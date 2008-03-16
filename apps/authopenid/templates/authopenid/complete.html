@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+
+
+{% block head %}{% endblock %}
+
+
+{% block content %}
+
+	<div id="completetxt">
+	<h1>{% trans "Your OpenID is verified! " %}</h1>
+	{% blocktrans %}
+	<p>Your OpenID can now be associated with a new or existing membership. You can change the association later in your preferences</p>
+	{% endblocktrans %}
+	<br /><br />
+	<h2>{% trans "Associate your OpenID" %}</h2>
+	{% blocktrans %}
+	<p>If you're joining <strong>Sitename</strong>, associate your OpenID with a new account. If you're already a member, associate with your existing account.</p>
+	{% endblocktrans %}
+	</div>
+
+		
+	
+	{% if form1.errors %}
+	<p class="errors">{% trans "Please correct errors below:" %}<br />
+		{% if form1.username.errors %} 
+			<span class="error">{{ form1.username.errors|join:", " }}</span>
+		{% endif %}
+		{% if form1.email.errors %} 
+			<span class="error">{{ form1.email.errors|join:", " }}</span>
+		{% endif %}
+	</p>
+	{% endif %}
+	{% if form2.errors %}
+	<p class="errors">{% trans "Please correct errors below:" %}<br />
+		{% if form2.username.errors %} 
+			<span class="error">{{ form2.username.errors|join:", " }}</span>
+		{% endif %}
+		{% if form2.password.errors %} 
+			<span class="error">{{ form2.password.errors|join:", " }}</span>
+		{% endif %}
+	</p>
+	{% endif %}
+
+	<div class="login">
+        <form name="fregister" action="{{ action }}" method="POST">
+            {{ form.next }}
+			<fieldset>
+				<legend>{% trans "A new account" %}</legend>
+				<div class="form-row"><label for "id_username">{% trans "Screen name" %}</label><br />{{ form1.username }}</div>
+				<div class="form-row"><label for "id_email">{% trans "Email" %}</label><br />{{ form1.email }}</div>
+				<div class="submit-row"><input type="submit" name="bnewaccount" value="CREATE MY ACCOUNT"></div>
+				<hr class="clear" />
+            	</fieldset>
+		</form>
+	</div>
+
+	
+
+	<div class="login">
+		<h3></h3>
+        <form name="fverify" action="{{ action }}" method="POST">
+            {{ form.next }}
+			<fieldset>
+				<legend>{% trans "An exisiting account" %}</legend>
+				<div class="form-row"><label for "id_username">{% trans "Screen name" %}</label><br />{{ form2.username }}</div>
+				<div class="form-row"><label for "id_passwordl">{% trans "Password" %}</label><br />{{ form2.password }}</div>
+				<div class="submit-row"><input type="submit" name="bverify" value="VERIFY"></div>
+			</fieldset>
+		</form>
+	</div>
+{% endblock %}
+
+	
+

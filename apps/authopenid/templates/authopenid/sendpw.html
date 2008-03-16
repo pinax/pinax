@@ -1,0 +1,30 @@
+
+{% extends "base.html" %}
+{% load i18n %}
+
+
+{% block content %}
+<h4 class="headblue">{% trans "Account: Send a new password" %}</h4>
+
+<p class="settings-descr">{% blocktrans %}Lost your password ? Here you can ask to reset your password. Enter the username you use  and you will get a confirm mail with your new password. This new password will be activated only after you clicked on the link you will find in the email{% endblocktrans %}</p>
+{% if form.errors %}
+<p class="errors">{% trans "Please correct errors below:" %}<br />
+	{% if form.username.errors %} 
+		<span class="error">{{ form.username.errors|join:", " }}</span>
+	{% endif %}
+</p>
+{% endif %}
+{% if msg %}
+<br /
+<span class="error">{{ msg }}</span>
+{% endif %}
+
+<div class="aligned">
+	<form action="." method="post" accept-charset="utf-8">
+		<div id="form-row"><label for="id_username">{% trans "Username" %}</label>{{ form.username }}</div>
+
+        <p><input type="submit" value="{% trans "Send new password" %}"></p>
+
+	</form>
+	</div>
+{% endblock %}

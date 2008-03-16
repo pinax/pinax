@@ -1,0 +1,42 @@
+
+{% extends "base_3rows.html" %}
+{% load i18n %}
+
+{% block head %}
+	<link rel="stylesheet" href="/media/css/form.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	<script type="text/javascript" src="http://yui.yahooapis.com/2.3.1/build/yahoo-dom-event/yahoo-dom-event.js"></script> 
+	<script language="javascript" src="/media/js/jsvalidate.js" type="text/javascript"></script>
+	
+{% endblock %}
+
+{% block info %}
+	<div id="metabar">
+	    <p>Settings, where you can make changes to your account</p>	
+	</div>
+{% endblock %}
+
+{% block content %}
+<h4 class="headblue">Account: edit profile</h4>
+
+<p class="settings-descr">If you choose to display this information, it will appear next to your username on your snippets page. It's a good way to give the readers of your snippets a little more information about you,</p>
+{% if form.errors %}
+<p class="errors">{% trans "Please correct errors below:" %}<br />
+	{% if form.homepage.errors %} 
+		<span class="error">{{ form.homepage.errors|join:", " }}</span>
+	{% endif %}
+</p>
+{% endif %}
+
+<div class="aligned">
+	<form action="{{ path }}" method="post" accept-charset="utf-8">
+
+        {{ form.username }}
+        <div id="form-row">{{ form.view_name }} show name and url on my bookmarks page?</div
+		<div id="form-row"><label for="id_name">{% trans "full name:" %}</label>{{ form.name }}</div>
+		<div id="form-row"><label for="id_password">{% trans "homepage:" %}</label>{{ form.homepage }}</div>
+
+        <p><input type="submit" value="{% trans "Edit profile" %}"></p>
+
+	</form>
+	</div>
+{% endblock %}
