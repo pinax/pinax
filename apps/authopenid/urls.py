@@ -2,7 +2,7 @@
 from django.conf.urls.defaults import patterns, url
 from django.utils.translation import ugettext as _
 
-urlpatterns = patterns('django_authopenid.views',
+urlpatterns = patterns('authopenid.views',
      # manage account registration
     url(r'^%s$' % _('signin/'), 'signin', name='user_signin'),
     url(r'^%s$' % _('signout/'), 'signout', name='user_signout'),
