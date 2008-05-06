@@ -1,0 +1,12 @@
+{% extends "site_base.html" %}
+
+{% block head_title %}Tabula Rasa : Confirm Email{% endblock %}
+
+{% block body %}
+{% if email_address %}
+    <h1>Email Confirmed</h1>
+    <p>You have confirmed that {{ email_address.email }} is an email address for user '{{ email_address.user }}'.</p>
+{% else %}
+    <p>Invalid confirmation key.</p>
+{% endif %}
+{% endblock %}

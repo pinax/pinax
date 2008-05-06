@@ -1,7 +1,5 @@
 # Django settings for tabularasa project.
 
-import os.path
-
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -12,7 +10,7 @@ ADMINS = (
 MANAGERS = ADMINS
 
 DATABASE_ENGINE = 'sqlite3'           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'ado_mssql'.
-DATABASE_NAME = 'test.db'             # Or path to database file if using sqlite3.
+DATABASE_NAME = 'dev.db'             # Or path to database file if using sqlite3.
 DATABASE_USER = ''             # Not used with sqlite3.
 DATABASE_PASSWORD = ''         # Not used with sqlite3.
 DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
@@ -23,7 +21,7 @@ DATABASE_PORT = ''             # Set to empty string for default. Not used with 
 # although not all variations may be possible on all operating systems.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'US/Eastern'
 
 # Language code for this installation. All choices can be found here:
 # http://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes
@@ -50,7 +48,7 @@ MEDIA_URL = ''
 ADMIN_MEDIA_PREFIX = '/media/'
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '%uzh^=egja(#*+zh(#1163j*xw5q@!o!-c5d7o1o^f)8(5x4fq'
+SECRET_KEY = 'bk-e2zv3humar79nm=j*bwc=-ymeit(8a20whp3goq4dh71t)s'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -64,15 +62,13 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
-    'authopenid.middleware.OpenIDMiddleware',
 )
 
 ROOT_URLCONF = 'tabularasa.urls'
 
+import os.path
+
 TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
     os.path.join(os.path.dirname(__file__), "templates"),
 )
 
@@ -82,5 +78,11 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.admin',
-    'authopenid',
+    
+    'emailconfirmation',
 )
+
+LOGIN_REDIRECT_URL = "/"
+
+EMAIL_CONFIRMATION_DAYS = 2
+DEFAULT_FROM_EMAIL = "noreply@example.com"

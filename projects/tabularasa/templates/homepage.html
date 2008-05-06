@@ -1,0 +1,11 @@
+{% extends "site_base.html" %}
+
+{% block head_title %}Tabula Rasa{% endblock %}
+
+{% block body %}
+<p>Nothing here yet. It's all just scaffolding.</p>
+{% if user.is_authenticated %}
+{% else %}
+<p>You can <a href="/account/signup/">Sign up</a> and <a href="/account/login/">Log in</a>, though.
+{% endif %}
+{% endblock %}

@@ -1,0 +1,179 @@
+body {
+    background-color: #FFF;
+    margin: 0;
+    position: relative;
+}
+html, body {
+    height: 100%;
+}
+body {
+    color: #333;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 10pt;
+}
+a, a:visited {
+    color: #13C;
+}
+img {
+    border: 0;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 0;
+    font-size: inherit;
+}
+td {
+    margin: 0;
+    border: 0;
+    padding: 0;
+}
+div {
+    position: relative;
+}
+#body {
+    margin: 20px auto;
+    padding: 10px;
+    width: 800px;
+}
+#footer {
+    color: #999; /* footer text colour */
+    margin: 50px auto;
+    padding: 10px;
+    clear: both;
+    width: 800px;
+}
+#footer a, #footer a:visited {
+    color: #444; /* footer link colour */
+}
+#footer a:hover {
+    color: #777; /* footer link hover colour */
+}
+#tabhead {
+    background: #F3F3F3 url('/site_media/heading.png') left top repeat-x;
+    border-bottom: 1px solid #000; /* tab border */
+}
+#tabhead .logo {
+    height: 80px;
+    padding-left: 5px;
+    padding-top: 0;
+}
+#tabhead .logo img {
+    width: 256px;
+    height: 79px;
+}
+#tabhead .login {
+    position: absolute;
+    top: 6px;
+    right: 15px;
+    color: #DEF; /* login bar text colour */
+}
+#tabhead .login a, #tabhead .login a:visited {
+    color: #DEF; /* login bar link colour */
+}
+#tabhead .login a:hover {
+    color: #FFF; /* login bar link hover colour */
+}
+#tabhead .tabs {
+    position: absolute;
+    bottom: -1px; /* must be same thickness as tab border */
+    left: 263px; /* based on width and padding of logo */
+}
+#tabhead .tabs td {
+    vertical-align: bottom;
+    padding-right: 10px;
+    padding-bottom: 1px; /* must be same thickness as tab border */
+}
+#tabhead .tabs td.selected {
+    padding-bottom: 0;
+}
+#tabhead .tab.selected div {
+    padding-bottom: 5px;
+}
+#tabhead .tab a, #tabhead .tab a:visited {
+    color: #444; /* unselected tab text colour */
+    font-weight: bold;
+    text-decoration: none;
+}
+#tabhead .tab a:hover {
+    color: #666; /* unselected tab text hover colour */
+}
+#tabhead .tab.selected a, #tabhead .tab.selected a:visited {
+    color: #000; /* selected tab text colour */
+}
+#tabhead .tab.selected a:hover {
+    color: #000; /* selected tab text hover colour */
+}
+#tabhead .tab div {
+    background-color: #DDD; /* unselected tab colour */
+    padding: 0;
+    padding-bottom: 4px;
+    padding-top: 5px;
+}
+#tabhead .tab div a {
+    padding: 5px 12px;
+}
+#tabhead .tab.selected div {
+    background-color: #FFF; /* selected tab colour */
+    border-left: 1px solid #000; /* tab border */
+    border-top: 1px solid #000; /* tab border */
+    border-right: 1px solid #000; /* tab border */
+}
+#tabhead .right_tab {
+    position: absolute;
+    right: 15px;
+    bottom: 0;
+}
+#tabhead .right_tab.selected {
+    bottom: -1px
+}
+form th {
+    text-align : left;
+}
+form.signup input[type="submit"], form.login input[type="submit"] {
+    margin: 20px 0;
+    font-size: 14pt;
+}
+input[type="text"], input[type="password"], textarea {
+    padding: 3px;
+    margin: 3px;
+    border: solid 1px #C6C6C6;
+    border-bottom: solid 1px #E3E3E3;
+    color: #666;
+    font-size: 12pt;
+    background: #F3F3F3 url('/site_media/form-shadow.png') left top repeat-x;
+}
+ul.errorlist {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    color: red;
+}
+ul#messages {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+ul#messages li {
+    padding: 5px 10px;
+    background: #DFC;
+}
+.verified {
+    color: green;
+}
+.remove {
+    color: red;
+}
+.unverified {
+    color: gray;
+}
+.primary {
+    font-weight: bold;
+}
+table.email_list td {
+    padding: 5px 10px;
+}
+.warning {
+    color: red;
+    font-weight: bold;
+}
