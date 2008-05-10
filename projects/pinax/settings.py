@@ -82,7 +82,10 @@ INSTALLED_APPS = (
     'emailconfirmation',
 )
 
-LOGIN_REDIRECT_URL = "/"
-
 EMAIL_CONFIRMATION_DAYS = 2
-DEFAULT_FROM_EMAIL = "noreply@example.com"
+
+try:
+    from localsettings import *
+except ImportError:
+    pass
+
