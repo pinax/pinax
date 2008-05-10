@@ -1,4 +1,5 @@
 from django.conf.urls.defaults import *
+from django.conf import settings
 
 import os.path
 
@@ -7,8 +8,12 @@ urlpatterns = patterns('',
     
     (r'^account/', include('account.urls')),
     
-    (r'^site_media/(?P<path>.*)$', 'django.views.static.serve',
-        {'document_root': os.path.join(os.path.dirname(__file__), "site_media")}),
-    
     (r'^admin/', include('django.contrib.admin.urls')),
 )
+
+if settings.DEBUG:
+    urlpatterns += patterns('',
+        (r'^site_media/(?P<path>.*)$', 'django.views.static.serve',
+            {'document_root': os.path.join(os.path.dirname(__file__), "site_media")}),
+    )
+
