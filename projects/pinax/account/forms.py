@@ -138,7 +138,7 @@ class ResetPasswordForm(forms.Form):
                 "new_password": new_password,
             })
             # @@@ eventually use django-mailer
-            if settings.DEBUG:
+            if settings.EMAIL_DEBUG:
                 print message
             else:
                 send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user.email])
