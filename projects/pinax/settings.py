@@ -1,4 +1,4 @@
-# Django settings for tabularasa project.
+# Django settings for pinax project.
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -64,7 +64,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.doc.XViewMiddleware',
 )
 
-ROOT_URLCONF = 'tabularasa.urls'
+ROOT_URLCONF = 'pinax.urls'
 
 import os.path
 
