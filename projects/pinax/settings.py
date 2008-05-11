@@ -80,6 +80,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     
     'emailconfirmation',
+    'extensions',
 )
 
 EMAIL_CONFIRMATION_DAYS = 2
