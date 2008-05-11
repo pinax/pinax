@@ -27,6 +27,7 @@ def signup(request):
             username, password = form.save()
             user = authenticate(username=username, password=password)
             auth_login(request, user)
+            request.user.message_set.create(message="Successfully logged in as %s." % user.username)
             return HttpResponseRedirect("/")
     else:
         form = SignupForm()
