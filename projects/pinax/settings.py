@@ -84,6 +84,7 @@ INSTALLED_APPS = (
 )
 
 EMAIL_CONFIRMATION_DAYS = 2
+EMAIL_DEBUG = DEBUG
 
 try:
     from localsettings import *
