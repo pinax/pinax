@@ -85,6 +85,7 @@ INSTALLED_APPS = (
 
 EMAIL_CONFIRMATION_DAYS = 2
 EMAIL_DEBUG = DEBUG
+CONTACT_EMAIL = "feedback@example.com"
 
 try:
     from localsettings import *

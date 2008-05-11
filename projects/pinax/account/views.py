@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.template import RequestContext
+from django.conf import settings
 
 from forms import SignupForm, AddEmailForm, LoginForm, ChangePasswordForm, ResetPasswordForm
 from emailconfirmation.models import EmailAddress, EmailConfirmation
@@ -17,7 +18,7 @@ def login(request):
         form = LoginForm()
     return render_to_response("account/login.html", {
         "form": form,
-        "contact_email": "feedback@example.com", # @@@ pull this from a setting
+        "contact_email": settings.CONTACT_EMAIL,
     }, context_instance=RequestContext(request))
 
 def signup(request):
@@ -33,7 +34,7 @@ def signup(request):
         form = SignupForm()
     return render_to_response("account/signup.html", {
         "form": form,
-        "contact_email": "feedback@example.com", # @@@ pull this from a setting
+        "contact_email": settings.CONTACT_EMAIL,
     }, context_instance=RequestContext(request))
 
 def account(request):
@@ -90,12 +91,12 @@ def password_reset(request):
             email = password_reset_form.save()
             return render_to_response("account/password_reset_done.html", {
                 "email": email,
-                "contact_email": "feedback@example.com", # @@@ pull this from a setting
+                "contact_email": settings.CONTACT_EMAIL,
             }, context_instance=RequestContext(request))
     else:
         password_reset_form = ResetPasswordForm()
     
     return render_to_response("account/password_reset.html", {
         "password_reset_form": password_reset_form,
-        "contact_email": "feedback@example.com", # @@@ pull this from a setting
+        "contact_email": settings.CONTACT_EMAIL,
     }, context_instance=RequestContext(request))
