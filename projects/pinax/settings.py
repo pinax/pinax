@@ -83,11 +83,15 @@ INSTALLED_APPS = (
     'extensions',
     'robots',
     'dbtemplates',
+    
+    'analytics',
 )
 
 EMAIL_CONFIRMATION_DAYS = 2
 EMAIL_DEBUG = DEBUG
 CONTACT_EMAIL = "feedback@example.com"
+
+# URCHIN_ID = "ua-..."
 
 try:
     from localsettings import *
