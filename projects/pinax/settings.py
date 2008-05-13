@@ -81,6 +81,7 @@ INSTALLED_APPS = (
     
     'emailconfirmation',
     'extensions',
+    'robots',
 )
 
 EMAIL_CONFIRMATION_DAYS = 2
