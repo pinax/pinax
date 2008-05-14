@@ -12,7 +12,7 @@
 <table class="friend_list">
 {% for friend in friends %}
     <tr>
-        <td>{{ friend.friend }}</td>
+        <td><a href="{% url profiles.views.profile friend.friend.username %}">{{ friend.friend }}</a></td>
     </tr>
 {% endfor %}
 </table>
@@ -27,7 +27,7 @@
 <table class="invitation_list">
 {% for sent_invitation in user.invitations_from.all %}
     <tr>
-        <td>{{ sent_invitation.to_user }}</td>
+        <td><a href="{% url profiles.views.profile sent_invitation.to_user.username %}">{{ sent_invitation.to_user }}</a></td>
         <td>{{ sent_invitation.sent }}</td>
         <td>{{ sent_invitation.get_status_display }}</td>
     </tr>
@@ -44,7 +44,7 @@
 <table class="invitation_list">
 {% for received_invitation in user.invitations_to.all %}
     <tr>
-        <td>{{ received_invitation.from_user }}</td>
+        <td><a href="{% url profiles.views.profile received_invitation.from_user.username %}">{{ received_invitation.from_user }}</a></td>
         <td>{{ received_invitation.sent }}</td>
         <td>{{ received_invitation.get_status_display }}</td>
     </tr>
