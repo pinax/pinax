@@ -1,0 +1,61 @@
+{% extends "site_base.html" %}
+
+{% block head_title %}Pinax : Friends{% endblock %}
+
+{% block body %}
+<h1>Friends</h1>
+{% if user.is_authenticated %}
+
+<h2>Your Friends</h2>
+
+{% if user.friends.all %}
+<table class="friend_list">
+{% for friend in friends %}
+    <tr>
+        <td>{{ friend.friend }}</td>
+    </tr>
+{% endfor %}
+</table>
+{% else %}
+<p>No friends yet.</p>
+{% endif %}
+
+
+<h2>Invitations Sent</h2>
+
+{% if user.invitations_from.all %}
+<table class="invitation_list">
+{% for sent_invitation in user.invitations_from.all %}
+    <tr>
+        <td>{{ sent_invitation.to_user }}</td>
+        <td>{{ sent_invitation.sent }}</td>
+        <td>{{ sent_invitation.get_status_display }}</td>
+    </tr>
+{% endfor %}
+</table>
+{% else %}
+<p>No invitations sent.</p>
+{% endif %}
+
+
+<h2>Invitations Received</h2>
+
+{% if user.invitations_to.all %}
+<table class="invitation_list">
+{% for received_invitation in user.invitations_to.all %}
+    <tr>
+        <td>{{ received_invitation.from_user }}</td>
+        <td>{{ received_invitation.sent }}</td>
+        <td>{{ received_invitation.get_status_display }}</td>
+    </tr>
+{% endfor %}
+</table>
+{% else %}
+<p>No invitations received.</p>
+{% endif %}
+
+{% else %}
+<p><span class="warning">Note</span>: Not logged in.</p>
+{% endif %}
+
+{% endblock %}

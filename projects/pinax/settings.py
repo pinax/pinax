@@ -73,17 +73,21 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
+    # included
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.admin',
     
+    # external
     'emailconfirmation',
     'extensions',
     'robots',
     'dbtemplates',
+    'friends',
     
+    # internal (for now)
     'analytics',
 )
 

@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     
     (r'^about/', include('about.urls')),
     (r'^account/', include('account.urls')),
+    (r'^friends/', include('friends_app.urls')),
     
     (r'^robots.txt$', include('robots.urls')),
     (r'^admin/', include('django.contrib.admin.urls')),
