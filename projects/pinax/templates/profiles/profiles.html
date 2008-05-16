@@ -1,0 +1,14 @@
+{% extends "site_base.html" %}
+
+{% block head_title %}Pinax : Profile for {{ other_user }}{% endblock %}
+
+{% block body %}
+<h1>Profiles</h1>
+
+<ul>
+    {% for other_user in users %}
+    <li><a href="{% url profiles.views.profile other_user.username %}">{{ other_user }}</a></li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

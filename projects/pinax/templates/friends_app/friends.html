@@ -6,6 +6,8 @@
 <h1>Friends</h1>
 {% if user.is_authenticated %}
 
+<p>You can see a (temporary) list of all users <a href="/profiles/">here</a>.</p>
+
 <h2>Your Friends</h2>
 
 {% if user.friends.all %}
