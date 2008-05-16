@@ -11,7 +11,10 @@
 <p>This is you.</p>
 {% else %}
 <h2>Invite As Friend</h2>
-{% if previous_invitations %}
+{% if previous_invitations_from %}
+<p>{{ other_user }} has already requested friendship.</p>
+{% else %}
+{% if previous_invitations_to %}
 <p>Friendship invitation sent.</p>
 {% else %}
 <form method="POST" action="">
@@ -20,6 +23,7 @@
     <tr><td></td><td><input type="submit" value="invite" /> {{ other_user }} to be a friend.</td></tr>
     </table>
 </form>
+{% endif %}
 {% endif %}
 {% endifequal %}
 

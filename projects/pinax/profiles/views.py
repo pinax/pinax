@@ -20,9 +20,11 @@ def profile(request, username):
         invite_form = InviteFriendForm(request.user, {
             'to_user': username,
         })
-    previous_invitations = FriendshipInvitation.objects.filter(to_user=other_user, from_user=request.user)
+    previous_invitations_to = FriendshipInvitation.objects.filter(to_user=other_user, from_user=request.user)
+    previous_invitations_from = FriendshipInvitation.objects.filter(to_user=request.user, from_user=other_user)
     return render_to_response("profiles/profile.html", {
         "other_user": other_user,
         "invite_form": invite_form,
-        "previous_invitations": previous_invitations,
+        "previous_invitations_to": previous_invitations_to,
+        "previous_invitations_from": previous_invitations_from,
     }, context_instance=RequestContext(request))
