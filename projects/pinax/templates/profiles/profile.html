@@ -13,7 +13,7 @@
 {% if is_friend %}
 <p>You are friends with {{ other_user }}.</p>
 {% else %}
-<h2>Invite As Friend</h2>
+<h2>Add As Friend</h2>
 {% if previous_invitations_from %}
 <p>{{ other_user }} has already requested friendship.</p>
 {% for invitation in previous_invitations_from %}
@@ -28,7 +28,7 @@
 {% endfor %}
 {% else %}
 {% if previous_invitations_to %}
-<p>Friendship invitation sent.</p>
+<p>Friendship request sent.</p>
 {% else %}
 <form method="POST" action="">
     <table>
