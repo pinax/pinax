@@ -12,7 +12,10 @@ def profiles(request):
 
 def profile(request, username):
     other_user = get_object_or_404(User, username=username)
-    is_friend = Friendship.objects.are_friends(request.user, other_user)
+    if request.user.is_authenticated():
+        is_friend = Friendship.objects.are_friends(request.user, other_user)
+    else:
+        is_friend = False
     if is_friend:
         invite_form = None
         previous_invitations_to = None

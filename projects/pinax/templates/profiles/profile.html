@@ -7,6 +7,7 @@
 
 <p>This is really just a placeholder at the moment.</p>
 
+{% if user.is_authenticated %}
 {% ifequal user other_user %}
 <p>This is you.</p>
 {% else %}
@@ -40,5 +41,8 @@
 {% endif %}
 {% endif %}
 {% endifequal %}
+{% else %}
+<p><a href="/account/signup/">Sign up</a> and <a href="/account/login/">log in </a> to add this person as a friend.</p>
+{% endif %}
 
 {% endblock %}
