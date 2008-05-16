@@ -10,9 +10,22 @@
 {% ifequal user other_user %}
 <p>This is you.</p>
 {% else %}
+{% if is_friend %}
+<p>You are friends with {{ other_user }}.</p>
+{% else %}
 <h2>Invite As Friend</h2>
 {% if previous_invitations_from %}
 <p>{{ other_user }} has already requested friendship.</p>
+{% for invitation in previous_invitations_from %}
+<div class="friendship_request">
+    <p>{{ invitation.message }}</p>
+    <form style="display: none;" id="invitation_{{ invitation.id }}" method="post" action="">
+        <input type="hidden" name="invitation" value="{{ invitation.id }}"/>
+        <input type="hidden" name="action" value="accept"/>
+    </form>
+    <p><a href="#" onclick="$('#invitation_{{ invitation.id }}').submit()">accept</a></p>
+</div>
+{% endfor %}
 {% else %}
 {% if previous_invitations_to %}
 <p>Friendship invitation sent.</p>
@@ -20,9 +33,10 @@
 <form method="POST" action="">
     <table>
     {{ invite_form.as_table }}
-    <tr><td></td><td><input type="submit" value="invite" /> {{ other_user }} to be a friend.</td></tr>
+    <tr><td></td><td><input type="submit" name="action" value="invite" /> {{ other_user }} to be a friend.</td></tr>
     </table>
 </form>
+{% endif %}
 {% endif %}
 {% endif %}
 {% endifequal %}

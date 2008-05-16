@@ -44,12 +44,26 @@
 
 {% if user.invitations_to.all %}
 <table class="invitation_list">
-{% for received_invitation in user.invitations_to.all %}
+{% for invitation in user.invitations_to.all %}
     <tr>
-        <td><a href="{% url profiles.views.profile received_invitation.from_user.username %}">{{ received_invitation.from_user }}</a></td>
-        <td>{{ received_invitation.sent }}</td>
-        <td>{{ received_invitation.get_status_display }}</td>
+        <td><a href="{% url profiles.views.profile invitation.from_user.username %}">{{ invitation.from_user }}</a></td>
+        <td>{{ invitation.sent }}</td>
+        <td>{{ invitation.get_status_display }}</td>
     </tr>
+{% ifequal invitation.status "2" %}
+    <tr>
+        <td colspan="3">
+            <div class="friendship_request">
+            <p>{{ invitation.message }}</p>
+            <form style="display: none;" id="invitation_{{ invitation.id }}" method="post" action="">
+                <input type="hidden" name="invitation" value="{{ invitation.id }}"/>
+                <input type="hidden" name="action" value="accept"/>
+            </form>
+            <p><a href="#" onclick="$('#invitation_{{ invitation.id }}').submit()">accept</a></p>
+            </div>
+        </td>
+    </tr>
+{% endifequal %}        
 {% endfor %}
 </table>
 {% else %}
