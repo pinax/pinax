@@ -1,0 +1,24 @@
+{% extends "site_base.html" %}
+
+{% block head_title %}Pinax : Notices{% endblock %}
+
+{% block body %}
+<h1>Notices</h1>
+{% if user.is_authenticated %}
+
+{% if notices %}
+{% for notice in notices %}
+<div class="notice">
+    {{ notice.message }}<br />
+    {{ notice.added|timesince }} ago
+</div>
+{% endfor %}
+{% else %}
+<p>No notices.</p>
+{% endif %}
+
+{% else %}
+<p><span class="warning">Note</span>: Not logged in.</p>
+{% endif %}
+
+{% endblock %}

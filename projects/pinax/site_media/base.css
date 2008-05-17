@@ -122,7 +122,12 @@ div {
 #tabhead .right_tab {
     position: absolute;
     right: 15px;
-    bottom: 0;
+    bottom: -1px; /* must be same thickness as tab border */
+}
+#tabhead .right_tab td {
+    vertical-align: bottom;
+    padding-right: 10px;
+    padding-bottom: 1px; /* must be same thickness as tab border */
 }
 #tabhead .right_tab.selected {
     bottom: -1px
@@ -185,5 +190,10 @@ table.invitation_list td {
 }
 div.friendship_request {
     padding: 2px 10px;
+    background: #EEE;
+}
+div.notice {
+    margin: 5px 0;
+    padding: 2px 5px;
     background: #EEE;
 }

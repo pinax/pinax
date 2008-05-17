@@ -81,6 +81,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     
     # external
+    'notification', # must be first
     'emailconfirmation',
     'extensions',
     'robots',

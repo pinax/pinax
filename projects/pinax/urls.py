@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     (r'^account/', include('account.urls')),
     (r'^profiles/', include('profiles.urls')),
     (r'^friends/', include('friends_app.urls')),
+    (r'^notices/', include('notices_app.urls')),
     
     (r'^robots.txt$', include('robots.urls')),
     (r'^admin/', include('django.contrib.admin.urls')),
