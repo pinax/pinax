@@ -87,6 +87,7 @@ INSTALLED_APPS = (
     'robots',
     'dbtemplates',
     'friends',
+    'mailer',
     
     # internal (for now)
     'analytics',
