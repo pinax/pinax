@@ -4,7 +4,12 @@ from django.core.validators import alnum_re
 from django.template.loader import render_to_string
 
 from django.conf import settings
-from django.core.mail import send_mail # @@@ eventually use django-mailer
+
+# favour django-mailer but fall back to django.core.mail
+try:
+    from mailer import send_mail
+except ImportError:
+    from django.core.mail import send_mail
 
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
@@ -137,9 +142,5 @@ class ResetPasswordForm(forms.Form):
                 "user": user,
                 "new_password": new_password,
             })
-            # @@@ eventually use django-mailer
-            if settings.EMAIL_DEBUG:
-                print message
-            else:
-                send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user.email])
+            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user.email])
         return self.cleaned_data["email"]
