@@ -12,7 +12,7 @@
 {% regroup notices by added.date as notices_by_date %}
 
 {% for date in notices_by_date %}
-<h2 class="notice_date">{{ date.grouper|naturalday:"M d" }}</h2>
+<h2 class="notice_date">{{ date.grouper|naturalday:"M d"|capfirst }}</h2>
 {% for notice in date.list %}
 <div class="notice">
     {{ notice.message }} <span class="notice_time">{{ notice.added.time|time:"P" }}</span>
