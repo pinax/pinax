@@ -17,7 +17,7 @@
 <h2 class="notice_date">{{ date.grouper|naturalday:"M d"|capfirst }}</h2>
 {% for notice in date.list %}
 <div class="notice">
-    <span class="notice_type">[{{ notice.notice_type }}]</span>
+    <span class="notice_type">[{{ notice.notice_type.display }}]</span>
     <span class="notice_message">{{ notice.message }}</span>
     <span class="notice_time">{{ notice.added.time|time:"P" }}</span>
 </div>
@@ -26,6 +26,32 @@
 {% else %}
 <p>No notices.</p>
 {% endif %}
+
+<h2>Settings</h2>
+
+<p>(not working yet)</p>
+
+<form method="POST" action="">
+<table class="notice_settings">
+    <tr>
+        <th>Notification Type</th>
+        <th>Email</th>
+    </tr>
+{% for notice_type in notice_types %}
+    <tr>
+        <td>{{ notice_type.display }}<br/>
+            <span class="notice_type_description">{{ notice_type.description }}</span>
+        </td>
+        <td>
+            <input type="checkbox" />
+        </td>
+    </tr>
+{% endfor %}
+    <tr>
+        <td><input type="submit" value="Change" /></td>
+    </tr>
+</table>
+</form>
 
 {% else %}
 <p><span class="warning">Note</span>: Not logged in.</p>
