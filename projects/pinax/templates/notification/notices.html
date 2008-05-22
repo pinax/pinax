@@ -29,6 +29,11 @@
 
 <h2>Settings</h2>
 
+{% if user.email %}
+<p>Primary email: <b>{{ user.email }}</b> (change under <a href="/account/">Account</a>)</p>
+{% else %}
+<p><span class="warning">Note</span>: You do not have a verified email address to which notices can be sent. You can add one by going to <a href="/account/">Account</a>.</p>
+{% endif %}
 <p>(not working yet)</p>
 
 <form method="POST" action="">
