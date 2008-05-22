@@ -16,7 +16,11 @@
 {% for date in notices_by_date %}
 <h2 class="notice_date">{{ date.grouper|naturalday:"M d"|capfirst }}</h2>
 {% for notice in date.list %}
+{% if notice.show_as_unseen %}
+<div class="unseen_notice">
+{% else %}
 <div class="notice">
+{% endif %}
     <span class="notice_type">[{{ notice.notice_type.display }}]</span>
     <span class="notice_message">{{ notice.message }}</span>
     <span class="notice_time">{{ notice.added.time|time:"P" }}</span>
