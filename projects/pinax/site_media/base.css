@@ -84,12 +84,6 @@ div {
     padding-right: 10px;
     padding-bottom: 1px; /* must be same thickness as tab border */
 }
-#tabhead .tabs td.selected {
-    padding-bottom: 0;
-}
-#tabhead .tab.selected div {
-    padding-bottom: 5px;
-}
 #tabhead .tab a, #tabhead .tab a:visited {
     color: #444; /* unselected tab text colour */
     font-weight: bold;
@@ -98,26 +92,15 @@ div {
 #tabhead .tab a:hover {
     color: #666; /* unselected tab text hover colour */
 }
-#tabhead .tab.selected a, #tabhead .tab.selected a:visited {
-    color: #000; /* selected tab text colour */
-}
-#tabhead .tab.selected a:hover {
-    color: #000; /* selected tab text hover colour */
-}
 #tabhead .tab div {
     background-color: #DDD; /* unselected tab colour */
     padding: 0;
     padding-bottom: 4px;
     padding-top: 5px;
+    margin: 0 1px; /* to compensate for border */
 }
 #tabhead .tab div a {
     padding: 5px 12px;
-}
-#tabhead .tab.selected div {
-    background-color: #FFF; /* selected tab colour */
-    border-left: 1px solid #000; /* tab border */
-    border-top: 1px solid #000; /* tab border */
-    border-right: 1px solid #000; /* tab border */
 }
 #tabhead .right_tab {
     position: absolute;
@@ -129,9 +112,33 @@ div {
     padding-right: 10px;
     padding-bottom: 1px; /* must be same thickness as tab border */
 }
-#tabhead .right_tab.selected {
-    bottom: -1px
+
+/* selected tabs */
+#home_tab .tab_home,
+#notices_tab .rtab_notices,
+#friends_tab .rtab_friends
+{
+    bottom: -1px !important;
+    padding-bottom: 0 !important;
 }
+#home_tab .tab_home a,
+#notices_tab .rtab_notices a,
+#friends_tab .rtab_friends a
+{
+    color: #000 !important; /* selected tab text colour */
+}
+#home_tab .tab_home div,
+#notices_tab .rtab_notices div,
+#friends_tab .rtab_friends div
+{
+    margin: 0;
+    background-color: #FFF !important; /* selected tab colour */
+    border-left: 1px solid #000 !important; /* tab border */
+    border-top: 1px solid #000 !important; /* tab border */
+    border-right: 1px solid #000 !important; /* tab border */
+    padding-bottom: 5px; /* 1px more than unselected padding-bottom */
+}
+
 form th {
     text-align : left;
 }

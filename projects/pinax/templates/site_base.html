@@ -14,11 +14,11 @@
 <table>
     <tr>
         {% if user.is_authenticated %}
-            <td class="tab selected"><div><a href="/">tab 1</a></div></td>
+            <td class="tab tab_home"><div><a href="/">Home</a></div></td>
             <td class="tab"><div><a href="/tab2/">tab 2</a></div></td>
             <td class="tab"><div><a href="/tab3/">tab 3</a></div></td>
         {% else %}
-            <td class="tab"><div><a href="/account/login?next=%2F">tab 1</a></div></td>
+            <td class="tab tab_home"><div><a href="/account/login?next=%2F">Home</a></div></td>
             <td class="tab"><div><a href="/account/login?next=%2Ftab2%2F">tab 2</a></div></td>
             <td class="tab"><div><a href="/account/login?next=%2Ftab3%2F">tab 3</a></div></td>
         {% endif %}
@@ -30,8 +30,8 @@
 <table>
     <tr>
         {% if user.is_authenticated %}
-            <td class="tab"><div><a href="/notices/">Notices</a></div></td>
-            <td class="tab"><div><a href="/friends/">Friends</a></div></td>
+            <td class="tab rtab_notices"><div><a href="/notices/">Notices</a></div></td>
+            <td class="tab rtab_friends"><div><a href="/friends/">Friends</a></div></td>
         {% endif %}
     </tr>
 </table>
