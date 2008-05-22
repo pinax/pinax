@@ -13,6 +13,8 @@
 
 {% if user.is_authenticated %}
 {% else %}
-<p>You can <a href="/account/signup/">Sign up</a> and <a href="/account/login/">Log in</a> to try out the site, although at this stage, there isn't much more than account management.
+<p>You can <a href="/account/signup/">Sign up</a> and <a href="/account/login/">Log in</a> to try out the site.</p>
+
+<p><b>At this stage, there is email verification, password management and (internal) friend invitation including notification of invitations and acceptance both on the site and via email (if you've verified your address).</b></p>
 {% endif %}
 {% endblock %}
