@@ -70,7 +70,7 @@ class SignupForm(forms.Form):
         username = self.cleaned_data["username"]
         email = self.cleaned_data["email"]
         password = self.cleaned_data["password1"]
-        new_user = User.objects.create_user(username, email, password)
+        new_user = User.objects.create_user(username, "", password)
         if email:
             new_user.message_set.create(message="Confirmation email sent to %s" % email)
             EmailAddress.objects.add_email(new_user, email)
