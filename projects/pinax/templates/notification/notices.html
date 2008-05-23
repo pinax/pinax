@@ -16,7 +16,7 @@
 {% for date in notices_by_date %}
 <h2 class="notice_date">{{ date.grouper|naturalday:"M d"|capfirst }}</h2>
 {% for notice in date.list %}
-{% if notice.show_as_unseen %}
+{% if notice.is_unseen %}
 <div class="unseen_notice">
 {% else %}
 <div class="notice">
