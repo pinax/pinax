@@ -44,16 +44,20 @@
 <table class="notice_settings">
     <tr>
         <th>Notification Type</th>
-        <th>Email</th>
+        {% for header in notice_settings.column_headers %}
+        <th>{{ header }}</th>
+        {% endfor %}
     </tr>
-{% for notice_type in notice_types %}
+{% for row in notice_settings.rows %}
     <tr>
-        <td>{{ notice_type.display }}<br/>
-            <span class="notice_type_description">{{ notice_type.description }}</span>
+        <td>{{ row.notice_type.display }}<br/>
+            <span class="notice_type_description">{{ row.notice_type.description }}</span>
         </td>
+        {% for cell in row.cells %}
         <td>
-            <input type="checkbox" />
+            <input type="checkbox" name="{{ cell.0 }}" {% if cell.1 %}checked="yes"{% endif %}/>
         </td>
+        {% endfor %}
     </tr>
 {% endfor %}
     <tr>
