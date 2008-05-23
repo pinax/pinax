@@ -10,9 +10,26 @@
 {% if user.is_authenticated %}
 {% ifequal user other_user %}
 <p>This is you.</p>
+<h2>Your Friends</h2>
+{% if other_friends %}
+<ul>
+{% for friendship in other_friends %}
+    <li><a href="{% url profiles.views.profile friendship.friend.username %}">{{ friendship.friend }}</a></li>
+{% endfor %}
+</ul>
+{% else %}
+<p>None. You should look at the list of <a href="/profiles/">profiles</a> and see if there's anyone you know.</p>
+{% endif %}
 {% else %}
 {% if is_friend %}
 <p>You are friends with {{ other_user }}.</p>
+<h2>{{ other_user }}'s Friends</h2>
+<ul>
+{% for friendship in other_friends %}
+    <li><a href="{% url profiles.views.profile friendship.friend.username %}">{{ friendship.friend }}</a></li>
+{% endfor %}
+</ul>
+
 {% else %}
 <h2>Add As Friend</h2>
 {% if previous_invitations_from %}

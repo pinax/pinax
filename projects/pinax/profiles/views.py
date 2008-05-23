@@ -14,7 +14,9 @@ def profile(request, username):
     other_user = get_object_or_404(User, username=username)
     if request.user.is_authenticated():
         is_friend = Friendship.objects.are_friends(request.user, other_user)
+        other_friends = Friendship.objects.friends_for_user(other_user)
     else:
+        other_friends = []
         is_friend = False
     if is_friend:
         invite_form = None
@@ -48,6 +50,7 @@ def profile(request, username):
     return render_to_response("profiles/profile.html", {
         "is_friend": is_friend,
         "other_user": other_user,
+        "other_friends": other_friends,
         "invite_form": invite_form,
         "previous_invitations_to": previous_invitations_to,
         "previous_invitations_from": previous_invitations_from,
