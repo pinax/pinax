@@ -6,6 +6,8 @@ import os.path
 
 urlpatterns = patterns('',
     (r'^$', direct_to_template, {"template": "homepage.html"}),
+    (r'^tab2/$', direct_to_template, {"template": "tabs.html"}),
+    (r'^tab3/$', direct_to_template, {"template": "tabs.html"}),
     
     (r'^about/', include('about.urls')),
     (r'^account/', include('account.urls')),
