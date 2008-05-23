@@ -106,6 +106,8 @@ INSTALLED_APPS = (
 EMAIL_CONFIRMATION_DAYS = 2
 EMAIL_DEBUG = DEBUG
 CONTACT_EMAIL = "feedback@example.com"
+LOGIN_URL = "/account/login"
+
 
 # URCHIN_ID = "ua-..."
 

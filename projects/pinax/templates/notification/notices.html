@@ -8,8 +8,6 @@
 
 {% block body %}
 <h1>Notices</h1>
-{% if user.is_authenticated %}
-
 {% if notices %}
 {% regroup notices by added.date as notices_by_date %}
 
@@ -64,9 +62,4 @@
     </tr>
 </table>
 </form>
-
-{% else %}
-<p><span class="warning">Note</span>: Not logged in.</p>
-{% endif %}
-
 {% endblock %}
