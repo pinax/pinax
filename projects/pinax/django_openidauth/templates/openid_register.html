@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Sign up{% endblock %}
+
+{% block content_header %}Sign up{% endblock %}
+
+{% block main_content %}
+
+{% if form.errors %}
+<p class="error">Please correct the errors below:</p>
+{% endif %}
+
+<form method="post" action="">
+<dl>
+<dt><label for="id_username">Username:</label>{% if form.username.errors %} <span class="error">{{ form.username.errors|join:", " }}</span>{% endif %}</dt>
+<dd>{{ form.username }}</dd>
+<dt><label for="id_email">Email address:</label>{% if form.email.errors %} <span class="error">{{ form.email.errors|join:", " }}</span>{% endif %}</dd>
+<dd>{{ form.email }}</dd>
+{% if form.password1 %}
+<dt><label for="id_password1">Password:</label>{% if form.password1.errors %} <span class="error">{{ form.password2.errors|join:", " }}</span>{% endif %}</dt>
+<dd>{{ form.password1 }}</dd>
+{% endif %}
+{% if form.password2 %}
+<dt><label for="id_password2">Password (type again to catch any typos):</label>{% if form.password2.errors %} <span class="error">{{ form.password2.errors|join:", " }}</span>{% endif %}</dt>
+<dd>{{ form.password2 }}</dd>
+{% endif %}
+<dt><label for="id_tos">I have read and agree to the <a href="/about/tos/">Terms of Service</a>:</label>{% if form.tos.errors %}&nbsp;<span class="error">{{ form.tos.errors|join:", " }}</span>{% endif %}&nbsp;&nbsp;{{ form.tos }}
+<dt><input type="submit" value="Register" /></dt>
+</dl>
+</form>
+{% endblock %}
+
+{% block sidebar %}
+<p>Fill out the form to the left (all fields are required), and your account will be created; you'll be sent an email with instructions on how to finish your registration.</p>
+{% endblock %}

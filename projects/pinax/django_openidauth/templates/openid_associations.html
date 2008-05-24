@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+  "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <title>OpenID associations</title>
+  <style type="text/css">
+  ul.messages { font-weight:  bold; }
+  </style>
+</head>
+<body>
+<h1>OpenID associations</h1>
+
+<p>You are signed in as <strong>{{ user|escape }}</strong>.</p>
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<form action="{{ action }}" method="POST">
+{% if del_buttons %}
+<p>Your account is currently associated with the following OpenID{{ del_buttons|pluralize }}:</p>
+<ul>
+{% for button in del_buttons %}
+    <li>{{ button.openid|escape }} - <input type="submit" name="{{ button.hash }}" value="Remove association"></li>
+{% endfor %}
+</ul>
+{% endif %}
+
+{% if add_buttons %}
+<p>You are currently logged in with the following OpenID{{ add_buttons|pluralize }}. Click "associate" to allow {% ifequal add_buttons.__len__ 1 %}it{% else %}an OpenID{% endifequal %} to be used to sign in to your account.</p>
+<ul>
+{% for button in add_buttons %}
+    <li>{{ button.openid|escape }} - <input type="submit" name="{{ button.hash }}" value="Associate"></li>
+{% endfor %}
+</ul>
+{% endif %}
+</form>
+
+<p>To associate a new OpenID with this account, sign in with it here:</p>
+
+<form action="{{ action }}" method="POST">
+<p><input type="text" name="openid_url" value=""> <input type="submit" value="Authenticate and associate with this account"></p>
+</form>
+
+</body>
+</html>

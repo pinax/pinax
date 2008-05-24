@@ -62,6 +62,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
+    'django_openidconsumer.middleware.OpenIDMiddleware',
 )
 
 ROOT_URLCONF = 'pinax.urls'
@@ -102,6 +103,8 @@ INSTALLED_APPS = (
     'mailer',
     'messages',
     'announcements',
+    'django_openidconsumer',
+    'django_openidauth',
     
     # internal (for now)
     'analytics',

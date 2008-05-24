@@ -1,0 +1,22 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+  "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Sign in with your OpenID</title>
+<style type="text/css">
+input.openid {
+  background: url({{ logo }}) no-repeat; 
+  background-position: 0 50%;
+  padding-left: 16px;
+}
+</style>
+</head>
+<body>
+<h1>Sign in with your OpenID</h1>
+
+<form action="{{ action }}" method="post">
+<p><input class="openid" type="text" name="openid_url"> <input type="submit" value="Sign in"></p>
+</form>
+
+</body>
+</html>

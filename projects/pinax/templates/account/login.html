@@ -15,6 +15,15 @@
         <tr><td></td><td><input type="submit" value="Log in &raquo;" /></td></tr>
         </table>
     </form>
+    
+    <p>Or sign in with your OpenID:</p>
+    <form class="login" action="/openid/login/" method="POST">
+        <table>
+            <tr><th>OpenID Identifier: </th><td><input class="openid" type="text" name="openid_url"></td></tr>
+            <tr><td></td><td><input type="submit" value="Log in &raquo;" /></td></tr>
+        </table>
+    </form>
+
     <p>If you have any trouble logging in to your account, contact us at <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>.</p>
 {% endblock %}
 

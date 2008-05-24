@@ -2,7 +2,6 @@ from django.conf.urls.defaults import *
 
 urlpatterns = patterns('',
     (r'^$', 'account.views.account'),
-    
     (r'^signup/$', 'account.views.signup'),
     (r'^login/$', 'account.views.login'),
     (r'^password_reset/$', 'account.views.password_reset'),
