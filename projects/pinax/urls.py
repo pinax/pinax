@@ -12,7 +12,7 @@ urlpatterns = patterns('',
     (r'^about/', include('about.urls')),
     (r'^account/', include('account.urls')),
     (r'^profiles/', include('profiles.urls')),
-    (r'^friends/', include('friends_app.urls')),
+    (r'^invitations/', include('friends_app.urls')),
     (r'^notices/', include('notification.urls')),
     
     (r'^robots.txt$', include('robots.urls')),

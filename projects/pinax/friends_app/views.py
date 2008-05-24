@@ -14,10 +14,6 @@ def friends(request):
                         request.user.message_set.create(message="Accepted friendship request from %s" % invitation.from_user)
                 except FriendshipInvitation.DoesNotExist:
                     pass
-        friends = Friendship.objects.friends_for_user(request.user)
-    else:
-        friends = None
-    return render_to_response("friends_app/friends.html", {
-        "friends": friends,
+    return render_to_response("friends_app/invitations.html", {
     }, context_instance=RequestContext(request))
     
