@@ -1,29 +1,12 @@
 {% extends "site_base.html" %}
 
-{% block head_title %}Pinax : Friends{% endblock %}
+{% block head_title %}Pinax : Invitations{% endblock %}
 
 {% block rtab_id %}friends_tab{% endblock %}
 
 {% block body %}
-<h1>Friends</h1>
+<h1>Invitations</h1>
 {% if user.is_authenticated %}
-
-<p>You can see a (temporary) list of all users <a href="/profiles/">here</a>.</p>
-
-<h2>Your Friends</h2>
-
-{% if user.friends.all %}
-<table class="friend_list">
-{% for friend in friends %}
-    <tr>
-        <td><a href="{% url profiles.views.profile friend.friend.username %}">{{ friend.friend }}</a></td>
-    </tr>
-{% endfor %}
-</table>
-{% else %}
-<p>No friends yet.</p>
-{% endif %}
-
 
 <h2>Friendship Requests Sent</h2>
 
