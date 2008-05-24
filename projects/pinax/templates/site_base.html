@@ -30,6 +30,7 @@
 <table>
     <tr>
         {% if user.is_authenticated %}
+            <td class="tab rtab_profile"><div><a href="{% url profiles.views.profile user %}">Profile</a></div></td>
             <td class="tab rtab_notices"><div><a href="/notices/">Notices{% if notice_unseen_count %} ({{ notice_unseen_count }}){% endif %}</a></div></td>
             <td class="tab rtab_invitations"><div><a href="/invitations/">Invitations</a></div></td>
         {% endif %}
