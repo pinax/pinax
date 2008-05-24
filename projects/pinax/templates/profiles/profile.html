@@ -45,7 +45,7 @@
 {% endif %}
 {% else %}
 {% if is_friend %}
-<p>You are friends with {{ other_user }}.</p>
+<p>You are friends with {{ other_user }}. <a href="{% url messages.views.compose %}{{ other_user }}/">Send a message</a>.</p>
 <h2>{{ other_user }}'s Friends</h2>
 <table class="friend_list">
 {% for friendship in other_friends %}

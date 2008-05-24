@@ -9,6 +9,7 @@
 {% endblock %}
 {% block subnav %}
 <ul class="subnav">
+    <li><a href="{% url messages.views.compose %} ">{% trans "Compose" %}</a></li>
     <li><a href="{% url messages.views.inbox %} ">{% trans "Inbox" %} ({% inbox_count %})</a></li>
     <li><a href="{% url messages.views.outbox %} ">{% trans "Sent" %}</a></li>
     <li><a href="{% url messages.views.trash %}">{% trans "Trash" %}</a></li>
