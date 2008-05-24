@@ -8,14 +8,19 @@
 <h1>Profiles</h1>
 
 {% load gravatar %}
+{% load humanize %}
 
-<table class="friend_list"> {# @@@ should be a different class #}
-{% for other_user in users %}
-    <tr>
-        <td>{% gravatar other_user 40 %}</td>
-        <td><a href="{% url profiles.views.profile other_user.username %}">{{ other_user }}</a></td>
-    </tr>
+{% regroup users by date_joined.date as users_by_date_joined %}
+
+{% for date in users_by_date_joined %}
+<h2 class="join_date">{{ date.grouper|naturalday:"M d"|capfirst }}</h2>
+{% for user in date.list %}
+<div class="profile">
+    <div style="float: left;">{% gravatar user 40 %}</div>
+    <div style="padding: 5px; margin-left: 50px;"><a href="{% url profiles.views.profile user.username %}">{{ user }}</a></div>
+    <div style="clear: both;"></div>
+</div>
 {% endfor %}
-</table>
+{% endfor %}
 
 {% endblock %}

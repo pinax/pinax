@@ -7,7 +7,7 @@ from friends.models import FriendshipInvitation, Friendship
 
 def profiles(request):
     return render_to_response("profiles/profiles.html", {
-        "users": User.objects.all(),
+        "users": User.objects.all().order_by("-date_joined"),
     }, context_instance=RequestContext(request))
 
 def profile(request, username):
