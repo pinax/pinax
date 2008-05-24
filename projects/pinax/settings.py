@@ -103,6 +103,10 @@ INSTALLED_APPS = (
     'analytics',
 )
 
+ABSOLUTE_URL_OVERRIDES = {
+    "auth.user": lambda o: "/profiles/%s/" % o.username,
+}
+
 EMAIL_CONFIRMATION_DAYS = 2
 EMAIL_DEBUG = DEBUG
 CONTACT_EMAIL = "feedback@example.com"

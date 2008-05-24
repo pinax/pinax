@@ -20,7 +20,7 @@
 <div class="notice">
 {% endif %}
     <span class="notice_type">[{{ notice.notice_type.display }}]</span>
-    <span class="notice_message">{{ notice.message }}</span>
+    <span class="notice_message">{{ notice.html_message|safe }}</span>
     <span class="notice_time">{{ notice.added.time|time:"P" }}</span>
 </div>
 {% endfor %}
