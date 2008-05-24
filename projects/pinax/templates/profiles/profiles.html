@@ -7,7 +7,7 @@
 
 <ul>
     {% for other_user in users %}
-    <li><a href="{% url profiles.views.profile other_user.username %}">{{ other_user }}</a></li>
+    <li><a href="{% url profiles_app.views.profile other_user.username %}">{{ other_user }}</a></li>
     {% endfor %}
 </ul>
 

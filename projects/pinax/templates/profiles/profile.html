@@ -14,7 +14,7 @@
 {% if other_friends %}
 <ul>
 {% for friendship in other_friends %}
-    <li><a href="{% url profiles.views.profile friendship.friend.username %}">{{ friendship.friend }}</a></li>
+    <li><a href="{% url profiles_app.views.profile friendship.friend.username %}">{{ friendship.friend }}</a></li>
 {% endfor %}
 </ul>
 {% else %}
@@ -26,7 +26,7 @@
 <h2>{{ other_user }}'s Friends</h2>
 <ul>
 {% for friendship in other_friends %}
-    <li><a href="{% url profiles.views.profile friendship.friend.username %}">{{ friendship.friend }}</a></li>
+    <li><a href="{% url profiles_app.views.profile friendship.friend.username %}">{{ friendship.friend }}</a></li>
 {% endfor %}
 </ul>
 
