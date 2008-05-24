@@ -9,5 +9,8 @@ class Profile(models.Model):
     location = models.CharField(max_length=40, null=True, blank=True)
     website = models.URLField(null=True, blank=True)
     
+    def __unicode__(self):
+        return self.user.username
+    
     class Admin:
         pass
