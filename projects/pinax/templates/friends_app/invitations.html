@@ -10,11 +10,11 @@
 
 {% if user.invitations_from.all %}
 <table class="invitation_list">
-{% for sent_invitation in user.invitations_from.all %}
+{% for invitation in user.invitations_from.all %}
     <tr>
-        <td><a href="{% url profiles.views.profile sent_invitation.to_user.username %}">{{ sent_invitation.to_user }}</a></td>
-        <td>{{ sent_invitation.sent }}</td>
-        <td>{{ sent_invitation.get_status_display }}</td>
+        <td><a href="{% url profiles.views.profile invitation.to_user.username %}">{{ invitation.to_user }}</a></td>
+        <td>{{ invitation.sent }}</td>
+        <td class="invitation_{{ invitation.get_status_display }}">{{ invitation.get_status_display }}</td>
     </tr>
 {% endfor %}
 </table>
@@ -31,7 +31,7 @@
     <tr>
         <td><a href="{% url profiles.views.profile invitation.from_user.username %}">{{ invitation.from_user }}</a></td>
         <td>{{ invitation.sent }}</td>
-        <td>{{ invitation.get_status_display }}</td>
+        <td class="invitation_{{ invitation.get_status_display }}">{{ invitation.get_status_display }}</td>
     </tr>
 {% ifequal invitation.status "2" %}
     <tr>
