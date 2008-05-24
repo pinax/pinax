@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from friends.forms import InviteFriendForm
 from friends.models import FriendshipInvitation, Friendship
 
+from profiles.models import Profile
 from profiles.forms import ProfileForm
 
 def profiles(request):
@@ -63,7 +64,12 @@ def profile(request, username):
                 profile = profile_form.save(commit=False)
                 profile.user = other_user
                 profile.save()
-        profile_form = ProfileForm(instance=other_user.get_profile())
+        try:
+            profile_form = ProfileForm(instance=other_user.get_profile())
+        except Profile.DoesNotExist:
+            profile = Profile(user=other_user)
+            profile.save()
+            profile_form = ProfileForm(instance=other_user.get_profile())
     else:
         profile_form = None
     
