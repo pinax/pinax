@@ -1,19 +1,20 @@
 {% extends "site_base.html" %}
+{% load i18n %}
 
 {% block head_title %}Pinax : Announcements{% endblock %}
 
 {% block body %}
-<h1>Announcements</h1>
+<h1>{% trans "Announcements" %}</h1>
 {% if object_list %}
 <ul>
     {% for announcement in object_list %}
     <li>
         <a href="{{ announcement.get_absolute_url }}">{{ announcement }}</a> -
-        <a href="{% url announcement_hide announcement.pk %}?next={{ request.path }}">Hide announcement</a>
+        <a href="{% url announcement_hide announcement.pk %}?next={{ request.path }}">{% trans "Hide announcement" %}</a>
     </li>
     {% endfor %}
 </ul>
 {% else %}
-<strong>There are no announcements for you.</strong>
+<strong>{% trans "There are no announcements for you." %}</strong>
 {% endif %}
 {% endblock %}
