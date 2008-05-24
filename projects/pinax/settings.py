@@ -98,18 +98,14 @@ INSTALLED_APPS = (
     'dbtemplates',
     'friends',
     'mailer',
-    'profiles',
     
     # internal (for now)
     'analytics',
-    'profiles_app',
 )
 
 ABSOLUTE_URL_OVERRIDES = {
     "auth.user": lambda o: "/profiles/%s/" % o.username,
 }
-
-AUTH_PROFILE_MODULE = 'profiles_app.Profile'
 
 EMAIL_CONFIRMATION_DAYS = 2
 EMAIL_DEBUG = DEBUG
