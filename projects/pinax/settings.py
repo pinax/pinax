@@ -101,6 +101,7 @@ INSTALLED_APPS = (
     
     # internal (for now)
     'analytics',
+    'gravatar',
 )
 
 ABSOLUTE_URL_OVERRIDES = {

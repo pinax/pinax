@@ -6,7 +6,8 @@
 
 {% block body %}
 
-<img src="{{ gravatar_url }}" alt="gravatar for {{ other_user }}" />
+{% load gravatar %}
+{% gravatar other_user 80 %}
 
 <h1>Profile for {{ other_user }}</h1>
 
