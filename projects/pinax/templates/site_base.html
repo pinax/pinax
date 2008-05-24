@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load inbox %}
+
 {% block login %}
     {% if user.is_authenticated %}
         <b>{{ user }}</b> | <a href="/account/">Account</a> | <a href="/account/logout">Logout</a>
@@ -31,8 +33,7 @@
     <tr>
         {% if user.is_authenticated %}
             <td class="tab rtab_profile"><div><a href="{% url profiles.views.profile user %}">Profile</a></div></td>
-            <td class="tab rtab_notices"><div><a href="/notices/">Notices{% if notice_unseen_count %} ({{ notice_unseen_count }}){% endif %}</a></div></td>
-            <td class="tab rtab_invitations"><div><a href="/invitations/">Invitations</a></div></td>
+            <td class="tab rtab_inbox"><div><a href="/messages/inbox/">Inbox ({% inbox_count %})</a></div></td>
         {% endif %}
     </tr>
 </table>

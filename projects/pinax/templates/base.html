@@ -30,6 +30,8 @@
                 <li><a href="#" onclick="$('#messages').fadeOut(); return false;"><small>clear messages</small></a></li>
             </ul>
             {% endif %}
+            {% block subnav %}
+            {% endblock %}
             {% block body %}
             {% endblock %}
             </div>

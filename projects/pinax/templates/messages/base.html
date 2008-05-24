@@ -1,0 +1,18 @@
+{% extends "site_base.html" %}
+{% load i18n inbox %}  
+
+{% block head_title %}Pinax : Notices{% endblock %}
+
+{% block rtab_id %}inbox_tab{% endblock %}
+
+{% block body %}  
+{% endblock %}
+{% block subnav %}
+<ul class="subnav">
+    <li><a href="{% url messages.views.inbox %} ">{% trans "Inbox" %} ({% inbox_count %})</a></li>
+    <li><a href="{% url messages.views.outbox %} ">{% trans "Sent" %}</a></li>
+    <li><a href="{% url messages.views.trash %}">{% trans "Trash" %}</a></li>
+    <li><a href="{% url notification.views.notices %}">{% trans "Notices" %}{% if notice_unseen_count %} ({{ notice_unseen_count }}){% endif %}</a></li>
+    <li><a href="{% url friends_app.views.friends %}">{% trans "Invitations" %}</a></li>
+</ul>
+{% endblock %}

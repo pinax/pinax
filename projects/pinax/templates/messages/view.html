@@ -1,0 +1,21 @@
+{% extends "messages/base.html" %} 
+{% load i18n %} 
+{% block body %}
+<h1>{% trans "View Message" %}</h1>
+<dl class="message-headers">
+    <dt>{% trans "Sender" %}:</dt>
+    <dd><a href="{% url profiles.views.profile message.sender %}">{{ message.sender }}</a></dd>
+    <dt>{% trans "Subject" %}:</dt>
+    <dd><strong>{{ message.subject }}</strong></dd>
+    <dt>{% trans "Date" %}:</dt>
+    <dd>{{ message.sent_at|date:"d.m.Y - H:i"}}</dd>
+    <dt>{% trans "Recipient" %}:</dt>
+    <dd>{{ message.recipient }}</dd>
+</dl>
+{{ message.body|linebreaksbr }}<br /><br />
+
+{% ifequal message.recipient user %}
+<a href="{% url messages.views.reply message.id %}">{% trans "Reply" %}</a>
+{% endifequal %}
+<a href="{% url messages.views.delete message.id %}">{% trans "Delete" %}</a>
+{% endblock %}

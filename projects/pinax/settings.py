@@ -98,6 +98,7 @@ INSTALLED_APPS = (
     'dbtemplates',
     'friends',
     'mailer',
+    'messages',
     
     # internal (for now)
     'analytics',
