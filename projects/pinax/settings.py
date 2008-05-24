@@ -102,11 +102,14 @@ INSTALLED_APPS = (
     # internal (for now)
     'analytics',
     'gravatar',
+    'profiles',
 )
 
 ABSOLUTE_URL_OVERRIDES = {
     "auth.user": lambda o: "/profiles/%s/" % o.username,
 }
+
+AUTH_PROFILE_MODULE = 'profiles.Profile'
 
 EMAIL_CONFIRMATION_DAYS = 2
 EMAIL_DEBUG = DEBUG

@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 from friends.forms import InviteFriendForm
 from friends.models import FriendshipInvitation, Friendship
 
+from profiles.forms import ProfileForm
+
 def profiles(request):
     return render_to_response("profiles/profiles.html", {
         "users": User.objects.all().order_by("-date_joined"),
@@ -15,9 +17,15 @@ def profile(request, username):
     if request.user.is_authenticated():
         is_friend = Friendship.objects.are_friends(request.user, other_user)
         other_friends = Friendship.objects.friends_for_user(other_user)
+        if request.user == other_user:
+            is_me = True
+        else:
+            is_me = False
     else:
         other_friends = []
         is_friend = False
+        is_me = False
+    
     if is_friend:
         invite_form = None
         previous_invitations_to = None
@@ -48,7 +56,20 @@ def profile(request, username):
     previous_invitations_to = FriendshipInvitation.objects.filter(to_user=other_user, from_user=request.user)
     previous_invitations_from = FriendshipInvitation.objects.filter(to_user=request.user, from_user=other_user)
     
+    if is_me:
+        if request.method == "POST":
+            if request.POST["action"] == "update":
+                profile_form = ProfileForm(request.POST, instance=other_user.get_profile())
+                profile = profile_form.save(commit=False)
+                profile.user = other_user
+                profile.save()
+        profile_form = ProfileForm(instance=other_user.get_profile())
+    else:
+        profile_form = None
+    
     return render_to_response("profiles/profile.html", {
+        "profile_form": profile_form,
+        "is_me": is_me,
         "is_friend": is_friend,
         "other_user": other_user,
         "other_friends": other_friends,

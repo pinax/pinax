@@ -11,11 +11,25 @@
 
 <h1>Profile for {{ other_user }}</h1>
 
-<p>This is really just a placeholder at the moment.</p>
+<div class="profile_info">
+    {% if other_user.get_profile.name %}<p><b>Name</b>: {{ other_user.get_profile.name }}</p>{% endif %}
+    {% if other_user.get_profile.about %}<p><b>About</b>: {{ other_user.get_profile.about }}</p>{% endif %}
+    {% if other_user.get_profile.location%}<p><b>Location</b>: {{ other_user.get_profile.location }}</p>{% endif %}
+    {% if other_user.get_profile.website %}<p><b>Website</b>: {{ other_user.get_profile.website }}</p>{% endif %}
+</div>
 
 {% if user.is_authenticated %}
-{% ifequal user other_user %}
-<p>This is you.</p>
+{% if is_me %}
+
+<p><a href="#" onclick="$('#profile_form').toggle(); return false;">Edit profile</a></p>
+
+<form id="profile_form" method="POST" action="" style="display: none;">
+<table>
+{{ profile_form }}
+<tr><td></td><td><input type="submit" name="action" value="update" /></td></tr>
+</table>
+</form>
+
 <h2>Your Friends</h2>
 {% if other_friends %}
 <table class="friend_list">
@@ -69,7 +83,7 @@
 {% endif %}
 {% endif %}
 {% endif %}
-{% endifequal %}
+{% endif %}
 {% else %}
 <p><a href="/account/signup/">Sign up</a> and <a href="/account/login/">log in </a> to add this person as a friend.</p>
 {% endif %}
