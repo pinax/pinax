@@ -6,6 +6,17 @@
 <h1>Invitations</h1>
 {% if user.is_authenticated %}
 
+<h2>Join Requests</h2>
+
+<p>If you'd like to invite someone to join Pinax, you can enter their email address and a message for them below:</p>
+
+<form method="POST" action="">
+<table>
+{{ join_request_form }}
+<tr><td></td><td><input type="submit" name="action" value="invite" /></td></tr>
+</table>
+</form>
+
 <h2>Friendship Requests Sent</h2>
 
 {% if user.invitations_from.all %}
