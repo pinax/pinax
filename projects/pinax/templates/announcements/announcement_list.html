@@ -6,12 +6,12 @@
 <h1>Announcements</h1>
 {% if object_list %}
 <ul>
-	{% for announcement in object_list %}
-	<li>
-		<a href="{{ announcement.get_absolute_url }}">{{ announcement }}</a> -
-		<a href="{% url announcement_hide announcement.pk %}">Hide announcement</a>
-	</li>
-	{% endfor %}
+    {% for announcement in object_list %}
+    <li>
+        <a href="{{ announcement.get_absolute_url }}">{{ announcement }}</a> -
+        <a href="{% url announcement_hide announcement.pk %}">Hide announcement</a>
+    </li>
+    {% endfor %}
 </ul>
 {% else %}
 <strong>There are no announcements for you.</strong>
