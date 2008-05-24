@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 from friends.forms import InviteFriendForm
 from friends.models import FriendshipInvitation, Friendship
 
+import urllib, hashlib
+
 def profiles(request):
     return render_to_response("profiles/profiles.html", {
         "users": User.objects.all(),
@@ -47,6 +49,15 @@ def profile(request, username):
             })
     previous_invitations_to = FriendshipInvitation.objects.filter(to_user=other_user, from_user=request.user)
     previous_invitations_from = FriendshipInvitation.objects.filter(to_user=request.user, from_user=other_user)
+    
+    # Set your variables here
+    email = other_user.email
+    size = 80
+    
+    # construct the url
+    gravatar_url = "http://www.gravatar.com/avatar.php?"
+    gravatar_url += urllib.urlencode({'gravatar_id':hashlib.md5(email).hexdigest(), 'size':str(size)})
+    
     return render_to_response("profiles/profile.html", {
         "is_friend": is_friend,
         "other_user": other_user,
@@ -54,4 +65,5 @@ def profile(request, username):
         "invite_form": invite_form,
         "previous_invitations_to": previous_invitations_to,
         "previous_invitations_from": previous_invitations_from,
+        "gravatar_url": gravatar_url,
     }, context_instance=RequestContext(request))
