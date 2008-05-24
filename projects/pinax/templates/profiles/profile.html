@@ -15,7 +15,7 @@
     {% if other_user.get_profile.name %}<p><b>Name</b>: {{ other_user.get_profile.name }}</p>{% endif %}
     {% if other_user.get_profile.about %}<p><b>About</b>: {{ other_user.get_profile.about }}</p>{% endif %}
     {% if other_user.get_profile.location%}<p><b>Location</b>: {{ other_user.get_profile.location }}</p>{% endif %}
-    {% if other_user.get_profile.website %}<p><b>Website</b>: {{ other_user.get_profile.website }}</p>{% endif %}
+    {% if other_user.get_profile.website %}<p><b>Website</b>: <a href="{{ other_user.get_profile.website }}">{{ other_user.get_profile.website }}</a></p>{% endif %}
 </div>
 
 {% if user.is_authenticated %}
