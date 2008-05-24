@@ -14,6 +14,18 @@
     </head>
     
     <body>
+		{% if site_wide_announcements %}
+		<div id="site_wide_announcements">
+			<ul>
+				{% for announcement in site_wide_announcements %}
+				<li>
+					<a href="{{ announcement.get_absolute_url }}">{{ announcement }}</a> -
+					<a href="{% url announcement_hide announcement.pk %}?next={{ request.path }}">Hide announcement</a>
+				</li>
+				{% endfor %}
+			</ul>
+		</div>
+		{% endif %}
         <div id="tabhead">
             <div class="logo">{% block logo_link_image %}{% endblock %}</div>
             <div class="login">{% block login %}{% endblock %}</div>

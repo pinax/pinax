@@ -1,0 +1,8 @@
+{% extends "site_base.html" %}
+
+{% block head_title %}Pinax : Announcements : {{ object }}{% endblock %}
+
+{% block body %}
+<h1>{{ object }}</h1>
+<p>{{ object.content }}</p>
+{% endblock %}

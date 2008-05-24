@@ -77,8 +77,10 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.debug",
     "django.core.context_processors.i18n",
     "django.core.context_processors.media",
+    "django.core.context_processors.request",
     
-    "notification.context_processors.notification"
+    "notification.context_processors.notification",
+    "announcements.context_processors.site_wide_announcements",
 )
 
 INSTALLED_APPS = (
@@ -99,6 +101,7 @@ INSTALLED_APPS = (
     'friends',
     'mailer',
     'messages',
+    'announcements',
     
     # internal (for now)
     'analytics',
