@@ -12,7 +12,25 @@
 
 <form method="POST" action="">
 <table>
-{{ join_request_form }}
+<tr>
+    <th>{{ join_request_form.email.label_tag }}</th>
+    <td>
+        {% if join_request_form.existing_users %}
+        <ul class="errorlist">
+        <li>Someone with this email address has already joined:
+        {% for other_user in join_request_form.existing_users %}
+        <a href="{% url profiles.views.profile other_user %}">{{ other_user }}</a>{% endfor %}</li>
+        </ul>
+        {% else %}
+        {{ join_request_form.email.errors }}
+        {% endif %}
+        {{ join_request_form.email }}
+    </td>
+</tr>
+<tr>
+    <th>{{ join_request_form.message.label_tag }}</th>
+    <td>{{ join_request_form.message.errors }}{{ join_request_form.message }}</td>
+</tr>
 <tr><td></td><td><input type="submit" name="action" value="invite" /></td></tr>
 </table>
 </form>
