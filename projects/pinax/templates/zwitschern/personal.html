@@ -8,20 +8,22 @@
 <h1>{% trans "Tweets" %}</h1>
 
 <form method="POST" action="{% url zwitschern.views.personal %}">
-    <p>What are you doing?</p>
+    <p>{% trans "What are you doing?" %}</p>
     <textarea id="new_tweet" name="tweet" cols="30" rows="4">{% if reply %}@{{ reply }} {% endif %}</textarea>
-    <p><span id="chars_left"></span> chars left. <input type="submit" name="action" value="{% trans "post" %}" /></p>
+    <p><span id="chars_left"></span> {% trans "chars left." %} <input type="hidden" name="action" value="post" /><input type="submit" value="{% trans "post" %}"></p>
     
 </form>
 
-<p>These are tweets from the {{ user.followed.count }} {{ user.followed.count|pluralize:"person,people" }} you are following (plus your own):</p>
+<p>{% blocktrans with user.followed.count as follow_count and user.followed.count|pluralize:"person,people" as follow_name %}
+These are tweets from the {{ follow_count }} {{ follow_name }} you are following (plus your own){% endblocktrans %}:</p>
 
 {% for tweet in tweets %}
 <div class="tweet">
 <a href="{% url profiles.views.profile tweet.sender %}"><b>{{ tweet.sender }}</b></a>
 {{ tweet.html|safe }}
-<span class="timesince">{{ tweet.sent|timesince }} ago</span>
-<a class="reply" href="{% url zwitschern.views.personal %}?reply={{ tweet.sender }}">reply</a>
+<span class="timesince">{% blocktrans with tweet.sent|timesince as tweet_age %}
+{{ tweet_age }} ago{% endblocktrans %}</span>
+<a class="reply" href="{% url zwitschern.views.personal %}?reply={{ tweet.sender }}">{% trans "reply" %}</a>
 </div>
 {% endfor %}
 

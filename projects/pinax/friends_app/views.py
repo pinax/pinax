@@ -17,7 +17,7 @@ def friends(request):
                     invitation = FriendshipInvitation.objects.get(id=invitation_id)
                     if invitation.to_user == request.user:
                         invitation.accept()
-                        request.user.message_set.create(message="Accepted friendship request from %s" % invitation.from_user)
+                        request.user.message_set.create(message=_("Accepted friendship request from %(from_user)s") % {'from_user': invitation.from_user})
                 except FriendshipInvitation.DoesNotExist:
                     pass
             elif request.POST["action"] == "invite": # invite to join

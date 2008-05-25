@@ -2,6 +2,7 @@ from datetime import datetime
 
 from django.db import models
 from django.utils.html import escape
+from django.utils.translation import ugettext_lazy as _
 
 from django.contrib.auth.models import User
 
@@ -24,9 +25,9 @@ class Tweet(models.Model):
     a single tweet from a user
     """
     
-    text = models.CharField(max_length=140)
-    sender = models.ForeignKey(User, related_name="sent_tweets")
-    sent = models.DateTimeField()
+    text = models.CharField(_('text'), max_length=140)
+    sender = models.ForeignKey(User, related_name="sent_tweets", verbose_name=_('sender'))
+    sent = models.DateTimeField(_('sent'))
     
     def html(self):
         return format_tweet(self.text)
@@ -44,10 +45,10 @@ class TweetInstance(models.Model):
     denormalized for better performance
     """
     
-    text = models.CharField(max_length=140)
-    sender = models.ForeignKey(User, related_name="sent_tweet_instances")
-    recipient = models.ForeignKey(User, related_name="received_tweet_instances")
-    sent = models.DateTimeField()
+    text = models.CharField(_('text'), max_length=140)
+    sender = models.ForeignKey(User, related_name="sent_tweet_instances", verbose_name=_('sender'))
+    recipient = models.ForeignKey(User, related_name="received_tweet_instances", verbose_name=_('recipient'))
+    sent = models.DateTimeField(_('sent'))
     
     def html(self):
         return format_tweet(self.text)
@@ -97,8 +98,8 @@ class FollowingManager(models.Manager):
 
 class Following(models.Model):
     
-    follower = models.ForeignKey(User, related_name="followed")
-    followed = models.ForeignKey(User, related_name="followers")
+    follower = models.ForeignKey(User, related_name="followed", verbose_name=_('follower'))
+    followed = models.ForeignKey(User, related_name="followers", verbose_name=_('followed'))
     
     objects = FollowingManager()
     

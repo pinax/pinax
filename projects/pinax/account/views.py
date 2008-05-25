@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.template import RequestContext
 from django.conf import settings
+from django.utils.translation import ugettext_lazy as _
 
 from forms import SignupForm, AddEmailForm, LoginForm, ChangePasswordForm, ResetPasswordForm
 from emailconfirmation.models import EmailAddress, EmailConfirmation
@@ -27,7 +28,7 @@ def signup(request):
             username, password = form.save()
             user = authenticate(username=username, password=password)
             auth_login(request, user)
-            request.user.message_set.create(message="Successfully logged in as %s." % user.username)
+            request.user.message_set.create(message=_("Successfully logged in as %(username)s.") % {'username': user.username})
             return HttpResponseRedirect("/")
     else:
         form = SignupForm()
@@ -56,7 +57,7 @@ def account(request):
                     email = request.POST["email"]
                     try:
                         email_address = EmailAddress.objects.get(user=request.user, email=email)
-                        request.user.message_set.create(message="Confirmation email sent to %s" % email)
+                        request.user.message_set.create(message=_("Confirmation email sent to %(email)s") % {'email': email})
                         EmailConfirmation.objects.send_confirmation(email_address)
                     except EmailAddress.DoesNotExist:
                         pass
@@ -65,7 +66,7 @@ def account(request):
                     try:
                         email_address = EmailAddress.objects.get(user=request.user, email=email)
                         email_address.delete()
-                        request.user.message_set.create(message="Removed email address %s" % email)
+                        request.user.message_set.create(message=_("Removed email address %(email)s") % {'email': email})
                     except EmailAddress.DoesNotExist:
                         pass
                 elif request.POST["action"] == "primary":

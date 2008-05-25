@@ -45,7 +45,7 @@
 <form id="profile_form" method="POST" action="" style="display: none;">
 <table>
 {{ profile_form }}
-<tr><td></td><td><input type="submit" name="action" value="{% trans "update" %}" /></td></tr>
+<tr><td></td><td><input type="hidden" name="action" value="update" /><input type="submit" value="{% trans "update" %}"/></td></tr>
 </table>
 </form>
 
@@ -68,9 +68,9 @@
 <div>
 <form method="POST" action="">
 {% if is_following %}
-<input type="submit" name="action" value="unfollow" />
+<input type="hidden" name="action" value="unfollow" /><input type="submit" value="{% trans "unfollow" %}"/>
 {% else %}
-<input type="submit" name="action" value="follow" />
+<input type="hidden" name="action" value="follow" /><input type="submit" value="{% trans "follow" %}"/>
 {% endif %}
 </form>
 </div>
@@ -109,7 +109,7 @@
     <form method="POST" action="">
         <table>
             {{ invite_form.as_table }}
-            <tr><td></td><td><input type="submit" name="action" value="{% trans "invite" %}" /> {% blocktrans %}{{ other_user }} to be a friend.{%  endblocktrans %}</td></tr>
+            <tr><td></td><td><input type="hidden" name="action" value="invite" /><input type="submit" value="{% trans "invite" %}"/> {% blocktrans %}{{ other_user }} to be a friend.{%  endblocktrans %}</td></tr>
         </table>
     </form>
     {% endif %}

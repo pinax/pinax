@@ -48,7 +48,7 @@
     <th>{{ join_request_form.message.label_tag }}</th>
     <td>{{ join_request_form.message.errors }}{{ join_request_form.message }}</td>
 </tr>
-<tr><td></td><td><input type="submit" name="action" value="{% trans "invite" %}" /></td></tr>
+<tr><td></td><td><input type="hidden" name="action" value="invite" /><input type="submit" value="{% trans "invite" %}"/></td></tr>
 </table>
 </form>
 
