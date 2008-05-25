@@ -1,12 +1,13 @@
 {% extends "base.html" %}
 
 {% load inbox %}
+{% load 18n %}
 
 {% block login %}
     {% if user.is_authenticated %}
-        <b>{{ user }}</b> | <a href="/account/">Account</a> | <a href="/account/logout">Logout</a>
+        <b>{{ user }}</b> | <a href="/account/">{% trans "Account" %}</a> | <a href="/account/logout">{% trans "Logout" %}</a>
     {% else %}
-        <a href="/account/login/">Login</a> or <a href="/account/signup/"><b>Sign up</b></a>
+        <a href="/account/login/">{% trans "Login" %}</a> or <a href="/account/signup/"><b>{% trans "Sign up" %}</b></a>
     {% endif %}
 {% endblock %}
 
@@ -16,11 +17,11 @@
 <table>
     <tr>
         {% if user.is_authenticated %}
-            <td class="tab tab_home"><div><a href="/">Home</a></div></td>
+            <td class="tab tab_home"><div><a href="/">{% trans "Home" %}</a></div></td>
             <td class="tab tab_empty"><div><a href="/tab2/">tab 2</a></div></td>
             <td class="tab tab_empty"><div><a href="/tab3/">tab 3</a></div></td>
         {% else %}
-            <td class="tab tab_home"><div><a href="/">Home</a></div></td>
+            <td class="tab tab_home"><div><a href="/">{% trans "Home" %}</a></div></td>
             <td class="tab tab_empty"><div><a href="/account/login?next=%2Ftab2%2F">tab 2</a></div></td>
             <td class="tab tab_empty"><div><a href="/account/login?next=%2Ftab3%2F">tab 3</a></div></td>
         {% endif %}
@@ -32,8 +33,8 @@
 <table>
     <tr>
         {% if user.is_authenticated %}
-            <td class="tab rtab_profile"><div><a href="{% url profiles.views.profile user %}">Profile</a></div></td>
-            <td class="tab rtab_inbox"><div><a href="/messages/inbox/">Inbox ({% inbox_count %})</a></div></td>
+            <td class="tab rtab_profile"><div><a href="{% url profiles.views.profile user %}">{% trans "Profile" %}</a></div></td>
+            <td class="tab rtab_inbox"><div><a href="/messages/inbox/">{% trans "Inbox" %} ({% inbox_count %})</a></div></td>
         {% endif %}
     </tr>
 </table>
@@ -41,10 +42,10 @@
 
 {% block footer %}
 <div class="legal">
-    &copy; 2008 &lt;your company here&gt;
-    - <a href="/about/">About Pinax</a>
-    - <a href="http://jtauber.com/pinax/">Pinax Blog</a>
-    - <a href="/about/terms/">Terms of Service</a>
-    - <a href="/about/privacy/">Privacy Policy</a>
+    {% trans "&copy; 2008 &lt;your company here&gt;" %}
+    - <a href="/about/">{% trans "About Pinax" %}</a>
+    - <a href="http://jtauber.com/pinax/">{% trans "Pinax Blog" %}</a>
+    - <a href="/about/terms/">{% trans "Terms of Service" %}</a>
+    - <a href="/about/privacy/">{% trans "Privacy Policy" %}</a>
 </div>
 {% endblock %}

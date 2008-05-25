@@ -1,3 +1,4 @@
-User '{{ user }}' at Pinax has given this as an email address.
+{% load i18n %}{% blocktrans %}User '{{ user }}' at Pinax has given this as an email address.
 
 To confirm this is correct, go to http://localhost:8001/account/confirm_email/{{ confirmation_key }}/
+{% endblocktrans %}

@@ -1,6 +1,8 @@
 {% extends "profiles/base.html" %}
 
-{% block head_title %}Pinax : Profile for {{ other_user }}{% endblock %}
+{% load i18n %}
+
+{% block head_title %}Pinax : {% blocktrans %}Profile for {{ other_user }}{% endblocktrans %}{% endblock %}
 
 {% block body %}
 
@@ -10,25 +12,25 @@
 <h1>Profile for {{ other_user }}</h1>
 
 <div class="profile_info">
-    {% if other_user.get_profile.name %}<p><b>Name</b>: {{ other_user.get_profile.name }}</p>{% endif %}
-    {% if other_user.get_profile.about %}<p><b>About</b>: {{ other_user.get_profile.about }}</p>{% endif %}
-    {% if other_user.get_profile.location%}<p><b>Location</b>: {{ other_user.get_profile.location }}</p>{% endif %}
-    {% if other_user.get_profile.website %}<p><b>Website</b>: <a href="{{ other_user.get_profile.website }}">{{ other_user.get_profile.website }}</a></p>{% endif %}
+    {% if other_user.get_profile.name %}<p><b>{% trans "Name" %}</b>: {{ other_user.get_profile.name }}</p>{% endif %}
+    {% if other_user.get_profile.about %}<p><b>{% trans "About" %}</b>: {{ other_user.get_profile.about }}</p>{% endif %}
+    {% if other_user.get_profile.location%}<p><b>{% trans "Location" %}</b>: {{ other_user.get_profile.location }}</p>{% endif %}
+    {% if other_user.get_profile.website %}<p><b>{% trans "Website" %}</b>: <a href="{{ other_user.get_profile.website }}">{{ other_user.get_profile.website }}</a></p>{% endif %}
 </div>
 
 {% if user.is_authenticated %}
 {% if is_me %}
 
-<p><a href="#" onclick="$('#profile_form').toggle(); return false;">Edit profile</a></p>
+<p><a href="#" onclick="$('#profile_form').toggle(); return false;">{% trans "Edit profile" %}</a></p>
 
 <form id="profile_form" method="POST" action="" style="display: none;">
 <table>
 {{ profile_form }}
-<tr><td></td><td><input type="submit" name="action" value="update" /></td></tr>
+<tr><td></td><td><input type="submit" name="action" value="{% trans "update" %}" /></td></tr>
 </table>
 </form>
 
-<h2>Your Friends</h2>
+<h2>{% trans "Your Friends" %}</h2>
 {% if other_friends %}
 <table class="friend_list">
 {% for friendship in other_friends %}
@@ -39,12 +41,12 @@
 {% endfor %}
 </table>
 {% else %}
-<p>None. You should look at the list of <a href="/profiles/">profiles</a> and see if there's anyone you know.</p>
+<p>{% blocktrans %}None. You should look at the list of <a href="/profiles/">profiles</a> and see if there's anyone you know.{% endblocktrans %}</p>
 {% endif %}
 {% else %}
 {% if is_friend %}
-<p>You are friends with {{ other_user }}. <a href="{% url messages.views.compose %}{{ other_user }}/">Send a message</a>.</p>
-<h2>{{ other_user }}'s Friends</h2>
+<p>{% blocktrans %}You are friends with {{ other_user }}. <a href="{% url messages.views.compose %}{{ other_user }}/">Send a message</a>.{% endblocktrans %}</p>
+<h2>{% blocktrans %}{{ other_user }}'s Friends{% endblocktrans %}</h2>
 <table class="friend_list">
 {% for friendship in other_friends %}
     <tr>
@@ -55,9 +57,9 @@
 </table>
 
 {% else %}
-<h2>Add As Friend</h2>
+<h2>{% trans "Add As Friend" %}</h2>
 {% if previous_invitations_from %}
-<p>{{ other_user }} has already requested friendship.</p>
+<p>{% blocktrans %}{{ other_user }} has already requested friendship.{% endblocktrans %}</p>
 {% for invitation in previous_invitations_from %}
 <div class="friendship_request">
     <p>{{ invitation.message }}</p>
@@ -65,17 +67,17 @@
         <input type="hidden" name="invitation" value="{{ invitation.id }}"/>
         <input type="hidden" name="action" value="accept"/>
     </form>
-    <p><a href="#" onclick="$('#invitation_{{ invitation.id }}').submit()">accept</a></p>
+    <p><a href="#" onclick="$('#invitation_{{ invitation.id }}').submit()">{% trans "accept" %}</a></p>
 </div>
 {% endfor %}
 {% else %}
 {% if previous_invitations_to %}
-<p>Friendship request sent.</p>
+<p>{% trans "Friendship request sent." %}</p>
 {% else %}
 <form method="POST" action="">
     <table>
     {{ invite_form.as_table }}
-    <tr><td></td><td><input type="submit" name="action" value="invite" /> {{ other_user }} to be a friend.</td></tr>
+    <tr><td></td><td><input type="submit" name="action" value="{% trans "invite" %}" /> {% blocktrans %}{{ other_user }} to be a friend.{% endblocktrans %}</td></tr>
     </table>
 </form>
 {% endif %}
@@ -83,7 +85,7 @@
 {% endif %}
 {% endif %}
 {% else %}
-<p><a href="/account/signup/">Sign up</a> and <a href="/account/login/">log in </a> to add this person as a friend.</p>
+<p>{% trans "<a href="/account/signup/">Sign up</a> and <a href="/account/login/">log in </a> to add this person as a friend." %}</p>
 {% endif %}
 
 {% endblock %}

@@ -1,12 +1,14 @@
 {% extends "messages/base.html" %}
 
-{% block head_title %}Pinax : Invitations{% endblock %}
+{% load 18n %}
+
+{% block head_title %}Pinax : {% trans "Invitations" %}{% endblock %}
 
 {% block body %}
-<h1>Invitations</h1>
+<h1>{% trans "Invitations" %}</h1>
 {% if user.is_authenticated %}
 
-<h2>Join Requests Sent</h2>
+<h2>{% trans "Join Requests Sent" %}</h2>
 
 {% if user.join_from.all %}
 <table class="invitation_list">
@@ -19,20 +21,20 @@
 {% endfor %}
 </table>
 {% else %}
-<p>No join requests sent.</p>
+<p>{% trans "No join requests sent." %}</p>
 {% endif %}
 
-<p><a href="#" onclick="$('#join_invite').toggle(); return false;">Invite someone new to join</a></p>
+<p><a href="#" onclick="$('#join_invite').toggle(); return false;">{% trans "Invite someone new to join" %}</a></p>
 
 <form id="join_invite" method="POST" action="" style="display: none;">
-    <p>If you'd like to invite someone to join Pinax, you can enter their email address and a message for them below:</p>
+    <p>{% trans "If you'd like to invite someone to join Pinax, you can enter their email address and a message for them below:" %}</p>
 <table>
 <tr>
     <th>{{ join_request_form.email.label_tag }}</th>
     <td>
         {% if join_request_form.existing_users %}
         <ul class="errorlist">
-        <li>Someone with this email address has already joined:
+        <li>{% trans "Someone with this email address has already joined:" %}
         {% for other_user in join_request_form.existing_users %}
         <a href="{% url profiles.views.profile other_user %}">{{ other_user }}</a>{% endfor %}</li>
         </ul>
@@ -46,13 +48,13 @@
     <th>{{ join_request_form.message.label_tag }}</th>
     <td>{{ join_request_form.message.errors }}{{ join_request_form.message }}</td>
 </tr>
-<tr><td></td><td><input type="submit" name="action" value="invite" /></td></tr>
+<tr><td></td><td><input type="submit" name="action" value="{% trans "invite" %}" /></td></tr>
 </table>
 </form>
 
 
 
-<h2>Friendship Requests Sent</h2>
+<h2>{% trans "Friendship Requests Sent" %}</h2>
 
 {% if user.invitations_from.all %}
 <table class="invitation_list">
@@ -65,11 +67,11 @@
 {% endfor %}
 </table>
 {% else %}
-<p>No friendship requests sent.</p>
+<p>{% trans "No friendship requests sent." %}</p>
 {% endif %}
 
 
-<h2>Friendship Requests Received</h2>
+<h2>{% trans "Friendship Requests Received" %}</h2>
 
 {% if user.invitations_to.all %}
 <table class="invitation_list">
@@ -88,7 +90,7 @@
                 <input type="hidden" name="invitation" value="{{ invitation.id }}"/>
                 <input type="hidden" name="action" value="accept"/>
             </form>
-            <p><a href="#" onclick="$('#invitation_{{ invitation.id }}').submit()">accept</a></p>
+            <p><a href="#" onclick="$('#invitation_{{ invitation.id }}').submit()">{% trans "accept" %}</a></p>
             </div>
         </td>
     </tr>
@@ -96,11 +98,11 @@
 {% endfor %}
 </table>
 {% else %}
-<p>No friendship requests received.</p>
+<p>{% trans "No friendship requests received." %}</p>
 {% endif %}
 
 {% else %}
-<p><span class="warning">Note</span>: Not logged in.</p>
+<p><span class="warning">{% trans "Note" %}</span>: {% trans "Not logged in." %}</p>
 {% endif %}
 
 {% endblock %}

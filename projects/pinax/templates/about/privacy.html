@@ -1,7 +1,9 @@
 {% extends "site_base.html" %}
 
-{% block head_title %}Pinax : Privacy Policy{% endblock %}
+{% load 18n %}
+
+{% block head_title %}Pinax : {% trans "Privacy Policy" %}{% endblock %}
 
 {% block body %}
-<p>Your <b>Privacy Policy</b> would normally go here...</p>
+{% trans "<p>Your <b>Privacy Policy</b> would normally go here...</p>" %}
 {% endblock %}

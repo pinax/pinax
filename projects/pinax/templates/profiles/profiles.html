@@ -1,9 +1,11 @@
 {% extends "profiles/base.html" %}
 
-{% block head_title %}Pinax : Profile for {{ other_user }}{% endblock %}
+{% load i18n %}
+
+{% block head_title %}Pinax : {% blocktrans %}Profile for {{ other_user }}{% endblocktrans %}{% endblock %}
 
 {% block body %}
-<h1>Profiles</h1>
+<h1>{% trans "Profiles" %}</h1>
 
 {% load gravatar %}
 {% load humanize %}

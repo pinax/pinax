@@ -1,7 +1,9 @@
 {% extends "site_base.html" %}
 
-{% block head_title %}Pinax : Terms of Service{% endblock %}
+{% load 18n %}
+
+{% block head_title %}Pinax : {% trans "Terms of Service" %}{% endblock %}
 
 {% block body %}
-<p>Your <b>Terms of Service</b> would normally go here...</p>
+{% trans "<p>Your <b>Terms of Service</b> would normally go here...</p>" %}
 {% endblock %}

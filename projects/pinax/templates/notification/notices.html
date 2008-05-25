@@ -1,11 +1,12 @@
 {% extends "messages/base.html" %}
 
 {% load humanize %}
+{% load 18n %}
 
-{% block head_title %}Pinax : Notices{% endblock %}
+{% block head_title %}Pinax : {% trans "Notices" %}{% endblock %}
 
 {% block body %}
-<h1>Notices</h1>
+<h1>{% trans "Notices" %}</h1>
 {% if notices %}
 {% regroup notices by added.date as notices_by_date %}
 
@@ -24,21 +25,21 @@
 {% endfor %}
 {% endfor %}
 {% else %}
-<p>No notices.</p>
+<p>{% trans "No notices." %}</p>
 {% endif %}
 
 <h2>Settings</h2>
 
 {% if user.email %}
-<p>Primary email: <b>{{ user.email }}</b> (change under <a href="/account/">Account</a>)</p>
+<p>{% trans "Primary email" %}: <b>{{ user.email }}</b> ({% trans "change under <a href="/account/">Account</a>" %})</p>
 {% else %}
-<p><span class="warning">Note</span>: You do not have a verified email address to which notices can be sent. You can add one by going to <a href="/account/">Account</a>.</p>
+<p><span class="warning">{% trans "Note" %}</span>: {% trans "You do not have a verified email address to which notices can be sent. You can add one by going to <a href="/account/">Account</a>." %}</p>
 {% endif %}
 
 <form method="POST" action="">
 <table class="notice_settings">
     <tr>
-        <th>Notification Type</th>
+        <th>{% trans "Notification Type" %}</th>
         {% for header in notice_settings.column_headers %}
         <th>{{ header }}</th>
         {% endfor %}
@@ -56,7 +57,7 @@
     </tr>
 {% endfor %}
     <tr>
-        <td><input type="submit" value="Change" /></td>
+        <td><input type="submit" value="{% trans "Change" %}" /></td>
     </tr>
 </table>
 </form>

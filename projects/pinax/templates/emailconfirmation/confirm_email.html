@@ -1,12 +1,14 @@
 {% extends "site_base.html" %}
 
-{% block head_title %}Pinax : Confirm Email{% endblock %}
+{% load 18n %}
+
+{% block head_title %}Pinax : {% trans "Confirm Email" %}{% endblock %}
 
 {% block body %}
 {% if email_address %}
-    <h1>Email Confirmed</h1>
-    <p>You have confirmed that {{ email_address.email }} is an email address for user '{{ email_address.user }}'.</p>
+    <h1>{% trans "Email Confirmed" %}</h1>
+    <p>{% blocktrans %}You have confirmed that {{ email_address.email }} is an email address for user '{{ email_address.user }}'.{% endblocktrans %}</p>
 {% else %}
-    <p>Invalid confirmation key.</p>
+    <p>{% trans "Invalid confirmation key." %}</p>
 {% endif %}
 {% endblock %}

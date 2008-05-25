@@ -1,8 +1,10 @@
 {% extends "site_base.html" %}
 
+{% load 18n %}
+
 {% block head_title %}Pinax : About{% endblock %}
 
-{% block body %}
+{% block body %}{% blocktrans %}
 <p>Your <b>About Page</b> would normally go here, be here's a temporary one...</p>
 
 <p><b>Pinax</b> is a <a href="http://djangoproject.com/">Django</a> project intended to provide a starting point for websites. By integrating numerous reusable Django apps to take care of the things that many sites have in common, it lets you focus on what makes your site different.</p>
@@ -10,8 +12,9 @@
 <p>This site is just a running example of Pinax. The source code is available as part of the <a href="http://code.google.com/p/django-hotclub/">Hot Club of France</a> project.</p>
 
 <p>If you have any questions about this site or the <b>Pinax</b> project, please <a href="mailto:jtauber@jtauber.com">contact James Tauber</a>.</p>
+{% endblocktrans %}
 
-<h2>External Projects Used</h2>
+<h2>{% trans "External Projects Used" %}</h2>
 
 <ul>
     <li><a href="http://code.google.com/p/django-messages/">django-messages</a></li>
@@ -25,6 +28,6 @@
     <li><a href="http://code.google.com/p/django-databasetemplateloader/">django-databasetemplateloader</a></li>
 </ul>
 
-with lots more to come...
+{% trans "with lots more to come..." %}
 
 {% endblock %}

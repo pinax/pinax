@@ -1,7 +1,9 @@
 {% extends "site_base.html" %}
 
-{% block head_title %}Pinax : Logout{% endblock %}
+{% load 18n %}
+
+{% block head_title %}Pinax : {% trans "Logout" %}{% endblock %}
 
 {% block body %}
-<p>You've been logged out.</p>
+<p>{% trans "You've been logged out." %}</p>
 {% endblock %}

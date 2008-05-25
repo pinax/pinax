@@ -1,32 +1,32 @@
 {% extends "site_base.html" %}
 
-{% block head_title %}Pinax : OpenID Associations{% endblock %}
+{% block head_title %}Pinax : {% trans "OpenID Associations" %}{% endblock %}
 
 {% block body %}
-<h1>Manage OpenID Associations</h1>
+<h1>{% trans "Manage OpenID Associations" %}</h1>
 <form action="{{ action }}" method="POST">
 {% if del_buttons %}
-<p>Your account is currently associated with the following OpenID{{ del_buttons|pluralize }}:</p>
+<p>{% blocktrans with del_buttons|pluralize as buttons %}Your account is currently associated with the following OpenID{{ buttons }}:{% endblocktrans %}</p>
 <ul>
 {% for button in del_buttons %}
-    <li>{{ button.openid|escape }} - <input type="submit" name="{{ button.hash }}" value="Remove association"></li>
+    <li>{{ button.openid|escape }} - <input type="submit" name="{{ button.hash }}" value="{% trans "Remove association" %}"></li>
 {% endfor %}
 </ul>
 {% endif %}
 
 {% if add_buttons %}
-<p>You are currently logged in with the following OpenID{{ add_buttons|pluralize }}. Click "associate" to allow {% ifequal add_buttons.__len__ 1 %}it{% else %}an OpenID{% endifequal %} to be used to sign in to your account.</p>
+<p>You are currently logged in with the following OpenID {{ add_buttons|pluralize }}. Click "associate" to allow {% ifequal add_buttons.__len__ 1 %}it{% else %}an OpenID{% endifequal %} to be used to sign in to your account.</p>
 <ul>
 {% for button in add_buttons %}
-    <li>{{ button.openid|escape }} - <input type="submit" name="{{ button.hash }}" value="Associate"></li>
+    <li>{{ button.openid|escape }} - <input type="submit" name="{{ button.hash }}" value="{% trans "Associate" %}"></li>
 {% endfor %}
 </ul>
 {% endif %}
 </form>
 
-<p>To associate a new OpenID with this account, sign in with it here:</p>
+<p>{% trans "To associate a new OpenID with this account, sign in with it here:" %}</p>
 
 <form action="{{ action }}" method="POST">
-<p><input type="text" name="openid_url" value=""> <input type="submit" value="Authenticate and associate with this account"></p>
+<p><input type="text" name="openid_url" value=""> <input type="submit" value="{% trans "Authenticate and associate with this account" %}"></p>
 </form>
 {% endblock %}

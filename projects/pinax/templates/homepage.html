@@ -4,17 +4,18 @@
 
 {% block tab_id %}home_tab{% endblock %}
 
-{% block body %}
+{% block body %}{% blocktrans %}
 <p><b>Pinax</b> is a <a href="http://djangoproject.com/">Django</a> project intended to provide a starting point for websites. By integrating numerous reusable Django apps to take care of the things that many sites have in common, it lets you focus on what makes your site different.</p>
 
 <p>This site is just a running example of Pinax. The source code is available as part of the <a href="http://code.google.com/p/django-hotclub/">Hot Club of France</a> project.</p>
 
 <p>If you have any questions about this site or the <b>Pinax</b> project, please <a href="mailto:jtauber@jtauber.com">contact James Tauber</a>.</p>
+{% endblocktrans %}
 
 {% if user.is_authenticated %}
 {% else %}
-<p>You can <a href="/account/signup/">Sign up</a> and <a href="/account/login/">Log in</a> to try out the site.</p>
+<p>{% trans "You can <a href="/account/signup/">Sign up</a> and <a href="/account/login/">Log in</a> to try out the site." %}</p>
 
-<p><b>At this stage, there is openid support, email verification, password management, site announcements, user-to-user messaging, (internal) friend invitation including notification of invitations and acceptance both on the site and via email (if you've verified your address).</b></p>
+<p><b>{% trans "At this stage, there is openid support, email verification, password management, site announcements, user-to-user messaging, (internal) friend invitation including notification of invitations and acceptance both on the site and via email (if you've verified your address)." %}</b></p>
 {% endif %}
 {% endblock %}
