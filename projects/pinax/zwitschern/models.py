@@ -10,6 +10,7 @@ from django.contrib.auth.models import User
 
 import re
 ref_re = re.compile("@(\w+)")
+reply_re = re.compile("^@(\w+)")
 
 def make_link(text):
     username = text.group(1)
@@ -57,11 +58,20 @@ class TweetInstance(models.Model):
 def tweet(user, text):
     now = datetime.now()
     Tweet(text=text, sender=user, sent=now).save()
+    recipients = set() # keep track of who's received it
     for follower in (following.follower for following in user.followers.all()):
-        TweetInstance(text=text, sender=user, recipient=follower, sent=now).save()
+        recipients.add(follower)
     # add sender
-    TweetInstance(text=text, sender=user, recipient=user, sent=now).save()
-    # @@@ doesn't also send to non-following @recipients yet
+    recipients.add(user)
+    # if starts with @user send it to them too even if not following
+    match = reply_re.match(text)
+    if match:
+        try:
+            recipients.add(User.objects.get(username=match.group(1)))
+        except User.DoesNotExist:
+            pass # oh well
+    for recipient in recipients:
+        TweetInstance(text=text, sender=user, recipient=recipient, sent=now).save()
 
 
 class FollowingManager(models.Manager):
