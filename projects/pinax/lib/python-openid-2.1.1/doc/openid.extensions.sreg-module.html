@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>openid.extensions.sreg</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css"></link>
+</head>
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="openid-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          <a class="navbar" target="_top" href="http://openidenabled.com/python-openid/">Python-OpenID</a>
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <font size="-1"><b class="breadcrumbs">
+        <a href="openid-module.html">Package&nbsp;openid</a> ::
+        <a href="openid.extensions-module.html">Package&nbsp;extensions</a> ::
+        Module&nbsp;sreg
+      </b></font></br>
+    </td>
+    <td><table cellpadding="0" cellspacing="0">
+      <tr><td align="right"><font size="-2">[<a href="frames.html"target="_top">frames</a>&nbsp;|&nbsp;<a href="openid.extensions.sreg-module.html" target="_top">no&nbsp;frames</a>]</font></td></tr>
+    </table></td>
+</tr></table>
+
+<!-- =========== START OF MODULE DESCRIPTION =========== -->
+<h2 class="module">Module openid.extensions.sreg</h2>
+
+<p>Simple registration request and response parsing and object 
+representation</p>
+This module contains objects representing simple registration requests 
+and responses that can be used with both OpenID relying parties and 
+OpenID providers.
+<ol start="1">
+  <li>
+    The relying party creates a request object and adds it to the 
+    <code><a href="openid.consumer.consumer.AuthRequest-class.html" 
+    class="link"><code>AuthRequest</code></a></code> object before making 
+    the <code>checkid_</code> request to the OpenID provider:
+<pre class="literalblock">
+auth_request.addExtension(SRegRequest(required=['email']))
+</pre>
+  </li>
+  <li>
+    The OpenID provider extracts the simple registration request from 
+    the OpenID request using 
+    <code><code>SRegRequest.fromOpenIDRequest</code></code>, gets the 
+    user's approval and data, creates a <code><a 
+    href="openid.extensions.sreg.SRegResponse-class.html" 
+    class="link"><code>SRegResponse</code></a></code> object and adds it 
+    to the <code>id_res</code> response:
+<pre class="literalblock">
+sreg_req = SRegRequest.fromOpenIDRequest(checkid_request)
+# [ get the user's approval and data, informing the user that
+#   the fields in sreg_response were requested ]
+sreg_resp = SRegResponse.extractResponse(sreg_req, user_data)
+sreg_resp.toMessage(openid_response.fields)
+</pre>
+  </li>
+  <li>
+    The relying party uses 
+    <code><code>SRegResponse.fromSuccessResponse</code></code> to extract 
+    the data from the OpenID response:
+<pre class="literalblock">
+sreg_resp = SRegResponse.fromSuccessResponse(success_response)
+</pre>
+  </li>
+</ol>
+<hr/>
+<p><b>Since:</b> 2.0
+</p>
+
+
+<!-- =========== START OF CLASSES =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Classes</th></tr>
+<tr><td width="15%">
+  <b><a href="openid.extensions.sreg.SRegRequest-class.html"><code>SRegRequest</code></a></b></td>
+  <td>An object to hold the state of a simple registration request.</td></tr>
+<tr><td width="15%">
+  <b><a href="openid.extensions.sreg.SRegResponse-class.html"><code>SRegResponse</code></a></b></td>
+  <td>Represents the data returned in a simple registration response inside 
+of an OpenID <code>id_res</code> response.</td></tr>
+</table><br />
+
+
+<!-- =========== START OF FUNCTION SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Function Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        bool
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.extensions.sreg-module.html#supportsSReg" class="summary-sig-name"><code>supportsSReg</code></a>(<span class=summary-sig-arg>endpoint</span>)</span></code>
+<br />
+Does the given endpoint advertise support for simple registration?</td></tr>
+</table><br />
+
+
+<!-- =========== START OF FUNCTION DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Function Details</th></tr>
+</table>
+
+<a name="supportsSReg"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">supportsSReg</span>(<span class=sig-arg>endpoint</span>)</span>
+  </h3>
+  Does the given endpoint advertise support for simple 
+  registration?
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>endpoint</b></code> -
+         The endpoint object as returned by OpenID discovery
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=openid.consumer.discover.OpenIDEndpoint)</i>
+      </dd>
+    </dl>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        Whether an sreg type was advertised by the endpoint
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=bool)</i>
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+<br />
+
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="openid-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          <a class="navbar" target="_top" href="http://openidenabled.com/python-openid/">Python-OpenID</a>
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td align="left"><font size="-2">Generated by Epydoc 2.1 on Fri Dec 14 16:10:53 2007</font></td>
+    <td align="right"><a href="http://epydoc.sourceforge.net"
+                      ><font size="-2">http://epydoc.sf.net</font></a></td>
+  </tr>
+</table>
+</body>
+</html>

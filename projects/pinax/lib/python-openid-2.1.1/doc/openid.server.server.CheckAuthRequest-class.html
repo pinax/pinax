@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>openid.server.server.CheckAuthRequest</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css"></link>
+</head>
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="openid-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          <a class="navbar" target="_top" href="http://openidenabled.com/python-openid/">Python-OpenID</a>
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <font size="-1"><b class="breadcrumbs">
+        <a href="openid-module.html">Package&nbsp;openid</a> ::
+        <a href="openid.server-module.html">Package&nbsp;server</a> ::
+        <a href="openid.server.server-module.html">Module&nbsp;server</a> ::
+        Class&nbsp;CheckAuthRequest
+      </b></font></br>
+    </td>
+    <td><table cellpadding="0" cellspacing="0">
+      <tr><td align="right"><font size="-2">[<a href="frames.html"target="_top">frames</a>&nbsp;|&nbsp;<a href="openid.server.server.CheckAuthRequest-class.html" target="_top">no&nbsp;frames</a>]</font></td></tr>
+    </table></td>
+</tr></table>
+
+<!-- =========== START OF CLASS DESCRIPTION =========== -->
+<h2 class="class">Type CheckAuthRequest</h2>
+
+<pre class="base-tree">
+   <a href="__builtin__.object-class.html"><code>object</code></a> --+    
+            |    
+<a href="openid.server.server.OpenIDRequest-class.html"><code>OpenIDRequest</code></a> --+
+                |
+               <b>CheckAuthRequest</b>
+</pre><br />
+
+<hr/>
+
+A request to verify the validity of a previous response.
+<hr/>
+
+<p><b>See Also:</b> <a href="http://openid.net/specs.bml#mode-check_authentication">OpenID 
+Specs, Mode: check_authentication</a>
+</p>
+
+
+<!-- =========== START OF METHOD SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Method Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.server.server.CheckAuthRequest-class.html#__init__" class="summary-sig-name"><code>__init__</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>assoc_handle</span>,
+          <span class=summary-sig-arg>signed</span>,
+          <span class=summary-sig-arg>invalidate_handle</span>)</span></code>
+<br />
+Construct me.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><a name="__str__"></a><span class="summary-sig"><span class="summary-sig-name">__str__</span>(<span class=summary-sig-arg>self</span>)</span></code>
+</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        <a href="openid.server.server.OpenIDResponse-class.html" 
+        class="link"><code>OpenIDResponse</code></a>
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.server.server.CheckAuthRequest-class.html#answer" class="summary-sig-name"><code>answer</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>signatory</span>)</span></code>
+<br />
+Respond to this request.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        <a href="openid.server.server.CheckAuthRequest-class.html" 
+        class="link"><code>CheckAuthRequest</code></a>
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.server.server.CheckAuthRequest-class.html#fromMessage" class="summary-sig-name"><code>fromMessage</code></a>(<span class=summary-sig-arg>klass</span>,
+          <span class=summary-sig-arg>message</span>,
+          <span class=summary-sig-arg>op_endpoint</span>)</span></code>
+<br />
+Construct me from an OpenID Message.    <i>(Class method)</i>
+</td></tr>
+  <tr><td colspan="2">
+    <b>Inherited from <a href="__builtin__.object-class.html"><code>object</code></a>:</b>
+      <a href="__builtin__.object-class.html#__delattr__"><code>__delattr__</code></a>, 
+      <a href="__builtin__.object-class.html#__getattribute__"><code>__getattribute__</code></a>, 
+      <a href="__builtin__.object-class.html#__hash__"><code>__hash__</code></a>, 
+      <a href="__builtin__.object-class.html#__new__"><code>__new__</code></a>, 
+      <a href="__builtin__.object-class.html#__reduce__"><code>__reduce__</code></a>, 
+      <a href="__builtin__.object-class.html#__reduce_ex__"><code>__reduce_ex__</code></a>, 
+      <a href="__builtin__.object-class.html#__repr__"><code>__repr__</code></a>, 
+      <a href="__builtin__.object-class.html#__setattr__"><code>__setattr__</code></a>
+    </td></tr>
+</table><br />
+
+
+<!-- =========== START OF INSTANCE VARIABLE SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Instance Variable Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+<td><b><a href="openid.server.server.CheckAuthRequest-class.html#assoc_handle"><code>assoc_handle</code></a></b>: The <a name="index-association_handle"></a><i 
+class="indexterm">association handle</i> the response was signed 
+with.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+<td><b><a href="openid.server.server.CheckAuthRequest-class.html#invalidate_handle"><code>invalidate_handle</code></a></b>: An <a name="index-association_handle"></a><i 
+class="indexterm">association handle</i> the client is asking about the 
+validity of.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1"><a href="openid.message.Message-class.html" 
+          class="link"><code>Message</code></a></font></td>
+<td><b><a href="openid.server.server.CheckAuthRequest-class.html#signed"><code>signed</code></a></b>: The message with the signature which wants checking.</td></tr>
+</table><br />
+
+
+<!-- =========== START OF CLASS VARIABLE SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Class Variable Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+<td><b><a href="openid.server.server.CheckAuthRequest-class.html#mode"><code>mode</code></a></b>: &quot;<a name="index-check_authentication"></a><i 
+class="indexterm"><code>check_authentication</code></i>&quot;</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1"><code>list</code></font></td>
+<td><b><a href="openid.server.server.CheckAuthRequest-class.html#required_fields"><code>required_fields</code></a></b> = <span title="['identity', 'return_to', 'response_nonce']"><code>['identity',&nbsp;'return_to',&nbsp;'response_no<span class="variable-ellipsis">...</span></code>
+</span></td></tr>
+</table><br />
+
+
+<!-- =========== START OF INSTANCE METHOD DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Instance Method Details</th></tr>
+</table>
+
+<a name="__init__"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">__init__</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>assoc_handle</span>,
+          <span class=sig-arg>signed</span>,
+          <span class=sig-arg>invalidate_handle</span>=<span class=sig-default>None</span>)</span>
+    <br /><i>(Constructor)</i>
+  </h3>
+  <p>Construct me.</p>
+  These parameters are assigned directly as class attributes, see my 
+  <a href="openid.server.server.CheckAuthRequest-class.html" 
+  class="link"><code>class documentation</code></a> for their 
+  descriptions.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>assoc_handle</b></code>
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=str)</i>
+      <dd><code><b>signed</b></code>
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=<a href="openid.message.Message-class.html" 
+              class="link"><code>Message</code></a>)</i>
+      <dd><code><b>invalidate_handle</b></code>
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=str)</i>
+      </dd>
+    </dl>
+    <dl><dt><b>Overrides:</b></dt>
+      <dd><a href="__builtin__.object-class.html#__init__"><code>__builtin__.object.__init__</code></a></dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="answer"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">answer</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>signatory</span>)</span>
+  </h3>
+  <p>Respond to this request.</p>
+  Given a <a href="openid.server.server.Signatory-class.html" 
+  class="link"><code>Signatory</code></a>, I can check the validity of 
+  the signature and the <a name="index-invalidate_handle"></a><i 
+  class="indexterm"><code>invalidate_handle</code></i>.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>signatory</b></code> -
+         The <a href="openid.server.server.Signatory-class.html" 
+        class="link"><code>Signatory</code></a> to use to check the 
+        signature.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=<a href="openid.server.server.Signatory-class.html" 
+              class="link"><code>Signatory</code></a>)</i>
+      </dd>
+    </dl>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        A response with an <a name="index-is_valid"></a><i 
+        class="indexterm"><code>is_valid</code></i> (and, if appropriate 
+        <a name="index-invalidate_handle"></a><i 
+        class="indexterm"><code>invalidate_handle</code></i>) field.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=<a href="openid.server.server.OpenIDResponse-class.html" 
+        class="link"><code>OpenIDResponse</code></a>)</i>
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+<br />
+
+
+<!-- =========== START OF CLASS METHOD DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Class Method Details</th></tr>
+</table>
+
+<a name="fromMessage"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">fromMessage</span>(<span class=sig-arg>klass</span>,
+          <span class=sig-arg>message</span>,
+          <span class=sig-arg>op_endpoint</span>=<span class=sig-default>None</span>)</span>
+  </h3>
+  Construct me from an OpenID Message.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>message</b></code> -
+         An OpenID check_authentication Message
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=<a href="openid.message.Message-class.html" 
+              class="link"><code>openid.message.Message</code></a>)</i>
+      </dd>
+    </dl>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        <a href="openid.server.server.CheckAuthRequest-class.html" 
+        class="link"><code>CheckAuthRequest</code></a>
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+<br />
+
+
+<!-- =========== START OF INSTANCE VARIABLE DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Instance Variable Details</th></tr>
+</table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="assoc_handle"></a>
+<h3>assoc_handle</h3>
+The <a name="index-association_handle"></a><i 
+class="indexterm">association handle</i> the response was signed 
+with.
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          str
+
+      </dd>
+    </dl>
+  </dd>
+</dl></td></tr></table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="invalidate_handle"></a>
+<h3>invalidate_handle</h3>
+An <a name="index-association_handle"></a><i 
+class="indexterm">association handle</i> the client is asking about the 
+validity of. Optional, may be <code>None</code>.
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          str
+
+      </dd>
+    </dl>
+  </dd>
+</dl></td></tr></table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="signed"></a>
+<h3>signed</h3>
+The message with the signature which wants checking.
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          <a href="openid.message.Message-class.html" 
+          class="link"><code>Message</code></a>
+
+      </dd>
+    </dl>
+  </dd>
+</dl></td></tr></table>
+<br />
+
+
+<!-- =========== START OF CLASS VARIABLE DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Class Variable Details</th></tr>
+</table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="mode"></a>
+<h3>mode</h3>
+&quot;<a name="index-check_authentication"></a><i 
+class="indexterm"><code>check_authentication</code></i>&quot;
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          str
+
+      </dd>
+<span title="'check_authentication'">      <dt><b>Value:</b></dt>
+      <dd><table><tr><td>
+<pre class="variable">
+<span class="variable-quote">'</span>check_authentication<span class="variable-quote">'</span>                                                 </pre>
+        </td></tr></table></dd>
+</span>    </dl>
+  </dd>
+</dl></td></tr></table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="required_fields"></a>
+<h3>required_fields</h3>
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          <code>list</code>
+
+      </dd>
+<span title="['identity', 'return_to', 'response_nonce']">      <dt><b>Value:</b></dt>
+      <dd><table><tr><td>
+<pre class="variable">
+['identity', 'return_to', 'response_nonce']                            </pre>
+        </td></tr></table></dd>
+</span>    </dl>
+  </dd>
+</dl></td></tr></table>
+<br />
+
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="openid-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          <a class="navbar" target="_top" href="http://openidenabled.com/python-openid/">Python-OpenID</a>
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td align="left"><font size="-2">Generated by Epydoc 2.1 on Fri Dec 14 16:10:53 2007</font></td>
+    <td align="right"><a href="http://epydoc.sourceforge.net"
+                      ><font size="-2">http://epydoc.sf.net</font></a></td>
+  </tr>
+</table>
+</body>
+</html>

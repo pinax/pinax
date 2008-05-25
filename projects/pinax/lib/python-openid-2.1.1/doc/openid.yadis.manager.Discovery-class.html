@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>openid.yadis.manager.Discovery</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css"></link>
+</head>
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="openid-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          <a class="navbar" target="_top" href="http://openidenabled.com/python-openid/">Python-OpenID</a>
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <font size="-1"><b class="breadcrumbs">
+        <a href="openid-module.html">Package&nbsp;openid</a> ::
+        <a href="openid.yadis-module.html">Package&nbsp;yadis</a> ::
+        <a href="openid.yadis.manager-module.html">Module&nbsp;manager</a> ::
+        Class&nbsp;Discovery
+      </b></font></br>
+    </td>
+    <td><table cellpadding="0" cellspacing="0">
+      <tr><td align="right"><font size="-2">[<a href="frames.html"target="_top">frames</a>&nbsp;|&nbsp;<a href="openid.yadis.manager.Discovery-class.html" target="_top">no&nbsp;frames</a>]</font></td></tr>
+    </table></td>
+</tr></table>
+
+<!-- =========== START OF CLASS DESCRIPTION =========== -->
+<h2 class="class">Type Discovery</h2>
+
+<pre class="base-tree">
+<a href="__builtin__.object-class.html"><code>object</code></a> --+
+         |
+        <b>Discovery</b>
+</pre><br />
+
+<hr/>
+
+<p>State management for discovery.</p>
+High-level usage pattern is to call .getNextService(discover) in order 
+to find the next available service for this user for this session. Once a 
+request completes, call .finish() to clean up the session state.
+<hr/>
+
+
+<!-- =========== START OF METHOD SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Method Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.yadis.manager.Discovery-class.html#__init__" class="summary-sig-name"><code>__init__</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>session</span>,
+          <span class=summary-sig-arg>url</span>,
+          <span class=summary-sig-arg>session_key_suffix</span>)</span></code>
+<br />
+Initialize a discovery object</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.yadis.manager.Discovery-class.html#cleanup" class="summary-sig-name"><code>cleanup</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>force</span>)</span></code>
+<br />
+Clean up Yadis-related services in the session and return the 
+most-recently-attempted service from the manager, if one exists.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.yadis.manager.Discovery-class.html#createManager" class="summary-sig-name"><code>createManager</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>services</span>,
+          <span class=summary-sig-arg>yadis_url</span>)</span></code>
+<br />
+Create a new YadisService Manager for this starting URL and suffix, 
+and store it in the session.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.yadis.manager.Discovery-class.html#destroyManager" class="summary-sig-name"><code>destroyManager</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>force</span>)</span></code>
+<br />
+Delete any YadisServiceManager with this starting URL and suffix from 
+the session.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.yadis.manager.Discovery-class.html#getManager" class="summary-sig-name"><code>getManager</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>force</span>)</span></code>
+<br />
+Extract the YadisServiceManager for this object's URL and suffix from 
+the session.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.yadis.manager.Discovery-class.html#getNextService" class="summary-sig-name"><code>getNextService</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>discover</span>)</span></code>
+<br />
+Return the next authentication service for the pair of user_input and 
+session.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        str
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.yadis.manager.Discovery-class.html#getSessionKey" class="summary-sig-name"><code>getSessionKey</code></a>(<span class=summary-sig-arg>self</span>)</span></code>
+<br />
+Get the session key for this starting URL and suffix</td></tr>
+  <tr><td colspan="2">
+    <b>Inherited from <a href="__builtin__.object-class.html"><code>object</code></a>:</b>
+      <a href="__builtin__.object-class.html#__delattr__"><code>__delattr__</code></a>, 
+      <a href="__builtin__.object-class.html#__getattribute__"><code>__getattribute__</code></a>, 
+      <a href="__builtin__.object-class.html#__hash__"><code>__hash__</code></a>, 
+      <a href="__builtin__.object-class.html#__new__"><code>__new__</code></a>, 
+      <a href="__builtin__.object-class.html#__reduce__"><code>__reduce__</code></a>, 
+      <a href="__builtin__.object-class.html#__reduce_ex__"><code>__reduce_ex__</code></a>, 
+      <a href="__builtin__.object-class.html#__repr__"><code>__repr__</code></a>, 
+      <a href="__builtin__.object-class.html#__setattr__"><code>__setattr__</code></a>, 
+      <a href="__builtin__.object-class.html#__str__"><code>__str__</code></a>
+    </td></tr>
+</table><br />
+
+
+<!-- =========== START OF INSTANCE VARIABLE SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Instance Variable Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+<td><b><a href="openid.yadis.manager.Discovery-class.html#session"><code>session</code></a></b>: a dict-like object that stores state unique to the requesting 
+user-agent.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+<td><b><a href="openid.yadis.manager.Discovery-class.html#session_key_suffix"><code>session_key_suffix</code></a></b>: The suffix that will be used to identify this object in the session 
+object.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+<td><b><a href="openid.yadis.manager.Discovery-class.html#url"><code>url</code></a></b>: the URL that is used to make the discovery request</td></tr>
+</table><br />
+
+
+<!-- =========== START OF CLASS VARIABLE SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Class Variable Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1"><code>str</code></font></td>
+<td><b><a href="openid.yadis.manager.Discovery-class.html#DEFAULT_SUFFIX"><code>DEFAULT_SUFFIX</code></a></b> = <span title="'auth'"><code><span class="variable-quote">'</span>auth<span class="variable-quote">'</span>                                  </code>
+</span></td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1"><code>str</code></font></td>
+<td><b><a href="openid.yadis.manager.Discovery-class.html#PREFIX"><code>PREFIX</code></a></b> = <span title="'_yadis_services_'"><code><span class="variable-quote">'</span>_yadis_services_<span class="variable-quote">'</span>                              </code>
+</span></td></tr>
+</table><br />
+
+
+<!-- =========== START OF METHOD DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Method Details</th></tr>
+</table>
+
+<a name="__init__"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">__init__</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>session</span>,
+          <span class=sig-arg>url</span>,
+          <span class=sig-arg>session_key_suffix</span>=<span class=sig-default>None</span>)</span>
+    <br /><i>(Constructor)</i>
+  </h3>
+  Initialize a discovery object
+  <dl><dt></dt><dd>
+    <dl><dt><b>Overrides:</b></dt>
+      <dd><a href="__builtin__.object-class.html#__init__"><code>__builtin__.object.__init__</code></a></dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="cleanup"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">cleanup</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>force</span>=<span class=sig-default>False</span>)</span>
+  </h3>
+  Clean up Yadis-related services in the session and return the 
+  most-recently-attempted service from the manager, if one exists.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>force</b></code> -
+         True if the manager should be deleted regardless of whether 
+        it's a manager for self.url.
+      </dd>
+    </dl>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        current service endpoint object or None if there is no current 
+        service
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="createManager"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">createManager</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>services</span>,
+          <span class=sig-arg>yadis_url</span>=<span class=sig-default>None</span>)</span>
+  </h3>
+  Create a new YadisService Manager for this starting URL and suffix, 
+  and store it in the session.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        A new YadisServiceManager or None
+      </dd>
+    </dl>
+    <dl><dt><b>Raises:</b></dt>
+      <dd><code><b>KeyError</b></code> -
+        When I already have a manager.
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="destroyManager"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">destroyManager</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>force</span>=<span class=sig-default>False</span>)</span>
+  </h3>
+  <p>Delete any YadisServiceManager with this starting URL and suffix 
+  from the session.</p>
+  If there is no service manager or the service manager is for a 
+  different URL, it silently does nothing.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>force</b></code> -
+         True if the manager should be deleted regardless of whether 
+        it's a manager for self.url.
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="getManager"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">getManager</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>force</span>=<span class=sig-default>False</span>)</span>
+  </h3>
+  Extract the YadisServiceManager for this object's URL and suffix 
+  from the session.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>force</b></code> -
+         True if the manager should be returned regardless of whether 
+        it's a manager for self.url.
+      </dd>
+    </dl>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        The current YadisServiceManager, if it's for this URL, or else 
+        None
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="getNextService"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">getNextService</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>discover</span>)</span>
+  </h3>
+  Return the next authentication service for the pair of user_input 
+  and session. This function handles fallback.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>discover</b></code> -
+         a callable that takes a URL and returns a list of services
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=str -&gt; [service])</i>
+      </dd>
+    </dl>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        the next available service
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="getSessionKey"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">getSessionKey</span>(<span class=sig-arg>self</span>)</span>
+  </h3>
+  Get the session key for this starting URL and suffix
+  <dl><dt></dt><dd>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        The session key
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=str)</i>
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+<br />
+
+
+<!-- =========== START OF INSTANCE VARIABLE DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Instance Variable Details</th></tr>
+</table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="session"></a>
+<h3>session</h3>
+a dict-like object that stores state unique to the requesting 
+user-agent. This object must be able to store serializable objects.
+</td></tr></table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="session_key_suffix"></a>
+<h3>session_key_suffix</h3>
+The suffix that will be used to identify this object in the session 
+object.
+</td></tr></table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="url"></a>
+<h3>url</h3>
+the URL that is used to make the discovery request
+</td></tr></table>
+<br />
+
+
+<!-- =========== START OF CLASS VARIABLE DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Class Variable Details</th></tr>
+</table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="DEFAULT_SUFFIX"></a>
+<h3>DEFAULT_SUFFIX</h3>
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          <code>str</code>
+
+      </dd>
+<span title="'auth'">      <dt><b>Value:</b></dt>
+      <dd><table><tr><td>
+<pre class="variable">
+<span class="variable-quote">'</span>auth<span class="variable-quote">'</span>                                                                 </pre>
+        </td></tr></table></dd>
+</span>    </dl>
+  </dd>
+</dl></td></tr></table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="PREFIX"></a>
+<h3>PREFIX</h3>
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          <code>str</code>
+
+      </dd>
+<span title="'_yadis_services_'">      <dt><b>Value:</b></dt>
+      <dd><table><tr><td>
+<pre class="variable">
+<span class="variable-quote">'</span>_yadis_services_<span class="variable-quote">'</span>                                                     </pre>
+        </td></tr></table></dd>
+</span>    </dl>
+  </dd>
+</dl></td></tr></table>
+<br />
+
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="openid-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          <a class="navbar" target="_top" href="http://openidenabled.com/python-openid/">Python-OpenID</a>
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td align="left"><font size="-2">Generated by Epydoc 2.1 on Fri Dec 14 16:10:53 2007</font></td>
+    <td align="right"><a href="http://epydoc.sourceforge.net"
+                      ><font size="-2">http://epydoc.sf.net</font></a></td>
+  </tr>
+</table>
+</body>
+</html>

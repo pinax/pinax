@@ -1,0 +1,177 @@
+Creating a YADIS Services Document
+##################################
+
+In order to use your URL with YADIS, you'll need to create a document
+that tells relying parties what services you use. This document helps
+you create a document and add OpenID services. Adding other services
+is similar, but each service may have different configuration options.
+
+In order to use these instructions, you'll need to understand a little
+bit about how OpenID works, in order to know how to fill in the values
+for your OpenID server. You can learn about OpenID at
+http://openid.net/ and http://www.openidenabled.com/\.
+
+What is a YADIS services document?
+==================================
+
+A YADIS services document is a file that relying parties read in order
+to find your services. It's an XML file that contains an entry for
+each service, indicating that service's parameters. A YADIS services
+document looks like this::
+
+  <?xml version="1.0" encoding="UTF-8"?>
+  <xrds:XRDS
+    xmlns:xrds="xri://$xrds"
+    xmlns:openid="http://openid.net/xmlns/1.0"
+    xmlns="xri://$xrd*($v*2.0)">
+    <XRD>
+
+      <Service priority="0">
+        <Type>http://openid.net/signon/1.0</Type>
+        <URI>http://www.myopenid.com/server</URI>
+        <openid:Delegate>http://josh.myopenid.com/</openid:Delegate>
+      </Service>
+
+    </XRD>
+  </xrds:XRDS>
+
+If you are familiar with XML, then the document should be pretty
+straightforward. If you are not, there is only a little that you need
+to learn in order to use YADIS. You do not need to read the technical
+notes in order to create your document.
+
+Technical note:
+
+  For the XML-aware, the document format is ``application/xrds+xml``,
+  and it comes from the `XRI Technical Committee`_'s `XRI Resolution
+  2.0 working draft`_. The working draft has an XML schema defined in
+  Appendix A. YADIS relying parties are only required to understand a
+  subset of the defined tags.
+
+  .. _`XRI Technical committee`: http://www.oasis-open.org/committees/tc_home.php?wg_abbrev=xri
+  .. _`XRI Resolution 2.0 working draft`: http://www.oasis-open.org/committees/download.php/15310/xri-resolution-V2.0-wd-09.pdf
+
+Boilerplate
+-----------
+
+Every services document needs a header and a footer to tell the
+relying party how to interpret this document. The header will always
+contain::
+
+  <?xml version="1.0" encoding="UTF-8"?>
+  <xrds:XRDS
+    xmlns:xrds="xri://$xrds"
+
+    (optionally other namespaces)
+
+    xmlns="xri://$xrd*($v*2.0)">
+    <XRD>
+
+Technical note:
+
+  Services may define their own XML namespaces. It is a good
+  convention to declare these namespaces at the top level, in the
+  ``<xrds:XRD>``. The XRD namespace is the default namespace because
+  most of the tags in the document are in that namespace.
+
+If you are using OpenID, the declaration::
+
+  xmlns:openid="http://openid.net/xmlns/1.0"
+
+should be inserted in the ``(optionally other namespaces)`` section.
+
+The document will end with::
+
+    </XRD>
+  </xrds:XRDS>
+
+Your services
+=============
+
+An OpenID service declaration looks like the following::
+
+  <Service priority="0">
+    <Type>http://openid.net/signon/1.0</Type>
+    <URI>http://www.myopenid.com/server</URI>
+    <openid:Delegate>http://josh.myopenid.com/</openid:Delegate>
+  </Service>
+
+The value inside of the ``<Type>`` tag indicates that this is an
+OpenID service. The value inside of the ``<URI>`` tag is the URL of
+your OpenID server. The ``<openid:Delegate>`` tag is the URL by which
+your OpenID server knows you. If your YADIS identity URL is the same
+as that value, you may omit the ``<openid:Delegate>`` tag.
+
+=========================== ===================== ==========================
+OpenID ``<link rel="...">`` XRD Tag               Notes
+ 
+=========================== ===================== ==========================
+``openid.server``           ``<URI>``
+``openid.delegate``         ``<openid:Delegate>`` Optional if your
+                                                  OpenID server knows
+                                                  about your YADIS
+                                                  identity URL. You
+                                                  are always allowed
+                                                  to specify this
+                                                  value.
+=========================== ===================== ==========================
+
+Just like in OpenID, you should be careful about capitalization and
+punctuation when you are specifying a delegate, or your server may not
+recognize you.
+
+Priority
+--------
+
+One of the nice features of YADIS is that it lets you specify more
+than one service of a given type, which means that relying parties are
+able to use your identity URL if one of the services are temporarily
+not available. XRD allows you to indicate which services you prefer to
+use through the ``priority`` attribute of the ``<Service>`` tag.
+
+The priority must be a whole number greater than or equal to zero. The
+service that has the lowest listed priority is the preferred service.
+If you do not specify a priority, that service will come after all
+services whose priority is listed.
+
+For example, assume that you have accounts with two OpenID services,
+http://first.example.com/openid and
+http://second.example.com/openid\. You like to use
+http://first.example.com/openid but it's sometimes not available,
+so you'd like to be able to fall back on
+http://second.example.com/openid\. Just set the ``priority``
+attribute for http://first.example.com/openid lower than that of
+http://second.example.com/openid\.
+
+Here's the YADIS services document for that example::
+
+  <?xml version="1.0" encoding="UTF-8"?>
+  <xrds:XRDS
+    xmlns:xrds="xri://$xrds"
+    xmlns:openid="http://openid.net/xmlns/1.0"
+    xmlns="xri://$xrd*($v*2.0)">
+    <XRD>
+
+      <Service priority="10">
+        <Type>http://openid.net/signon/1.0</Type>
+        <URI>http://first.example.com/openid</URI>
+        <openid:Delegate>http://first.example.com/users/joe</openid:Delegate>
+      </Service>
+
+      <Service priority="20">
+        <Type>http://openid.net/signon/1.0</Type>
+        <URI>http://second.example.com/openid</URI>
+        <openid:Delegate>http://joe.second.example.com/</openid:Delegate>
+      </Service>
+
+    </XRD>
+  </xrds:XRDS>
+
+It's a good idea to leave room between the priority values so that if
+you have to add another service in the middle of the list, there's
+room to do it.
+
+Technical note:
+
+  If there are multiple services with identical ``priority``
+  attributes, the relying party may try those services in any order.

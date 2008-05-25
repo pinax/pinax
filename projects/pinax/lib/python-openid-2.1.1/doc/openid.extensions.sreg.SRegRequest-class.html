@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>openid.extensions.sreg.SRegRequest</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css"></link>
+</head>
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="openid-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          <a class="navbar" target="_top" href="http://openidenabled.com/python-openid/">Python-OpenID</a>
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <font size="-1"><b class="breadcrumbs">
+        <a href="openid-module.html">Package&nbsp;openid</a> ::
+        <a href="openid.extensions-module.html">Package&nbsp;extensions</a> ::
+        <a href="openid.extensions.sreg-module.html">Module&nbsp;sreg</a> ::
+        Class&nbsp;SRegRequest
+      </b></font></br>
+    </td>
+    <td><table cellpadding="0" cellspacing="0">
+      <tr><td align="right"><font size="-2">[<a href="frames.html"target="_top">frames</a>&nbsp;|&nbsp;<a href="openid.extensions.sreg.SRegRequest-class.html" target="_top">no&nbsp;frames</a>]</font></td></tr>
+    </table></td>
+</tr></table>
+
+<!-- =========== START OF CLASS DESCRIPTION =========== -->
+<h2 class="class">Type SRegRequest</h2>
+
+<pre class="base-tree">
+<a href="__builtin__.object-class.html"><code>object</code></a> --+    
+         |    
+ <a href="openid.extension.Extension-class.html"><code>Extension</code></a> --+
+             |
+            <b>SRegRequest</b>
+</pre><br />
+
+<hr/>
+
+An object to hold the state of a simple registration request.
+<hr/>
+
+
+<!-- =========== START OF METHOD SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Method Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.extensions.sreg.SRegRequest-class.html#__init__" class="summary-sig-name"><code>__init__</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>required</span>,
+          <span class=summary-sig-arg>optional</span>,
+          <span class=summary-sig-arg>policy_url</span>,
+          <span class=summary-sig-arg>sreg_ns_uri</span>)</span></code>
+<br />
+Initialize an empty simple registration request</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.extensions.sreg.SRegRequest-class.html#__contains__" class="summary-sig-name"><code>__contains__</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>field_name</span>)</span></code>
+<br />
+Was this field in the request?</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        [str]
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.extensions.sreg.SRegRequest-class.html#allRequestedFields" class="summary-sig-name"><code>allRequestedFields</code></a>(<span class=summary-sig-arg>self</span>)</span></code>
+<br />
+A list of all of the simple registration fields that were requested, 
+whether they were required or optional.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        bool
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.extensions.sreg.SRegRequest-class.html#wereFieldsRequested" class="summary-sig-name"><code>wereFieldsRequested</code></a>(<span class=summary-sig-arg>self</span>)</span></code>
+<br />
+Have any simple registration fields been requested?</td></tr>
+  <tr><td colspan="2">
+    <b>Inherited from <a href="openid.extension.Extension-class.html"><code>Extension</code></a>:</b>
+      <a href="openid.extension.Extension-class.html#toMessage"><code>toMessage</code></a>
+      <br />
+    <b>Inherited from <a href="__builtin__.object-class.html"><code>object</code></a>:</b>
+      <a href="__builtin__.object-class.html#__delattr__"><code>__delattr__</code></a>, 
+      <a href="__builtin__.object-class.html#__getattribute__"><code>__getattribute__</code></a>, 
+      <a href="__builtin__.object-class.html#__hash__"><code>__hash__</code></a>, 
+      <a href="__builtin__.object-class.html#__new__"><code>__new__</code></a>, 
+      <a href="__builtin__.object-class.html#__reduce__"><code>__reduce__</code></a>, 
+      <a href="__builtin__.object-class.html#__reduce_ex__"><code>__reduce_ex__</code></a>, 
+      <a href="__builtin__.object-class.html#__repr__"><code>__repr__</code></a>, 
+      <a href="__builtin__.object-class.html#__setattr__"><code>__setattr__</code></a>, 
+      <a href="__builtin__.object-class.html#__str__"><code>__str__</code></a>
+    </td></tr>
+<tr bgcolor="#e8f0f8" class="group">
+  <th colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;Consumer</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.extensions.sreg.SRegRequest-class.html#requestField" class="summary-sig-name"><code>requestField</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>field_name</span>,
+          <span class=summary-sig-arg>required</span>,
+          <span class=summary-sig-arg>strict</span>)</span></code>
+<br />
+Request the specified field from the OpenID user</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.extensions.sreg.SRegRequest-class.html#requestFields" class="summary-sig-name"><code>requestFields</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>field_names</span>,
+          <span class=summary-sig-arg>required</span>,
+          <span class=summary-sig-arg>strict</span>)</span></code>
+<br />
+Add the given list of fields to the request</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        {str:str}
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.extensions.sreg.SRegRequest-class.html#getExtensionArgs" class="summary-sig-name"><code>getExtensionArgs</code></a>(<span class=summary-sig-arg>self</span>)</span></code>
+<br />
+Get a dictionary of unqualified simple registration arguments 
+representing this request.</td></tr>
+<tr bgcolor="#e8f0f8" class="group">
+  <th colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;Server</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        <code><a href="openid.extensions.sreg.SRegRequest-class.html" 
+        class="link"><code>SRegRequest</code></a></code>
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.extensions.sreg.SRegRequest-class.html#fromOpenIDRequest" class="summary-sig-name"><code>fromOpenIDRequest</code></a>(<span class=summary-sig-arg>cls</span>,
+          <span class=summary-sig-arg>request</span>)</span></code>
+<br />
+Create a simple registration request that contains the fields that 
+were requested in the OpenID request with the given arguments    <i>(Class method)</i>
+</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.extensions.sreg.SRegRequest-class.html#parseExtensionArgs" class="summary-sig-name"><code>parseExtensionArgs</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>args</span>,
+          <span class=summary-sig-arg>strict</span>)</span></code>
+<br />
+Parse the unqualified simple registration request parameters and add 
+them to this object.</td></tr>
+</table><br />
+
+
+<!-- =========== START OF INSTANCE VARIABLE SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Instance Variable Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">[str]</font></td>
+<td><b><a href="openid.extensions.sreg.SRegRequest-class.html#optional"><code>optional</code></a></b>: A list of the optional fields in this simple registration request</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">str or NoneType</font></td>
+<td><b><a href="openid.extensions.sreg.SRegRequest-class.html#policy_url"><code>policy_url</code></a></b>: The policy URL that was provided with the request</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">[str]</font></td>
+<td><b><a href="openid.extensions.sreg.SRegRequest-class.html#required"><code>required</code></a></b>: A list of the required fields in this simple registration request</td></tr>
+  <tr><td colspan="2">
+    <b>Inherited from <a href="openid.extension.Extension-class.html"><code>Extension</code></a>:</b>
+      <a href="openid.extension.Extension-class.html#ns_uri"><code>ns_uri</code></a>
+    </td></tr>
+</table><br />
+
+
+<!-- =========== START OF CLASS VARIABLE SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Class Variable Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1"><code>str</code></font></td>
+<td><b><a href="openid.extensions.sreg.SRegRequest-class.html#ns_alias"><code>ns_alias</code></a></b> = <span title="'sreg'"><code><span class="variable-quote">'</span>sreg<span class="variable-quote">'</span>                                        </code>
+</span></td></tr>
+</table><br />
+
+
+<!-- =========== START OF INSTANCE METHOD DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Instance Method Details</th></tr>
+</table>
+
+<a name="requestField"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">requestField</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>field_name</span>,
+          <span class=sig-arg>required</span>=<span class=sig-default>False</span>,
+          <span class=sig-arg>strict</span>=<span class=sig-default>False</span>)</span>
+  </h3>
+  Request the specified field from the OpenID user
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>field_name</b></code> -
+         the unqualified simple registration field name
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=str)</i>
+      <dd><code><b>required</b></code> -
+         whether the given field should be presented to the user as 
+        being a required to successfully complete the request
+      <dd><code><b>strict</b></code> -
+         whether to raise an exception when a field is added to a 
+        request more than once
+      </dd>
+    </dl>
+    <dl><dt><b>Raises:</b></dt>
+      <dd><code><b>ValueError</b></code> -
+        when the field requested is not a simple registration field or 
+        strict is set and the field was requested more than once
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="requestFields"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">requestFields</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>field_names</span>,
+          <span class=sig-arg>required</span>=<span class=sig-default>False</span>,
+          <span class=sig-arg>strict</span>=<span class=sig-default>False</span>)</span>
+  </h3>
+  Add the given list of fields to the request
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>field_names</b></code> -
+         The simple registration data fields to request
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=[str])</i>
+      <dd><code><b>required</b></code> -
+         Whether these values should be presented to the user as 
+        required
+      <dd><code><b>strict</b></code> -
+         whether to raise an exception when a field is added to a 
+        request more than once
+      </dd>
+    </dl>
+    <dl><dt><b>Raises:</b></dt>
+      <dd><code><b>ValueError</b></code> -
+        when a field requested is not a simple registration field or 
+        strict is set and a field was requested more than once
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="getExtensionArgs"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">getExtensionArgs</span>(<span class=sig-arg>self</span>)</span>
+  </h3>
+  <p>Get a dictionary of unqualified simple registration arguments 
+  representing this request.</p>
+  This method is essentially the inverse of <code><a 
+  href="openid.extensions.sreg.SRegRequest-class.html#parseExtensionArgs" 
+  class="link"><code>parseExtensionArgs</code></a></code>. This method 
+  serializes the simple registration request fields.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        {str:str}
+      </dd>
+    </dl>
+    <dl><dt><b>Overrides:</b></dt>
+      <dd><a href="openid.extension.Extension-class.html#getExtensionArgs"><code>openid.extension.Extension.getExtensionArgs</code></a></dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="parseExtensionArgs"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">parseExtensionArgs</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>args</span>,
+          <span class=sig-arg>strict</span>=<span class=sig-default>False</span>)</span>
+  </h3>
+  <p>Parse the unqualified simple registration request parameters and add 
+  them to this object.</p>
+  <p>This method is essentially the inverse of <code><a 
+  href="openid.extensions.sreg.SRegRequest-class.html#getExtensionArgs" 
+  class="link"><code>getExtensionArgs</code></a></code>. This method 
+  restores the serialized simple registration request fields.</p>
+  If you are extracting arguments from a standard OpenID checkid_* 
+  request, you probably want to use <code><a 
+  href="openid.extensions.sreg.SRegRequest-class.html#fromOpenIDRequest" 
+  class="link"><code>fromOpenIDRequest</code></a></code>, which will 
+  extract the sreg namespace and arguments from the OpenID request. This 
+  method is intended for cases where the OpenID server needs more control 
+  over how the arguments are parsed than that method provides.
+<pre class="doctestblock">
+<span class="py-src"><span class="py-prompt">&gt;&gt;&gt; </span>args = message.getArgs(ns_uri)
+<span class="py-prompt">&gt;&gt;&gt; </span>request.parseExtensionArgs(args)</span></pre>
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>args</b></code> -
+         The unqualified simple registration arguments
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type={str:str})</i>
+      <dd><code><b>strict</b></code> -
+         Whether requests with fields that are not defined in the 
+        simple registration specification should be tolerated (and 
+        ignored)
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=bool)</i>
+      </dd>
+    </dl>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        None; updates this object
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="__init__"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">__init__</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>required</span>=<span class=sig-default>None</span>,
+          <span class=sig-arg>optional</span>=<span class=sig-default>None</span>,
+          <span class=sig-arg>policy_url</span>=<span class=sig-default>None</span>,
+          <span class=sig-arg>sreg_ns_uri</span>=<span class=sig-default>'http://openid.net/extensions/sreg/1.1'</span>)</span>
+    <br /><i>(Constructor)</i>
+  </h3>
+  Initialize an empty simple registration request
+  <dl><dt></dt><dd>
+    <dl><dt><b>Overrides:</b></dt>
+      <dd><a href="__builtin__.object-class.html#__init__"><code>__builtin__.object.__init__</code></a></dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="__contains__"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">__contains__</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>field_name</span>)</span>
+    <br /><i>(In operator)</i>
+  </h3>
+  Was this field in the request?
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="allRequestedFields"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">allRequestedFields</span>(<span class=sig-arg>self</span>)</span>
+  </h3>
+  A list of all of the simple registration fields that were requested, 
+  whether they were required or optional.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        [str]
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="wereFieldsRequested"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">wereFieldsRequested</span>(<span class=sig-arg>self</span>)</span>
+  </h3>
+  Have any simple registration fields been requested?
+  <dl><dt></dt><dd>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        bool
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+<br />
+
+
+<!-- =========== START OF CLASS METHOD DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Class Method Details</th></tr>
+</table>
+
+<a name="fromOpenIDRequest"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">fromOpenIDRequest</span>(<span class=sig-arg>cls</span>,
+          <span class=sig-arg>request</span>)</span>
+  </h3>
+  Create a simple registration request that contains the fields that 
+  were requested in the OpenID request with the given arguments
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>request</b></code> -
+         The OpenID request
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=openid.server.CheckIDRequest)</i>
+      </dd>
+    </dl>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        The newly created simple registration request
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=<code><a href="openid.extensions.sreg.SRegRequest-class.html" 
+        class="link"><code>SRegRequest</code></a></code>)</i>
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+<br />
+
+
+<!-- =========== START OF INSTANCE VARIABLE DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Instance Variable Details</th></tr>
+</table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="optional"></a>
+<h3>optional</h3>
+A list of the optional fields in this simple registration request
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          [str]
+
+      </dd>
+    </dl>
+  </dd>
+</dl></td></tr></table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="policy_url"></a>
+<h3>policy_url</h3>
+The policy URL that was provided with the request
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          str or NoneType
+
+      </dd>
+    </dl>
+  </dd>
+</dl></td></tr></table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="required"></a>
+<h3>required</h3>
+A list of the required fields in this simple registration request
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          [str]
+
+      </dd>
+    </dl>
+  </dd>
+</dl></td></tr></table>
+<br />
+
+
+<!-- =========== START OF CLASS VARIABLE DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Class Variable Details</th></tr>
+</table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="ns_alias"></a>
+<h3>ns_alias</h3>
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          <code>str</code>
+
+      </dd>
+<span title="'sreg'">      <dt><b>Value:</b></dt>
+      <dd><table><tr><td>
+<pre class="variable">
+<span class="variable-quote">'</span>sreg<span class="variable-quote">'</span>                                                                 </pre>
+        </td></tr></table></dd>
+</span>    </dl>
+  </dd>
+</dl></td></tr></table>
+<br />
+
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="openid-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          <a class="navbar" target="_top" href="http://openidenabled.com/python-openid/">Python-OpenID</a>
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td align="left"><font size="-2">Generated by Epydoc 2.1 on Fri Dec 14 16:10:52 2007</font></td>
+    <td align="right"><a href="http://epydoc.sourceforge.net"
+                      ><font size="-2">http://epydoc.sf.net</font></a></td>
+  </tr>
+</table>
+</body>
+</html>

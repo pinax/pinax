@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>yadis.test.test_parsehtml</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="yadis-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.openidenabled.com/yadis/">Python-Yadis</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="yadis-module.html">Package&nbsp;yadis</a> ::
+        <a href="yadis.test-module.html">Package&nbsp;test</a> ::
+        Module&nbsp;test_parsehtml
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="yadis.test.test_parsehtml-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="yadis.test.test_parsehtml-module.html">Module yadis.test.test_parsehtml</a></h1>
+<pre class="py-src">
+<tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package yadis=yadis-module.html"><a title="yadis" class="py-name" href="#" onclick="return doclink('link-0', 'yadis', 'link-0');">yadis</a></tt></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Module yadis.parsehtml=yadis.parsehtml-module.html"><a title="yadis.parsehtml" class="py-name" href="#" onclick="return doclink('link-1', 'parsehtml', 'link-1');">parsehtml</a></tt></tt> <tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Class yadis.parsehtml.YadisHTMLParser=yadis.parsehtml.YadisHTMLParser-class.html"><a title="yadis.parsehtml.YadisHTMLParser" class="py-name" href="#" onclick="return doclink('link-2', 'YadisHTMLParser', 'link-2');">YadisHTMLParser</a></tt></tt><tt class="py-op">,</tt> <tt id="link-3" class="py-name" targets="Class yadis.parsehtml.ParseDone=yadis.parsehtml.ParseDone-class.html"><a title="yadis.parsehtml.ParseDone" class="py-name" href="#" onclick="return doclink('link-3', 'ParseDone', 'link-3');">ParseDone</a></tt></tt> </tt>
+<tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">HTMLParser</tt> <tt class="py-keyword">import</tt> <tt class="py-name">HTMLParseError</tt> </tt>
+<tt class="py-lineno"> 3</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">,</tt> <tt class="py-name">unittest</tt><tt class="py-op">,</tt> <tt class="py-name">sys</tt> </tt>
+<tt class="py-lineno"> 5</tt>  <tt class="py-line"> </tt>
+<a name="_TestCase"></a><div id="_TestCase-def"><tt class="py-lineno"> 6</tt> <a class="py-toggle" href="#" id="_TestCase-toggle" onclick="return toggle('_TestCase');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="yadis.test.test_parsehtml._TestCase-class.html">_TestCase</a><tt class="py-op">(</tt><tt class="py-base-class">unittest</tt><tt class="py-op">.</tt><tt class="py-base-class">TestCase</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_TestCase-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="_TestCase-expanded"><tt class="py-lineno"> 7</tt>  <tt class="py-line">    <tt id="link-4" class="py-name" targets="Variable yadis.test.test_parsehtml._TestCase.reserved_values=yadis.test.test_parsehtml._TestCase-class.html#reserved_values"><a title="yadis.test.test_parsehtml._TestCase.reserved_values" class="py-name" href="#" onclick="return doclink('link-4', 'reserved_values', 'link-4');">reserved_values</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">'None'</tt><tt class="py-op">,</tt> <tt class="py-string">'EOF'</tt><tt class="py-op">]</tt> </tt>
+<tt class="py-lineno"> 8</tt>  <tt class="py-line"> </tt>
+<a name="_TestCase.__init__"></a><div id="_TestCase.__init__-def"><tt class="py-lineno"> 9</tt> <a class="py-toggle" href="#" id="_TestCase.__init__-toggle" onclick="return toggle('_TestCase.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.test.test_parsehtml._TestCase-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">filename</tt><tt class="py-op">,</tt> <tt class="py-param">testname</tt><tt class="py-op">,</tt> <tt class="py-param">expected</tt><tt class="py-op">,</tt> <tt class="py-param">case</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_TestCase.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="_TestCase.__init__-expanded"><tt class="py-lineno">10</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Variable yadis.test.test_parsehtml.filename=yadis.test.test_parsehtml-module.html#filename"><a title="yadis.test.test_parsehtml.filename" class="py-name" href="#" onclick="return doclink('link-5', 'filename', 'link-5');">filename</a></tt></tt> <tt class="py-op">=</tt> <tt id="link-6" class="py-name"><a title="yadis.test.test_parsehtml.filename" class="py-name" href="#" onclick="return doclink('link-6', 'filename', 'link-5');">filename</a></tt></tt> </tt>
+<tt class="py-lineno">11</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">testname</tt> <tt class="py-op">=</tt> <tt class="py-name">testname</tt> </tt>
+<tt class="py-lineno">12</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">expected</tt> <tt class="py-op">=</tt> <tt class="py-name">expected</tt> </tt>
+<tt class="py-lineno">13</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">case</tt> <tt class="py-op">=</tt> <tt class="py-name">case</tt> </tt>
+<tt class="py-lineno">14</tt>  <tt class="py-line">        <tt class="py-name">unittest</tt><tt class="py-op">.</tt><tt class="py-name">TestCase</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Method yadis.discover.DiscoveryFailure.__init__()=yadis.discover.DiscoveryFailure-class.html#__init__,Method yadis.discover.DiscoveryResult.__init__()=yadis.discover.DiscoveryResult-class.html#__init__,Method yadis.filters.BasicServiceEndpoint.__init__()=yadis.filters.BasicServiceEndpoint-class.html#__init__,Method yadis.filters.CompoundFilter.__init__()=yadis.filters.CompoundFilter-class.html#__init__,Method yadis.filters.TransformFilterMaker.__init__()=yadis.filters.TransformFilterMaker-class.html#__init__,Method yadis.manager.Discovery.__init__()=yadis.manager.Discovery-class.html#__init__,Method yadis.manager.YadisServiceManager.__init__()=yadis.manager.YadisServiceManager-class.html#__init__,Method yadis.parsehtml.YadisHTMLParser.__init__()=yadis.parsehtml.YadisHTMLParser-class.html#__init__,Method yadis.test.livediscover.DiscoverTestCase.__init__()=yadis.test.livediscover.DiscoverTestCase-class.html#__init__,Method yadis.test.test_accept.MatchAcceptTest.__init__()=yadis.test.test_accept.MatchAcceptTest-class.html#__init__,Method yadis.test.test_discover.TestFetcher.__init__()=yadis.test.test_discover.TestFetcher-class.html#__init__,Method yadis.test.test_discover.TestSecondGet.MockFetcher.__init__()=yadis.test.test_discover.TestSecondGet.MockFetcher-class.html#__init__,Method yadis.test.test_discover._TestCase.__init__()=yadis.test.test_discover._TestCase-class.html#__init__,Method yadis.test.test_parsehtml._TestCase.__init__()=yadis.test.test_parsehtml._TestCase-class.html#__init__,Method yadis.xrires.ProxyResolver.__init__()=yadis.xrires.ProxyResolver-class.html#__init__"><a title="yadis.discover.DiscoveryFailure.__init__
+yadis.discover.DiscoveryResult.__init__
+yadis.filters.BasicServiceEndpoint.__init__
+yadis.filters.CompoundFilter.__init__
+yadis.filters.TransformFilterMaker.__init__
+yadis.manager.Discovery.__init__
+yadis.manager.YadisServiceManager.__init__
+yadis.parsehtml.YadisHTMLParser.__init__
+yadis.test.livediscover.DiscoverTestCase.__init__
+yadis.test.test_accept.MatchAcceptTest.__init__
+yadis.test.test_discover.TestFetcher.__init__
+yadis.test.test_discover.TestSecondGet.MockFetcher.__init__
+yadis.test.test_discover._TestCase.__init__
+yadis.test.test_parsehtml._TestCase.__init__
+yadis.xrires.ProxyResolver.__init__" class="py-name" href="#" onclick="return doclink('link-7', '__init__', 'link-7');">__init__</a></tt></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+</div><tt class="py-lineno">15</tt>  <tt class="py-line"> </tt>
+<a name="_TestCase.runTest"></a><div id="_TestCase.runTest-def"><tt class="py-lineno">16</tt> <a class="py-toggle" href="#" id="_TestCase.runTest-toggle" onclick="return toggle('_TestCase.runTest');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.test.test_parsehtml._TestCase-class.html#runTest">runTest</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_TestCase.runTest-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="_TestCase.runTest-expanded"><tt class="py-lineno">17</tt>  <tt class="py-line">        <tt class="py-name">p</tt> <tt class="py-op">=</tt> <tt id="link-8" class="py-name"><a title="yadis.parsehtml.YadisHTMLParser" class="py-name" href="#" onclick="return doclink('link-8', 'YadisHTMLParser', 'link-2');">YadisHTMLParser</a></tt></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">18</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">19</tt>  <tt class="py-line">            <tt class="py-name">p</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Method yadis.parsehtml.YadisHTMLParser.feed()=yadis.parsehtml.YadisHTMLParser-class.html#feed"><a title="yadis.parsehtml.YadisHTMLParser.feed" class="py-name" href="#" onclick="return doclink('link-9', 'feed', 'link-9');">feed</a></tt></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">case</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">20</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt id="link-10" class="py-name"><a title="yadis.parsehtml.ParseDone" class="py-name" href="#" onclick="return doclink('link-10', 'ParseDone', 'link-3');">ParseDone</a></tt></tt><tt class="py-op">,</tt> <tt class="py-name">why</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">21</tt>  <tt class="py-line">            <tt class="py-name">found</tt> <tt class="py-op">=</tt> <tt class="py-name">why</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<tt class="py-lineno">22</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">23</tt>  <tt class="py-line">            <tt class="py-comment"># make sure we protect outselves against accidental bogus</tt> </tt>
+<tt class="py-lineno">24</tt>  <tt class="py-line"><tt class="py-comment"></tt>            <tt class="py-comment"># test cases</tt> </tt>
+<tt class="py-lineno">25</tt>  <tt class="py-line"><tt class="py-comment"></tt>            <tt class="py-keyword">assert</tt> <tt class="py-name">found</tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name"><a title="yadis.test.test_parsehtml._TestCase.reserved_values" class="py-name" href="#" onclick="return doclink('link-11', 'reserved_values', 'link-4');">reserved_values</a></tt></tt> </tt>
+<tt class="py-lineno">26</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">27</tt>  <tt class="py-line">            <tt class="py-comment"># convert to a string</tt> </tt>
+<tt class="py-lineno">28</tt>  <tt class="py-line"><tt class="py-comment"></tt>            <tt class="py-keyword">if</tt> <tt class="py-name">found</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">29</tt>  <tt class="py-line">                <tt class="py-name">found</tt> <tt class="py-op">=</tt> <tt class="py-string">'None'</tt> </tt>
+<tt class="py-lineno">30</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">31</tt>  <tt class="py-line">            <tt class="py-name">msg</tt> <tt class="py-op">=</tt> <tt class="py-string">"%r != %r for case %s"</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">found</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">expected</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">case</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">32</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">failUnlessEqual</tt><tt class="py-op">(</tt><tt class="py-name">found</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">expected</tt><tt class="py-op">,</tt> <tt class="py-name">msg</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">33</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-name">HTMLParseError</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">34</tt>  <tt class="py-line">            <tt class="py-keyword">assert</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">expected</tt> <tt class="py-op">==</tt> <tt class="py-string">'None'</tt> </tt>
+<tt class="py-lineno">35</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">36</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">failUnless</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">expected</tt> <tt class="py-op">==</tt> <tt class="py-string">'EOF'</tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">case</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">expected</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><tt class="py-lineno">37</tt>  <tt class="py-line"> </tt>
+<a name="_TestCase.shortDescription"></a><div id="_TestCase.shortDescription-def"><tt class="py-lineno">38</tt> <a class="py-toggle" href="#" id="_TestCase.shortDescription-toggle" onclick="return toggle('_TestCase.shortDescription');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.test.test_parsehtml._TestCase-class.html#shortDescription">shortDescription</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_TestCase.shortDescription-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="_TestCase.shortDescription-expanded"><tt class="py-lineno">39</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-string">"%s (%s&lt;%s&gt;)"</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt> </tt>
+<tt class="py-lineno">40</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">testname</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno">41</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__class__</tt><tt class="py-op">.</tt><tt class="py-name">__module__</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno">42</tt>  <tt class="py-line">            <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">basename</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name"><a title="yadis.test.test_parsehtml.filename" class="py-name" href="#" onclick="return doclink('link-12', 'filename', 'link-5');">filename</a></tt></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div></div><tt class="py-lineno">43</tt>  <tt class="py-line"> </tt>
+<a name="parseCases"></a><div id="parseCases-def"><tt class="py-lineno">44</tt> <a class="py-toggle" href="#" id="parseCases-toggle" onclick="return toggle('parseCases');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.test.test_parsehtml-module.html#parseCases">parseCases</a><tt class="py-op">(</tt><tt class="py-param">data</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="parseCases-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="parseCases-expanded"><tt class="py-lineno">45</tt>  <tt class="py-line">    <tt class="py-name">cases</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<tt class="py-lineno">46</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt id="link-13" class="py-name" targets="Function yadis.test.test_accept.chunk()=yadis.test.test_accept-module.html#chunk"><a title="yadis.test.test_accept.chunk" class="py-name" href="#" onclick="return doclink('link-13', 'chunk', 'link-13');">chunk</a></tt></tt> <tt class="py-keyword">in</tt> <tt class="py-name">data</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-string">'\f\n'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">47</tt>  <tt class="py-line">        <tt class="py-name">expected</tt><tt class="py-op">,</tt> <tt class="py-name">case</tt> <tt class="py-op">=</tt> <tt id="link-14" class="py-name"><a title="yadis.test.test_accept.chunk" class="py-name" href="#" onclick="return doclink('link-14', 'chunk', 'link-13');">chunk</a></tt></tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-string">'\n'</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">48</tt>  <tt class="py-line">        <tt class="py-name">cases</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">expected</tt><tt class="py-op">,</tt> <tt class="py-name">case</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">49</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">cases</tt> </tt>
+</div><tt class="py-lineno">50</tt>  <tt class="py-line"> </tt>
+<a name="loadTests"></a><div id="loadTests-def"><tt class="py-lineno">51</tt> <a class="py-toggle" href="#" id="loadTests-toggle" onclick="return toggle('loadTests');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.test.test_parsehtml-module.html#loadTests">loadTests</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="loadTests-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="loadTests-expanded"><tt class="py-lineno">52</tt>  <tt class="py-line">    <tt class="py-docstring">"""Make a pyunit TestSuite from a file defining test cases."""</tt> </tt>
+<tt class="py-lineno">53</tt>  <tt class="py-line">    <tt class="py-name">s</tt> <tt class="py-op">=</tt> <tt class="py-name">unittest</tt><tt class="py-op">.</tt><tt class="py-name">TestSuite</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">54</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-op">(</tt><tt id="link-15" class="py-name"><a title="yadis.test.test_parsehtml.filename" class="py-name" href="#" onclick="return doclink('link-15', 'filename', 'link-5');">filename</a></tt></tt><tt class="py-op">,</tt> <tt class="py-name">test_num</tt><tt class="py-op">,</tt> <tt class="py-name">expected</tt><tt class="py-op">,</tt> <tt class="py-name">case</tt><tt class="py-op">)</tt> <tt class="py-keyword">in</tt> <tt id="link-16" class="py-name" targets="Function yadis.test.test_parsehtml.getCases()=yadis.test.test_parsehtml-module.html#getCases"><a title="yadis.test.test_parsehtml.getCases" class="py-name" href="#" onclick="return doclink('link-16', 'getCases', 'link-16');">getCases</a></tt></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">55</tt>  <tt class="py-line">        <tt class="py-name">s</tt><tt class="py-op">.</tt><tt class="py-name">addTest</tt><tt class="py-op">(</tt><tt id="link-17" class="py-name" targets="Class yadis.test.test_discover._TestCase=yadis.test.test_discover._TestCase-class.html,Class yadis.test.test_parsehtml._TestCase=yadis.test.test_parsehtml._TestCase-class.html"><a title="yadis.test.test_discover._TestCase
+yadis.test.test_parsehtml._TestCase" class="py-name" href="#" onclick="return doclink('link-17', '_TestCase', 'link-17');">_TestCase</a></tt></tt><tt class="py-op">(</tt><tt id="link-18" class="py-name"><a title="yadis.test.test_parsehtml.filename" class="py-name" href="#" onclick="return doclink('link-18', 'filename', 'link-5');">filename</a></tt></tt><tt class="py-op">,</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">test_num</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">expected</tt><tt class="py-op">,</tt> <tt class="py-name">case</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">56</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">s</tt> </tt>
+</div><tt class="py-lineno">57</tt>  <tt class="py-line"> </tt>
+<a name="test"></a><div id="test-def"><tt class="py-lineno">58</tt> <a class="py-toggle" href="#" id="test-toggle" onclick="return toggle('test');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.test.test_parsehtml-module.html#test">test</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="test-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="test-expanded"><tt class="py-lineno">59</tt>  <tt class="py-line">    <tt id="link-19" class="py-name" targets="Variable yadis.test.test_accept.runner=yadis.test.test_accept-module.html#runner"><a title="yadis.test.test_accept.runner" class="py-name" href="#" onclick="return doclink('link-19', 'runner', 'link-19');">runner</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-name">unittest</tt><tt class="py-op">.</tt><tt class="py-name">TextTestRunner</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">60</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-20" class="py-name"><a title="yadis.test.test_accept.runner" class="py-name" href="#" onclick="return doclink('link-20', 'runner', 'link-19');">runner</a></tt></tt><tt class="py-op">.</tt><tt class="py-name">run</tt><tt class="py-op">(</tt><tt id="link-21" class="py-name" targets="Function yadis.test.test_accept.loadTests()=yadis.test.test_accept-module.html#loadTests,Function yadis.test.test_discover.loadTests()=yadis.test.test_discover-module.html#loadTests,Function yadis.test.test_parsehtml.loadTests()=yadis.test.test_parsehtml-module.html#loadTests"><a title="yadis.test.test_accept.loadTests
+yadis.test.test_discover.loadTests
+yadis.test.test_parsehtml.loadTests" class="py-name" href="#" onclick="return doclink('link-21', 'loadTests', 'link-21');">loadTests</a></tt></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><tt class="py-lineno">61</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">62</tt>  <tt class="py-line"><tt id="link-22" class="py-name" targets="Variable yadis.test.test_parsehtml.filenames=yadis.test.test_parsehtml-module.html#filenames"><a title="yadis.test.test_parsehtml.filenames" class="py-name" href="#" onclick="return doclink('link-22', 'filenames', 'link-22');">filenames</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">'data/test1-parsehtml.txt'</tt><tt class="py-op">]</tt> </tt>
+<tt class="py-lineno">63</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">64</tt>  <tt class="py-line"><tt id="link-23" class="py-name" targets="Variable yadis.test.test_parsehtml.default_test_files=yadis.test.test_parsehtml-module.html#default_test_files"><a title="yadis.test.test_parsehtml.default_test_files" class="py-name" href="#" onclick="return doclink('link-23', 'default_test_files', 'link-23');">default_test_files</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<tt class="py-lineno">65</tt>  <tt class="py-line"><tt id="link-24" class="py-name" targets="Variable yadis.test.test_parsehtml.base=yadis.test.test_parsehtml-module.html#base"><a title="yadis.test.test_parsehtml.base" class="py-name" href="#" onclick="return doclink('link-24', 'base', 'link-24');">base</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">dirname</tt><tt class="py-op">(</tt><tt class="py-name">__file__</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">66</tt>  <tt class="py-line"><tt class="py-keyword">for</tt> <tt id="link-25" class="py-name"><a title="yadis.test.test_parsehtml.filename" class="py-name" href="#" onclick="return doclink('link-25', 'filename', 'link-5');">filename</a></tt></tt> <tt class="py-keyword">in</tt> <tt id="link-26" class="py-name"><a title="yadis.test.test_parsehtml.filenames" class="py-name" href="#" onclick="return doclink('link-26', 'filenames', 'link-22');">filenames</a></tt></tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">67</tt>  <tt class="py-line">    <tt id="link-27" class="py-name" targets="Variable yadis.test.test_parsehtml.full_name=yadis.test.test_parsehtml-module.html#full_name"><a title="yadis.test.test_parsehtml.full_name" class="py-name" href="#" onclick="return doclink('link-27', 'full_name', 'link-27');">full_name</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt id="link-28" class="py-name"><a title="yadis.test.test_parsehtml.base" class="py-name" href="#" onclick="return doclink('link-28', 'base', 'link-24');">base</a></tt></tt><tt class="py-op">,</tt> <tt id="link-29" class="py-name"><a title="yadis.test.test_parsehtml.filename" class="py-name" href="#" onclick="return doclink('link-29', 'filename', 'link-5');">filename</a></tt></tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">68</tt>  <tt class="py-line">    <tt id="link-30" class="py-name"><a title="yadis.test.test_parsehtml.default_test_files" class="py-name" href="#" onclick="return doclink('link-30', 'default_test_files', 'link-23');">default_test_files</a></tt></tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt id="link-31" class="py-name"><a title="yadis.test.test_parsehtml.full_name" class="py-name" href="#" onclick="return doclink('link-31', 'full_name', 'link-27');">full_name</a></tt></tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">69</tt>  <tt class="py-line"> </tt>
+<a name="getCases"></a><div id="getCases-def"><tt class="py-lineno">70</tt> <a class="py-toggle" href="#" id="getCases-toggle" onclick="return toggle('getCases');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.test.test_parsehtml-module.html#getCases">getCases</a><tt class="py-op">(</tt><tt class="py-param">test_files</tt><tt class="py-op">=</tt><tt id="link-32" class="py-name"><a title="yadis.test.test_parsehtml.default_test_files" class="py-name" href="#" onclick="return doclink('link-32', 'default_test_files', 'link-23');">default_test_files</a></tt></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="getCases-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="getCases-expanded"><tt class="py-lineno">71</tt>  <tt class="py-line">    <tt class="py-name">cases</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<tt class="py-lineno">72</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt id="link-33" class="py-name"><a title="yadis.test.test_parsehtml.filename" class="py-name" href="#" onclick="return doclink('link-33', 'filename', 'link-5');">filename</a></tt></tt> <tt class="py-keyword">in</tt> <tt class="py-name">test_files</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">73</tt>  <tt class="py-line">        <tt class="py-name">test_num</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<tt class="py-lineno">74</tt>  <tt class="py-line">        <tt class="py-name">data</tt> <tt class="py-op">=</tt> <tt class="py-name">file</tt><tt class="py-op">(</tt><tt id="link-34" class="py-name"><a title="yadis.test.test_parsehtml.filename" class="py-name" href="#" onclick="return doclink('link-34', 'filename', 'link-5');">filename</a></tt></tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">read</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">75</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">expected</tt><tt class="py-op">,</tt> <tt class="py-name">case</tt> <tt class="py-keyword">in</tt> <tt id="link-35" class="py-name" targets="Function yadis.test.test_parsehtml.parseCases()=yadis.test.test_parsehtml-module.html#parseCases"><a title="yadis.test.test_parsehtml.parseCases" class="py-name" href="#" onclick="return doclink('link-35', 'parseCases', 'link-35');">parseCases</a></tt></tt><tt class="py-op">(</tt><tt class="py-name">data</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">76</tt>  <tt class="py-line">            <tt class="py-name">test_num</tt> <tt class="py-op">+=</tt> <tt class="py-number">1</tt> </tt>
+<tt class="py-lineno">77</tt>  <tt class="py-line">            <tt class="py-name">cases</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt id="link-36" class="py-name"><a title="yadis.test.test_parsehtml.filename" class="py-name" href="#" onclick="return doclink('link-36', 'filename', 'link-5');">filename</a></tt></tt><tt class="py-op">,</tt> <tt class="py-name">test_num</tt><tt class="py-op">,</tt> <tt class="py-name">expected</tt><tt class="py-op">,</tt> <tt class="py-name">case</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">78</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">cases</tt> </tt>
+</div><tt class="py-lineno">79</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">80</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">81</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-name">__name__</tt> <tt class="py-op">==</tt> <tt class="py-string">'__main__'</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">82</tt>  <tt class="py-line">    <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">exit</tt><tt class="py-op">(</tt><tt class="py-keyword">not</tt> <tt id="link-37" class="py-name" targets="Package yadis.test=yadis.test-module.html,Function yadis.test.livediscover.test()=yadis.test.livediscover-module.html#test,Function yadis.test.test_discover.test()=yadis.test.test_discover-module.html#test,Function yadis.test.test_parsehtml.test()=yadis.test.test_parsehtml-module.html#test"><a title="yadis.test
+yadis.test.livediscover.test
+yadis.test.test_discover.test
+yadis.test.test_parsehtml.test" class="py-name" href="#" onclick="return doclink('link-37', 'test', 'link-37');">test</a></tt></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">wasSuccessful</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">83</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="yadis-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.openidenabled.com/yadis/">Python-Yadis</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">Generated by Epydoc
+        3.0alpha3 on Fri Dec  8 13:17:18 2006</td>
+    <td align="right" class="footer">
+      <a href="http://epydoc.sourceforge.net">http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie()
+  // -->
+</script>
+  
+</body>
+</html>

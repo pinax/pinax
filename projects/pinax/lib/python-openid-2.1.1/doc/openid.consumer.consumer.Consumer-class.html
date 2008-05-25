@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>openid.consumer.consumer.Consumer</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css"></link>
+</head>
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="openid-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          <a class="navbar" target="_top" href="http://openidenabled.com/python-openid/">Python-OpenID</a>
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <font size="-1"><b class="breadcrumbs">
+        <a href="openid-module.html">Package&nbsp;openid</a> ::
+        <a href="openid.consumer-module.html">Package&nbsp;consumer</a> ::
+        <a href="openid.consumer.consumer-module.html">Module&nbsp;consumer</a> ::
+        Class&nbsp;Consumer
+      </b></font></br>
+    </td>
+    <td><table cellpadding="0" cellspacing="0">
+      <tr><td align="right"><font size="-2">[<a href="frames.html"target="_top">frames</a>&nbsp;|&nbsp;<a href="openid.consumer.consumer.Consumer-class.html" target="_top">no&nbsp;frames</a>]</font></td></tr>
+    </table></td>
+</tr></table>
+
+<!-- =========== START OF CLASS DESCRIPTION =========== -->
+<h2 class="class">Type Consumer</h2>
+
+<pre class="base-tree">
+<a href="__builtin__.object-class.html"><code>object</code></a> --+
+         |
+        <b>Consumer</b>
+</pre><br />
+
+<hr/>
+
+An OpenID consumer implementation that performs discovery and does 
+session management.
+<hr/>
+
+
+<!-- =========== START OF METHOD SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Method Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.consumer.consumer.Consumer-class.html#__init__" class="summary-sig-name"><code>__init__</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>session</span>,
+          <span class=summary-sig-arg>store</span>,
+          <span class=summary-sig-arg>consumer_class</span>)</span></code>
+<br />
+Initialize a Consumer instance.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        <a href="openid.consumer.consumer.AuthRequest-class.html" 
+        class="link"><code>AuthRequest</code></a>
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.consumer.consumer.Consumer-class.html#begin" class="summary-sig-name"><code>begin</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>user_url</span>,
+          <span class=summary-sig-arg>anonymous</span>)</span></code>
+<br />
+Start the OpenID authentication process.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        <a href="openid.consumer.consumer.AuthRequest-class.html" 
+        class="link"><code>AuthRequest</code></a>
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.consumer.consumer.Consumer-class.html#beginWithoutDiscovery" class="summary-sig-name"><code>beginWithoutDiscovery</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>service</span>,
+          <span class=summary-sig-arg>anonymous</span>)</span></code>
+<br />
+Start OpenID verification without doing OpenID server discovery.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.consumer.consumer.Consumer-class.html#complete" class="summary-sig-name"><code>complete</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>query</span>,
+          <span class=summary-sig-arg>return_to</span>)</span></code>
+<br />
+Called to interpret the server's response to an OpenID request.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.consumer.consumer.Consumer-class.html#setAssociationPreference" class="summary-sig-name"><code>setAssociationPreference</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>association_preferences</span>)</span></code>
+<br />
+Set the order in which association types/sessions should be 
+attempted.</td></tr>
+  <tr><td colspan="2">
+    <b>Inherited from <a href="__builtin__.object-class.html"><code>object</code></a>:</b>
+      <a href="__builtin__.object-class.html#__delattr__"><code>__delattr__</code></a>, 
+      <a href="__builtin__.object-class.html#__getattribute__"><code>__getattribute__</code></a>, 
+      <a href="__builtin__.object-class.html#__hash__"><code>__hash__</code></a>, 
+      <a href="__builtin__.object-class.html#__new__"><code>__new__</code></a>, 
+      <a href="__builtin__.object-class.html#__reduce__"><code>__reduce__</code></a>, 
+      <a href="__builtin__.object-class.html#__reduce_ex__"><code>__reduce_ex__</code></a>, 
+      <a href="__builtin__.object-class.html#__repr__"><code>__repr__</code></a>, 
+      <a href="__builtin__.object-class.html#__setattr__"><code>__setattr__</code></a>, 
+      <a href="__builtin__.object-class.html#__str__"><code>__str__</code></a>
+    </td></tr>
+</table><br />
+
+
+<!-- =========== START OF INSTANCE VARIABLE SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Instance Variable Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">GenericConsumer</font></td>
+<td><b><a href="openid.consumer.consumer.Consumer-class.html#consumer"><code>consumer</code></a></b>: an instance of an object implementing the OpenID protocol, but doing 
+no discovery or session management.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+<td><b><a href="openid.consumer.consumer.Consumer-class.html#session"><code>session</code></a></b>: A dictionary-like object representing the user's session data.</td></tr>
+</table><br />
+
+
+<!-- =========== START OF CLASS VARIABLE SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Class Variable Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1"><code>str</code></font></td>
+<td><b><a href="openid.consumer.consumer.Consumer-class.html#session_key_prefix"><code>session_key_prefix</code></a></b>: A string that is prepended to session keys to ensure that they are 
+unique.</td></tr>
+</table><br />
+
+
+<!-- =========== START OF INSTANCE METHOD DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Instance Method Details</th></tr>
+</table>
+
+<a name="__init__"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">__init__</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>session</span>,
+          <span class=sig-arg>store</span>,
+          <span class=sig-arg>consumer_class</span>=<span class=sig-default>None</span>)</span>
+    <br /><i>(Constructor)</i>
+  </h3>
+  <p>Initialize a Consumer instance.</p>
+  You should create a new instance of the Consumer object with every 
+  HTTP request that handles OpenID transactions.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>session</b></code> -
+         See <a 
+        href="openid.consumer.consumer.Consumer-class.html#session" 
+        class="link"><code>the session instance variable</code></a>
+      <dd><code><b>store</b></code> -
+         an object that implements the interface in <code><a 
+        href="openid.store.interface.OpenIDStore-class.html" 
+        class="link"><code>openid.store.interface.OpenIDStore</code></a></code>. 
+        Several implementations are provided, to cover common database 
+        environments.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=<code><a 
+              href="openid.store.interface.OpenIDStore-class.html" 
+              class="link"><code>openid.store.interface.OpenIDStore</code></a></code>)</i>
+      </dd>
+    </dl>
+    <dl><dt><b>Overrides:</b></dt>
+      <dd><a href="__builtin__.object-class.html#__init__"><code>__builtin__.object.__init__</code></a></dd>
+    </dl>
+<dl><dt><b>See Also:</b></dt>
+  <dd>
+    <a href="openid.store.interface-module.html" 
+class="link"><code>openid.store.interface</code></a>,
+    <a href="openid.store-module.html" 
+class="link"><code>openid.store</code></a>
+  </dd>
+</dl>
+
+  </dd></dl>
+</td></tr></table>
+
+<a name="begin"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">begin</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>user_url</span>,
+          <span class=sig-arg>anonymous</span>=<span class=sig-default>False</span>)</span>
+  </h3>
+  Start the OpenID authentication process. See steps 1-2 in the 
+  overview at the top of this file.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>user_url</b></code> -
+         Identity URL given by the user. This method performs a textual 
+        transformation of the URL to try and make sure it is normalized. 
+        For example, a user_url of example.com will be normalized to 
+        http://example.com/ normalizing and resolving any redirects the 
+        server might issue.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=unicode)</i>
+      <dd><code><b>anonymous</b></code> -
+         Whether to make an anonymous request of the OpenID provider. 
+        Such a request does not ask for an authorization assertion for an 
+        OpenID identifier, but may be used with extensions to pass other 
+        data. e.g. &quot;I don't care who you are, but I'd like to know 
+        your time zone.&quot;
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=bool)</i>
+      </dd>
+    </dl>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        An object containing the discovered information will be 
+        returned, with a method for building a redirect URL to the 
+        server, as described in step 3 of the overview. This object may 
+        also be used to add extension arguments to the request, using its 
+        <a 
+        href="openid.consumer.consumer.AuthRequest-class.html#addExtensionArg" 
+        class="link"><code>addExtensionArg</code></a> method.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=<a href="openid.consumer.consumer.AuthRequest-class.html" 
+        class="link"><code>AuthRequest</code></a>)</i>
+      </dd>
+    </dl>
+    <dl><dt><b>Raises:</b></dt>
+      <dd><code><b>openid.consumer.discover.DiscoveryFailure</b></code> -
+        when I fail to find an OpenID server for this URL. If the 
+        <code>yadis</code> package is available, <a 
+        href="openid.yadis.discover.DiscoveryFailure-class.html" 
+        class="link"><code>openid.consumer.discover.DiscoveryFailure</code></a> 
+        is an alias for <code>yadis.discover.DiscoveryFailure</code>.
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="beginWithoutDiscovery"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">beginWithoutDiscovery</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>service</span>,
+          <span class=sig-arg>anonymous</span>=<span class=sig-default>False</span>)</span>
+  </h3>
+  Start OpenID verification without doing OpenID server discovery. 
+  This method is used internally by Consumer.begin after discovery is 
+  performed, and exists to provide an interface for library users needing 
+  to perform their own discovery.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>service</b></code> -
+         an OpenID service endpoint descriptor. This object and 
+        factories for it are found in the <a 
+        href="openid.consumer.discover-module.html" 
+        class="link"><code>openid.consumer.discover</code></a> 
+        module.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=<a 
+              href="openid.consumer.discover.OpenIDServiceEndpoint-class.html" 
+              class="link"><code>OpenIDServiceEndpoint</code></a>)</i>
+      </dd>
+    </dl>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        an OpenID authentication request object.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=<a href="openid.consumer.consumer.AuthRequest-class.html" 
+        class="link"><code>AuthRequest</code></a>)</i>
+      </dd>
+    </dl>
+<dl><dt><b>See Also:</b></dt>
+  <dd>
+    Openid.consumer.consumer.Consumer.begin,
+    openid.consumer.discover
+  </dd>
+</dl>
+
+  </dd></dl>
+</td></tr></table>
+
+<a name="complete"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">complete</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>query</span>,
+          <span class=sig-arg>return_to</span>)</span>
+  </h3>
+  Called to interpret the server's response to an OpenID request. It 
+  is called in step 4 of the flow described in the consumer overview.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>query</b></code> -
+         A dictionary of the query parameters for this HTTP 
+        request.
+      <dd><code><b>return_to</b></code> -
+         The return URL used to invoke the application. Extract the URL 
+        from your application's web request framework and specify it here 
+        to have it checked against the openid.return_to value in the 
+        response. If the return_to URL check fails, the status of the 
+        completion will be FAILURE.
+      </dd>
+    </dl>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        a subclass of Response. The type of response is indicated by 
+        the status attribute, which will be one of SUCCESS, CANCEL, 
+        FAILURE, or SETUP_NEEDED.
+      </dd>
+    </dl>
+<dl><dt><b>See Also:</b></dt>
+  <dd>
+    <a href="openid.consumer.consumer.SuccessResponse-class.html" 
+class="link"><code>SuccessResponse</code></a>,
+    <a href="openid.consumer.consumer.CancelResponse-class.html" 
+class="link"><code>CancelResponse</code></a>,
+    <a href="openid.consumer.consumer.SetupNeededResponse-class.html" 
+class="link"><code>SetupNeededResponse</code></a>,
+    <a href="openid.consumer.consumer.FailureResponse-class.html" 
+class="link"><code>FailureResponse</code></a>
+  </dd>
+</dl>
+
+  </dd></dl>
+</td></tr></table>
+
+<a name="setAssociationPreference"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">setAssociationPreference</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>association_preferences</span>)</span>
+  </h3>
+  Set the order in which association types/sessions should be 
+  attempted. For instance, to only allow HMAC-SHA256 associations created 
+  with a DH-SHA256 association session:
+<pre class="doctestblock">
+<span class="py-src"><span class="py-prompt">&gt;&gt;&gt; </span>consumer.setAssociationPreference([(<span class="py-string">'HMAC-SHA256'</span>, <span class="py-string">'DH-SHA256'</span>)])</span></pre>
+  Any association type/association type pair that is not in this list 
+  will not be attempted at all.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>association_preferences</b></code> -
+         The list of allowed (association type, association session 
+        type) pairs that should be allowed for this consumer to use, in 
+        order from most preferred to least preferred.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=[(str, str)])</i>
+      </dd>
+    </dl>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        None
+      </dd>
+    </dl>
+<p><b>See Also:</b> <code><a href="openid.association.SessionNegotiator-class.html" 
+class="link"><code>openid.association.SessionNegotiator</code></a></code>
+</p>
+
+  </dd></dl>
+</td></tr></table>
+<br />
+
+
+<!-- =========== START OF INSTANCE VARIABLE DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Instance Variable Details</th></tr>
+</table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="consumer"></a>
+<h3>consumer</h3>
+an instance of an object implementing the OpenID protocol, but doing 
+no discovery or session management.
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          GenericConsumer
+
+      </dd>
+    </dl>
+  </dd>
+</dl></td></tr></table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="session"></a>
+<h3>session</h3>
+A dictionary-like object representing the user's session data. This is 
+used for keeping state of the OpenID transaction when the user is 
+redirected to the server.
+</td></tr></table>
+<br />
+
+
+<!-- =========== START OF CLASS VARIABLE DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Class Variable Details</th></tr>
+</table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="session_key_prefix"></a>
+<h3>session_key_prefix</h3>
+A string that is prepended to session keys to ensure that they are 
+unique. This variable may be changed to suit your application.
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          <code>str</code>
+
+      </dd>
+<span title="'_openid_consumer_'">      <dt><b>Value:</b></dt>
+      <dd><table><tr><td>
+<pre class="variable">
+<span class="variable-quote">'</span>_openid_consumer_<span class="variable-quote">'</span>                                                    </pre>
+        </td></tr></table></dd>
+</span>    </dl>
+  </dd>
+</dl></td></tr></table>
+<br />
+
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="openid-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          <a class="navbar" target="_top" href="http://openidenabled.com/python-openid/">Python-OpenID</a>
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td align="left"><font size="-2">Generated by Epydoc 2.1 on Fri Dec 14 16:10:52 2007</font></td>
+    <td align="right"><a href="http://epydoc.sourceforge.net"
+                      ><font size="-2">http://epydoc.sf.net</font></a></td>
+  </tr>
+</table>
+</body>
+</html>

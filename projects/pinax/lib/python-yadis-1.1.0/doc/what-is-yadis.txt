@@ -1,0 +1,86 @@
+What is YADIS?
+##############
+
+:Author: Josh Hoyt <josh@janrain.com>
+:Date: 30 November 2005
+
+YADIS stands for Yet Another Decentralized Identity Interoperability
+System. There is a loose understanding of what YADIS is trying to
+accomplish, based on the original specification and the discussion on
+the mailing list and wiki. This document attempts to boil down that
+consensus into a definition that can be used to evaluate proposals for
+implementing YADIS.
+
+This document attempts to describe what YADIS is as fully as possible
+without specifying any particular implementation.
+
+What is a digital identity system?
+==================================
+
+YADIS is an "Identity Interoperability System" for digital
+identities. To understand what a digital identity system does, it's
+necessary to define digital identity. From
+http://www.identitygang.org/Lexicon\:
+
+    [Digital identity is the] digital representation of a set of
+    claims made by one digital subject about itself or another digital
+    subject
+
+That makes a digital identity system a system for making claims about
+an entity. Given that definition, YADIS is a protocol that provides
+interoperability between services that make claims about an
+entity. YADIS works by tying a set of claims to a single global
+identifier representing the entity. The global identifier for YADIS is
+a URI.
+
+More precisely, YADIS is a protocol by which the owner of an URI can
+associate a certain set of digital identity services with that URI.
+Implementation of YADIS requires establishing a canonical form of an
+identity URI and then discovering the services associated with that
+URI and each service's identity-specific parameters.
+
+A party that relies on YADIS will use a set protocol to discover
+services for an identity URI. The relying party will treat that URI as
+the identifier for the entity controlling it.
+
+YADIS is fundamentally decentralized, because a digital identity
+service does not need to explicitly provide support for YADIS to be
+used with YADIS. In fact, like delegation in OpenID, there is no way
+that a digital identity service can prevent its use within YADIS.
+
+How can identity services use YADIS?
+====================================
+
+In order to use a service with YADIS, there must be a convention for
+representing, using, and possibly verifying the service's parameters
+as discovered from the identity URI. That convention can be developed
+by the owners of the service or it may be established separately.
+
+YADIS and TypeKey
+-----------------
+
+For example, TypeKey (http://typekey.com/) is a digital identity
+system that provides an API for relying parties to authenticate and
+retrieve profile information about TypeKey users. TypeKey does not use
+a URI as the identifier for its users. In order to use the API, the
+service needs to know the TypeKey identifier of the user.
+
+To use TypeKey to provide information for a YADIS identity, the
+results of the discovery process would indicate that TypeKey was a
+provider of information, and that the identity used a particular
+TypeKey identity. Concretely::
+
+  YADIS identity URI: http://slack.example.com/bob
+
+  Supported Services
+    TypeKey
+      Member Name: Bob Dobbs
+
+A relying party that supports YADIS and TypeKey uses YADIS to
+associate the member name "Bob Dobbs" with the URI
+"http://slack.example.com/bob". The relying party then asks the user to
+authenticate with TypeKey without needing to provide TypeKey with
+Bob's YADIS identity URI. Once the TypeKey authentication is complete,
+if TypeKey indicates that "Bob Dobbs" has authenticated, the relying
+party knows that this user is the user who controls the YADIS identity
+URI.

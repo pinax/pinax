@@ -1,0 +1,53 @@
+#!/usr/bin/env python
+# -*- Python -*-
+
+# Does pyunit *still* not come with a test collector?  What is wrong with
+# these people?  Do I have to require all development environments to have
+# twisted.trial installed?
+
+# TODO:
+#  - make command line options work again
+#    - verbose/quiet
+#    - select specific tests or modules
+
+import unittest
+import sys
+
+def fixpath():
+    import os.path
+    try:
+        d = os.path.dirname(__file__)
+    except NameError:
+        d = os.path.dirname(sys.argv[0])
+    yadisparent = os.path.normpath(os.path.join(d, '..', '..'))
+    if yadisparent not in sys.path:
+        print "putting %s in sys.path" % (yadisparent,)
+        sys.path.insert(0, yadisparent)
+
+
+def run():
+    import test_parsehtml
+    import test_discover
+    import test_accept
+    import test_etxrd
+    import test_xri
+    import test_xrires
+
+    loader = unittest.TestLoader()
+    s = unittest.TestSuite()
+    s.addTest(loader.loadTestsFromModule(test_etxrd))
+    s.addTest(test_parsehtml.loadTests())
+    s.addTest(test_discover.loadTests())
+    s.addTest(loader.loadTestsFromModule(test_discover))
+    s.addTest(loader.loadTestsFromModule(test_xri))
+    s.addTest(test_accept.loadTests())
+
+    runner = unittest.TextTestRunner() # verbosity=2)
+
+    result = runner.run(s)
+
+    return result
+
+if __name__ == '__main__':
+    fixpath()
+    sys.exit(not run().wasSuccessful())

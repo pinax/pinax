@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>yadis.accept</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="yadis-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.openidenabled.com/yadis/">Python-Yadis</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="yadis-module.html">Package&nbsp;yadis</a> ::
+        Module&nbsp;accept
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="yadis.accept-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module accept</h1><span class="codelink"><a href="yadis.accept-pysrc.html">source&nbsp;code</a></span><br /><br />
+Functions for generating and parsing HTTP Accept: headers for 
+  supporting server-directed content negotiation.<br /><br />
+
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <span class="summary-sig"><a href="yadis.accept-module.html#generateAcceptHeader" class="summary-sig-name">generateAcceptHeader</a>(<span class="summary-sig-arg">*elements</span>)</span><br />
+      Generate an accept header value
+  </td>
+</tr>
+<tr>
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <span class="summary-sig"><a href="yadis.accept-module.html#parseAcceptHeader" class="summary-sig-name">parseAcceptHeader</a>(<span class="summary-sig-arg">value</span>)</span><br />
+      Parse an accept header, ignoring any accept-extensions
+  </td>
+</tr>
+<tr>
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <span class="summary-sig"><a href="yadis.accept-module.html#matchTypes" class="summary-sig-name">matchTypes</a>(<span class="summary-sig-arg">accept_types</span>,
+        <span class="summary-sig-arg">have_types</span>)</span><br />
+      Given the result of parsing an Accept: header, and the available 
+      MIME types, return the acceptable types with their quality 
+      markdowns.
+  </td>
+</tr>
+<tr>
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <span class="summary-sig"><a href="yadis.accept-module.html#getAcceptable" class="summary-sig-name">getAcceptable</a>(<span class="summary-sig-arg">accept_header</span>,
+        <span class="summary-sig-arg">have_types</span>)</span><br />
+      Parse the accept header and return a list of available types in 
+      preferred order.
+  </td>
+</tr>
+</table>
+
+<br />
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="generateAcceptHeader"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">generateAcceptHeader</span>(<span class="sig-arg">*elements</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="yadis.accept-pysrc.html#generateAcceptHeader">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </table>
+  
+  <br /><p>Generate an accept header value</p>
+  [str or (str, float)] -&gt; str
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+</div>
+<a name="parseAcceptHeader"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">parseAcceptHeader</span>(<span class="sig-arg">value</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="yadis.accept-pysrc.html#parseAcceptHeader">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </table>
+  
+  <br /><p>Parse an accept header, ignoring any accept-extensions</p>
+  <p>returns a list of tuples containing main MIME type, MIME subtype, and 
+  quality markdown.</p>
+  str -&gt; [(str, str, float)]
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+</div>
+<a name="matchTypes"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">matchTypes</span>(<span class="sig-arg">accept_types</span>,
+        <span class="sig-arg">have_types</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="yadis.accept-pysrc.html#matchTypes">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </table>
+  
+  <br /><p>Given the result of parsing an Accept: header, and the available MIME 
+  types, return the acceptable types with their quality markdowns.</p>
+  For example:
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-other">acceptable = parseAcceptHeader(</span><span class="py-string">'text/html, text/plain; q=0.5'</span><span class="py-other">)
+</span><span class="py-prompt">&gt;&gt;&gt; </span><span class="py-other">matchTypes(acceptable, [</span><span class="py-string">'text/plain'</span><span class="py-other">, </span><span class="py-string">'text/html'</span><span class="py-other">, </span><span class="py-string">'image/jpeg'</span><span class="py-other">])</span>
+<span class="py-output">[('text/html', 1.0), ('text/plain', 0.5)]</span>
+</pre>
+  Type signature: ([(str, str, float)], [str]) -&gt; [(str, float)]
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+</div>
+<a name="getAcceptable"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getAcceptable</span>(<span class="sig-arg">accept_header</span>,
+        <span class="sig-arg">have_types</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="yadis.accept-pysrc.html#getAcceptable">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </table>
+  
+  <br /><p>Parse the accept header and return a list of available types in 
+  preferred order. If a type is unacceptable, it will not be in the 
+  resulting list.</p>
+  <p>This is a convenience wrapper around matchTypes and 
+  parseAcceptHeader.</p>
+  (str, [str]) -&gt; [str]
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="yadis-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.openidenabled.com/yadis/">Python-Yadis</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">Generated by Epydoc
+        3.0alpha3 on Fri Dec  8 13:17:17 2006</td>
+    <td align="right" class="footer">
+      <a href="http://epydoc.sourceforge.net">http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie()
+  // -->
+</script>
+  
+</body>
+</html>

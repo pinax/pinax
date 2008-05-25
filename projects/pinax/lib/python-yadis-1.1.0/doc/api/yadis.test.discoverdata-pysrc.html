@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>yadis.test.discoverdata</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="yadis-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.openidenabled.com/yadis/">Python-Yadis</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="yadis-module.html">Package&nbsp;yadis</a> ::
+        <a href="yadis.test-module.html">Package&nbsp;test</a> ::
+        Module&nbsp;discoverdata
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="yadis.test.discoverdata-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="yadis.test.discoverdata-module.html">Module yadis.test.discoverdata</a></h1>
+<pre class="py-src">
+<tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-docstring">"""Module to make discovery data test cases available"""</tt> </tt>
+<tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">urlparse</tt> </tt>
+<tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt> </tt>
+<tt class="py-lineno">  4</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package yadis=yadis-module.html"><a title="yadis" class="py-name" href="#" onclick="return doclink('link-0', 'yadis', 'link-0');">yadis</a></tt></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Module yadis.discover=yadis.discover-module.html,Function yadis.discover.discover()=yadis.discover-module.html#discover"><a title="yadis.discover
+yadis.discover.discover" class="py-name" href="#" onclick="return doclink('link-1', 'discover', 'link-1');">discover</a></tt></tt> <tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Class yadis.discover.DiscoveryResult=yadis.discover.DiscoveryResult-class.html"><a title="yadis.discover.DiscoveryResult" class="py-name" href="#" onclick="return doclink('link-2', 'DiscoveryResult', 'link-2');">DiscoveryResult</a></tt></tt><tt class="py-op">,</tt> <tt id="link-3" class="py-name" targets="Class yadis.discover.DiscoveryFailure=yadis.discover.DiscoveryFailure-class.html"><a title="yadis.discover.DiscoveryFailure" class="py-name" href="#" onclick="return doclink('link-3', 'DiscoveryFailure', 'link-3');">DiscoveryFailure</a></tt></tt> </tt>
+<tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-4" class="py-name"><a title="yadis" class="py-name" href="#" onclick="return doclink('link-4', 'yadis', 'link-0');">yadis</a></tt></tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Module yadis.constants=yadis.constants-module.html"><a title="yadis.constants" class="py-name" href="#" onclick="return doclink('link-5', 'constants', 'link-5');">constants</a></tt></tt> <tt class="py-keyword">import</tt> <tt id="link-6" class="py-name" targets="Variable yadis.constants.YADIS_HEADER_NAME=yadis.constants-module.html#YADIS_HEADER_NAME"><a title="yadis.constants.YADIS_HEADER_NAME" class="py-name" href="#" onclick="return doclink('link-6', 'YADIS_HEADER_NAME', 'link-6');">YADIS_HEADER_NAME</a></tt></tt> </tt>
+<tt class="py-lineno">  7</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">  8</tt>  <tt class="py-line"><tt id="link-7" class="py-name" targets="Variable yadis.test.discoverdata.tests_dir=yadis.test.discoverdata-module.html#tests_dir"><a title="yadis.test.discoverdata.tests_dir" class="py-name" href="#" onclick="return doclink('link-7', 'tests_dir', 'link-7');">tests_dir</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">dirname</tt><tt class="py-op">(</tt><tt class="py-name">__file__</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">  9</tt>  <tt class="py-line"><tt id="link-8" class="py-name" targets="Variable yadis.test.discoverdata.data_path=yadis.test.discoverdata-module.html#data_path"><a title="yadis.test.discoverdata.data_path" class="py-name" href="#" onclick="return doclink('link-8', 'data_path', 'link-8');">data_path</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt id="link-9" class="py-name"><a title="yadis.test.discoverdata.tests_dir" class="py-name" href="#" onclick="return doclink('link-9', 'tests_dir', 'link-7');">tests_dir</a></tt></tt><tt class="py-op">,</tt> <tt class="py-string">'data'</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 10</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt id="link-10" class="py-name" targets="Variable yadis.test.discoverdata.testlist=yadis.test.discoverdata-module.html#testlist"><a title="yadis.test.discoverdata.testlist" class="py-name" href="#" onclick="return doclink('link-10', 'testlist', 'link-10');">testlist</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> </tt>
+<tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-comment"># success,  input_name,          id_name,            result_name</tt> </tt>
+<tt class="py-lineno"> 13</tt>  <tt class="py-line">    <tt class="py-op">(</tt><tt class="py-name">True</tt><tt class="py-op">,</tt>  <tt class="py-string">"equiv"</tt><tt class="py-op">,</tt>             <tt class="py-string">"equiv"</tt><tt class="py-op">,</tt>            <tt class="py-string">"xrds"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 14</tt>  <tt class="py-line">    <tt class="py-op">(</tt><tt class="py-name">True</tt><tt class="py-op">,</tt>  <tt class="py-string">"header"</tt><tt class="py-op">,</tt>            <tt class="py-string">"header"</tt><tt class="py-op">,</tt>           <tt class="py-string">"xrds"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 15</tt>  <tt class="py-line">    <tt class="py-op">(</tt><tt class="py-name">True</tt><tt class="py-op">,</tt>  <tt class="py-string">"lowercase_header"</tt><tt class="py-op">,</tt>  <tt class="py-string">"lowercase_header"</tt><tt class="py-op">,</tt> <tt class="py-string">"xrds"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 16</tt>  <tt class="py-line">    <tt class="py-op">(</tt><tt class="py-name">True</tt><tt class="py-op">,</tt>  <tt class="py-string">"xrds"</tt><tt class="py-op">,</tt>              <tt class="py-string">"xrds"</tt><tt class="py-op">,</tt>             <tt class="py-string">"xrds"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 17</tt>  <tt class="py-line">    <tt class="py-op">(</tt><tt class="py-name">True</tt><tt class="py-op">,</tt>  <tt class="py-string">"xrds_ctparam"</tt><tt class="py-op">,</tt>      <tt class="py-string">"xrds_ctparam"</tt><tt class="py-op">,</tt>     <tt class="py-string">"xrds_ctparam"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 18</tt>  <tt class="py-line">    <tt class="py-op">(</tt><tt class="py-name">True</tt><tt class="py-op">,</tt>  <tt class="py-string">"xrds_ctcase"</tt><tt class="py-op">,</tt>       <tt class="py-string">"xrds_ctcase"</tt><tt class="py-op">,</tt>      <tt class="py-string">"xrds_ctcase"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 19</tt>  <tt class="py-line">    <tt class="py-op">(</tt><tt class="py-name">False</tt><tt class="py-op">,</tt> <tt class="py-string">"xrds_html"</tt><tt class="py-op">,</tt>         <tt class="py-string">"xrds_html"</tt><tt class="py-op">,</tt>        <tt class="py-string">"xrds_html"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 20</tt>  <tt class="py-line">    <tt class="py-op">(</tt><tt class="py-name">True</tt><tt class="py-op">,</tt>  <tt class="py-string">"redir_equiv"</tt><tt class="py-op">,</tt>       <tt class="py-string">"equiv"</tt><tt class="py-op">,</tt>            <tt class="py-string">"xrds"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 21</tt>  <tt class="py-line">    <tt class="py-op">(</tt><tt class="py-name">True</tt><tt class="py-op">,</tt>  <tt class="py-string">"redir_header"</tt><tt class="py-op">,</tt>      <tt class="py-string">"header"</tt><tt class="py-op">,</tt>           <tt class="py-string">"xrds"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 22</tt>  <tt class="py-line">    <tt class="py-op">(</tt><tt class="py-name">True</tt><tt class="py-op">,</tt>  <tt class="py-string">"redir_xrds"</tt><tt class="py-op">,</tt>        <tt class="py-string">"xrds"</tt><tt class="py-op">,</tt>             <tt class="py-string">"xrds"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 23</tt>  <tt class="py-line">    <tt class="py-op">(</tt><tt class="py-name">False</tt><tt class="py-op">,</tt> <tt class="py-string">"redir_xrds_html"</tt><tt class="py-op">,</tt>   <tt class="py-string">"xrds_html"</tt><tt class="py-op">,</tt>        <tt class="py-string">"xrds_html"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 24</tt>  <tt class="py-line">    <tt class="py-op">(</tt><tt class="py-name">True</tt><tt class="py-op">,</tt>  <tt class="py-string">"redir_redir_equiv"</tt><tt class="py-op">,</tt> <tt class="py-string">"equiv"</tt><tt class="py-op">,</tt>            <tt class="py-string">"xrds"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 25</tt>  <tt class="py-line">    <tt class="py-op">(</tt><tt class="py-name">False</tt><tt class="py-op">,</tt> <tt class="py-string">"404_server_response"</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt>             <tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 26</tt>  <tt class="py-line">    <tt class="py-op">(</tt><tt class="py-name">False</tt><tt class="py-op">,</tt> <tt class="py-string">"404_with_header"</tt><tt class="py-op">,</tt>     <tt class="py-name">None</tt><tt class="py-op">,</tt>             <tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 27</tt>  <tt class="py-line">    <tt class="py-op">(</tt><tt class="py-name">False</tt><tt class="py-op">,</tt> <tt class="py-string">"404_with_meta"</tt><tt class="py-op">,</tt>       <tt class="py-name">None</tt><tt class="py-op">,</tt>             <tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 28</tt>  <tt class="py-line">    <tt class="py-op">(</tt><tt class="py-name">False</tt><tt class="py-op">,</tt> <tt class="py-string">"201_server_response"</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt>             <tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 29</tt>  <tt class="py-line">    <tt class="py-op">(</tt><tt class="py-name">False</tt><tt class="py-op">,</tt> <tt class="py-string">"500_server_response"</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt>             <tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 30</tt>  <tt class="py-line">    <tt class="py-op">]</tt> </tt>
+<tt class="py-lineno"> 31</tt>  <tt class="py-line"> </tt>
+<a name="getDataName"></a><div id="getDataName-def"><tt class="py-lineno"> 32</tt> <a class="py-toggle" href="#" id="getDataName-toggle" onclick="return toggle('getDataName');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.test.discoverdata-module.html#getDataName">getDataName</a><tt class="py-op">(</tt><tt class="py-op">*</tt><tt class="py-param">components</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="getDataName-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="getDataName-expanded"><tt class="py-lineno"> 33</tt>  <tt class="py-line">    <tt class="py-name">sanitized</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<tt class="py-lineno"> 34</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">part</tt> <tt class="py-keyword">in</tt> <tt class="py-name">components</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 35</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">part</tt> <tt class="py-keyword">in</tt> <tt class="py-op">[</tt><tt class="py-string">'.'</tt><tt class="py-op">,</tt> <tt class="py-string">'..'</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 36</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt> </tt>
+<tt class="py-lineno"> 37</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">part</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 38</tt>  <tt class="py-line">            <tt class="py-name">sanitized</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">part</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 39</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 40</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">sanitized</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 41</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt> </tt>
+<tt class="py-lineno"> 42</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 43</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt id="link-11" class="py-name"><a title="yadis.test.discoverdata.data_path" class="py-name" href="#" onclick="return doclink('link-11', 'data_path', 'link-8');">data_path</a></tt></tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-name">sanitized</tt><tt class="py-op">)</tt> </tt>
+</div><tt class="py-lineno"> 44</tt>  <tt class="py-line"> </tt>
+<a name="getExampleXRDS"></a><div id="getExampleXRDS-def"><tt class="py-lineno"> 45</tt> <a class="py-toggle" href="#" id="getExampleXRDS-toggle" onclick="return toggle('getExampleXRDS');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.test.discoverdata-module.html#getExampleXRDS">getExampleXRDS</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="getExampleXRDS-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="getExampleXRDS-expanded"><tt class="py-lineno"> 46</tt>  <tt class="py-line">    <tt id="link-12" class="py-name" targets="Variable yadis.test.test_parsehtml.filename=yadis.test.test_parsehtml-module.html#filename"><a title="yadis.test.test_parsehtml.filename" class="py-name" href="#" onclick="return doclink('link-12', 'filename', 'link-12');">filename</a></tt></tt> <tt class="py-op">=</tt> <tt id="link-13" class="py-name" targets="Function yadis.test.discoverdata.getDataName()=yadis.test.discoverdata-module.html#getDataName"><a title="yadis.test.discoverdata.getDataName" class="py-name" href="#" onclick="return doclink('link-13', 'getDataName', 'link-13');">getDataName</a></tt></tt><tt class="py-op">(</tt><tt class="py-string">'example-xrds.xml'</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 47</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">file</tt><tt class="py-op">(</tt><tt id="link-14" class="py-name"><a title="yadis.test.test_parsehtml.filename" class="py-name" href="#" onclick="return doclink('link-14', 'filename', 'link-12');">filename</a></tt></tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">read</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><tt class="py-lineno"> 48</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 49</tt>  <tt class="py-line"><tt id="link-15" class="py-name" targets="Variable yadis.test.discoverdata.example_xrds=yadis.test.discoverdata-module.html#example_xrds"><a title="yadis.test.discoverdata.example_xrds" class="py-name" href="#" onclick="return doclink('link-15', 'example_xrds', 'link-15');">example_xrds</a></tt></tt> <tt class="py-op">=</tt> <tt id="link-16" class="py-name" targets="Function yadis.test.discoverdata.getExampleXRDS()=yadis.test.discoverdata-module.html#getExampleXRDS"><a title="yadis.test.discoverdata.getExampleXRDS" class="py-name" href="#" onclick="return doclink('link-16', 'getExampleXRDS', 'link-16');">getExampleXRDS</a></tt></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 50</tt>  <tt class="py-line"><tt id="link-17" class="py-name" targets="Variable yadis.test.discoverdata.default_test_file=yadis.test.discoverdata-module.html#default_test_file"><a title="yadis.test.discoverdata.default_test_file" class="py-name" href="#" onclick="return doclink('link-17', 'default_test_file', 'link-17');">default_test_file</a></tt></tt> <tt class="py-op">=</tt> <tt id="link-18" class="py-name"><a title="yadis.test.discoverdata.getDataName" class="py-name" href="#" onclick="return doclink('link-18', 'getDataName', 'link-13');">getDataName</a></tt></tt><tt class="py-op">(</tt><tt class="py-string">'test1-discover.txt'</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 51</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 52</tt>  <tt class="py-line"><tt id="link-19" class="py-name" targets="Variable yadis.test.discoverdata.discover_tests=yadis.test.discoverdata-module.html#discover_tests"><a title="yadis.test.discoverdata.discover_tests" class="py-name" href="#" onclick="return doclink('link-19', 'discover_tests', 'link-19');">discover_tests</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<tt class="py-lineno"> 53</tt>  <tt class="py-line"> </tt>
+<a name="readTests"></a><div id="readTests-def"><tt class="py-lineno"> 54</tt> <a class="py-toggle" href="#" id="readTests-toggle" onclick="return toggle('readTests');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.test.discoverdata-module.html#readTests">readTests</a><tt class="py-op">(</tt><tt class="py-param">filename</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="readTests-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="readTests-expanded"><tt class="py-lineno"> 55</tt>  <tt class="py-line">    <tt class="py-name">data</tt> <tt class="py-op">=</tt> <tt class="py-name">file</tt><tt class="py-op">(</tt><tt id="link-20" class="py-name"><a title="yadis.test.test_parsehtml.filename" class="py-name" href="#" onclick="return doclink('link-20', 'filename', 'link-12');">filename</a></tt></tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">read</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 56</tt>  <tt class="py-line">    <tt class="py-name">tests</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<tt class="py-lineno"> 57</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">case</tt> <tt class="py-keyword">in</tt> <tt class="py-name">data</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-string">'\f\n'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 58</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-name">name</tt><tt class="py-op">,</tt> <tt class="py-name">content</tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt class="py-name">case</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-string">'\n'</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 59</tt>  <tt class="py-line">        <tt class="py-name">tests</tt><tt class="py-op">[</tt><tt class="py-name">name</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">content</tt> </tt>
+<tt class="py-lineno"> 60</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">tests</tt> </tt>
+</div><tt class="py-lineno"> 61</tt>  <tt class="py-line"> </tt>
+<a name="getData"></a><div id="getData-def"><tt class="py-lineno"> 62</tt> <a class="py-toggle" href="#" id="getData-toggle" onclick="return toggle('getData');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.test.discoverdata-module.html#getData">getData</a><tt class="py-op">(</tt><tt class="py-param">filename</tt><tt class="py-op">,</tt> <tt class="py-param">name</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="getData-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="getData-expanded"><tt class="py-lineno"> 63</tt>  <tt class="py-line">    <tt class="py-keyword">global</tt> <tt id="link-21" class="py-name"><a title="yadis.test.discoverdata.discover_tests" class="py-name" href="#" onclick="return doclink('link-21', 'discover_tests', 'link-19');">discover_tests</a></tt></tt> </tt>
+<tt class="py-lineno"> 64</tt>  <tt class="py-line">    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 65</tt>  <tt class="py-line">        <tt class="py-name">file_tests</tt> <tt class="py-op">=</tt> <tt id="link-22" class="py-name"><a title="yadis.test.discoverdata.discover_tests" class="py-name" href="#" onclick="return doclink('link-22', 'discover_tests', 'link-19');">discover_tests</a></tt></tt><tt class="py-op">[</tt><tt id="link-23" class="py-name"><a title="yadis.test.test_parsehtml.filename" class="py-name" href="#" onclick="return doclink('link-23', 'filename', 'link-12');">filename</a></tt></tt><tt class="py-op">]</tt> </tt>
+<tt class="py-lineno"> 66</tt>  <tt class="py-line">    <tt class="py-keyword">except</tt> <tt class="py-name">KeyError</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 67</tt>  <tt class="py-line">        <tt class="py-name">file_tests</tt> <tt class="py-op">=</tt> <tt id="link-24" class="py-name"><a title="yadis.test.discoverdata.discover_tests" class="py-name" href="#" onclick="return doclink('link-24', 'discover_tests', 'link-19');">discover_tests</a></tt></tt><tt class="py-op">[</tt><tt id="link-25" class="py-name"><a title="yadis.test.test_parsehtml.filename" class="py-name" href="#" onclick="return doclink('link-25', 'filename', 'link-12');">filename</a></tt></tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt id="link-26" class="py-name" targets="Function yadis.test.discoverdata.readTests()=yadis.test.discoverdata-module.html#readTests"><a title="yadis.test.discoverdata.readTests" class="py-name" href="#" onclick="return doclink('link-26', 'readTests', 'link-26');">readTests</a></tt></tt><tt class="py-op">(</tt><tt id="link-27" class="py-name"><a title="yadis.test.test_parsehtml.filename" class="py-name" href="#" onclick="return doclink('link-27', 'filename', 'link-12');">filename</a></tt></tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 68</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">file_tests</tt><tt class="py-op">[</tt><tt class="py-name">name</tt><tt class="py-op">]</tt> </tt>
+</div><tt class="py-lineno"> 69</tt>  <tt class="py-line"> </tt>
+<a name="fillTemplate"></a><div id="fillTemplate-def"><tt class="py-lineno"> 70</tt> <a class="py-toggle" href="#" id="fillTemplate-toggle" onclick="return toggle('fillTemplate');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.test.discoverdata-module.html#fillTemplate">fillTemplate</a><tt class="py-op">(</tt><tt class="py-param">test_name</tt><tt class="py-op">,</tt> <tt class="py-param">template</tt><tt class="py-op">,</tt> <tt class="py-param">base_url</tt><tt class="py-op">,</tt> <tt class="py-param">example_xrds</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="fillTemplate-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="fillTemplate-expanded"><tt class="py-lineno"> 71</tt>  <tt class="py-line">    <tt class="py-name">mapping</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> </tt>
+<tt class="py-lineno"> 72</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">'URL_BASE/'</tt><tt class="py-op">,</tt> <tt id="link-28" class="py-name" targets="Variable yadis.test.test_discover._TestCase.base_url=yadis.test.test_discover._TestCase-class.html#base_url"><a title="yadis.test.test_discover._TestCase.base_url" class="py-name" href="#" onclick="return doclink('link-28', 'base_url', 'link-28');">base_url</a></tt></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 73</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">'&lt;XRDS Content&gt;'</tt><tt class="py-op">,</tt> <tt id="link-29" class="py-name"><a title="yadis.test.discoverdata.example_xrds" class="py-name" href="#" onclick="return doclink('link-29', 'example_xrds', 'link-15');">example_xrds</a></tt></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 74</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">'YADIS_HEADER'</tt><tt class="py-op">,</tt> <tt id="link-30" class="py-name"><a title="yadis.constants.YADIS_HEADER_NAME" class="py-name" href="#" onclick="return doclink('link-30', 'YADIS_HEADER_NAME', 'link-6');">YADIS_HEADER_NAME</a></tt></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 75</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">'NAME'</tt><tt class="py-op">,</tt> <tt class="py-name">test_name</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 76</tt>  <tt class="py-line">        <tt class="py-op">]</tt> </tt>
+<tt class="py-lineno"> 77</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 78</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">k</tt><tt class="py-op">,</tt> <tt class="py-name">v</tt> <tt class="py-keyword">in</tt> <tt class="py-name">mapping</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 79</tt>  <tt class="py-line">        <tt class="py-name">template</tt> <tt class="py-op">=</tt> <tt class="py-name">template</tt><tt class="py-op">.</tt><tt class="py-name">replace</tt><tt class="py-op">(</tt><tt class="py-name">k</tt><tt class="py-op">,</tt> <tt class="py-name">v</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 80</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 81</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">template</tt> </tt>
+</div><tt class="py-lineno"> 82</tt>  <tt class="py-line"> </tt>
+<a name="generateSample"></a><div id="generateSample-def"><tt class="py-lineno"> 83</tt> <a class="py-toggle" href="#" id="generateSample-toggle" onclick="return toggle('generateSample');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.test.discoverdata-module.html#generateSample">generateSample</a><tt class="py-op">(</tt><tt class="py-param">test_name</tt><tt class="py-op">,</tt> <tt class="py-param">base_url</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 84</tt>  <tt class="py-line">                   <tt class="py-param">example_xrds</tt><tt class="py-op">=</tt><tt id="link-31" class="py-name"><a title="yadis.test.discoverdata.example_xrds" class="py-name" href="#" onclick="return doclink('link-31', 'example_xrds', 'link-15');">example_xrds</a></tt></tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 85</tt>  <tt class="py-line">                   <tt class="py-param">filename</tt><tt class="py-op">=</tt><tt id="link-32" class="py-name"><a title="yadis.test.discoverdata.default_test_file" class="py-name" href="#" onclick="return doclink('link-32', 'default_test_file', 'link-17');">default_test_file</a></tt></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="generateSample-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="generateSample-expanded"><tt class="py-lineno"> 86</tt>  <tt class="py-line">    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 87</tt>  <tt class="py-line">        <tt class="py-name">template</tt> <tt class="py-op">=</tt> <tt id="link-33" class="py-name" targets="Function yadis.test.discoverdata.getData()=yadis.test.discoverdata-module.html#getData"><a title="yadis.test.discoverdata.getData" class="py-name" href="#" onclick="return doclink('link-33', 'getData', 'link-33');">getData</a></tt></tt><tt class="py-op">(</tt><tt id="link-34" class="py-name"><a title="yadis.test.test_parsehtml.filename" class="py-name" href="#" onclick="return doclink('link-34', 'filename', 'link-12');">filename</a></tt></tt><tt class="py-op">,</tt> <tt class="py-name">test_name</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 88</tt>  <tt class="py-line">    <tt class="py-keyword">except</tt> <tt class="py-name">IOError</tt><tt class="py-op">,</tt> <tt class="py-name">why</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 89</tt>  <tt class="py-line">        <tt class="py-keyword">import</tt> <tt class="py-name">errno</tt> </tt>
+<tt class="py-lineno"> 90</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">why</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-name">errno</tt><tt class="py-op">.</tt><tt class="py-name">ENOENT</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 91</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt class="py-name">KeyError</tt><tt class="py-op">(</tt><tt id="link-35" class="py-name"><a title="yadis.test.test_parsehtml.filename" class="py-name" href="#" onclick="return doclink('link-35', 'filename', 'link-12');">filename</a></tt></tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 92</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 93</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> </tt>
+<tt class="py-lineno"> 94</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 95</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-36" class="py-name" targets="Function yadis.test.discoverdata.fillTemplate()=yadis.test.discoverdata-module.html#fillTemplate"><a title="yadis.test.discoverdata.fillTemplate" class="py-name" href="#" onclick="return doclink('link-36', 'fillTemplate', 'link-36');">fillTemplate</a></tt></tt><tt class="py-op">(</tt><tt class="py-name">test_name</tt><tt class="py-op">,</tt> <tt class="py-name">template</tt><tt class="py-op">,</tt> <tt id="link-37" class="py-name"><a title="yadis.test.test_discover._TestCase.base_url" class="py-name" href="#" onclick="return doclink('link-37', 'base_url', 'link-28');">base_url</a></tt></tt><tt class="py-op">,</tt> <tt id="link-38" class="py-name"><a title="yadis.test.discoverdata.example_xrds" class="py-name" href="#" onclick="return doclink('link-38', 'example_xrds', 'link-15');">example_xrds</a></tt></tt><tt class="py-op">)</tt> </tt>
+</div><tt class="py-lineno"> 96</tt>  <tt class="py-line"> </tt>
+<a name="generateResult"></a><div id="generateResult-def"><tt class="py-lineno"> 97</tt> <a class="py-toggle" href="#" id="generateResult-toggle" onclick="return toggle('generateResult');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.test.discoverdata-module.html#generateResult">generateResult</a><tt class="py-op">(</tt><tt class="py-param">base_url</tt><tt class="py-op">,</tt> <tt class="py-param">input_name</tt><tt class="py-op">,</tt> <tt class="py-param">id_name</tt><tt class="py-op">,</tt> <tt class="py-param">result_name</tt><tt class="py-op">,</tt> <tt class="py-param">success</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="generateResult-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="generateResult-expanded"><tt class="py-lineno"> 98</tt>  <tt class="py-line">    <tt class="py-name">input_url</tt> <tt class="py-op">=</tt> <tt class="py-name">urlparse</tt><tt class="py-op">.</tt><tt class="py-name">urljoin</tt><tt class="py-op">(</tt><tt id="link-39" class="py-name"><a title="yadis.test.test_discover._TestCase.base_url" class="py-name" href="#" onclick="return doclink('link-39', 'base_url', 'link-28');">base_url</a></tt></tt><tt class="py-op">,</tt> <tt class="py-name">input_name</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 99</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">100</tt>  <tt class="py-line">    <tt class="py-comment"># If the name is None then we expect the protocol to fail, which</tt> </tt>
+<tt class="py-lineno">101</tt>  <tt class="py-line"><tt class="py-comment"></tt>    <tt class="py-comment"># we represent by None</tt> </tt>
+<tt class="py-lineno">102</tt>  <tt class="py-line"><tt class="py-comment"></tt>    <tt class="py-keyword">if</tt> <tt class="py-name">id_name</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">103</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">result_name</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt> </tt>
+<tt class="py-lineno">104</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">input_url</tt><tt class="py-op">,</tt> <tt id="link-40" class="py-name"><a title="yadis.discover.DiscoveryFailure" class="py-name" href="#" onclick="return doclink('link-40', 'DiscoveryFailure', 'link-3');">DiscoveryFailure</a></tt></tt> </tt>
+<tt class="py-lineno">105</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">106</tt>  <tt class="py-line">    <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt id="link-41" class="py-name" targets="Function yadis.test.discoverdata.generateSample()=yadis.test.discoverdata-module.html#generateSample"><a title="yadis.test.discoverdata.generateSample" class="py-name" href="#" onclick="return doclink('link-41', 'generateSample', 'link-41');">generateSample</a></tt></tt><tt class="py-op">(</tt><tt class="py-name">result_name</tt><tt class="py-op">,</tt> <tt id="link-42" class="py-name"><a title="yadis.test.test_discover._TestCase.base_url" class="py-name" href="#" onclick="return doclink('link-42', 'base_url', 'link-28');">base_url</a></tt></tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">107</tt>  <tt class="py-line">    <tt class="py-name">headers</tt><tt class="py-op">,</tt> <tt class="py-name">content</tt> <tt class="py-op">=</tt> <tt class="py-name">result</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-string">'\n\n'</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">108</tt>  <tt class="py-line">    <tt class="py-name">header_lines</tt> <tt class="py-op">=</tt> <tt class="py-name">headers</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-string">'\n'</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">109</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">header_line</tt> <tt class="py-keyword">in</tt> <tt class="py-name">header_lines</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">110</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">header_line</tt><tt class="py-op">.</tt><tt class="py-name">startswith</tt><tt class="py-op">(</tt><tt class="py-string">'Content-Type:'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">111</tt>  <tt class="py-line">            <tt class="py-name">_</tt><tt class="py-op">,</tt> <tt class="py-name">ctype</tt> <tt class="py-op">=</tt> <tt class="py-name">header_line</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-string">':'</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">112</tt>  <tt class="py-line">            <tt class="py-name">ctype</tt> <tt class="py-op">=</tt> <tt class="py-name">ctype</tt><tt class="py-op">.</tt><tt class="py-name">strip</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">113</tt>  <tt class="py-line">            <tt class="py-keyword">break</tt> </tt>
+<tt class="py-lineno">114</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">115</tt>  <tt class="py-line">        <tt class="py-name">ctype</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<tt class="py-lineno">116</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">117</tt>  <tt class="py-line">    <tt class="py-name">id_url</tt> <tt class="py-op">=</tt> <tt class="py-name">urlparse</tt><tt class="py-op">.</tt><tt class="py-name">urljoin</tt><tt class="py-op">(</tt><tt id="link-43" class="py-name"><a title="yadis.test.test_discover._TestCase.base_url" class="py-name" href="#" onclick="return doclink('link-43', 'base_url', 'link-28');">base_url</a></tt></tt><tt class="py-op">,</tt> <tt class="py-name">id_name</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">118</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">119</tt>  <tt class="py-line">    <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt id="link-44" class="py-name"><a title="yadis.discover.DiscoveryResult" class="py-name" href="#" onclick="return doclink('link-44', 'DiscoveryResult', 'link-2');">DiscoveryResult</a></tt></tt><tt class="py-op">(</tt><tt class="py-name">input_url</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">120</tt>  <tt class="py-line">    <tt class="py-name">result</tt><tt class="py-op">.</tt><tt id="link-45" class="py-name" targets="Variable yadis.discover.DiscoveryResult.normalized_uri=yadis.discover.DiscoveryResult-class.html#normalized_uri"><a title="yadis.discover.DiscoveryResult.normalized_uri" class="py-name" href="#" onclick="return doclink('link-45', 'normalized_uri', 'link-45');">normalized_uri</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-name">id_url</tt> </tt>
+<tt class="py-lineno">121</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">success</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">122</tt>  <tt class="py-line">        <tt class="py-name">result</tt><tt class="py-op">.</tt><tt id="link-46" class="py-name" targets="Variable yadis.discover.DiscoveryResult.xrds_uri=yadis.discover.DiscoveryResult-class.html#xrds_uri"><a title="yadis.discover.DiscoveryResult.xrds_uri" class="py-name" href="#" onclick="return doclink('link-46', 'xrds_uri', 'link-46');">xrds_uri</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-name">urlparse</tt><tt class="py-op">.</tt><tt class="py-name">urljoin</tt><tt class="py-op">(</tt><tt id="link-47" class="py-name"><a title="yadis.test.test_discover._TestCase.base_url" class="py-name" href="#" onclick="return doclink('link-47', 'base_url', 'link-28');">base_url</a></tt></tt><tt class="py-op">,</tt> <tt class="py-name">result_name</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">123</tt>  <tt class="py-line">    <tt class="py-name">result</tt><tt class="py-op">.</tt><tt id="link-48" class="py-name" targets="Variable yadis.discover.DiscoveryResult.content_type=yadis.discover.DiscoveryResult-class.html#content_type"><a title="yadis.discover.DiscoveryResult.content_type" class="py-name" href="#" onclick="return doclink('link-48', 'content_type', 'link-48');">content_type</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-name">ctype</tt> </tt>
+<tt class="py-lineno">124</tt>  <tt class="py-line">    <tt class="py-name">result</tt><tt class="py-op">.</tt><tt id="link-49" class="py-name" targets="Variable yadis.discover.DiscoveryResult.response_text=yadis.discover.DiscoveryResult-class.html#response_text"><a title="yadis.discover.DiscoveryResult.response_text" class="py-name" href="#" onclick="return doclink('link-49', 'response_text', 'link-49');">response_text</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-name">content</tt> </tt>
+<tt class="py-lineno">125</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">input_url</tt><tt class="py-op">,</tt> <tt class="py-name">result</tt> </tt>
+</div><tt class="py-lineno">126</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="yadis-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.openidenabled.com/yadis/">Python-Yadis</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">Generated by Epydoc
+        3.0alpha3 on Fri Dec  8 13:17:18 2006</td>
+    <td align="right" class="footer">
+      <a href="http://epydoc.sourceforge.net">http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie()
+  // -->
+</script>
+  
+</body>
+</html>

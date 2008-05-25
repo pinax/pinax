@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>yadis.manager</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="yadis-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.openidenabled.com/yadis/">Python-Yadis</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="yadis-module.html">Package&nbsp;yadis</a> ::
+        Module&nbsp;manager
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="yadis.manager-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="yadis.manager-module.html">Module yadis.manager</a></h1>
+<pre class="py-src">
+<a name="YadisServiceManager"></a><div id="YadisServiceManager-def"><tt class="py-lineno">  1</tt> <a class="py-toggle" href="#" id="YadisServiceManager-toggle" onclick="return toggle('YadisServiceManager');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="yadis.manager.YadisServiceManager-class.html">YadisServiceManager</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="YadisServiceManager-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="YadisServiceManager-expanded"><tt class="py-lineno">  2</tt>  <tt class="py-line">    <tt class="py-docstring">"""Holds the state of a list of selected Yadis services, managing</tt> </tt>
+<tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-docstring">    storing it in a session and iterating over the services in order."""</tt> </tt>
+<tt class="py-lineno">  4</tt>  <tt class="py-line"> </tt>
+<a name="YadisServiceManager.__init__"></a><div id="YadisServiceManager.__init__-def"><tt class="py-lineno">  5</tt> <a class="py-toggle" href="#" id="YadisServiceManager.__init__-toggle" onclick="return toggle('YadisServiceManager.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.manager.YadisServiceManager-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">starting_url</tt><tt class="py-op">,</tt> <tt class="py-param">yadis_url</tt><tt class="py-op">,</tt> <tt class="py-param">services</tt><tt class="py-op">,</tt> <tt class="py-param">session_key</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="YadisServiceManager.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="YadisServiceManager.__init__-expanded"><tt class="py-lineno">  6</tt>  <tt class="py-line">        <tt class="py-comment"># The URL that was used to initiate the Yadis protocol</tt> </tt>
+<tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-comment"></tt>        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">starting_url</tt> <tt class="py-op">=</tt> <tt class="py-name">starting_url</tt> </tt>
+<tt class="py-lineno">  8</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">  9</tt>  <tt class="py-line">        <tt class="py-comment"># The URL after following redirects (the identifier)</tt> </tt>
+<tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-comment"></tt>        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">yadis_url</tt> <tt class="py-op">=</tt> <tt class="py-name">yadis_url</tt> </tt>
+<tt class="py-lineno"> 11</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 12</tt>  <tt class="py-line">        <tt class="py-comment"># List of service elements</tt> </tt>
+<tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-comment"></tt>        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-0" class="py-name" targets="Module yadis.services=yadis.services-module.html"><a title="yadis.services" class="py-name" href="#" onclick="return doclink('link-0', 'services', 'link-0');">services</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-name">list</tt><tt class="py-op">(</tt><tt id="link-1" class="py-name"><a title="yadis.services" class="py-name" href="#" onclick="return doclink('link-1', 'services', 'link-0');">services</a></tt></tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 14</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 15</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">session_key</tt> <tt class="py-op">=</tt> <tt class="py-name">session_key</tt> </tt>
+<tt class="py-lineno"> 16</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 17</tt>  <tt class="py-line">        <tt class="py-comment"># Reference to the current service object</tt> </tt>
+<tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-comment"></tt>        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_current</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+</div><tt class="py-lineno"> 19</tt>  <tt class="py-line"> </tt>
+<a name="YadisServiceManager.__len__"></a><div id="YadisServiceManager.__len__-def"><tt class="py-lineno"> 20</tt> <a class="py-toggle" href="#" id="YadisServiceManager.__len__-toggle" onclick="return toggle('YadisServiceManager.__len__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.manager.YadisServiceManager-class.html#__len__">__len__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="YadisServiceManager.__len__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="YadisServiceManager.__len__-expanded"><tt class="py-lineno"> 21</tt>  <tt class="py-line">        <tt class="py-docstring">"""How many untried services remain?"""</tt> </tt>
+<tt class="py-lineno"> 22</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-2" class="py-name"><a title="yadis.services" class="py-name" href="#" onclick="return doclink('link-2', 'services', 'link-0');">services</a></tt></tt><tt class="py-op">)</tt> </tt>
+</div><tt class="py-lineno"> 23</tt>  <tt class="py-line"> </tt>
+<a name="YadisServiceManager.__iter__"></a><div id="YadisServiceManager.__iter__-def"><tt class="py-lineno"> 24</tt> <a class="py-toggle" href="#" id="YadisServiceManager.__iter__-toggle" onclick="return toggle('YadisServiceManager.__iter__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.manager.YadisServiceManager-class.html#__iter__">__iter__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="YadisServiceManager.__iter__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="YadisServiceManager.__iter__-expanded"><tt class="py-lineno"> 25</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt> </tt>
+</div><tt class="py-lineno"> 26</tt>  <tt class="py-line"> </tt>
+<a name="YadisServiceManager.next"></a><div id="YadisServiceManager.next-def"><tt class="py-lineno"> 27</tt> <a class="py-toggle" href="#" id="YadisServiceManager.next-toggle" onclick="return toggle('YadisServiceManager.next');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.manager.YadisServiceManager-class.html#next">next</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="YadisServiceManager.next-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="YadisServiceManager.next-expanded"><tt class="py-lineno"> 28</tt>  <tt class="py-line">        <tt class="py-docstring">"""Return the next service</tt> </tt>
+<tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno"> 30</tt>  <tt class="py-line"><tt class="py-docstring">        self.current() will continue to return that service until the</tt> </tt>
+<tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-docstring">        next call to this method."""</tt> </tt>
+<tt class="py-lineno"> 32</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 33</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_current</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-3" class="py-name"><a title="yadis.services" class="py-name" href="#" onclick="return doclink('link-3', 'services', 'link-0');">services</a></tt></tt><tt class="py-op">.</tt><tt class="py-name">pop</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 34</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-name">IndexError</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 35</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt class="py-name">StopIteration</tt> </tt>
+<tt class="py-lineno"> 36</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 37</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_current</tt> </tt>
+</div><tt class="py-lineno"> 38</tt>  <tt class="py-line"> </tt>
+<a name="YadisServiceManager.current"></a><div id="YadisServiceManager.current-def"><tt class="py-lineno"> 39</tt> <a class="py-toggle" href="#" id="YadisServiceManager.current-toggle" onclick="return toggle('YadisServiceManager.current');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.manager.YadisServiceManager-class.html#current">current</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="YadisServiceManager.current-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="YadisServiceManager.current-expanded"><tt class="py-lineno"> 40</tt>  <tt class="py-line">        <tt class="py-docstring">"""Return the current service.</tt> </tt>
+<tt class="py-lineno"> 41</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-docstring">        Returns None if there are no services left.</tt> </tt>
+<tt class="py-lineno"> 43</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<tt class="py-lineno"> 44</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_current</tt> </tt>
+</div><tt class="py-lineno"> 45</tt>  <tt class="py-line"> </tt>
+<a name="YadisServiceManager.forURL"></a><div id="YadisServiceManager.forURL-def"><tt class="py-lineno"> 46</tt> <a class="py-toggle" href="#" id="YadisServiceManager.forURL-toggle" onclick="return toggle('YadisServiceManager.forURL');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.manager.YadisServiceManager-class.html#forURL">forURL</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">url</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="YadisServiceManager.forURL-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="YadisServiceManager.forURL-expanded"><tt class="py-lineno"> 47</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">url</tt> <tt class="py-keyword">in</tt> <tt class="py-op">[</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">starting_url</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">yadis_url</tt><tt class="py-op">]</tt> </tt>
+</div><tt class="py-lineno"> 48</tt>  <tt class="py-line"> </tt>
+<a name="YadisServiceManager.started"></a><div id="YadisServiceManager.started-def"><tt class="py-lineno"> 49</tt> <a class="py-toggle" href="#" id="YadisServiceManager.started-toggle" onclick="return toggle('YadisServiceManager.started');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.manager.YadisServiceManager-class.html#started">started</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="YadisServiceManager.started-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="YadisServiceManager.started-expanded"><tt class="py-lineno"> 50</tt>  <tt class="py-line">        <tt class="py-docstring">"""Has the first service been returned?"""</tt> </tt>
+<tt class="py-lineno"> 51</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_current</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt> </tt>
+</div><tt class="py-lineno"> 52</tt>  <tt class="py-line"> </tt>
+<a name="YadisServiceManager.store"></a><div id="YadisServiceManager.store-def"><tt class="py-lineno"> 53</tt> <a class="py-toggle" href="#" id="YadisServiceManager.store-toggle" onclick="return toggle('YadisServiceManager.store');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.manager.YadisServiceManager-class.html#store">store</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">session</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="YadisServiceManager.store-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="YadisServiceManager.store-expanded"><tt class="py-lineno"> 54</tt>  <tt class="py-line">        <tt class="py-docstring">"""Store this object in the session, by its session key."""</tt> </tt>
+<tt class="py-lineno"> 55</tt>  <tt class="py-line">        <tt class="py-name">session</tt><tt class="py-op">[</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">session_key</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt> </tt>
+</div></div><tt class="py-lineno"> 56</tt>  <tt class="py-line"> </tt>
+<a name="Discovery"></a><div id="Discovery-def"><tt class="py-lineno"> 57</tt> <a class="py-toggle" href="#" id="Discovery-toggle" onclick="return toggle('Discovery');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="yadis.manager.Discovery-class.html">Discovery</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Discovery-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Discovery-expanded"><tt class="py-lineno"> 58</tt>  <tt class="py-line">    <tt class="py-docstring">"""State management for discovery.</tt> </tt>
+<tt class="py-lineno"> 59</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno"> 60</tt>  <tt class="py-line"><tt class="py-docstring">    High-level usage pattern is to call .getNextService(discover) in</tt> </tt>
+<tt class="py-lineno"> 61</tt>  <tt class="py-line"><tt class="py-docstring">    order to find the next available service for this user for this</tt> </tt>
+<tt class="py-lineno"> 62</tt>  <tt class="py-line"><tt class="py-docstring">    session. Once a request completes, call .finish() to clean up the</tt> </tt>
+<tt class="py-lineno"> 63</tt>  <tt class="py-line"><tt class="py-docstring">    session state.</tt> </tt>
+<tt class="py-lineno"> 64</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno"> 65</tt>  <tt class="py-line"><tt class="py-docstring">    @ivar session: a dict-like object that stores state unique to the</tt> </tt>
+<tt class="py-lineno"> 66</tt>  <tt class="py-line"><tt class="py-docstring">        requesting user-agent. This object must be able to store</tt> </tt>
+<tt class="py-lineno"> 67</tt>  <tt class="py-line"><tt class="py-docstring">        serializable objects.</tt> </tt>
+<tt class="py-lineno"> 68</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt class="py-docstring">    @ivar url: the URL that is used to make the discovery request</tt> </tt>
+<tt class="py-lineno"> 70</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno"> 71</tt>  <tt class="py-line"><tt class="py-docstring">    @ivar session_key_suffix: The suffix that will be used to identify</tt> </tt>
+<tt class="py-lineno"> 72</tt>  <tt class="py-line"><tt class="py-docstring">        this object in the session object.</tt> </tt>
+<tt class="py-lineno"> 73</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<tt class="py-lineno"> 74</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 75</tt>  <tt class="py-line">    <tt id="link-4" class="py-name" targets="Variable yadis.manager.Discovery.DEFAULT_SUFFIX=yadis.manager.Discovery-class.html#DEFAULT_SUFFIX"><a title="yadis.manager.Discovery.DEFAULT_SUFFIX" class="py-name" href="#" onclick="return doclink('link-4', 'DEFAULT_SUFFIX', 'link-4');">DEFAULT_SUFFIX</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-string">'auth'</tt> </tt>
+<tt class="py-lineno"> 76</tt>  <tt class="py-line">    <tt id="link-5" class="py-name" targets="Variable yadis.manager.Discovery.PREFIX=yadis.manager.Discovery-class.html#PREFIX"><a title="yadis.manager.Discovery.PREFIX" class="py-name" href="#" onclick="return doclink('link-5', 'PREFIX', 'link-5');">PREFIX</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-string">'_yadis_services_'</tt> </tt>
+<tt class="py-lineno"> 77</tt>  <tt class="py-line"> </tt>
+<a name="Discovery.__init__"></a><div id="Discovery.__init__-def"><tt class="py-lineno"> 78</tt> <a class="py-toggle" href="#" id="Discovery.__init__-toggle" onclick="return toggle('Discovery.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.manager.Discovery-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">session</tt><tt class="py-op">,</tt> <tt class="py-param">url</tt><tt class="py-op">,</tt> <tt class="py-param">session_key_suffix</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Discovery.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Discovery.__init__-expanded"><tt class="py-lineno"> 79</tt>  <tt class="py-line">        <tt class="py-docstring">"""Initialize a discovery object"""</tt> </tt>
+<tt class="py-lineno"> 80</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">session</tt> <tt class="py-op">=</tt> <tt class="py-name">session</tt> </tt>
+<tt class="py-lineno"> 81</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">url</tt> <tt class="py-op">=</tt> <tt class="py-name">url</tt> </tt>
+<tt class="py-lineno"> 82</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">session_key_suffix</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 83</tt>  <tt class="py-line">            <tt class="py-name">session_key_suffix</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name"><a title="yadis.manager.Discovery.DEFAULT_SUFFIX" class="py-name" href="#" onclick="return doclink('link-6', 'DEFAULT_SUFFIX', 'link-4');">DEFAULT_SUFFIX</a></tt></tt> </tt>
+<tt class="py-lineno"> 84</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 85</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">session_key_suffix</tt> <tt class="py-op">=</tt> <tt class="py-name">session_key_suffix</tt> </tt>
+</div><tt class="py-lineno"> 86</tt>  <tt class="py-line"> </tt>
+<a name="Discovery.getNextService"></a><div id="Discovery.getNextService-def"><tt class="py-lineno"> 87</tt> <a class="py-toggle" href="#" id="Discovery.getNextService-toggle" onclick="return toggle('Discovery.getNextService');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.manager.Discovery-class.html#getNextService">getNextService</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">discover</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Discovery.getNextService-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Discovery.getNextService-expanded"><tt class="py-lineno"> 88</tt>  <tt class="py-line">        <tt class="py-docstring">"""Return the next authentication service for the pair of</tt> </tt>
+<tt class="py-lineno"> 89</tt>  <tt class="py-line"><tt class="py-docstring">        user_input and session.  This function handles fallback.</tt> </tt>
+<tt class="py-lineno"> 90</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno"> 91</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno"> 92</tt>  <tt class="py-line"><tt class="py-docstring">        @param discover: a callable that takes a URL and returns a</tt> </tt>
+<tt class="py-lineno"> 93</tt>  <tt class="py-line"><tt class="py-docstring">            list of services</tt> </tt>
+<tt class="py-lineno"> 94</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno"> 95</tt>  <tt class="py-line"><tt class="py-docstring">        @type discover: str -&gt; [service]</tt> </tt>
+<tt class="py-lineno"> 96</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno"> 97</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno"> 98</tt>  <tt class="py-line"><tt class="py-docstring">        @return: the next available service</tt> </tt>
+<tt class="py-lineno"> 99</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<tt class="py-lineno">100</tt>  <tt class="py-line">        <tt id="link-7" class="py-name" targets="Module yadis.manager=yadis.manager-module.html"><a title="yadis.manager" class="py-name" href="#" onclick="return doclink('link-7', 'manager', 'link-7');">manager</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Method yadis.manager.Discovery.getManager()=yadis.manager.Discovery-class.html#getManager"><a title="yadis.manager.Discovery.getManager" class="py-name" href="#" onclick="return doclink('link-8', 'getManager', 'link-8');">getManager</a></tt></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">101</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-9" class="py-name"><a title="yadis.manager" class="py-name" href="#" onclick="return doclink('link-9', 'manager', 'link-7');">manager</a></tt></tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt> <tt class="py-keyword">and</tt> <tt class="py-keyword">not</tt> <tt id="link-10" class="py-name"><a title="yadis.manager" class="py-name" href="#" onclick="return doclink('link-10', 'manager', 'link-7');">manager</a></tt></tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">102</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Method yadis.manager.Discovery.destroyManager()=yadis.manager.Discovery-class.html#destroyManager"><a title="yadis.manager.Discovery.destroyManager" class="py-name" href="#" onclick="return doclink('link-11', 'destroyManager', 'link-11');">destroyManager</a></tt></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">103</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">104</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt id="link-12" class="py-name"><a title="yadis.manager" class="py-name" href="#" onclick="return doclink('link-12', 'manager', 'link-7');">manager</a></tt></tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">105</tt>  <tt class="py-line">            <tt class="py-name">yadis_url</tt><tt class="py-op">,</tt> <tt id="link-13" class="py-name"><a title="yadis.services" class="py-name" href="#" onclick="return doclink('link-13', 'services', 'link-0');">services</a></tt></tt> <tt class="py-op">=</tt> <tt id="link-14" class="py-name" targets="Module yadis.discover=yadis.discover-module.html,Function yadis.discover.discover()=yadis.discover-module.html#discover"><a title="yadis.discover
+yadis.discover.discover" class="py-name" href="#" onclick="return doclink('link-14', 'discover', 'link-14');">discover</a></tt></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">url</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">106</tt>  <tt class="py-line">            <tt id="link-15" class="py-name"><a title="yadis.manager" class="py-name" href="#" onclick="return doclink('link-15', 'manager', 'link-7');">manager</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Method yadis.manager.Discovery.createManager()=yadis.manager.Discovery-class.html#createManager"><a title="yadis.manager.Discovery.createManager" class="py-name" href="#" onclick="return doclink('link-16', 'createManager', 'link-16');">createManager</a></tt></tt><tt class="py-op">(</tt><tt id="link-17" class="py-name"><a title="yadis.services" class="py-name" href="#" onclick="return doclink('link-17', 'services', 'link-0');">services</a></tt></tt><tt class="py-op">,</tt> <tt class="py-name">yadis_url</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">107</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">108</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-18" class="py-name"><a title="yadis.manager" class="py-name" href="#" onclick="return doclink('link-18', 'manager', 'link-7');">manager</a></tt></tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">109</tt>  <tt class="py-line">            <tt class="py-name">service</tt> <tt class="py-op">=</tt> <tt id="link-19" class="py-name"><a title="yadis.manager" class="py-name" href="#" onclick="return doclink('link-19', 'manager', 'link-7');">manager</a></tt></tt><tt class="py-op">.</tt><tt id="link-20" class="py-name" targets="Method yadis.manager.YadisServiceManager.next()=yadis.manager.YadisServiceManager-class.html#next"><a title="yadis.manager.YadisServiceManager.next" class="py-name" href="#" onclick="return doclink('link-20', 'next', 'link-20');">next</a></tt></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">110</tt>  <tt class="py-line">            <tt id="link-21" class="py-name"><a title="yadis.manager" class="py-name" href="#" onclick="return doclink('link-21', 'manager', 'link-7');">manager</a></tt></tt><tt class="py-op">.</tt><tt id="link-22" class="py-name" targets="Method yadis.manager.YadisServiceManager.store()=yadis.manager.YadisServiceManager-class.html#store"><a title="yadis.manager.YadisServiceManager.store" class="py-name" href="#" onclick="return doclink('link-22', 'store', 'link-22');">store</a></tt></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">session</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">111</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">112</tt>  <tt class="py-line">            <tt class="py-name">service</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<tt class="py-lineno">113</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">114</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">service</tt> </tt>
+</div><tt class="py-lineno">115</tt>  <tt class="py-line"> </tt>
+<a name="Discovery.cleanup"></a><div id="Discovery.cleanup-def"><tt class="py-lineno">116</tt> <a class="py-toggle" href="#" id="Discovery.cleanup-toggle" onclick="return toggle('Discovery.cleanup');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.manager.Discovery-class.html#cleanup">cleanup</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Discovery.cleanup-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Discovery.cleanup-expanded"><tt class="py-lineno">117</tt>  <tt class="py-line">        <tt class="py-docstring">"""Clean up Yadis-related services in the session and return</tt> </tt>
+<tt class="py-lineno">118</tt>  <tt class="py-line"><tt class="py-docstring">        the most-recently-attempted service from the manager, if one</tt> </tt>
+<tt class="py-lineno">119</tt>  <tt class="py-line"><tt class="py-docstring">        exists.</tt> </tt>
+<tt class="py-lineno">120</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno">121</tt>  <tt class="py-line"><tt class="py-docstring">        @return: current service endpoint object or None if there is</tt> </tt>
+<tt class="py-lineno">122</tt>  <tt class="py-line"><tt class="py-docstring">            no current service</tt> </tt>
+<tt class="py-lineno">123</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<tt class="py-lineno">124</tt>  <tt class="py-line">        <tt id="link-23" class="py-name"><a title="yadis.manager" class="py-name" href="#" onclick="return doclink('link-23', 'manager', 'link-7');">manager</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="yadis.manager.Discovery.getManager" class="py-name" href="#" onclick="return doclink('link-24', 'getManager', 'link-8');">getManager</a></tt></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">125</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-25" class="py-name"><a title="yadis.manager" class="py-name" href="#" onclick="return doclink('link-25', 'manager', 'link-7');">manager</a></tt></tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">126</tt>  <tt class="py-line">            <tt class="py-name">service</tt> <tt class="py-op">=</tt> <tt id="link-26" class="py-name"><a title="yadis.manager" class="py-name" href="#" onclick="return doclink('link-26', 'manager', 'link-7');">manager</a></tt></tt><tt class="py-op">.</tt><tt id="link-27" class="py-name" targets="Method yadis.manager.YadisServiceManager.current()=yadis.manager.YadisServiceManager-class.html#current"><a title="yadis.manager.YadisServiceManager.current" class="py-name" href="#" onclick="return doclink('link-27', 'current', 'link-27');">current</a></tt></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">127</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-28" class="py-name"><a title="yadis.manager.Discovery.destroyManager" class="py-name" href="#" onclick="return doclink('link-28', 'destroyManager', 'link-11');">destroyManager</a></tt></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">128</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">129</tt>  <tt class="py-line">            <tt class="py-name">service</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<tt class="py-lineno">130</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">131</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">service</tt> </tt>
+</div><tt class="py-lineno">132</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">133</tt>  <tt class="py-line">    <tt class="py-comment">### Lower-level methods</tt> </tt>
+<tt class="py-lineno">134</tt>  <tt class="py-line"><tt class="py-comment"></tt> </tt>
+<a name="Discovery.getSessionKey"></a><div id="Discovery.getSessionKey-def"><tt class="py-lineno">135</tt> <a class="py-toggle" href="#" id="Discovery.getSessionKey-toggle" onclick="return toggle('Discovery.getSessionKey');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.manager.Discovery-class.html#getSessionKey">getSessionKey</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Discovery.getSessionKey-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Discovery.getSessionKey-expanded"><tt class="py-lineno">136</tt>  <tt class="py-line">        <tt class="py-docstring">"""Get the session key for this starting URL and suffix</tt> </tt>
+<tt class="py-lineno">137</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno">138</tt>  <tt class="py-line"><tt class="py-docstring">        @return: The session key</tt> </tt>
+<tt class="py-lineno">139</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: str</tt> </tt>
+<tt class="py-lineno">140</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<tt class="py-lineno">141</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name"><a title="yadis.manager.Discovery.PREFIX" class="py-name" href="#" onclick="return doclink('link-29', 'PREFIX', 'link-5');">PREFIX</a></tt></tt> <tt class="py-op">+</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">session_key_suffix</tt> </tt>
+</div><tt class="py-lineno">142</tt>  <tt class="py-line"> </tt>
+<a name="Discovery.getManager"></a><div id="Discovery.getManager-def"><tt class="py-lineno">143</tt> <a class="py-toggle" href="#" id="Discovery.getManager-toggle" onclick="return toggle('Discovery.getManager');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.manager.Discovery-class.html#getManager">getManager</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Discovery.getManager-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Discovery.getManager-expanded"><tt class="py-lineno">144</tt>  <tt class="py-line">        <tt class="py-docstring">"""Extract the YadisServiceManager for this object's URL and</tt> </tt>
+<tt class="py-lineno">145</tt>  <tt class="py-line"><tt class="py-docstring">        suffix from the session.</tt> </tt>
+<tt class="py-lineno">146</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno">147</tt>  <tt class="py-line"><tt class="py-docstring">        @return: The current YadisServiceManager, if it's for this</tt> </tt>
+<tt class="py-lineno">148</tt>  <tt class="py-line"><tt class="py-docstring">            URL, or else None</tt> </tt>
+<tt class="py-lineno">149</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<tt class="py-lineno">150</tt>  <tt class="py-line">        <tt id="link-30" class="py-name"><a title="yadis.manager" class="py-name" href="#" onclick="return doclink('link-30', 'manager', 'link-7');">manager</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">session</tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-31" class="py-name" targets="Method yadis.manager.Discovery.getSessionKey()=yadis.manager.Discovery-class.html#getSessionKey"><a title="yadis.manager.Discovery.getSessionKey" class="py-name" href="#" onclick="return doclink('link-31', 'getSessionKey', 'link-31');">getSessionKey</a></tt></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">151</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-op">(</tt><tt id="link-32" class="py-name"><a title="yadis.manager" class="py-name" href="#" onclick="return doclink('link-32', 'manager', 'link-7');">manager</a></tt></tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt> <tt class="py-keyword">and</tt> <tt id="link-33" class="py-name"><a title="yadis.manager" class="py-name" href="#" onclick="return doclink('link-33', 'manager', 'link-7');">manager</a></tt></tt><tt class="py-op">.</tt><tt id="link-34" class="py-name" targets="Method yadis.manager.YadisServiceManager.forURL()=yadis.manager.YadisServiceManager-class.html#forURL"><a title="yadis.manager.YadisServiceManager.forURL" class="py-name" href="#" onclick="return doclink('link-34', 'forURL', 'link-34');">forURL</a></tt></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">url</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">152</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt id="link-35" class="py-name"><a title="yadis.manager" class="py-name" href="#" onclick="return doclink('link-35', 'manager', 'link-7');">manager</a></tt></tt> </tt>
+<tt class="py-lineno">153</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">154</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">None</tt> </tt>
+</div><tt class="py-lineno">155</tt>  <tt class="py-line"> </tt>
+<a name="Discovery.createManager"></a><div id="Discovery.createManager-def"><tt class="py-lineno">156</tt> <a class="py-toggle" href="#" id="Discovery.createManager-toggle" onclick="return toggle('Discovery.createManager');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.manager.Discovery-class.html#createManager">createManager</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">services</tt><tt class="py-op">,</tt> <tt class="py-param">yadis_url</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Discovery.createManager-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Discovery.createManager-expanded"><tt class="py-lineno">157</tt>  <tt class="py-line">        <tt class="py-docstring">"""Create a new YadisService Manager for this starting URL and</tt> </tt>
+<tt class="py-lineno">158</tt>  <tt class="py-line"><tt class="py-docstring">        suffix, and store it in the session.</tt> </tt>
+<tt class="py-lineno">159</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno">160</tt>  <tt class="py-line"><tt class="py-docstring">        @raises KeyError: When I already have a manager.</tt> </tt>
+<tt class="py-lineno">161</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno">162</tt>  <tt class="py-line"><tt class="py-docstring">        @return: A new YadisServiceManager or None</tt> </tt>
+<tt class="py-lineno">163</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<tt class="py-lineno">164</tt>  <tt class="py-line">        <tt class="py-name">key</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-36" class="py-name"><a title="yadis.manager.Discovery.getSessionKey" class="py-name" href="#" onclick="return doclink('link-36', 'getSessionKey', 'link-31');">getSessionKey</a></tt></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">165</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-37" class="py-name"><a title="yadis.manager.Discovery.getManager" class="py-name" href="#" onclick="return doclink('link-37', 'getManager', 'link-8');">getManager</a></tt></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">166</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt class="py-name">KeyError</tt><tt class="py-op">(</tt><tt class="py-string">'There is already a %r manager for %r'</tt> <tt class="py-op">%</tt> </tt>
+<tt class="py-lineno">167</tt>  <tt class="py-line">                           <tt class="py-op">(</tt><tt class="py-name">key</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">url</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">168</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">169</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt id="link-38" class="py-name"><a title="yadis.services" class="py-name" href="#" onclick="return doclink('link-38', 'services', 'link-0');">services</a></tt></tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">170</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">None</tt> </tt>
+<tt class="py-lineno">171</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">172</tt>  <tt class="py-line">        <tt id="link-39" class="py-name"><a title="yadis.manager" class="py-name" href="#" onclick="return doclink('link-39', 'manager', 'link-7');">manager</a></tt></tt> <tt class="py-op">=</tt> <tt id="link-40" class="py-name" targets="Class yadis.manager.YadisServiceManager=yadis.manager.YadisServiceManager-class.html"><a title="yadis.manager.YadisServiceManager" class="py-name" href="#" onclick="return doclink('link-40', 'YadisServiceManager', 'link-40');">YadisServiceManager</a></tt></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">url</tt><tt class="py-op">,</tt> <tt class="py-name">yadis_url</tt><tt class="py-op">,</tt> <tt id="link-41" class="py-name"><a title="yadis.services" class="py-name" href="#" onclick="return doclink('link-41', 'services', 'link-0');">services</a></tt></tt><tt class="py-op">,</tt> <tt class="py-name">key</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">173</tt>  <tt class="py-line">        <tt id="link-42" class="py-name"><a title="yadis.manager" class="py-name" href="#" onclick="return doclink('link-42', 'manager', 'link-7');">manager</a></tt></tt><tt class="py-op">.</tt><tt id="link-43" class="py-name"><a title="yadis.manager.YadisServiceManager.store" class="py-name" href="#" onclick="return doclink('link-43', 'store', 'link-22');">store</a></tt></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">session</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">174</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-44" class="py-name"><a title="yadis.manager" class="py-name" href="#" onclick="return doclink('link-44', 'manager', 'link-7');">manager</a></tt></tt> </tt>
+</div><tt class="py-lineno">175</tt>  <tt class="py-line"> </tt>
+<a name="Discovery.destroyManager"></a><div id="Discovery.destroyManager-def"><tt class="py-lineno">176</tt> <a class="py-toggle" href="#" id="Discovery.destroyManager-toggle" onclick="return toggle('Discovery.destroyManager');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.manager.Discovery-class.html#destroyManager">destroyManager</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Discovery.destroyManager-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Discovery.destroyManager-expanded"><tt class="py-lineno">177</tt>  <tt class="py-line">        <tt class="py-docstring">"""Delete any YadisServiceManager with this starting URL and</tt> </tt>
+<tt class="py-lineno">178</tt>  <tt class="py-line"><tt class="py-docstring">        suffix from the session.</tt> </tt>
+<tt class="py-lineno">179</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno">180</tt>  <tt class="py-line"><tt class="py-docstring">        If there is no service manager or the service manager is for a</tt> </tt>
+<tt class="py-lineno">181</tt>  <tt class="py-line"><tt class="py-docstring">        different URL, it silently does nothing.</tt> </tt>
+<tt class="py-lineno">182</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<tt class="py-lineno">183</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-45" class="py-name"><a title="yadis.manager.Discovery.getManager" class="py-name" href="#" onclick="return doclink('link-45', 'getManager', 'link-8');">getManager</a></tt></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">184</tt>  <tt class="py-line">            <tt class="py-name">key</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-46" class="py-name"><a title="yadis.manager.Discovery.getSessionKey" class="py-name" href="#" onclick="return doclink('link-46', 'getSessionKey', 'link-31');">getSessionKey</a></tt></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">185</tt>  <tt class="py-line">            <tt class="py-keyword">del</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">session</tt><tt class="py-op">[</tt><tt class="py-name">key</tt><tt class="py-op">]</tt> </tt>
+</div></div><tt class="py-lineno">186</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="yadis-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.openidenabled.com/yadis/">Python-Yadis</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">Generated by Epydoc
+        3.0alpha3 on Fri Dec  8 13:17:18 2006</td>
+    <td align="right" class="footer">
+      <a href="http://epydoc.sourceforge.net">http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie()
+  // -->
+</script>
+  
+</body>
+</html>

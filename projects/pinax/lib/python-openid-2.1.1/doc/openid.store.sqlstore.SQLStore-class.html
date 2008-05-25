@@ -1,0 +1,598 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>openid.store.sqlstore.SQLStore</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css"></link>
+</head>
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="openid-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          <a class="navbar" target="_top" href="http://openidenabled.com/python-openid/">Python-OpenID</a>
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <font size="-1"><b class="breadcrumbs">
+        <a href="openid-module.html">Package&nbsp;openid</a> ::
+        <a href="openid.store-module.html">Package&nbsp;store</a> ::
+        <a href="openid.store.sqlstore-module.html">Module&nbsp;sqlstore</a> ::
+        Class&nbsp;SQLStore
+      </b></font></br>
+    </td>
+    <td><table cellpadding="0" cellspacing="0">
+      <tr><td align="right"><font size="-2">[<a href="frames.html"target="_top">frames</a>&nbsp;|&nbsp;<a href="openid.store.sqlstore.SQLStore-class.html" target="_top">no&nbsp;frames</a>]</font></td></tr>
+    </table></td>
+</tr></table>
+
+<!-- =========== START OF CLASS DESCRIPTION =========== -->
+<h2 class="class">Type SQLStore</h2>
+
+<pre class="base-tree">
+ <a href="__builtin__.object-class.html"><code>object</code></a> --+    
+          |    
+<a href="openid.store.interface.OpenIDStore-class.html"><code>OpenIDStore</code></a> --+
+              |
+             <b>SQLStore</b>
+</pre><br />
+
+<dl><dt><b>Known Subclasses:</b></dt>
+<dd>
+    <a href="openid.store.sqlstore.MySQLStore-class.html"><code>MySQLStore</code></a>,
+    <a href="openid.store.sqlstore.PostgreSQLStore-class.html"><code>PostgreSQLStore</code></a>,
+    <a href="openid.store.sqlstore.SQLiteStore-class.html"><code>SQLiteStore</code></a></dd></dl>
+
+<hr/>
+
+<p>This is the parent class for the SQL stores, which contains the logic 
+common to all of the SQL stores.</p>
+<p>The table names used are determined by the class variables <code><a 
+href="openid.store.sqlstore.SQLStore-class.html#settings_table" 
+class="link"><code>settings_table</code></a></code>, <code><a 
+href="openid.store.sqlstore.SQLStore-class.html#associations_table" 
+class="link"><code>associations_table</code></a></code>, and <code><a 
+href="openid.store.sqlstore.SQLStore-class.html#nonces_table" 
+class="link"><code>nonces_table</code></a></code>. To change the name of 
+the tables used, pass new table names into the constructor.</p>
+<p>To create the tables with the proper schema, see the <code><a 
+href="openid.store.sqlstore.SQLStore-class.html#createTables" 
+class="link"><code>createTables</code></a></code> method.</p>
+<p>This class shouldn't be used directly. Use one of its subclasses 
+instead, as those contain the code necessary to use a specific 
+database.</p>
+All methods other than <code><a 
+href="openid.store.sqlstore.SQLStore-class.html#__init__" 
+class="link"><code>__init__</code></a></code> and <code><a 
+href="openid.store.sqlstore.SQLStore-class.html#createTables" 
+class="link"><code>createTables</code></a></code> should be considered 
+implementation details.
+<hr/>
+
+
+<!-- =========== START OF METHOD SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Method Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.store.sqlstore.SQLStore-class.html#__init__" class="summary-sig-name"><code>__init__</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>conn</span>,
+          <span class=summary-sig-arg>settings_table</span>,
+          <span class=summary-sig-arg>associations_table</span>,
+          <span class=summary-sig-arg>nonces_table</span>)</span></code>
+<br />
+This creates a new SQLStore instance.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.store.sqlstore.SQLStore-class.html#createTables" class="summary-sig-name"><code>createTables</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class="summary-sig-vararg">*args</span>,
+          <span class="summary-sig-kwarg">**kwargs</span>)</span></code>
+<br />
+This method creates the database tables necessary for this store to 
+work.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><a name="__getattr__"></a><span class="summary-sig"><span class="summary-sig-name">__getattr__</span>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>attr</span>)</span></code>
+</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.store.sqlstore.SQLStore-class.html#blobDecode" class="summary-sig-name"><code>blobDecode</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>blob</span>)</span></code>
+<br />
+Convert a blob as returned by the SQL engine into a str object.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.store.sqlstore.SQLStore-class.html#blobEncode" class="summary-sig-name"><code>blobEncode</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>s</span>)</span></code>
+<br />
+Convert a str object into the necessary object for storing in the 
+database as a blob.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        int
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.store.sqlstore.SQLStore-class.html#cleanupAssociations" class="summary-sig-name"><code>cleanupAssociations</code></a>(<span class=summary-sig-arg>self</span>)</span></code>
+<br />
+Remove expired associations from the store.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        int
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.store.sqlstore.SQLStore-class.html#cleanupNonces" class="summary-sig-name"><code>cleanupNonces</code></a>(<span class=summary-sig-arg>self</span>)</span></code>
+<br />
+Remove expired nonces from the store.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.store.sqlstore.SQLStore-class.html#getAssociation" class="summary-sig-name"><code>getAssociation</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class="summary-sig-vararg">*args</span>,
+          <span class="summary-sig-kwarg">**kwargs</span>)</span></code>
+<br />
+Get the most recent association that has been set for this server URL 
+and handle.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.store.sqlstore.SQLStore-class.html#removeAssociation" class="summary-sig-name"><code>removeAssociation</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class="summary-sig-vararg">*args</span>,
+          <span class="summary-sig-kwarg">**kwargs</span>)</span></code>
+<br />
+Remove the association for the given server URL and handle, returning 
+whether the association existed at all.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.store.sqlstore.SQLStore-class.html#storeAssociation" class="summary-sig-name"><code>storeAssociation</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class="summary-sig-vararg">*args</span>,
+          <span class="summary-sig-kwarg">**kwargs</span>)</span></code>
+<br />
+Set the association for the server URL.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><a name="txn_cleanupAssociations"></a><span class="summary-sig"><span class="summary-sig-name">txn_cleanupAssociations</span>(<span class=summary-sig-arg>self</span>)</span></code>
+</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><a name="txn_cleanupNonces"></a><span class="summary-sig"><span class="summary-sig-name">txn_cleanupNonces</span>(<span class=summary-sig-arg>self</span>)</span></code>
+</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.store.sqlstore.SQLStore-class.html#txn_createTables" class="summary-sig-name"><code>txn_createTables</code></a>(<span class=summary-sig-arg>self</span>)</span></code>
+<br />
+This method creates the database tables necessary for this store to 
+work.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.store.sqlstore.SQLStore-class.html#txn_getAssociation" class="summary-sig-name"><code>txn_getAssociation</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>server_url</span>,
+          <span class=summary-sig-arg>handle</span>)</span></code>
+<br />
+Get the most recent association that has been set for this server URL 
+and handle.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.store.sqlstore.SQLStore-class.html#txn_removeAssociation" class="summary-sig-name"><code>txn_removeAssociation</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>server_url</span>,
+          <span class=summary-sig-arg>handle</span>)</span></code>
+<br />
+Remove the association for the given server URL and handle, returning 
+whether the association existed at all.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.store.sqlstore.SQLStore-class.html#txn_storeAssociation" class="summary-sig-name"><code>txn_storeAssociation</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>server_url</span>,
+          <span class=summary-sig-arg>association</span>)</span></code>
+<br />
+Set the association for the server URL.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.store.sqlstore.SQLStore-class.html#txn_useNonce" class="summary-sig-name"><code>txn_useNonce</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>server_url</span>,
+          <span class=summary-sig-arg>timestamp</span>,
+          <span class=summary-sig-arg>salt</span>)</span></code>
+<br />
+Return whether this nonce is present, and if it is, then remove it 
+from the set.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.store.sqlstore.SQLStore-class.html#useNonce" class="summary-sig-name"><code>useNonce</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class="summary-sig-vararg">*args</span>,
+          <span class="summary-sig-kwarg">**kwargs</span>)</span></code>
+<br />
+Return whether this nonce is present, and if it is, then remove it 
+from the set.</td></tr>
+  <tr><td colspan="2">
+    <b>Inherited from <a href="openid.store.interface.OpenIDStore-class.html"><code>OpenIDStore</code></a>:</b>
+      <a href="openid.store.interface.OpenIDStore-class.html#cleanup"><code>cleanup</code></a>
+      <br />
+    <b>Inherited from <a href="__builtin__.object-class.html"><code>object</code></a>:</b>
+      <a href="__builtin__.object-class.html#__delattr__"><code>__delattr__</code></a>, 
+      <a href="__builtin__.object-class.html#__getattribute__"><code>__getattribute__</code></a>, 
+      <a href="__builtin__.object-class.html#__hash__"><code>__hash__</code></a>, 
+      <a href="__builtin__.object-class.html#__new__"><code>__new__</code></a>, 
+      <a href="__builtin__.object-class.html#__reduce__"><code>__reduce__</code></a>, 
+      <a href="__builtin__.object-class.html#__reduce_ex__"><code>__reduce_ex__</code></a>, 
+      <a href="__builtin__.object-class.html#__repr__"><code>__repr__</code></a>, 
+      <a href="__builtin__.object-class.html#__setattr__"><code>__setattr__</code></a>, 
+      <a href="__builtin__.object-class.html#__str__"><code>__str__</code></a>
+    </td></tr>
+</table><br />
+
+
+<!-- =========== START OF CLASS VARIABLE SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Class Variable Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1"><code>str</code></font></td>
+<td><b><a href="openid.store.sqlstore.SQLStore-class.html#associations_table"><code>associations_table</code></a></b>: This is the default name of the table to keep associations in</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1"><code>str</code></font></td>
+<td><b><a href="openid.store.sqlstore.SQLStore-class.html#nonces_table"><code>nonces_table</code></a></b>: This is the default name of the table to keep nonces in.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1"><code>str</code></font></td>
+<td><b><a href="openid.store.sqlstore.SQLStore-class.html#settings_table"><code>settings_table</code></a></b>: This is the default name of the table to keep this store's settings 
+in.</td></tr>
+</table><br />
+
+
+<!-- =========== START OF METHOD DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Method Details</th></tr>
+</table>
+
+<a name="__init__"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">__init__</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>conn</span>,
+          <span class=sig-arg>settings_table</span>=<span class=sig-default>None</span>,
+          <span class=sig-arg>associations_table</span>=<span class=sig-default>None</span>,
+          <span class=sig-arg>nonces_table</span>=<span class=sig-default>None</span>)</span>
+    <br /><i>(Constructor)</i>
+  </h3>
+  This creates a new SQLStore instance. It requires an established 
+  database connection be given to it, and it allows overriding the 
+  default table names.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>conn</b></code> -
+         This must be an established connection to a database of the 
+        correct type for the SQLStore subclass you're using.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=A python database API compatible connection object.)</i>
+      <dd><code><b>settings_table</b></code> -
+         This is an optional parameter to specify the name of the table 
+        used for this store's settings. The default value is specified in 
+        <code><a 
+        href="openid.store.sqlstore.SQLStore-class.html#settings_table" 
+        class="link"><code>SQLStore.settings_table</code></a></code>.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=<code>str</code>)</i>
+      <dd><code><b>associations_table</b></code> -
+         This is an optional parameter to specify the name of the table 
+        used for storing associations. The default value is specified in 
+        <code><a 
+        href="openid.store.sqlstore.SQLStore-class.html#associations_table" 
+        class="link"><code>SQLStore.associations_table</code></a></code>.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=<code>str</code>)</i>
+      <dd><code><b>nonces_table</b></code> -
+         This is an optional parameter to specify the name of the table 
+        used for storing nonces. The default value is specified in 
+        <code><a 
+        href="openid.store.sqlstore.SQLStore-class.html#nonces_table" 
+        class="link"><code>SQLStore.nonces_table</code></a></code>.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=<code>str</code>)</i>
+      </dd>
+    </dl>
+    <dl><dt><b>Overrides:</b></dt>
+      <dd><a href="__builtin__.object-class.html#__init__"><code>__builtin__.object.__init__</code></a></dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="createTables"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">createTables</span>(<span class=sig-arg>self</span>,
+          <span class="sig-vararg">*args</span>,
+          <span class="sig-kwarg">**kwargs</span>)</span>
+  </h3>
+  This method creates the database tables necessary for this store to 
+  work. It should not be called if the tables already exist.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="blobDecode"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">blobDecode</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>blob</span>)</span>
+  </h3>
+  <p>Convert a blob as returned by the SQL engine into a str object.</p>
+  str -&gt; str
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="blobEncode"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">blobEncode</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>s</span>)</span>
+  </h3>
+  Convert a str object into the necessary object for storing in the 
+  database as a blob.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="cleanupAssociations"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">cleanupAssociations</span>(<span class=sig-arg>self</span>,
+          <span class="sig-vararg">*args</span>,
+          <span class="sig-kwarg">**kwargs</span>)</span>
+  </h3>
+  <p>Remove expired associations from the store.</p>
+  This method is not called in the normal operation of the library. It 
+  provides a way for store admins to keep their storage from filling up 
+  with expired data.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        the number of associations expired.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=int)</i>
+      </dd>
+    </dl>
+    <dl><dt><b>Overrides:</b></dt>
+      <dd><a href="openid.store.interface.OpenIDStore-class.html#cleanupAssociations"><code>openid.store.interface.OpenIDStore.cleanupAssociations</code></a> <i>(inherited documentation)</i>
+</dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="cleanupNonces"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">cleanupNonces</span>(<span class=sig-arg>self</span>,
+          <span class="sig-vararg">*args</span>,
+          <span class="sig-kwarg">**kwargs</span>)</span>
+  </h3>
+  <p>Remove expired nonces from the store.</p>
+  <p>Discards any nonce from storage that is old enough that its 
+  timestamp would not pass <a 
+  href="openid.store.interface.OpenIDStore-class.html#useNonce" 
+  class="link"><code>useNonce</code></a>.</p>
+  This method is not called in the normal operation of the library. It 
+  provides a way for store admins to keep their storage from filling up 
+  with expired data.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        the number of nonces expired.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=int)</i>
+      </dd>
+    </dl>
+    <dl><dt><b>Overrides:</b></dt>
+      <dd><a href="openid.store.interface.OpenIDStore-class.html#cleanupNonces"><code>openid.store.interface.OpenIDStore.cleanupNonces</code></a> <i>(inherited documentation)</i>
+</dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="getAssociation"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">getAssociation</span>(<span class=sig-arg>self</span>,
+          <span class="sig-vararg">*args</span>,
+          <span class="sig-kwarg">**kwargs</span>)</span>
+  </h3>
+  <p>Get the most recent association that has been set for this server 
+  URL and handle.</p>
+  str -&gt; NoneType or Association
+  <dl><dt></dt><dd>
+    <dl><dt><b>Overrides:</b></dt>
+      <dd><a href="openid.store.interface.OpenIDStore-class.html#getAssociation"><code>openid.store.interface.OpenIDStore.getAssociation</code></a></dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="removeAssociation"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">removeAssociation</span>(<span class=sig-arg>self</span>,
+          <span class="sig-vararg">*args</span>,
+          <span class="sig-kwarg">**kwargs</span>)</span>
+  </h3>
+  <p>Remove the association for the given server URL and handle, 
+  returning whether the association existed at all.</p>
+  (str, str) -&gt; bool
+  <dl><dt></dt><dd>
+    <dl><dt><b>Overrides:</b></dt>
+      <dd><a href="openid.store.interface.OpenIDStore-class.html#removeAssociation"><code>openid.store.interface.OpenIDStore.removeAssociation</code></a></dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="storeAssociation"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">storeAssociation</span>(<span class=sig-arg>self</span>,
+          <span class="sig-vararg">*args</span>,
+          <span class="sig-kwarg">**kwargs</span>)</span>
+  </h3>
+  <p>Set the association for the server URL.</p>
+  Association -&gt; NoneType
+  <dl><dt></dt><dd>
+    <dl><dt><b>Overrides:</b></dt>
+      <dd><a href="openid.store.interface.OpenIDStore-class.html#storeAssociation"><code>openid.store.interface.OpenIDStore.storeAssociation</code></a></dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="txn_createTables"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">txn_createTables</span>(<span class=sig-arg>self</span>)</span>
+  </h3>
+  This method creates the database tables necessary for this store to 
+  work. It should not be called if the tables already exist.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="txn_getAssociation"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">txn_getAssociation</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>server_url</span>,
+          <span class=sig-arg>handle</span>=<span class=sig-default>None</span>)</span>
+  </h3>
+  <p>Get the most recent association that has been set for this server 
+  URL and handle.</p>
+  str -&gt; NoneType or Association
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="txn_removeAssociation"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">txn_removeAssociation</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>server_url</span>,
+          <span class=sig-arg>handle</span>)</span>
+  </h3>
+  <p>Remove the association for the given server URL and handle, 
+  returning whether the association existed at all.</p>
+  (str, str) -&gt; bool
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="txn_storeAssociation"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">txn_storeAssociation</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>server_url</span>,
+          <span class=sig-arg>association</span>)</span>
+  </h3>
+  <p>Set the association for the server URL.</p>
+  Association -&gt; NoneType
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="txn_useNonce"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">txn_useNonce</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>server_url</span>,
+          <span class=sig-arg>timestamp</span>,
+          <span class=sig-arg>salt</span>)</span>
+  </h3>
+  <p>Return whether this nonce is present, and if it is, then remove it 
+  from the set.</p>
+  str -&gt; bool
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="useNonce"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">useNonce</span>(<span class=sig-arg>self</span>,
+          <span class="sig-vararg">*args</span>,
+          <span class="sig-kwarg">**kwargs</span>)</span>
+  </h3>
+  <p>Return whether this nonce is present, and if it is, then remove it 
+  from the set.</p>
+  str -&gt; bool
+  <dl><dt></dt><dd>
+    <dl><dt><b>Overrides:</b></dt>
+      <dd><a href="openid.store.interface.OpenIDStore-class.html#useNonce"><code>openid.store.interface.OpenIDStore.useNonce</code></a></dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+<br />
+
+
+<!-- =========== START OF CLASS VARIABLE DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Class Variable Details</th></tr>
+</table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="associations_table"></a>
+<h3>associations_table</h3>
+This is the default name of the table to keep associations in
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          <code>str</code>
+
+      </dd>
+<span title="'oid_associations'">      <dt><b>Value:</b></dt>
+      <dd><table><tr><td>
+<pre class="variable">
+<span class="variable-quote">'</span>oid_associations<span class="variable-quote">'</span>                                                     </pre>
+        </td></tr></table></dd>
+</span>    </dl>
+  </dd>
+</dl></td></tr></table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="nonces_table"></a>
+<h3>nonces_table</h3>
+This is the default name of the table to keep nonces in.
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          <code>str</code>
+
+      </dd>
+<span title="'oid_nonces'">      <dt><b>Value:</b></dt>
+      <dd><table><tr><td>
+<pre class="variable">
+<span class="variable-quote">'</span>oid_nonces<span class="variable-quote">'</span>                                                           </pre>
+        </td></tr></table></dd>
+</span>    </dl>
+  </dd>
+</dl></td></tr></table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="settings_table"></a>
+<h3>settings_table</h3>
+This is the default name of the table to keep this store's settings 
+in.
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          <code>str</code>
+
+      </dd>
+<span title="'oid_settings'">      <dt><b>Value:</b></dt>
+      <dd><table><tr><td>
+<pre class="variable">
+<span class="variable-quote">'</span>oid_settings<span class="variable-quote">'</span>                                                         </pre>
+        </td></tr></table></dd>
+</span>    </dl>
+  </dd>
+</dl></td></tr></table>
+<br />
+
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="openid-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          <a class="navbar" target="_top" href="http://openidenabled.com/python-openid/">Python-OpenID</a>
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td align="left"><font size="-2">Generated by Epydoc 2.1 on Fri Dec 14 16:10:53 2007</font></td>
+    <td align="right"><a href="http://epydoc.sourceforge.net"
+                      ><font size="-2">http://epydoc.sf.net</font></a></td>
+  </tr>
+</table>
+</body>
+</html>

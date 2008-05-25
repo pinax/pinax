@@ -1,0 +1,55 @@
+# This file is a Apache configuration file for setting up a
+# YADIS-enabled identity URL.
+
+# This section enables the special header that makes a URL a YADIS
+# identity URL. If this header is present, the file is not required to
+# have any particular content or MIME type.
+<Files home.html>
+    # Add the X-YADIS-Location header to successful responses
+    # Replace the URL with the URL for your YADIS service discovery document.
+    Header onsuccess set X-YADIS-Location \
+      "http://openidenabled.com/yadis-test/apache/yadis.xml"
+</Files>
+
+# This section tells Apache what content-type to use for the YADIS
+# services document. In order for the content-negotiation optimization
+# to work, the Web server is required to return this specific
+# content-type for the YADIS services document.
+#
+# If you ever are hosting a YADIS services document, you should set
+# the content-type returned for the file to this value, regardless of
+# how the file is accessed.
+<Files yadis.xml>
+    # Make sure that Apache serves the YADIS services document as the
+    # correct content-type.
+    ForceType application/xrds+xml
+</Files>
+
+# This section is the first step to enabling content negotiation for
+# the identity URL. It tells Apache that this file is a type-map file,
+# which will be used to dispatch to the appropriate content based on
+# the form of the request.
+<Files identity>
+    # Tell apache that this file is a type-map that should be handled
+    # by mod_negotiation
+    SetHandler type-map
+</Files>
+
+# This section is only applicable when content negotiation is
+# enabled. It prevents direct requests for the content that is being
+# returned by the identity URL.
+#
+# Don't allow direct access to the .html file, so that there's no
+# confusion about which one is the idenity URL. This redirect means
+# that no matter which of the direct content URL or the desired
+# identity URL is entered, only the desired identity URL will be used
+# by YADIS consumers.
+RewriteEngine On
+
+# In order for this test to succeed, RewriteEngine must be turned On
+# in the site-wide apache configuration. Unless it is, the SCRIPT_URL
+# variable will not be set.
+RewriteCond "%{ENV:SCRIPT_URL}" "^/yadis-test/apache/home\.html$"
+
+# Redirect requests for the non-YADIS content to the identity URL.
+RewriteRule "^home\.html$" "/yadis-test/apache/identity" [R,L]

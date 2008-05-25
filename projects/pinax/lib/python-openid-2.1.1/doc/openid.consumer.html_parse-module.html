@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>openid.consumer.html_parse</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css"></link>
+</head>
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="openid-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          <a class="navbar" target="_top" href="http://openidenabled.com/python-openid/">Python-OpenID</a>
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <font size="-1"><b class="breadcrumbs">
+        <a href="openid-module.html">Package&nbsp;openid</a> ::
+        <a href="openid.consumer-module.html">Package&nbsp;consumer</a> ::
+        Module&nbsp;html_parse
+      </b></font></br>
+    </td>
+    <td><table cellpadding="0" cellspacing="0">
+      <tr><td align="right"><font size="-2">[<a href="frames.html"target="_top">frames</a>&nbsp;|&nbsp;<a href="openid.consumer.html_parse-module.html" target="_top">no&nbsp;frames</a>]</font></td></tr>
+    </table></td>
+</tr></table>
+
+<!-- =========== START OF MODULE DESCRIPTION =========== -->
+<h2 class="module">Module openid.consumer.html_parse</h2>
+
+This module implements a VERY limited parser that finds &lt;link&gt; 
+tags in the head of HTML or XHTML documents and parses out their 
+attributes according to the OpenID spec. It is a liberal parser, but it 
+requires these things from the data in order to work:
+<ul>
+  <li>
+    There must be an open &lt;html&gt; tag
+  </li>
+  <li>
+    There must be an open &lt;head&gt; tag inside of the &lt;html&gt; 
+    tag
+  </li>
+  <li>
+    Only &lt;link&gt;s that are found inside of the &lt;head&gt; tag 
+    are parsed (this is by design)
+  </li>
+  <li>
+    The parser follows the OpenID specification in resolving the 
+    attributes of the link tags. This means that the attributes DO NOT 
+    get resolved as they would by an XML or HTML parser. In particular, 
+    only certain entities get replaced, and href attributes do not get 
+    resolved relative to a base URL.
+  </li>
+</ul>
+From http://openid.net/specs.bml#linkrel:
+<ul>
+  <li>
+    The openid.server URL MUST be an absolute URL. OpenID consumers 
+    MUST NOT attempt to resolve relative URLs.
+  </li>
+  <li>
+    The openid.server URL MUST NOT include entities other than 
+    &amp;amp;, &amp;lt;, &amp;gt;, and &amp;quot;.
+  </li>
+</ul>
+<p>The parser ignores SGML comments and &lt;![CDATA[blocks]]&gt;. Both 
+kinds of quoting are allowed for attributes.</p>
+The parser deals with invalid markup in these ways:
+<ul>
+  <li>
+    Tag names are not case-sensitive
+  </li>
+  <li>
+    The &lt;html&gt; tag is accepted even when it is not at the top 
+    level
+  </li>
+  <li>
+    The &lt;head&gt; tag is accepted even when it is not a direct 
+    child of the &lt;html&gt; tag, but a &lt;html&gt; tag must be an 
+    ancestor of the &lt;head&gt; tag
+  </li>
+  <li>
+    &lt;link&gt; tags are accepted even when they are not direct 
+    children of the &lt;head&gt; tag, but a &lt;head&gt; tag must be an 
+    ancestor of the &lt;link&gt; tag
+  </li>
+  <li>
+    If there is no closing tag for an open &lt;html&gt; or 
+    &lt;head&gt; tag, the remainder of the document is viewed as being 
+    inside of the tag. If there is no closing tag for a &lt;link&gt; tag, 
+    the link tag is treated as a short tag. Exceptions to this rule are 
+    that &lt;html&gt; closes &lt;html&gt; and &lt;body&gt; or 
+    &lt;head&gt; closes &lt;head&gt;
+  </li>
+  <li>
+    Attributes of the &lt;link&gt; tag are not required to be 
+    quoted.
+  </li>
+  <li>
+    In the case of duplicated attribute names, the attribute coming 
+    last in the tag will be the value returned.
+  </li>
+  <li>
+    Any text that does not parse as an attribute within a link tag 
+    will be ignored. (e.g. &lt;link pumpkin rel='openid.server' /&gt; 
+    will ignore pumpkin)
+  </li>
+  <li>
+    If there are more than one &lt;html&gt; or &lt;head&gt; tag, the 
+    parser only looks inside of the first one.
+  </li>
+  <li>
+    The contents of &lt;script&gt; tags are ignored entirely, except 
+    unclosed &lt;script&gt; tags. Unclosed &lt;script&gt; tags are 
+    ignored.
+  </li>
+  <li>
+    Any other invalid markup is ignored, including unclosed SGML 
+    comments and unclosed &lt;![CDATA[blocks.
+  </li>
+</ul>
+<hr/>
+
+<!-- =========== START OF FUNCTION SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Function Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        [[(type(html), type(html))]]
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.consumer.html_parse-module.html#parseLinkAttrs" class="summary-sig-name"><code>parseLinkAttrs</code></a>(<span class=summary-sig-arg>html</span>)</span></code>
+<br />
+Find all link tags in a string representing a HTML document and return 
+a list of their attributes.</td></tr>
+</table><br />
+
+
+<!-- =========== START OF FUNCTION DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Function Details</th></tr>
+</table>
+
+<a name="parseLinkAttrs"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">parseLinkAttrs</span>(<span class=sig-arg>html</span>)</span>
+  </h3>
+  Find all link tags in a string representing a HTML document and 
+  return a list of their attributes.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>html</b></code> -
+         the text to parse
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=str or unicode)</i>
+      </dd>
+    </dl>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        A list of dictionaries of attributes, one for each link 
+        tag
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=[[(type(html), type(html))]])</i>
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+<br />
+
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="openid-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          <a class="navbar" target="_top" href="http://openidenabled.com/python-openid/">Python-OpenID</a>
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td align="left"><font size="-2">Generated by Epydoc 2.1 on Fri Dec 14 16:10:53 2007</font></td>
+    <td align="right"><a href="http://epydoc.sourceforge.net"
+                      ><font size="-2">http://epydoc.sf.net</font></a></td>
+  </tr>
+</table>
+</body>
+</html>

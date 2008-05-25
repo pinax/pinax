@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>yadis.etxrd</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="yadis-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.openidenabled.com/yadis/">Python-Yadis</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="yadis-module.html">Package&nbsp;yadis</a> ::
+        Module&nbsp;etxrd
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="yadis.etxrd-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="yadis.etxrd-module.html">Module yadis.etxrd</a></h1>
+<pre class="py-src">
+<tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment"># -*- test-case-name: yadis.test.test_etxrd -*-</tt> </tt>
+<tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-docstring">"""</tt> </tt>
+<tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-docstring">ElementTree interface to an XRD document.</tt> </tt>
+<tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<tt class="py-lineno">  5</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-name">__all__</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> </tt>
+<tt class="py-lineno">  7</tt>  <tt class="py-line">    <tt class="py-string">'nsTag'</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno">  8</tt>  <tt class="py-line">    <tt class="py-string">'mkXRDTag'</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno">  9</tt>  <tt class="py-line">    <tt class="py-string">'isXRDS'</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 10</tt>  <tt class="py-line">    <tt class="py-string">'parseXRDS'</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 11</tt>  <tt class="py-line">    <tt class="py-string">'getCanonicalID'</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 12</tt>  <tt class="py-line">    <tt class="py-string">'getYadisXRD'</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 13</tt>  <tt class="py-line">    <tt class="py-string">'getPriorityStrict'</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 14</tt>  <tt class="py-line">    <tt class="py-string">'getPriority'</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 15</tt>  <tt class="py-line">    <tt class="py-string">'prioSort'</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 16</tt>  <tt class="py-line">    <tt class="py-string">'iterServices'</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 17</tt>  <tt class="py-line">    <tt class="py-string">'expandService'</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 18</tt>  <tt class="py-line">    <tt class="py-string">'expandServices'</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 19</tt>  <tt class="py-line">    <tt class="py-op">]</tt> </tt>
+<tt class="py-lineno"> 20</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">random</tt> </tt>
+<tt class="py-lineno"> 22</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">elementtree</tt><tt class="py-op">.</tt><tt class="py-name">ElementTree</tt> <tt class="py-keyword">import</tt> <tt class="py-name">ElementTree</tt> </tt>
+<tt class="py-lineno"> 24</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-comment"># Use expat if it's present. Otherwise, use xmllib</tt> </tt>
+<tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 27</tt>  <tt class="py-line">    <tt class="py-keyword">from</tt> <tt class="py-name">xml</tt><tt class="py-op">.</tt><tt class="py-name">parsers</tt><tt class="py-op">.</tt><tt class="py-name">expat</tt> <tt class="py-keyword">import</tt> <tt class="py-name">ExpatError</tt> <tt class="py-name">as</tt> <tt class="py-name">XMLError</tt> </tt>
+<tt class="py-lineno"> 28</tt>  <tt class="py-line">    <tt class="py-keyword">from</tt> <tt class="py-name">elementtree</tt><tt class="py-op">.</tt><tt class="py-name">ElementTree</tt> <tt class="py-keyword">import</tt> <tt class="py-name">XMLTreeBuilder</tt> </tt>
+<tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt class="py-keyword">except</tt> <tt class="py-name">ImportError</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 30</tt>  <tt class="py-line">    <tt class="py-keyword">from</tt> <tt class="py-name">elementtree</tt><tt class="py-op">.</tt><tt class="py-name">SimpleXMLTreeBuilder</tt> <tt class="py-keyword">import</tt> <tt class="py-name">TreeBuilder</tt> <tt class="py-name">as</tt> <tt class="py-name">XMLTreeBuilder</tt> </tt>
+<tt class="py-lineno"> 31</tt>  <tt class="py-line">    <tt class="py-keyword">from</tt> <tt class="py-name">xmllib</tt> <tt class="py-keyword">import</tt> <tt class="py-name">Error</tt> <tt class="py-name">as</tt> <tt class="py-name">XMLError</tt> </tt>
+<tt class="py-lineno"> 32</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package yadis=yadis-module.html"><a title="yadis" class="py-name" href="#" onclick="return doclink('link-0', 'yadis', 'link-0');">yadis</a></tt></tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Module yadis.xri=yadis.xri-module.html"><a title="yadis.xri" class="py-name" href="#" onclick="return doclink('link-1', 'xri', 'link-1');">xri</a></tt></tt> </tt>
+<tt class="py-lineno"> 34</tt>  <tt class="py-line"> </tt>
+<a name="XRDSError"></a><div id="XRDSError-def"><tt class="py-lineno"> 35</tt> <a class="py-toggle" href="#" id="XRDSError-toggle" onclick="return toggle('XRDSError');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="yadis.etxrd.XRDSError-class.html">XRDSError</a><tt class="py-op">(</tt><tt class="py-base-class">Exception</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="XRDSError-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="XRDSError-expanded"><tt class="py-lineno"> 36</tt>  <tt class="py-line">    <tt class="py-docstring">"""An error with the XRDS document."""</tt> </tt>
+<tt class="py-lineno"> 37</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 38</tt>  <tt class="py-line">    <tt class="py-comment"># The exception that triggered this exception</tt> </tt>
+<tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-comment"></tt>    <tt id="link-2" class="py-name" targets="Variable yadis.etxrd.XRDSError.reason=yadis.etxrd.XRDSError-class.html#reason"><a title="yadis.etxrd.XRDSError.reason" class="py-name" href="#" onclick="return doclink('link-2', 'reason', 'link-2');">reason</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+</div><tt class="py-lineno"> 40</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 41</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 42</tt>  <tt class="py-line"> </tt>
+<a name="XRDSFraud"></a><div id="XRDSFraud-def"><tt class="py-lineno"> 43</tt> <a class="py-toggle" href="#" id="XRDSFraud-toggle" onclick="return toggle('XRDSFraud');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="yadis.etxrd.XRDSFraud-class.html">XRDSFraud</a><tt class="py-op">(</tt><tt class="py-base-class">XRDSError</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="XRDSFraud-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="XRDSFraud-expanded"><tt class="py-lineno"> 44</tt>  <tt class="py-line">    <tt class="py-docstring">"""Raised when there's an assertion in the XRDS that it does not have</tt> </tt>
+<tt class="py-lineno"> 45</tt>  <tt class="py-line"><tt class="py-docstring">    the authority to make.</tt> </tt>
+<tt class="py-lineno"> 46</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+</div><tt class="py-lineno"> 47</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 48</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 49</tt>  <tt class="py-line"> </tt>
+<a name="parseXRDS"></a><div id="parseXRDS-def"><tt class="py-lineno"> 50</tt> <a class="py-toggle" href="#" id="parseXRDS-toggle" onclick="return toggle('parseXRDS');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.etxrd-module.html#parseXRDS">parseXRDS</a><tt class="py-op">(</tt><tt class="py-param">text</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="parseXRDS-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="parseXRDS-expanded"><tt class="py-lineno"> 51</tt>  <tt class="py-line">    <tt class="py-docstring">"""Parse the given text as an XRDS document.</tt> </tt>
+<tt class="py-lineno"> 52</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno"> 53</tt>  <tt class="py-line"><tt class="py-docstring">    @return: ElementTree containing an XRDS document</tt> </tt>
+<tt class="py-lineno"> 54</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno"> 55</tt>  <tt class="py-line"><tt class="py-docstring">    @raises XRDSError: When there is a parse error or the document does</tt> </tt>
+<tt class="py-lineno"> 56</tt>  <tt class="py-line"><tt class="py-docstring">        not contain an XRDS.</tt> </tt>
+<tt class="py-lineno"> 57</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<tt class="py-lineno"> 58</tt>  <tt class="py-line">    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 59</tt>  <tt class="py-line">        <tt class="py-name">parser</tt> <tt class="py-op">=</tt> <tt class="py-name">XMLTreeBuilder</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 60</tt>  <tt class="py-line">        <tt class="py-name">parser</tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Method yadis.parsehtml.YadisHTMLParser.feed()=yadis.parsehtml.YadisHTMLParser-class.html#feed"><a title="yadis.parsehtml.YadisHTMLParser.feed" class="py-name" href="#" onclick="return doclink('link-3', 'feed', 'link-3');">feed</a></tt></tt><tt class="py-op">(</tt><tt class="py-name">text</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 61</tt>  <tt class="py-line">        <tt class="py-name">element</tt> <tt class="py-op">=</tt> <tt class="py-name">parser</tt><tt class="py-op">.</tt><tt class="py-name">close</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 62</tt>  <tt class="py-line">    <tt class="py-keyword">except</tt> <tt class="py-name">XMLError</tt><tt class="py-op">,</tt> <tt class="py-name">why</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 63</tt>  <tt class="py-line">        <tt class="py-name">exc</tt> <tt class="py-op">=</tt> <tt id="link-4" class="py-name" targets="Class yadis.etxrd.XRDSError=yadis.etxrd.XRDSError-class.html"><a title="yadis.etxrd.XRDSError" class="py-name" href="#" onclick="return doclink('link-4', 'XRDSError', 'link-4');">XRDSError</a></tt></tt><tt class="py-op">(</tt><tt class="py-string">'Error parsing document as XML'</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 64</tt>  <tt class="py-line">        <tt class="py-name">exc</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name"><a title="yadis.etxrd.XRDSError.reason" class="py-name" href="#" onclick="return doclink('link-5', 'reason', 'link-2');">reason</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-name">why</tt> </tt>
+<tt class="py-lineno"> 65</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">exc</tt> </tt>
+<tt class="py-lineno"> 66</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 67</tt>  <tt class="py-line">        <tt class="py-name">tree</tt> <tt class="py-op">=</tt> <tt class="py-name">ElementTree</tt><tt class="py-op">(</tt><tt class="py-name">element</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 68</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt id="link-6" class="py-name" targets="Method yadis.discover.DiscoveryResult.isXRDS()=yadis.discover.DiscoveryResult-class.html#isXRDS,Function yadis.etxrd.isXRDS()=yadis.etxrd-module.html#isXRDS"><a title="yadis.discover.DiscoveryResult.isXRDS
+yadis.etxrd.isXRDS" class="py-name" href="#" onclick="return doclink('link-6', 'isXRDS', 'link-6');">isXRDS</a></tt></tt><tt class="py-op">(</tt><tt class="py-name">tree</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 69</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-7" class="py-name"><a title="yadis.etxrd.XRDSError" class="py-name" href="#" onclick="return doclink('link-7', 'XRDSError', 'link-4');">XRDSError</a></tt></tt><tt class="py-op">(</tt><tt class="py-string">'Not an XRDS document'</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 70</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 71</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">tree</tt> </tt>
+</div><tt class="py-lineno"> 72</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 73</tt>  <tt class="py-line"><tt id="link-8" class="py-name" targets="Variable yadis.etxrd.XRD_NS_2_0=yadis.etxrd-module.html#XRD_NS_2_0"><a title="yadis.etxrd.XRD_NS_2_0" class="py-name" href="#" onclick="return doclink('link-8', 'XRD_NS_2_0', 'link-8');">XRD_NS_2_0</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-string">'xri://$xrd*($v*2.0)'</tt> </tt>
+<tt class="py-lineno"> 74</tt>  <tt class="py-line"><tt id="link-9" class="py-name" targets="Variable yadis.etxrd.XRDS_NS=yadis.etxrd-module.html#XRDS_NS"><a title="yadis.etxrd.XRDS_NS" class="py-name" href="#" onclick="return doclink('link-9', 'XRDS_NS', 'link-9');">XRDS_NS</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-string">'xri://$xrds'</tt> </tt>
+<tt class="py-lineno"> 75</tt>  <tt class="py-line"> </tt>
+<a name="nsTag"></a><div id="nsTag-def"><tt class="py-lineno"> 76</tt> <a class="py-toggle" href="#" id="nsTag-toggle" onclick="return toggle('nsTag');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.etxrd-module.html#nsTag">nsTag</a><tt class="py-op">(</tt><tt class="py-param">ns</tt><tt class="py-op">,</tt> <tt class="py-param">t</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="nsTag-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="nsTag-expanded"><tt class="py-lineno"> 77</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-string">'{%s}%s'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">ns</tt><tt class="py-op">,</tt> <tt class="py-name">t</tt><tt class="py-op">)</tt> </tt>
+</div><tt class="py-lineno"> 78</tt>  <tt class="py-line"> </tt>
+<a name="mkXRDTag"></a><div id="mkXRDTag-def"><tt class="py-lineno"> 79</tt> <a class="py-toggle" href="#" id="mkXRDTag-toggle" onclick="return toggle('mkXRDTag');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.etxrd-module.html#mkXRDTag">mkXRDTag</a><tt class="py-op">(</tt><tt class="py-param">t</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="mkXRDTag-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="mkXRDTag-expanded"><tt class="py-lineno"> 80</tt>  <tt class="py-line">    <tt class="py-docstring">"""basestring -&gt; basestring</tt> </tt>
+<tt class="py-lineno"> 81</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno"> 82</tt>  <tt class="py-line"><tt class="py-docstring">    Create a tag name in the XRD 2.0 XML namespace suitable for using</tt> </tt>
+<tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt class="py-docstring">    with ElementTree</tt> </tt>
+<tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<tt class="py-lineno"> 85</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-10" class="py-name" targets="Function yadis.etxrd.nsTag()=yadis.etxrd-module.html#nsTag"><a title="yadis.etxrd.nsTag" class="py-name" href="#" onclick="return doclink('link-10', 'nsTag', 'link-10');">nsTag</a></tt></tt><tt class="py-op">(</tt><tt id="link-11" class="py-name"><a title="yadis.etxrd.XRD_NS_2_0" class="py-name" href="#" onclick="return doclink('link-11', 'XRD_NS_2_0', 'link-8');">XRD_NS_2_0</a></tt></tt><tt class="py-op">,</tt> <tt class="py-name">t</tt><tt class="py-op">)</tt> </tt>
+</div><tt class="py-lineno"> 86</tt>  <tt class="py-line"> </tt>
+<a name="mkXRDSTag"></a><div id="mkXRDSTag-def"><tt class="py-lineno"> 87</tt> <a class="py-toggle" href="#" id="mkXRDSTag-toggle" onclick="return toggle('mkXRDSTag');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.etxrd-module.html#mkXRDSTag">mkXRDSTag</a><tt class="py-op">(</tt><tt class="py-param">t</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="mkXRDSTag-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="mkXRDSTag-expanded"><tt class="py-lineno"> 88</tt>  <tt class="py-line">    <tt class="py-docstring">"""basestring -&gt; basestring</tt> </tt>
+<tt class="py-lineno"> 89</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno"> 90</tt>  <tt class="py-line"><tt class="py-docstring">    Create a tag name in the XRDS XML namespace suitable for using</tt> </tt>
+<tt class="py-lineno"> 91</tt>  <tt class="py-line"><tt class="py-docstring">    with ElementTree</tt> </tt>
+<tt class="py-lineno"> 92</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<tt class="py-lineno"> 93</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-12" class="py-name"><a title="yadis.etxrd.nsTag" class="py-name" href="#" onclick="return doclink('link-12', 'nsTag', 'link-10');">nsTag</a></tt></tt><tt class="py-op">(</tt><tt id="link-13" class="py-name"><a title="yadis.etxrd.XRDS_NS" class="py-name" href="#" onclick="return doclink('link-13', 'XRDS_NS', 'link-9');">XRDS_NS</a></tt></tt><tt class="py-op">,</tt> <tt class="py-name">t</tt><tt class="py-op">)</tt> </tt>
+</div><tt class="py-lineno"> 94</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 95</tt>  <tt class="py-line"><tt class="py-comment"># Tags that are used in Yadis documents</tt> </tt>
+<tt class="py-lineno"> 96</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt id="link-14" class="py-name" targets="Variable yadis.etxrd.root_tag=yadis.etxrd-module.html#root_tag"><a title="yadis.etxrd.root_tag" class="py-name" href="#" onclick="return doclink('link-14', 'root_tag', 'link-14');">root_tag</a></tt></tt> <tt class="py-op">=</tt> <tt id="link-15" class="py-name" targets="Function yadis.etxrd.mkXRDSTag()=yadis.etxrd-module.html#mkXRDSTag"><a title="yadis.etxrd.mkXRDSTag" class="py-name" href="#" onclick="return doclink('link-15', 'mkXRDSTag', 'link-15');">mkXRDSTag</a></tt></tt><tt class="py-op">(</tt><tt class="py-string">'XRDS'</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 97</tt>  <tt class="py-line"><tt id="link-16" class="py-name" targets="Variable yadis.etxrd.service_tag=yadis.etxrd-module.html#service_tag"><a title="yadis.etxrd.service_tag" class="py-name" href="#" onclick="return doclink('link-16', 'service_tag', 'link-16');">service_tag</a></tt></tt> <tt class="py-op">=</tt> <tt id="link-17" class="py-name" targets="Function yadis.etxrd.mkXRDTag()=yadis.etxrd-module.html#mkXRDTag"><a title="yadis.etxrd.mkXRDTag" class="py-name" href="#" onclick="return doclink('link-17', 'mkXRDTag', 'link-17');">mkXRDTag</a></tt></tt><tt class="py-op">(</tt><tt class="py-string">'Service'</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 98</tt>  <tt class="py-line"><tt id="link-18" class="py-name" targets="Variable yadis.etxrd.xrd_tag=yadis.etxrd-module.html#xrd_tag"><a title="yadis.etxrd.xrd_tag" class="py-name" href="#" onclick="return doclink('link-18', 'xrd_tag', 'link-18');">xrd_tag</a></tt></tt> <tt class="py-op">=</tt> <tt id="link-19" class="py-name"><a title="yadis.etxrd.mkXRDTag" class="py-name" href="#" onclick="return doclink('link-19', 'mkXRDTag', 'link-17');">mkXRDTag</a></tt></tt><tt class="py-op">(</tt><tt class="py-string">'XRD'</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 99</tt>  <tt class="py-line"><tt id="link-20" class="py-name" targets="Variable yadis.etxrd.type_tag=yadis.etxrd-module.html#type_tag"><a title="yadis.etxrd.type_tag" class="py-name" href="#" onclick="return doclink('link-20', 'type_tag', 'link-20');">type_tag</a></tt></tt> <tt class="py-op">=</tt> <tt id="link-21" class="py-name"><a title="yadis.etxrd.mkXRDTag" class="py-name" href="#" onclick="return doclink('link-21', 'mkXRDTag', 'link-17');">mkXRDTag</a></tt></tt><tt class="py-op">(</tt><tt class="py-string">'Type'</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">100</tt>  <tt class="py-line"><tt id="link-22" class="py-name" targets="Variable yadis.etxrd.uri_tag=yadis.etxrd-module.html#uri_tag"><a title="yadis.etxrd.uri_tag" class="py-name" href="#" onclick="return doclink('link-22', 'uri_tag', 'link-22');">uri_tag</a></tt></tt> <tt class="py-op">=</tt> <tt id="link-23" class="py-name"><a title="yadis.etxrd.mkXRDTag" class="py-name" href="#" onclick="return doclink('link-23', 'mkXRDTag', 'link-17');">mkXRDTag</a></tt></tt><tt class="py-op">(</tt><tt class="py-string">'URI'</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">101</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">102</tt>  <tt class="py-line"><tt class="py-comment"># Other XRD tags</tt> </tt>
+<tt class="py-lineno">103</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt id="link-24" class="py-name" targets="Variable yadis.etxrd.canonicalID_tag=yadis.etxrd-module.html#canonicalID_tag"><a title="yadis.etxrd.canonicalID_tag" class="py-name" href="#" onclick="return doclink('link-24', 'canonicalID_tag', 'link-24');">canonicalID_tag</a></tt></tt> <tt class="py-op">=</tt> <tt id="link-25" class="py-name"><a title="yadis.etxrd.mkXRDTag" class="py-name" href="#" onclick="return doclink('link-25', 'mkXRDTag', 'link-17');">mkXRDTag</a></tt></tt><tt class="py-op">(</tt><tt class="py-string">'CanonicalID'</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">104</tt>  <tt class="py-line"> </tt>
+<a name="isXRDS"></a><div id="isXRDS-def"><tt class="py-lineno">105</tt> <a class="py-toggle" href="#" id="isXRDS-toggle" onclick="return toggle('isXRDS');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.etxrd-module.html#isXRDS">isXRDS</a><tt class="py-op">(</tt><tt class="py-param">xrd_tree</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="isXRDS-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="isXRDS-expanded"><tt class="py-lineno">106</tt>  <tt class="py-line">    <tt class="py-docstring">"""Is this document an XRDS document?"""</tt> </tt>
+<tt class="py-lineno">107</tt>  <tt class="py-line">    <tt class="py-name">root</tt> <tt class="py-op">=</tt> <tt class="py-name">xrd_tree</tt><tt class="py-op">.</tt><tt class="py-name">getroot</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">108</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">root</tt><tt class="py-op">.</tt><tt class="py-name">tag</tt> <tt class="py-op">==</tt> <tt id="link-26" class="py-name"><a title="yadis.etxrd.root_tag" class="py-name" href="#" onclick="return doclink('link-26', 'root_tag', 'link-14');">root_tag</a></tt></tt> </tt>
+</div><tt class="py-lineno">109</tt>  <tt class="py-line"> </tt>
+<a name="getYadisXRD"></a><div id="getYadisXRD-def"><tt class="py-lineno">110</tt> <a class="py-toggle" href="#" id="getYadisXRD-toggle" onclick="return toggle('getYadisXRD');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.etxrd-module.html#getYadisXRD">getYadisXRD</a><tt class="py-op">(</tt><tt class="py-param">xrd_tree</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="getYadisXRD-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="getYadisXRD-expanded"><tt class="py-lineno">111</tt>  <tt class="py-line">    <tt class="py-docstring">"""Return the XRD element that should contain the Yadis services"""</tt> </tt>
+<tt class="py-lineno">112</tt>  <tt class="py-line">    <tt class="py-name">xrd</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<tt class="py-lineno">113</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">114</tt>  <tt class="py-line">    <tt class="py-comment"># for the side-effect of assigning the last one in the list to the</tt> </tt>
+<tt class="py-lineno">115</tt>  <tt class="py-line"><tt class="py-comment"></tt>    <tt class="py-comment"># xrd variable</tt> </tt>
+<tt class="py-lineno">116</tt>  <tt class="py-line"><tt class="py-comment"></tt>    <tt class="py-keyword">for</tt> <tt class="py-name">xrd</tt> <tt class="py-keyword">in</tt> <tt class="py-name">xrd_tree</tt><tt class="py-op">.</tt><tt class="py-name">findall</tt><tt class="py-op">(</tt><tt id="link-27" class="py-name"><a title="yadis.etxrd.xrd_tag" class="py-name" href="#" onclick="return doclink('link-27', 'xrd_tag', 'link-18');">xrd_tag</a></tt></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">117</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
+<tt class="py-lineno">118</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">119</tt>  <tt class="py-line">    <tt class="py-comment"># There were no elements found, or else xrd would be set to the</tt> </tt>
+<tt class="py-lineno">120</tt>  <tt class="py-line"><tt class="py-comment"></tt>    <tt class="py-comment"># last one</tt> </tt>
+<tt class="py-lineno">121</tt>  <tt class="py-line"><tt class="py-comment"></tt>    <tt class="py-keyword">if</tt> <tt class="py-name">xrd</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">122</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt id="link-28" class="py-name"><a title="yadis.etxrd.XRDSError" class="py-name" href="#" onclick="return doclink('link-28', 'XRDSError', 'link-4');">XRDSError</a></tt></tt><tt class="py-op">(</tt><tt class="py-string">'No XRD present in tree'</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">123</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">124</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">xrd</tt> </tt>
+</div><tt class="py-lineno">125</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">126</tt>  <tt class="py-line"> </tt>
+<a name="getCanonicalID"></a><div id="getCanonicalID-def"><tt class="py-lineno">127</tt> <a class="py-toggle" href="#" id="getCanonicalID-toggle" onclick="return toggle('getCanonicalID');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.etxrd-module.html#getCanonicalID">getCanonicalID</a><tt class="py-op">(</tt><tt class="py-param">iname</tt><tt class="py-op">,</tt> <tt class="py-param">xrd_tree</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="getCanonicalID-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="getCanonicalID-expanded"><tt class="py-lineno">128</tt>  <tt class="py-line">    <tt class="py-docstring">"""Return the CanonicalID from this XRDS document.</tt> </tt>
+<tt class="py-lineno">129</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno">130</tt>  <tt class="py-line"><tt class="py-docstring">    @param iname: the XRI being resolved.</tt> </tt>
+<tt class="py-lineno">131</tt>  <tt class="py-line"><tt class="py-docstring">    @type iname: unicode</tt> </tt>
+<tt class="py-lineno">132</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno">133</tt>  <tt class="py-line"><tt class="py-docstring">    @param xrd_tree: The XRDS output from the resolver.</tt> </tt>
+<tt class="py-lineno">134</tt>  <tt class="py-line"><tt class="py-docstring">    @type xrd_tree: ElementTree</tt> </tt>
+<tt class="py-lineno">135</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno">136</tt>  <tt class="py-line"><tt class="py-docstring">    @returns: The XRI CanonicalID or None.</tt> </tt>
+<tt class="py-lineno">137</tt>  <tt class="py-line"><tt class="py-docstring">    @returntype: unicode or None</tt> </tt>
+<tt class="py-lineno">138</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<tt class="py-lineno">139</tt>  <tt class="py-line">    <tt class="py-name">xrd_list</tt> <tt class="py-op">=</tt> <tt class="py-name">xrd_tree</tt><tt class="py-op">.</tt><tt class="py-name">findall</tt><tt class="py-op">(</tt><tt id="link-29" class="py-name"><a title="yadis.etxrd.xrd_tag" class="py-name" href="#" onclick="return doclink('link-29', 'xrd_tag', 'link-18');">xrd_tag</a></tt></tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">140</tt>  <tt class="py-line">    <tt class="py-name">xrd_list</tt><tt class="py-op">.</tt><tt class="py-name">reverse</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">141</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">142</tt>  <tt class="py-line">    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">143</tt>  <tt class="py-line">        <tt class="py-name">canonicalID</tt> <tt class="py-op">=</tt> <tt id="link-30" class="py-name"><a title="yadis.xri" class="py-name" href="#" onclick="return doclink('link-30', 'xri', 'link-1');">xri</a></tt></tt><tt class="py-op">.</tt><tt id="link-31" class="py-name" targets="Function yadis.xri.XRI()=yadis.xri-module.html#XRI"><a title="yadis.xri.XRI" class="py-name" href="#" onclick="return doclink('link-31', 'XRI', 'link-31');">XRI</a></tt></tt><tt class="py-op">(</tt><tt class="py-name">xrd_list</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">findall</tt><tt class="py-op">(</tt><tt id="link-32" class="py-name"><a title="yadis.etxrd.canonicalID_tag" class="py-name" href="#" onclick="return doclink('link-32', 'canonicalID_tag', 'link-24');">canonicalID_tag</a></tt></tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">text</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">144</tt>  <tt class="py-line">    <tt class="py-keyword">except</tt> <tt class="py-name">IndexError</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">145</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">None</tt> </tt>
+<tt class="py-lineno">146</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">147</tt>  <tt class="py-line">    <tt class="py-name">childID</tt> <tt class="py-op">=</tt> <tt class="py-name">canonicalID</tt> </tt>
+<tt class="py-lineno">148</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">149</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">xrd</tt> <tt class="py-keyword">in</tt> <tt class="py-name">xrd_list</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">:</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">150</tt>  <tt class="py-line">        <tt class="py-comment"># XXX: can't use rsplit until we require python &gt;= 2.4.</tt> </tt>
+<tt class="py-lineno">151</tt>  <tt class="py-line"><tt class="py-comment"></tt>        <tt class="py-name">parent_sought</tt> <tt class="py-op">=</tt> <tt class="py-name">childID</tt><tt class="py-op">[</tt><tt class="py-op">:</tt><tt class="py-name">childID</tt><tt class="py-op">.</tt><tt class="py-name">rindex</tt><tt class="py-op">(</tt><tt class="py-string">'!'</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<tt class="py-lineno">152</tt>  <tt class="py-line">        <tt class="py-name">parent_list</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt id="link-33" class="py-name"><a title="yadis.xri" class="py-name" href="#" onclick="return doclink('link-33', 'xri', 'link-1');">xri</a></tt></tt><tt class="py-op">.</tt><tt id="link-34" class="py-name"><a title="yadis.xri.XRI" class="py-name" href="#" onclick="return doclink('link-34', 'XRI', 'link-31');">XRI</a></tt></tt><tt class="py-op">(</tt><tt class="py-name">c</tt><tt class="py-op">.</tt><tt class="py-name">text</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">c</tt> <tt class="py-keyword">in</tt> <tt class="py-name">xrd</tt><tt class="py-op">.</tt><tt class="py-name">findall</tt><tt class="py-op">(</tt><tt id="link-35" class="py-name"><a title="yadis.etxrd.canonicalID_tag" class="py-name" href="#" onclick="return doclink('link-35', 'canonicalID_tag', 'link-24');">canonicalID_tag</a></tt></tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<tt class="py-lineno">153</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">parent_sought</tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">parent_list</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">154</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-36" class="py-name" targets="Class yadis.etxrd.XRDSFraud=yadis.etxrd.XRDSFraud-class.html"><a title="yadis.etxrd.XRDSFraud" class="py-name" href="#" onclick="return doclink('link-36', 'XRDSFraud', 'link-36');">XRDSFraud</a></tt></tt><tt class="py-op">(</tt><tt class="py-string">"%r can not come from any of %s"</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">parent_sought</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno">155</tt>  <tt class="py-line">                                                                <tt class="py-name">parent_list</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">156</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">157</tt>  <tt class="py-line">        <tt class="py-name">childID</tt> <tt class="py-op">=</tt> <tt class="py-name">parent_sought</tt> </tt>
+<tt class="py-lineno">158</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">159</tt>  <tt class="py-line">    <tt class="py-name">root</tt> <tt class="py-op">=</tt> <tt id="link-37" class="py-name"><a title="yadis.xri" class="py-name" href="#" onclick="return doclink('link-37', 'xri', 'link-1');">xri</a></tt></tt><tt class="py-op">.</tt><tt id="link-38" class="py-name" targets="Function yadis.xri.rootAuthority()=yadis.xri-module.html#rootAuthority"><a title="yadis.xri.rootAuthority" class="py-name" href="#" onclick="return doclink('link-38', 'rootAuthority', 'link-38');">rootAuthority</a></tt></tt><tt class="py-op">(</tt><tt class="py-name">iname</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">160</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt id="link-39" class="py-name"><a title="yadis.xri" class="py-name" href="#" onclick="return doclink('link-39', 'xri', 'link-1');">xri</a></tt></tt><tt class="py-op">.</tt><tt id="link-40" class="py-name" targets="Function yadis.xri.providerIsAuthoritative()=yadis.xri-module.html#providerIsAuthoritative"><a title="yadis.xri.providerIsAuthoritative" class="py-name" href="#" onclick="return doclink('link-40', 'providerIsAuthoritative', 'link-40');">providerIsAuthoritative</a></tt></tt><tt class="py-op">(</tt><tt class="py-name">root</tt><tt class="py-op">,</tt> <tt class="py-name">childID</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">161</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt id="link-41" class="py-name"><a title="yadis.etxrd.XRDSFraud" class="py-name" href="#" onclick="return doclink('link-41', 'XRDSFraud', 'link-36');">XRDSFraud</a></tt></tt><tt class="py-op">(</tt><tt class="py-string">"%r can not come from root %r"</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">childID</tt><tt class="py-op">,</tt> <tt class="py-name">root</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">162</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">163</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">canonicalID</tt> </tt>
+</div><tt class="py-lineno">164</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">165</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">166</tt>  <tt class="py-line"> </tt>
+<a name="_Max"></a><div id="_Max-def"><tt class="py-lineno">167</tt> <a class="py-toggle" href="#" id="_Max-toggle" onclick="return toggle('_Max');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="yadis.etxrd._Max-class.html">_Max</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_Max-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_Max-expanded"><tt class="py-lineno">168</tt>  <tt class="py-line">    <tt class="py-docstring">"""Value that compares greater than any other value.</tt> </tt>
+<tt class="py-lineno">169</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno">170</tt>  <tt class="py-line"><tt class="py-docstring">    Should only be used as a singleton. Implemented for use as a</tt> </tt>
+<tt class="py-lineno">171</tt>  <tt class="py-line"><tt class="py-docstring">    priority value for when a priority is not specified."""</tt> </tt>
+<a name="_Max.__cmp__"></a><div id="_Max.__cmp__-def"><tt class="py-lineno">172</tt> <a class="py-toggle" href="#" id="_Max.__cmp__-toggle" onclick="return toggle('_Max.__cmp__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.etxrd._Max-class.html#__cmp__">__cmp__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">other</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_Max.__cmp__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="_Max.__cmp__-expanded"><tt class="py-lineno">173</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">other</tt> <tt class="py-keyword">is</tt> <tt class="py-name">self</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">174</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-number">0</tt> </tt>
+<tt class="py-lineno">175</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">176</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-number">1</tt> </tt>
+</div></div><tt class="py-lineno">177</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">178</tt>  <tt class="py-line"><tt id="link-42" class="py-name" targets="Variable yadis.etxrd.Max=yadis.etxrd-module.html#Max"><a title="yadis.etxrd.Max" class="py-name" href="#" onclick="return doclink('link-42', 'Max', 'link-42');">Max</a></tt></tt> <tt class="py-op">=</tt> <tt id="link-43" class="py-name" targets="Class yadis.etxrd._Max=yadis.etxrd._Max-class.html"><a title="yadis.etxrd._Max" class="py-name" href="#" onclick="return doclink('link-43', '_Max', 'link-43');">_Max</a></tt></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">179</tt>  <tt class="py-line"> </tt>
+<a name="getPriorityStrict"></a><div id="getPriorityStrict-def"><tt class="py-lineno">180</tt> <a class="py-toggle" href="#" id="getPriorityStrict-toggle" onclick="return toggle('getPriorityStrict');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.etxrd-module.html#getPriorityStrict">getPriorityStrict</a><tt class="py-op">(</tt><tt class="py-param">element</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="getPriorityStrict-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="getPriorityStrict-expanded"><tt class="py-lineno">181</tt>  <tt class="py-line">    <tt class="py-docstring">"""Get the priority of this element.</tt> </tt>
+<tt class="py-lineno">182</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno">183</tt>  <tt class="py-line"><tt class="py-docstring">    Raises ValueError if the value of the priority is invalid. If no</tt> </tt>
+<tt class="py-lineno">184</tt>  <tt class="py-line"><tt class="py-docstring">    priority is specified, it returns a value that compares greater</tt> </tt>
+<tt class="py-lineno">185</tt>  <tt class="py-line"><tt class="py-docstring">    than any other value.</tt> </tt>
+<tt class="py-lineno">186</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<tt class="py-lineno">187</tt>  <tt class="py-line">    <tt class="py-name">prio_str</tt> <tt class="py-op">=</tt> <tt class="py-name">element</tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-string">'priority'</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">188</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">prio_str</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">189</tt>  <tt class="py-line">        <tt class="py-name">prio_val</tt> <tt class="py-op">=</tt> <tt class="py-name">int</tt><tt class="py-op">(</tt><tt class="py-name">prio_str</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">190</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">prio_val</tt> <tt class="py-op">&gt;=</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">191</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">prio_val</tt> </tt>
+<tt class="py-lineno">192</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">193</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">'Priority values must be non-negative integers'</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">194</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">195</tt>  <tt class="py-line">    <tt class="py-comment"># Any errors in parsing the priority fall through to here</tt> </tt>
+<tt class="py-lineno">196</tt>  <tt class="py-line"><tt class="py-comment"></tt>    <tt class="py-keyword">return</tt> <tt id="link-44" class="py-name"><a title="yadis.etxrd.Max" class="py-name" href="#" onclick="return doclink('link-44', 'Max', 'link-42');">Max</a></tt></tt> </tt>
+</div><tt class="py-lineno">197</tt>  <tt class="py-line"> </tt>
+<a name="getPriority"></a><div id="getPriority-def"><tt class="py-lineno">198</tt> <a class="py-toggle" href="#" id="getPriority-toggle" onclick="return toggle('getPriority');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.etxrd-module.html#getPriority">getPriority</a><tt class="py-op">(</tt><tt class="py-param">element</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="getPriority-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="getPriority-expanded"><tt class="py-lineno">199</tt>  <tt class="py-line">    <tt class="py-docstring">"""Get the priority of this element</tt> </tt>
+<tt class="py-lineno">200</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno">201</tt>  <tt class="py-line"><tt class="py-docstring">    Returns Max if no priority is specified or the priority value is invalid.</tt> </tt>
+<tt class="py-lineno">202</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<tt class="py-lineno">203</tt>  <tt class="py-line">    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">204</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-45" class="py-name" targets="Function yadis.etxrd.getPriorityStrict()=yadis.etxrd-module.html#getPriorityStrict"><a title="yadis.etxrd.getPriorityStrict" class="py-name" href="#" onclick="return doclink('link-45', 'getPriorityStrict', 'link-45');">getPriorityStrict</a></tt></tt><tt class="py-op">(</tt><tt class="py-name">element</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">205</tt>  <tt class="py-line">    <tt class="py-keyword">except</tt> <tt class="py-name">ValueError</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">206</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-46" class="py-name"><a title="yadis.etxrd.Max" class="py-name" href="#" onclick="return doclink('link-46', 'Max', 'link-42');">Max</a></tt></tt> </tt>
+</div><tt class="py-lineno">207</tt>  <tt class="py-line"> </tt>
+<a name="prioSort"></a><div id="prioSort-def"><tt class="py-lineno">208</tt> <a class="py-toggle" href="#" id="prioSort-toggle" onclick="return toggle('prioSort');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.etxrd-module.html#prioSort">prioSort</a><tt class="py-op">(</tt><tt class="py-param">elements</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="prioSort-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="prioSort-expanded"><tt class="py-lineno">209</tt>  <tt class="py-line">    <tt class="py-docstring">"""Sort a list of elements that have priority attributes"""</tt> </tt>
+<tt class="py-lineno">210</tt>  <tt class="py-line">    <tt class="py-comment"># Randomize the services before sorting so that equal priority</tt> </tt>
+<tt class="py-lineno">211</tt>  <tt class="py-line"><tt class="py-comment"></tt>    <tt class="py-comment"># elements are load-balanced.</tt> </tt>
+<tt class="py-lineno">212</tt>  <tt class="py-line"><tt class="py-comment"></tt>    <tt class="py-name">random</tt><tt class="py-op">.</tt><tt class="py-name">shuffle</tt><tt class="py-op">(</tt><tt class="py-name">elements</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">213</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">214</tt>  <tt class="py-line">    <tt class="py-name">prio_elems</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">(</tt><tt id="link-47" class="py-name" targets="Function yadis.etxrd.getPriority()=yadis.etxrd-module.html#getPriority"><a title="yadis.etxrd.getPriority" class="py-name" href="#" onclick="return doclink('link-47', 'getPriority', 'link-47');">getPriority</a></tt></tt><tt class="py-op">(</tt><tt class="py-name">e</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">e</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">e</tt> <tt class="py-keyword">in</tt> <tt class="py-name">elements</tt><tt class="py-op">]</tt> </tt>
+<tt class="py-lineno">215</tt>  <tt class="py-line">    <tt class="py-name">prio_elems</tt><tt class="py-op">.</tt><tt class="py-name">sort</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">216</tt>  <tt class="py-line">    <tt class="py-name">sorted_elems</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">s</tt> <tt class="py-keyword">for</tt> <tt class="py-op">(</tt><tt class="py-name">_</tt><tt class="py-op">,</tt> <tt class="py-name">s</tt><tt class="py-op">)</tt> <tt class="py-keyword">in</tt> <tt class="py-name">prio_elems</tt><tt class="py-op">]</tt> </tt>
+<tt class="py-lineno">217</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">sorted_elems</tt> </tt>
+</div><tt class="py-lineno">218</tt>  <tt class="py-line"> </tt>
+<a name="iterServices"></a><div id="iterServices-def"><tt class="py-lineno">219</tt> <a class="py-toggle" href="#" id="iterServices-toggle" onclick="return toggle('iterServices');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.etxrd-module.html#iterServices">iterServices</a><tt class="py-op">(</tt><tt class="py-param">xrd_tree</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="iterServices-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="iterServices-expanded"><tt class="py-lineno">220</tt>  <tt class="py-line">    <tt class="py-docstring">"""Return an iterable over the Service elements in the Yadis XRD</tt> </tt>
+<tt class="py-lineno">221</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno">222</tt>  <tt class="py-line"><tt class="py-docstring">    sorted by priority"""</tt> </tt>
+<tt class="py-lineno">223</tt>  <tt class="py-line">    <tt class="py-name">xrd</tt> <tt class="py-op">=</tt> <tt id="link-48" class="py-name" targets="Function yadis.etxrd.getYadisXRD()=yadis.etxrd-module.html#getYadisXRD"><a title="yadis.etxrd.getYadisXRD" class="py-name" href="#" onclick="return doclink('link-48', 'getYadisXRD', 'link-48');">getYadisXRD</a></tt></tt><tt class="py-op">(</tt><tt class="py-name">xrd_tree</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">224</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-49" class="py-name" targets="Function yadis.etxrd.prioSort()=yadis.etxrd-module.html#prioSort"><a title="yadis.etxrd.prioSort" class="py-name" href="#" onclick="return doclink('link-49', 'prioSort', 'link-49');">prioSort</a></tt></tt><tt class="py-op">(</tt><tt class="py-name">xrd</tt><tt class="py-op">.</tt><tt class="py-name">findall</tt><tt class="py-op">(</tt><tt id="link-50" class="py-name"><a title="yadis.etxrd.service_tag" class="py-name" href="#" onclick="return doclink('link-50', 'service_tag', 'link-16');">service_tag</a></tt></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><tt class="py-lineno">225</tt>  <tt class="py-line"> </tt>
+<a name="sortedURIs"></a><div id="sortedURIs-def"><tt class="py-lineno">226</tt> <a class="py-toggle" href="#" id="sortedURIs-toggle" onclick="return toggle('sortedURIs');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.etxrd-module.html#sortedURIs">sortedURIs</a><tt class="py-op">(</tt><tt class="py-param">service_element</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="sortedURIs-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="sortedURIs-expanded"><tt class="py-lineno">227</tt>  <tt class="py-line">    <tt class="py-docstring">"""Given a Service element, return a list of the contents of all</tt> </tt>
+<tt class="py-lineno">228</tt>  <tt class="py-line"><tt class="py-docstring">    URI tags in priority order."""</tt> </tt>
+<tt class="py-lineno">229</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-op">[</tt><tt class="py-name">uri_element</tt><tt class="py-op">.</tt><tt class="py-name">text</tt> <tt class="py-keyword">for</tt> <tt class="py-name">uri_element</tt> </tt>
+<tt class="py-lineno">230</tt>  <tt class="py-line">            <tt class="py-keyword">in</tt> <tt id="link-51" class="py-name"><a title="yadis.etxrd.prioSort" class="py-name" href="#" onclick="return doclink('link-51', 'prioSort', 'link-49');">prioSort</a></tt></tt><tt class="py-op">(</tt><tt class="py-name">service_element</tt><tt class="py-op">.</tt><tt class="py-name">findall</tt><tt class="py-op">(</tt><tt id="link-52" class="py-name"><a title="yadis.etxrd.uri_tag" class="py-name" href="#" onclick="return doclink('link-52', 'uri_tag', 'link-22');">uri_tag</a></tt></tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+</div><tt class="py-lineno">231</tt>  <tt class="py-line"> </tt>
+<a name="getTypeURIs"></a><div id="getTypeURIs-def"><tt class="py-lineno">232</tt> <a class="py-toggle" href="#" id="getTypeURIs-toggle" onclick="return toggle('getTypeURIs');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.etxrd-module.html#getTypeURIs">getTypeURIs</a><tt class="py-op">(</tt><tt class="py-param">service_element</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="getTypeURIs-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="getTypeURIs-expanded"><tt class="py-lineno">233</tt>  <tt class="py-line">    <tt class="py-docstring">"""Given a Service element, return a list of the contents of all</tt> </tt>
+<tt class="py-lineno">234</tt>  <tt class="py-line"><tt class="py-docstring">    Type tags"""</tt> </tt>
+<tt class="py-lineno">235</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-op">[</tt><tt class="py-name">type_element</tt><tt class="py-op">.</tt><tt class="py-name">text</tt> <tt class="py-keyword">for</tt> <tt class="py-name">type_element</tt> </tt>
+<tt class="py-lineno">236</tt>  <tt class="py-line">            <tt class="py-keyword">in</tt> <tt class="py-name">service_element</tt><tt class="py-op">.</tt><tt class="py-name">findall</tt><tt class="py-op">(</tt><tt id="link-53" class="py-name"><a title="yadis.etxrd.type_tag" class="py-name" href="#" onclick="return doclink('link-53', 'type_tag', 'link-20');">type_tag</a></tt></tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+</div><tt class="py-lineno">237</tt>  <tt class="py-line"> </tt>
+<a name="expandService"></a><div id="expandService-def"><tt class="py-lineno">238</tt> <a class="py-toggle" href="#" id="expandService-toggle" onclick="return toggle('expandService');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.etxrd-module.html#expandService">expandService</a><tt class="py-op">(</tt><tt class="py-param">service_element</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="expandService-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="expandService-expanded"><tt class="py-lineno">239</tt>  <tt class="py-line">    <tt class="py-docstring">"""Take a service element and expand it into an iterator of:</tt> </tt>
+<tt class="py-lineno">240</tt>  <tt class="py-line"><tt class="py-docstring">    ([type_uri], uri, service_element)</tt> </tt>
+<tt class="py-lineno">241</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<tt class="py-lineno">242</tt>  <tt class="py-line">    <tt class="py-name">uris</tt> <tt class="py-op">=</tt> <tt id="link-54" class="py-name" targets="Function yadis.etxrd.sortedURIs()=yadis.etxrd-module.html#sortedURIs"><a title="yadis.etxrd.sortedURIs" class="py-name" href="#" onclick="return doclink('link-54', 'sortedURIs', 'link-54');">sortedURIs</a></tt></tt><tt class="py-op">(</tt><tt class="py-name">service_element</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">243</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">uris</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">244</tt>  <tt class="py-line">        <tt class="py-name">uris</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">None</tt><tt class="py-op">]</tt> </tt>
+<tt class="py-lineno">245</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">246</tt>  <tt class="py-line">    <tt class="py-name">expanded</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<tt class="py-lineno">247</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">uri</tt> <tt class="py-keyword">in</tt> <tt class="py-name">uris</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">248</tt>  <tt class="py-line">        <tt class="py-name">type_uris</tt> <tt class="py-op">=</tt> <tt id="link-55" class="py-name" targets="Function yadis.etxrd.getTypeURIs()=yadis.etxrd-module.html#getTypeURIs"><a title="yadis.etxrd.getTypeURIs" class="py-name" href="#" onclick="return doclink('link-55', 'getTypeURIs', 'link-55');">getTypeURIs</a></tt></tt><tt class="py-op">(</tt><tt class="py-name">service_element</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">249</tt>  <tt class="py-line">        <tt class="py-name">expanded</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">type_uris</tt><tt class="py-op">,</tt> <tt class="py-name">uri</tt><tt class="py-op">,</tt> <tt class="py-name">service_element</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">250</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">251</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">expanded</tt> </tt>
+</div><tt class="py-lineno">252</tt>  <tt class="py-line"> </tt>
+<a name="expandServices"></a><div id="expandServices-def"><tt class="py-lineno">253</tt> <a class="py-toggle" href="#" id="expandServices-toggle" onclick="return toggle('expandServices');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.etxrd-module.html#expandServices">expandServices</a><tt class="py-op">(</tt><tt class="py-param">service_elements</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="expandServices-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="expandServices-expanded"><tt class="py-lineno">254</tt>  <tt class="py-line">    <tt class="py-docstring">"""Take a sorted iterator of service elements and expand it into a</tt> </tt>
+<tt class="py-lineno">255</tt>  <tt class="py-line"><tt class="py-docstring">    sorted iterator of:</tt> </tt>
+<tt class="py-lineno">256</tt>  <tt class="py-line"><tt class="py-docstring">    ([type_uri], uri, service_element)</tt> </tt>
+<tt class="py-lineno">257</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno">258</tt>  <tt class="py-line"><tt class="py-docstring">    There may be more than one item in the resulting list for each</tt> </tt>
+<tt class="py-lineno">259</tt>  <tt class="py-line"><tt class="py-docstring">    service element if there is more than one URI or type for a</tt> </tt>
+<tt class="py-lineno">260</tt>  <tt class="py-line"><tt class="py-docstring">    service, but each triple will be unique.</tt> </tt>
+<tt class="py-lineno">261</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno">262</tt>  <tt class="py-line"><tt class="py-docstring">    If there is no URI or Type for a Service element, it will not</tt> </tt>
+<tt class="py-lineno">263</tt>  <tt class="py-line"><tt class="py-docstring">    appear in the result.</tt> </tt>
+<tt class="py-lineno">264</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<tt class="py-lineno">265</tt>  <tt class="py-line">    <tt class="py-name">expanded</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<tt class="py-lineno">266</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">service_element</tt> <tt class="py-keyword">in</tt> <tt class="py-name">service_elements</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">267</tt>  <tt class="py-line">        <tt class="py-name">expanded</tt><tt class="py-op">.</tt><tt class="py-name">extend</tt><tt class="py-op">(</tt><tt id="link-56" class="py-name" targets="Function yadis.etxrd.expandService()=yadis.etxrd-module.html#expandService"><a title="yadis.etxrd.expandService" class="py-name" href="#" onclick="return doclink('link-56', 'expandService', 'link-56');">expandService</a></tt></tt><tt class="py-op">(</tt><tt class="py-name">service_element</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">268</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">269</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">expanded</tt> </tt>
+</div><tt class="py-lineno">270</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="yadis-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.openidenabled.com/yadis/">Python-Yadis</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">Generated by Epydoc
+        3.0alpha3 on Fri Dec  8 13:17:18 2006</td>
+    <td align="right" class="footer">
+      <a href="http://epydoc.sourceforge.net">http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie()
+  // -->
+</script>
+  
+</body>
+</html>

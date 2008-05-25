@@ -1,0 +1,76 @@
+.. -*- rst -*-
+
+Using OpenID with YADIS
+#######################
+
+What is YADIS?
+==============
+
+YADIS is a service discovery protocol. See http://yadis.org/ for more
+information about how to use YADIS. See http://openid.net/ for more
+information about OpenID.
+
+OpenID service definitions
+==========================
+
+Any ``<xrd:Service>`` element in a YADIS document that has a
+``<xrd:Type>`` element whose value is ``http://openid.net/singon/1.0``
+describes an OpenID sign-on service.
+
+An OpenID sign-on service uses these tags:
+
+=============== ======== =================== =================================
+Tag             Required OpenID
+                         ``<link
+                         rel="...">``
+                         equivalent          Value
+=============== ======== =================== =================================
+xrd:Type        yes      *none*              ``http://openid.net/signon/1.2``
+xrd:URI         yes      ``openid.server``   The OpenID server URL for this
+                                             service
+openid:Delegate no       ``openid.delegate`` The URL by which the server knows
+                                             this user
+=============== ======== =================== =================================
+
+The Type and URI tag are in the ``xrd`` namespace,
+``xri://$xrd*($v*2.0)``, and are standard elements of XRD
+documents. The Delegate tag is in the ``http://openid.net/signon/1.0``
+namespace. An XML schema for this namespace can be found at
+``http://openid.net/signon/1.0/schema.xml``.
+
+Extensions
+----------
+
+OpenID 1.2 supports extensions, which are exchanges of additional data
+along with an authentication request. Extensions pass data through
+arguments that are in a sub-namespace of ``openid``. For example, the
+simple registration extension uses the namespace ``openid.sreg``, so
+all query arguments that are related to simple registration data
+exchange are prefixed with ``openid.sreg.``. In order for relying
+parties to be aware of what extensions are supported by the server,
+there is an additional tag in the OpenID XML namespace for declaring
+them.
+
+The ``<openid:Extension>`` tag contains a URI that identifies a
+particular OpenID extension. An OpenID service descriptor may contain
+any number of extension tags. If an extension is not listed in the
+service descriptor, the relying party should not attempt to use that
+extension with any server URI listed in that descriptor. Each
+extension will define its own namespace prefix. There is no mechanism
+for avoiding namespace prefix collisions. It is expected that there
+will not be a large number of extensions in use, so the likelyhood of
+collisions is small.
+
+Using an OpenID definition
+==========================
+
+Using YADIS with OpenID definitions replaces steps 1-3 of the `OpenID
+specification`_. Use the YADIS protocol to obtain a YADIS resource
+descriptor. If a descriptor contains OpenID service definitions,
+extract the values of the ``<xrd:URI>`` and ``<openid:Delegate>`` tags
+and start at step 4 of the OpenID specification, using those values as
+``openid.server`` and ``openid.delegate`` respectively. If there is no
+``<openid:Delegate>`` specified, the YADIS URL takes the place of the
+user's OpenID URL in the OpenID protocol.
+
+.. _`OpenID specification`: http://openid.net/specs.bml

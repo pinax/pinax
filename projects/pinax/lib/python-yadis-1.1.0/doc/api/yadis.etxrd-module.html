@@ -1,0 +1,890 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>yadis.etxrd</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="yadis-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.openidenabled.com/yadis/">Python-Yadis</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="yadis-module.html">Package&nbsp;yadis</a> ::
+        Module&nbsp;etxrd
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="yadis.etxrd-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module etxrd</h1><span class="codelink"><a href="yadis.etxrd-pysrc.html">source&nbsp;code</a></span><br /><br />
+ElementTree interface to an XRD document.<br /><br />
+
+<!-- ==================== CLASSES ==================== -->
+<a name="section-Classes"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Classes</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Classes"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <a href="yadis.etxrd.XRDSError-class.html">XRDSError</a><br />
+      An error with the XRDS document.
+  </td>
+</tr>
+<tr class="private">
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <a href="yadis.etxrd.XRDSFraud-class.html">XRDSFraud</a><br />
+      Raised when there's an assertion in the XRDS that it does not 
+        have the authority to make.
+  </td>
+</tr>
+<tr class="private">
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <a href="yadis.etxrd._Max-class.html">_Max</a><br />
+      Value that compares greater than any other value.
+  </td>
+</tr>
+</table>
+
+<br />
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <span class="summary-sig"><a href="yadis.etxrd-module.html#parseXRDS" class="summary-sig-name">parseXRDS</a>(<span class="summary-sig-arg">text</span>)</span><br />
+      Parse the given text as an XRDS document.
+  </td>
+</tr>
+<tr>
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <span class="summary-sig"><a href="yadis.etxrd-module.html#nsTag" class="summary-sig-name">nsTag</a>(<span class="summary-sig-arg">ns</span>,
+        <span class="summary-sig-arg">t</span>)</span>
+  </td>
+</tr>
+<tr>
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <span class="summary-sig"><a href="yadis.etxrd-module.html#mkXRDTag" class="summary-sig-name">mkXRDTag</a>(<span class="summary-sig-arg">t</span>)</span><br />
+      basestring -&gt; basestring
+  </td>
+</tr>
+<tr class="private">
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <span class="summary-sig"><a href="yadis.etxrd-module.html#mkXRDSTag" class="summary-sig-name">mkXRDSTag</a>(<span class="summary-sig-arg">t</span>)</span><br />
+      basestring -&gt; basestring
+  </td>
+</tr>
+<tr>
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <span class="summary-sig"><a href="yadis.etxrd-module.html#isXRDS" class="summary-sig-name">isXRDS</a>(<span class="summary-sig-arg">xrd_tree</span>)</span><br />
+      Is this document an XRDS document?
+  </td>
+</tr>
+<tr>
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <span class="summary-sig"><a href="yadis.etxrd-module.html#getYadisXRD" class="summary-sig-name">getYadisXRD</a>(<span class="summary-sig-arg">xrd_tree</span>)</span><br />
+      Return the XRD element that should contain the Yadis services
+  </td>
+</tr>
+<tr>
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">unicode or None</span>
+  </td><td class="summary">
+    <span class="summary-sig"><a href="yadis.etxrd-module.html#getCanonicalID" class="summary-sig-name">getCanonicalID</a>(<span class="summary-sig-arg">iname</span>,
+        <span class="summary-sig-arg">xrd_tree</span>)</span><br />
+      Return the CanonicalID from this XRDS document.
+  </td>
+</tr>
+<tr>
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <span class="summary-sig"><a href="yadis.etxrd-module.html#getPriorityStrict" class="summary-sig-name">getPriorityStrict</a>(<span class="summary-sig-arg">element</span>)</span><br />
+      Get the priority of this element.
+  </td>
+</tr>
+<tr>
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <span class="summary-sig"><a href="yadis.etxrd-module.html#getPriority" class="summary-sig-name">getPriority</a>(<span class="summary-sig-arg">element</span>)</span><br />
+      Get the priority of this element
+  </td>
+</tr>
+<tr>
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <span class="summary-sig"><a href="yadis.etxrd-module.html#prioSort" class="summary-sig-name">prioSort</a>(<span class="summary-sig-arg">elements</span>)</span><br />
+      Sort a list of elements that have priority attributes
+  </td>
+</tr>
+<tr>
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <span class="summary-sig"><a href="yadis.etxrd-module.html#iterServices" class="summary-sig-name">iterServices</a>(<span class="summary-sig-arg">xrd_tree</span>)</span><br />
+      Return an iterable over the Service elements in the Yadis XRD
+  </td>
+</tr>
+<tr class="private">
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <span class="summary-sig"><a href="yadis.etxrd-module.html#sortedURIs" class="summary-sig-name">sortedURIs</a>(<span class="summary-sig-arg">service_element</span>)</span><br />
+      Given a Service element, return a list of the contents of all URI 
+      tags in priority order.
+  </td>
+</tr>
+<tr class="private">
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <span class="summary-sig"><a href="yadis.etxrd-module.html#getTypeURIs" class="summary-sig-name">getTypeURIs</a>(<span class="summary-sig-arg">service_element</span>)</span><br />
+      Given a Service element, return a list of the contents of all Type
+      tags
+  </td>
+</tr>
+<tr>
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <span class="summary-sig"><a href="yadis.etxrd-module.html#expandService" class="summary-sig-name">expandService</a>(<span class="summary-sig-arg">service_element</span>)</span><br />
+      Take a service element and expand it into an iterator of: 
+      ([type_uri], uri, service_element)
+  </td>
+</tr>
+<tr>
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <span class="summary-sig"><a href="yadis.etxrd-module.html#expandServices" class="summary-sig-name">expandServices</a>(<span class="summary-sig-arg">service_elements</span>)</span><br />
+      Take a sorted iterator of service elements and expand it into a 
+      sorted iterator of: ([type_uri], uri, service_element)
+  </td>
+</tr>
+</table>
+
+<br />
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <a href="yadis.etxrd-module.html#XRD_NS_2_0">XRD_NS_2_0</a> = <code title="'xri://$xrd*($v*2.0)'">'xri://$xrd*($v*2.0)'</code>
+  </td>
+</tr>
+<tr class="private">
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <a href="yadis.etxrd-module.html#XRDS_NS">XRDS_NS</a> = <code title="'xri://$xrds'">'xri://$xrds'</code>
+  </td>
+</tr>
+<tr class="private">
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <a href="yadis.etxrd-module.html#root_tag">root_tag</a> = <code title="'{xri://$xrds}XRDS'">'{xri://$xrds}XRDS'</code>
+  </td>
+</tr>
+<tr class="private">
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <a href="yadis.etxrd-module.html#service_tag">service_tag</a> = <code title="'{xri://$xrd*($v*2.0)}Service'">'{xri://$xrd*($v*2.0)}Service'</code>
+  </td>
+</tr>
+<tr class="private">
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <a href="yadis.etxrd-module.html#xrd_tag">xrd_tag</a> = <code title="'{xri://$xrd*($v*2.0)}XRD'">'{xri://$xrd*($v*2.0)}XRD'</code>
+  </td>
+</tr>
+<tr class="private">
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <a href="yadis.etxrd-module.html#type_tag">type_tag</a> = <code title="'{xri://$xrd*($v*2.0)}Type'">'{xri://$xrd*($v*2.0)}Type'</code>
+  </td>
+</tr>
+<tr class="private">
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <a href="yadis.etxrd-module.html#uri_tag">uri_tag</a> = <code title="'{xri://$xrd*($v*2.0)}URI'">'{xri://$xrd*($v*2.0)}URI'</code>
+  </td>
+</tr>
+<tr class="private">
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <a href="yadis.etxrd-module.html#canonicalID_tag">canonicalID_tag</a> = <code title="'{xri://$xrd*($v*2.0)}CanonicalID'">'{xri://$xrd*($v*2.0)}CanonicalID'</code>
+  </td>
+</tr>
+<tr class="private">
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <a href="yadis.etxrd-module.html#Max">Max</a> = <code title="&lt;yadis.etxrd._Max object at 0xb7af85ac&gt;">&lt;yadis.etxrd._Max object at 0xb7af85ac&gt;</code>
+  </td>
+</tr>
+</table>
+
+<br />
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="parseXRDS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">parseXRDS</span>(<span class="sig-arg">text</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="yadis.etxrd-pysrc.html#parseXRDS">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </table>
+  
+  <br />Parse the given text as an XRDS document.
+  <dl><dt></dt><dd>
+    <dl><dt>Returns:</dt>
+        <dd>ElementTree containing an XRDS document</dd></dl>
+    <dl><dt>Raises:</dt></dl>
+    <ul class="nomargin">
+        <li><code><strong class='fraise'><a href="yadis.etxrd.XRDSError-class.html">XRDSError</a></strong></code> - When there is a parse error or the document does not contain an 
+        XRDS.</li>
+    </ul>
+  </dd></dl>
+</td></tr></table>
+</div>
+<a name="nsTag"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">nsTag</span>(<span class="sig-arg">ns</span>,
+        <span class="sig-arg">t</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="yadis.etxrd-pysrc.html#nsTag">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </table>
+  
+  
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+</div>
+<a name="mkXRDTag"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">mkXRDTag</span>(<span class="sig-arg">t</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="yadis.etxrd-pysrc.html#mkXRDTag">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </table>
+  
+  <br /><p>basestring -&gt; basestring</p>
+  Create a tag name in the XRD 2.0 XML namespace suitable for using with
+  ElementTree
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+</div>
+<a name="mkXRDSTag"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">mkXRDSTag</span>(<span class="sig-arg">t</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="yadis.etxrd-pysrc.html#mkXRDSTag">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </table>
+  
+  <br /><p>basestring -&gt; basestring</p>
+  Create a tag name in the XRDS XML namespace suitable for using with 
+  ElementTree
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+</div>
+<a name="isXRDS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">isXRDS</span>(<span class="sig-arg">xrd_tree</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="yadis.etxrd-pysrc.html#isXRDS">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </table>
+  
+  <br />Is this document an XRDS document?
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+</div>
+<a name="getYadisXRD"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getYadisXRD</span>(<span class="sig-arg">xrd_tree</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="yadis.etxrd-pysrc.html#getYadisXRD">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </table>
+  
+  <br />Return the XRD element that should contain the Yadis services
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+</div>
+<a name="getCanonicalID"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getCanonicalID</span>(<span class="sig-arg">iname</span>,
+        <span class="sig-arg">xrd_tree</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="yadis.etxrd-pysrc.html#getCanonicalID">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </table>
+  
+  <br />Return the CanonicalID from this XRDS document.
+  <dl><dt></dt><dd>
+    <dl><dt>Parameters:</dt></dl>
+    <ul class="nomargin">
+        <li><strong class="pname"><code>iname</code></strong> (unicode) - the XRI being resolved.</li>
+        <li><strong class="pname"><code>xrd_tree</code></strong> (ElementTree) - The XRDS output from the resolver.</li>
+    </ul>
+    <dl><dt>Returns: unicode or None</dt>
+        <dd>The XRI CanonicalID or None.</dd></dl>
+  </dd></dl>
+</td></tr></table>
+</div>
+<a name="getPriorityStrict"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getPriorityStrict</span>(<span class="sig-arg">element</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="yadis.etxrd-pysrc.html#getPriorityStrict">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </table>
+  
+  <br /><p>Get the priority of this element.</p>
+  Raises ValueError if the value of the priority is invalid. If no 
+  priority is specified, it returns a value that compares greater than any 
+  other value.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+</div>
+<a name="getPriority"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getPriority</span>(<span class="sig-arg">element</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="yadis.etxrd-pysrc.html#getPriority">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </table>
+  
+  <br /><p>Get the priority of this element</p>
+  Returns Max if no priority is specified or the priority value is 
+  invalid.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+</div>
+<a name="prioSort"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">prioSort</span>(<span class="sig-arg">elements</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="yadis.etxrd-pysrc.html#prioSort">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </table>
+  
+  <br />Sort a list of elements that have priority attributes
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+</div>
+<a name="iterServices"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">iterServices</span>(<span class="sig-arg">xrd_tree</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="yadis.etxrd-pysrc.html#iterServices">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </table>
+  
+  <br /><p>Return an iterable over the Service elements in the Yadis XRD</p>
+  sorted by priority
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+</div>
+<a name="sortedURIs"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">sortedURIs</span>(<span class="sig-arg">service_element</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="yadis.etxrd-pysrc.html#sortedURIs">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </table>
+  
+  <br />Given a Service element, return a list of the contents of all URI tags
+  in priority order.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+</div>
+<a name="getTypeURIs"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getTypeURIs</span>(<span class="sig-arg">service_element</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="yadis.etxrd-pysrc.html#getTypeURIs">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </table>
+  
+  <br />Given a Service element, return a list of the contents of all Type 
+  tags
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+</div>
+<a name="expandService"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">expandService</span>(<span class="sig-arg">service_element</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="yadis.etxrd-pysrc.html#expandService">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </table>
+  
+  <br />Take a service element and expand it into an iterator of: ([type_uri],
+  uri, service_element)
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+</div>
+<a name="expandServices"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">expandServices</span>(<span class="sig-arg">service_elements</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="yadis.etxrd-pysrc.html#expandServices">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </table>
+  
+  <br /><p>Take a sorted iterator of service elements and expand it into a sorted
+  iterator of: ([type_uri], uri, service_element)</p>
+  <p>There may be more than one item in the resulting list for each service
+  element if there is more than one URI or type for a service, but each 
+  triple will be unique.</p>
+  If there is no URI or Type for a Service element, it will not appear 
+  in the result.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== VARIABLES DETAILS ==================== -->
+<a name="section-VariablesDetails"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-VariablesDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="XRD_NS_2_0"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">XRD_NS_2_0</h3>
+  
+  <dl><dt></dt><dd>
+    <dl><dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<span class="variable-quote">'</span>xri://$xrd*($v*2.0)<span class="variable-quote">'</span>                                                  
+      </pre></td></tr></table></dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+</div>
+<a name="XRDS_NS"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">XRDS_NS</h3>
+  
+  <dl><dt></dt><dd>
+    <dl><dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<span class="variable-quote">'</span>xri://$xrds<span class="variable-quote">'</span>                                                          
+      </pre></td></tr></table></dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+</div>
+<a name="root_tag"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">root_tag</h3>
+  
+  <dl><dt></dt><dd>
+    <dl><dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<span class="variable-quote">'</span>{xri://$xrds}XRDS<span class="variable-quote">'</span>                                                    
+      </pre></td></tr></table></dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+</div>
+<a name="service_tag"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">service_tag</h3>
+  
+  <dl><dt></dt><dd>
+    <dl><dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<span class="variable-quote">'</span>{xri://$xrd*($v*2.0)}Service<span class="variable-quote">'</span>                                         
+      </pre></td></tr></table></dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+</div>
+<a name="xrd_tag"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">xrd_tag</h3>
+  
+  <dl><dt></dt><dd>
+    <dl><dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<span class="variable-quote">'</span>{xri://$xrd*($v*2.0)}XRD<span class="variable-quote">'</span>                                             
+      </pre></td></tr></table></dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+</div>
+<a name="type_tag"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">type_tag</h3>
+  
+  <dl><dt></dt><dd>
+    <dl><dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<span class="variable-quote">'</span>{xri://$xrd*($v*2.0)}Type<span class="variable-quote">'</span>                                            
+      </pre></td></tr></table></dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+</div>
+<a name="uri_tag"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">uri_tag</h3>
+  
+  <dl><dt></dt><dd>
+    <dl><dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<span class="variable-quote">'</span>{xri://$xrd*($v*2.0)}URI<span class="variable-quote">'</span>                                             
+      </pre></td></tr></table></dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+</div>
+<a name="canonicalID_tag"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">canonicalID_tag</h3>
+  
+  <dl><dt></dt><dd>
+    <dl><dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<span class="variable-quote">'</span>{xri://$xrd*($v*2.0)}CanonicalID<span class="variable-quote">'</span>                                     
+      </pre></td></tr></table></dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+</div>
+<a name="Max"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">Max</h3>
+  
+  <dl><dt></dt><dd>
+    <dl><dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+&lt;yadis.etxrd._Max object at 0xb7af85ac&gt;                                
+      </pre></td></tr></table></dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="yadis-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.openidenabled.com/yadis/">Python-Yadis</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">Generated by Epydoc
+        3.0alpha3 on Fri Dec  8 13:17:17 2006</td>
+    <td align="right" class="footer">
+      <a href="http://epydoc.sourceforge.net">http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie()
+  // -->
+</script>
+  
+</body>
+</html>

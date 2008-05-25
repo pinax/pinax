@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>openid.server.server.AssociateRequest</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css"></link>
+</head>
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="openid-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          <a class="navbar" target="_top" href="http://openidenabled.com/python-openid/">Python-OpenID</a>
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <font size="-1"><b class="breadcrumbs">
+        <a href="openid-module.html">Package&nbsp;openid</a> ::
+        <a href="openid.server-module.html">Package&nbsp;server</a> ::
+        <a href="openid.server.server-module.html">Module&nbsp;server</a> ::
+        Class&nbsp;AssociateRequest
+      </b></font></br>
+    </td>
+    <td><table cellpadding="0" cellspacing="0">
+      <tr><td align="right"><font size="-2">[<a href="frames.html"target="_top">frames</a>&nbsp;|&nbsp;<a href="openid.server.server.AssociateRequest-class.html" target="_top">no&nbsp;frames</a>]</font></td></tr>
+    </table></td>
+</tr></table>
+
+<!-- =========== START OF CLASS DESCRIPTION =========== -->
+<h2 class="class">Type AssociateRequest</h2>
+
+<pre class="base-tree">
+   <a href="__builtin__.object-class.html"><code>object</code></a> --+    
+            |    
+<a href="openid.server.server.OpenIDRequest-class.html"><code>OpenIDRequest</code></a> --+
+                |
+               <b>AssociateRequest</b>
+</pre><br />
+
+<hr/>
+
+A request to establish an <a name="index-association"></a><i 
+class="indexterm">association</i>.
+<hr/>
+
+<p><b>See Also:</b> <a href="http://openid.net/specs.bml#mode-associate">OpenID Specs, 
+Mode: associate</a>
+</p>
+
+
+<!-- =========== START OF METHOD SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Method Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.server.server.AssociateRequest-class.html#__init__" class="summary-sig-name"><code>__init__</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>session</span>,
+          <span class=summary-sig-arg>assoc_type</span>)</span></code>
+<br />
+Construct me.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        <a href="openid.server.server.OpenIDResponse-class.html" 
+        class="link"><code>OpenIDResponse</code></a>
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.server.server.AssociateRequest-class.html#answer" class="summary-sig-name"><code>answer</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>assoc</span>)</span></code>
+<br />
+Respond to this request with an <a name="index-association"></a><i 
+class="indexterm">association</i>.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.server.server.AssociateRequest-class.html#answerUnsupported" class="summary-sig-name"><code>answerUnsupported</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>message</span>,
+          <span class=summary-sig-arg>preferred_association_type</span>,
+          <span class=summary-sig-arg>preferred_session_type</span>)</span></code>
+<br />
+Respond to this request indicating that the association type or 
+association session type is not supported.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        <a href="openid.server.server.AssociateRequest-class.html" 
+        class="link"><code>AssociateRequest</code></a>
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.server.server.AssociateRequest-class.html#fromMessage" class="summary-sig-name"><code>fromMessage</code></a>(<span class=summary-sig-arg>klass</span>,
+          <span class=summary-sig-arg>message</span>,
+          <span class=summary-sig-arg>op_endpoint</span>)</span></code>
+<br />
+Construct me from an OpenID Message.    <i>(Class method)</i>
+</td></tr>
+  <tr><td colspan="2">
+    <b>Inherited from <a href="__builtin__.object-class.html"><code>object</code></a>:</b>
+      <a href="__builtin__.object-class.html#__delattr__"><code>__delattr__</code></a>, 
+      <a href="__builtin__.object-class.html#__getattribute__"><code>__getattribute__</code></a>, 
+      <a href="__builtin__.object-class.html#__hash__"><code>__hash__</code></a>, 
+      <a href="__builtin__.object-class.html#__new__"><code>__new__</code></a>, 
+      <a href="__builtin__.object-class.html#__reduce__"><code>__reduce__</code></a>, 
+      <a href="__builtin__.object-class.html#__reduce_ex__"><code>__reduce_ex__</code></a>, 
+      <a href="__builtin__.object-class.html#__repr__"><code>__repr__</code></a>, 
+      <a href="__builtin__.object-class.html#__setattr__"><code>__setattr__</code></a>, 
+      <a href="__builtin__.object-class.html#__str__"><code>__str__</code></a>
+    </td></tr>
+</table><br />
+
+
+<!-- =========== START OF INSTANCE VARIABLE SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Instance Variable Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+<td><b><a href="openid.server.server.AssociateRequest-class.html#assoc_type"><code>assoc_type</code></a></b>: The type of association.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+<td><b><a href="openid.server.server.AssociateRequest-class.html#session"><code>session</code></a></b>: An object that knows how to handle association requests of a certain 
+type.</td></tr>
+</table><br />
+
+
+<!-- =========== START OF CLASS VARIABLE SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Class Variable Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+<td><b><a href="openid.server.server.AssociateRequest-class.html#mode"><code>mode</code></a></b>: &quot;<a name="index-check_authentication"></a><i 
+class="indexterm"><code>check_authentication</code></i>&quot;</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1"><code>dict</code></font></td>
+<td><b><a href="openid.server.server.AssociateRequest-class.html#session_classes"><code>session_classes</code></a></b> = <span title="{'no-encryption': &lt;class 'openid.server.server.PlainTextServerSession'&gt;, 'DH-SHA1': &lt;class 'openid.server.server.DiffieHellmanSHA1ServerSession'&gt;, 'DH-SHA256': &lt;class 'openid.server.server.DiffieHellmanSHA256ServerSession'&gt;}"><code>{'no-encryption':&nbsp;&lt;class&nbsp;'openid.serve<span class="variable-ellipsis">...</span></code>
+</span></td></tr>
+</table><br />
+
+
+<!-- =========== START OF INSTANCE METHOD DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Instance Method Details</th></tr>
+</table>
+
+<a name="__init__"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">__init__</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>session</span>,
+          <span class=sig-arg>assoc_type</span>)</span>
+    <br /><i>(Constructor)</i>
+  </h3>
+  <p>Construct me.</p>
+  The session is assigned directly as a class attribute. See my <a 
+  href="openid.server.server.AssociateRequest-class.html" 
+  class="link"><code>class documentation</code></a> for its 
+  description.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Overrides:</b></dt>
+      <dd><a href="__builtin__.object-class.html#__init__"><code>__builtin__.object.__init__</code></a></dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="answer"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">answer</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>assoc</span>)</span>
+  </h3>
+  Respond to this request with an <a name="index-association"></a><i 
+  class="indexterm">association</i>.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>assoc</b></code> -
+         The association to send back.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=<a href="openid.association.Association-class.html" 
+              class="link"><code>openid.association.Association</code></a>)</i>
+      </dd>
+    </dl>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        A response with the association information, encrypted to the 
+        consumer's <a name="index-public_key"></a><i 
+        class="indexterm">public key</i> if appropriate.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=<a href="openid.server.server.OpenIDResponse-class.html" 
+        class="link"><code>OpenIDResponse</code></a>)</i>
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="answerUnsupported"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">answerUnsupported</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>message</span>,
+          <span class=sig-arg>preferred_association_type</span>=<span class=sig-default>None</span>,
+          <span class=sig-arg>preferred_session_type</span>=<span class=sig-default>None</span>)</span>
+  </h3>
+  Respond to this request indicating that the association type or 
+  association session type is not supported.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+<br />
+
+
+<!-- =========== START OF CLASS METHOD DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Class Method Details</th></tr>
+</table>
+
+<a name="fromMessage"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">fromMessage</span>(<span class=sig-arg>klass</span>,
+          <span class=sig-arg>message</span>,
+          <span class=sig-arg>op_endpoint</span>=<span class=sig-default>None</span>)</span>
+  </h3>
+  Construct me from an OpenID Message.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>message</b></code> -
+         The OpenID associate request
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=openid.message.Message)</i>
+      </dd>
+    </dl>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        <a href="openid.server.server.AssociateRequest-class.html" 
+        class="link"><code>AssociateRequest</code></a>
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+<br />
+
+
+<!-- =========== START OF INSTANCE VARIABLE DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Instance Variable Details</th></tr>
+</table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="assoc_type"></a>
+<h3>assoc_type</h3>
+The type of association. The protocol currently only defines one value 
+for this, &quot;<a name="index-HMAC_SHA1"></a><i 
+class="indexterm"><code>HMAC-SHA1</code></i>&quot;.
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          str
+
+      </dd>
+    </dl>
+  </dd>
+</dl></td></tr></table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="session"></a>
+<h3>session</h3>
+An object that knows how to handle association requests of a certain 
+type.
+</td></tr></table>
+<br />
+
+
+<!-- =========== START OF CLASS VARIABLE DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Class Variable Details</th></tr>
+</table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="mode"></a>
+<h3>mode</h3>
+&quot;<a name="index-check_authentication"></a><i 
+class="indexterm"><code>check_authentication</code></i>&quot;
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          str
+
+      </dd>
+<span title="'associate'">      <dt><b>Value:</b></dt>
+      <dd><table><tr><td>
+<pre class="variable">
+<span class="variable-quote">'</span>associate<span class="variable-quote">'</span>                                                            </pre>
+        </td></tr></table></dd>
+</span>    </dl>
+  </dd>
+</dl></td></tr></table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="session_classes"></a>
+<h3>session_classes</h3>
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          <code>dict</code>
+
+      </dd>
+<span title="{'no-encryption': &lt;class 'openid.server.server.PlainTextServerSession'&gt;, 'DH-SHA1': &lt;class 'openid.server.server.DiffieHellmanSHA1ServerSession'&gt;, 'DH-SHA256': &lt;class 'openid.server.server.DiffieHellmanSHA256ServerSession'&gt;}">      <dt><b>Value:</b></dt>
+      <dd><table><tr><td>
+<pre class="variable">
+{'DH-SHA1': &lt;class 'openid.server.server.DiffieHellmanSHA1ServerSessio<span class="variable-linewrap">\</span>
+n'&gt;,
+ 'DH-SHA256': &lt;class 'openid.server.server.DiffieHellmanSHA256ServerSe<span class="variable-linewrap">\</span>
+ssion'&gt;,
+ 'no-encryption': &lt;class 'openid.server.server.PlainTextServerSession'<span class="variable-linewrap">\</span>
+&gt;}                                                                     </pre>
+        </td></tr></table></dd>
+</span>    </dl>
+  </dd>
+</dl></td></tr></table>
+<br />
+
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="openid-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          <a class="navbar" target="_top" href="http://openidenabled.com/python-openid/">Python-OpenID</a>
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td align="left"><font size="-2">Generated by Epydoc 2.1 on Fri Dec 14 16:10:52 2007</font></td>
+    <td align="right"><a href="http://epydoc.sourceforge.net"
+                      ><font size="-2">http://epydoc.sf.net</font></a></td>
+  </tr>
+</table>
+</body>
+</html>

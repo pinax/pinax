@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>openid.consumer.consumer</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css"></link>
+</head>
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="openid-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          <a class="navbar" target="_top" href="http://openidenabled.com/python-openid/">Python-OpenID</a>
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <font size="-1"><b class="breadcrumbs">
+        <a href="openid-module.html">Package&nbsp;openid</a> ::
+        <a href="openid.consumer-module.html">Package&nbsp;consumer</a> ::
+        Module&nbsp;consumer
+      </b></font></br>
+    </td>
+    <td><table cellpadding="0" cellspacing="0">
+      <tr><td align="right"><font size="-2">[<a href="frames.html"target="_top">frames</a>&nbsp;|&nbsp;<a href="openid.consumer.consumer-module.html" target="_top">no&nbsp;frames</a>]</font></td></tr>
+    </table></td>
+</tr></table>
+
+<!-- =========== START OF MODULE DESCRIPTION =========== -->
+<h2 class="module">Module openid.consumer.consumer</h2>
+
+<p>OpenID support for Relying Parties (aka Consumers).</p>
+This module documents the main interface with the OpenID consumer 
+library. The only part of the library which has to be used and isn't 
+documented in full here is the store required to create an <code><a 
+href="openid.consumer.consumer.Consumer-class.html" 
+class="link"><code>Consumer</code></a></code> instance. More on the 
+abstract store type and concrete implementations of it that are provided 
+in the documentation for the <code><a 
+href="openid.consumer.consumer.Consumer-class.html#__init__" 
+class="link"><code>__init__</code></a></code> method of the <code><a 
+href="openid.consumer.consumer.Consumer-class.html" 
+class="link"><code>Consumer</code></a></code> class.
+<h1 class="heading">OVERVIEW</h1>
+  The OpenID identity verification process most commonly uses the 
+  following steps, as visible to the user of this library:
+  <ol start="1">
+    <li>
+      The user enters their OpenID into a field on the consumer's 
+      site, and hits a login button.
+    </li>
+    <li>
+      The consumer site discovers the user's OpenID provider using the 
+      Yadis protocol.
+    </li>
+    <li>
+      The consumer site sends the browser a redirect to the OpenID 
+      provider. This is the authentication request as described in the 
+      OpenID specification.
+    </li>
+    <li>
+      The OpenID provider's site sends the browser a redirect back to 
+      the consumer site. This redirect contains the provider's response 
+      to the authentication request.
+    </li>
+  </ol>
+  The most important part of the flow to note is the consumer's site 
+  must handle two separate HTTP requests in order to perform the full 
+  identity check.
+<h1 class="heading">LIBRARY DESIGN</h1>
+  <p>This consumer library is designed with that flow in mind. The goal 
+  is to make it as easy as possible to perform the above steps 
+  securely.</p>
+  <p>At a high level, there are two important parts in the consumer 
+  library. The first important part is this module, which contains the 
+  interface to actually use this library. The second is the <code><a 
+  href="openid.store.interface-module.html" 
+  class="link"><code>openid.store.interface</code></a></code> module, 
+  which describes the interface to use if you need to create a custom 
+  method for storing the state this library needs to maintain between 
+  requests.</p>
+  <p>In general, the second part is less important for users of the 
+  library to know about, as several implementations are provided which 
+  cover a wide variety of situations in which consumers may use the 
+  library.</p>
+  This module contains a class, <code><a 
+  href="openid.consumer.consumer.Consumer-class.html" 
+  class="link"><code>Consumer</code></a></code>, with methods 
+  corresponding to the actions necessary in each of steps 2, 3, and 4 
+  described in the overview. Use of this library should be as easy as 
+  creating an <code><a 
+  href="openid.consumer.consumer.Consumer-class.html" 
+  class="link"><code>Consumer</code></a></code> instance and calling the 
+  methods appropriate for the action the site wants to take.
+<h1 class="heading">SESSIONS, STORES, AND STATELESS MODE</h1>
+  The <code><a href="openid.consumer.consumer.Consumer-class.html" 
+  class="link"><code>Consumer</code></a></code> object keeps track of two 
+  types of state:
+  <ol start="1">
+    <li>
+      State of the user's current authentication attempt. Things like 
+      the identity URL, the list of endpoints discovered for that URL, 
+      and in case where some endpoints are unreachable, the list of 
+      endpoints already tried. This state needs to be held from 
+      Consumer.begin() to Consumer.complete(), but it is only applicable 
+      to a single session with a single user agent, and at the end of the 
+      authentication process (i.e. when an OP replies with either 
+      <code>id_res</code> or <code>cancel</code>) it may be 
+      discarded.
+    </li>
+    <li>
+      State of relationships with servers, i.e. shared secrets 
+      (associations) with servers and nonces seen on signed messages. 
+      This information should persist from one session to the next and 
+      should not be bound to a particular user-agent.
+    </li>
+  </ol>
+  <p>These two types of storage are reflected in the first two arguments 
+  of Consumer's constructor, <code>session</code> and <code>store</code>. 
+  <code>session</code> is a dict-like object and we hope your web 
+  framework provides you with one of these bound to the user agent. 
+  <code>store</code> is an instance of <a 
+  href="openid.store.interface.OpenIDStore-class.html" 
+  class="link"><code>openid.store.interface.OpenIDStore</code></a>.</p>
+  <p>Since the store does hold secrets shared between your application 
+  and the OpenID provider, you should be careful about how you use it in 
+  a shared hosting environment. If the filesystem or database permissions 
+  of your web host allow strangers to read from them, do not store your 
+  data there! If you have no safe place to store your data, construct 
+  your consumer with <code>None</code> for the store, and it will operate 
+  only in stateless mode. Stateless mode may be slower, put more load on 
+  the OpenID provider, and trusts the provider to keep you safe from 
+  replay attacks.</p>
+  Several store implementation are provided, and the interface is 
+  fully documented so that custom stores can be used as well. See the 
+  documentation for the <code><a 
+  href="openid.consumer.consumer.Consumer-class.html" 
+  class="link"><code>Consumer</code></a></code> class for more 
+  information on the interface for stores. The implementations that are 
+  provided allow the consumer site to store the necessary data in several 
+  different ways, including several SQL databases and normal files on 
+  disk.
+<h1 class="heading">IMMEDIATE MODE</h1>
+  <p>In the flow described above, the user may need to confirm to the 
+  OpenID provider that it's ok to disclose his or her identity. The 
+  provider may draw pages asking for information from the user before it 
+  redirects the browser back to the consumer's site. This is generally 
+  transparent to the consumer site, so it is typically ignored as an 
+  implementation detail.</p>
+  There can be times, however, where the consumer site wants to get a 
+  response immediately. When this is the case, the consumer can put the 
+  library in immediate mode. In immediate mode, there is an extra 
+  response possible from the server, which is essentially the server 
+  reporting that it doesn't have enough information to answer the 
+  question yet.
+<h1 class="heading">USING THIS LIBRARY</h1>
+  <p>Integrating this library into an application is usually a relatively 
+  straightforward process. The process should basically follow this 
+  plan:</p>
+  <p>Add an OpenID login field somewhere on your site. When an OpenID is 
+  entered in that field and the form is submitted, it should make a 
+  request to the your site which includes that OpenID URL.</p>
+  <p>First, the application should <a 
+  href="openid.consumer.consumer.Consumer-class.html#__init__" 
+  class="link"><code>instantiate a Consumer</code></a> with a session for 
+  per-user state and store for shared state. using the store of 
+  choice.</p>
+  <p>Next, the application should call the '<code><a 
+  href="openid.consumer.consumer.Consumer-class.html#begin" 
+  class="link"><code>begin</code></a></code>' method on the <code><a 
+  href="openid.consumer.consumer.Consumer-class.html" 
+  class="link"><code>Consumer</code></a></code> instance. This method 
+  takes the OpenID URL. The <code><a 
+  href="openid.consumer.consumer.Consumer-class.html#begin" 
+  class="link"><code>begin</code></a></code> method returns an <code><a 
+  href="openid.consumer.consumer.AuthRequest-class.html" 
+  class="link"><code>AuthRequest</code></a></code> object.</p>
+  <p>Next, the application should call the <code><a 
+  href="openid.consumer.consumer.AuthRequest-class.html#redirectURL" 
+  class="link"><code>redirectURL</code></a></code> method on the <code><a 
+  href="openid.consumer.consumer.AuthRequest-class.html" 
+  class="link"><code>AuthRequest</code></a></code> object. The parameter 
+  <code>return_to</code> is the URL that the OpenID server will send the 
+  user back to after attempting to verify his or her identity. The 
+  <code>realm</code> parameter is the URL (or URL pattern) that 
+  identifies your web site to the user when he or she is authorizing it. 
+  Send a redirect to the resulting URL to the user's browser.</p>
+  <p>That's the first half of the authentication process. The second half 
+  of the process is done after the user's OpenID Provider sends the 
+  user's browser a redirect back to your site to complete their 
+  login.</p>
+  <p>When that happens, the user will contact your site at the URL given 
+  as the <code>return_to</code> URL to the <code><a 
+  href="openid.consumer.consumer.AuthRequest-class.html#redirectURL" 
+  class="link"><code>redirectURL</code></a></code> call made above. The 
+  request will have several query parameters added to the URL by the 
+  OpenID provider as the information necessary to finish the request.</p>
+  <p>Get an <code><a href="openid.consumer.consumer.Consumer-class.html" 
+  class="link"><code>Consumer</code></a></code> instance with the same 
+  session and store as before and call its <code><a 
+  href="openid.consumer.consumer.Consumer-class.html#complete" 
+  class="link"><code>complete</code></a></code> method, passing in all 
+  the received query arguments.</p>
+  There are multiple possible return types possible from that method. 
+  These indicate the whether or not the login was successful, and include 
+  any additional information appropriate for their type.
+<hr/>
+
+<!-- =========== START OF CLASSES =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Classes</th></tr>
+<tr><td width="15%">
+  <b><a href="openid.consumer.consumer.AuthRequest-class.html"><code>AuthRequest</code></a></b></td>
+  <td>An object that holds the state necessary for generating an OpenID 
+authentication request.</td></tr>
+<tr><td width="15%">
+  <b><a href="openid.consumer.consumer.CancelResponse-class.html"><code>CancelResponse</code></a></b></td>
+  <td>A response with a status of CANCEL.</td></tr>
+<tr><td width="15%">
+  <b><a href="openid.consumer.consumer.Consumer-class.html"><code>Consumer</code></a></b></td>
+  <td>An OpenID consumer implementation that performs discovery and does 
+session management.</td></tr>
+<tr><td width="15%">
+  <b><a href="openid.consumer.consumer.FailureResponse-class.html"><code>FailureResponse</code></a></b></td>
+  <td>A response with a status of FAILURE.</td></tr>
+<tr><td width="15%">
+  <b><a href="openid.consumer.consumer.SetupNeededResponse-class.html"><code>SetupNeededResponse</code></a></b></td>
+  <td>A response with a status of SETUP_NEEDED.</td></tr>
+<tr><td width="15%">
+  <b><a href="openid.consumer.consumer.SuccessResponse-class.html"><code>SuccessResponse</code></a></b></td>
+  <td>A response with a status of SUCCESS.</td></tr>
+</table><br />
+
+
+<!-- =========== START OF VARIABLE SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Variable Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1"><code>str</code></font></td>
+<td><b><a href="openid.consumer.consumer-module.html#CANCEL"><code>CANCEL</code></a></b>: constant used as the status for <a 
+href="openid.consumer.consumer.CancelResponse-class.html" 
+class="link"><code>CancelResponse</code></a> objects.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1"><code>str</code></font></td>
+<td><b><a href="openid.consumer.consumer-module.html#FAILURE"><code>FAILURE</code></a></b>: constant used as the status for <a 
+href="openid.consumer.consumer.FailureResponse-class.html" 
+class="link"><code>FailureResponse</code></a> objects.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1"><code>str</code></font></td>
+<td><b><a href="openid.consumer.consumer-module.html#SETUP_NEEDED"><code>SETUP_NEEDED</code></a></b>: constant used as the status for <a 
+href="openid.consumer.consumer.SetupNeededResponse-class.html" 
+class="link"><code>SetupNeededResponse</code></a> objects.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1"><code>str</code></font></td>
+<td><b><a href="openid.consumer.consumer-module.html#SUCCESS"><code>SUCCESS</code></a></b>: constant used as the status for <a 
+href="openid.consumer.consumer.SuccessResponse-class.html" 
+class="link"><code>SuccessResponse</code></a> objects.</td></tr>
+</table><br />
+
+
+<!-- =========== START OF VARIABLE DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Variable Details</th></tr>
+</table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="CANCEL"></a>
+<h3>CANCEL</h3>
+constant used as the status for <a 
+href="openid.consumer.consumer.CancelResponse-class.html" 
+class="link"><code>CancelResponse</code></a> objects.
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          <code>str</code>
+
+      </dd>
+<span title="'cancel'">      <dt><b>Value:</b></dt>
+      <dd><table><tr><td>
+<pre class="variable">
+<span class="variable-quote">'</span>cancel<span class="variable-quote">'</span>                                                               </pre>
+        </td></tr></table></dd>
+</span>    </dl>
+  </dd>
+</dl></td></tr></table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="FAILURE"></a>
+<h3>FAILURE</h3>
+constant used as the status for <a 
+href="openid.consumer.consumer.FailureResponse-class.html" 
+class="link"><code>FailureResponse</code></a> objects.
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          <code>str</code>
+
+      </dd>
+<span title="'failure'">      <dt><b>Value:</b></dt>
+      <dd><table><tr><td>
+<pre class="variable">
+<span class="variable-quote">'</span>failure<span class="variable-quote">'</span>                                                              </pre>
+        </td></tr></table></dd>
+</span>    </dl>
+  </dd>
+</dl></td></tr></table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="SETUP_NEEDED"></a>
+<h3>SETUP_NEEDED</h3>
+constant used as the status for <a 
+href="openid.consumer.consumer.SetupNeededResponse-class.html" 
+class="link"><code>SetupNeededResponse</code></a> objects.
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          <code>str</code>
+
+      </dd>
+<span title="'setup_needed'">      <dt><b>Value:</b></dt>
+      <dd><table><tr><td>
+<pre class="variable">
+<span class="variable-quote">'</span>setup_needed<span class="variable-quote">'</span>                                                         </pre>
+        </td></tr></table></dd>
+</span>    </dl>
+  </dd>
+</dl></td></tr></table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="SUCCESS"></a>
+<h3>SUCCESS</h3>
+constant used as the status for <a 
+href="openid.consumer.consumer.SuccessResponse-class.html" 
+class="link"><code>SuccessResponse</code></a> objects.
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          <code>str</code>
+
+      </dd>
+<span title="'success'">      <dt><b>Value:</b></dt>
+      <dd><table><tr><td>
+<pre class="variable">
+<span class="variable-quote">'</span>success<span class="variable-quote">'</span>                                                              </pre>
+        </td></tr></table></dd>
+</span>    </dl>
+  </dd>
+</dl></td></tr></table>
+<br />
+
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="openid-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          <a class="navbar" target="_top" href="http://openidenabled.com/python-openid/">Python-OpenID</a>
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td align="left"><font size="-2">Generated by Epydoc 2.1 on Fri Dec 14 16:10:53 2007</font></td>
+    <td align="right"><a href="http://epydoc.sourceforge.net"
+                      ><font size="-2">http://epydoc.sf.net</font></a></td>
+  </tr>
+</table>
+</body>
+</html>

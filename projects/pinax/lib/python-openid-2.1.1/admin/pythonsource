@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+find ./openid/ \( \( -name _darcs -o -name .svn -o -name _trial_temp -o -name test -o -name admin -o -name examples \) -type d -prune -a -false \) -o \( ! -iname \*~ -a -type f \) -a \( ! -iname \*.pyc -a -type f \) -a -name \*.py

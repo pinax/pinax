@@ -1,0 +1,229 @@
+#!/usr/bin/env python
+import os.path, sys, warnings
+
+test_modules = [
+    'cryptutil',
+    'oidutil',
+    'dh',
+    ]
+
+def fixpath():
+    try:
+        d = os.path.dirname(__file__)
+    except NameError:
+        d = os.path.dirname(sys.argv[0])
+    parent = os.path.normpath(os.path.join(d, '..'))
+    if parent not in sys.path:
+        print "putting %s in sys.path" % (parent,)
+        sys.path.insert(0, parent)
+
+def otherTests():
+    failed = []
+    for module_name in test_modules:
+        print 'Testing %s...' % (module_name,) ,
+        sys.stdout.flush()
+        module_name = 'openid.test.' + module_name
+        try:
+            test_mod = __import__(module_name, {}, {}, [None])
+        except ImportError:
+            print 'Failed to import test %r' % (module_name,)
+            failed.append(module_name)
+        else:
+            try:
+                test_mod.test()
+            except (SystemExit, KeyboardInterrupt):
+                raise
+            except:
+                sys.excepthook(*sys.exc_info())
+                failed.append(module_name)
+            else:
+                print 'Succeeded.'
+
+
+    return failed
+
+def pyunitTests():
+    import unittest
+    from openid.test import test_htmldiscover
+    from openid.test import test_openidyadis
+    from openid.test import test_discover
+    from openid.test import test_consumer
+    from openid.test import test_message
+    from openid.test import test_server
+    from openid.test import test_symbol
+    from openid.test import kvform
+    from openid.test import oidutil
+    from openid.test import linkparse
+    from openid.test import trustroot
+    from openid.test import test_association
+    from openid.test import test_negotiation
+    from openid.test import test_auth_request
+    from openid.test import test_fetchers
+    from openid.test import test_urinorm
+    from openid.test import test_nonce
+    from openid.test import test_association_response
+    from openid.test import test_verifydisco
+    from openid.test import test_sreg
+    from openid.test import storetest
+    from openid.test import test_ax
+    from openid.test import test_rpverify
+    from openid.test import test_pape
+
+    # yadis tests
+    from openid.test import test_parsehtml
+    from openid.test import test_yadis_discover
+    from openid.test import test_accept
+    from openid.test import test_etxrd
+    from openid.test import test_xri
+    from openid.test import test_xrires
+    from openid.test import test_services
+
+    pyunit_modules = [
+        test_server,
+        test_consumer,
+        test_message,
+        test_symbol,
+        test_etxrd,
+        test_xri,
+        test_xrires,
+        test_association_response,
+        test_auth_request,
+        test_negotiation,
+        test_verifydisco,
+        test_sreg,
+        test_ax,
+        test_pape,
+        test_rpverify,
+        ]
+
+    try:
+        from openid.test import test_examples
+    except ImportError, e:
+        if 'twill' in str(e):
+            warnings.warn("Could not import twill; skipping test_examples.")
+        else:
+            raise
+    else:
+        pyunit_modules.append(test_examples)
+
+    # Some modules have data-driven tests, and they use custom methods
+    # to build the test suite:
+    custom_modules = [
+        storetest,
+        oidutil,
+        linkparse,
+        trustroot,
+        test_openidyadis,
+        test_htmldiscover,
+        test_association,
+        kvform,
+        test_parsehtml,
+        test_discover,
+        test_accept,
+        test_fetchers,
+        test_urinorm,
+        test_yadis_discover,
+        test_nonce,
+        ]
+
+    loader = unittest.TestLoader()
+    s = unittest.TestSuite()
+
+    for m in pyunit_modules:
+        s.addTest(loader.loadTestsFromModule(m))
+
+    for m in custom_modules:
+        try:
+            s.addTest(m.pyUnitTests())
+        except AttributeError, ex:
+            # because the AttributeError doesn't actually say which
+            # object it was.
+            print "Error loading tests from %s:" % (m,)
+            raise
+
+    runner = unittest.TextTestRunner() # verbosity=2)
+
+    return runner.run(s)
+
+
+
+def splitDir(d, count):
+    # in python2.4 and above, it's easier to spell this as
+    # d.rsplit(os.sep, count)
+    for i in xrange(count):
+        d = os.path.dirname(d)
+    return d
+
+
+
+def _import_djopenid():
+    """Import djopenid from examples/
+
+    It's not in sys.path, and I don't really want to put it in sys.path.
+    """
+    import types
+    thisfile = os.path.abspath(sys.modules[__name__].__file__)
+    topDir = splitDir(thisfile, 2)
+    djdir = os.path.join(topDir, 'examples', 'djopenid')
+
+    djinit = os.path.join(djdir, '__init__.py')
+
+    djopenid = types.ModuleType('djopenid')
+    execfile(djinit, djopenid.__dict__)
+    djopenid.__file__ = djinit
+
+    # __path__ is the magic that makes child modules of the djopenid package
+    # importable.  New feature in python 2.3, see PEP 302.
+    djopenid.__path__ = [djdir]
+    sys.modules['djopenid'] = djopenid
+
+
+
+def django_tests():
+    """Runs tests from examples/djopenid.
+
+    @returns: number of failed tests.
+    """
+    import os
+    # Django uses this to find out where its settings are.
+    os.environ['DJANGO_SETTINGS_MODULE'] = 'djopenid.settings'
+
+    _import_djopenid()
+
+    try:
+        import django.test.simple
+    except ImportError, e:
+        warnings.warn("django.test.simple not found; "
+                      "django examples not tested.")
+        return 0
+    import djopenid.server.models, djopenid.consumer.models
+    print "Testing Django examples:"
+
+    # These tests do get put in to a pyunit test suite, so we could run them
+    # with the other pyunit tests, but django also establishes a test database
+    # for them, so we let it do that thing instead.
+    return django.test.simple.run_tests([djopenid.server.models,
+                                         djopenid.consumer.models])
+
+try:
+    bool
+except NameError:
+    def bool(x):
+        return not not x
+
+def main():
+    fixpath()
+    other_failed = otherTests()
+    pyunit_result = pyunitTests()
+    django_failures = django_tests()
+
+    if other_failed:
+        print 'Failures:', ', '.join(other_failed)
+
+    failed = (bool(other_failed) or
+              bool(not pyunit_result.wasSuccessful()) or
+              (django_failures > 0))
+    return failed
+
+if __name__ == '__main__':
+    sys.exit(main() and 1 or 0)

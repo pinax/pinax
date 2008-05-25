@@ -1,0 +1,44 @@
+#!/usr/bin/env python
+import os.path
+import urlparse
+import sys
+
+# XXX: are the tests going to be in a package?
+parent = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+tests_path = os.path.join(parent, 'tests')
+
+sys.path.insert(0, tests_path)
+
+# Add yadis path
+sys.path.insert(0, parent)
+
+import buildhtml
+import builddiscover
+
+test_root = 'yadis-test'
+
+def main(target, base_url):
+    os.mkdir(target)
+
+    def getTestSettings(name):
+        test_dir = os.path.join(target, name)
+        os.mkdir(test_dir)
+        test_url = urlparse.urljoin(base_url, test_root + '/')
+        test_url = urlparse.urljoin(test_url, name + '/')
+        return (test_url, test_dir)
+
+    # Build HTML test files
+    buildhtml.buildHTML(*getTestSettings('html'))
+
+    # Build discovery test files
+    builddiscover.buildDiscover(*getTestSettings('discover'))
+
+if __name__ == '__main__':
+    (base_url,) = sys.argv[1:]
+
+    target = os.path.join(parent, test_root)
+    if os.path.exists(target):
+        print >>sys.stderr, 'Target exists:', target
+        sys.exit(1)
+
+    main(target, base_url)

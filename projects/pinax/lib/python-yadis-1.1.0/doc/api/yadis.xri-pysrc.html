@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>yadis.xri</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="yadis-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.openidenabled.com/yadis/">Python-Yadis</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="yadis-module.html">Package&nbsp;yadis</a> ::
+        Module&nbsp;xri
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="yadis.xri-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="yadis.xri-module.html">Module yadis.xri</a></h1>
+<pre class="py-src">
+<tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment"># -*- test-case-name: yadis.test.test_xri -*-</tt> </tt>
+<tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-docstring">"""Utility functions for handling XRIs.</tt> </tt>
+<tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-docstring">@see: XRI Syntax v2.0 at the U{OASIS XRI Technical Committee&lt;http://www.oasis-open.org/committees/tc_home.php?wg_abbrev=xri&gt;}</tt> </tt>
+<tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<tt class="py-lineno">  6</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">re</tt> </tt>
+<tt class="py-lineno">  8</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">  9</tt>  <tt class="py-line"><tt id="link-0" class="py-name" targets="Variable yadis.xri.XRI_AUTHORITIES=yadis.xri-module.html#XRI_AUTHORITIES"><a title="yadis.xri.XRI_AUTHORITIES" class="py-name" href="#" onclick="return doclink('link-0', 'XRI_AUTHORITIES', 'link-0');">XRI_AUTHORITIES</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">'!'</tt><tt class="py-op">,</tt> <tt class="py-string">'='</tt><tt class="py-op">,</tt> <tt class="py-string">'@'</tt><tt class="py-op">,</tt> <tt class="py-string">'+'</tt><tt class="py-op">,</tt> <tt class="py-string">'$'</tt><tt class="py-op">,</tt> <tt class="py-string">'('</tt><tt class="py-op">]</tt> </tt>
+<tt class="py-lineno"> 10</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 12</tt>  <tt class="py-line">    <tt class="py-name">unichr</tt><tt class="py-op">(</tt><tt class="py-number">0x10000</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-keyword">except</tt> <tt class="py-name">ValueError</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 14</tt>  <tt class="py-line">    <tt class="py-comment"># narrow python build</tt> </tt>
+<tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-comment"></tt>    <tt id="link-1" class="py-name" targets="Variable yadis.xri.UCSCHAR=yadis.xri-module.html#UCSCHAR"><a title="yadis.xri.UCSCHAR" class="py-name" href="#" onclick="return doclink('link-1', 'UCSCHAR', 'link-1');">UCSCHAR</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> </tt>
+<tt class="py-lineno"> 16</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-number">0xA0</tt><tt class="py-op">,</tt> <tt class="py-number">0xD7FF</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 17</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-number">0xF900</tt><tt class="py-op">,</tt> <tt class="py-number">0xFDCF</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 18</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-number">0xFDF0</tt><tt class="py-op">,</tt> <tt class="py-number">0xFFEF</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 19</tt>  <tt class="py-line">        <tt class="py-op">]</tt> </tt>
+<tt class="py-lineno"> 20</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 21</tt>  <tt class="py-line">    <tt id="link-2" class="py-name" targets="Variable yadis.xri.IPRIVATE=yadis.xri-module.html#IPRIVATE"><a title="yadis.xri.IPRIVATE" class="py-name" href="#" onclick="return doclink('link-2', 'IPRIVATE', 'link-2');">IPRIVATE</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> </tt>
+<tt class="py-lineno"> 22</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-number">0xE000</tt><tt class="py-op">,</tt> <tt class="py-number">0xF8FF</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 23</tt>  <tt class="py-line">        <tt class="py-op">]</tt> </tt>
+<tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 25</tt>  <tt class="py-line">    <tt id="link-3" class="py-name"><a title="yadis.xri.UCSCHAR" class="py-name" href="#" onclick="return doclink('link-3', 'UCSCHAR', 'link-1');">UCSCHAR</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> </tt>
+<tt class="py-lineno"> 26</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-number">0xA0</tt><tt class="py-op">,</tt> <tt class="py-number">0xD7FF</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 27</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-number">0xF900</tt><tt class="py-op">,</tt> <tt class="py-number">0xFDCF</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 28</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-number">0xFDF0</tt><tt class="py-op">,</tt> <tt class="py-number">0xFFEF</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 29</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-number">0x10000</tt><tt class="py-op">,</tt> <tt class="py-number">0x1FFFD</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 30</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-number">0x20000</tt><tt class="py-op">,</tt> <tt class="py-number">0x2FFFD</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 31</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-number">0x30000</tt><tt class="py-op">,</tt> <tt class="py-number">0x3FFFD</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 32</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-number">0x40000</tt><tt class="py-op">,</tt> <tt class="py-number">0x4FFFD</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 33</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-number">0x50000</tt><tt class="py-op">,</tt> <tt class="py-number">0x5FFFD</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 34</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-number">0x60000</tt><tt class="py-op">,</tt> <tt class="py-number">0x6FFFD</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 35</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-number">0x70000</tt><tt class="py-op">,</tt> <tt class="py-number">0x7FFFD</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 36</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-number">0x80000</tt><tt class="py-op">,</tt> <tt class="py-number">0x8FFFD</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 37</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-number">0x90000</tt><tt class="py-op">,</tt> <tt class="py-number">0x9FFFD</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 38</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-number">0xA0000</tt><tt class="py-op">,</tt> <tt class="py-number">0xAFFFD</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 39</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-number">0xB0000</tt><tt class="py-op">,</tt> <tt class="py-number">0xBFFFD</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 40</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-number">0xC0000</tt><tt class="py-op">,</tt> <tt class="py-number">0xCFFFD</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 41</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-number">0xD0000</tt><tt class="py-op">,</tt> <tt class="py-number">0xDFFFD</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 42</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-number">0xE1000</tt><tt class="py-op">,</tt> <tt class="py-number">0xEFFFD</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 43</tt>  <tt class="py-line">        <tt class="py-op">]</tt> </tt>
+<tt class="py-lineno"> 44</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 45</tt>  <tt class="py-line">    <tt id="link-4" class="py-name"><a title="yadis.xri.IPRIVATE" class="py-name" href="#" onclick="return doclink('link-4', 'IPRIVATE', 'link-2');">IPRIVATE</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> </tt>
+<tt class="py-lineno"> 46</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-number">0xE000</tt><tt class="py-op">,</tt> <tt class="py-number">0xF8FF</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 47</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-number">0xF0000</tt><tt class="py-op">,</tt> <tt class="py-number">0xFFFFD</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 48</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-number">0x100000</tt><tt class="py-op">,</tt> <tt class="py-number">0x10FFFD</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 49</tt>  <tt class="py-line">        <tt class="py-op">]</tt> </tt>
+<tt class="py-lineno"> 50</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 51</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 52</tt>  <tt class="py-line"><tt id="link-5" class="py-name" targets="Variable yadis.xri._escapeme_re=yadis.xri-module.html#_escapeme_re"><a title="yadis.xri._escapeme_re" class="py-name" href="#" onclick="return doclink('link-5', '_escapeme_re', 'link-5');">_escapeme_re</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">compile</tt><tt class="py-op">(</tt><tt class="py-string">'[%s]'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-string">''</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt> </tt>
+<tt class="py-lineno"> 53</tt>  <tt class="py-line">    <tt class="py-name">map</tt><tt class="py-op">(</tt><tt class="py-keyword">lambda</tt> <tt class="py-op">(</tt><tt class="py-name">m</tt><tt class="py-op">,</tt> <tt class="py-name">n</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> <tt class="py-string">u'%s-%s'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">unichr</tt><tt class="py-op">(</tt><tt class="py-name">m</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">unichr</tt><tt class="py-op">(</tt><tt class="py-name">n</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 54</tt>  <tt class="py-line">        <tt id="link-6" class="py-name"><a title="yadis.xri.UCSCHAR" class="py-name" href="#" onclick="return doclink('link-6', 'UCSCHAR', 'link-1');">UCSCHAR</a></tt></tt> <tt class="py-op">+</tt> <tt id="link-7" class="py-name"><a title="yadis.xri.IPRIVATE" class="py-name" href="#" onclick="return doclink('link-7', 'IPRIVATE', 'link-2');">IPRIVATE</a></tt></tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 55</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 56</tt>  <tt class="py-line"> </tt>
+<a name="identifierScheme"></a><div id="identifierScheme-def"><tt class="py-lineno"> 57</tt> <a class="py-toggle" href="#" id="identifierScheme-toggle" onclick="return toggle('identifierScheme');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.xri-module.html#identifierScheme">identifierScheme</a><tt class="py-op">(</tt><tt class="py-param">identifier</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="identifierScheme-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="identifierScheme-expanded"><tt class="py-lineno"> 58</tt>  <tt class="py-line">    <tt class="py-docstring">"""Determine if this identifier is an XRI or URI.</tt> </tt>
+<tt class="py-lineno"> 59</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno"> 60</tt>  <tt class="py-line"><tt class="py-docstring">    @returns: C{"XRI"} or C{"URI"}</tt> </tt>
+<tt class="py-lineno"> 61</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<tt class="py-lineno"> 62</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">identifier</tt><tt class="py-op">.</tt><tt class="py-name">startswith</tt><tt class="py-op">(</tt><tt class="py-string">'xri://'</tt><tt class="py-op">)</tt> <tt class="py-keyword">or</tt> <tt class="py-name">identifier</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-keyword">in</tt> <tt id="link-8" class="py-name"><a title="yadis.xri.XRI_AUTHORITIES" class="py-name" href="#" onclick="return doclink('link-8', 'XRI_AUTHORITIES', 'link-0');">XRI_AUTHORITIES</a></tt></tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 63</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-string">"XRI"</tt> </tt>
+<tt class="py-lineno"> 64</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 65</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-string">"URI"</tt> </tt>
+</div><tt class="py-lineno"> 66</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 67</tt>  <tt class="py-line"> </tt>
+<a name="toIRINormal"></a><div id="toIRINormal-def"><tt class="py-lineno"> 68</tt> <a class="py-toggle" href="#" id="toIRINormal-toggle" onclick="return toggle('toIRINormal');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.xri-module.html#toIRINormal">toIRINormal</a><tt class="py-op">(</tt><tt class="py-param">xri</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="toIRINormal-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="toIRINormal-expanded"><tt class="py-lineno"> 69</tt>  <tt class="py-line">    <tt class="py-docstring">"""Transform an XRI to IRI-normal form."""</tt> </tt>
+<tt class="py-lineno"> 70</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt id="link-9" class="py-name" targets="Module yadis.xri=yadis.xri-module.html"><a title="yadis.xri" class="py-name" href="#" onclick="return doclink('link-9', 'xri', 'link-9');">xri</a></tt></tt><tt class="py-op">.</tt><tt class="py-name">startswith</tt><tt class="py-op">(</tt><tt class="py-string">'xri://'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 71</tt>  <tt class="py-line">        <tt id="link-10" class="py-name"><a title="yadis.xri" class="py-name" href="#" onclick="return doclink('link-10', 'xri', 'link-9');">xri</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-string">'xri://'</tt> <tt class="py-op">+</tt> <tt id="link-11" class="py-name"><a title="yadis.xri" class="py-name" href="#" onclick="return doclink('link-11', 'xri', 'link-9');">xri</a></tt></tt> </tt>
+<tt class="py-lineno"> 72</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-12" class="py-name" targets="Function yadis.xri.escapeForIRI()=yadis.xri-module.html#escapeForIRI"><a title="yadis.xri.escapeForIRI" class="py-name" href="#" onclick="return doclink('link-12', 'escapeForIRI', 'link-12');">escapeForIRI</a></tt></tt><tt class="py-op">(</tt><tt id="link-13" class="py-name"><a title="yadis.xri" class="py-name" href="#" onclick="return doclink('link-13', 'xri', 'link-9');">xri</a></tt></tt><tt class="py-op">)</tt> </tt>
+</div><tt class="py-lineno"> 73</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 74</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 75</tt>  <tt class="py-line"><tt id="link-14" class="py-name" targets="Variable yadis.xri._xref_re=yadis.xri-module.html#_xref_re"><a title="yadis.xri._xref_re" class="py-name" href="#" onclick="return doclink('link-14', '_xref_re', 'link-14');">_xref_re</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">compile</tt><tt class="py-op">(</tt><tt class="py-string">'\((.*?)\)'</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 76</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 77</tt>  <tt class="py-line"> </tt>
+<a name="_escape_xref"></a><div id="_escape_xref-def"><tt class="py-lineno"> 78</tt> <a class="py-toggle" href="#" id="_escape_xref-toggle" onclick="return toggle('_escape_xref');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.xri-module.html#_escape_xref">_escape_xref</a><tt class="py-op">(</tt><tt class="py-param">xref_match</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_escape_xref-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_escape_xref-expanded"><tt class="py-lineno"> 79</tt>  <tt class="py-line">    <tt class="py-docstring">"""Escape things that need to be escaped if they're in a cross-reference.</tt> </tt>
+<tt class="py-lineno"> 80</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<tt class="py-lineno"> 81</tt>  <tt class="py-line">    <tt class="py-name">xref</tt> <tt class="py-op">=</tt> <tt class="py-name">xref_match</tt><tt class="py-op">.</tt><tt class="py-name">group</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 82</tt>  <tt class="py-line">    <tt class="py-name">xref</tt> <tt class="py-op">=</tt> <tt class="py-name">xref</tt><tt class="py-op">.</tt><tt class="py-name">replace</tt><tt class="py-op">(</tt><tt class="py-string">'/'</tt><tt class="py-op">,</tt> <tt class="py-string">'%2F'</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 83</tt>  <tt class="py-line">    <tt class="py-name">xref</tt> <tt class="py-op">=</tt> <tt class="py-name">xref</tt><tt class="py-op">.</tt><tt class="py-name">replace</tt><tt class="py-op">(</tt><tt class="py-string">'?'</tt><tt class="py-op">,</tt> <tt class="py-string">'%3F'</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 84</tt>  <tt class="py-line">    <tt class="py-name">xref</tt> <tt class="py-op">=</tt> <tt class="py-name">xref</tt><tt class="py-op">.</tt><tt class="py-name">replace</tt><tt class="py-op">(</tt><tt class="py-string">'#'</tt><tt class="py-op">,</tt> <tt class="py-string">'%23'</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 85</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">xref</tt> </tt>
+</div><tt class="py-lineno"> 86</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 87</tt>  <tt class="py-line"> </tt>
+<a name="escapeForIRI"></a><div id="escapeForIRI-def"><tt class="py-lineno"> 88</tt> <a class="py-toggle" href="#" id="escapeForIRI-toggle" onclick="return toggle('escapeForIRI');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.xri-module.html#escapeForIRI">escapeForIRI</a><tt class="py-op">(</tt><tt class="py-param">xri</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="escapeForIRI-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="escapeForIRI-expanded"><tt class="py-lineno"> 89</tt>  <tt class="py-line">    <tt class="py-docstring">"""Escape things that need to be escaped when transforming to an IRI."""</tt> </tt>
+<tt class="py-lineno"> 90</tt>  <tt class="py-line">    <tt id="link-15" class="py-name"><a title="yadis.xri" class="py-name" href="#" onclick="return doclink('link-15', 'xri', 'link-9');">xri</a></tt></tt> <tt class="py-op">=</tt> <tt id="link-16" class="py-name"><a title="yadis.xri" class="py-name" href="#" onclick="return doclink('link-16', 'xri', 'link-9');">xri</a></tt></tt><tt class="py-op">.</tt><tt class="py-name">replace</tt><tt class="py-op">(</tt><tt class="py-string">'%'</tt><tt class="py-op">,</tt> <tt class="py-string">'%25'</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 91</tt>  <tt class="py-line">    <tt id="link-17" class="py-name"><a title="yadis.xri" class="py-name" href="#" onclick="return doclink('link-17', 'xri', 'link-9');">xri</a></tt></tt> <tt class="py-op">=</tt> <tt id="link-18" class="py-name"><a title="yadis.xri._xref_re" class="py-name" href="#" onclick="return doclink('link-18', '_xref_re', 'link-14');">_xref_re</a></tt></tt><tt class="py-op">.</tt><tt class="py-name">sub</tt><tt class="py-op">(</tt><tt id="link-19" class="py-name" targets="Function yadis.xri._escape_xref()=yadis.xri-module.html#_escape_xref"><a title="yadis.xri._escape_xref" class="py-name" href="#" onclick="return doclink('link-19', '_escape_xref', 'link-19');">_escape_xref</a></tt></tt><tt class="py-op">,</tt> <tt id="link-20" class="py-name"><a title="yadis.xri" class="py-name" href="#" onclick="return doclink('link-20', 'xri', 'link-9');">xri</a></tt></tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 92</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-21" class="py-name"><a title="yadis.xri" class="py-name" href="#" onclick="return doclink('link-21', 'xri', 'link-9');">xri</a></tt></tt> </tt>
+</div><tt class="py-lineno"> 93</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 94</tt>  <tt class="py-line"> </tt>
+<a name="toURINormal"></a><div id="toURINormal-def"><tt class="py-lineno"> 95</tt> <a class="py-toggle" href="#" id="toURINormal-toggle" onclick="return toggle('toURINormal');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.xri-module.html#toURINormal">toURINormal</a><tt class="py-op">(</tt><tt class="py-param">xri</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="toURINormal-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="toURINormal-expanded"><tt class="py-lineno"> 96</tt>  <tt class="py-line">    <tt class="py-docstring">"""Transform an XRI to URI normal form."""</tt> </tt>
+<tt class="py-lineno"> 97</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-22" class="py-name" targets="Function yadis.xri.iriToURI()=yadis.xri-module.html#iriToURI"><a title="yadis.xri.iriToURI" class="py-name" href="#" onclick="return doclink('link-22', 'iriToURI', 'link-22');">iriToURI</a></tt></tt><tt class="py-op">(</tt><tt id="link-23" class="py-name" targets="Function yadis.xri.toIRINormal()=yadis.xri-module.html#toIRINormal"><a title="yadis.xri.toIRINormal" class="py-name" href="#" onclick="return doclink('link-23', 'toIRINormal', 'link-23');">toIRINormal</a></tt></tt><tt class="py-op">(</tt><tt id="link-24" class="py-name"><a title="yadis.xri" class="py-name" href="#" onclick="return doclink('link-24', 'xri', 'link-9');">xri</a></tt></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><tt class="py-lineno"> 98</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 99</tt>  <tt class="py-line"> </tt>
+<a name="_percentEscapeUnicode"></a><div id="_percentEscapeUnicode-def"><tt class="py-lineno">100</tt> <a class="py-toggle" href="#" id="_percentEscapeUnicode-toggle" onclick="return toggle('_percentEscapeUnicode');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.xri-module.html#_percentEscapeUnicode">_percentEscapeUnicode</a><tt class="py-op">(</tt><tt class="py-param">char_match</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_percentEscapeUnicode-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_percentEscapeUnicode-expanded"><tt class="py-lineno">101</tt>  <tt class="py-line">    <tt class="py-name">c</tt> <tt class="py-op">=</tt> <tt class="py-name">char_match</tt><tt class="py-op">.</tt><tt class="py-name">group</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">102</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-string">''</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-string">'%%%X'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">ord</tt><tt class="py-op">(</tt><tt class="py-name">octet</tt><tt class="py-op">)</tt><tt class="py-op">,</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">octet</tt> <tt class="py-keyword">in</tt> <tt class="py-name">c</tt><tt class="py-op">.</tt><tt class="py-name">encode</tt><tt class="py-op">(</tt><tt class="py-string">'utf-8'</tt><tt class="py-op">)</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+</div><tt class="py-lineno">103</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">104</tt>  <tt class="py-line"> </tt>
+<a name="iriToURI"></a><div id="iriToURI-def"><tt class="py-lineno">105</tt> <a class="py-toggle" href="#" id="iriToURI-toggle" onclick="return toggle('iriToURI');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.xri-module.html#iriToURI">iriToURI</a><tt class="py-op">(</tt><tt class="py-param">iri</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="iriToURI-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="iriToURI-expanded"><tt class="py-lineno">106</tt>  <tt class="py-line">    <tt class="py-docstring">"""Transform an IRI to a URI by escaping unicode."""</tt> </tt>
+<tt class="py-lineno">107</tt>  <tt class="py-line">    <tt class="py-comment"># According to RFC 3987, section 3.1, "Mapping of IRIs to URIs"</tt> </tt>
+<tt class="py-lineno">108</tt>  <tt class="py-line"><tt class="py-comment"></tt>    <tt class="py-keyword">return</tt> <tt id="link-25" class="py-name"><a title="yadis.xri._escapeme_re" class="py-name" href="#" onclick="return doclink('link-25', '_escapeme_re', 'link-5');">_escapeme_re</a></tt></tt><tt class="py-op">.</tt><tt class="py-name">sub</tt><tt class="py-op">(</tt><tt id="link-26" class="py-name" targets="Function yadis.xri._percentEscapeUnicode()=yadis.xri-module.html#_percentEscapeUnicode"><a title="yadis.xri._percentEscapeUnicode" class="py-name" href="#" onclick="return doclink('link-26', '_percentEscapeUnicode', 'link-26');">_percentEscapeUnicode</a></tt></tt><tt class="py-op">,</tt> <tt class="py-name">iri</tt><tt class="py-op">)</tt> </tt>
+</div><tt class="py-lineno">109</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">110</tt>  <tt class="py-line"> </tt>
+<a name="providerIsAuthoritative"></a><div id="providerIsAuthoritative-def"><tt class="py-lineno">111</tt> <a class="py-toggle" href="#" id="providerIsAuthoritative-toggle" onclick="return toggle('providerIsAuthoritative');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.xri-module.html#providerIsAuthoritative">providerIsAuthoritative</a><tt class="py-op">(</tt><tt class="py-param">providerID</tt><tt class="py-op">,</tt> <tt class="py-param">canonicalID</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="providerIsAuthoritative-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="providerIsAuthoritative-expanded"><tt class="py-lineno">112</tt>  <tt class="py-line">    <tt class="py-docstring">"""Is this provider ID authoritative for this XRI?</tt> </tt>
+<tt class="py-lineno">113</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno">114</tt>  <tt class="py-line"><tt class="py-docstring">    @returntype: bool</tt> </tt>
+<tt class="py-lineno">115</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<tt class="py-lineno">116</tt>  <tt class="py-line">    <tt class="py-comment"># XXX: can't use rsplit until we require python &gt;= 2.4.</tt> </tt>
+<tt class="py-lineno">117</tt>  <tt class="py-line"><tt class="py-comment"></tt>    <tt class="py-name">lastbang</tt> <tt class="py-op">=</tt> <tt class="py-name">canonicalID</tt><tt class="py-op">.</tt><tt class="py-name">rindex</tt><tt class="py-op">(</tt><tt class="py-string">'!'</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">118</tt>  <tt class="py-line">    <tt class="py-name">parent</tt> <tt class="py-op">=</tt> <tt class="py-name">canonicalID</tt><tt class="py-op">[</tt><tt class="py-op">:</tt><tt class="py-name">lastbang</tt><tt class="py-op">]</tt> </tt>
+<tt class="py-lineno">119</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">parent</tt> <tt class="py-op">==</tt> <tt class="py-name">providerID</tt> </tt>
+</div><tt class="py-lineno">120</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">121</tt>  <tt class="py-line"> </tt>
+<a name="rootAuthority"></a><div id="rootAuthority-def"><tt class="py-lineno">122</tt> <a class="py-toggle" href="#" id="rootAuthority-toggle" onclick="return toggle('rootAuthority');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.xri-module.html#rootAuthority">rootAuthority</a><tt class="py-op">(</tt><tt class="py-param">xri</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="rootAuthority-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="rootAuthority-expanded"><tt class="py-lineno">123</tt>  <tt class="py-line">    <tt class="py-docstring">"""Return the root authority for an XRI.</tt> </tt>
+<tt class="py-lineno">124</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno">125</tt>  <tt class="py-line"><tt class="py-docstring">    Example::</tt> </tt>
+<tt class="py-lineno">126</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno">127</tt>  <tt class="py-line"><tt class="py-docstring">        rootAuthority("xri://@example") == "xri://@"</tt> </tt>
+<tt class="py-lineno">128</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno">129</tt>  <tt class="py-line"><tt class="py-docstring">    @type xri: unicode</tt> </tt>
+<tt class="py-lineno">130</tt>  <tt class="py-line"><tt class="py-docstring">    @returntype: unicode</tt> </tt>
+<tt class="py-lineno">131</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<tt class="py-lineno">132</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-27" class="py-name"><a title="yadis.xri" class="py-name" href="#" onclick="return doclink('link-27', 'xri', 'link-9');">xri</a></tt></tt><tt class="py-op">.</tt><tt class="py-name">startswith</tt><tt class="py-op">(</tt><tt class="py-string">'xri://'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">133</tt>  <tt class="py-line">        <tt id="link-28" class="py-name"><a title="yadis.xri" class="py-name" href="#" onclick="return doclink('link-28', 'xri', 'link-9');">xri</a></tt></tt> <tt class="py-op">=</tt> <tt id="link-29" class="py-name"><a title="yadis.xri" class="py-name" href="#" onclick="return doclink('link-29', 'xri', 'link-9');">xri</a></tt></tt><tt class="py-op">[</tt><tt class="py-number">6</tt><tt class="py-op">:</tt><tt class="py-op">]</tt> </tt>
+<tt class="py-lineno">134</tt>  <tt class="py-line">    <tt class="py-name">authority</tt> <tt class="py-op">=</tt> <tt id="link-30" class="py-name"><a title="yadis.xri" class="py-name" href="#" onclick="return doclink('link-30', 'xri', 'link-9');">xri</a></tt></tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-string">'/'</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<tt class="py-lineno">135</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">authority</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-string">'('</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">136</tt>  <tt class="py-line">        <tt class="py-comment"># Cross-reference.</tt> </tt>
+<tt class="py-lineno">137</tt>  <tt class="py-line"><tt class="py-comment"></tt>        <tt class="py-comment"># XXX: This is incorrect if someone nests cross-references so there</tt> </tt>
+<tt class="py-lineno">138</tt>  <tt class="py-line"><tt class="py-comment"></tt>        <tt class="py-comment">#   is another close-paren in there.  Hopefully nobody does that</tt> </tt>
+<tt class="py-lineno">139</tt>  <tt class="py-line"><tt class="py-comment"></tt>        <tt class="py-comment">#   before we have a real xriparse function.  Hopefully nobody does</tt> </tt>
+<tt class="py-lineno">140</tt>  <tt class="py-line"><tt class="py-comment"></tt>        <tt class="py-comment">#   that *ever*.</tt> </tt>
+<tt class="py-lineno">141</tt>  <tt class="py-line"><tt class="py-comment"></tt>        <tt class="py-name">root</tt> <tt class="py-op">=</tt> <tt class="py-name">authority</tt><tt class="py-op">[</tt><tt class="py-op">:</tt><tt class="py-name">authority</tt><tt class="py-op">.</tt><tt class="py-name">index</tt><tt class="py-op">(</tt><tt class="py-string">')'</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+<tt class="py-lineno">142</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt class="py-name">authority</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-keyword">in</tt> <tt id="link-31" class="py-name"><a title="yadis.xri.XRI_AUTHORITIES" class="py-name" href="#" onclick="return doclink('link-31', 'XRI_AUTHORITIES', 'link-0');">XRI_AUTHORITIES</a></tt></tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">143</tt>  <tt class="py-line">        <tt class="py-comment"># Other XRI reference.</tt> </tt>
+<tt class="py-lineno">144</tt>  <tt class="py-line"><tt class="py-comment"></tt>        <tt class="py-name">root</tt> <tt class="py-op">=</tt> <tt class="py-name">authority</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<tt class="py-lineno">145</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">146</tt>  <tt class="py-line">        <tt class="py-comment"># IRI reference.  XXX: Can IRI authorities have segments?</tt> </tt>
+<tt class="py-lineno">147</tt>  <tt class="py-line"><tt class="py-comment"></tt>        <tt class="py-name">segments</tt> <tt class="py-op">=</tt> <tt class="py-name">authority</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-string">'!'</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">148</tt>  <tt class="py-line">        <tt class="py-name">segments</tt> <tt class="py-op">=</tt> <tt class="py-name">reduce</tt><tt class="py-op">(</tt><tt class="py-name">list</tt><tt class="py-op">.</tt><tt class="py-name">__add__</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno">149</tt>  <tt class="py-line">            <tt class="py-name">map</tt><tt class="py-op">(</tt><tt class="py-keyword">lambda</tt> <tt class="py-name">s</tt><tt class="py-op">:</tt> <tt class="py-name">s</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-string">'*'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">segments</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">150</tt>  <tt class="py-line">        <tt class="py-name">root</tt> <tt class="py-op">=</tt> <tt class="py-name">segments</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<tt class="py-lineno">151</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">152</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-32" class="py-name" targets="Function yadis.xri.XRI()=yadis.xri-module.html#XRI"><a title="yadis.xri.XRI" class="py-name" href="#" onclick="return doclink('link-32', 'XRI', 'link-32');">XRI</a></tt></tt><tt class="py-op">(</tt><tt class="py-name">root</tt><tt class="py-op">)</tt> </tt>
+</div><tt class="py-lineno">153</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">154</tt>  <tt class="py-line"> </tt>
+<a name="XRI"></a><div id="XRI-def"><tt class="py-lineno">155</tt> <a class="py-toggle" href="#" id="XRI-toggle" onclick="return toggle('XRI');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.xri-module.html#XRI">XRI</a><tt class="py-op">(</tt><tt class="py-param">xri</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="XRI-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="XRI-expanded"><tt class="py-lineno">156</tt>  <tt class="py-line">    <tt class="py-docstring">"""An XRI object allowing comparison of XRI.</tt> </tt>
+<tt class="py-lineno">157</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno">158</tt>  <tt class="py-line"><tt class="py-docstring">    Ideally, this would do full normalization and provide comparsion</tt> </tt>
+<tt class="py-lineno">159</tt>  <tt class="py-line"><tt class="py-docstring">    operators as per XRI Syntax.  Right now, it just does a bit of</tt> </tt>
+<tt class="py-lineno">160</tt>  <tt class="py-line"><tt class="py-docstring">    canonicalization by ensuring the xri scheme is present.</tt> </tt>
+<tt class="py-lineno">161</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno">162</tt>  <tt class="py-line"><tt class="py-docstring">    @param xri: an xri string</tt> </tt>
+<tt class="py-lineno">163</tt>  <tt class="py-line"><tt class="py-docstring">    @type xri: unicode</tt> </tt>
+<tt class="py-lineno">164</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<tt class="py-lineno">165</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt id="link-33" class="py-name"><a title="yadis.xri" class="py-name" href="#" onclick="return doclink('link-33', 'xri', 'link-9');">xri</a></tt></tt><tt class="py-op">.</tt><tt class="py-name">startswith</tt><tt class="py-op">(</tt><tt class="py-string">'xri://'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">166</tt>  <tt class="py-line">        <tt id="link-34" class="py-name"><a title="yadis.xri" class="py-name" href="#" onclick="return doclink('link-34', 'xri', 'link-9');">xri</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-string">'xri://'</tt> <tt class="py-op">+</tt> <tt id="link-35" class="py-name"><a title="yadis.xri" class="py-name" href="#" onclick="return doclink('link-35', 'xri', 'link-9');">xri</a></tt></tt> </tt>
+<tt class="py-lineno">167</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-36" class="py-name"><a title="yadis.xri" class="py-name" href="#" onclick="return doclink('link-36', 'xri', 'link-9');">xri</a></tt></tt> </tt>
+</div><tt class="py-lineno">168</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="yadis-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.openidenabled.com/yadis/">Python-Yadis</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">Generated by Epydoc
+        3.0alpha3 on Fri Dec  8 13:17:18 2006</td>
+    <td align="right" class="footer">
+      <a href="http://epydoc.sourceforge.net">http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie()
+  // -->
+</script>
+  
+</body>
+</html>

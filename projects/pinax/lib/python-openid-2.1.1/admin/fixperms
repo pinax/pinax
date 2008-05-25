@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+cat - <<EOF | xargs chmod +x
+admin/builddiscover.py
+admin/fixperms
+admin/makechangelog
+admin/pythonsource
+admin/runtests
+admin/setversion
+admin/tagrelease
+EOF

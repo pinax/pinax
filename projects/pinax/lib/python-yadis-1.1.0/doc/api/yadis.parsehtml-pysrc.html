@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>yadis.parsehtml</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="yadis-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.openidenabled.com/yadis/">Python-Yadis</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="yadis-module.html">Package&nbsp;yadis</a> ::
+        Module&nbsp;parsehtml
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="yadis.parsehtml-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="yadis.parsehtml-module.html">Module yadis.parsehtml</a></h1>
+<pre class="py-src">
+<tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-name">__all__</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">'findHTMLMeta'</tt><tt class="py-op">,</tt> <tt class="py-string">'MetaNotFound'</tt><tt class="py-op">]</tt> </tt>
+<tt class="py-lineno">  2</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">HTMLParser</tt> <tt class="py-keyword">import</tt> <tt class="py-name">HTMLParser</tt><tt class="py-op">,</tt> <tt class="py-name">HTMLParseError</tt> </tt>
+<tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">htmlentitydefs</tt> </tt>
+<tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">re</tt> </tt>
+<tt class="py-lineno">  6</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package yadis=yadis-module.html"><a title="yadis" class="py-name" href="#" onclick="return doclink('link-0', 'yadis', 'link-0');">yadis</a></tt></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Module yadis.constants=yadis.constants-module.html"><a title="yadis.constants" class="py-name" href="#" onclick="return doclink('link-1', 'constants', 'link-1');">constants</a></tt></tt> <tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Variable yadis.constants.YADIS_HEADER_NAME=yadis.constants-module.html#YADIS_HEADER_NAME"><a title="yadis.constants.YADIS_HEADER_NAME" class="py-name" href="#" onclick="return doclink('link-2', 'YADIS_HEADER_NAME', 'link-2');">YADIS_HEADER_NAME</a></tt></tt> </tt>
+<tt class="py-lineno">  8</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-comment"># Size of the chunks to search at a time (also the amount that gets</tt> </tt>
+<tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt class="py-comment"># read at a time)</tt> </tt>
+<tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt id="link-3" class="py-name" targets="Variable yadis.parsehtml.CHUNK_SIZE=yadis.parsehtml-module.html#CHUNK_SIZE"><a title="yadis.parsehtml.CHUNK_SIZE" class="py-name" href="#" onclick="return doclink('link-3', 'CHUNK_SIZE', 'link-3');">CHUNK_SIZE</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-number">1024</tt> <tt class="py-op">*</tt> <tt class="py-number">16</tt> <tt class="py-comment"># 16 KB</tt> </tt>
+<tt class="py-lineno"> 12</tt>  <tt class="py-line"> </tt>
+<a name="ParseDone"></a><div id="ParseDone-def"><tt class="py-lineno"> 13</tt> <a class="py-toggle" href="#" id="ParseDone-toggle" onclick="return toggle('ParseDone');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="yadis.parsehtml.ParseDone-class.html">ParseDone</a><tt class="py-op">(</tt><tt class="py-base-class">Exception</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ParseDone-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="ParseDone-expanded"><tt class="py-lineno"> 14</tt>  <tt class="py-line">    <tt class="py-docstring">"""Exception to hold the URI that was located when the parse is</tt> </tt>
+<tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-docstring">    finished. If the parse finishes without finding the URI, set it to</tt> </tt>
+<tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-docstring">    None."""</tt> </tt>
+</div><tt class="py-lineno"> 17</tt>  <tt class="py-line"> </tt>
+<a name="MetaNotFound"></a><div id="MetaNotFound-def"><tt class="py-lineno"> 18</tt> <a class="py-toggle" href="#" id="MetaNotFound-toggle" onclick="return toggle('MetaNotFound');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="yadis.parsehtml.MetaNotFound-class.html">MetaNotFound</a><tt class="py-op">(</tt><tt class="py-base-class">Exception</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MetaNotFound-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="MetaNotFound-expanded"><tt class="py-lineno"> 19</tt>  <tt class="py-line">    <tt class="py-docstring">"""Exception to hold the content of the page if we did not find</tt> </tt>
+<tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-docstring">    the appropriate &lt;meta&gt; tag"""</tt> </tt>
+</div><tt class="py-lineno"> 21</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt id="link-4" class="py-name" targets="Variable yadis.parsehtml.re_flags=yadis.parsehtml-module.html#re_flags"><a title="yadis.parsehtml.re_flags" class="py-name" href="#" onclick="return doclink('link-4', 're_flags', 'link-4');">re_flags</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">IGNORECASE</tt> <tt class="py-op">|</tt> <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">UNICODE</tt> <tt class="py-op">|</tt> <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">VERBOSE</tt> </tt>
+<tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt id="link-5" class="py-name" targets="Variable yadis.parsehtml.ent_pat=yadis.parsehtml-module.html#ent_pat"><a title="yadis.parsehtml.ent_pat" class="py-name" href="#" onclick="return doclink('link-5', 'ent_pat', 'link-5');">ent_pat</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-string">r'''</tt> </tt>
+<tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-string">&amp;</tt> </tt>
+<tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-string">(?: \#x (?P&lt;hex&gt; [a-f0-9]+ )</tt> </tt>
+<tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-string">|   \# (?P&lt;dec&gt; \d+ )</tt> </tt>
+<tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-string">|   (?P&lt;word&gt; \w+ )</tt> </tt>
+<tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt class="py-string">)</tt> </tt>
+<tt class="py-lineno"> 30</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-string">;'''</tt> </tt>
+<tt class="py-lineno"> 32</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt id="link-6" class="py-name" targets="Variable yadis.parsehtml.ent_re=yadis.parsehtml-module.html#ent_re"><a title="yadis.parsehtml.ent_re" class="py-name" href="#" onclick="return doclink('link-6', 'ent_re', 'link-6');">ent_re</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">compile</tt><tt class="py-op">(</tt><tt id="link-7" class="py-name"><a title="yadis.parsehtml.ent_pat" class="py-name" href="#" onclick="return doclink('link-7', 'ent_pat', 'link-5');">ent_pat</a></tt></tt><tt class="py-op">,</tt> <tt id="link-8" class="py-name"><a title="yadis.parsehtml.re_flags" class="py-name" href="#" onclick="return doclink('link-8', 're_flags', 'link-4');">re_flags</a></tt></tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 34</tt>  <tt class="py-line"> </tt>
+<a name="substituteMO"></a><div id="substituteMO-def"><tt class="py-lineno"> 35</tt> <a class="py-toggle" href="#" id="substituteMO-toggle" onclick="return toggle('substituteMO');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.parsehtml-module.html#substituteMO">substituteMO</a><tt class="py-op">(</tt><tt class="py-param">mo</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="substituteMO-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="substituteMO-expanded"><tt class="py-lineno"> 36</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">mo</tt><tt class="py-op">.</tt><tt class="py-name">lastgroup</tt> <tt class="py-op">==</tt> <tt class="py-string">'hex'</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 37</tt>  <tt class="py-line">        <tt class="py-name">codepoint</tt> <tt class="py-op">=</tt> <tt class="py-name">int</tt><tt class="py-op">(</tt><tt class="py-name">mo</tt><tt class="py-op">.</tt><tt class="py-name">group</tt><tt class="py-op">(</tt><tt class="py-string">'hex'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-number">16</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 38</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt class="py-name">mo</tt><tt class="py-op">.</tt><tt class="py-name">lastgroup</tt> <tt class="py-op">==</tt> <tt class="py-string">'dec'</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 39</tt>  <tt class="py-line">        <tt class="py-name">codepoint</tt> <tt class="py-op">=</tt> <tt class="py-name">int</tt><tt class="py-op">(</tt><tt class="py-name">mo</tt><tt class="py-op">.</tt><tt class="py-name">group</tt><tt class="py-op">(</tt><tt class="py-string">'dec'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 40</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 41</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">mo</tt><tt class="py-op">.</tt><tt class="py-name">lastgroup</tt> <tt class="py-op">==</tt> <tt class="py-string">'word'</tt> </tt>
+<tt class="py-lineno"> 42</tt>  <tt class="py-line">        <tt class="py-name">codepoint</tt> <tt class="py-op">=</tt> <tt class="py-name">htmlentitydefs</tt><tt class="py-op">.</tt><tt class="py-name">name2codepoint</tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-name">mo</tt><tt class="py-op">.</tt><tt class="py-name">group</tt><tt class="py-op">(</tt><tt class="py-string">'word'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 43</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 44</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">codepoint</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 45</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">mo</tt><tt class="py-op">.</tt><tt class="py-name">group</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 46</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 47</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">unichr</tt><tt class="py-op">(</tt><tt class="py-name">codepoint</tt><tt class="py-op">)</tt> </tt>
+</div><tt class="py-lineno"> 48</tt>  <tt class="py-line"> </tt>
+<a name="substituteEntities"></a><div id="substituteEntities-def"><tt class="py-lineno"> 49</tt> <a class="py-toggle" href="#" id="substituteEntities-toggle" onclick="return toggle('substituteEntities');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.parsehtml-module.html#substituteEntities">substituteEntities</a><tt class="py-op">(</tt><tt class="py-param">s</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="substituteEntities-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="substituteEntities-expanded"><tt class="py-lineno"> 50</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-9" class="py-name"><a title="yadis.parsehtml.ent_re" class="py-name" href="#" onclick="return doclink('link-9', 'ent_re', 'link-6');">ent_re</a></tt></tt><tt class="py-op">.</tt><tt class="py-name">sub</tt><tt class="py-op">(</tt><tt id="link-10" class="py-name" targets="Function yadis.parsehtml.substituteMO()=yadis.parsehtml-module.html#substituteMO"><a title="yadis.parsehtml.substituteMO" class="py-name" href="#" onclick="return doclink('link-10', 'substituteMO', 'link-10');">substituteMO</a></tt></tt><tt class="py-op">,</tt> <tt class="py-name">s</tt><tt class="py-op">)</tt> </tt>
+</div><tt class="py-lineno"> 51</tt>  <tt class="py-line"> </tt>
+<a name="YadisHTMLParser"></a><div id="YadisHTMLParser-def"><tt class="py-lineno"> 52</tt> <a class="py-toggle" href="#" id="YadisHTMLParser-toggle" onclick="return toggle('YadisHTMLParser');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="yadis.parsehtml.YadisHTMLParser-class.html">YadisHTMLParser</a><tt class="py-op">(</tt><tt class="py-base-class">HTMLParser</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="YadisHTMLParser-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="YadisHTMLParser-expanded"><tt class="py-lineno"> 53</tt>  <tt class="py-line">    <tt class="py-docstring">"""Parser that finds a meta http-equiv tag in the head of a html</tt> </tt>
+<tt class="py-lineno"> 54</tt>  <tt class="py-line"><tt class="py-docstring">    document.</tt> </tt>
+<tt class="py-lineno"> 55</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno"> 56</tt>  <tt class="py-line"><tt class="py-docstring">    When feeding in data, if the tag is matched or it will never be</tt> </tt>
+<tt class="py-lineno"> 57</tt>  <tt class="py-line"><tt class="py-docstring">    found, the parser will raise ParseDone with the uri as the first</tt> </tt>
+<tt class="py-lineno"> 58</tt>  <tt class="py-line"><tt class="py-docstring">    attribute.</tt> </tt>
+<tt class="py-lineno"> 59</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno"> 60</tt>  <tt class="py-line"><tt class="py-docstring">    Parsing state diagram</tt> </tt>
+<tt class="py-lineno"> 61</tt>  <tt class="py-line"><tt class="py-docstring">    =====================</tt> </tt>
+<tt class="py-lineno"> 62</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno"> 63</tt>  <tt class="py-line"><tt class="py-docstring">    Any unlisted input does not affect the state::</tt> </tt>
+<tt class="py-lineno"> 64</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno"> 65</tt>  <tt class="py-line"><tt class="py-docstring">                1, 2, 5                       8</tt> </tt>
+<tt class="py-lineno"> 66</tt>  <tt class="py-line"><tt class="py-docstring">               +--------------------------+  +-+</tt> </tt>
+<tt class="py-lineno"> 67</tt>  <tt class="py-line"><tt class="py-docstring">               |                          |  | |</tt> </tt>
+<tt class="py-lineno"> 68</tt>  <tt class="py-line"><tt class="py-docstring">            4  |    3       1, 2, 5, 7    v  | v</tt> </tt>
+<tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt class="py-docstring">        TOP -&gt; HTML -&gt; HEAD ----------&gt; TERMINATED</tt> </tt>
+<tt class="py-lineno"> 70</tt>  <tt class="py-line"><tt class="py-docstring">        | |            ^  |               ^  ^</tt> </tt>
+<tt class="py-lineno"> 71</tt>  <tt class="py-line"><tt class="py-docstring">        | | 3          |  |               |  |</tt> </tt>
+<tt class="py-lineno"> 72</tt>  <tt class="py-line"><tt class="py-docstring">        | +------------+  +-&gt; FOUND ------+  |</tt> </tt>
+<tt class="py-lineno"> 73</tt>  <tt class="py-line"><tt class="py-docstring">        |                  6         8       |</tt> </tt>
+<tt class="py-lineno"> 74</tt>  <tt class="py-line"><tt class="py-docstring">        | 1, 2                               |</tt> </tt>
+<tt class="py-lineno"> 75</tt>  <tt class="py-line"><tt class="py-docstring">        +------------------------------------+</tt> </tt>
+<tt class="py-lineno"> 76</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno"> 77</tt>  <tt class="py-line"><tt class="py-docstring">      1. any of &lt;/body&gt;, &lt;/html&gt;, &lt;/head&gt; -&gt; TERMINATE</tt> </tt>
+<tt class="py-lineno"> 78</tt>  <tt class="py-line"><tt class="py-docstring">      2. &lt;body&gt; -&gt; TERMINATE</tt> </tt>
+<tt class="py-lineno"> 79</tt>  <tt class="py-line"><tt class="py-docstring">      3. &lt;head&gt; -&gt; HEAD</tt> </tt>
+<tt class="py-lineno"> 80</tt>  <tt class="py-line"><tt class="py-docstring">      4. &lt;html&gt; -&gt; HTML</tt> </tt>
+<tt class="py-lineno"> 81</tt>  <tt class="py-line"><tt class="py-docstring">      5. &lt;html&gt; -&gt; TERMINATE</tt> </tt>
+<tt class="py-lineno"> 82</tt>  <tt class="py-line"><tt class="py-docstring">      6. &lt;meta http-equiv='X-XRDS-Location'&gt; -&gt; FOUND</tt> </tt>
+<tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt class="py-docstring">      7. &lt;head&gt; -&gt; TERMINATE</tt> </tt>
+<tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt class="py-docstring">      8. Any input -&gt; TERMINATE</tt> </tt>
+<tt class="py-lineno"> 85</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<tt class="py-lineno"> 86</tt>  <tt class="py-line">    <tt id="link-11" class="py-name" targets="Variable yadis.parsehtml.YadisHTMLParser.TOP=yadis.parsehtml.YadisHTMLParser-class.html#TOP"><a title="yadis.parsehtml.YadisHTMLParser.TOP" class="py-name" href="#" onclick="return doclink('link-11', 'TOP', 'link-11');">TOP</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<tt class="py-lineno"> 87</tt>  <tt class="py-line">    <tt id="link-12" class="py-name" targets="Variable yadis.parsehtml.YadisHTMLParser.HTML=yadis.parsehtml.YadisHTMLParser-class.html#HTML"><a title="yadis.parsehtml.YadisHTMLParser.HTML" class="py-name" href="#" onclick="return doclink('link-12', 'HTML', 'link-12');">HTML</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-number">1</tt> </tt>
+<tt class="py-lineno"> 88</tt>  <tt class="py-line">    <tt id="link-13" class="py-name" targets="Variable yadis.parsehtml.YadisHTMLParser.HEAD=yadis.parsehtml.YadisHTMLParser-class.html#HEAD"><a title="yadis.parsehtml.YadisHTMLParser.HEAD" class="py-name" href="#" onclick="return doclink('link-13', 'HEAD', 'link-13');">HEAD</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-number">2</tt> </tt>
+<tt class="py-lineno"> 89</tt>  <tt class="py-line">    <tt id="link-14" class="py-name" targets="Variable yadis.parsehtml.YadisHTMLParser.FOUND=yadis.parsehtml.YadisHTMLParser-class.html#FOUND"><a title="yadis.parsehtml.YadisHTMLParser.FOUND" class="py-name" href="#" onclick="return doclink('link-14', 'FOUND', 'link-14');">FOUND</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-number">3</tt> </tt>
+<tt class="py-lineno"> 90</tt>  <tt class="py-line">    <tt id="link-15" class="py-name" targets="Variable yadis.parsehtml.YadisHTMLParser.TERMINATED=yadis.parsehtml.YadisHTMLParser-class.html#TERMINATED"><a title="yadis.parsehtml.YadisHTMLParser.TERMINATED" class="py-name" href="#" onclick="return doclink('link-15', 'TERMINATED', 'link-15');">TERMINATED</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-number">4</tt> </tt>
+<tt class="py-lineno"> 91</tt>  <tt class="py-line"> </tt>
+<a name="YadisHTMLParser.__init__"></a><div id="YadisHTMLParser.__init__-def"><tt class="py-lineno"> 92</tt> <a class="py-toggle" href="#" id="YadisHTMLParser.__init__-toggle" onclick="return toggle('YadisHTMLParser.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.parsehtml.YadisHTMLParser-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="YadisHTMLParser.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="YadisHTMLParser.__init__-expanded"><tt class="py-lineno"> 93</tt>  <tt class="py-line">        <tt class="py-name">HTMLParser</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Method yadis.discover.DiscoveryFailure.__init__()=yadis.discover.DiscoveryFailure-class.html#__init__,Method yadis.discover.DiscoveryResult.__init__()=yadis.discover.DiscoveryResult-class.html#__init__,Method yadis.filters.BasicServiceEndpoint.__init__()=yadis.filters.BasicServiceEndpoint-class.html#__init__,Method yadis.filters.CompoundFilter.__init__()=yadis.filters.CompoundFilter-class.html#__init__,Method yadis.filters.TransformFilterMaker.__init__()=yadis.filters.TransformFilterMaker-class.html#__init__,Method yadis.manager.Discovery.__init__()=yadis.manager.Discovery-class.html#__init__,Method yadis.manager.YadisServiceManager.__init__()=yadis.manager.YadisServiceManager-class.html#__init__,Method yadis.parsehtml.YadisHTMLParser.__init__()=yadis.parsehtml.YadisHTMLParser-class.html#__init__,Method yadis.test.livediscover.DiscoverTestCase.__init__()=yadis.test.livediscover.DiscoverTestCase-class.html#__init__,Method yadis.test.test_accept.MatchAcceptTest.__init__()=yadis.test.test_accept.MatchAcceptTest-class.html#__init__,Method yadis.test.test_discover.TestFetcher.__init__()=yadis.test.test_discover.TestFetcher-class.html#__init__,Method yadis.test.test_discover.TestSecondGet.MockFetcher.__init__()=yadis.test.test_discover.TestSecondGet.MockFetcher-class.html#__init__,Method yadis.test.test_discover._TestCase.__init__()=yadis.test.test_discover._TestCase-class.html#__init__,Method yadis.test.test_parsehtml._TestCase.__init__()=yadis.test.test_parsehtml._TestCase-class.html#__init__,Method yadis.xrires.ProxyResolver.__init__()=yadis.xrires.ProxyResolver-class.html#__init__"><a title="yadis.discover.DiscoveryFailure.__init__
+yadis.discover.DiscoveryResult.__init__
+yadis.filters.BasicServiceEndpoint.__init__
+yadis.filters.CompoundFilter.__init__
+yadis.filters.TransformFilterMaker.__init__
+yadis.manager.Discovery.__init__
+yadis.manager.YadisServiceManager.__init__
+yadis.parsehtml.YadisHTMLParser.__init__
+yadis.test.livediscover.DiscoverTestCase.__init__
+yadis.test.test_accept.MatchAcceptTest.__init__
+yadis.test.test_discover.TestFetcher.__init__
+yadis.test.test_discover.TestSecondGet.MockFetcher.__init__
+yadis.test.test_discover._TestCase.__init__
+yadis.test.test_parsehtml._TestCase.__init__
+yadis.xrires.ProxyResolver.__init__" class="py-name" href="#" onclick="return doclink('link-16', '__init__', 'link-16');">__init__</a></tt></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 94</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">phase</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name"><a title="yadis.parsehtml.YadisHTMLParser.TOP" class="py-name" href="#" onclick="return doclink('link-17', 'TOP', 'link-11');">TOP</a></tt></tt> </tt>
+</div><tt class="py-lineno"> 95</tt>  <tt class="py-line"> </tt>
+<a name="YadisHTMLParser._terminate"></a><div id="YadisHTMLParser._terminate-def"><tt class="py-lineno"> 96</tt> <a class="py-toggle" href="#" id="YadisHTMLParser._terminate-toggle" onclick="return toggle('YadisHTMLParser._terminate');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.parsehtml.YadisHTMLParser-class.html#_terminate">_terminate</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="YadisHTMLParser._terminate-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="YadisHTMLParser._terminate-expanded"><tt class="py-lineno"> 97</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">phase</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name"><a title="yadis.parsehtml.YadisHTMLParser.TERMINATED" class="py-name" href="#" onclick="return doclink('link-18', 'TERMINATED', 'link-15');">TERMINATED</a></tt></tt> </tt>
+<tt class="py-lineno"> 98</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt id="link-19" class="py-name" targets="Class yadis.parsehtml.ParseDone=yadis.parsehtml.ParseDone-class.html"><a title="yadis.parsehtml.ParseDone" class="py-name" href="#" onclick="return doclink('link-19', 'ParseDone', 'link-19');">ParseDone</a></tt></tt><tt class="py-op">(</tt><tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+</div><tt class="py-lineno"> 99</tt>  <tt class="py-line"> </tt>
+<a name="YadisHTMLParser.handle_endtag"></a><div id="YadisHTMLParser.handle_endtag-def"><tt class="py-lineno">100</tt> <a class="py-toggle" href="#" id="YadisHTMLParser.handle_endtag-toggle" onclick="return toggle('YadisHTMLParser.handle_endtag');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.parsehtml.YadisHTMLParser-class.html#handle_endtag">handle_endtag</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">tag</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="YadisHTMLParser.handle_endtag-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="YadisHTMLParser.handle_endtag-expanded"><tt class="py-lineno">101</tt>  <tt class="py-line">        <tt class="py-comment"># If we ever see an end of head, body, or html, bail out right away.</tt> </tt>
+<tt class="py-lineno">102</tt>  <tt class="py-line"><tt class="py-comment"></tt>        <tt class="py-comment"># [1]</tt> </tt>
+<tt class="py-lineno">103</tt>  <tt class="py-line"><tt class="py-comment"></tt>        <tt class="py-keyword">if</tt> <tt class="py-name">tag</tt> <tt class="py-keyword">in</tt> <tt class="py-op">[</tt><tt class="py-string">'head'</tt><tt class="py-op">,</tt> <tt class="py-string">'body'</tt><tt class="py-op">,</tt> <tt class="py-string">'html'</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">104</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-20" class="py-name" targets="Method yadis.parsehtml.YadisHTMLParser._terminate()=yadis.parsehtml.YadisHTMLParser-class.html#_terminate"><a title="yadis.parsehtml.YadisHTMLParser._terminate" class="py-name" href="#" onclick="return doclink('link-20', '_terminate', 'link-20');">_terminate</a></tt></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><tt class="py-lineno">105</tt>  <tt class="py-line"> </tt>
+<a name="YadisHTMLParser.handle_starttag"></a><div id="YadisHTMLParser.handle_starttag-def"><tt class="py-lineno">106</tt> <a class="py-toggle" href="#" id="YadisHTMLParser.handle_starttag-toggle" onclick="return toggle('YadisHTMLParser.handle_starttag');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.parsehtml.YadisHTMLParser-class.html#handle_starttag">handle_starttag</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">tag</tt><tt class="py-op">,</tt> <tt class="py-param">attrs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="YadisHTMLParser.handle_starttag-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="YadisHTMLParser.handle_starttag-expanded"><tt class="py-lineno">107</tt>  <tt class="py-line">        <tt class="py-comment"># if we ever see a start body tag, bail out right away, since</tt> </tt>
+<tt class="py-lineno">108</tt>  <tt class="py-line"><tt class="py-comment"></tt>        <tt class="py-comment"># we want to prevent the meta tag from appearing in the body</tt> </tt>
+<tt class="py-lineno">109</tt>  <tt class="py-line"><tt class="py-comment"></tt>        <tt class="py-comment"># [2]</tt> </tt>
+<tt class="py-lineno">110</tt>  <tt class="py-line"><tt class="py-comment"></tt>        <tt class="py-keyword">if</tt> <tt class="py-name">tag</tt><tt class="py-op">==</tt><tt class="py-string">'body'</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">111</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-21" class="py-name"><a title="yadis.parsehtml.YadisHTMLParser._terminate" class="py-name" href="#" onclick="return doclink('link-21', '_terminate', 'link-20');">_terminate</a></tt></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">112</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">113</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">phase</tt> <tt class="py-op">==</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="yadis.parsehtml.YadisHTMLParser.TOP" class="py-name" href="#" onclick="return doclink('link-22', 'TOP', 'link-11');">TOP</a></tt></tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">114</tt>  <tt class="py-line">            <tt class="py-comment"># At the top level, allow a html tag or a head tag to move</tt> </tt>
+<tt class="py-lineno">115</tt>  <tt class="py-line"><tt class="py-comment"></tt>            <tt class="py-comment"># to the head or html phase</tt> </tt>
+<tt class="py-lineno">116</tt>  <tt class="py-line"><tt class="py-comment"></tt>            <tt class="py-keyword">if</tt> <tt class="py-name">tag</tt> <tt class="py-op">==</tt> <tt class="py-string">'head'</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">117</tt>  <tt class="py-line">                <tt class="py-comment"># [3]</tt> </tt>
+<tt class="py-lineno">118</tt>  <tt class="py-line"><tt class="py-comment"></tt>                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">phase</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="yadis.parsehtml.YadisHTMLParser.HEAD" class="py-name" href="#" onclick="return doclink('link-23', 'HEAD', 'link-13');">HEAD</a></tt></tt> </tt>
+<tt class="py-lineno">119</tt>  <tt class="py-line">            <tt class="py-keyword">elif</tt> <tt class="py-name">tag</tt> <tt class="py-op">==</tt> <tt class="py-string">'html'</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">120</tt>  <tt class="py-line">                <tt class="py-comment"># [4]</tt> </tt>
+<tt class="py-lineno">121</tt>  <tt class="py-line"><tt class="py-comment"></tt>                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">phase</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="yadis.parsehtml.YadisHTMLParser.HTML" class="py-name" href="#" onclick="return doclink('link-24', 'HTML', 'link-12');">HTML</a></tt></tt> </tt>
+<tt class="py-lineno">122</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">123</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">phase</tt> <tt class="py-op">==</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-25" class="py-name"><a title="yadis.parsehtml.YadisHTMLParser.HTML" class="py-name" href="#" onclick="return doclink('link-25', 'HTML', 'link-12');">HTML</a></tt></tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">124</tt>  <tt class="py-line">            <tt class="py-comment"># if we are in the html tag, allow a head tag to move to</tt> </tt>
+<tt class="py-lineno">125</tt>  <tt class="py-line"><tt class="py-comment"></tt>            <tt class="py-comment"># the HEAD phase. If we get another html tag, then bail</tt> </tt>
+<tt class="py-lineno">126</tt>  <tt class="py-line"><tt class="py-comment"></tt>            <tt class="py-comment"># out</tt> </tt>
+<tt class="py-lineno">127</tt>  <tt class="py-line"><tt class="py-comment"></tt>            <tt class="py-keyword">if</tt> <tt class="py-name">tag</tt> <tt class="py-op">==</tt> <tt class="py-string">'head'</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">128</tt>  <tt class="py-line">                <tt class="py-comment"># [3]</tt> </tt>
+<tt class="py-lineno">129</tt>  <tt class="py-line"><tt class="py-comment"></tt>                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">phase</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name"><a title="yadis.parsehtml.YadisHTMLParser.HEAD" class="py-name" href="#" onclick="return doclink('link-26', 'HEAD', 'link-13');">HEAD</a></tt></tt> </tt>
+<tt class="py-lineno">130</tt>  <tt class="py-line">            <tt class="py-keyword">elif</tt> <tt class="py-name">tag</tt> <tt class="py-op">==</tt> <tt class="py-string">'html'</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">131</tt>  <tt class="py-line">                <tt class="py-comment"># [5]</tt> </tt>
+<tt class="py-lineno">132</tt>  <tt class="py-line"><tt class="py-comment"></tt>                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-27" class="py-name"><a title="yadis.parsehtml.YadisHTMLParser._terminate" class="py-name" href="#" onclick="return doclink('link-27', '_terminate', 'link-20');">_terminate</a></tt></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">133</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">134</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">phase</tt> <tt class="py-op">==</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-28" class="py-name"><a title="yadis.parsehtml.YadisHTMLParser.HEAD" class="py-name" href="#" onclick="return doclink('link-28', 'HEAD', 'link-13');">HEAD</a></tt></tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">135</tt>  <tt class="py-line">            <tt class="py-comment"># If we are in the head phase, look for the appropriate</tt> </tt>
+<tt class="py-lineno">136</tt>  <tt class="py-line"><tt class="py-comment"></tt>            <tt class="py-comment"># meta tag. If we get a head or body tag, bail out.</tt> </tt>
+<tt class="py-lineno">137</tt>  <tt class="py-line"><tt class="py-comment"></tt>            <tt class="py-keyword">if</tt> <tt class="py-name">tag</tt> <tt class="py-op">==</tt> <tt class="py-string">'meta'</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">138</tt>  <tt class="py-line">                <tt class="py-name">attrs_d</tt> <tt class="py-op">=</tt> <tt class="py-name">dict</tt><tt class="py-op">(</tt><tt class="py-name">attrs</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">139</tt>  <tt class="py-line">                <tt class="py-name">http_equiv</tt> <tt class="py-op">=</tt> <tt class="py-name">attrs_d</tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-string">'http-equiv'</tt><tt class="py-op">,</tt> <tt class="py-string">''</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">lower</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">140</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">http_equiv</tt> <tt class="py-op">==</tt> <tt id="link-29" class="py-name"><a title="yadis.constants.YADIS_HEADER_NAME" class="py-name" href="#" onclick="return doclink('link-29', 'YADIS_HEADER_NAME', 'link-2');">YADIS_HEADER_NAME</a></tt></tt><tt class="py-op">.</tt><tt class="py-name">lower</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">141</tt>  <tt class="py-line">                    <tt class="py-name">raw_attr</tt> <tt class="py-op">=</tt> <tt class="py-name">attrs_d</tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-string">'content'</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">142</tt>  <tt class="py-line">                    <tt class="py-name">yadis_loc</tt> <tt class="py-op">=</tt> <tt id="link-30" class="py-name" targets="Function yadis.parsehtml.substituteEntities()=yadis.parsehtml-module.html#substituteEntities"><a title="yadis.parsehtml.substituteEntities" class="py-name" href="#" onclick="return doclink('link-30', 'substituteEntities', 'link-30');">substituteEntities</a></tt></tt><tt class="py-op">(</tt><tt class="py-name">raw_attr</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">143</tt>  <tt class="py-line">                    <tt class="py-comment"># [6]</tt> </tt>
+<tt class="py-lineno">144</tt>  <tt class="py-line"><tt class="py-comment"></tt>                    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">phase</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-31" class="py-name"><a title="yadis.parsehtml.YadisHTMLParser.FOUND" class="py-name" href="#" onclick="return doclink('link-31', 'FOUND', 'link-14');">FOUND</a></tt></tt> </tt>
+<tt class="py-lineno">145</tt>  <tt class="py-line">                    <tt class="py-keyword">raise</tt> <tt id="link-32" class="py-name"><a title="yadis.parsehtml.ParseDone" class="py-name" href="#" onclick="return doclink('link-32', 'ParseDone', 'link-19');">ParseDone</a></tt></tt><tt class="py-op">(</tt><tt class="py-name">yadis_loc</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">146</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">147</tt>  <tt class="py-line">            <tt class="py-keyword">elif</tt> <tt class="py-name">tag</tt> <tt class="py-keyword">in</tt> <tt class="py-op">[</tt><tt class="py-string">'head'</tt><tt class="py-op">,</tt> <tt class="py-string">'html'</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">148</tt>  <tt class="py-line">                <tt class="py-comment"># [5], [7]</tt> </tt>
+<tt class="py-lineno">149</tt>  <tt class="py-line"><tt class="py-comment"></tt>                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-33" class="py-name"><a title="yadis.parsehtml.YadisHTMLParser._terminate" class="py-name" href="#" onclick="return doclink('link-33', '_terminate', 'link-20');">_terminate</a></tt></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><tt class="py-lineno">150</tt>  <tt class="py-line"> </tt>
+<a name="YadisHTMLParser.feed"></a><div id="YadisHTMLParser.feed-def"><tt class="py-lineno">151</tt> <a class="py-toggle" href="#" id="YadisHTMLParser.feed-toggle" onclick="return toggle('YadisHTMLParser.feed');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.parsehtml.YadisHTMLParser-class.html#feed">feed</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">chars</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="YadisHTMLParser.feed-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="YadisHTMLParser.feed-expanded"><tt class="py-lineno">152</tt>  <tt class="py-line">        <tt class="py-comment"># [8]</tt> </tt>
+<tt class="py-lineno">153</tt>  <tt class="py-line"><tt class="py-comment"></tt>        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">phase</tt> <tt class="py-keyword">in</tt> <tt class="py-op">[</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-34" class="py-name"><a title="yadis.parsehtml.YadisHTMLParser.TERMINATED" class="py-name" href="#" onclick="return doclink('link-34', 'TERMINATED', 'link-15');">TERMINATED</a></tt></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-35" class="py-name"><a title="yadis.parsehtml.YadisHTMLParser.FOUND" class="py-name" href="#" onclick="return doclink('link-35', 'FOUND', 'link-14');">FOUND</a></tt></tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">154</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-36" class="py-name"><a title="yadis.parsehtml.YadisHTMLParser._terminate" class="py-name" href="#" onclick="return doclink('link-36', '_terminate', 'link-20');">_terminate</a></tt></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">155</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">156</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">HTMLParser</tt><tt class="py-op">.</tt><tt id="link-37" class="py-name" targets="Method yadis.parsehtml.YadisHTMLParser.feed()=yadis.parsehtml.YadisHTMLParser-class.html#feed"><a title="yadis.parsehtml.YadisHTMLParser.feed" class="py-name" href="#" onclick="return doclink('link-37', 'feed', 'link-37');">feed</a></tt></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">chars</tt><tt class="py-op">)</tt> </tt>
+</div></div><tt class="py-lineno">157</tt>  <tt class="py-line"> </tt>
+<a name="findHTMLMeta"></a><div id="findHTMLMeta-def"><tt class="py-lineno">158</tt> <a class="py-toggle" href="#" id="findHTMLMeta-toggle" onclick="return toggle('findHTMLMeta');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.parsehtml-module.html#findHTMLMeta">findHTMLMeta</a><tt class="py-op">(</tt><tt class="py-param">stream</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="findHTMLMeta-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="findHTMLMeta-expanded"><tt class="py-lineno">159</tt>  <tt class="py-line">    <tt class="py-docstring">"""Look for a meta http-equiv tag with the YADIS header name.</tt> </tt>
+<tt class="py-lineno">160</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno">161</tt>  <tt class="py-line"><tt class="py-docstring">    @param stream: Source of the html text</tt> </tt>
+<tt class="py-lineno">162</tt>  <tt class="py-line"><tt class="py-docstring">    @type stream: Object that implements a read() method that works</tt> </tt>
+<tt class="py-lineno">163</tt>  <tt class="py-line"><tt class="py-docstring">        like file.read</tt> </tt>
+<tt class="py-lineno">164</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno">165</tt>  <tt class="py-line"><tt class="py-docstring">    @return: The URI from which to fetch the XRDS document</tt> </tt>
+<tt class="py-lineno">166</tt>  <tt class="py-line"><tt class="py-docstring">    @rtype: str</tt> </tt>
+<tt class="py-lineno">167</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno">168</tt>  <tt class="py-line"><tt class="py-docstring">    @raises MetaNotFound: raised with the content that was</tt> </tt>
+<tt class="py-lineno">169</tt>  <tt class="py-line"><tt class="py-docstring">        searched as the first parameter.</tt> </tt>
+<tt class="py-lineno">170</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<tt class="py-lineno">171</tt>  <tt class="py-line">    <tt class="py-name">parser</tt> <tt class="py-op">=</tt> <tt id="link-38" class="py-name" targets="Class yadis.parsehtml.YadisHTMLParser=yadis.parsehtml.YadisHTMLParser-class.html"><a title="yadis.parsehtml.YadisHTMLParser" class="py-name" href="#" onclick="return doclink('link-38', 'YadisHTMLParser', 'link-38');">YadisHTMLParser</a></tt></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">172</tt>  <tt class="py-line">    <tt class="py-name">chunks</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<tt class="py-lineno">173</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">174</tt>  <tt class="py-line">    <tt class="py-keyword">while</tt> <tt class="py-number">1</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">175</tt>  <tt class="py-line">        <tt id="link-39" class="py-name" targets="Function yadis.test.test_accept.chunk()=yadis.test.test_accept-module.html#chunk"><a title="yadis.test.test_accept.chunk" class="py-name" href="#" onclick="return doclink('link-39', 'chunk', 'link-39');">chunk</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-name">stream</tt><tt class="py-op">.</tt><tt class="py-name">read</tt><tt class="py-op">(</tt><tt id="link-40" class="py-name"><a title="yadis.parsehtml.CHUNK_SIZE" class="py-name" href="#" onclick="return doclink('link-40', 'CHUNK_SIZE', 'link-3');">CHUNK_SIZE</a></tt></tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">176</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt id="link-41" class="py-name"><a title="yadis.test.test_accept.chunk" class="py-name" href="#" onclick="return doclink('link-41', 'chunk', 'link-39');">chunk</a></tt></tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">177</tt>  <tt class="py-line">            <tt class="py-comment"># End of file</tt> </tt>
+<tt class="py-lineno">178</tt>  <tt class="py-line"><tt class="py-comment"></tt>            <tt class="py-keyword">break</tt> </tt>
+<tt class="py-lineno">179</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">180</tt>  <tt class="py-line">        <tt class="py-name">chunks</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt id="link-42" class="py-name"><a title="yadis.test.test_accept.chunk" class="py-name" href="#" onclick="return doclink('link-42', 'chunk', 'link-39');">chunk</a></tt></tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">181</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">182</tt>  <tt class="py-line">            <tt class="py-name">parser</tt><tt class="py-op">.</tt><tt id="link-43" class="py-name"><a title="yadis.parsehtml.YadisHTMLParser.feed" class="py-name" href="#" onclick="return doclink('link-43', 'feed', 'link-37');">feed</a></tt></tt><tt class="py-op">(</tt><tt id="link-44" class="py-name"><a title="yadis.test.test_accept.chunk" class="py-name" href="#" onclick="return doclink('link-44', 'chunk', 'link-39');">chunk</a></tt></tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">183</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-name">HTMLParseError</tt><tt class="py-op">,</tt> <tt class="py-name">why</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">184</tt>  <tt class="py-line">            <tt class="py-comment"># HTML parse error, so bail</tt> </tt>
+<tt class="py-lineno">185</tt>  <tt class="py-line"><tt class="py-comment"></tt>            <tt class="py-name">chunks</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">stream</tt><tt class="py-op">.</tt><tt class="py-name">read</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">186</tt>  <tt class="py-line">            <tt class="py-keyword">break</tt> </tt>
+<tt class="py-lineno">187</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt id="link-45" class="py-name"><a title="yadis.parsehtml.ParseDone" class="py-name" href="#" onclick="return doclink('link-45', 'ParseDone', 'link-19');">ParseDone</a></tt></tt><tt class="py-op">,</tt> <tt class="py-name">why</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">188</tt>  <tt class="py-line">            <tt class="py-name">uri</tt> <tt class="py-op">=</tt> <tt class="py-name">why</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<tt class="py-lineno">189</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">uri</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">190</tt>  <tt class="py-line">                <tt class="py-comment"># Parse finished, but we may need the rest of the file</tt> </tt>
+<tt class="py-lineno">191</tt>  <tt class="py-line"><tt class="py-comment"></tt>                <tt class="py-name">chunks</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">stream</tt><tt class="py-op">.</tt><tt class="py-name">read</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">192</tt>  <tt class="py-line">                <tt class="py-keyword">break</tt> </tt>
+<tt class="py-lineno">193</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">194</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">uri</tt> </tt>
+<tt class="py-lineno">195</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">196</tt>  <tt class="py-line">    <tt class="py-name">content</tt> <tt class="py-op">=</tt> <tt class="py-string">''</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">chunks</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">197</tt>  <tt class="py-line">    <tt class="py-keyword">raise</tt> <tt id="link-46" class="py-name" targets="Class yadis.parsehtml.MetaNotFound=yadis.parsehtml.MetaNotFound-class.html"><a title="yadis.parsehtml.MetaNotFound" class="py-name" href="#" onclick="return doclink('link-46', 'MetaNotFound', 'link-46');">MetaNotFound</a></tt></tt><tt class="py-op">(</tt><tt class="py-name">content</tt><tt class="py-op">)</tt> </tt>
+</div><tt class="py-lineno">198</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="yadis-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.openidenabled.com/yadis/">Python-Yadis</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">Generated by Epydoc
+        3.0alpha3 on Fri Dec  8 13:17:18 2006</td>
+    <td align="right" class="footer">
+      <a href="http://epydoc.sourceforge.net">http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie()
+  // -->
+</script>
+  
+</body>
+</html>

@@ -1,0 +1,590 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>openid.server.server.CheckIDRequest</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css"></link>
+</head>
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="openid-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          <a class="navbar" target="_top" href="http://openidenabled.com/python-openid/">Python-OpenID</a>
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <font size="-1"><b class="breadcrumbs">
+        <a href="openid-module.html">Package&nbsp;openid</a> ::
+        <a href="openid.server-module.html">Package&nbsp;server</a> ::
+        <a href="openid.server.server-module.html">Module&nbsp;server</a> ::
+        Class&nbsp;CheckIDRequest
+      </b></font></br>
+    </td>
+    <td><table cellpadding="0" cellspacing="0">
+      <tr><td align="right"><font size="-2">[<a href="frames.html"target="_top">frames</a>&nbsp;|&nbsp;<a href="openid.server.server.CheckIDRequest-class.html" target="_top">no&nbsp;frames</a>]</font></td></tr>
+    </table></td>
+</tr></table>
+
+<!-- =========== START OF CLASS DESCRIPTION =========== -->
+<h2 class="class">Type CheckIDRequest</h2>
+
+<pre class="base-tree">
+   <a href="__builtin__.object-class.html"><code>object</code></a> --+    
+            |    
+<a href="openid.server.server.OpenIDRequest-class.html"><code>OpenIDRequest</code></a> --+
+                |
+               <b>CheckIDRequest</b>
+</pre><br />
+
+<hr/>
+
+<p>A request to confirm the identity of a user.</p>
+This class handles requests for openid modes <a 
+name="index-checkid_immediate"></a><i 
+class="indexterm"><code>checkid_immediate</code></i> and <a 
+name="index-checkid_setup"></a><i 
+class="indexterm"><code>checkid_setup</code></i>.
+<hr/>
+
+
+<!-- =========== START OF METHOD SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Method Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.server.server.CheckIDRequest-class.html#__init__" class="summary-sig-name"><code>__init__</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>identity</span>,
+          <span class=summary-sig-arg>return_to</span>,
+          <span class=summary-sig-arg>trust_root</span>,
+          <span class=summary-sig-arg>immediate</span>,
+          <span class=summary-sig-arg>assoc_handle</span>,
+          <span class=summary-sig-arg>op_endpoint</span>)</span></code>
+<br />
+Construct me.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><a name="__str__"></a><span class="summary-sig"><span class="summary-sig-name">__str__</span>(<span class=summary-sig-arg>self</span>)</span></code>
+</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        <a href="openid.server.server.OpenIDResponse-class.html" 
+        class="link"><code>OpenIDResponse</code></a>
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.server.server.CheckIDRequest-class.html#answer" class="summary-sig-name"><code>answer</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>allow</span>,
+          <span class=summary-sig-arg>server_url</span>,
+          <span class=summary-sig-arg>identity</span>,
+          <span class=summary-sig-arg>claimed_id</span>)</span></code>
+<br />
+Respond to this request.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        str
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.server.server.CheckIDRequest-class.html#encodeToURL" class="summary-sig-name"><code>encodeToURL</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>server_url</span>)</span></code>
+<br />
+Encode this request as a URL to GET.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        <a href="openid.server.server.CheckIDRequest-class.html" 
+        class="link"><code>CheckIDRequest</code></a>
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.server.server.CheckIDRequest-class.html#fromMessage" class="summary-sig-name"><code>fromMessage</code></a>(<span class=summary-sig-arg>klass</span>,
+          <span class=summary-sig-arg>message</span>,
+          <span class=summary-sig-arg>op_endpoint</span>)</span></code>
+<br />
+Construct me from an OpenID message.    <i>(Class method)</i>
+</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        str
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.server.server.CheckIDRequest-class.html#getCancelURL" class="summary-sig-name"><code>getCancelURL</code></a>(<span class=summary-sig-arg>self</span>)</span></code>
+<br />
+Get the URL to cancel this request.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        bool
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.server.server.CheckIDRequest-class.html#idSelect" class="summary-sig-name"><code>idSelect</code></a>(<span class=summary-sig-arg>self</span>)</span></code>
+<br />
+Is the identifier to be selected by the IDP?</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        bool
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.server.server.CheckIDRequest-class.html#returnToVerified" class="summary-sig-name"><code>returnToVerified</code></a>(<span class=summary-sig-arg>self</span>)</span></code>
+<br />
+Does the relying party publish the return_to URL for this response 
+under the realm? It is up to the provider to set a policy for what kinds 
+of realms should be allowed.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        bool
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.server.server.CheckIDRequest-class.html#trustRootValid" class="summary-sig-name"><code>trustRootValid</code></a>(<span class=summary-sig-arg>self</span>)</span></code>
+<br />
+Is my return_to under my trust_root?</td></tr>
+  <tr><td colspan="2">
+    <b>Inherited from <a href="__builtin__.object-class.html"><code>object</code></a>:</b>
+      <a href="__builtin__.object-class.html#__delattr__"><code>__delattr__</code></a>, 
+      <a href="__builtin__.object-class.html#__getattribute__"><code>__getattribute__</code></a>, 
+      <a href="__builtin__.object-class.html#__hash__"><code>__hash__</code></a>, 
+      <a href="__builtin__.object-class.html#__new__"><code>__new__</code></a>, 
+      <a href="__builtin__.object-class.html#__reduce__"><code>__reduce__</code></a>, 
+      <a href="__builtin__.object-class.html#__reduce_ex__"><code>__reduce_ex__</code></a>, 
+      <a href="__builtin__.object-class.html#__repr__"><code>__repr__</code></a>, 
+      <a href="__builtin__.object-class.html#__setattr__"><code>__setattr__</code></a>
+    </td></tr>
+</table><br />
+
+
+<!-- =========== START OF INSTANCE VARIABLE SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Instance Variable Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+<td><b><a href="openid.server.server.CheckIDRequest-class.html#assoc_handle"><code>assoc_handle</code></a></b>: Provided in smart mode requests, a handle for a previously established 
+association.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+<td><b><a href="openid.server.server.CheckIDRequest-class.html#claimed_id"><code>claimed_id</code></a></b>: The claimed identifier.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+<td><b><a href="openid.server.server.CheckIDRequest-class.html#identity"><code>identity</code></a></b>: The OP-local identifier being checked.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">bool</font></td>
+<td><b><a href="openid.server.server.CheckIDRequest-class.html#immediate"><code>immediate</code></a></b>: Is this an immediate-mode request?</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+<td><b><a href="openid.server.server.CheckIDRequest-class.html#return_to"><code>return_to</code></a></b>: The URL to send the user agent back to to reply to this request.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+<td><b><a href="openid.server.server.CheckIDRequest-class.html#trust_root"><code>trust_root</code></a></b>: &quot;Are you Frank?&quot; asks the checkid request.</td></tr>
+</table><br />
+
+
+<!-- =========== START OF CLASS VARIABLE SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Class Variable Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">str</font></td>
+<td><b><a href="openid.server.server.CheckIDRequest-class.html#mode"><code>mode</code></a></b>: &quot;<a name="index-checkid_immediate"></a><i 
+class="indexterm"><code>checkid_immediate</code></i>&quot; or &quot;<a 
+name="index-checkid_setup"></a><i 
+class="indexterm"><code>checkid_setup</code></i>&quot;</td></tr>
+</table><br />
+
+
+<!-- =========== START OF INSTANCE METHOD DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Instance Method Details</th></tr>
+</table>
+
+<a name="__init__"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">__init__</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>identity</span>,
+          <span class=sig-arg>return_to</span>,
+          <span class=sig-arg>trust_root</span>=<span class=sig-default>None</span>,
+          <span class=sig-arg>immediate</span>=<span class=sig-default>False</span>,
+          <span class=sig-arg>assoc_handle</span>=<span class=sig-default>None</span>,
+          <span class=sig-arg>op_endpoint</span>=<span class=sig-default>None</span>)</span>
+    <br /><i>(Constructor)</i>
+  </h3>
+  <p>Construct me.</p>
+  These parameters are assigned directly as class attributes, see my 
+  <a href="openid.server.server.CheckIDRequest-class.html" 
+  class="link"><code>class documentation</code></a> for their 
+  descriptions.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Raises:</b></dt>
+      <dd><code><b>MalformedReturnURL</b></code> -
+        When the <code>return_to</code> URL is not a URL.
+    </dl>
+    <dl><dt><b>Overrides:</b></dt>
+      <dd><a href="__builtin__.object-class.html#__init__"><code>__builtin__.object.__init__</code></a></dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="answer"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">answer</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>allow</span>,
+          <span class=sig-arg>server_url</span>=<span class=sig-default>None</span>,
+          <span class=sig-arg>identity</span>=<span class=sig-default>None</span>,
+          <span class=sig-arg>claimed_id</span>=<span class=sig-default>None</span>)</span>
+  </h3>
+  Respond to this request.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>allow</b></code> -
+         Allow this user to claim this identity, and allow the consumer 
+        to have this information?
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=bool)</i>
+      <dd><code><b>server_url</b></code> -
+         <p>DEPRECATED. Passing <code>op_endpoint</code> to the <a 
+        href="openid.server.server.Server-class.html" 
+        class="link"><code>Server</code></a> constructor makes this 
+        optional.</p>
+        <p>When an OpenID 1.x immediate mode request does not succeed, it 
+        gets back a URL where the request may be carried out in a 
+        not-so-immediate fashion. Pass my URL in here (the fully 
+        qualified address of this server's endpoint, i.e. 
+        <code>http://example.com/server</code>), and I will use it as a 
+        base for the URL for a new request.</p>
+        Optional for requests where 
+        <code>CheckIDRequest.immediate</code> is <code>False</code> or 
+        <code>allow</code> is <code>True</code>.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=str)</i>
+      <dd><code><b>identity</b></code> -
+         The OP-local identifier to answer with. Only for use when the 
+        relying party requested identifier selection.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=str or None)</i>
+      <dd><code><b>claimed_id</b></code> -
+         <p>The claimed identifier to answer with, for use with identifier 
+        selection in the case where the claimed identifier and the 
+        OP-local identifier differ, i.e. when the claimed_id uses 
+        delegation.</p>
+        <p>If <code>identity</code> is provided but this is not, 
+        <code>claimed_id</code> will default to the value of 
+        <code>identity</code>. When answering requests that did not ask 
+        for identifier selection, the response <code>claimed_id</code> 
+        will default to that of the request.</p>
+        This parameter is new in OpenID 2.0.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=str or None)</i>
+      </dd>
+    </dl>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        <a href="openid.server.server.OpenIDResponse-class.html" 
+        class="link"><code>OpenIDResponse</code></a>
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="encodeToURL"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">encodeToURL</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>server_url</span>)</span>
+  </h3>
+  Encode this request as a URL to GET.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>server_url</b></code> -
+         The URL of the OpenID server to make this request of.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=str)</i>
+      </dd>
+    </dl>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        str
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="getCancelURL"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">getCancelURL</span>(<span class=sig-arg>self</span>)</span>
+  </h3>
+  <p>Get the URL to cancel this request.</p>
+  <p>Useful for creating a &quot;Cancel&quot; button on a web form so 
+  that operation can be carried out directly without another trip through 
+  the server.</p>
+  (Except you probably want to make another trip through the server so 
+  that it knows that the user did make a decision. Or you could simulate 
+  this method by doing <code>.answer(False).encodeToURL()</code>)
+  <dl><dt></dt><dd>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        The return_to URL with openid.mode = cancel.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=str)</i>
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="idSelect"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">idSelect</span>(<span class=sig-arg>self</span>)</span>
+  </h3>
+  Is the identifier to be selected by the IDP?
+  <dl><dt></dt><dd>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        bool
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="returnToVerified"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">returnToVerified</span>(<span class=sig-arg>self</span>)</span>
+  </h3>
+  <p>Does the relying party publish the return_to URL for this response 
+  under the realm? It is up to the provider to set a policy for what 
+  kinds of realms should be allowed. This return_to URL verification 
+  reduces vulnerability to data-theft attacks based on open proxies, 
+  cross-site-scripting, or open redirectors.</p>
+  This check should only be performed after making sure that the 
+  return_to URL matches the realm.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        True if the realm publishes a document with the return_to URL 
+        listed
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=bool)</i>
+      </dd>
+    </dl>
+    <dl><dt><b>Raises:</b></dt>
+      <dd><code><b>openid.yadis.discover.DiscoveryFailure</b></code> -
+        if the realm URL does not support Yadis discovery (and so does 
+        not support the verification process).
+      <dd><code><b>openid.fetchers.HTTPFetchingError</b></code> -
+        if the realm URL is not reachable. When this is the case, the 
+        RP may be hosted on the user's intranet.
+    </dl>
+<p><b>Since:</b> 2.1.0
+</p>
+
+<p><b>See Also:</b> <a 
+href="openid.server.server.CheckIDRequest-class.html#trustRootValid" 
+class="link"><code>trustRootValid</code></a>
+</p>
+
+  </dd></dl>
+</td></tr></table>
+
+<a name="trustRootValid"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">trustRootValid</span>(<span class=sig-arg>self</span>)</span>
+  </h3>
+  Is my return_to under my trust_root?
+  <dl><dt></dt><dd>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        bool
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+<br />
+
+
+<!-- =========== START OF CLASS METHOD DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Class Method Details</th></tr>
+</table>
+
+<a name="fromMessage"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">fromMessage</span>(<span class=sig-arg>klass</span>,
+          <span class=sig-arg>message</span>,
+          <span class=sig-arg>op_endpoint</span>)</span>
+  </h3>
+  Construct me from an OpenID message.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>message</b></code> -
+         An OpenID checkid_* request Message
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=openid.message.Message)</i>
+      <dd><code><b>op_endpoint</b></code> -
+         The endpoint URL of the server that this message was sent 
+        to.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=str)</i>
+      </dd>
+    </dl>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        <a href="openid.server.server.CheckIDRequest-class.html" 
+        class="link"><code>CheckIDRequest</code></a>
+      </dd>
+    </dl>
+    <dl><dt><b>Raises:</b></dt>
+      <dd><code><b>ProtocolError</b></code> -
+        When not all required parameters are present in the 
+        message.
+      <dd><code><b>MalformedReturnURL</b></code> -
+        When the <code>return_to</code> URL is not a URL.
+      <dd><code><b>UntrustedReturnURL</b></code> -
+        When the <code>return_to</code> URL is outside the 
+        <code>trust_root</code>.
+    </dl>
+  </dd></dl>
+</td></tr></table>
+<br />
+
+
+<!-- =========== START OF INSTANCE VARIABLE DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Instance Variable Details</th></tr>
+</table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="assoc_handle"></a>
+<h3>assoc_handle</h3>
+Provided in smart mode requests, a handle for a previously established 
+association. <code>None</code> for dumb mode requests.
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          str
+
+      </dd>
+    </dl>
+  </dd>
+</dl></td></tr></table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="claimed_id"></a>
+<h3>claimed_id</h3>
+The claimed identifier. Not present in OpenID 1.x messages.
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          str
+
+      </dd>
+    </dl>
+  </dd>
+</dl></td></tr></table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="identity"></a>
+<h3>identity</h3>
+The OP-local identifier being checked.
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          str
+
+      </dd>
+    </dl>
+  </dd>
+</dl></td></tr></table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="immediate"></a>
+<h3>immediate</h3>
+Is this an immediate-mode request?
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          bool
+
+      </dd>
+    </dl>
+  </dd>
+</dl></td></tr></table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="return_to"></a>
+<h3>return_to</h3>
+The URL to send the user agent back to to reply to this request.
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          str
+
+      </dd>
+    </dl>
+  </dd>
+</dl></td></tr></table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="trust_root"></a>
+<h3>trust_root</h3>
+&quot;Are you Frank?&quot; asks the checkid request. &quot;Who wants 
+to know?&quot; <code>trust_root</code>, that's who. This URL identifies 
+the party making the request, and the user will use that to make her 
+decision about what answer she trusts them to have. Referred to as 
+&quot;realm&quot; in OpenID 2.0.
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          str
+
+      </dd>
+    </dl>
+  </dd>
+</dl></td></tr></table>
+<br />
+
+
+<!-- =========== START OF CLASS VARIABLE DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Class Variable Details</th></tr>
+</table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="mode"></a>
+<h3>mode</h3>
+&quot;<a name="index-checkid_immediate"></a><i 
+class="indexterm"><code>checkid_immediate</code></i>&quot; or &quot;<a 
+name="index-checkid_setup"></a><i 
+class="indexterm"><code>checkid_setup</code></i>&quot;
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          str
+
+      </dd>
+    </dl>
+  </dd>
+</dl></td></tr></table>
+<br />
+
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="openid-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          <a class="navbar" target="_top" href="http://openidenabled.com/python-openid/">Python-OpenID</a>
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td align="left"><font size="-2">Generated by Epydoc 2.1 on Fri Dec 14 16:10:53 2007</font></td>
+    <td align="right"><a href="http://epydoc.sourceforge.net"
+                      ><font size="-2">http://epydoc.sf.net</font></a></td>
+  </tr>
+</table>
+</body>
+</html>

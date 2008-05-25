@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>openid.extensions.ax.FetchRequest</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css"></link>
+</head>
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="openid-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          <a class="navbar" target="_top" href="http://openidenabled.com/python-openid/">Python-OpenID</a>
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <font size="-1"><b class="breadcrumbs">
+        <a href="openid-module.html">Package&nbsp;openid</a> ::
+        <a href="openid.extensions-module.html">Package&nbsp;extensions</a> ::
+        <a href="openid.extensions.ax-module.html">Module&nbsp;ax</a> ::
+        Class&nbsp;FetchRequest
+      </b></font></br>
+    </td>
+    <td><table cellpadding="0" cellspacing="0">
+      <tr><td align="right"><font size="-2">[<a href="frames.html"target="_top">frames</a>&nbsp;|&nbsp;<a href="openid.extensions.ax.FetchRequest-class.html" target="_top">no&nbsp;frames</a>]</font></td></tr>
+    </table></td>
+</tr></table>
+
+<!-- =========== START OF CLASS DESCRIPTION =========== -->
+<h2 class="class">Type FetchRequest</h2>
+
+<pre class="base-tree">
+<a href="__builtin__.object-class.html"><code>object</code></a> --+        
+         |        
+ <a href="openid.extension.Extension-class.html"><code>Extension</code></a> --+    
+             |    
+     <code>AXMessage</code> --+
+                 |
+                <b>FetchRequest</b>
+</pre><br />
+
+<hr/>
+
+An attribute exchange 'fetch_request' message. This message is sent by 
+a relying party when it wishes to obtain attributes about the subject of 
+an OpenID authentication request.
+<hr/>
+
+
+<!-- =========== START OF METHOD SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Method Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><a name="__init__"></a><span class="summary-sig"><span class="summary-sig-name">__init__</span>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>update_url</span>)</span></code>
+</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.extensions.ax.FetchRequest-class.html#has_key" class="summary-sig-name"><code>__contains__</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>type_uri</span>)</span></code>
+<br />
+Is the given type URI present in this fetch_request?</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.extensions.ax.FetchRequest-class.html#__iter__" class="summary-sig-name"><code>__iter__</code></a>(<span class=summary-sig-arg>self</span>)</span></code>
+<br />
+Iterate over the attribute type URIs in this fetch_request</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.extensions.ax.FetchRequest-class.html#add" class="summary-sig-name"><code>add</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>attribute</span>)</span></code>
+<br />
+Add an attribute to this attribute exchange request.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        <code><a href="openid.extensions.ax.FetchRequest-class.html" 
+        class="link"><code>FetchRequest</code></a></code> or 
+        <code>None</code>
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.extensions.ax.FetchRequest-class.html#fromOpenIDRequest" class="summary-sig-name"><code>fromOpenIDRequest</code></a>(<span class=summary-sig-arg>cls</span>,
+          <span class=summary-sig-arg>openid_request</span>)</span></code>
+<br />
+Extract a FetchRequest from an OpenID message    <i>(Class method)</i>
+</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        {unicode:unicode}
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.extensions.ax.FetchRequest-class.html#getExtensionArgs" class="summary-sig-name"><code>getExtensionArgs</code></a>(<span class=summary-sig-arg>self</span>)</span></code>
+<br />
+Get the serialized form of this attribute fetch request.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        [str]
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.extensions.ax.FetchRequest-class.html#getRequiredAttrs" class="summary-sig-name"><code>getRequiredAttrs</code></a>(<span class=summary-sig-arg>self</span>)</span></code>
+<br />
+Get the type URIs for all attributes that have been marked as 
+required.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.extensions.ax.FetchRequest-class.html#has_key" class="summary-sig-name"><code>has_key</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>type_uri</span>)</span></code>
+<br />
+Is the given type URI present in this fetch_request?</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.extensions.ax.FetchRequest-class.html#iterAttrs" class="summary-sig-name"><code>iterAttrs</code></a>(<span class=summary-sig-arg>self</span>)</span></code>
+<br />
+Iterate over the AttrInfo objects that are contained in this 
+fetch_request.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.extensions.ax.FetchRequest-class.html#parseExtensionArgs" class="summary-sig-name"><code>parseExtensionArgs</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>ax_args</span>)</span></code>
+<br />
+Given attribute exchange arguments, populate this FetchRequest.</td></tr>
+  <tr><td colspan="2">
+    <b>Inherited from <a href="openid.extension.Extension-class.html"><code>Extension</code></a>:</b>
+      <a href="openid.extension.Extension-class.html#toMessage"><code>toMessage</code></a>
+      <br />
+    <b>Inherited from <a href="__builtin__.object-class.html"><code>object</code></a>:</b>
+      <a href="__builtin__.object-class.html#__delattr__"><code>__delattr__</code></a>, 
+      <a href="__builtin__.object-class.html#__getattribute__"><code>__getattribute__</code></a>, 
+      <a href="__builtin__.object-class.html#__hash__"><code>__hash__</code></a>, 
+      <a href="__builtin__.object-class.html#__new__"><code>__new__</code></a>, 
+      <a href="__builtin__.object-class.html#__reduce__"><code>__reduce__</code></a>, 
+      <a href="__builtin__.object-class.html#__reduce_ex__"><code>__reduce_ex__</code></a>, 
+      <a href="__builtin__.object-class.html#__repr__"><code>__repr__</code></a>, 
+      <a href="__builtin__.object-class.html#__setattr__"><code>__setattr__</code></a>, 
+      <a href="__builtin__.object-class.html#__str__"><code>__str__</code></a>
+    </td></tr>
+</table><br />
+
+
+<!-- =========== START OF INSTANCE VARIABLE SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Instance Variable Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">{str:AttrInfo}</font></td>
+<td><b><a href="openid.extensions.ax.FetchRequest-class.html#requested_attributes"><code>requested_attributes</code></a></b>: The attributes that have been requested thus far, indexed by the type 
+URI.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+<td><b><a href="openid.extensions.ax.FetchRequest-class.html#update_url"><code>update_url</code></a></b>: A URL that will accept responses for this attribute exchange request, 
+even in the absence of the user who made this request.</td></tr>
+  <tr><td colspan="2">
+
+    </td></tr>
+</table><br />
+
+
+<!-- =========== START OF CLASS VARIABLE SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Class Variable Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1"><code>NoneType</code></font></td>
+<td><b><a href="openid.extensions.ax.FetchRequest-class.html#mode"><code>mode</code></a></b>: The type of this attribute exchange message.</td></tr>
+  <tr><td colspan="2">
+
+    </td></tr>
+</table><br />
+
+
+<!-- =========== START OF INSTANCE METHOD DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Instance Method Details</th></tr>
+</table>
+
+<a name="has_key"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">__contains__</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>type_uri</span>)</span>
+    <br /><i>(In operator)</i>
+  </h3>
+  Is the given type URI present in this fetch_request?
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="__iter__"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">__iter__</span>(<span class=sig-arg>self</span>)</span>
+  </h3>
+  Iterate over the attribute type URIs in this fetch_request
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="add"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">add</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>attribute</span>)</span>
+  </h3>
+  Add an attribute to this attribute exchange request.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>attribute</b></code> -
+         The attribute that is being requested
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=<code><code>AttrInfo</code></code>)</i>
+      </dd>
+    </dl>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        None
+      </dd>
+    </dl>
+    <dl><dt><b>Raises:</b></dt>
+      <dd><code><b>KeyError</b></code> -
+        when the requested attribute is already present in this fetch 
+        request.
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="getExtensionArgs"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">getExtensionArgs</span>(<span class=sig-arg>self</span>)</span>
+  </h3>
+  Get the serialized form of this attribute fetch request.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        The fetch request message parameters
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type={unicode:unicode})</i>
+      </dd>
+    </dl>
+    <dl><dt><b>Overrides:</b></dt>
+      <dd><a href="openid.extension.Extension-class.html#getExtensionArgs"><code>openid.extension.Extension.getExtensionArgs</code></a></dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="getRequiredAttrs"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">getRequiredAttrs</span>(<span class=sig-arg>self</span>)</span>
+  </h3>
+  Get the type URIs for all attributes that have been marked as 
+  required.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        A list of the type URIs for attributes that have been marked 
+        as required.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=[str])</i>
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="has_key"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">has_key</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>type_uri</span>)</span>
+  </h3>
+  Is the given type URI present in this fetch_request?
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="iterAttrs"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">iterAttrs</span>(<span class=sig-arg>self</span>)</span>
+  </h3>
+  Iterate over the AttrInfo objects that are contained in this 
+  fetch_request.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="parseExtensionArgs"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">parseExtensionArgs</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>ax_args</span>)</span>
+  </h3>
+  Given attribute exchange arguments, populate this FetchRequest.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>ax_args</b></code> -
+         Attribute Exchange arguments from the request. As returned 
+        from <a href="openid.message.Message-class.html#getArgs" 
+        class="link"><code>Message.getArgs</code></a>.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=dict)</i>
+      </dd>
+    </dl>
+    <dl><dt><b>Raises:</b></dt>
+      <dd><code><b>KeyError</b></code> -
+        if the message is not consistent in its use of namespace 
+        aliases.
+      <dd><code><b>NotAXMessage</b></code> -
+        If ax_args does not include an Attribute Exchange mode.
+      <dd><code><b>AXError</b></code> -
+        If the data to be parsed does not follow the attribute 
+        exchange specification. At least when 'if_available' or 
+        'required' is not specified for a particular attribute type.
+    </dl>
+  </dd></dl>
+</td></tr></table>
+<br />
+
+
+<!-- =========== START OF CLASS METHOD DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Class Method Details</th></tr>
+</table>
+
+<a name="fromOpenIDRequest"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">fromOpenIDRequest</span>(<span class=sig-arg>cls</span>,
+          <span class=sig-arg>openid_request</span>)</span>
+  </h3>
+  Extract a FetchRequest from an OpenID message
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>openid_request</b></code> -
+         The OpenID authentication request containing the attribute 
+        fetch request
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=<code><a 
+              href="openid.server.server.CheckIDRequest-class.html" 
+              class="link"><code>openid.server.server.CheckIDRequest</code></a></code>)</i>
+      </dd>
+    </dl>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        The FetchRequest extracted from the message or None, if the 
+        message contained no AX extension.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=<code><a href="openid.extensions.ax.FetchRequest-class.html" 
+        class="link"><code>FetchRequest</code></a></code> or 
+        <code>None</code>)</i>
+      </dd>
+    </dl>
+    <dl><dt><b>Raises:</b></dt>
+      <dd><code><b>KeyError</b></code> -
+        if the AuthRequest is not consistent in its use of namespace 
+        aliases.
+      <dd><code><b>AXError</b></code> -
+        When parseExtensionArgs would raise same.
+    </dl>
+<p><b>See Also:</b> <a 
+href="openid.extensions.ax.FetchRequest-class.html#parseExtensionArgs" 
+class="link"><code>parseExtensionArgs</code></a>
+</p>
+
+  </dd></dl>
+</td></tr></table>
+<br />
+
+
+<!-- =========== START OF INSTANCE VARIABLE DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Instance Variable Details</th></tr>
+</table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="requested_attributes"></a>
+<h3>requested_attributes</h3>
+The attributes that have been requested thus far, indexed by the type 
+URI.
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          {str:AttrInfo}
+
+      </dd>
+    </dl>
+  </dd>
+</dl></td></tr></table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="update_url"></a>
+<h3>update_url</h3>
+A URL that will accept responses for this attribute exchange request, 
+even in the absence of the user who made this request.
+</td></tr></table>
+<br />
+
+
+<!-- =========== START OF CLASS VARIABLE DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Class Variable Details</th></tr>
+</table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="mode"></a>
+<h3>mode</h3>
+The type of this attribute exchange message. This must be overridden 
+in subclasses.
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          <code>NoneType</code>
+
+      </dd>
+<span title="'fetch_request'">      <dt><b>Value:</b></dt>
+      <dd><table><tr><td>
+<pre class="variable">
+<span class="variable-quote">'</span>fetch_request<span class="variable-quote">'</span>                                                        </pre>
+        </td></tr></table></dd>
+</span>    </dl>
+  </dd>
+</dl></td></tr></table>
+<br />
+
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="openid-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          <a class="navbar" target="_top" href="http://openidenabled.com/python-openid/">Python-OpenID</a>
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td align="left"><font size="-2">Generated by Epydoc 2.1 on Fri Dec 14 16:10:53 2007</font></td>
+    <td align="right"><a href="http://epydoc.sourceforge.net"
+                      ><font size="-2">http://epydoc.sf.net</font></a></td>
+  </tr>
+</table>
+</body>
+</html>

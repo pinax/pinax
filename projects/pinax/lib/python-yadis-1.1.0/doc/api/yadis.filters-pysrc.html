@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>yadis.filters</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="yadis-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.openidenabled.com/yadis/">Python-Yadis</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="yadis-module.html">Package&nbsp;yadis</a> ::
+        Module&nbsp;filters
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="yadis.filters-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="yadis.filters-module.html">Module yadis.filters</a></h1>
+<pre class="py-src">
+<tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-docstring">"""This module contains functions and classes used for extracting</tt> </tt>
+<tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-docstring">endpoint information out of a Yadis XRD file using the ElementTree XML</tt> </tt>
+<tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-docstring">parser.</tt> </tt>
+<tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<tt class="py-lineno">  5</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-name">__all__</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> </tt>
+<tt class="py-lineno">  7</tt>  <tt class="py-line">    <tt class="py-string">'BasicServiceEndpoint'</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno">  8</tt>  <tt class="py-line">    <tt class="py-string">'mkFilter'</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno">  9</tt>  <tt class="py-line">    <tt class="py-string">'IFilter'</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 10</tt>  <tt class="py-line">    <tt class="py-string">'TransformFilterMaker'</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 11</tt>  <tt class="py-line">    <tt class="py-string">'CompoundFilter'</tt><tt class="py-op">,</tt> </tt>
+<tt class="py-lineno"> 12</tt>  <tt class="py-line">    <tt class="py-op">]</tt> </tt>
+<tt class="py-lineno"> 13</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package yadis=yadis-module.html"><a title="yadis" class="py-name" href="#" onclick="return doclink('link-0', 'yadis', 'link-0');">yadis</a></tt></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Module yadis.etxrd=yadis.etxrd-module.html"><a title="yadis.etxrd" class="py-name" href="#" onclick="return doclink('link-1', 'etxrd', 'link-1');">etxrd</a></tt></tt> <tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Function yadis.etxrd.expandService()=yadis.etxrd-module.html#expandService"><a title="yadis.etxrd.expandService" class="py-name" href="#" onclick="return doclink('link-2', 'expandService', 'link-2');">expandService</a></tt></tt> </tt>
+<tt class="py-lineno"> 15</tt>  <tt class="py-line"> </tt>
+<a name="BasicServiceEndpoint"></a><div id="BasicServiceEndpoint-def"><tt class="py-lineno"> 16</tt> <a class="py-toggle" href="#" id="BasicServiceEndpoint-toggle" onclick="return toggle('BasicServiceEndpoint');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="yadis.filters.BasicServiceEndpoint-class.html">BasicServiceEndpoint</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BasicServiceEndpoint-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="BasicServiceEndpoint-expanded"><tt class="py-lineno"> 17</tt>  <tt class="py-line">    <tt class="py-docstring">"""Generic endpoint object that contains parsed service</tt> </tt>
+<tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-docstring">    information, as well as a reference to the service element from</tt> </tt>
+<tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-docstring">    which it was generated. If there is more than one xrd:Type or</tt> </tt>
+<tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-docstring">    xrd:URI in the xrd:Service, this object represents just one of</tt> </tt>
+<tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-docstring">    those pairs.</tt> </tt>
+<tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-docstring">    This object can be used as a filter, because it implements</tt> </tt>
+<tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-docstring">    fromBasicServiceEndpoint.</tt> </tt>
+<tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-docstring">    The simplest kind of filter you can write implements</tt> </tt>
+<tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-docstring">    fromBasicServiceEndpoint, which takes one of these objects.</tt> </tt>
+<tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="BasicServiceEndpoint.__init__"></a><div id="BasicServiceEndpoint.__init__-def"><tt class="py-lineno"> 29</tt> <a class="py-toggle" href="#" id="BasicServiceEndpoint.__init__-toggle" onclick="return toggle('BasicServiceEndpoint.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.filters.BasicServiceEndpoint-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">yadis_url</tt><tt class="py-op">,</tt> <tt class="py-param">type_uris</tt><tt class="py-op">,</tt> <tt class="py-param">uri</tt><tt class="py-op">,</tt> <tt class="py-param">service_element</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BasicServiceEndpoint.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BasicServiceEndpoint.__init__-expanded"><tt class="py-lineno"> 30</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">type_uris</tt> <tt class="py-op">=</tt> <tt class="py-name">type_uris</tt> </tt>
+<tt class="py-lineno"> 31</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">yadis_url</tt> <tt class="py-op">=</tt> <tt class="py-name">yadis_url</tt> </tt>
+<tt class="py-lineno"> 32</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">uri</tt> <tt class="py-op">=</tt> <tt class="py-name">uri</tt> </tt>
+<tt class="py-lineno"> 33</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">service_element</tt> <tt class="py-op">=</tt> <tt class="py-name">service_element</tt> </tt>
+</div><tt class="py-lineno"> 34</tt>  <tt class="py-line"> </tt>
+<a name="BasicServiceEndpoint.matchTypes"></a><div id="BasicServiceEndpoint.matchTypes-def"><tt class="py-lineno"> 35</tt> <a class="py-toggle" href="#" id="BasicServiceEndpoint.matchTypes-toggle" onclick="return toggle('BasicServiceEndpoint.matchTypes');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.filters.BasicServiceEndpoint-class.html#matchTypes">matchTypes</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">type_uris</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BasicServiceEndpoint.matchTypes-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BasicServiceEndpoint.matchTypes-expanded"><tt class="py-lineno"> 36</tt>  <tt class="py-line">        <tt class="py-docstring">"""Query this endpoint to see if it has any of the given type</tt> </tt>
+<tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-docstring">        URIs. This is useful for implementing other endpoint classes</tt> </tt>
+<tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt class="py-docstring">        that e.g. need to check for the presence of multiple versions</tt> </tt>
+<tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-docstring">        of a single protocol.</tt> </tt>
+<tt class="py-lineno"> 40</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno"> 41</tt>  <tt class="py-line"><tt class="py-docstring">        @param type_uris: The URIs that you wish to check</tt> </tt>
+<tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-docstring">        @type type_uris: iterable of str</tt> </tt>
+<tt class="py-lineno"> 43</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno"> 44</tt>  <tt class="py-line"><tt class="py-docstring">        @return: all types that are in both in type_uris and</tt> </tt>
+<tt class="py-lineno"> 45</tt>  <tt class="py-line"><tt class="py-docstring">            self.type_uris</tt> </tt>
+<tt class="py-lineno"> 46</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<tt class="py-lineno"> 47</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-op">[</tt><tt class="py-name">uri</tt> <tt class="py-keyword">for</tt> <tt class="py-name">uri</tt> <tt class="py-keyword">in</tt> <tt class="py-name">type_uris</tt> <tt class="py-keyword">if</tt> <tt class="py-name">uri</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">type_uris</tt><tt class="py-op">]</tt> </tt>
+</div><tt class="py-lineno"> 48</tt>  <tt class="py-line"> </tt>
+<a name="BasicServiceEndpoint.fromBasicServiceEndpoint"></a><div id="BasicServiceEndpoint.fromBasicServiceEndpoint-def"><tt class="py-lineno"> 49</tt> <a class="py-toggle" href="#" id="BasicServiceEndpoint.fromBasicServiceEndpoint-toggle" onclick="return toggle('BasicServiceEndpoint.fromBasicServiceEndpoint');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.filters.BasicServiceEndpoint-class.html#fromBasicServiceEndpoint">fromBasicServiceEndpoint</a><tt class="py-op">(</tt><tt class="py-param">endpoint</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BasicServiceEndpoint.fromBasicServiceEndpoint-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BasicServiceEndpoint.fromBasicServiceEndpoint-expanded"><tt class="py-lineno"> 50</tt>  <tt class="py-line">        <tt class="py-docstring">"""Trivial transform from a basic endpoint to itself. This</tt> </tt>
+<tt class="py-lineno"> 51</tt>  <tt class="py-line"><tt class="py-docstring">        method exists to allow BasicServiceEndpoint to be used as a</tt> </tt>
+<tt class="py-lineno"> 52</tt>  <tt class="py-line"><tt class="py-docstring">        filter.</tt> </tt>
+<tt class="py-lineno"> 53</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno"> 54</tt>  <tt class="py-line"><tt class="py-docstring">        If you are subclassing this object, re-implement this function.</tt> </tt>
+<tt class="py-lineno"> 55</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno"> 56</tt>  <tt class="py-line"><tt class="py-docstring">        @param endpoint: An instance of BasicServiceEndpoint</tt> </tt>
+<tt class="py-lineno"> 57</tt>  <tt class="py-line"><tt class="py-docstring">        @return: The object that was passed in, with no processing.</tt> </tt>
+<tt class="py-lineno"> 58</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<tt class="py-lineno"> 59</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">endpoint</tt> </tt>
+</div><tt class="py-lineno"> 60</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 61</tt>  <tt class="py-line">    <tt id="link-3" class="py-name" targets="Static Method yadis.filters.BasicServiceEndpoint.fromBasicServiceEndpoint()=yadis.filters.BasicServiceEndpoint-class.html#fromBasicServiceEndpoint"><a title="yadis.filters.BasicServiceEndpoint.fromBasicServiceEndpoint" class="py-name" href="#" onclick="return doclink('link-3', 'fromBasicServiceEndpoint', 'link-3');">fromBasicServiceEndpoint</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-name">staticmethod</tt><tt class="py-op">(</tt><tt id="link-4" class="py-name"><a title="yadis.filters.BasicServiceEndpoint.fromBasicServiceEndpoint" class="py-name" href="#" onclick="return doclink('link-4', 'fromBasicServiceEndpoint', 'link-3');">fromBasicServiceEndpoint</a></tt></tt><tt class="py-op">)</tt> </tt>
+</div><tt class="py-lineno"> 62</tt>  <tt class="py-line"> </tt>
+<a name="IFilter"></a><div id="IFilter-def"><tt class="py-lineno"> 63</tt> <a class="py-toggle" href="#" id="IFilter-toggle" onclick="return toggle('IFilter');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="yadis.filters.IFilter-class.html">IFilter</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IFilter-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="IFilter-expanded"><tt class="py-lineno"> 64</tt>  <tt class="py-line">    <tt class="py-docstring">"""Interface for Yadis filter objects. Other filter-like things</tt> </tt>
+<tt class="py-lineno"> 65</tt>  <tt class="py-line"><tt class="py-docstring">    are convertable to this class."""</tt> </tt>
+<tt class="py-lineno"> 66</tt>  <tt class="py-line"> </tt>
+<a name="IFilter.getServiceEndpoints"></a><div id="IFilter.getServiceEndpoints-def"><tt class="py-lineno"> 67</tt> <a class="py-toggle" href="#" id="IFilter.getServiceEndpoints-toggle" onclick="return toggle('IFilter.getServiceEndpoints');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.filters.IFilter-class.html#getServiceEndpoints">getServiceEndpoints</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">yadis_url</tt><tt class="py-op">,</tt> <tt class="py-param">service_element</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IFilter.getServiceEndpoints-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="IFilter.getServiceEndpoints-expanded"><tt class="py-lineno"> 68</tt>  <tt class="py-line">        <tt class="py-docstring">"""Returns an iterator of endpoint objects"""</tt> </tt>
+<tt class="py-lineno"> 69</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">NotImplementedError</tt> </tt>
+</div></div><tt class="py-lineno"> 70</tt>  <tt class="py-line"> </tt>
+<a name="TransformFilterMaker"></a><div id="TransformFilterMaker-def"><tt class="py-lineno"> 71</tt> <a class="py-toggle" href="#" id="TransformFilterMaker-toggle" onclick="return toggle('TransformFilterMaker');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="yadis.filters.TransformFilterMaker-class.html">TransformFilterMaker</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TransformFilterMaker-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="TransformFilterMaker-expanded"><tt class="py-lineno"> 72</tt>  <tt class="py-line">    <tt class="py-docstring">"""Take a list of basic filters and makes a filter that transforms</tt> </tt>
+<tt class="py-lineno"> 73</tt>  <tt class="py-line"><tt class="py-docstring">    the basic filter into a top-level filter. This is mostly useful</tt> </tt>
+<tt class="py-lineno"> 74</tt>  <tt class="py-line"><tt class="py-docstring">    for the implementation of mkFilter, which should only be needed</tt> </tt>
+<tt class="py-lineno"> 75</tt>  <tt class="py-line"><tt class="py-docstring">    for special cases or internal use by this library.</tt> </tt>
+<tt class="py-lineno"> 76</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno"> 77</tt>  <tt class="py-line"><tt class="py-docstring">    This object is useful for creating simple filters for services</tt> </tt>
+<tt class="py-lineno"> 78</tt>  <tt class="py-line"><tt class="py-docstring">    that use one URI and are specified by one Type (we expect most</tt> </tt>
+<tt class="py-lineno"> 79</tt>  <tt class="py-line"><tt class="py-docstring">    Types will fit this paradigm).</tt> </tt>
+<tt class="py-lineno"> 80</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno"> 81</tt>  <tt class="py-line"><tt class="py-docstring">    Creates a BasicServiceEndpoint object and apply the filter</tt> </tt>
+<tt class="py-lineno"> 82</tt>  <tt class="py-line"><tt class="py-docstring">    functions to it until one of them returns a value.</tt> </tt>
+<tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<tt class="py-lineno"> 84</tt>  <tt class="py-line"> </tt>
+<a name="TransformFilterMaker.__init__"></a><div id="TransformFilterMaker.__init__-def"><tt class="py-lineno"> 85</tt> <a class="py-toggle" href="#" id="TransformFilterMaker.__init__-toggle" onclick="return toggle('TransformFilterMaker.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.filters.TransformFilterMaker-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">filter_functions</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TransformFilterMaker.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="TransformFilterMaker.__init__-expanded"><tt class="py-lineno"> 86</tt>  <tt class="py-line">        <tt class="py-docstring">"""Initialize the filter maker's state</tt> </tt>
+<tt class="py-lineno"> 87</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno"> 88</tt>  <tt class="py-line"><tt class="py-docstring">        @param filter_functions: The endpoint transformer functions to</tt> </tt>
+<tt class="py-lineno"> 89</tt>  <tt class="py-line"><tt class="py-docstring">            apply to the basic endpoint. These are called in turn</tt> </tt>
+<tt class="py-lineno"> 90</tt>  <tt class="py-line"><tt class="py-docstring">            until one of them does not return None, and the result of</tt> </tt>
+<tt class="py-lineno"> 91</tt>  <tt class="py-line"><tt class="py-docstring">            that transformer is returned.</tt> </tt>
+<tt class="py-lineno"> 92</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<tt class="py-lineno"> 93</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">filter_functions</tt> <tt class="py-op">=</tt> <tt class="py-name">filter_functions</tt> </tt>
+</div><tt class="py-lineno"> 94</tt>  <tt class="py-line"> </tt>
+<a name="TransformFilterMaker.getServiceEndpoints"></a><div id="TransformFilterMaker.getServiceEndpoints-def"><tt class="py-lineno"> 95</tt> <a class="py-toggle" href="#" id="TransformFilterMaker.getServiceEndpoints-toggle" onclick="return toggle('TransformFilterMaker.getServiceEndpoints');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.filters.TransformFilterMaker-class.html#getServiceEndpoints">getServiceEndpoints</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">yadis_url</tt><tt class="py-op">,</tt> <tt class="py-param">service_element</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TransformFilterMaker.getServiceEndpoints-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="TransformFilterMaker.getServiceEndpoints-expanded"><tt class="py-lineno"> 96</tt>  <tt class="py-line">        <tt class="py-docstring">"""Returns an iterator of endpoint objects produced by the</tt> </tt>
+<tt class="py-lineno"> 97</tt>  <tt class="py-line"><tt class="py-docstring">        filter functions."""</tt> </tt>
+<tt class="py-lineno"> 98</tt>  <tt class="py-line">        <tt class="py-name">endpoints</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<tt class="py-lineno"> 99</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">100</tt>  <tt class="py-line">        <tt class="py-comment"># Do an expansion of the service element by xrd:Type and xrd:URI</tt> </tt>
+<tt class="py-lineno">101</tt>  <tt class="py-line"><tt class="py-comment"></tt>        <tt class="py-keyword">for</tt> <tt class="py-name">type_uris</tt><tt class="py-op">,</tt> <tt class="py-name">uri</tt><tt class="py-op">,</tt> <tt class="py-name">_</tt> <tt class="py-keyword">in</tt> <tt id="link-5" class="py-name"><a title="yadis.etxrd.expandService" class="py-name" href="#" onclick="return doclink('link-5', 'expandService', 'link-2');">expandService</a></tt></tt><tt class="py-op">(</tt><tt class="py-name">service_element</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">102</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">103</tt>  <tt class="py-line">            <tt class="py-comment"># Create a basic endpoint object to represent this</tt> </tt>
+<tt class="py-lineno">104</tt>  <tt class="py-line"><tt class="py-comment"></tt>            <tt class="py-comment"># yadis_url, Service, Type, URI combination</tt> </tt>
+<tt class="py-lineno">105</tt>  <tt class="py-line"><tt class="py-comment"></tt>            <tt class="py-name">endpoint</tt> <tt class="py-op">=</tt> <tt id="link-6" class="py-name" targets="Class yadis.filters.BasicServiceEndpoint=yadis.filters.BasicServiceEndpoint-class.html"><a title="yadis.filters.BasicServiceEndpoint" class="py-name" href="#" onclick="return doclink('link-6', 'BasicServiceEndpoint', 'link-6');">BasicServiceEndpoint</a></tt></tt><tt class="py-op">(</tt> </tt>
+<tt class="py-lineno">106</tt>  <tt class="py-line">                <tt class="py-name">yadis_url</tt><tt class="py-op">,</tt> <tt class="py-name">type_uris</tt><tt class="py-op">,</tt> <tt class="py-name">uri</tt><tt class="py-op">,</tt> <tt class="py-name">service_element</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">107</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">108</tt>  <tt class="py-line">            <tt class="py-name">e</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Method yadis.filters.TransformFilterMaker.applyFilters()=yadis.filters.TransformFilterMaker-class.html#applyFilters"><a title="yadis.filters.TransformFilterMaker.applyFilters" class="py-name" href="#" onclick="return doclink('link-7', 'applyFilters', 'link-7');">applyFilters</a></tt></tt><tt class="py-op">(</tt><tt class="py-name">endpoint</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">109</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">e</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">110</tt>  <tt class="py-line">                <tt class="py-name">endpoints</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">e</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">111</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">112</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">endpoints</tt> </tt>
+</div><tt class="py-lineno">113</tt>  <tt class="py-line"> </tt>
+<a name="TransformFilterMaker.applyFilters"></a><div id="TransformFilterMaker.applyFilters-def"><tt class="py-lineno">114</tt> <a class="py-toggle" href="#" id="TransformFilterMaker.applyFilters-toggle" onclick="return toggle('TransformFilterMaker.applyFilters');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.filters.TransformFilterMaker-class.html#applyFilters">applyFilters</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">endpoint</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TransformFilterMaker.applyFilters-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="TransformFilterMaker.applyFilters-expanded"><tt class="py-lineno">115</tt>  <tt class="py-line">        <tt class="py-docstring">"""Apply filter functions to an endpoint until one of them</tt> </tt>
+<tt class="py-lineno">116</tt>  <tt class="py-line"><tt class="py-docstring">        returns non-None."""</tt> </tt>
+<tt class="py-lineno">117</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">filter_function</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">filter_functions</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">118</tt>  <tt class="py-line">            <tt class="py-name">e</tt> <tt class="py-op">=</tt> <tt class="py-name">filter_function</tt><tt class="py-op">(</tt><tt class="py-name">endpoint</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">119</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">e</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">120</tt>  <tt class="py-line">                <tt class="py-comment"># Once one of the filters has returned an</tt> </tt>
+<tt class="py-lineno">121</tt>  <tt class="py-line"><tt class="py-comment"></tt>                <tt class="py-comment"># endpoint, do not apply any more.</tt> </tt>
+<tt class="py-lineno">122</tt>  <tt class="py-line"><tt class="py-comment"></tt>                <tt class="py-keyword">return</tt> <tt class="py-name">e</tt> </tt>
+<tt class="py-lineno">123</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">124</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">None</tt> </tt>
+</div></div><tt class="py-lineno">125</tt>  <tt class="py-line"> </tt>
+<a name="CompoundFilter"></a><div id="CompoundFilter-def"><tt class="py-lineno">126</tt> <a class="py-toggle" href="#" id="CompoundFilter-toggle" onclick="return toggle('CompoundFilter');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="yadis.filters.CompoundFilter-class.html">CompoundFilter</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CompoundFilter-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="CompoundFilter-expanded"><tt class="py-lineno">127</tt>  <tt class="py-line">    <tt class="py-docstring">"""Create a new filter that applies a set of filters to an endpoint</tt> </tt>
+<tt class="py-lineno">128</tt>  <tt class="py-line"><tt class="py-docstring">    and collects their results.</tt> </tt>
+<tt class="py-lineno">129</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="CompoundFilter.__init__"></a><div id="CompoundFilter.__init__-def"><tt class="py-lineno">130</tt> <a class="py-toggle" href="#" id="CompoundFilter.__init__-toggle" onclick="return toggle('CompoundFilter.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.filters.CompoundFilter-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">subfilters</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CompoundFilter.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="CompoundFilter.__init__-expanded"><tt class="py-lineno">131</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">subfilters</tt> <tt class="py-op">=</tt> <tt class="py-name">subfilters</tt> </tt>
+</div><tt class="py-lineno">132</tt>  <tt class="py-line"> </tt>
+<a name="CompoundFilter.getServiceEndpoints"></a><div id="CompoundFilter.getServiceEndpoints-def"><tt class="py-lineno">133</tt> <a class="py-toggle" href="#" id="CompoundFilter.getServiceEndpoints-toggle" onclick="return toggle('CompoundFilter.getServiceEndpoints');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.filters.CompoundFilter-class.html#getServiceEndpoints">getServiceEndpoints</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">yadis_url</tt><tt class="py-op">,</tt> <tt class="py-param">service_element</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CompoundFilter.getServiceEndpoints-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="CompoundFilter.getServiceEndpoints-expanded"><tt class="py-lineno">134</tt>  <tt class="py-line">        <tt class="py-docstring">"""Generate all endpoint objects for all of the subfilters of</tt> </tt>
+<tt class="py-lineno">135</tt>  <tt class="py-line"><tt class="py-docstring">        this filter and return their concatenation."""</tt> </tt>
+<tt class="py-lineno">136</tt>  <tt class="py-line">        <tt class="py-name">endpoints</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<tt class="py-lineno">137</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">subfilter</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">subfilters</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">138</tt>  <tt class="py-line">            <tt class="py-name">endpoints</tt><tt class="py-op">.</tt><tt class="py-name">extend</tt><tt class="py-op">(</tt> </tt>
+<tt class="py-lineno">139</tt>  <tt class="py-line">                <tt class="py-name">subfilter</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Method yadis.filters.CompoundFilter.getServiceEndpoints()=yadis.filters.CompoundFilter-class.html#getServiceEndpoints,Method yadis.filters.IFilter.getServiceEndpoints()=yadis.filters.IFilter-class.html#getServiceEndpoints,Method yadis.filters.TransformFilterMaker.getServiceEndpoints()=yadis.filters.TransformFilterMaker-class.html#getServiceEndpoints,Function yadis.services.getServiceEndpoints()=yadis.services-module.html#getServiceEndpoints"><a title="yadis.filters.CompoundFilter.getServiceEndpoints
+yadis.filters.IFilter.getServiceEndpoints
+yadis.filters.TransformFilterMaker.getServiceEndpoints
+yadis.services.getServiceEndpoints" class="py-name" href="#" onclick="return doclink('link-8', 'getServiceEndpoints', 'link-8');">getServiceEndpoints</a></tt></tt><tt class="py-op">(</tt><tt class="py-name">yadis_url</tt><tt class="py-op">,</tt> <tt class="py-name">service_element</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">140</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">endpoints</tt> </tt>
+</div></div><tt class="py-lineno">141</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">142</tt>  <tt class="py-line"><tt class="py-comment"># Exception raised when something is not able to be turned into a filter</tt> </tt>
+<tt class="py-lineno">143</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt id="link-9" class="py-name" targets="Variable yadis.filters.filter_type_error=yadis.filters-module.html#filter_type_error"><a title="yadis.filters.filter_type_error" class="py-name" href="#" onclick="return doclink('link-9', 'filter_type_error', 'link-9');">filter_type_error</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-name">TypeError</tt><tt class="py-op">(</tt> </tt>
+<tt class="py-lineno">144</tt>  <tt class="py-line">    <tt class="py-string">'Expected a filter, an endpoint, a callable or a list of any of these.'</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">145</tt>  <tt class="py-line"> </tt>
+<a name="mkFilter"></a><div id="mkFilter-def"><tt class="py-lineno">146</tt> <a class="py-toggle" href="#" id="mkFilter-toggle" onclick="return toggle('mkFilter');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.filters-module.html#mkFilter">mkFilter</a><tt class="py-op">(</tt><tt class="py-param">parts</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="mkFilter-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="mkFilter-expanded"><tt class="py-lineno">147</tt>  <tt class="py-line">    <tt class="py-docstring">"""Convert a filter-convertable thing into a filter</tt> </tt>
+<tt class="py-lineno">148</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno">149</tt>  <tt class="py-line"><tt class="py-docstring">    @param parts: a filter, an endpoint, a callable, or a list of any of these.</tt> </tt>
+<tt class="py-lineno">150</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<tt class="py-lineno">151</tt>  <tt class="py-line">    <tt class="py-comment"># Convert the parts into a list, and pass to mkCompoundFilter</tt> </tt>
+<tt class="py-lineno">152</tt>  <tt class="py-line"><tt class="py-comment"></tt>    <tt class="py-keyword">if</tt> <tt class="py-name">parts</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">153</tt>  <tt class="py-line">        <tt class="py-name">parts</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt id="link-10" class="py-name"><a title="yadis.filters.BasicServiceEndpoint" class="py-name" href="#" onclick="return doclink('link-10', 'BasicServiceEndpoint', 'link-6');">BasicServiceEndpoint</a></tt></tt><tt class="py-op">]</tt> </tt>
+<tt class="py-lineno">154</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">155</tt>  <tt class="py-line">    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">156</tt>  <tt class="py-line">        <tt class="py-name">parts</tt> <tt class="py-op">=</tt> <tt class="py-name">list</tt><tt class="py-op">(</tt><tt class="py-name">parts</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">157</tt>  <tt class="py-line">    <tt class="py-keyword">except</tt> <tt class="py-name">TypeError</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">158</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-11" class="py-name" targets="Function yadis.filters.mkCompoundFilter()=yadis.filters-module.html#mkCompoundFilter"><a title="yadis.filters.mkCompoundFilter" class="py-name" href="#" onclick="return doclink('link-11', 'mkCompoundFilter', 'link-11');">mkCompoundFilter</a></tt></tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-name">parts</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">159</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">160</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-12" class="py-name"><a title="yadis.filters.mkCompoundFilter" class="py-name" href="#" onclick="return doclink('link-12', 'mkCompoundFilter', 'link-11');">mkCompoundFilter</a></tt></tt><tt class="py-op">(</tt><tt class="py-name">parts</tt><tt class="py-op">)</tt> </tt>
+</div><tt class="py-lineno">161</tt>  <tt class="py-line"> </tt>
+<a name="mkCompoundFilter"></a><div id="mkCompoundFilter-def"><tt class="py-lineno">162</tt> <a class="py-toggle" href="#" id="mkCompoundFilter-toggle" onclick="return toggle('mkCompoundFilter');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.filters-module.html#mkCompoundFilter">mkCompoundFilter</a><tt class="py-op">(</tt><tt class="py-param">parts</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="mkCompoundFilter-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="mkCompoundFilter-expanded"><tt class="py-lineno">163</tt>  <tt class="py-line">    <tt class="py-docstring">"""Create a filter out of a list of filter-like things</tt> </tt>
+<tt class="py-lineno">164</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno">165</tt>  <tt class="py-line"><tt class="py-docstring">    Used by mkFilter</tt> </tt>
+<tt class="py-lineno">166</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno">167</tt>  <tt class="py-line"><tt class="py-docstring">    @param parts: list of filter, endpoint, callable or list of any of these</tt> </tt>
+<tt class="py-lineno">168</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<tt class="py-lineno">169</tt>  <tt class="py-line">    <tt class="py-comment"># Separate into a list of callables and a list of filter objects</tt> </tt>
+<tt class="py-lineno">170</tt>  <tt class="py-line"><tt class="py-comment"></tt>    <tt class="py-name">transformers</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<tt class="py-lineno">171</tt>  <tt class="py-line">    <tt id="link-13" class="py-name" targets="Module yadis.filters=yadis.filters-module.html"><a title="yadis.filters" class="py-name" href="#" onclick="return doclink('link-13', 'filters', 'link-13');">filters</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<tt class="py-lineno">172</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">subfilter</tt> <tt class="py-keyword">in</tt> <tt class="py-name">parts</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">173</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">174</tt>  <tt class="py-line">            <tt class="py-name">subfilter</tt> <tt class="py-op">=</tt> <tt class="py-name">list</tt><tt class="py-op">(</tt><tt class="py-name">subfilter</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">175</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-name">TypeError</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">176</tt>  <tt class="py-line">            <tt class="py-comment"># If it's not an iterable</tt> </tt>
+<tt class="py-lineno">177</tt>  <tt class="py-line"><tt class="py-comment"></tt>            <tt class="py-keyword">if</tt> <tt class="py-name">hasattr</tt><tt class="py-op">(</tt><tt class="py-name">subfilter</tt><tt class="py-op">,</tt> <tt class="py-string">'getServiceEndpoints'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">178</tt>  <tt class="py-line">                <tt class="py-comment"># It's a full filter</tt> </tt>
+<tt class="py-lineno">179</tt>  <tt class="py-line"><tt class="py-comment"></tt>                <tt id="link-14" class="py-name"><a title="yadis.filters" class="py-name" href="#" onclick="return doclink('link-14', 'filters', 'link-13');">filters</a></tt></tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">subfilter</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">180</tt>  <tt class="py-line">            <tt class="py-keyword">elif</tt> <tt class="py-name">hasattr</tt><tt class="py-op">(</tt><tt class="py-name">subfilter</tt><tt class="py-op">,</tt> <tt class="py-string">'fromBasicServiceEndpoint'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">181</tt>  <tt class="py-line">                <tt class="py-comment"># It's an endpoint object, so put its endpoint</tt> </tt>
+<tt class="py-lineno">182</tt>  <tt class="py-line"><tt class="py-comment"></tt>                <tt class="py-comment"># conversion attribute into the list of endpoint</tt> </tt>
+<tt class="py-lineno">183</tt>  <tt class="py-line"><tt class="py-comment"></tt>                <tt class="py-comment"># transformers</tt> </tt>
+<tt class="py-lineno">184</tt>  <tt class="py-line"><tt class="py-comment"></tt>                <tt class="py-name">transformers</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">subfilter</tt><tt class="py-op">.</tt><tt id="link-15" class="py-name"><a title="yadis.filters.BasicServiceEndpoint.fromBasicServiceEndpoint" class="py-name" href="#" onclick="return doclink('link-15', 'fromBasicServiceEndpoint', 'link-3');">fromBasicServiceEndpoint</a></tt></tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">185</tt>  <tt class="py-line">            <tt class="py-keyword">elif</tt> <tt class="py-name">callable</tt><tt class="py-op">(</tt><tt class="py-name">subfilter</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">186</tt>  <tt class="py-line">                <tt class="py-comment"># It's a simple callable, so add it to the list of</tt> </tt>
+<tt class="py-lineno">187</tt>  <tt class="py-line"><tt class="py-comment"></tt>                <tt class="py-comment"># endpoint transformers</tt> </tt>
+<tt class="py-lineno">188</tt>  <tt class="py-line"><tt class="py-comment"></tt>                <tt class="py-name">transformers</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">subfilter</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">189</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">190</tt>  <tt class="py-line">                <tt class="py-keyword">raise</tt> <tt id="link-16" class="py-name"><a title="yadis.filters.filter_type_error" class="py-name" href="#" onclick="return doclink('link-16', 'filter_type_error', 'link-9');">filter_type_error</a></tt></tt> </tt>
+<tt class="py-lineno">191</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">192</tt>  <tt class="py-line">            <tt id="link-17" class="py-name"><a title="yadis.filters" class="py-name" href="#" onclick="return doclink('link-17', 'filters', 'link-13');">filters</a></tt></tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt id="link-18" class="py-name"><a title="yadis.filters.mkCompoundFilter" class="py-name" href="#" onclick="return doclink('link-18', 'mkCompoundFilter', 'link-11');">mkCompoundFilter</a></tt></tt><tt class="py-op">(</tt><tt class="py-name">subfilter</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">193</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">194</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">transformers</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">195</tt>  <tt class="py-line">        <tt id="link-19" class="py-name"><a title="yadis.filters" class="py-name" href="#" onclick="return doclink('link-19', 'filters', 'link-13');">filters</a></tt></tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt id="link-20" class="py-name" targets="Class yadis.filters.TransformFilterMaker=yadis.filters.TransformFilterMaker-class.html"><a title="yadis.filters.TransformFilterMaker" class="py-name" href="#" onclick="return doclink('link-20', 'TransformFilterMaker', 'link-20');">TransformFilterMaker</a></tt></tt><tt class="py-op">(</tt><tt class="py-name">transformers</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">196</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">197</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt id="link-21" class="py-name"><a title="yadis.filters" class="py-name" href="#" onclick="return doclink('link-21', 'filters', 'link-13');">filters</a></tt></tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-number">1</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">198</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-22" class="py-name"><a title="yadis.filters" class="py-name" href="#" onclick="return doclink('link-22', 'filters', 'link-13');">filters</a></tt></tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<tt class="py-lineno">199</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">200</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-23" class="py-name" targets="Class yadis.filters.CompoundFilter=yadis.filters.CompoundFilter-class.html"><a title="yadis.filters.CompoundFilter" class="py-name" href="#" onclick="return doclink('link-23', 'CompoundFilter', 'link-23');">CompoundFilter</a></tt></tt><tt class="py-op">(</tt><tt id="link-24" class="py-name"><a title="yadis.filters" class="py-name" href="#" onclick="return doclink('link-24', 'filters', 'link-13');">filters</a></tt></tt><tt class="py-op">)</tt> </tt>
+</div><tt class="py-lineno">201</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="yadis-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.openidenabled.com/yadis/">Python-Yadis</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">Generated by Epydoc
+        3.0alpha3 on Fri Dec  8 13:17:18 2006</td>
+    <td align="right" class="footer">
+      <a href="http://epydoc.sourceforge.net">http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie()
+  // -->
+</script>
+  
+</body>
+</html>

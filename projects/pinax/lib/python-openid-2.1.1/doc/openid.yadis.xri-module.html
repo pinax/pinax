@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>openid.yadis.xri</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css"></link>
+</head>
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="openid-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          <a class="navbar" target="_top" href="http://openidenabled.com/python-openid/">Python-OpenID</a>
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <font size="-1"><b class="breadcrumbs">
+        <a href="openid-module.html">Package&nbsp;openid</a> ::
+        <a href="openid.yadis-module.html">Package&nbsp;yadis</a> ::
+        Module&nbsp;xri
+      </b></font></br>
+    </td>
+    <td><table cellpadding="0" cellspacing="0">
+      <tr><td align="right"><font size="-2">[<a href="frames.html"target="_top">frames</a>&nbsp;|&nbsp;<a href="openid.yadis.xri-module.html" target="_top">no&nbsp;frames</a>]</font></td></tr>
+    </table></td>
+</tr></table>
+
+<!-- =========== START OF MODULE DESCRIPTION =========== -->
+<h2 class="module">Module openid.yadis.xri</h2>
+
+Utility functions for handling XRIs.
+<hr/>
+<p><b>See Also:</b> XRI Syntax v2.0 at the <a 
+href="http://www.oasis-open.org/committees/tc_home.php?wg_abbrev=xri">OASIS 
+XRI Technical Committee</a>
+</p>
+
+
+<!-- =========== START OF FUNCTION SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Function Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.yadis.xri-module.html#escapeForIRI" class="summary-sig-name"><code>escapeForIRI</code></a>(<span class=summary-sig-arg>xri</span>)</span></code>
+<br />
+Escape things that need to be escaped when transforming to an IRI.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.yadis.xri-module.html#identifierScheme" class="summary-sig-name"><code>identifierScheme</code></a>(<span class=summary-sig-arg>identifier</span>)</span></code>
+<br />
+Determine if this identifier is an XRI or URI.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.yadis.xri-module.html#iriToURI" class="summary-sig-name"><code>iriToURI</code></a>(<span class=summary-sig-arg>iri</span>)</span></code>
+<br />
+Transform an IRI to a URI by escaping unicode.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        bool
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.yadis.xri-module.html#providerIsAuthoritative" class="summary-sig-name"><code>providerIsAuthoritative</code></a>(<span class=summary-sig-arg>providerID</span>,
+          <span class=summary-sig-arg>canonicalID</span>)</span></code>
+<br />
+Is this provider ID authoritative for this XRI?</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        unicode
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.yadis.xri-module.html#rootAuthority" class="summary-sig-name"><code>rootAuthority</code></a>(<span class=summary-sig-arg>xri</span>)</span></code>
+<br />
+Return the root authority for an XRI.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.yadis.xri-module.html#toIRINormal" class="summary-sig-name"><code>toIRINormal</code></a>(<span class=summary-sig-arg>xri</span>)</span></code>
+<br />
+Transform an XRI to IRI-normal form.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.yadis.xri-module.html#toURINormal" class="summary-sig-name"><code>toURINormal</code></a>(<span class=summary-sig-arg>xri</span>)</span></code>
+<br />
+Transform an XRI to URI normal form.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.yadis.xri-module.html#XRI" class="summary-sig-name"><code>XRI</code></a>(<span class=summary-sig-arg>xri</span>)</span></code>
+<br />
+An XRI object allowing comparison of XRI.</td></tr>
+</table><br />
+
+
+<!-- =========== START OF FUNCTION DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Function Details</th></tr>
+</table>
+
+<a name="escapeForIRI"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">escapeForIRI</span>(<span class=sig-arg>xri</span>)</span>
+  </h3>
+  Escape things that need to be escaped when transforming to an 
+  IRI.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="identifierScheme"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">identifierScheme</span>(<span class=sig-arg>identifier</span>)</span>
+  </h3>
+  Determine if this identifier is an XRI or URI.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        <code>&quot;XRI&quot;</code> or 
+        <code>&quot;URI&quot;</code>
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="iriToURI"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">iriToURI</span>(<span class=sig-arg>iri</span>)</span>
+  </h3>
+  Transform an IRI to a URI by escaping unicode.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="providerIsAuthoritative"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">providerIsAuthoritative</span>(<span class=sig-arg>providerID</span>,
+          <span class=sig-arg>canonicalID</span>)</span>
+  </h3>
+  Is this provider ID authoritative for this XRI?
+  <dl><dt></dt><dd>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        bool
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="rootAuthority"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">rootAuthority</span>(<span class=sig-arg>xri</span>)</span>
+  </h3>
+  <p>Return the root authority for an XRI.</p>
+  Example:
+<pre class="literalblock">
+   rootAuthority(&quot;xri://&#64;example&quot;) == &quot;xri://&#64;&quot;
+</pre>
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>xri</b></code>
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=unicode)</i>
+      </dd>
+    </dl>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        unicode
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="toIRINormal"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">toIRINormal</span>(<span class=sig-arg>xri</span>)</span>
+  </h3>
+  Transform an XRI to IRI-normal form.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="toURINormal"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">toURINormal</span>(<span class=sig-arg>xri</span>)</span>
+  </h3>
+  Transform an XRI to URI normal form.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="XRI"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">XRI</span>(<span class=sig-arg>xri</span>)</span>
+  </h3>
+  <p>An XRI object allowing comparison of XRI.</p>
+  Ideally, this would do full normalization and provide comparsion 
+  operators as per XRI Syntax. Right now, it just does a bit of 
+  canonicalization by ensuring the xri scheme is present.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>xri</b></code> -
+         an xri string
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=unicode)</i>
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+<br />
+
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="openid-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          <a class="navbar" target="_top" href="http://openidenabled.com/python-openid/">Python-OpenID</a>
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td align="left"><font size="-2">Generated by Epydoc 2.1 on Fri Dec 14 16:10:53 2007</font></td>
+    <td align="right"><a href="http://epydoc.sourceforge.net"
+                      ><font size="-2">http://epydoc.sf.net</font></a></td>
+  </tr>
+</table>
+</body>
+</html>

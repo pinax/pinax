@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>openid</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css"></link>
+</head>
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th bgcolor="#70b0f0" class="navselect">&nbsp;&nbsp;&nbsp;Home&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          <a class="navbar" target="_top" href="http://openidenabled.com/python-openid/">Python-OpenID</a>
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <font size="-1"><b class="breadcrumbs">
+        Package&nbsp;openid
+      </b></font></br>
+    </td>
+    <td><table cellpadding="0" cellspacing="0">
+      <tr><td align="right"><font size="-2">[<a href="frames.html"target="_top">frames</a>&nbsp;|&nbsp;<a href="openid-module.html" target="_top">no&nbsp;frames</a>]</font></td></tr>
+    </table></td>
+</tr></table>
+
+<!-- =========== START OF PACKAGE DESCRIPTION =========== -->
+<h2 class="package">Package openid</h2>
+
+This package is an implementation of the OpenID specification in 
+Python. It contains code for both server and consumer implementations. 
+For information on implementing an OpenID consumer, see the <code><a 
+href="openid.consumer.consumer-module.html" 
+class="link"><code>openid.consumer.consumer</code></a></code> module. For 
+information on implementing an OpenID server, see the <code><a 
+href="openid.server.server-module.html" 
+class="link"><code>openid.server.server</code></a></code> module.
+<hr/>
+<p><b>Contact:</b> <a 
+href="http://lists.openidenabled.com/mailman/listinfo/dev">dev&#64;lists.openidenabled.com</a>
+</p>
+
+<p><b>Copyright:</b> (C) 2005-2007 JanRain, Inc.
+</p>
+
+<p><b>License:</b> <p>Licensed under the Apache License, Version 2.0 (the 
+&quot;License&quot;); you may not use this file except in compliance with 
+the License. You may obtain a copy of the License at <a 
+href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a></p>
+Unless required by applicable law or agreed to in writing, software 
+distributed under the License is distributed on an &quot;AS IS&quot; 
+BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or 
+implied. See the License for the specific language governing permissions 
+and limitations under the License.
+</p>
+
+
+<!-- =========== START OF SUBMODULES =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Submodules</th></tr>
+  <tr><td><ul>
+<li> <b><a href="openid.association-module.html"><code>association</code></a></b>: <i>This module contains code for dealing with associations between 
+consumers and servers.</i>
+<li> <b><a href="openid.consumer-module.html"><code>consumer</code></a></b>: <i>This package contains the portions of the library used only when 
+implementing an OpenID consumer.</i>
+  <ul>
+    <li> <b><a href="openid.consumer.consumer-module.html"><code>consumer</code></a></b>: <i>OpenID support for Relying Parties (aka Consumers).</i>
+    <li> <b><a href="openid.consumer.discover-module.html"><code>discover</code></a></b>: <i>Functions to discover OpenID endpoints from identifiers.</i>
+    <li> <b><a href="openid.consumer.html_parse-module.html"><code>html_parse</code></a></b>: <i>This module implements a VERY limited parser that finds &lt;link&gt; 
+tags in the head of HTML or XHTML documents and parses out their 
+attributes according to the OpenID spec.</i>
+  </ul>
+<li> <b><a href="openid.cryptutil-module.html"><code>cryptutil</code></a></b>: <i>Module containing a cryptographic-quality source of randomness and 
+other cryptographically useful functionality</i>
+<li> <b><a href="openid.dh-module.html"><code>dh</code></a></b>
+<li> <b><a href="openid.extension-module.html"><code>extension</code></a></b>
+<li> <b><a href="openid.extensions-module.html"><code>extensions</code></a></b>
+  <ul>
+    <li> <b><a href="openid.extensions.ax-module.html"><code>ax</code></a></b>: <i>Implements the OpenID Attribute Exchange specification, version 
+1.0.</i>
+    <li> <b><a href="openid.extensions.pape-module.html"><code>pape</code></a></b>: <i>An implementation of the OpenID Provider Authentication Policy 
+Extension 1.0</i>
+    <li> <b><a href="openid.extensions.sreg-module.html"><code>sreg</code></a></b>: <i>Simple registration request and response parsing and object 
+representation</i>
+  </ul>
+<li> <b><a href="openid.fetchers-module.html"><code>fetchers</code></a></b>: <i>This module contains the HTTP fetcher interface and several 
+implementations.</i>
+<li> <b><a href="openid.kvform-module.html"><code>kvform</code></a></b>
+<li> <b><a href="openid.message-module.html"><code>message</code></a></b>: <i>Extension argument processing code</i>
+<li> <b><a href="openid.oidutil-module.html"><code>oidutil</code></a></b>: <i>This module contains general utility code that is used throughout the 
+library.</i>
+<li> <b><a href="openid.server-module.html"><code>server</code></a></b>: <i>This package contains the portions of the library used only when 
+implementing an OpenID server.</i>
+  <ul>
+    <li> <b><a href="openid.server.server-module.html"><code>server</code></a></b>: <i>OpenID server protocol and logic.</i>
+    <li> <b><a href="openid.server.trustroot-module.html"><code>trustroot</code></a></b>: <i>This module contains the <code><a 
+href="openid.server.trustroot.TrustRoot-class.html" 
+class="link"><code>TrustRoot</code></a></code> class, which helps handle 
+trust root checking.</i>
+  </ul>
+<li> <b><a href="openid.sreg-module.html"><code>sreg</code></a></b>: <i>moved to <a href="openid.extensions.sreg-module.html" 
+class="link"><code>openid.extensions.sreg</code></a></i>
+<li> <b><a href="openid.store-module.html"><code>store</code></a></b>: <i>This package contains the modules related to this library's use of 
+persistent storage.</i>
+  <ul>
+    <li> <b><a href="openid.store.interface-module.html"><code>interface</code></a></b>: <i>This module contains the definition of the <code><a 
+href="openid.store.interface.OpenIDStore-class.html" 
+class="link"><code>OpenIDStore</code></a></code> interface.</i>
+    <li> <b><a href="openid.store.filestore-module.html"><code>filestore</code></a></b>: <i>This module contains an <code><a 
+href="openid.store.interface.OpenIDStore-class.html" 
+class="link"><code>OpenIDStore</code></a></code> implementation backed by 
+flat files.</i>
+    <li> <b><a href="openid.store.sqlstore-module.html"><code>sqlstore</code></a></b>: <i>This module contains <code><a 
+href="openid.store.interface.OpenIDStore-class.html" 
+class="link"><code>OpenIDStore</code></a></code> implementations that use 
+various SQL databases to back them.</i>
+    <li> <b><a href="openid.store.memstore-module.html"><code>memstore</code></a></b>: <i>A simple store using only in-process memory.</i>
+    <li> <b><a href="openid.store.nonce-module.html"><code>nonce</code></a></b>
+  </ul>
+<li> <b><a href="openid.urinorm-module.html"><code>urinorm</code></a></b>
+<li> <b><a href="openid.yadis-module.html"><code>yadis</code></a></b>: <i>Yadis.</i>
+  <ul>
+    <li> <b><a href="openid.yadis.accept-module.html"><code>accept</code></a></b>: <i>Functions for generating and parsing HTTP Accept: headers for 
+supporting server-directed content negotiation.</i>
+    <li> <b><a href="openid.yadis.constants-module.html"><code>constants</code></a></b>
+    <li> <b><a href="openid.yadis.discover-module.html"><code>discover</code></a></b>
+    <li> <b><a href="openid.yadis.etxrd-module.html"><code>etxrd</code></a></b>: <i>ElementTree interface to an XRD document.</i>
+    <li> <b><a href="openid.yadis.filters-module.html"><code>filters</code></a></b>: <i>This module contains functions and classes used for extracting 
+endpoint information out of a Yadis XRD file using the ElementTree XML 
+parser.</i>
+    <li> <b><a href="openid.yadis.manager-module.html"><code>manager</code></a></b>
+    <li> <b><a href="openid.yadis.parsehtml-module.html"><code>parsehtml</code></a></b>
+    <li> <b><a href="openid.yadis.services-module.html"><code>services</code></a></b>
+    <li> <b><a href="openid.yadis.xri-module.html"><code>xri</code></a></b>: <i>Utility functions for handling XRIs.</i>
+    <li> <b><a href="openid.yadis.xrires-module.html"><code>xrires</code></a></b>: <i>XRI resolution.</i>
+  </ul>
+  </ul></td></tr>
+</table><br />
+
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th bgcolor="#70b0f0" class="navselect">&nbsp;&nbsp;&nbsp;Home&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          <a class="navbar" target="_top" href="http://openidenabled.com/python-openid/">Python-OpenID</a>
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td align="left"><font size="-2">Generated by Epydoc 2.1 on Fri Dec 14 16:10:53 2007</font></td>
+    <td align="right"><a href="http://epydoc.sourceforge.net"
+                      ><font size="-2">http://epydoc.sf.net</font></a></td>
+  </tr>
+</table>
+</body>
+</html>

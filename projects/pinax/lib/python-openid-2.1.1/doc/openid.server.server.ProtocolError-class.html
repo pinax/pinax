@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>openid.server.server.ProtocolError</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css"></link>
+</head>
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="openid-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          <a class="navbar" target="_top" href="http://openidenabled.com/python-openid/">Python-OpenID</a>
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <font size="-1"><b class="breadcrumbs">
+        <a href="openid-module.html">Package&nbsp;openid</a> ::
+        <a href="openid.server-module.html">Package&nbsp;server</a> ::
+        <a href="openid.server.server-module.html">Module&nbsp;server</a> ::
+        Class&nbsp;ProtocolError
+      </b></font></br>
+    </td>
+    <td><table cellpadding="0" cellspacing="0">
+      <tr><td align="right"><font size="-2">[<a href="frames.html"target="_top">frames</a>&nbsp;|&nbsp;<a href="openid.server.server.ProtocolError-class.html" target="_top">no&nbsp;frames</a>]</font></td></tr>
+    </table></td>
+</tr></table>
+
+<!-- =========== START OF CLASS DESCRIPTION =========== -->
+<h2 class="class">Type ProtocolError</h2>
+
+<pre class="base-tree">
+   <a href="__builtin__.object-class.html"><code>object</code></a> --+        
+            |        
+<a href="exceptions.BaseException-class.html"><code>BaseException</code></a> --+    
+                |    
+        <a href="exceptions.Exception-class.html"><code>Exception</code></a> --+
+                    |
+                   <b>ProtocolError</b>
+</pre><br />
+
+<dl><dt><b>Known Subclasses:</b></dt>
+<dd>
+    <a href="openid.server.server.MalformedReturnURL-class.html"><code>MalformedReturnURL</code></a>,
+    <a href="openid.server.server.MalformedTrustRoot-class.html"><code>MalformedTrustRoot</code></a>,
+    <a href="openid.server.server.UntrustedReturnURL-class.html"><code>UntrustedReturnURL</code></a></dd></dl>
+
+<hr/>
+
+A message did not conform to the OpenID protocol.
+<hr/>
+
+
+<!-- =========== START OF METHOD SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Method Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.server.server.ProtocolError-class.html#__init__" class="summary-sig-name"><code>__init__</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>message</span>,
+          <span class=summary-sig-arg>text</span>,
+          <span class=summary-sig-arg>reference</span>,
+          <span class=summary-sig-arg>contact</span>)</span></code>
+<br />
+When an error occurs.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><a name="encodeToKVForm"></a><span class="summary-sig"><span class="summary-sig-name">encodeToKVForm</span>(<span class=summary-sig-arg>self</span>)</span></code>
+</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><a name="encodeToURL"></a><span class="summary-sig"><span class="summary-sig-name">encodeToURL</span>(<span class=summary-sig-arg>self</span>)</span></code>
+</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        str
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.server.server.ProtocolError-class.html#getReturnTo" class="summary-sig-name"><code>getReturnTo</code></a>(<span class=summary-sig-arg>self</span>)</span></code>
+<br />
+Get the return_to argument from the request, if any.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        bool
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.server.server.ProtocolError-class.html#hasReturnTo" class="summary-sig-name"><code>hasReturnTo</code></a>(<span class=summary-sig-arg>self</span>)</span></code>
+<br />
+Did this request have a return_to parameter?</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.server.server.ProtocolError-class.html#toFormMarkup" class="summary-sig-name"><code>toFormMarkup</code></a>(<span class=summary-sig-arg>self</span>)</span></code>
+<br />
+Encode to HTML form markup for POST.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.server.server.ProtocolError-class.html#toMessage" class="summary-sig-name"><code>toMessage</code></a>(<span class=summary-sig-arg>self</span>)</span></code>
+<br />
+Generate a Message object for sending to the relying party, after 
+encoding.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.server.server.ProtocolError-class.html#whichEncoding" class="summary-sig-name"><code>whichEncoding</code></a>(<span class=summary-sig-arg>self</span>)</span></code>
+<br />
+How should I be encoded?</td></tr>
+  <tr><td colspan="2">
+    <b>Inherited from <a href="exceptions.Exception-class.html"><code>Exception</code></a>:</b>
+      <a href="exceptions.Exception-class.html#__new__"><code>__new__</code></a>
+      <br />
+    <b>Inherited from <a href="exceptions.BaseException-class.html"><code>BaseException</code></a>:</b>
+      <a href="exceptions.BaseException-class.html#__delattr__"><code>__delattr__</code></a>, 
+      <a href="exceptions.BaseException-class.html#__getattribute__"><code>__getattribute__</code></a>, 
+      <a href="exceptions.BaseException-class.html#__getitem__"><code>__getitem__</code></a>, 
+      <a href="exceptions.BaseException-class.html#__getslice__"><code>__getslice__</code></a>, 
+      <a href="exceptions.BaseException-class.html#__reduce__"><code>__reduce__</code></a>, 
+      <a href="exceptions.BaseException-class.html#__repr__"><code>__repr__</code></a>, 
+      <a href="exceptions.BaseException-class.html#__setattr__"><code>__setattr__</code></a>, 
+      <a href="exceptions.BaseException-class.html#__setstate__"><code>__setstate__</code></a>, 
+      <a href="exceptions.BaseException-class.html#__str__"><code>__str__</code></a>
+      <br />
+    <b>Inherited from <a href="__builtin__.object-class.html"><code>object</code></a>:</b>
+      <a href="__builtin__.object-class.html#__hash__"><code>__hash__</code></a>, 
+      <a href="__builtin__.object-class.html#__reduce_ex__"><code>__reduce_ex__</code></a>
+    </td></tr>
+</table><br />
+
+
+<!-- =========== START OF INSTANCE VARIABLE SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Instance Variable Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">openid.message.Message</font></td>
+<td><b><a href="openid.server.server.ProtocolError-class.html#message"><code>message</code></a></b>: The query that is failing to be a valid OpenID request.</td></tr>
+</table><br />
+
+
+<!-- =========== START OF CLASS VARIABLE SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Class Variable Summary</th></tr>
+  <tr><td colspan="2">
+    <b>Inherited from <a href="exceptions.BaseException-class.html"><code>BaseException</code></a>:</b>
+      <a href="exceptions.BaseException-class.html#args"><code>args</code></a>
+    </td></tr>
+</table><br />
+
+
+<!-- =========== START OF METHOD DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Method Details</th></tr>
+</table>
+
+<a name="__init__"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">__init__</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>message</span>,
+          <span class=sig-arg>text</span>=<span class=sig-default>None</span>,
+          <span class=sig-arg>reference</span>=<span class=sig-default>None</span>,
+          <span class=sig-arg>contact</span>=<span class=sig-default>None</span>)</span>
+    <br /><i>(Constructor)</i>
+  </h3>
+  When an error occurs.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>message</b></code> -
+         The message that is failing to be a valid OpenID request.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=openid.message.Message)</i>
+      <dd><code><b>text</b></code> -
+         A message about the encountered error. Set as 
+        <code>args[0]</code>.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=str)</i>
+      </dd>
+    </dl>
+    <dl><dt><b>Overrides:</b></dt>
+      <dd><a href="exceptions.Exception-class.html#__init__"><code>exceptions.Exception.__init__</code></a></dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="getReturnTo"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">getReturnTo</span>(<span class=sig-arg>self</span>)</span>
+  </h3>
+  Get the return_to argument from the request, if any.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        str
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="hasReturnTo"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">hasReturnTo</span>(<span class=sig-arg>self</span>)</span>
+  </h3>
+  Did this request have a return_to parameter?
+  <dl><dt></dt><dd>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        bool
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="toFormMarkup"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">toFormMarkup</span>(<span class=sig-arg>self</span>)</span>
+  </h3>
+  Encode to HTML form markup for POST.
+  <dl><dt></dt><dd>
+<p><b>Since:</b> 2.1.0
+</p>
+
+  </dd></dl>
+</td></tr></table>
+
+<a name="toMessage"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">toMessage</span>(<span class=sig-arg>self</span>)</span>
+  </h3>
+  Generate a Message object for sending to the relying party, after 
+  encoding.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="whichEncoding"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">whichEncoding</span>(<span class=sig-arg>self</span>)</span>
+  </h3>
+  How should I be encoded?
+  <dl><dt></dt><dd>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        one of ENCODE_URL, ENCODE_KVFORM, or None. If None, I cannot 
+        be encoded as a protocol message and should be displayed to the 
+        user.
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+<br />
+
+
+<!-- =========== START OF INSTANCE VARIABLE DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Instance Variable Details</th></tr>
+</table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="message"></a>
+<h3>message</h3>
+The query that is failing to be a valid OpenID request.
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          openid.message.Message
+
+      </dd>
+    </dl>
+  </dd>
+</dl></td></tr></table>
+<br />
+
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="openid-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          <a class="navbar" target="_top" href="http://openidenabled.com/python-openid/">Python-OpenID</a>
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td align="left"><font size="-2">Generated by Epydoc 2.1 on Fri Dec 14 16:10:53 2007</font></td>
+    <td align="right"><a href="http://epydoc.sourceforge.net"
+                      ><font size="-2">http://epydoc.sf.net</font></a></td>
+  </tr>
+</table>
+</body>
+</html>

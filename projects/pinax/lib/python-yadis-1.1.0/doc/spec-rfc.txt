@@ -1,0 +1,197 @@
+.. -*- rst -*-
+
+YADIS Protocol
+==============
+
+:Date: 13 January 2006
+
+.. contents::
+.. sectnum::
+
+Protocol Overview
+-----------------
+
+The YADIS [#]_ protocol enables discovery of service definitions from
+an ``http://`` or ``https://`` URL. The protocol consists of
+performing HTTP requests to obtain a YADIS Resource Descriptor.
+
+
+Terminology
+-----------
+
+YADIS URL
+  an ``http://`` or ``https://`` URL that supports the YADIS protocol
+
+
+YADIS Resource Descriptor
+  the document that results from performing the YADIS protocol
+
+
+Relying Party
+  the entity using the YADIS protocol to discover what services are
+  available for a YADIS URL
+
+
+Agent
+  the software acting on behalf of the relying party
+
+
+Specification
+-------------
+
+The protocol starts with an HTTP [#]_ request for the YADIS URL. The
+response must contain either a URL for the YADIS resource descriptor
+or the resource descriptor itself. If it does not, then the URL is not
+a YADIS URL.
+
+The YADIS protocol uses HTTP or HTTPS requests as necessary for the
+URL it is working with. Whenever the agent is instructed to make an
+HTTP request, HTTPS is implied for ``https://`` URLs. When using
+HTTP to retrieve a document, redirects that are encountered should be
+followed, up to a reasonable maximum. A simple guideline is a maximum
+of 10 redirects, similar to most web browsers. The final HTTP
+response is only successful if it has a 200 response code.
+
+
+Requesting the Document
+.......................
+
+The agent performs an HTTP ``GET`` request for the YADIS URL. The
+agent may use server-driven content negotiation [#]_ to encourage the server to respond
+immediately with a YADIS resource descriptor. If the agent is using
+content negotiation, it should request the ``application/xrds+xml``
+MIME [#]_ type. Using content negotiation reduces the number of HTTP
+requests if used with a server that supports it.
+
+The agent may perform an HTTP ``HEAD`` request if it expects the
+server response to include an ``X-YADIS-Location`` HTTP header. If the
+header is not present, the protocol must be restarted with an HTTP
+``GET`` request.
+
+
+Handling the Response
+.....................
+
+If the HTTP response contains an ``X-YADIS-Location`` header, the
+header value is the location of the `YADIS resource descriptor`_. The
+header name is not case sensitive.
+
+If the header is not present and the MIME type of the response
+indicates an HTML document [*]_, the agent must parse the document. The
+document must contain a ``<meta>`` tag [#]_ with an ``http-equiv``
+attribute whose value, ignoring case, is ``X-YADIS-Location``. The tag
+must have a ``content`` attribute whose value is the location of the
+YADIS resource descriptor. The agent must only accept ``<meta>`` tags
+that occur inside of the ``<head>`` element of the HTML document.
+
+If a location was found in either of the two previous cases, the
+location must be an absolute HTTP URL. The agent performs a HTTP
+``GET`` request for that URL. If the request succeeds, the content
+returned must be a YADIS resource descriptor, regardless of the
+declared MIME type of the response. After retrieving the resource
+descriptor, the YADIS protocol is complete.
+
+If no ``X-YADIS-Location`` header is included in the server's response
+to the request for the YADIS URL and the MIME type of the response
+doesn't indicate HTML, the MIME type must be ``application/xrds+xml``.
+If it is, the server's response is the YADIS resource descriptor.
+Otherwise, the initial URL is not a YADIS URL.
+
+.. [*] Any version of HTML, including XHTML, is acceptable.
+
+
+YADIS Resource Descriptor
+-------------------------
+
+The YADIS resource descriptor is a document that contains service
+descriptions associated with the YADIS URL. It uses the Extensible
+Resource Descriptor (XRD) format developed by the XRI Technical
+Committee [#]_ of the OASIS group [#]_ as part of XRI [#]_
+resolution. This section includes a short description of the XRD
+format to supplement the official specification, which is in the XRI
+Resolution 2.0 specification [#]_. An XML schema for XRD documents
+can be found in Appendix A of that specification.
+
+The top-level element of an XRD document is the ``<XRDS>``
+element. This element may contain multiple ``<XRD>`` elements. If
+multiple ``<XRD>`` elements are present, the last one should be
+used. If no ``<XRD>`` element is present, it should be treated
+the same as if no services are declared.
+
+``<XRD>`` elements contain ``<Service>`` elements that describe
+services. Each ``<Service>`` element should contain ``<Type>``
+elements that identify the type of that service. ``<Service>``
+elements may contain other elements to provide additional
+information. The meaning of those elements depends on the details of
+the service, and is beyond the scope of YADIS.
+
+A service that uses YADIS for discovery will have a definition. The
+definition specifies which ``<Service>`` elements are relevant and how
+the information in those elements is used. It should include a URI
+that indicates its type. A ``<Type>`` element for a relevant
+``<Service>`` element should have that URI as its contents. The
+definition may allow information that cannot be encoded by the XRD
+schema's defined tags. If it does, it should specify a schema for
+additional tags.
+
+Example Descriptor
+..................
+::
+
+  <?xml version="1.0" encoding="UTF-8"?>
+  <xrds:XRDS
+      xmlns:xrds="xri://$xrds"
+      xmlns="xri://$xrd*($v*2.0)"
+      xmlns:openid="http://openid.net/xmlns/1.0">
+    <XRD>
+
+      <Service priority="20">
+        <Type>http://openid.net/signon/1.0</Type>
+        <URI>http://www.myopenid.com/server</URI>
+        <openid:Delegate>http://smoker.myopenid.com/</openid:Delegate>
+      </Service>
+
+      <Service priority="30">
+        <Type>http://openid.net/signon/1.0</Type>
+        <URI>http://www.livejournal.com/openid/server.bml</URI>
+        <openid:Delegate>http://frank.livejournal.com/</openid:Delegate>
+      </Service>
+
+      <Service>
+        <Type>http://lid.netmesh.org/sso/2.0b5</Type>
+        <Type>http://lid.netmesh.org/sso/1.0</Type>
+      </Service>
+
+    </XRD>
+  </xrds:XRDS>
+
+This example descriptor begins with an XML document declaration, then
+an ``<XRDS>`` element which contains namespace declarations for all
+the namespaces used in the document. The ``<XRDS>`` element contains
+one ``<XRD>`` element, which has the services declared in it.
+
+Two of the three ``<Service>`` elements have a ``priority``
+attribute. The optional ``priority`` attribute indicates a preference
+for a service. A relying party should use priorities to choose which
+service to use. The relying party should use the element with the
+lowest numerically valued ``priority`` attribute, if elements with
+that attribute are specified. If there are multiple elements with the
+same priority, the relying party should choose one at random. This
+allows load balancing between equivalent services. In the above
+example, relying parties wishing to use OpenID should try to use the
+myopenid.com server before the livejournal.com server.
+
+References
+----------
+
+.. [#] YADIS - http://yadis.org/
+.. [#] HTTP 1.1 - http://www.ietf.org/rfc/rfc2616.txt
+.. [#] Server-driven HTTP content negotiation in HTTP 1.1 - http://www.w3.org/Protocols/rfc2616/rfc2616-sec12.html
+.. [#] MIME - http://www.ietf.org/rfc/rfc2045.txt
+.. [#] HTML 4.01 ``<meta>`` tag - http://www.w3.org/TR/1999/REC-html401-19991224/struct/global.html#h-7.4.4
+.. [#]  Extensible Resource Identifier Technical Committee - http://www.oasis-open.org/committees/tc_home.php?wg_abbrev=xri
+.. [#] Organization for the Advancement of Structured Information Standards - http://www.oasis-open.org/
+.. [#] Extensible Resource Identifier - http://en.wikipedia.org/wiki/XRI
+.. [#] XRI Resolution 2.0 specification, working draft 9 - http://www.oasis-open.org/committees/download.php/15310/xri-resolution-V2.0-wd-09.pdf
+
+.. Working draft 10, editor's draft 3 (PDF) http://www.oasis-open.org/committees/download.php/16231/xri-resolution-V2.0-wd-10-ed-03.pdf

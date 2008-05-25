@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>openid.yadis.etxrd</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css"></link>
+</head>
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="openid-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          <a class="navbar" target="_top" href="http://openidenabled.com/python-openid/">Python-OpenID</a>
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <font size="-1"><b class="breadcrumbs">
+        <a href="openid-module.html">Package&nbsp;openid</a> ::
+        <a href="openid.yadis-module.html">Package&nbsp;yadis</a> ::
+        Module&nbsp;etxrd
+      </b></font></br>
+    </td>
+    <td><table cellpadding="0" cellspacing="0">
+      <tr><td align="right"><font size="-2">[<a href="frames.html"target="_top">frames</a>&nbsp;|&nbsp;<a href="openid.yadis.etxrd-module.html" target="_top">no&nbsp;frames</a>]</font></td></tr>
+    </table></td>
+</tr></table>
+
+<!-- =========== START OF MODULE DESCRIPTION =========== -->
+<h2 class="module">Module openid.yadis.etxrd</h2>
+
+ElementTree interface to an XRD document.
+<hr/>
+
+<!-- =========== START OF FUNCTION SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Function Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.yadis.etxrd-module.html#expandService" class="summary-sig-name"><code>expandService</code></a>(<span class=summary-sig-arg>service_element</span>)</span></code>
+<br />
+Take a service element and expand it into an iterator of: ([type_uri], 
+uri, service_element)</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.yadis.etxrd-module.html#expandServices" class="summary-sig-name"><code>expandServices</code></a>(<span class=summary-sig-arg>service_elements</span>)</span></code>
+<br />
+Take a sorted iterator of service elements and expand it into a sorted 
+iterator of: ([type_uri], uri, service_element)</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        unicode or None
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.yadis.etxrd-module.html#getCanonicalID" class="summary-sig-name"><code>getCanonicalID</code></a>(<span class=summary-sig-arg>iname</span>,
+          <span class=summary-sig-arg>xrd_tree</span>)</span></code>
+<br />
+Return the CanonicalID from this XRDS document.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.yadis.etxrd-module.html#getPriority" class="summary-sig-name"><code>getPriority</code></a>(<span class=summary-sig-arg>element</span>)</span></code>
+<br />
+Get the priority of this element</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.yadis.etxrd-module.html#getPriorityStrict" class="summary-sig-name"><code>getPriorityStrict</code></a>(<span class=summary-sig-arg>element</span>)</span></code>
+<br />
+Get the priority of this element.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.yadis.etxrd-module.html#getYadisXRD" class="summary-sig-name"><code>getYadisXRD</code></a>(<span class=summary-sig-arg>xrd_tree</span>)</span></code>
+<br />
+Return the XRD element that should contain the Yadis services</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.yadis.etxrd-module.html#isXRDS" class="summary-sig-name"><code>isXRDS</code></a>(<span class=summary-sig-arg>xrd_tree</span>)</span></code>
+<br />
+Is this document an XRDS document?</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.yadis.etxrd-module.html#iterServices" class="summary-sig-name"><code>iterServices</code></a>(<span class=summary-sig-arg>xrd_tree</span>)</span></code>
+<br />
+Return an iterable over the Service elements in the Yadis XRD</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.yadis.etxrd-module.html#mkXRDTag" class="summary-sig-name"><code>mkXRDTag</code></a>(<span class=summary-sig-arg>t</span>)</span></code>
+<br />
+basestring -&gt; basestring</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><a name="nsTag"></a><span class="summary-sig"><span class="summary-sig-name">nsTag</span>(<span class=summary-sig-arg>ns</span>,
+          <span class=summary-sig-arg>t</span>)</span></code>
+</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.yadis.etxrd-module.html#parseXRDS" class="summary-sig-name"><code>parseXRDS</code></a>(<span class=summary-sig-arg>text</span>)</span></code>
+<br />
+Parse the given text as an XRDS document.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.yadis.etxrd-module.html#prioSort" class="summary-sig-name"><code>prioSort</code></a>(<span class=summary-sig-arg>elements</span>)</span></code>
+<br />
+Sort a list of elements that have priority attributes</td></tr>
+</table><br />
+
+
+<!-- =========== START OF FUNCTION DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Function Details</th></tr>
+</table>
+
+<a name="expandService"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">expandService</span>(<span class=sig-arg>service_element</span>)</span>
+  </h3>
+  Take a service element and expand it into an iterator of: 
+  ([type_uri], uri, service_element)
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="expandServices"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">expandServices</span>(<span class=sig-arg>service_elements</span>)</span>
+  </h3>
+  <p>Take a sorted iterator of service elements and expand it into a 
+  sorted iterator of: ([type_uri], uri, service_element)</p>
+  <p>There may be more than one item in the resulting list for each 
+  service element if there is more than one URI or type for a service, 
+  but each triple will be unique.</p>
+  If there is no URI or Type for a Service element, it will not appear 
+  in the result.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="getCanonicalID"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">getCanonicalID</span>(<span class=sig-arg>iname</span>,
+          <span class=sig-arg>xrd_tree</span>)</span>
+  </h3>
+  Return the CanonicalID from this XRDS document.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>iname</b></code> -
+         the XRI being resolved.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=unicode)</i>
+      <dd><code><b>xrd_tree</b></code> -
+         The XRDS output from the resolver.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=ElementTree)</i>
+      </dd>
+    </dl>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        The XRI CanonicalID or None.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=unicode or None)</i>
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="getPriority"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">getPriority</span>(<span class=sig-arg>element</span>)</span>
+  </h3>
+  <p>Get the priority of this element</p>
+  Returns Max if no priority is specified or the priority value is 
+  invalid.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="getPriorityStrict"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">getPriorityStrict</span>(<span class=sig-arg>element</span>)</span>
+  </h3>
+  <p>Get the priority of this element.</p>
+  Raises ValueError if the value of the priority is invalid. If no 
+  priority is specified, it returns a value that compares greater than 
+  any other value.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="getYadisXRD"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">getYadisXRD</span>(<span class=sig-arg>xrd_tree</span>)</span>
+  </h3>
+  Return the XRD element that should contain the Yadis services
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="isXRDS"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">isXRDS</span>(<span class=sig-arg>xrd_tree</span>)</span>
+  </h3>
+  Is this document an XRDS document?
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="iterServices"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">iterServices</span>(<span class=sig-arg>xrd_tree</span>)</span>
+  </h3>
+  <p>Return an iterable over the Service elements in the Yadis XRD</p>
+  sorted by priority
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="mkXRDTag"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">mkXRDTag</span>(<span class=sig-arg>t</span>)</span>
+  </h3>
+  <p>basestring -&gt; basestring</p>
+  Create a tag name in the XRD 2.0 XML namespace suitable for using 
+  with ElementTree
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="parseXRDS"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">parseXRDS</span>(<span class=sig-arg>text</span>)</span>
+  </h3>
+  Parse the given text as an XRDS document.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        ElementTree containing an XRDS document
+      </dd>
+    </dl>
+    <dl><dt><b>Raises:</b></dt>
+      <dd><code><b>XRDSError</b></code> -
+        When there is a parse error or the document does not contain 
+        an XRDS.
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="prioSort"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">prioSort</span>(<span class=sig-arg>elements</span>)</span>
+  </h3>
+  Sort a list of elements that have priority attributes
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+<br />
+
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="openid-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          <a class="navbar" target="_top" href="http://openidenabled.com/python-openid/">Python-OpenID</a>
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td align="left"><font size="-2">Generated by Epydoc 2.1 on Fri Dec 14 16:10:52 2007</font></td>
+    <td align="right"><a href="http://epydoc.sourceforge.net"
+                      ><font size="-2">http://epydoc.sf.net</font></a></td>
+  </tr>
+</table>
+</body>
+</html>

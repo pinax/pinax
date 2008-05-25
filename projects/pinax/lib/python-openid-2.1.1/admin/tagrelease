@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+VERSION="$1"
+VERSION_PATTERN='^[0-9]\+\.[0-9]\+\.[0-9]\+\(-[a-z0-9-]\+\)\?$'
+
+echo "$VERSION" | grep -e "$VERSION_PATTERN" 2>&1 >/dev/null || {
+    echo "$VERSION"
+    echo "Malformed version number. Expected X.X.X or X.X.X-name." 1>&2
+    exit 1
+}
+
+cd $(dirname $(dirname $(readlink --canonicalize "$0")))
+./admin/setversion "$VERSION"
+darcs record -m 'Set version number to '"$VERSION" && darcs tag "release-$VERSION"

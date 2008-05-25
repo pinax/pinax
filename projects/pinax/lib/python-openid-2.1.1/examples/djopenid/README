@@ -1,0 +1,67 @@
+
+DJANGO EXAMPLE PACKAGE
+======================
+
+This package implements an example consumer and server for the Django
+Python web framework.  You can get Django (and learn more about it) at
+
+  http://www.djangoproject.com/
+
+SETUP
+=====
+
+ 1. Install the OpenID library, version 2.0.0 or later.
+
+ 2. Install Django 0.95.1.
+
+    If you find that the examples run on even newer versions of
+    Django, please let us know!
+
+ 3. Modify djopenid/settings.py appropriately; you may wish to change
+    the database type or path, although the default settings should be
+    sufficient for most systems.
+
+ 4. In examples/djopenid/ run:
+
+    python manage.py syncdb
+
+ 5. To run the example consumer or server, run
+
+    python manage.py runserver PORT
+
+    where PORT is the port number on which to listen.
+
+    Note that if you want to try both the consumer and server at the
+    same time, run the command twice with two different values for
+    PORT.
+
+ 6. Point your web browser at the server at
+
+    http://localhost:PORT/
+
+    to begin.
+
+ABOUT THE CODE
+==============
+
+The example server and consumer code provided in this package are
+intended to be instructional in the use of this OpenID library.  While
+it is not recommended to use the example code in production, the code
+should be sufficient to explain the general use of the library.
+
+If you aren't familiar with the Django web framework, you can quickly
+start looking at the important code by looking in the 'views' modules:
+
+  djopenid.consumer.views
+  djopenid.server.views
+
+Each view is a python callable that responds to an HTTP request.
+Regardless of whether you use a framework, your application should
+look similar to these example applications.
+
+CONTACT
+=======
+
+Please send bug reports, patches, and other feedback to
+
+  dev@lists.openidenabled.com

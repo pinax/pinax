@@ -1,0 +1,226 @@
+What's New in Python OpenID 2.1.0
+=================================
+
+This implementation of OpenID has been upgraded to support version 2.0
+of the OpenID Authentication specification.
+
+New in this version is:
+
+ * Verification of relying party return_to addresses, to screen out RPs 
+   hiding behind open redirect relays.  Server code can invoke this with
+   the returnToVerified method on CheckIDRequest.
+
+ * Helper module for the Provider Authentication Policy Extension (PAPE) in
+   openid.extensions.pape.
+
+ * Helper module for Attribute Exchange in openid.extensions.ax.
+
+Bugfixes:
+
+ * Allow the use of lxml as an ElementTree implemenation.
+
+ * Provide compatability with a wider range of versions for SQL stores.
+
+
+Upgrading from 2.0.1
+--------------------
+
+The third argument to Consumer.complete() is required.
+
+The sreg module should be imported from openid.extensions.sreg instead of
+openid.sreg.
+
+The ax module should likewise be imported from openid.extensions.ax
+instead of openid.ax
+
+The openid.extensions.ax.FetchRequest.fromOpenIDRequest method now
+takes a CheckIDRequest object instead of a Message object
+
+The OpenID response (the result of Consumer.complete()) now has a
+getDisplayIdentifier() method which should be called instead of
+accessing response.identity_url.  The value of getDisplayIdentifier()
+will be the XRI i-name if XRI is used.  The value of
+response.identity_url SHOULD, however, be used as the application's
+database key for storing account information.
+
+What's New in Python OpenID 2.0
+===============================
+
+The big news here is compatibility with svn revision 313 of the OpenID 2.0 
+draft specification.
+
+Highlights include:
+
+ * Simple Registration support in a new module openid.sreg.  (Those
+   previously using SuccessResponse.extensionResponse are advised to
+   look here.)
+ * OpenID provider-driven identifier selection.
+ * "Negotiators" allow you to define which association types to use.
+ * Examples for Django.
+
+Dependencies
+------------
+
+Python 2.5 is now supported.  Support for Python 2.2 discontinued.
+Seperate installation of yadis and urljr packages is no longer
+required; they have been included in this package.  
+
+
+Upgrading from 1.1 or 1.2
+-------------------------
+
+One of the additions to the OpenID protocol was a specified nonce
+format for one-way nonces.  As a result, the nonce table in the store
+has changed.  You'll need to run contrib/upgrade-store-1.1-to-2.0 to
+upgrade your store, or you'll encounter errors about the wrong number
+of columns in the oid_nonces table.
+
+If you've written your own custom store or code that interacts directly with it,
+you'll need to review the change notes in openid.store.interface.
+
+Consumers should now pass an additional parameter to Consumer.complete() 
+to defend against return_to tampering.
+
+
+What's New in Python OpenID 1.1.2
+=================================
+
+i-name Support
+--------------
+
+This version of the library allows the use of XRI as OpenID identifiers,
+allowing users to log in with their i-names.  For full XRI compatibility,
+relying parties integrating this library should take note of the user's
+CanonicalID, as described in the "Identifying the End User" section of the
+OpenID 2.0 specification.
+
+Bug Fixes
+---------
+
+A variety of bug fixes were included in this release, mostly relating to
+international issues such as dealing with other character sets, Unicode,
+incorrectly flagging certain Norwegian trust roots as suspect, and operation
+of the filesystem-backed store on exotic platforms.
+
+Dependencies
+------------
+
+ * urljr 1.0.1
+ * yadis 1.1.0
+
+
+What's New in Python OpenID 1.1.0
+=================================
+
+Version 1.1 of the Python OpenID library implements recent changes to
+the OpenID specification as well as making API changes that should
+make integration with applications easier.
+
+Yadis Support
+-------------
+
+One of the major changes to OpenID since the last release has been the
+approval of Yadis discovery as the preferred way to specify the OpenID
+metadata for an identity URL instead of using <link> tags in
+HTML. This library does Yadis discovery, and if that fails, it falls
+back to old-style discovery.
+
+Some advantages of Yadis support are:
+
+ * Support for fallback if your primary OpenID provider is not available
+
+ * Support for load-balancing between OpenID servers
+
+ * Easy interoperability for different identity services
+
+For more information about Yadis, see http://yadis.org/ or
+http://www.openidenabled.com/yadis/
+
+Extension Support
+-----------------
+
+OpenID also has formalized support for extensions. Extensions are a
+mechanism for transferring information from the consumer to the server
+and from the server to the consumer in the process of performing
+OpenID authentication. Extensions are implemented as additional
+namespaced query arguments that go along with standard OpenID requests
+and responses. This library provides a simple API for adding extension
+arguments to requests and extracting extension responses from replies.
+
+Dependencies
+------------
+
+These dependencies should be available from wherever you acquired the
+OpenID library.
+
+ * urljr - The fetcher abstraction from the previous OpenID library
+   has been extended and is also used for the Yadis library. Because
+   the Yadis library is useful without the OpenID library, the HTTP
+   fetching code has been rolled into its own package. Additionally,
+   the library now has the concept of a default fetcher to make APIs
+   simpler.
+
+ * yadis - The Yadis library provides a general discovery layer that
+   has been adopted by OpenID as well as other identity-related
+   protocols. Most OpenID identity URLs will work without the Yadis
+   library, but as time goes on, this library will be more and more
+   important.
+
+Consumer API
+------------
+
+The consumer API has been changed for more natural use as well as to
+support extension arguments.
+
+ * OpenIDConsumer(store, [fetcher], [immediate]) is now
+   Consumer(session, store)
+
+  - The session object is a dictionary-like object that should be
+    tied to the requesting HTTP agent, for example, using a session
+    ID cookie. It is used for Yadis fallback and holding the state
+    of the OpenID transaction between the redirect to the server
+    and the response. The values that are placed in the session are
+    namespaced, so there should not be a conflict with other uses
+    of the same session. The session namespace is an attribute of
+    the Consumer object.
+
+  - Because the consumer object now does session management, it is
+    necessary to construct a new consumer object for every
+    request. Creating consumer objects is light-weight.
+
+ * OpenIDConsumer.beginAuth(user_url) is now Consumer.begin(user_url)
+   and either returns an AuthRequest object or raises an
+   exception. There is no more tuple unpacking or status codes.
+
+ * OpenIDConsumer.constructRedirect(authreq, return_to, trust_root) is
+   now AuthRequest.redirectURL(trust_root, return_to, [immediate]).
+
+ * OpenIDConsumer.completeAuth(token, query) is now
+   Consumer.complete(query). It no longer returns a tuple. Instead it
+   returns an object that has a status code and additional information
+   about the response. See the API documentation for more information.
+
+Server API
+----------
+
+The server API has been changed for greater extensibility.  Instead
+of taking an "is_authorized" callback, processing happens in several
+stages, allowing you to insert extension data into the response
+before it is signed and returned.  See the documentation for the
+openid.server.server module.
+
+Fetcher API
+-----------
+
+ * fetcher was openid.consumer.fetchers.OpenIDHTTPFetcher, is now
+   urljr.fetchers.HTTPFetcher.  get() and post() have been replaced by
+   fetch(), see urljr.fetchers for details.
+
+Upgrading from 1.0
+------------------
+
+The server changed the way it indexes associations in the store, so if
+you're upgrading a server installation, we recommend you clear the old
+records from your store when you do so.  As a consequence, consumers
+will re-establish associations with your server a little sooner than
+they would have otherwise.

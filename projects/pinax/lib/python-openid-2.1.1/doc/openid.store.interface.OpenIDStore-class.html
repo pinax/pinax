@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>openid.store.interface.OpenIDStore</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css"></link>
+</head>
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="openid-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          <a class="navbar" target="_top" href="http://openidenabled.com/python-openid/">Python-OpenID</a>
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <font size="-1"><b class="breadcrumbs">
+        <a href="openid-module.html">Package&nbsp;openid</a> ::
+        <a href="openid.store-module.html">Package&nbsp;store</a> ::
+        <a href="openid.store.interface-module.html">Module&nbsp;interface</a> ::
+        Class&nbsp;OpenIDStore
+      </b></font></br>
+    </td>
+    <td><table cellpadding="0" cellspacing="0">
+      <tr><td align="right"><font size="-2">[<a href="frames.html"target="_top">frames</a>&nbsp;|&nbsp;<a href="openid.store.interface.OpenIDStore-class.html" target="_top">no&nbsp;frames</a>]</font></td></tr>
+    </table></td>
+</tr></table>
+
+<!-- =========== START OF CLASS DESCRIPTION =========== -->
+<h2 class="class">Type OpenIDStore</h2>
+
+<pre class="base-tree">
+<a href="__builtin__.object-class.html"><code>object</code></a> --+
+         |
+        <b>OpenIDStore</b>
+</pre><br />
+
+<dl><dt><b>Known Subclasses:</b></dt>
+<dd>
+    <a href="openid.store.filestore.FileOpenIDStore-class.html"><code>FileOpenIDStore</code></a>,
+    <a href="openid.store.sqlstore.SQLStore-class.html"><code>SQLStore</code></a></dd></dl>
+
+<hr/>
+
+This is the interface for the store objects the OpenID library uses. 
+It is a single class that provides all of the persistence mechanisms that 
+the OpenID library needs, for both servers and consumers.
+<hr/>
+
+
+<!-- =========== START OF METHOD SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Method Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        <code>NoneType</code>
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.store.interface.OpenIDStore-class.html#storeAssociation" class="summary-sig-name"><code>storeAssociation</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>server_url</span>,
+          <span class=summary-sig-arg>association</span>)</span></code>
+<br />
+This method puts a <code><a 
+href="openid.association.Association-class.html" 
+class="link"><code>Association</code></a></code> object into storage, 
+retrievable by server URL and handle.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        <code><a href="openid.association.Association-class.html" 
+        class="link"><code>Association</code></a></code> or 
+        <code>NoneType</code>
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.store.interface.OpenIDStore-class.html#getAssociation" class="summary-sig-name"><code>getAssociation</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>server_url</span>,
+          <span class=summary-sig-arg>handle</span>)</span></code>
+<br />
+This method returns an <code><a 
+href="openid.association.Association-class.html" 
+class="link"><code>Association</code></a></code> object from storage that 
+matches the server URL and, if specified, handle.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        <code>bool</code> or <code>int</code>
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.store.interface.OpenIDStore-class.html#removeAssociation" class="summary-sig-name"><code>removeAssociation</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>server_url</span>,
+          <span class=summary-sig-arg>handle</span>)</span></code>
+<br />
+This method removes the matching association if it's found, and 
+returns whether the association was removed or not.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        <code>bool</code>
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.store.interface.OpenIDStore-class.html#useNonce" class="summary-sig-name"><code>useNonce</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>server_url</span>,
+          <span class=summary-sig-arg>timestamp</span>,
+          <span class=summary-sig-arg>salt</span>)</span></code>
+<br />
+Called when using a nonce.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.store.interface.OpenIDStore-class.html#cleanup" class="summary-sig-name"><code>cleanup</code></a>(<span class=summary-sig-arg>self</span>)</span></code>
+<br />
+Shortcut for <code><a 
+href="openid.store.interface.OpenIDStore-class.html#cleanupNonces" 
+class="link"><code>cleanupNonces</code></a>()</code>, <code><a 
+href="openid.store.interface.OpenIDStore-class.html#cleanupAssociations" 
+class="link"><code>cleanupAssociations</code></a>()</code>.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        int
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.store.interface.OpenIDStore-class.html#cleanupAssociations" class="summary-sig-name"><code>cleanupAssociations</code></a>(<span class=summary-sig-arg>self</span>)</span></code>
+<br />
+Remove expired associations from the store.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        int
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.store.interface.OpenIDStore-class.html#cleanupNonces" class="summary-sig-name"><code>cleanupNonces</code></a>(<span class=summary-sig-arg>self</span>)</span></code>
+<br />
+Remove expired nonces from the store.</td></tr>
+  <tr><td colspan="2">
+    <b>Inherited from <a href="__builtin__.object-class.html"><code>object</code></a>:</b>
+      <a href="__builtin__.object-class.html#__init__"><code>__init__</code></a>, 
+      <a href="__builtin__.object-class.html#__delattr__"><code>__delattr__</code></a>, 
+      <a href="__builtin__.object-class.html#__getattribute__"><code>__getattribute__</code></a>, 
+      <a href="__builtin__.object-class.html#__hash__"><code>__hash__</code></a>, 
+      <a href="__builtin__.object-class.html#__new__"><code>__new__</code></a>, 
+      <a href="__builtin__.object-class.html#__reduce__"><code>__reduce__</code></a>, 
+      <a href="__builtin__.object-class.html#__reduce_ex__"><code>__reduce_ex__</code></a>, 
+      <a href="__builtin__.object-class.html#__repr__"><code>__repr__</code></a>, 
+      <a href="__builtin__.object-class.html#__setattr__"><code>__setattr__</code></a>, 
+      <a href="__builtin__.object-class.html#__str__"><code>__str__</code></a>
+    </td></tr>
+</table><br />
+
+
+<!-- =========== START OF METHOD DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Method Details</th></tr>
+</table>
+
+<a name="storeAssociation"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">storeAssociation</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>server_url</span>,
+          <span class=sig-arg>association</span>)</span>
+  </h3>
+  This method puts a <code><a 
+  href="openid.association.Association-class.html" 
+  class="link"><code>Association</code></a></code> object into storage, 
+  retrievable by server URL and handle.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>server_url</b></code> -
+         The URL of the identity server that this association is with. 
+        Because of the way the server portion of the library uses this 
+        interface, don't assume there are any limitations on the 
+        character set of the input string. In particular, expect to see 
+        unescaped non-url-safe characters in the server_url field.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=<code>str</code>)</i>
+      <dd><code><b>association</b></code> -
+         The <code><a href="openid.association.Association-class.html" 
+        class="link"><code>Association</code></a></code> to store.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=<code><a 
+              href="openid.association.Association-class.html" 
+              class="link"><code>Association</code></a></code>)</i>
+      </dd>
+    </dl>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        <code>None</code>
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=<code>NoneType</code>)</i>
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="getAssociation"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">getAssociation</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>server_url</span>,
+          <span class=sig-arg>handle</span>=<span class=sig-default>None</span>)</span>
+  </h3>
+  <p>This method returns an <code><a 
+  href="openid.association.Association-class.html" 
+  class="link"><code>Association</code></a></code> object from storage 
+  that matches the server URL and, if specified, handle. It returns 
+  <code>None</code> if no such association is found or if the matching 
+  association is expired.</p>
+  <p>If no handle is specified, the store may return any association 
+  which matches the server URL. If multiple associations are valid, the 
+  recommended return value for this method is the one most recently 
+  issued.</p>
+  This method is allowed (and encouraged) to garbage collect expired 
+  associations when found. This method must not return expired 
+  associations.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>server_url</b></code> -
+         The URL of the identity server to get the association for. 
+        Because of the way the server portion of the library uses this 
+        interface, don't assume there are any limitations on the 
+        character set of the input string. In particular, expect to see 
+        unescaped non-url-safe characters in the server_url field.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=<code>str</code>)</i>
+      <dd><code><b>handle</b></code> -
+         This optional parameter is the handle of the specific 
+        association to get. If no specific handle is provided, any valid 
+        association matching the server URL is returned.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=<code>str</code> or <code>NoneType</code>)</i>
+      </dd>
+    </dl>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        The <code><a href="openid.association.Association-class.html" 
+        class="link"><code>Association</code></a></code> for the given 
+        identity server.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=<code><a href="openid.association.Association-class.html" 
+        class="link"><code>Association</code></a></code> or 
+        <code>NoneType</code>)</i>
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="removeAssociation"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">removeAssociation</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>server_url</span>,
+          <span class=sig-arg>handle</span>)</span>
+  </h3>
+  This method removes the matching association if it's found, and 
+  returns whether the association was removed or not.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>server_url</b></code> -
+         The URL of the identity server the association to remove 
+        belongs to. Because of the way the server portion of the library 
+        uses this interface, don't assume there are any limitations on 
+        the character set of the input string. In particular, expect to 
+        see unescaped non-url-safe characters in the server_url 
+        field.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=<code>str</code>)</i>
+      <dd><code><b>handle</b></code> -
+         This is the handle of the association to remove. If there 
+        isn't an association found that matches both the given URL and 
+        handle, then there was no matching handle found.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=<code>str</code>)</i>
+      </dd>
+    </dl>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        Returns whether or not the given association existed.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=<code>bool</code> or <code>int</code>)</i>
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="useNonce"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">useNonce</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>server_url</span>,
+          <span class=sig-arg>timestamp</span>,
+          <span class=sig-arg>salt</span>)</span>
+  </h3>
+  <p>Called when using a nonce.</p>
+  <p>This method should return <code>True</code> if the nonce has not 
+  been used before, and store it for a while to make sure nobody tries to 
+  use the same value again. If the nonce has already been used or the 
+  timestamp is not current, return <code>False</code>.</p>
+  You may use <code>openid.store.nonce.SKEW</code> for your timestamp 
+  window.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>server_url</b></code> -
+         The URL of the server from which the nonce originated.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=<code>str</code>)</i>
+      <dd><code><b>timestamp</b></code> -
+         The time that the nonce was created (to the nearest second), 
+        in seconds since January 1 1970 UTC.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=<code>int</code>)</i>
+      <dd><code><b>salt</b></code> -
+         A random string that makes two nonces from the same server 
+        issued during the same second unique.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=str)</i>
+      </dd>
+    </dl>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        Whether or not the nonce was valid.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=<code>bool</code>)</i>
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="cleanup"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">cleanup</span>(<span class=sig-arg>self</span>)</span>
+  </h3>
+  <p>Shortcut for <code><a 
+  href="openid.store.interface.OpenIDStore-class.html#cleanupNonces" 
+  class="link"><code>cleanupNonces</code></a>()</code>, <code><a 
+  href="openid.store.interface.OpenIDStore-class.html#cleanupAssociations" 
+  class="link"><code>cleanupAssociations</code></a>()</code>.</p>
+  This method is not called in the normal operation of the library. It 
+  provides a way for store admins to keep their storage from filling up 
+  with expired data.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="cleanupAssociations"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">cleanupAssociations</span>(<span class=sig-arg>self</span>)</span>
+  </h3>
+  <p>Remove expired associations from the store.</p>
+  This method is not called in the normal operation of the library. It 
+  provides a way for store admins to keep their storage from filling up 
+  with expired data.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        the number of associations expired.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=int)</i>
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="cleanupNonces"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">cleanupNonces</span>(<span class=sig-arg>self</span>)</span>
+  </h3>
+  <p>Remove expired nonces from the store.</p>
+  <p>Discards any nonce from storage that is old enough that its 
+  timestamp would not pass <a 
+  href="openid.store.interface.OpenIDStore-class.html#useNonce" 
+  class="link"><code>useNonce</code></a>.</p>
+  This method is not called in the normal operation of the library. It 
+  provides a way for store admins to keep their storage from filling up 
+  with expired data.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        the number of nonces expired.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=int)</i>
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+<br />
+
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="openid-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          <a class="navbar" target="_top" href="http://openidenabled.com/python-openid/">Python-OpenID</a>
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td align="left"><font size="-2">Generated by Epydoc 2.1 on Fri Dec 14 16:10:52 2007</font></td>
+    <td align="right"><a href="http://epydoc.sourceforge.net"
+                      ><font size="-2">http://epydoc.sf.net</font></a></td>
+  </tr>
+</table>
+</body>
+</html>

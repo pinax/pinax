@@ -1,0 +1,121 @@
+<html>
+  <head>
+    <title>Django OpenID Example Consumer</title>
+    <style type="text/css">
+    div.message {
+        background: #9f9;
+        padding: 0.5em;
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+        border: 1px solid #555;
+        font-weight: bold;
+    }
+
+    div.error {
+        background: #f99;
+        padding: 0.5em;
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+        border: 1px solid #555;
+        font-weight: bold;
+    }
+
+    div.box {
+        background: #eee;
+        border: 1px solid black;
+        padding: 1em;
+    }
+    </style>
+  </head>
+  <body>
+
+  <div class="box">
+
+  <p>
+    This is an example consumer built for the Django framework.  Enter
+    an OpenID in the box below.
+  </p>
+
+  {% if error %}
+    <div class="error">{{ error|escape }}</div>
+  {% endif %}
+
+  {% if url %}
+    <div class="message">
+      OpenID authentication succeeded; you authenticated as
+        <a href="{{ url }}">{{ url|escape }}</a>.
+
+      <p>
+      {% if sreg %}
+        Simple Registration data returned:
+
+        <ul>
+        {% for pair in sreg %}
+          <li>{{ pair.0 }}: {{ pair.1 }}</li>
+        {% endfor %}
+        </ul>
+      {% else %}
+        The server returned no Simple Registration data.
+      {% endif %}
+
+      {% if pape %}
+
+        {% if pape.auth_policies %}
+          An authentication policy response contained these policies:
+
+          <ul>
+          {% for uri in pape.auth_policies %}
+            <li><tt>{{ uri }}</tt></li>
+          {% endfor %}
+          </ul>
+        {% else %}
+          An authentication policy response was returned, but no
+          policies were enforced by the server.
+        {% endif %}
+      {% else %}
+        The server returned no authentication policy data (PAPE).
+      {% endif %}
+      </p>
+    </div>
+  {% endif %}
+
+  {% if message %}
+    <div class="message">
+      {{ message|escape }}
+    </div>
+  {% endif %}
+
+  {% if failure_reason %}
+    <div class="error">
+      {{ failure_reason|escape }}
+    </div>
+  {% endif %}
+
+  <form method="post" action="{{ consumer_url }}">
+    <input type="text" size="40" name="openid_identifier" />
+
+    <p>
+    Request these authentication policies
+      (<a href="http://openid.net/specs/openid-provider-authentication-policy-extension-1_0-01.html">PAPE</a>):
+
+    <table>
+      {% for pair in pape_policies %}
+      <tr>
+        <td><input type="checkbox" name="policy_{{ pair.0 }}" id="id_policy_{{ pair.0 }}" /></td>
+        <td>
+          <label for="id_policy_{{ pair.0 }}"><tt>
+            {{ pair.1 }}
+          </tt></label>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+    </p>
+
+    <input type="submit" value="Begin" />
+  </form>
+
+  </div>
+
+  </body>
+</html>

@@ -1,0 +1,96 @@
+Background association requests
+###############################
+
+This document describes how to make signing in with OpenID faster for
+users of your application by never making the users wait for an
+association to be made, but using associations when they're
+available. Most OpenID libraries and applications attempt to make
+associations during the discovery phase of the OpenID authentication
+request. Because association requests may have to do Diffie-Hellman
+key exchange, which is time consuming. Even if Diffie-Hellman key
+exchange is not used, the user still needs to wait for the association
+request.
+
+Setting up your application to make associations in the background
+==================================================================
+
+When making associations background, there are two components that
+need access to the OpenID association store: the consumer application
+and the background association fetcher. The consumer needs to be set
+up to record the server URL for any request for which an association
+does not exist or is expired instead of making a new association. The
+background fetcher looks at the server URL queue and makes
+associations for any server URLs that need them. After the
+associations are made, the consumer will use them until they expire
+again. While associations are expired or missing, the consumer will
+use stateless mode to complete authentications with the servers that
+need associations.
+
+The OpenID server endpoint URL queue
+-----------------------------------------------------------------
+
+You will have to set up a conduit between the consumer and the
+background association fetcher so that the background association
+fetcher knows what servers need associations. The background
+association fetcher will not fetch associations for servers that
+already have them, so the queue does not have to be very smart. It
+could be as simple as a file to which the server URLs are
+appended. Either way, the queue needs to be write-able by the consumer
+and readable by the background fetcher.
+
+Configuring the consumer
+-----------------------------------------------------------------
+
+Create a subclass of ``GenericConsumer`` that overrides
+``_negotiateAssociation`` so that it just records the server URL that
+needs an association::
+
+  from openid.consumer.consumer import GenericConsumer, Consumer
+
+  class LazyAssociationConsumer(GenericConsumer):
+      needs_assoc_file = None
+
+      def _negotiateAssociation(self, endpoint):
+          # Do whatever you need to do here to send the server_url to
+          # the queue. This example just appends it to a file.
+          self.needs_assoc_file.write(endpoint.server_url + '\n')
+          self.needs_assoc_file.flush()
+
+You could also store the whole endpoint object. When you instantiate
+the consumer, pass this generic consumer class to the controlling
+consumer::
+
+  return Consumer(session, store, consumer_class=LazyAssociationConsumer)
+
+The background association fetcher
+-----------------------------------------------------------------
+
+The background association fetcher is just a script that should be
+added to ``cron`` or triggered periodically. If you are ambitious, you
+could make the background fetcher listen for inserts into the queue.
+
+The background fetcher needs to do something similar to the following::
+
+  def refresh(consumer, endpoint):
+      if consumer.store.getAssociation(endpoint.server_url):
+          logging.info("We don't need to associate with %r", endpoint.server_url)
+          return
+
+      logging.info("Associating with %r", endpoint.server_url)
+      now = time.time()
+      assoc = consumer._negotiateAssociation(endpoint)
+      if assoc:
+          elapsed = time.time() - now
+          logging.info('(%0.2f seconds) Associated with %r', elapsed,
+                       endpoint.server_url)
+          consumer.store.storeAssociation(endpoint.server_url, assoc)
+      else:
+          logging.error('Failed to make an association with %r',
+                        endpoint.server_url)
+
+The code in this example logs the amount of time that the association
+request took. This is time that the user would have been waiting. The
+``consumer`` in this example is a standard consumer, not the
+``LazyAssociationConsumer`` that was defined in the section
+above. This is important, because the lazy consumer above will not
+actually make any associations.

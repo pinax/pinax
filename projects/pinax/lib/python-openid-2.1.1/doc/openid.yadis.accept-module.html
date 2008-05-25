@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>openid.yadis.accept</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css"></link>
+</head>
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="openid-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          <a class="navbar" target="_top" href="http://openidenabled.com/python-openid/">Python-OpenID</a>
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <font size="-1"><b class="breadcrumbs">
+        <a href="openid-module.html">Package&nbsp;openid</a> ::
+        <a href="openid.yadis-module.html">Package&nbsp;yadis</a> ::
+        Module&nbsp;accept
+      </b></font></br>
+    </td>
+    <td><table cellpadding="0" cellspacing="0">
+      <tr><td align="right"><font size="-2">[<a href="frames.html"target="_top">frames</a>&nbsp;|&nbsp;<a href="openid.yadis.accept-module.html" target="_top">no&nbsp;frames</a>]</font></td></tr>
+    </table></td>
+</tr></table>
+
+<!-- =========== START OF MODULE DESCRIPTION =========== -->
+<h2 class="module">Module openid.yadis.accept</h2>
+
+Functions for generating and parsing HTTP Accept: headers for 
+supporting server-directed content negotiation.
+<hr/>
+
+<!-- =========== START OF FUNCTION SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Function Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.yadis.accept-module.html#generateAcceptHeader" class="summary-sig-name"><code>generateAcceptHeader</code></a>(<span class="summary-sig-vararg">*elements</span>)</span></code>
+<br />
+Generate an accept header value</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.yadis.accept-module.html#getAcceptable" class="summary-sig-name"><code>getAcceptable</code></a>(<span class=summary-sig-arg>accept_header</span>,
+          <span class=summary-sig-arg>have_types</span>)</span></code>
+<br />
+Parse the accept header and return a list of available types in 
+preferred order.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.yadis.accept-module.html#matchTypes" class="summary-sig-name"><code>matchTypes</code></a>(<span class=summary-sig-arg>accept_types</span>,
+          <span class=summary-sig-arg>have_types</span>)</span></code>
+<br />
+Given the result of parsing an Accept: header, and the available MIME 
+types, return the acceptable types with their quality markdowns.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.yadis.accept-module.html#parseAcceptHeader" class="summary-sig-name"><code>parseAcceptHeader</code></a>(<span class=summary-sig-arg>value</span>)</span></code>
+<br />
+Parse an accept header, ignoring any accept-extensions</td></tr>
+</table><br />
+
+
+<!-- =========== START OF FUNCTION DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Function Details</th></tr>
+</table>
+
+<a name="generateAcceptHeader"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">generateAcceptHeader</span>(<span class="sig-vararg">*elements</span>)</span>
+  </h3>
+  <p>Generate an accept header value</p>
+  [str or (str, float)] -&gt; str
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="getAcceptable"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">getAcceptable</span>(<span class=sig-arg>accept_header</span>,
+          <span class=sig-arg>have_types</span>)</span>
+  </h3>
+  <p>Parse the accept header and return a list of available types in 
+  preferred order. If a type is unacceptable, it will not be in the 
+  resulting list.</p>
+  <p>This is a convenience wrapper around matchTypes and 
+  parseAcceptHeader.</p>
+  (str, [str]) -&gt; [str]
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="matchTypes"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">matchTypes</span>(<span class=sig-arg>accept_types</span>,
+          <span class=sig-arg>have_types</span>)</span>
+  </h3>
+  <p>Given the result of parsing an Accept: header, and the available 
+  MIME types, return the acceptable types with their quality 
+  markdowns.</p>
+  For example:
+<pre class="doctestblock">
+<span class="py-src"><span class="py-prompt">&gt;&gt;&gt; </span>acceptable = parseAcceptHeader(<span class="py-string">'text/html, text/plain; q=0.5'</span>)
+<span class="py-prompt">&gt;&gt;&gt; </span>matchTypes(acceptable, [<span class="py-string">'text/plain'</span>, <span class="py-string">'text/html'</span>, <span class="py-string">'image/jpeg'</span>])</span>
+<span class="py-output">[('text/html', 1.0), ('text/plain', 0.5)]</span></pre>
+  Type signature: ([(str, str, float)], [str]) -&gt; [(str, 
+  float)]
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="parseAcceptHeader"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">parseAcceptHeader</span>(<span class=sig-arg>value</span>)</span>
+  </h3>
+  <p>Parse an accept header, ignoring any accept-extensions</p>
+  <p>returns a list of tuples containing main MIME type, MIME subtype, 
+  and quality markdown.</p>
+  str -&gt; [(str, str, float)]
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+<br />
+
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="openid-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          <a class="navbar" target="_top" href="http://openidenabled.com/python-openid/">Python-OpenID</a>
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td align="left"><font size="-2">Generated by Epydoc 2.1 on Fri Dec 14 16:10:52 2007</font></td>
+    <td align="right"><a href="http://epydoc.sourceforge.net"
+                      ><font size="-2">http://epydoc.sf.net</font></a></td>
+  </tr>
+</table>
+</body>
+</html>

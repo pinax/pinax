@@ -1,0 +1,7 @@
+#!/bin/bash
+
+rm -rf doc/*
+epydoc --html --output doc/ --name "Python-OpenID" --top openid \
+    --url "http://openidenabled.com/python-openid/" --inheritance listed \
+    --no-private -v \
+    $( find openid -name '*.py' -and -not -path 'openid/test*' )

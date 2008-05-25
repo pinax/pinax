@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>openid.server.server</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css"></link>
+</head>
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="openid-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          <a class="navbar" target="_top" href="http://openidenabled.com/python-openid/">Python-OpenID</a>
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <font size="-1"><b class="breadcrumbs">
+        <a href="openid-module.html">Package&nbsp;openid</a> ::
+        <a href="openid.server-module.html">Package&nbsp;server</a> ::
+        Module&nbsp;server
+      </b></font></br>
+    </td>
+    <td><table cellpadding="0" cellspacing="0">
+      <tr><td align="right"><font size="-2">[<a href="frames.html"target="_top">frames</a>&nbsp;|&nbsp;<a href="openid.server.server-module.html" target="_top">no&nbsp;frames</a>]</font></td></tr>
+    </table></td>
+</tr></table>
+
+<!-- =========== START OF MODULE DESCRIPTION =========== -->
+<h2 class="module">Module openid.server.server</h2>
+
+OpenID server protocol and logic.
+<h1 class="heading">Overview</h1>
+  An OpenID server must perform three tasks:
+  <ol start="1">
+    <li>
+      Examine the incoming request to determine its nature and 
+      validity.
+    </li>
+    <li>
+      Make a decision about how to respond to this request.
+    </li>
+    <li>
+      Format the response according to the protocol.
+    </li>
+  </ol>
+  <p>The first and last of these tasks may performed by the <a 
+  href="openid.server.server.Server-class.html#decodeRequest" 
+  class="link"><code>decodeRequest</code></a> and <a 
+  href="openid.server.server.Server-class.html#encodeResponse" 
+  class="link"><code>encodeResponse</code></a> methods of the <a 
+  href="openid.server.server.Server-class.html" 
+  class="link"><code>Server</code></a> object. Who gets to do the 
+  intermediate task -- deciding how to respond to the request -- will 
+  depend on what type of request it is.</p>
+  <p>If it's a request to authenticate a user (a <a 
+  name="index-checkid_setup"></a><i 
+  class="indexterm"><code>checkid_setup</code></i> or <a 
+  name="index-checkid_immediate"></a><i 
+  class="indexterm"><code>checkid_immediate</code></i> request), you need 
+  to decide if you will assert that this user may claim the identity in 
+  question. Exactly how you do that is a matter of application policy, 
+  but it generally involves making sure the user has an account with your 
+  system and is logged in, checking to see if that identity is hers to 
+  claim, and verifying with the user that she does consent to releasing 
+  that information to the party making the request.</p>
+  <p>Examine the properties of the <a 
+  href="openid.server.server.CheckIDRequest-class.html" 
+  class="link"><code>CheckIDRequest</code></a> object, optionally check 
+  <a 
+  href="openid.server.server.CheckIDRequest-class.html#returnToVerified" 
+  class="link"><code>CheckIDRequest.returnToVerified</code></a>, and and 
+  when you've come to a decision, form a response by calling <a 
+  href="openid.server.server.CheckIDRequest-class.html#answer" 
+  class="link"><code>CheckIDRequest.answer</code></a>.</p>
+  Other types of requests relate to establishing associations between 
+  client and server and verifying the authenticity of previous 
+  communications. <a href="openid.server.server.Server-class.html" 
+  class="link"><code>Server</code></a> contains all the logic and data 
+  necessary to respond to such requests; just pass the request to <a 
+  href="openid.server.server.Server-class.html#handleRequest" 
+  class="link"><code>Server.handleRequest</code></a>.
+<h1 class="heading">OpenID Extensions</h1>
+  <p>Do you want to provide other information for your users in addition 
+  to authentication? Version 2.0 of the OpenID protocol allows consumers 
+  to add extensions to their requests. For example, with sites using the 
+  <a 
+  href="http://openid.net/specs/openid-simple-registration-extension-1_0.html">Simple 
+  Registration Extension</a>, a user can agree to have their nickname and 
+  e-mail address sent to a site when they sign up.</p>
+  <p>Since extensions do not change the way OpenID authentication works, 
+  code to handle extension requests may be completely separate from the 
+  <a href="openid.server.server.OpenIDRequest-class.html" 
+  class="link"><code>OpenIDRequest</code></a> class here. But you'll 
+  likely want data sent back by your extension to be signed. <a 
+  href="openid.server.server.OpenIDResponse-class.html" 
+  class="link"><code>OpenIDResponse</code></a> provides methods with 
+  which you can add data to it which can be signed with the other data in 
+  the OpenID signature.</p>
+  For example:
+<pre class="literalblock">
+   # when request is a checkid_* request
+   response = request.answer(True)
+   # this will a signed 'openid.sreg.timezone' parameter to the response
+   # as well as a namespace declaration for the openid.sreg namespace
+   response.fields.setArg('http://openid.net/sreg/1.0', 'timezone', 'America/Los_Angeles')
+</pre>
+  There are helper modules for a number of extensions, including <a 
+  href="openid.extensions.ax-module.html" class="link"><code>Attribute 
+  Exchange</code></a>, <a href="openid.extensions.pape-module.html" 
+  class="link"><code>PAPE</code></a>, and <a 
+  href="openid.extensions.sreg-module.html" class="link"><code>Simple 
+  Registration</code></a> in the <a href="openid.extensions-module.html" 
+  class="link"><code>openid.extensions</code></a> package.
+<h1 class="heading">Stores</h1>
+  The OpenID server needs to maintain state between requests in order 
+  to function. Its mechanism for doing this is called a store. The store 
+  interface is defined in <code><a 
+  href="openid.store.interface.OpenIDStore-class.html" 
+  class="link"><code>openid.store.interface.OpenIDStore</code></a></code>. 
+  Additionally, several concrete store implementations are provided, so 
+  that most sites won't need to implement a custom store. For a store 
+  backed by flat files on disk, see <code><a 
+  href="openid.store.filestore.FileOpenIDStore-class.html" 
+  class="link"><code>openid.store.filestore.FileOpenIDStore</code></a></code>. 
+  For stores based on MySQL or SQLite, see the <code><a 
+  href="openid.store.sqlstore-module.html" 
+  class="link"><code>openid.store.sqlstore</code></a></code> module.
+<h1 class="heading">Upgrading</h1>
+  <h2 class="heading">From 1.0 to 1.1</h2>
+    The keys by which a server looks up associations in its store have 
+    changed in version 1.2 of this library. If your store has entries 
+    created from version 1.0 code, you should empty it.
+  <h2 class="heading">From 1.1 to 2.0</h2>
+    <p>One of the additions to the OpenID protocol was a specified nonce 
+    format for one-way nonces. As a result, the nonce table in the store 
+    has changed. You'll need to run contrib/upgrade-store-1.1-to-2.0 to 
+    upgrade your store, or you'll encounter errors about the wrong number 
+    of columns in the oid_nonces table.</p>
+    If you've written your own custom store or code that interacts 
+    directly with it, you'll need to review the change notes in <a 
+    href="openid.store.interface-module.html" 
+    class="link"><code>openid.store.interface</code></a>.
+<hr/>
+
+<!-- =========== START OF CLASSES =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Classes</th></tr>
+<tr><td width="15%">
+  <b><a href="openid.server.server.Decoder-class.html"><code>Decoder</code></a></b></td>
+  <td>I decode an incoming web request in to a <a 
+href="openid.server.server.OpenIDRequest-class.html" 
+class="link"><code>OpenIDRequest</code></a>.</td></tr>
+<tr><td width="15%">
+  <b><a href="openid.server.server.DiffieHellmanSHA1ServerSession-class.html"><code>DiffieHellmanSHA1ServerSession</code></a></b></td>
+  <td>An object that knows how to handle association requests with the 
+Diffie-Hellman session type.</td></tr>
+<tr><td width="15%">
+  <b><a href="openid.server.server.DiffieHellmanSHA256ServerSession-class.html"><code>DiffieHellmanSHA256ServerSession</code></a></b></td>
+  <td>&nbsp;</td></tr>
+<tr><td width="15%">
+  <b><a href="openid.server.server.Encoder-class.html"><code>Encoder</code></a></b></td>
+  <td>I encode responses in to <a 
+href="openid.server.server.WebResponse-class.html" 
+class="link"><code>WebResponses</code></a>.</td></tr>
+<tr><td width="15%">
+  <b><a href="openid.server.server.PlainTextServerSession-class.html"><code>PlainTextServerSession</code></a></b></td>
+  <td>An object that knows how to handle association requests with no 
+session type.</td></tr>
+<tr><td width="15%">
+  <b><a href="openid.server.server.Server-class.html"><code>Server</code></a></b></td>
+  <td>I handle requests for an OpenID server.</td></tr>
+<tr><td width="15%">
+  <b><a href="openid.server.server.Signatory-class.html"><code>Signatory</code></a></b></td>
+  <td>I sign things.</td></tr>
+<tr><td width="15%">
+  <b><a href="openid.server.server.SigningEncoder-class.html"><code>SigningEncoder</code></a></b></td>
+  <td>I encode responses in to <a 
+href="openid.server.server.WebResponse-class.html" 
+class="link"><code>WebResponses</code></a>, signing them when 
+required.</td></tr>
+<tr><td width="15%">
+  <b><a href="openid.server.server.WebResponse-class.html"><code>WebResponse</code></a></b></td>
+  <td>I am a response to an OpenID request in terms a web server 
+understands.</td></tr>
+<tr bgcolor="#e8f0f8" class="group">
+  <th colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;Requests</th></tr>
+<tr><td width="15%">
+  <b><a href="openid.server.server.OpenIDRequest-class.html"><code>OpenIDRequest</code></a></b></td>
+  <td>I represent an incoming OpenID request.</td></tr>
+<tr><td width="15%">
+  <b><a href="openid.server.server.AssociateRequest-class.html"><code>AssociateRequest</code></a></b></td>
+  <td>A request to establish an <a name="index-association"></a><i 
+class="indexterm">association</i>.</td></tr>
+<tr><td width="15%">
+  <b><a href="openid.server.server.CheckIDRequest-class.html"><code>CheckIDRequest</code></a></b></td>
+  <td>A request to confirm the identity of a user.</td></tr>
+<tr><td width="15%">
+  <b><a href="openid.server.server.CheckAuthRequest-class.html"><code>CheckAuthRequest</code></a></b></td>
+  <td>A request to verify the validity of a previous response.</td></tr>
+<tr bgcolor="#e8f0f8" class="group">
+  <th colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;Responses</th></tr>
+<tr><td width="15%">
+  <b><a href="openid.server.server.OpenIDResponse-class.html"><code>OpenIDResponse</code></a></b></td>
+  <td>I am a response to an OpenID request.</td></tr>
+</table><br />
+
+
+<!-- =========== START OF EXCEPTIONS =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Exceptions</th></tr>
+<tr><td width="15%">
+  <b><a href="openid.server.server.AlreadySigned-class.html"><code>AlreadySigned</code></a></b></td>
+  <td>This response is already signed.</td></tr>
+<tr><td width="15%">
+  <b><a href="openid.server.server.EncodingError-class.html"><code>EncodingError</code></a></b></td>
+  <td>Could not encode this as a protocol message.</td></tr>
+<tr><td width="15%">
+  <b><a href="openid.server.server.MalformedReturnURL-class.html"><code>MalformedReturnURL</code></a></b></td>
+  <td>The return_to URL doesn't look like a valid URL.</td></tr>
+<tr><td width="15%">
+  <b><a href="openid.server.server.MalformedTrustRoot-class.html"><code>MalformedTrustRoot</code></a></b></td>
+  <td>The trust root is not well-formed.</td></tr>
+<tr><td width="15%">
+  <b><a href="openid.server.server.NoReturnToError-class.html"><code>NoReturnToError</code></a></b></td>
+  <td>Raised when a response to a request cannot be generated because the 
+request contains no return_to URL.</td></tr>
+<tr><td width="15%">
+  <b><a href="openid.server.server.ProtocolError-class.html"><code>ProtocolError</code></a></b></td>
+  <td>A message did not conform to the OpenID protocol.</td></tr>
+<tr><td width="15%">
+  <b><a href="openid.server.server.UntrustedReturnURL-class.html"><code>UntrustedReturnURL</code></a></b></td>
+  <td>A return_to is outside the trust_root.</td></tr>
+<tr><td width="15%">
+  <b><a href="openid.server.server.VersionError-class.html"><code>VersionError</code></a></b></td>
+  <td>Raised when an operation was attempted that is not compatible with the 
+protocol version being used.</td></tr>
+</table><br />
+
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="openid-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          <a class="navbar" target="_top" href="http://openidenabled.com/python-openid/">Python-OpenID</a>
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td align="left"><font size="-2">Generated by Epydoc 2.1 on Fri Dec 14 16:10:52 2007</font></td>
+    <td align="right"><a href="http://epydoc.sourceforge.net"
+                      ><font size="-2">http://epydoc.sf.net</font></a></td>
+  </tr>
+</table>
+</body>
+</html>

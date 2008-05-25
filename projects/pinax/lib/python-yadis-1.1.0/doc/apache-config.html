@@ -1,0 +1,478 @@
+<html>
+  <head>
+    <title>Configuring a YADIS URL using only Apache</title>
+    <style type="text/css">
+      body {
+          max-width: 50em;
+      }
+      .expected {
+          color: red;
+      }
+      .comment {
+          color: red;
+      }
+      .configuration {
+          border: 1px solid black;
+          padding: 1em;
+          background: #ffe;
+      }
+      .literal {
+          color: #000099;
+          font-weight: bold;
+      }
+      dd {
+          margin-bottom: 1em;
+      }
+      dl {
+          margin-bottom: 2em;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Configuring a YADIS URL using only Apache</h1>
+
+    <p>
+      This document describes how to support YADIS service discovery
+      using only Apache configuration. This is desirable because it
+      makes your YADIS identity URL faster and more reliable to use,
+      and it doesn't require running any code on your server.
+    </p>
+
+    <h2>Quick start</h2>
+
+    <p>
+      If you are a quick study at configuring Apache, you can get your
+      identity URL configured by:
+    </p>
+
+    <ol>
+      <li>
+        Create your YADIS services document. If you don't know how,
+        look for documentation on <a
+        href="http://openidenabled.com/">openidenabled.com</a>.
+      </li>
+
+      <li>
+        Make sure <code>mod_rewrite</code>,
+        <code>mod_negotiation</code>, and <code>mod_headers</code> are
+        enabled in your server-level configuration, and that
+        <code>RewriteEngine On</code> appears in your server-level
+        (not just <code>.htaccess</code>) configuration.
+      </li>
+
+      <li>
+        Download the <code><a href="htaccess.txt">.htaccess</a></code>
+        and <a href="identity.txt">type map</a> files.
+      </li>
+
+      <li>
+        Edit the <code>.htaccess</code> and type map files to match
+        your server configuration. The type map file should be where
+        you want your identity URL to be.
+      </li>
+    </ol>
+
+    <h2>Apache configuration</h2>
+
+    <p>
+      This configuration is for <a
+        href="http://httpd.apache.org/docs/2.0/">Apache 2.0</a>. It
+      has not been tested, but this configuration should also work
+      for Apache 1.3 and 2.2.
+    </p>
+
+    <p>
+      The configuration for the identity URL is achieved using
+      <code>.htaccess</code> directives using the standard Apache
+      modules <code><a
+      href="http://httpd.apache.org/docs/2.0/mod/mod_negotiation.html"
+      >mod_negotiation</a></code> and <code><a
+      href="http://httpd.apache.org/docs/2.0/mod/mod_headers.html"
+      >mod_headers</a></code>.
+      These directives will also work with some small changes if they
+      are put in a <code>&lt;Directory&gt;</code> section of the server-level
+      configuration. Experiment and have fun.
+    </p>
+
+    <h3>Server-level configuration</h3>
+
+    <p>
+      There are minimal server-level requirements for the
+      configuration described here. Most of the configuration is in a
+      <code>.htaccess</code> file. For this configuration to work, you
+      need configuration like the following:
+    </p>
+
+    <pre class="configuration">
+<span class="comment"># Change the paths to match your server configuration.</span>
+LoadModule headers_module <span class="literal">/usr/lib/apache2/modules/mod_headers.so</span>
+LoadModule rewrite_module <span class="literal">/usr/lib/apache2/modules/mod_rewrite.so</span>
+
+RewriteEngine On</pre>
+
+    <p>
+      <code>mod_negotiation</code> is compiled into most Apache
+      configurations by default, but make sure that it's enabled.
+    </p>
+
+    <h3>Directory-level configuration</h3>
+
+    <p>This directory contains the following files:</p>
+
+    <dl>
+      <dt><code><a href="identity.txt">identity</a></code></dt>
+
+      <dd>
+        The mod_negotiation type-map file that instructs the Web
+        server when to return the HTML document and when to return the
+        YADIS services document.
+      </dd>
+
+      <dt><code><a href="htaccess.txt">.htaccess</a></code></dt>
+
+      <dd>
+        The Apache configuration directives to support YADIS
+        efficiently.
+      </dd>
+
+      <dt><code><a href="home.html">home.html</a></code></dt>
+
+      <dd>
+        This document. The content that will be returned for non-YADIS
+        HTTP requests to this URL.
+      </dd>
+
+      <dt><code><a href="yadis.xml">yadis.xml</a></code></dt>
+
+      <dd>
+        The YADIS services document.
+      </dd>
+    </dl>
+
+    <p>The following (relative) URLs will be served by Apache:</p>
+
+    <dl>
+      <dt><code>identity</code></dt>
+      <dd>The identity URL</dd>
+
+      <dt><code>yadis.xml</code></dt>
+      <dd>The YADIS services document</dd>
+    </dl>
+
+
+
+    <h3>Adding the X-YADIS-Location header</h3>
+
+    <p>
+      Adding a header is trivially supported by the <a
+      href="http://httpd.apache.org/docs/2.0/mod/mod_headers.html#header"
+      >Header directive</a>. The scope of the directive is set to only
+      the URL that is to be used as the identity.
+    </p>
+
+    <p>The directive is as follows:</p>
+
+    <pre class="configuration">
+&lt;Files <span class="literal">identity_url_content_name</span>&gt;
+    <span class="comment"># Add the X-YADIS-Location header to the response if the response
+    # is a 200</span>
+    Header onsuccess set <span class="literal">X-YADIS-Location</span> <span class="literal">http://my-web-site.example.com/yadis.xml</span>
+&lt;/Files&gt;</pre>
+
+    <p>
+      At this point, the URL can be used as an identity URL by any
+      compliant relying party, with no further configuration. The
+      content negotiation step is an optimization that will make it
+      faster to use your identity URL, but can be omitted.
+    </p>
+
+    <p>
+      If you are using only this configuration, then
+      <code>identity_url_content_name</code> is the file that you want
+      to be served for your identity URL. For other configurations,
+      read on.
+    </p>
+
+
+
+    <h3>Setting the content type for the YADIS services document</h3>
+
+    <p>
+      The YADIS services document is of type
+      <code>application/xrds+xml</code>. In order for content
+      negotiation to work, the content type must be set correctly in
+      the HTTP response headers. It is also a good idea to set the
+      content type even if you are not using content negotiation so
+      that the client knows how to treat the file in general.
+    </p>
+
+    <p>
+      We force apache to use the correct content type with this
+      configuration:
+    </p>
+
+    <pre class="configuration">
+&lt;Files <span class="literal">yadis.xml</span>&gt;
+    <span class="comment"># Make sure that Apache serves the YADIS services document as the
+    # correct content-type.</span>
+    ForceType <span class="literal">application/xrds+xml</span>
+&lt;/Files&gt;</pre>
+
+
+
+    <h3>Using content negotiation</h3>
+
+    <p>
+      If you are using content negotiation, you will need to create an
+      Apache type-map file indicating the locations of the documents
+      to use when different content-types are requested. There are two
+      requirements for using this system with YADIS. First, any
+      content that is returned that is not a YADIS services document
+      must have the X-YADIS-Location header set. Second, the YADIS
+      services document must be returned with the proper content-type.
+    </p>
+
+    <p>
+      Those requirements are taken care of by the preceeding two
+      configuration snippets, so all that is left is to set up the
+      type map.
+    </p>
+
+    <p>
+      The simplest usable type map is a file with the following contents:
+    </p>
+
+    <pre class="configuration">
+Content-Type: application/xrds+xml; qs=0.8
+URI: <span class="literal">yadis.xml</span>
+
+Content-Type: */*; qs=0.9
+URI: <span class="literal">identity_url_content_name</span></pre>
+
+    <p>
+      To use this type-map, you need to put the file in your directory
+      and tell apache that it is a type-map:
+    </p>
+
+    <pre class="configuration">
+&lt;Files <span class="literal">type_map_name</span>&gt;
+    <span class="comment"># Tell apache that this file is a type-map that should be handled
+    # by mod_negotiation</span>
+    SetHandler <span class="literal">type-map</span>
+&lt;/Files&gt;</pre>
+
+    <p>
+      In this configuration, <code>identity_url_content_name</code>
+      should be the file that contains the <em>content</em> that you
+      want displayed for regular requests for your identity URL and
+      <code>type_map_name</code> should be the name that you want to
+      use for your identity URL.
+    </p>
+
+    <p>
+      There is one more wrinkle. Because the content must be available
+      to Apache and the type-map also points to the same URL
+      internally, there are now <em>two</em> URLs that are usable as
+      identity URLs. This is OK, but to reduce confusion, there is one
+      more configuration trick in the file. This trick makes direct
+      requests for the content URL to redirect to the identity URL:
+    </p>
+
+    <pre class="configuration">
+<span class="comment"># Don't allow direct access to the .html file, so that there's no
+# confusion about which one is the idenity URL. This redirect means
+# that no matter which of the direct content URL or the desired
+# identity URL is entered, only the desired identity URL will be used
+# by YADIS consumers.</span>
+RewriteEngine On
+
+<span class="comment"># In order for this test to succeed, RewriteEngine must be turned On
+# in the site-wide apache configuration. Unless it is, the SCRIPT_URL
+# variable will not be set.</span>
+RewriteCond <span class="literal">"%{ENV:SCRIPT_URL}"</span> <span class="literal">"^server_relative_content_url$"</span>
+
+<span class="comment"># Redirect requests for the non-YADIS content to the identity URL.</span>
+RewriteRule <span class="literal">"^server_relative_content_url$"</span> <span class="literal">"server_relative_identity_url"</span> [R,L]</pre>
+
+    <h2>Testing your configuration</h2>
+
+    <p>
+      You can test your configuration with any tool that will retrieve
+      a URL and show you redirects and headers. We used <code><a
+      href="http://www.gnu.org/software/wget/wget.html">wget</a></code>.
+    </p>
+
+    <h3>Check the content type of your YADIS services document</h3>
+
+    <p>
+      Retrieve the YADIS services document and make sure that the
+      response has the correct <code>Content-Type</code> header.
+    </p>
+
+    <pre class="configuration">
+$ <strong>wget -S http://openidenabled.com/yadis-test/apache/yadis.xml</strong>
+--14:12:50--  http://openidenabled.com/yadis-test/apache/yadis.xml
+           =&gt; `yadis.xml'
+Resolving openidenabled.com... 67.137.230.70
+Connecting to openidenabled.com|67.137.230.70|:80... connected.
+HTTP request sent, awaiting response...
+  HTTP/1.1 200 OK
+  Date: Wed, 07 Dec 2005 22:12:50 GMT
+  Server: Apache/2.0.54 (Debian GNU/Linux)
+  Last-Modified: Wed, 07 Dec 2005 19:46:48 GMT
+  ETag: "f0074-130-69a95a00"
+  Accept-Ranges: bytes
+  Content-Length: 304
+  Keep-Alive: timeout=15, max=100
+  Connection: Keep-Alive
+  <strong class="expected">Content-Type: application/xrds+xml</strong>
+Length: 304 [application/xrds+xml]
+
+100%[====================================&gt;] 304           --.--K/s
+
+14:12:50 (10.74 MB/s) - `yadis.xml' saved [304/304]</pre>
+
+    <p>
+      Make sure that the <code>Content-Type</code> header is set to
+      <code>application/xrds+xml</code>.
+    </p>
+
+    <h3>Check the presence of the YADIS location header</h3>
+
+    <p>
+      Retrieve the identity URL and make sure that the header pointing
+      to the YADIS services document is correct.
+    </p>
+
+    <pre class="configuration">
+$ <strong>wget -S http://openidenabled.com/yadis-test/apache/identity</strong>
+--14:16:41--  http://openidenabled.com/yadis-test/apache/identity
+           =&gt; `identity'
+Resolving openidenabled.com... 67.137.230.70
+Connecting to openidenabled.com|67.137.230.70|:80... connected.
+HTTP request sent, awaiting response...
+  HTTP/1.1 200 OK
+  Date: Wed, 07 Dec 2005 22:16:41 GMT
+  Server: Apache/2.0.54 (Debian GNU/Linux)
+  Content-Location: home.html
+  Vary: negotiate,accept
+  TCN: choice
+  Last-Modified: Wed, 07 Dec 2005 21:56:26 GMT
+  ETag: "f0079-1eeb-39443680;f0077-64-3a93e800"
+  Accept-Ranges: bytes
+  Content-Length: 7915
+  <strong class="expected">X-YADIS-Location: http://openidenabled.com/yadis-test/apache/yadis.xml</strong>
+  Keep-Alive: timeout=15, max=100
+  Connection: Keep-Alive
+  Content-Type: text/html
+  Expires: Wed, 07 Dec 2005 22:16:41 GMT
+Length: 7,915 (7.7K) [text/html]
+
+100%[====================================&gt;] 7,915         --.--K/s
+
+14:16:41 (85.98 KB/s) - `identity' saved [7915/7915]</pre>
+
+    <p>
+      Check to see that the <code>X-YADIS-Location</code> header is
+      present and contains the URL to your YADIS services document.
+    </p>
+
+    <h3>Check the content URL redirect</h3>
+
+    <p>
+      Retrieve the content URL and look for a redirect to the identity
+      URL.
+    </p>
+
+    <pre class="configuration">
+$ <strong>wget -S http://openidenabled.com/yadis-test/apache/home.html</strong>
+--14:20:35--  http://openidenabled.com/yadis-test/apache/home.html
+           =&gt; `home.html'
+Resolving openidenabled.com... 67.137.230.70
+Connecting to openidenabled.com|67.137.230.70|:80... connected.
+HTTP request sent, awaiting response...
+  <strong class="expected">HTTP/1.1 302 Found</strong>
+  Date: Wed, 07 Dec 2005 22:20:35 GMT
+  Server: Apache/2.0.54 (Debian GNU/Linux)
+  <strong class="expected">Location: http://openidenabled.com/yadis-test/apache/identity</strong>
+  Content-Length: 235
+  Keep-Alive: timeout=15, max=100
+  Connection: Keep-Alive
+  Content-Type: text/html; charset=iso-8859-1
+Location: http://openidenabled.com/yadis-test/apache/identity [following]
+--14:20:35--  http://openidenabled.com/yadis-test/apache/identity
+           =&gt; `identity'
+Reusing existing connection to openidenabled.com:80.
+HTTP request sent, awaiting response...
+  HTTP/1.1 200 OK
+  Date: Wed, 07 Dec 2005 22:20:35 GMT
+  Server: Apache/2.0.54 (Debian GNU/Linux)
+  Content-Location: home.html
+  Vary: negotiate,accept
+  TCN: choice
+  Last-Modified: Wed, 07 Dec 2005 21:56:26 GMT
+  ETag: "f0079-1eeb-39443680;f0077-64-3a93e800"
+  Accept-Ranges: bytes
+  Content-Length: 7915
+  <strong class="expected">X-YADIS-Location: http://openidenabled.com/yadis-test/apache/yadis.xml</strong>
+  Keep-Alive: timeout=15, max=99
+  Connection: Keep-Alive
+  Content-Type: text/html
+  Expires: Wed, 07 Dec 2005 22:20:35 GMT
+Length: 7,915 (7.7K) [text/html]
+
+100%[====================================&gt;] 7,915         40.82K/s
+
+14:20:35 (40.72 KB/s) - `identity' saved [7915/7915]</pre>
+
+    <p>
+      Check that there is a redirect to your identity URL and that the
+      redirected URL has the YADIS header present.
+    </p>
+
+    <h3>Check to be sure content negotiation is working</h3>
+
+    <p>
+      Retrieve the identity URL with an <code>Accept</code> header
+      that indicates a preference for
+      <code>application/xrds+xml</code>.
+    </p>
+
+    <pre class="configuration">
+$ <strong>wget --header="Accept: application/xrds+xml; q=1, text/html; q=0.9" \
+-S http://openidenabled.com/yadis-test/apache/identity</strong>
+--14:25:45--  http://openidenabled.com/yadis-test/apache/identity
+           => `identity'
+Resolving openidenabled.com... 67.137.230.70
+Connecting to openidenabled.com|67.137.230.70|:80... connected.
+HTTP request sent, awaiting response...
+  HTTP/1.1 200 OK
+  Date: Wed, 07 Dec 2005 22:25:45 GMT
+  Server: Apache/2.0.54 (Debian GNU/Linux)
+  <strong class="expected">Content-Location: yadis.xml</strong>
+  Vary: negotiate,accept
+  TCN: choice
+  Last-Modified: Wed, 07 Dec 2005 19:46:48 GMT
+  ETag: "f0074-130-69a95a00;f0077-64-3a93e800"
+  Accept-Ranges: bytes
+  Content-Length: 304
+  Keep-Alive: timeout=15, max=100
+  Connection: Keep-Alive
+  <strong class="expected">Content-Type: application/xrds+xml</strong>
+  Expires: Wed, 07 Dec 2005 22:25:45 GMT
+Length: 304 [application/xrds+xml]
+
+100%[====================================>] 304           --.--K/s
+
+14:25:45 (10.74 MB/s) - `identity' saved [304/304]</pre>
+
+    <p>
+      Check that the <code>Content-Type</code> is
+      <code>application/xrds+xml</code>. Also look at the contents of
+      the file to make sure that it contains the XRDS file.
+    </p>
+
+    <hr />
+    <p>Copyright (c) 2005 JanRain, Inc.</p>
+  </body>
+</html>

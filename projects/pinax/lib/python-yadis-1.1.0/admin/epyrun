@@ -1,0 +1,17 @@
+#!/bin/sh
+ADMINDIR=$( dirname $0 )
+
+cd $ADMINDIR/..
+
+case "$1" in
+    check)
+        epydoc --check yadis
+        ;;
+    *)
+        epydoc \
+            --output doc/api \
+            --name 'Python-Yadis' \
+            --url 'http://www.openidenabled.com/yadis/' \
+            yadis
+        ;;
+esac

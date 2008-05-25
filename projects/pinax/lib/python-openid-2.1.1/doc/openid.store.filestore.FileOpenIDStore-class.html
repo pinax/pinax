@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>openid.store.filestore.FileOpenIDStore</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css"></link>
+</head>
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="openid-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          <a class="navbar" target="_top" href="http://openidenabled.com/python-openid/">Python-OpenID</a>
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <font size="-1"><b class="breadcrumbs">
+        <a href="openid-module.html">Package&nbsp;openid</a> ::
+        <a href="openid.store-module.html">Package&nbsp;store</a> ::
+        <a href="openid.store.filestore-module.html">Module&nbsp;filestore</a> ::
+        Class&nbsp;FileOpenIDStore
+      </b></font></br>
+    </td>
+    <td><table cellpadding="0" cellspacing="0">
+      <tr><td align="right"><font size="-2">[<a href="frames.html"target="_top">frames</a>&nbsp;|&nbsp;<a href="openid.store.filestore.FileOpenIDStore-class.html" target="_top">no&nbsp;frames</a>]</font></td></tr>
+    </table></td>
+</tr></table>
+
+<!-- =========== START OF CLASS DESCRIPTION =========== -->
+<h2 class="class">Type FileOpenIDStore</h2>
+
+<pre class="base-tree">
+ <a href="__builtin__.object-class.html"><code>object</code></a> --+    
+          |    
+<a href="openid.store.interface.OpenIDStore-class.html"><code>OpenIDStore</code></a> --+
+              |
+             <b>FileOpenIDStore</b>
+</pre><br />
+
+<hr/>
+
+<p>This is a filesystem-based store for OpenID associations and nonces. 
+This store should be safe for use in concurrent systems on both windows 
+and unix (excluding NFS filesystems). There are a couple race conditions 
+in the system, but those failure cases have been set up in such a way 
+that the worst-case behavior is someone having to try to log in a second 
+time.</p>
+<p>Most of the methods of this class are implementation details. People 
+wishing to just use this store need only pay attention to the <code><a 
+href="openid.store.filestore.FileOpenIDStore-class.html#__init__" 
+class="link"><code>__init__</code></a></code> method.</p>
+Methods of this object can raise OSError if unexpected filesystem 
+conditions, such as bad permissions or missing directories, occur.
+<hr/>
+
+
+<!-- =========== START OF METHOD SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Method Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.store.filestore.FileOpenIDStore-class.html#__init__" class="summary-sig-name"><code>__init__</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>directory</span>)</span></code>
+<br />
+Initializes a new FileOpenIDStore.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.store.filestore.FileOpenIDStore-class.html#cleanup" class="summary-sig-name"><code>cleanup</code></a>(<span class=summary-sig-arg>self</span>)</span></code>
+<br />
+Remove expired entries from the database.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        int
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.store.filestore.FileOpenIDStore-class.html#cleanupAssociations" class="summary-sig-name"><code>cleanupAssociations</code></a>(<span class=summary-sig-arg>self</span>)</span></code>
+<br />
+Remove expired associations from the store.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        int
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.store.filestore.FileOpenIDStore-class.html#cleanupNonces" class="summary-sig-name"><code>cleanupNonces</code></a>(<span class=summary-sig-arg>self</span>)</span></code>
+<br />
+Remove expired nonces from the store.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.store.filestore.FileOpenIDStore-class.html#getAssociation" class="summary-sig-name"><code>getAssociation</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>server_url</span>,
+          <span class=summary-sig-arg>handle</span>)</span></code>
+<br />
+Retrieve an association.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.store.filestore.FileOpenIDStore-class.html#getAssociationFilename" class="summary-sig-name"><code>getAssociationFilename</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>server_url</span>,
+          <span class=summary-sig-arg>handle</span>)</span></code>
+<br />
+Create a unique filename for a given server url and handle.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.store.filestore.FileOpenIDStore-class.html#removeAssociation" class="summary-sig-name"><code>removeAssociation</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>server_url</span>,
+          <span class=summary-sig-arg>handle</span>)</span></code>
+<br />
+Remove an association if it exists.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.store.filestore.FileOpenIDStore-class.html#storeAssociation" class="summary-sig-name"><code>storeAssociation</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>server_url</span>,
+          <span class=summary-sig-arg>association</span>)</span></code>
+<br />
+Store an association in the association directory.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.store.filestore.FileOpenIDStore-class.html#useNonce" class="summary-sig-name"><code>useNonce</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>server_url</span>,
+          <span class=summary-sig-arg>timestamp</span>,
+          <span class=summary-sig-arg>salt</span>)</span></code>
+<br />
+Return whether this nonce is valid.</td></tr>
+  <tr><td colspan="2">
+    <b>Inherited from <a href="__builtin__.object-class.html"><code>object</code></a>:</b>
+      <a href="__builtin__.object-class.html#__delattr__"><code>__delattr__</code></a>, 
+      <a href="__builtin__.object-class.html#__getattribute__"><code>__getattribute__</code></a>, 
+      <a href="__builtin__.object-class.html#__hash__"><code>__hash__</code></a>, 
+      <a href="__builtin__.object-class.html#__new__"><code>__new__</code></a>, 
+      <a href="__builtin__.object-class.html#__reduce__"><code>__reduce__</code></a>, 
+      <a href="__builtin__.object-class.html#__reduce_ex__"><code>__reduce_ex__</code></a>, 
+      <a href="__builtin__.object-class.html#__repr__"><code>__repr__</code></a>, 
+      <a href="__builtin__.object-class.html#__setattr__"><code>__setattr__</code></a>, 
+      <a href="__builtin__.object-class.html#__str__"><code>__str__</code></a>
+    </td></tr>
+</table><br />
+
+
+<!-- =========== START OF METHOD DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Method Details</th></tr>
+</table>
+
+<a name="__init__"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">__init__</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>directory</span>)</span>
+    <br /><i>(Constructor)</i>
+  </h3>
+  Initializes a new FileOpenIDStore. This initializes the nonce and 
+  association directories, which are subdirectories of the directory 
+  passed in.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>directory</b></code> -
+         This is the directory to put the store directories in.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=<code>str</code>)</i>
+      </dd>
+    </dl>
+    <dl><dt><b>Overrides:</b></dt>
+      <dd><a href="__builtin__.object-class.html#__init__"><code>__builtin__.object.__init__</code></a></dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="cleanup"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">cleanup</span>(<span class=sig-arg>self</span>)</span>
+  </h3>
+  <p>Remove expired entries from the database. This is potentially 
+  expensive, so only run when it is acceptable to take time.</p>
+  () -&gt; NoneType
+  <dl><dt></dt><dd>
+    <dl><dt><b>Overrides:</b></dt>
+      <dd><a href="openid.store.interface.OpenIDStore-class.html#cleanup"><code>openid.store.interface.OpenIDStore.cleanup</code></a></dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="cleanupAssociations"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">cleanupAssociations</span>(<span class=sig-arg>self</span>)</span>
+  </h3>
+  <p>Remove expired associations from the store.</p>
+  This method is not called in the normal operation of the library. It 
+  provides a way for store admins to keep their storage from filling up 
+  with expired data.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        the number of associations expired.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=int)</i>
+      </dd>
+    </dl>
+    <dl><dt><b>Overrides:</b></dt>
+      <dd><a href="openid.store.interface.OpenIDStore-class.html#cleanupAssociations"><code>openid.store.interface.OpenIDStore.cleanupAssociations</code></a> <i>(inherited documentation)</i>
+</dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="cleanupNonces"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">cleanupNonces</span>(<span class=sig-arg>self</span>)</span>
+  </h3>
+  <p>Remove expired nonces from the store.</p>
+  <p>Discards any nonce from storage that is old enough that its 
+  timestamp would not pass <a 
+  href="openid.store.interface.OpenIDStore-class.html#useNonce" 
+  class="link"><code>useNonce</code></a>.</p>
+  This method is not called in the normal operation of the library. It 
+  provides a way for store admins to keep their storage from filling up 
+  with expired data.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        the number of nonces expired.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=int)</i>
+      </dd>
+    </dl>
+    <dl><dt><b>Overrides:</b></dt>
+      <dd><a href="openid.store.interface.OpenIDStore-class.html#cleanupNonces"><code>openid.store.interface.OpenIDStore.cleanupNonces</code></a> <i>(inherited documentation)</i>
+</dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="getAssociation"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">getAssociation</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>server_url</span>,
+          <span class=sig-arg>handle</span>=<span class=sig-default>None</span>)</span>
+  </h3>
+  <p>Retrieve an association. If no handle is specified, return the 
+  association with the latest expiration.</p>
+  (str, str or NoneType) -&gt; Association or NoneType
+  <dl><dt></dt><dd>
+    <dl><dt><b>Overrides:</b></dt>
+      <dd><a href="openid.store.interface.OpenIDStore-class.html#getAssociation"><code>openid.store.interface.OpenIDStore.getAssociation</code></a></dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="getAssociationFilename"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">getAssociationFilename</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>server_url</span>,
+          <span class=sig-arg>handle</span>)</span>
+  </h3>
+  <p>Create a unique filename for a given server url and handle. This 
+  implementation does not assume anything about the format of the handle. 
+  The filename that is returned will contain the domain name from the 
+  server URL for ease of human inspection of the data directory.</p>
+  (str, str) -&gt; str
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="removeAssociation"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">removeAssociation</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>server_url</span>,
+          <span class=sig-arg>handle</span>)</span>
+  </h3>
+  <p>Remove an association if it exists. Do nothing if it does not.</p>
+  (str, str) -&gt; bool
+  <dl><dt></dt><dd>
+    <dl><dt><b>Overrides:</b></dt>
+      <dd><a href="openid.store.interface.OpenIDStore-class.html#removeAssociation"><code>openid.store.interface.OpenIDStore.removeAssociation</code></a></dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="storeAssociation"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">storeAssociation</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>server_url</span>,
+          <span class=sig-arg>association</span>)</span>
+  </h3>
+  <p>Store an association in the association directory.</p>
+  (str, Association) -&gt; NoneType
+  <dl><dt></dt><dd>
+    <dl><dt><b>Overrides:</b></dt>
+      <dd><a href="openid.store.interface.OpenIDStore-class.html#storeAssociation"><code>openid.store.interface.OpenIDStore.storeAssociation</code></a></dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="useNonce"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">useNonce</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>server_url</span>,
+          <span class=sig-arg>timestamp</span>,
+          <span class=sig-arg>salt</span>)</span>
+  </h3>
+  <p>Return whether this nonce is valid.</p>
+  str -&gt; bool
+  <dl><dt></dt><dd>
+    <dl><dt><b>Overrides:</b></dt>
+      <dd><a href="openid.store.interface.OpenIDStore-class.html#useNonce"><code>openid.store.interface.OpenIDStore.useNonce</code></a></dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+<br />
+
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="openid-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          <a class="navbar" target="_top" href="http://openidenabled.com/python-openid/">Python-OpenID</a>
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td align="left"><font size="-2">Generated by Epydoc 2.1 on Fri Dec 14 16:10:53 2007</font></td>
+    <td align="right"><a href="http://epydoc.sourceforge.net"
+                      ><font size="-2">http://epydoc.sf.net</font></a></td>
+  </tr>
+</table>
+</body>
+</html>

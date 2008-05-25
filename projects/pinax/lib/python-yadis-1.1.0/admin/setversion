@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+cat <<EOF | \
+    xargs sed -i 's/\[library version:[^]]*\]/[library version:'"$1"']/'
+setup.py
+yadis/__init__.py
+EOF

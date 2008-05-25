@@ -1,0 +1,616 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>yadis.xri</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="yadis-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.openidenabled.com/yadis/">Python-Yadis</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="yadis-module.html">Package&nbsp;yadis</a> ::
+        Module&nbsp;xri
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="yadis.xri-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module xri</h1><span class="codelink"><a href="yadis.xri-pysrc.html">source&nbsp;code</a></span><br /><br />
+Utility functions for handling XRIs.<br /><br />
+
+<hr />
+      <p><strong>See Also:</strong>
+        XRI Syntax v2.0 at the <a 
+        href="http://www.oasis-open.org/committees/tc_home.php?wg_abbrev=xri"
+        target="_top">OASIS XRI Technical Committee</a>
+      </p>
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <span class="summary-sig"><a href="yadis.xri-module.html#identifierScheme" class="summary-sig-name">identifierScheme</a>(<span class="summary-sig-arg">identifier</span>)</span><br />
+      Determine if this identifier is an XRI or URI.
+  </td>
+</tr>
+<tr>
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <span class="summary-sig"><a href="yadis.xri-module.html#toIRINormal" class="summary-sig-name">toIRINormal</a>(<span class="summary-sig-arg">xri</span>)</span><br />
+      Transform an XRI to IRI-normal form.
+  </td>
+</tr>
+<tr class="private">
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <span class="summary-sig"><a href="yadis.xri-module.html#_escape_xref" class="summary-sig-name">_escape_xref</a>(<span class="summary-sig-arg">xref_match</span>)</span><br />
+      Escape things that need to be escaped if they're in a 
+      cross-reference.
+  </td>
+</tr>
+<tr>
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <span class="summary-sig"><a href="yadis.xri-module.html#escapeForIRI" class="summary-sig-name">escapeForIRI</a>(<span class="summary-sig-arg">xri</span>)</span><br />
+      Escape things that need to be escaped when transforming to an 
+      IRI.
+  </td>
+</tr>
+<tr>
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <span class="summary-sig"><a href="yadis.xri-module.html#toURINormal" class="summary-sig-name">toURINormal</a>(<span class="summary-sig-arg">xri</span>)</span><br />
+      Transform an XRI to URI normal form.
+  </td>
+</tr>
+<tr class="private">
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <span class="summary-sig"><a href="yadis.xri-module.html#_percentEscapeUnicode" class="summary-sig-name">_percentEscapeUnicode</a>(<span class="summary-sig-arg">char_match</span>)</span>
+  </td>
+</tr>
+<tr>
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <span class="summary-sig"><a href="yadis.xri-module.html#iriToURI" class="summary-sig-name">iriToURI</a>(<span class="summary-sig-arg">iri</span>)</span><br />
+      Transform an IRI to a URI by escaping unicode.
+  </td>
+</tr>
+<tr>
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">bool</span>
+  </td><td class="summary">
+    <span class="summary-sig"><a href="yadis.xri-module.html#providerIsAuthoritative" class="summary-sig-name">providerIsAuthoritative</a>(<span class="summary-sig-arg">providerID</span>,
+        <span class="summary-sig-arg">canonicalID</span>)</span><br />
+      Is this provider ID authoritative for this XRI?
+  </td>
+</tr>
+<tr>
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">unicode</span>
+  </td><td class="summary">
+    <span class="summary-sig"><a href="yadis.xri-module.html#rootAuthority" class="summary-sig-name">rootAuthority</a>(<span class="summary-sig-arg">xri</span>)</span><br />
+      Return the root authority for an XRI.
+  </td>
+</tr>
+<tr>
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <span class="summary-sig"><a href="yadis.xri-module.html#XRI" class="summary-sig-name">XRI</a>(<span class="summary-sig-arg">xri</span>)</span><br />
+      An XRI object allowing comparison of XRI.
+  </td>
+</tr>
+</table>
+
+<br />
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <a href="yadis.xri-module.html#XRI_AUTHORITIES">XRI_AUTHORITIES</a> = <code title="['!', '=', '@', '+', '$', '(']">['!', '=', '@', '+', '$', '(']</code>
+  </td>
+</tr>
+<tr>
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <a href="yadis.xri-module.html#UCSCHAR">UCSCHAR</a> = <code title="[(160, 55295), (63744, 64975), (65008, 65519), (65536, 131069), (131072, 196605), (196608, 262141), (262144, 327677), (327680, 393213), (393216, 458749), (458752, 524285), (524288, 589821), (589824, 655357), (655360, 720893), (720896, 786429), (786432, 851965), (851968, 917501), (921600, 983037)]">[(160, 55295), (63744, 64975), (65008, 65519), (6553...</code>
+  </td>
+</tr>
+<tr>
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <a href="yadis.xri-module.html#IPRIVATE">IPRIVATE</a> = <code title="[(57344, 63743), (983040, 1048573), (1048576, 1114109)]">[(57344, 63743), (983040, 1048573), (1048576, 1114109)]</code>
+  </td>
+</tr>
+<tr class="private">
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <a href="yadis.xri-module.html#_escapeme_re">_escapeme_re</a> = <code title="&lt;_sre.SRE_Pattern object at 0x8383430&gt;">&lt;_sre.SRE_Pattern object at 0x8383430&gt;</code>
+  </td>
+</tr>
+<tr class="private">
+  <td width="15%" align="right" valign="top" class="summary">
+    <span class="summary-type">&nbsp;</span>
+  </td><td class="summary">
+    <a href="yadis.xri-module.html#_xref_re">_xref_re</a> = <code title="&lt;_sre.SRE_Pattern object at 0xb7cfff50&gt;">&lt;_sre.SRE_Pattern object at 0xb7cfff50&gt;</code>
+  </td>
+</tr>
+</table>
+
+<br />
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="identifierScheme"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">identifierScheme</span>(<span class="sig-arg">identifier</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="yadis.xri-pysrc.html#identifierScheme">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </table>
+  
+  <br />Determine if this identifier is an XRI or URI.
+  <dl><dt></dt><dd>
+    <dl><dt>Returns:</dt>
+        <dd><code>&quot;XRI&quot;</code> or 
+          <code>&quot;URI&quot;</code></dd></dl>
+  </dd></dl>
+</td></tr></table>
+</div>
+<a name="toIRINormal"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">toIRINormal</span>(<span class="sig-arg">xri</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="yadis.xri-pysrc.html#toIRINormal">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </table>
+  
+  <br />Transform an XRI to IRI-normal form.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+</div>
+<a name="_escape_xref"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_escape_xref</span>(<span class="sig-arg">xref_match</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="yadis.xri-pysrc.html#_escape_xref">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </table>
+  
+  <br />Escape things that need to be escaped if they're in a 
+  cross-reference.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+</div>
+<a name="escapeForIRI"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">escapeForIRI</span>(<span class="sig-arg">xri</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="yadis.xri-pysrc.html#escapeForIRI">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </table>
+  
+  <br />Escape things that need to be escaped when transforming to an IRI.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+</div>
+<a name="toURINormal"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">toURINormal</span>(<span class="sig-arg">xri</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="yadis.xri-pysrc.html#toURINormal">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </table>
+  
+  <br />Transform an XRI to URI normal form.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+</div>
+<a name="_percentEscapeUnicode"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_percentEscapeUnicode</span>(<span class="sig-arg">char_match</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="yadis.xri-pysrc.html#_percentEscapeUnicode">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </table>
+  
+  
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+</div>
+<a name="iriToURI"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">iriToURI</span>(<span class="sig-arg">iri</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="yadis.xri-pysrc.html#iriToURI">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </table>
+  
+  <br />Transform an IRI to a URI by escaping unicode.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+</div>
+<a name="providerIsAuthoritative"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">providerIsAuthoritative</span>(<span class="sig-arg">providerID</span>,
+        <span class="sig-arg">canonicalID</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="yadis.xri-pysrc.html#providerIsAuthoritative">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </table>
+  
+  <br />Is this provider ID authoritative for this XRI?
+  <dl><dt></dt><dd>
+    <dl><dt>Returns: bool</dt></dl>
+  </dd></dl>
+</td></tr></table>
+</div>
+<a name="rootAuthority"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">rootAuthority</span>(<span class="sig-arg">xri</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="yadis.xri-pysrc.html#rootAuthority">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </table>
+  
+  <br /><p>Return the root authority for an XRI.</p>
+  Example:
+<pre class="literalblock">
+   rootAuthority(&quot;xri://@example&quot;) == &quot;xri://@&quot;
+</pre>
+  <dl><dt></dt><dd>
+    <dl><dt>Returns: unicode</dt></dl>
+  </dd></dl>
+</td></tr></table>
+</div>
+<a name="XRI"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">XRI</span>(<span class="sig-arg">xri</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="yadis.xri-pysrc.html#XRI">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </table>
+  
+  <br /><p>An XRI object allowing comparison of XRI.</p>
+  Ideally, this would do full normalization and provide comparsion 
+  operators as per XRI Syntax.  Right now, it just does a bit of 
+  canonicalization by ensuring the xri scheme is present.
+  <dl><dt></dt><dd>
+    <dl><dt>Parameters:</dt></dl>
+    <ul class="nomargin">
+        <li><strong class="pname"><code>xri</code></strong> (unicode) - an xri string</li>
+    </ul>
+  </dd></dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== VARIABLES DETAILS ==================== -->
+<a name="section-VariablesDetails"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-VariablesDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="XRI_AUTHORITIES"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">XRI_AUTHORITIES</h3>
+  
+  <dl><dt></dt><dd>
+    <dl><dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+['!', '=', '@', '+', '$', '(']                                         
+      </pre></td></tr></table></dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+</div>
+<a name="UCSCHAR"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">UCSCHAR</h3>
+  
+  <dl><dt></dt><dd>
+    <dl><dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+[(160, 55295),
+ (63744, 64975),
+ (65008, 65519),
+ (65536, 131069),
+ (131072, 196605),
+ (196608, 262141),
+ (262144, 327677),
+ (327680, 393213),
+<span class="variable-ellipsis">...</span>                                                                    
+      </pre></td></tr></table></dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+</div>
+<a name="IPRIVATE"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">IPRIVATE</h3>
+  
+  <dl><dt></dt><dd>
+    <dl><dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+[(57344, 63743), (983040, 1048573), (1048576, 1114109)]                
+      </pre></td></tr></table></dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+</div>
+<a name="_escapeme_re"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">_escapeme_re</h3>
+  
+  <dl><dt></dt><dd>
+    <dl><dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<span class="re"><span class="re-group">[</span><span class="re-char">\u00a0</span><span class="re-group">-</span><span class="re-char">\ud7ff</span><span class="re-char">\uf900</span><span class="re-group">-</span><span class="re-char">\ufdcf</span><span class="re-char">\ufdf0</span><span class="re-group">-</span><span class="re-char">\uffef</span><span class="re-char">\u10000</span><span class="re-group">-</span><span class="re-char">\u1fffd</span><span class="re-char">\u20000</span><span class="re-group">-</span><span class="re-char">\u2fffd<span class="variable-linewrap"><img src="crarr.png" alt="" /></span>
+</span><span class="re-char">\u30000</span><span class="re-group">-</span><span class="re-char">\u3fffd</span><span class="re-char">\u40000</span><span class="re-group">-</span><span class="re-char">\u4fffd</span><span class="re-char">\u50000</span><span class="re-group">-</span><span class="re-char">\u5fffd</span><span class="re-char">\u60000</span><span class="re-group">-</span><span class="re-char">\u6fffd</span><span class="re-char">\u70000</span><span class="re-group">-</span><span class="re-char">\u<span class="variable-linewrap"><img src="crarr.png" alt="" /></span>
+7fffd</span><span class="re-char">\u80000</span><span class="re-group">-</span><span class="re-char">\u8fffd</span><span class="re-char">\u90000</span><span class="re-group">-</span><span class="re-char">\u9fffd</span><span class="re-char">\ua0000</span><span class="re-group">-</span><span class="re-char">\uafffd</span><span class="re-char">\ub0000</span><span class="re-group">-</span><span class="re-char">\ubfffd</span><span class="re-char">\uc00<span class="variable-linewrap"><img src="crarr.png" alt="" /></span>
+00</span><span class="re-group">-</span><span class="re-char">\ucfffd</span><span class="re-char">\ud0000</span><span class="re-group">-</span><span class="re-char">\udfffd</span><span class="re-char">\ue1000</span><span class="re-group">-</span><span class="re-char">\uefffd</span><span class="re-char">\ue000</span><span class="re-group">-</span><span class="re-char">\uf8ff</span><span class="re-char">\uf0000</span><span class="re-group">-</span><span class="re-char">\uffffd</span><span class="re-char">\u<span class="variable-linewrap"><img src="crarr.png" alt="" /></span>
+100000</span><span class="re-group">-</span><span class="re-char">\u10fffd</span><span class="re-group">]</span></span>                                                       
+      </pre></td></tr></table></dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+</div>
+<a name="_xref_re"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">_xref_re</h3>
+  
+  <dl><dt></dt><dd>
+    <dl><dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<span class="re"><span class="re-char">\(</span><span class="re-group">(</span><span class="re-char">.</span><span class="re-op">*?</span><span class="re-group">)</span><span class="re-char">\)</span></span>                                                              
+      </pre></td></tr></table></dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="yadis-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.openidenabled.com/yadis/">Python-Yadis</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">Generated by Epydoc
+        3.0alpha3 on Fri Dec  8 13:17:17 2006</td>
+    <td align="right" class="footer">
+      <a href="http://epydoc.sourceforge.net">http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie()
+  // -->
+</script>
+  
+</body>
+</html>

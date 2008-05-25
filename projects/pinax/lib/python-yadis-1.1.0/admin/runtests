@@ -1,0 +1,33 @@
+#!/bin/bash
+
+ADMINDIR=$(dirname $0)
+YDIR=${ADMINDIR}/..
+
+declare -i errorcode=0
+
+if which pyflakes >> /dev/null; then
+    echo -n 'Checking code (pyflakes)... '
+    if pyflakes ${YDIR}/yadis; then
+        echo OK.
+    else
+        echo "Failed."
+        errorcode=$errorcode+1
+    fi
+else
+    echo 'Install pyflakes. http://divmod.org/trac/wiki/DivmodPyflakes'
+fi
+
+if [[ $1 != "darcs" ]] ; then
+    echo 'Checking docs... '
+    if ! ${ADMINDIR}/epyrun check; then
+        # Who knows?  Epydoc --check doesn't modify the return code.
+        errorcode=$errorcode+2
+    fi
+fi
+
+echo -n 'Running tests... '
+if ! python ${YDIR}/yadis/test/runtests ; then
+   errorcode=$errorcode+4
+fi
+
+exit $errorcode

@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>yadis.accept</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="yadis-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.openidenabled.com/yadis/">Python-Yadis</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="yadis-module.html">Package&nbsp;yadis</a> ::
+        Module&nbsp;accept
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="yadis.accept-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="yadis.accept-module.html">Module yadis.accept</a></h1>
+<pre class="py-src">
+<tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-docstring">"""Functions for generating and parsing HTTP Accept: headers for</tt> </tt>
+<tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-docstring">supporting server-directed content negotiation.</tt> </tt>
+<tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<tt class="py-lineno">  4</tt>  <tt class="py-line"> </tt>
+<a name="generateAcceptHeader"></a><div id="generateAcceptHeader-def"><tt class="py-lineno">  5</tt> <a class="py-toggle" href="#" id="generateAcceptHeader-toggle" onclick="return toggle('generateAcceptHeader');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.accept-module.html#generateAcceptHeader">generateAcceptHeader</a><tt class="py-op">(</tt><tt class="py-op">*</tt><tt class="py-param">elements</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="generateAcceptHeader-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="generateAcceptHeader-expanded"><tt class="py-lineno">  6</tt>  <tt class="py-line">    <tt class="py-docstring">"""Generate an accept header value</tt> </tt>
+<tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-docstring">    [str or (str, float)] -&gt; str</tt> </tt>
+<tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<tt class="py-lineno"> 10</tt>  <tt class="py-line">    <tt class="py-name">parts</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<tt class="py-lineno"> 11</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">element</tt> <tt class="py-keyword">in</tt> <tt class="py-name">elements</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 12</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">type</tt><tt class="py-op">(</tt><tt class="py-name">element</tt><tt class="py-op">)</tt> <tt class="py-keyword">is</tt> <tt class="py-name">str</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 13</tt>  <tt class="py-line">            <tt class="py-name">qs</tt> <tt class="py-op">=</tt> <tt class="py-string">"1.0"</tt> </tt>
+<tt class="py-lineno"> 14</tt>  <tt class="py-line">            <tt class="py-name">mtype</tt> <tt class="py-op">=</tt> <tt class="py-name">element</tt> </tt>
+<tt class="py-lineno"> 15</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 16</tt>  <tt class="py-line">            <tt class="py-name">mtype</tt><tt class="py-op">,</tt> <tt class="py-name">q</tt> <tt class="py-op">=</tt> <tt class="py-name">element</tt> </tt>
+<tt class="py-lineno"> 17</tt>  <tt class="py-line">            <tt class="py-name">q</tt> <tt class="py-op">=</tt> <tt class="py-name">float</tt><tt class="py-op">(</tt><tt class="py-name">q</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 18</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">q</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">1</tt> <tt class="py-keyword">or</tt> <tt class="py-name">q</tt> <tt class="py-op">&lt;=</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 19</tt>  <tt class="py-line">                <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">'Invalid preference factor: %r'</tt> <tt class="py-op">%</tt> <tt class="py-name">q</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 20</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 21</tt>  <tt class="py-line">            <tt class="py-name">qs</tt> <tt class="py-op">=</tt> <tt class="py-string">'%0.1f'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">q</tt><tt class="py-op">,</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 22</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 23</tt>  <tt class="py-line">        <tt class="py-name">parts</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">qs</tt><tt class="py-op">,</tt> <tt class="py-name">mtype</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 24</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 25</tt>  <tt class="py-line">    <tt class="py-name">parts</tt><tt class="py-op">.</tt><tt class="py-name">sort</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 26</tt>  <tt class="py-line">    <tt class="py-name">chunks</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<tt class="py-lineno"> 27</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">q</tt><tt class="py-op">,</tt> <tt class="py-name">mtype</tt> <tt class="py-keyword">in</tt> <tt class="py-name">parts</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 28</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">q</tt> <tt class="py-op">==</tt> <tt class="py-string">'1.0'</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 29</tt>  <tt class="py-line">            <tt class="py-name">chunks</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">mtype</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 30</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 31</tt>  <tt class="py-line">            <tt class="py-name">chunks</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-string">'%s; q=%s'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">mtype</tt><tt class="py-op">,</tt> <tt class="py-name">q</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 32</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 33</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-string">', '</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">chunks</tt><tt class="py-op">)</tt> </tt>
+</div><tt class="py-lineno"> 34</tt>  <tt class="py-line"> </tt>
+<a name="parseAcceptHeader"></a><div id="parseAcceptHeader-def"><tt class="py-lineno"> 35</tt> <a class="py-toggle" href="#" id="parseAcceptHeader-toggle" onclick="return toggle('parseAcceptHeader');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.accept-module.html#parseAcceptHeader">parseAcceptHeader</a><tt class="py-op">(</tt><tt class="py-param">value</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="parseAcceptHeader-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="parseAcceptHeader-expanded"><tt class="py-lineno"> 36</tt>  <tt class="py-line">    <tt class="py-docstring">"""Parse an accept header, ignoring any accept-extensions</tt> </tt>
+<tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt class="py-docstring">    returns a list of tuples containing main MIME type, MIME subtype,</tt> </tt>
+<tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-docstring">    and quality markdown.</tt> </tt>
+<tt class="py-lineno"> 40</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno"> 41</tt>  <tt class="py-line"><tt class="py-docstring">    str -&gt; [(str, str, float)]</tt> </tt>
+<tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<tt class="py-lineno"> 43</tt>  <tt class="py-line">    <tt class="py-name">chunks</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt id="link-0" class="py-name" targets="Function yadis.test.test_accept.chunk()=yadis.test.test_accept-module.html#chunk"><a title="yadis.test.test_accept.chunk" class="py-name" href="#" onclick="return doclink('link-0', 'chunk', 'link-0');">chunk</a></tt></tt><tt class="py-op">.</tt><tt class="py-name">strip</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt id="link-1" class="py-name"><a title="yadis.test.test_accept.chunk" class="py-name" href="#" onclick="return doclink('link-1', 'chunk', 'link-0');">chunk</a></tt></tt> <tt class="py-keyword">in</tt> <tt class="py-name">value</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-string">','</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<tt class="py-lineno"> 44</tt>  <tt class="py-line">    <tt id="link-2" class="py-name" targets="Module yadis.accept=yadis.accept-module.html"><a title="yadis.accept" class="py-name" href="#" onclick="return doclink('link-2', 'accept', 'link-2');">accept</a></tt></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<tt class="py-lineno"> 45</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt id="link-3" class="py-name"><a title="yadis.test.test_accept.chunk" class="py-name" href="#" onclick="return doclink('link-3', 'chunk', 'link-0');">chunk</a></tt></tt> <tt class="py-keyword">in</tt> <tt class="py-name">chunks</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 46</tt>  <tt class="py-line">        <tt class="py-name">parts</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">s</tt><tt class="py-op">.</tt><tt class="py-name">strip</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">s</tt> <tt class="py-keyword">in</tt> <tt id="link-4" class="py-name"><a title="yadis.test.test_accept.chunk" class="py-name" href="#" onclick="return doclink('link-4', 'chunk', 'link-0');">chunk</a></tt></tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-string">';'</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<tt class="py-lineno"> 47</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 48</tt>  <tt class="py-line">        <tt class="py-name">mtype</tt> <tt class="py-op">=</tt> <tt class="py-name">parts</tt><tt class="py-op">.</tt><tt class="py-name">pop</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 49</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-string">'/'</tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">mtype</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 50</tt>  <tt class="py-line">            <tt class="py-comment"># This is not a MIME type, so ignore the bad data</tt> </tt>
+<tt class="py-lineno"> 51</tt>  <tt class="py-line"><tt class="py-comment"></tt>            <tt class="py-keyword">continue</tt> </tt>
+<tt class="py-lineno"> 52</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 53</tt>  <tt class="py-line">        <tt class="py-name">main</tt><tt class="py-op">,</tt> <tt class="py-name">sub</tt> <tt class="py-op">=</tt> <tt class="py-name">mtype</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-string">'/'</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 54</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 55</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">ext</tt> <tt class="py-keyword">in</tt> <tt class="py-name">parts</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 56</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-string">'='</tt> <tt class="py-keyword">in</tt> <tt class="py-name">ext</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 57</tt>  <tt class="py-line">                <tt class="py-name">k</tt><tt class="py-op">,</tt> <tt class="py-name">v</tt> <tt class="py-op">=</tt> <tt class="py-name">ext</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-string">'='</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 58</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">k</tt> <tt class="py-op">==</tt> <tt class="py-string">'q'</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 59</tt>  <tt class="py-line">                    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 60</tt>  <tt class="py-line">                        <tt class="py-name">q</tt> <tt class="py-op">=</tt> <tt class="py-name">float</tt><tt class="py-op">(</tt><tt class="py-name">v</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 61</tt>  <tt class="py-line">                        <tt class="py-keyword">break</tt> </tt>
+<tt class="py-lineno"> 62</tt>  <tt class="py-line">                    <tt class="py-keyword">except</tt> <tt class="py-name">ValueError</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 63</tt>  <tt class="py-line">                        <tt class="py-comment"># Ignore poorly formed q-values</tt> </tt>
+<tt class="py-lineno"> 64</tt>  <tt class="py-line"><tt class="py-comment"></tt>                        <tt class="py-keyword">pass</tt> </tt>
+<tt class="py-lineno"> 65</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 66</tt>  <tt class="py-line">            <tt class="py-name">q</tt> <tt class="py-op">=</tt> <tt class="py-number">1.0</tt> </tt>
+<tt class="py-lineno"> 67</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 68</tt>  <tt class="py-line">        <tt id="link-5" class="py-name"><a title="yadis.accept" class="py-name" href="#" onclick="return doclink('link-5', 'accept', 'link-2');">accept</a></tt></tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">q</tt><tt class="py-op">,</tt> <tt class="py-name">main</tt><tt class="py-op">,</tt> <tt class="py-name">sub</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 69</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 70</tt>  <tt class="py-line">    <tt id="link-6" class="py-name"><a title="yadis.accept" class="py-name" href="#" onclick="return doclink('link-6', 'accept', 'link-2');">accept</a></tt></tt><tt class="py-op">.</tt><tt class="py-name">sort</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 71</tt>  <tt class="py-line">    <tt id="link-7" class="py-name"><a title="yadis.accept" class="py-name" href="#" onclick="return doclink('link-7', 'accept', 'link-2');">accept</a></tt></tt><tt class="py-op">.</tt><tt class="py-name">reverse</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 72</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-op">[</tt><tt class="py-op">(</tt><tt class="py-name">main</tt><tt class="py-op">,</tt> <tt class="py-name">sub</tt><tt class="py-op">,</tt> <tt class="py-name">q</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-op">(</tt><tt class="py-name">q</tt><tt class="py-op">,</tt> <tt class="py-name">main</tt><tt class="py-op">,</tt> <tt class="py-name">sub</tt><tt class="py-op">)</tt> <tt class="py-keyword">in</tt> <tt id="link-8" class="py-name"><a title="yadis.accept" class="py-name" href="#" onclick="return doclink('link-8', 'accept', 'link-2');">accept</a></tt></tt><tt class="py-op">]</tt> </tt>
+</div><tt class="py-lineno"> 73</tt>  <tt class="py-line"> </tt>
+<a name="matchTypes"></a><div id="matchTypes-def"><tt class="py-lineno"> 74</tt> <a class="py-toggle" href="#" id="matchTypes-toggle" onclick="return toggle('matchTypes');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.accept-module.html#matchTypes">matchTypes</a><tt class="py-op">(</tt><tt class="py-param">accept_types</tt><tt class="py-op">,</tt> <tt class="py-param">have_types</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="matchTypes-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="matchTypes-expanded"><tt class="py-lineno"> 75</tt>  <tt class="py-line">    <tt class="py-docstring">"""Given the result of parsing an Accept: header, and the</tt> </tt>
+<tt class="py-lineno"> 76</tt>  <tt class="py-line"><tt class="py-docstring">    available MIME types, return the acceptable types with their</tt> </tt>
+<tt class="py-lineno"> 77</tt>  <tt class="py-line"><tt class="py-docstring">    quality markdowns.</tt> </tt>
+<tt class="py-lineno"> 78</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno"> 79</tt>  <tt class="py-line"><tt class="py-docstring">    For example:</tt> </tt>
+<tt class="py-lineno"> 80</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno"> 81</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; acceptable = parseAcceptHeader('text/html, text/plain; q=0.5')</tt> </tt>
+<tt class="py-lineno"> 82</tt>  <tt class="py-line"><tt class="py-docstring">    &gt;&gt;&gt; matchTypes(acceptable, ['text/plain', 'text/html', 'image/jpeg'])</tt> </tt>
+<tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt class="py-docstring">    [('text/html', 1.0), ('text/plain', 0.5)]</tt> </tt>
+<tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno"> 85</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno"> 86</tt>  <tt class="py-line"><tt class="py-docstring">    Type signature: ([(str, str, float)], [str]) -&gt; [(str, float)]</tt> </tt>
+<tt class="py-lineno"> 87</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<tt class="py-lineno"> 88</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">accept_types</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 89</tt>  <tt class="py-line">        <tt class="py-comment"># Accept all of them</tt> </tt>
+<tt class="py-lineno"> 90</tt>  <tt class="py-line"><tt class="py-comment"></tt>        <tt class="py-name">default</tt> <tt class="py-op">=</tt> <tt class="py-number">1</tt> </tt>
+<tt class="py-lineno"> 91</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 92</tt>  <tt class="py-line">        <tt class="py-name">default</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<tt class="py-lineno"> 93</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno"> 94</tt>  <tt class="py-line">    <tt class="py-name">match_main</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<tt class="py-lineno"> 95</tt>  <tt class="py-line">    <tt class="py-name">match_sub</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<tt class="py-lineno"> 96</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-op">(</tt><tt class="py-name">main</tt><tt class="py-op">,</tt> <tt class="py-name">sub</tt><tt class="py-op">,</tt> <tt class="py-name">q</tt><tt class="py-op">)</tt> <tt class="py-keyword">in</tt> <tt class="py-name">accept_types</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 97</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">main</tt> <tt class="py-op">==</tt> <tt class="py-string">'*'</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno"> 98</tt>  <tt class="py-line">            <tt class="py-name">default</tt> <tt class="py-op">=</tt> <tt class="py-name">max</tt><tt class="py-op">(</tt><tt class="py-name">default</tt><tt class="py-op">,</tt> <tt class="py-name">q</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno"> 99</tt>  <tt class="py-line">            <tt class="py-keyword">continue</tt> </tt>
+<tt class="py-lineno">100</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">sub</tt> <tt class="py-op">==</tt> <tt class="py-string">'*'</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">101</tt>  <tt class="py-line">            <tt class="py-name">match_main</tt><tt class="py-op">[</tt><tt class="py-name">main</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">max</tt><tt class="py-op">(</tt><tt class="py-name">match_main</tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-name">main</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">q</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">102</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">103</tt>  <tt class="py-line">            <tt class="py-name">match_sub</tt><tt class="py-op">[</tt><tt class="py-op">(</tt><tt class="py-name">main</tt><tt class="py-op">,</tt> <tt class="py-name">sub</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">max</tt><tt class="py-op">(</tt><tt class="py-name">match_sub</tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">main</tt><tt class="py-op">,</tt> <tt class="py-name">sub</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">q</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">104</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">105</tt>  <tt class="py-line">    <tt class="py-name">accepted_list</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<tt class="py-lineno">106</tt>  <tt class="py-line">    <tt class="py-name">order_maintainer</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<tt class="py-lineno">107</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">mtype</tt> <tt class="py-keyword">in</tt> <tt class="py-name">have_types</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">108</tt>  <tt class="py-line">        <tt class="py-name">main</tt><tt class="py-op">,</tt> <tt class="py-name">sub</tt> <tt class="py-op">=</tt> <tt class="py-name">mtype</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-string">'/'</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">109</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-op">(</tt><tt class="py-name">main</tt><tt class="py-op">,</tt> <tt class="py-name">sub</tt><tt class="py-op">)</tt> <tt class="py-keyword">in</tt> <tt class="py-name">match_sub</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">110</tt>  <tt class="py-line">            <tt class="py-name">q</tt> <tt class="py-op">=</tt> <tt class="py-name">match_sub</tt><tt class="py-op">[</tt><tt class="py-op">(</tt><tt class="py-name">main</tt><tt class="py-op">,</tt> <tt class="py-name">sub</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<tt class="py-lineno">111</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">112</tt>  <tt class="py-line">            <tt class="py-name">q</tt> <tt class="py-op">=</tt> <tt class="py-name">match_main</tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-name">main</tt><tt class="py-op">,</tt> <tt class="py-name">default</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">113</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">114</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">q</tt><tt class="py-op">:</tt> </tt>
+<tt class="py-lineno">115</tt>  <tt class="py-line">            <tt class="py-name">accepted_list</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-number">1</tt> <tt class="py-op">-</tt> <tt class="py-name">q</tt><tt class="py-op">,</tt> <tt class="py-name">order_maintainer</tt><tt class="py-op">,</tt> <tt class="py-name">q</tt><tt class="py-op">,</tt> <tt class="py-name">mtype</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">116</tt>  <tt class="py-line">            <tt class="py-name">order_maintainer</tt> <tt class="py-op">+=</tt> <tt class="py-number">1</tt> </tt>
+<tt class="py-lineno">117</tt>  <tt class="py-line"> </tt>
+<tt class="py-lineno">118</tt>  <tt class="py-line">    <tt class="py-name">accepted_list</tt><tt class="py-op">.</tt><tt class="py-name">sort</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">119</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-op">[</tt><tt class="py-op">(</tt><tt class="py-name">mtype</tt><tt class="py-op">,</tt> <tt class="py-name">q</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-op">(</tt><tt class="py-name">_</tt><tt class="py-op">,</tt> <tt class="py-name">_</tt><tt class="py-op">,</tt> <tt class="py-name">q</tt><tt class="py-op">,</tt> <tt class="py-name">mtype</tt><tt class="py-op">)</tt> <tt class="py-keyword">in</tt> <tt class="py-name">accepted_list</tt><tt class="py-op">]</tt> </tt>
+</div><tt class="py-lineno">120</tt>  <tt class="py-line"> </tt>
+<a name="getAcceptable"></a><div id="getAcceptable-def"><tt class="py-lineno">121</tt> <a class="py-toggle" href="#" id="getAcceptable-toggle" onclick="return toggle('getAcceptable');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="yadis.accept-module.html#getAcceptable">getAcceptable</a><tt class="py-op">(</tt><tt class="py-param">accept_header</tt><tt class="py-op">,</tt> <tt class="py-param">have_types</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="getAcceptable-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="getAcceptable-expanded"><tt class="py-lineno">122</tt>  <tt class="py-line">    <tt class="py-docstring">"""Parse the accept header and return a list of available types in</tt> </tt>
+<tt class="py-lineno">123</tt>  <tt class="py-line"><tt class="py-docstring">    preferred order. If a type is unacceptable, it will not be in the</tt> </tt>
+<tt class="py-lineno">124</tt>  <tt class="py-line"><tt class="py-docstring">    resulting list.</tt> </tt>
+<tt class="py-lineno">125</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno">126</tt>  <tt class="py-line"><tt class="py-docstring">    This is a convenience wrapper around matchTypes and</tt> </tt>
+<tt class="py-lineno">127</tt>  <tt class="py-line"><tt class="py-docstring">    parseAcceptHeader.</tt> </tt>
+<tt class="py-lineno">128</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<tt class="py-lineno">129</tt>  <tt class="py-line"><tt class="py-docstring">    (str, [str]) -&gt; [str]</tt> </tt>
+<tt class="py-lineno">130</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<tt class="py-lineno">131</tt>  <tt class="py-line">    <tt class="py-name">accepted</tt> <tt class="py-op">=</tt> <tt id="link-9" class="py-name" targets="Function yadis.accept.parseAcceptHeader()=yadis.accept-module.html#parseAcceptHeader"><a title="yadis.accept.parseAcceptHeader" class="py-name" href="#" onclick="return doclink('link-9', 'parseAcceptHeader', 'link-9');">parseAcceptHeader</a></tt></tt><tt class="py-op">(</tt><tt class="py-name">accept_header</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">132</tt>  <tt class="py-line">    <tt class="py-name">preferred</tt> <tt class="py-op">=</tt> <tt id="link-10" class="py-name" targets="Function yadis.accept.matchTypes()=yadis.accept-module.html#matchTypes,Method yadis.filters.BasicServiceEndpoint.matchTypes()=yadis.filters.BasicServiceEndpoint-class.html#matchTypes"><a title="yadis.accept.matchTypes
+yadis.filters.BasicServiceEndpoint.matchTypes" class="py-name" href="#" onclick="return doclink('link-10', 'matchTypes', 'link-10');">matchTypes</a></tt></tt><tt class="py-op">(</tt><tt class="py-name">accepted</tt><tt class="py-op">,</tt> <tt class="py-name">have_types</tt><tt class="py-op">)</tt> </tt>
+<tt class="py-lineno">133</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-op">[</tt><tt class="py-name">mtype</tt> <tt class="py-keyword">for</tt> <tt class="py-op">(</tt><tt class="py-name">mtype</tt><tt class="py-op">,</tt> <tt class="py-name">_</tt><tt class="py-op">)</tt> <tt class="py-keyword">in</tt> <tt class="py-name">preferred</tt><tt class="py-op">]</tt> </tt>
+</div><tt class="py-lineno">134</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="yadis-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.openidenabled.com/yadis/">Python-Yadis</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">Generated by Epydoc
+        3.0alpha3 on Fri Dec  8 13:17:19 2006</td>
+    <td align="right" class="footer">
+      <a href="http://epydoc.sourceforge.net">http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie()
+  // -->
+</script>
+  
+</body>
+</html>

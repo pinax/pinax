@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <title>Django OpenID Example Server</title>
+    <style type="text/css">
+    div.message {
+        background: #9f9;
+        padding: 0.5em;
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+        border: 1px solid #555;
+        font-weight: bold;
+    }
+
+    div.error {
+        background: #f99;
+        padding: 0.5em;
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+        border: 1px solid #555;
+        font-weight: bold;
+    }
+
+    div.box {
+        background: #eee;
+        border: 1px solid black;
+        padding: 1em;
+    }
+    </style>
+    {% block head %}
+    <meta http-equiv="x-xrds-location" content="{{ server_xrds_url }}">
+    {% endblock %}
+  </head>
+  <body>
+
+{% block body %}
+  <div class="box">
+
+  <p>
+    This is an example server built for the Django framework.  It only
+    authenticates one OpenID, which is also served by this
+    application.  The OpenID it serves is
+
+    <pre>
+<a href="{{ user_url }}">{{ user_url }}</a>
+    </pre>
+  </p>
+
+  </div>
+{% endblock %}
+  </body>
+</html>

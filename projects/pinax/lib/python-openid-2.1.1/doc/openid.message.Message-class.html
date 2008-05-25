@@ -1,0 +1,551 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>openid.message.Message</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css"></link>
+</head>
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="openid-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          <a class="navbar" target="_top" href="http://openidenabled.com/python-openid/">Python-OpenID</a>
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <font size="-1"><b class="breadcrumbs">
+        <a href="openid-module.html">Package&nbsp;openid</a> ::
+        <a href="openid.message-module.html">Module&nbsp;message</a> ::
+        Class&nbsp;Message
+      </b></font></br>
+    </td>
+    <td><table cellpadding="0" cellspacing="0">
+      <tr><td align="right"><font size="-2">[<a href="frames.html"target="_top">frames</a>&nbsp;|&nbsp;<a href="openid.message.Message-class.html" target="_top">no&nbsp;frames</a>]</font></td></tr>
+    </table></td>
+</tr></table>
+
+<!-- =========== START OF CLASS DESCRIPTION =========== -->
+<h2 class="class">Type Message</h2>
+
+<pre class="base-tree">
+<a href="__builtin__.object-class.html"><code>object</code></a> --+
+         |
+        <b>Message</b>
+</pre><br />
+
+<hr/>
+
+In the implementation of this object, None represents the global 
+namespace as well as a namespace with no key.
+<hr/>
+
+
+<!-- =========== START OF METHOD SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Method Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.message.Message-class.html#__init__" class="summary-sig-name"><code>__init__</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>openid_namespace</span>)</span></code>
+<br />
+Create an empty Message</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><a name="__eq__"></a><span class="summary-sig"><span class="summary-sig-name">__eq__</span>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>other</span>)</span></code>
+</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><a name="__ne__"></a><span class="summary-sig"><span class="summary-sig-name">__ne__</span>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>other</span>)</span></code>
+</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><a name="__repr__"></a><span class="summary-sig"><span class="summary-sig-name">__repr__</span>(<span class=summary-sig-arg>self</span>)</span></code>
+</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><a name="copy"></a><span class="summary-sig"><span class="summary-sig-name">copy</span>(<span class=summary-sig-arg>self</span>)</span></code>
+</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><a name="delArg"></a><span class="summary-sig"><span class="summary-sig-name">delArg</span>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>namespace</span>,
+          <span class=summary-sig-arg>key</span>)</span></code>
+</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.message.Message-class.html#fromKVForm" class="summary-sig-name"><code>fromKVForm</code></a>(<span class=summary-sig-arg>cls</span>,
+          <span class=summary-sig-arg>kvform_string</span>)</span></code>
+<br />
+Create a Message from a KVForm string    <i>(Class method)</i>
+</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.message.Message-class.html#fromOpenIDArgs" class="summary-sig-name"><code>fromOpenIDArgs</code></a>(<span class=summary-sig-arg>cls</span>,
+          <span class=summary-sig-arg>openid_args</span>)</span></code>
+<br />
+Construct a Message from a parsed KVForm message    <i>(Class method)</i>
+</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.message.Message-class.html#fromPostArgs" class="summary-sig-name"><code>fromPostArgs</code></a>(<span class=summary-sig-arg>cls</span>,
+          <span class=summary-sig-arg>args</span>)</span></code>
+<br />
+Construct a Message containing a set of POST arguments    <i>(Class method)</i>
+</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><a name="getAliasedArg"></a><span class="summary-sig"><span class="summary-sig-name">getAliasedArg</span>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>aliased_key</span>,
+          <span class=summary-sig-arg>default</span>)</span></code>
+</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        str or the type of default
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.message.Message-class.html#getArg" class="summary-sig-name"><code>getArg</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>namespace</span>,
+          <span class=summary-sig-arg>key</span>,
+          <span class=summary-sig-arg>default</span>)</span></code>
+<br />
+Get a value for a namespaced key.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        dict
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.message.Message-class.html#getArgs" class="summary-sig-name"><code>getArgs</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>namespace</span>)</span></code>
+<br />
+Get the arguments that are defined for this namespace URI</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.message.Message-class.html#getKey" class="summary-sig-name"><code>getKey</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>namespace</span>,
+          <span class=summary-sig-arg>ns_key</span>)</span></code>
+<br />
+Get the key for a particular namespaced argument</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><a name="getOpenIDNamespace"></a><span class="summary-sig"><span class="summary-sig-name">getOpenIDNamespace</span>(<span class=summary-sig-arg>self</span>)</span></code>
+</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><a name="hasKey"></a><span class="summary-sig"><span class="summary-sig-name">hasKey</span>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>namespace</span>,
+          <span class=summary-sig-arg>ns_key</span>)</span></code>
+</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><a name="isOpenID1"></a><span class="summary-sig"><span class="summary-sig-name">isOpenID1</span>(<span class=summary-sig-arg>self</span>)</span></code>
+</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><a name="isOpenID2"></a><span class="summary-sig"><span class="summary-sig-name">isOpenID2</span>(<span class=summary-sig-arg>self</span>)</span></code>
+</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.message.Message-class.html#setArg" class="summary-sig-name"><code>setArg</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>namespace</span>,
+          <span class=summary-sig-arg>key</span>,
+          <span class=summary-sig-arg>value</span>)</span></code>
+<br />
+Set a single argument in this namespace</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><a name="setOpenIDNamespace"></a><span class="summary-sig"><span class="summary-sig-name">setOpenIDNamespace</span>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>openid_ns_uri</span>)</span></code>
+</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.message.Message-class.html#toArgs" class="summary-sig-name"><code>toArgs</code></a>(<span class=summary-sig-arg>self</span>)</span></code>
+<br />
+Return all namespaced arguments, failing if any non-namespaced 
+arguments exist.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">        str or unicode
+</font></td>
+  <td><code><span class="summary-sig"><a href="openid.message.Message-class.html#toFormMarkup" class="summary-sig-name"><code>toFormMarkup</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>action_url</span>,
+          <span class=summary-sig-arg>form_tag_attrs</span>,
+          <span class=summary-sig-arg>submit_text</span>)</span></code>
+<br />
+Generate HTML form markup that contains the values in this message, to 
+be HTTP POSTed as x-www-form-urlencoded UTF-8.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.message.Message-class.html#toKVForm" class="summary-sig-name"><code>toKVForm</code></a>(<span class=summary-sig-arg>self</span>)</span></code>
+<br />
+Generate a KVForm string that contains the parameters in this 
+message.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.message.Message-class.html#toPostArgs" class="summary-sig-name"><code>toPostArgs</code></a>(<span class=summary-sig-arg>self</span>)</span></code>
+<br />
+Return all arguments with openid.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.message.Message-class.html#toURL" class="summary-sig-name"><code>toURL</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>base_url</span>)</span></code>
+<br />
+Generate a GET URL with the parameters in this message attached as 
+query parameters.</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.message.Message-class.html#toURLEncoded" class="summary-sig-name"><code>toURLEncoded</code></a>(<span class=summary-sig-arg>self</span>)</span></code>
+<br />
+Generate an x-www-urlencoded string</td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+  <td><code><span class="summary-sig"><a href="openid.message.Message-class.html#updateArgs" class="summary-sig-name"><code>updateArgs</code></a>(<span class=summary-sig-arg>self</span>,
+          <span class=summary-sig-arg>namespace</span>,
+          <span class=summary-sig-arg>updates</span>)</span></code>
+<br />
+Set multiple key/value pairs in one call</td></tr>
+  <tr><td colspan="2">
+    <b>Inherited from <a href="__builtin__.object-class.html"><code>object</code></a>:</b>
+      <a href="__builtin__.object-class.html#__delattr__"><code>__delattr__</code></a>, 
+      <a href="__builtin__.object-class.html#__getattribute__"><code>__getattribute__</code></a>, 
+      <a href="__builtin__.object-class.html#__hash__"><code>__hash__</code></a>, 
+      <a href="__builtin__.object-class.html#__new__"><code>__new__</code></a>, 
+      <a href="__builtin__.object-class.html#__reduce__"><code>__reduce__</code></a>, 
+      <a href="__builtin__.object-class.html#__reduce_ex__"><code>__reduce_ex__</code></a>, 
+      <a href="__builtin__.object-class.html#__setattr__"><code>__setattr__</code></a>, 
+      <a href="__builtin__.object-class.html#__str__"><code>__str__</code></a>
+    </td></tr>
+</table><br />
+
+
+<!-- =========== START OF INSTANCE VARIABLE SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Instance Variable Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+<td><b><a href="openid.message.Message-class.html#ns_args"><code>ns_args</code></a></b>: two-level dictionary of the values in this message, grouped by 
+namespace URI.</td></tr>
+</table><br />
+
+
+<!-- =========== START OF CLASS VARIABLE SUMMARY =========== -->
+<table class="summary" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="summary">
+  <th colspan="2">Class Variable Summary</th></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1"><code>list</code></font></td>
+<td><b><a href="openid.message.Message-class.html#allowed_openid_namespaces"><code>allowed_openid_namespaces</code></a></b> = <span title="['http://openid.net/signon/1.0', 'http://specs.openid.net/auth/2.0']"><code>['http://openid.net/signon/1<span class="variable-ellipsis">...</span></code>
+</span></td></tr>
+<tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
+<td><b><a href="openid.message.Message-class.html#namespaces"><code>namespaces</code></a></b>: A dictionary specifying specific namespace-URI to alias mappings that 
+should be used when generating namespace aliases.</td></tr>
+</table><br />
+
+
+<!-- =========== START OF INSTANCE METHOD DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Instance Method Details</th></tr>
+</table>
+
+<a name="__init__"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">__init__</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>openid_namespace</span>=<span class=sig-default>None</span>)</span>
+    <br /><i>(Constructor)</i>
+  </h3>
+  Create an empty Message
+  <dl><dt></dt><dd>
+    <dl><dt><b>Overrides:</b></dt>
+      <dd><a href="__builtin__.object-class.html#__init__"><code>__builtin__.object.__init__</code></a></dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="getArg"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">getArg</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>namespace</span>,
+          <span class=sig-arg>key</span>,
+          <span class=sig-arg>default</span>=<span class=sig-default>None</span>)</span>
+  </h3>
+  Get a value for a namespaced key.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>namespace</b></code> -
+         The namespace in the message for this key
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=str)</i>
+      <dd><code><b>key</b></code> -
+         The key to get within this namespace
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=str)</i>
+      <dd><code><b>default</b></code> -
+         The value to use if this key is absent from this message. 
+        Using the special value openid.message.no_default will result in 
+        this method raising a KeyError instead of returning the 
+        default.
+      </dd>
+    </dl>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        str or the type of default
+      </dd>
+    </dl>
+    <dl><dt><b>Raises:</b></dt>
+      <dd><code><b>KeyError</b></code> -
+        if default is no_default
+      <dd><code><b>UndefinedOpenIDNamespace</b></code> -
+        if the message has not yet had an OpenID namespace set
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="getArgs"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">getArgs</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>namespace</span>)</span>
+  </h3>
+  Get the arguments that are defined for this namespace URI
+  <dl><dt></dt><dd>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        mapping from namespaced keys to values
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=dict)</i>
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="getKey"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">getKey</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>namespace</span>,
+          <span class=sig-arg>ns_key</span>)</span>
+  </h3>
+  Get the key for a particular namespaced argument
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="setArg"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">setArg</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>namespace</span>,
+          <span class=sig-arg>key</span>,
+          <span class=sig-arg>value</span>)</span>
+  </h3>
+  Set a single argument in this namespace
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="toArgs"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">toArgs</span>(<span class=sig-arg>self</span>)</span>
+  </h3>
+  Return all namespaced arguments, failing if any non-namespaced 
+  arguments exist.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="toFormMarkup"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">toFormMarkup</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>action_url</span>,
+          <span class=sig-arg>form_tag_attrs</span>=<span class=sig-default>None</span>,
+          <span class=sig-arg>submit_text</span>=<span class=sig-default>'Continue'</span>)</span>
+  </h3>
+  Generate HTML form markup that contains the values in this message, 
+  to be HTTP POSTed as x-www-form-urlencoded UTF-8.
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>action_url</b></code> -
+         The URL to which the form will be POSTed
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=str)</i>
+      <dd><code><b>form_tag_attrs</b></code> -
+         Dictionary of attributes to be added to the form tag. 
+        'accept-charset' and 'enctype' have defaults that can be 
+        overridden. If a value is supplied for 'action' or 'method', it 
+        will be replaced.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type={unicode: unicode})</i>
+      <dd><code><b>submit_text</b></code> -
+         The text that will appear on the submit button for this 
+        form.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=unicode)</i>
+      </dd>
+    </dl>
+    <dl><dt><b>Returns:</b></dt>
+      <dd>
+        A string containing (X)HTML markup for a form that encodes the 
+        values in this Message object.
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type=str or unicode)</i>
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+
+<a name="toKVForm"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">toKVForm</span>(<span class=sig-arg>self</span>)</span>
+  </h3>
+  Generate a KVForm string that contains the parameters in this 
+  message. This will fail if the message contains arguments outside of 
+  the 'openid.' prefix.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="toPostArgs"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">toPostArgs</span>(<span class=sig-arg>self</span>)</span>
+  </h3>
+  Return all arguments with openid. in front of namespaced 
+  arguments.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="toURL"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">toURL</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>base_url</span>)</span>
+  </h3>
+  Generate a GET URL with the parameters in this message attached as 
+  query parameters.
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="toURLEncoded"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">toURLEncoded</span>(<span class=sig-arg>self</span>)</span>
+  </h3>
+  Generate an x-www-urlencoded string
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="updateArgs"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">updateArgs</span>(<span class=sig-arg>self</span>,
+          <span class=sig-arg>namespace</span>,
+          <span class=sig-arg>updates</span>)</span>
+  </h3>
+  Set multiple key/value pairs in one call
+  <dl><dt></dt><dd>
+    <dl><dt><b>Parameters:</b></dt>
+      <dd><code><b>updates</b></code> -
+         The values to set
+        <br /><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        (type={unicode:unicode})</i>
+      </dd>
+    </dl>
+  </dd></dl>
+</td></tr></table>
+<br />
+
+
+<!-- =========== START OF CLASS METHOD DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Class Method Details</th></tr>
+</table>
+
+<a name="fromKVForm"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">fromKVForm</span>(<span class=sig-arg>cls</span>,
+          <span class=sig-arg>kvform_string</span>)</span>
+  </h3>
+  Create a Message from a KVForm string
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="fromOpenIDArgs"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">fromOpenIDArgs</span>(<span class=sig-arg>cls</span>,
+          <span class=sig-arg>openid_args</span>)</span>
+  </h3>
+  Construct a Message from a parsed KVForm message
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+
+<a name="fromPostArgs"></a>
+<table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
+  <h3><span class="sig"><span class="sig-name">fromPostArgs</span>(<span class=sig-arg>cls</span>,
+          <span class=sig-arg>args</span>)</span>
+  </h3>
+  Construct a Message containing a set of POST arguments
+  <dl><dt></dt><dd>
+  </dd></dl>
+</td></tr></table>
+<br />
+
+
+<!-- =========== START OF INSTANCE VARIABLE DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Instance Variable Details</th></tr>
+</table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="ns_args"></a>
+<h3>ns_args</h3>
+two-level dictionary of the values in this message, grouped by 
+namespace URI. The first level is the namespace URI.
+</td></tr></table>
+<br />
+
+
+<!-- =========== START OF CLASS VARIABLE DETAILS =========== -->
+<table class="details" border="1" cellpadding="3" cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="details">
+  <th colspan="2">Class Variable Details</th></tr>
+</table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="allowed_openid_namespaces"></a>
+<h3>allowed_openid_namespaces</h3>
+<dl>
+  <dt></dt>
+  <dd>
+    <dl>
+      <dt><b>Type:</b></dt>
+      <dd>
+          <code>list</code>
+
+      </dd>
+<span title="['http://openid.net/signon/1.0', 'http://specs.openid.net/auth/2.0']">      <dt><b>Value:</b></dt>
+      <dd><table><tr><td>
+<pre class="variable">
+['http://openid.net/signon/1.0', 'http://specs.openid.net/auth/2.0']   </pre>
+        </td></tr></table></dd>
+</span>    </dl>
+  </dd>
+</dl></td></tr></table>
+<table width="100%" class="var-details" bgcolor="#e0e0e0"><tr><td>
+<a name="namespaces"></a>
+<h3>namespaces</h3>
+A dictionary specifying specific namespace-URI to alias mappings that 
+should be used when generating namespace aliases.
+</td></tr></table>
+<br />
+
+
+<!-- =========== START OF NAVBAR =========== -->
+<table class="navbar" border="0" width="100%" cellpadding="0" bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="center">
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="openid-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="trees.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="indices.html">Index</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar">&nbsp;&nbsp;&nbsp;<a class="navbar" href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+    <th class="navbar" align="right" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0">
+      <tr><th class="navbar" align="center">
+        <p class="nomargin">
+          <a class="navbar" target="_top" href="http://openidenabled.com/python-openid/">Python-OpenID</a>
+      </p></th></tr></table>
+    </th>
+  </tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td align="left"><font size="-2">Generated by Epydoc 2.1 on Fri Dec 14 16:10:53 2007</font></td>
+    <td align="right"><a href="http://epydoc.sourceforge.net"
+                      ><font size="-2">http://epydoc.sf.net</font></a></td>
+  </tr>
+</table>
+</body>
+</html>

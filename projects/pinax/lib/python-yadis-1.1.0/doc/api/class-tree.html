@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class Hierarchy</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="yadis-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th bgcolor="#70b0f0" class="navbar-select"
+          >&nbsp;&nbsp;&nbsp;Trees&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.openidenabled.com/yadis/">Python-Yadis</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">&nbsp;</td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="class-tree.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<center><b>
+ [ <a href="module-tree.html">Module Hierarchy</a>
+ | <a href="class-tree.html">Class Hierarchy</a> ]
+</b></center><br />
+<h1 class="epydoc">Class Hierarchy</h1>
+<ul class="nomargin-top">
+    <li> <strong class="uidlink">exceptions.Exception</strong>:
+      <em class="summary">Common base class for all exceptions.</em>
+    <ul>
+    <li> <strong class="uidlink">exceptions.StandardError</strong>:
+      <em class="summary">Base class for all standard Python exceptions.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="exceptions.AssertionError-class.html">exceptions.AssertionError</a></strong>:
+      <em class="summary">Assertion failed.</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="yadis.test.test_discover.QuitServer-class.html">yadis.test.test_discover.QuitServer</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="yadis.parsehtml.ParseDone-class.html">yadis.parsehtml.ParseDone</a></strong>:
+      <em class="summary">Exception to hold the URI that was located when the parse is 
+        finished.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="yadis.discover.DiscoveryFailure-class.html">yadis.discover.DiscoveryFailure</a></strong>:
+      <em class="summary">Raised when a YADIS protocol error occurs in the discovery 
+        process</em>
+    </li>
+    <li> <strong class="uidlink"><a href="yadis.etxrd.XRDSError-class.html">yadis.etxrd.XRDSError</a></strong>:
+      <em class="summary">An error with the XRDS document.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="yadis.etxrd.XRDSFraud-class.html">yadis.etxrd.XRDSFraud</a></strong>:
+      <em class="summary">Raised when there's an assertion in the XRDS that it does not 
+        have the authority to make.</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="yadis.parsehtml.MetaNotFound-class.html">yadis.parsehtml.MetaNotFound</a></strong>:
+      <em class="summary">Exception to hold the content of the page if we did not find the
+        appropriate &lt;meta&gt; tag</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink">markupbase.ParserBase</strong>:
+      <em class="summary">Parser base class which provides some common support methods 
+        used by the SGML/HTML and XHTML parsers.</em>
+    <ul>
+    <li> <strong class="uidlink">HTMLParser.HTMLParser</strong>:
+      <em class="summary">Find tags and other markup and call handler functions.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="yadis.parsehtml.YadisHTMLParser-class.html">yadis.parsehtml.YadisHTMLParser</a></strong>:
+      <em class="summary">Parser that finds a meta http-equiv tag in the head of a html 
+        document.</em>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink">object</strong>:
+      <em class="summary">The most base type</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="yadis.filters.TransformFilterMaker-class.html">yadis.filters.TransformFilterMaker</a></strong>:
+      <em class="summary">Take a list of basic filters and makes a filter that transforms 
+        the basic filter into a top-level filter.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="yadis.etxrd._Max-class.html">yadis.etxrd._Max</a></strong>:
+      <em class="summary">Value that compares greater than any other value.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="yadis.xrires.ProxyResolver-class.html">yadis.xrires.ProxyResolver</a></strong>:
+      <em class="summary">Python interface to a remote XRI proxy resolver.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="yadis.manager.YadisServiceManager-class.html">yadis.manager.YadisServiceManager</a></strong>:
+      <em class="summary">Holds the state of a list of selected Yadis services, managing 
+        storing it in a session and iterating over the services in 
+        order.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="yadis.test.test_discover.TestSecondGet.MockFetcher-class.html">yadis.test.test_discover.TestSecondGet.MockFetcher</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="yadis.manager.Discovery-class.html">yadis.manager.Discovery</a></strong>:
+      <em class="summary">State management for discovery.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="yadis.filters.IFilter-class.html">yadis.filters.IFilter</a></strong>:
+      <em class="summary">Interface for Yadis filter objects.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="yadis.filters.BasicServiceEndpoint-class.html">yadis.filters.BasicServiceEndpoint</a></strong>:
+      <em class="summary">Generic endpoint object that contains parsed service 
+        information, as well as a reference to the service element from 
+        which it was generated.</em>
+    </li>
+    <li> <strong class="uidlink">unittest.TestCase</strong>:
+      <em class="summary">A class whose instances are single test cases.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="yadis.test.test_discover.TestSecondGet-class.html">yadis.test.test_discover.TestSecondGet</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="yadis.test.test_xri.XriEscapingTestCase-class.html">yadis.test.test_xri.XriEscapingTestCase</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="yadis.test.test_parsehtml._TestCase-class.html">yadis.test.test_parsehtml._TestCase</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="yadis.test.test_xri.TestGetRootAuthority-class.html">yadis.test.test_xri.TestGetRootAuthority</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="yadis.test.test_xri.XriDiscoveryTestCase-class.html">yadis.test.test_xri.XriDiscoveryTestCase</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="yadis.test.test_xrires.ProxyQueryTestCase-class.html">yadis.test.test_xrires.ProxyQueryTestCase</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="yadis.test.test_etxrd.TestCanonicalID-class.html">yadis.test.test_etxrd.TestCanonicalID</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="yadis.test.livediscover.DiscoverTestCase-class.html">yadis.test.livediscover.DiscoverTestCase</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="yadis.test.test_xri.XriTransformationTestCase-class.html">yadis.test.test_xri.XriTransformationTestCase</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="yadis.test.test_discover._TestCase-class.html">yadis.test.test_discover._TestCase</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="yadis.test.test_xri.CanonicalIDTest-class.html">yadis.test.test_xri.CanonicalIDTest</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="yadis.test.test_etxrd.TestServiceParser-class.html">yadis.test.test_etxrd.TestServiceParser</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="yadis.test.test_accept.MatchAcceptTest-class.html">yadis.test.test_accept.MatchAcceptTest</a></strong>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="yadis.discover.DiscoveryResult-class.html">yadis.discover.DiscoveryResult</a></strong>:
+      <em class="summary">Contains the result of performing Yadis discovery on a URI</em>
+    </li>
+    <li> <strong class="uidlink"><a href="yadis.test.test_discover.TestFetcher-class.html">yadis.test.test_discover.TestFetcher</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="yadis.filters.CompoundFilter-class.html">yadis.filters.CompoundFilter</a></strong>:
+      <em class="summary">Create a new filter that applies a set of filters to an endpoint
+        and collects their results.</em>
+    </li>
+    </ul>
+    </li>
+</ul>
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="yadis-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th bgcolor="#70b0f0" class="navbar-select"
+          >&nbsp;&nbsp;&nbsp;Trees&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.openidenabled.com/yadis/">Python-Yadis</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">Generated by Epydoc
+        3.0alpha3 on Fri Dec  8 13:17:17 2006</td>
+    <td align="right" class="footer">
+      <a href="http://epydoc.sourceforge.net">http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie()
+  // -->
+</script>
+  
+</body>
+</html>

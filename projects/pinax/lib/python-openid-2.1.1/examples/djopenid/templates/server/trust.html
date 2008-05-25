@@ -1,0 +1,47 @@
+{% extends "server/index.html" %}
+
+{% block body %}
+
+{% ifequal trust_root_valid "Valid" %}
+  <!-- Trust root has been validated by OpenID 2 mechanism. -->
+  <p>The site <tt>{{ trust_root|escape }}</tt> has requested verification
+  of your OpenID.</p>
+{% endifequal %}
+{% ifequal trust_root_valid "Invalid" %}
+<div class="error">
+  <p>This request claims to be from {{ trust_root|escape }} but I have 
+  determined that <em>it is a pack of lies</em>.  Beware, if you release
+  information to them, they are likely to do unconscionable things with it,
+  being the lying liars that they are.</p>
+  <p>Please tell the <em>real</em> {{ trust_root|escape }} that someone is
+  trying to abuse your trust in their good name.</p>
+</div>
+{% endifequal %}
+{% ifequal trust_root_valid "Unreachable" %}
+  <p>The site <tt>{{ trust_root|escape }}</tt> has requested verification
+  of your OpenID.  I have failed to reach it and thus cannot vouch for its
+  authenticity.  Perhaps it is on your local network.</p>
+{% endifequal %}
+{% ifequal trust_root_valid "DISCOVERY_FAILED" %}
+  <p>The site <tt>{{ trust_root|escape }}</tt> has requested verification
+  of your OpenID.  However, <tt>{{ trust_root|escape }}</tt> does not 
+  implement OpenID 2.0's relying party verification mechanism.  Please use
+  extra caution in deciding whether to release information to this party,
+  and ask <tt>{{ trust_root|escape }}</tt> to implement relying party
+  verification for your future transactions.</p>
+{% endifequal %}
+
+<!-- trust_root_valid is {{ trust_root_valid }} -->
+
+<div>
+<form method="post"
+      action="{{ trust_handler_url }}">
+  Verify your identity to the relying party?
+
+  <br/>
+  <input type="submit" value="Yes (Allow)" name="allow" />
+  <input type="submit" value="No (Cancel)" name="cancel" />
+</form>
+</div>
+
+{% endblock %}

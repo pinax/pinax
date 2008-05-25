@@ -1,0 +1,41 @@
+#!/bin/bash
+
+set -e
+
+if [ -z $1 ] ; then
+   echo Usage: $0 version
+   exit 1
+fi
+
+DIST_VERSION=$1
+ADMINDIR=$(dirname $0)
+YDIR=${ADMINDIR}/..
+QUIET="-q"
+
+PYTHON=python
+
+WORKDIR=$(mktemp -t -d python-yadis.XXXXXX) || exit 1
+
+darcs_export () {
+    DARCS_DIR=$1
+    TARGET_DIR=$2
+    # We can't darcs get straight into the mktemp dir, because the mktemp
+    # dir already exists and "darcs get" kindly does a sanity check to make
+    # sure it doesn't clobber an already existing directory.
+    TMPREPO=$2/foo.$$
+    darcs get $DARCS_DIR ${TMPREPO}
+    rm -r ${TMPREPO}/_darcs
+    mv --target-directory=${TARGET_DIR} ${TMPREPO}/*
+    rmdir $TMPREPO
+}
+
+darcs_export ${YDIR} ${WORKDIR}
+pushd $WORKDIR
+bash admin/fixperms
+admin/setversion ${DIST_VERSION}
+admin/runtests || exit 1
+$PYTHON setup.py ${QUIET} sdist
+popd
+
+cp -v --interactive ${WORKDIR}/dist/* .
+rm -rf $WORKDIR
