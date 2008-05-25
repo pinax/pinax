@@ -15,6 +15,7 @@ def personal(request):
         if request.POST["action"] == "post":
             text = request.POST["tweet"].strip()
             tweet(request.user, text)
+        reply = None
     else:
         reply = request.GET.get("reply")
             
