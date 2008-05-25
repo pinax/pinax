@@ -5,7 +5,7 @@
 
 {% block login %}
     {% if user.is_authenticated %}
-        <b>{{ user }}</b> | <a href="/account/">{% trans "Account" %}</a> | <a href="/account/logout">{% trans "Logout" %}</a>
+        {% if openid %}<img src="/site_media/openid-icon.png" alt="Logged in with OpenID" />{% endif %}<b>{{ user }}</b> | <a href="/account/">{% trans "Account" %}</a> | <a href="/account/logout">{% trans "Logout" %}</a>
     {% else %}
         <a href="/account/login/">{% trans "Login" %}</a> or <a href="/account/signup/"><b>{% trans "Sign up" %}</b></a>
     {% endif %}

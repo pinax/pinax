@@ -4,7 +4,7 @@ urlpatterns = patterns('',
     (r'^signup/$', 'django_openidauth.regviews.register', {
         'success_url': '/account/',
         'template_name': 'openid/signup.html',
-        'already_registered_url': '/account/',
+        'already_registered_url': '/openid/associations/',
     }),
     (r'^login/$', 'django_openidconsumer.views.begin', {
         'sreg': 'email,nickname',

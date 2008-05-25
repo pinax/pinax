@@ -16,7 +16,7 @@ def _make_hash(hash_type, user, openid):
     )).hexdigest()
 
 @login_required
-def associations(request, template_name='openid_associations.html', post_login_redirect='/openid/associations/'):
+def associations(request, template_name='openid_associations.html', post_login_redirect='/openid/complete/'):
     """
     A view for managing the OpenIDs associated with a user account.
     """

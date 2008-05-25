@@ -63,6 +63,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.locale.LocaleMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
+    'djangologging.middleware.LoggingMiddleware',
     'django_openidconsumer.middleware.OpenIDMiddleware',
 )
 
@@ -83,6 +84,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     
     "notification.context_processors.notification",
     "announcements.context_processors.site_wide_announcements",
+    "account.context_processors.openid",
+    "core.context_processors.contact_email",
 )
 
 INSTALLED_APPS = (
@@ -125,6 +128,13 @@ EMAIL_DEBUG = DEBUG
 CONTACT_EMAIL = "feedback@example.com"
 LOGIN_URL = "/account/login"
 
+LOGGING_OUTPUT_ENABLED = True
+LOGGING_SHOW_METRICS = True
+LOGGING_LOG_SQL = True
+
+INTERNAL_IPS = (
+    '127.0.0.1',
+)
 
 # URCHIN_ID = "ua-..."
 
