@@ -7,6 +7,9 @@
 
 {% block body %}
 <h1>{% trans "Notices" %}</h1>
+
+<p><a href="#settings">configure settings</a></p>
+
 {% if notices %}
 {% regroup notices by added.date as notices_by_date %}
 
@@ -28,6 +31,7 @@
 <p>{% trans "No notices." %}</p>
 {% endif %}
 
+<div id="settings">
 <h2>{% trans "Settings" %}</h2>
 
 {% if user.email %}
@@ -61,4 +65,5 @@
     </tr>
 </table>
 </form>
+</div>
 {% endblock %}
