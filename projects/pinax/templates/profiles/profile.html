@@ -45,7 +45,7 @@
 {% endif %}
 {% else %}
 {% if is_friend %}
-<p>{% blocktrans %}You are friends with {{ other_user }}. <a href="{% url messages.views.compose %}{{ other_user }}/">Send a message</a>.{% endblocktrans %}</p>
+<p>{% blocktrans %}You are friends with {{ other_user }}.{% endblocktrans %} <a href="{% url messages.views.compose %}{{ other_user }}/">{% trans "Send a message" %}</a>.</p>
 <h2>{% blocktrans %}{{ other_user }}'s Friends{% endblocktrans %}</h2>
 <table class="friend_list">
 {% for friendship in other_friends %}

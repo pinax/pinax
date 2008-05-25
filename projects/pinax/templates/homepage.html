@@ -14,8 +14,8 @@
 
 {% if user.is_authenticated %}
 {% else %}
-<p>{% trans "You can <a href="/account/signup/">Sign up</a> and <a href="/account/login/">Log in</a> to try out the site." %}</p>
+<p>{% blocktrans %}You can <a href="/account/signup/">Sign up</a> and <a href="/account/login/">Log in</a> to try out the site.{% endblocktrans %}</p>
 
-<p><b>{% trans "At this stage, there is openid support, email verification, password management, site announcements, user-to-user messaging, (internal) friend invitation including notification of invitations and acceptance both on the site and via email (if you've verified your address)." %}</b></p>
+<p><b>{% blocktrans %}At this stage, there is openid support, email verification, password management, site announcements, user-to-user messaging, (internal) friend invitation including notification of invitations and acceptance both on the site and via email (if you've verified your address).{% endblocktrans %}</b></p>
 {% endif %}
 {% endblock %}
