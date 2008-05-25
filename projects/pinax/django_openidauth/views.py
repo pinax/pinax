@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login as log_user_in, load_backend
 from django.utils.html import escape
 from django.conf import settings
+from django.template import RequestContext
 
 from models import UserOpenID, associate_openid, unassociate_openid
 from django_openidconsumer import views as consumer_views
@@ -109,7 +110,8 @@ def associations(request, template_name='openid_associations.html', post_login_r
         'add_buttons': add_buttons,
         'del_buttons': del_buttons, # This is also used to generate the list of 
                                     # of associated OpenIDs
-    })
+    },
+    context_instance=RequestContext(request))
 
 def complete(request, on_login_ok=None, on_login_failed=None, 
         on_login_ok_url=None, on_login_failed_url=None,

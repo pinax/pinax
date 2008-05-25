@@ -115,6 +115,7 @@ INSTALLED_APPS = (
     'gravatar',
     'profiles',
     'zwitschern',
+    'account',
 )
 
 ABSOLUTE_URL_OVERRIDES = {

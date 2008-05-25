@@ -2,10 +2,11 @@
 
 {% load inbox %}
 {% load i18n %}
+{% load openid_tags %}
 
 {% block login %}
     {% if user.is_authenticated %}
-        {% if openid %}<img src="/site_media/openid-icon.png" alt="Logged in with OpenID" />{% endif %}<b>{{ user }}</b> | <a href="/account/">{% trans "Account" %}</a> | <a href="/account/logout">{% trans "Logout" %}</a>
+        {% openid_icon openid user %}<b>{{ user }}</b> | <a href="/account/">{% trans "Account" %}</a> | <a href="/account/logout">{% trans "Logout" %}</a>
     {% else %}
         <a href="/account/login/">{% trans "Login" %}</a> or <a href="/account/signup/"><b>{% trans "Sign up" %}</b></a>
     {% endif %}
