@@ -7,9 +7,9 @@
 {% block body %}
 <h1>{% trans "Tweets" %}</h1>
 
-<form method="POST" action="">
+<form method="POST" action="{% url zwitschern.views.personal %}">
     <p>What are you doing?</p>
-    <textarea id="new_tweet" name="tweet" cols="30" rows="4"></textarea>
+    <textarea id="new_tweet" name="tweet" cols="30" rows="4">{% if reply %}@{{ reply }} {% endif %}</textarea>
     <p><span id="chars_left"></span> chars left. <input type="submit" name="action" value="{% trans "post" %}" /></p>
     
 </form>
@@ -21,6 +21,7 @@
 <a href="{% url profiles.views.profile tweet.sender %}"><b>{{ tweet.sender }}</b></a>
 {{ tweet.html|safe }}
 <span class="timesince">{{ tweet.sent|timesince }} ago</span>
+<a class="reply" href="{% url zwitschern.views.personal %}?reply={{ tweet.sender }}">reply</a>
 </div>
 {% endfor %}
 
@@ -45,6 +46,20 @@
             update_chars_left();
         });
         update_chars_left();
+        $('#new_tweet').focus();
+        {% if reply %}
+        var offset = {{ reply|length }} + 2;
+        var textarea = $('#new_tweet')[0];
+        if (textarea.setSelectionRange) { // Safari, Firefox
+            textarea.setSelectionRange(offset, offset);
+        } else if (textarea.createTextRange) { // IE
+            var range = textarea.createTextRange();
+            range.collapse(true);
+            range.moveEnd('character', offset);
+            range.moveStart('character', offset);
+            range.select();
+        }
+        {% endif %}
     });
 </script>
 

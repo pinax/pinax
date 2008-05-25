@@ -14,6 +14,7 @@
 <a href="{% url profiles.views.profile tweet.sender %}"><b>{{ tweet.sender }}</b></a>
 {{ tweet.html|safe }}
 <span class="timesince">{{ tweet.sent|timesince }} ago</span>
+<a class="reply" href="{% url zwitschern.views.personal %}?reply={{ tweet.sender }}">reply</a>
 </div>
 {% endfor %}
 

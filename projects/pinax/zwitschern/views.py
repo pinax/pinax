@@ -15,10 +15,13 @@ def personal(request):
         if request.POST["action"] == "post":
             text = request.POST["tweet"].strip()
             tweet(request.user, text)
-    
+    else:
+        reply = request.GET.get("reply")
+            
     tweets = TweetInstance.objects.filter(recipient=request.user).order_by("-sent")
     
     return render_to_response("zwitschern/personal.html", {
+        "reply": reply,
         "tweets": tweets,
     }, context_instance=RequestContext(request))
 
