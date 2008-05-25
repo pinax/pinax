@@ -16,6 +16,8 @@ from django.contrib.auth.models import User
 
 from emailconfirmation.models import EmailAddress
 
+from friends.models import JoinInvitation
+
 class LoginForm(forms.Form):
     
     username = forms.CharField(label="Username", max_length=30, widget=forms.TextInput())
@@ -50,6 +52,7 @@ class SignupForm(forms.Form):
     password1 = forms.CharField(label="Password", widget=forms.PasswordInput(render_value=False))
     password2 = forms.CharField(label="Password (again)", widget=forms.PasswordInput(render_value=False))
     email = forms.EmailField(label="Email (optional)", required=False, widget=forms.TextInput())
+    confirmation_key = forms.CharField(max_length=40, required=False, widget=forms.HiddenInput())
     
     def clean_username(self):
         if not alnum_re.search(self.cleaned_data["username"]):
@@ -70,11 +73,36 @@ class SignupForm(forms.Form):
         username = self.cleaned_data["username"]
         email = self.cleaned_data["email"]
         password = self.cleaned_data["password1"]
-        new_user = User.objects.create_user(username, "", password)
-        if email:
-            new_user.message_set.create(message="Confirmation email sent to %s" % email)
-            EmailAddress.objects.add_email(new_user, email)
-        return username, password # required for authenticate()
+        if self.cleaned_data["confirmation_key"]:
+            try:
+                join_invitation = JoinInvitation.objects.get(confirmation_key = self.cleaned_data["confirmation_key"])
+                confirmed = True
+            except JoinInvitation.DoesNotExist:
+                confirmed = False
+        else:
+            confirmed = False
+        
+        # @@@ clean up some of the repetition below -- DRY!
+        
+        if confirmed:
+            if email == join_invitation.contact.email:
+                new_user = User.objects.create_user(username, email, password)
+                new_user.message_set.create(message="Your email address has already been verified")
+                # already verified so can just create
+                EmailAddress(user=new_user, email=email, verified=True, primary=True).save()
+            else:
+                new_user = User.objects.create_user(username, "", password)
+                if email:
+                    new_user.message_set.create(message="Confirmation email sent to %s" % email)
+                    EmailAddress.objects.add_email(new_user, email)
+            join_invitation.accept(new_user)
+            return username, password # required for authenticate()
+        else:
+            new_user = User.objects.create_user(username, "", password)
+            if email:
+                new_user.message_set.create(message="Confirmation email sent to %s" % email)
+                EmailAddress.objects.add_email(new_user, email)
+            return username, password # required for authenticate()
 
 
 class UserForm(forms.Form):
