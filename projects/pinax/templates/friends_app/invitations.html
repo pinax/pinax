@@ -6,11 +6,26 @@
 <h1>Invitations</h1>
 {% if user.is_authenticated %}
 
-<h2>Join Requests</h2>
+<h2>Join Requests Sent</h2>
 
-<p>If you'd like to invite someone to join Pinax, you can enter their email address and a message for them below:</p>
+{% if user.join_from.all %}
+<table class="invitation_list">
+{% for invitation in user.join_from.all %}
+    <tr>
+        <td>{{ invitation.contact.email }}</td>
+        <td>{{ invitation.sent }}</td>
+        <td class="invitation_{{ invitation.get_status_display }}">{{ invitation.get_status_display }}</td>
+    </tr>
+{% endfor %}
+</table>
+{% else %}
+<p>No join requests sent.</p>
+{% endif %}
 
-<form method="POST" action="">
+<p><a href="#" onclick="$('#join_invite').toggle(); return false;">Invite someone new to join</a></p>
+
+<form id="join_invite" method="POST" action="" style="display: none;">
+    <p>If you'd like to invite someone to join Pinax, you can enter their email address and a message for them below:</p>
 <table>
 <tr>
     <th>{{ join_request_form.email.label_tag }}</th>
@@ -34,6 +49,8 @@
 <tr><td></td><td><input type="submit" name="action" value="invite" /></td></tr>
 </table>
 </form>
+
+
 
 <h2>Friendship Requests Sent</h2>
 
