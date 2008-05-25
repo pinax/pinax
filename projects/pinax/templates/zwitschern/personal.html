@@ -9,9 +9,9 @@
 
 <form method="POST" action="">
     <p>What are you doing?</p>
-    <textarea name="tweet" cols="30" rows="4"></textarea>
-    <p>(140 character limit, not yet enforced in UI :-)</p>
-    <input type="submit" name="action" value="{% trans "post" %}" />
+    <textarea id="new_tweet" name="tweet" cols="30" rows="4"></textarea>
+    <p><span id="chars_left"></span> chars left. <input type="submit" name="action" value="{% trans "post" %}" /></p>
+    
 </form>
 
 <p>These are tweets from the {{ user.followed.count }} {{ user.followed.count|pluralize:"person,people" }} you are following (plus your own):</p>
@@ -24,6 +24,28 @@
 </div>
 {% endfor %}
 
+{% endblock %}
 
+{% block extra_body %}
+
+<script>
+    $(document).ready(function() {
+        function update_chars_left() {
+            var max_len = 140;
+            var textarea = $('#new_tweet')[0];
+            var tweet_len = textarea.value.length;
+            if (tweet_len >= max_len) {
+                textarea.value = textarea.value.substring(0, max_len); // truncate
+                $('#chars_left').html("0");
+            } else {
+                $('#chars_left').html(max_len - tweet_len);
+            }
+        }
+        $('#new_tweet').keyup(function() {
+            update_chars_left();
+        });
+        update_chars_left();
+    });
+</script>
 
 {% endblock %}
