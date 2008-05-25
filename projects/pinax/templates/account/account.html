@@ -1,38 +1,38 @@
 {% extends "site_base.html" %}
 
-{% block head_title %}Pinax : Account{% endblock %}
+{% block head_title %}Pinax : {% trans "Account" %}{% endblock %}
 
 {% block body %}
-<h1>Account</h1>
+<h1>{% trans "Account" %}</h1>
 {% if user.is_authenticated %}
 
-<h2>Email Addresses</h2>
+<h2>{% trans "Email Addresses" %}</h2>
 {% if user.emailaddress_set.all %}
 <table class="email_list">
 {% for emailaddress in user.emailaddress_set.all %}
     <tr>
         <td>{% if emailaddress.primary %}<b>{{ emailaddress.email }}</b>{% else %}{{ emailaddress.email }}{% endif %}</td>
         {% if emailaddress.verified %}
-        <td><span class="verified">verified</span>
+        <td><span class="verified">{% trans "verified" %}</span>
         {% if emailaddress.primary %}
-        - <span class="primary">primary</span>
+        - <span class="primary">{% trans "primary" %}</span>
         {% else %}
         <form style="display: none;" id="primary_{{ forloop.counter }}" method="post" action="">
             <input type="hidden" name="email" value="{{ emailaddress.email }}"/>
             <input type="hidden" name="action" value="primary"/>
         </form>
         -
-        <a href="#" onclick="$('#primary_{{ forloop.counter }}').submit();">make primary</a>
+        <a href="#" onclick="$('#primary_{{ forloop.counter }}').submit();">{% trans "make primary" %}</a>
         {% endif %}
         </td>
         {% else %}
-        <td><span class="unverified">unverified</span>
+        <td><span class="unverified">{% trans "unverified" %}</span>
         <form style="display: none;" id="send_{{ forloop.counter }}" method="post" action="">
             <input type="hidden" name="email" value="{{ emailaddress.email }}"/>
             <input type="hidden" name="action" value="send"/>
         </form>
         -
-        <a href="#" onclick="$('#send_{{ forloop.counter }}').submit();">re-send verification email</a></td>
+        <a href="#" onclick="$('#send_{{ forloop.counter }}').submit();">{% trans "re-send verification email" %}</a></td>
         {% endif %}
         <td>
         {% if emailaddress.primary %}
@@ -41,36 +41,36 @@
             <input type="hidden" name="email" value="{{ emailaddress.email }}"/>
             <input type="hidden" name="action" value="remove"/>
         </form>
-        <a class="remove" href="#" onclick="$('#remove_{{ forloop.counter }}').submit()">remove</a>
+        <a class="remove" href="#" onclick="$('#remove_{{ forloop.counter }}').submit()">{% trans "remove" %}</a>
         {% endif %}
         </td>
     </tr>
 {% endfor %}
 </table>
 {% else %}
-<p><span class="warning">None</span>. You should really add one so you can receive notifications, reset your password if you forget it, etc.</p>
+<p><span class="warning">{% trans "None" %}</span>. {% trans "You should really add one so you can receive notifications, reset your password if you forget it, etc." %}</p>
 {% endif %}
 
-<h3>Add Email Address</h3>
+<h3>{% trans "Add Email Address" %}</h3>
 <form method="post" action="">
 <table>{{ add_email_form.as_table }}
-<tr><td></td><td><input type="submit" name="action" value="add"/></td></tr>
+<tr><td></td><td><input type="submit" name="action" value="{% trans "add" %}"/></td></tr>
 </table>
 </form>
 
-<h2>OpenID Associations</h2>
-<a href="/openid/associations/">Manage Your OpenID Associations Here</a>
+<h2>{% trans "OpenID Associations" %}</h2>
+<a href="/openid/associations/">{% trans "Manage Your OpenID Associations Here" %}</a>
 
-<h2>Change Password</h2>
+<h2>{% trans "Change Password" %}</h2>
 
 <form method="post" action="">
 <table>{{ password_change_form.as_table }}
-<tr><td></td><td><input type="submit" name="action" value="change password"/></td></tr>
+<tr><td></td><td><input type="submit" name="action" value="{% trans "change password" %}"/></td></tr>
 </table>
 </form>
 
 {% else %}
-<p><span class="warning">Note</span>: Not logged in.</p>
+<p><span class="warning">{% trans "Note" %}</span>: {% trans "Not logged in." %}</p>
 {% endif %}
 {% endblock %}
 

@@ -7,7 +7,7 @@
 {% block body %}
 <h1>{% trans "Sign Up" %}</h1>
 {% if user.is_authenticated %}
-<p>You are already logged in.</p>
+<p>{% trans "You are already logged in." %}</p>
 {% else %}
 <p>{% trans "Already have an account?" %} <a href="/account/login/">{% trans "Log In" %}</a>!
 <form class="signup" method="post" action="/account/signup/">
