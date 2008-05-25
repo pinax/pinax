@@ -5,7 +5,7 @@ from django.views.generic.simple import direct_to_template
 import os.path
 
 urlpatterns = patterns('',
-    (r'^$', direct_to_template, {"template": "homepage.html"}),
+    url(r'^$', direct_to_template, {"template": "homepage.html"}, name="home"),
     (r'^tab2/$', direct_to_template, {"template": "tabs.html"}),
     (r'^tab3/$', direct_to_template, {"template": "tabs.html"}),
     

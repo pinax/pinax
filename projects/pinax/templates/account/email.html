@@ -1,4 +1,4 @@
-{% extends "site_base.html" %}
+{% extends "account/base.html" %}
 
 {% load i18n %}
 
@@ -56,18 +56,7 @@
 <h3>{% trans "Add Email Address" %}</h3>
 <form method="post" action="">
 <table>{{ add_email_form.as_table }}
-<tr><td></td><td><input type="hidden" name="action" value="add"/><input type="submit" value="{% trans "add" %}"/></td></tr>
-</table>
-</form>
-
-<h2>{% trans "OpenID Associations" %}</h2>
-<a href="/openid/associations/">{% trans "Manage Your OpenID Associations Here" %}</a>
-
-<h2>{% trans "Change Password" %}</h2>
-
-<form method="post" action="">
-<table>{{ password_change_form.as_table }}
-<tr><td></td><td><input type="hidden" name="action" value="change password"/><input type="submit" value="{% trans "change password" %}"/></td></tr>
+<tr><td></td><td><input type="submit" name="action" value="{% trans "add" %}"/></td></tr>
 </table>
 </form>
 
