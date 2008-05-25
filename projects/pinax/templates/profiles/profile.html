@@ -54,7 +54,7 @@
 {% if user.sent_tweets.all %}
 {% for tweet in user.sent_tweets.all %}
 <div class="tweet">
-{{ tweet.text }}
+{{ tweet.html|safe }}
 <span class="timesince">{{ tweet.sent|timesince }} ago</span>
 </div>
 {% endfor %}
@@ -119,7 +119,7 @@
     
     {% for tweet in other_user.sent_tweets.all %}
     <div class="tweet">
-    {{ tweet.text }}
+    {{ tweet.html|safe }}
     <span class="timesince">{{ tweet.sent|timesince }} ago</span>
     </div>
     {% endfor %}

@@ -1,12 +1,23 @@
 from datetime import datetime
 
 from django.db import models
+from django.utils.html import escape
 
 from django.contrib.auth.models import User
 
 # relational databases are a terrible way to do
 # multicast messages (just ask Twitter) but here you have it :-)
 
+import re
+ref_re = re.compile("@(\w+)")
+
+def make_link(text):
+    username = text.group(1)
+    return """@<a href="/profiles/%s/">%s</a>""" % (username, username)
+
+def format_tweet(text):
+    return ref_re.sub(make_link, escape(text))
+    
 class Tweet(models.Model):
     """
     a single tweet from a user
@@ -15,6 +26,9 @@ class Tweet(models.Model):
     text = models.CharField(max_length=140)
     sender = models.ForeignKey(User, related_name="sent_tweets")
     sent = models.DateTimeField()
+    
+    def html(self):
+        return format_tweet(self.text)
     
     class Meta:
         ordering = ('-sent', )
@@ -33,6 +47,9 @@ class TweetInstance(models.Model):
     sender = models.ForeignKey(User, related_name="sent_tweet_instances")
     recipient = models.ForeignKey(User, related_name="received_tweet_instances")
     sent = models.DateTimeField()
+    
+    def html(self):
+        return format_tweet(self.text)
     
     class Admin:
         list_display = ('id', 'sender', 'text', 'recipient',)

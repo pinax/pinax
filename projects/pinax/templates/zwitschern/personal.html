@@ -18,8 +18,8 @@
 
 {% for tweet in tweets %}
 <div class="tweet">
-<a href="{% url profiles.views.profile tweet.sender %}">{{ tweet.sender }}</a>
-{{ tweet.text }}
+<a href="{% url profiles.views.profile tweet.sender %}"><b>{{ tweet.sender }}</b></a>
+{{ tweet.html|safe }}
 <span class="timesince">{{ tweet.sent|timesince }} ago</span>
 </div>
 {% endfor %}
