@@ -51,12 +51,16 @@
 
 <h2>Tweets</h2>
 
+{% if user.sent_tweets.all %}
 {% for tweet in user.sent_tweets.all %}
 <div class="tweet">
 {{ tweet.text }}
 <span class="timesince">{{ tweet.sent|timesince }} ago</span>
 </div>
 {% endfor %}
+{% else %}
+<p>You haven't posted any <a href="{% url zwitschern.views.personal %}">tweets</a> yet.</p>
+{% endif %}
 
 {% else %}
 

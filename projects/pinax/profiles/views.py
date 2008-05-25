@@ -10,6 +10,11 @@ from zwitschern.models import Following
 from profiles.models import Profile
 from profiles.forms import ProfileForm
 
+try:
+    from notification import models as notification
+except ImportError:
+    notification = None
+
 def profiles(request):
     return render_to_response("profiles/profiles.html", {
         "users": User.objects.all().order_by("-date_joined"),
@@ -32,10 +37,15 @@ def profile(request, username):
         is_following = False
     
     if request.user.is_authenticated() and request.method == "POST" and not is_me:
+        
+        # @@@ some of this should go in zwitschern itself
+        
         if request.POST["action"] == "follow":
             Following.objects.follow(request.user, other_user)
             is_following = True
             request.user.message_set.create(message="You are now following %s" % other_user)
+            if notification:
+                notification.send([other_user], "tweet_follow", "%s is now following your tweets", [request.user])
         elif request.POST["action"] == "unfollow":
             Following.objects.unfollow(request.user, other_user)
             is_following = False
