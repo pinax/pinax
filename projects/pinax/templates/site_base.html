@@ -35,7 +35,7 @@
         {% if user.is_authenticated %}
             <td class="tab rtab_profile"><div><a href="{% url profiles.views.profile user %}">{% trans "Profile" %}</a></div></td>
             <td class="tab rtab_tweets"><div><a href="{% url zwitschern.views.personal %}">{% trans "Tweets" %}</a></div></td>
-            <td class="tab rtab_inbox"><div><a href="/messages/inbox/">{% trans "Inbox" %} ({% inbox_count %})</a></div></td>
+            <td class="tab rtab_inbox"><div><a href="/messages/inbox/">{% trans "Inbox" %} ({% inbox_count %}{% if notice_unseen_count %}+{{ notice_unseen_count }}{% endif %})</a></div></td>
         {% endif %}
     </tr>
 </table>
