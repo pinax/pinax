@@ -136,6 +136,12 @@ INTERNAL_IPS = (
     '127.0.0.1',
 )
 
+ugettext = lambda s: s
+LANGUAGES = (
+  ('de', ugettext('German')),
+  ('en', ugettext('English')),
+)
+
 # URCHIN_ID = "ua-..."
 
 try:

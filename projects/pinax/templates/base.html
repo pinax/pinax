@@ -28,7 +28,16 @@
         {% endif %}
         <div id="tabhead">
             <div class="logo">{% block logo_link_image %}{% endblock %}</div>
-            <div class="login">{% block login %}{% endblock %}</div>
+            <div class="login">{% block login %}{% endblock %}
+                <span class="locale">{% block locale_switcher %}
+                    {% get_available_languages as LANGUAGES %}
+                    {% get_current_language as LANGUAGE_CODE %}
+                    <form action="/i18n/setlang/" method="post" id="locale_switcher">
+                    <select name="language" onchange="$('#locale_switcher').submit()">{% for lang in LANGUAGES %}
+                        <option value="{{ lang.0 }}" {% ifequal lang.0 LANGUAGE_CODE %} selected="selected"{% endifequal %}>{{ lang.1 }}</option>
+                    {% endfor %}</select></form>
+                {% endblock %}</span>
+            </div>
             <div class="tabs" id="{% block tab_id %}{% endblock %}">{% block tabs %}{% endblock %}</div>
             <div class="right_tab" id="{% block rtab_id %}{% endblock %}">{% block right_tab %}{% endblock %}</div>
         </div>
