@@ -8,7 +8,7 @@
 <h1>{% trans "Manage OpenID Associations" %}</h1>
 <form action="{{ action }}" method="POST">
 {% if del_buttons %}
-<p>{% blocktrans with del_buttons|pluralize as buttons %}Your account is currently associated with the following OpenID{{ buttons }}:{% endblocktrans %}</p>
+<p>{% blocktrans with del_buttons|pluralize as buttons %}Your account is currently associated with the following OpenID {{ buttons }}:{% endblocktrans %}</p>
 <ul>
 {% for button in del_buttons %}
     <li>{{ button.openid|escape }} - <input type="submit" name="{{ button.hash }}" value="{% trans "Remove association" %}"></li>

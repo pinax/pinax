@@ -31,9 +31,9 @@
 <h2>{% trans "Settings" %}</h2>
 
 {% if user.email %}
-<p>{% trans "Primary email" %}: <b>{{ user.email }}</b> ({% trans "change under <a href="/account/">Account</a>" %})</p>
+<p>{% trans "Primary email" %}: <b>{{ user.email }}</b> ({% blocktrans %}change under <a href="/account/">Account</a>{% endblocktrans %})</p>
 {% else %}
-<p><span class="warning">{% trans "Note" %}</span>: {% trans "You do not have a verified email address to which notices can be sent. You can add one by going to <a href="/account/">Account</a>." %}</p>
+<p><span class="warning">{% trans "Note" %}</span>: {% blocktrans %}You do not have a verified email address to which notices can be sent. You can add one by going to <a href="/account/">Account</a>.{% endblocktrans %}</p>
 {% endif %}
 
 <form method="POST" action="">
