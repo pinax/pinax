@@ -1,0 +1,10 @@
+{% extends "site_base.html" %}
+
+{% block rtab_id %}profile_tab{% endblock %}
+
+{% block subnav %}
+<ul class="subnav">
+    <li><a href="{% url profiles.views.profile user.username %} ">Your Profile</a></li>
+    <li><a href="{% url profiles.views.profiles %} ">All Profiles</a></li>
+</ul>
+{% endblock %}
