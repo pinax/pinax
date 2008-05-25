@@ -126,6 +126,7 @@ div {
 #home_tab .tab_home,
 #empty_tab .tab_empty,
 #profile_tab .rtab_profile,
+#tweets_tab .rtab_tweets,
 #inbox_tab .rtab_inbox
 {
     bottom: -1px !important;
@@ -134,6 +135,7 @@ div {
 #home_tab .tab_home a,
 #empty_tab .tab_empty a,
 #profile_tab .rtab_profile a,
+#tweets_tab .rtab_tweets a,
 #inbox_tab .rtab_inbox a
 {
     color: #000 !important; /* selected tab text colour */
@@ -141,6 +143,7 @@ div {
 #home_tab .tab_home div,
 #empty_tab .tab_empty div,
 #profile_tab .rtab_profile div,
+#tweets_tab .rtab_tweets div,
 #inbox_tab .rtab_inbox div
 {
     margin: 0;
@@ -317,4 +320,23 @@ dl.message-headers dt {
 }
 dl.message-header dd {
     float: left;
+}
+div.friends {
+    float: right;
+    background: #F0F0FF;
+    padding: 5px;
+}
+div.friends h2 {
+    margin: 0;
+}
+div.tweet {
+    width: 500px;
+    margin: 0;
+    padding: 5px;
+    border-bottom: 1px solid #CCC;
+    font-size: 12pt;
+}
+div.tweet .timesince {
+    color: #999;
+    font-size: 80%;
 }

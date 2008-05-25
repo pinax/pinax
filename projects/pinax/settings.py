@@ -110,6 +110,7 @@ INSTALLED_APPS = (
     'analytics',
     'gravatar',
     'profiles',
+    'zwitschern',
 )
 
 ABSOLUTE_URL_OVERRIDES = {

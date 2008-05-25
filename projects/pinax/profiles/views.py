@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 from friends.forms import InviteFriendForm
 from friends.models import FriendshipInvitation, Friendship
 
+from zwitschern.models import Following
+
 from profiles.models import Profile
 from profiles.forms import ProfileForm
 
@@ -17,6 +19,7 @@ def profile(request, username):
     other_user = get_object_or_404(User, username=username)
     if request.user.is_authenticated():
         is_friend = Friendship.objects.are_friends(request.user, other_user)
+        is_following = Following.objects.is_following(request.user, other_user)
         other_friends = Friendship.objects.friends_for_user(other_user)
         if request.user == other_user:
             is_me = True
@@ -26,13 +29,24 @@ def profile(request, username):
         other_friends = []
         is_friend = False
         is_me = False
+        is_following = False
+    
+    if request.user.is_authenticated() and request.method == "POST" and not is_me:
+        if request.POST["action"] == "follow":
+            Following.objects.follow(request.user, other_user)
+            is_following = True
+            request.user.message_set.create(message="You are now following %s" % other_user)
+        elif request.POST["action"] == "unfollow":
+            Following.objects.unfollow(request.user, other_user)
+            is_following = False
+            request.user.message_set.create(message="You have stopped following %s" % other_user)
     
     if is_friend:
         invite_form = None
         previous_invitations_to = None
         previous_invitations_from = None
     else:
-        if request.method == "POST":
+        if request.user.is_authenticated() and request.method == "POST":
             if request.POST["action"] == "invite":
                 invite_form = InviteFriendForm(request.user, request.POST)
                 if invite_form.is_valid():
@@ -77,6 +91,7 @@ def profile(request, username):
         "profile_form": profile_form,
         "is_me": is_me,
         "is_friend": is_friend,
+        "is_following": is_following,
         "other_user": other_user,
         "other_friends": other_friends,
         "invite_form": invite_form,

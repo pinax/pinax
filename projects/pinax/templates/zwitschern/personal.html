@@ -1,0 +1,29 @@
+{% extends "zwitschern/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}Pinax : {% blocktrans %}Tweets{% endblocktrans %}{% endblock %}
+
+{% block body %}
+<h1>{% trans "Tweets" %}</h1>
+
+<form method="POST" action="">
+    <p>What are you doing?</p>
+    <textarea name="tweet" cols="30" rows="4"></textarea>
+    <p>(140 character limit, not yet enforced in UI :-)</p>
+    <input type="submit" name="action" value="{% trans "post" %}" />
+</form>
+
+<p>These are tweets from the {{ user.followed.count }} {{ user.followed.count|pluralize:"person,people" }} you are following (plus your own):</p>
+
+{% for tweet in tweets %}
+<div class="tweet">
+<a href="{% url profiles.views.profile tweet.sender %}">{{ tweet.sender }}</a>
+{{ tweet.text }}
+<span class="timesince">{{ tweet.sent|timesince }} ago</span>
+</div>
+{% endfor %}
+
+
+
+{% endblock %}

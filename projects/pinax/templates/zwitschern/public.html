@@ -1,0 +1,22 @@
+{% extends "zwitschern/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}Pinax : {% blocktrans %}Public Tweets{% endblocktrans %}{% endblock %}
+
+{% block body %}
+<h1>{% trans "All Tweets" %}</h1>
+
+<p>These are tweets from everyone:</p>
+
+{% for tweet in tweets %}
+<div class="tweet">
+<a href="{% url profiles.views.profile tweet.sender %}">{{ tweet.sender }}</a>
+{{ tweet.text }}
+<span class="timesince">{{ tweet.sent|timesince }} ago</span>
+</div>
+{% endfor %}
+
+
+
+{% endblock %}

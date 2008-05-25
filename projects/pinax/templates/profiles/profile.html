@@ -7,6 +7,7 @@
 {% block body %}
 
 {% load gravatar %}
+
 {% gravatar other_user 80 %}
 
 <h1>Profile for {{ other_user }}</h1>
@@ -18,8 +19,26 @@
     {% if other_user.get_profile.website %}<p><b>{% trans "Website" %}</b>: <a href="{{ other_user.get_profile.website }}">{{ other_user.get_profile.website }}</a></p>{% endif %}
 </div>
 
+<p><b>Followers</b>: {{ other_user.followers.count }}
+<b>Following</b>: {{ other_user.followed.count }}</p>
+
 {% if user.is_authenticated %}
 {% if is_me %}
+<div class="friends">
+    <h2>{% trans "Your Friends" %}</h2>
+    {% if other_friends %}
+    <table class="friend_list">
+        {% for friendship in other_friends %}
+        <tr>
+            <td>{% gravatar friendship.friend 40 %}</td>
+            <td><a href="{% url profiles.views.profile friendship.friend.username %}">{{ friendship.friend }}</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>{% blocktrans %}None. You should look at the list of <a href="/profiles/">profiles</a> and see if there's anyone you know.{% endblocktrans %}</p>
+    {% endif %}
+</div>
 
 <p><a href="#" onclick="$('#profile_form').toggle(); return false;">{% trans "Edit profile" %}</a></p>
 
@@ -30,59 +49,77 @@
 </table>
 </form>
 
-<h2>{% trans "Your Friends" %}</h2>
-{% if other_friends %}
-<table class="friend_list">
-{% for friendship in other_friends %}
-    <tr>
-        <td>{% gravatar friendship.friend 40 %}</td>
-        <td><a href="{% url profiles.views.profile friendship.friend.username %}">{{ friendship.friend }}</a></td>
-    </tr>
-{% endfor %}
-</table>
-{% else %}
-<p>{% blocktrans %}None. You should look at the list of <a href="/profiles/">profiles</a> and see if there's anyone you know.{% endblocktrans %}</p>
-{% endif %}
-{% else %}
-{% if is_friend %}
-<p>{% blocktrans %}You are friends with {{ other_user }}.{% endblocktrans %} <a href="{% url messages.views.compose %}{{ other_user }}/">{% trans "Send a message" %}</a>.</p>
-<h2>{% blocktrans %}{{ other_user }}'s Friends{% endblocktrans %}</h2>
-<table class="friend_list">
-{% for friendship in other_friends %}
-    <tr>
-        <td>{% gravatar friendship.friend 40 %}</td>
-        <td><a href="{% url profiles.views.profile friendship.friend.username %}">{{ friendship.friend }}</a></td>
-    </tr>
-{% endfor %}
-</table>
+<h2>Tweets</h2>
 
-{% else %}
-<h2>{% trans "Add As Friend" %}</h2>
-{% if previous_invitations_from %}
-<p>{% blocktrans %}{{ other_user }} has already requested friendship.{% endblocktrans %}</p>
-{% for invitation in previous_invitations_from %}
-<div class="friendship_request">
-    <p>{{ invitation.message }}</p>
-    <form style="display: none;" id="invitation_{{ invitation.id }}" method="post" action="">
-        <input type="hidden" name="invitation" value="{{ invitation.id }}"/>
-        <input type="hidden" name="action" value="accept"/>
-    </form>
-    <p><a href="#" onclick="$('#invitation_{{ invitation.id }}').submit()">{% trans "accept" %}</a></p>
+{% for tweet in user.sent_tweets.all %}
+<div class="tweet">
+{{ tweet.text }}
+<span class="timesince">{{ tweet.sent|timesince }} ago</span>
 </div>
 {% endfor %}
+
 {% else %}
-{% if previous_invitations_to %}
-<p>{% trans "Friendship request sent." %}</p>
-{% else %}
+
+<div>
 <form method="POST" action="">
-    <table>
-    {{ invite_form.as_table }}
-    <tr><td></td><td><input type="submit" name="action" value="{% trans "invite" %}" /> {% blocktrans %}{{ other_user }} to be a friend.{% endblocktrans %}</td></tr>
-    </table>
+{% if is_following %}
+<input type="submit" name="action" value="unfollow" />
+{% else %}
+<input type="submit" name="action" value="follow" />
+{% endif %}
 </form>
-{% endif %}
-{% endif %}
-{% endif %}
+</div>
+
+    {% if is_friend %}
+    <p>{% blocktrans %}You are friends with {{ other_user }}.{% endblocktrans %} <a href="{% url messages.views.compose %}{{ other_user }}/">{% trans "Send a message" %}</a>.</p>
+    <div class="friends">
+    <h2>{% blocktrans %}{{ other_user }}'s Friends{% endblocktrans %}</h2>
+    <table class="friend_list">
+        {% for friendship in other_friends %}
+        <tr>
+            <td>{% gravatar friendship.friend 40 %}</td>
+            <td><a href="{% url profiles.views.profile friendship.friend.username %}">{{ friendship.friend }}</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    </div>
+    {% else %}
+    <h2>{% trans "Add As Friend" %}</h2>
+    {% if previous_invitations_from %}
+    <p>{% blocktrans %}{{ other_user }} has already requested friendship.{% endblocktrans %}</p>
+    {% for invitation in previous_invitations_from %}
+    <div class="friendship_request">
+        <p>{{ invitation.message }}</p>
+        <form style="display: none;" id="invitation_{{ invitation.id }}" method="post" action="">
+            <input type="hidden" name="invitation" value="{{ invitation.id }}"/>
+            <input type="hidden" name="action" value="accept"/>
+        </form>
+        <p><a href="#" onclick="$('#invitation_{{ invitation.id }}').submit()">{% trans "accept" %}</a></p>
+    </div>
+    {% endfor %}
+    {% else %}
+    {% if previous_invitations_to %}
+    <p>{% trans "Friendship request sent." %}</p>
+    {% else %}
+    <form method="POST" action="">
+        <table>
+            {{ invite_form.as_table }}
+            <tr><td></td><td><input type="submit" name="action" value="{% trans "invite" %}" /> {% blocktrans %}{{ other_user }} to be a friend.{%  endblocktrans %}</td></tr>
+        </table>
+    </form>
+    {% endif %}
+    {% endif %}
+    {% endif %}
+    
+    <h2>Tweets</h2>
+    
+    {% for tweet in other_user.sent_tweets.all %}
+    <div class="tweet">
+    {{ tweet.text }}
+    <span class="timesince">{{ tweet.sent|timesince }} ago</span>
+    </div>
+    {% endfor %}
+    
 {% endif %}
 {% else %}
 <p>{% blocktrans %}<a href="/account/signup/">Sign up</a> and <a href="/account/login/">log in </a> to add this person as a friend.{% endblocktrans %}</p>
