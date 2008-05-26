@@ -31,15 +31,17 @@
 
 {% if is_friend %}
 <div class="friends">
-<h2>{% blocktrans %}{{ other_user }}'s Friends{% endblocktrans %}</h2>
-<table class="friend_list">
-    {% for friendship in other_friends %}
-    {% if forloop.counter|divisibleby:"2" %}{% else %}<tr>{% endif %}
-        <td class="avatar">{% gravatar friendship.friend 40 %}</td>
-        <td class="details"><a href="{% url profiles.views.profile friendship.friend.username %}">{{ friendship.friend }}</a></td>
-    {% if forloop.counter|divisibleby:"2" %}</tr>{% else %}{% endif %}
+    <h2>{% blocktrans %}{{ other_user }}'s Friends{% endblocktrans %}</h2>
+    <table width="100%">
+        {% for friendship in other_friends %}
+        {% if forloop.counter0|divisibleby:"3" %}<tr>{% endif %}
+            <td>
+                <div class="avatar">{% gravatar friendship.friend 40 %}</div>
+                <div class="details"><a href="{% url profiles.views.profile friendship.friend.username %}">{{ friendship.friend }}</a></div>
+            </td>
+    {% if forloop.counter0|add:"1"|divisibleby:"3" %}</tr>{% endif %}
     {% endfor %}
-    {% if other_friends|length|divisibleby:"2" %}{% else %}</tr>{% endif %}
+    {% if other_friends|length|divisibleby:"3" %}{% else %}</tr>{% endif %}
 </table>
 </div>
 {% endif %}
