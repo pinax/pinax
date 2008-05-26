@@ -1,6 +1,7 @@
 {% extends "zwitschern/base.html" %}
 
 {% load i18n %}
+{% load oembed_tags %}
 
 {% block head_title %}Pinax : {% blocktrans %}Tweets{% endblocktrans %}{% endblock %}
 
@@ -17,6 +18,7 @@
 <p>{% blocktrans with user.followed.count as follow_count and user.followed.count|pluralize:"person,people" as follow_name %}
 These are tweets from the {{ follow_count }} {{ follow_name }} you are following (plus your own){% endblocktrans %}:</p>
 
+{% oembed %}
 {% for tweet in tweets %}
 <div class="tweet">
 <a href="{% url profiles.views.profile tweet.sender %}"><b>{{ tweet.sender }}</b></a>
@@ -26,6 +28,7 @@ These are tweets from the {{ follow_count }} {{ follow_name }} you are following
 <a class="reply" href="{% url zwitschern.views.personal %}?reply={{ tweet.sender }}">{% trans "reply" %}</a>
 </div>
 {% endfor %}
+{% endoembed %}
 
 {% endblock %}
 

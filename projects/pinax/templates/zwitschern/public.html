@@ -1,6 +1,7 @@
 {% extends "zwitschern/base.html" %}
 
 {% load i18n %}
+{% load oembed_tags %}
 
 {% block head_title %}Pinax : {% blocktrans %}Public Tweets{% endblocktrans %}{% endblock %}
 
@@ -9,6 +10,7 @@
 
 <p>These are tweets from everyone:</p>
 
+{% oembed %}
 {% for tweet in tweets %}
 <div class="tweet">
 <a href="{% url profiles.views.profile tweet.sender %}"><b>{{ tweet.sender }}</b></a>
@@ -17,7 +19,7 @@
 <a class="reply" href="{% url zwitschern.views.personal %}?reply={{ tweet.sender }}">reply</a>
 </div>
 {% endfor %}
-
+{% endoembed %}
 
 
 {% endblock %}

@@ -109,6 +109,7 @@ INSTALLED_APPS = (
     'announcements',
     'django_openidconsumer',
     'django_openidauth',
+    'oembed',
     
     # internal (for now)
     'analytics',
