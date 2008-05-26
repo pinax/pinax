@@ -8,5 +8,16 @@
 </table>
 <input type="submit" value="{% trans "Send" %} &raquo;"/>
 </form>
-
+{% endblock %}
+{% block extra_body %}
+{{ block.super }}
+<script type="text/javascript" src="/site_media/jquery.bgiframe.js"></script>
+<script type="text/javascript" src="/site_media/jquery.dimensions.js"></script>
+<script type="text/javascript" src="/site_media/jquery.ajaxQueue.js"></script>
+<script type="text/javascript" src="/site_media/jquery.autocomplete.js"></script>
+<script type="text/javascript">
+$().ready(function() {
+    $("#id_recipient").autocomplete("/account/username_autocomplete/");
+});
+</script>
 {% endblock %}

@@ -1,5 +1,5 @@
 from django.shortcuts import render_to_response
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponseForbidden
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.template import RequestContext
@@ -7,9 +7,11 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 from forms import SignupForm, AddEmailForm, LoginForm, ChangePasswordForm, ResetPasswordForm
 from emailconfirmation.models import EmailAddress, EmailConfirmation
+from friends.models import Friendship
 
 def login(request):
     redirect_to = request.REQUEST.get("next", reverse("acct_email"))
@@ -102,3 +104,13 @@ def password_reset(request):
     return render_to_response("account/password_reset.html", {
         "password_reset_form": password_reset_form,
     }, context_instance=RequestContext(request))
+
+def username_autocomplete(request):
+    if request.user.is_authenticated():
+        q = request.GET.get("q")
+        friends = Friendship.objects.friends_for_user(request.user)
+        response = HttpResponse("\n".join([f["friend"].username for f in friends if f["friend"].username.startswith(q)]))
+    else:
+        response = HttpResponseForbidden()
+    setattr(response, "djangologging.suppress_output", True)
+    return response
