@@ -28,6 +28,9 @@ $().ready(function() {
         // TODO: improve highlighting to only affect username.
         highlight: false,
     });
+    $("#id_recipient").result(function() {
+        $("#id_subject").focus();
+    });
 });
 </script>
 {% endblock %}
