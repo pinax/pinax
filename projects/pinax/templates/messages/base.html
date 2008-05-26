@@ -1,14 +1,13 @@
 {% extends "site_base.html" %}
+
 {% load i18n inbox %}  
 
 {% block head_title %}Pinax : Notices{% endblock %}
 
 {% block rtab_id %}inbox_tab{% endblock %}
 
-{% block body %}  
-{% endblock %}
 {% block subnav %}
-<ul class="subnav">
+<ul>
     <li><a href="{% url messages.views.compose %} ">{% trans "Compose" %}</a></li>
     <li><a href="{% url messages.views.inbox %} ">{% trans "Inbox" %} ({% inbox_count %})</a></li>
     <li><a href="{% url messages.views.outbox %} ">{% trans "Sent" %}</a></li>

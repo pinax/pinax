@@ -32,7 +32,8 @@ div {
     position: relative;
 }
 #body {
-    margin: 20px auto;
+    clear: both;
+    margin: 0 auto;
     padding: 10px;
     width: 800px;
 }
@@ -56,6 +57,9 @@ div {
 }
 #site_wide_announcements ul {
     padding: 0;
+    margin: 0;
+}
+h1 {
     margin: 0;
 }
 #tabhead {
@@ -147,7 +151,7 @@ div {
 #inbox_tab .rtab_inbox div
 {
     margin: 0;
-    background-color: #FFF !important; /* selected tab colour */
+    background-color: #DEF !important; /* selected tab colour */
     border-left: 1px solid #000 !important; /* tab border */
     border-top: 1px solid #000 !important; /* tab border */
     border-right: 1px solid #000 !important; /* tab border */
@@ -281,25 +285,33 @@ table.messages tr th {
     border-bottom: 1px solid #999;
 }
 
-ul.subnav {
-    margin-right: 20px;
-    float:right;
+#subnav {
+    margin: 0;
+    padding: 8px 20px;
+    background: #DEF; /* tab colour */
+    border-bottom: 1px solid #000;
 }
 
-ul.subnav li {
+#subnav ul {
+    float: right;
+    margin: 0;
+    padding: 0;
+}
+
+#subnav ul li {
     display: inline;
     list-style-type: none;
 }
 
-ul.subnav a:link, ul.subnav a:visited {
+#subnav ul a:link, #subnav ul a:visited {
     float: left;
     font-weight: bold;
-    margin: 0 10px 4px 0;
+    margin: 0 20px 0 0;
     text-decoration: none;
     color: #444;
 }
 
-ul.subnav a:hover {
+#subnav ul a:hover {
     color: #666;
 }
 
