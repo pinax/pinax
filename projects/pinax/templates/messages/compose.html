@@ -17,7 +17,16 @@
 <script type="text/javascript" src="/site_media/jquery.autocomplete.js"></script>
 <script type="text/javascript">
 $().ready(function() {
-    $("#id_recipient").autocomplete("/account/username_autocomplete/");
+    $("#id_recipient").autocomplete("/account/username_autocomplete/", {
+        formatItem: function(data, i, n, value) {
+            values = value.split(",,");
+            return values[0] + values[1] + "<br />" + values[2];
+        },
+        formatResult: function(data, value) {
+            values = value.split(",,");
+            return values[1];
+        }
+    });
 });
 </script>
 {% endblock %}

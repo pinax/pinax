@@ -105,11 +105,23 @@ def password_reset(request):
         "password_reset_form": password_reset_form,
     }, context_instance=RequestContext(request))
 
+from gravatar.templatetags.gravatar import gravatar
+
 def username_autocomplete(request):
     if request.user.is_authenticated():
         q = request.GET.get("q")
         friends = Friendship.objects.friends_for_user(request.user)
-        response = HttpResponse("\n".join([f["friend"].username for f in friends if f["friend"].username.startswith(q)]))
+        content = []
+        for friendship in friends:
+            if friendship["friend"].username.startswith(q):
+                profile = friendship["friend"].get_profile()
+                entry = "%s,,%s,,%s" % (
+                    gravatar(friendship["friend"], 40),
+                    friendship["friend"].username,
+                    profile.location
+                )
+                content.append(entry)
+        response = HttpResponse("\n".join(content))
     else:
         response = HttpResponseForbidden()
     setattr(response, "djangologging.suppress_output", True)
