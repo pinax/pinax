@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load gravatar %}
+{% load oembed_tags %}
 
 {% block head_title %}Pinax : {% blocktrans %}Profile for {{ other_user }}{% endblocktrans %}{% endblock %}
 
@@ -72,7 +73,7 @@
 </form>
 
 <h2>Tweets</h2>
-
+{% oembed %}
 {% if user.sent_tweets.all %}
 {% for tweet in user.sent_tweets.all %}
 <div class="tweet">
@@ -84,6 +85,7 @@
 {% else %}
 <p>You haven't posted any <a href="{% url zwitschern.views.personal %}">tweets</a> yet.</p>
 {% endif %}
+{% endoembed %}
 
 {% else %}
 
