@@ -132,7 +132,7 @@
     {% endif %}
     
     <h2>Tweets</h2>
-    
+    {% oembed %}
     {% for tweet in other_user.sent_tweets.all %}
     <div class="tweet">
     {{ tweet.html|safe }}
@@ -140,6 +140,7 @@
     <a class="reply" href="{% url zwitschern.views.personal %}?reply={{ tweet.sender }}">reply</a>
     </div>
     {% endfor %}
+    {% endoembed %}
     
 {% endif %}
 {% else %}
