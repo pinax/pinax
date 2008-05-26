@@ -1,5 +1,6 @@
 {% extends "messages/base.html" %} 
 {% load i18n %} 
+{% load oembed_tags %}
 {% block body %}
 <h1>{% trans "View Message" %}</h1>
 <dl class="message-headers">
@@ -12,7 +13,7 @@
     <dt>{% trans "Recipient" %}:</dt>
     <dd>{{ message.recipient }}</dd>
 </dl>
-{{ message.body|linebreaksbr }}<br /><br />
+{% oembed %}{{ message.body|linebreaksbr }}{% endoembed %}<br /><br />
 
 {% ifequal message.recipient user %}
 <a href="{% url messages.views.reply message.id %}">{% trans "Reply" %}</a>
