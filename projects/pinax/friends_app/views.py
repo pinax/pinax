@@ -23,6 +23,7 @@ def friends(request):
                     request.user.message_set.create(message=_("Accepted friendship request from %(from_user)s") % {'from_user': invitation.from_user})
             except FriendshipInvitation.DoesNotExist:
                 pass
+            join_request_form = JoinRequestForm()
         elif request.POST["action"] == "invite": # invite to join
             join_request_form = JoinRequestForm(request.POST)
             if join_request_form.is_valid():
