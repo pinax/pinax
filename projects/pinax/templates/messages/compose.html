@@ -23,9 +23,10 @@ $().ready(function() {
             return values[0] + values[1] + "<br />" + values[2];
         },
         formatResult: function(data, value) {
-            values = value.split(",,");
-            return values[1];
-        }
+            return value.split(",,")[1];
+        },
+        // TODO: improve highlighting to only affect username.
+        highlight: false,
     });
 });
 </script>
