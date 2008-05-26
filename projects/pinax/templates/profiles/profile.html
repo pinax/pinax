@@ -1,12 +1,44 @@
 {% extends "profiles/base.html" %}
 
 {% load i18n %}
+{% load gravatar %}
 
 {% block head_title %}Pinax : {% blocktrans %}Profile for {{ other_user }}{% endblocktrans %}{% endblock %}
 
 {% block body %}
 
-{% load gravatar %}
+
+{% if is_me %}
+<div class="friends">
+    <h2>{% trans "Your Friends" %}</h2>
+    {% if other_friends %}
+    <table class="friend_list">
+        {% for friendship in other_friends %}
+        <tr>
+            <td>{% gravatar friendship.friend 40 %}</td>
+            <td><a href="{% url profiles.views.profile friendship.friend.username %}">{{ friendship.friend }}</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>{% blocktrans %}None. You should look at the list of <a href="/profiles/">profiles</a> and see if there's anyone you know.{% endblocktrans %}</p>
+    {% endif %}
+</div>
+{% endif %}
+
+{% if is_friend %}
+<div class="friends">
+<h2>{% blocktrans %}{{ other_user }}'s Friends{% endblocktrans %}</h2>
+<table class="friend_list">
+    {% for friendship in other_friends %}
+    <tr>
+        <td>{% gravatar friendship.friend 40 %}</td>
+        <td><a href="{% url profiles.views.profile friendship.friend.username %}">{{ friendship.friend }}</a></td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
+{% endif %}
 
 {% gravatar other_user 80 %}
 
@@ -24,22 +56,6 @@
 
 {% if user.is_authenticated %}
 {% if is_me %}
-<div class="friends">
-    <h2>{% trans "Your Friends" %}</h2>
-    {% if other_friends %}
-    <table class="friend_list">
-        {% for friendship in other_friends %}
-        <tr>
-            <td>{% gravatar friendship.friend 40 %}</td>
-            <td><a href="{% url profiles.views.profile friendship.friend.username %}">{{ friendship.friend }}</a></td>
-        </tr>
-        {% endfor %}
-    </table>
-    {% else %}
-    <p>{% blocktrans %}None. You should look at the list of <a href="/profiles/">profiles</a> and see if there's anyone you know.{% endblocktrans %}</p>
-    {% endif %}
-</div>
-
 <p><a href="#" onclick="$('#profile_form').toggle(); return false;">{% trans "Edit profile" %}</a></p>
 
 <form id="profile_form" method="POST" action="" style="display: none;">
@@ -77,17 +93,6 @@
 
     {% if is_friend %}
     <p>{% blocktrans %}You are friends with {{ other_user }}.{% endblocktrans %} <a href="{% url messages.views.compose %}{{ other_user }}/">{% trans "Send a message" %}</a>.</p>
-    <div class="friends">
-    <h2>{% blocktrans %}{{ other_user }}'s Friends{% endblocktrans %}</h2>
-    <table class="friend_list">
-        {% for friendship in other_friends %}
-        <tr>
-            <td>{% gravatar friendship.friend 40 %}</td>
-            <td><a href="{% url profiles.views.profile friendship.friend.username %}">{{ friendship.friend }}</a></td>
-        </tr>
-        {% endfor %}
-    </table>
-    </div>
     {% else %}
     <h2>{% trans "Add As Friend" %}</h2>
     {% if previous_invitations_from %}
