@@ -31,6 +31,7 @@
             <div class="login">{% block login %}{% endblock %}{% block locale_switcher %}{% endblock %}</div>
             <div class="tabs" id="{% block tab_id %}{% endblock %}">{% block tabs %}{% endblock %}</div>
             <div class="right_tab" id="{% block rtab_id %}{% endblock %}">{% block right_tab %}{% endblock %}</div>
+            {% block subnav %}{% endblock %}
         </div>
         
         <div id="body">
@@ -42,8 +43,6 @@
                 <li><a href="#" onclick="$('#messages').fadeOut(); return false;"><small>{% trans "clear messages" %}</small></a></li>
             </ul>
             {% endif %}
-            {% block subnav %}
-            {% endblock %}
             {% block body %}
             {% endblock %}
             </div>
