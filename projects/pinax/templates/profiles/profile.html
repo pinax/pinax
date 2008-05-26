@@ -10,7 +10,7 @@
 
 {% gravatar other_user 80 %}
 
-<h1>Profile for {{ other_user }}</h1>
+<h1>{% blocktrans %}Profile for {{ other_user }}{% endblocktrans %}</h1>
 
 <div class="profile_info">
     {% if other_user.get_profile.name %}<p><b>{% trans "Name" %}</b>: {{ other_user.get_profile.name }}</p>{% endif %}
@@ -19,8 +19,8 @@
     {% if other_user.get_profile.website %}<p><b>{% trans "Website" %}</b>: <a href="{{ other_user.get_profile.website }}">{{ other_user.get_profile.website }}</a></p>{% endif %}
 </div>
 
-<p><b>Followers</b>: {{ other_user.followers.count }}
-<b>Following</b>: {{ other_user.followed.count }}</p>
+<p><b>{% trans "Followers" %}</b>: {{ other_user.followers.count }}
+<b>{% trans "Following" %}</b>: {{ other_user.followed.count }}</p>
 
 {% if user.is_authenticated %}
 {% if is_me %}
