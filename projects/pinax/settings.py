@@ -143,6 +143,7 @@ LANGUAGES = (
   ('en', ugettext('English')),
   ('de', ugettext('German')),
   ('es', ugettext('Spanish')),
+  ('sv', ugettext('Swedish')),
 )
 
 # URCHIN_ID = "ua-..."

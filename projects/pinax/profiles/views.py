@@ -2,6 +2,9 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.contrib.auth.models import User
 
+from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext
+
 from friends.forms import InviteFriendForm
 from friends.models import FriendshipInvitation, Friendship
 
@@ -43,13 +46,13 @@ def profile(request, username):
         if request.POST["action"] == "follow":
             Following.objects.follow(request.user, other_user)
             is_following = True
-            request.user.message_set.create(message="You are now following %s" % other_user)
+            request.user.message_set.create(message=_("You are now following %(other_user)s") % {'other_user': other_user})
             if notification:
                 notification.send([other_user], "tweet_follow", "%s is now following your tweets", [request.user])
         elif request.POST["action"] == "unfollow":
             Following.objects.unfollow(request.user, other_user)
             is_following = False
-            request.user.message_set.create(message="You have stopped following %s" % other_user)
+            request.user.message_set.create(message=_("You have stopped following %(other_user)s") % {'other_user': other_user})
     
     if is_friend:
         invite_form = None
@@ -71,7 +74,7 @@ def profile(request, username):
                         invitation = FriendshipInvitation.objects.get(id=invitation_id)
                         if invitation.to_user == request.user:
                             invitation.accept()
-                            request.user.message_set.create(message="You have accepted the friendship request from %s" % invitation.from_user)
+                            request.user.message_set.create(message=_("You have accepted the friendship request from %(from_user)s") % {'from_user': invitation.from_user})
                             is_friend = True
                             other_friends = Friendship.objects.friends_for_user(other_user)
                     except FriendshipInvitation.DoesNotExist:
@@ -79,7 +82,7 @@ def profile(request, username):
         else:
             invite_form = InviteFriendForm(request.user, {
                 'to_user': username,
-                'message': "Let's be friends!",
+                'message': ugettext("Let's be friends!"),
             })
     previous_invitations_to = FriendshipInvitation.objects.filter(to_user=other_user, from_user=request.user)
     previous_invitations_from = FriendshipInvitation.objects.filter(to_user=request.user, from_user=other_user)
