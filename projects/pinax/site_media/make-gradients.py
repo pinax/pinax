@@ -1,0 +1,13 @@
+import sys
+sys.path.append("../utils")
+
+from gradient import *
+
+write_png("heading.png", 1, 80, gradient([
+    (1.00, (0x00, 0x11, 0x33), (0x00, 0x55, 0x77)),
+]))
+
+write_png("form-shadow.png", 1, 25, gradient([
+    (0.33, (0xDD, 0xDD, 0xDD), (0xF3, 0xF3, 0xF3)), # top-shadow
+    (1.0,  (0xF3, 0xF3, 0xF3), (0xF3, 0xF3, 0xF3)),
+]))
