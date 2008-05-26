@@ -100,23 +100,25 @@
     {% if is_friend %}
     <p>{% blocktrans %}You are friends with {{ other_user }}.{% endblocktrans %} <a href="{% url messages.views.compose %}{{ other_user }}/">{% trans "Send a message" %}</a>.</p>
     {% else %}
-    <h2>{% trans "Add As Friend" %}</h2>
     {% if previous_invitations_from %}
     <p>{% blocktrans %}{{ other_user }} has already requested friendship.{% endblocktrans %}</p>
     {% for invitation in previous_invitations_from %}
     <div class="friendship_request">
-        <p>{{ invitation.message }}</p>
-        <form style="display: none;" id="invitation_{{ invitation.id }}" method="post" action="">
+        <p>From <a href="{% url profiles.views.profile invitation.from_user.username %}">{{ invitation.from_user }}</a>
+            ({{ invitation.sent }}):</p>
+        <p class="invitation_message">{{ invitation.message }}</p>
+        <form method="post" action="">
             <input type="hidden" name="invitation" value="{{ invitation.id }}"/>
             <input type="hidden" name="action" value="accept"/>
+            <input type="submit" value="{% trans 'accept' %}" />
         </form>
-        <p><a href="#" onclick="$('#invitation_{{ invitation.id }}').submit()">{% trans "accept" %}</a></p>
     </div>
     {% endfor %}
     {% else %}
     {% if previous_invitations_to %}
     <p>{% trans "Friendship request sent." %}</p>
     {% else %}
+    <h2>{% trans "Add As Friend" %}</h2>
     <form method="POST" action="">
         <table>
             {{ invite_form.as_table }}

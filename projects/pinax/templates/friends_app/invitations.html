@@ -6,23 +6,7 @@
 
 {% block body %}
 <h1>{% trans "Invitations" %}</h1>
-{% if user.is_authenticated %}
 
-<h2>{% trans "Join Requests Sent" %}</h2>
-
-{% if user.join_from.all %}
-<table class="invitation_list">
-{% for invitation in user.join_from.all %}
-    <tr>
-        <td>{{ invitation.contact.email }}</td>
-        <td>{{ invitation.sent }}</td>
-        <td class="invitation_{{ invitation.get_status_display }}">{{ invitation.get_status_display }}</td>
-    </tr>
-{% endfor %}
-</table>
-{% else %}
-<p>{% trans "No join requests sent." %}</p>
-{% endif %}
 
 <p><a href="#" onclick="$('#join_invite').toggle(); return false;">{% trans "Invite someone new to join" %}</a></p>
 
@@ -52,13 +36,44 @@
 </table>
 </form>
 
+<h2>{% trans "Friendship Requests Received" %}</h2>
+
+{% if invites_received %}
+<table class="invitation_list">
+{% for invitation in invites_received %}
+{% ifequal invitation.status "2" %}
+<tr>
+    <td colspan="3" class="friendship_request">
+        <p>From <a href="{% url profiles.views.profile invitation.from_user.username %}">{{ invitation.from_user }}</a>
+            ({{ invitation.sent }}):</p>
+        <p class="invitation_message">{{ invitation.message }}</p>
+        <form method="post" action="">
+            <input type="hidden" name="invitation" value="{{ invitation.id }}"/>
+            <input type="hidden" name="action" value="accept"/>
+            <input type="submit" value="{% trans 'accept' %}" />
+        </form>
+    </td>
+</tr>
+{% else %}
+    <tr>
+        <td><a href="{% url profiles.views.profile invitation.from_user.username %}">{{ invitation.from_user }}</a></td>
+        <td>{{ invitation.sent }}</td>
+        <td class="invitation_{{ invitation.get_status_display }}">{{ invitation.get_status_display }}</td>
+    </tr>
+{% endifequal %}        
+{% endfor %}
+</table>
+{% else %}
+<p>{% trans "No friendship requests received." %}</p>
+{% endif %}
+
 
 
 <h2>{% trans "Friendship Requests Sent" %}</h2>
 
-{% if user.invitations_from.all %}
+{% if invites_sent %}
 <table class="invitation_list">
-{% for invitation in user.invitations_from.all %}
+{% for invitation in invites_sent %}
     <tr>
         <td><a href="{% url profiles.views.profile invitation.to_user.username %}">{{ invitation.to_user }}</a></td>
         <td>{{ invitation.sent }}</td>
@@ -71,38 +86,23 @@
 {% endif %}
 
 
-<h2>{% trans "Friendship Requests Received" %}</h2>
 
-{% if user.invitations_to.all %}
+<h2>{% trans "Join Requests Sent" %}</h2>
+
+{% if joins_sent %}
 <table class="invitation_list">
-{% for invitation in user.invitations_to.all %}
+{% for invitation in joins_sent %}
     <tr>
-        <td><a href="{% url profiles.views.profile invitation.from_user.username %}">{{ invitation.from_user }}</a></td>
+        <td>{{ invitation.contact.email }}</td>
         <td>{{ invitation.sent }}</td>
         <td class="invitation_{{ invitation.get_status_display }}">{{ invitation.get_status_display }}</td>
     </tr>
-{% ifequal invitation.status "2" %}
-    <tr>
-        <td colspan="3">
-            <div class="friendship_request">
-            <p>{{ invitation.message }}</p>
-            <form style="display: none;" id="invitation_{{ invitation.id }}" method="post" action="">
-                <input type="hidden" name="invitation" value="{{ invitation.id }}"/>
-                <input type="hidden" name="action" value="accept"/>
-            </form>
-            <p><a href="#" onclick="$('#invitation_{{ invitation.id }}').submit()">{% trans "accept" %}</a></p>
-            </div>
-        </td>
-    </tr>
-{% endifequal %}        
 {% endfor %}
 </table>
 {% else %}
-<p>{% trans "No friendship requests received." %}</p>
+<p>{% trans "No join requests sent." %}</p>
 {% endif %}
 
-{% else %}
-<p><span class="warning">{% trans "Note" %}</span>: {% trans "Not logged in." %}</p>
-{% endif %}
+
 
 {% endblock %}

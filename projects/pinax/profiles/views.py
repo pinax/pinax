@@ -65,18 +65,21 @@ def profile(request, username):
                 invite_form = InviteFriendForm(request.user, {
                     'to_user': username,
                 })
-                if request.POST["action"] == "accept":
+                if request.POST["action"] == "accept": # @@@ perhaps the form should just post to friends and be redirected here
                     invitation_id = request.POST["invitation"]
                     try:
                         invitation = FriendshipInvitation.objects.get(id=invitation_id)
                         if invitation.to_user == request.user:
                             invitation.accept()
-                            request.user.message_set.create(message="Accepted friendship request from %s" % invitation.from_user)
+                            request.user.message_set.create(message="You have accepted the friendship request from %s" % invitation.from_user)
+                            is_friend = True
+                            other_friends = Friendship.objects.friends_for_user(other_user)
                     except FriendshipInvitation.DoesNotExist:
                         pass
         else:
             invite_form = InviteFriendForm(request.user, {
                 'to_user': username,
+                'message': "Let's be friends!",
             })
     previous_invitations_to = FriendshipInvitation.objects.filter(to_user=other_user, from_user=request.user)
     previous_invitations_from = FriendshipInvitation.objects.filter(to_user=request.user, from_user=other_user)

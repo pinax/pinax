@@ -38,14 +38,15 @@
             {% if messages %}
             <ul id="messages">
                 {% for message in messages %}
-                <li>{{ message }}</li>
+                <li id="message_{{ forloop.counter }}"><a href="#" onclick="$('#message_{{ forloop.counter }}').fadeOut(); return false;"><small>{% trans "clear" %}</small></a> {{ message }}</li>
                 {% endfor %}
-                <li><a href="#" onclick="$('#messages').fadeOut(); return false;"><small>{% trans "clear messages" %}</small></a></li>
             </ul>
             {% endif %}
+            
             {% block body %}
             {% endblock %}
-            </div>
+            
+        </div>
         
         <div id="footer">{% block footer %}{% endblock %}</div>
         
