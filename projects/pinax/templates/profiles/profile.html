@@ -76,7 +76,7 @@
 {% oembed %}
 {% if user.sent_tweets.all %}
 {% for tweet in user.sent_tweets.all %}
-<div class="tweet">
+<div class="tweet" id="t{{ tweet.id }}">
 {{ tweet.html|safe }}
 <span class="timesince">{{ tweet.sent|timesince }} ago</span>
 <a class="reply" href="{% url zwitschern.views.personal %}?reply={{ tweet.sender }}">reply</a>
@@ -134,7 +134,7 @@
     <h2>Tweets</h2>
     {% oembed %}
     {% for tweet in other_user.sent_tweets.all %}
-    <div class="tweet">
+    <div class="tweet" id="t{{ tweet.id }}">
     {{ tweet.html|safe }}
     <span class="timesince">{{ tweet.sent|timesince }} ago</span>
     <a class="reply" href="{% url zwitschern.views.personal %}?reply={{ tweet.sender }}">reply</a>

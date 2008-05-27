@@ -5,6 +5,10 @@
 
 {% block head_title %}Pinax : {% blocktrans %}Tweets{% endblocktrans %}{% endblock %}
 
+{% block extra_head %}
+<link rel="alternate" type="application/atom+xml" title="Tweets Feed for User {{ user.username|capfirst }}" href="/feeds/tweets/{{ user.username }}/" />
+{% endblock %}
+
 {% block body %}
 <h1>{% trans "Tweets" %}</h1>
 
@@ -20,7 +24,7 @@ These are tweets from the {{ follow_count }} {{ follow_name }} you are following
 
 {% oembed %}
 {% for tweet in tweets %}
-<div class="tweet">
+<div class="tweet" id="t{{ tweet.id }}">
 <a href="{% url profiles.views.profile tweet.sender %}"><b>{{ tweet.sender }}</b></a>
 {{ tweet.html|safe }}
 <span class="timesince">{% blocktrans with tweet.sent|timesince as tweet_age %}

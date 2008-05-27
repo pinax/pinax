@@ -4,6 +4,11 @@ from django.views.generic.simple import direct_to_template
 
 import os.path
 
+from zwitschern.feeds import TweetFeed
+feed_dict = {"feed_dict": {
+    'tweets': TweetFeed,
+}}
+
 urlpatterns = patterns('',
     url(r'^$', direct_to_template, {"template": "homepage.html"}, name="home"),
     (r'^tab2/$', direct_to_template, {"template": "tabs.html"}),
@@ -23,6 +28,8 @@ urlpatterns = patterns('',
     (r'^robots.txt$', include('robots.urls')),
     (r'^i18n/', include('django.conf.urls.i18n')),
     (r'^admin/', include('django.contrib.admin.urls')),
+    
+    (r'^feeds/(.*)/$', 'django.contrib.syndication.views.feed', feed_dict),
 )
 
 if settings.DEBUG:

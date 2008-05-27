@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 
@@ -34,4 +34,13 @@ def public(request):
 
     return render_to_response("zwitschern/public.html", {
         "tweets": tweets,
+    }, context_instance=RequestContext(request))
+
+def single(request, id):
+    """
+    A single tweet.
+    """
+    tweet = get_object_or_404(TweetInstance, id=id)
+    return render_to_response("zwitschern/single.html", {
+        "tweet": tweet,
     }, context_instance=RequestContext(request))
