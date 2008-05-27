@@ -1,0 +1,73 @@
+{% extends "tribes/base.html" %}
+
+{% load i18n %}
+{% load gravatar %}
+
+{% block head_title %}Pinax : {{ tribe.name }}{% endblock %}
+
+{% block body %}
+
+<div class="friends">
+    <h2>{% trans "Members" %}</h2>
+    <table width="100%">
+        {% for member in tribe.members.all %}
+        {% if forloop.counter0|divisibleby:"3" %}<tr>{% endif %}
+            <td>
+                <div class="avatar">{% gravatar member 40 %}</div>
+                <div class="details"><a href="{% url profiles.views.profile member.username %}">{{ member }}</a></div>
+            </td>
+        {% if forloop.counter0|add:"1"|divisibleby:"3" %}</tr>{% endif %}
+        {% endfor %}
+        {% if tribe.members.all|length|divisibleby:"3" %}{% else %}</tr>{% endif %}
+    </table>
+</div>
+
+<p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time. It doesn't do much yet.</p>
+
+<h1>{% trans "Tribe" %} {{ tribe.name }}</h1>
+
+
+<p>Slug: <tt>{{ tribe.slug }}</tt><br />
+Creator: <a href="{% url profiles.views.profile tribe.creator.username %}">{{ tribe.creator }}</a><br />
+Created: {{ tribe.created|date }}
+</p>
+
+
+<p>{{ tribe.description }}</p>
+
+
+{% ifequal user tribe.creator %}
+<p><a href="#" onclick="$('#tribe_form').toggle(); return false;">{% trans "Edit details" %}</a></p>
+
+<form id="tribe_form" method="POST" action="" style="display: none;">
+<table>
+{{ tribe_form }}
+<tr><td></td><td><input type="hidden" name="action" value="update" /><input type="submit" value="{% trans 'update' %}"/></td></tr>
+</table>
+</form>
+{% endifequal %}
+
+<div>
+<form method="POST" action="">
+{% if are_member %}
+{% ifequal user tribe.creator %}
+<p>You are the creator of this tribe so can't leave (yet).</p>
+{% else %}
+<input type="hidden" name="action" value="leave" /><input type="submit" value="{% trans "leave" %}"/>
+{% endifequal %}
+{% else %}
+<input type="hidden" name="action" value="join" /><input type="submit" value="{% trans "join tribe" %}"/>
+{% endif %}
+</form>
+</div>
+
+
+{% endblock %}
+
+{% block extra_body %}
+<script>
+{% if tribe_form.errors %}
+    $('#tribe_form').show();
+{% endif %}
+</script>
+{% endblock %}

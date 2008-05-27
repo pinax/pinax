@@ -1,0 +1,44 @@
+{% extends "tribes/base.html" %}
+
+{% load i18n %}
+{% load gravatar %}
+{% load humanize %}
+
+{% block head_title %}Pinax : {% blocktrans %}Tribes{% endblocktrans %}{% endblock %}
+
+{% block body %}
+<p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time. It doesn't do much yet.</p>
+
+<h1>{% trans "Tribes" %}</h1>
+
+
+<p><a href="#" onclick="$('#tribe_form').toggle(); return false;">{% trans "Start your own" %}</a></p>
+
+<form id="tribe_form" method="POST" action="" style="display: none;">
+<table>
+{{ tribe_form }}
+<tr><td></td><td><input type="hidden" name="action" value="create" /><input type="submit" value="{% trans 'create' %}"/></td></tr>
+</table>
+</form>
+
+{% regroup tribes by created.date as tribes_by_created %}
+
+{% for date in tribes_by_created %}
+<h2 class="creation_date">{{ date.grouper|naturalday:_("MONTH_DAY_FORMAT")|capfirst }}</h2>
+<dl>
+{% for tribe in date.list %}
+    <dt>{{ tribe.name }} (<a href="{% url tribes.views.tribe tribe.slug %}">{{ tribe.slug }}</a>)</dt>
+    <dd>{{ tribe.description }}</dd>
+{% endfor %}
+</dl>
+{% endfor %}
+
+{% endblock %}
+
+{% block extra_body %}
+<script>
+{% if tribe_form.errors %}
+    $('#tribe_form').show();
+{% endif %}
+</script>
+{% endblock %}
