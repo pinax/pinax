@@ -121,7 +121,7 @@
 </div>
 
     {% if is_friend %}
-    <p>{% blocktrans %}You are friends with {{ other_user }}.{% endblocktrans %} <a href="{% url messages.views.compose %}{{ other_user }}/">{% trans "Send a message" %}</a>.</p>
+    <p>{% blocktrans %}You are friends with {{ other_user }}.{% endblocktrans %} <a href="{% url messages_compose %}{{ other_user }}/">{% trans "Send a message" %}</a>.</p>
     {% else %}
     {% if previous_invitations_from %}
     <p>{% blocktrans %}{{ other_user }} has requested friendship.{% endblocktrans %}</p>

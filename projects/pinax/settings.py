@@ -86,6 +86,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "announcements.context_processors.site_wide_announcements",
     "account.context_processors.openid",
     "core.context_processors.contact_email",
+    "messages.context_processors.inbox"
 )
 
 INSTALLED_APPS = (

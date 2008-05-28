@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 
-{% load inbox %}
 {% load i18n %}
 {% load openid_tags %}
 
@@ -40,7 +39,7 @@
         <td class="tab rtab_profile"><div><a href="{% url profiles.views.profile user %}">{% trans "Profile" %}</a></div></td>
         <td class="tab rtab_tribes"><div><a href="{% url tribes.views.tribes %}">{% trans "Tribes" %}</a></div></td>
         <td class="tab rtab_tweets"><div><a href="{% url zwitschern.views.personal %}">{% trans "Tweets" %}</a></div></td>
-        <td class="tab rtab_inbox"><div><a href="/messages/inbox/">{% trans "Inbox" %} ({% inbox_count %}{% if notice_unseen_count %}+{{ notice_unseen_count }}{% endif %})</a></div></td>
+        <td class="tab rtab_inbox"><div><a href="/messages/inbox/">{% trans "Inbox" %} ({% if messages_inbox_count %}{{ messages_inbox_count }}{% else %}0{% endif %}{% if notice_unseen_count %}+{{ notice_unseen_count }}{% endif %})</a></div></td>
     </tr>
 </table>
 {% endif %}

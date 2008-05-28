@@ -49,7 +49,7 @@
     </tr>
 {% for row in notice_settings.rows %}
     <tr>
-        <td>{% trans row.notice_type.get_display %}<br/>
+        <td>{% trans row.notice_type.display %}<br/>
             <span class="notice_type_description">{% trans row.notice_type.description %}</span>
         </td>
         {% for cell in row.cells %}
