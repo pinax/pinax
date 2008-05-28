@@ -8,44 +8,45 @@
 
 {% block body %}
 
+<div class="right_panel">
+    {% if is_me %}
+    <div class="friends">
+        <h2>{% trans "Your Friends" %}</h2>
+        {% if other_friends %}
+        <table width="100%">
+            {% for friendship in other_friends %}
+            {% if forloop.counter0|divisibleby:"3" %}<tr>{% endif %}
+                <td>
+                    <div class="avatar">{% gravatar friendship.friend 40 %}</div>
+                    <div class="details"><a href="{% url profiles.views.profile friendship.friend.username %}">{{ friendship.friend }}</a></div>
+                </td>
+            {% if forloop.counter0|add:"1"|divisibleby:"3" %}</tr>{% endif %}
+            {% endfor %}
+            {% if other_friends|length|divisibleby:"3" %}{% else %}</tr>{% endif %}
+        </table>
+        {% else %}
+        <p>{% blocktrans %}None. You should look at the list of <a href="/profiles/">profiles</a> and see if there's anyone you know.{% endblocktrans %}</p>
+        {% endif %}
+    </div>
+    {% endif %}
 
-{% if is_me %}
-<div class="friends">
-    <h2>{% trans "Your Friends" %}</h2>
-    {% if other_friends %}
-    <table width="100%">
-        {% for friendship in other_friends %}
-        {% if forloop.counter0|divisibleby:"3" %}<tr>{% endif %}
-            <td>
-                <div class="avatar">{% gravatar friendship.friend 40 %}</div>
-                <div class="details"><a href="{% url profiles.views.profile friendship.friend.username %}">{{ friendship.friend }}</a></div>
-            </td>
+    {% if is_friend %}
+    <div class="friends">
+        <h2>{% blocktrans %}{{ other_user }}'s Friends{% endblocktrans %}</h2>
+        <table width="100%">
+            {% for friendship in other_friends %}
+            {% if forloop.counter0|divisibleby:"3" %}<tr>{% endif %}
+                <td>
+                    <div class="avatar">{% gravatar friendship.friend 40 %}</div>
+                    <div class="details"><a href="{% url profiles.views.profile friendship.friend.username %}">{{ friendship.friend }}</a></div>
+                </td>
         {% if forloop.counter0|add:"1"|divisibleby:"3" %}</tr>{% endif %}
         {% endfor %}
         {% if other_friends|length|divisibleby:"3" %}{% else %}</tr>{% endif %}
     </table>
-    {% else %}
-    <p>{% blocktrans %}None. You should look at the list of <a href="/profiles/">profiles</a> and see if there's anyone you know.{% endblocktrans %}</p>
+    </div>
     {% endif %}
 </div>
-{% endif %}
-
-{% if is_friend %}
-<div class="friends">
-    <h2>{% blocktrans %}{{ other_user }}'s Friends{% endblocktrans %}</h2>
-    <table width="100%">
-        {% for friendship in other_friends %}
-        {% if forloop.counter0|divisibleby:"3" %}<tr>{% endif %}
-            <td>
-                <div class="avatar">{% gravatar friendship.friend 40 %}</div>
-                <div class="details"><a href="{% url profiles.views.profile friendship.friend.username %}">{{ friendship.friend }}</a></div>
-            </td>
-    {% if forloop.counter0|add:"1"|divisibleby:"3" %}</tr>{% endif %}
-    {% endfor %}
-    {% if other_friends|length|divisibleby:"3" %}{% else %}</tr>{% endif %}
-</table>
-</div>
-{% endif %}
 
 {% gravatar other_user 80 %}
 
@@ -133,6 +134,7 @@
     
     <h2>Tweets</h2>
     {% oembed %}
+    {% if other_user.sent_tweets.all %}
     {% for tweet in other_user.sent_tweets.all %}
     <div class="tweet" id="t{{ tweet.id }}">
     {{ tweet.html|safe }}
@@ -140,6 +142,9 @@
     <a class="reply" href="{% url zwitschern.views.personal %}?reply={{ tweet.sender }}">reply</a>
     </div>
     {% endfor %}
+    {% else %}
+    <p>{{ other_user }} hasn't posted any tweets yet.</p>
+    {% endif %}
     {% endoembed %}
     
 {% endif %}
