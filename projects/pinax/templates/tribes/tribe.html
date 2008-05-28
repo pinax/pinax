@@ -7,19 +7,21 @@
 
 {% block body %}
 
-<div class="friends">
-    <h2>{% trans "Members" %}</h2>
-    <table width="100%">
-        {% for member in tribe.members.all %}
-        {% if forloop.counter0|divisibleby:"3" %}<tr>{% endif %}
-            <td>
-                <div class="avatar">{% gravatar member 40 %}</div>
-                <div class="details"><a href="{% url profiles.views.profile member.username %}">{{ member }}</a></div>
-            </td>
-        {% if forloop.counter0|add:"1"|divisibleby:"3" %}</tr>{% endif %}
-        {% endfor %}
-        {% if tribe.members.all|length|divisibleby:"3" %}{% else %}</tr>{% endif %}
-    </table>
+<div class="right_panel">
+    <div class="friends">
+        <h2>{% trans "Members" %}</h2>
+        <table width="100%">
+            {% for member in tribe.members.all %}
+            {% if forloop.counter0|divisibleby:"3" %}<tr>{% endif %}
+                <td>
+                    <div class="avatar">{% gravatar member 40 %}</div>
+                    <div class="details"><a href="{% url profiles.views.profile member.username %}">{{ member }}</a></div>
+                </td>
+            {% if forloop.counter0|add:"1"|divisibleby:"3" %}</tr>{% endif %}
+            {% endfor %}
+            {% if tribe.members.all|length|divisibleby:"3" %}{% else %}</tr>{% endif %}
+        </table>
+    </div>
 </div>
 
 <p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time. It doesn't do much yet.</p>
