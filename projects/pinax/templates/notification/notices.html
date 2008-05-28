@@ -1,7 +1,6 @@
 {% extends "messages/base.html" %}
 
-{% load humanize %}
-{% load i18n %}
+{% load humanize i18n %}
 
 {% block head_title %}Pinax : {% trans "Notices" %}{% endblock %}
 
@@ -21,7 +20,7 @@
 {% else %}
 <div class="notice">
 {% endif %}
-    <span class="notice_type">[{{ notice.notice_type.display }}]</span>
+    <span class="notice_type">[{% trans notice.notice_type.display %}]</span>
     <span class="notice_message">{{ notice.html_message|safe }}</span>
     <span class="notice_time">{{ notice.added.time|time:"P" }}</span>
 </div>
@@ -50,8 +49,8 @@
     </tr>
 {% for row in notice_settings.rows %}
     <tr>
-        <td>{{ row.notice_type.display }}<br/>
-            <span class="notice_type_description">{{ row.notice_type.description }}</span>
+        <td>{% trans row.notice_type.get_display %}<br/>
+            <span class="notice_type_description">{% trans row.notice_type.description %}</span>
         </td>
         {% for cell in row.cells %}
         <td>
