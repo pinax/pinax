@@ -5,10 +5,14 @@
 {% block rtab_id %}id="account_tab"{% endblock %}
 
 {% block subnav %}
+{% if user.is_authenticated %}
 <ul>
     <li><a href="{% url acct_email %} ">{% trans "E-Mail Addresses" %}</a></li>
     <li><a href="{% url openid_assoc %} ">{% trans "OpenID Associations" %}</a></li>
     <li><a href="{% url acct_passwd %} ">{% trans "Change Password" %}</a></li>
     <li><a href="{% url acct_passwd_reset %} ">{% trans "Reset Password" %}</a></li>
 </ul>
+{% else %}
+&nbsp;
+{% endif %}
 {% endblock %}
