@@ -6,6 +6,8 @@ from django.template.loader import render_to_string
 from django.conf import settings
 
 from django.utils.translation import ugettext_lazy as _
+# some things can't take it lazy...
+from django.utils.translation import ugettext
 
 # favour django-mailer but fall back to django.core.mail
 try:
@@ -167,7 +169,7 @@ class ResetPasswordForm(forms.Form):
             new_password = User.objects.make_random_password()
             user.set_password(new_password)
             user.save()
-            subject = _("Password reset")
+            subject = ugettext("Password reset")
             message = render_to_string("account/password_reset_message.txt", {
                 "user": user,
                 "new_password": new_password,
