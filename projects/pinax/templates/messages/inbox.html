@@ -11,13 +11,13 @@
         <tr>
             <td>{{ message.sender }}</td>
             <td>
-                {% if message.new %}<strong>{% endif %}  
-                {% if message.replied %}<em>{% endif %} 
-                <a href=" {{message.get_absolute_url }}">{{ message.subject }}</a>
-                {% if message.replied %}</em>{% endif %} 
+                {% if message.new %}<strong>{% endif %}
+                {% if message.replied %}<em>{% endif %}
+                <a href="{{ message.get_absolute_url }}">{{ message.subject }}</a>
+                {% if message.replied %}</em>{% endif %}
                 {% if message.new %}</strong>{% endif %}</td>
-            <td>{{ message.sent_at|date:"d.m.Y - H:i" }}</td>
-            <td><a href="{% url messages.views.delete message.id %}">{% trans "delete" %}</a></td>
+            <td>{{ message.sent_at|date:_("DATETIME_FORMAT") }}</td>
+            <td><a href="{% url messages_delete message.id %}">{% trans "delete" %}</a></td>
         </tr>
     {% endfor %}
         </tbody>

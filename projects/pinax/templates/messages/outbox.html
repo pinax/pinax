@@ -11,10 +11,10 @@
     <tr>
         <td>{{ message.recipient }}</td>
         <td>
-        <a href="{{message.get_absolute_url }}">{{ message.subject }}</a>
+        <a href="{{ message.get_absolute_url }}">{{ message.subject }}</a>
         </td>
-        <td>{{ message.sent_at|date:"d.m.Y - H:i" }}</td>
-        <td><a href="{% url messages.views.delete message.id %}?next={% url messages.views.outbox %}">{% trans "delete" %}</a></td>
+        <td>{{ message.sent_at|date:_("DATETIME_FORMAT") }}</td>
+        <td><a href="{% url messages_delete message.id %}?next={% url messages_outbox %}">{% trans "delete" %}</a></td>
     </tr>
 {% endfor %}
     </tbody>

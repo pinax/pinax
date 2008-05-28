@@ -13,8 +13,8 @@
         <td> 
         {{ message.subject }}
         </td>
-        <td>{{ message.sent_at|date:"d.m.Y - H:i" }}</td>
-        <td><a href="{% url messages.views.undelete message.id %}">{% trans "undelete" %}</a></td>
+        <td>{{ message.sent_at|date:_("DATETIME_FORMAT") }}</td>
+        <td><a href="{% url messages_undelete message.id %}">{% trans "undelete" %}</a></td>
     </tr>
 {% endfor %}
     </tbody>
