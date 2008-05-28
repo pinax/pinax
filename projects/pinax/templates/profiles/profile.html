@@ -10,6 +10,16 @@
 
 <div class="right_panel">
     {% if is_me %}
+    <div class="tribes">
+        <h2>{% trans "Your Tribes" %}</h2>
+        {% if other_user.tribe_set.all %}
+        {% for tribe in other_user.tribe_set.all %}
+        <a href="{% url tribes.views.tribe tribe.slug %}">{{ tribe.name }}</a>
+        {% endfor %}
+        {% else %}
+        <p>You are not yet a member of any <a href="{% url tribes.views.tribes tribes %}">tribes</a>.</p>
+        {% endif %}
+    </div>
     <div class="friends">
         <h2>{% trans "Your Friends" %}</h2>
         {% if other_friends %}
@@ -29,8 +39,18 @@
         {% endif %}
     </div>
     {% endif %}
-
+    
     {% if is_friend %}
+    <div class="tribes">
+        <h2>{% blocktrans %}{{ other_user }}'s Tribes{% endblocktrans %}</h2>
+        {% if other_user.tribe_set.all %}
+        {% for tribe in other_user.tribe_set.all %}
+        <a href="{% url tribes.views.tribe tribe.slug %}">{{ tribe.name }}</a>
+        {% endfor %}
+        {% else %}
+        <p>{% blocktrans %}Not yet a member of any tribes.{% endblocktrans %}</p>
+        {% endif %}
+    </div>
     <div class="friends">
         <h2>{% blocktrans %}{{ other_user }}'s Friends{% endblocktrans %}</h2>
         <table width="100%">
