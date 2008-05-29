@@ -16,6 +16,11 @@ try:
 except ImportError:
     friends = False
 
+try:
+    from threadedcomments.models import ThreadedComment
+    forums = True
+except ImportError:
+    forums = False
 
 def tribes(request):
     if request.user.is_authenticated() and request.method == "POST":
@@ -74,4 +79,9 @@ def tribe(request, slug):
         "tribe": tribe,
         "are_member": are_member,
     }, context_instance=RequestContext(request))
-    
+
+def topic(request, id):
+    topic = get_object_or_404(ThreadedComment, id=id)
+    return render_to_response("tribes/topic.html", {
+        'topic': topic,
+    }, context_instance=RequestContext(request))

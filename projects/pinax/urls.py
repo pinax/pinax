@@ -24,6 +24,7 @@ urlpatterns = patterns('',
     (r'^announcements/', include('announcements.urls')),
     (r'^tweets/', include('zwitschern.urls')),
     (r'^tribes/', include('tribes.urls')),
+    (r'^comments/', include('threadedcomments.urls')),
     
     (r'^robots.txt$', include('robots.urls')),
     (r'^i18n/', include('django.conf.urls.i18n')),

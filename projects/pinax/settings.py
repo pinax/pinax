@@ -116,10 +116,11 @@ INSTALLED_APPS = (
     'oembed',
     'djangodblog',
     'pagination',
+    'gravatar', # This needs to go before threadedcomments.
+    'threadedcomments',
     
     # internal (for now)
     'analytics',
-    'gravatar',
     'profiles',
     'zwitschern',
     'account',

@@ -1,0 +1,46 @@
+{% extends "tribes/base.html" %}
+
+{% load i18n %}
+{% load threadedcommentstags %}
+{% load pagination_tags %}
+{% load gravatar %}
+
+{% block head_title %}Pinax : {{ topic.comment|truncatewords:10 }}{% endblock %}
+
+{% block body %}
+{% get_threaded_comment_tree for topic as responses %}
+{% autopaginate responses %}
+<a href="{% url tribe_detail topic.content_object.slug %}">&larr; {% trans "Back to" %} {{ topic.content_object.name }} {% trans "Tribe" %}</a>
+<table id="messageboard">
+    <tr class="odd">
+        <td class="meta">
+            <a href="{% url profiles.views.profile topic.user.username %}">
+                {% gravatar topic.user 40 %}<br />
+                {{ topic.date_submitted|date }}
+            </a>
+            {% ifequal user topic.user %}<form method="POST" action="{% url tc_comment_delete topic.id %}"><input type="submit" value="{% trans "Delete Topic" %}" /><input type="hidden" name="next" value="{% url tribe_detail topic.content_object.slug %}" /></form>{% else %}&nbsp;{% endifequal %}
+        </td>
+        <td class="body">{{ topic.comment|urlize|linebreaks }}</td>
+    </tr>
+    {% for response in responses %}
+        <tr class="{% cycle even,odd %}">
+            <td class="meta">
+                <a href="{% url profiles.views.profile response.user.username %}">
+                    {% gravatar response.user 40 %}<br />
+                    {{ response.date_submitted|date }}
+                </a>
+                {% ifequal user response.user %}<form method="POST" action="{% url tc_comment_delete response.id %}"><input type="submit" value="{% trans "Delete Post" %}" /><input type="hidden" name="next" value="{% url tribe_detail response.content_object.slug %}" /></form>{% else %}&nbsp;{% endifequal %}
+            </td>
+            <td class="body">{{ response.comment|urlize|linebreaks }}</td>
+        </tr>
+    {% endfor %}
+</table>
+<form action="{% get_comment_url topic %}" method="POST">
+    <table>
+    <tr><td><textarea id="id_comment" rows="10" cols="40" name="comment"></textarea></td></tr>
+    <tr><td><input type="submit" value="{% trans "Post Response" %}" /></td></tr>
+    </table>
+    <input type="hidden" name="next" value="{{ request.path }}" />
+</form>
+{% paginate %}
+{% endblock %}
