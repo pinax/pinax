@@ -10,6 +10,12 @@ try:
 except ImportError:
     notification = None
 
+try:
+    from friends.models import Friendship
+    friends = True
+except ImportError:
+    friends = False
+
 
 def tribes(request):
     if request.user.is_authenticated() and request.method == "POST":
@@ -22,6 +28,11 @@ def tribes(request):
                 tribe.members.add(request.user)
                 tribe.save()
                 tribe_form = TribeForm()
+                if notification:
+                    # @@@ might be worth having a shortcut for sending to all users
+                    notification.send(User.objects.all(), "tribes_new_tribe", "A new tribe %s has been created.", [tribe])
+                    if friends: # @@@ might be worth having a shortcut for sending to all friends
+                        notification.send((x['friend'] for x in Friendship.objects.friends_for_user(tribe.creator)), "tribes_friend_tribe", "%s has created a new tribe %s.", [tribe.creator, tribe])
                 
         else:
             tribe_form = TribeForm()
@@ -45,7 +56,9 @@ def tribe(request, slug):
             tribe.members.add(request.user)
             request.user.message_set.create(message="You have joined the tribe %s" % tribe.name)
             if notification:
-                pass # @@@
+                notification.send(tribe.members.all(), "tribes_new_member", "%s has joined the tribe %s.", [request.user, tribe])
+                if friends: # @@@ might be worth having a shortcut for sending to all friends
+                    notification.send((x['friend'] for x in Friendship.objects.friends_for_user(request.user)), "tribes_friend_joined", "%s has joined the tribe %s.", [request.user, tribe])
         elif request.POST["action"] == "leave":
             tribe.members.remove(request.user)
             request.user.message_set.create(message="You have left the tribe %s" % tribe.name)

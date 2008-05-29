@@ -21,5 +21,9 @@ class Tribe(models.Model):
     def __unicode__(self):
         return self.name
     
+    def get_absolute_url(self):
+        return ("tribe_detail", [self.slug])
+    get_absolute_url = models.permalink(get_absolute_url)
+    
     class Admin:
         list_display = ('name', 'creator', 'created',)

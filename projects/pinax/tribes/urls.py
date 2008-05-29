@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import *
 
 urlpatterns = patterns('',
-    (r'^$', 'tribes.views.tribes'),
-    (r'^(\w+)/$', 'tribes.views.tribe'),
+    url(r'^$', 'tribes.views.tribes', name="tribes_list"),
+    url(r'^(\w+)/$', 'tribes.views.tribe', name="tribe_detail"),
 )
