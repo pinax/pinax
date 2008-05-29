@@ -65,6 +65,7 @@ Created: {{ tribe.created|date }}
 </form>
 </div>
 
+{% comment %}
 <h2>{% trans "Discussion Topics for Tribe" %} {{ tribe.name }}</h2>
 {% get_threaded_comment_tree for tribe as topics %}
 {% autopaginate topics %}
@@ -82,6 +83,8 @@ Created: {{ tribe.created|date }}
 </form>
 
 {% paginate %}
+{% endcomment %}
+
 {% endblock %}
 
 {% block extra_body %}
