@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Django settings for pinax project.
 
 DEBUG = True
@@ -142,10 +143,10 @@ INTERNAL_IPS = (
 
 ugettext = lambda s: s
 LANGUAGES = (
-  ('en', ugettext('English')),
-  ('de', ugettext('German')),
-  ('es', ugettext('Spanish')),
-  ('sv', ugettext('Swedish')),
+  ('en', u'English'),
+  ('de', u'Deutsch'),
+  ('es', u'Español'),
+  ('sv', u'Svenska'),
 )
 
 # URCHIN_ID = "ua-..."
