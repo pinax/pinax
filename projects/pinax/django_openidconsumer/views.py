@@ -40,9 +40,10 @@ def is_valid_next_url(next):
     return bool(next_url_re.match(next))
 
 def begin(request, sreg=None, extension_args=None, redirect_to=None, 
-        on_failure=None):
+        on_failure=None, if_not_user_url=None):
     
     on_failure = on_failure or default_on_failure
+    if_not_user_url = if_not_user_url or default_if_not_user_url
     
     if request.GET.get('logo'):
         # Makes for a better demo
@@ -74,16 +75,7 @@ def begin(request, sreg=None, extension_args=None, redirect_to=None,
     
     user_url = request.REQUEST.get('openid_url', None)
     if not user_url:
-        request_path = request.path
-        if request.GET.get('next'):
-            request_path += '?' + urllib.urlencode({
-                'next': request.GET['next']
-            })
-        
-        return render('openid_signin.html', {
-            'action': request_path,
-            'logo': request.path + '?logo=1',
-        })
+        return if_not_user_url(request)
     
     if xri.identifierScheme(user_url) == 'XRI' and getattr(
         settings, 'OPENID_DISALLOW_INAMES', False
@@ -147,6 +139,18 @@ def default_on_success(request, identity_url, openid_response):
         next = getattr(settings, 'OPENID_REDIRECT_NEXT', '/')
     
     return HttpResponseRedirect(next)
+
+def default_if_not_user_url(request):
+    request_path = request.path
+    if request.GET.get('next'):
+        request_path += '?' + urllib.urlencode({
+            'next': request.GET['next']
+        })
+    
+    return render('openid_signin.html', {
+        'action': request_path,
+        'logo': request.path + '?logo=1',
+    })
 
 def default_on_failure(request, message):
     return render('openid_failure.html', {
