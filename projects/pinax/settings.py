@@ -66,6 +66,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.doc.XViewMiddleware',
     'djangologging.middleware.LoggingMiddleware',
     'django_openidconsumer.middleware.OpenIDMiddleware',
+    'pagination.middleware.PaginationMiddleware',
     'djangodblog.DBLogMiddleware',
 )
 
@@ -114,6 +115,7 @@ INSTALLED_APPS = (
     'django_openidauth',
     'oembed',
     'djangodblog',
+    'pagination',
     
     # internal (for now)
     'analytics',

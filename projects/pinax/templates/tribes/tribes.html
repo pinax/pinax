@@ -3,6 +3,7 @@
 {% load i18n %}
 {% load gravatar %}
 {% load humanize %}
+{% load pagination_tags %}
 
 {% block head_title %}Pinax : {% blocktrans %}Tribes{% endblocktrans %}{% endblock %}
 
@@ -21,6 +22,7 @@
 </table>
 </form>
 
+{% autopaginate tribes %}
 {% regroup tribes by created.date as tribes_by_created %}
 
 {% for date in tribes_by_created %}
@@ -33,6 +35,7 @@
 </dl>
 {% endfor %}
 
+{% paginate %}
 {% endblock %}
 
 {% block extra_body %}

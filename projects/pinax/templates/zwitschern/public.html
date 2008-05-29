@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load oembed_tags %}
+{% load pagination_tags %}
 
 {% block head_title %}Pinax : {% blocktrans %}Public Tweets{% endblocktrans %}{% endblock %}
 
@@ -15,6 +16,7 @@
 <p>These are tweets from everyone:</p>
 
 {% oembed %}
+{% autopaginate %}
 {% for tweet in tweets %}
 <div class="tweet" id="t{{ tweet.id }}">
 <a href="{% url profiles.views.profile tweet.sender %}"><b>{{ tweet.sender }}</b></a>
@@ -24,6 +26,6 @@
 </div>
 {% endfor %}
 {% endoembed %}
-
+{% paginate %}
 
 {% endblock %}
