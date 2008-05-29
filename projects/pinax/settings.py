@@ -146,7 +146,7 @@ LANGUAGES = (
   ('en', u'English'),
   ('de', u'Deutsch'),
   ('es', u'Español'),
-  ('en', u'English'),
+  ('sv', u'Svenska'),
   ('pt-br', u'Português brasileiro'),
 )
 
