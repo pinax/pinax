@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-27 21:07+0200\n"
+"POT-Creation-Date: 2008-05-29 02:36+0200\n"
 "PO-Revision-Date: 2008-05-27 21:06+0200\n"
 "Last-Translator: jens persson <jens@persson.cx>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -16,22 +16,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
-
-#: settings.py:144
-msgid "English"
-msgstr "Engelska"
-
-#: settings.py:145
-msgid "German"
-msgstr "Tyska"
-
-#: settings.py:146
-msgid "Spanish"
-msgstr "Spanska"
-
-#: settings.py:147
-msgid "Swedish"
-msgstr "Svenska"
 
 #: account/forms.py:25 account/forms.py:53
 msgid "Username"
@@ -85,7 +69,7 @@ msgstr "Din epostadress har redan verifierats"
 msgid "Confirmation email sent to %(email)s"
 msgstr "Bekräftelsebrev har skickats till %(email)s"
 
-#: account/forms.py:119 account/forms.py:158 notification/models.py:40
+#: account/forms.py:119 account/forms.py:158 notification/models.py:44
 msgid "Email"
 msgstr "E-post"
 
@@ -121,35 +105,35 @@ msgstr "E-postadressen har inte bekräftats för något användarkonto"
 msgid "Password reset"
 msgstr "Lösenordsåterställning"
 
-#: announcements/models.py:33
+#: announcements/models.py:34
 msgid "title"
 msgstr "titel"
 
-#: announcements/models.py:34 dbtemplates/models.py:15
+#: announcements/models.py:35 dbtemplates/models.py:15
 msgid "content"
 msgstr "innehåll"
 
-#: announcements/models.py:35 tribes/models.py:16
+#: announcements/models.py:36 tribes/models.py:16
 msgid "creator"
 msgstr "skapare"
 
-#: announcements/models.py:36
+#: announcements/models.py:37
 msgid "creation_date"
 msgstr "skapad_datum"
 
-#: announcements/models.py:37
+#: announcements/models.py:38
 msgid "site wide"
 msgstr "HEla webbplatsen"
 
-#: announcements/models.py:38
+#: announcements/models.py:39
 msgid "members only"
 msgstr "endast medlemmar"
 
-#: announcements/models.py:50
+#: announcements/models.py:51
 msgid "announcement"
 msgstr "meddelande"
 
-#: announcements/models.py:51
+#: announcements/models.py:52
 msgid "announcements"
 msgstr "meddelanden"
 
@@ -193,11 +177,11 @@ msgstr "Nivå"
 msgid "Timestamp"
 msgstr "Tidsstämpel"
 
-#: djangologging/templates/logging.html:16 templates/profiles/profile.html:57
+#: djangologging/templates/logging.html:16 templates/profiles/profile.html:78
 msgid "Location"
 msgstr "Plats"
 
-#: djangologging/templates/logging.html:17 messages/models.py:108
+#: djangologging/templates/logging.html:17 messages/models.py:98
 msgid "Message"
 msgstr "Meddelande"
 
@@ -236,14 +220,14 @@ msgstr "Inget filter (visa alla)"
 msgid "Accepted friendship request from %(from_user)s"
 msgstr "Acceptera vänskapsförfrågan från %(from_user)s"
 
-#: messages/forms.py:12 messages/models.py:59
+#: messages/forms.py:19 messages/models.py:58
 #: messages/templates/messages/outbox.html:7
 #: messages/templates/messages/view.html:12 templates/messages/outbox.html:7
 #: templates/messages/view.html:13
 msgid "Recipient"
 msgstr "Mottagare"
 
-#: messages/forms.py:13 messages/models.py:56
+#: messages/forms.py:20 messages/models.py:55
 #: messages/templates/messages/inbox.html:7
 #: messages/templates/messages/outbox.html:7
 #: messages/templates/messages/trash.html:7
@@ -253,67 +237,166 @@ msgstr "Mottagare"
 msgid "Subject"
 msgstr "Ämne"
 
-#: messages/forms.py:14 messages/models.py:57
+#: messages/forms.py:21 messages/models.py:56
 msgid "Body"
 msgstr "Meddelande"
 
-#: messages/forms.py:20
+#: messages/forms.py:28
 msgid "There is no user with this username."
 msgstr "Det finns ingen användare med det användarnamnet."
 
-#: messages/models.py:58 messages/templates/messages/inbox.html:7
+#: messages/forms.py:49
+#, python-format
+msgid "you have replied to %s from %s."
+msgstr ""
+
+#: messages/forms.py:53
+#, python-format
+msgid "%s has sent you a reply to %s."
+msgstr ""
+
+#: messages/forms.py:58
+#, fuzzy, python-format
+msgid "you have sent a message to %s."
+msgstr "Föräldrameddelande"
+
+#: messages/forms.py:62
+#, fuzzy, python-format
+msgid "you have received a message from %s."
+msgstr "Borttagna meddelanden"
+
+#: messages/management.py:10
+#, fuzzy
+msgid "Message Received"
+msgstr "Mottaget"
+
+#: messages/management.py:10
+msgid "you have received a message"
+msgstr ""
+
+#: messages/management.py:11
+#, fuzzy
+msgid "Message Sent"
+msgstr "Meddelande"
+
+#: messages/management.py:11
+#, fuzzy
+msgid "you have sent a message"
+msgstr "Föräldrameddelande"
+
+#: messages/management.py:12
+#, fuzzy
+msgid "Message Replied"
+msgstr "Meddelande"
+
+#: messages/management.py:12
+msgid "you have replied to a message"
+msgstr ""
+
+#: messages/management.py:13
+#, fuzzy
+msgid "Reply Received"
+msgstr "Mottaget"
+
+#: messages/management.py:13
+msgid "you have received a reply to a message"
+msgstr ""
+
+#: messages/management.py:14
+#, fuzzy
+msgid "Message Deleted"
+msgstr "Meddelande"
+
+#: messages/management.py:14
+#, fuzzy
+msgid "you have deleted a message"
+msgstr "Borttagna meddelanden"
+
+#: messages/management.py:15
+#, fuzzy
+msgid "Message Recovered"
+msgstr "Meddelandet har återskapats."
+
+#: messages/management.py:15
+#, fuzzy
+msgid "you have undelete a message"
+msgstr "Skicka ett meddelande"
+
+#: messages/models.py:57 messages/templates/messages/inbox.html:7
 #: messages/templates/messages/trash.html:7
 #: messages/templates/messages/view.html:8 templates/messages/inbox.html:7
 #: templates/messages/trash.html:7 templates/messages/view.html:7
 msgid "Sender"
 msgstr "Avsändare"
 
-#: messages/models.py:60
+#: messages/models.py:59
 msgid "Parent message"
 msgstr "Föräldrameddelande"
 
-#: messages/models.py:61
+#: messages/models.py:60
 msgid "sent at"
 msgstr "skickat den"
 
-#: messages/models.py:62
+#: messages/models.py:61
 msgid "read at"
 msgstr "läst den"
 
-#: messages/models.py:63
+#: messages/models.py:62
 msgid "replied at"
 msgstr "svarat den"
 
-#: messages/models.py:64
+#: messages/models.py:63
 msgid "Sender deleted at"
 msgstr "Avsändaren togs bort den"
 
-#: messages/models.py:65
+#: messages/models.py:64
 msgid "Recipient deleted at"
 msgstr "Mottagaren togs bort den"
 
-#: messages/models.py:109
+#: messages/models.py:99
 msgid "Messages"
 msgstr "Meddelanden"
 
-#: messages/utils.py:19
+#: messages/utils.py:25
 msgid "New Message:"
 msgstr "Nytt meddelande:"
 
-#: messages/views.py:66 messages/views.py:94
+#: messages/views.py:82 messages/views.py:114
 msgid "Message successfully sent."
 msgstr "Meddelandet har skickats."
 
-#: messages/views.py:135
+#: messages/views.py:120
+#, python-format
+msgid ""
+"%(sender)s wrote:\n"
+"%(body)s"
+msgstr ""
+
+#: messages/views.py:124
+#, python-format
+msgid "Re: %(subject)s"
+msgstr ""
+
+#: messages/views.py:160
 msgid "Message successfully deleted."
 msgstr "Meddelandet har tagits bort."
 
-#: messages/views.py:160
+#: messages/views.py:163
+#, python-format
+msgid "you have deleted the message %s."
+msgstr ""
+
+#: messages/views.py:189
 msgid "Message successfully recovered."
 msgstr "Meddelandet har återskapats."
 
+#: messages/views.py:192
+#, python-format
+msgid "you have recovered the message %s."
+msgstr ""
+
 #: messages/templates/messages/base.html:8
-#: messages/templates/messages/inbox.html:4 templates/site_base.html:43
+#: messages/templates/messages/inbox.html:4 templates/site_base.html:40
 #: templates/messages/base.html:12 templates/messages/inbox.html:4
 msgid "Inbox"
 msgstr "Inkorg"
@@ -352,11 +435,26 @@ msgstr "Mottaget"
 msgid "Action"
 msgstr "Åtgärd"
 
+#: messages/templates/messages/inbox.html:19
+#: messages/templates/messages/outbox.html:16
+#: messages/templates/messages/trash.html:16
+#: messages/templates/messages/view.html:11 templates/messages/inbox.html:19
+#: templates/messages/outbox.html:16 templates/messages/trash.html:16
+#: templates/messages/view.html:12
+msgid "DATETIME_FORMAT"
+msgstr ""
+
 #: messages/templates/messages/inbox.html:20
 #: messages/templates/messages/outbox.html:17 templates/messages/inbox.html:20
 #: templates/messages/outbox.html:17
 msgid "delete"
 msgstr "radera"
+
+#: messages/templates/messages/new_message.html:4
+#: templates/messages/new_messages.html:4
+#, python-format
+msgid "Sent from %(site_url)s"
+msgstr ""
 
 #: messages/templates/messages/outbox.html:7 templates/messages/base.html:13
 #: templates/messages/outbox.html:7
@@ -397,68 +495,73 @@ msgstr "Svara"
 msgid "Delete"
 msgstr "Ta bort"
 
-#: notification/models.py:24
+#: notification/models.py:25
 msgid "label"
 msgstr "etikett"
 
-#: notification/models.py:25
+#: notification/models.py:26
 msgid "display"
 msgstr "visa"
 
-#: notification/models.py:26 tribes/models.py:18
+#: notification/models.py:27 tribes/models.py:18
 msgid "description"
 msgstr "beskrivning"
 
-#: notification/models.py:35 notification/models.py:50
-#: notification/models.py:73
+#: notification/models.py:30
+#, fuzzy
+msgid "default"
+msgstr "radera"
+
+#: notification/models.py:39 notification/models.py:59
+#: notification/models.py:88
 msgid "notice type"
 msgstr "meddelande typ"
 
-#: notification/models.py:36
+#: notification/models.py:40
 msgid "notice types"
 msgstr "meddelande typer"
 
-#: notification/models.py:49 notification/models.py:71 profiles/models.py:8
+#: notification/models.py:58 notification/models.py:86 profiles/models.py:8
 msgid "user"
 msgstr "användare"
 
-#: notification/models.py:51
+#: notification/models.py:60
 msgid "medium"
 msgstr "media"
 
-#: notification/models.py:52
+#: notification/models.py:61
 msgid "send"
 msgstr "sänt"
 
-#: notification/models.py:58
+#: notification/models.py:67
 msgid "notice setting"
 msgstr "meddelande inställning"
 
-#: notification/models.py:59
+#: notification/models.py:68
 msgid "notice settings"
 msgstr "meddelande inställningar"
 
-#: notification/models.py:72
+#: notification/models.py:87
 msgid "message"
 msgstr "meddelanden"
 
-#: notification/models.py:74
+#: notification/models.py:89
 msgid "added"
 msgstr "tillagda"
 
-#: notification/models.py:75
+#: notification/models.py:90
 msgid "unseen"
 msgstr "osedda"
 
-#: notification/models.py:76
+#: notification/models.py:91
 msgid "archived"
 msgstr "arkiverade"
 
-#: notification/models.py:103
+#: notification/models.py:118
 msgid "notice"
 msgstr "meddelande"
 
-#: notification/models.py:104
+#: notification/models.py:119
 msgid "notices"
 msgstr "meddelanden"
 
@@ -655,58 +758,58 @@ msgstr ""
 "webbplatsmeddelanden, användarmeddelanden, väninbjudningar (både inom och "
 "utom webbplatsen), en enkel twitter klon och stöd för meddelanden."
 
-#: templates/site_base.html:9 templates/account/email.html:5
+#: templates/site_base.html:8 templates/account/email.html:5
 #: templates/account/email.html.py:8
 msgid "Account"
 msgstr "Konto"
 
-#: templates/site_base.html:9 templates/account/logout.html:5
+#: templates/site_base.html:8 templates/account/logout.html:5
 msgid "Logout"
 msgstr "Logga ut"
 
-#: templates/site_base.html:11 templates/account/login.html:5
+#: templates/site_base.html:10 templates/account/login.html:5
 msgid "Login"
 msgstr "Logga in"
 
-#: templates/site_base.html:11
+#: templates/site_base.html:10
 msgid "Sign up"
 msgstr "Registrera dig"
 
-#: templates/site_base.html:29
+#: templates/site_base.html:26
 msgid "Home"
 msgstr "Hem"
 
-#: templates/site_base.html:40
+#: templates/site_base.html:37
 msgid "Profile"
 msgstr "Konto"
 
-#: templates/site_base.html:41 templates/tribes/tribes.html:7
+#: templates/site_base.html:38 templates/tribes/tribes.html:7
 #: templates/tribes/tribes.html.py:12
 msgid "Tribes"
 msgstr "Stammar"
 
-#: templates/site_base.html:42 templates/zwitschern/personal.html:6
+#: templates/site_base.html:39 templates/zwitschern/personal.html:6
 #: templates/zwitschern/personal.html:13
 msgid "Tweets"
 msgstr "Tweets"
 
-#: templates/site_base.html:51
+#: templates/site_base.html:48
 msgid "&copy; 2008 &lt;your company here&gt;"
 msgstr "&copy; 2008 &lt; din företags namn&gt;"
 
-#: templates/site_base.html:52
+#: templates/site_base.html:49
 msgid "About Pinax"
 msgstr "Om Pinax"
 
-#: templates/site_base.html:53
+#: templates/site_base.html:50
 msgid "Pinax Blog"
 msgstr "Pinax bloggen"
 
-#: templates/site_base.html:54 templates/about/terms.html:5
+#: templates/site_base.html:51 templates/about/terms.html:5
 msgid "Terms of Service"
 msgstr "Användarvilkor"
 
-#: templates/site_base.html:55 templates/about/privacy.html:5
+#: templates/site_base.html:52 templates/about/privacy.html:5
 msgid "Privacy Policy"
 msgstr "Integritetspolicy"
 
@@ -714,7 +817,7 @@ msgstr "Integritetspolicy"
 msgid "Put whatever you want on these tabs :-)"
 msgstr "Sätt vad du vill på de här flikarna :-)"
 
-#: templates/about/about.html:5 templates/profiles/profile.html:56
+#: templates/about/about.html:5 templates/profiles/profile.html:77
 msgid "About"
 msgstr "Om"
 
@@ -770,20 +873,20 @@ msgstr "<p>Din <b>Integritetspolicy</b> skulle normalt sätt finnas här...</p>"
 msgid "<p>Your <b>Terms of Service</b> would normally go here...</p>"
 msgstr "<p>Dina <b>användningsvilkor</b>skulle normalt sett vara här</p>"
 
-#: templates/account/base.html:9
+#: templates/account/base.html:10
 msgid "E-Mail Addresses"
 msgstr "E-postadress"
 
-#: templates/account/base.html:10 templates/openid/associations.html:5
+#: templates/account/base.html:11 templates/openid/associations.html:5
 msgid "OpenID Associations"
 msgstr "OpenID kopplingar"
 
-#: templates/account/base.html:11 templates/account/password_change.html:5
+#: templates/account/base.html:12 templates/account/password_change.html:5
 #: templates/account/password_change.html:8
 msgid "Change Password"
 msgstr "Byt lösenord"
 
-#: templates/account/base.html:12
+#: templates/account/base.html:13
 msgid "Reset Password"
 msgstr "Återställ lösenord"
 
@@ -838,7 +941,7 @@ msgstr "lägg till"
 #: templates/account/email.html:64 templates/account/login.html:10
 #: templates/account/password_reset.html:10
 #: templates/account/password_reset_done.html:10
-#: templates/notification/notices.html:40
+#: templates/notification/notices.html:39
 msgid "Note"
 msgstr "Anteckning"
 
@@ -1033,7 +1136,7 @@ msgid "Someone with this email address has already joined:"
 msgstr "Någon med den epostadressen har redan registrerat sig:"
 
 #: templates/friends_app/invitations.html:35
-#: templates/profiles/profile.html:127
+#: templates/profiles/profile.html:148
 msgid "invite"
 msgstr "bjud in"
 
@@ -1042,7 +1145,7 @@ msgid "Friendship Requests Received"
 msgstr "Vänskapsförfrågning  har tagits emot"
 
 #: templates/friends_app/invitations.html:53
-#: templates/profiles/profile.html:115
+#: templates/profiles/profile.html:136
 msgid "accept"
 msgstr "acceptera"
 
@@ -1070,37 +1173,37 @@ msgstr "Ingen inbjudan har skickats."
 msgid "Compose"
 msgstr "Redigera"
 
-#: templates/messages/base.html:15 templates/notification/notices.html:6
-#: templates/notification/notices.html:9
+#: templates/messages/base.html:15 templates/notification/notices.html:5
+#: templates/notification/notices.html:8
 msgid "Notices"
 msgstr "Meddelanden"
 
-#: templates/notification/notices.html:11
+#: templates/notification/notices.html:10
 msgid "configure settings"
 msgstr "ändra inställningar"
 
-#: templates/notification/notices.html:17 templates/profiles/profiles.html:16
+#: templates/notification/notices.html:16 templates/profiles/profiles.html:16
 #: templates/tribes/tribes.html:27
 msgid "MONTH_DAY_FORMAT"
 msgstr "MONTH_DAY_FORMAT"
 
-#: templates/notification/notices.html:31
+#: templates/notification/notices.html:30
 msgid "No notices."
 msgstr "Niga meddelanden."
 
-#: templates/notification/notices.html:35
+#: templates/notification/notices.html:34
 msgid "Settings"
 msgstr "Inställningar"
 
-#: templates/notification/notices.html:38
+#: templates/notification/notices.html:37
 msgid "Primary email"
 msgstr "Primär epost"
 
-#: templates/notification/notices.html:38
+#: templates/notification/notices.html:37
 msgid "change under <a href=\"/account/email/\">Account</a>"
 msgstr "Ändra under <a href=\"/account/email/\">Ditt konto</a>"
 
-#: templates/notification/notices.html:40
+#: templates/notification/notices.html:39
 msgid ""
 "You do not have a verified email address to which notices can be sent. You "
 "can add one by going to <a href=\"/account/email/\">Account</a>."
@@ -1108,11 +1211,11 @@ msgstr ""
 "Du har inte en verifierad epostadress som meddelanden kan skickas till.För "
 "att lägga till en, gå till <a href=\"/account/email/\">Ditt konto</a>."
 
-#: templates/notification/notices.html:46
+#: templates/notification/notices.html:45
 msgid "Notification Type"
 msgstr "Meddelandetyp"
 
-#: templates/notification/notices.html:64
+#: templates/notification/notices.html:63
 msgid "Change"
 msgstr "Byt"
 
@@ -1166,16 +1269,21 @@ msgstr "Ditt konto"
 msgid "All Profiles"
 msgstr "Alla konton"
 
-#: templates/profiles/profile.html:7 templates/profiles/profile.html.py:52
+#: templates/profiles/profile.html:7 templates/profiles/profile.html.py:73
 #, python-format
 msgid "Profile for %(other_user)s"
 msgstr "%(other_user)s konto"
 
 #: templates/profiles/profile.html:14
+#, fuzzy
+msgid "Your Tribes"
+msgstr "Dina vänner"
+
+#: templates/profiles/profile.html:24
 msgid "Your Friends"
 msgstr "Dina vänner"
 
-#: templates/profiles/profile.html:28
+#: templates/profiles/profile.html:38
 msgid ""
 "None. You should look at the list of <a href=\"/profiles/\">profiles</a> and "
 "see if there's anyone you know."
@@ -1183,71 +1291,80 @@ msgstr ""
 "Titta på listan över alla <a href=\"/profiles/\">användare</a> och se om det "
 "finns någon du känner."
 
-#: templates/profiles/profile.html:35
+#: templates/profiles/profile.html:45
+#, fuzzy, python-format
+msgid "%(other_user)s's Tribes"
+msgstr "%(other_user)ss vänner"
+
+#: templates/profiles/profile.html:51
+msgid "Not yet a member of any tribes."
+msgstr ""
+
+#: templates/profiles/profile.html:55
 #, python-format
 msgid "%(other_user)s's Friends"
 msgstr "%(other_user)ss vänner"
 
-#: templates/profiles/profile.html:55
+#: templates/profiles/profile.html:76
 msgid "Name"
 msgstr "Namn"
 
-#: templates/profiles/profile.html:58
+#: templates/profiles/profile.html:79
 msgid "Website"
 msgstr "Webbplats"
 
-#: templates/profiles/profile.html:61
+#: templates/profiles/profile.html:82
 msgid "Followers"
 msgstr "Efterföljare"
 
-#: templates/profiles/profile.html:62
+#: templates/profiles/profile.html:83
 msgid "Following"
 msgstr "Följer"
 
-#: templates/profiles/profile.html:66
+#: templates/profiles/profile.html:87
 msgid "Edit profile"
 msgstr "Ändra profil"
 
-#: templates/profiles/profile.html:71 templates/tribes/tribe.html:45
+#: templates/profiles/profile.html:92 templates/tribes/tribe.html:47
 msgid "update"
 msgstr "uppdatera"
 
-#: templates/profiles/profile.html:95
+#: templates/profiles/profile.html:116
 msgid "unfollow"
 msgstr "sluta följa"
 
-#: templates/profiles/profile.html:97
+#: templates/profiles/profile.html:118
 msgid "follow tweets"
 msgstr "följ tweets"
 
-#: templates/profiles/profile.html:103
+#: templates/profiles/profile.html:124
 #, python-format
 msgid "You are friends with %(other_user)s."
 msgstr "Du är vän med %(other_user)s."
 
-#: templates/profiles/profile.html:103
+#: templates/profiles/profile.html:124
 msgid "Send a message"
 msgstr "Skicka ett meddelande"
 
-#: templates/profiles/profile.html:106
+#: templates/profiles/profile.html:127
 #, python-format
 msgid "%(other_user)s has requested friendship."
 msgstr "%(other_user)s har redan föreslagit vänskap."
 
-#: templates/profiles/profile.html:121
+#: templates/profiles/profile.html:142
 msgid "Friendship request sent."
 msgstr "Vänskapsförfrågan har skickats."
 
-#: templates/profiles/profile.html:123
+#: templates/profiles/profile.html:144
 msgid "Add As Friend"
 msgstr "Lägg till som vän"
 
-#: templates/profiles/profile.html:127
+#: templates/profiles/profile.html:148
 #, python-format
 msgid "%(other_user)s to be a friend."
 msgstr "%(other_user)s för att bli en vän."
 
-#: templates/profiles/profile.html:147
+#: templates/profiles/profile.html:172
 msgid ""
 "<a href=\"/account/signup/\">Sign up</a> and <a href=\"/account/login/\">log "
 "in </a> to add this person as a friend."
@@ -1263,23 +1380,23 @@ msgstr "Profiler"
 msgid "All Tribes"
 msgstr "Alla stammar"
 
-#: templates/tribes/tribe.html:11
+#: templates/tribes/tribe.html:12
 msgid "Members"
 msgstr "Medlemmar"
 
-#: templates/tribes/tribe.html:27
+#: templates/tribes/tribe.html:29
 msgid "Tribe"
 msgstr "Stam"
 
-#: templates/tribes/tribe.html:40
+#: templates/tribes/tribe.html:42
 msgid "Edit details"
 msgstr "Ändra detaljer"
 
-#: templates/tribes/tribe.html:56
+#: templates/tribes/tribe.html:58
 msgid "leave"
 msgstr "lämna"
 
-#: templates/tribes/tribe.html:59
+#: templates/tribes/tribe.html:61
 msgid "join tribe"
 msgstr "gå med i stam"
 
@@ -1347,6 +1464,38 @@ msgstr "Offentliga Tweets"
 msgid "Single Tweet"
 msgstr "Enstaka Tweet"
 
+#: tribes/management.py:10
+msgid "Friend Joined Tribe"
+msgstr ""
+
+#: tribes/management.py:10
+msgid "a friend of yours joined a tribe"
+msgstr ""
+
+#: tribes/management.py:11
+msgid "New Tribe Member"
+msgstr ""
+
+#: tribes/management.py:11
+msgid "a tribe you are a member of has a new member"
+msgstr ""
+
+#: tribes/management.py:12
+msgid "New Tribe Created"
+msgstr ""
+
+#: tribes/management.py:12
+msgid "a new tribe has been created"
+msgstr ""
+
+#: tribes/management.py:13
+msgid "Friend Created Tribe"
+msgstr ""
+
+#: tribes/management.py:13
+msgid "a friend has created a new tribe"
+msgstr ""
+
 #: tribes/models.py:14
 msgid "slug"
 msgstr "pollett"
@@ -1382,3 +1531,15 @@ msgstr "efterföljare"
 #: zwitschern/models.py:102
 msgid "followed"
 msgstr "följd"
+
+#~ msgid "English"
+#~ msgstr "Engelska"
+
+#~ msgid "German"
+#~ msgstr "Tyska"
+
+#~ msgid "Spanish"
+#~ msgstr "Spanska"
+
+#~ msgid "Swedish"
+#~ msgstr "Svenska"

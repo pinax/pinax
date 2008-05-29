@@ -146,7 +146,8 @@ LANGUAGES = (
   ('en', u'English'),
   ('de', u'Deutsch'),
   ('es', u'Español'),
-  ('sv', u'Svenska'),
+  ('en', u'English'),
+  ('pt-br', u'Português brasileiro'),
 )
 
 # URCHIN_ID = "ua-..."

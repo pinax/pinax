@@ -14,7 +14,7 @@
 {% block locale_switcher %}
     <form action="/i18n/setlang/" method="post" id="locale_switcher">
     <select name="language" onchange="$('#locale_switcher').submit()">{% for lang in LANGUAGES %}
-        <option value="{{ lang.0 }}" {% ifequal lang.0 LANGUAGE_CODE %} selected="selected"{% endifequal %}>{{ lang.1 }}</option>
+        <option value="{{ lang.0 }}"{% ifequal lang.0 LANGUAGE_CODE %} selected="selected"{% endifequal %}>{{ lang.1 }}</option>
     {% endfor %}</select></form>
 {% endblock %}
 
