@@ -30,7 +30,7 @@ msgstr "Esta conta atualmente está inativa."
 
 #: account/forms.py:40
 msgid "The username and/or password you specified are not correct."
-msgstr "O nome de usuário e/ou senha especificados são inválidas."
+msgstr "O nome de usuário e/ou senha especificados são inválidos."
 
 #: account/forms.py:46 account/views.py:35
 #, python-format
@@ -253,82 +253,71 @@ msgid "%s has sent you a reply to %s."
 msgstr ""
 
 #: messages/forms.py:58
-#, fuzzy, python-format
 msgid "you have sent a message to %s."
-msgstr "Mensagem pai."
+msgstr "Você enviou uma mansagem para %s."
 
 #: messages/forms.py:62
-#, fuzzy, python-format
 msgid "you have received a message from %s."
-msgstr "Mensagens excluídas"
+msgstr "você recebeu uma mensagem de %s"
 
 #: messages/management.py:10
-#, fuzzy
 msgid "Message Received"
-msgstr "Recebido"
+msgstr "Mensagem Recebida"
 
 #: messages/management.py:10
 msgid "you have received a message"
-msgstr ""
+msgstr "você recebeu uma mensagem"
 
 #: messages/management.py:11
-#, fuzzy
 msgid "Message Sent"
-msgstr "Mensagem"
+msgstr "Mensagem Enviada"
 
 #: messages/management.py:11
-#, fuzzy
 msgid "you have sent a message"
-msgstr "Mensagem pai."
+msgstr "você enviou uma mensagem"
 
 #: messages/management.py:12
-#, fuzzy
 msgid "Message Replied"
-msgstr "Mensagem"
+msgstr "Mensagem Respondida"
 
 #: messages/management.py:12
 msgid "you have replied to a message"
-msgstr ""
+msgstr "você respondeu uma mensagem"
 
 #: messages/management.py:13
-#, fuzzy
 msgid "Reply Received"
-msgstr "Recebido"
+msgstr "Resposta Recebida"
 
 #: messages/management.py:13
 msgid "you have received a reply to a message"
-msgstr ""
+msgstr "você recebeu uma resposta"
 
 #: messages/management.py:14
-#, fuzzy
 msgid "Message Deleted"
-msgstr "Mensagem"
+msgstr "Mensagem Excluida"
 
 #: messages/management.py:14
-#, fuzzy
 msgid "you have deleted a message"
-msgstr "Mensagens excluídas"
+msgstr "você escluiu uma mensagem"
 
 #: messages/management.py:15
-#, fuzzy
 msgid "Message Recovered"
-msgstr "Mensagem recuperada com sucesso."
+msgstr "Mensagem Recuperada"
 
 #: messages/management.py:15
-#, fuzzy
 msgid "you have undelete a message"
-msgstr "Envie uma mensagem"
+msgstr "você recuperou uma mensagem"
 
 #: messages/models.py:57 messages/templates/messages/inbox.html:7
 #: messages/templates/messages/trash.html:7
 #: messages/templates/messages/view.html:8 templates/messages/inbox.html:7
 #: templates/messages/trash.html:7 templates/messages/view.html:7
 msgid "Sender"
-msgstr "Remetente."
+msgstr "Remetente"
 
 #: messages/models.py:59
 msgid "Parent message"
-msgstr "Mensagem pai."
+msgstr "Mensagem pai"
 
 #: messages/models.py:60
 msgid "sent at"
@@ -363,25 +352,24 @@ msgid "Message successfully sent."
 msgstr "Mensagem enviada com sucesso."
 
 #: messages/views.py:120
-#, python-format
 msgid ""
 "%(sender)s wrote:\n"
 "%(body)s"
 msgstr ""
+"%(sender)s escreveu:\n"
+"%(body)s"
 
 #: messages/views.py:124
-#, python-format
 msgid "Re: %(subject)s"
-msgstr ""
+msgstr "Re: %(subject)s"
 
 #: messages/views.py:160
 msgid "Message successfully deleted."
 msgstr "Mensagem excluída com sucesso."
 
 #: messages/views.py:163
-#, python-format
 msgid "you have deleted the message %s."
-msgstr ""
+msgstr "você excluiu a mensagem %s"
 
 #: messages/views.py:189
 msgid "Message successfully recovered."
@@ -390,7 +378,7 @@ msgstr "Mensagem recuperada com sucesso."
 #: messages/views.py:192
 #, python-format
 msgid "you have recovered the message %s."
-msgstr ""
+msgstr "você recuperou a mensagem %s"
 
 #: messages/templates/messages/base.html:8
 #: messages/templates/messages/inbox.html:4 templates/site_base.html:40
@@ -451,7 +439,7 @@ msgstr "excluir"
 #: templates/messages/new_messages.html:4
 #, python-format
 msgid "Sent from %(site_url)s"
-msgstr ""
+msgstr "Enviado por %(site_url)s"
 
 #: messages/templates/messages/outbox.html:7 templates/messages/base.html:13
 #: templates/messages/outbox.html:7
@@ -477,7 +465,7 @@ msgid ""
 "Deleted Messages are removed from the trash at unregular intervals, don't "
 "rely on this feature for long-time storage."
 msgstr ""
-"Mensagens deletadas são removidas da lixeira em períodos irregulares, não "
+"Mensagens excluidas são removidas da lixeira em períodos irregulares, não "
 "confie nesse método para armazenamento de longo prazo."
 
 #: messages/templates/messages/view.html:4 templates/messages/view.html:5
@@ -505,9 +493,8 @@ msgid "description"
 msgstr "descrição"
 
 #: notification/models.py:30
-#, fuzzy
 msgid "default"
-msgstr "excluir"
+msgstr "padrão"
 
 #: notification/models.py:39 notification/models.py:59
 #: notification/models.py:88
@@ -563,42 +550,34 @@ msgid "notices"
 msgstr "avisos"
 
 #: profiles/models.py:10
-#, fuzzy
 msgid "about"
-msgstr "Sobre"
+msgstr "sobre"
 
 #: profiles/models.py:11
-#, fuzzy
 msgid "location"
 msgstr "localização"
 
 #: profiles/models.py:12
-#, fuzzy
 msgid "website"
-msgstr "Website"
+msgstr "website"
 
 #: profiles/models.py:21
-#, fuzzy
 msgid "profile"
 msgstr "Perfil"
 
 #: profiles/models.py:22
-#, fuzzy
 msgid "profiles"
 msgstr "Perfis"
 
 #: profiles/views.py:49
-#, fuzzy, python-format
 msgid "You are now following %(other_user)s"
-msgstr "Você é agora amigo(a) de %(other_user)s"
+msgstr "Você está seguindo %(other_user)s"
 
 #: profiles/views.py:55
-#, fuzzy, python-format
 msgid "You have stopped following %(other_user)s"
 msgstr "Você deixou de seguir %(other_user)s"
 
 #: profiles/views.py:77
-#, fuzzy, python-format
 msgid "You have accepted the friendship request from %(from_user)s"
 msgstr "Você aceitou o pedido de amizade de %(from_user)s"
 
@@ -618,10 +597,10 @@ msgid ""
 "sign ($) to match the end of the URL, e.g., '/*.jpg$'."
 msgstr ""
 "Sensível quanto a diferenças entre maiúsculas e minusculas. A ausência de "
-"uma barra no finaltambém cada com arquivos que iniciam com o nome do padrão, "
-"por exemplo, '/admin' tambémcasa com '/admin.html'. Alguns sistemas de busca "
-"maiores também permitem um asterisco (*)como texto geral, e cifrão ($) para "
-"casar com o fim da URL, por exemplo, '/*.jpg$'."
+"uma barra no final também faz o padrçao casar com arquivos que iniciam "
+"com o nome do padrão, por exemplo, '/admin' também casa com '/admin.html'. "
+"Alguns sistemas de busca maiores também permitem um asterisco (*) como "
+"texto geral, e cifrão ($) para casar com o fim da URL, por exemplo, '/*.jpg$'."
 
 #: robots/models.py:26 robots/models.py:27
 msgid "url"
@@ -639,7 +618,7 @@ msgid ""
 "Robots</a>."
 msgstr ""
 "Isso deve ser uma string de agente de usuário como 'Googlebot'. Entre um "
-"asterisco (*) for para todos os agentes de usuário. PAra uma lista completa "
+"asterisco (*) para todos os agentes de usuário. Para uma lista completa "
 "veja o <a target=_blank href='http://www.robotstxt.org/wc/active/html/index."
 "html'>banco de dados de robôs Web</a>."
 
@@ -649,8 +628,7 @@ msgstr "Esses são alguns endereços (URLs) que permitem acesso por robôs web."
 
 #: robots/models.py:49
 msgid "These are URLs which are not allowed to be accessed by web robots."
-msgstr ""
-"Esses são algums dos endereços (URLs) que não permitem acesso por robôs web."
+msgstr "Esses são algums dos endereços (URLs) que não permitem acesso por robôs web."
 
 #: robots/models.py:51
 msgid "crawl delay"
@@ -735,7 +713,7 @@ msgstr ""
 "que faz seu site diferente.</p>\n"
 "\n"
 "<p>Esse site é um exemplo do Pinax em execução. O código fonte está "
-"disponível com parte do projeto <a href=\"http://code.google.com/p/django-"
+"disponível como parte do projeto <a href=\"http://code.google.com/p/django-"
 "hotclub/\">Hot Club of France</a></p>\n"
 "\n"
 "<p>Caso você tenha qualquer questão sobre o site ou o projeto <b>Pinax</b>, "
@@ -789,7 +767,6 @@ msgstr "Perfil"
 
 #: templates/site_base.html:38 templates/tribes/tribes.html:7
 #: templates/tribes/tribes.html.py:12
-#, fuzzy
 msgid "Tribes"
 msgstr "Tribo"
 
@@ -820,7 +797,7 @@ msgstr "Politica de privacidade"
 
 #: templates/tabs.html:10
 msgid "Put whatever you want on these tabs :-)"
-msgstr "Ponha o que quiser nessas tabs :-)"
+msgstr "Coloque o que quiser nessas tabs :-)"
 
 #: templates/about/about.html:5 templates/profiles/profile.html:77
 msgid "About"
@@ -846,7 +823,7 @@ msgid ""
 msgstr ""
 "\n"
 "<p>Sua página <b>Sobre o Site</b> poderia normalmente ficar aqui, aqui está "
-"uma temparária...</p>\n"
+"uma temporária...</p>\n"
 "\n"
 "<p><b>Pinax</b> é um projeto em <a href=\"http://djangoproject.com/"
 "\">Django</a> com o intúito de prover um ponto de partida para websites. "
@@ -855,7 +832,7 @@ msgstr ""
 "que faz seu site diferente.</p>\n"
 "\n"
 "<p>Esse site é um exemplo do Pinax em execução. O código fonte está "
-"disponível com parte do projeto <a href=\"http://code.google.com/p/django-"
+"disponível como parte do projeto <a href=\"http://code.google.com/p/django-"
 "hotclub/\">Hot Club of France</a></p>\n"
 "\n"
 "<p>Caso você tenha qualquer questão sobre o site ou o projeto <b>Pinax</b>, "
@@ -984,7 +961,7 @@ msgstr "Ou entre com seu OpenID"
 
 #: templates/account/login.html:24
 msgid "OpenID Identifier"
-msgstr "Identificador OpenID"
+msgstr "Identidade OpenID"
 
 #: templates/account/login.html:29
 #, python-format
@@ -1032,15 +1009,14 @@ msgstr ""
 "href=\"mailto:%(contact_email)s\">%(contact_email)s</a>."
 
 #: templates/account/password_reset_done.html:12
-#, python-format
 msgid ""
 "A new password has been sent to <b>%(email)s</b>. If you do not receive it "
 "within a few minutes, contact us at <a href=\"mailto:%(contact_email)s\">%"
 "(contact_email)s</a>."
 msgstr ""
 "Uma nova senha foi enviada para <b>%(email)s</b>. Se você não a receber em "
-"alguns minutos, entre em contato em <a href=\"mailto:%(contact_email)s\">%"
-"(contact_email)s</a>."
+"alguns minutos, entre em contato em <a href=\"mailto:%(contact_email)s\">"
+"%(contact_email)s</a>."
 
 #: templates/account/password_reset_done.html:13
 msgid ""
@@ -1081,7 +1057,6 @@ msgstr ""
 "privacy\">Política de Privacidade</a>."
 
 #: templates/account/signup.html:19 templates/openid/signup.html:20
-#, python-format
 msgid ""
 "If you have any trouble creating your account, contact us at <a href="
 "\"mailto:%(contact_email)s\">%(contact_email)s</a>."
@@ -1090,7 +1065,6 @@ msgstr ""
 "href=\"mailto:%(contact_email)s\">%(contact_email)s</a>."
 
 #: templates/announcements/announcement_detail.html:5
-#, python-format
 msgid "Announcements : %(object)s"
 msgstr "Avisos : %(object)s"
 
@@ -1101,7 +1075,7 @@ msgstr "Avisos"
 
 #: templates/announcements/announcement_list.html:19
 msgid "There are no announcements for you."
-msgstr "Sem avisos para você"
+msgstr "Não há avisos para você"
 
 #: templates/emailconfirmation/confirm_email.html:5
 msgid "Confirm Email"
@@ -1136,7 +1110,7 @@ msgid ""
 "If you'd like to invite someone to join Pinax, you can enter their email "
 "address and a message for them below:"
 msgstr ""
-"Se você desejar convidar alguém ao Pinax, vocÊ pode entrar seu endereço de "
+"Se você desejar convidar alguém ao Pinax, você pode entrar seu endereço de "
 "email e uma mensagem para ele abaixo:"
 
 #: templates/friends_app/invitations.html:21
@@ -1155,7 +1129,7 @@ msgstr "Pedido de Amizade Recebido"
 #: templates/friends_app/invitations.html:53
 #: templates/profiles/profile.html:136
 msgid "accept"
-msgstr "Aceitar"
+msgstr "aceitar"
 
 #: templates/friends_app/invitations.html:67
 msgid "No friendship requests received."
@@ -1232,10 +1206,9 @@ msgid "Manage OpenID Associations"
 msgstr "Gerenciar associações OpenID"
 
 #: templates/openid/associations.html:11
-#, python-format
 msgid ""
 "Your account is currently associated with the following OpenID %(buttons)s:"
-msgstr "Sua conta está associada atualmente aos seguintes OpenID %(buttons)s"
+msgstr "Sua conta está associada atualmente aos seguintes OpenID %(buttons)s:"
 
 #: templates/openid/associations.html:14
 msgid "Remove association"
@@ -1278,14 +1251,12 @@ msgid "All Profiles"
 msgstr "Todos Perfis"
 
 #: templates/profiles/profile.html:7 templates/profiles/profile.html.py:73
-#, python-format
 msgid "Profile for %(other_user)s"
 msgstr "Perfil para %(other_user)s"
 
 #: templates/profiles/profile.html:14
-#, fuzzy
 msgid "Your Tribes"
-msgstr "Seus Amigos"
+msgstr "Suas Tribos"
 
 #: templates/profiles/profile.html:24
 msgid "Your Friends"
@@ -1296,22 +1267,21 @@ msgid ""
 "None. You should look at the list of <a href=\"/profiles/\">profiles</a> and "
 "see if there's anyone you know."
 msgstr ""
-"Nehum. Você deveria olhar na lista de <a href=\"/profiles/\">perfis</a> e "
+"Ninguém. Você deveria olhar na lista de <a href=\"/profiles/\">perfis</a> e "
 "ver se há alguém que você conhece."
 
 #: templates/profiles/profile.html:45
-#, fuzzy, python-format
 msgid "%(other_user)s's Tribes"
-msgstr "%(other_user)s's Friends"
+msgstr "Tribos de %(other_user)s"
 
 #: templates/profiles/profile.html:51
 msgid "Not yet a member of any tribes."
-msgstr ""
+msgstr "Nenhum membro dessa trbo ainda."
 
 #: templates/profiles/profile.html:55
 #, python-format
 msgid "%(other_user)s's Friends"
-msgstr "%(other_user)s's Friends"
+msgstr "Amigos de %(other_user)s"
 
 #: templates/profiles/profile.html:76
 msgid "Name"
@@ -1346,7 +1316,6 @@ msgid "follow tweets"
 msgstr "seguir tweets"
 
 #: templates/profiles/profile.html:124
-#, python-format
 msgid "You are friends with %(other_user)s."
 msgstr "Você é amigo(a) de %(other_user)s"
 
@@ -1385,17 +1354,14 @@ msgid "Profiles"
 msgstr "Perfis"
 
 #: templates/tribes/base.html:10
-#, fuzzy
 msgid "All Tribes"
 msgstr "Todas as Tribos"
 
 #: templates/tribes/tribe.html:12
-#, fuzzy
 msgid "Members"
 msgstr "Membros"
 
 #: templates/tribes/tribe.html:29
-#, fuzzy
 msgid "Tribe"
 msgstr "Tribo"
 
@@ -1404,21 +1370,18 @@ msgid "Edit details"
 msgstr "Editar detalhes"
 
 #: templates/tribes/tribe.html:58
-#, fuzzy
 msgid "leave"
-msgstr "Nível"
+msgstr "abandonar"
 
 #: templates/tribes/tribe.html:61
 msgid "join tribe"
 msgstr "unir-se à tribo"
 
 #: templates/tribes/tribes.html:15
-#, fuzzy
 msgid "Start your own"
 msgstr "Comece sua própria"
 
 #: templates/tribes/tribes.html:20
-#, fuzzy
 msgid "create"
 msgstr "criador"
 
@@ -1444,7 +1407,7 @@ msgstr "enviar"
 
 #: templates/zwitschern/personal.html:22
 msgid "person,people"
-msgstr ""
+msgstr "pessoa,pessoas"
 
 #: templates/zwitschern/personal.html:22
 #, python-format
@@ -1454,7 +1417,7 @@ msgid ""
 "(plus your own)"
 msgstr ""
 "\n"
-"Esses são os tweets dos %(follow_count)s %(follow_name)s que você segue "
+"Esses são os tweets das %(follow_count)s %(follow_name)s que você segue "
 "(mais os seus)"
 
 #: templates/zwitschern/personal.html:30
@@ -1475,53 +1438,50 @@ msgid "Public Tweets"
 msgstr "Tweets Públicos"
 
 #: templates/zwitschern/single.html:6 templates/zwitschern/single.html.py:9
-#, fuzzy
 msgid "Single Tweet"
 msgstr "Tweet único"
 
 #: tribes/management.py:10
 msgid "Friend Joined Tribe"
-msgstr ""
+msgstr "Amigo se Uniu à Tribo"
 
 #: tribes/management.py:10
 msgid "a friend of yours joined a tribe"
-msgstr ""
+msgstr "um amigo seu se uniu à tribo"
 
 #: tribes/management.py:11
 msgid "New Tribe Member"
-msgstr ""
+msgstr "Novo Membro da Tribo"
 
 #: tribes/management.py:11
 msgid "a tribe you are a member of has a new member"
-msgstr ""
+msgstr "Uma tribo que você faz parte tem um novo membro"
 
 #: tribes/management.py:12
 msgid "New Tribe Created"
-msgstr ""
+msgstr "Nova Tribo Criada"
 
 #: tribes/management.py:12
 msgid "a new tribe has been created"
-msgstr ""
+msgstr "ums nova tribo foi criada"
 
 #: tribes/management.py:13
 msgid "Friend Created Tribe"
-msgstr ""
+msgstr "Amigo Criou Tribo"
 
 #: tribes/management.py:13
 msgid "a friend has created a new tribe"
-msgstr ""
+msgstr "um amigo criou nova tribo"
 
 #: tribes/models.py:14
 msgid "slug"
 msgstr ""
 
 #: tribes/models.py:17
-#, fuzzy
 msgid "created"
 msgstr "criador"
 
 #: tribes/models.py:19
-#, fuzzy
 msgid "members"
 msgstr "membros"
 
