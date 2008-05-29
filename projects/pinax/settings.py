@@ -66,6 +66,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.doc.XViewMiddleware',
     'djangologging.middleware.LoggingMiddleware',
     'django_openidconsumer.middleware.OpenIDMiddleware',
+    'djangodblog.DBLogMiddleware',
 )
 
 ROOT_URLCONF = 'pinax.urls'
@@ -112,6 +113,7 @@ INSTALLED_APPS = (
     'django_openidconsumer',
     'django_openidauth',
     'oembed',
+    'djangodblog',
     
     # internal (for now)
     'analytics',
