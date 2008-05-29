@@ -11,7 +11,7 @@
 {% load gravatar %}
 {% load humanize %}
 
-{% autopaginate user %}
+{% autopaginate users %}
 {% regroup users by date_joined.date as users_by_date_joined %}
 
 {% for date in users_by_date_joined %}
