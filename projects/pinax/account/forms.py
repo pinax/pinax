@@ -20,6 +20,8 @@ from emailconfirmation.models import EmailAddress
 
 from friends.models import JoinInvitation
 
+from timezones import TIMEZONE_CHOICES
+
 class LoginForm(forms.Form):
     
     username = forms.CharField(label=_("Username"), max_length=30, widget=forms.TextInput())
@@ -113,6 +115,12 @@ class UserForm(forms.Form):
         self.user = user
         super(UserForm, self).__init__(*args, **kwargs)
 
+class ProfileForm(UserForm):
+    
+    def __init__(self, *args, **kwargs):
+        super(ProfileForm, self).__init__(*args, **kwargs)
+        self.profile = self.user.get_profile()
+
 
 class AddEmailForm(UserForm):
     
@@ -174,3 +182,16 @@ class ResetPasswordForm(forms.Form):
             })
             send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user.email])
         return self.cleaned_data["email"]
+
+class ChangeTimezoneForm(ProfileForm):
+    
+    timezone = forms.ChoiceField(label=_("Timezone"), required=True, choices=TIMEZONE_CHOICES)
+    
+    def __init__(self, *args, **kwargs):
+        super(ChangeTimezoneForm, self).__init__(*args, **kwargs)
+        self.initial.update({"timezone": self.profile.timezone})
+    
+    def save(self):
+        self.profile.timezone = self.cleaned_data["timezone"]
+        self.profile.save()
+        self.user.message_set.create(message=_("Timezone successfully updated."))

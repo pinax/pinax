@@ -9,7 +9,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
-from forms import SignupForm, AddEmailForm, LoginForm, ChangePasswordForm, ResetPasswordForm
+from forms import SignupForm, AddEmailForm, LoginForm, ChangePasswordForm, ResetPasswordForm, ChangeTimezoneForm
 from emailconfirmation.models import EmailAddress, EmailConfirmation
 from friends.models import Friendship
 
@@ -103,6 +103,17 @@ def password_reset(request):
     
     return render_to_response("account/password_reset.html", {
         "password_reset_form": password_reset_form,
+    }, context_instance=RequestContext(request))
+
+def timezone_change(request):
+    if request.method == "POST":
+        form = ChangeTimezoneForm(request.user, request.POST)
+        if form.is_valid():
+            form.save()
+    else:
+        form = ChangeTimezoneForm(request.user)
+    return render_to_response("account/timezone_change.html", {
+        "form": form,
     }, context_instance=RequestContext(request))
 
 from gravatar.templatetags.gravatar import gravatar
