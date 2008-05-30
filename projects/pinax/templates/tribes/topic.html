@@ -10,7 +10,7 @@
 {% block body %}
 {% get_threaded_comment_tree for topic as responses %}
 {% autopaginate responses %}
-<a href="{% url tribe_detail topic.content_object.slug %}">&larr; {% trans "Back to" %} {{ topic.content_object.name }} {% trans "Tribe" %}</a>
+<a href="{% url tribe_topics topic.content_object.slug %}">&larr; {% trans "Back to Topic List for Tribe " %} {{ topic.content_object.name }}</a>
 <table id="messageboard">
     <tr class="odd">
         <td class="meta">

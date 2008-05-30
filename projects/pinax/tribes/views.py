@@ -49,7 +49,7 @@ def tribes(request):
         "tribes": Tribe.objects.all().order_by("-created"),
     }, context_instance=RequestContext(request))
 
-def tribe(request, slug):
+def tribe(request, slug, template_name="tribes/tribe.html"):
     tribe = get_object_or_404(Tribe, slug=slug)
     
     if request.user.is_authenticated() and request.method == "POST":
@@ -74,7 +74,7 @@ def tribe(request, slug):
     
     are_member = request.user in tribe.members.all()
     
-    return render_to_response("tribes/tribe.html", {
+    return render_to_response(template_name, {
         "tribe_form": tribe_form,
         "tribe": tribe,
         "are_member": are_member,

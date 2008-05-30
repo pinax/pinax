@@ -1,0 +1,29 @@
+{% extends "tribes/base.html" %}
+
+{% load i18n %}
+{% load gravatar %}
+{% load threadedcommentstags %}
+{% load pagination_tags %}
+
+{% block head_title %}Pinax : {{ tribe.name }}{% endblock %}
+
+{% block body %}
+<h1>{% trans "Discussion Topics for Tribe" %} <a href="{% url tribe_detail tribe.slug %}">{{ tribe.name }}</a></h1>
+{% get_threaded_comment_tree for tribe as topics %}
+{% autopaginate topics %}
+<div id="threads">
+{% for topic in topics %}
+    <p class="{% cycle tl_odd,tl_even %}"><a href="{% url tribe_topic topic.id %}">{{ topic.comment|urlize|linebreaks }}</a></p>
+{% endfor %}
+</div>
+<form action="{% get_comment_url tribe %}" method="POST">
+    <table>
+    <tr><td><textarea id="id_comment" rows="10" cols="40" name="comment"></textarea></td></tr>
+    <tr><td><input type="submit" value="{% trans "Create New Topic" %}" /></td></tr>
+    </table>
+    <input type="hidden" name="next" value="{{ request.path }}" />
+</form>
+
+{% paginate %}
+
+{% endblock %}
