@@ -6,6 +6,7 @@ sys.path.insert(0, 'lib/python-yadis-1.1.0')
 sys.path.insert(0, 'lib/docutils-0.4')
 sys.path.insert(0, 'lib/textile-2.0.11')
 sys.path.insert(0, 'lib/markdown-1.7')
+sys.path.insert(0, 'lib/pytz-2008b')
 
 from django.core.management import execute_manager
 try:
