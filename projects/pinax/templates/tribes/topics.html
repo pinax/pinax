@@ -13,7 +13,7 @@
 {% autopaginate topics %}
 <div id="threads">
 {% for topic in topics %}
-    <p class="{% cycle tl_odd,tl_even %}"><a href="{% url tribe_topic topic.id %}">{{ topic.comment|urlize|linebreaks }}</a></p>
+    <p class="{% cycle tl_odd,tl_even %}"><a href="{% url tribe_topic topic.id %}">{{ topic.comment }}</a></p>
 {% endfor %}
 </div>
 <form action="{% get_comment_url tribe %}" method="POST">
