@@ -180,6 +180,15 @@ input[type="text"], input[type="password"], textarea {
     font-size: 12pt;
     background: #F3F3F3 url('/site_media/form-shadow.png') left top repeat-x;
 }
+/*
+input[type="submit"] {
+    background-color: #FFF0F5;
+    border: 1px solid #FF0000;
+    cursor: pointer;
+    color: #FF0000;
+    text-decoration: underline;
+}
+*/
 ul.errorlist {
     margin: 0;
     padding: 0;
@@ -496,38 +505,27 @@ div.tweet .reply {
 	background-color: #0A246A;
 	color: white;
 }
-#messageboard {
-	width: 100%;
+
+/* topics */
+table.topic, table.topics, table.responses {
+    width: 100%;
 }
-#messageboard .meta {
-	width: 60px;
-	text-align: center;
+table.topic td, table.topics td, .responses td {
+    vertical-align: top;
+    padding: 5px 20px 5px 5px;
 }
-#messageboard .body {
-	width: 100%;
-	text-align: left;
-        padding-left: 10px;
+table.topic td h1, table.topics td h2 {
+    margin: 0;
+    padding: 0;
 }
-#messageboard .even {
-	background-color: #FAFAFA;
+.responses .even, .topics .even {
+    background-color: #FAFAFA;
 }
-#messageboard .odd {
-	background-color: #F3F3F3;
+.responses .odd, .topics .odd {
+    background-color: #F3F3F3;
 }
-#messageboard input[type="submit"] {
-	background-color: #FFF0F5;
-        border: 1px solid #FF0000;
-        cursor: pointer;
-        color: #FF0000;
-        text-decoration: underline;
-}
-.tl_even {
-	background-color: #FAFAFA;
-	padding: 3px 3px 3px 3px;
-}
-.tl_odd {
-	background-color: #F3F3F3;
-        padding: 3px 3px 3px 3px;
+td.meta {
+    width: 100px;
 }
 
 /* pagination */

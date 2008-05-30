@@ -11,14 +11,21 @@
 <h1>{% trans "Discussion Topics for Tribe" %} <a href="{% url tribe_detail tribe.slug %}">{{ tribe.name }}</a></h1>
 
 {% autopaginate tribe.topics.all %}
-<div id="topics">
+<table class="topics">
     {% for topic in tribe.topics.all %}
-    <div class="{% cycle tl_odd,tl_even %}">
-        <h2 class="topic_title"><a href="{% url tribe_topic topic.id %}">{{ topic.title }}</a></h2>
-        <div class="topic_body">{{ topic.body }}</div>
-    </div>
+    <tr class="{% cycle odd,even %}">
+        <td class="meta">
+            <div class="avatar">{% gravatar topic.creator 40 %}</div>
+            <div class="details"><a href="{% url profiles.views.profile topic.creator.username %}">{{ topic.creator }}</a></div>
+            {{ topic.created|date }}
+        </td>
+        <td>
+            <h2><a href="{% url tribe_topic topic.id %}">{{ topic.title }}</a></h2>
+            <div class="body">{{ topic.body|urlize|linebreaks }}</div>
+        </td>
+    </tr>
     {% endfor %}
-</div>
+</table>
 
 <form action="{% url tribe_topics tribe.slug %}" method="POST">
     <table>
