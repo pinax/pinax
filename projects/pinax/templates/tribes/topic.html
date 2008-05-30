@@ -37,8 +37,8 @@
     {% for response in responses %}
         <tr class="{% cycle odd,even %}">
             <td class="meta">
-                <div class="avatar">{% gravatar topic.creator 40 %}</div>
-                <div class="details"><a href="{% url profiles.views.profile topic.creator.username %}">{{ topic.creator }}</a></div>
+                <div class="avatar">{% gravatar response.user 40 %}</div>
+                <div class="details"><a href="{% url profiles.views.profile response.user.username %}">{{ response.user }}</a></div>
                 {{ response.date_submitted|date }}
             </td>
             <td>
