@@ -16,7 +16,7 @@
 <p>These are tweets from everyone:</p>
 
 {% oembed %}
-{% autopaginate %}
+{% autopaginate tweets %}
 {% for tweet in tweets %}
 <div class="tweet" id="t{{ tweet.id }}">
 <a href="{% url profiles.views.profile tweet.sender %}"><b>{{ tweet.sender }}</b></a>
