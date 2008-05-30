@@ -71,12 +71,13 @@ def tribe(request, slug):
                 pass # @@@
     
     tribe_form = TribeUpdateForm(instance=tribe)
-    
+    topics = tribe.topics.all()[:5]
     are_member = request.user in tribe.members.all()
     
     return render_to_response("tribes/tribe.html", {
         "tribe_form": tribe_form,
         "tribe": tribe,
+        "topics": topics,
         "are_member": are_member,
     }, context_instance=RequestContext(request))
 

@@ -65,7 +65,28 @@ Created: {{ tribe.created|date }}
 </form>
 </div>
 
-<a href="{% url tribe_topics tribe.slug %}">Discussion Forum for Tribe {{ tribe.name }}</a>
+<h2>Discussion Topics{% if tribe.topics.all.count %} ({{ tribe.topics.all.count }}){% endif %}</h2>
+
+{% if topics %}
+<table class="topics">
+    {% for topic in topics %}
+    <tr class="{% cycle odd,even %}">
+        <td class="meta">
+            <div class="avatar">{% gravatar topic.creator 40 %}</div>
+            <div class="details"><a href="{% url profiles.views.profile topic.creator.username %}">{{ topic.creator }}</a></div>
+            {{ topic.created|date }}
+        </td>
+        <td>
+            <h2><a href="{% url tribe_topic topic.id %}">{{ topic.title }}</a></h2>
+            <div class="body">{{ topic.body|urlize|linebreaks }}</div>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<p><a href="{% url tribe_topics tribe.slug %}">more...</a></p>
+{% else %}
+<p>None yet. <a href="{% url tribe_topics tribe.slug %}">Start one...</a></p>
+{% endif %}
 
 {% endblock %}
 
