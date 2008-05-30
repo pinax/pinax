@@ -121,6 +121,7 @@ INSTALLED_APPS = (
     'threadedcomments',
     'wiki',
     'django_evolution',
+    'timezones',
     
     # internal (for now)
     'analytics',
