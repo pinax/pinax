@@ -1,10 +1,18 @@
 from datetime import datetime
 
 from django.db import models
+from django.dispatch import dispatcher
+from django.db.models import signals
 from django.utils.html import escape
 from django.utils.translation import ugettext_lazy as _
 
 from django.contrib.auth.models import User
+
+try:
+    from notification import models as notification
+except ImportError:
+    notification = None
+
 
 class Tribe(models.Model):
     """
@@ -53,3 +61,12 @@ class Topic(models.Model):
     
     class Admin:
         list_display = ('title', )
+
+
+if notification:
+    from threadedcomments.models import ThreadedComment
+    def new_comment(sender, instance):
+        if isinstance(instance.content_object, Topic):
+            topic = instance.content_object
+            notification.send([topic.creator], "tribes_topic_response", "%(user)s has responded to your topic '%(topic)s'.", {"user": instance.user, "topic": topic})
+    dispatcher.connect(new_comment, signal=signals.post_save, sender=ThreadedComment)

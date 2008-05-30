@@ -7,46 +7,6 @@
 
 {% block body %}
 
-<div class="right_panel">
-    <div class="notice_settings">
-        <h2>{% trans "Settings" %}</h2>
-        
-        {% if user.email %}
-        <p>{% trans "Primary email" %}:<br />
-            <b>{{ user.email }}</b><br />
-            ({% blocktrans %}change under <a href="/account/email/">Account</a>{% endblocktrans %})</p>
-        {% else %}
-        <p><span class="warning">{% trans "Note" %}</span>: {% blocktrans %}You do not have a verified email address to which notices can be sent. You can add one by going to <a href="/account/email/">Account</a>.{% endblocktrans %}</p>
-        {% endif %}
-        
-        <form method="POST" action="">
-            <table class="notice_settings">
-                <tr>
-                    <th>{% trans "Notification Type" %}</th>
-                    {% for header in notice_settings.column_headers %}
-                    <th>{{ header }}</th>
-                    {% endfor %}
-                </tr>
-                {% for row in notice_settings.rows %}
-                <tr>
-                    <td>{% trans row.notice_type.display %}<br/>
-                        <span class="notice_type_description">{% trans row.notice_type.description %}</span>
-                    </td>
-                    {% for cell in row.cells %}
-                    <td>
-                        <input type="checkbox" name="{{ cell.0 }}" {% if cell.1 %}checked="yes"{% endif %}/>
-                    </td>
-                    {% endfor %}
-                </tr>
-                {% endfor %}
-                <tr>
-                    <td><input type="submit" value="{% trans "Change" %}" /></td>
-                </tr>
-            </table>
-        </form>
-    </div>
-</div>
-
 <h1>{% trans "Notices" %}</h1>
 
 {% autopaginate notices %}
@@ -71,5 +31,43 @@
 {% else %}
 <p>{% trans "No notices." %}</p>
 {% endif %}
+
+<div class="notice_settings">
+    <h2>{% trans "Settings" %}</h2>
+    
+    {% if user.email %}
+    <p>{% trans "Primary email" %}:<br />
+        <b>{{ user.email }}</b><br />
+        ({% blocktrans %}change under <a href="/account/email/">Account</a>{% endblocktrans %})</p>
+    {% else %}
+    <p><span class="warning">{% trans "Note" %}</span>: {% blocktrans %}You do not have a verified email address to which notices can be sent. You can add one by going to <a href="/account/email/">Account</a>.{% endblocktrans %}</p>
+    {% endif %}
+    
+    <form method="POST" action="">
+        <table class="notice_settings">
+            <tr>
+                <th>{% trans "Notification Type" %}</th>
+                {% for header in notice_settings.column_headers %}
+                <th>{{ header }}</th>
+                {% endfor %}
+            </tr>
+            {% for row in notice_settings.rows %}
+            <tr>
+                <td>{% trans row.notice_type.display %}<br/>
+                    <span class="notice_type_description">{% trans row.notice_type.description %}</span>
+                </td>
+                {% for cell in row.cells %}
+                <td>
+                    <input type="checkbox" name="{{ cell.0 }}" {% if cell.1 %}checked="yes"{% endif %}/>
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+            <tr>
+                <td><input type="submit" value="{% trans "Change" %}" /></td>
+            </tr>
+        </table>
+    </form>
+</div>
 
 {% endblock %}

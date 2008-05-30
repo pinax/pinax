@@ -90,7 +90,9 @@ def topics(request, slug):
             topic.tribe = tribe
             topic.creator = request.user
             topic.save()
-            # @@@ notification
+            request.user.message_set.create(message="You have started the topic %s" % topic.title)
+            if notification:
+                notification.send(tribe.members.all(), "tribes_new_topic", "%(creator)s has started a topic '%(topic)s' in tribe %(tribe)s.", {"creator": request.user, "topic": topic, "tribe": tribe})
             topic_form = TopicForm() # @@@ is this the right way to reset it?
     else:
         topic_form = TopicForm()
