@@ -27,3 +27,29 @@ class Tribe(models.Model):
     
     class Admin:
         list_display = ('name', 'creator', 'created',)
+
+
+class Topic(models.Model):
+    """
+    a discussion topic for the tribe.
+    """
+    
+    tribe = models.ForeignKey(Tribe, related_name="topics", verbose_name=_('tribe'))
+    
+    title = models.CharField(_('title'), max_length="50")
+    creator = models.ForeignKey(User, related_name="created_topics", verbose_name=_('creator'))
+    created = models.DateTimeField(_('created'), default=datetime.now)
+    body = models.TextField(_('body'), blank=True)
+    
+    def __unicode__(self):
+        return self.title
+    
+    def get_absolute_url(self):
+        return ("tribe_topic", [self.pk])
+    get_absolute_url = models.permalink(get_absolute_url)
+    
+    class Meta:
+        ordering = ('-created', )
+    
+    class Admin:
+        list_display = ('title', )

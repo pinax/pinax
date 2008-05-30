@@ -1,9 +1,10 @@
 from django import newforms as forms
 from django.utils.translation import ugettext_lazy as _
 
-from tribes.models import Tribe
+from tribes.models import *
 
 class TribeForm(forms.ModelForm):
+    
     slug = forms.RegexField(max_length=20, regex=r'^\w+$',
         help_text = _("a short version of the name consisting only of letters, numbers and underscores."),
         error_message = _("This value must contain only letters, numbers and underscores."))
@@ -35,3 +36,10 @@ class TribeUpdateForm(forms.ModelForm):
     class Meta:
         model = Tribe
         fields = ('name', 'description')
+
+
+class TopicForm(forms.ModelForm):
+    
+    class Meta:
+        model = Topic
+        fields = ('title', 'body')

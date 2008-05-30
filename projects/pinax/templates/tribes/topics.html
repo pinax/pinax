@@ -9,16 +9,20 @@
 
 {% block body %}
 <h1>{% trans "Discussion Topics for Tribe" %} <a href="{% url tribe_detail tribe.slug %}">{{ tribe.name }}</a></h1>
-{% get_threaded_comment_tree for tribe as topics %}
-{% autopaginate topics %}
-<div id="threads">
-{% for topic in topics %}
-    <p class="{% cycle tl_odd,tl_even %}"><a href="{% url tribe_topic topic.id %}">{{ topic.comment }}</a></p>
-{% endfor %}
+
+{% autopaginate tribe.topics.all %}
+<div id="topics">
+    {% for topic in tribe.topics.all %}
+    <div class="{% cycle tl_odd,tl_even %}">
+        <h2 class="topic_title"><a href="{% url tribe_topic topic.id %}">{{ topic.title }}</a></h2>
+        <div class="topic_body">{{ topic.body }}</div>
+    </div>
+    {% endfor %}
 </div>
-<form action="{% get_comment_url tribe %}" method="POST">
+
+<form action="{% url tribe_topics tribe.slug %}" method="POST">
     <table>
-    <tr><td><textarea id="id_comment" rows="10" cols="40" name="comment"></textarea></td></tr>
+    {{ topic_form }}
     <tr><td><input type="submit" value="{% trans "Create New Topic" %}" /></td></tr>
     </table>
     <input type="hidden" name="next" value="{{ request.path }}" />

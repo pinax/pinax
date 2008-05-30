@@ -5,22 +5,23 @@
 {% load pagination_tags %}
 {% load gravatar %}
 
-{% block head_title %}Pinax : {{ topic.comment|truncatewords:10 }}{% endblock %}
+{% block head_title %}Pinax : {{ topic.title }}{% endblock %}
 
 {% block body %}
 {% get_threaded_comment_tree for topic as responses %}
 {% autopaginate responses %}
-<a href="{% url tribe_topics topic.content_object.slug %}">&larr; {% trans "Back to Topic List for Tribe " %} {{ topic.content_object.name }}</a>
+<p><a href="{% url tribe_topics topic.tribe.slug %}">&larr; {% trans "Back to Topic List for Tribe " %} {{ topic.tribe }}</a></p>
+
 <table id="messageboard">
     <tr class="odd">
         <td class="meta">
-            <a href="{% url profiles.views.profile topic.user.username %}">
-                {% gravatar topic.user 40 %}<br />
-                {{ topic.date_submitted|date }}
+            <a href="{% url profiles.views.profile topic.creator.username %}">
+                {% gravatar topic.creator 40 %}<br />
+                {{ topic.creation|date }}
             </a>
-            {% ifequal user topic.user %}<form method="POST" action="{% url tc_comment_delete topic.id %}"><input type="submit" value="{% trans "Delete Topic" %}" /><input type="hidden" name="next" value="{% url tribe_detail topic.content_object.slug %}" /></form>{% else %}&nbsp;{% endifequal %}
+            {% ifequal user topic.creator %}<form method="POST" action="{% url tc_comment_delete topic.id %}"><input type="submit" value="{% trans "Delete Topic" %}" /><input type="hidden" name="next" value="{% url tribe_detail topic.content_object.slug %}" /></form>{% else %}&nbsp;{% endifequal %}
         </td>
-        <td class="body">{{ topic.comment|urlize|linebreaks }}</td>
+        <td class="body">{{ topic.body|urlize|linebreaks }}</td>
     </tr>
     {% for response in responses %}
         <tr class="{% cycle even,odd %}">
