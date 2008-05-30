@@ -100,6 +100,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.humanize',
+    'django.contrib.markup',
     
     # external
     'notification', # must be first
@@ -118,6 +119,7 @@ INSTALLED_APPS = (
     'pagination',
     'gravatar', # This needs to go before threadedcomments.
     'threadedcomments',
+    'wiki',
     
     # internal (for now)
     'analytics',

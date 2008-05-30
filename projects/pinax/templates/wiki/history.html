@@ -1,0 +1,55 @@
+{% extends "wiki/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}Pinax : {{ article.title }} {% endblock %}
++
+{% block body %}
+    <h1>
+        <a href="{{ article.get_absolute_url }}"> {{ article.title }} </a>
+    </h1>
+    
+    <h2> {% trans "Article History" %} </h2>
+    
+    {% if changes %}
+    <table>
+        <tr class="tbheader">
+            <th>{% trans "At" %}</th>
+            <th>{% trans "User" %}</th>
+            <th>{% trans "Comment" %}</th>
+            <th>{% trans "Revert" %}</th>
+        </tr>
+        {% for change in changes %}
+        <tr class="{% cycle 'tbodd' 'tbeven' %}">
+            <td><a href="{{ change.get_absolute_url }}">
+                {{ change.modified|date:"M d, Y" }}</a></td>
+            <td>
+                {% if change.is_anonymous_change %}
+                {{ change.editor_ip }}
+                {% else %}
+                <a href="{% url wiki_article change.editor %}">{{ change.editor }}</a>
+                {% endif %}
+            </td>
+            <td>
+                {% if change.comment %}<i>'{{ change.comment}}'</i> {% endif %}
+            </td>
+            <td>
+                {% ifequal forloop.counter 1 %}
+                <form action="{% url wiki_revert_revision article.title %}" method="POST">
+                    <input name="revision" type="hidden" value="{{ change.revision }}">
+                    <input name="revert" type="submit" value="{% trans "Revert Last Change" %}">
+                </form>
+                {% endifequal %}
+            </td>
+            {% endfor %}
+        </tr>
+    </table>
+    
+    {% if previous %}
+    <a href="{% url wiki_article_history article.title,previous %}">{% trans "Previous" %}</a>
+    {% endif %}
+    <a href="{% url wiki_article_history article.title,next %}">{% trans "Next" %}</a>
+    {% else %}
+    <p> {% trans "No changes in this article" %}</p>
+    {% endif %}
+{% endblock %}

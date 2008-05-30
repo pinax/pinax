@@ -1,0 +1,23 @@
+{% extends "wiki/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}Pinax : {% trans "Index" %}{% endblock %}
+
+{% block body %}
+    <div class="right_panel">
+        {% include "wiki/searchbox.html" %}
+    </div>
+    
+    <h1>{% trans "Index" %}</h1>
+    
+    {% if articles %}
+    <ul>
+        {% for article in articles %}
+        <li><a href="{% url wiki_article article.title %}">{{ article.title }}</a></li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p><a href="{% url wiki_edit_article "NewArticle" %}">{% trans "Create a new article" %}</a>.</p>
+    {% endif %}
+{% endblock %}
