@@ -5,7 +5,7 @@
 {% load threadedcommentstags %}
 {% load pagination_tags %}
 
-{% block head_title %}Pinax : {{ tribe.name }}{% endblock %}
+{% block head_title %}Pinax : Topics for {{ tribe.name }}{% endblock %}
 
 {% block body %}
 <h1>{% trans "Discussion Topics for Tribe" %} <a href="{% url tribe_detail tribe.slug %}">{{ tribe.name }}</a></h1>
