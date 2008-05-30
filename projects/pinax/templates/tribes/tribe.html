@@ -26,6 +26,7 @@
     </div>
 </div>
 
+<div style="width: 550px;">
 <p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time.</p>
 
 <h1>{% trans "Tribe" %} {{ tribe.name }}</h1>
@@ -88,6 +89,7 @@ Created: {{ tribe.created|date }}
 <p>None yet. <a href="{% url tribe_topics tribe.slug %}">Start one...</a></p>
 {% endif %}
 
+</div>
 {% endblock %}
 
 {% block extra_body %}
