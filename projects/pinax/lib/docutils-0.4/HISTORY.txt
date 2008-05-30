@@ -1,0 +1,2183 @@
+==================
+ Docutils History
+==================
+
+:Author: David Goodger; open to all Docutils developers
+:Contact: goodger@python.org
+:Date: $Date: 2006-01-09 20:54:47 +0100 (Mon, 09 Jan 2006) $
+:Revision: $Revision: 4262 $
+:Web site: http://docutils.sourceforge.net/
+:Copyright: This document has been placed in the public domain.
+
+.. contents::
+
+
+Release 0.4 (2006-01-09)
+========================
+
+* General:
+
+  - Updated the project policies for trunk/branch development &
+    version numbering.
+
+* docutils/__init__.py:
+
+  - Added ``__version_details__`` attribute to describe code source
+    (repository/snapshot/release).
+  - Replaced ``default_transforms`` attribute of TransformSpec with
+    ``get_transforms()`` method.
+
+* docutils/core.py:
+
+  - Added ``publish_doctree`` and ``publish_from_doctree`` convenience
+    functions, for document tree extraction and reprocessing.
+
+* docutils/io.py:
+
+  - Added ``DocTreeInput`` class, for reprocessing existing documents.
+  - Added support for non-Unicode (e.g. binary) writer output.
+
+* docutils/nodes.py:
+
+  - Re-introduced ``Targetable.indirect_reference_name``, for
+    MoinMoin/reST compatibility (removed in r3124/r3129).
+  - Added ``serial_escape`` function; escapes string values that are
+    elements of a list, for serialization.  Modified Docutils-XML
+    writing (``Element._dom_node``) and pseudo-XML writing
+    (``Element.starttag``) to use ``serial_escape``.
+  - Added ``Node.deepcopy()`` method.
+  - Removed the internal lists ``document.substitution_refs``,
+    ``document.anonymous_refs``, and ``document.anonymous_targets``.
+  - Added a "container" element.
+  - Fixed bug where values of list-valued attributes of elements
+    originating from custom interpreted text roles (i.e., with custom
+    classes) were being shared between element instances.  Reported by
+    Shmuel Zeigerman.
+
+* docutils/statemachine.py:
+
+  - Added trailing whitespace stripping to ``string2lines()``.
+  - Added ``StringList.pad_double_width()`` & ``.replace()`` for East
+    Asian double-width character support.
+
+* docutils/utils.py:
+
+  - Added ``east_asian_column_width()`` for double-width character
+    support.
+
+* docutils/languages/ja.py: Added to project: Japanese mappings by
+  Hisashi Morita.
+
+* docutils/languages/zh_cn.py: Added to project: Simplified Chinese
+  mappings by Panjunyong.
+
+* docutils/parsers/null.py: Added to project; a do-nothing parser.
+
+* docutils/parsers/rst/__init__.py:
+
+  - Added validator to tab_width setting, with test.  Closes SF bug
+    #1212515, report from Wu Wei.
+
+* docutils/parsers/rst/states.py:
+
+  - Fixed bug with escaped colons indicating a literal block.
+  - Fixed bug with enumerated lists (SF#1254145).
+  - Backslash-escaped colons inside of field names are now allowed.
+  - Targets (implicit and explicit), anonymous hyperlink references
+    and auto-numbered footnote references inside of substitution
+    definitions are now disallowed.
+  - Fixed bug: list items with blank first lines.
+  - Fixed bug: block quote attributions with indented second lines.
+  - Added East Asian double-width character support (Python 2.4 only).
+
+* docutils/parsers/rst/tableparser.py:
+
+  - Added East Asian double-width character support (Python 2.4 only).
+
+* docutils/parsers/rst/directives/body.py:
+
+  - Added the "container" directive.
+
+* docutils/parsers/rst/directives/misc.py:
+
+  - Added the "default-role", "title", and "date" directives.
+  - Added standard data file syntax to the "include" directive.
+  - Added support for "class" directive content.
+
+* docutils/parsers/rst/directives/images.py:
+
+  - Added ``indirect_reference_name`` support for images with a target
+    option.
+  - Added support for image width and height units.
+  - Fixed bug with image "target" options.
+
+* docutils/parsers/rst/directives/references.py:
+
+  - Added "class" attribute to "target-notes" directive, for
+    footnote_reference classes.
+
+* docutils/parsers/rst/include/: Directory added to project; contains
+  standard data files for the "include" directive.  Initial contents:
+  character entity substitution definition sets, and a set of
+  definitions for S5/HTML presentations.
+
+* docutils/parsers/rst/languages/ja.py: Added to project: Japanese
+  mappings by David Goodger.
+  
+* docutils/parsers/rst/languages/zh_cn.py: Added to project:
+  Simplified Chinese mappings by Panjunyong.
+
+* docutils/readers/__init__.py:
+
+  - Added universal.Decorations and universal.ExposeInternals
+    transforms as default transforms for all readers.
+  - Added ``ReReader`` base class for readers that reread an existing
+    document tree.
+
+* docutils/readers/doctree.py: Added to project; a reader for existing
+  document trees.
+
+* docutils/transforms/frontmatter.py:
+
+  - Fixed the DocInfo transform to handle SVN-style expansion of the
+    "Date" keyword.
+  - In ``DocInfo.extract_authors``, treat the contents of "authors"
+    fields uniformly.
+
+* docutils/transforms/misc.py:
+
+  - Added misc.Transitions transform, extracted from
+    universal.FinalChecks.
+
+* docutils/transforms/references.py:
+
+  - Added references.DanglingReferences transform, extracted from
+    universal.FinalChecks.
+  - Fixed bug with doubly-indirect substitutions.
+  - Added footnote_reference classes attribute to "TargetNotes".
+  - Fixed bug with circular substitution definitions that put Docutils
+    into an infinite loop.
+
+* docutils/transforms/universal.py:
+
+  - Added universal.ExposeInternals transform, extracted from
+    universal.FinalChecks.
+  - Removed universal.FinalChecks transform (logic has been moved to
+    several new transforms).
+  - Fixed bug with the "expose_internals" setting and Text nodes
+    (exposed by the "rawsource" internal attribute).
+  - Added the universal.StripComments transform, implementation of the
+    "strip_comments" setting.
+
+* docutils/transforms/writer_aux.py: Added to project; auxiliary
+  transforms for writers.
+
+  - Added ``Compound`` transform, which flattens compound paragraphs.
+
+* docutils/writers/: Several writer modules (html4css1.py) were
+  converted into packages.  Support modules and data files have been
+  moved into the packages.  The stylesheets for the HTML writers are
+  now installed along with the code, the code knows where to find
+  them, and the default is to use them (actually, to embed them).
+  Some adjustments to configuration files may be necessary.  The
+  easiest way to obtain the new default behavior is to remove all
+  settings whose name includes "stylesheet".
+
+* docutils/writers/__init__.py:
+
+  - Added universal.Messages and universal.FilterMessages transforms
+    as default transforms for all writers.
+  - Added ``UnfilteredWriter`` base class for writers that pass the
+    document tree on unchanged.
+
+* docutils/writers/docutils_xml.py:
+
+  - Made ``xmlcharrefreplace`` the default output encoding error
+    handler.
+
+* docutils/writers/html4css1/: 
+
+  - Added support for image width and height units.
+  - Made ``xmlcharrefreplace`` the default output encoding error
+    handler.
+  - Made ``--embed-stylesheet`` the default rather than
+    ``--link-stylesheet``.
+  - Moved "id" attribute from container (section etc.) to title's <a>
+    tag, to be on the same tag as "name".
+    (!!! To be reverted in Docutils 0.5.)
+  - Added vertical space between fields of field lists.
+  - Added ``--compact-field-lists`` option to remove vertical space in
+    simple field lists.
+  - Made cloaking of email addresses with ``--cloak-email-addresses``
+    less obtrusive.
+  - Fixed support for centered images.
+  - Added support for class="compact" & class="open" lists.
+
+* docutils/writers/latex2e/:
+
+  - Underscores in citekeys are no longer escaped.
+
+* docutils/writers/newlatex2e/unicode_map.py: Added to project;
+  mapping of Unicode characters to LaTeX equivalents.
+
+* docutils/writers/s5_html/: Package added to project; writer for
+  S5/HTML slide shows.
+
+* docs/dev/distributing.txt: Added to project; guide for distributors
+  (package maintainers).
+
+* docs/dev/hacking.txt: Added to project; guide for developers.
+
+* docs/ref/doctree.txt:
+
+  - Updated for plural attributes "classes", "ids", "names",
+    "dupnames".
+  - Added the "container" element.
+
+* docs/ref/docutils.dtd:
+
+  - Updated for plural attributes "classes", "ids", "names",
+    "dupnames".
+
+* docs/user/emacs.txt: Added to project; a document about Emacs
+  support for reStructuredText and Docutils.
+
+* docs/user/links.txt: Added to project; lists of Docutils-related
+  links.
+
+* docs/user/mailing-lists.txt: Added to project; information about
+  Docutils-related mailing lists and how to access them.
+
+* docs/user/slide-shows.txt: Added to project; example of and docs for
+  the S5/HTML writer (``rst2s5.py`` front end).
+
+* docs/ref/rst/definitions.txt: "reStructuredText Standard Definition
+  Files", added to project.
+
+* test/coverage.sh: Added to project; test coverage script.
+
+* test/DocutilsTestSupport.py:
+
+  - Added support for specifying runtime settings at the suite level.
+
+* test/test_functional.py:
+
+  - Added the ``clear_output_directory`` function.
+  - Added support for ``_test_more`` functions in functional test
+    config files.
+
+* tools/rst2s5.py: Added to project; front end for the S5/HTML writer.
+
+* tools/rstpep2html.py: Renamed from pep.py.
+
+* tools/dev/create_unimap.py: Added to project; script to create the
+  docutils/writers/unimap_latex.py mapping file.
+
+* tools/dev/profile_docutils.py: Added to project; profiler script.
+
+* tools/dev/unicode2rstsubs.py: Moved from tools/unicode2rstsubs.py.
+
+* tools/editors/emacs/restructuredtext.el,
+  tools/editors/emacs/rst-html.el, tools/editors/emacs/rst-mode.el:
+  Removed from project; the functionality is now contained in rst.el.
+
+* tools/editors/emacs/rst.el: Added to project.  Added many features
+  and fixed many bugs.  See docs/user/emacs.txt for details.
+
+* tools/stylesheets: Removed from project.  Stylesheets have been
+  renamed and moved into writer packages.
+
+
+Release 0.3.9 (2005-05-26)
+==========================
+
+* General:
+
+  - Eliminated and replaced all uses of the old string attributes
+    ``id``, ``name``, ``dupname`` and ``class`` with references to the
+    new list attributes ``ids``, ``names``, ``dupnames`` and
+    ``classes`` throughout the whole source tree.
+
+* docutils/core.py:
+
+  - Enabled ``--dump-*`` options when ``--traceback`` specified,
+    allowing for easier debugging.
+  - In ``Publisher.publish()``, expanded the generic top-level
+    exception catching.
+
+* docutils/examples.py:
+
+  - Added ``internals`` function for exploration.
+
+* docutils/io.py:
+
+  - Fixed ``Input.decode`` method to apply heuristics only if no
+    encoding is explicitly given, and to provide better reporting of
+    decoding errors.
+  - The ``Input.decode`` method now removes byte order marks (BOMs)
+    from input streams.
+
+* docutils/nodes.py:
+
+  - ``image`` element class changed to subclass of Element, not
+    TextElement (it's an empty element, and cannot contain text).
+  - Added ``attr_defaults`` dictionary for default attribute values.
+  - Added empty list as default value for the following attributes:
+    ``ids``, ``names``, ``dupnames``, ``classes``, and ``backrefs``.
+  - Added ``document.decoration`` attribute,
+    ``document.get_decoration`` method, and ``decoration.get_header``
+    & ``.get_footer`` methods.
+  - Added ``Element.update_basic_atts()`` and ``Element.substitute()``
+    methods.
+
+* docutils/utils.py:
+
+  - Removed ``docutils.utils.Reporter.categories``,
+    ``docutils.utils.ConditionSet``, and all references to them, to
+    simplify error reporting.
+
+* docutils/languages/nl.py: Added to project; Dutch mappings by
+  Martijn Pieters.
+
+* docutils/parsers/rst/__init__.py:
+
+  - Added settings: ``file_insertion_enabled`` & ``raw_enabled``.
+
+* docutils/parsers/rst/states.py:
+
+  - Added check for escaped at-mark to prevent email address recognition.
+  - Fixed option lists to allow spaces inside ``<angle-bracketed option
+    arguments>``.
+  - Allowed whitespace in paths and URLs.
+  - Added auto-enumerated list items.
+  - Fixed bug that assumed ``.. _`` and ``.. |`` were invariably
+    followed by text.
+  - Added support for table stub columns.
+
+* docutils/parsers/rst/directives/__init__.py:
+
+  - Allowed whitespace in paths (``path`` function).
+  - Added ``uri`` directive option conversion function.
+
+* docutils/parsers/rst/directives/body.py:
+
+  - Fixed illegal context bug with "topic" directive (allowed within
+    sidebars; not within body elements).
+
+* docutils/parsers/rst/directives/images.py:
+
+  - Allowed whitespace (stripped) in "image" & "figure" directive URLs.
+  - Added support for the ``file_insertion_enabled`` setting in the
+    "figure" directive (disables "figwidth" option).
+  - "image" directive: added checks for valid values of "align" option,
+    depending on context.  "figure" directive: added specialized
+    "align" option and attribute on "figure" element.
+  - Made ":figwidth: image" option of "figure" directive work again.
+  - Fixed bug with reference names containing uppercase letters
+    (e.g. ``Name_``) in "target" option of "image" directive.
+
+* docutils/parsers/rst/directives/misc.py:
+
+  - Fixed "include" and "raw" directives to catch text decoding
+    errors.
+  - Allowed whitespace in "include" & "raw" directive paths.
+  - Added support for ``file_insertion_enabled`` & ``raw_enabled``
+    settings in "include" & "raw" directives.
+
+* docutils/parsers/rst/directives/parts.py:
+
+  - Added "header" & "footer" directives.
+  - Fixed illegal context bug with "contents" directive (topics
+    allowed within sidebars; not within body elements).
+
+* docutils/parsers/rst/directives/tables.py:
+
+  - Added "list-table" directive.
+  - Caught empty CSV table bug.
+  - Added support for the ``file_insertion_enabled`` setting in the
+    "csv-table" directive.
+  - Added ``stub-columns`` option to "csv-table" and "list-table"
+    directives.
+
+* docutils/parsers/rst/languages/nl.py: Added to project; Dutch
+  mappings by Martijn Pieters.
+
+* docutils/readers/standalone.py:
+
+  - Added ``--section-subtitles`` and ``--no-section-subtitles``
+    options to activate or deactivate the SectSubTitle transform.
+
+* docutils/transforms/frontmatter.py:
+
+  - Added SectSubTitle transform to promote titles of lone
+    subsections to subtitles.
+
+* docutils/transforms/references.py:
+
+  - Fixed mislocated internal targets bug, by propagating internal
+    targets to the next node, making use of the newly added support
+    for multiple names and IDs.
+  - Fixed duplicate footnote label bug.
+  - Replaced ``ChainedTargets`` with more generic ``PropagateTargets``
+    transform.
+
+* docutils/writers/html4css1.py:
+
+  - Fixed unencoded stylesheet reference bug (characters like "&" in
+    stylesheet references).
+  - ``target`` nodes now appear as ``span`` tags (instead of ``a``
+    tags).
+  - Added support for multiple IDs per node by creating empty ``span``
+    tags.
+  - Added the ``field_name_limit`` & ``option_limit`` settings &
+    support.
+  - Added support for table stub columns.
+  - Added support for the ``align`` attribute on ``figure`` elements.
+  - Added the ``cloak_email_addresses`` setting & support.
+  - Added ``html_prolog``, ``html_head``, ``html_body``,
+    ``html_title``, & ``html_subtitle`` to parts dictionary exposed by
+    ``docutils.core.publish_parts``.
+  - Added support for section subtitles.
+
+* docutils/writers/latex2e.py:
+
+  - Fixed tables starting with more than one multirow cell.
+  - Improved --use-latex-docinfo so that organization/contact/address
+    fields are lumped with the last author field and appear on the
+    titlepage.
+  - Made sure the titlepage is always shown with --use-latex-docinfo,
+    even if the document has no title.
+  - Made sure that latex doesn't fill in today's date if no date field
+    was given.
+  - Added support for section subtitles.
+
+* docutils/writers/newlatex2e.py: Added to project; a new LaTeX writer
+  (under development).
+
+* docutils/writers/null.py: Added to project; a do-nothing Writer.
+
+* docs/api/publisher.txt:
+
+  - Added "``publish_parts`` Details" section.
+
+* docutils/dev/repository.txt: Added to project; information about the
+  Docutils Subversion repository.
+
+* docs/ref/docutils.dtd:
+
+  - Added a ``stub`` attribute to the ``colspec`` element via the
+    ``tbl.colspec.att`` parameter entity.
+  - Allowed topic elements within sidebars
+  - Added an ``align`` attribute to the ``figure`` element.
+
+* tools/rst2newlatex.py: Added to project; front end for the new LaTeX
+  writer.
+
+
+Release 0.3.7 (2004-12-24)
+==========================
+
+* docutils/frontend.py:
+
+  - Added options: --input-encoding-error-handler,
+    --record-dependencies, --leave-footnote-reference-space,
+    --strict-visitor.
+  - Added command-line and config file support for "overrides" setting
+    parameter.
+
+* docutils/io.py:
+
+  - Added support for input encoding error handler.
+
+* docutils/nodes.py:
+
+  - Added dispatch_visit and dispatch_departure methods to
+    NodeVisitor; useful as a hook for Visitors.
+  - Changed structure of ``line_block``; added ``line``.
+  - Added ``compound`` node class.
+  - Added a mechanism for Visitors to transitionally ignore new node
+    classes.
+
+* docutils/utils.py:
+
+  - Moved ``escape2null`` and ``unescape`` functions from
+    docutils/parsers/rst/states.py.
+
+* docutils/parsers/rst/roles.py:
+
+  - Added "raw" role.
+  - Changed role function API: the "text" parameter now takes
+    null-escaped interpreted text content.
+
+* docutils/parsers/rst/states.py:
+
+  - Fixed bug where a "role" directive in a nested parse would crash
+    the parser; the state machine's "language" attribute was not being
+    copied over.
+  - Added support for line block syntax.
+  - Fixed directive parsing bug: argument-less directives didn't
+    notice that arguments were present.
+  - Removed error checking for transitions.
+  - Added support for multiple classifiers in definition list items.
+  - Moved ``escape2null`` and ``unescape`` functions to docutils/utils.py.
+  - Changed role function API: the "text" parameter now takes
+    null-escaped interpreted text content.
+  - Empty sections and documents are allowed now.
+
+* docutils/parsers/rst/directives/__init__.py:
+
+  - Added ``encoding`` directive option conversion function.
+  - Allow multiple class names in class_option conversion function.
+
+* docutils/parsers/rst/directives/body.py:
+
+  - Converted the line-block directive to use the new structure.
+  - Extracted the old line-block functionality to the ``block``
+    function (still used).
+  - Added ``compound`` directive (thanks to Felix Wiemann).
+
+* docutils/parsers/rst/directives/misc.py:
+
+  - Added "encoding" option to "include" and "raw" directives.
+  - Added "trim", "ltrim", and "rtrim" options to "unicode" directive.
+  - Allow multiple class names in the "class" directive.
+
+* docutils/parsers/rst/directives/parts.py:
+
+  - Directive "sectnum" now accepts "prefix", "suffix", and "start"
+    options.  Thanks to Lele Gaifax.
+
+* docutils/parsers/rst/directives/tables.py:
+
+  - Added "encoding" directive to "csv-table" directive.
+  - Added workaround for lack of Unicode support in csv.py, for
+    non-ASCII CSV input.
+
+* docutils/transforms/misc.py:
+
+  - Fixed bug when multiple "class" directives are applied to a single
+    element.
+  - Enabled multiple format names for "raw" directive.
+
+* docutils/transforms/references.py:
+
+  - Added support for trimming whitespace from beside substitution
+    references.
+
+* docutils/transforms/universal.py:
+
+  - FinalChecks now checks for illegal transitions and moves
+    transitions between sections.
+
+* docutils/writers/html4css1.py:
+
+  - HTMLTranslator.encode now converts U+00A0 to "&nbsp;".
+  - "stylesheet" and "stylesheet_path" settings are now mutually
+    exclusive.
+  - Added support for the new line_block/line structure.
+  - --footnote-references now overrides
+    --trim-footnote-reference-space, if applicable.
+  - Added support for ``compound`` elements.
+  - Enabled multiple format names for "raw" directive.
+  - ``<p>`` tags of a paragraph which is the only visible child of the
+    document node are no longer stripped.
+  - Moved paragraph-compacting logic (for stripping ``<p>`` tags) to
+    new method ``should_be_compact_paragraph()``.
+  - Added class="docutils" to ``dl``, ``hr``, ``table`` and ``tt``
+    elements.
+  - "raw" elements are now surrounded by ``span`` or ``div`` tags in
+    the output if they have their ``class`` attribute set.
+  - The whole document is now surrounded by a ``<div
+    class="document">`` element.
+  - Body-level images are now wrapped by their own ``<div>`` elements,
+    with image classes copied to the wrapper, and for images which
+    have the ``:align:`` option set, the surrounding ``<div>`` now
+    receives a class attribute (like ``class="align-left"``).
+
+* docutils/writers/latex2e.py:
+
+  - no newline after depart_term.
+  - Added translations for some Unicode quotes.
+  - Added option "font-encoding", made package AE the default.
+  - "stylesheet" and "stylesheet_path" settings are now mutually
+    exclusive.
+  - --footnote-references now overrides
+    --trim-footnote-reference-space, if applicable.
+  - The footnote label style now matches the footnote reference style
+    ("brackets" or "superscript").
+  - Added support for ``compound`` elements.
+  - Enabled multiple format names for "raw" directive.
+
+* docs/ref/docutils.dtd:
+
+  - Changed structure of the ``line_block`` element; added ``line``.
+  - Added ``compound`` element.
+  - Added "ltrim" and "rtrim" attributes to
+    ``substitution_definition`` element.
+  - Enabled multiple format names for ``raw`` element.
+  - Enabled multiple classifiers in ``definition_list_item`` elements.
+
+* docs/ref/rst/directives.txt
+
+  - Marked "line-block" as deprecated.
+  - "Class" directive now allows multiple class names.
+  - Added "Rationale for Class Attribute Value Conversion".
+  - Added warning about "raw" overuse/abuse.
+
+* docs/ref/rst/restructuredtext.txt:
+
+  - Added syntax for line blocks.
+  - Definition list items may have multiple classifiers.
+
+* docs/ref/rst/roles.txt:
+
+  - Added "raw" role.
+
+* tools/stylesheets/default.css:
+
+  - Added support for the new line_block structure.
+  - Added "docutils" class to ``dl``, ``hr``, ``table`` and ``tt``.
+
+
+Release 0.3.5 (2004-07-29)
+==========================
+
+General:
+
+* _`Documentation cleanup/reorganization`.
+
+  - Created new subdirectories of docs/:
+
+    * ``docs/user/``: introductory/tutorial material for end-users
+    * ``docs/dev/``: for core-developers (development notes, plans, etc.)
+    * ``docs/api/``: API reference material for client-developers
+    * ``docs/ref/``: reference material for all groups
+    * ``docs/howto/``: for component-developers and core-developers
+    * ``docs/peps/``: Python Enhancement Proposals
+
+  - Moved ``docs/*`` to ``docs/user/``.
+  - Moved ``pysource.dtd``, ``pysource.txt``, ``semantics.txt`` from
+    ``spec/`` to ``docs/dev``.
+  - Moved ``doctree.txt``, ``docutils.dtd``, ``soextblx.dtd``,
+    ``transforms.txt`` from ``spec/`` to ``docs/ref/``.
+  - Moved ``alternatives.txt``, and ``problems.txt`` from
+    ``spec/rst/`` to ``docs/dev/rst/``.
+  - Moved ``reStructuredText.txt``, ``directives.txt``,
+    ``interpreted.txt``, and ``introduction.txt`` from ``spec/rst/``
+    to ``docs/ref/rst/``.  Renamed ``interpreted.txt`` to
+    ``roles.txt``, ``reStructuredText.txt`` to
+    ``restructuredtext.txt``.
+  - Moved ``spec/howto/`` to ``docs/howto``.
+
+  In order to keep the CVS history of moved files, we supplied
+  SourceForge with a `script for modifying the Docutils CVS
+  repository`__.
+
+  __ http://cvs.sourceforge.net/viewcvs.py/*checkout*/docutils/sandbox/davidg/infrastructure/cvs-reorg.sh?content-type=text/plain&rev=1.5
+
+  After running the cleanup script:
+
+  - Added ``docs/index.txt``.
+  - Added a ``.htaccess`` file to the ``web`` module, containing
+    redirects for all old paths to new paths.  They'll preserve
+    fragments (the "#name" part of a URL), and won't clutter up the
+    file system, and will correct the URL in the user's browser.
+  - Added ``BUGS.txt``, ``docs/dev/policies.txt``,
+    ``docs/dev/website.txt``, ``docs/dev/release.txt`` from all but
+    the "To Do" list itself in ``docs/dev/todo.txt``.
+  - Moved "Future Plans" from ``HISTORY.txt`` to new "Priorities"
+    section of ``docs/dev/todo.txt``.
+  - Added ``THANKS.txt`` from "Acknowledgements" in ``HISTORY.txt``.
+  - Added "How To Report Bugs" to ``BUGS.txt``.
+  - Went through all the sources and docs (including under web/) and
+    updated links.  Mostly done by Felix Wiemann; thanks Felix!
+    (Still need to update links in the sandboxes.)
+
+Specific:
+
+* BUGS.txt: Added to project.
+
+* THANKS.txt: Added to project.
+
+* docutils/__init__.py:
+
+  - 0.3.4: Post-release.
+
+* docutils/core.py:
+
+  - Added special error handling & advice for UnicodeEncodeError.
+  - Refactored Publisher.publish (simplified exception handling &
+    extracted debug dumps).
+  - Renamed "enable_exit" parameter of convenience functions to
+    "enable_exit_status".
+  - Enabled traceback (exception propagation) by default in
+    programmatic convenience functions.
+  - Now publish_file and publish_cmdline convenience functions return
+    the encoded string results in addition to their regular I/O.
+  - Extracted common code from publish_file, publish_string, and
+    publish_parts, into new publish_programmatically.  Extracted
+    settings code to ``Publisher.process_programmatic_settings``.
+  - In Publisher.publish, disabled ``settings_overrides`` when
+    ``settings`` is supplied; redundant.
+
+* docutils/frontend.py:
+
+  - Added help text for "--output-encoding-error-handler" and
+    "--error-encoding-error-handler".
+  - Renamed "--exit" to "--exit-status".
+  - Simplified default-setting code.
+
+* docutils/parsers/rst/__init__.py:
+
+  - Added "--pep-base-url" and "--rfc-base-url" options.
+
+* docutils/parsers/rst/states.py:
+
+  - Made URI recognition more aggressive and intelligent.
+
+* docutils/parsers/rst/directives/__init__.py:
+
+  - Added several directive option conversion functions.
+
+* docutils/parsers/rst/directives/body.py:
+
+  - Moved "table" directive to tables.py.
+
+* docutils/parsers/rst/directives/tables.py: Table-related directives,
+  added to project.
+
+* docutils/writers/latex2e.py:
+
+  - Added "--table-style=(standard|booktabs|nolines)"
+  - figures get "here" option (LaTeX per default puts them at bottom),
+    and figure content is centered.
+  - Rowspan support for tables.
+  - Fix: admonition titles before first section.
+  - Replace ``--`` in literal by ``-{}-`` because fontencoding T1 has endash.
+  - Replave ``_`` in literal by an underlined blank, because it has the correct
+    width.
+  - Fix: encode pdfbookmark titles, ``#`` broke pdflatex.
+  - A few unicode replacements, if output_encoding != utf
+  - Add "--graphicx-option".
+  - Indent literal-blocks.
+  - Fix: omit ``\maketitle`` when there is no document title.
+
+* docs/index.txt: "Docutils Project Documentation Overview", added to
+  project.
+
+* docs/api/cmdline-tool.txt: "Inside A Docutils Command-Line Front-End
+  Tool", added to project.
+
+* docs/api/publisher.txt: "The Docutils Publisher", added to project.
+
+* docs/api/runtime-settings.txt: "Docutils Runtime Settings", added to project.
+
+* docs/dev/policies.txt: Added to project (extracted from
+  ``docs/dev/todo.txt``, formerly ``spec/notes.txt``).
+
+* docs/dev/release.txt: Added to project (extracted from
+  ``docs/dev/todo.txt``, formerly ``spec/notes.txt``).
+
+* docs/dev/testing.txt: Added to project.
+
+* docs/dev/website.txt: Added to project (extracted from
+  ``docs/dev/todo.txt``, formerly ``spec/notes.txt``).
+
+* docs/ref/rst/directives.txt:
+
+  - Added directives: "table", "csv-table".
+
+* docs/user/rst/cheatsheet.txt: "The reStructuredText Cheat Sheet"
+  added to project.  1 page for syntax, and a 1 page reference for
+  directives and roles.  Source text to be used as-is; not meant to be
+  converted to HTML.
+
+* docs/user/rst/demo.txt: Added to project; moved from tools/test.txt
+  with a change of title.
+
+* test/functional/, contents, and test/test_functional.py: Added to
+  project.
+
+* tools/buildhtml.py: Fixed bug with config file handling.
+
+* tools/html.py: Removed from project (duplicate of rst2html.py).
+
+* tools/pep2html.py: Removed from project (duplicate of Python's
+  nondist/peps/pep2html.py; Docutils' tools/pep.py can be used for
+  Docutils-related PEPs in docs/peps/).
+
+* tools/rst2pseudoxml.py: Renamed from publish.py.
+
+* tools/rst2xml.py: Renamed from docutils-xml.py.
+
+* tools/test.txt: Removed from project; moved to
+  docs/user/rst/demo.txt.
+
+* setup.py: Now also installs ``rst2latex.py``.
+
+
+Release 0.3.3 (2004-05-09)
+==========================
+
+* docutils/__init__.py:
+
+  - 0.3.1: Reorganized config file format (multiple sections); see
+    docs/config.txt.
+  - Added unknown_reference_resolvers attribute to TransformSpec.
+  - 0.3.2: Interpreted text reorganization.
+  - 0.3.3: Released.
+
+* docutils/core.py:
+
+  - Catch system messages to stop tracebacks from parsing errors.
+  - Catch exceptions during processing report & exit without
+    tracebacks, except when "--traceback" used.
+  - Reordered components for OptionParser; application comes last.
+  - Added "config_section" parameter to several methods and functions,
+    allowing front ends to easily specify their config file sections.
+  - Added publish_parts convenience function to allow access to individual
+    parts of a document.
+
+* docutils/examples.py: Added to project; practical examples of
+  Docutils client code, to be used as-is or as models for variations.
+
+* docutils/frontend.py:
+
+  - Added "--traceback" & "--no-traceback" options ("traceback"
+    setting).
+  - Implemented support for config file reorganization:
+    ``standard_config_files`` moved from ``ConfigParser`` to
+    ``OptionParser``; added
+    ``OptionParser.get_config_file_settings()`` and
+    ``.get_standard_config_settings()``; support for old "[options]"
+    section (with deprecation warning) and mapping from old to new
+    settings.
+  - Reimplemented setting validation.
+  - Enabled flexible boolean values: yes/no, true/false, on/off.
+  - Added ``Values``, a subclass of ``optparse.Values``, with support
+    for list setting attributes.
+  - Added support for new ``DOCUTILSCONFIG`` environment variable;
+    thanks to Beni Cherniavsky.
+  - Added "--no-section-numbering" option.
+
+* docutils/io.py:
+
+  - Catch IOErrors when opening source & destination files, report &
+    exit without tracebacks.  Added ``handle_io_errors`` parameter to
+    ``FileInput`` & ``FileOutput`` to enable caller error handling.
+
+* docutils/nodes.py:
+
+  - Changed ``SparseNodeVisitor`` and ``GenericNodeVisitor`` dynamic
+    method definitions (via ``exec``) to dynamic assignments (via
+    ``setattr``); thanks to Roman Suzi.
+  - Encapsulated visitor dynamic assignments in a function; thanks to
+    Ian Bicking.
+  - Added indirect_reference_name attribute to the Targetable
+    class. This attribute holds the whitespace_normalized_name
+    (contains mixed case) of a target.
+
+* docutils/statemachine.py:
+
+  - Renamed ``StringList.strip_indent`` to ``.trim_left``.
+  - Added ``StringList.get_2D_block``.
+
+* docutils/utils.py:
+
+  - Added "level" attribute to SystemMessage exceptions.
+
+* docutils/languages/af.py: Added to project; Afrikaans mappings by
+  Jannie Hofmeyr.
+
+* docutils/languages/cs.py: Added to project; Czech mappings by Marek
+  Blaha.
+
+* docutils/languages/eo.py: Added to project; Esperanto mappings by
+  Marcelo Huerta San Martin.
+
+* docutils/languages/pt_br.py: Added to project; Brazilian Portuguese
+  mappings by Lalo Martins.
+
+* docutils/languages/ru.py: Added to project; Russian mappings by
+  Roman Suzi.
+
+* docutils/parsers/rst/roles.py: Added to project.  Contains
+  interpreted text role functions, a registry for interpreted text
+  roles, and an API for adding to and retrieving from the registry.
+  Contributed by Edward Loper.
+
+* docutils/parsers/rst/states.py:
+
+  - Updated ``RSTState.nested_parse`` for "include" in table cells.
+  - Allowed true em-dash character and "---" as block quote
+    attribution marker.
+  - Added support for <angle-bracketed> complex option arguments
+    (option lists).
+  - Fixed handling of backslashes in substitution definitions.
+  - Fixed off-by-1 error with extra whitespace after substitution
+    definition directive.
+  - Added inline markup parsing to field lists' field names.
+  - Added support for quoted (and unindented) literal blocks.
+    Driven in part by a bribe from Frank Siebenlist (thanks!).
+  - Parser now handles escapes in URIs correctly.
+  - Made embedded-URIs' reference text omittable.  Idea from Beni
+    Cherniavsky.
+  - Refactored explicit target processing code.
+  - Added name attribute to references containing the reference name only
+    through whitespace_normalize_name (no case changes).
+  - parse_target no longer returns the refname after going through
+    normalize_name. This is now handled in make_target.
+  - Fixed bug relating to role-less interpreted text in non-English
+    contexts.
+  - Reorganized interpreted text processing; moved code into the new
+    roles.py module.  Contributed by Edward Loper.
+  - Refactored ``Body.parse_directive`` into ``run_directive`` and
+    ``parse_directive_block``.
+
+* docutils/parsers/rst/tableparser.py:
+
+  - Reworked for ``StringList``, to support "include" directives in
+    table cells.
+
+* docutils/parsers/rst/directives/__init__.py:
+
+  - Renamed ``unchanged()`` directive option conversion function to
+    ``unchanged_required``, and added a new ``unchanged``.
+  - Catch unicode value too high error; fixes bug 781766.
+  - Beefed up directive error reporting.
+
+* docutils/parsers/rst/directives/body.py:
+
+  - Added basic "table" directive.
+
+* docutils/parsers/rst/directives/images.py:
+
+  - Added "target" option to "image" directive.
+  - Added name attribute to references containing the reference name only
+    through whitespace_normalize_name (no case changes).
+
+* docutils/parsers/rst/directives/misc.py:
+
+  - Isolated the import of the ``urllib2`` module; was causing
+    problems on SourceForge (``libssl.so.2`` unavailable?).
+  - Added the "role" directive for declaring custom interpreted text
+    roles.
+
+* docutils/parsers/rst/directives/parts.py:
+
+  - The "contents" directive does more work up-front, creating the
+    "topic" and "title", and leaving the "pending" node for the
+    transform.  Allows earlier reference resolution; fixes subtle bug.
+
+* docutils/parsers/rst/languages/af.py: Added to project; Afrikaans
+  mappings by Jannie Hofmeyr.
+
+* docutils/parsers/rst/languages/cs.py: Added to project; Czech
+  mappings by Marek Blaha.
+
+* docutils/parsers/rst/languages/eo.py: Added to project; Esperanto
+  mappings by Marcelo Huerta San Martin.
+
+* docutils/parsers/rst/languages/pt_br.py: Added to project; Brazilian
+  Portuguese mappings by Lalo Martins.
+
+* docutils/parsers/rst/languages/ru.py: Added to project; Russian
+  mappings by Roman Suzi.
+
+* docutils/transforms/parts.py:
+
+  - The "contents" directive does more work up-front, creating the
+    "topic" and "title", and leaving the "pending" node for the
+    transform.  Allows earlier reference resolution; fixes subtle bug.
+  - Added support for disabling of section numbering.
+
+* docutils/transforms/references.py:
+
+  - Verifying that external targets are truly targets and not indirect
+    references. This is because we are now adding a "name" attribute to
+    references in addition to targets. Note sure if this is correct!
+  - Added code to hook into the unknown_reference_resolvers list for a
+    transformer in resolve_indirect_target. This allows the
+    unknown_reference_resolvers to keep around indirect targets which
+    docutils doesn't know about.
+  - Added specific error message for duplicate targets.
+
+* docutils/transforms/universal.py:
+
+  - Added FilterMessages transform (removes system messages below the
+    verbosity threshold).
+  - Added hook (via docutils.TransformSpec.unknown_reference_resolvers)
+    to FinalCheckVisitor for application-specific handling of
+    unresolvable references.
+  - Added specific error message for duplicate targets.
+
+* docutils/writers/__init__.py:
+
+  - Added assemble_parts method to the Writer class to allow for
+    access to a documents individual parts.
+  - Documented & set default for ``Writer.output`` attribute.
+
+* docutils/writers/html4css1.py:
+
+  - Fixed unicode handling of attribute values (bug 760673).
+  - Prevent duplication of "class" attribute values (bug report from
+    Kirill Lapshin).
+  - Improved table grid/border handling (prompted by report from Bob
+    Marshall).
+  - Added support for table titles.
+  - Added "<title />" for untitled docs, for XHTML conformance; thanks
+    to Darek Suchojad.
+  - Added functionality to keep track of individual parts of a document
+    and store them in a dictionary as the "parts" attribute of the writer.
+    Contributed by Reggie Dugard at the Docutils sprint at PyCon DC 2004.
+  - Added proper support for the "scale" attribute of the "image"
+    element.  Contributed by Brent Cook.
+  - Added ``--initial-header-level`` option.
+  - Fixed bug: the body_pre_docinfo segment depended on there being a
+    docinfo; if no docinfo, the document title was incorporated into
+    the body segment.  Adversely affected the publish_parts interface.
+
+* docutils/writers/latex2e.py:
+
+  - Changed default stylesheet to "no stylesheet" to avoid latex complaining
+    about a missing file.
+  - Added options and support: ``--compound-enumerators``,
+    ``--section-prefix-for-enumerators``, and
+    ``--section-enumerator-separator``.  By John F Meinel Jr (SF patch
+    934322).
+  - Added option ``--use-verbatim-when-possible``, to avoid
+    problematic characters (eg, '~' in italian) in literal blocks.
+  - It's now possible to use four section levels in the `book` and
+    `report` LaTeX classes.  The default `article` class still has
+    three levels limit.
+
+* docs/config.txt: "Docutils Configuration Files", added to project.
+  Moved config file entry descriptions from tools.txt.
+
+* docs/tools.txt:
+
+  - Moved config file entry descriptions to config.txt.
+
+* spec/notes.txt: Continual updates.  Added "Setting Up For Docutils
+  Development".
+
+* spec/howto/rst-roles.txt: "Creating reStructuredText Interpreted
+  Text Roles", added to project.
+
+* spec/rst/reStructuredText.txt:
+
+  - Added description of support for <angle-bracketed> complex option
+    arguments to option lists.
+  - Added subsections for indented and quoted literal blocks.
+
+* test: Continually adding & updating tests.
+
+  - Added test/test_settings.py & test/data/config_*.txt support
+    files.
+  - Added test/test_writers/test_htmlfragment.py.
+
+* test/DocutilsTestSupport.py:
+
+  - Refactored LaTeX publisher test suite/case class names to make
+    testing other writers easier.
+  - Added HtmlWriterPublishTestCase and HtmlFragmentTestSuite classes
+    to test the processing of HTML fragments which use the new
+    publish_parts convenience function.
+
+* tools/buildhtml.py:
+
+  - Added support for the "--prune" option.
+  - Removed dependency on pep2html.py; plaintext PEPs no longer
+    supported.
+
+* tools/docutils.conf:
+
+  - Updated for configuration file reorganization.
+
+* tools/rst2html.py:
+
+  - copied from tools/html.py
+
+* setup.py:
+
+  - added a 'scripts' section to configuration
+  - added 'tools/rst2html.py' to the scripts section
+
+
+Release 0.3 (2003-06-24)
+========================
+
+General:
+
+* Renamed "attribute" to "option" for directives/extensions.
+
+* Renamed transform method "transform" to "apply".
+
+* Renamed "options" to "settings" for runtime settings (as set by
+  command-line options).  Sometimes "option" (singular) became
+  "settings" (plural).  Some variations below:
+
+  - document.options -> document.settings (stored in other objects as
+    well)
+  - option_spec -> settings_spec (not directives though)
+  - OptionSpec -> SettingsSpec
+  - cmdline_options -> settings_spec
+  - relative_path_options -> relative_path_settings
+  - option_default_overrides -> settings_default_overrides
+  - Publisher.set_options -> Publisher.get_settings
+
+Specific:
+
+* COPYING.txt: Added "Public Domain Dedication".
+
+* FAQ.txt: Frequently asked questions, added to project.
+
+* setup.py:
+
+  - Updated with PyPI Trove classifiers.
+  - Conditional installation of third-party modules.
+
+* docutils/__init__.py:
+
+  - Bumped version to 0.2.1 to reflect changes to I/O classes.
+  - Bumped version to 0.2.2 to reflect changes to stylesheet options.
+  - Factored ``SettingsSpec`` out of ``Component``; separately useful.
+  - Bumped version to 0.2.3 because of the new "--embed-stylesheet"
+    option and its effect on the PEP template & writer.
+  - Bumped version to 0.2.4 due to changes to the PEP template &
+    stylesheet.
+  - Bumped version to 0.2.5 to reflect changes to Reporter output.
+  - Added ``TransformSpec`` class for new transform system.
+  - Bumped version to 0.2.6 for API changes (renaming).
+  - Bumped version to 0.2.7 for new ``docutils.core.publish_*``
+    convenience functions.
+  - Added ``Component.component_type`` attribute.
+  - Bumped version to 0.2.8 because of the internal parser switch from
+    plain lists to the docutils.statemachine.StringList objects.
+  - Bumped version to 0.2.9 because of the frontend.py API changes.
+  - Bumped version to 0.2.10 due to changes to the project layout
+    (third-party modules removed from the "docutils" package), and
+    signature changes in ``io.Input``/``io.Output``.
+  - Changed version to 0.3.0 for release.
+
+* docutils/core.py:
+
+  - Made ``publish()`` a bit more convenient.
+  - Generalized ``Publisher.set_io``.
+  - Renamed ``publish()`` to ``publish_cmdline()``; rearranged its
+    parameters; improved its docstring.
+  - Added ``publish_file()`` and ``publish_string()``.
+  - Factored ``Publisher.set_source()`` and ``.set_destination()``
+    out of ``.set_io``.
+  - Added support for "--dump-pseudo-xml", "--dump-settings", and
+    "--dump-transforms" hidden options.
+  - Added ``Publisher.apply_transforms()`` method.
+  - Added ``Publisher.set_components()`` method; support for
+    ``publish_*()`` conveninece functions.
+  - Moved config file processing to docutils/frontend.py.
+  - Added support for exit status ("exit_level" setting &
+    ``enable_exit`` parameter for Publisher.publish() and convenience
+    functions).
+
+* docutils/frontend.py:
+
+  - Check for & exit on identical source & destination paths.
+  - Fixed bug with absolute paths & "--config".
+  - Set non-command-line defaults in ``OptionParser.__init__()``:
+    ``_source`` & ``_destination``.
+  - Distributed ``relative_path_settings`` to components; updated
+    ``OptionParser.populate_from_components()`` to combine it all.
+  - Require list of keys in ``make_paths_absolute`` (was implicit in
+    global ``relative_path_settings``).
+  - Added "--expose-internal-attribute", "--dump-pseudo-xml",
+    "--dump-settings", and "--dump-transforms" hidden options.
+  - Removed nasty internals-fiddling ``ConfigParser.get_section``
+    code, replaced with correct code.
+  - Added validation functionality for config files.
+  - Added "--error-encoding" option/setting, "_disable_config"
+    internal setting.
+  - Added encoding validation; updated "--input-encoding" and
+    "--output-encoding"; added "--error-encoding-error-handler" and
+    "--output-encoding-error-handler".
+  - Moved config file processing from docutils/core.py.
+  - Updated ``OptionParser.populate_from_components`` to handle new
+    ``SettingsSpec.settings_defaults`` dict.
+  - Added support for "-" => stdin/stdout.
+  - Added "exit_level" setting ("--exit" option).
+
+* docutils/io.py:
+
+  - Split ``IO`` classes into subclasses of ``Input`` and ``Output``.
+  - Added automatic closing to ``FileInput`` and ``FileOutput``.
+  - Delayed opening of ``FileOutput`` file until ``write()`` called.
+  - ``FileOutput.write()`` now returns the encoded output string.
+  - Try to get path/stream name automatically in ``FileInput`` &
+    ``FileOutput``.
+  - Added defaults for source & destination paths.
+  - Allow for Unicode I/O with an explicit "unicode" encoding.
+  - Added ``Output.encode()``.
+  - Removed dependency on runtime settings; pass encoding directly.
+  - Recognize Unicode strings in ``Input.decode()``.
+  - Added support for output encoding error handlers.
+
+* docutils/nodes.py:
+
+  - Added "Invisible" element category class.
+  - Changed ``Node.walk()`` & ``.walkabout()`` to permit more tree
+    modification during a traversal.
+  - Added element classes: ``line_block``, ``generated``, ``address``,
+    ``sidebar``, ``rubric``, ``attribution``, ``admonition``,
+    ``superscript``, ``subscript``, ``inline``
+  - Added support for lists of nodes to ``Element.insert()``.
+  - Fixed parent linking in ``Element.replace()``.
+  - Added new abstract superclass ``FixedTextElement``; adds
+    "xml:space" attribute.
+  - Added support for "line" attribute of ``system_message`` nodes.
+  - Added support for the observer pattern from ``utils.Reporter``.
+    Added ``parse_messages`` and ``transform_messages`` attributes to
+    ``document``, removed ``messages``.  Added ``note_parse_message``
+    and ``note_transform_message`` methods.
+  - Added support for improved diagnostics:
+
+    - Added "document", "source", and "line" internal attributes to
+      ``Node``, set by ``Node.setup_child()``.
+    - Converted variations on ``node.parent = self`` to
+      ``self.setup_child(node)``.
+    - Added ``document.current_source`` & ``.current_line``
+      attributes, and ``.note_source`` observer method.
+    - Changed "system_message" output to GNU-Tools format.
+
+  - Added a "rawsource" attribute to the ``Text`` class, for text
+    before backslash-escape resolution.
+  - Support for new transform system.
+  - Reworked ``pending`` element.
+  - Fixed XML DOM bug (SF #660611).
+  - Removed the ``interpeted`` element class and added
+    ``title_reference``, ``abbreviation``, ``acronym``.
+  - Made substitutions case-sensitive-but-forgiving; moved some code
+    from the parser.
+  - Fixed Unicode bug on element attributes (report: William Dode).
+
+* docutils/optik.py: Removed from project; replaced with
+  extras/optparse.py and extras/textwrap.py.  These will be installed
+  only if they're not already present in the Python installation.
+
+* docutils/roman.py: Moved to extras/roman.py; this will be installed
+  only if it's not already present in the Python installation.
+
+* docutils/statemachine.py:
+
+  - Factored out ``State.add_initial_transitions()`` so it can be
+    extended.
+  - Converted whitespace-specific "blank" and "indent" transitions
+    from special-case code to ordinary transitions: removed
+    ``StateMachineWS.check_line()`` & ``.check_whitespace()``, added
+    ``StateWS.add_initial_transitions()`` method, ``ws_patterns`` &
+    ``ws_initial_transitions`` attributes.
+  - Removed ``State.match_transition()`` after merging it into
+    ``.check_line()``.
+  - Added ``StateCorrection`` exception.
+  - Added support for ``StateCorrection`` in ``StateMachine.run()``
+    (moved ``TransitionCorrection`` support there too.)
+  - Changed ``StateMachine.next_line()`` and ``.goto_line()`` to raise
+    ``EOFError`` instead of ``IndexError``.
+  - Added ``State.no_match`` method.
+  - Added support for the Observer pattern, triggered by input line
+    changes.
+  - Added ``strip_top`` parameter to
+    ``StateMachineWS.get_first_known_indented``.
+  - Made ``context`` a parameter to ``StateMachine.run()``.
+  - Added ``ViewList`` & ``StringList`` classes;
+    ``extract_indented()`` becomes ``StringList.get_indented()``.
+  - Added ``StateMachine.insert_input()``.
+  - Fixed ViewList slice handling for Python 2.3.  Patch from (and
+    thanks to) Fred Drake.
+
+* docutils/utils.py:
+
+  - Added a ``source`` attribute to Reporter instances and
+    ``system_message`` elements.
+  - Added an observer pattern to ``utils.Reporter`` to keep track of
+    system messages.
+  - Fixed bugs in ``relative_path()``.
+  - Added support for improved diagnostics.
+  - Moved ``normalize_name()`` to nodes.py (``fully_normalize_name``).
+  - Added support for encoding Reporter stderr output, and encoding
+    error handlers.
+  - Reporter keeps track of the highest level system message yet
+    generated.
+
+* docutils/languages: Fixed bibliographic field language lookups.
+
+* docutils/languages/es.py: Added to project; Spanish mappings by
+  Marcelo Huerta San Martin.
+
+* docutils/languages/fr.py: Added to project; French mappings by
+  Stefane Fermigier.
+
+* docutils/languages/it.py: Added to project; Italian mappings by
+  Nicola Larosa.
+
+* docutils/languages/sk.py: Added to project; Slovak mappings by
+  Miroslav Vasko.
+
+* docutils/parser/__init__.py:
+
+  - Added ``Parser.finish_parse()`` method.
+
+* docutils/parser/rst/__init__.py:
+
+  - Added options: "--pep-references", "--rfc-references",
+    "--tab-width", "--trim-footnote-reference-space".
+
+* docutils/parsers/rst/states.py:
+
+  - Changed "title under/overline too short" system messages from INFO
+    to WARNING, and fixed its insertion location.
+  - Fixed enumerated list item parsing to allow paragraphs & section
+    titles to begin with enumerators.
+  - Converted system messages to use the new "line" attribute.
+  - Fixed a substitution reference edge case.
+  - Added support for "--pep-references" and "--rfc-references"
+    options; reworked ``Inliner`` code to make customization easier.
+  - Removed field argument parsing.
+  - Added support for short section title over/underlines.
+  - Fixed "simple reference name" regexp to ignore text like
+    "object.__method__"; not an anonymous reference.
+  - Added support for improved diagnostics.
+  - Reworked directive API, based on Dethe Elza's contribution.  Added
+    ``Body.parse_directive()``, ``.parse_directive_options()``,
+    ``.parse_directive_arguments()`` methods.
+  - Added ``ExtensionOptions`` class, to parse directive options
+    without parsing field bodies.  Factored
+    ``Body.parse_field_body()`` out of ``Body.field()``, overridden in
+    ``ExtensionOptions``.
+  - Improved definition list term/classifier parsing.
+  - Added warnings for unknown directives.
+  - Renamed ``Stuff`` to ``Struct``.
+  - Now flagged as errors: transitions at the beginning or end of
+    sections, empty sections (except title), and empty documents.
+  - Updated for ``statemachine.StringList``.
+  - Enabled recognition of schemeless email addresses in targets.
+  - Added support for embedded URIs in hyperlink references.
+  - Added backslash-escapes to inline markup end-string suffix.
+  - Added support for correct interpreted text processing.
+  - Fixed nested title parsing (topic, sidebar directives).
+  - Added special processing of backslash-escaped whitespace (idea
+    from David Abrahams).
+  - Made substitutions case-sensitive-but-forgiving; moved some code
+    to ``docutils.nodes``.
+  - Added support for block quote attributions.
+  - Added a kludge to work-around a conflict between the bubble-up
+    parser strategy and short titles (<= 3 char-long over- &
+    underlines).  Fixes SF bug #738803 "infinite loop with multiple
+    titles" submitted by Jason Diamond.
+  - Added explicit interpreted text roles for standard inline markup:
+    "emphasis", "strong", "literal".
+  - Implemented "superscript" and "subscript" interpreted text roles.
+  - Added initial support for "abbreviation" and "acronym" roles;
+    incomplete.
+  - Added support for "--trim-footnote-reference-space" option.
+  - Optional space before colons in directives & hyperlink targets.
+
+* docutils/parsers/rst/tableparser.py:
+
+  - Fixed a bug that was producing unwanted empty rows in "simple"
+    tables.
+  - Detect bad column spans in "simple" tables.
+
+* docutils/parsers/rst/directives: Updated all directive functions to
+  new API.
+
+* docutils/parsers/rst/directives/__init__.py:
+
+  - Added ``flag()``, ``unchanged()``, ``path()``,
+    ``nonnegative_int()``, ``choice()``, and ``class_option()``
+    directive option helper functions.
+  - Added warnings for unknown directives.
+  - Return ``None`` for missing directives.
+  - Added ``register_directive()``, thanks to William Dode and Paul
+    Moore.
+
+* docutils/parsers/rst/directives/admonitions.py:
+
+  - Added "admonition" directive.
+
+* docutils/parsers/rst/directives/body.py: Added to project.  Contains
+  the "topic", "sidebar" (from Patrick O'Brien), "line-block",
+  "parsed-literal", "rubric", "epigraph", "highlights" and
+  "pull-quote" directives.
+
+* docutils/parsers/rst/directives/images.py:
+
+  - Added an "align" attribute to the "image" & "figure" directives
+    (by Adam Chodorowski).
+  - Added "class" option to "image", and "figclass" to "figure".
+
+* docutils/parsers/rst/directives/misc.py:
+
+  - Added "include", "raw", and "replace" directives, courtesy of
+    Dethe Elza.
+  - Added "unicode" and "class" directives.
+
+* docutils/parsers/rst/directives/parts.py:
+
+  - Added the "sectnum" directive; by Dmitry Jemerov.
+  - Added "class" option to "contents" directive.
+
+* docutils/parsers/rst/directives/references.py: Added to project.
+  Contains the "target-notes" directive.
+
+* docutils/parsers/rst/languages/__init__.py:
+
+  - Return ``None`` from get_language() for missing language modules.
+
+* docutils/parsers/rst/languages/de.py: Added to project; German
+  mappings by Engelbert Gruber.
+
+* docutils/parsers/rst/languages/en.py:
+
+  - Added interpreted text roles mapping.
+
+* docutils/parsers/rst/languages/es.py: Added to project; Spanish
+  mappings by Marcelo Huerta San Martin.
+
+* docutils/parsers/rst/languages/fr.py: Added to project; French
+  mappings by William Dode.
+
+* docutils/parsers/rst/languages/it.py: Added to project; Italian
+  mappings by Nicola Larosa.
+
+* docutils/parsers/rst/languages/sk.py: Added to project; Slovak
+  mappings by Miroslav Vasko.
+
+* docutils/readers/__init__.py:
+
+  - Added support for the observer pattern from ``utils.Reporter``, in
+    ``Reader.parse`` and ``Reader.transform``.
+  - Removed ``Reader.transform()`` method.
+  - Added default parameter values to ``Reader.__init__()`` to make
+    instantiation easier.
+  - Removed bogus aliases: "restructuredtext" is *not* a Reader.
+
+* docutils/readers/pep.py:
+
+  - Added the ``peps.TargetNotes`` transform to the Reader.
+  - Removed PEP & RFC reference detection code; moved to
+    parsers/rst/states.py as options (enabled here by default).
+  - Added support for pre-acceptance PEPs (no PEP number yet).
+  - Moved ``Inliner`` & made it a class attribute of ``Reader`` for
+    easy subclassing.
+
+* docutils/readers/python: Python Source Reader subpackage added to
+  project, including preliminary versions of:
+
+  - __init__.py
+  - moduleparser.py: Parser for Python modules.
+
+* docutils/transforms/__init__.py:
+
+  - Added ``Transformer`` class and completed transform reform.
+  - Added unknown_reference_resolvers list for each transformer. This list holds
+    the list of functions provided by each component of the transformer that
+    help resolve references.
+
+* docutils/transforms/frontmatter.py:
+
+  - Improved support for generic fields.
+  - Fixed bibliographic field language lookups.
+
+* docutils/transforms/misc.py: Added to project.  Miscellaneous
+  transforms.
+
+* docutils/transforms/parts.py:
+
+  - Moved the "id" attribute from TOC list items to the references
+    (``Contents.build_contents()``).
+  - Added the ``SectNum`` transform; by Dmitry Jemerov.
+  - Added "class" attribute support to ``Contents``.
+
+* docutils/transforms/peps.py:
+
+  - Added ``mask_email()`` function, updating to pep2html.py's
+    functionality.
+  - Linked "Content-Type: text/x-rst" to PEP 12.
+  - Added the ``TargetNotes`` PEP-specific transform.
+  - Added ``TargetNotes.cleanup_callback``.
+  - Added title check to ``Headers``.
+
+* docutils/transforms/references.py:
+
+  - Added the ``TargetNotes`` generic transform.
+  - Split ``Hyperlinks`` into multiple transforms.
+  - Fixed bug with multiply-indirect references (report: Bruce Smith).
+  - Added check for circular indirect references.
+  - Made substitutions case-sensitive-but-forgiving.
+
+* docutils/transforms/universal.py:
+
+  - Added support for the "--expose-internal-attributes" option.
+  - Removed ``Pending`` transform classes & data.
+
+* docutils/writers/__init__.py:
+
+  - Removed ``Writer.transform()`` method.
+
+* docutils/writers/docutils-xml.py:
+
+  - Added XML and doctype declarations.
+  - Added "--no-doctype" and "--no-xml-declaration" options.
+
+* docutils/writers/html4css1.py:
+
+  - "name" attributes only on these tags: a, applet, form, frame,
+    iframe, img, map.
+  - Added "name" attribute to <a> in section titles for Netscape 4
+    support (bug report: Pearu Peterson).
+  - Fixed targets (names) on footnote, citation, topic title,
+    problematic, and system_message nodes (for Netscape 4).
+  - Changed field names from "<td>" to "<th>".
+  - Added "@" to "&#64;" encoding to thwart address harvesters.
+  - Improved the vertical whitespace optimization; ignore "invisible"
+    nodes (targets, comments, etc.).
+  - Improved inline literals with ``<span class="pre">`` around chunks
+    of text and ``&nbsp;`` for runs of spaces.
+  - Improved modularity of output; added ``self.body_pre_docinfo`` and
+    ``self.docinfo`` segments.
+  - Added support for "line_block", "address" elements.
+  - Improved backlinks (footnotes & system_messages).
+  - Improved system_message output.
+  - Redefined "--stylesheet" as containing an invariant URL, used
+    verbatim.  Added "--stylesheet-path", interpreted w.r.t. the
+    working directory.
+  - Added "--footnote-references" option (superscript or brackets).
+  - Added "--compact-lists" and "--no-compact-lists" options.
+  - Added "--embed-stylesheet" and "--link-stylesheet" options;
+    factored out ``HTMLTranslator.get_stylesheet_reference()``.
+  - Improved field list rendering.
+  - Added Docutils version to "generator" meta tag.
+  - Fixed a bug with images; they must be inline, so wrapped in <p>.
+  - Improved layout of <pre> HTML source.
+  - Fixed attribute typo on <colspec>.
+  - Refined XML prologue.
+  - Support for no stylesheet.
+  - Removed "interpreted" element support.
+  - Added support for "title_reference", "sidebar", "attribution",
+    "rubric", and generic "admonition" elements.
+  - Added "--attribution" option.
+  - Added support for "inline", "subscript", "superscript" elements.
+  - Added initial support for "abbreviation" and "acronym";
+    incomplete.
+
+* docutils/writers/latex2e.py: LaTeX Writer, added by Engelbert Gruber
+  (from the sandbox).
+
+  - Added french.
+  - Double quotes in literal blocks (special treatment for de/ngerman).
+  - Added '--hyperlink-color' option ('0' turns off coloring of links).
+  - Added  "--attribution" option.
+  - Right align attributions.
+
+* docutils/writers/pep_html.py:
+
+  - Parameterized output encoding in PEP template.
+  - Reworked substitutions from ``locals()`` into ``subs`` dict.
+  - Redefined "--pep-stylesheet" as containing an invariant URL, used
+    verbatim.  Added "--pep-stylesheet-path", interpreted w.r.t. the
+    working directory.
+  - Added an override on the "--footnote-references" option.
+  - Factored out ``HTMLTranslator.get_stylesheet_reference()``.
+  - Added Docutils version to "generator" meta tag.
+  - Added a "DO NOT EDIT THIS FILE" comment to generated HTML.
+
+* docs/tools.txt:
+
+  - Added a "silent" setting for ``buildhtml.py``.
+  - Added a "Getting Help" section.
+  - Rearranged the structure.
+  - Kept up to date, with new settings, command-line options etc.
+  - Added section for ``rst2latex.py`` (Engelbert Gruber).
+  - Converted settings table into a definition list.
+
+* docs/rst/quickstart.txt:
+
+  - Added a table of contents.
+  - Added feedback information.
+  - Added mention of minimum section title underline lengths.
+  - Removed the 4-character minimum for section title underlines.
+
+* docs/rst/quickref.html:
+
+  - Added a "Getting Help" section.
+  - Added a style to make section title backlinks more subtle.
+  - Added mention of minimum section title underline lengths.
+  - Removed the 4-character minimum for section title underlines.
+
+* extras: Directory added to project; contains third-party modules
+  that Docutils depends on (optparse, textwrap, roman).  These are
+  only installed if they're not already present.
+
+* licenses: Directory added to project; contains copies of license
+  files for non-public-domain files.
+
+* spec/doctree.txt:
+
+  - Changed the focus.  It's about DTD elements:  structural
+    relationships, semantics, and external (public) attributes.  Not
+    about the element class library.
+  - Moved some implementation-specific stuff into ``docutils.nodes``
+    docstrings.
+  - Wrote descriptions of all common attributes and parameter
+    entities.  Filled in introductory material.
+  - Working through the element descriptions: 55 down, 37 to go.
+  - Removed "Representation of Horizontal Rules" to
+    spec/rst/alternatives.txt.
+
+* spec/docutils.dtd:
+
+  - Added "generated" inline element.
+  - Added "line_block" body element.
+  - Added "auto" attribute to "title".
+  - Changed content models of "literal_block" and "doctest_block" to
+    ``%text.model``.
+  - Added ``%number;`` attribute type parameter entity.
+  - Changed ``%structural.elements;`` to ``%section.elements``.
+  - Updated attribute types; made more specific.
+  - Added "address" bibliographic element.
+  - Added "line" attribute to ``system_message`` element.
+  - Removed "field_argument" element; "field_name" may contain
+    multiple words and whitespace.
+  - Changed public identifier to docutils.sf.net.
+  - Removed "interpreted" element; added "title_reference",
+    "abbreviation", "acronym".
+  - Removed "refuri" attribute from "footnote_reference" and
+    "citation_reference".
+  - Added "sidebar", "rubric", "attribution", "admonition",
+    "superscript", "subscript", and "inline" elements.
+
+* spec/pep-0256.txt: Converted to reStructuredText & updated.
+
+* spec/pep-0257.txt: Converted to reStructuredText & updated.
+
+* spec/pep-0258.txt: Converted to reStructuredText & updated.
+
+* spec/semantics.txt: Updated with text from a Doc-SIG response to
+  Dallas Mahrt.
+
+* spec/transforms.txt: Added to project.
+
+* spec/howto: Added subdirectory, for developer how-to docs.
+
+* spec/howto/rst-directives.txt: Added to project.  Original by Dethe
+  Elza, edited & extended by David Goodger.
+
+* spec/howto/i18n.txt: Docutils Internationalization.  Added to
+  project.
+
+* spec/rst/alternatives.txt:
+
+  - Added "Doctree Representation of Transitions" from
+    spec/doctree.txt.
+  - Updated "Inline External Targets" & closed the debate.
+  - Added ideas for interpreted text syntax extensions.
+  - Added "Nested Inline Markup" section.
+
+* spec/rst/directives.txt:
+
+  - Added directives: "topic", "sectnum", "target-notes",
+    "line-block", "parsed-literal", "include", "replace", "sidebar",
+    "admonition", "rubric", "epigraph", "highlights", "unicode" and
+    "class".
+  - Formalized descriptions of directive details.
+  - Added an "align" attribute to the "image" & "figure" directives
+    (by Adam Chodorowski).
+  - Added "class" options to "topic", "sidebar", "line-block",
+    "parsed-literal", "contents", and "image"; and "figclass" to
+    "figure".
+
+* spec/rst/interpreted.txt: Added to project.  Descriptions of
+  interpreted text roles.
+
+* spec/rst/introduction.txt:
+
+  - Added pointers to material for new users.
+
+* spec/rst/reStructuredText.txt:
+
+  - Disambiguated comments (just add a newline after the "::").
+  - Updated enumerated list description; added a discussion of the
+    second-line validity checking.
+  - Updated directive description.
+  - Added a note redirecting newbies to the user docs.
+  - Expanded description of inline markup start-strings in non-markup
+    contexts.
+  - Removed field arguments and made field lists a generic construct.
+  - Removed the 4-character minimum for section title underlines.
+  - Clarified term/classifier delimiter & inline markup ambiguity
+    (definition lists).
+  - Added "Embedded URIs".
+  - Updated "Interpreted Text" section.
+  - Added "Character-Level Inline Markup" section.
+
+* test: Continually adding & updating tests.
+
+  - Moved test/test_rst/ to test/test_parsers/test_rst/.
+  - Moved test/test_pep/ to test/test_readers/test_pep/.
+  - Added test/test_readers/test_python/.
+  - Added test/test_writers/ (Engelbert Gruber).
+
+* tools:
+
+  - Made the ``locale.setlocale()`` calls in front ends
+    fault-tolerant.
+
+* tools/buildhtml.py:
+
+  - Added "--silent" option.
+  - Fixed bug with absolute paths & "--config".
+  - Updated for new I/O classes.
+  - Added some exception handling.
+  - Separated publishers' setting defaults; prevents interference.
+  - Updated for new ``publish_file()`` convenience function.
+
+* tools/pep-html-template:
+
+  - Allow for "--embed-stylesheet".
+  - Added Docutils version to "generator" meta tag.
+  - Added a "DO NOT EDIT THIS FILE" comment to generated HTML.
+  - Conform to XHTML spec.
+
+* tools/pep2html.py:
+
+  - Made ``argv`` a parameter to ``main()``.
+  - Added support for "Content-Type:" header & arbitrary PEP formats.
+  - Linked "Content-Type: text/plain" to PEP 9.
+  - Files skipped (due to an error) are not pushed onto the server.
+  - Updated for new I/O classes.
+  - Added ``check_requirements()`` & ``pep_type_error()``.
+  - Added some exception handling.
+  - Updated for new ``publish_string()`` convenience function.
+  - Added a "DO NOT EDIT THIS FILE" comment to generated HTML.
+
+* tools/quicktest.py:
+
+  - Added "-V"/"--version" option.
+
+* tools/rst2latex.py: LaTeX front end, added by Engelbert Gruber.
+
+* tools/unicode2rstsubs.py: Added to project.  Produces character
+  entity files (reSructuredText substitutions) from the MathML master
+  unicode.xml file.
+
+* tools/editors: Support code for editors, added to project.  Contains
+  ``emacs/restructuredtext.el``.
+
+* tools/stylesheets/default.css: Moved into the stylesheets directory.
+
+  - Added style for chunks of inline literals.
+  - Removed margin for first child of table cells.
+  - Right-aligned field list names.
+  - Support for auto-numbered section titles in TOCs.
+  - Increased the size of inline literals (<tt>) in titles.
+  - Restored the light gray background for inline literals.
+  - Added support for "line_block" elements.
+  - Added style for "address" elements.
+  - Removed "a.footnote-reference" style; doing it with ``<sup>`` now.
+  - Improved field list rendering.
+  - Vertical whitespace improvements.
+  - Removed "a.target" style.
+
+* tools/stylesheets/pep.css:
+
+  - Fixed nested section margins.
+  - Other changes parallel those of ``../default.css``.
+
+
+Release 0.2 (2002-07-31)
+========================
+
+General:
+
+- The word "component" was being used ambiguously.  From now on,
+  "component" will be used to mean "Docutils component", as in Reader,
+  Writer, Parser, or Transform.  Portions of documents (Table of
+  Contents, sections, etc.)  will be called "document parts".
+- Did a grand renaming: a lot of ``verylongnames`` became
+  ``very_long_names``.
+- Cleaned up imports: no more relative package imports or
+  comma-separated lists of top-level modules.
+- Added support for an option values object which carries default
+  settings and overrides (from command-line options and library use).
+- Added internal Unicode support, and support for both input and
+  output encodings.
+- Added support for the ``docutils.io.IO`` class & subclasses.
+
+Specific:
+
+* docutils/__init__.py:
+
+  - Added ``ApplicationError`` and ``DataError``, for use throughout
+    the package.
+  - Added ``Component`` base class for Docutils components; implements
+    the ``supports`` method.
+  - Added ``__version__`` (thus, ``docutils.__version__``).
+
+* docutils/core.py:
+
+  - Removed many keyword parameters to ``Publisher.__init__()`` and
+    ``publish()``; bundled into an option values object.  Added
+    "argv", "usage", "description", and "option_spec" parameters for
+    command-line support.
+  - Added ``Publisher.process_command_line()`` and ``.set_options()``
+    methods.
+  - Reworked I/O model for ``docutils.io`` wrappers.
+  - Updated ``Publisher.set_options()``; now returns option values
+    object.
+  - Added support for configuration files (/etc/docutils.conf,
+    ./docutils.conf, ~/.docutils).
+  - Added ``Publisher.setup_option_parser()``.
+  - Added default usage message and description.
+
+* docutils/frontend.py: Added to project; support for front-end
+  (command-line) scripts.  Option specifications may be augmented by
+  components.  Requires Optik (http://optik.sf.net/) for option
+  processing (installed locally as docutils/optik.py).
+
+* docutils/io.py: Added to project; uniform API for a variety of input
+  output mechanisms.
+
+* docutils/nodes.py:
+
+  - Added ``TreeCopyVisitor`` class.
+  - Added a ``copy`` method to ``Node`` and subclasses.
+  - Added a ``SkipDeparture`` exception for visitors.
+  - Renamed ``TreePruningException`` from ``VisitorException``.
+  - Added docstrings to ``TreePruningException``, subclasses, and
+    ``Nodes.walk()``.
+  - Improved docstrings.
+  - Added ``SparseNodeVisitor``, refined ``NodeVisitor``.
+  - Moved ``utils.id()`` to ``nodes.make_id()`` to avoid circular
+    imports.
+  - Added ``decoration``, ``header``, and ``footer`` node classes, and
+    ``PreDecorative`` mixin.
+  - Reworked the name/id bookkeeping; to ``document``, removed
+    ``explicit_targets`` and ``implicit_targets`` attributes, added
+    ``nametypes`` attribute and ``set_name_id_map`` method.
+  - Added ``NodeFound`` exception, for use with ``NodeVisitor``
+    traversals.
+  - Added ``document.has_name()`` method.
+  - Fixed DOM generation for list-attributes.
+  - Added category class ``Labeled`` (used by footnotes & citations).
+  - Added ``Element.set_class()`` method (sets "class" attribute).
+
+* docutils/optik.py: Added to project.  Combined from the Optik
+  package, with added option groups and other modifications.  The use
+  of this module is probably only temporary.
+
+* docutils/statemachine.py:
+
+  - Added ``runtime_init`` method to ``StateMachine`` and ``State``.
+  - Added underscores to improve many awkward names.
+  - In ``string2lines()``, changed whitespace normalizing translation
+    table to regexp; restores Python 2.0 compatibility with Unicode.
+
+* docutils/urischemes.py:
+
+  - Filled in some descriptions.
+  - Added "shttp" scheme.
+
+* docutils/utils.py:
+
+  - Added ``clean_rcs_keywords`` function (moved from
+    docutils/transforms/frontmatter.py
+    ``DocInfo.filter_rcs_keywords``).
+  - Added underscores to improve many awkward names.
+  - Changed names of Reporter's thresholds:
+    warning_level -> report_level; error_level -> halt_level.
+  - Moved ``utils.id()`` to ``nodes.make_id()``.
+  - Added ``relative_path(source, target)``.
+
+* docutils/languages/de.py: German mappings; added to project.  Thanks
+  to Gunnar Schwant for the translations.
+
+* docutils/languages/en.py: Added "Dedication" bibliographic field
+  mappings.
+
+* docutils/languages/sv.py: Swedish mappings; added to project by Adam
+  Chodorowski.
+
+* docutils/parsers/rst/states.py:
+
+  - Added underscores to improve many awkward names.
+  - Added RFC-2822 header support.
+  - Extracted the inline parsing code from ``RSTState`` to a separate
+    class, ``Inliner``, which will allow easy subclassing.
+  - Made local bindings for ``memo`` container & often-used contents
+    (reduces code complexity a lot).  See ``RSTState.runtime_init()``.
+  - ``RSTState.parent`` replaces ``RSTState.statemachine.node``.
+  - Added ``MarkupMismatch`` exception; for late corrections.
+  - Added ``-/:`` characters to inline markup's start string prefix,
+    ``/`` to end string suffix.
+  - Fixed a footnote bug.
+  - Fixed a bug with literal blocks.
+  - Applied patch from Simon Budig: simplified regexps with symbolic
+    names, removed ``Inliner.groups`` and ``Body.explicit.groups``.
+  - Converted regexps from ``'%s' % var`` to ``'%(var)s' % locals()``.
+  - Fixed a bug in ``Inliner.interpreted_or_phrase_ref()``.
+  - Allowed non-ASCII in "simple names" (directive names, field names,
+    references, etc.).
+  - Converted ``Inliner.patterns.initial`` to be dynamically built
+    from parts with ``build_regexp()`` function.
+  - Changed ``Inliner.inline_target`` to ``.inline_internal_target``.
+  - Updated docstrings.
+  - Changed "table" to "grid_table"; added "simple_table" support.
+
+* docutils/parsers/rst/tableparser.py:
+
+  - Changed ``TableParser`` to ``GridTableParser``.
+  - Added ``SimpleTableParser``.
+  - Refactored naming.
+
+* docutils/parsers/rst/directives/__init__.py: Added "en" (English) as
+  a fallback language for directive names.
+
+* docutils/parsers/rst/directives/html.py: Changed the ``meta``
+  directive to use a ``pending`` element, used only by HTML writers.
+
+* docutils/parsers/rst/directives/parts.py: Renamed from
+  components.py.
+
+  - Added "backlinks" attribute to "contents" directive.
+
+* docutils/parsers/rst/languages/sv.py: Swedish mappings; added to
+  project by Adam Chodorowski.
+
+* docutils/readers/__init__.py: Gave Readers more control over
+  choosing and instantiating Parsers.
+
+* docutils/readers/pep.py: Added to project; for PEP processing.
+
+* docutils/transforms/__init__.py: ``Transform.__init__()`` now
+  requires a ``component`` parameter.
+
+* docutils/transforms/components.py: Added to project; transforms
+  related to Docutils components.
+
+* docutils/transforms/frontmatter.py:
+
+  - In ``DocInfo.extract_authors``, check for a single "author" in an
+    "authors" group, and convert it to a single "author" element.
+  - Added support for "Dedication" and generic bibliographic fields.
+
+* docutils/transforms/peps.py: Added to project; PEP-specific.
+
+* docutils/transforms/parts.py: Renamed from old components.py.
+
+  - Added filter for `Contents`, to use alt-text for inline images,
+    and to remove inline markup that doesn't make sense in the ToC.
+  - Added "name" attribute to TOC topic depending on its title.
+  - Added support for optional TOC backlinks.
+
+* docutils/transforms/references.py: Fixed indirect target resolution
+  in ``Hyperlinks`` transform.
+
+* docutils/transforms/universal.py:
+
+  - Changed ``Messages`` transform to properly filter out system
+    messages below the warning threshold.
+  - Added ``Decorations`` transform (support for ``--generator``,
+    ``--date``, ``--time``, ``--source-link`` options).
+
+* docutils/writers/__init__.py: Added "pdf" alias in anticipation of
+  Engelbert Gruber's PDF writer.
+
+* docutils/writers/html4css1.py:
+
+  - Made XHTML-compatible (switched to lowercase element & attribute
+    names; empty tag format).
+  - Escape double-dashes in comment text.
+  - Improved boilerplate & modularity of output.
+  - Exposed modular output in Writer class.
+  - Added a "generator" meta tag to <head>.
+  - Added support for the ``--stylesheet`` option.
+  - Added support for ``decoration``, ``header``, and ``footer``
+    elements.
+  - In ``HTMLTranslator.attval()``, changed whitespace normalizing
+    translation table to regexp; restores Python 2.0 compatibility
+    with Unicode.
+  - Added the translator class as instance variable to the Writer, to
+    make it easily subclassable.
+  - Improved option list spacing (thanks to Richard Jones).
+  - Modified field list output.
+  - Added backlinks to footnotes & citations.
+  - Added percentage widths to "<col>" tags (from colspec).
+  - Option lists: "<code>" changed to "<kbd>", ``option_argument``
+    "<span>" changed to "<var>".
+  - Inline literals: "<code>" changed to "<tt>".
+  - Many changes to optimize vertical space: compact simple lists etc.
+  - Add a command-line options & directive attributes to control TOC
+    and footnote/citation backlinks.
+  - Added support for optional footnote/citation backlinks.
+  - Added support for generic bibliographic fields.
+  - Identify backrefs.
+  - Relative URLs for stylesheet links.
+
+* docutils/writers/pep_html.py: Added to project; HTML Writer for
+  PEPs (subclass of ``html4css1.Writer``).
+
+* docutils/writers/pseudoxml.py: Renamed from pprint.py.
+
+* docutils/writers/docutils_xml.py: Added to project; trivial writer
+  of the Docutils internal doctree in XML.
+
+* docs/tools.txt: "Docutils Front-End Tools", added to project.
+
+* spec/doctree.txt:
+
+  - Changed the title to "The Docutils Document Tree".
+  - Added "Hyperlink Bookkeeping" section.
+
+* spec/docutils.dtd:
+
+  - Added ``decoration``, ``header``, and ``footer`` elements.
+  - Brought ``interpreted`` element in line with the parser: changed
+    attribute "type" to "role", added "position".
+  - Added support for generic bibliographic fields.
+
+* spec/notes.txt: Continual updates.  Added "Project Policies".
+
+* spec/pep-0256.txt:  Updated.  Added "Roadmap to the Doctring PEPs"
+  section.
+
+* spec/pep-0257.txt: Clarified prohibition of signature repetition.
+
+* spec/pep-0258.txt: Updated.  Added text from pysource.txt and
+  mailing list discussions.
+
+* spec/pep-0287.txt:
+
+  - Renamed to "reStructuredText Docstring Format".
+  - Minor edits.
+  - Reworked Q&A as an enumerated list.
+  - Converted to reStructuredText format.
+
+* spec/pysource.dtd:
+
+  - Reworked structural elements, incorporating ideas from Tony Ibbs.
+
+* spec/pysource.txt: Removed from project.  Moved much of its contents
+  to pep-0258.txt.
+
+* spec/rst/alternatives.txt:
+
+  - Expanded auto-enumerated list idea; thanks to Fred Bremmer.
+  - Added "Inline External Targets" section.
+
+* spec/rst/directives.txt:
+
+  - Added "backlinks" attribute to "contents" directive.
+
+* spec/rst/problems.txt:
+
+  - Updated the Enumerated List Markup discussion.
+  - Added new alternative table markup syntaxes.
+
+* spec/rst/reStructuredText.txt:
+
+  - Clarified field list usage.
+  - Updated enumerated list description.
+  - Clarified purpose of directives.
+  - Added ``-/:`` characters to inline markup's start string prefix,
+    ``/`` to end string suffix.
+  - Updated "Authors" bibliographic field behavior.
+  - Changed "inline hyperlink targets" to "inline internal targets".
+  - Added "simple table" syntax to supplement the existing but
+    newly-renamed "grid tables".
+  - Added cautions for anonymous hyperlink use.
+  - Added "Dedication" and generic bibliographic fields.
+
+* test: Made test modules standalone (subdirectories became packages).
+
+* test/DocutilsTestSupport.py:
+
+  - Added support for PEP extensions to reStructuredText.
+  - Added support for simple tables.
+  - Refactored naming.
+
+* test/package_unittest.py: Renamed from UnitTestFolder.py.
+
+  - Now supports true packages containing test modules
+    (``__init__.py`` files required); fixes duplicate module name bug.
+
+* test/test_pep/: Subpackage added to project; PEP testing.
+
+* test/test_rst/test_SimpleTableParser.py: Added to project.
+
+* tools:
+
+  - Updated html.py and publish.py front-end tools to use the new
+    command-line processing facilities of ``docutils.frontend``
+    (exposed in ``docutils.core.Publisher``), reducing each to just a
+    few lines of code.
+  - Added ``locale.setlocale()`` calls to front-end tools.
+
+* tools/buildhtml.py: Added to project; batch-generates .html from all
+  the .txt files in directories and subdirectories.
+
+* tools/default.css:
+
+  - Added support for ``header`` and ``footer`` elements.
+  - Added styles for "Dedication" topics (biblio fields).
+
+* tools/docutils.conf: A configuration file; added to project.
+
+* tools/docutils-xml.py: Added to project.
+
+* tools/pep.py: Added to project; PEP to HTML front-end tool.
+
+* tools/pep-html-template: Added to project.
+
+* tools/pep2html.py: Added to project from Python (nondist/peps).
+  Added support for Docutils (reStructuredText PEPs).
+
+* tools/quicktest.py:
+
+  - Added the ``--attributes`` option, hacked a bit.
+  - Added a second command-line argument (output file); cleaned up.
+
+* tools/stylesheets/: Subdirectory added to project.
+
+* tools/stylesheets/pep.css: Added to project; stylesheet for PEPs.
+
+
+Release 0.1 (2002-04-20)
+========================
+
+This is the first release of Docutils, merged from the now inactive
+reStructuredText__ and `Docstring Processing System`__ projects.  For
+the pre-Docutils history, see the `reStructuredText HISTORY`__ and the
+`DPS HISTORY`__ files.
+
+__ http://structuredtext.sourceforge.net/
+__ http://docstring.sourceforge.net/
+__ http://structuredtext.sourceforge.net/HISTORY.html
+__ http://docstring.sourceforge.net/HISTORY.html
+
+General changes: renamed 'dps' package to 'docutils'; renamed
+'restructuredtext' subpackage to 'rst'; merged the codebases; merged
+the test suites (reStructuredText's test/test_states renamed to
+test/test_rst); and all modifications required to make it all work.
+
+* docutils/parsers/rst/states.py:
+
+  - Improved diagnostic system messages for missing blank lines.
+  - Fixed substitution_reference bug.
+
+
+..
+   Local Variables:
+   mode: indented-text
+   indent-tabs-mode: nil
+   sentence-end-double-space: t
+   fill-column: 70
+   End:

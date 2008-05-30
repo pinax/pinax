@@ -1,0 +1,201 @@
+Some Tests for the LaTeX Writer
+===============================
+
+These tests have been written to exercise some unusual combinations of
+syntax elements which may cause trouble for the LaTeX writer but do
+not need to be tested with other writers (e.g. the HTML writer).
+
+This file is not yet used by any automated test.  It is currently only
+used to control the visual appearance of the output.
+
+
+Block Quotes
+------------
+
+    This block quote comes directly after the section heading and is
+    followed by a paragraph.
+
+    This is the second paragraph of the block quote and it contains
+    some more text filling up some space which would otherwise be
+    empty.
+
+    -- Attribution
+
+This is a paragraph.
+
+    This block quote does not have an attribution.
+
+This is another paragraph.
+
+    Another block quote at the end of the section.
+
+
+More Block Quotes
+-----------------
+
+    Block quote followed by a transition.
+
+----------
+
+    Another block quote.
+
+
+Sidebars
+--------
+
+This paragraph precedes the sidebar.  This is some text.  This is some
+text.  This is some text.  This is some text.  This is some text.
+This is some text.  This is some text.  This is some text.
+
+.. sidebar:: Sidebar Title
+
+   These are the sidebar contents.  These are the sidebar contents.
+
+   These are the sidebar contents.  These are the sidebar contents.
+
+   These are the sidebar contents.  These are the sidebar contents.
+   These are the sidebar contents.  These are the sidebar contents.
+
+This paragraph follows the sidebar.  This is some text.  This is some
+text.  This is some text.
+
+This is some text.  This is some text.  This is some text.  This is
+some text.  This is some text.  This is some text.  This is some text.
+
+
+Next Section
+------------
+
+This section comes after the sidebar, and this text should float
+around the sidebar as well.  This is some text.  This is some text.
+This is some text.  This is some text.  This is some text.  This is
+some text.  This is some text.  This is some text.  This is some text.
+This is some text.  This is some text.  This is some text.  This is
+some text.  This is some text.
+
+This is some text.  This is some text.  This is some text.  This is
+some text.  This is some text.  This is some text.  This is some text.
+This is some text.  This is some text.  This is some text.
+
+
+Nested Elements
+---------------
+
+:Field list: | Line
+             | Block
+:Field 2: * Bullet
+          * list
+:Another (longer) field: * Bullet
+                         * list
+:Yet another long field:
+          * .. comment
+
+            Bullet
+
+            .. comment
+
+          * .. comment
+
+            list
+
+            .. comment
+
+:Field: * This
+
+          is
+
+          a
+
+        * bullet
+
+          list
+
+:Field: * | This is
+          | a bullet
+        * | list with
+          | line blocks
+:Last field: Last field.
+
+* * * * * * * * Deeply nested list.
+
+1. 2. 3. 4. 5. 6. 7. 8. Deeply nested list.
+
++-----------------+
+| | Line block    |
+|                 |
+| * Bullet list   |
+|                 |
+| ::              |
+|                 |
+|     Literal     |
+|     block       |
++-----------------+
+| :Field 1:       |
+|  Text.          |
+| :Field 2:       |
+|  More text.     |
++-----------------+
+| +-------+-----+ |
+| | A     |* foo| |
+| | nested|     | |
+| | table.|* bar| |
+| +-------+-----+ |
++-----------------+
+| This is a       |
+| paragraph.      |
+|                 |
+| +-------+-----+ |
+| | A     |* foo| |
+| | nested|     | |
+| | table.|* bar| |
+| +-------+-----+ |
+|                 |
+| Another longer  |
+| paragraph.      |
++-----------------+
+| * A list.       |
+| * A list.       |
+|                 |
+| +-------+-----+ |
+| | A     |* foo| |
+| | nested|     | |
+| | table.|* bar| |
+| +-------+-----+ |
+|                 |
+| * Another list. |
+| * Another list. |
++-----------------+
+| Foo             |
+|                 |
+| Bar             |
++-----------------+
+| * Foo           |
+|                 |
+| * Bar           |
++-----------------+
+| * This is a     |
+|   paragraph.    |
+|                 |
+|   This is a     |
+|   paragraph.    |
+|                 |
+| * This is a     |
+|   paragraph.    |
+|                 |
+|   This is a     |
+|   paragraph.    |
++-----------------+
+
+
+Images
+======
+
+Image with 20% width:
+
+.. image:: ../../../docs/user/rst/images/title.png
+   :width: 20%
+
+Image with 100% width:
+
+.. image:: ../../../docs/user/rst/images/title.png
+   :width: 100%

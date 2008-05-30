@@ -1,0 +1,46 @@
+===================
+ Docutils Web Site
+===================
+
+:Author: David Goodger; open to all Docutils developers
+:Contact: goodger@python.org
+:Date: $Date: 2005-11-08 22:51:31 +0100 (Tue, 08 Nov 2005) $
+:Revision: $Revision: 4021 $
+:Copyright: This document has been placed in the public domain.
+
+The Docutils web site, <http://docutils.sourceforge.net/>, is
+maintained automatically by the ``docutils-update`` script, run as an
+hourly cron job on shell.berlios.de (by user "felixwiemann").  The
+script will process any .txt file which is newer than the
+corresponding .html file in the project's web directory on
+shell.berlios.de (``/home/groups/docutils/htdocs/aux/htdocs/``) and
+upload the changes to the web site at SourceForge.  For a new .txt
+file, just SSH to ``<username>@shell.berlios.de`` and ::
+
+    cd /home/groups/docutils/htdocs/aux/htdocs/
+    touch filename.html
+    chmod g+w filename.html
+    sleep 1
+    touch filename.txt
+
+The script will take care of the rest within an hour.  Thereafter
+whenever the .txt file is modified (checked in to SVN), the .html will
+be regenerated automatically.
+
+After adding directories to SVN, allow the script to run once to
+create the directories in the filesystem before preparing for HTML
+processing as described above.
+
+The docutils-update__ script is located at
+``sandbox/infrastructure/docutils-update``.
+
+__ http://docutils.sf.net/sandbox/infrastructure/docutils-update
+
+
+..
+   Local Variables:
+   mode: indented-text
+   indent-tabs-mode: nil
+   sentence-end-double-space: t
+   fill-column: 70
+   End:

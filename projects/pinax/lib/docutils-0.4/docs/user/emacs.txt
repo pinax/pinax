@@ -1,0 +1,497 @@
+.. -*- coding: utf-8 -*-
+
+========================================
+   Emacs Support for reStructuredText
+========================================
+
+:Author: Martin Blais <blais@furius.ca>
+:Date: $Date: 2005-11-18 05:26:30 +0100 (Fri, 18 Nov 2005) $
+:Abstract:
+
+    High-level description of the existing emacs support for editing
+    reStructuredText text documents.  Suggested setup code and usage
+    instructions are provided.
+
+.. contents::
+
+
+Introduction
+============
+
+reStructuredText_ is a series of conventions that allows a
+toolset--docutils--to extract generic document structure from simple
+text files.  For people who use Emacs_, there is a package that adds
+some support for the conventions that reStructuredText_ specifies:
+``rst.el``.
+
+This document describes the most important features that it provides,
+how to setup your emacs to use them and how to invoke them.
+
+
+Basic Setup
+===========
+
+The emacs support is completely provided by the ``rst.el`` emacs
+package.  In order to use these features, you need to put the file in
+your emacs load-path, and to load it with::
+
+  (require 'rst)  ;; or (load "rst")
+
+Additional configuration variables can be customized and can be found
+by browsing the source code for ``rst.el``.
+
+Then you will want to bind keys to the most common commands it
+provides.  A standard text-mode hook function is maintained and
+provided by the package for this use, set it up like this::
+
+  (add-hook 'text-mode-hook 'rst-text-mode-bindings)
+
+A prefix map is defined for all the ``rst.el`` commands.  By default,
+it is bound to the mode-specific-map and ``p``, e.g. ``C-c p ...``.
+
+
+Section Decoration Adjustment
+=============================
+
+The rst package does not completely parse all the reStructuredText_
+constructs, but it contains the ability to recognize the section
+decorations and to build the hierarchy of the document.  What we call
+section decorations or adornments are the underlines or under- and
+overlines used to mark a section title.
+
+There is a function that helps a great deal to maintain these
+decorations: ``rst-adjust`` (bound on ``C-c p a``, ``C-c p =`` or
+``C-=`` by default).  This function is a Swiss army knife that can be
+invoked repeatedly and whose behaviour depends on context:
+
+#. If there is an incomplete underline, e.g.::
+
+      My Section Title
+      ^^
+
+   Invocation will complete the section title.  You can simply enter a
+   few characters of the title and invoke the function to complete it.
+   It can also be used to adjust the length of the existing decoration
+   when you need to edit the title.
+
+#. If there is no section decoration, a decoration one level under the
+   last encountered section level is added;
+
+#. If there is already a section decoration, it is promoted to the
+   next level.  You can invoke it like this repeatedly to cycle the
+   title through the hierarchy of existing decorations.
+
+Invoking the function with a negative prefix argument, e.g. ``C--
+C-=``, will effectively reverse the direction of decoration cycling.
+To alternate between underline-only and over-and-under styles, you can
+use a regular prefix argument, e.g. ``C-u C-=``.  See the
+documentation of ``rst-adjust`` for more description of the prefix
+arguments to alter the behaviour of the function.
+
+
+Promoting and Demoting Many Sections
+------------------------------------
+
+When you are re-organizing the structure of a document, it can be
+useful to change the level of a number of section titles.  The same
+key binding can be used to do that: if the region is active when the
+binding is invoked, all the section titles that are within the region
+are promoted accordingly (or demoted, with negative prefix arg).
+
+
+Customizations
+--------------
+
+You can set the variable ``rst-preferred-decorations`` to a list of
+the decorations that you like to use for documents.  Everyone has
+their preference.  ``rst-default-indent`` can be set to the number of
+indent spaces preferred for the over-and-under decoration style.
+
+
+Viewing the Hierarchy of Section Decorations
+============================================
+
+You can visualize the hierarchy of the section decorations in the
+current buffer by invoking ``rst-display-decorations-hierarchy``,
+bound on ``C-c p h``.  A temporary buffer will appear with fake
+section titles rendered in the style of the current document.  This
+can be useful when editing other people's documents to find out which
+section decorations correspond to which levels.
+
+
+Table of Contents
+=================
+
+When you are editing long documents, it can be a bit difficult to
+orient yourself in the structure of your text.  To that effect, a
+function is provided that quickly parses the document and presents a
+hierarchically indented table of contents of the document in a
+temporary buffer, in which you can navigate and press ``Return`` to go
+to a specific section.
+
+Invoke this function (``rst-toc``) with ``C-c p t``.  It should
+present a temporary buffer that looks something like this::
+
+  Table of Contents: 
+  Debugging Meta-Techniques
+    Introduction
+    Debugging Solution Patterns
+      Recognize That a Bug Exists
+      Subdivide and Isolate
+      Identify and Verify Assumptions
+      Use a Tool for Introspection
+      Change one thing at a time
+      Learn about the System
+    Understanding a bug
+    The Basic Steps in Debugging
+    Attitude
+      Bad Feelings
+      Good Feelings
+    References
+
+When you select a section title, the temporary buffer disappears and
+you are left with the cursor positioned at the chosen section.
+
+
+Inserting a Table of Contents
+-----------------------------
+
+Oftentimes in long text documents that are meant to be read directly,
+a Table of Contents is inserted at the beginning of the text.  This is
+the case for most internet FAQs, for example.  In reStructuredText_
+documents, since the table of contents is automatically generated by
+the parser with the ``.. contents::`` directive, people generally have
+not been adding a text table of contents to their source documents,
+and partly because it is too much trouble to edit and maintain.
+
+The emacs support for reStructuredText_ provides a function to insert
+such a table of contents in your document.  Since it is not meant to
+be part of the document text, you should place such a table of
+contents within a comment, so that it is ignored by the parser.  This
+is the favoured usage::
+
+  .. contents::
+  .. 
+      1  Introduction
+      2  Debugging Solution Patterns
+        2.1  Recognize That a Bug Exists
+        2.2  Subdivide and Isolate
+        2.3  Identify and Verify Assumptions
+        2.4  Use a Tool for Introspection
+        2.5  Change one thing at a time
+        2.6  Learn about the System
+      3  Understanding a bug
+      4  The Basic Steps in Debugging
+      5  Attitude
+        5.1  Bad Feelings
+        5.2  Good Feelings
+      6  References
+
+Just place the cursor at the top-left corner where you want to insert
+the TOC and invoke the function with ``C-c p i``.  The table of
+contents will display all the section titles that are under the
+location where the insertion occurs.  This way you can insert local
+table of contents by placing them in the appropriate location.
+
+If you have deep nesting of sections, you can use a numeric prefix
+argument to limit the depth of rendering of the TOC.
+
+You can also customize the look of the TOC by setting the values of
+the following variables:: ``rst-toc-indent``,
+``rst-toc-insert-style``, ``rst-toc-insert-max-level``.
+
+
+Maintaining the Table of Contents Up-to-date
+--------------------------------------------
+
+One issue is that you will probably want to maintain the inserted
+table of contents up-to-date.  There is a function that will
+automatically look for the inserted TOC (``rst-toc-insert-update``)
+and it can be added to a hook on the section decoration adjustment
+function, so that every time you adjust a section title, the TOC is
+updated. Add this functionality with the following emacs
+configuration::
+
+  (add-hook 'rst-adjust-hook 'rst-toc-insert-update)
+
+You can invoke the update on the current buffer with ``C-c p u``.
+
+
+Navigating Between the Section Titles
+=====================================
+
+You can move the cursor between the different sections by using the
+``rst-backward-section`` and ``rst-forward-section`` functions, by
+default bound to the ``C-c p p`` and ``C-c p n`` keys (also ``C-c
+C-p`` and ``C-c C-n``).
+
+
+Shifting Bullet List Levels
+===========================
+
+Due to the nature of reStructuredText_, bullet lists are always
+indented by two characters (unless they are part of a blockquote),
+e.g. ::
+
+   - Fruits
+
+     - Bananas
+     - Apples
+     - Oranges
+
+   - Veggies
+
+     - Zucchini
+     - Chick Peas
+
+To this effect, when re-organizing bullet lists, it can be useful to
+shift regions of text by indents of two characters.  You can use the
+``C-c C-r`` and ``C-c C-l`` to shift the current region.  These
+bindings are similar to the ones provided by python-mode for editing
+python code and behave similarly.
+
+
+Major Mode for Editing reStructuredText Documents
+=================================================
+
+There is a major mode available for editing and syntax highlighting
+reStructuredText_ constructs.  This mode was written by Stefan Merten
+[#]_.  It mostly provides lazy syntax coloring for many of the
+constructs that reStructuredText_ prescribes.
+
+To enable this mode, type ``M-x rst-mode`` or you can set up an
+``auto-mode-alist`` to automatically turn it on whenever you visit
+reStructuredText_ documents::
+
+   (add-to-list 'auto-mode-alist '("\\.rst$" . rst-mode) )
+
+If have local variables enabled (see ``enable-local-variables`` in the
+Emacs manual), you can also add the following at the top of your
+documents to trigger rst-mode::
+
+   .. -*- mode: rst -*-
+
+Or add this at the end of your documents::
+
+   ..
+      Local Variables:
+      mode: rst
+      End:
+
+By default, the font-lock colouring is performed lazily.  If you don't
+like this, you can turn this off by setting the value of
+``rst-mode-lazy``.  You can also change the various colours (see the
+source file for the whole list of customizable faces).
+
+.. [#] This mode used to be provided by the file ``rst-mode.el`` and
+   has now been integrated with the rest of the emacs code.
+
+
+Converting Documents from Emacs
+===============================
+
+At the moment there is minimal support for calling the conversion
+tools from within Emacs.  You can add a key binding like this to
+invoke it::
+
+  (local-set-key [(control c)(?9)] 'rst-compile)
+
+This function basically creates a compilation command with the correct
+output name for the current buffer and then invokes Emacs' compile
+function.  It also looks for the presence of a ``docutils.conf``
+configuration file in the parent directories and adds it to the
+cmdline options.  You can customize which tool is used to perform the
+conversion and some standard options to always be added as well.
+
+Invocation uses the toolset indicated by
+``rst-compile-primary-toolset`` (default is ``'html``).  Invocation
+with a prefix argument uses ``rst-compile-secondary-toolset`` (default
+is ``'latex``).
+
+.. note:: 
+
+   In general it is preferred to use a Makefile to automate the
+   conversion of many documents or a hierarchy of documents.  The
+   functionality presented above is meant to be convenient for use on
+   single files.
+
+
+Other / External Useful Emacs Settings
+======================================
+
+This section covers general emacs text-mode settings that are useful
+in the context of reStructuredText_ conventions.  These are not
+provided by ``rst.el`` but you may find them useful specifically for
+reStructuredText_ documents.
+
+
+Settings for Filling Lists
+--------------------------
+
+One problem with the default text-mode settings is that *filling* long
+lines in bullet and enumerated lists that do not have an empty line
+between them merges them together, e.g.::
+
+     - Bananas;
+     - One Apple a day keeps the doctor away, and eating more keeps the pirates at bay;
+     - Oranges;
+
+Becomes::
+
+     - Bananas; One Apple a day keeps the doctor away, and eating more
+     - keeps the pirates at bay; Oranges;
+
+This is usually not what you want. What you want is this::
+
+     - Bananas;
+     - One Apple a day keeps the doctor away, and eating more keeps
+       the pirates at bay;
+     - Oranges;
+
+The problem is that emacs does not recognize the various consecutive
+items as forming paragraph boundaries.  You can fix this easily by
+changing the global value of the parapraph boundary detection to
+recognize such lists, using the ``rst-set-paragraph-separation``
+function::
+
+   (add-hook 'text-mode-hook 'rst-set-paragraph-separation)
+
+
+``text-mode`` Settings
+----------------------
+
+Consult the Emacs manual for more text-mode customizations.  In
+particular, you may be interested in setting the following variables,
+functions and modes that pertain somewhat to text-mode:
+
+- indent-tabs-mode
+- colon-double-space
+- auto-fill-mode
+- auto-mode-alist
+- fill-region
+
+
+Editing Tables: Emacs table mode
+--------------------------------
+
+You may want to check out `Emacs table mode`_ to create an edit
+tables, it allows creating ascii tables compatible with
+reStructuredText_.
+
+.. _Emacs table mode: http://table.sourceforge.net/
+
+
+Character Processing
+--------------------
+
+Since reStructuredText punts on the issue of character processing,
+here are some useful resources for Emacs users in the Unicode world:
+
+* `xmlunicode.el and unichars.el from Norman Walsh
+  <http://nwalsh.com/emacs/xmlchars/index.html>`__
+
+* `An essay by Tim Bray, with example code
+  <http://www.tbray.org/ongoing/When/200x/2003/09/27/UniEmacs>`__
+
+* For Emacs users on Mac OS X, here are some useful useful additions
+  to your .emacs file.
+
+  - To get direct keyboard input of non-ASCII characters (like
+    "option-e e" resulting in "é" [eacute]), first enable the option
+    key by setting the command key as your meta key::
+
+        (setq mac-command-key-is-meta t) ;; nil for option key
+
+    Next, use one of these lines::
+
+        (set-keyboard-coding-system 'mac-roman)
+        (setq mac-keyboard-text-encoding kTextEncodingISOLatin1)
+
+    I prefer the first line, because it enables non-Latin-1 characters
+    as well (em-dash, curly quotes, etc.).
+
+  - To enable the display of all characters in the Mac-Roman charset,
+    first create a fontset listing the fonts to use for each range of
+    characters using charsets that Emacs understands::
+
+      (create-fontset-from-fontset-spec
+       "-apple-monaco-medium-r-normal--10-*-*-*-*-*-fontset-monaco,
+        ascii:-apple-monaco-medium-r-normal--10-100-75-75-m-100-mac-roman,
+        latin-iso8859-1:-apple-monaco-medium-r-normal--10-100-75-75-m-100-mac-roman,
+        mule-unicode-0100-24ff:-apple-monaco-medium-r-normal--10-100-75-75-m-100-mac-roman")
+
+    Latin-1 doesn't cover characters like em-dash and curly quotes, so
+    "mule-unicode-0100-24ff" is needed.
+
+    Next, use that fontset::
+
+        (set-frame-font "fontset-monaco")
+
+  - To enable cooperation between the system clipboard and the Emacs
+    kill ring, add this line::
+
+        (set-clipboard-coding-system 'mac-roman)
+
+  Other useful resources are in `Andrew Choi's Emacs 21 for Mac OS X
+  FAQ <http://members.shaw.ca/akochoi-emacs/stories/faq.html>`__.
+
+No matter what platform (or editor) you're using, I recommend the
+ProFont__ programmer's font.  It's monospaced, small but readable,
+similar characters are visually distinctive (like "I1l|", "0O", "ao",
+and ".,:;"), and free.
+
+__ http://www.tobias-jung.de/seekingprofont/
+
+
+Credits
+=======
+
+- The automatic section adjustment and table of contents features were
+  written by Martin Blais;
+- ``rst-mode`` and its syntax highlighting was implemented by Stefan
+  Merten;
+- Various other functions were implemented by David Goodger.
+
+
+Obsolete Files
+==============
+
+On 2005-10-30, ``restructuredtext.el``, ``rst-html.el`` and
+``rst-mode.el`` were merged to form the new ``rst.el``.  You can
+consider the old files obsolete and remove them.
+
+
+Future Work
+===========
+
+Here are some features and ideas that will be worked on in the future,
+in those frenzied mornings of excitement over the virtues of the
+one-true-way kitchen sink of editors:
+
+- It would be nice to differentiate between text files using
+  reStructuredText_ and other general text files.  If we had a
+  function to automatically guess whether a .txt file is following the
+  reStructuredText_ conventions, we could trigger rst-mode without
+  having to hard-code this in every text file, nor forcing the user to
+  add a local mode variable at the top of the file.
+
+  We could perform this guessing by searching for a valid decoration
+  at the top of the document or searching for reStructuredText_
+  directives further on.
+
+- The suggested decorations when adjusting should not have to cycle
+  below one below the last section decoration level preceding the
+  cursor.  We need to fix that.
+
+
+.. _Emacs: http://www.gnu.org/software/emacs/emacs.html
+.. _reStructuredText: http://docutils.sf.net/rst.html
+
+
+..
+   Local Variables:
+   mode: indented-text
+   indent-tabs-mode: nil
+   sentence-end-double-space: t
+   fill-column: 70
+   End:

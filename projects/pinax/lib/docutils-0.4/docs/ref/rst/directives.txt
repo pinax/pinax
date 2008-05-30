@@ -1,0 +1,1727 @@
+=============================
+ reStructuredText Directives
+=============================
+:Author: David Goodger
+:Contact: goodger@python.org
+:Revision: $Revision: 4228 $
+:Date: $Date: 2005-12-23 00:46:04 +0100 (Fri, 23 Dec 2005) $
+:Copyright: This document has been placed in the public domain.
+
+.. contents::
+
+This document describes the directives implemented in the reference
+reStructuredText parser.
+
+Directives have the following syntax::
+
+    +-------+-------------------------------+
+    | ".. " | directive type "::" directive |
+    +-------+ block                         |
+            |                               |
+            +-------------------------------+
+
+Directives begin with an explicit markup start (two periods and a
+space), followed by the directive type and two colons (collectively,
+the "directive marker").  The directive block begins immediately after
+the directive marker, and includes all subsequent indented lines.  The
+directive block is divided into arguments, options (a field list), and
+content (in that order), any of which may appear.  See the Directives_
+section in the `reStructuredText Markup Specification`_ for syntax
+details.
+
+Descriptions below list "doctree elements" (document tree element
+names; XML DTD generic identifiers) corresponding to individual
+directives.  For details on the hierarchy of elements, please see `The
+Docutils Document Tree`_ and the `Docutils Generic DTD`_ XML document
+type definition.  For directive implementation details, see `Creating
+reStructuredText Directives`_.
+
+.. _Directives: restructuredtext.html#directives
+.. _reStructuredText Markup Specification: restructuredtext.html
+.. _The Docutils Document Tree: ../doctree.html
+.. _Docutils Generic DTD: ../docutils.dtd
+.. _Creating reStructuredText Directives:
+   ../../howto/rst-directives.html
+
+
+-------------
+ Admonitions
+-------------
+
+.. _attention:
+.. _caution:
+.. _danger:
+.. _error:
+.. _hint:
+.. _important:
+.. _note:
+.. _tip:
+.. _warning:
+
+Specific Admonitions
+====================
+
+:Directive Types: "attention", "caution", "danger", "error", "hint",
+                  "important", "note", "tip", "warning", "admonition"
+:Doctree Elements: attention, caution, danger, error, hint, important,
+                   note, tip, warning, admonition, title
+:Directive Arguments: None.
+:Directive Options: None.
+:Directive Content: Interpreted as body elements.
+
+Admonitions are specially marked "topics" that can appear anywhere an
+ordinary body element can.  They contain arbitrary body elements.
+Typically, an admonition is rendered as an offset block in a document,
+sometimes outlined or shaded, with a title matching the admonition
+type.  For example::
+
+    .. DANGER::
+       Beware killer rabbits!
+
+This directive might be rendered something like this::
+
+    +------------------------+
+    |        !DANGER!        |
+    |                        |
+    | Beware killer rabbits! |
+    +------------------------+
+
+The following admonition directives have been implemented:
+
+- attention
+- caution
+- danger
+- error
+- hint
+- important
+- note
+- tip
+- warning
+
+Any text immediately following the directive indicator (on the same
+line and/or indented on following lines) is interpreted as a directive
+block and is parsed for normal body elements.  For example, the
+following "note" admonition directive contains one paragraph and a
+bullet list consisting of two list items::
+
+    .. note:: This is a note admonition.
+       This is the second line of the first paragraph.
+
+       - The note contains all indented body elements
+         following.
+       - It includes this bullet list.
+
+
+.. _admonition:
+
+Generic Admonition
+==================
+
+:Directive Type: "admonition"
+:Doctree Elements: admonition, title
+:Directive Arguments: One, required (admonition title)
+:Directive Options: Possible.
+:Directive Content: Interpreted as body elements.
+
+This is a generic, titled admonition.  The title may be anything the
+author desires.
+
+The author-supplied title is also used as a "class" attribute value
+after being converted into a valid identifier form (down-cased;
+non-alphanumeric characters converted to single hyphens; "admonition-"
+prefixed).  For example, this admonition::
+
+    .. admonition:: And, by the way...
+
+       You can make up your own admonition too.
+
+becomes the following document tree (pseudo-XML)::
+
+    <document source="test data">
+        <admonition class="admonition-and-by-the-way">
+            <title>
+                And, by the way...
+            <paragraph>
+                You can make up your own admonition too.
+
+The following option is recognized:
+
+``class`` : text
+    Override the computed "class" attribute value.  See the class_
+    directive below.
+
+
+--------
+ Images
+--------
+
+There are two image directives: "image" and "figure".
+
+
+Image
+=====
+
+:Directive Type: "image"
+:Doctree Element: image
+:Directive Arguments: One, required (image URI).
+:Directive Options: Possible.
+:Directive Content: None.
+
+An "image" is a simple picture::
+
+    .. image:: picture.png
+
+The URI for the image source file is specified in the directive
+argument.  As with hyperlink targets, the image URI may begin on the
+same line as the explicit markup start and target name, or it may
+begin in an indented text block immediately following, with no
+intervening blank lines.  If there are multiple lines in the link
+block, they are stripped of leading and trailing whitespace and joined
+together.
+
+Optionally, the image link block may contain a flat field list, the
+_`image options`.  For example::
+
+    .. image:: picture.jpeg
+       :height: 100
+       :width: 200
+       :scale: 50
+       :alt: alternate text
+       :align: right
+
+The following options are recognized:
+
+``alt`` : text
+    Alternate text: a short description of the image, displayed by
+    applications that cannot display images, or spoken by applications
+    for visually impaired users.
+
+``height`` : integer
+    The desired height of the image in pixels, used to reserve space
+    or scale the image vertically.  When the "scale" option is also
+    specified, they are combined.  For example, a height of 200 and a
+    scale of 50 is equivalent to a height of 100 with no scale.
+
+    New in Docutils 0.3.10: It is also possible to specify a `length
+    value`_.
+
+``width`` : integer
+    The width of the image in pixels, used to reserve space or scale
+    the image horizontally.  As with "height" above, when the "scale"
+    option is also specified, they are combined.
+
+    New in Docutils 0.3.10: It is also possible to specify a length_
+    or `percentage value`_ (which is relative to the current line
+    width).
+
+    .. _length:
+    .. _length value: restructuredtext.html#length-units
+    .. _percentage value: restructuredtext.html#percentage-units
+
+``scale`` : integer
+    The uniform scaling factor of the image, a percentage (but no "%"
+    symbol is required or allowed).  "100" means full-size, and is
+    equivalent to omitting a "scale" option.
+
+    If no "height" or "width" options are specified, PIL [#PIL]_ may
+    be used to determine them, if PIL is installed and the image file
+    is available.
+
+``align`` : "top", "middle", "bottom", "left", "center", or "right"
+    The alignment of the image, equivalent to the HTML ``<img>`` tag's
+    "align" attribute.  The values "top", "middle", and "bottom"
+    control an image's vertical alignment (relative to the text
+    baseline); they are only useful for inline images (substitutions).
+    The values "left", "center", and "right" control an image's
+    horizontal alignment, allowing the image to float and have the
+    text flow around it.  The specific behavior depends upon the
+    browser or rendering software used.
+
+``target`` : text (URI or reference name)
+    Makes the image into a hyperlink reference ("clickable").  The
+    option argument may be a URI (relative or absolute), or a
+    reference name with underscore suffix (e.g. ``name_``).
+
+``class`` : text
+    Set a "class" attribute value on the image element.  See the
+    class_ directive below.
+
+
+Figure
+======
+
+:Directive Type: "figure"
+:Doctree Elements: figure, image, caption, legend
+:Directive Arguments: One, required (image URI).
+:Directive Options: Possible.
+:Directive Content: Interpreted as the figure caption and an optional
+                    legend.
+
+A "figure" consists of image_ data (including `image options`_), an
+optional caption (a single paragraph), and an optional legend
+(arbitrary body elements)::
+
+    .. figure:: picture.png
+       :scale: 50
+       :alt: map to buried treasure
+
+       This is the caption of the figure (a simple paragraph).
+
+       The legend consists of all elements after the caption.  In this
+       case, the legend consists of this paragraph and the following
+       table:
+
+       +-----------------------+-----------------------+
+       | Symbol                | Meaning               |
+       +=======================+=======================+
+       | .. image:: tent.png   | Campground            |
+       +-----------------------+-----------------------+
+       | .. image:: waves.png  | Lake                  |
+       +-----------------------+-----------------------+
+       | .. image:: peak.png   | Mountain              |
+       +-----------------------+-----------------------+
+
+There must be blank lines before the caption paragraph and before the
+legend.  To specify a legend without a caption, use an empty comment
+("..") in place of the caption.
+
+The "figure" directive supports all of the options of the "image"
+directive (see `image options`_ above).  In addition, the following
+options are recognized:
+
+``figwidth`` : integer or "image"
+    The width of the figure in pixels, to limit the horizontal space
+    used.  A special value of "image" is allowed, in which case the
+    included image's actual width is used (requires PIL [#PIL]_).  If
+    the image file is not found or the required software is
+    unavailable, this option is ignored.
+
+    Sets the "width" attribute of the "figure" doctree element.
+
+    This option does not scale the included image; use the "width"
+    `image`_ option for that. ::
+
+        +---------------------------+
+        |        figure             |
+        |                           |
+        |<------ figwidth --------->|
+        |                           |
+        |  +---------------------+  |
+        |  |     image           |  |
+        |  |                     |  |
+        |  |<--- width --------->|  |
+        |  +---------------------+  |
+        |                           |
+        |The figure's caption should|
+        |wrap at this width.        |
+        +---------------------------+
+
+``figclass`` : text
+    Set a "class" attribute value on the figure element.  See the
+    class_ directive below.
+
+``align`` : "left", "center", or "right"
+    The horizontal alignment of the figure, allowing the image to
+    float and have the text flow around it.  The specific behavior
+    depends upon the browser or rendering software used.
+
+.. [#PIL] `Python Imaging Library`_.
+
+.. _Python Imaging Library: http://www.pythonware.com/products/pil/
+
+
+---------------
+ Body Elements
+---------------
+
+Topic
+=====
+
+:Directive Type: "topic"
+:Doctree Element: topic
+:Directive Arguments: 1, required (topic title).
+:Directive Options: Possible.
+:Directive Content: Interpreted as the topic body.
+
+A topic is like a block quote with a title, or a self-contained
+section with no subsections.  Use the "topic" directive to indicate a
+self-contained idea that is separate from the flow of the document.
+Topics may occur anywhere a section or transition may occur.  Body
+elements and topics may not contain nested topics.
+
+The directive's sole argument is interpreted as the topic title; the
+next line must be blank.  All subsequent lines make up the topic body,
+interpreted as body elements.  For example::
+
+    .. topic:: Topic Title
+
+        Subsequent indented lines comprise
+        the body of the topic, and are
+        interpreted as body elements.
+
+The following option is recognized:
+
+``class`` : text
+    Set a "class" attribute value on the topic element.  See the
+    class_ directive below.
+
+
+Sidebar
+=======
+
+:Directive Type: "sidebar"
+:Doctree Element: sidebar
+:Directive Arguments: One, required (sidebar title).
+:Directive Options: Possible.
+:Directive Content: Interpreted as the sidebar body.
+
+Sidebars are like miniature, parallel documents that occur inside
+other documents, providing related or reference material.  A sidebar
+is typically offset by a border and "floats" to the side of the page;
+the document's main text may flow around it.  Sidebars can also be
+likened to super-footnotes; their content is outside of the flow of
+the document's main text.
+
+Sidebars may occur anywhere a section or transition may occur.  Body
+elements (including sidebars) may not contain nested sidebars.
+
+The directive's sole argument is interpreted as the sidebar title,
+which may be followed by a subtitle option (see below); the next line
+must be blank.  All subsequent lines make up the sidebar body,
+interpreted as body elements.  For example::
+
+    .. sidebar:: Sidebar Title
+       :subtitle: Optional Sidebar Subtitle
+
+       Subsequent indented lines comprise
+       the body of the sidebar, and are
+       interpreted as body elements.
+
+The following options are recognized:
+
+``subtitle`` : text
+    The sidebar's subtitle.
+
+``class`` : text
+    Set a "class" attribute value on the sidebar element.  See the
+    class_ directive below.
+
+
+Line Block
+==========
+
+.. admonition:: Deprecated
+
+   The "line-block" directive is deprecated.  Use the `line block
+   syntax`_ instead.
+
+   .. _line block syntax: restructuredtext.html#line-blocks
+
+:Directive Type: "line-block"
+:Doctree Element: line_block
+:Directive Arguments: None.
+:Directive Options: Possible.
+:Directive Content: Becomes the body of the line block.
+
+The "line-block" directive constructs an element where line breaks and
+initial indentation is significant and inline markup is supported.  It
+is equivalent to a `parsed literal block`_ with different rendering:
+typically in an ordinary serif typeface instead of a
+typewriter/monospaced face, and not automatically indented.  (Have the
+line-block directive begin a block quote to get an indented line
+block.)  Line blocks are useful for address blocks and verse (poetry,
+song lyrics), where the structure of lines is significant.  For
+example, here's a classic::
+
+    "To Ma Own Beloved Lassie: A Poem on her 17th Birthday", by
+    Ewan McTeagle (for Lassie O'Shea):
+
+        .. line-block::
+
+            Lend us a couple of bob till Thursday.
+            I'm absolutely skint.
+            But I'm expecting a postal order and I can pay you back
+                as soon as it comes.
+            Love, Ewan.
+
+The following option is recognized:
+
+``class`` : text
+    Set a "class" attribute value on the line_block element.  See the
+    class_ directive below.
+
+
+.. _parsed-literal:
+
+Parsed Literal Block
+====================
+
+:Directive Type: "parsed-literal"
+:Doctree Element: literal_block
+:Directive Arguments: None.
+:Directive Options: Possible.
+:Directive Content: Becomes the body of the literal block.
+
+Unlike an ordinary literal block, the "parsed-literal" directive
+constructs a literal block where the text is parsed for inline markup.
+It is equivalent to a `line block`_ with different rendering:
+typically in a typewriter/monospaced typeface, like an ordinary
+literal block.  Parsed literal blocks are useful for adding hyperlinks
+to code examples.
+
+However, care must be taken with the text, because inline markup is
+recognized and there is no protection from parsing.  Backslash-escapes
+may be necessary to prevent unintended parsing.  And because the
+markup characters are removed by the parser, care must also be taken
+with vertical alignment.  Parsed "ASCII art" is tricky, and extra
+whitespace may be necessary.
+
+For example, all the element names in this content model are links::
+
+    .. parsed-literal::
+
+       ( (title_, subtitle_?)?,
+         decoration_?,
+         (docinfo_, transition_?)?,
+         `%structure.model;`_ )
+
+The following option is recognized:
+
+``class`` : text
+    Set a "class" attribute value on the literal_block element.  See
+    the class_ directive below.
+
+
+Rubric
+======
+
+:Directive Type: "rubric"
+:Doctree Element: rubric
+:Directive Arguments: 1, required (rubric text).
+:Directive Options: Possible.
+:Directive Content: None.
+
+..
+
+     rubric n. 1. a title, heading, or the like, in a manuscript,
+     book, statute, etc., written or printed in red or otherwise
+     distinguished from the rest of the text. ...
+
+     -- Random House Webster's College Dictionary, 1991
+
+The "rubric" directive inserts a "rubric" element into the document
+tree.  A rubric is like an informal heading that doesn't correspond to
+the document's structure.
+
+The following option is recognized:
+
+``class`` : text
+    Set a "class" attribute value on the rubric element.  See the
+    class_ directive below.
+
+
+Epigraph
+========
+
+:Directive Type: "epigraph"
+:Doctree Element: block_quote
+:Directive Arguments: None.
+:Directive Options: None.
+:Directive Content: Interpreted as the body of the block quote.
+
+An epigraph is an apposite (suitable, apt, or pertinent) short
+inscription, often a quotation or poem, at the beginning of a document
+or section.
+
+The "epigraph" directive produces an "epigraph"-class block quote.
+For example, this input::
+
+     .. epigraph::
+
+        No matter where you go, there you are.
+
+        -- Buckaroo Banzai
+
+becomes this document tree fragment::
+
+    <block_quote class="epigraph">
+        <paragraph>
+            No matter where you go, there you are.
+        <attribution>
+            Buckaroo Banzai
+
+
+Highlights
+==========
+
+:Directive Type: "highlights"
+:Doctree Element: block_quote
+:Directive Arguments: None.
+:Directive Options: None.
+:Directive Content: Interpreted as the body of the block quote.
+
+Highlights summarize the main points of a document or section, often
+consisting of a list.
+
+The "highlights" directive produces a "highlights"-class block quote.
+See Epigraph_ above for an analogous example.
+
+
+Pull-Quote
+==========
+
+:Directive Type: "pull-quote"
+:Doctree Element: block_quote
+:Directive Arguments: None.
+:Directive Options: None.
+:Directive Content: Interpreted as the body of the block quote.
+
+A pull-quote is a small selection of text "pulled out and quoted",
+typically in a larger typeface.  Pull-quotes are used to attract
+attention, especially in long articles.
+
+The "pull-quote" directive produces a "pull-quote"-class block quote.
+See Epigraph_ above for an analogous example.
+
+
+.. _compound:
+
+Compound Paragraph
+==================
+
+:Directive Type: "compound"
+:Doctree Element: compound
+:Directive Arguments: None.
+:Directive Options: Possible.
+:Directive Content: Interpreted as body elements.
+
+(New in Docutils 0.3.6)
+
+The "compound" directive is used to create a compound paragraph, which
+is a single logical paragraph containing multiple physical body
+elements such as simple paragraphs, literal blocks, tables, lists,
+etc., instead of directly containing text and inline elements.  For
+example::
+
+    .. compound::
+
+       The 'rm' command is very dangerous.  If you are logged
+       in as root and enter ::
+
+           cd /
+           rm -rf *
+
+       you will erase the entire contents of your file system.
+
+In the example above, a literal block is "embedded" within a sentence
+that begins in one physical paragraph and ends in another.
+
+.. note::
+
+   The "compound" directive is *not* a generic block-level container
+   like HTML's ``<div>`` element.  Do not use it only to group a
+   sequence of elements, or you may get unexpected results.
+
+   If you need a generic block-level container, please use the
+   container_ directive, described below.
+
+Compound paragraphs are typically rendered as multiple distinct text
+blocks, with the possibility of variations to emphasize their logical
+unity:
+
+* If paragraphs are rendered with a first-line indent, only the first
+  physical paragraph of a compound paragraph should have that indent
+  -- second and further physical paragraphs should omit the indents;
+* vertical spacing between physical elements may be reduced;
+* and so on.
+
+The following option is recognized:
+
+``class`` : text
+    Set a "class" attribute value on the compound element.  See the
+    class_ directive below.
+
+
+Container
+=========
+
+:Directive Type: "container"
+:Doctree Element: container
+:Directive Arguments: One or more, optional (class names).
+:Directive Options: None.
+:Directive Content: Interpreted as body elements.
+
+(New in Docutils 0.3.10)
+
+The "container" directive surrounds its contents (arbitrary body
+elements) with a generic block-level "container" element.  Combined
+with the optional "class_" attribute argument(s), this is an extension
+mechanism for users & applications.  For example::
+
+    .. container:: custom
+
+       This paragraph might be rendered in a custom way.
+
+Parsing the above results in the following pseudo-XML::
+
+    <container classes="custom">
+        <paragraph>
+            This paragraph might be rendered in a custom way.
+
+The "container" directive is the equivalent of HTML's ``<div>``
+element.  It may be used to group a sequence of elements for user- or
+application-specific purposes.
+
+
+--------
+ Tables
+--------
+
+Formal tables need more structure than the reStructuredText syntax
+supplies.  Tables may be given titles with the table_ directive.
+Sometimes reStructuredText tables are inconvenient to write, or table
+data in a standard format is readily available.  The csv-table_
+directive supports CSV data.
+
+
+Table
+=====
+
+:Directive Type: "table"
+:Doctree Element: table
+:Directive Arguments: 1, optional (table title).
+:Directive Options: Possible.
+:Directive Content: A normal reStructuredText table.
+
+(New in Docutils 0.3.1)
+
+The "table" directive is used to create a titled table, to associate a
+title with a table::
+
+    .. table:: Truth table for "not"
+
+       =====  =====
+         A    not A
+       =====  =====
+       False  True
+       True   False
+       =====  =====
+
+The following option is recognized:
+
+``class`` : text
+    Set a "class" attribute value on the table element.  See the
+    class_ directive below.
+
+
+.. _csv-table:
+
+CSV Table
+=========
+
+:Directive Type: "csv-table"
+:Doctree Element: table
+:Directive Arguments: 1, optional (table title).
+:Directive Options: Possible.
+:Directive Content: A CSV (comma-separated values) table.
+
+.. WARNING::
+
+   The "csv-table" directive's ":file:" and ":url:" options represent
+   a potential security holes.  They can be disabled with the
+   "file_insertion_enabled_" runtime setting.
+
+.. Note::
+
+   The "csv-table" directive requires the ``csv.py`` module of the
+   Python standard library, which was added in Python 2.3.  It will
+   not work with earlier versions of Python.  Using the "csv-table"
+   directive in a document will make the document **incompatible**
+   with systems using Python 2.1 or 2.2.
+
+(New in Docutils 0.3.4)
+
+The "csv-table" directive is used to create a table from CSV
+(comma-separated values) data.  CSV is a common data format generated
+by spreadsheet applications and commercial databases.  The data may be
+internal (an integral part of the document) or external (a separate
+file).
+
+Example::
+
+    .. csv-table:: Frozen Delights!
+       :header: "Treat", "Quantity", "Description"
+       :widths: 15, 10, 30
+
+       "Albatross", 2.99, "On a stick!"
+       "Crunchy Frog", 1.49, "If we took the bones out, it wouldn't be
+       crunchy, now would it?"
+       "Gannet Ripple", 1.99, "On a stick!"
+
+Block markup and inline markup within cells is supported.  Line ends
+are recognized within cells.
+
+Working limitations:
+
+* Whitespace delimiters are supported only for external CSV files.
+
+* There is no support for checking that the number of columns in each
+  row is the same.  However, this directive supports CSV generators
+  that do not insert "empty" entries at the end of short rows, by
+  automatically adding empty entries.
+
+  .. Add "strict" option to verify input?
+
+The following options are recognized:
+
+``class`` : text
+    Set a "class" attribute value on the table element.  See the
+    class_ directive below.
+
+``widths`` : integer [, integer...]
+    A comma- or space-separated list of relative column widths.  The
+    default is equal-width columns (100%/#columns).
+
+``header-rows`` : integer
+    The number of rows of CSV data to use in the table header.
+    Defaults to 0.
+
+``stub-columns`` : integer
+    The number of table columns to use as stubs (row titles, on the
+    left).  Defaults to 0.
+
+``header`` : CSV data
+    Supplemental data for the table header, added independently of and
+    before any ``header-rows`` from the main CSV data.  Must use the
+    same CSV format as the main CSV data.
+
+``file`` : string (newlines removed)
+    The local filesystem path to a CSV data file.
+
+``url`` : string (whitespace removed)
+    An Internet URL reference to a CSV data file.
+
+``encoding`` : name of text encoding
+    The text encoding of the external CSV data (file or URL).
+    Defaults to the document's encoding (if specified).
+
+``delim`` : char | "tab" | "space"
+    A one-character string used to separate fields.  Defaults to ``,``
+    (comma).  May be specified as a Unicode code point; see the
+    unicode_ directive for syntax details.
+
+``quote`` : char
+    A one-character string used to quote elements containing the
+    delimiter or which start with the quote character.  Defaults to
+    ``"`` (quote).  May be specified as a Unicode code point; see the
+    unicode_ directive for syntax details.
+
+``keepspace`` : flag
+    Treat whitespace immediately following the delimiter as
+    significant.  The default is to ignore such whitespace.
+
+``escape`` : char
+    A one-character string used to escape the delimiter or quote
+    characters.  May be specified as a Unicode code point; see the
+    unicode_ directive for syntax details.  Used when the delimiter is
+    used in an unquoted field, or when quote characters are used
+    within a field.  The default is to double-up the character,
+    e.g. "He said, ""Hi!"""
+
+    .. Add another possible value, "double", to explicitly indicate
+       the default case?
+
+
+List Table
+==========
+
+:Directive Type: "list-table"
+:Doctree Element: table
+:Directive Arguments: 1, optional (table title).
+:Directive Options: Possible.
+:Directive Content: A uniform two-level bullet list.
+
+(New in Docutils 0.3.8.  This is an initial implementation; `further
+ideas`__ may be implemented in the future.)
+
+__ ../../dev/rst/alternatives.html#list-driven-tables
+
+The "list-table" directive is used to create a table from data in a
+uniform two-level bullet list.  "Uniform" means that each sublist
+(second-level list) must contain the same number of list items.
+
+Example::
+
+    .. list-table:: Frozen Delights!
+       :widths: 15 10 30
+       :header-rows: 1
+
+       * - Treat
+         - Quantity
+         - Description
+       * - Albatross
+         - 2.99
+         - On a stick!
+       * - Crunchy Frog
+         - 1.49
+         - If we took the bones out, it wouldn't be
+           crunchy, now would it?
+       * - Gannet Ripple
+         - 1.99
+         - On a stick!
+
+The following options are recognized:
+
+``class`` : text
+    Set a "class" attribute value on the table element.  See the
+    class_ directive below.
+
+``widths`` : integer [integer...]
+    A comma- or space-separated list of relative column widths.  The
+    default is equal-width columns (100%/#columns).
+
+``header-rows`` : integer
+    The number of rows of list data to use in the table header.
+    Defaults to 0.
+
+``stub-columns`` : integer
+    The number of table columns to use as stubs (row titles, on the
+    left).  Defaults to 0.
+
+
+----------------
+ Document Parts
+----------------
+
+.. _contents:
+
+Table of Contents
+=================
+
+:Directive Type: "contents"
+:Doctree Elements: pending, topic
+:Directive Arguments: One, optional: title.
+:Directive Options: Possible.
+:Directive Content: None.
+
+The "contents" directive generates a table of contents (TOC) in a
+topic_.  Topics, and therefore tables of contents, may occur anywhere
+a section or transition may occur.  Body elements and topics may not
+contain tables of contents.
+
+Here's the directive in its simplest form::
+
+    .. contents::
+
+Language-dependent boilerplate text will be used for the title.  The
+English default title text is "Contents".
+
+An explicit title may be specified::
+
+    .. contents:: Table of Contents
+
+The title may span lines, although it is not recommended::
+
+    .. contents:: Here's a very long Table of
+       Contents title
+
+Options may be specified for the directive, using a field list::
+
+    .. contents:: Table of Contents
+       :depth: 2
+
+If the default title is to be used, the options field list may begin
+on the same line as the directive marker::
+
+    .. contents:: :depth: 2
+
+The following options are recognized:
+
+``depth`` : integer
+    The number of section levels that are collected in the table of
+    contents.  The default is unlimited depth.
+
+``local`` : flag (empty)
+    Generate a local table of contents.  Entries will only include
+    subsections of the section in which the directive is given.  If no
+    explicit title is given, the table of contents will not be titled.
+
+``backlinks`` : "entry" or "top" or "none"
+    Generate links from section headers back to the table of contents
+    entries, the table of contents itself, or generate no backlinks.
+
+``class`` : text
+    Set a "class" attribute value on the topic element.  See the
+    class_ directive below.
+
+
+.. _sectnum:
+.. _section-autonumbering:
+
+Automatic Section Numbering
+===========================
+
+:Directive Type: "sectnum" or "section-autonumbering" (synonyms)
+:Doctree Elements: pending, generated
+:Directive Arguments: None.
+:Directive Options: Possible.
+:Directive Content: None.
+
+The "sectnum" (or "section-autonumbering") directive automatically
+numbers sections and subsections in a document.  Section numbers are
+of the "multiple enumeration" form, where each level has a number,
+separated by periods.  For example, the title of section 1, subsection
+2, subsubsection 3 would have "1.2.3" prefixed.
+
+The "sectnum" directive does its work in two passes: the initial parse
+and a transform.  During the initial parse, a "pending" element is
+generated which acts as a placeholder, storing any options internally.
+At a later stage in the processing, the "pending" element triggers a
+transform, which adds section numbers to titles.  Section numbers are
+enclosed in a "generated" element, and titles have their "auto"
+attribute set to "1".
+
+The following options are recognized:
+
+``depth`` : integer
+    The number of section levels that are numbered by this directive.
+    The default is unlimited depth.
+
+``prefix`` : string
+    An arbitrary string that is prefixed to the automatically
+    generated section numbers.  It may be something like "3.2.", which
+    will produce "3.2.1", "3.2.2", "3.2.2.1", and so on.  Note that
+    any separating punctuation (in the example, a period, ".") must be
+    explicitly provided.  The default is no prefix.
+
+``suffix`` : string
+    An arbitrary string that is appended to the automatically
+    generated section numbers.  The default is no suffix.
+
+``start`` : integer
+    The value that will be used for the first section number.
+    Combined with ``prefix``, this may be used to force the right
+    numbering for a document split over several source files.  The
+    default is 1.
+
+
+.. _header:
+.. _footer:
+
+Document Header & Footer
+========================
+
+:Directive Types: "header" and "footer"
+:Doctree Elements: decoration, header, footer
+:Directive Arguments: None.
+:Directive Options: None.
+:Directive Content: Interpreted as body elements.
+
+(New in Docutils 0.3.8)
+
+The "header" and "footer" directives create document decorations,
+useful for page navigation, notes, time/datestamp, etc.  For example::
+
+    .. header:: This space for rent.
+
+This will add a paragraph to the document header, which will appear at
+the top of the generated web page or at the top of every printed page.
+
+These directives may be used multiple times, cumulatively.  There is
+currently support for only one header and footer.
+
+.. note::
+
+   While it is possible to use the "header" and "footer" directives to
+   create navigational elements for web pages, you should be aware
+   that Docutils is meant to be used for *document* processing, and
+   that a navigation bar is not typically part of a document.
+
+   Thus, you may soon find Docutils' abilities to be insufficient for
+   these purposes.  At that time, you should consider using a
+   templating system (like ht2html_) rather than the "header" and
+   "footer" directives.
+
+   .. _ht2html: http://ht2html.sourceforge.net/
+
+In addition to the use of these directives to populate header and
+footer content, content may also be added automatically by the
+processing system.  For example, if certain runtime settings are
+enabled, the document footer is populated with processing information
+such as a datestamp, a link to `the Docutils website`_, etc.
+
+.. _the Docutils website: http://docutils.sourceforge.net
+
+
+------------
+ References
+------------
+
+.. _target-notes:
+
+Target Footnotes
+================
+
+:Directive Type: "target-notes"
+:Doctree Elements: pending, footnote, footnote_reference
+:Directive Arguments: None.
+:Directive Options: Possible.
+:Directive Content: None.
+
+The "target-notes" directive creates a footnote for each external
+target in the text, and corresponding footnote references after each
+reference.  For every explicit target (of the form, ``.. _target name:
+URL``) in the text, a footnote will be generated containing the
+visible URL as content.
+
+The following option is recognized:
+
+``class`` : text
+    Set a "class" attribute value on all footnote_reference elements.
+    See the class_ directive below.
+
+
+Footnotes
+=========
+
+**NOT IMPLEMENTED YET**
+
+:Directive Type: "footnotes"
+:Doctree Elements: pending, topic
+:Directive Arguments: None?
+:Directive Options: Possible?
+:Directive Content: None.
+
+@@@
+
+
+Citations
+=========
+
+**NOT IMPLEMENTED YET**
+
+:Directive Type: "citations"
+:Doctree Elements: pending, topic
+:Directive Arguments: None?
+:Directive Options: Possible?
+:Directive Content: None.
+
+@@@
+
+
+---------------
+ HTML-Specific
+---------------
+
+Meta
+====
+
+:Directive Type: "meta"
+:Doctree Element: meta (non-standard)
+:Directive Arguments: None.
+:Directive Options: None.
+:Directive Content: Must contain a flat field list.
+
+The "meta" directive is used to specify HTML metadata stored in HTML
+META tags.  "Metadata" is data about data, in this case data about web
+pages.  Metadata is used to describe and classify web pages in the
+World Wide Web, in a form that is easy for search engines to extract
+and collate.
+
+Within the directive block, a flat field list provides the syntax for
+metadata.  The field name becomes the contents of the "name" attribute
+of the META tag, and the field body (interpreted as a single string
+without inline markup) becomes the contents of the "content"
+attribute.  For example::
+
+    .. meta::
+       :description: The reStructuredText plaintext markup language
+       :keywords: plaintext, markup language
+
+This would be converted to the following HTML::
+
+    <meta name="description"
+        content="The reStructuredText plaintext markup language">
+    <meta name="keywords" content="plaintext, markup language">
+
+Support for other META attributes ("http-equiv", "scheme", "lang",
+"dir") are provided through field arguments, which must be of the form
+"attr=value"::
+
+    .. meta::
+       :description lang=en: An amusing story
+       :description lang=fr: Un histoire amusant
+
+And their HTML equivalents::
+
+    <meta name="description" lang="en" content="An amusing story">
+    <meta name="description" lang="fr" content="Un histoire amusant">
+
+Some META tags use an "http-equiv" attribute instead of the "name"
+attribute.  To specify "http-equiv" META tags, simply omit the name::
+
+    .. meta::
+       :http-equiv=Content-Type: text/html; charset=ISO-8859-1
+
+HTML equivalent::
+
+    <meta http-equiv="Content-Type"
+         content="text/html; charset=ISO-8859-1">
+
+
+Imagemap
+========
+
+**NOT IMPLEMENTED YET**
+
+Non-standard element: imagemap.
+
+
+-----------------------------------------
+ Directives for Substitution Definitions
+-----------------------------------------
+
+The directives in this section may only be used in substitution
+definitions.  They may not be used directly, in standalone context.
+The `image`_ directive may be used both in substitution definitions
+and in the standalone context.
+
+
+.. _replace:
+
+Replacement Text
+================
+
+:Directive Type: "replace"
+:Doctree Element: Text & inline elements
+:Directive Arguments: None.
+:Directive Options: None.
+:Directive Content: A single paragraph; may contain inline markup.
+
+The "replace" directive is used to indicate replacement text for a
+substitution reference.  It may be used within substitution
+definitions only.  For example, this directive can be used to expand
+abbreviations::
+
+    .. |reST| replace:: reStructuredText
+
+    Yes, |reST| is a long word, so I can't blame anyone for wanting to
+    abbreviate it.
+
+As reStructuredText doesn't support nested inline markup, the only way
+to create a reference with styled text is to use substitutions with
+the "replace" directive::
+
+    I recommend you try |Python|_.
+
+    .. |Python| replace:: Python, *the* best language around
+    .. _Python: http://www.python.org/
+
+
+.. _unicode:
+
+Unicode Character Codes
+=======================
+
+:Directive Type: "unicode"
+:Doctree Element: Text
+:Directive Arguments: One or more, required (Unicode character codes,
+                      optional text, and comments).
+:Directive Options: Possible.
+:Directive Content: None.
+
+The "unicode" directive converts Unicode character codes (numerical
+values) to characters, and may be used in substitution definitions
+only.
+
+The arguments, separated by spaces, can be:
+
+* **character codes** as
+
+  - decimal numbers or
+
+  - hexadecimal numbers, prefixed by ``0x``, ``x``, ``\x``, ``U+``,
+    ``u``, or ``\u`` or as XML-style hexadecimal character entities,
+    e.g. ``&#x1a2b;``
+
+* **text**, which is used as-is.
+
+Text following " .. " is a comment and is ignored.  The spaces between
+the arguments are ignored and thus do not appear in the output.
+Hexadecimal codes are case-insensitive.
+
+For example, the following text::
+
+    Copyright |copy| 2003, |BogusMegaCorp (TM)| |---|
+    all rights reserved.
+
+    .. |copy| unicode:: 0xA9 .. copyright sign
+    .. |BogusMegaCorp (TM)| unicode:: BogusMegaCorp U+2122
+       .. with trademark sign
+    .. |---| unicode:: U+02014 .. em dash
+       :trim:
+
+results in:
+
+    Copyright |copy| 2003, |BogusMegaCorp (TM)| |---|
+    all rights reserved.
+
+    .. |copy| unicode:: 0xA9 .. copyright sign
+    .. |BogusMegaCorp (TM)| unicode:: BogusMegaCorp U+2122
+       .. with trademark sign
+    .. |---| unicode:: U+02014 .. em dash
+       :trim:
+
+The following options are recognized:
+
+``ltrim`` : flag
+    Whitespace to the left of the substitution reference is removed.
+
+``rtrim`` : flag
+    Whitespace to the right of the substitution reference is removed.
+
+``trim`` : flag
+    Equivalent to ``ltrim`` plus ``rtrim``; whitespace on both sides
+    of the substitution reference is removed.
+
+
+Date
+====
+
+:Directive Type: "date"
+:Doctree Element: Text
+:Directive Arguments: One, optional (date format).
+:Directive Options: None.
+:Directive Content: None.
+
+The "date" directive generates the current local date and inserts it
+into the document as text.  This directive may be used in substitution
+definitions only.
+
+The optional directive content is interpreted as the desired date
+format, using the same codes as Python's time.strftime function.  The
+default format is "%Y-%m-%d" (ISO 8601 date), but time fields can also
+be used.  Examples::
+
+    .. |date| date::
+    .. |time| date:: %H:%M
+
+    Today's date is |date|.
+
+    This document was generated on |date| at |time|.
+
+
+---------------
+ Miscellaneous
+---------------
+
+.. _include:
+
+Including an External Document Fragment
+=======================================
+
+:Directive Type: "include"
+:Doctree Elements: depend on data being included
+:Directive Arguments: One, required (path to the file to include).
+:Directive Options: Possible.
+:Directive Content: None.
+
+.. WARNING::
+
+   The "include" directive represents a potential security hole.  It
+   can be disabled with the "file_insertion_enabled_" runtime setting.
+
+   .. _file_insertion_enabled: ../../user/config.html#file-insertion-enabled
+
+The "include" directive reads a reStructuredText-formatted text file
+and parses it in the current document's context at the point of the
+directive.  The directive argument is the path to the file to be
+included, relative to the document containing the directive.  For
+example::
+
+    This first example will be parsed at the document level, and can
+    thus contain any construct, including section headers.
+
+    .. include:: inclusion.txt
+
+    Back in the main document.
+
+        This second example will be parsed in a block quote context.
+        Therefore it may only contain body elements.  It may not
+        contain section headers.
+
+        .. include:: inclusion.txt
+
+If an included document fragment contains section structure, the title
+adornments must match those of the master document.
+
+Standard data files intended for inclusion in reStructuredText
+documents are distributed with the Docutils source code, located in
+the "docutils" package in the ``docutils/parsers/rst/include``
+directory.  To access these files, use the special syntax for standard
+"include" data files, angle brackets around the file name::
+
+    .. include:: <isonum.txt>
+
+The current set of standard "include" data files consists of sets of
+substitution definitions.  See `reStructuredText Standard Substitution
+Definition Sets`__ for details of the available standard data files.
+
+__ substitutions.html
+
+The following options are recognized:
+
+``literal`` : flag (empty)
+    The entire included text is inserted into the document as a single
+    literal block (useful for program listings).
+
+``encoding`` : name of text encoding
+    The text encoding of the external data file.  Defaults to the
+    document's encoding (if specified).
+
+
+.. _raw:
+
+Raw Data Pass-Through
+=====================
+
+:Directive Type: "raw"
+:Doctree Element: raw
+:Directive Arguments: One or more, required (output format types).
+:Directive Options: Possible.
+:Directive Content: Stored verbatim, uninterpreted.  None (empty) if a
+                    "file" or "url" option given.
+
+.. WARNING::
+
+   The "raw" directive represents a potential security hole.  It can
+   be disabled with the "raw_enabled_" or "file_insertion_enabled_"
+   runtime settings.
+
+   .. _raw_enabled: ../../user/config.html#raw-enabled
+
+.. Caution::
+
+   The "raw" directive is a stop-gap measure allowing the author to
+   bypass reStructuredText's markup.  It is a "power-user" feature
+   that should not be overused or abused.  The use of "raw" ties
+   documents to specific output formats and makes them less portable.
+
+   If you often need to use the "raw" directive or a "raw"-derived
+   interpreted text role, that is a sign either of overuse/abuse or
+   that functionality may be missing from reStructuredText.  Please
+   describe your situation in a message to the Docutils-users_ mailing
+   list.
+
+.. _Docutils-users: ../../user/mailing-lists.html#docutils-users
+
+The "raw" directive indicates non-reStructuredText data that is to be
+passed untouched to the Writer.  The names of the output formats are
+given in the directive arguments.  The interpretation of the raw data
+is up to the Writer.  A Writer may ignore any raw output not matching
+its format.
+
+For example, the following input would be passed untouched by an HTML
+Writer::
+
+    .. raw:: html
+
+       <hr width=50 size=10>
+
+A LaTeX Writer could insert the following raw content into its
+output stream::
+
+    .. raw:: latex
+
+       \setlength{\parindent}{0pt}
+
+Raw data can also be read from an external file, specified in a
+directive option.  In this case, the content block must be empty.  For
+example::
+
+    .. raw:: html
+       :file: inclusion.html
+
+The following options are recognized:
+
+``file`` : string (newlines removed)
+    The local filesystem path of a raw data file to be included.
+
+``url`` : string (whitespace removed)
+    An Internet URL reference to a raw data file to be included.
+
+``encoding`` : name of text encoding
+    The text encoding of the external raw data (file or URL).
+    Defaults to the document's encoding (if specified).
+
+
+Class
+=====
+
+:Directive Type: "class"
+:Doctree Element: pending
+:Directive Arguments: One or more, required (class names / attribute
+                      values).
+:Directive Options: None.
+:Directive Content: Optional.  If present, it is interpreted as body
+                    elements.
+
+The "class" directive sets the "class" attribute value on its content
+or on the first immediately following non-comment element [#]_.  For
+details of the "class" attribute, see `its entry`__ in `The Docutils
+Document Tree`_.  The directive argument consists of one or more
+space-separated class names, which are converted to lowercase and all
+non-alphanumeric characters are converted to hyphens.  (For the
+rationale, see below.)
+
+__ ../doctree.html#class
+
+Examples::
+
+    .. class:: special
+
+    This is a "special" paragraph.
+
+    .. class:: exceptional remarkable
+
+    An Exceptional Section
+    ======================
+
+    This is an ordinary paragraph.
+
+    .. class:: multiple
+
+       First paragraph.
+
+       Second paragraph.
+
+The text above is parsed and transformed into this doctree fragment::
+
+    <paragraph class="special">
+        This is a "special" paragraph.
+    <section class="exceptional remarkable">
+        <title>
+            An Exceptional Section
+        <paragraph>
+            This is an ordinary paragraph.
+        <paragraph class="multiple">
+            First paragraph.
+        <paragraph class="multiple">
+            Second paragraph.
+
+.. [#] To set a "class" attribute value on a block quote, the "class"
+   directive must be followed by an empty comment::
+
+       .. class:: highlights
+       ..
+
+           Block quote text.
+
+   The directive doesn't allow content, therefore an empty comment is
+   required to terminate the directive.  Without the empty comment,
+   the block quote text would be interpreted as the "class"
+   directive's content, and the parser would complain.
+
+.. topic:: Rationale for Class Attribute Value Conversion
+
+    Docutils identifiers are converted to conform to the regular
+    expression ``[a-z](-?[a-z0-9]+)*``.  For CSS compatibility,
+    identifiers (the "class" and "id" attributes) should have no
+    underscores, colons, or periods.  Hyphens may be used.
+
+    - The `HTML 4.01 spec`_ defines identifiers based on SGML tokens:
+
+          ID and NAME tokens must begin with a letter ([A-Za-z]) and
+          may be followed by any number of letters, digits ([0-9]),
+          hyphens ("-"), underscores ("_"), colons (":"), and periods
+          (".").
+
+    - However the `CSS1 spec`_ defines identifiers based on the "name"
+      token, a tighter interpretation ("flex" tokenizer notation
+      below; "latin1" and "escape" 8-bit characters have been replaced
+      with entities)::
+
+          unicode     \\[0-9a-f]{1,4}
+          latin1      [&iexcl;-&yuml;]
+          escape      {unicode}|\\[ -~&iexcl;-&yuml;]
+          nmchar      [-a-z0-9]|{latin1}|{escape}
+          name        {nmchar}+
+
+    The CSS1 "nmchar" rule does not include underscores ("_"), colons
+    (":"), or periods ("."), therefore "class" and "id" attributes
+    should not contain these characters.  They should be replaced with
+    hyphens ("-").  Combined with HTML's requirements (the first
+    character must be a letter; no "unicode", "latin1", or "escape"
+    characters), this results in the ``[a-z](-?[a-z0-9]+)*`` pattern.
+
+    .. _HTML 4.01 spec: http://www.w3.org/TR/html401/
+    .. _CSS1 spec: http://www.w3.org/TR/REC-CSS1
+
+
+.. _role:
+
+Custom Interpreted Text Roles
+=============================
+
+:Directive Type: "role"
+:Doctree Element: None; affects subsequent parsing.
+:Directive Arguments: Two; one required (new role name), one optional
+                      (base role name, in parentheses).
+:Directive Options: Possible (depends on base role).
+:Directive Content: depends on base role.
+
+(New in Docutils 0.3.2)
+
+The "role" directive dynamically creates a custom interpreted text
+role and registers it with the parser.  This means that after
+declaring a role like this::
+
+    .. role:: custom
+
+the document may use the new "custom" role::
+
+    An example of using :custom:`interpreted text`
+
+This will be parsed into the following document tree fragment::
+
+    <paragraph>
+        An example of using
+        <inline class="custom">
+            interpreted text
+
+The role must be declared in a document before it can be used.
+
+The new role may be based on an existing role, specified as a second
+argument in parentheses (whitespace optional)::
+
+    .. role:: custom(emphasis)
+
+    :custom:`text`
+
+The parsed result is as follows::
+
+    <paragraph>
+        <emphasis class="custom">
+            text
+
+If no base role is explicitly specified, a generic custom role is
+automatically used.  Subsequent interpreted text will produce an
+"inline" element with a "class" attribute, as in the first example
+above.
+
+With most roles, the ":class:" option can be used to set a "class"
+attribute that is different from the role name.  For example::
+
+    .. role:: custom
+       :class: special
+
+    :custom:`interpreted text`
+
+This is the parsed result::
+
+    <paragraph>
+        <inline class="special">
+            interpreted text
+
+.. _role class:
+
+The following option is recognized by the "role" directive for most
+base roles:
+
+``class`` : text
+    Set a "class" attribute value on the element produced (``inline``,
+    or element associated with a base class) when the custom
+    interpreted text role is used.  If no directive options are
+    specified, a "class" option with the directive argument (role
+    name) as the value is implied.  See the class_ directive above.
+
+Specific base roles may support other options and/or directive
+content.  See the `reStructuredText Interpreted Text Roles`_ document
+for details.
+
+.. _reStructuredText Interpreted Text Roles: roles.html
+
+
+.. _default-role:
+
+Setting the Default Interpreted Text Role
+=========================================
+
+:Directive Type: "default-role"
+:Doctree Element: None; affects subsequent parsing.
+:Directive Arguments: One, optional (new default role name).
+:Directive Options: None.
+:Directive Content: None.
+
+(New in Docutils 0.3.10)
+
+The "default-role" directive sets the default interpreted text role,
+the role that is used for interpreted text without an explicit role.
+For example, after setting the default role like this::
+
+    .. default-role:: subscript
+
+any subsequent use of implicit-role interpreted text in the document
+will use the "subscript" role::
+
+    An example of a `default` role.
+
+This will be parsed into the following document tree fragment::
+
+    <paragraph>
+        An example of a
+        <subscript>
+            default
+         role.
+
+Custom roles may be used (see the "role_" directive above), but it
+must have been declared in a document before it can be set as the
+default role.  See the `reStructuredText Interpreted Text Roles`_
+document for details of built-in roles.
+
+The directive may be used without an argument to restore the initial
+default interpreted text role, which is application-dependent.  The
+initial default interpreted text role of the standard reStructuredText
+parser is "title-reference".
+
+
+.. _title:
+
+Metadata Document Title
+=======================
+
+:Directive Type: "title"
+:Doctree Element: None.
+:Directive Arguments: 1, required (the title text).
+:Directive Options: None.
+:Directive Content: None.
+
+The "title" directive specifies the document title as metadata, which
+does not become part of the document body.  It overrides a
+document-supplied title.  For example, in HTML output the metadata
+document title appears in the title bar of the browser window.
+
+
+Restructuredtext-Test-Directive
+===============================
+
+:Directive Type: "restructuredtext-test-directive"
+:Doctree Element: system_warning
+:Directive Arguments: None.
+:Directive Options: None.
+:Directive Content: Interpreted as a literal block.
+
+This directive is provided for test purposes only.  (Nobody is
+expected to type in a name *that* long!)  It is converted into a
+level-1 (info) system message showing the directive data, possibly
+followed by a literal block containing the rest of the directive
+block.
+
+
+..
+   Local Variables:
+   mode: indented-text
+   indent-tabs-mode: nil
+   sentence-end-double-space: t
+   fill-column: 70
+   End:

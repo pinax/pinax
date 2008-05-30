@@ -1,0 +1,606 @@
+<!--
+======================================================================
+    Docutils Generic DTD
+======================================================================
+:Author: David Goodger
+:Contact: goodger@users.sourceforge.net
+:Revision: $Revision: 3963 $
+:Date: $Date: 2005-10-28 18:12:56 +0200 (Fri, 28 Oct 2005) $
+:Copyright: This DTD has been placed in the public domain.
+:Filename: docutils.dtd
+
+More information about this DTD (document type definition) and the
+Docutils project can be found at http://docutils.sourceforge.net/.
+The latest version of this DTD is available from
+http://docutils.sourceforge.net/docs/ref/docutils.dtd.
+
+The formal public identifier for this DTD is::
+
+    +//IDN docutils.sourceforge.net//DTD Docutils Generic//EN//XML
+-->
+
+<!--
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Parameter Entities
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Parameter entities are used to simplify the DTD (reduce duplication)
+and to allow the DTD to be customized by wrapper DTDs.  Parameter
+entities beginning with "additional" are meant to allow easy extension
+by wrapper DTDs.
+-->
+
+<!-- Attributes
+================================================================== -->
+
+<!-- Boolean: no if zero(s), yes if any other value. -->
+<!ENTITY % yesorno "NMTOKEN">
+
+<!-- Emphasize that the attribute value must be a number. -->
+<!ENTITY % number  "NMTOKEN">
+
+<!-- A number which may be immediately followed by a unit. -->
+<!ENTITY % measure "NMTOKEN">
+
+<!ENTITY % additional.basic.atts "">
+<!--
+Attributes shared by all elements in this DTD:
+
+- `id` is a unique identifier, typically assigned by the system.
+- `name` is an identifier assigned in the markup.
+- `dupname` is the same as `name`, used when it's a duplicate.
+- `source` is the name of the source of this document or fragment.
+- `class` is used to transmit individuality information forward.
+-->
+<!ENTITY % basic.atts
+  " ids       NMTOKENS  #IMPLIED
+    names     CDATA     #IMPLIED
+    dupnames  CDATA     #IMPLIED
+    source    CDATA     #IMPLIED
+    classes   NMTOKENS  #IMPLIED
+    %additional.basic.atts; ">
+
+<!-- External reference to a URI/URL. -->
+<!ENTITY % refuri.att
+  " refuri    CDATA     #IMPLIED ">
+
+<!-- Internal reference to the `id` attribute of an element. -->
+<!ENTITY % refid.att
+  " refid     IDREF     #IMPLIED ">
+
+<!-- Space-separated list of id references, for backlinks. -->
+<!ENTITY % backrefs.att
+  " backrefs  IDREFS    #IMPLIED ">
+
+<!--
+Internal reference to the `name` attribute of an element. On a
+'target' element, 'refname' indicates an indirect target which may
+resolve to either an internal or external reference.
+-->
+<!ENTITY % refname.att
+  " refname   NMTOKENS  #IMPLIED ">
+
+<!ENTITY % additional.reference.atts "">
+<!-- Collected hyperlink reference attributes. -->
+<!ENTITY % reference.atts
+  " %refuri.att;
+    %refid.att;
+    %refname.att;
+    %additional.reference.atts; ">
+
+<!-- Unnamed hyperlink. -->
+<!ENTITY % anonymous.att
+  " anonymous %yesorno; #IMPLIED ">
+
+<!-- Auto-numbered footnote or title. -->
+<!ENTITY % auto.att
+  " auto      CDATA     #IMPLIED ">
+
+<!-- XML standard attribute for whitespace-preserving elements. -->
+<!ENTITY % fixedspace.att
+  " xml:space (default | preserve) #FIXED 'preserve' ">
+
+<!ENTITY % align-h.att
+  " align     (left | center | right) #IMPLIED ">
+
+<!ENTITY % align-hv.att
+  " align     (top | middle | bottom | left | center | right) #IMPLIED ">
+
+
+<!-- Element OR-Lists
+============================================================= -->
+
+<!ENTITY % additional.bibliographic.elements "">
+<!ENTITY % bibliographic.elements
+  " author | authors | organization | address | contact
+    | version | revision | status | date | copyright
+    | field
+    %additional.bibliographic.elements; ">
+
+<!ENTITY % additional.section.elements "">
+<!ENTITY % section.elements
+  " section
+    %additional.section.elements; ">
+
+<!ENTITY % additional.body.elements "">
+<!ENTITY % body.elements
+  " paragraph | compound | container | literal_block | doctest_block
+    | line_block | block_quote
+    | table | figure | image | footnote | citation | rubric
+    | bullet_list | enumerated_list | definition_list | field_list
+    | option_list
+    | attention | caution | danger | error | hint | important | note
+    | tip | warning | admonition
+    | reference | target | substitution_definition | comment | pending
+    | system_message | raw
+    %additional.body.elements; ">
+
+<!ENTITY % additional.inline.elements "">
+<!ENTITY % inline.elements
+  " emphasis | strong | literal
+    | reference | footnote_reference | citation_reference
+    | substitution_reference | title_reference
+    | abbreviation | acronym | subscript | superscript
+    | inline | problematic | generated
+    | target | image | raw
+    %additional.inline.elements; ">
+
+
+<!-- Element Content Models
+================================================================== -->
+
+<!-- The structure model may not end with a transition. -->
+<!ENTITY % structure.model
+   " ( ( (%body.elements; | topic | sidebar)+, transition? )*,
+       ( (%section.elements;), (transition?, (%section.elements;) )* )? )">
+
+<!ENTITY % text.model
+  " (#PCDATA | %inline.elements;)* ">
+
+
+<!-- Table Model
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This DTD uses the Exchange subset of the CALS-table model (OASIS
+Technical Memorandum 9901:1999 "XML Exchange Table Model DTD",
+http://www.oasis-open.org/html/tm9901.htm).
+-->
+
+<!ENTITY % calstblx PUBLIC
+    "-//OASIS//DTD XML Exchange Table Model 19990315//EN"
+    "soextblx.dtd">
+
+<!-- These parameter entities customize the table model DTD. -->
+<!ENTITY % bodyatt              " %basic.atts; ">  <!-- table elt -->
+<!ENTITY % tbl.tgroup.att       " %basic.atts; ">
+<!ENTITY % tbl.thead.att        " %basic.atts; ">
+<!ENTITY % tbl.tbody.att        " %basic.atts; ">
+<!ENTITY % tbl.colspec.att
+  " %basic.atts;
+    stub      %yesorno; #IMPLIED ">
+<!ENTITY % tbl.row.att          " %basic.atts; ">
+<!ENTITY % tbl.entry.mdl        " (%body.elements;)* ">
+<!ENTITY % tbl.entry.att
+  " %basic.atts;
+    morecols  %number;  #IMPLIED ">
+
+<!--
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Root Element
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-->
+
+<!-- Optional elements may be generated by internal processing. -->
+<!ELEMENT document
+    ( (title, subtitle?)?,
+      decoration?,
+      (docinfo, transition?)?,
+      %structure.model; )>
+<!ATTLIST document
+    %basic.atts;
+    title     CDATA     #IMPLIED>
+
+<!--
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Title Elements
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-->
+
+<!ELEMENT title %text.model;>
+<!ATTLIST title
+    %basic.atts;
+    %refid.att;
+    %auto.att;>
+
+<!ELEMENT subtitle %text.model;>
+<!ATTLIST subtitle %basic.atts;>
+
+<!--
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Bibliographic Elements
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-->
+
+<!-- Container for bibliographic elements. May not be empty. -->
+<!ELEMENT docinfo (%bibliographic.elements;)+>
+<!ATTLIST docinfo %basic.atts;>
+
+<!-- Container for bibliographic elements. May not be empty.
+Eventual replacement for docinfo? -->
+<!ELEMENT info (%bibliographic.elements;)+>
+<!ATTLIST info %basic.atts;>
+
+<!ELEMENT author %text.model;>
+<!ATTLIST author %basic.atts;>
+
+<!ELEMENT authors (author, organization?, address?, contact?)+>
+<!ATTLIST authors %basic.atts;>
+
+<!ELEMENT organization %text.model;>
+<!ATTLIST organization %basic.atts;>
+
+<!ELEMENT address %text.model;>
+<!ATTLIST address
+    %basic.atts;
+    %fixedspace.att;>
+
+<!ELEMENT contact %text.model;>
+<!ATTLIST contact %basic.atts;>
+
+<!ELEMENT version %text.model;>
+<!ATTLIST version %basic.atts;>
+
+<!ELEMENT revision %text.model;>
+<!ATTLIST revision %basic.atts;>
+
+<!ELEMENT status %text.model;>
+<!ATTLIST status %basic.atts;>
+
+<!ELEMENT date %text.model;>
+<!ATTLIST date %basic.atts;>
+
+<!ELEMENT copyright %text.model;>
+<!ATTLIST copyright %basic.atts;>
+
+<!--
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Decoration Elements
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-->
+
+<!ELEMENT decoration (header?, footer?)>
+<!ATTLIST decoration %basic.atts;>
+
+<!ELEMENT header (%body.elements;)+>
+<!ATTLIST header %basic.atts;>
+
+<!ELEMENT footer (%body.elements;)+>
+<!ATTLIST footer %basic.atts;>
+
+<!--
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Structural Elements
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-->
+
+<!ELEMENT section
+    (title, subtitle?, info?, decoration?, %structure.model;)>
+<!ATTLIST section %basic.atts;>
+
+<!ELEMENT topic (title?, (%body.elements;)+)>
+<!ATTLIST topic %basic.atts;>
+
+<!ELEMENT sidebar (title, subtitle?, (%body.elements; | topic)+)>
+<!ATTLIST sidebar %basic.atts;>
+
+<!ELEMENT transition EMPTY>
+<!ATTLIST transition %basic.atts;>
+
+<!--
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Body Elements
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-->
+
+<!ELEMENT paragraph %text.model;>
+<!ATTLIST paragraph %basic.atts;>
+
+<!ELEMENT compound (%body.elements;)+>
+<!ATTLIST compound %basic.atts;>
+
+<!ELEMENT container (%body.elements;)+>
+<!ATTLIST container %basic.atts;>
+
+<!ELEMENT bullet_list (list_item+)>
+<!ATTLIST bullet_list
+    %basic.atts;
+    bullet    CDATA     #IMPLIED>
+
+<!ELEMENT enumerated_list (list_item+)>
+<!ATTLIST enumerated_list
+    %basic.atts;
+    enumtype  (arabic | loweralpha | upperalpha
+                      | lowerroman | upperroman)
+                        #IMPLIED
+    prefix    CDATA     #IMPLIED
+    suffix    CDATA     #IMPLIED
+    start     %number;  #IMPLIED>
+
+<!ELEMENT list_item (%body.elements;)*>
+<!ATTLIST list_item %basic.atts;>
+
+<!ELEMENT definition_list (definition_list_item+)>
+<!ATTLIST definition_list %basic.atts;>
+
+<!ELEMENT definition_list_item (term, classifier*, definition)>
+<!ATTLIST definition_list_item %basic.atts;>
+
+<!ELEMENT term %text.model;>
+<!ATTLIST term %basic.atts;>
+
+<!ELEMENT classifier %text.model;>
+<!ATTLIST classifier %basic.atts;>
+
+<!ELEMENT definition (%body.elements;)+>
+<!ATTLIST definition %basic.atts;>
+
+<!ELEMENT field_list (field+)>
+<!ATTLIST field_list %basic.atts;>
+
+<!ELEMENT field (field_name, field_body)>
+<!ATTLIST field %basic.atts;>
+
+<!ELEMENT field_name %text.model;>
+<!ATTLIST field_name %basic.atts;>
+
+<!-- May be empty. -->
+<!ELEMENT field_body (%body.elements;)*>
+<!ATTLIST field_body %basic.atts;>
+
+<!ELEMENT option_list (option_list_item+)>
+<!ATTLIST option_list %basic.atts;>
+
+<!ELEMENT option_list_item (option_group, description)>
+<!ATTLIST option_list_item %basic.atts;>
+
+<!ELEMENT option_group (option+)>
+<!ATTLIST option_group %basic.atts;>
+
+<!ELEMENT option (option_string, option_argument*)>
+<!ATTLIST option %basic.atts;>
+
+<!ELEMENT option_string (#PCDATA)>
+<!ATTLIST option_string %basic.atts;>
+
+<!--
+`delimiter` contains the text preceding the `option_argument`: either
+the text separating it from the `option_string` (typically either "="
+or " ") or the text between option arguments (typically either "," or
+" ").
+-->
+<!ELEMENT option_argument (#PCDATA)>
+<!ATTLIST option_argument
+    %basic.atts;
+    delimiter  CDATA    #IMPLIED>
+
+<!ELEMENT description (%body.elements;)+>
+<!ATTLIST description %basic.atts;>
+
+<!ELEMENT literal_block %text.model;>
+<!ATTLIST literal_block
+    %basic.atts;
+    %fixedspace.att;>
+
+<!ELEMENT line_block (line | line_block)+>
+<!ATTLIST line_block %basic.atts;>
+
+<!ELEMENT line %text.model;>
+<!ATTLIST line %basic.atts;>
+
+<!ELEMENT block_quote ((%body.elements;)+, attribution?)>
+<!ATTLIST block_quote %basic.atts;>
+
+<!ELEMENT attribution %text.model;>
+<!ATTLIST attribution %basic.atts;>
+
+<!ELEMENT doctest_block %text.model;>
+<!ATTLIST doctest_block
+    %basic.atts;
+    %fixedspace.att;>
+
+<!ELEMENT attention (%body.elements;)+>
+<!ATTLIST attention %basic.atts;>
+
+<!ELEMENT caution (%body.elements;)+>
+<!ATTLIST caution %basic.atts;>
+
+<!ELEMENT danger (%body.elements;)+>
+<!ATTLIST danger %basic.atts;>
+
+<!ELEMENT error (%body.elements;)+>
+<!ATTLIST error %basic.atts;>
+
+<!ELEMENT hint (%body.elements;)+>
+<!ATTLIST hint %basic.atts;>
+
+<!ELEMENT important (%body.elements;)+>
+<!ATTLIST important %basic.atts;>
+
+<!ELEMENT note (%body.elements;)+>
+<!ATTLIST note %basic.atts;>
+
+<!ELEMENT tip (%body.elements;)+>
+<!ATTLIST tip %basic.atts;>
+
+<!ELEMENT warning (%body.elements;)+>
+<!ATTLIST warning %basic.atts;>
+
+<!ELEMENT admonition (title, (%body.elements;)+)>
+<!ATTLIST admonition %basic.atts;>
+
+<!ELEMENT footnote (label?, (%body.elements;)+)>
+<!ATTLIST footnote
+    %basic.atts;
+    %backrefs.att;
+    %auto.att;>
+
+<!ELEMENT citation (label, (%body.elements;)+)>
+<!ATTLIST citation
+    %basic.atts;
+    %backrefs.att;>
+
+<!ELEMENT label (#PCDATA)>
+<!ATTLIST label %basic.atts;>
+
+<!ELEMENT rubric %text.model;>
+<!ATTLIST rubric %basic.atts;>
+
+<!-- Empty except when used as an inline element. -->
+<!ELEMENT target %text.model;>
+<!ATTLIST target
+    %basic.atts;
+    %reference.atts;
+    %anonymous.att;>
+
+<!ELEMENT substitution_definition %text.model;>
+<!ATTLIST substitution_definition
+    %basic.atts;
+    ltrim     %yesorno; #IMPLIED
+    rtrim     %yesorno; #IMPLIED>
+
+<!ELEMENT comment (#PCDATA)>
+<!ATTLIST comment
+    %basic.atts;
+    %fixedspace.att;>
+
+<!ELEMENT pending EMPTY>
+<!ATTLIST pending %basic.atts;>
+
+<!ELEMENT figure (image, ((caption, legend?) | legend)) >
+<!ATTLIST figure
+    %basic.atts;
+    %align-h.att;
+    width     %number;  #IMPLIED>
+
+<!-- Also an inline element. -->
+<!ELEMENT image EMPTY>
+<!ATTLIST image
+    %basic.atts;
+    %align-hv.att;
+    uri       CDATA     #REQUIRED
+    alt       CDATA     #IMPLIED
+    height    %measure; #IMPLIED
+    width     %measure; #IMPLIED
+    scale     %number;  #IMPLIED>
+
+<!ELEMENT caption %text.model;>
+<!ATTLIST caption %basic.atts;>
+
+<!ELEMENT legend (%body.elements;)+>
+<!ATTLIST legend %basic.atts;>
+
+<!--
+Table elements: table, tgroup, colspec, thead, tbody, row, entry.
+-->
+%calstblx;
+
+<!-- Used to record processing information. -->
+<!ELEMENT system_message (%body.elements;)+>
+<!ATTLIST system_message
+    %basic.atts;
+    %backrefs.att;
+    level     %number;  #IMPLIED
+    line      %number;  #IMPLIED
+    type      NMTOKEN   #IMPLIED>
+
+<!-- Used to pass raw data through the system. Also inline. -->
+<!ELEMENT raw %text.model;>
+<!ATTLIST raw
+    %basic.atts;
+    %fixedspace.att;
+    format    NMTOKENS  #IMPLIED>
+
+<!--
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Inline Elements
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Inline elements occur within the text contents of body elements. Some
+nesting of inline elements is allowed by these definitions, with the
+following caveats:
+
+- An inline element may not contain a nested element of the same type
+  (e.g. <strong> may not contain another <strong>).
+- Nested inline elements may or may not be supported by individual
+  applications using this DTD.
+- The inline elements <footnote_reference>, <citation_reference>,
+  <literal>, and <image> do not support nesting.
+-->
+
+<!ELEMENT emphasis %text.model;>
+<!ATTLIST emphasis %basic.atts;>
+
+<!ELEMENT strong %text.model;>
+<!ATTLIST strong %basic.atts;>
+
+<!ELEMENT literal (#PCDATA)>
+<!ATTLIST literal %basic.atts;>
+
+<!-- Can also be a body element, when it contains an "image" element. -->
+<!ELEMENT reference %text.model;>
+<!ATTLIST reference
+    %basic.atts;
+    %reference.atts;
+    %anonymous.att;>
+
+<!ELEMENT footnote_reference (#PCDATA)>
+<!ATTLIST footnote_reference
+    %basic.atts;
+    %refid.att;
+    %refname.att;
+    %auto.att;>
+
+<!ELEMENT citation_reference (#PCDATA)>
+<!ATTLIST citation_reference
+    %basic.atts;
+    %refid.att;
+    %refname.att;>
+
+<!ELEMENT substitution_reference %text.model;>
+<!ATTLIST substitution_reference
+    %basic.atts;
+    %refname.att;>
+
+<!ELEMENT title_reference %text.model;>
+<!ATTLIST title_reference %basic.atts;>
+
+<!ELEMENT abbreviation %text.model;>
+<!ATTLIST abbreviation %basic.atts;>
+
+<!ELEMENT acronym %text.model;>
+<!ATTLIST acronym %basic.atts;>
+
+<!ELEMENT superscript %text.model;>
+<!ATTLIST superscript %basic.atts;>
+
+<!ELEMENT subscript %text.model;>
+<!ATTLIST subscript %basic.atts;>
+
+<!ELEMENT inline %text.model;>
+<!ATTLIST inline %basic.atts;>
+
+<!ELEMENT problematic %text.model;>
+<!ATTLIST problematic
+    %basic.atts;
+    %refid.att;>
+
+<!ELEMENT generated %text.model;>
+<!ATTLIST generated %basic.atts;>
+
+<!--
+Local Variables:
+mode: sgml
+indent-tabs-mode: nil
+fill-column: 70
+End:
+-->

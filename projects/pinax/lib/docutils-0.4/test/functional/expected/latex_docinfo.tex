@@ -1,0 +1,85 @@
+\documentclass[10pt,a4paper,english]{article}
+\usepackage{babel}
+\usepackage{ae}
+\usepackage{aeguill}
+\usepackage{shortvrb}
+\usepackage[latin1]{inputenc}
+\usepackage{tabularx}
+\usepackage{longtable}
+\setlength{\extrarowheight}{2pt}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{multirow}
+\usepackage{ifthen}
+\usepackage[colorlinks=true,linkcolor=blue,urlcolor=blue]{hyperref}
+\usepackage[DIV12]{typearea}
+%% generator Docutils: http://docutils.sourceforge.net/
+\newlength{\admonitionwidth}
+\setlength{\admonitionwidth}{0.9\textwidth}
+\newlength{\docinfowidth}
+\setlength{\docinfowidth}{0.9\textwidth}
+\newlength{\locallinewidth}
+\newcommand{\optionlistlabel}[1]{\bf #1 \hfill}
+\newenvironment{optionlist}[1]
+{\begin{list}{}
+  {\setlength{\labelwidth}{#1}
+   \setlength{\rightmargin}{1cm}
+   \setlength{\leftmargin}{\rightmargin}
+   \addtolength{\leftmargin}{\labelwidth}
+   \addtolength{\leftmargin}{\labelsep}
+   \renewcommand{\makelabel}{\optionlistlabel}}
+}{\end{list}}
+\newlength{\lineblockindentation}
+\setlength{\lineblockindentation}{2.5em}
+\newenvironment{lineblock}[1]
+{\begin{list}{}
+  {\setlength{\partopsep}{\parskip}
+   \addtolength{\partopsep}{\baselineskip}
+   \topsep0pt\itemsep0.15\baselineskip\parsep0pt
+   \leftmargin#1}
+ \raggedright}
+{\end{list}}
+% begin: floats for footnotes tweaking.
+\setlength{\floatsep}{0.5em}
+\setlength{\textfloatsep}{\fill}
+\addtolength{\textfloatsep}{3em}
+\renewcommand{\textfraction}{0.5}
+\renewcommand{\topfraction}{0.5}
+\renewcommand{\bottomfraction}{0.5}
+\setcounter{totalnumber}{50}
+\setcounter{topnumber}{50}
+\setcounter{bottomnumber}{50}
+% end floats for footnotes
+% some commands, that could be overwritten in the style file.
+\newcommand{\rubric}[1]{\subsection*{~\hfill {\it #1} \hfill ~}}
+\newcommand{\titlereference}[1]{\textsl{#1}}
+% end of "some commands"
+\title{}
+\author{Foo Fred~\\
+Food Foomatics {\&} Friends~\\
+foo@food.example.info~\\
+Fox St 13~\\
+Foowood \and
+Bar Barney~\\
+Bar-BQ Bar~\\
+1-800-BARBQBAR~\\
+Barbara St 16~\\
+South Barwell}
+\date{}
+\hypersetup{
+pdfauthor={Foo Fred;Bar Barney}
+}
+\raggedbottom
+\begin{document}
+\maketitle
+
+%___________________________________________________________________________
+\begin{center}
+\begin{tabularx}{\docinfowidth}{lX}
+\end{tabularx}
+\end{center}
+
+\setlength{\locallinewidth}{\linewidth}
+
+\end{document}

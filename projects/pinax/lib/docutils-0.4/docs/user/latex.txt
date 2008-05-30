@@ -1,0 +1,388 @@
+================================
+ Generating LaTeX with Docutils
+================================
+
+:Author: Engelbert Gruber
+:Contact: grubert@users.sourceforge.net
+:Revision: $Revision: 3415 $
+:Date: $Date: 2005-06-01 02:56:39 +0200 (Wed, 01 Jun 2005) $
+:Copyright: This document has been placed in the public domain.
+
+.. contents::
+
+
+Introduction
+============
+
+Producing LaTeX code from reST input could be done in at least two ways:
+
+a. Transform the internal markup into corresponding LaTeX markup e.g.
+   a section title would be written as ```\section{this section ...}``.
+b. Using LaTeX as a typesetting system to produce desired paperwork
+   without caring about loosing document structure information.
+
+The former might be preferable, but limits to LaTeXs capabilities, so 
+in reality it is a mix. The reality is that LaTeX has a titlepage with
+title, author and date, by default only title is used. Author and date
+are shown in the docutils docinfo table and set to blank for LaTeX.
+To get author and date set by LaTeX specify option "use-LaTeX-docinfo".
+
+Options
+=======
+
+Configuration can be done in two ways (again):
+
+1. Options to the docutils tool: e.g. language selection.
+2. Options to LaTeX via the stylesheet file.
+
+The generated LaTeX documents should be kept processable by a standard
+LaTeX installation (if such a thing exists), therefore the document
+contains default settings. To allow *overwriting defaults* the stylesheet
+is included at last.
+
+Run ``rst2latex.py --help`` to see the command-line options, or have look in
+config documentytion.
+
+
+=====================  ================================================
+Configuration Issue    Description
+=====================  ================================================
+papersize              Default: a4paper. Paper geometry can be changed  
+                       using ``\geometry{xxx}`` entries.
+
+                       Some possibilities:
+
+                       * a4paper, b3paper, letterpaper, executivepaper,
+                         legalpaper
+                       * landscape, portrait, twoside.
+
+                       and a ton of other option setting margins.
+
+                       An example::
+
+                         \geometry{a5paper,landscape}
+---------------------  ------------------------------------------------
+paragraph indent       By default LaTeX indents the forst line in a
+                       paragraph. The following lines set indentation 
+                       to zero but add a vertical space between 
+                       paragraphs.::
+
+                         \setlength{\parindent}{0pt}
+                         \setlength{\parskip}{6pt plus 2pt minus 1pt}
+---------------------  ------------------------------------------------
+admonitionwidth        The width for admonitions.
+                       Default: 0.9*textwidth, this can be changed 
+                       e.g.::
+
+                         \setlength{\admonitionwidth}{0.7\textwidth}
+---------------------  ------------------------------------------------
+docinfowidth           The width for the docinfo table.
+                       Default: 0.9*textwidth, changed to e.g.::
+
+                         \setlength{\docinfowidth}{0.7\textwidth}
+---------------------  ------------------------------------------------
+rubric style           The header contains the definition of a new
+                       LaTeX command rubric. Inserting::
+
+                         \renewcommand{\rubric}[1]{\subsection*{
+                           ~\hfill {\color{red} #1} \hfill ~}}
+
+                       sets rubric to subsection style in red.
+
+                       Default: subsection style italic.
+---------------------  ------------------------------------------------
+line spacing           Is done with package *setspace*, which gives
+                       singlespace, onehalfspace and doublespace 
+                       commands. To get documentwide double spacing, 
+                       add this to your stylesheet ::
+
+                         \usepackage{setspace} 
+                         \doublespacing
+
+                       Another way ::
+
+                         \linespread{1.55}
+
+                       And yet another, add ``doublesp`` to the
+                       documentoptions and e.g. ::
+
+                         \setstretch{1.7}
+
+                       for bigger linespacing.
+---------------------  ------------------------------------------------
+font selection         see below
+=====================  ================================================
+
+
+Font selection
+--------------
+
+When generating pdf-files from LaTeX, use the pdflatex command, the files
+are a lot smaller if postscript fonts are used. This *was* fixed by putting 
+``\usepackage{times}`` into the stylesheet. 
+
+It is said that the typewriter font in computer modern font, the default
+LaTeX font package, is too heavy compared to the others. There is a package
+or some commands too fix this, which i currently cannot find.
+
+Some people diagnose a similar unbalance for the postscript fonts, the
+package to fix this is ``\usepackage{pslatex}``.
+pslatex in contrast to the standard LaTeX fonts has a bold typewriter font.
+
+As ``times`` does not use the appropriate mathematical fonts and ``pslatex``
+does not work with T1 encodings one should use::
+
+  \usepackage{mathptmx}
+  \usepackage[scaled=.90]{helvet}
+  \usepackage{courier}
+
+*font encoding* can be selected with option "font-encoding". Default
+uses package "ae" for old style font encoding use "OT1". 
+
+Hyphenation
+-----------
+
+The amount of hyphenation is influenced by ``\hyphenpenalty``, setting it to 
+10000 almost prevents hyphenation. As this produces lines with more spcea 
+between words one should increase LaTeX's ``\tolerance`` for this.
+
+E.g. try ::
+
+  \hyphenpenalty=5000
+  \tolerance=1000
+
+Unicode
+-------
+
+The generated LaTeX documents are in latin1 encoding per default, if unicode
+characters are required one must set ``--output-encoding=utf-8`` install
+`LaTeX unicode`_ support and add::
+
+    \usepackage{ucs}
+    \usepackage[utf8]{inputenc}
+
+to the stylesheet. If LaTeX issues a Warning about unloaded/known characters
+adding ::
+
+    \PreloadUnicodePage{n}
+
+where *n* is the unicode pagenumber, might help.
+
+.. _LaTeX unicode: http://www.unruh.de/DniQ/latex/unicode/
+
+Table of figures
+----------------
+
+A table of figures can be generated by a command directly to LaTeX::
+
+  .. raw:: LaTeX
+
+     \listoffigures
+
+LaTeX also has a command ``\listoftables``.
+
+Section numbering
+-----------------
+
+If section numbering and LaTeX table of contents is used LaTeX and 
+docutils will number sections. To switch off displaying of LaTeX's
+numbers one has to add following lines to the stylesheet ::
+
+  % no section number display
+  \makeatletter
+  \def\@seccntformat#1{}
+  \makeatother
+  % no numbers in toc
+  \renewcommand{\numberline}[1]{}
+
+
+Number pages by chapter
+-----------------------
+
+This can be accomplished with ::
+
+  \usepackage{chappg}
+
+From the documentation 
+
+  Basic operation of the package is to redefine ``\thepage`` to be
+  ``\thechapter-\arabic{page}``, and to cause the page number to be reset
+  (to 1) at the start of each chapter.  So the pages of chapter 3 will
+  be numbered 3-1, 3-2, ..., and the pages of appendix B will be
+  numbered B-1, B-2, ...
+
+See documentation for details and other possibilities.
+
+Images
+------
+
+Images are included in LaTeX by the graphicx package. The supported
+image formats depend on the used driver (dvi, dvips, pdftex, ...).
+
+If pdf-image inclusion in pdf files fails, specify
+``--graphicx-option=pdftex`` or ``--graphicx-option=auto``.
+
+
+Commands directly to LaTeX
+==========================
+
+By means of the reST-raw directive one can give commands directly to 
+LaTeX, e.g. forcing a page break::
+
+  .. raw:: LaTeX
+
+     \newpage
+
+
+Or setting formulas in LaTeX::
+
+  .. raw:: LaTeX
+
+     $$x^3 + 3x^2a + 3xa^2 + a^3,$$
+
+
+Or making a colorbox: If someone wants to get a red background for a textblock,
+she/he can put \definecolor{bg}{rgb}{.9,0,0} into style.tex and in
+reStructuredText do something like this::
+
+  |begincolorbox|
+  Nobody expects the spanish inquisition.
+  |endcolorbox|
+
+  .. |begincolorbox| raw:: LaTeX
+
+     \\begin{center}
+     \\colorbox{bg}{
+     \\parbox{0.985\\linewidth}{
+
+  .. |endcolorbox| raw:: LaTeX
+
+     }}
+     \\end{center}
+
+
+Custom title page
+-----------------
+
+Currently maketitle only shows the title and subtitle, date and author are shown 
+in the docinfo table.
+
+To change the titlepage layout, e.g. see fancyhdr, one must redefine the
+maketitle command in the stylesheet::
+
+  \renewcommand{\maketitle}{
+    \begin{titlepage}
+      \begin{center}
+      \textsf{TITLE \@title} \\
+      Date: \today
+      \end{center}
+    \end{titlepage}
+  }
+
+``\@title`` contains the title.
+
+Problems
+========
+
+Open to be fixed or open to discussion.
+
+footnotes and citations
+-----------------------
+
+Initially both were implemented using figures, because hyperlinking back
+and forth seemed to be impossible. Later images were put into figures.
+
+This results in footnotes images and figures possibly being mixed at page 
+foot.
+
+* Use LaTeX footnotes and citations for printing or more complex layout.
+* Footnotes and citations done with figures might excell in hyperlink
+  support.
+
+If ``use-latex-citations`` is used a bibliography is inserted right at
+the end of the document. *This should be customizable*.
+
+Tables
+------
+
+:Tablewidth: reST-documents line length is assumed to be 80 characters. The
+             tablewidth is set relative to this value. If someone produces
+             documents with line length of 132 this will fail.
+
+             Table width is tried to fit in page even if it is wider than
+             the assumed linewidth, still assumed linewidth is a hook. 
+
+* In tools.txt the option tables right column, there should be some more spacing
+  between the description and the next paragraph "Default:".
+
+  Paragraph separation in tables is hairy. 
+  see http://www.tex.ac.uk/cgi-bin/texfaq2html?label=struttab
+
+  - The strut solution did not work.
+  - setting extrarowheight added ad top of row not between paragraphs in
+    a cell. ALTHOUGH i set it to 2pt because, text is too close to the topline.
+  - baselineskip/stretch does not help.
+* Should there be two hlines after table head and on table end ?
+* Table: multicol cells are always {l}.
+* The contents of a rowspan cell do not influence table height.
+  (Maybe if we put a tabular inside ?)
+* Table heads and footer for longtable (firstpage lastpage ..).
+* Table cells with multirow and multicolumn
+* literal-blocks in table cells: 
+
+  - If verbatim or flushleft is used one gets vertical space above and below.
+  - This is bad for the topmost paragraph in a cell, therefore the writer
+    uses raggedright. 
+  - Ragged right fails on followup paragraphs as the vertical space would be
+    missing.
+
+Notes
+~~~~~
+
+* table-style booktabs: booktabs.sty 1.00 does not work with longtable.
+
+Miscellaneous
+-------------
+
+* Selection of LaTeX fontsize configurable.
+* Assumed reST linelength for table width setting configurable.
+* literal-block indentation configurable.
+* recongize LaTeX and replace by ``\LaTeX``.
+* Support embed-stylesheet.
+* Sidebar handling.
+* Maybe add end of line after term in definition list. see
+    http://roundup.sf.net/doc-0.5/features.pdf
+* Pdfbookmark level 4 (and greater) does not work (might be settable but OTOH).
+* center subsection{Abstract} gives a LaTeX error here.
+  ``! LaTeX Error: Something's wrong--perhaps a missing \item.``
+  Committed a HACK: centering by hfill.
+* Document errors are also too silent.
+* Use optionlist for docinfo, the table does only work for single page.
+* Consider peter funk's hooks for TeXpert:
+  
+  * Define his own document preamble (including the choice to
+    choose his own documentclass.  That would make the ``--documentclass``
+    option superfluous).  I suggest to call this option ``--preamble``
+  * Use two additional hooks to put additional stuff just behind the 
+    ``\begin{document}`` and just before the ``\end{document}`` macros.
+    Typical uses would be ``\tableofcontents``, ``\listoffigures`` and
+    ``\appendix``, ``\makeindex``, ``\makeglossary`` and some such 
+    for larger documents.
+
+* The indentional problematic error in docs/user/rst/demo.txt is not
+  referring anywhere.
+* Footnotes are not all on the same page (as in
+  docs/user/rst/demo.txt) and do not link back and forth.
+* No link to system errors.
+* Hyperlinks are not hyphenated; this leads to bad spacing. See
+  docs/user/rst/demo.txt 2.14 directives.
+* Meta keywords into pdf ?
+* Pagestyle headings does not work, when sections are starred.
+* For additional docinfo items: the field_body is inserted as text, i.e. no
+  markup is done.
+* Multiple author entries in docinfo (same thing as in html).
+* keep literal-blocks together on a page, avoid pagebreaks.
+
+  failed experiments up to now: samepage, minipage, pagebreak 1 to 4 before
+  the block.
+

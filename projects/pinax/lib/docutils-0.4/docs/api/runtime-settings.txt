@@ -1,0 +1,192 @@
+===========================
+ Docutils Runtime Settings
+===========================
+
+:Author: David Goodger
+:Contact: goodger@python.org
+:Date: $Date: 2005-05-28 03:22:12 +0200 (Sat, 28 May 2005) $
+:Revision: $Revision: 3398 $
+:Copyright: This document has been placed in the public domain.
+
+.. contents::
+
+
+Introduction
+============
+
+Docutils runtime settings are assembled from several sources:
+component settings specifications, application settings
+specifications, configuration files, and command-line options.
+Docutils overlays default and explicitly specified values from these
+sources such that settings behave the way we want and expect them to
+behave.
+
+To understand how Docutils deals with runtime settings, the attributes
+and parameters involved must first be understood.  Begin with the the
+docstrings of the attributes of the ``docutils.SettingsSpec`` base
+class (in the ``docutils/__init__.py`` module):
+
+* ``settings_spec``
+* ``settings_defaults``
+* ``settings_default_overrides``
+* ``relative_path_settings``
+* ``config_section``
+* ``config_section_dependencies``
+
+Next, several _`convenience function parameters` are also significant
+(described in the ``docutils.core.publish_programmatically`` function
+docstring):
+
+* The ``settings`` parameter is a runtime settings
+  (``docutils.frontend.Values``) object which, if present, is assumed
+  to be complete (it must include all runtime settings).  Also, if the
+  ``settings`` parameter is present, no further runtime settings
+  processing is done.  In other words, the other parameters, described
+  below, will have no effect.
+
+* ``settings_spec``, a `docutils.SettingsSpec` subclass or object, is
+  treated like a fourth component (after the Parser, Reader, and
+  Writer).  In other words, it's the settings specification for the
+  "Application" itself.
+
+* ``settings_overrides`` is a dictionary which will override the
+  defaults of the components (from their settings specs).
+
+* ``config_section`` specifies the name of an application-specific
+  configuration file section.
+
+
+.. _command-line tools:
+
+Runtime Settings Processing for Command-Line Tools
+==================================================
+
+Following along with the actual code is recommended.  The
+``docutils/__init__.py``, ``docutils/core.py``, and
+``docutils.frontend.py`` modules are described.
+
+1. A command-line front-end tool imports and calls
+   ``docutils.core.publish_cmdline``.  The relevant `convenience
+   function parameters`_ are described above.
+
+2. ``docutils.core.publish_cmdline`` initializes a
+   ``docutils.core.Publisher`` object, then calls its ``publish``
+   method.
+
+3. The ``docutils.core.Publisher`` object's ``publish`` method checks
+   its ``settings`` attribute to see if it's defined.  If it is, no
+   further runtime settings processing is done.
+
+   If ``settings`` is not defined, ``self.process_command_line`` is
+   called with the following relevant arguments:
+
+   * ``settings_spec``
+   * ``config_section``
+   * ``settings_overrides`` (in the form of excess keyword
+     arguments, collected in the ``defaults`` parameter)
+
+4. ``self.process_command_line`` calls ``self.setup_option_parser``,
+   passing ``settings_spec``, ``config_section``, and ``defaults``.
+
+5. ``self.setup_option_parser`` checks its ``config_section``
+   parameter; if defined, it adds that config file section to
+   ``settings_spec`` (or to a new, empty ``docutils.SettingsSpec``
+   object), replacing anything defined earlier.  (See `Docutils
+   Configuration Files`_ for details.)  Then it instantiates a new
+   ``docutils.frontend.OptionParser`` object, passing the following
+   relevant arguments:
+
+   * ``components``: A tuple of ``docutils.SettingsSpec`` objects,
+     ``(self.parser, self.reader, self.writer, settings_spec)``
+   * ``defaults`` (originally from ``settings_overrides``)
+
+6. The ``docutils.frontend.OptionParser`` object's ``__init__`` method
+   calls ``self.populate_from_components`` with ``self.components``,
+   which consists of ``self`` prepended to the ``components`` tuple it
+   received.  ``self`` (``docutils.frontend.OptionParser``) defines
+   general Docutils settings.
+
+7. In ``self.populate_from_components``, for each component passed,
+   ``component.settings_spec`` is processed and
+   ``component.settings_defaults`` is applied.  Then, for each
+   component, ``component.settings_default_overrides`` is applied.
+   This two-loop process ensures that
+   ``component.settings_default_overrides`` can override the default
+   settings of any other component.
+
+8. Back in ``docutils.frontend.OptionParser.__init__``, the
+   ``defaults`` parameter (derived from the ``settings_overrides``
+   parameter of ``docutils.core.Publisher.publish``) is overlaid over
+   ``self.defaults``.  So ``settings_overrides`` has priority over all
+   ``SettingsSpec`` data.
+
+9. Next, ``docutils.frontend.OptionParser.__init__`` checks if
+   configuration files are enabled (its ``read_config_files``
+   parameter is true, and ``self.defaults['_disable_config']`` is
+   false).  If they are enabled (and normally, they are),
+   ``self.get_standard_config_settings`` is called.  This reads the
+   `docutils configuration files`_, and returns a dictionary of
+   settings.  This is then overlaid on ``self.defaults``.  So
+   configuration file settings have priority over all software-defined
+   defaults.
+
+10. Back in the ``docutils.core.Publisher`` object,
+    ``self.setup_option_parser`` returns the ``option_parser`` object
+    to its caller, ``self.process_command_line``.
+
+11. ``self.process_command_line`` calls ``option_parser.parse_args``,
+    which parses all command line options and returns a
+    ``docutils.frontend.Values`` object.  This is assigned to the
+    ``docutils.core.Publisher`` object's ``self.settings``.  So
+    command-line options have priority over configuration file
+    settings.
+
+    When ``option_parser.parse_args`` is called, the source and
+    destination command-line arguments are also parsed, and assigned
+    to the ``_source`` and ``_destination`` attributes of what becomes
+    the ``docutils.core.Publisher`` object's ``self.settings``.
+
+12. From ``docutils.core.Publisher.publish``, ``self.set_io`` is
+    called with no arguments.  If either ``self.source`` or
+    ``self.destination`` are not set, the corresponding
+    ``self.set_source`` and ``self.set_destination`` are called,
+    effectively with no arguments.
+
+13. ``self.set_source`` checks for a ``source_path`` parameter, and if
+    there is none (which is the case for command-line use), it is
+    taken from ``self.settings._source``.  ``self.source`` is set by
+    instantiating a ``self.source_class`` object.  For command-line
+    front-end tools, the default ``self.source_class`` is used,
+    ``docutils.io.FileInput``.
+
+14. ``self.set_destination`` does the same job for the destination
+    that ``self.set_source`` does for the source (the default
+    ``self.destination_class`` is ``docutils.io.FileOutput``).
+
+.. _Docutils Configuration Files: ../user/config.html
+
+
+Runtime Settings Processing From Applications
+=============================================
+
+Applications process runtime settings in a different way than
+`command-line tools`_ do.  Instead of calling ``publish_cmdline``, the
+application calls one of ``publish_file``, ``publish_string``, or
+``publish_parts``.  These in turn call ``publish_programmatically``,
+which implements a generic programmatic interface.  Although an
+application may also call ``publish_programmatically`` directly, it is
+not recommended (if it does seem to be necessary, please write to the
+Docutils-develop_ mailing list).
+
+``publish_programmatically`` accepts the same `convenience function
+parameters`_ as ``publish_cmdline``.  Where things differ is that
+programmatic use does no command-line processing.  Instead of calling
+``docutils.Publisher.process_command_line`` (as ``publish_cmdline``
+does, via ``docutils.Publisher.publish``),
+``docutils.Publisher.process_programmatic_settings`` is called to set
+up the runtime settings.
+
+.. copy & modify the list from command-line tools?
+
+
+.. _Docutils-develop: ../user/mailing-lists.html#docutils-develop

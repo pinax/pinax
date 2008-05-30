@@ -3,6 +3,7 @@
 import sys
 sys.path.insert(0, 'lib/python-openid-2.1.1')
 sys.path.insert(0, 'lib/python-yadis-1.1.0')
+sys.path.insert(0, 'lib/docutils-0.4')
 
 from django.core.management import execute_manager
 try:

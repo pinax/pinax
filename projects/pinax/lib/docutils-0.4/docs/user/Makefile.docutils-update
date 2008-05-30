@@ -1,0 +1,6 @@
+slide-shows.s5.html: slide-shows.txt
+	rst2s5.py slide-shows.txt slide-shows.s5.html \
+		--config ../../tools/docutils.conf \
+		--overwrite-theme-files \
+		--link-stylesheet \
+		--no-generator --no-datestamp --no-source-link

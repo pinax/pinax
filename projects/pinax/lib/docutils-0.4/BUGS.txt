@@ -1,0 +1,280 @@
+================
+ Docutils_ Bugs
+================
+
+:Author: David Goodger; open to all Docutils developers
+:Contact: goodger@python.org
+:Date: $Date: 2005-12-29 00:48:48 +0100 (Thu, 29 Dec 2005) $
+:Revision: $Revision: 4233 $
+:Copyright: This document has been placed in the public domain.
+
+.. _Docutils: http://docutils.sourceforge.net/
+
+
+Bugs in Docutils?!?  Yes, we do have a few.  Some are old-timers that
+tend to stay in the shadows and don't bother anybody.  Once in a while
+new bugs are born.  From time to time some bugs (new and old) crawl
+out into the light and must be dealt with.  Icky.
+
+This document describes how to report a bug, and lists known bugs.
+
+.. contents::
+
+
+How To Report A Bug
+===================
+
+If you think you've discovered a bug, please read through these
+guidelines before reporting it.
+
+First, make sure it's a new bug:
+
+* Please check the list of `known bugs`_ below and the `SourceForge
+  Bug Tracker`_ to see if it has already been reported.
+
+* Are you using the very latest version of Docutils?  The bug may have
+  already been fixed.  Please get the latest version of Docutils from
+  the repository_ or from the current snapshot_ and check again.  Even
+  if your bug has not been fixed, others probably have, and you're
+  better off with the most up-to-date code.
+
+  If you don't have time to check the latest snapshot, please report
+  the bug anyway.  We'd rather tell you that it's already fixed than
+  miss reports of unfixed bugs.
+
+* If Docutils does not behave the way you expect, look in the
+  documentation_ (don't forget the FAQ_!) and `mailing list archives`_
+  for evidence that it should behave the way you expect.
+
+If you're not sure, please ask on the Docutils-users_ mailing list
+first.
+
+If it's a new bug, the most important thing you can do is to write a
+simple description and a recipe that reproduces the bug.  Try to
+create a minimal document that demonstrates the bug.  The easier you
+make it to understand and track down the bug, the more likely a fix
+will be.
+
+Now you're ready to write the bug report.  Please include:
+
+* A clear description of the bug.  Describe how you expected Docutils
+  to behave, and contrast that with how it actually behaved.  While
+  the bug may seem obvious to you, it may not be so obvious to someone
+  else, so it's best to avoid a guessing game.
+
+* A complete description of the environment in which you reproduced
+  the bug:
+
+  - Your operating system & version.
+  - The version of Python (``python -V``).
+  - The version of Docutils (use the "-V" option to most Docutils
+    front-end tools).
+  - Any private modifications you made to Docutils.
+  - Anything else that could possibly be relevant.  Err on the side
+    of too much information, rather than too little.
+
+* A literal transcript of the *exact* command you ran, and the *exact*
+  output.  Use the "--traceback" option to get a complete picture.
+
+* The exact input and output files.  Better to attach complete files
+  to your bug report than to include just a summary or excerpt.
+
+* If you also want to include speculation as to the cause, and even a
+  patch to fix the bug, that would be great!
+
+The best place to send your bug report is to the `SourceForge Bug
+Tracker`_.  That way, it won't be misplaced or forgotten.  In fact, an
+open bug report on SourceForge is a constant irritant that begs to be
+squashed.
+
+Thank you!
+
+(This section was inspired by the `Subversion project's`__ BUGS__
+file.)
+
+__ http://subversion.tigris.org/
+__ http://svn.collab.net/viewcvs/svn/trunk/BUGS?view=markup
+
+.. _CVS: http://sourceforge.net/cvs/?group_id=38414
+.. _repository: docs/dev/repository.html
+.. _snapshot: http://docutils.sourceforge.net/#download
+.. _documentation: docs/
+.. _FAQ: FAQ.html
+.. _mailing list archives: http://docutils.sf.net/#mailing-lists
+.. _Docutils-users: docs/user/mailing-lists.html#docutils-users
+.. _SourceForge Bug Tracker:
+   http://sourceforge.net/tracker/?group_id=38414&atid=422030
+
+
+Known Bugs
+==========
+
+Also see the `SourceForge Bug Tracker`_.
+
+* The "stylesheet" setting (a URL, to be used verbatim) should be
+  allowed to be combined with "embed_stylesheet".  The stylesheet data
+  should be read in using urllib.  There was an assumption that a
+  stylesheet to be embedded should exist as a file on the local
+  system, and only the "stylesheet_path" setting should be used.
+
+* ``utils.relative_path()`` sometimes returns absolute _`paths on
+  Windows` (like ``C:/test/foo.css``) where it could have chosen a
+  relative path.
+
+  Furthermore, absolute pathnames are inserted verbatim, like
+  ``href="C:/test/foo.css"`` instead of
+  ``href="file:///C:/test/foo.css"``.
+
+  For details, see `this posting by Alan G. Isaac
+  <http://article.gmane.org/gmane.text.docutils.user/1569>`_.
+
+* _`Line numbers` in system messages are inconsistent in the parser.
+
+  - In text inserted by the "include" directive, errors are often not
+    reported with the correct "source" or "line" numbers.  Perhaps all
+    Reporter calls need "source" and "line" keyword arguments.
+    Elements' .line assignments should be checked.  (Assign to .source
+    too?  Add a set_info method?  To what?)  There's a test in
+    test/test_parsers/test_rst/test_directives/test_include.py.
+
+  - Some line numbers in elements are not being set properly
+    (explicitly), just implicitly/automatically.  See rev. 1.74 of
+    docutils/parsers/rst/states.py for an example of how to set.
+
+* .. _none source:
+
+  Quite a few nodes are getting a "None" source attribute as well.  In
+  particular, see the bodies of definition lists.
+
+* Footnote label "5" should be "4" when processing the following
+  input::
+
+      ref [#abc]_ [#]_ [1]_ [#4]_
+
+      .. [#abc] footnote
+      .. [#] two
+      .. [1] one
+      .. [#4] four
+
+  Output::
+
+      <document source="<stdin>">
+          <paragraph>
+              ref
+              <footnote_reference auto="1" ids="id1" refid="abc">
+                  2
+
+              <footnote_reference auto="1" ids="id2" refid="id5">
+                  3
+
+              <footnote_reference ids="id3" refid="id6">
+                  1
+
+              <footnote_reference auto="1" ids="id4" refid="id7">
+                  5
+          <footnote auto="1" backrefs="id1" ids="abc" names="abc">
+              <label>
+                  2
+              <paragraph>
+                  footnote
+          <footnote auto="1" backrefs="id2" ids="id5" names="3">
+              <label>
+                  3
+              <paragraph>
+                  two
+          <footnote backrefs="id3" ids="id6" names="1">
+              <label>
+                  1
+              <paragraph>
+                  one
+          <footnote auto="1" backrefs="id4" ids="id7" names="4">
+              <label>
+                  5
+              <paragraph>
+                  four
+
+* IDs are based on names.  Explicit hyperlink targets have priority
+  over implicit targets.  But if an explicit target comes after an
+  implicit target with the same name, the ID of the first (implicit)
+  target remains based on the implicit name.  Since HTML fragment
+  identifiers based on the IDs, the first target keeps the name.  For
+  example::
+
+      .. contents::
+
+      Section
+      =======
+
+      .. _contents:
+
+      Subsection
+      ----------
+
+      text with a reference to contents_ and section_
+
+      .. _section:
+
+      This paragraph is explicitly targeted with the name "section".
+
+  When processed to HTML, the 2 internal hyperlinks (to "contents" &
+  "section") will work fine, but hyperlinks from outside the document
+  using ``href="...#contents"`` and ``href="...#section"`` won't work.
+  Such external links will connect to the implicit targets (table of
+  contents and "Section" title) instead of the explicit targets
+  ("Subsection" title and last paragraph).
+
+  Hyperlink targets with duplicate names should be assigned new IDs
+  unrelated to the target names (i.e., "id"-prefix serial IDs).
+
+* The "contents" ID of the local table of contents in
+  ``test/functional/expected/standalone_rst_pseudoxml.txt`` is lost in
+  the HTML output at
+  ``test/functional/expected/standalone_rst_html4css1.html``.
+
+* _`Blank first columns` in simple tables with explicit row separators
+  silently swallow their input.  They should at least produce system
+  error messages.  But, with explicit row separators, the meaning is
+  unambiguous and ought to be supported::
+
+      ==============  ==========
+      Table with row  separators
+      ==============  ==========
+                      and blank
+      --------------  ----------
+                      entries
+      --------------  ----------
+                      in first
+      --------------  ----------
+                      columns.
+      ==============  ==========
+
+  Added a commented-out test case to
+  test/test_parsers/test_rst/test_SimpleTableParser.py.
+
+* _`Footnote references with hyperlink targets` cause a possibly
+  invalid node tree and make the HTML writer crash::
+
+      $ rst2pseudoxml.py
+      [1]_
+
+      .. _1: URI
+      <document source="<stdin>">
+          <paragraph>
+              <footnote_reference ids="id1" refuri="URI">
+                  1
+          <target ids="id2" names="1" refuri="URI">
+
+* Anonymous references have "name" attributes.  Should they?  Are they
+  used?  See ``test/test_parsers/test_rst/test_inline_markup.py``.
+
+* <reference> elements have a "name" attribute, not "names".  The
+  attribute should be "names"; this is an inconsistency.
+
+
+..
+   Local Variables:
+   mode: indented-text
+   indent-tabs-mode: nil
+   sentence-end-double-space: t
+   fill-column: 70
+   End:

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.4: http://docutils.sourceforge.net/" />
+<title></title>
+<link rel="stylesheet" href="../../../docutils/writers/html4css1/html4css1.css" type="text/css" />
+</head>
+<body>
+<div class="document">
+<p>Potentially dangerous features (security holes):</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">functional/input/dangerous.txt</tt>, line 3)</p>
+<p>&quot;include&quot; directive disabled.</p>
+<pre class="literal-block">
+.. include:: /etc/passwd
+</pre>
+</div>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">functional/input/dangerous.txt</tt>, line 4)</p>
+<p>&quot;raw&quot; directive disabled.</p>
+<pre class="literal-block">
+.. raw:: html
+   :file: /etc/passwd
+</pre>
+</div>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">functional/input/dangerous.txt</tt>, line 6)</p>
+<p>&quot;raw&quot; directive disabled.</p>
+<pre class="literal-block">
+.. raw:: html
+   :url: file:///etc/passwd
+</pre>
+</div>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">functional/input/dangerous.txt</tt>, line 8)</p>
+<p>&quot;raw&quot; directive disabled.</p>
+<pre class="literal-block">
+.. raw:: html
+
+   &lt;script&gt;
+       that does something really nasty
+   &lt;/script&gt;
+</pre>
+</div>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">functional/input/dangerous.txt</tt>, line 13)</p>
+<p>File and URL access deactivated; ignoring &quot;csv-table&quot; directive.</p>
+<pre class="literal-block">
+.. csv-table:: :file: /etc/passwd
+</pre>
+</div>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">functional/input/dangerous.txt</tt>, line 14)</p>
+<p>File and URL access deactivated; ignoring &quot;csv-table&quot; directive.</p>
+<pre class="literal-block">
+.. csv-table:: :url: file:///etc/passwd
+</pre>
+</div>
+<div class="figure">
+<img alt="picture.png" src="picture.png" />
+</div>
+</div>
+</body>
+</html>

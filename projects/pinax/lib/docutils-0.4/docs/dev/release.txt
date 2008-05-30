@@ -1,0 +1,168 @@
+=============================
+ Docutils_ Release Procedure
+=============================
+:Author: David Goodger; Felix Wiemann; open to all Docutils developers
+:Contact: goodger@python.org
+:Date: $Date: 2005-11-08 22:48:57 +0100 (Tue, 08 Nov 2005) $
+:Revision: $Revision: 4020 $
+:Copyright: This document has been placed in the public domain.
+
+.. _Docutils: http://docutils.sourceforge.net/
+
+
+(Steps in boldface text are *not* covered by the release script at
+sandbox/fwiemann/release.sh.  "Not covered" means that you aren't even
+reminded of them.  Note: The release.sh script needs to be updated to
+reflect the recent move to Subversion!)
+
+* **Announce a check-in freeze on Docutils-develop.  Post a list of
+  major changes since the last release and ask for additions.**
+
+  .. _CHANGES.txt:
+
+  **You may want to save this list of changes in a file
+  (e.g. CHANGES.txt) to have it at hand when you need it for posting
+  announcements or pasting it into forms.**
+
+* Change ``__version_details__`` in docutils/docutils/__init__.py to
+  "release" (from "repository").
+
+* Bump the _`version number` in the following files:
+
+  + docutils/setup.py
+  + docutils/docutils/__init__.py
+  + docutils/test/functional/expected/* ("Generator: Docutils X.Y.Z")
+
+* Close the "Changes Since ..." section in docutils/HISTORY.txt.
+
+* Clear/unset the PYTHONPATH environment variable.
+   
+* Create the release tarball:
+
+  (a) Create a new empty directory and ``cd`` into it.
+
+  (b) Get a clean snapshot of the main tree::
+
+          svn export svn://svn.berlios.de/docutils/trunk/docutils
+
+  (c) Use Distutils to create the release tarball::
+
+          cd docutils
+          python setup.py sdist
+
+* Expand and _`install` the release tarball in isolation:
+
+  (a) Expand the tarball in a new location, not over any existing
+      files.
+
+  (b) Remove the old installation from site-packages (including
+      roman.py, and optparse.py, textwrap.py).
+
+      Install from expanded directory::
+
+          cd docutils-X.Y.Z
+          python setup.py install
+
+      The "install" command may require root permissions.
+
+  (c) Repeat step b) for all supported Python versions.
+
+* Run the _`test suite` from the expanded archive directory with all
+  supported Python versions: ``cd test ; python -u alltests.py``.
+
+* Add a directory X.Y.Z (where X.Y.Z is the current version number
+  of Docutils) in the webroot (i.e. the ``htdocs/`` directory).
+  Put all documentation files into it::
+
+      cd docutils-X.Y.Z
+      rm -rf build
+      cd tools/
+      ./buildhtml.py ..
+      cd ..
+      find -name test -type d -prune -o -name \*.css -print0 \
+          -o -name \*.html -print0 -o -name \*.txt -print0 \
+          | tar -cjvf docutils-docs.tar.bz2 -T - --null
+      scp docutils-docs.tar.bz2 <username>@shell.sourceforge.net:
+
+  Now log in to shell.sourceforge.net and::
+
+      cd /home/groups/d/do/docutils/htdocs/
+      mkdir -m g+rwxs X.Y.Z
+      cd X.Y.Z
+      tar -xjvf ~/docutils-docs.tar.bz2
+      rm ~/docutils-docs.tar.bz2
+
+* Upload the release tarball::
+
+      $ ftp upload.sourceforge.net
+      Connected to osdn.dl.sourceforge.net.
+      ...
+      Name (upload.sourceforge.net:david): anonymous
+      331 Anonymous login ok, send your complete e-mail address as password.
+      Password:
+      ...
+      230 Anonymous access granted, restrictions apply.
+      ftp> bin
+      200 Type set to I.
+      ftp> cd /incoming
+      250 CWD command successful.
+      ftp> put docutils-X.Y.Z.tar.gz
+
+* Access the _`file release system` on SourceForge (Admin
+  interface).  Fill in the fields:
+
+      :Package ID:      docutils
+      :Release Name:    <use release number only, e.g. 0.3>
+      :Release Date:    <today's date>
+      :Status:          Active
+      :File Name:       <select the file just uploaded>
+      :File Type:       Source .gz
+      :Processor Type:  Platform-Independent
+      :Release Notes:   <insert README.txt file here>
+      :Change Log:      <insert summary from CHANGES.txt_>
+
+      Also check the "Preserve my pre-formatted text" box.
+
+* For verifying the integrity of the release, download the release
+  tarball (you may need to wait up to 30 minutes), install_ it, and
+  re-run the `test suite`_.
+
+* Register with PyPI (``python setup.py register``).
+
+* Restore ``__version_details__`` in docutils/docutils/__init__.py to
+  "repository" (from "release").
+
+* Bump the `version number`_ again.
+
+* Add a new empty section "Changes Since ..." in HISTORY.txt.
+
+* Update the web page (web/index.txt).
+
+* Run docutils-update on the server.
+    
+* **Send announcement email to:**
+
+  * docutils-develop@lists.sourceforge.net (also announcing the end
+    of the check-in freeze)
+  * docutils-users@lists.sourceforge.net
+  * doc-sig@python.org
+  * python-announce@python.org
+
+* **Add a SourceForge News item, with title "Docutils X.Y.Z released"
+  and containing the release tarball's download URL.**
+
+* **Register with FreshMeat.** (Add a `new release`__ for the
+  `Docutils project`__).
+
+  __ http://freshmeat.net/add-release/48702/
+  __ http://freshmeat.net/projects/docutils/
+
+    
+
+..
+   Local Variables:
+   mode: indented-text
+   indent-tabs-mode: nil
+   sentence-end-double-space: t
+   fill-column: 70
+   End:

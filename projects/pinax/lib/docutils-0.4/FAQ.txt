@@ -1,0 +1,1049 @@
+.. -*- coding: utf-8 -*-
+
+===========================================
+ Docutils FAQ (Frequently Asked Questions)
+===========================================
+
+:Date: $Date: 2005-12-09 05:21:34 +0100 (Fri, 09 Dec 2005) $
+:Revision: $Revision: 4163 $
+:Web site: http://docutils.sourceforge.net/
+:Copyright: This document has been placed in the public domain.
+
+.. contents::
+.. sectnum::
+
+
+This is a work in progress.  Please feel free to ask questions and/or
+provide answers; send email to the `Docutils-users`_ mailing list.
+Project members should feel free to edit the source text file
+directly.
+
+.. _let us know:
+.. _Docutils-users: docs/user/mailing-lists.html#docutils-users
+
+
+Docutils
+========
+
+What is Docutils?
+-----------------
+
+Docutils_ is a system for processing plaintext documentation into
+useful formats, such as HTML, XML, and LaTeX.  It supports multiple
+types of input, such as standalone files (implemented), inline
+documentation from Python modules and packages (under development),
+`PEPs (Python Enhancement Proposals)`_ (implemented), and others as
+discovered.
+
+For an overview of the Docutils project implementation, see `PEP
+258`_, "Docutils Design Specification".
+
+Docutils is implemented in Python_.
+
+.. _Docutils: http://docutils.sourceforge.net/
+.. _PEPs (Python Enhancement Proposals):
+   http://www.python.org/peps/pep-0012.html
+.. _PEP 258: http://www.python.org/peps/pep-0258.html
+.. _Python: http://www.python.org/
+
+
+Why is it called "Docutils"?
+----------------------------
+
+Docutils is short for "Python Documentation Utilities".  The name
+"Docutils" was inspired by "Distutils", the Python Distribution
+Utilities architected by Greg Ward, a component of Python's standard
+library.
+
+The earliest known use of the term "docutils" in a Python context was
+a `fleeting reference`__ in a message by Fred Drake on 1999-12-02 in
+the Python Doc-SIG mailing list.  It was suggested `as a project
+name`__ on 2000-11-27 on Doc-SIG, again by Fred Drake, in response to
+a question from Tony "Tibs" Ibbs: "What do we want to *call* this
+thing?".  This was shortly after David Goodger first `announced
+reStructuredText`__ on Doc-SIG.
+
+Tibs used the name "Docutils" for `his effort`__ "to document what the
+Python docutils package should support, with a particular emphasis on
+documentation strings".  Tibs joined the current project (and its
+predecessors) and graciously donated the name.
+
+For more history of reStructuredText and the Docutils project, see `An
+Introduction to reStructuredText`_.
+
+Please note that the name is "Docutils", not "DocUtils" or "Doc-Utils"
+or any other variation.
+
+.. _An Introduction to reStructuredText:
+   http://docutils.sourceforge.net/docs/ref/rst/introduction.html
+__ http://mail.python.org/pipermail/doc-sig/1999-December/000878.html
+__ http://mail.python.org/pipermail/doc-sig/2000-November/001252.html
+__ http://mail.python.org/pipermail/doc-sig/2000-November/001239.html
+__ http://homepage.ntlworld.com/tibsnjoan/docutils/STpy.html
+
+
+Is there a GUI authoring environment for Docutils?
+--------------------------------------------------
+
+DocFactory_ is under development.  It uses wxPython and looks very
+promising.
+
+.. _DocFactory:
+   http://docutils.sf.net/sandbox/gschwant/docfactory/doc/
+
+
+What is the status of the Docutils project?
+-------------------------------------------
+
+Although useful and relatively stable, Docutils is experimental code,
+with APIs and architecture subject to change.
+
+Our highest priority is to fix bugs as they are reported.  So the
+latest code from the repository_ (or the snapshots_) is almost always
+the most stable (bug-free) as well as the most featureful.
+
+
+What is the Docutils project release policy?
+--------------------------------------------
+
+It's "release early & often".  We also have automatically-generated
+snapshots_ which always contain the latest code from the repository_.
+As the project matures, we may formalize on a
+stable/development-branch scheme, but we're not using anything like
+that yet.
+
+.. _repository: docs/dev/repository.html
+.. _snapshots: http://docutils.sourceforge.net/#download
+
+
+reStructuredText
+================
+
+What is reStructuredText?
+-------------------------
+
+reStructuredText_ is an easy-to-read, what-you-see-is-what-you-get
+plaintext markup syntax and parser system.  The reStructuredText
+parser is a component of Docutils_.  reStructuredText is a revision
+and reinterpretation of the StructuredText_ and Setext_ lightweight
+markup systems.
+
+If you are reading this on the web, you can see for yourself.  `The
+source for this FAQ <FAQ.txt>`_ is written in reStructuredText; open
+it in another window and compare them side by side.
+
+`A ReStructuredText Primer`_ and the `Quick reStructuredText`_ user
+reference are a good place to start.  The `reStructuredText Markup
+Specification`_ is a detailed technical specification.
+
+.. _A ReStructuredText Primer:
+   http://docutils.sourceforge.net/docs/user/rst/quickstart.html
+.. _Quick reStructuredText:
+   http://docutils.sourceforge.net/docs/user/rst/quickref.html
+.. _reStructuredText Markup Specification:
+   http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html
+.. _reStructuredText: http://docutils.sourceforge.net/rst.html
+.. _StructuredText:
+   http://dev.zope.org/Members/jim/StructuredTextWiki/FrontPage/
+.. _Setext: http://docutils.sourceforge.net/mirror/setext.html
+
+
+Why is it called "reStructuredText"?
+------------------------------------
+
+The name came from a combination of "StructuredText", one of
+reStructuredText's predecessors, with "re": "revised", "reworked", and
+"reinterpreted", and as in the ``re.py`` regular expression module.
+For a detailed history of reStructuredText and the Docutils project,
+see `An Introduction to reStructuredText`_.
+
+
+What's the standard abbreviation for "reStructuredText"?
+--------------------------------------------------------
+
+"RST" and "ReST" (or "reST") are both acceptable.  Care should be
+taken with capitalization, to avoid confusion with "REST__", an
+acronym for "Representational State Transfer".
+
+The abbreviations "reSTX" and "rSTX"/"rstx" should **not** be used;
+they overemphasize reStructuredText's precedessor, Zope's
+StructuredText.
+
+__ http://en.wikipedia.org/wiki/Representational_State_Transfer
+
+
+What's the standard filename extension for a reStructuredText file?
+-------------------------------------------------------------------
+
+It's ".txt".  Some people would like to use ".rest" or ".rst" or
+".restx", but why bother?  ReStructuredText source files are meant to
+be readable as plaintext, and most operating systems already associate
+".txt" with text files.  Using a specialized filename extension would
+require that users alter their OS settings, which is something that
+many users will not be willing or able to do.
+
+
+Are there any reStructuredText editor extensions?
+-------------------------------------------------
+
+See `Editor Support for reStructuredText`__.
+
+__ http://docutils.sf.net/tools/editors/README.html
+
+
+How can I indicate the document title?  Subtitle?
+-------------------------------------------------
+
+A uniquely-adorned section title at the beginning of a document is
+treated specially, as the document title.  Similarly, a
+uniquely-adorned section title immediately after the document title
+becomes the document subtitle.  For example::
+
+    This is the Document Title
+    ==========================
+
+    This is the Document Subtitle
+    -----------------------------
+
+    Here's an ordinary paragraph.
+
+Counterexample::
+
+    Here's an ordinary paragraph.
+
+    This is *not* a Document Title
+    ==============================
+
+    The "ordinary paragraph" above the section title
+    prevents it from becoming the document title.
+
+Another counterexample::
+
+    This is not the Document Title,  because...
+    ===========================================
+
+    Here's an ordinary paragraph.
+
+    ... the title adornment is not unique
+    =====================================
+
+    Another ordinary paragraph.
+
+
+How can I represent esoteric characters (e.g. character entities) in a document?
+--------------------------------------------------------------------------------
+
+For example, say you want an em-dash (XML character entity &mdash;,
+Unicode character U+2014) in your document: use a real em-dash.
+Insert concrete characters (e.g. type a *real* em-dash) into your
+input file, using whatever encoding suits your application, and tell
+Docutils the input encoding.  Docutils uses Unicode internally, so the
+em-dash character is a real em-dash internally.
+
+Emacs users should refer to the `Emacs Support for reStructuredText`__
+document.  Tips for other editors are welcome.
+
+__ http://docutils.sourceforge.net/tools/editors/emacs/README.html
+
+ReStructuredText has no character entity subsystem; it doesn't know
+anything about XML charents.  To Docutils, "&mdash;" in input text is
+7 discrete characters; no interpretation happens.  When writing HTML,
+the "&" is converted to "&amp;", so in the raw output you'd see
+"&amp;mdash;".  There's no difference in interpretation for text
+inside or outside inline literals or literal blocks -- there's no
+character entity interpretation in either case.
+
+If you can't use a Unicode-compatible encoding and must rely on 7-bit
+ASCII, there is a workaround.  New in Docutils 0.3.10 is a set of
+`Standard Substitution Definition Sets`_, which provide equivalents of
+XML & HTML character entity sets as substitution definitions.  For
+example, the Japanese yen currency symbol can be used as follows::
+
+    .. include:: <xhtml1-lat1.txt>
+
+    |yen| 600 for a complete meal?  That's cheap!
+
+For earlier versions of Docutils, equivalent files containing
+character entity set substitution definitions using the "unicode_"
+directive `are available`_.  Please read the `description and
+instructions`_ for use.  Thanks to David Priest for the original idea.
+
+If you insist on using XML-style charents, you'll have to implement a
+pre-processing system to convert to UTF-8 or something.  That
+introduces complications though; you can no longer *write* about
+charents naturally; instead of writing "&mdash;" you'd have to write
+"&amp;mdash;".
+
+For the common case of long dashes, you might also want to insert the
+following substitution definitons into your document (both of them are
+using the "unicode_" directive)::
+
+    .. |--| unicode:: U+2013   .. en dash
+    .. |---| unicode:: U+2014  .. em dash, trimming surrounding whitespace
+       :trim:
+
+.. |--| unicode:: U+2013   .. en dash
+.. |---| unicode:: U+2014  .. em dash, trimming surrounding whitespace
+   :trim:
+
+Now you can write dashes using pure ASCII: "``foo |--| bar; foo |---|
+bar``", rendered as "foo |--| bar; foo |---| bar".  (Note that Mozilla
+and Firefox may render this incorrectly.)  The ``:trim:`` option for
+the em dash is necessary because you cannot write "``foo|---|bar``";
+thus you need to add spaces ("``foo |---| bar``") and advise the
+reStructuredText parser to trim the spaces.
+
+.. _Standard Substitution Definition Sets:
+   http://docutils.sf.net/docs/ref/rst/substitutions.html
+.. _unicode:
+   http://docutils.sf.net/docs/ref/rst/directives.html#unicode-character-codes
+.. _are available: http://docutils.sourceforge.net/tmp/charents/
+.. _tarball: http://docutils.sourceforge.net/tmp/charents.tgz
+.. _description and instructions:
+   http://docutils.sourceforge.net/tmp/charents/README.html
+.. _to-do list: http://docutils.sourceforge.net/docs/dev/todo.html
+
+
+How can I generate backticks using a Scandinavian keyboard?
+-----------------------------------------------------------
+
+The use of backticks in reStructuredText is a bit awkward with
+Scandinavian keyboards, where the backtick is a "dead" key.  To get
+one ` character one must press SHIFT-` + SPACE.
+
+Unfortunately, with all the variations out there, there's no way to
+please everyone.  For Scandinavian programmers and technical writers,
+this is not limited to reStructuredText but affects many languages and
+environments.
+
+Possible solutions include
+
+* If you have to input a lot of backticks, simply type one in the
+  normal/awkward way, select it, copy and then paste the rest (CTRL-V
+  is a lot faster than SHIFT-` + SPACE).
+
+* Use keyboard macros.
+
+* Remap the keyboard.  The Scandinavian keyboard layout is awkward for
+  other programming/technical characters too; for example, []{}
+  etc. are a bit awkward compared to US keyboards.
+
+  According to Axel Kollmorgen,
+
+      Under Windows, you can use the `Microsoft Keyboard Layout Creator
+      <http://www.microsoft.com/globaldev/tools/msklc.mspx>`__ to easily
+      map the backtick key to a real backtick (no dead key). took me
+      five minutes to load my default (german) keyboard layout, untick
+      "Dead Key?" from the backtick key properties ("in all shift
+      states"), "build dll and setup package", install the generated
+      .msi, and add my custom keyboard layout via Control Panel >
+      Regional and Language Options > Languages > Details > Add
+      Keyboard layout (and setting it as default "when you start your
+      computer").
+
+* Use a virtual/screen keyboard or character palette, such as:
+
+  - `Web-based keyboards <http://keyboard.lab.co.il/>`__ (IE only
+    unfortunately).
+  - Windows: `Click-N-Type <http://www.lakefolks.org/cnt/>`__.
+  - Mac OS X: the Character Palette can store a set of favorite
+    characters for easy input.  Open System Preferences,
+    International, Input Menu tab, enable "Show input menu in menu
+    bar", and be sure that Character Palette is enabled in the list.
+
+If anyone knows of other/better solutions, please `let us know`_.
+
+
+Are there any tools for HTML/XML-to-reStructuredText?  (Round-tripping)
+-----------------------------------------------------------------------
+
+People have tossed the idea around, and some implementations of
+reStructuredText-generating tools can be found in the `Docutils Link
+List`_.
+
+There's no reason why reStructuredText should not be round-trippable
+to/from XML; any technicalities which prevent round-tripping would be
+considered bugs.  Whitespace would not be identical, but paragraphs
+shouldn't suffer.  The tricky parts would be the smaller details, like
+links and IDs and other bookkeeping.
+
+For HTML, true round-tripping may not be possible.  Even adding lots
+of extra "class" attributes may not be enough.  A "simple HTML" to RST
+filter is possible -- for some definition of "simple HTML" -- but HTML
+is used as dumb formatting so much that such a filter may not be
+particularly useful.  An 80/20 approach should work though: build a
+tool that does 80% of the work automatically, leaving the other 20%
+for manual tweaks.
+
+.. _Docutils Link List: docs/user/links.html
+
+
+Are there any Wikis that use reStructuredText syntax?
+-----------------------------------------------------
+
+There are several, with various degrees of completeness.  With no
+implied endorsement or recommendation, and in no particular order:
+
+* `Webware for Python wiki
+  <http://wiki.webwareforpython.org/thiswiki.html>`__
+* `Ian Bicking's experimental code
+  <http://docutils.sf.net/sandbox/ianb/wiki/Wiki.py>`__
+* `MoinMoin <http://moinmoin.wikiwikiweb.de/>`__ has some support;
+  `here's a sample <http://moinmoin.wikiwikiweb.de/RestSample>`__
+* Zope-based `Zwiki <http://zwiki.org/>`__
+* Zope3-based Zwiki (in the Zope 3 source tree as ``zope.products.zwiki``)
+* `StikiWiki <http://mithrandr.moria.org/code/stikiwiki/>`__
+* `Trac <http://projects.edgewall.com/trac/>`__ `supports using reStructuredText
+  <http://projects.edgewall.com/trac/wiki/WikiRestructuredText>`__ as an
+  alternative to wiki markup. This includes support for `TracLinks
+  <http://projects.edgewall.com/trac/wiki/TracLinks>`__ from within RST
+  text via a custom RST reference-directive or, even easier, an interpreted text
+  role 'trac'
+* `Vogontia <http://www.ososo.de/vogontia/>`__, a Wiki-like FAQ system
+
+Please `let us know`_ of any other reStructuredText Wikis.
+
+The example application for the `Web Framework Shootout
+<http://colorstudy.com/docs/shootout.html>`__ article is a Wiki using
+reStructuredText.
+
+
+Are there any Weblog (Blog) projects that use reStructuredText syntax?
+----------------------------------------------------------------------
+
+With no implied endorsement or recommendation, and in no particular
+order:
+
+* `Firedrop <http://www.voidspace.org.uk/python/firedrop2/>`__
+* `Python Desktop Server <http://pyds.muensterland.org/>`__
+* `PyBloxsom <http://roughingit.subtlehints.net/pyblosxom/>`__
+* `Lino WebMan <http://lino.sourceforge.net/webman.html>`__
+
+Please `let us know`_ of any other reStructuredText Blogs.
+
+
+Can lists be indented without generating block quotes?
+------------------------------------------------------
+
+Some people like to write lists with indentation, without intending a
+block quote context, like this::
+
+    paragraph
+
+      * list item 1
+      * list item 2
+
+There has been a lot of discussion about this, but there are some
+issues that would need to be resolved before it could be implemented.
+There is a summary of the issues and pointers to the discussions in
+`the to-do list`__.
+
+__ http://docutils.sourceforge.net/docs/dev/todo.html#indented-lists
+
+
+Could the requirement for blank lines around lists be relaxed?
+--------------------------------------------------------------
+
+Short answer: no.
+
+In reStructuredText, it would be impossible to unambigously mark up
+and parse lists without blank lines before and after.  Deeply nested
+lists may look ugly with so many blank lines, but it's a price we pay
+for unambiguous markup.  Some other plaintext markup systems do not
+require blank lines in nested lists, but they have to compromise
+somehow, either accepting ambiguity or requiring extra complexity.
+For example, `Epytext <http://epydoc.sf.net/epytext.html#list>`__ does
+not require blank lines around lists, but it does require that lists
+be indented and that ambiguous cases be escaped.
+
+
+How can I include mathematical equations in documents?
+------------------------------------------------------
+
+There is no elegant built-in way, yet.  There are several ideas, but
+no obvious winner.  This issue requires a champion to solve the
+technical and aesthetic issues and implement a generic solution.
+Here's the `to-do list entry`__.
+
+__ http://docutils.sourceforge.net/docs/dev/todo.html#math-markup
+
+There are several quick & dirty ways to include equations in documents.
+They all presently use LaTeX syntax or dialects of it.
+
+* For LaTeX output, nothing beats raw LaTeX math.  A simple way is to
+  use the `raw directive`_::
+
+      .. raw:: latex
+
+          \[ x^3 + 3x^2a + 3xa^2 + a^3, \]
+
+  For inline math you could use substitutions of the raw directive but
+  the recently added `raw role`_ is more convenient.  You must define a
+  custom role based on it once in your document::
+
+      .. role:: raw-latex(raw)
+          :format: latex
+
+  and then you can just use the new role in your text::
+
+      the binomial expansion of :raw-latex:`$(x+a)^3$` is
+
+  .. _raw directive: http://docutils.sourceforge.net/docs/ref/rst/
+                     directives.html#raw-data-pass-through
+  .. _raw role: http://docutils.sourceforge.net/docs/ref/rst/roles.html#raw
+
+* Jens Jørgen Mortensen has implemented a "latex-math" role and
+  directive, available from `his sandbox`__.
+
+  __ http://docutils.sourceforge.net/sandbox/jensj/latex_math/
+
+* For HTML the "Right" w3c-standard way to include math is MathML_.
+  Unfortunately its rendering is still quite broken (or absent) on many
+  browsers but it's getting better.  Another bad problem is that typing
+  or reading raw MathML by humans is *really* painful, so embedding it
+  in a reST document with the raw directive would defy the goals of
+  readability and editability of reST (see an `example of raw MathML
+  <http://sf.net/mailarchive/message.php?msg_id=2177102>`__).
+
+  A much less painful way to generate HTML+MathML is to use itex2mml_ to
+  convert a dialect of LaTeX syntax to presentation MathML.  Here is an
+  example of potential `itex math markup
+  <http://article.gmane.org/gmane.text.docutils.user/118>`__.  The
+  simplest way to use it is to add ``html`` to the format lists for the
+  raw directive/role and postprocess the resulting document with
+  itex2mml.  This way you can *generate LaTeX and HTML+MathML from the
+  same source*, but you must limit yourself to the intersection of LaTeX
+  and itex markups for this to work.  Alan G. Isaac wrote a detailed
+  HOWTO_ for this approach.
+
+  .. _MathML: http://www.w3.org/Math/
+  .. _itex2mml: http://pear.math.pitt.edu/mathzilla/itex2mml.html
+  .. _HOWTO: http://www.american.edu/econ/itex2mml/mathhack.rst
+
+* The other way to add math to HTML is to use images of the equations,
+  typically generated by TeX.  This is inferior to MathML in the long
+  term but is perhaps more accessible nowdays.
+
+  Of course, doing it by hand is too much work.  Beni Cherniavsky has
+  written some `preprocessing scripts`__ for converting the
+  ``texmath`` role/directive into images for HTML output and raw
+  directives/subsitution for LaTeX output.  This way you can *generate
+  LaTeX and HTML+images from the same source*.  `Instructions here`__.
+
+  __ http://docutils.sourceforge.net/sandbox/cben/rolehack/
+  __ http://docutils.sourceforge.net/sandbox/cben/rolehack/README.html
+
+
+Is nested inline markup possible?
+---------------------------------
+
+Not currently, no.  It's on the `to-do list`__ (`details here`__), and
+hopefully will be part of the reStructuredText parser soon.  At that
+time, markup like this will become possible::
+
+    Here is some *emphasized text containing a `hyperlink`_ and
+    ``inline literals``*.
+
+__ http://docutils.sf.net/docs/dev/todo.html#nested-inline-markup
+__ http://docutils.sf.net/docs/dev/rst/alternatives.html#nested-inline-markup
+
+There are workarounds, but they are either convoluted or ugly or both.
+They are not recommended.
+
+* Inline markup can be combined with hyperlinks using `substitution
+  definitions`__ and references__ with the `"replace" directive`__.
+  For example::
+
+      Here is an |emphasized hyperlink|_.
+
+      .. |emphasized hyperlink| replace:: *emphasized hyperlink*
+      .. _emphasized hyperlink: http://example.org
+
+  It is not possible for just a portion of the replacement text to be
+  a hyperlink; it's the entire replacement text or nothing.
+
+  __ http://docutils.sf.net/docs/ref/rst/restructuredtext.html#substitution-definitions
+  __ http://docutils.sf.net/docs/ref/rst/restructuredtext.html#substitution-references
+  __ http://docutils.sf.net/docs/ref/rst/directives.html#replace
+
+* The `"raw" directive`__ can be used to insert raw HTML into HTML
+  output::
+
+      Here is some |stuff|.
+
+      .. |stuff| raw:: html
+
+         <em>emphasized text containing a
+         <a href="http://example.org">hyperlink</a> and
+         <tt>inline literals</tt></em>
+
+  Raw LaTeX is supported for LaTeX output, etc.
+
+  __ http://docutils.sf.net/docs/ref/rst/directives.html#raw
+
+
+How to indicate a line break or a significant newline?
+------------------------------------------------------
+
+`Line blocks`__ are designed for address blocks, verse, and other
+cases where line breaks are significant and must be preserved.  Unlike
+literal blocks, the typeface is not changed, and inline markup is
+recognized.  For example::
+
+    | A one, two, a one two three four
+    |
+    | Half a bee, philosophically,
+    |     must, *ipso facto*, half not be.
+    | But half the bee has got to be,
+    |     *vis a vis* its entity.  D'you see?
+    |
+    | But can a bee be said to be
+    |     or not to be an entire bee,
+    |         when half the bee is not a bee,
+    |             due to some ancient injury?
+    |
+    | Singing...
+
+__ http://docutils.sf.net/docs/ref/rst/restructuredtext.html#line-blocks
+
+Here's a workaround for manually inserting explicit line breaks in
+HTML output::
+
+    .. |br| raw:: html
+
+       <br />
+
+    I want to break this line here: |br| this is after the break.
+
+    If the extra whitespace bothers you, |br|\ backslash-escape it.
+
+
+A URL containing asterisks doesn't work.  What to do?
+-----------------------------------------------------
+
+Asterisks are valid URL characters (see :RFC:`2396`), sometimes used
+in URLs.  For example::
+
+    http://cvs.example.org/viewcvs.py/*checkout*/module/file
+
+Unfortunately, the parser thinks the asterisks are indicating
+emphasis.  The slashes serve as delineating punctuation, allowing the
+asterisks to be recognized as markup.  The example above is separated
+by the parser into a truncated URL, an emphasized word, and some
+regular text::
+
+    http://cvs.example.org/viewcvs.py/
+    *checkout*
+    /module/file
+
+To turn off markup recognition, use a backslash to escape at least the
+first asterisk, like this::
+
+    http://cvs.example.org/viewcvs.py/\*checkout*/module/file
+
+Escaping the second asterisk doesn't hurt, but it isn't necessary.
+
+
+How can I make a literal block with *some* formatting?
+------------------------------------------------------
+
+Use the `parsed-literal`_ directive.
+
+.. _parsed-literal: docs/ref/rst/directives.html#parsed-literal
+
+Scenario: a document contains some source code, which calls for a
+literal block to preserve linebreaks and whitespace.  But part of the
+source code should be formatted, for example as emphasis or as a
+hyperlink.  This calls for a *parsed* literal block::
+
+    .. parsed-literal::
+
+       print "Hello world!"  # *tricky* code [1]_
+
+The emphasis (``*tricky*``) and footnote reference (``[1]_``) will be
+parsed.
+
+
+Can reStructuredText be used for web or generic templating?
+-----------------------------------------------------------
+
+Docutils and reStructuredText can be used with or as a component of a
+templating system, but they do not themselves include templating
+functionality.  Templating should simply be left to dedicated
+templating systems.  Users can choose a templating system to apply to
+their reStructuredText documents as best serves their interests.
+
+There are many good templating systems for Python (ht2html_, YAPTU_,
+Quixote_'s PTL, Cheetah_, etc.; see this non-exhaustive list of `some
+other templating systems`_), and many more for other languages, each
+with different approaches.  We invite you to try several and find one
+you like.  If you adapt it to use Docutils/reStructuredText, please
+consider contributing the code to Docutils or `let us know`_ and we'll
+keep a list here.
+
+One reST-specific web templating system is `rest2web
+<http://www.voidspace.org.uk/python/rest2web>`_, a tool for
+automatically building websites, or parts of websites.
+
+.. _ht2html: http://ht2html.sourceforge.net/
+.. _YAPTU:
+   http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/52305
+.. _Quixote: http://www.mems-exchange.org/software/quixote/
+.. _Cheetah: http://www.cheetahtemplate.org/
+.. _some other templating systems:
+   http://webware.sourceforge.net/Papers/Templates/
+
+
+How can I mark up a FAQ or other list of questions & answers?
+-------------------------------------------------------------
+
+There is no specific syntax for FAQs and Q&A lists.  Here are two
+options:
+
+1. For a FAQ (Frequently Asked Questions, usually with answers), a
+   convenient way to mark up the questions is as section titles, with
+   the answer(s) as section content.  This document is marked up in
+   this way.
+
+   The advantages of using section titles for questions are: sections
+   can be numbered automatically, and a table of contents can be
+   generated automatically.  One limitation of this format is that
+   questions must fit on one line (section titles may not wrap, in the
+   source text).  For very long questions, the title may be a summary
+   of the question, with the full question in the section body.
+
+2. Field lists work well as Q&A lists::
+
+       :Q: What kind of questions can we
+           put here?
+
+       :A: Any kind we like!
+
+   In order to separate questions, lists can be used:
+
+       1. :Q: What kind of question can we
+              put here?
+          :A: Any kind we like!
+
+       2. :Q: How many answers can a question have?
+          :A: It can have one,
+          :A: or more.
+          :A3: Answers can be numbered like this.
+          :A: 1. Or like this.
+              2. We're flexible!
+
+   If you don't want to number or otherwise mark questions, you can
+   use an empty comment between individual field lists to separate
+   them::
+
+       :Q: First question?
+       :A: Answer.
+
+       ..
+
+       :Q: Second question?
+       :A: Answer.
+
+
+HTML Writer
+===========
+
+What is the status of the HTML Writer?
+--------------------------------------
+
+The HTML Writer module, ``docutils/writers/html4css1.py``, is a
+proof-of-concept reference implementation.  While it is a complete
+implementation, some aspects of the HTML it produces may be
+incompatible with older browsers or specialized applications (such as
+web templating).  Alternate implementations are welcome.
+
+
+What kind of HTML does it produce?
+----------------------------------
+
+It produces XHTML compatible with the `XHTML 1.0`_ specification.  A
+cascading stylesheet is required for proper viewing with a modern
+graphical browser.  Correct rendering of the HTML produced depends on
+the CSS support of the browser.  A general-purpose stylesheet,
+``html4css1.css`` is provided with the code, and is embedded by
+default.  It is installed in the "writers/html4css1/" subdirectory
+within the Docutils package.  Use the ``--help`` command-line option
+to see the specific location on your machine.
+
+.. _XHTML 1.0: http://www.w3.org/TR/xhtml1/
+
+
+What browsers are supported?
+----------------------------
+
+No specific browser is targeted; all modern graphical browsers should
+work.  Some older browsers, text-only browsers, and browsers without
+full CSS support are known to produce inferior results.  Firefox,
+Safari, Mozilla (version 1.0 and up), and MS Internet Explorer
+(version 5.0 and up) are known to give good results.  Reports of
+experiences with other browsers are welcome.
+
+
+Unexpected results from tools/rst2html.py: H1, H1 instead of H1, H2.  Why?
+--------------------------------------------------------------------------
+
+Here's the question in full:
+
+    I have this text::
+
+        Heading 1
+        =========
+
+        All my life, I wanted to be H1.
+
+        Heading 1.1
+        -----------
+
+        But along came H1, and so shouldn't I be H2?
+        No!  I'm H1!
+
+        Heading 1.1.1
+        *************
+
+        Yeah, imagine me, I'm stuck at H3!  No?!?
+
+    When I run it through tools/rst2html.py, I get unexpected results
+    (below).  I was expecting H1, H2, then H3; instead, I get H1, H1,
+    H2::
+
+        ...
+        <html lang="en">
+        <head>
+        ...
+        <title>Heading 1</title>
+        </head>
+        <body>
+        <div class="document" id="heading-1">
+        <h1 class="title">Heading 1</h1>                <-- first H1
+        <p>All my life, I wanted to be H1.</p>
+        <div class="section" id="heading-1-1">
+        <h1><a name="heading-1-1">Heading 1.1</a></h1>        <-- H1
+        <p>But along came H1, and so now I must be H2.</p>
+        <div class="section" id="heading-1-1-1">
+        <h2><a name="heading-1-1-1">Heading 1.1.1</a></h2>
+        <p>Yeah, imagine me, I'm stuck at H3!</p>
+        ...
+
+    What gives?
+
+Check the "class" attribute on the H1 tags, and you will see a
+difference.  The first H1 is actually ``<h1 class="title">``; this is
+the document title, and the default stylesheet renders it centered.
+There can also be an ``<h2 class="subtitle">`` for the document
+subtitle.
+
+If there's only one highest-level section title at the beginning of a
+document, it is treated specially, as the document title.  (Similarly, a
+lone second-highest-level section title may become the document
+subtitle.)  See `How can I indicate the document title?  Subtitle?`_ for
+details.  Rather than use a plain H1 for the document title, we use ``<h1
+class="title">`` so that we can use H1 again within the document.  Why
+do we do this?  HTML only has H1-H6, so by making H1 do double duty, we
+effectively reserve these tags to provide 6 levels of heading beyond the
+single document title.
+
+HTML is being used for dumb formatting for nothing but final display.
+A stylesheet *is required*, and one is provided; see `What kind of
+HTML does it produce?`_ above.  Of course, you're welcome to roll your
+own.  The default stylesheet provides rules to format ``<h1
+class="title">`` and ``<h2 class="subtitle">`` differently from
+ordinary ``<h1>`` and ``<h2>``::
+
+    h1.title {
+      text-align: center }
+
+    h2.subtitle {
+      text-align: center }
+
+If you don't want the top section heading to be interpreted as a
+title at all, disable the `doctitle_xform`_ setting
+(``--no-doc-title`` option).  This will interpret your document
+differently from the standard settings, which might not be a good
+idea.  If you don't like the reuse of the H1 in the HTML output, you
+can tweak the `initial_header_level`_ setting
+(``--initial-header-level`` option) -- but unless you match its value
+to your specific document, you might end up with bad HTML (e.g. H3
+without H2).
+
+.. _doctitle_xform:
+   http://docutils.sourceforge.net/docs/user/config.html#doctitle-xform
+.. _initial_header_level:
+   http://docutils.sourceforge.net/docs/user/config.html#initial-header-level
+
+(Thanks to Mark McEahern for the question and much of the answer.)
+
+
+Why do enumerated lists only use numbers (no letters or roman numerals)?
+------------------------------------------------------------------------
+
+The rendering of enumerators (the numbers or letters acting as list
+markers) is completely governed by the stylesheet, so either the
+browser can't find the stylesheet (try using the "--embed-stylesheet"
+option), or the browser can't understand it (try a recent Firefox,
+Mozilla, Konqueror, Opera, Safari, or even MSIE).
+
+
+There appear to be garbage characters in the HTML.  What's up?
+--------------------------------------------------------------
+
+What you're seeing is most probably not garbage, but the result of a
+mismatch between the actual encoding of the HTML output and the
+encoding your browser is expecting.  Your browser is misinterpreting
+the HTML data, which is encoded text.  A discussion of text encodings
+is beyond the scope of this FAQ; see one or more of these documents
+for more info:
+
+* `UTF-8 and Unicode FAQ for Unix/Linux
+  <http://www.cl.cam.ac.uk/~mgk25/unicode.html>`_
+
+* Chapters 3 and 4 of `Introduction to i18n [Internationalization]
+  <http://www.debian.org/doc/manuals/intro-i18n/>`_
+
+* `Python Unicode Tutorial
+  <http://www.reportlab.com/i18n/python_unicode_tutorial.html>`_
+
+* `Python Unicode Objects: Some Observations on Working With Non-ASCII
+  Character Sets <http://effbot.org/zone/unicode-objects.htm>`_
+
+The common case is with the default output encoding (UTF-8), when
+either numbered sections are used (via the "sectnum_" directive) or
+symbol-footnotes.  3 non-breaking spaces are inserted in each numbered
+section title, between the generated number and the title text.  Most
+footnote symbols are not available in ASCII, nor are non-breaking
+spaces.  When encoded with UTF-8 and viewed with ordinary ASCII tools,
+these characters will appear to be multi-character garbage.
+
+You may have an decoding problem in your browser (or editor, etc.).
+The encoding of the output is set to "utf-8", but your browswer isn't
+recognizing that.  You can either try to fix your browser (enable
+"UTF-8 character set", sometimes called "Unicode"), or choose a
+different encoding for the HTML output.  You can also try
+``--output-encoding=ascii:xmlcharrefreplace`` for HTML (not applicable
+to non-XMLish outputs).
+
+If you're generating document fragments, the "Content-Type" metadata
+(between the HTML ``<head>`` and ``</head>`` tags) must agree with the
+encoding of the rest of the document.  For UTF-8, it should be::
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+Also, Docutils normally generates an XML declaration as the first line
+of the output.  It must also match the document encoding.  For UTF-8::
+
+    <?xml version="1.0" encoding="utf-8" ?>
+
+.. _sectnum:
+   http://docutils.sourceforge.net/docs/ref/rst/directives.html#sectnum
+
+
+How can I retrieve the body of the HTML document?
+-------------------------------------------------
+
+(This is usually needed when using Docutils in conjunction with a
+templating system.)
+
+You can use the `docutils.core.publish_parts()`_ function, which
+returns a dictionary containing an 'html_body_' entry.
+
+.. _docutils.core.publish_parts():
+   docs/api/publisher.html#publish-parts
+.. _html_body:
+   docs/api/publisher.html#html-body
+
+
+Why is the Docutils XHTML served as "Content-type: text/html"?
+--------------------------------------------------------------
+
+Full question:
+
+    Docutils' HTML output looks like XHTML and is advertised as such::
+
+      <?xml version="1.0" encoding="utf-8" ?>
+      <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xht ml1/DTD/xhtml1-transitional.dtd">
+
+    But this is followed by::
+
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    Shouldn't this be "application/xhtml+xml" instead of "text/html"?
+
+In a perfect web, the Docutils XHTML output would be 100% strict
+XHTML.  But it's not a perfect web, and a major source of imperfection
+is Internet Explorer.  Despite it's drawbacks, IE still represents the
+majority of web browsers, and cannot be ignored.
+
+Short answer: if we didn't serve XHTML as "text/html" (which is a
+perfectly valid thing to do), it couldn't be viewed in Internet
+Explorer.  
+
+Long answer: see the `"Criticisms of Internet Explorer" Wikipedia
+entry <http://en.wikipedia.org/wiki/Criticisms_of_Internet_Explorer#XHTML>`__.
+
+However, there's also `Sending XHTML as text/html Considered
+Harmful`__.  What to do, what to do?  We're damned no matter what we
+do.  So we'll continue to do the practical instead of the pure:
+support the browsers that are actually out there, and not fight for
+strict standards compliance.
+
+__ http://hixie.ch/advocacy/xhtml
+
+(Thanks to Martin F. Krafft, Robert Kern, Michael Foord, and Alan
+G. Isaac.)
+
+
+Python Source Reader
+====================
+
+Can I use Docutils for Python auto-documentation?
+-------------------------------------------------
+
+Yes, in conjunction with other projects.
+
+Docstring extraction functionality from within Docutils is still under
+development.  There is most of a source code parsing module in
+docutils/readers/python/moduleparser.py.  We do plan to finish it
+eventually.  Ian Bicking wrote an initial front end for the
+moduleparser.py module, in sandbox/ianb/extractor/extractor.py.  Ian
+also did some work on the Python Source Reader
+(docutils.readers.python) component at PyCon DC 2004.
+
+Version 2.0 of Ed Loper's `Epydoc <http://epydoc.sourceforge.net/>`_
+supports reStructuredText-format docstrings for HTML output.  Docutils
+0.3 or newer is required.  Development of a Docutils-specific
+auto-documentation tool will continue.  Epydoc works by importing
+Python modules to be documented, whereas the Docutils-specific tool,
+described above, will parse modules without importing them (as with
+`HappyDoc <http://happydoc.sourceforge.net/>`_, which doesn't support
+reStructuredText).
+
+The advantages of parsing over importing are security and flexibility;
+the disadvantage is complexity/difficulty.
+
+* Security: untrusted code that shouldn't be executed can be parsed;
+  importing a module executes its top-level code.
+* Flexibility: comments and unofficial docstrings (those not supported
+  by Python syntax) can only be processed by parsing.
+* Complexity/difficulty: it's a lot harder to parse and analyze a
+  module than it is to ``import`` and analyze one.
+
+For more details, please see "Docstring Extraction Rules" in `PEP
+258`_, item 3 ("How").
+
+
+Miscellaneous
+=============
+
+Is the Docutils document model based on any existing XML models?
+----------------------------------------------------------------
+
+Not directly, no.  It borrows bits from DocBook, HTML, and others.  I
+(David Goodger) have designed several document models over the years,
+and have my own biases.  The Docutils document model is designed for
+simplicity and extensibility, and has been influenced by the needs of
+the reStructuredText markup.

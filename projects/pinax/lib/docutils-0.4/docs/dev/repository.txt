@@ -1,0 +1,217 @@
+=====================================
+ The Docutils_ Subversion Repository
+=====================================
+
+:Author: Felix Wiemann
+:Contact: Felix.Wiemann@ososo.de
+:Revision: $Revision: 4002 $
+:Date: $Date: 2005-11-06 17:50:19 +0100 (Sun, 06 Nov 2005) $
+:Copyright: This document has been placed in the public domain.
+
+.. _Docutils: http://docutils.sourceforge.net/
+
+.. contents::
+
+Docutils uses a Subversion_ repository located at ``svn.berlios.de``.
+Subversion is exhaustively documented in the `Subversion Book`_
+(svnbook).
+
+.. _Subversion: http://subversion.tigris.org/
+.. _Subversion Book: http://svnbook.red-bean.com/
+
+.. Note::
+
+   While the repository resides at BerliOS, all other project data
+   (web site, snapshots, releases, mailing lists, trackers) is hosted
+   at SourceForge.
+
+For the project policy on repository use (check-in requirements,
+branching, etc.), please see the `Docutils Project Policies`__.
+
+__ policies.html#subversion-repository
+
+
+Accessing the Repository
+========================
+
+Web Access
+----------
+
+The repository can be browsed and examined via the web at
+http://svn.berlios.de/viewcvs/docutils/.
+
+
+Anonymous Access
+----------------
+
+Anonymous (read-only) access is available at ``svn://svn.berlios.de/docutils/``.
+
+To check out the current main source tree of Docutils, type ::
+
+    svn checkout svn://svn.berlios.de/docutils/trunk/docutils
+
+To check out everything (main tree, sandboxes, and web site), type ::
+
+    svn checkout svn://svn.berlios.de/docutils/trunk docutils
+
+This will create a working copy of the whole trunk in a new directory
+called ``docutils``.
+
+If you cannot use the ``svn`` port, you can also use the HTTP access
+method by substituting "http://svn.berlios.de/svnroot/repos" for
+"svn://svn.berlios.de".
+
+Note that you should *not* check out ``svn://svn.berlios.de/docutils``
+(without "trunk"), because then you'd end up fetching the whole
+Docutils tree for every branch and tag over and over again, wasting
+your and BerliOS's bandwidth.
+
+To update your working copy later on, cd into the working copy and
+type ::
+
+    svn update
+
+
+Developer Access
+----------------
+
+(Developers who had write-access for Docutils' CVS repository on
+SourceForge.net should `register at BerliOS`__ and send a message with
+their BerliOS user name to `Felix Wiemann <Felix.Wiemann@ososo.de>`_.)
+
+__ https://developer.berlios.de/account/register.php
+
+If you are a developer, you get read-write access via
+``svn+ssh://<user>@svn.berlios.de/svnroot/repos/docutils/``, where
+``<user>`` is your BerliOS user account name.  So to retrieve a
+working copy, type ::
+
+    svn checkout svn+ssh://<user>@svn.berlios.de/svnroot/repos/docutils/trunk \
+        docutils
+
+If you previously had an anonymous working copy and gained developer
+access, you can switch the URL associated with your working copy by
+typing ::
+
+    svn switch --relocate svn://svn.berlios.de/docutils/trunk/docutils \
+        svn+ssh://<user>@svn.berlios.de/svnroot/repos/docutils
+
+(Again, ``<user>`` is your BerliOS user account name.)
+
+If you cannot use the ``ssh`` port, you can also use the HTTPS access
+method by substituting "https://svn.berlios.de" for
+"svn+ssh://svn.berlios.de".
+
+
+Setting Up Your Subversion Client For Development
+`````````````````````````````````````````````````
+
+Before commiting changes to the repository, please ensure that the
+following lines are contained (and uncommented) in your
+~/.subversion/config file, so that new files are added with the
+correct properties set::
+
+    [miscellany]
+    # For your convenience:
+    global-ignores = ... *.pyc ...
+    # For correct properties:
+    enable-auto-props = yes
+
+    [auto-props]
+    *.py = svn:eol-style=native;svn:keywords=Author Date Id Revision
+    *.txt = svn:eol-style=native;svn:keywords=Author Date Id Revision
+    *.html = svn:eol-style=native;svn:keywords=Author Date Id Revision
+    *.xml = svn:eol-style=native;svn:keywords=Author Date Id Revision
+    *.tex = svn:eol-style=native;svn:keywords=Author Date Id Revision
+    *.css = svn:eol-style=native;svn:keywords=Author Date Id Revision
+    *.patch = svn:eol-style=native
+    *.sh = svn:eol-style=native;svn:executable;svn:keywords=Author Date Id Revision
+    *.png = svn:mime-type=image/png
+    *.jpg = svn:mime-type=image/jpeg
+    *.gif = svn:mime-type=image/gif
+
+
+Setting Up SSH Access
+`````````````````````
+
+With a public & private key pair, you can access the shell and
+Subversion servers without having to enter your password.  There are
+two places to add your SSH public key on BerliOS: your web account and
+your shell account.
+
+* Adding your SSH key to your BerliOS web account:
+
+  1. Log in on the web at https://developer.berlios.de/.  Create your
+     account first if necessary.  You should be taken to your "My
+     Personal Page" (https://developer.berlios.de/my/).
+
+  2. Choose "Account Options" from the menu below the top banner.
+
+  3. At the bottom of the "Account Maintenance" page
+     (https://developer.berlios.de/account/) you'll find a "Shell
+     Account Information" section; click on "[Edit Keys]".
+
+  4. Copy and paste your SSH public key into the edit box on this page
+     (https://developer.berlios.de/account/editsshkeys.php).  Further
+     instructions are available on this page.
+
+* Adding your SSH key to your BerliOS shell account:
+
+  1. Log in to the BerliOS shell server::
+
+         ssh <user>@shell.berlios.de
+
+     You'll be asked for your password, which you set when you created
+     your account.
+
+  2. Create a .ssh directory in your home directory, and remove
+     permissions for group & other::
+
+         mkdir .ssh
+         chmod og-rwx .ssh
+
+     Exit the SSH session.
+
+  3. Copy your public key to the .ssh directory on BerliOS::
+
+         scp .ssh/id_dsa.pub <user>@shell.berlios.de:.ssh/authorized_keys
+
+  Now you should be able to start an SSH session without needing your
+  password.
+
+
+Repository Layout
+=================
+
+The following tree shows the repository layout::
+
+    docutils/
+    |-- branches/
+    |   |-- branch1/
+    |   |   |-- docutils/
+    |   |   |-- sandbox/
+    |   |   `-- web/
+    |   `-- branch2/
+    |       |-- docutils/
+    |       |-- sandbox/
+    |       `-- web/
+    |-- tags/
+    |   |-- tag1/
+    |   |   |-- docutils/
+    |   |   |-- sandbox/
+    |   |   `-- web/
+    |   `-- tag2/
+    |       |-- docutils/
+    |       |-- sandbox/
+    |       `-- web/
+    `-- trunk/
+        |-- docutils/
+        |-- sandbox/
+        `-- web/
+
+``docutils/branches/`` and ``docutils/tags/`` contain (shallow) copies
+of the whole trunk.
+
+The main source tree lives at ``docutils/trunk/docutils/``, next to
+the sandboxes (``docutils/trunk/sandbox/``) and the web site files
+(``docutils/trunk/web/``).

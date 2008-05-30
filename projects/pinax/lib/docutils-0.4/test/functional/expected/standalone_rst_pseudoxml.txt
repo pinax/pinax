@@ -1,0 +1,1841 @@
+<document ids="restructuredtext-test-document doctitle" names="restructuredtext\ test\ document doctitle" source="functional/input/standalone_rst_pseudoxml.txt" title="reStructuredText Test Document">
+    <title>
+        reStructuredText Test Document
+    <subtitle ids="examples-of-syntax-constructs subtitle" names="examples\ of\ syntax\ constructs subtitle">
+        Examples of Syntax Constructs
+    <decoration>
+        <header>
+            <paragraph>
+                Document header
+        <footer>
+            <paragraph>
+                Document footer
+    <docinfo>
+        <author>
+            David Goodger
+        <address xml:space="preserve">
+            123 Example Street
+            Example, EX  Canada
+            A1B 2C3
+        <contact>
+            <reference refuri="mailto:goodger@users.sourceforge.net">
+                goodger@users.sourceforge.net
+        <authors>
+            <author>
+                Me
+            <author>
+                Myself
+            <author>
+                I
+        <organization>
+            humankind
+        <date>
+            Now, or yesterday.  Or maybe even 
+            <emphasis>
+                before
+             yesterday.
+        <status>
+            This is a "work in progress"
+        <revision>
+            is managed by a version control system.
+        <version>
+            1
+        <copyright>
+            This document has been placed in the public domain. You
+            may do with it as you wish. You may copy, modify,
+            redistribute, reattribute, sell, buy, rent, lease,
+            destroy, or improve it, quote it at length, excerpt,
+            incorporate, collate, fold, staple, or mutilate it, or do
+            anything else to it that your or anyone else's heart
+            desires.
+        <field>
+            <field_name>
+                field name
+            <field_body>
+                <paragraph>
+                    This is a "generic bibliographic field".
+        <field>
+            <field_name>
+                field name "2"
+            <field_body>
+                <paragraph>
+                    Generic bibliographic fields may contain multiple body elements.
+                <paragraph>
+                    Like this.
+    <topic classes="dedication">
+        <title>
+            Dedication
+        <paragraph>
+            For Docutils users & co-developers.
+    <topic classes="abstract">
+        <title>
+            Abstract
+        <paragraph>
+            This is a test document, containing at least one example of each
+            reStructuredText construct.
+    <comment xml:space="preserve">
+        This is a comment. Note how any initial comments are moved by
+        transforms to after the document title, subtitle, and docinfo.
+    <target refid="doctitle">
+    <comment xml:space="preserve">
+        Above is the document title, and below is the subtitle.
+        They are transformed from section titles after parsing.
+    <target refid="subtitle">
+    <comment xml:space="preserve">
+        bibliographic fields (which also require a transform):
+    <meta content="reStructuredText, test, parser" name="keywords">
+    <meta content="A test document, containing at least one example of each reStructuredText construct." lang="en" name="description">
+    <topic classes="contents" ids="table-of-contents" names="table\ of\ contents">
+        <title>
+            Table of Contents
+        <bullet_list classes="auto-toc">
+            <list_item>
+                <paragraph>
+                    <reference ids="id32" refid="structural-elements">
+                        <generated classes="sectnum">
+                            1   
+                        Structural Elements
+                <bullet_list classes="auto-toc">
+                    <list_item>
+                        <paragraph>
+                            <reference ids="id33" refid="section-title">
+                                <generated classes="sectnum">
+                                    1.1   
+                                Section Title
+                    <list_item>
+                        <paragraph>
+                            <reference ids="id34" refid="empty-section">
+                                <generated classes="sectnum">
+                                    1.2   
+                                Empty Section
+                    <list_item>
+                        <paragraph>
+                            <reference ids="id35" refid="transitions">
+                                <generated classes="sectnum">
+                                    1.3   
+                                Transitions
+            <list_item>
+                <paragraph>
+                    <reference ids="id36" refid="body-elements">
+                        <generated classes="sectnum">
+                            2   
+                        Body Elements
+                <bullet_list classes="auto-toc">
+                    <list_item>
+                        <paragraph>
+                            <reference ids="id37" refid="paragraphs">
+                                <generated classes="sectnum">
+                                    2.1   
+                                Paragraphs
+                        <bullet_list classes="auto-toc">
+                            <list_item>
+                                <paragraph>
+                                    <reference ids="id38" refid="inline-markup">
+                                        <generated classes="sectnum">
+                                            2.1.1   
+                                        Inline Markup
+                    <list_item>
+                        <paragraph>
+                            <reference ids="id39" refid="bullet-lists">
+                                <generated classes="sectnum">
+                                    2.2   
+                                Bullet Lists
+                    <list_item>
+                        <paragraph>
+                            <reference ids="id40" refid="enumerated-lists">
+                                <generated classes="sectnum">
+                                    2.3   
+                                Enumerated Lists
+                    <list_item>
+                        <paragraph>
+                            <reference ids="id41" refid="definition-lists">
+                                <generated classes="sectnum">
+                                    2.4   
+                                Definition Lists
+                    <list_item>
+                        <paragraph>
+                            <reference ids="id42" refid="field-lists">
+                                <generated classes="sectnum">
+                                    2.5   
+                                Field Lists
+                    <list_item>
+                        <paragraph>
+                            <reference ids="id43" refid="option-lists">
+                                <generated classes="sectnum">
+                                    2.6   
+                                Option Lists
+                    <list_item>
+                        <paragraph>
+                            <reference ids="id44" refid="literal-blocks">
+                                <generated classes="sectnum">
+                                    2.7   
+                                Literal Blocks
+                    <list_item>
+                        <paragraph>
+                            <reference ids="id45" refid="line-blocks">
+                                <generated classes="sectnum">
+                                    2.8   
+                                Line Blocks
+                    <list_item>
+                        <paragraph>
+                            <reference ids="id46" refid="block-quotes">
+                                <generated classes="sectnum">
+                                    2.9   
+                                Block Quotes
+                    <list_item>
+                        <paragraph>
+                            <reference ids="id47" refid="doctest-blocks">
+                                <generated classes="sectnum">
+                                    2.10   
+                                Doctest Blocks
+                    <list_item>
+                        <paragraph>
+                            <reference ids="id48" refid="footnotes">
+                                <generated classes="sectnum">
+                                    2.11   
+                                Footnotes
+                    <list_item>
+                        <paragraph>
+                            <reference ids="id49" refid="citations">
+                                <generated classes="sectnum">
+                                    2.12   
+                                Citations
+                    <list_item>
+                        <paragraph>
+                            <reference ids="id50" refid="targets">
+                                <generated classes="sectnum">
+                                    2.13   
+                                Targets
+                        <bullet_list classes="auto-toc">
+                            <list_item>
+                                <paragraph>
+                                    <reference ids="id51" refid="duplicate-target-names">
+                                        <generated classes="sectnum">
+                                            2.13.1   
+                                        Duplicate Target Names
+                            <list_item>
+                                <paragraph>
+                                    <reference ids="id52" refid="id20">
+                                        <generated classes="sectnum">
+                                            2.13.2   
+                                        Duplicate Target Names
+                    <list_item>
+                        <paragraph>
+                            <reference ids="id53" refid="directives">
+                                <generated classes="sectnum">
+                                    2.14   
+                                Directives
+                        <bullet_list classes="auto-toc">
+                            <list_item>
+                                <paragraph>
+                                    <reference ids="id54" refid="document-parts">
+                                        <generated classes="sectnum">
+                                            2.14.1   
+                                        Document Parts
+                            <list_item>
+                                <paragraph>
+                                    <reference ids="id55" refid="images">
+                                        <generated classes="sectnum">
+                                            2.14.2   
+                                        Images
+                            <list_item>
+                                <paragraph>
+                                    <reference ids="id56" refid="admonitions">
+                                        <generated classes="sectnum">
+                                            2.14.3   
+                                        Admonitions
+                            <list_item>
+                                <paragraph>
+                                    <reference ids="id57" refid="topics-sidebars-and-rubrics">
+                                        <generated classes="sectnum">
+                                            2.14.4   
+                                        Topics, Sidebars, and Rubrics
+                            <list_item>
+                                <paragraph>
+                                    <reference ids="id58" refid="target-footnotes">
+                                        <generated classes="sectnum">
+                                            2.14.5   
+                                        Target Footnotes
+                            <list_item>
+                                <paragraph>
+                                    <reference ids="id59" refid="replacement-text">
+                                        <generated classes="sectnum">
+                                            2.14.6   
+                                        Replacement Text
+                            <list_item>
+                                <paragraph>
+                                    <reference ids="id60" refid="compound-paragraph">
+                                        <generated classes="sectnum">
+                                            2.14.7   
+                                        Compound Paragraph
+                            <list_item>
+                                <paragraph>
+                                    <reference ids="id61" refid="parsed-literal-blocks">
+                                        <generated classes="sectnum">
+                                            2.14.8   
+                                        Parsed Literal Blocks
+                    <list_item>
+                        <paragraph>
+                            <reference ids="id62" refid="substitution-definitions">
+                                <generated classes="sectnum">
+                                    2.15   
+                                Substitution Definitions
+                    <list_item>
+                        <paragraph>
+                            <reference ids="id63" refid="comments">
+                                <generated classes="sectnum">
+                                    2.16   
+                                Comments
+                    <list_item>
+                        <paragraph>
+                            <reference ids="id64" refid="raw-text">
+                                <generated classes="sectnum">
+                                    2.17   
+                                Raw text
+                    <list_item>
+                        <paragraph>
+                            <reference ids="id65" refid="container">
+                                <generated classes="sectnum">
+                                    2.18   
+                                Container
+                    <list_item>
+                        <paragraph>
+                            <reference ids="id66" refid="colspanning-tables">
+                                <generated classes="sectnum">
+                                    2.19   
+                                Colspanning tables
+                    <list_item>
+                        <paragraph>
+                            <reference ids="id67" refid="rowspanning-tables">
+                                <generated classes="sectnum">
+                                    2.20   
+                                Rowspanning tables
+                    <list_item>
+                        <paragraph>
+                            <reference ids="id68" refid="complex-tables">
+                                <generated classes="sectnum">
+                                    2.21   
+                                Complex tables
+                    <list_item>
+                        <paragraph>
+                            <reference ids="id69" refid="list-tables">
+                                <generated classes="sectnum">
+                                    2.22   
+                                List Tables
+            <list_item>
+                <paragraph>
+                    <reference ids="id70" refid="error-handling">
+                        <generated classes="sectnum">
+                            3   
+                        Error Handling
+    <section ids="structural-elements" names="structural\ elements">
+        <title auto="1" refid="id32">
+            <generated classes="sectnum">
+                1   
+            Structural Elements
+        <section ids="section-title" names="section\ title">
+            <title auto="1" refid="id33">
+                <generated classes="sectnum">
+                    1.1   
+                Section Title
+            <subtitle ids="section-subtitle" names="section\ subtitle">
+                Section Subtitle
+            <paragraph>
+                That's it, the text just above this line.
+        <section ids="empty-section" names="empty\ section">
+            <title auto="1" refid="id34">
+                <generated classes="sectnum">
+                    1.2   
+                Empty Section
+        <section ids="transitions" names="transitions">
+            <title auto="1" refid="id35">
+                <generated classes="sectnum">
+                    1.3   
+                Transitions
+            <paragraph>
+                Here's a transition:
+            <transition>
+            <paragraph>
+                It divides the section.  Transitions may also occur between sections:
+    <transition>
+    <section ids="body-elements" names="body\ elements">
+        <title auto="1" refid="id36">
+            <generated classes="sectnum">
+                2   
+            Body Elements
+        <section ids="paragraphs" names="paragraphs">
+            <title auto="1" refid="id37">
+                <generated classes="sectnum">
+                    2.1   
+                Paragraphs
+            <paragraph>
+                A paragraph.
+            <section ids="inline-markup" names="inline\ markup">
+                <title auto="1" refid="id38">
+                    <generated classes="sectnum">
+                        2.1.1   
+                    Inline Markup
+                <paragraph>
+                    Paragraphs contain text and may contain inline markup: 
+                    <emphasis>
+                        emphasis
+                    ,
+                    <strong>
+                        strong emphasis
+                    , 
+                    <literal>
+                        inline literals
+                    , standalone hyperlinks
+                    (
+                    <reference refuri="http://www.python.org">
+                        http://www.python.org
+                    ), external hyperlinks (
+                    <reference name="Python" refuri="http://www.python.org/">
+                        Python
+                     
+                    <footnote_reference auto="1" ids="id26" refid="id25">
+                        5
+                    ), internal
+                    cross-references (
+                    <reference name="example" refid="example">
+                        example
+                    ), external hyperlinks with embedded URIs
+                    (
+                    <reference name="Python web site" refuri="http://www.python.org">
+                        Python web site
+                    ), 
+                    <reference anonymous="1" name="anonymous hyperlink references" refuri="http://www.python.org/">
+                        anonymous hyperlink
+                        references
+                     
+                    <footnote_reference auto="1" ids="id29" refid="id25">
+                        5
+                     (
+                    <reference anonymous="1" name="a second reference" refuri="http://docutils.sourceforge.net/">
+                        a second reference
+                     
+                    <footnote_reference auto="1" ids="id31" refid="id30">
+                        6
+                    ), footnote references (manually
+                    numbered 
+                    <footnote_reference ids="id1" refid="id8">
+                        1
+                    , anonymous auto-numbered 
+                    <footnote_reference auto="1" ids="id2" refid="id11">
+                        3
+                    , labeled auto-numbered
+                    <footnote_reference auto="1" ids="id3" refid="label">
+                        2
+                    , or symbolic 
+                    <footnote_reference auto="*" ids="id4" refid="id12">
+                        *
+                    ), citation references (
+                    <citation_reference ids="id5" refid="cit2002">
+                        CIT2002
+                    ),
+                    substitution references (
+                    <image alt="EXAMPLE" uri="../../../docs/user/rst/images/biohazard.png">
+                    ), and 
+                    <target ids="inline-hyperlink-targets" names="inline\ hyperlink\ targets">
+                        inline hyperlink targets
+                    
+                    (see 
+                    <reference name="Targets" refid="id22">
+                        Targets
+                     below for a reference back to here).  Character-level
+                    inline markup is also possible (although exceedingly ugly!) in 
+                    <emphasis>
+                        re
+                    <literal>
+                        Structured
+                    <emphasis>
+                        Text
+                    .  Problems are indicated by 
+                    <problematic ids="id24" refid="id23">
+                        |problematic|
+                     text
+                    (generated by processing errors; this one is intentional).  Here is a
+                    reference to the 
+                    <reference name="doctitle" refid="doctitle">
+                        doctitle
+                     and the 
+                    <reference name="subtitle" refid="subtitle">
+                        subtitle
+                    .
+                <target anonymous="1" ids="id6" refuri="http://www.python.org/">
+                <target anonymous="1" ids="id7" refuri="http://docutils.sourceforge.net/">
+                <paragraph>
+                    The default role for interpreted text is 
+                    <title_reference>
+                        Title Reference
+                    .  Here are
+                    some explicit interpreted text roles: a PEP reference (
+                    <reference refuri="http://www.python.org/peps/pep-0287.html">
+                        PEP 287
+                    ); an
+                    RFC reference (
+                    <reference refuri="http://www.faqs.org/rfcs/rfc2822.html">
+                        RFC 2822
+                    ); a 
+                    <subscript>
+                        subscript
+                    ; a 
+                    <superscript>
+                        superscript
+                    ;
+                    and explicit roles for 
+                    <emphasis>
+                        standard
+                     
+                    <strong>
+                        inline
+                    
+                    <literal>
+                        markup
+                    .
+                <comment xml:space="preserve">
+                    DO NOT RE-WRAP THE FOLLOWING PARAGRAPH!
+                <paragraph>
+                    Let's test wrapping and whitespace significance in inline literals:
+                    <literal>
+                        This is an example of --inline-literal --text, --including some--
+                        strangely--hyphenated-words.  Adjust-the-width-of-your-browser-window
+                        to see how the text is wrapped.  -- ---- --------  Now note    the
+                        spacing    between the    words of    this sentence    (words
+                        should    be grouped    in pairs).
+                <paragraph>
+                    If the 
+                    <literal>
+                        --pep-references
+                     option was supplied, there should be a
+                    live link to PEP 258 here.
+        <section ids="bullet-lists" names="bullet\ lists">
+            <title auto="1" refid="id39">
+                <generated classes="sectnum">
+                    2.2   
+                Bullet Lists
+            <bullet_list bullet="-">
+                <list_item>
+                    <paragraph>
+                        A bullet list
+                    <bullet_list bullet="+">
+                        <list_item>
+                            <paragraph>
+                                Nested bullet list.
+                        <list_item>
+                            <paragraph>
+                                Nested item 2.
+                <list_item>
+                    <paragraph>
+                        Item 2.
+                    <paragraph>
+                        Paragraph 2 of item 2.
+                    <bullet_list bullet="*">
+                        <list_item>
+                            <paragraph>
+                                Nested bullet list.
+                        <list_item>
+                            <paragraph>
+                                Nested item 2.
+                            <bullet_list bullet="-">
+                                <list_item>
+                                    <paragraph>
+                                        Third level.
+                                <list_item>
+                                    <paragraph>
+                                        Item 2.
+                        <list_item>
+                            <paragraph>
+                                Nested item 3.
+                        <list_item>
+                            <paragraph>
+                                This nested list should be compacted by the HTML writer.
+                            <target ids="target" names="target">
+                            <comment xml:space="preserve">
+                                Even if this item contains a target and a comment.
+        <section ids="enumerated-lists" names="enumerated\ lists">
+            <title auto="1" refid="id40">
+                <generated classes="sectnum">
+                    2.3   
+                Enumerated Lists
+            <enumerated_list enumtype="arabic" prefix="" suffix=".">
+                <list_item>
+                    <paragraph>
+                        Arabic numerals.
+                    <enumerated_list enumtype="loweralpha" prefix="" suffix=")">
+                        <list_item>
+                            <paragraph>
+                                lower alpha)
+                            <enumerated_list enumtype="lowerroman" prefix="(" suffix=")">
+                                <list_item>
+                                    <paragraph>
+                                        (lower roman)
+                                    <enumerated_list enumtype="upperalpha" prefix="" suffix=".">
+                                        <list_item>
+                                            <paragraph>
+                                                upper alpha.
+                                            <enumerated_list enumtype="upperroman" prefix="" suffix=")">
+                                                <list_item>
+                                                    <paragraph>
+                                                        upper roman)
+                <list_item>
+                    <paragraph>
+                        Lists that don't start at 1:
+                    <enumerated_list enumtype="arabic" prefix="" start="3" suffix=".">
+                        <list_item>
+                            <paragraph>
+                                Three
+                        <list_item>
+                            <paragraph>
+                                Four
+                    <enumerated_list enumtype="upperalpha" prefix="" start="3" suffix=".">
+                        <list_item>
+                            <paragraph>
+                                C
+                        <list_item>
+                            <paragraph>
+                                D
+                    <enumerated_list enumtype="lowerroman" prefix="" start="3" suffix=".">
+                        <list_item>
+                            <paragraph>
+                                iii
+                        <list_item>
+                            <paragraph>
+                                iv
+        <section ids="definition-lists" names="definition\ lists">
+            <title auto="1" refid="id41">
+                <generated classes="sectnum">
+                    2.4   
+                Definition Lists
+            <definition_list>
+                <definition_list_item>
+                    <term>
+                        Term
+                    <definition>
+                        <paragraph>
+                            Definition
+                <definition_list_item>
+                    <term>
+                        Term
+                    <classifier>
+                        classifier
+                    <definition>
+                        <paragraph>
+                            Definition paragraph 1.
+                        <paragraph>
+                            Definition paragraph 2.
+                <definition_list_item>
+                    <term>
+                        Term
+                    <definition>
+                        <paragraph>
+                            Definition
+                <definition_list_item>
+                    <term>
+                        Term
+                    <classifier>
+                        classifier one
+                    <classifier>
+                        classifier two
+                    <definition>
+                        <paragraph>
+                            Definition
+        <section ids="field-lists" names="field\ lists">
+            <title auto="1" refid="id42">
+                <generated classes="sectnum">
+                    2.5   
+                Field Lists
+            <field_list>
+                <field>
+                    <field_name>
+                        what
+                    <field_body>
+                        <paragraph>
+                            Field lists map field names to field bodies, like database
+                            records.  They are often part of an extension syntax.  They are
+                            an unambiguous variant of RFC 2822 fields.
+                <field>
+                    <field_name>
+                        how arg1 arg2
+                    <field_body>
+                        <paragraph>
+                            The field marker is a colon, the field name, and a colon.
+                        <paragraph>
+                            The field body may contain one or more body elements, indented
+                            relative to the field marker.
+                <field>
+                    <field_name>
+                        credits
+                    <field_body>
+                        <paragraph classes="credits">
+                            This paragraph has the 
+                            <title_reference>
+                                credits
+                             class set.  (This is actually not
+                            about credits but just for ensuring that the class attribute
+                            doesn't get stripped away.)
+        <section ids="option-lists" names="option\ lists">
+            <title auto="1" refid="id43">
+                <generated classes="sectnum">
+                    2.6   
+                Option Lists
+            <paragraph>
+                For listing command-line options:
+            <option_list>
+                <option_list_item>
+                    <option_group>
+                        <option>
+                            <option_string>
+                                -a
+                    <description>
+                        <paragraph>
+                            command-line option "a"
+                <option_list_item>
+                    <option_group>
+                        <option>
+                            <option_string>
+                                -b
+                            <option_argument delimiter=" ">
+                                file
+                    <description>
+                        <paragraph>
+                            options can have arguments
+                            and long descriptions
+                <option_list_item>
+                    <option_group>
+                        <option>
+                            <option_string>
+                                --long
+                    <description>
+                        <paragraph>
+                            options can be long also
+                <option_list_item>
+                    <option_group>
+                        <option>
+                            <option_string>
+                                --input
+                            <option_argument delimiter="=">
+                                file
+                    <description>
+                        <paragraph>
+                            long options can also have
+                            arguments
+                <option_list_item>
+                    <option_group>
+                        <option>
+                            <option_string>
+                                --very-long-option
+                    <description>
+                        <paragraph>
+                            The description can also start on the next line.
+                        <paragraph>
+                            The description may contain multiple body elements,
+                            regardless of where it starts.
+                <option_list_item>
+                    <option_group>
+                        <option>
+                            <option_string>
+                                -x
+                        <option>
+                            <option_string>
+                                -y
+                        <option>
+                            <option_string>
+                                -z
+                    <description>
+                        <paragraph>
+                            Multiple options are an "option group".
+                <option_list_item>
+                    <option_group>
+                        <option>
+                            <option_string>
+                                -v
+                        <option>
+                            <option_string>
+                                --verbose
+                    <description>
+                        <paragraph>
+                            Commonly-seen: short & long options.
+                <option_list_item>
+                    <option_group>
+                        <option>
+                            <option_string>
+                                -1
+                            <option_argument delimiter=" ">
+                                file
+                        <option>
+                            <option_string>
+                                --one
+                            <option_argument delimiter="=">
+                                file
+                        <option>
+                            <option_string>
+                                --two
+                            <option_argument delimiter=" ">
+                                file
+                    <description>
+                        <paragraph>
+                            Multiple options with arguments.
+                <option_list_item>
+                    <option_group>
+                        <option>
+                            <option_string>
+                                /V
+                    <description>
+                        <paragraph>
+                            DOS/VMS-style options too
+            <paragraph>
+                There must be at least two spaces between the option and the
+                description.
+        <section ids="literal-blocks" names="literal\ blocks">
+            <title auto="1" refid="id44">
+                <generated classes="sectnum">
+                    2.7   
+                Literal Blocks
+            <paragraph>
+                Literal blocks are indicated with a double-colon ("::") at the end of
+                the preceding paragraph (over there 
+                <literal>
+                    -->
+                ).  They can be indented:
+            <literal_block xml:space="preserve">
+                if literal_block:
+                    text = 'is left as-is'
+                    spaces_and_linebreaks = 'are preserved'
+                    markup_processing = None
+            <paragraph>
+                Or they can be quoted without indentation:
+            <literal_block xml:space="preserve">
+                >> Great idea!
+                >
+                > Why didn't I think of that?
+        <section ids="line-blocks" names="line\ blocks">
+            <title auto="1" refid="id45">
+                <generated classes="sectnum">
+                    2.8   
+                Line Blocks
+            <paragraph>
+                This section tests line blocks.  Line blocks are body elements which
+                consist of lines and other line blocks.  Nested line blocks cause
+                indentation.
+            <line_block>
+                <line>
+                    This is a line block.  It ends with a blank line.
+                <line_block>
+                    <line>
+                        New lines begin with a vertical bar ("|").
+                    <line>
+                        Line breaks and initial indent are significant, and preserved.
+                    <line_block>
+                        <line>
+                            Continuation lines are also possible.  A long line that is intended
+                            to wrap should begin with a space in place of the vertical bar.
+                    <line>
+                        The left edge of a continuation line need not be aligned with
+                        the left edge of the text above it.
+            <line_block>
+                <line>
+                    This is a second line block.
+                <line>
+                <line>
+                    Blank lines are permitted internally, but they must begin with a "|".
+            <paragraph>
+                Another line block, surrounded by paragraphs:
+            <line_block>
+                <line>
+                    And it's no good waiting by the window
+                <line>
+                    It's no good waiting for the sun
+                <line>
+                    Please believe me, the things you dream of
+                <line>
+                    They don't fall in the lap of no-one
+            <paragraph>
+                Take it away, Eric the Orchestra Leader!
+            <block_quote>
+                <line_block>
+                    <line>
+                        A one, two, a one two three four
+                    <line>
+                    <line>
+                        Half a bee, philosophically,
+                    <line_block>
+                        <line>
+                            must, 
+                            <emphasis>
+                                ipso facto
+                            , half not be.
+                    <line>
+                        But half the bee has got to be,
+                    <line_block>
+                        <line>
+                            <emphasis>
+                                vis a vis
+                             its entity.  D'you see?
+                        <line>
+                    <line>
+                        But can a bee be said to be
+                    <line_block>
+                        <line>
+                            or not to be an entire bee,
+                        <line_block>
+                            <line>
+                                when half the bee is not a bee,
+                            <line_block>
+                                <line>
+                                    due to some ancient injury?
+                                <line>
+                    <line>
+                        Singing...
+        <section ids="block-quotes" names="block\ quotes">
+            <title auto="1" refid="id46">
+                <generated classes="sectnum">
+                    2.9   
+                Block Quotes
+            <paragraph>
+                Block quotes consist of indented body elements:
+            <block_quote>
+                <paragraph>
+                    My theory by A. Elk.  Brackets Miss, brackets.  This theory goes
+                    as follows and begins now.  All brontosauruses are thin at one
+                    end, much much thicker in the middle and then thin again at the
+                    far end.  That is my theory, it is mine, and belongs to me and I
+                    own it, and what it is too.
+                <attribution>
+                    Anne Elk (Miss)
+        <section ids="doctest-blocks" names="doctest\ blocks">
+            <title auto="1" refid="id47">
+                <generated classes="sectnum">
+                    2.10   
+                Doctest Blocks
+            <doctest_block xml:space="preserve">
+                >>> print 'Python-specific usage examples; begun with ">>>"'
+                Python-specific usage examples; begun with ">>>"
+                >>> print '(cut and pasted from interactive Python sessions)'
+                (cut and pasted from interactive Python sessions)
+        <section ids="footnotes" names="footnotes">
+            <title auto="1" refid="id48">
+                <generated classes="sectnum">
+                    2.11   
+                Footnotes
+            <footnote backrefs="id1 id9 id21" ids="id8" names="1">
+                <label>
+                    1
+                <paragraph>
+                    A footnote contains body elements, consistently indented by at
+                    least 3 spaces.
+                <paragraph>
+                    This is the footnote's second paragraph.
+            <footnote auto="1" backrefs="id3 id10" ids="label" names="label">
+                <label>
+                    2
+                <paragraph>
+                    Footnotes may be numbered, either manually (as in 
+                    <footnote_reference ids="id9" refid="id8">
+                        1
+                    ) or
+                    automatically using a "#"-prefixed label.  This footnote has a
+                    label so it can be referred to from multiple places, both as a
+                    footnote reference (
+                    <footnote_reference auto="1" ids="id10" refid="label">
+                        2
+                    ) and as a hyperlink reference
+                    (
+                    <reference name="label" refid="label">
+                        label
+                    ).
+            <footnote auto="1" backrefs="id2" ids="id11" names="3">
+                <label>
+                    3
+                <paragraph>
+                    This footnote is numbered automatically and anonymously using a
+                    label of "#" only.
+                <paragraph>
+                    This is the second paragraph.
+                <paragraph>
+                    And this is the third paragraph.
+            <footnote auto="*" backrefs="id4" ids="id12">
+                <label>
+                    *
+                <paragraph>
+                    Footnotes may also use symbols, specified with a "*" label.
+                    Here's a reference to the next footnote: 
+                    <footnote_reference auto="*" ids="id13" refid="id14">
+                        †
+                    .
+            <footnote auto="*" backrefs="id13" ids="id14">
+                <label>
+                    †
+                <paragraph>
+                    This footnote shows the next symbol in the sequence.
+            <footnote ids="id15" names="4">
+                <label>
+                    4
+                <paragraph>
+                    Here's an unreferenced footnote, with a reference to a
+                    nonexistent footnote: 
+                    <problematic ids="id80 id16" refid="id79">
+                        [5]_
+                    .
+        <section ids="citations" names="citations">
+            <title auto="1" refid="id49">
+                <generated classes="sectnum">
+                    2.12   
+                Citations
+            <citation backrefs="id5 id17" ids="cit2002" names="cit2002">
+                <label>
+                    CIT2002
+                <paragraph>
+                    Citations are text-labeled footnotes. They may be
+                    rendered separately and differently from footnotes.
+            <paragraph>
+                Here's a reference to the above, 
+                <citation_reference ids="id17" refid="cit2002">
+                    CIT2002
+                , and a 
+                <problematic ids="id82 id18" refid="id81">
+                    [nonexistent]_
+                
+                citation.
+            <target refid="another-target">
+        <section dupnames="targets" ids="targets another-target" names="another\ target">
+            <title auto="1" refid="id50">
+                <generated classes="sectnum">
+                    2.13   
+                Targets
+            <target refid="example">
+            <paragraph ids="example" names="example">
+                This paragraph is pointed to by the explicit "example" target. A
+                reference can be found under 
+                <reference name="Inline Markup" refid="inline-markup">
+                    Inline Markup
+                , above. 
+                <reference name="Inline hyperlink targets" refid="inline-hyperlink-targets">
+                    Inline
+                    hyperlink targets
+                 are also possible.
+            <paragraph>
+                Section headers are implicit targets, referred to by name. See
+                <reference name="Targets" refid="id22">
+                    Targets
+                , which is a subsection of 
+                <reference name="Body Elements" refid="body-elements">
+                    Body Elements
+                .
+            <paragraph>
+                Explicit external targets are interpolated into references such as
+                "
+                <reference name="Python" refuri="http://www.python.org/">
+                    Python
+                 
+                <footnote_reference auto="1" ids="id27" refid="id25">
+                    5
+                ".
+            <target ids="python" names="python" refuri="http://www.python.org/">
+            <paragraph>
+                Targets may be indirect and anonymous.  Thus 
+                <reference anonymous="1" name="this phrase" refid="id22">
+                    this phrase
+                 may also
+                refer to the 
+                <reference name="Targets" refid="id22">
+                    Targets
+                 section.
+            <target anonymous="1" ids="id19" refid="id22">
+            <paragraph>
+                Here's a 
+                <problematic ids="id84" refid="id83">
+                    `hyperlink reference without a target`_
+                , which generates an
+                error.
+            <section dupnames="duplicate\ target\ names" ids="duplicate-target-names">
+                <title auto="1" refid="id51">
+                    <generated classes="sectnum">
+                        2.13.1   
+                    Duplicate Target Names
+                <paragraph>
+                    Duplicate names in section headers or other implicit targets will
+                    generate "info" (level-1) system messages.  Duplicate names in
+                    explicit targets will generate "warning" (level-2) system messages.
+            <section dupnames="duplicate\ target\ names" ids="id20">
+                <title auto="1" refid="id52">
+                    <generated classes="sectnum">
+                        2.13.2   
+                    Duplicate Target Names
+                <paragraph>
+                    Since there are two "Duplicate Target Names" section headers, we
+                    cannot uniquely refer to either of them by name.  If we try to (like
+                    this: 
+                    <problematic ids="id86" refid="id85">
+                        `Duplicate Target Names`_
+                    ), an error is generated.
+        <section ids="directives" names="directives">
+            <title auto="1" refid="id53">
+                <generated classes="sectnum">
+                    2.14   
+                Directives
+            <topic classes="contents local" ids="contents" names="contents">
+                <bullet_list classes="auto-toc">
+                    <list_item>
+                        <paragraph>
+                            <reference ids="id71" refid="document-parts">
+                                <generated classes="sectnum">
+                                    2.14.1   
+                                Document Parts
+                    <list_item>
+                        <paragraph>
+                            <reference ids="id72" refid="images">
+                                <generated classes="sectnum">
+                                    2.14.2   
+                                Images
+                    <list_item>
+                        <paragraph>
+                            <reference ids="id73" refid="admonitions">
+                                <generated classes="sectnum">
+                                    2.14.3   
+                                Admonitions
+                    <list_item>
+                        <paragraph>
+                            <reference ids="id74" refid="topics-sidebars-and-rubrics">
+                                <generated classes="sectnum">
+                                    2.14.4   
+                                Topics, Sidebars, and Rubrics
+                    <list_item>
+                        <paragraph>
+                            <reference ids="id75" refid="target-footnotes">
+                                <generated classes="sectnum">
+                                    2.14.5   
+                                Target Footnotes
+                    <list_item>
+                        <paragraph>
+                            <reference ids="id76" refid="replacement-text">
+                                <generated classes="sectnum">
+                                    2.14.6   
+                                Replacement Text
+                    <list_item>
+                        <paragraph>
+                            <reference ids="id77" refid="compound-paragraph">
+                                <generated classes="sectnum">
+                                    2.14.7   
+                                Compound Paragraph
+                    <list_item>
+                        <paragraph>
+                            <reference ids="id78" refid="parsed-literal-blocks">
+                                <generated classes="sectnum">
+                                    2.14.8   
+                                Parsed Literal Blocks
+            <paragraph>
+                These are just a sample of the many reStructuredText Directives.  For
+                others, please see
+                <reference refuri="http://docutils.sourceforge.net/docs/ref/rst/directives.html">
+                    http://docutils.sourceforge.net/docs/ref/rst/directives.html
+                .
+            <section ids="document-parts" names="document\ parts">
+                <title auto="1" refid="id71">
+                    <generated classes="sectnum">
+                        2.14.1   
+                    Document Parts
+                <paragraph>
+                    An example of the "contents" directive can be seen above this section
+                    (a local, untitled table of 
+                    <reference name="contents" refid="contents">
+                        contents
+                    ) and at the beginning of the
+                    document (a document-wide 
+                    <reference name="table of contents" refid="table-of-contents">
+                        table of contents
+                    ).
+            <section ids="images" names="images">
+                <title auto="1" refid="id72">
+                    <generated classes="sectnum">
+                        2.14.2   
+                    Images
+                <paragraph>
+                    An image directive (also clickable -- a hyperlink reference):
+                <reference name="directives" refid="directives">
+                    <image classes="class1 class2" uri="../../../docs/user/rst/images/title.png">
+                <paragraph>
+                    Image with multiple IDs:
+                <target refid="image-target-1">
+                <target refid="image-target-2">
+                <target refid="image-target-3">
+                <image ids="image-target-3 image-target-2 image-target-1" names="image\ target\ 3 image\ target\ 2 image\ target\ 1" uri="../../../docs/user/rst/images/title.png">
+                <paragraph>
+                    A centered image:
+                <image align="center" uri="../../../docs/user/rst/images/biohazard.png">
+                <paragraph>
+                    A left-aligned image:
+                <image align="left" uri="../../../docs/user/rst/images/biohazard.png">
+                <paragraph>
+                    A right-aligned image:
+                <image align="right" uri="../../../docs/user/rst/images/biohazard.png">
+                <paragraph>
+                    A figure directive:
+                <figure align="right" classes="figclass1 figclass2">
+                    <image alt="reStructuredText, the markup syntax" classes="class1 class2" uri="../../../docs/user/rst/images/biohazard.png" width="50">
+                    <caption>
+                        A figure is an image with a caption and/or a legend:
+                    <legend>
+                        <table>
+                            <tgroup cols="2">
+                                <colspec colwidth="12">
+                                <colspec colwidth="47">
+                                <tbody>
+                                    <row>
+                                        <entry>
+                                            <paragraph>
+                                                re
+                                        <entry>
+                                            <paragraph>
+                                                Revised, revisited, based on 're' module.
+                                    <row>
+                                        <entry>
+                                            <paragraph>
+                                                Structured
+                                        <entry>
+                                            <paragraph>
+                                                Structure-enhanced text, structuredtext.
+                                    <row>
+                                        <entry>
+                                            <paragraph>
+                                                Text
+                                        <entry>
+                                            <paragraph>
+                                                Well it is, isn't it?
+                        <paragraph>
+                            This paragraph is also part of the legend.
+                <figure align="left" classes="figclass1 figclass2">
+                    <image alt="reStructuredText, the markup syntax" classes="class1 class2" uri="../../../docs/user/rst/images/biohazard.png" width="50">
+                    <caption>
+                        A left-aligned figure.
+                    <legend>
+                        <paragraph>
+                            This is the legend.
+                <paragraph>
+                    This paragraph might flow around the figure...
+                <paragraph>
+                    A centered figure:
+                <figure align="center">
+                    <image uri="../../../docs/user/rst/images/biohazard.png" width="50">
+                    <caption>
+                        This is the caption.
+                    <legend>
+                        <paragraph>
+                            This is the legend.
+                        <paragraph>
+                            The legend may consist of several paragraphs.
+                <paragraph>
+                    This paragraph might flow around the figure...
+                <paragraph>
+                    A left-aligned figure:
+                <figure align="left">
+                    <image uri="../../../docs/user/rst/images/biohazard.png" width="50">
+                    <caption>
+                        This is the caption.
+                    <legend>
+                        <paragraph>
+                            This is the legend.
+                        <paragraph>
+                            The legend may consist of several paragraphs.
+                <paragraph>
+                    This paragraph might flow around the figure...
+                <paragraph>
+                    Now widths:
+                <paragraph>
+                    An image 2 em wide:
+                <image uri="../../../docs/user/rst/images/biohazard.png" width="2em">
+                <paragraph>
+                    An image 2 em wide and 30 pixel high:
+                <image height="30px" uri="../../../docs/user/rst/images/biohazard.png" width="2em">
+                <paragraph>
+                    An image occupying 70% of the line width:
+                <image uri="../../../docs/user/rst/images/biohazard.png" width="70%">
+                <paragraph>
+                    An image 3 cm high:
+                <image height="3cm" uri="../../../docs/user/rst/images/biohazard.png">
+            <section ids="admonitions" names="admonitions">
+                <title auto="1" refid="id73">
+                    <generated classes="sectnum">
+                        2.14.3   
+                    Admonitions
+                <attention>
+                    <paragraph>
+                        Directives at large.
+                <caution>
+                    <paragraph>
+                        Don't take any wooden nickels.
+                <danger>
+                    <paragraph>
+                        Mad scientist at work!
+                <error>
+                    <paragraph>
+                        Does not compute.
+                <hint>
+                    <paragraph>
+                        It's bigger than a bread box.
+                <important>
+                    <bullet_list bullet="-">
+                        <list_item>
+                            <paragraph>
+                                Wash behind your ears.
+                        <list_item>
+                            <paragraph>
+                                Clean up your room.
+                        <list_item>
+                            <paragraph>
+                                Call your mother.
+                        <list_item>
+                            <paragraph>
+                                Back up your data.
+                <note>
+                    <paragraph>
+                        This is a note.
+                <tip>
+                    <paragraph>
+                        15% if the service is good.
+                <warning>
+                    <paragraph>
+                        Strong prose may provoke extreme mental exertion.
+                        Reader discretion is strongly advised.
+                <admonition classes="admonition-and-by-the-way">
+                    <title>
+                        And, by the way...
+                    <paragraph>
+                        You can make up your own admonition too.
+                    <target ids="docutils" names="docutils" refuri="http://docutils.sourceforge.net/">
+            <section ids="topics-sidebars-and-rubrics" names="topics,\ sidebars,\ and\ rubrics">
+                <title auto="1" refid="id74">
+                    <generated classes="sectnum">
+                        2.14.4   
+                    Topics, Sidebars, and Rubrics
+                <sidebar>
+                    <title>
+                        Sidebar Title
+                    <subtitle>
+                        Optional Subtitle
+                    <paragraph>
+                        This is a sidebar.  It is for text outside the flow of the main
+                        text.
+                    <rubric>
+                        This is a rubric inside a sidebar
+                    <paragraph>
+                        Sidebars often appears beside the main text with a border and
+                        background color.
+                <topic>
+                    <title>
+                        Topic Title
+                    <paragraph>
+                        This is a topic.
+                <rubric>
+                    This is a rubric
+            <section ids="target-footnotes" names="target\ footnotes">
+                <title auto="1" refid="id75">
+                    <generated classes="sectnum">
+                        2.14.5   
+                    Target Footnotes
+                <footnote auto="1" backrefs="id26 id27 id28 id29" ids="id25" names="TARGET_NOTE:\ id25">
+                    <label>
+                        5
+                    <paragraph>
+                        <reference refuri="http://www.python.org/">
+                            http://www.python.org/
+                <footnote auto="1" backrefs="id31" ids="id30" names="TARGET_NOTE:\ id30">
+                    <label>
+                        6
+                    <paragraph>
+                        <reference refuri="http://docutils.sourceforge.net/">
+                            http://docutils.sourceforge.net/
+            <section ids="replacement-text" names="replacement\ text">
+                <title auto="1" refid="id76">
+                    <generated classes="sectnum">
+                        2.14.6   
+                    Replacement Text
+                <paragraph>
+                    I recommend you try 
+                    <reference refuri="http://www.python.org/">
+                        Python, 
+                        <emphasis>
+                            the
+                         best language around
+                     
+                    <footnote_reference auto="1" ids="id28" refid="id25">
+                        5
+                    .
+                <substitution_definition names="Python">
+                    Python, 
+                    <emphasis>
+                        the
+                     best language around
+            <section ids="compound-paragraph" names="compound\ paragraph">
+                <title auto="1" refid="id77">
+                    <generated classes="sectnum">
+                        2.14.7   
+                    Compound Paragraph
+                <compound classes="some-class">
+                    <paragraph>
+                        Compound 1, paragraph 1.
+                    <paragraph>
+                        Compound 1, paragraph 2.
+                    <bullet_list bullet="*">
+                        <list_item>
+                            <paragraph>
+                                Compound 1, list item one.
+                        <list_item>
+                            <paragraph>
+                                Compound 1, list item two.
+                <paragraph>
+                    Another compound statement:
+                <compound>
+                    <paragraph>
+                        Compound 2, a literal block:
+                    <literal_block xml:space="preserve">
+                        Compound 2, literal.
+                    <paragraph>
+                        Compound 2, this is a test.
+                <compound>
+                    <paragraph>
+                        Compound 3, only consisting of one paragraph.
+                <compound>
+                    <literal_block xml:space="preserve">
+                        Compound 4.
+                        This one starts with a literal block.
+                    <paragraph>
+                        Compound 4, a paragraph.
+                <paragraph>
+                    Now something 
+                    <emphasis>
+                        really
+                     perverted -- a nested compound block.  This is
+                    just to test that it works at all; the results don't have to be
+                    meaningful.
+                <compound>
+                    <paragraph>
+                        Compound 5, block 1 (a paragraph).
+                    <compound>
+                        <paragraph>
+                            Compound 6, block 2 in compound 5.
+                        <paragraph>
+                            Compound 6, another paragraph.
+                    <paragraph>
+                        Compound 5, block 3 (a paragraph).
+                <compound>
+                    <paragraph>
+                        Compound 7, with a table inside:
+                    <table>
+                        <tgroup cols="3">
+                            <colspec colwidth="20">
+                            <colspec colwidth="20">
+                            <colspec colwidth="20">
+                            <tbody>
+                                <row>
+                                    <entry>
+                                        <paragraph>
+                                            Left cell, first
+                                            paragraph.
+                                        <paragraph>
+                                            Left cell, second
+                                            paragraph.
+                                    <entry>
+                                        <paragraph>
+                                            Middle cell,
+                                            consisting of
+                                            exactly one
+                                            paragraph.
+                                    <entry>
+                                        <paragraph>
+                                            Right cell.
+                                        <paragraph>
+                                            Paragraph 2.
+                                        <paragraph>
+                                            Paragraph 3.
+                    <paragraph>
+                        Compound 7, a paragraph after the table.
+                    <paragraph>
+                        Compound 7, another paragraph.
+            <section ids="parsed-literal-blocks" names="parsed\ literal\ blocks">
+                <title auto="1" refid="id78">
+                    <generated classes="sectnum">
+                        2.14.8   
+                    Parsed Literal Blocks
+                <literal_block xml:space="preserve">
+                    This is a parsed literal block.
+                        This line is indented.  The next line is blank.
+                    
+                    Inline markup is supported, e.g. 
+                    <emphasis>
+                        emphasis
+                    , 
+                    <strong>
+                        strong
+                    , 
+                    <literal>
+                        literal
+                        text
+                    , footnotes 
+                    <footnote_reference ids="id21" refid="id8">
+                        1
+                    , 
+                    <target ids="id22" names="targets">
+                        targets
+                    , and 
+                    <reference name="references" refuri="http://www.python.org/">
+                        references
+                    <target ids="references" names="references" refuri="http://www.python.org/">
+                    .
+        <section ids="substitution-definitions" names="substitution\ definitions">
+            <title auto="1" refid="id62">
+                <generated classes="sectnum">
+                    2.15   
+                Substitution Definitions
+            <paragraph>
+                An inline image (
+                <image alt="EXAMPLE" uri="../../../docs/user/rst/images/biohazard.png">
+                ) example:
+            <substitution_definition names="EXAMPLE">
+                <image alt="EXAMPLE" uri="../../../docs/user/rst/images/biohazard.png">
+            <paragraph>
+                (Substitution definitions are not visible in the HTML source.)
+        <section ids="comments" names="comments">
+            <title auto="1" refid="id63">
+                <generated classes="sectnum">
+                    2.16   
+                Comments
+            <paragraph>
+                Here's one:
+            <comment xml:space="preserve">
+                Comments begin with two dots and a space. Anything may
+                follow, except for the syntax of footnotes, hyperlink
+                targets, directives, or substitution definitions.
+                
+                Double-dashes -- "--" -- must be escaped somehow in HTML output.
+            <paragraph>
+                (View the HTML source to see the comment.)
+        <section ids="raw-text" names="raw\ text">
+            <title auto="1" refid="id64">
+                <generated classes="sectnum">
+                    2.17   
+                Raw text
+            <paragraph>
+                This does not necessarily look nice, because there may be missing white space.
+            <paragraph>
+                It's just there to freeze the behavior.
+            <raw format="html latex" xml:space="preserve">
+                A test.
+            <raw format="html latex" xml:space="preserve">
+                Second test.
+            <raw classes="myclass" format="html latex" xml:space="preserve">
+                Another test with myclass set.
+            <paragraph>
+                This is the 
+                <raw classes="myrawroleclass" format="html latex" xml:space="preserve">
+                    fourth test
+                 with myrawroleclass set.
+            <raw format="html" xml:space="preserve">
+                Fifth test in HTML.<br />Line two.
+            <raw format="latex" xml:space="preserve">
+                Fifth test in LaTeX.\\Line two.
+        <section ids="container" names="container">
+            <title auto="1" refid="id65">
+                <generated classes="sectnum">
+                    2.18   
+                Container
+            <container classes="custom">
+                <paragraph>
+                    paragraph 1
+                <paragraph>
+                    paragraph 2
+        <section ids="colspanning-tables" names="colspanning\ tables">
+            <title auto="1" refid="id66">
+                <generated classes="sectnum">
+                    2.19   
+                Colspanning tables
+            <paragraph>
+                This table has a cell spanning two columns:
+            <table>
+                <tgroup cols="3">
+                    <colspec colwidth="5">
+                    <colspec colwidth="5">
+                    <colspec colwidth="6">
+                    <thead>
+                        <row>
+                            <entry morecols="1">
+                                <paragraph>
+                                    Inputs
+                            <entry>
+                                <paragraph>
+                                    Output
+                        <row>
+                            <entry>
+                                <paragraph>
+                                    A
+                            <entry>
+                                <paragraph>
+                                    B
+                            <entry>
+                                <paragraph>
+                                    A or B
+                    <tbody>
+                        <row>
+                            <entry>
+                                <paragraph>
+                                    False
+                            <entry>
+                                <paragraph>
+                                    False
+                            <entry>
+                                <paragraph>
+                                    False
+                        <row>
+                            <entry>
+                                <paragraph>
+                                    True
+                            <entry>
+                                <paragraph>
+                                    False
+                            <entry>
+                                <paragraph>
+                                    True
+                        <row>
+                            <entry>
+                                <paragraph>
+                                    False
+                            <entry>
+                                <paragraph>
+                                    True
+                            <entry>
+                                <paragraph>
+                                    True
+                        <row>
+                            <entry>
+                                <paragraph>
+                                    True
+                            <entry>
+                                <paragraph>
+                                    True
+                            <entry>
+                                <paragraph>
+                                    True
+        <section ids="rowspanning-tables" names="rowspanning\ tables">
+            <title auto="1" refid="id67">
+                <generated classes="sectnum">
+                    2.20   
+                Rowspanning tables
+            <paragraph>
+                Here's a table with cells spanning several rows:
+            <table>
+                <tgroup cols="3">
+                    <colspec colwidth="24">
+                    <colspec colwidth="12">
+                    <colspec colwidth="18">
+                    <thead>
+                        <row>
+                            <entry>
+                                <paragraph>
+                                    Header row, column 1
+                                    (header rows optional)
+                            <entry>
+                                <paragraph>
+                                    Header 2
+                            <entry>
+                                <paragraph>
+                                    Header 3
+                    <tbody>
+                        <row>
+                            <entry>
+                                <paragraph>
+                                    body row 1, column 1
+                            <entry>
+                                <paragraph>
+                                    column 2
+                            <entry>
+                                <paragraph>
+                                    column 3
+                        <row>
+                            <entry>
+                                <paragraph>
+                                    body row 2
+                            <entry morerows="1">
+                                <paragraph>
+                                    Cells may
+                                    span rows.
+                            <entry morerows="1">
+                                <paragraph>
+                                    Another
+                                    rowspanning
+                                    cell.
+                        <row>
+                            <entry>
+                                <paragraph>
+                                    body row 3
+        <section ids="complex-tables" names="complex\ tables">
+            <title auto="1" refid="id68">
+                <generated classes="sectnum">
+                    2.21   
+                Complex tables
+            <paragraph>
+                Here's a complex table, which should test all features.
+            <table>
+                <tgroup cols="4">
+                    <colspec colwidth="24">
+                    <colspec colwidth="12">
+                    <colspec colwidth="10">
+                    <colspec colwidth="10">
+                    <thead>
+                        <row>
+                            <entry>
+                                <paragraph>
+                                    Header row, column 1
+                                    (header rows optional)
+                            <entry>
+                                <paragraph>
+                                    Header 2
+                            <entry>
+                                <paragraph>
+                                    Header 3
+                            <entry>
+                                <paragraph>
+                                    Header 4
+                    <tbody>
+                        <row>
+                            <entry>
+                                <paragraph>
+                                    body row 1, column 1
+                            <entry>
+                                <paragraph>
+                                    column 2
+                            <entry>
+                                <paragraph>
+                                    column 3
+                            <entry>
+                                <paragraph>
+                                    column 4
+                        <row>
+                            <entry>
+                                <paragraph>
+                                    body row 2
+                            <entry morecols="2">
+                                <paragraph>
+                                    Cells may span columns.
+                        <row>
+                            <entry>
+                                <paragraph>
+                                    body row 3
+                            <entry morerows="1">
+                                <paragraph>
+                                    Cells may
+                                    span rows.
+                                <paragraph>
+                                    Paragraph.
+                            <entry morecols="1" morerows="1">
+                                <bullet_list bullet="-">
+                                    <list_item>
+                                        <paragraph>
+                                            Table cells
+                                    <list_item>
+                                        <paragraph>
+                                            contain
+                                    <list_item>
+                                        <paragraph>
+                                            body elements.
+                        <row>
+                            <entry>
+                                <paragraph>
+                                    body row 4
+                        <row>
+                            <entry>
+                                <paragraph>
+                                    body row 5
+                            <entry morecols="1">
+                                <paragraph>
+                                    Cells may also be
+                                    empty: 
+                                    <literal>
+                                        -->
+                            <entry>
+        <section ids="list-tables" names="list\ tables">
+            <title auto="1" refid="id69">
+                <generated classes="sectnum">
+                    2.22   
+                List Tables
+            <paragraph>
+                Here's a list table exercising all features:
+            <table classes="test">
+                <title>
+                    list table with integral header
+                <tgroup cols="3">
+                    <colspec colwidth="10" stub="1">
+                    <colspec colwidth="20">
+                    <colspec colwidth="30">
+                    <thead>
+                        <row>
+                            <entry>
+                                <paragraph>
+                                    Treat
+                            <entry>
+                                <paragraph>
+                                    Quantity
+                            <entry>
+                                <paragraph>
+                                    Description
+                    <tbody>
+                        <row>
+                            <entry>
+                                <paragraph>
+                                    Albatross
+                            <entry>
+                                <paragraph>
+                                    2.99
+                            <entry>
+                                <paragraph>
+                                    On a stick!
+                        <row>
+                            <entry>
+                                <paragraph>
+                                    Crunchy Frog
+                            <entry>
+                                <paragraph>
+                                    1.49
+                            <entry>
+                                <paragraph>
+                                    If we took the bones out, it wouldn't be
+                                    crunchy, now would it?
+                        <row>
+                            <entry>
+                                <paragraph>
+                                    Gannet Ripple
+                            <entry>
+                                <paragraph>
+                                    1.99
+                            <entry>
+                                <paragraph>
+                                    On a stick!
+    <section ids="error-handling" names="error\ handling">
+        <title auto="1" refid="id70">
+            <generated classes="sectnum">
+                3   
+            Error Handling
+        <paragraph>
+            Any errors caught during processing will generate system messages.
+        <paragraph>
+            There should be five messages in the following, auto-generated
+            section, "Docutils System Messages":
+        <comment xml:space="preserve">
+            section should be added by Docutils automatically
+    <section classes="system-messages">
+        <title>
+            Docutils System Messages
+        <system_message backrefs="id24" ids="id23" level="3" line="100" source="functional/input/data/standard.txt" type="ERROR">
+            <paragraph>
+                Undefined substitution referenced: "problematic".
+        <system_message backrefs="id80" ids="id79" level="3" line="358" source="functional/input/standalone_rst_pseudoxml.txt" type="ERROR">
+            <paragraph>
+                Unknown target name: "5".
+        <system_message backrefs="id82" ids="id81" level="3" line="367" source="functional/input/data/standard.txt" type="ERROR">
+            <paragraph>
+                Unknown target name: "nonexistent".
+        <system_message backrefs="id84" ids="id83" level="3" line="394" source="functional/input/data/standard.txt" type="ERROR">
+            <paragraph>
+                Unknown target name: "hyperlink reference without a target".
+        <system_message backrefs="id86" ids="id85" level="3" line="407" source="functional/input/data/standard.txt" type="ERROR">
+            <paragraph>
+                Duplicate target name, cannot be used as a unique reference: "duplicate target names".

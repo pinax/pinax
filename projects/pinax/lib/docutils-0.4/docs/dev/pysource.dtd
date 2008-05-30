@@ -1,0 +1,259 @@
+<!--
+======================================================================
+    Docutils Python Source DTD
+======================================================================
+:Author: David Goodger
+:Contact: goodger@users.sourceforge.net
+:Revision: $Revision: 2223 $
+:Date: $Date: 2004-06-05 21:32:15 +0200 (Sat, 05 Jun 2004) $
+:Copyright: This DTD has been placed in the public domain.
+:Filename: pysource.dtd
+
+This DTD (document type definition) extends the Generic DTD (see
+below).
+
+More information about this DTD and the Docutils project can be found
+at http://docutils.sourceforge.net/.  The latest version of this DTD
+is available from
+http://docutils.sourceforge.net/docs/dev/pysource.dtd.
+
+The formal public identifier for this DTD is::
+
+    +//IDN docutils.sourceforge.net//DTD Docutils Python Source//EN//XML
+-->
+
+<!--
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Parameter Entity Overrides
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-->
+
+<!ENTITY % additional.section.elements
+  " | package_section | module_section | class_section
+    | method_section | function_section
+    | module_attribute_section | function_attribute_section
+    | class_attribute_section | instance_attribute_section ">
+
+<!ENTITY % additional.inline.elements
+  " | package | module | class | method | function
+    | variable | parameter | type | attribute
+    | module_attribute | class_attribute | instance_attribute
+    | exception_class | warning_class ">
+
+<!--
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Generic DTD
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This DTD extends the Docutils Generic DTD, available from
+http://docutils.sourceforge.net/docs/ref/docutils.dtd.
+-->
+
+<!ENTITY % docutils PUBLIC
+    "+//IDN python.org//DTD Docutils Generic//EN//XML"
+    "docutils.dtd">
+%docutils;
+
+<!--
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Additional Section Elements
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-->
+
+<!ELEMENT package_section
+    (package, fullname?, import_list?, %structure.model;)>
+<!ATTLIST package_section %basic.atts;>
+
+<!ELEMENT module_section
+    (module, fullname?, import_list?, %structure.model;)>
+<!ATTLIST module_section %basic.atts;>
+
+<!ELEMENT class_section
+    (class, inheritance_list?, fullname?, subclasses?,
+     %structure.model;)>
+<!ATTLIST class_section %basic.atts;>
+
+<!ELEMENT method_section
+    (method, parameter_list?, fullname?, overrides?,
+     %structure.model;)>
+<!ATTLIST method_section %basic.atts;>
+
+<!ELEMENT function_section
+    (function, parameter_list?, fullname?, %structure.model;)>
+<!ATTLIST function_section %basic.atts;>
+
+<!ELEMENT module_attribute_section
+    (attribute, initial_value?, fullname?, %structure.model;)>
+<!ATTLIST module_attribute_section %basic.atts;>
+
+<!ELEMENT function_attribute_section
+    (attribute, initial_value?, fullname?, %structure.model;)>
+<!ATTLIST function_attribute_section %basic.atts;>
+
+<!ELEMENT class_attribute_section
+    (attribute, initial_value?, fullname?, overrides?,
+     %structure.model;)>
+<!ATTLIST class_attribute_section %basic.atts;>
+
+<!ELEMENT instance_attribute_section
+    (attribute, initial_value?, fullname?, overrides?,
+     %structure.model;)>
+<!ATTLIST instance_attribute_section %basic.atts;>
+
+<!--
+    Section Subelements
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-->
+
+<!ELEMENT fullname
+    (package | module | class | method | function | attribute)+>
+<!ATTLIST fullname %basic.atts;>
+
+<!ELEMENT import_list (import_item+)>
+<!ATTLIST import_list %basic.atts;>
+
+<!--
+Support ``import module``, ``import module as alias``, ``from module
+import identifier``, and ``from module import identifier as alias``.
+-->
+<!ELEMENT import_item (fullname, identifier?, alias?)>
+<!ATTLIST import_item %basic.atts;>
+
+<!ELEMENT inheritance_list (class+)>
+<!ATTLIST inheritance_list %basic.atts;>
+
+<!ELEMENT subclasses (class+)>
+<!ATTLIST subclasses %basic.atts;>
+
+<!ELEMENT parameter_list
+    ((parameter_item+, optional_parameters*) | optional_parameters+)>
+<!ATTLIST parameter_list %basic.atts;>
+
+<!ELEMENT parameter_item
+    ((parameter | parameter_tuple), parameter_default?)>
+<!ATTLIST parameter_item %basic.atts;>
+
+<!ELEMENT optional_parameters (parameter_item+, optional_parameters*)>
+<!ATTLIST optional_parameters %basic.atts;>
+
+<!ELEMENT parameter_tuple (parameter | parameter_tuple)+>
+<!ATTLIST parameter_tuple %basic.atts;>
+
+<!ELEMENT parameter_default (#PCDATA)>
+<!ATTLIST parameter_default %basic.atts;>
+
+<!ELEMENT overrides (fullname+)>
+<!ATTLIST overrides %basic.atts;>
+
+<!ELEMENT initial_value (#PCDATA)>
+<!ATTLIST initial_value %basic.atts;>
+
+<!--
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Additional Inline Elements
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-->
+
+<!-- Also used as the `package_section` identifier/title. -->
+<!ELEMENT package (#PCDATA)>
+<!ATTLIST package
+    %basic.atts;
+    %reference.atts;>
+
+<!-- Also used as the `module_section` identifier/title. -->
+<!ELEMENT module (#PCDATA)>
+<!ATTLIST module
+    %basic.atts;
+    %reference.atts;>
+
+<!--
+Also used as the `class_section` identifier/title, and in the
+`inheritance` element.
+-->
+<!ELEMENT class (#PCDATA)>
+<!ATTLIST class
+    %basic.atts;
+    %reference.atts;>
+
+<!-- Also used as the `method_section` identifier/title. -->
+<!ELEMENT method (#PCDATA)>
+<!ATTLIST method
+    %basic.atts;
+    %reference.atts;>
+
+<!-- Also used as the `function_section` identifier/title. -->
+<!ELEMENT function (#PCDATA)>
+<!ATTLIST function
+    %basic.atts;
+    %reference.atts;>
+
+<!--
+??? Use this instead of the ``*_attribute`` elements below?  Add a
+"type" attribute to differentiate?
+
+Also used as the identifier/title for `module_attribute_section`,
+`class_attribute_section`, and `instance_attribute_section`.
+-->
+<!ELEMENT attribute (#PCDATA)>
+<!ATTLIST attribute
+    %basic.atts;
+    %reference.atts;>
+
+<!--
+Also used as the `module_attribute_section` identifier/title. A module
+attribute is an exported module-level global variable.
+-->
+<!ELEMENT module_attribute (#PCDATA)>
+<!ATTLIST module_attribute
+    %basic.atts;
+    %reference.atts;>
+
+<!-- Also used as the `class_attribute_section` identifier/title. -->
+<!ELEMENT class_attribute (#PCDATA)>
+<!ATTLIST class_attribute
+    %basic.atts;
+    %reference.atts;>
+
+<!--
+Also used as the `instance_attribute_section` identifier/title.
+-->
+<!ELEMENT instance_attribute (#PCDATA)>
+<!ATTLIST instance_attribute
+    %basic.atts;
+    %reference.atts;>
+
+<!ELEMENT variable (#PCDATA)>
+<!ATTLIST variable
+    %basic.atts;
+    %reference.atts;>
+
+<!-- Also used in `parameter_list`. -->
+<!ELEMENT parameter (#PCDATA)>
+<!ATTLIST parameter
+    %basic.atts;
+    %reference.atts;
+    excess_positional  %yesorno;  #IMPLIED
+    excess_keyword     %yesorno;  #IMPLIED>
+
+<!ELEMENT type (#PCDATA)>
+<!ATTLIST type
+    %basic.atts;
+    %reference.atts;>
+
+<!ELEMENT exception_class (#PCDATA)>
+<!ATTLIST exception_class
+    %basic.atts;
+    %reference.atts;>
+
+<!ELEMENT warning_class (#PCDATA)>
+<!ATTLIST warning_class
+    %basic.atts;
+    %reference.atts;>
+
+<!--
+Local Variables:
+mode: sgml
+indent-tabs-mode: nil
+fill-column: 70
+End:
+-->

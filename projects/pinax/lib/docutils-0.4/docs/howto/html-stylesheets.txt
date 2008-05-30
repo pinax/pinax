@@ -1,0 +1,76 @@
+==============================================
+ Writing HTML (CSS) Stylesheets for Docutils_
+==============================================
+
+:Author: Felix Wiemann
+:Contact: Felix.Wiemann@ososo.de
+:Date: $Date: 2005-12-09 05:21:34 +0100 (Fri, 09 Dec 2005) $
+:Revision: $Revision: 4163 $
+:Copyright: This document has been placed in the public domain.
+
+.. _Docutils: http://docutils.sourceforge.net/
+
+
+The look of Docutils' HTML output is customizable via a CSS
+stylesheet.  The default stylesheet is called ``html4css1.css`` and
+can be found in the ``writers/html4css1/`` directory of the Docutils
+installation.  Use the command ``rst2html.py --help`` and look at the
+description of the ``--stylesheet-path`` command-line option for the
+exact machine-specific location.
+
+To customize the stylesheet, first copy ``html4css1.css`` to the same
+place as your output HTML files will go.  Next, place a new file
+(e.g. called ``my-docutils.css``) in the same directory and use the
+following template::
+
+    /*
+    :Author: Your Name
+    :Contact: Your Email Address
+    :Copyright: This stylesheet has been placed in the public domain.
+
+    Stylesheet for use with Docutils.  [Optionally place a more
+    detailed description here.]
+    */
+
+    @import url(html4css1.css);
+
+    /* Your customizations go here.  For example: */
+
+    h1, h2, h3, h4, h5, h6, p.topic-title {
+      font-family: sans-serif }    
+
+For help on the CSS syntax, please see `the WDG's guide to Cascading
+Style Sheets`__ and, in particular, their `list of CSS1 properties`__.
+
+__ http://www.htmlhelp.com/reference/css/
+__ http://www.htmlhelp.com/reference/css/all-properties.html
+
+It is important that you do not edit a copy of ``html4css1.css``
+directly because ``html4css1.css`` is frequently updated with each new
+release of Docutils.
+
+Also make sure that you import ``html4css1.css`` (using "``@import
+url(html4css1.css);``") because the definitions contained in the
+default stylesheet are required for correct rendering (margins,
+alignment, etc.).
+
+If you think your stylesheet is fancy and you would like to let others
+benefit from your efforts, you are encouraged to post the stylesheet
+to the Docutils-users_ mailing list.  We can upload it to the
+`Docutils repository`__ if you would like us to do so.
+
+If you decide to share you stylesheet with other users of Docutils,
+please keep website-specific customizations not applicable to
+Docutils' HTML code in a separate stylesheet.
+
+.. _Docutils-users: ../user/mailing-lists.html#docutils-users
+__ http://docutils.sourceforge.net/sandbox/stylesheets/
+
+
+..
+   Local Variables:
+   mode: indented-text
+   indent-tabs-mode: nil
+   sentence-end-double-space: t
+   fill-column: 70
+   End:

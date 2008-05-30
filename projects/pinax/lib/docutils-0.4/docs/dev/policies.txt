@@ -1,0 +1,549 @@
+===========================
+ Docutils Project Policies
+===========================
+
+:Author: David Goodger; open to all Docutils developers
+:Contact: goodger@python.org
+:Date: $Date: 2005-11-14 19:11:32 +0100 (Mon, 14 Nov 2005) $
+:Revision: $Revision: 4048 $
+:Copyright: This document has been placed in the public domain.
+
+.. contents::
+
+The Docutils project group is a meritocracy based on code contribution
+and lots of discussion [#bcs]_.  A few quotes sum up the policies of
+the Docutils project.  The IETF's classic credo (by MIT professor Dave
+Clark) is an ideal we can aspire to:
+
+    We reject: kings, presidents, and voting.  We believe in: rough
+    consensus and running code.
+
+As architect, chief cook and bottle-washer, David Goodger currently
+functions as BDFN (Benevolent Dictator For Now).  (But he would
+happily abdicate the throne given a suitable candidate.  Any takers?)
+
+Eric S. Raymond, anthropologist of the hacker subculture, writes in
+his essay `The Magic Cauldron`_:
+
+    The number of contributors [to] projects is strongly and inversely
+    correlated with the number of hoops each project makes a user go
+    through to contribute.
+
+We will endeavour to keep the barrier to entry as low as possible.
+The policies below should not be thought of as barriers, but merely as
+a codification of experience to date.  These are "best practices";
+guidelines, not absolutes.  Exceptions are expected, tolerated, and
+used as a source of improvement.  Feedback and criticism is welcome.
+
+As for control issues, Emmett Plant (CEO of the Xiph.org Foundation,
+originators of Ogg Vorbis) put it well when he said:
+
+    Open source dictates that you lose a certain amount of control
+    over your codebase, and that's okay with us.
+
+.. [#bcs] Phrase borrowed from `Ben Collins-Sussman of the Subversion
+   project <http://www.red-bean.com/sussman/svn-anti-fud.html>`__.
+
+.. _The Magic Cauldron:
+   http://www.catb.org/~esr/writings/magic-cauldron/
+
+
+Python Coding Conventions
+=========================
+
+Contributed code will not be refused merely because it does not
+strictly adhere to these conditions; as long as it's internally
+consistent, clean, and correct, it probably will be accepted.  But
+don't be surprised if the "offending" code gets fiddled over time to
+conform to these conventions.
+
+The Docutils project shall follow the generic coding conventions as
+specified in the `Style Guide for Python Code`_ and `Docstring
+Conventions`_ PEPs, summarized, clarified, and extended as follows:
+
+* 4 spaces per indentation level.  No hard tabs.
+
+* Use only 7-bit ASCII, no 8-bit strings.  See `Docutils
+  Internationalization`_.
+
+* No one-liner compound statements (i.e., no ``if x: return``: use two
+  lines & indentation), except for degenerate class or method
+  definitions (i.e., ``class X: pass`` is OK.).
+
+* Lines should be no more than 78 characters long.
+
+* Use "StudlyCaps" for class names (except for element classes in
+  docutils.nodes).
+
+* Use "lowercase" or "lowercase_with_underscores" for function,
+  method, and variable names.  For short names, maximum two words,
+  joined lowercase may be used (e.g. "tagname").  For long names with
+  three or more words, or where it's hard to parse the split between
+  two words, use lowercase_with_underscores (e.g.,
+  "note_explicit_target", "explicit_target").  If in doubt, use
+  underscores.
+
+* Avoid lambda expressions, which are inherently difficult to
+  understand.  Named functions are preferable and superior: they're
+  faster (no run-time compilation), and well-chosen names serve to
+  document and aid understanding.
+
+* Avoid functional constructs (filter, map, etc.).  Use list
+  comprehensions instead.
+
+* Avoid ``from __future__ import`` constructs.  They are inappropriate
+  for production code.
+
+* Use 'single quotes' for string literals, and """triple double
+  quotes""" for docstrings.
+
+.. _Style Guide for Python Code:
+   http://www.python.org/peps/pep-0008.html
+.. _Docstring Conventions: http://www.python.org/peps/pep-0257.html
+.. _Docutils Internationalization: ../howto/i18n.html#python-code
+
+
+Documentation Conventions
+=========================
+
+* Docutils documentation is written using reStructuredText, of course.
+
+* Use 7-bit ASCII if at all possible, and Unicode substitutions when
+  necessary.
+
+* Use the following section title adornment styles::
+
+      ================
+       Document Title
+      ================
+
+      --------------------------------------------
+       Document Subtitle, or Major Division Title
+      --------------------------------------------
+
+      Section
+      =======
+
+      Subsection
+      ----------
+
+      Sub-Subsection
+      ``````````````
+
+      Sub-Sub-Subsection
+      ..................
+
+* Use two blank lines before each section/subsection/etc. title.  One
+  blank line is sufficient between immediately adjacent titles.
+
+* Add a bibliographic field list immediately after the document
+  title/subtitle.  See the beginning of this document for an example.
+
+* Add an Emacs "local variables" block in a comment at the end of the
+  document.  See the end of this document for an example.
+
+
+Copyrights and Licensing
+========================
+
+The majority of the Docutils project code and documentation has been
+placed in the public domain.  Unless clearly and explicitly indicated
+otherwise, any patches (modifications to existing files) submitted to
+the project for inclusion (via Subversion, SourceForge trackers,
+mailing lists, or private email) are assumed to be in the public
+domain as well.
+
+Any new files contributed to the project should clearly state their
+intentions regarding copyright, in one of the following ways:
+
+* Public domain (preferred): include the statement "This
+  module/document has been placed in the public domain."
+
+* Copyright & open source license: include a copyright notice, along
+  with either an embedded license statement, a reference to an
+  accompanying license file, or a license URL.
+
+One of the goals of the Docutils project, once complete, is to be
+incorporated into the Python standard library.  At that time copyright
+of the Docutils code will be assumed by or transferred to the Python
+Software Foundation (PSF), and will be released under Python's
+license.  If the copyright/license option is chosen for new files, the
+license should be compatible with Python's current license, and the
+author(s) of the files should be willing to assign copyright to the
+PSF.  The PSF accepts the `Academic Free License v. 2.1
+<http://opensource.org/licenses/afl-2.1.php>`_ and the `Apache
+License, Version 2.0 <http://opensource.org/licenses/apache2.0.php>`_.
+
+
+Subversion Repository
+=====================
+
+Please see the `repository documentation`_ for details on how to
+access Docutils' Subversion repository.  Anyone can access the
+repository anonymously.  Only project developers can make changes.
+(If you would like to become a project developer, just ask!)  Also see
+`Setting Up For Docutils Development`_ below for some useful info.
+
+Unless you really *really* know what you're doing, please do *not* use
+``svn import``.  It's quite easy to mess up the repository with an
+import.
+
+.. _repository documentation: repository.html
+
+
+Branches
+--------
+
+(These branch policies go into effect with Docutils 0.4.)
+
+The "docutils" directory of the **trunk** (a.k.a. the **Docutils
+core**) is used for active -- but stable, fully tested, and reviewed
+-- development.
+
+There will be at least one active **maintenance branch** at a time,
+based on at least the latest feature release.  For example, when
+Docutils 0.5 is released, its maintenance branch will take over, and
+the 0.4.x maintenance branch may be retired.  Maintenance branches
+will receive bug fixes only; no new features will be allowed here.
+
+Obvious and uncontroversial bug fixes *with tests* can be checked in
+directly to the core and to the maintenance branches.  Don't forget to
+add test cases!  Many (but not all) bug fixes will be applicable both
+to the core and to the maintenance branches; these should be applied
+to both.  No patches or dedicated branches are required for bug fixes,
+but they may be used.  It is up to the discretion of project
+developers to decide which mechanism to use for each case.
+
+Feature additions and API changes will be done in **feature
+branches**.  Feature branches will not be managed in any way.
+Frequent small checkins are encouraged here.  Feature branches must be
+discussed on the docutils-develop mailing list and reviewed before
+being merged into the core.
+
+
+Review Criteria
+```````````````
+
+Before a new feature, an API change, or a complex, disruptive, or
+controversial bug fix can be checked in to the core or into a
+maintenance branch, it must undergo review.  These are the criteria:
+
+* The branch must be complete, and include full documentation and
+  tests.
+
+* There should ideally be one branch merge commit per feature or
+  change.  In other words, each branch merge should represent a
+  coherent change set.
+
+* The code must be stable and uncontroversial.  Moving targets and
+  features under debate are not ready to be merged.
+
+* The code must work.  The test suite must complete with no failures.
+  See `Docutils Testing`_.
+
+The review process will ensure that at least one other set of eyeballs
+& brains sees the code before it enters the core.  In addition to the
+above, the general `Check-ins`_ policy (below) also applies.
+
+.. _Docutils Testing: testing.html
+
+
+Check-ins
+---------
+
+Changes or additions to the Docutils core and maintenance branches
+carry a commitment to the Docutils user community.  Developers must be
+prepared to fix and maintain any code they have committed.
+
+The Docutils core (``trunk/docutils`` directory) and maintenance
+branches should always be kept in a stable state (usable and as
+problem-free as possible).  All changes to the Docutils core or
+maintenance branches must be in `good shape`_, usable_, documented_,
+tested_, and `reasonably complete`_.
+
+* _`Good shape` means that the code is clean, readable, and free of
+  junk code (unused legacy code; by analogy to "junk DNA").
+
+* _`Usable` means that the code does what it claims to do.  An "XYZ
+  Writer" should produce reasonable XYZ output.
+
+* _`Documented`: The more complete the documentation the better.
+  Modules & files must be at least minimally documented internally.
+  `Docutils Front-End Tools`_ should have a new section for any
+  front-end tool that is added.  `Docutils Configuration Files`_
+  should be modified with any settings/options defined.  For any
+  non-trivial change, the HISTORY.txt_ file should be updated.
+
+* _`Tested` means that unit and/or functional tests, that catch all
+  bugs fixed and/or cover all new functionality, have been added to
+  the test suite.  These tests must be checked by running the test
+  suite under all supported Python versions, and the entire test suite
+  must pass.  See `Docutils Testing`_.
+
+* _`Reasonably complete` means that the code must handle all input.
+  Here "handle" means that no input can cause the code to fail (cause
+  an exception, or silently and incorrectly produce nothing).
+  "Reasonably complete" does not mean "finished" (no work left to be
+  done).  For example, a writer must handle every standard element
+  from the Docutils document model; for unimplemented elements, it
+  must *at the very least* warn that "Output for element X is not yet
+  implemented in writer Y".
+
+If you really want to check code directly into the Docutils core,
+you can, but you must ensure that it fulfills the above criteria
+first.  People will start to use it and they will expect it to work!
+If there are any issues with your code, or if you only have time for
+gradual development, you should put it on a branch or in the sandbox
+first.  It's easy to move code over to the Docutils core once it's
+complete.
+
+It is the responsibility and obligation of all developers to keep the
+Docutils core and maintenance branches stable.  If a commit is made to
+the core or maintenance branch which breaks any test, the solution is
+simply to revert the change.  This is not vindictive; it's practical.
+We revert first, and discuss later.
+
+Docutils will pursue an open and trusting policy for as long as
+possible, and deal with any aberrations if (and hopefully not when)
+they happen.  We'd rather see a torrent of loose contributions than
+just a trickle of perfect-as-they-stand changes.  The occasional
+mistake is easy to fix.  That's what Subversion is for!
+
+.. _Docutils Front-End Tools: ../user/tools.html
+.. _Docutils Configuration Files: ../user/config.html
+.. _HISTORY.txt: ../../HISTORY.txt
+
+
+Version Numbering
+=================
+
+Docutils version numbering uses a ``major.minor.micro`` scheme (x.y.z;
+for example, 0.4.1).
+
+**Major releases** (x.0, e.g. 1.0) will be rare, and will represent
+major changes in API, functionality, or commitment.  For example, as
+long as the major version of Docutils is 0, it is to be considered
+*experimental code*.  When Docutils reaches version 1.0, the major
+APIs will be considered frozen and backward compatibility will become
+of paramount importance.
+
+Releases that change the minor number (x.y, e.g. 0.5) will be
+**feature releases**; new features from the `Docutils core`_ will be
+included.
+
+Releases that change the micro number (x.y.z, e.g. 0.4.1) will be
+**bug-fix releases**.  No new features will be introduced in these
+releases; only bug fixes off of `maintenance branches`_ will be
+included.
+
+This policy was adopted in October 2005, and will take effect with
+Docutils version 0.4.  Prior to version 0.4, Docutils didn't have an
+official version numbering policy, and micro releases contained both
+bug fixes and new features.
+
+.. _Docutils core:
+   http://svn.berlios.de/viewcvs/docutils/trunk/docutils/
+.. _maintenance branches:
+   http://svn.berlios.de/viewcvs/docutils/branches/
+
+
+Snapshots
+=========
+
+Snapshot tarballs will be generated regularly from
+
+* the Docutils core, representing the current cutting-edge state of
+  development;
+
+* each active maintenance branch, for bug fixes;
+
+* each development branch, representing the unstable
+  seat-of-your-pants bleeding edge.
+
+The ``sandbox/infrastructure/docutils-update`` shell script, run as an
+hourly cron job on the BerliOS server, is responsible for
+automatically generating the snapshots and updating the web site.  See
+the `web site docs <website.html>`__.
+
+
+Setting Up For Docutils Development
+===================================
+
+When making changes to the code, testing is a must.  The code should
+be run to verify that it produces the expected results, and the entire
+test suite should be run too.  The modified Docutils code has to be
+accessible to Python for the tests to have any meaning.  There are two
+ways to keep the Docutils code accessible during development:
+
+1. Update your ``PYTHONPATH`` environment variable so that Python
+   picks up your local working copy of the code.  This is the
+   recommended method.
+
+   We'll assume that the Docutils trunk is checked out under your
+   ~/projects/ directory as follows::
+
+       svn co svn+ssh://<user>@svn.berlios.de/svnroot/repos/docutils/trunk \
+           docutils
+
+   For the bash shell, add this to your ``~/.profile``::
+
+       PYTHONPATH=$HOME/projects/docutils/docutils
+       PYTHONPATH=$PYTHONPATH:$HOME/projects/docutils/docutils/extras
+       export PYTHONPATH
+
+   The first line points to the directory containing the ``docutils``
+   package.  The second line adds the directory containing the
+   third-party modules Docutils depends on.  The third line exports
+   this environment variable.  You may also wish to add the ``tools``
+   directory to your ``PATH``::
+
+       PATH=$PATH:$HOME/projects/docutils/docutils/tools
+       export PATH
+
+2. Before you run anything, every time you make a change, reinstall
+   Docutils::
+
+       python setup.py install
+
+   .. CAUTION::
+
+      This method is **not** recommended for day-to-day development;
+      it's too easy to forget.  Confusion inevitably ensues.
+
+      If you install Docutils this way, Python will always pick up the
+      last-installed copy of the code.  If you ever forget to
+      reinstall the "docutils" package, Python won't see your latest
+      changes.
+
+A useful addition to the ``docutils`` top-level directory in branches
+and alternate copies of the code is a ``set-PATHS`` file
+containing the following lines::
+
+    # source this file
+    export PYTHONPATH=$PWD:$PWD/extras
+    export PATH=$PWD/tools:$PATH
+
+Open a shell for this branch, ``cd`` to the ``docutils`` top-level
+directory, and "source" this file.  For example, using the bash
+shell::
+
+    $ cd some-branch/docutils
+    $ . set-PATHS
+
+
+Mailing Lists
+=============
+
+Developers are recommended to subscribe to all `Docutils mailing
+lists`_.
+
+.. _Docutils mailing lists: ../user/mailing-lists.html
+
+
+The Wiki
+========
+
+There is a development wiki at http://docutils.python-hosting.com/ as
+a scratchpad for transient notes.  Please use the repository for
+permament document storage.
+
+
+The Sandbox
+===========
+
+The `sandbox directory`_ is a place to play around, to try out and
+share ideas.  It's a part of the Subversion repository but it isn't
+distributed as part of Docutils releases.  Feel free to check in code
+to the sandbox; that way people can try it out but you won't have to
+worry about it working 100% error-free, as is the goal of the Docutils
+core.  Each developer who wants to play in the sandbox should create
+either a project-specific subdirectory or personal subdirectory
+(suggested name: SourceForge ID, nickname, or given name + family
+initial).  It's OK to make a mess in your personal space!  But please,
+play nice.
+
+Please update the `sandbox README`_ file with links and a brief
+description of your work.
+
+In order to minimize the work necessary for others to install and try
+out new, experimental components, the following sandbox directory
+structure is recommended::
+
+    sandbox/
+        project_name/ # For a collaborative project.
+                      # Structure as in userid/component_name below.
+        userid/       # For personal space.
+            component_name/ # A verbose name is best.
+                README.txt  # Please explain the requirements,
+                            # purpose/goals, and usage.
+                docs/
+                    ...
+                component.py    # The component is a single module.
+                            # *OR* (but *not* both)
+                component/  # The component is a package.
+                    __init__.py  # Contains the Reader/Writer class.
+                    other1.py    # Other modules and data files used
+                    data.txt     # by this component.
+                    ...
+                test/       # Test suite.
+                    ...
+                tools/      # For front ends etc.
+                    ...
+                setup.py    # Use Distutils to install the component
+                            # code and tools/ files into the right
+                            # places in Docutils.
+
+Some sandbox projects are destined to become Docutils components once
+completed.  Others, such as add-ons to Docutils or applications of
+Docutils, graduate to become `parallel projects`_.
+
+.. _sandbox README: http://docutils.sf.net/sandbox/README.html
+.. _sandbox directory:
+   http://svn.berlios.de/viewcvs/docutils/trunk/sandbox/
+
+
+.. _parallel project:
+
+Parallel Projects
+=================
+
+Parallel projects contain useful code that is not central to the
+functioning of Docutils.  Examples are specialized add-ons or
+plug-ins, and applications of Docutils.  They use Docutils, but
+Docutils does not require their presence to function.
+
+An official parallel project will have its own directory beside (or
+parallel to) the main ``docutils`` directory in the Subversion
+repository.  It can have its own web page in the
+docutils.sourceforge.net domain, its own file releases and
+downloadable snapshots, and even a mailing list if that proves useful.
+However, an official parallel project has implications: it is expected
+to be maintained and continue to work with changes to the core
+Docutils.
+
+A parallel project requires a project leader, who must commit to
+coordinate and maintain the implementation:
+
+* Answer questions from users and developers.
+* Review suggestions, bug reports, and patches.
+* Monitor changes and ensure the quality of the code and
+  documentation.
+* Coordinate with Docutils to ensure interoperability.
+* Put together official project releases.
+
+Of course, related projects may be created independently of Docutils.
+The advantage of a parallel project is that the SourceForge
+environment and the developer and user communities are already
+established.  Core Docutils developers are available for consultation
+and may contribute to the parallel project.  It's easier to keep the
+projects in sync when there are changes made to the core Docutils
+code.
+
+
+..
+   Local Variables:
+   mode: indented-text
+   indent-tabs-mode: nil
+   sentence-end-double-space: t
+   fill-column: 70
+   End:
