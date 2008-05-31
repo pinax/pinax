@@ -8,18 +8,18 @@
 {% block head_title %}Pinax : {{ topic.title }}{% endblock %}
 
 {% block body %}
-{% get_threaded_comment_tree for topic as responses %}
-{% autopaginate responses %}
 <p><a href="{% url tribe_topics topic.tribe.slug %}">&larr; {% trans "Back to Topic List for Tribe " %} {{ topic.tribe }}</a></p>
 
-<table class="topic">
-    <tr>
-        <td class="meta">
+{% get_threaded_comment_tree for topic as responses %}
+{% autopaginate responses %}
+<ul class="responses">
+    <li class="odd thread-0">
+        <div class="meta">
             <div class="avatar">{% gravatar topic.creator 40 %}</div>
             <div class="details"><a href="{% url profiles.views.profile topic.creator.username %}">{{ topic.creator }}</a></div>
             {{ topic.created|date }}
-        </td>
-        <td>
+        </div>
+        <div class="bulk">
             <h1>{{ topic.title }}</h1>
             <div class="body">{{ topic.body|urlize|linebreaks }}</div>
             {% ifequal user topic.creator %}
@@ -28,20 +28,16 @@
                 <input type="hidden" name="next" value="{% url tribe_detail topic.content_object.slug %}" />
             </form>
             {% endifequal %}
-        </td>
-    </tr>
-</table>
-
-
-<table class="responses">
+        </div>
+    </li>
     {% for response in responses %}
-        <tr class="{% cycle odd,even %}">
-            <td class="meta">
+        <li class="{% cycle even,odd %} thread-{{ response.depth }}">
+            <div class="meta">
                 <div class="avatar">{% gravatar response.user 40 %}</div>
                 <div class="details"><a href="{% url profiles.views.profile response.user.username %}">{{ response.user }}</a></div>
                 {{ response.date_submitted|date }}
-            </td>
-            <td>
+            </div>
+            <div class="bulk">
                 <div class="body">{{ response.comment|urlize|linebreaks }}</div>
                 {% ifequal user response.user %}
                 <form method="POST" action="{% url tc_comment_delete response.id %}">
@@ -49,10 +45,16 @@
                     <input type="hidden" name="next" value="{% url tribe_detail response.content_object.slug %}" />
                 </form>
                 {% endifequal %}
-            </td>
-        </tr>
+                <a href="javascript:toggle_comment_form({{ response.id }})">Reply to This Post</a>
+                <form class="hidden" method="POST" action="{% get_comment_url topic response %}" id="comment_form_{{ response.id }}">
+                    <table><tr><td><textarea id="id_comment" rows="10" cols="40" name="comment"></textarea></td></tr>
+                    <tr><td><input type="submit" value="{% trans "Post Response" %}" /></td></tr></table>
+                    <input type="hidden" name="next" value="{{ request.path }}" />
+                </form>
+            </div>
+        </li>
     {% endfor %}
-</table>
+</ul>
 
 <form action="{% get_comment_url topic %}" method="POST">
     <table>
@@ -62,4 +64,21 @@
     <input type="hidden" name="next" value="{{ request.path }}" />
 </form>
 {% paginate %}
+{% endblock %}
+
+{% block extra_body %}
+<script type="text/javascript">
+function toggle_comment_form(id){
+    var cform = $('#comment_form_' + id);
+    if(cform.hasClass('hidden')) {
+        cform.prev().text("Stop Replying to This Post");
+        cform.slideDown();
+    }
+    else {
+        cform.prev().text("Reply to This Post");
+        cform.slideUp();
+    }
+    cform.toggleClass('hidden');
+}
+</script>
 {% endblock %}

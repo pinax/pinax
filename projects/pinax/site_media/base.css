@@ -504,10 +504,10 @@ div.tweet .reply {
 }
 
 /* topics */
-table.topic, table.topics, table.responses {
+table.topic, table.topics {
     width: 100%;
 }
-table.topic td, table.topics td, .responses td {
+table.topic td, table.topics td, {
     vertical-align: top;
     padding: 5px 20px 5px 5px;
 }
@@ -521,9 +521,28 @@ table.topic td h1, table.topics td h2 {
 .responses .odd, .topics .odd {
     background-color: #F3F3F3;
 }
-td.meta {
-    width: 100px;
+.responses {
+    margin-left: 0px;
+    padding-left: 0px;
 }
+.responses li { 
+    list-style-type: none; 
+}
+.meta {
+    width: 100px;
+    float: left;
+    margin: 4px;
+}
+.hidden { display: none; }
+.thread-0 { margin-left: 0px; }
+.thread-1 { margin-left: 20px; }
+.thread-2 { margin-left: 40px; }
+.thread-3 { margin-left: 60px; }
+.thread-4 { margin-left: 80px; }
+.thread-5 { margin-left: 100px; }
+.thread-6 { margin-left: 120px; }
+.thread-7 { margin-left: 140px; }
+.thread-8 { margin-left: 160px; }
 
 /* pagination */
 .pagination {
