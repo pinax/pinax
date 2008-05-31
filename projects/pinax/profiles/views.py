@@ -67,6 +67,7 @@ def profile(request, username):
             else:
                 invite_form = InviteFriendForm(request.user, {
                     'to_user': username,
+                    'message': ugettext("Let's be friends!"),
                 })
                 if request.POST["action"] == "accept": # @@@ perhaps the form should just post to friends and be redirected here
                     invitation_id = request.POST["invitation"]
