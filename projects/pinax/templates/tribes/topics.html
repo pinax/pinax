@@ -27,6 +27,10 @@
     {% endfor %}
 </table>
 
+{% paginate %}
+
+<h2>New Topic</h2>
+
 <form action="{% url tribe_topics tribe.slug %}" method="POST">
     <table>
     {{ topic_form }}
@@ -34,7 +38,5 @@
     </table>
     <input type="hidden" name="next" value="{{ request.path }}" />
 </form>
-
-{% paginate %}
 
 {% endblock %}
