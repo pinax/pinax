@@ -2,6 +2,7 @@
 
 {% load humanize i18n %}
 {% load pagination_tags %}
+{% load timezone_filters %}
 
 {% block head_title %}Pinax : {% trans "Notices" %}{% endblock %}
 
@@ -11,6 +12,7 @@
 
 {% autopaginate notices %}
 {% if notices %}
+{# TODO: get timezone support working with regroup #}
 {% regroup notices by added.date as notices_by_date %}
 
 {% for date in notices_by_date %}
@@ -23,7 +25,7 @@
 {% endif %}
     <span class="notice_type">[{% trans notice.notice_type.display %}]</span>
     <span class="notice_message">{{ notice.html_message|safe }}</span>
-    <span class="notice_time">{{ notice.added.time|time:"P" }}</span>
+    <span class="notice_time">{{ notice.added|localtime:user.get_profile.timezone|time:"P" }}</span>
 </div>
 {% endfor %}
 {% endfor %}

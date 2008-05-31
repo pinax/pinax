@@ -1,5 +1,6 @@
 {% extends "messages/base.html" %} 
 {% load i18n %} 
+{% load timezone_filters %}
 {% block body %} 
 <h1>{% trans "Deleted Messages" %}</h1>
 <table class="messages">
@@ -13,7 +14,7 @@
         <td> 
         {{ message.subject }}
         </td>
-        <td>{{ message.sent_at|date:_("DATETIME_FORMAT") }}</td>
+        <td>{{ message.sent_at|localtime:user.get_profile.timezone|date:_("DATETIME_FORMAT") }}</td>
         <td><a href="{% url messages_undelete message.id %}">{% trans "undelete" %}</a></td>
     </tr>
 {% endfor %}
