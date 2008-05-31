@@ -5,7 +5,7 @@ from django.template.loader import render_to_string
 
 from django.conf import settings
 
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _, ugettext
 
 # favour django-mailer but fall back to django.core.mail
 try:
@@ -45,7 +45,7 @@ class LoginForm(forms.Form):
     def login(self, request):
         if self.is_valid():
             login(request, self.user)
-            request.user.message_set.create(message=_("Successfully logged in as %(username)s.") % {'username': self.user.username})
+            request.user.message_set.create(message=ugettext(u"Successfully logged in as %(username)s.") % {'username': self.user.username})
             return True
         return False
 
@@ -91,20 +91,20 @@ class SignupForm(forms.Form):
         if confirmed:
             if email == join_invitation.contact.email:
                 new_user = User.objects.create_user(username, email, password)
-                new_user.message_set.create(message=_("Your email address has already been verified"))
+                new_user.message_set.create(message=ugettext(u"Your email address has already been verified"))
                 # already verified so can just create
                 EmailAddress(user=new_user, email=email, verified=True, primary=True).save()
             else:
                 new_user = User.objects.create_user(username, "", password)
                 if email:
-                    new_user.message_set.create(message=_("Confirmation email sent to %(email)s") % {'email': email})
+                    new_user.message_set.create(message=ugettext(u"Confirmation email sent to %(email)s") % {'email': email})
                     EmailAddress.objects.add_email(new_user, email)
             join_invitation.accept(new_user)
             return username, password # required for authenticate()
         else:
             new_user = User.objects.create_user(username, "", password)
             if email:
-                new_user.message_set.create(message=_("Confirmation email sent to %(email)s") % {'email': email})
+                new_user.message_set.create(message=ugettext(u"Confirmation email sent to %(email)s") % {'email': email})
                 EmailAddress.objects.add_email(new_user, email)
             return username, password # required for authenticate()
 
@@ -134,7 +134,7 @@ class AddEmailForm(UserForm):
         raise forms.ValidationError(_("This email address already associated with this account."))
     
     def save(self):
-        self.user.message_set.create(message=_("Confirmation email sent to %(email)s") % {'email': self.cleaned_data["email"]})
+        self.user.message_set.create(message=ugettext(u"Confirmation email sent to %(email)s") % {'email': self.cleaned_data["email"]})
         return EmailAddress.objects.add_email(self.user, self.cleaned_data["email"])
 
 
@@ -158,7 +158,7 @@ class ChangePasswordForm(UserForm):
     def save(self):
         self.user.set_password(self.cleaned_data['password1'])
         self.user.save()
-        self.user.message_set.create(message=_("Password successfully changed."))
+        self.user.message_set.create(message=ugettext(u"Password successfully changed."))
 
 
 class ResetPasswordForm(forms.Form):
@@ -194,4 +194,4 @@ class ChangeTimezoneForm(ProfileForm):
     def save(self):
         self.profile.timezone = self.cleaned_data["timezone"]
         self.profile.save()
-        self.user.message_set.create(message=_("Timezone successfully updated."))
+        self.user.message_set.create(message=ugettext(u"Timezone successfully updated."))
