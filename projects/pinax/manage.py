@@ -1,8 +1,8 @@
-#!/usr/bin/env python
-
+#!/usr/bin/env python2.5
 import sys
-sys.path.insert(0, 'lib/python-openid-2.1.1')
-sys.path.insert(0, 'lib/python-yadis-1.1.0')
+sys.path.insert(0, '/home/eldarion/webapps/pinax_django/lib/')
+sys.path.insert(0, '/home/eldarion/webapps/pinax_django/pinax/lib/python-openid-2.1.1')
+sys.path.insert(0, '/home/eldarion/webapps/pinax_django/pinax/lib/python-yadis-1.1.0')
 sys.path.insert(0, 'lib/docutils-0.4')
 sys.path.insert(0, 'lib/textile-2.0.11')
 sys.path.insert(0, 'lib/markdown-1.7')
