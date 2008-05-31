@@ -1,6 +1,7 @@
 {% extends "messages/base.html" %} 
 {% load i18n %} 
 {% load oembed_tags %}
+{% load timezone_filters %}
 {% block body %}
 <h1>{% trans "View Message" %}</h1>
 <dl class="message-headers">
@@ -9,7 +10,7 @@
     <dt>{% trans "Subject" %}:</dt>
     <dd><strong>{{ message.subject }}</strong></dd>
     <dt>{% trans "Date" %}:</dt>
-    <dd>{{ message.sent_at|date:_("DATETIME_FORMAT")}}</dd>
+    <dd>{{ message.sent_at|localtime:user.get_profile.timezone|date:_("DATETIME_FORMAT")}}</dd>
     <dt>{% trans "Recipient" %}:</dt>
     <dd>{{ message.recipient }}</dd>
 </dl>
