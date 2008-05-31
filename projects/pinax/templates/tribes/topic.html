@@ -13,7 +13,7 @@
 {% get_threaded_comment_tree for topic as responses %}
 {% autopaginate responses %}
 <ul class="responses">
-    <li class="odd thread-0">
+    <li class="odd thread-0 clearfix">
         <div class="meta">
             <div class="avatar">{% gravatar topic.creator 40 %}</div>
             <div class="details"><a href="{% url profiles.views.profile topic.creator.username %}">{{ topic.creator }}</a></div>
@@ -29,10 +29,9 @@
             </form>
             {% endifequal %}
         </div>
-        <div class="clearboth"></div>
     </li>
     {% for response in responses %}
-        <li class="{% cycle even,odd %} thread-{{ response.depth }}">
+        <li class="{% cycle even,odd %} thread-{{ response.depth }} clearfix">
             <div class="meta">
                 <div class="avatar">{% gravatar response.user 40 %}</div>
                 <div class="details"><a href="{% url profiles.views.profile response.user.username %}">{{ response.user }}</a></div>
@@ -53,7 +52,6 @@
                     <input type="hidden" name="next" value="{{ request.path }}" />
                 </form>
             </div>
-            <div class="clearboth"></div>
         </li>
     {% endfor %}
 </ul>
