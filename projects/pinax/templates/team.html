@@ -1,6 +1,7 @@
 {% extends "site_base.html" %}
 
 {% load i18n %}
+{% load gravatar %}
 
 {% block head_title %}Pinax : Team{% endblock %}
 
@@ -10,5 +11,28 @@
 <h1>Team</h1>
 
 <p>The people responsible for Pinax.</p>
+
+<div class="profile clearfix">
+    <div style="float: left;">{% gravatar "jtauber" 40 %}</div>
+    <div style="padding: 5px; margin-left: 50px; font-size: 14pt"><a href="{% url profiles.views.profile "jtauber" %}">James Tauber</a></div>
+</div>
+<div class="profile clearfix">
+    <div style="float: left;">{% gravatar "brosner" 40 %}</div>
+    <div style="padding: 5px; margin-left: 50px; font-size: 14pt"><a href="{% url profiles.views.profile "brosner" %}">Brian Rosner</a></div>
+</div>
+<div class="profile clearfix">
+    <div style="float: left;">{% gravatar "jezdez" 40 %}</div>
+    <div style="padding: 5px; margin-left: 50px; font-size: 14pt"><a href="{% url profiles.views.profile "jezdez" %}">Jannis Leidel</a></div>
+</div>
+<div class="profile clearfix">
+    <div style="float: left;">{% gravatar "ericflo" 40 %}</div>
+    <div style="padding: 5px; margin-left: 50px; font-size: 14pt"><a href="{% url profiles.views.profile "ericflo" %}">Eric Florenzano</a></div>
+</div>
+<div class="profile clearfix">
+    <div style="float: left;">{% gravatar "edcrypt" 40 %}</div>
+    <div style="padding: 5px; margin-left: 50px; font-size: 14pt"><a href="{% url profiles.views.profile "edcrypt" %}">Eduardo de Oliveira Padoan</a></div>
+</div>
+
+<p>and the developers of the awesome re-usable django apps we used and the translators who provided localization of Pinax.</p>
 
 {% endblock %}
