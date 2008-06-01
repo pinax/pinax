@@ -8,9 +8,9 @@
     <h1>
         <a href="{{ article.get_absolute_url }}"> {{ article.title }} </a>
     </h1>
-    
+
     <h2> {% trans "Article History" %} </h2>
-    
+
     {% if changes %}
     <table>
         <tr class="tbheader">
@@ -35,7 +35,7 @@
             </td>
             <td>
                 {% ifequal forloop.counter 1 %}
-                <form action="{% url wiki_revert_revision article.title %}" method="POST">
+                <form action="{% url wiki_revert_revision title=article.title,group_slug=group.slug %}" method="POST">
                     <input name="revision" type="hidden" value="{{ change.revision }}">
                     <input name="revert" type="submit" value="{% trans "Revert Last Change" %}">
                 </form>
@@ -44,7 +44,7 @@
             {% endfor %}
         </tr>
     </table>
-    
+
     {% if previous %}
     <a href="{% url wiki_article_history article.title,previous %}">{% trans "Previous" %}</a>
     {% endif %}

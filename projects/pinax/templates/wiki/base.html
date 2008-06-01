@@ -6,7 +6,7 @@
 
 {% block subnav %}
 <ul>
-    <li><a href="{% url wiki_article_list %} ">{% trans "All Articles" %}</a></li>
+    <li><a href="{% url wiki_article_list group.slug %} ">{% trans "All Articles" %}</a></li>
     {% block subnav_extraitems %}{% endblock %}
 </ul>
 {% endblock %}

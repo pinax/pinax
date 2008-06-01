@@ -10,22 +10,22 @@
     <div class="right_panel">
         {% include "wiki/searchbox.html" %}
     </div>
-    
+
     <h1>{% trans "Index" %}</h1>
-    
+
     {% autopaginate articles %}
     {% regroup articles by created_at.date as articles_by_creation_date %}
-    
+
     {% if articles %}
     <ul>
         {% for date in articles_by_creation_date %}
         <h2 class="join_date">{{ date.grouper|naturalday:_("MONTH_DAY_FORMAT")|capfirst }}</h2>
         {% for article in date.list %}
-        <a href="{% url wiki_article article.title %}">{{ article.title }}</a><br />
+        <a href="{% url wiki_article title=article.title,group_slug=group.slug %}">{{ article.title }}</a><br />
         {% endfor %}
         {% endfor %}
     </ul>
     {% else %}
-    <p><a href="{% url wiki_edit_article "NewArticle" %}">{% trans "Create a new article" %}</a>.</p>
+    <p><a href="{% url wiki_edit_article title="NewArticle",group_slug=group.slug %}">{% trans "Create a new article" %}</a>.</p>
     {% endif %}
 {% endblock %}

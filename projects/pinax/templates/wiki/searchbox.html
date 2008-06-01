@@ -2,7 +2,7 @@
 
 {% if search_form %}
 <div id="searchbox">
-    <form method="post" action="{% url wiki_search_article %}">
+    <form method="post" action="{% url wiki_search_article group_slug=group.slug %}">
         {{ search_form.as_p }}
         <input type="submit" name="search_button" value="{% trans "Go" %}" />
         <input type="submit" name="search_button" value="{% trans "Search" %}" />

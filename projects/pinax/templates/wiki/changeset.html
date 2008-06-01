@@ -5,7 +5,7 @@
 {% block head_title %}Pinax : {{ article_title }} {% endblock %}
 
 {% block body %}
-    <h1> <a href="{% url wiki_article article_title %}"> {{ article_title }} </a> </h1>
+    <h1> <a href="{% url wiki_article title=article_title,group_slug=group.slug %}"> {{ article_title }} </a> </h1>
     {% if changeset.old_title %}
     <h2> {{ changeset.old_title }} </h2>
     {% endif %}
