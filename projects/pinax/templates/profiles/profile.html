@@ -159,19 +159,21 @@
     
     <h2>Tweets</h2>
     {% oembed %}
-    {% if other_user.sent_tweets.all %}
-    {% autopaginate other_user.sent_tweets.all %}
-    {% for tweet in other_user.sent_tweets.all %}
+    {% with other_user.sent_tweets.all as tweets %}
+    {% autopaginate tweets %}
+    {% if tweets %}
+    {% for tweet in tweets %}
     <div class="tweet" id="t{{ tweet.id }}">
     {{ tweet.html|safe }}
     <span class="timesince">{{ tweet.sent|timesince }} ago</span>
     <a class="reply" href="{% url zwitschern.views.personal %}?reply={{ tweet.sender }}">reply</a>
     </div>
     {% endfor %}
-    {% paginate %}
     {% else %}
     <p>{{ other_user }} hasn't posted any tweets yet.</p>
     {% endif %}
+    {% paginate %}
+    {% endwith %}
     {% endoembed %}
     
 {% endif %}
