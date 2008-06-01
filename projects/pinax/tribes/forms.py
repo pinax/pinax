@@ -30,7 +30,10 @@ class TribeUpdateForm(forms.ModelForm):
     
     def clean_name(self):
         if Tribe.objects.filter(name=self.cleaned_data["name"]).count() > 0:
-            raise forms.ValidationError(_("A tribe already exists with that name."))
+            if self.cleaned_data["name"] == self.instance.name:
+                pass # same instance
+            else:
+                raise forms.ValidationError(_("A tribe already exists with that name."))
         return self.cleaned_data["name"]
     
     class Meta:
