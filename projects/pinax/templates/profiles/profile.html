@@ -4,6 +4,7 @@
 {% load gravatar %}
 {% load oembed_tags %}
 {% load pagination_tags %}
+{% load zwitschern %}
 
 {% block head_title %}Pinax : {% blocktrans %}Profile for {{ other_user }}{% endblocktrans %}{% endblock %}
 
@@ -94,25 +95,6 @@
 </table>
 </form>
 
-<h2>Tweets</h2>
-{% oembed %}
-{% with user.sent_tweets.all as tweets %}
-{% autopaginate tweets %}
-{% if tweets %}
-{% for tweet in tweets %}
-<div class="tweet" id="t{{ tweet.id }}">
-{{ tweet.html|safe }}
-<span class="timesince">{{ tweet.sent|timesince }} ago</span>
-<a class="reply" href="{% url zwitschern.views.personal %}?reply={{ tweet.sender }}">reply</a>
-</div>
-{% endfor %}
-{% paginate %}
-{% else %}
-<p>You haven't posted any <a href="{% url zwitschern.views.personal %}">tweets</a> yet.</p>
-{% endif %}
-{% endwith %}
-{% endoembed %}
-
 {% else %}
 
 <div>
@@ -157,31 +139,19 @@
     {% endif %}
     {% endif %}
     
-    <h2>Tweets</h2>
-    {% oembed %}
-    {% with other_user.sent_tweets.all as tweets %}
-    {% autopaginate tweets %}
-    {% if tweets %}
-    {% for tweet in tweets %}
-    <div class="tweet" id="t{{ tweet.id }}">
-    {{ tweet.html|safe }}
-    <span class="timesince">{{ tweet.sent|timesince }} ago</span>
-    <a class="reply" href="{% url zwitschern.views.personal %}?reply={{ tweet.sender }}">reply</a>
-    </div>
-    {% endfor %}
-    {% else %}
-    <p>{{ other_user }} hasn't posted any tweets yet.</p>
-    {% endif %}
-    {% paginate %}
-    {% endwith %}
-    {% endoembed %}
-    
+{% endif %}
+
+<h2>{% trans "Tweets" %}</h2>
+{% if user.is_authenticated and is_me %}
+{% tweet_listing user.sent_tweets.all 0 is_me %}
+{% else %}
+{% tweet_listing other_user.sent_tweets.all 0 is_me %}
 {% endif %}
 
 {% if other_user.get_profile.blogrss %}
     <div id='feed-entries'>
     <h2>{% trans "Recent Blog Posts" %}</h2>
-    {% load feedutil %}{% feed other_user.get_profile.blogrss 5 0 %}
+    {% load feedutil %}{% feed other_user.get_profile.blogrss 5 %}
     </div>
 {% endif %}
 {% else %}

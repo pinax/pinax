@@ -162,6 +162,8 @@ LANGUAGES = (
 
 # URCHIN_ID = "ua-..."
 
+CACHE_BACKEND = "locmem:///?max_entries=3000"
+
 try:
     from localsettings import *
 except ImportError:

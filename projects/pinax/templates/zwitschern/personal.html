@@ -1,8 +1,7 @@
 {% extends "zwitschern/base.html" %}
 
 {% load i18n %}
-{% load oembed_tags %}
-{% load pagination_tags %}
+{% load zwitschern %}
 
 {% block head_title %}Pinax : {% blocktrans %}Tweets{% endblocktrans %}{% endblock %}
 
@@ -23,19 +22,7 @@
 <p>{% blocktrans with user.followed.count as follow_count and user.followed.count|pluralize:_("person,people") as follow_name %}
 These are tweets from the {{ follow_count }} {{ follow_name }} you are following (plus your own){% endblocktrans %}:</p>
 
-{% oembed %}
-{% autopaginate tweets %}
-{% for tweet in tweets %}
-<div class="tweet" id="t{{ tweet.id }}">
-<a href="{% url profiles.views.profile tweet.sender %}"><b>{{ tweet.sender }}</b></a>
-{{ tweet.html|safe }}
-<span class="timesince">{% blocktrans with tweet.sent|timesince as tweet_age %}
-{{ tweet_age }} ago{% endblocktrans %}</span>
-<a class="reply" href="{% url zwitschern.views.personal %}?reply={{ tweet.sender }}">{% trans "reply" %}</a>
-</div>
-{% endfor %}
-{% endoembed %}
-{% paginate %}
+{% tweet_listing tweets 1 0 %}
 
 {% endblock %}
 

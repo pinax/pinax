@@ -1,8 +1,7 @@
 {% extends "zwitschern/base.html" %}
 
 {% load i18n %}
-{% load oembed_tags %}
-{% load pagination_tags %}
+{% load zwitschern %}
 
 {% block head_title %}Pinax : {% blocktrans %}Public Tweets{% endblocktrans %}{% endblock %}
 
@@ -15,17 +14,6 @@
 
 <p>These are tweets from everyone:</p>
 
-{% oembed %}
-{% autopaginate tweets %}
-{% for tweet in tweets %}
-<div class="tweet" id="t{{ tweet.id }}">
-<a href="{% url profiles.views.profile tweet.sender %}"><b>{{ tweet.sender }}</b></a>
-{{ tweet.html|safe }}
-<span class="timesince">{{ tweet.sent|timesince }} ago</span>
-<a class="reply" href="{% url zwitschern.views.personal %}?reply={{ tweet.sender }}">reply</a>
-</div>
-{% endfor %}
-{% endoembed %}
-{% paginate %}
+{% tweet_listing tweets 1 0 %}
 
 {% endblock %}
