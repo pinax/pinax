@@ -5,10 +5,11 @@
 {% load markup %}
 {% load switchcase %}
 
-{% block head_title %}Pinax : {{ article.title }} {% endblock %}
+{% block head_title %}Pinax : Wiki for {{ group.name }} {% endblock %}
 
 {% block body %}
-    <h1><a href="{{ article.get_absolute_url }}" rel="bookmark">{{ article.title }}</a></h1>
+    <h1>{% trans "Wiki for Tribe" %} <a href="{% url tribe_detail group.slug %}">{{ group.name }}</a></h1>
+    <h2><a href="{{ article.get_absolute_url }}" rel="bookmark">{{ article.title }}</a></h2>
 
     {% if not article.id %}
     <p>{% trans "This article does not exist." %}
