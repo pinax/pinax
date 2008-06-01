@@ -122,6 +122,7 @@ INSTALLED_APPS = (
     'wiki',
     'django_evolution',
     'timezones',
+    'feedutil',
     
     # internal (for now)
     'analytics',

@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Uncommon RSS Elements [Universal Feed Parser]</title>
+<link rel="stylesheet" href="feedparser.css" type="text/css">
+<link rev="made" href="mailto:mark@diveintomark.org">
+<meta name="generator" content="DocBook XSL Stylesheets V1.65.1">
+<meta name="keywords" content="RSS, Atom, CDF, XML, feed, parser, Python">
+<link rel="start" href="index.html" title="Documentation">
+<link rel="up" href="basic.html" title="Basic Features">
+<link rel="prev" href="atom-detail.html" title="Getting Detailed Information on Atom Elements">
+<link rel="next" href="uncommon-atom.html" title="Uncommon Atom Elements">
+</head>
+<body id="feedparser-org" class="docs">
+<div class="z" id="intro"><div class="sectionInner"><div class="sectionInner2">
+<div class="s" id="pageHeader">
+<h1><a href="/"><span>Universal Feed Parser</span></a></h1>
+<p><span>Parse RSS and Atom feeds in Python.  3000 unit tests.  Open source.</span></p>
+</div>
+<div class="s" id="quickSummary"><ul>
+<li class="li1">
+<a href="http://sourceforge.net/projects/feedparser/"><span>Download</span></a> ·</li>
+<li class="li2">
+<a href="http://feedparser.org/docs/"><span>Documentation</span></a> ·</li>
+<li class="li3">
+<a href="http://feedparser.org/tests/"><span>Unit tests</span></a> ·</li>
+<li class="li4"><a href="http://sourceforge.net/tracker/?func=browse&amp;group_id=112328&amp;atid=661937"><span>Report a bug</span></a></li>
+</ul></div>
+</div></div></div>
+<div id="main"><div id="mainInner">
+<p id="breadcrumb">You are here: <a href="index.html">Documentation</a> → <a href="basic.html">Basic Features</a> → <span class="thispage">Uncommon RSS Elements</span></p>
+<div class="section" lang="en">
+<div class="titlepage">
+<div>
+<div><h2 class="title">
+<a name="basic.rss.uncommon" class="skip" href="#basic.rss.uncommon" title="link to this section"><img src="images/permalink.gif" alt="[link]" title="link to this section" width="8" height="9"></a> Uncommon <acronym title="Rich Site Summary">RSS</acronym> Elements</h2></div>
+<div><div class="abstract">
+<h3 class="title"></h3>
+<p>These elements are less common, but are useful for niche applications and may be present in any <acronym title="Rich Site Summary">RSS</acronym> feed.</p>
+</div></div>
+</div>
+<div></div>
+</div>
+<p>An <acronym title="Rich Site Summary">RSS</acronym> feed can specify a small image which some aggregators display as a logo.</p>
+<div class="example">
+<a name="example.image" class="skip" href="#example.image" title="link to this example"><img src="images/permalink.gif" alt="[link]" title="link to this example" width="8" height="9"></a> <h3 class="title">Example: Accessing feed image</h3>
+<pre class="screen"><tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput"><font color='navy'><b>import</b></font> feedparser</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d = feedparser.parse('<a href="http://feedparser.org/docs/examples/rss20.xml">http://feedparser.org/docs/examples/rss20.xml</a>')</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.feed.image</span>
+<span class="computeroutput">{'title': u'Example banner',
+ 'href': u'http://example.org/banner.png',
+ 'width': 80,
+ 'height': 15,
+ 'link': u'http://example.org/'}</span></pre>
+</div>
+<p>Feeds and entries can be assigned to multiple categories, and in some versions of <acronym title="Rich Site Summary">RSS</acronym>, categories can be associated with a “<span class="quote">domain</span>”.  Both are free-form strings.  For historical reasons, <span class="application">Universal Feed Parser</span> makes multiple categories available as a list of tuples, rather than a list of dictionaries.</p>
+<div class="example">
+<a name="example.categories" class="skip" href="#example.categories" title="link to this example"><img src="images/permalink.gif" alt="[link]" title="link to this example" width="8" height="9"></a> <h3 class="title">Example: Accessing multiple categories</h3>
+<pre class="screen"><tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput"><font color='navy'><b>import</b></font> feedparser</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d = feedparser.parse('<a href="http://feedparser.org/docs/examples/rss20.xml">http://feedparser.org/docs/examples/rss20.xml</a>')</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.feed.categories</span>
+<span class="computeroutput">[(u'Syndic8', u'1024'),
+ (u'dmoz', 'Top/Society/People/Personal_Homepages/P/')]</span></pre>
+</div>
+<p>Each item in an <acronym title="Rich Site Summary">RSS</acronym> feed can have an “<span class="quote">enclosure</span>”, a delightful misnomer that is simply a link to an external file (usually a music or video file, but any type of file can be "enclosed").  Once rare, this element has recently gained popularity due to the rise of <a href="http://en.wikipedia.org/wiki/Podcasting">podcasting</a>.  Some clients (such as Apple's <span class="application">iTunes</span>) may automatically download enclosures; others (such as the web-based Bloglines) may simply render each enclosure as a link.</p>
+<p>The <acronym title="Rich Site Summary">RSS</acronym> specification states that there can be at most one enclosure per item.  However, Atom entries may contain more than one enclosure per entry, so <span class="application">Universal Feed Parser</span> captures all of them and makes them available as a list.</p>
+<div class="example">
+<a name="example.enclosure" class="skip" href="#example.enclosure" title="link to this example"><img src="images/permalink.gif" alt="[link]" title="link to this example" width="8" height="9"></a> <h3 class="title">Example: Accessing enclosures</h3>
+<pre class="screen"><tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput"><font color='navy'><b>import</b></font> feedparser</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d = feedparser.parse('<a href="http://feedparser.org/docs/examples/rss20.xml">http://feedparser.org/docs/examples/rss20.xml</a>')</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">e = d.entries[0]</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">len(e.enclosures)</span>
+<span class="computeroutput">1</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">e.enclosures[0]</span>
+<span class="computeroutput">{'type': u'audio/mpeg',
+ 'length': u'1069871',
+ 'href': u'http://example.org/audio/demo.mp3'}</span></pre>
+</div>
+<p>No one is quite sure what a cloud is.</p>
+<div class="example">
+<a name="example.cloud" class="skip" href="#example.cloud" title="link to this example"><img src="images/permalink.gif" alt="[link]" title="link to this example" width="8" height="9"></a> <h3 class="title">Example: Accessing feed cloud</h3>
+<pre class="screen"><tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput"><font color='navy'><b>import</b></font> feedparser</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d = feedparser.parse('<a href="http://feedparser.org/docs/examples/rss20.xml">http://feedparser.org/docs/examples/rss20.xml</a>')</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.feed.cloud</span>
+<span class="computeroutput">{'domain': u'rpc.example.com',
+ 'port': u'80',
+ 'path': u'/RPC2', 
+ 'registerprocedure': u'pingMe',
+ 'protocol': u'soap'}</span></pre>
+</div>
+<a name="id4953229"></a><table class="note" border="0" summary="">
+<tr><td rowspan="2" align="center" valign="top" width="1%"><img src="images/note.png" alt="Note" title="" width="24" height="24"></td></tr>
+<tr><td colspan="2" align="left" valign="top" width="99%">For more examples of accessing <acronym title="Rich Site Summary">RSS</acronym> elements, see the annotated examples: <a href="annotated-rss10.html" title="RSS 1.0">RSS 1.0</a>, <a href="annotated-rss20.html" title="RSS 2.0">RSS 2.0</a>, and <a href="annotated-rss20-dc.html" title="RSS 2.0 with Namespaces">RSS 2.0 with Namespaces</a>.</td></tr>
+</table>
+</div>
+<div style="float: left">← <a class="NavigationArrow" href="atom-detail.html">Getting Detailed Information on Atom Elements</a>
+</div>
+<div style="text-align: right">
+<a class="NavigationArrow" href="uncommon-atom.html">Uncommon Atom Elements</a> →</div>
+<hr style="clear:both">
+<div class="footer"><p class="copyright">Copyright © 2004, 2005, 2006 Mark Pilgrim</p></div>
+</div></div>
+</body>
+</html>

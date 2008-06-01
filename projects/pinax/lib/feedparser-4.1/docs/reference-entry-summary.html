@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>entries[i].summary [Universal Feed Parser]</title>
+<link rel="stylesheet" href="feedparser.css" type="text/css">
+<link rev="made" href="mailto:mark@diveintomark.org">
+<meta name="generator" content="DocBook XSL Stylesheets V1.65.1">
+<meta name="keywords" content="RSS, Atom, CDF, XML, feed, parser, Python">
+<link rel="start" href="index.html" title="Documentation">
+<link rel="up" href="reference.html" title="Reference">
+<link rel="prev" href="reference-entry-links.html" title="entries[i].links">
+<link rel="next" href="reference-entry-summary_detail.html" title="entries[i].summary_detail">
+</head>
+<body id="feedparser-org" class="docs">
+<div class="z" id="intro"><div class="sectionInner"><div class="sectionInner2">
+<div class="s" id="pageHeader">
+<h1><a href="/"><span>Universal Feed Parser</span></a></h1>
+<p><span>Parse RSS and Atom feeds in Python.  3000 unit tests.  Open source.</span></p>
+</div>
+<div class="s" id="quickSummary"><ul>
+<li class="li1">
+<a href="http://sourceforge.net/projects/feedparser/"><span>Download</span></a> ·</li>
+<li class="li2">
+<a href="http://feedparser.org/docs/"><span>Documentation</span></a> ·</li>
+<li class="li3">
+<a href="http://feedparser.org/tests/"><span>Unit tests</span></a> ·</li>
+<li class="li4"><a href="http://sourceforge.net/tracker/?func=browse&amp;group_id=112328&amp;atid=661937"><span>Report a bug</span></a></li>
+</ul></div>
+</div></div></div>
+<div id="main"><div id="mainInner">
+<p id="breadcrumb">You are here: <a href="index.html">Documentation</a> → <a href="reference.html">Reference</a> → <span class="thispage">entries[i].summary</span></p>
+<div class="section" lang="en">
+<div class="titlepage">
+<div><div><h2 class="title">
+<a name="reference.entry.summary" class="skip" href="#reference.entry.summary" title="link to this section"><img src="images/permalink.gif" alt="[link]" title="link to this section" width="8" height="9"></a> entries[i].summary</h2></div></div>
+<div></div>
+</div>
+<div class="abstract"><p>A summary of the entry.</p></div>
+<p>If this contains <acronym title="HyperText Markup Language">HTML</acronym> or <acronym title="Extensible HyperText Markup Language">XHTML</acronym>, it is <a href="html-sanitization.html" title="HTML Sanitization">sanitized</a> by default.</p>
+<p>If this contains <acronym title="HyperText Markup Language">HTML</acronym> or <acronym title="Extensible HyperText Markup Language">XHTML</acronym>, certain (X)HTML elements within this value may contain relative <acronym title="Uniform Resource Identifier">URI</acronym>s.  If so, they are <a href="resolving-relative-links.html" title="Relative Link Resolution">resolved according to a set of rules</a>.</p>
+<p>Some publishing systems auto-generate this value from the first few words or first paragraph of the entry.  Other publishing systems misuse it to include the full content.  In the latter cases, <span class="application">Universal Feed Parser</span> ought to detect it and put the value in <a href="reference-entry-content.html" title="entries[i].content">entries[i].content</a> instead, but it doesn't.</p>
+<div class="reference-from">
+<h3>Comes from</h3>
+<ul>
+<li><tt class="literal">/atom10:feed/atom10:entry/atom10:summary</tt></li>
+<li><tt class="literal">/atom03:feed/atom03:entry/atom03:summary</tt></li>
+<li><tt class="literal">/rss/channel/item/description</tt></li>
+<li><tt class="literal">/rss/channel/item/dc:description</tt></li>
+<li><tt class="literal">/rdf:RDF/rdf:item/rdf:description</tt></li>
+<li><tt class="literal">/rdf:RDF/rdf:item/dc:description</tt></li>
+</ul>
+</div>
+<div class="seealso">
+<h3>See also</h3>
+<ul><li><a href="reference-entry-summary_detail.html" title="entries[i].summary_detail">entries[i].summary_detail</a></li></ul>
+</div>
+<a name="id4972044"></a><table class="note" border="0" summary="">
+<tr><td rowspan="2" align="center" valign="top" width="1%"><img src="images/note.png" alt="Note" title="" width="24" height="24"></td></tr>
+<tr><td colspan="2" align="left" valign="top" width="99%">Some feeds include both a <tt class="literal">summary</tt> and <tt class="literal">description</tt> element for each entry.  In this case, the first element will be available in <tt class="varname">entry['summary']</tt> and the second will be available in <tt class="varname">entry['content'][0]</tt>.</td></tr>
+</table>
+</div>
+<div style="float: left">← <a class="NavigationArrow" href="reference-entry-links.html">entries[i].links</a>
+</div>
+<div style="text-align: right">
+<a class="NavigationArrow" href="reference-entry-summary_detail.html">entries[i].summary_detail</a> →</div>
+<hr style="clear:both">
+<div class="footer"><p class="copyright">Copyright © 2004, 2005, 2006 Mark Pilgrim</p></div>
+</div></div>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Changes in version 4.1 [Universal Feed Parser]</title>
+<link rel="stylesheet" href="feedparser.css" type="text/css">
+<link rev="made" href="mailto:mark@diveintomark.org">
+<meta name="generator" content="DocBook XSL Stylesheets V1.65.1">
+<meta name="keywords" content="RSS, Atom, CDF, XML, feed, parser, Python">
+<link rel="start" href="index.html" title="Documentation">
+<link rel="up" href="history.html" title="Revision history">
+<link rel="prev" href="history.html" title="Revision history">
+<link rel="next" href="changes-40.html" title="Changes in version 4.0">
+</head>
+<body id="feedparser-org" class="docs">
+<div class="z" id="intro"><div class="sectionInner"><div class="sectionInner2">
+<div class="s" id="pageHeader">
+<h1><a href="/"><span>Universal Feed Parser</span></a></h1>
+<p><span>Parse RSS and Atom feeds in Python.  3000 unit tests.  Open source.</span></p>
+</div>
+<div class="s" id="quickSummary"><ul>
+<li class="li1">
+<a href="http://sourceforge.net/projects/feedparser/"><span>Download</span></a> ·</li>
+<li class="li2">
+<a href="http://feedparser.org/docs/"><span>Documentation</span></a> ·</li>
+<li class="li3">
+<a href="http://feedparser.org/tests/"><span>Unit tests</span></a> ·</li>
+<li class="li4"><a href="http://sourceforge.net/tracker/?func=browse&amp;group_id=112328&amp;atid=661937"><span>Report a bug</span></a></li>
+</ul></div>
+</div></div></div>
+<div id="main"><div id="mainInner">
+<p id="breadcrumb">You are here: <a href="index.html">Documentation</a> → <a href="history.html">Revision history</a> → <span class="thispage">Changes in version 4.1</span></p>
+<div class="section" lang="en">
+<div class="titlepage">
+<div><div><h2 class="title">
+<a name="changes.41" class="skip" href="#changes.41" title="link to this section"><img src="images/permalink.gif" alt="[link]" title="link to this section" width="8" height="9"></a> Changes in version 4.1</h2></div></div>
+<div></div>
+</div>
+<div class="abstract"><p>Here is a summary of the major changes in <span class="application">Universal Feed Parser</span> 4.1.</p></div>
+<div class="itemizedlist"><ul>
+<li>Support for the <a href="http://chardet.feedparser.org/"><span class="application">Universal Encoding Detector</span></a> to autodetect character encoding of feeds that declare their encoding incorrectly or don't declare it at all.  See <a href="character-encoding.html" title="Character Encoding Detection">Character Encoding Detection</a> for details of when this gets called.</li>
+<li>
+<span class="application">Universal Feed Parser</span> no longer sets a default socket timeout (bug <a href="http://sourceforge.net/tracker/index.php?func=detail&amp;aid=1392140&amp;group_id=112328&amp;atid=661937">1392140</a>).  If you were relying on this feature, you will need to call <tt class="literal">socket.setdefaulttimeout(TIMEOUT_IN_SECONDS)</tt> yourself.</li>
+</ul></div>
+</div>
+<div style="float: left">← <a class="NavigationArrow" href="history.html">Revision history</a>
+</div>
+<div style="text-align: right">
+<a class="NavigationArrow" href="changes-40.html">Changes in version 4.0</a> →</div>
+<hr style="clear:both">
+<div class="footer"><p class="copyright">Copyright © 2004, 2005, 2006 Mark Pilgrim</p></div>
+</div></div>
+</body>
+</html>

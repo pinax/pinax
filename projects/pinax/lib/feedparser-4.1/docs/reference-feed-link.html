@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>feed.link [Universal Feed Parser]</title>
+<link rel="stylesheet" href="feedparser.css" type="text/css">
+<link rev="made" href="mailto:mark@diveintomark.org">
+<meta name="generator" content="DocBook XSL Stylesheets V1.65.1">
+<meta name="keywords" content="RSS, Atom, CDF, XML, feed, parser, Python">
+<link rel="start" href="index.html" title="Documentation">
+<link rel="up" href="reference.html" title="Reference">
+<link rel="prev" href="reference-feed-title_detail.html" title="feed.title_detail">
+<link rel="next" href="reference-feed-links.html" title="feed.links">
+</head>
+<body id="feedparser-org" class="docs">
+<div class="z" id="intro"><div class="sectionInner"><div class="sectionInner2">
+<div class="s" id="pageHeader">
+<h1><a href="/"><span>Universal Feed Parser</span></a></h1>
+<p><span>Parse RSS and Atom feeds in Python.  3000 unit tests.  Open source.</span></p>
+</div>
+<div class="s" id="quickSummary"><ul>
+<li class="li1">
+<a href="http://sourceforge.net/projects/feedparser/"><span>Download</span></a> ·</li>
+<li class="li2">
+<a href="http://feedparser.org/docs/"><span>Documentation</span></a> ·</li>
+<li class="li3">
+<a href="http://feedparser.org/tests/"><span>Unit tests</span></a> ·</li>
+<li class="li4"><a href="http://sourceforge.net/tracker/?func=browse&amp;group_id=112328&amp;atid=661937"><span>Report a bug</span></a></li>
+</ul></div>
+</div></div></div>
+<div id="main"><div id="mainInner">
+<p id="breadcrumb">You are here: <a href="index.html">Documentation</a> → <a href="reference.html">Reference</a> → <span class="thispage">feed.link</span></p>
+<div class="section" lang="en">
+<div class="titlepage">
+<div><div><h2 class="title">
+<a name="reference.feed.link" class="skip" href="#reference.feed.link" title="link to this section"><img src="images/permalink.gif" alt="[link]" title="link to this section" width="8" height="9"></a> feed.link</h2></div></div>
+<div></div>
+</div>
+<div class="abstract"><p>The <acronym title="Uniform Resource Locator">URL</acronym> of the <acronym title="HyperText Markup Language">HTML</acronym> page associated with this feed.</p></div>
+<p>For site feeds, this is probably the home page of the site.  For category feeds, this is probably the category's archive page.  For search feeds, this is probably the web page that displays the search results for the given search parameters.</p>
+<p>If this is a relative <acronym title="Uniform Resource Identifier">URI</acronym>, it is <a href="resolving-relative-links.html" title="Relative Link Resolution">resolved according to a set of rules</a>.</p>
+<div class="reference-from">
+<h3>Comes from</h3>
+<ul>
+<li><tt class="literal">/atom10:feed/atom10:link[rel="alternate"]/@href</tt></li>
+<li><tt class="literal">/atom10:feed/atom10:link[@not rel]/@href</tt></li>
+<li><tt class="literal">/atom03:feed/atom03:link[rel="alternate"]/@href</tt></li>
+<li><tt class="literal">/rss/channel/link</tt></li>
+<li><tt class="literal">/rdf:RDF/rdf:channel/rdf:link</tt></li>
+</ul>
+</div>
+<div class="seealso">
+<h3>See also</h3>
+<ul><li><a href="reference-feed-links.html" title="feed.links">feed.links</a></li></ul>
+</div>
+</div>
+<div style="float: left">← <a class="NavigationArrow" href="reference-feed-title_detail.html">feed.title_detail</a>
+</div>
+<div style="text-align: right">
+<a class="NavigationArrow" href="reference-feed-links.html">feed.links</a> →</div>
+<hr style="clear:both">
+<div class="footer"><p class="copyright">Copyright © 2004, 2005, 2006 Mark Pilgrim</p></div>
+</div></div>
+</body>
+</html>

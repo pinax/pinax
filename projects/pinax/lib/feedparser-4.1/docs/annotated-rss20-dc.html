@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>RSS 2.0 with Namespaces [Universal Feed Parser]</title>
+<link rel="stylesheet" href="feedparser.css" type="text/css">
+<link rev="made" href="mailto:mark@diveintomark.org">
+<meta name="generator" content="DocBook XSL Stylesheets V1.65.1">
+<meta name="keywords" content="RSS, Atom, CDF, XML, feed, parser, Python">
+<link rel="start" href="index.html" title="Documentation">
+<link rel="up" href="annotated-examples.html" title="Annotated Examples">
+<link rel="prev" href="annotated-rss20.html" title="RSS 2.0">
+<link rel="next" href="annotated-rss10.html" title="RSS 1.0">
+</head>
+<body id="feedparser-org" class="docs">
+<div class="z" id="intro"><div class="sectionInner"><div class="sectionInner2">
+<div class="s" id="pageHeader">
+<h1><a href="/"><span>Universal Feed Parser</span></a></h1>
+<p><span>Parse RSS and Atom feeds in Python.  3000 unit tests.  Open source.</span></p>
+</div>
+<div class="s" id="quickSummary"><ul>
+<li class="li1">
+<a href="http://sourceforge.net/projects/feedparser/"><span>Download</span></a> ·</li>
+<li class="li2">
+<a href="http://feedparser.org/docs/"><span>Documentation</span></a> ·</li>
+<li class="li3">
+<a href="http://feedparser.org/tests/"><span>Unit tests</span></a> ·</li>
+<li class="li4"><a href="http://sourceforge.net/tracker/?func=browse&amp;group_id=112328&amp;atid=661937"><span>Report a bug</span></a></li>
+</ul></div>
+</div></div></div>
+<div id="main"><div id="mainInner">
+<p id="breadcrumb">You are here: <a href="index.html">Documentation</a> → <a href="annotated-examples.html">Annotated Examples</a> → <span class="thispage">RSS 2.0 with Namespaces</span></p>
+<div class="section" lang="en">
+<div class="titlepage">
+<div>
+<div><h2 class="title">
+<a name="annotated.rss20dc" class="skip" href="#annotated.rss20dc" title="link to this section"><img src="images/permalink.gif" alt="[link]" title="link to this section" width="8" height="9"></a> RSS 2.0 with Namespaces</h2></div>
+<div><div class="abstract">
+<h3 class="title"></h3>
+<p>This is a sample <acronym title="Rich Site Summary">RSS</acronym> 2.0 feed that uses several allowable extension modules in namespaces.  The feed is annotated with links that show how each value can be accessed once the feed is parsed.</p>
+</div></div>
+</div>
+<div></div>
+</div>
+<a name="id4964572"></a><table class="caution" border="0" summary="">
+<tr><td rowspan="2" align="center" valign="top" width="1%"><img src="images/caution.png" alt="Caution" title="" width="24" height="24"></td></tr>
+<tr><td colspan="2" align="left" valign="top" width="99%">Even though many of these elements are required according to the specification, real-world feeds may be missing any element.  If an element is not present in the feed, it will not be present in the parsed results.  You should not rely on any particular element being present.</td></tr>
+</table>
+<div class="example">
+<a name="example.annotated.rss20dc" class="skip" href="#example.annotated.rss20dc" title="link to this example"><img src="images/permalink.gif" alt="[link]" title="link to this example" width="8" height="9"></a> <h3 class="title">Example: Annotated <acronym title="Rich Site Summary">RSS</acronym> 2.0 feed with namespaces</h3>
+<pre class="programlisting ">&lt;?xml version="1.0" encoding="<a href="reference-encoding.html" title="encoding">utf-8</a>"?&gt;
+&lt;rss version="<a href="reference-version.html" title="version">2.0</a>"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:admin="http://webns.net/mvcb/"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"&gt;
+&lt;channel&gt;
+  &lt;title&gt;<a href="reference-feed-title.html" title="feed.title">Sample Feed</a>&lt;/title&gt;
+  &lt;link&gt;<a href="reference-feed-link.html" title="feed.link">http://example.org/</a>&lt;/link&gt;
+  &lt;description&gt;<a href="reference-feed-subtitle.html" title="feed.subtitle">For documentation only</a>&lt;/description&gt;
+  &lt;dc:language&gt;<a href="reference-feed-language.html" title="feed.language">en-us</a>&lt;/dc:language&gt;
+  &lt;dc:creator&gt;<a href="reference-feed-author_detail.html#reference.feed.author_detail.name" title="feed.author_detail.name">Mark Pilgrim</a> (<a href="reference-feed-author_detail.html#reference.feed.author_detail.email" title="feed.author_detail.email">mark@example.org</a>)&lt;/dc:creator&gt;
+  &lt;dc:rights&gt;<a href="reference-feed-rights.html" title="feed.rights">Copyright 2004 Mark Pilgrim</a>&lt;/dc:rights&gt;
+  &lt;dc:date&gt;<a href="reference-feed-updated.html" title="feed.updated">2004-06-04T17:40:33-05:00</a>&lt;/dc:date&gt;
+  &lt;admin:generatorAgent rdf:resource="<a href="reference-feed-generator_detail.html#reference.feed.generator_detail.href" title="feed.generator_detail.href">http://www.exampletoolkit.org/</a>"/&gt;
+  &lt;admin:errorReportsTo rdf:resource="<a href="reference-feed-errorreportsto.html" title="feed.errorreportsto">mailto:mark@example.org</a>"/&gt;
+
+  &lt;item&gt;
+    &lt;title&gt;<a href="reference-entry-title.html" title="entries[i].title">First of all</a>&lt;/title&gt;
+    &lt;link&gt;<a href="reference-entry-link.html" title="entries[i].link">http://example.org/archives/2002/09/04.html#first_of_all</a>&lt;/link&gt;
+    &lt;guid isPermaLink="false"&gt;<a href="reference-entry-id.html" title="entries[i].id">1983@example.org</a>&lt;/guid&gt;
+    &lt;description&gt;
+      <a href="reference-entry-summary.html" title="entries[i].summary">Americans are fat. Smokers are stupid. People who don't speak Perl are irrelevant.</a>
+    &lt;/description&gt;
+    &lt;dc:subject&gt;<a href="reference-entry-tags.html#reference.entry.tags.term" title="entries[i].tags[j].term">Quotes</a>&lt;/dc:subject&gt;
+    &lt;dc:date&gt;<a href="reference-entry-updated.html" title="entries[i].updated">2002-09-04T13:54:20-05:00</a>&lt;/dc:date&gt;
+    &lt;content:encoded&gt;&lt;![CDATA[
+<a href="reference-entry-content.html#reference.entry.content.value" title="entries[i].content[j].value">      &lt;cite&gt;Ian Hickson&lt;/cite&gt;: &lt;q&gt;&lt;a href="http://ln.hixie.ch/?start=1030823786&amp;amp;count=1?&gt;
+      Americans are fat. Smokers are stupid. People who don't speak Perl are irrelevant.
+      &lt;/a&gt;&lt;/q&gt;</a>
+      ]]&gt;
+    &lt;/content:encoded&gt;
+  &lt;/item&gt;
+&lt;/channel&gt;
+&lt;/rss&gt;</pre>
+</div>
+</div>
+<div style="float: left">← <a class="NavigationArrow" href="annotated-rss20.html">RSS 2.0</a>
+</div>
+<div style="text-align: right">
+<a class="NavigationArrow" href="annotated-rss10.html">RSS 1.0</a> →</div>
+<hr style="clear:both">
+<div class="footer"><p class="copyright">Copyright © 2004, 2005, 2006 Mark Pilgrim</p></div>
+</div></div>
+</body>
+</html>

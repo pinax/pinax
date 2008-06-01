@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>version [Universal Feed Parser]</title>
+<link rel="stylesheet" href="feedparser.css" type="text/css">
+<link rev="made" href="mailto:mark@diveintomark.org">
+<meta name="generator" content="DocBook XSL Stylesheets V1.65.1">
+<meta name="keywords" content="RSS, Atom, CDF, XML, feed, parser, Python">
+<link rel="start" href="index.html" title="Documentation">
+<link rel="up" href="reference.html" title="Reference">
+<link rel="prev" href="reference-entry-license.html" title="entries[i].license">
+<link rel="next" href="reference-namespaces.html" title="namespaces">
+</head>
+<body id="feedparser-org" class="docs">
+<div class="z" id="intro"><div class="sectionInner"><div class="sectionInner2">
+<div class="s" id="pageHeader">
+<h1><a href="/"><span>Universal Feed Parser</span></a></h1>
+<p><span>Parse RSS and Atom feeds in Python.  3000 unit tests.  Open source.</span></p>
+</div>
+<div class="s" id="quickSummary"><ul>
+<li class="li1">
+<a href="http://sourceforge.net/projects/feedparser/"><span>Download</span></a> ·</li>
+<li class="li2">
+<a href="http://feedparser.org/docs/"><span>Documentation</span></a> ·</li>
+<li class="li3">
+<a href="http://feedparser.org/tests/"><span>Unit tests</span></a> ·</li>
+<li class="li4"><a href="http://sourceforge.net/tracker/?func=browse&amp;group_id=112328&amp;atid=661937"><span>Report a bug</span></a></li>
+</ul></div>
+</div></div></div>
+<div id="main"><div id="mainInner">
+<p id="breadcrumb">You are here: <a href="index.html">Documentation</a> → <a href="reference.html">Reference</a> → <span class="thispage">version</span></p>
+<div class="section" lang="en">
+<div class="titlepage">
+<div>
+<div><h2 class="title">
+<a name="reference.version" class="skip" href="#reference.version" title="link to this section"><img src="images/permalink.gif" alt="[link]" title="link to this section" width="8" height="9"></a> version</h2></div>
+<div><div class="abstract">
+<h3 class="title"></h3>
+<p>The format and version of the feed.</p>
+</div></div>
+</div>
+<div></div>
+</div>
+<p>Here is the complete list of known feed types and versions that may be returned in <tt class="varname">version</tt>:</p>
+<div class="variablelist"><dl>
+<dt><span class="term"><tt class="constant">rss090</tt></span></dt>
+<dd><a href="http://www.purplepages.ie/RSS/netscape/rss0.90.html"><acronym title="Rich Site Summary">RSS</acronym> 0.90</a></dd>
+<dt><span class="term"><tt class="constant">rss091n</tt></span></dt>
+<dd><a href="http://my.netscape.com/publish/formats/rss-spec-0.91.html">Netscape <acronym title="Rich Site Summary">RSS</acronym> 0.91</a></dd>
+<dt><span class="term"><tt class="constant">rss091u</tt></span></dt>
+<dd>
+<a href="http://backend.userland.com/rss091">Userland <acronym title="Rich Site Summary">RSS</acronym> 0.91</a> (<a href="http://diveintomark.org/archives/2004/02/04/incompatible-rss#example3">differences from Netscape <acronym title="Rich Site Summary">RSS</acronym> 0.91</a>)</dd>
+<dt><span class="term"><tt class="constant">rss10</tt></span></dt>
+<dd><a href="http://purl.org/rss/1.0/"><acronym title="Rich Site Summary">RSS</acronym> 1.0</a></dd>
+<dt><span class="term"><tt class="constant">rss092</tt></span></dt>
+<dd><a href="http://backend.userland.com/rss092"><acronym title="Rich Site Summary">RSS</acronym> 0.92</a></dd>
+<dt><span class="term"><tt class="constant">rss093</tt></span></dt>
+<dd><a href="http://backend.userland.com/rss093"><acronym title="Rich Site Summary">RSS</acronym> 0.93</a></dd>
+<dt><span class="term"><tt class="constant">rss094</tt></span></dt>
+<dd>
+<acronym title="Rich Site Summary">RSS</acronym> 0.94 (no accurate specification is known to exist)</dd>
+<dt><span class="term"><tt class="constant">rss20</tt></span></dt>
+<dd><a href="http://blogs.law.harvard.edu/tech/rss"><acronym title="Rich Site Summary">RSS</acronym> 2.0</a></dd>
+<dt><span class="term"><tt class="constant">rss</tt></span></dt>
+<dd>
+<acronym title="Rich Site Summary">RSS</acronym> (unknown or unrecognized version)</dd>
+<dt><span class="term"><tt class="constant">atom01</tt></span></dt>
+<dd><a href="http://www.intertwingly.net/blog/1506.html">Atom 0.1</a></dd>
+<dt><span class="term"><tt class="constant">atom02</tt></span></dt>
+<dd><a href="http://diveintomark.org/public/2003/08/atom02spec.txt">Atom 0.2</a></dd>
+<dt><span class="term"><tt class="constant">atom03</tt></span></dt>
+<dd><a href="http://www.mnot.net/drafts/draft-nottingham-atom-format-02.html">Atom 0.3</a></dd>
+<dt><span class="term"><tt class="constant">atom10</tt></span></dt>
+<dd><a href="http://www.ietf.org/rfc/rfc4287">Atom 1.0</a></dd>
+<dt><span class="term"><tt class="constant">atom</tt></span></dt>
+<dd>Atom (unknown or unrecognized version)</dd>
+<dt><span class="term"><tt class="constant">cdf</tt></span></dt>
+<dd><a href="http://www.w3.org/TR/NOTE-CDFsubmit.html"><acronym title="Channel Definition Format">CDF</acronym></a></dd>
+<dt><span class="term"><tt class="constant">hotrss</tt></span></dt>
+<dd><a href="http://diveintomark.org/archives/2004/04/14/hot-rss">Hot <acronym title="Rich Site Summary">RSS</acronym></a></dd>
+</dl></div>
+<p>If the feed type is completely unknown, <tt class="varname">version</tt> will be an empty string.</p>
+<a name="id4977107"></a><table class="tip" border="0" summary="">
+<tr><td rowspan="2" align="center" valign="top" width="1%"><img src="images/tip.png" alt="Tip" title="" width="24" height="24"></td></tr>
+<tr><td colspan="2" align="left" valign="top" width="99%">This element always exists, although it may be an empty string if the version can not be determined.</td></tr>
+</table>
+</div>
+<div style="float: left">← <a class="NavigationArrow" href="reference-entry-license.html">entries[i].license</a>
+</div>
+<div style="text-align: right">
+<a class="NavigationArrow" href="reference-namespaces.html">namespaces</a> →</div>
+<hr style="clear:both">
+<div class="footer"><p class="copyright">Copyright © 2004, 2005, 2006 Mark Pilgrim</p></div>
+</div></div>
+</body>
+</html>

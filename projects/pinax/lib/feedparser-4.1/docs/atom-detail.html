@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Getting Detailed Information on Atom Elements [Universal Feed Parser]</title>
+<link rel="stylesheet" href="feedparser.css" type="text/css">
+<link rev="made" href="mailto:mark@diveintomark.org">
+<meta name="generator" content="DocBook XSL Stylesheets V1.65.1">
+<meta name="keywords" content="RSS, Atom, CDF, XML, feed, parser, Python">
+<link rel="start" href="index.html" title="Documentation">
+<link rel="up" href="basic.html" title="Basic Features">
+<link rel="prev" href="common-atom-elements.html" title="Common Atom Elements">
+<link rel="next" href="uncommon-rss.html" title="Uncommon RSS Elements">
+</head>
+<body id="feedparser-org" class="docs">
+<div class="z" id="intro"><div class="sectionInner"><div class="sectionInner2">
+<div class="s" id="pageHeader">
+<h1><a href="/"><span>Universal Feed Parser</span></a></h1>
+<p><span>Parse RSS and Atom feeds in Python.  3000 unit tests.  Open source.</span></p>
+</div>
+<div class="s" id="quickSummary"><ul>
+<li class="li1">
+<a href="http://sourceforge.net/projects/feedparser/"><span>Download</span></a> ·</li>
+<li class="li2">
+<a href="http://feedparser.org/docs/"><span>Documentation</span></a> ·</li>
+<li class="li3">
+<a href="http://feedparser.org/tests/"><span>Unit tests</span></a> ·</li>
+<li class="li4"><a href="http://sourceforge.net/tracker/?func=browse&amp;group_id=112328&amp;atid=661937"><span>Report a bug</span></a></li>
+</ul></div>
+</div></div></div>
+<div id="main"><div id="mainInner">
+<p id="breadcrumb">You are here: <a href="index.html">Documentation</a> → <a href="basic.html">Basic Features</a> → <span class="thispage">Getting Detailed Information on Atom Elements</span></p>
+<div class="section" lang="en">
+<div class="titlepage">
+<div><div><h2 class="title">
+<a name="basic.detail" class="skip" href="#basic.detail" title="link to this section"><img src="images/permalink.gif" alt="[link]" title="link to this section" width="8" height="9"></a> Getting Detailed Information on Atom Elements</h2></div></div>
+<div></div>
+</div>
+<div class="abstract"><p>Several Atom elements share the Atom content model: <tt class="sgmltag-element">title</tt>, <tt class="sgmltag-element">subtitle</tt>, <tt class="sgmltag-element">rights</tt>, <tt class="sgmltag-element">summary</tt>, and of course <tt class="sgmltag-element">content</tt>.  (Atom 0.3 also had an <tt class="sgmltag-element">info</tt> element which shared this content model.)  <span class="application">Universal Feed Parser</span> captures all relevant metadata about these elements, most importantly the content type and the value itself.</p></div>
+<div class="example">
+<a name="example.feed.detail" class="skip" href="#example.feed.detail" title="link to this example"><img src="images/permalink.gif" alt="[link]" title="link to this example" width="8" height="9"></a> <h3 class="title">Example: Detailed Information on Feed Elements</h3>
+<pre class="screen"><tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput"><font color='navy'><b>import</b></font> feedparser</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d = feedparser.parse('<a href="http://feedparser.org/docs/examples/atom10.xml">http://feedparser.org/docs/examples/atom10.xml</a>')</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.feed.title_detail</span>
+<span class="computeroutput">{'type': u'text/plain',
+ 'base': u'http://example.org/',
+ 'language': u'en',
+ 'value': u'Sample Feed'}</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.feed.subtitle_detail</span>
+<span class="computeroutput">{'type': u'text/html',
+ 'base': u'http://example.org/',
+ 'language': u'en',
+ 'value': u'For documentation &lt;em&gt;only&lt;/em&gt;'}</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.feed.rights_detail</span>
+<span class="computeroutput">{'type': u'text/html',
+ 'base': u'http://example.org/',
+ 'language': u'en',
+ 'value': u'&lt;p&gt;Copyright 2004, Mark Pilgrim&lt;/p&gt;'}</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.entries[0].title_detail</span>
+<span class="computeroutput">{'type': 'text/plain',
+ 'base': u'http://example.org/',
+ 'language': u'en',
+ 'value': u'First entry title'}</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.entries[0].summary_detail</span>
+<span class="computeroutput">{'type': u'text/plain',
+ 'base': u'http://example.org/',
+ 'language': u'en',
+ 'value': u'Watch out for nasty tricks'}</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">len(d.entries[0].content)</span>
+<span class="computeroutput">1</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.entries[0].content[0]</span>
+<span class="computeroutput">{'type': u'application/xhtml+xml',
+ 'base': u'http://example.org/entry/3',
+ 'language': u'en-US'
+ 'value': u'&lt;div&gt;Watch out for &lt;span&gt; nasty tricks&lt;/span&gt;&lt;/div&gt;'}</span></pre>
+</div>
+</div>
+<div style="float: left">← <a class="NavigationArrow" href="common-atom-elements.html">Common Atom Elements</a>
+</div>
+<div style="text-align: right">
+<a class="NavigationArrow" href="uncommon-rss.html">Uncommon RSS Elements</a> →</div>
+<hr style="clear:both">
+<div class="footer"><p class="copyright">Copyright © 2004, 2005, 2006 Mark Pilgrim</p></div>
+</div></div>
+</body>
+</html>

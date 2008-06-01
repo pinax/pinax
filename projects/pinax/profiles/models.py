@@ -13,6 +13,7 @@ class Profile(models.Model):
     about = models.TextField(_('about'), null=True, blank=True)
     location = models.CharField(_('location'), max_length=40, null=True, blank=True)
     website = models.URLField(_('website'), null=True, blank=True)
+    blogrss = models.URLField(_('blog rss/atom'), null=True, blank=True)
     timezone = models.CharField(_('timezone'), max_length=100,
         choices=TIMEZONE_CHOICES, default=settings.TIME_ZONE)
     

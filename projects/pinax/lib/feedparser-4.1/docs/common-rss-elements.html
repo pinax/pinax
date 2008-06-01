@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Common RSS Elements [Universal Feed Parser]</title>
+<link rel="stylesheet" href="feedparser.css" type="text/css">
+<link rev="made" href="mailto:mark@diveintomark.org">
+<meta name="generator" content="DocBook XSL Stylesheets V1.65.1">
+<meta name="keywords" content="RSS, Atom, CDF, XML, feed, parser, Python">
+<link rel="start" href="index.html" title="Documentation">
+<link rel="up" href="basic.html" title="Basic Features">
+<link rel="prev" href="introduction.html" title="Introduction">
+<link rel="next" href="common-atom-elements.html" title="Common Atom Elements">
+</head>
+<body id="feedparser-org" class="docs">
+<div class="z" id="intro"><div class="sectionInner"><div class="sectionInner2">
+<div class="s" id="pageHeader">
+<h1><a href="/"><span>Universal Feed Parser</span></a></h1>
+<p><span>Parse RSS and Atom feeds in Python.  3000 unit tests.  Open source.</span></p>
+</div>
+<div class="s" id="quickSummary"><ul>
+<li class="li1">
+<a href="http://sourceforge.net/projects/feedparser/"><span>Download</span></a> ·</li>
+<li class="li2">
+<a href="http://feedparser.org/docs/"><span>Documentation</span></a> ·</li>
+<li class="li3">
+<a href="http://feedparser.org/tests/"><span>Unit tests</span></a> ·</li>
+<li class="li4"><a href="http://sourceforge.net/tracker/?func=browse&amp;group_id=112328&amp;atid=661937"><span>Report a bug</span></a></li>
+</ul></div>
+</div></div></div>
+<div id="main"><div id="mainInner">
+<p id="breadcrumb">You are here: <a href="index.html">Documentation</a> → <a href="basic.html">Basic Features</a> → <span class="thispage">Common RSS Elements</span></p>
+<div class="section" lang="en">
+<div class="titlepage">
+<div><div><h2 class="title">
+<a name="basic.rss" class="skip" href="#basic.rss" title="link to this section"><img src="images/permalink.gif" alt="[link]" title="link to this section" width="8" height="9"></a> Common <acronym title="Rich Site Summary">RSS</acronym> Elements</h2></div></div>
+<div></div>
+</div>
+<div class="abstract"><p>The most commonly used elements in <acronym title="Rich Site Summary">RSS</acronym> feeds (regardless of version) are title, link, description, modified date, and entry ID.  The modified date comes from the <tt class="sgmltag-element">pubDate</tt> element, and the entry ID comes from the <tt class="sgmltag-element">guid</tt> element.</p></div>
+<p>This sample <acronym title="Rich Site Summary">RSS</acronym> feed is at <a href="http://feedparser.org/docs/examples/rss20.xml">http://feedparser.org/docs/examples/rss20.xml</a>.</p>
+<div class="informalexample"><pre class="programlisting ">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;rss version="2.0"&gt;
+&lt;channel&gt;
+  &lt;title&gt;Sample Feed&lt;/title&gt;
+  &lt;description&gt;For documentation &amp;lt;em&amp;gt;only&amp;lt;/em&amp;gt;&lt;/description&gt;
+  &lt;link&gt;http://example.org/&lt;/link&gt;
+  &lt;pubDate&gt;Sat, 07 Sep 2002 0:00:01 GMT&lt;/pubDate&gt;
+  &lt;!-- other elements omitted from this example --&gt;
+  &lt;item&gt;
+    &lt;title&gt;First entry title&lt;/title&gt;
+    &lt;link&gt;http://example.org/entry/3&lt;/link&gt;
+    &lt;description&gt;Watch out for &amp;lt;span style="background-image:
+url(javascript:window.location='http://example.org/')"&amp;gt;nasty
+tricks&amp;lt;/span&amp;gt;&lt;/description&gt;
+    &lt;pubDate&gt;Sat, 07 Sep 2002 0:00:01 GMT&lt;/pubDate&gt;
+    &lt;guid&gt;http://example.org/entry/3&lt;/guid&gt;
+    &lt;!-- other elements omitted from this example --&gt;
+  &lt;/item&gt;
+&lt;/channel&gt;
+&lt;/rss&gt;</pre></div>
+<p>The <tt class="sgmltag-element">channel</tt> elements are available in <tt class="varname">d.feed</tt>.</p>
+<div class="example">
+<a name="example.rss.channel" class="skip" href="#example.rss.channel" title="link to this example"><img src="images/permalink.gif" alt="[link]" title="link to this example" width="8" height="9"></a> <h3 class="title">Example: Accessing Common Channel Elements</h3>
+<pre class="screen"><tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput"><font color='navy'><b>import</b></font> feedparser</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d = feedparser.parse('<a href="http://feedparser.org/docs/examples/rss20.xml">http://feedparser.org/docs/examples/rss20.xml</a>')</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.feed.title</span>
+<span class="computeroutput">u'Sample Feed'</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.feed.link</span>
+<span class="computeroutput">u'http://example.org/'</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.feed.description</span>
+<span class="computeroutput">u'For documentation &lt;em&gt;only&lt;/em&gt;'</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.feed.date</span>
+<span class="computeroutput">u'Sat, 07 Sep 2002 0:00:01 GMT'</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.feed.date_parsed</span>
+<span class="computeroutput">(2002, 9, 7, 0, 0, 1, 5, 250, 0)</span></pre>
+</div>
+<p>The items are available in <tt class="varname">d.entries</tt>, which is a list.  You access items in the list in the same order in which they appear in the original feed, so the first item is available in <tt class="varname">d.entries[0]</tt>.</p>
+<div class="example">
+<a name="example.rss.item" class="skip" href="#example.rss.item" title="link to this example"><img src="images/permalink.gif" alt="[link]" title="link to this example" width="8" height="9"></a> <h3 class="title">Example: Accessing Common Item Elements</h3>
+<pre class="screen"><tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput"><font color='navy'><b>import</b></font> feedparser</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d = feedparser.parse('<a href="http://feedparser.org/docs/examples/rss20.xml">http://feedparser.org/docs/examples/rss20.xml</a>')</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.entries[0].title</span>
+<span class="computeroutput">u'First item title'</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.entries[0].link</span>
+<span class="computeroutput">u'http://example.org/item/1'</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.entries[0].description</span>
+<span class="computeroutput">u'Watch out for &lt;span&gt;nasty tricks&lt;/span&gt;'</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.entries[0].date</span>
+<span class="computeroutput">u'Thu, 05 Sep 2002 0:00:01 GMT'</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.entries[0].date_parsed</span>
+<span class="computeroutput">(2002, 9, 5, 0, 0, 1, 3, 248, 0)</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.entries[0].id</span>
+<span class="computeroutput">u'http://example.org/guid/1'</span></pre>
+</div>
+<a name="id4952074"></a><table class="tip" border="0" summary="">
+<tr><td rowspan="2" align="center" valign="top" width="1%"><img src="images/tip.png" alt="Tip" title="" width="24" height="24"></td></tr>
+<tr><td colspan="2" align="left" valign="top" width="99%">You can also access data from <acronym title="Rich Site Summary">RSS</acronym> feeds using Atom terminology.  See <a href="content-normalization.html" title="Content Normalization">Content Normalization</a> for details.</td></tr>
+</table>
+</div>
+<div style="float: left">← <a class="NavigationArrow" href="introduction.html">Introduction</a>
+</div>
+<div style="text-align: right">
+<a class="NavigationArrow" href="common-atom-elements.html">Common Atom Elements</a> →</div>
+<hr style="clear:both">
+<div class="footer"><p class="copyright">Copyright © 2004, 2005, 2006 Mark Pilgrim</p></div>
+</div></div>
+</body>
+</html>

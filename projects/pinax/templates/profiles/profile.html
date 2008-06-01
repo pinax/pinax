@@ -160,6 +160,7 @@
     <h2>Tweets</h2>
     {% oembed %}
     {% if other_user.sent_tweets.all %}
+    {% autopaginate other_user.sent_tweets.all %}
     {% for tweet in other_user.sent_tweets.all %}
     <div class="tweet" id="t{{ tweet.id }}">
     {{ tweet.html|safe }}
@@ -167,11 +168,19 @@
     <a class="reply" href="{% url zwitschern.views.personal %}?reply={{ tweet.sender }}">reply</a>
     </div>
     {% endfor %}
+    {% paginate %}
     {% else %}
     <p>{{ other_user }} hasn't posted any tweets yet.</p>
     {% endif %}
     {% endoembed %}
     
+{% endif %}
+
+{% if user.get_profile.blogrss %}
+    <div id='feed-entries'>
+    <h2>{% trans "Recent Blog Posts" %}</h2>
+    {% load feedutil %}{% feed user.get_profile.blogrss 5 0 %}
+    </div>
 {% endif %}
 {% else %}
 <p>{% blocktrans %}<a href="/account/signup/">Sign up</a> and <a href="/account/login/">log in </a> to add this person as a friend.{% endblocktrans %}</p>

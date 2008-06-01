@@ -1,0 +1,366 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Documentation [Universal Feed Parser]</title>
+<link rel="stylesheet" href="feedparser.css" type="text/css">
+<link rev="made" href="mailto:mark@diveintomark.org">
+<meta name="generator" content="DocBook XSL Stylesheets V1.65.1">
+<meta name="keywords" content="RSS, Atom, CDF, XML, feed, parser, Python">
+<link rel="start" href="index.html" title="Documentation">
+<link rel="next" href="basic.html" title="Basic Features">
+</head>
+<body id="feedparser-org" class="docs">
+<div class="z" id="intro"><div class="sectionInner"><div class="sectionInner2">
+<div class="s" id="pageHeader">
+<h1><a href="/"><span>Universal Feed Parser</span></a></h1>
+<p><span>Parse RSS and Atom feeds in Python.  3000 unit tests.  Open source.</span></p>
+</div>
+<div class="s" id="quickSummary"><ul>
+<li class="li1">
+<a href="http://sourceforge.net/projects/feedparser/"><span>Download</span></a> ·</li>
+<li class="li2">
+<a href="http://feedparser.org/docs/"><span>Documentation</span></a> ·</li>
+<li class="li3">
+<a href="http://feedparser.org/tests/"><span>Unit tests</span></a> ·</li>
+<li class="li4"><a href="http://sourceforge.net/tracker/?func=browse&amp;group_id=112328&amp;atid=661937"><span>Report a bug</span></a></li>
+</ul></div>
+</div></div></div>
+<div id="main"><div id="mainInner">
+<p id="breadcrumb">You are here: <span class="thispage">Documentation</span></p>
+<div class="book" lang="en">
+<div class="titlepage">
+<div>
+<div><p class="pubdate">2006-01-10</p></div>
+<div><div class="abstract">
+<h3 class="title"></h3>
+<p>This documentation claims to describe the behavior of <span class="application">Universal Feed Parser</span> 4.1.  It does not claim to describe the behavior of any other version.</p>
+<p>This documentation lives at <a href="http://feedparser.org/docs/">http://feedparser.org/docs/</a>.  If you're reading it somewhere else, you may not have the latest version.</p>
+</div></div>
+<div><p class="copyright">Copyright © 2004, 2005, 2006 Mark Pilgrim</p></div>
+<div><div class="legalnotice"><p>This documentation is provided by the author “<span class="quote">as is</span>” without any express or implied warranties.  See <a href="license.html" title="Terms of use">Terms of use</a> for more details.</p></div></div>
+</div>
+<div></div>
+</div>
+<div class="toc">
+<p><b>Table of Contents</b></p>
+<ul>
+<li>
+<span class="chapter"><a href="basic.html">Basic Features</a></span><ul>
+<li><span class="section"><a href="introduction.html">Introduction</a></span></li>
+<li><span class="section"><a href="common-rss-elements.html">Common RSS Elements</a></span></li>
+<li><span class="section"><a href="common-atom-elements.html">Common Atom Elements</a></span></li>
+<li><span class="section"><a href="atom-detail.html">Getting Detailed Information on Atom Elements</a></span></li>
+<li><span class="section"><a href="uncommon-rss.html">Uncommon RSS Elements</a></span></li>
+<li><span class="section"><a href="uncommon-atom.html">Uncommon Atom Elements</a></span></li>
+<li><span class="section"><a href="basic-existence.html">Testing for Existence</a></span></li>
+</ul>
+</li>
+<li>
+<span class="chapter"><a href="advanced.html">Advanced Features</a></span><ul>
+<li>
+<span class="section"><a href="date-parsing.html">Date Parsing</a></span><ul>
+<li><span class="section"><a href="date-parsing.html#advanced.date.history">History of Date Formats</a></span></li>
+<li><span class="section"><a href="date-parsing.html#advanced.date.formats">Recognized Date Formats</a></span></li>
+<li><span class="section"><a href="date-parsing.html#advanced.date.register">Supporting Additional Date Formats</a></span></li>
+</ul>
+</li>
+<li>
+<span class="section"><a href="html-sanitization.html">HTML Sanitization</a></span><ul><li><span class="section"><a href="html-sanitization.html#advanced.sanitization.why">Whitelist, Don't Blacklist</a></span></li></ul>
+</li>
+<li><span class="section"><a href="content-normalization.html">Content Normalization</a></span></li>
+<li><span class="section"><a href="namespace-handling.html">Namespace Handling</a></span></li>
+<li>
+<span class="section"><a href="resolving-relative-links.html">Relative Link Resolution</a></span><ul>
+<li><span class="section"><a href="resolving-relative-links.html#advanced.base.which">Which Values Are URIs</a></span></li>
+<li><span class="section"><a href="resolving-relative-links.html#advanced.base.how">How Relative URIs Are Resolved</a></span></li>
+</ul>
+</li>
+<li><span class="section"><a href="version-detection.html">Feed Type and Version Detection</a></span></li>
+<li>
+<span class="section"><a href="character-encoding.html">Character Encoding Detection</a></span><ul>
+<li><span class="section"><a href="character-encoding.html#advanced.encoding.intro">Introduction to Character Encoding</a></span></li>
+<li><span class="section"><a href="character-encoding.html#advanced.encoding.override">Handling Incorrectly-Declared Encodings</a></span></li>
+<li><span class="section"><a href="character-encoding.html#advanced.encoding.nonxml">Handling Incorrectly-Declared Media Types</a></span></li>
+</ul>
+</li>
+<li><span class="section"><a href="bozo.html">Bozo Detection</a></span></li>
+</ul>
+</li>
+<li>
+<span class="chapter"><a href="http.html">HTTP Features</a></span><ul>
+<li><span class="section"><a href="http-etag.html">ETag and Last-Modified Headers</a></span></li>
+<li><span class="section"><a href="http-useragent.html">User-Agent and Referer Headers</a></span></li>
+<li><span class="section"><a href="http-redirect.html">HTTP Redirects</a></span></li>
+<li><span class="section"><a href="http-authentication.html">Password-Protected Feeds</a></span></li>
+<li><span class="section"><a href="http-other.html">Other HTTP Headers</a></span></li>
+</ul>
+</li>
+<li>
+<span class="chapter"><a href="annotated-examples.html">Annotated Examples</a></span><ul>
+<li><span class="section"><a href="annotated-atom10.html">Atom 1.0</a></span></li>
+<li><span class="section"><a href="annotated-atom03.html">Atom 0.3</a></span></li>
+<li><span class="section"><a href="annotated-rss20.html">RSS 2.0</a></span></li>
+<li><span class="section"><a href="annotated-rss20-dc.html">RSS 2.0 with Namespaces</a></span></li>
+<li><span class="section"><a href="annotated-rss10.html">RSS 1.0</a></span></li>
+</ul>
+</li>
+<li>
+<span class="chapter"><a href="history.html">Revision history</a></span><ul>
+<li><span class="section"><a href="changes-41.html">Changes in version 4.1</a></span></li>
+<li><span class="section"><a href="changes-40.html">Changes in version 4.0</a></span></li>
+</ul>
+</li>
+<li>
+<span class="chapter"><a href="reference.html">Reference</a></span><ul>
+<li><span class="section"><a href="reference-feed.html">feed</a></span></li>
+<li><span class="section"><a href="reference-feed-title.html">feed.title</a></span></li>
+<li>
+<span class="section"><a href="reference-feed-title_detail.html">feed.title_detail</a></span><ul>
+<li><span class="section"><a href="reference-feed-title_detail.html#reference.feed.title_detail.value">feed.title_detail.value</a></span></li>
+<li><span class="section"><a href="reference-feed-title_detail.html#reference.feed.title_detail.type">feed.title_detail.type</a></span></li>
+<li><span class="section"><a href="reference-feed-title_detail.html#reference.feed.title_detail.language">feed.title_detail.language</a></span></li>
+<li><span class="section"><a href="reference-feed-title_detail.html#reference.feed.title_detail.base">feed.title_detail.base</a></span></li>
+</ul>
+</li>
+<li><span class="section"><a href="reference-feed-link.html">feed.link</a></span></li>
+<li>
+<span class="section"><a href="reference-feed-links.html">feed.links</a></span><ul>
+<li><span class="section"><a href="reference-feed-links.html#reference.feed.links.rel">feed.links[i].rel</a></span></li>
+<li><span class="section"><a href="reference-feed-links.html#reference.feed.links.type">feed.links[i].type</a></span></li>
+<li><span class="section"><a href="reference-feed-links.html#reference.feed.links.href">feed.links[i].href</a></span></li>
+<li><span class="section"><a href="reference-feed-links.html#reference.feed.links.title">feed.links[i].title</a></span></li>
+</ul>
+</li>
+<li><span class="section"><a href="reference-feed-subtitle.html">feed.subtitle</a></span></li>
+<li>
+<span class="section"><a href="reference-feed-subtitle_detail.html">feed.subtitle_detail</a></span><ul>
+<li><span class="section"><a href="reference-feed-subtitle_detail.html#reference.feed.subtitle_detail.value">feed.subtitle_detail.value</a></span></li>
+<li><span class="section"><a href="reference-feed-subtitle_detail.html#reference.feed.subtitle_detail.type">feed.subtitle_detail.type</a></span></li>
+<li><span class="section"><a href="reference-feed-subtitle_detail.html#reference.feed.subtitle_detail.language">feed.subtitle_detail.language</a></span></li>
+<li><span class="section"><a href="reference-feed-subtitle_detail.html#reference.feed.subtitle_detail.base">feed.subtitle_detail.base</a></span></li>
+</ul>
+</li>
+<li><span class="section"><a href="reference-feed-rights.html">feed.rights</a></span></li>
+<li>
+<span class="section"><a href="reference-feed-rights_detail.html">feed.rights_detail</a></span><ul>
+<li><span class="section"><a href="reference-feed-rights_detail.html#reference.feed.rights_detail.value">feed.rights_detail.value</a></span></li>
+<li><span class="section"><a href="reference-feed-rights_detail.html#reference.feed.rights_detail.type">feed.rights_detail.type</a></span></li>
+<li><span class="section"><a href="reference-feed-rights_detail.html#reference.feed.rights_detail.language">feed.rights_detail.language</a></span></li>
+<li><span class="section"><a href="reference-feed-rights_detail.html#reference.feed.rights_detail.base">feed.rights_detail.base</a></span></li>
+</ul>
+</li>
+<li><span class="section"><a href="reference-feed-generator.html">feed.generator</a></span></li>
+<li>
+<span class="section"><a href="reference-feed-generator_detail.html">feed.generator_detail</a></span><ul>
+<li><span class="section"><a href="reference-feed-generator_detail.html#reference.feed.generator_detail.name">feed.generator_detail.name</a></span></li>
+<li><span class="section"><a href="reference-feed-generator_detail.html#reference.feed.generator_detail.href">feed.generator_detail.href</a></span></li>
+<li><span class="section"><a href="reference-feed-generator_detail.html#reference.feed.generator_detail.version">feed.generator_detail.version</a></span></li>
+</ul>
+</li>
+<li><span class="section"><a href="reference-feed-info.html">feed.info</a></span></li>
+<li>
+<span class="section"><a href="reference-feed-info-detail.html">feed.info_detail</a></span><ul>
+<li><span class="section"><a href="reference-feed-info-detail.html#reference.feed.info_detail.value">feed.info_detail.value</a></span></li>
+<li><span class="section"><a href="reference-feed-info-detail.html#reference.feed.info_detail.type">feed.info_detail.type</a></span></li>
+<li><span class="section"><a href="reference-feed-info-detail.html#reference.feed.info_detail.language">feed.info_detail.language</a></span></li>
+<li><span class="section"><a href="reference-feed-info-detail.html#reference.feed.info_detail.base">feed.info_detail.base</a></span></li>
+</ul>
+</li>
+<li><span class="section"><a href="reference-feed-updated.html">feed.updated</a></span></li>
+<li><span class="section"><a href="reference-feed-updated_parsed.html">feed.updated_parsed</a></span></li>
+<li><span class="section"><a href="reference-feed-id.html">feed.id</a></span></li>
+<li><span class="section"><a href="reference-feed-author.html">feed.author</a></span></li>
+<li>
+<span class="section"><a href="reference-feed-author_detail.html">feed.author_detail</a></span><ul>
+<li><span class="section"><a href="reference-feed-author_detail.html#reference.feed.author_detail.name">feed.author_detail.name</a></span></li>
+<li><span class="section"><a href="reference-feed-author_detail.html#reference.feed.author_detail.href">feed.author_detail.href</a></span></li>
+<li><span class="section"><a href="reference-feed-author_detail.html#reference.feed.author_detail.email">feed.author_detail.email</a></span></li>
+</ul>
+</li>
+<li>
+<span class="section"><a href="reference-feed-contributors.html">feed.contributors</a></span><ul>
+<li><span class="section"><a href="reference-feed-contributors.html#reference.feed.contributors.name">feed.contributors[i].name</a></span></li>
+<li><span class="section"><a href="reference-feed-contributors.html#reference.feed.contributors.href">feed.contributors[i].href</a></span></li>
+<li><span class="section"><a href="reference-feed-contributors.html#reference.feed.contributors.email">feed.contributors[i].email</a></span></li>
+</ul>
+</li>
+<li>
+<span class="section"><a href="reference-feed-image.html">feed.image</a></span><ul>
+<li><span class="section"><a href="reference-feed-image.html#reference.feed.image.title">feed.image.title</a></span></li>
+<li><span class="section"><a href="reference-feed-image.html#reference.feed.image.href">feed.image.href</a></span></li>
+<li><span class="section"><a href="reference-feed-image.html#reference.feed.image.link">feed.image.link</a></span></li>
+<li><span class="section"><a href="reference-feed-image.html#reference.feed.image.width">feed.image.width</a></span></li>
+<li><span class="section"><a href="reference-feed-image.html#reference.feed.image.height">feed.image.height</a></span></li>
+<li><span class="section"><a href="reference-feed-image.html#reference.feed.image.description">feed.image.description</a></span></li>
+<li><span class="section"><a href="reference-feed-image.html#reference.feed.image.example">Annotated example</a></span></li>
+</ul>
+</li>
+<li><span class="section"><a href="reference-feed-icon.html">feed.icon</a></span></li>
+<li><span class="section"><a href="reference-feed-logo.html">feed.icon</a></span></li>
+<li>
+<span class="section"><a href="reference-feed-textinput.html">feed.textinput</a></span><ul>
+<li><span class="section"><a href="reference-feed-textinput.html#reference.feed.textinput.title">feed.textinput.title</a></span></li>
+<li><span class="section"><a href="reference-feed-textinput.html#reference.feed.textinput.link">feed.textinput.link</a></span></li>
+<li><span class="section"><a href="reference-feed-textinput.html#reference.feed.textinput.name">feed.textinput.name</a></span></li>
+<li><span class="section"><a href="reference-feed-textinput.html#reference.feed.textinput.description">feed.textinput.description</a></span></li>
+<li><span class="section"><a href="reference-feed-textinput.html#id4969764">Annotated example</a></span></li>
+</ul>
+</li>
+<li>
+<span class="section"><a href="reference-feed-cloud.html">feed.cloud</a></span><ul>
+<li><span class="section"><a href="reference-feed-cloud.html#reference.feed.cloud.domain">feed.cloud.domain</a></span></li>
+<li><span class="section"><a href="reference-feed-cloud.html#reference.feed.cloud.port">feed.cloud.port</a></span></li>
+<li><span class="section"><a href="reference-feed-cloud.html#reference.feed.cloud.path">feed.cloud.path</a></span></li>
+<li><span class="section"><a href="reference-feed-cloud.html#reference.feed.cloud.registerProcedure">feed.cloud.registerProcedure</a></span></li>
+<li><span class="section"><a href="reference-feed-cloud.html#reference.feed.cloud.protocol">feed.cloud.protocol</a></span></li>
+</ul>
+</li>
+<li><span class="section"><a href="reference-feed-publisher.html">feed.publisher</a></span></li>
+<li>
+<span class="section"><a href="reference-feed-publisher_detail.html">feed.publisher_detail</a></span><ul>
+<li><span class="section"><a href="reference-feed-publisher_detail.html#reference.feed.publisher_detail.name">feed.publisher_detail.name</a></span></li>
+<li><span class="section"><a href="reference-feed-publisher_detail.html#reference.feed.publisher_detail.href">feed.publisher_detail.href</a></span></li>
+<li><span class="section"><a href="reference-feed-publisher_detail.html#reference.feed.publisher_detail.email">feed.publisher_detail.email</a></span></li>
+</ul>
+</li>
+<li>
+<span class="section"><a href="reference-feed-tags.html">feed.tags</a></span><ul>
+<li><span class="section"><a href="reference-feed-tags.html#reference.feed.tags.term">feed.tags[i].term</a></span></li>
+<li><span class="section"><a href="reference-feed-tags.html#reference.feed.tags.scheme">feed.tags[i].scheme</a></span></li>
+<li><span class="section"><a href="reference-feed-tags.html#reference.feed.tags.label">feed.tags[i].label</a></span></li>
+</ul>
+</li>
+<li><span class="section"><a href="reference-feed-docs.html">feed.docs</a></span></li>
+<li><span class="section"><a href="reference-feed-ttl.html">feed.ttl</a></span></li>
+<li><span class="section"><a href="reference-feed-language.html">feed.language</a></span></li>
+<li><span class="section"><a href="reference-feed-license.html">feed.license</a></span></li>
+<li><span class="section"><a href="reference-feed-errorreportsto.html">feed.errorreportsto</a></span></li>
+<li><span class="section"><a href="reference-entry.html">entries</a></span></li>
+<li><span class="section"><a href="reference-entry-title.html">entries[i].title</a></span></li>
+<li>
+<span class="section"><a href="reference-entry-title_detail.html">entries[i].title_detail</a></span><ul>
+<li><span class="section"><a href="reference-entry-title_detail.html#reference.entry.title_detail.value">entries[i].title_detail.value</a></span></li>
+<li><span class="section"><a href="reference-entry-title_detail.html#reference.entry.title_detail.type">entries[i].title_detail.type</a></span></li>
+<li><span class="section"><a href="reference-entry-title_detail.html#reference.entry.title_detail.language">entries[i].title_detail.language</a></span></li>
+<li><span class="section"><a href="reference-entry-title_detail.html#reference.entry.title_detail.base">entries[i].title_detail.base</a></span></li>
+</ul>
+</li>
+<li><span class="section"><a href="reference-entry-link.html">entries[i].link</a></span></li>
+<li>
+<span class="section"><a href="reference-entry-links.html">entries[i].links</a></span><ul>
+<li><span class="section"><a href="reference-entry-links.html#reference.entry.links.rel">entries[i].links[j].rel</a></span></li>
+<li><span class="section"><a href="reference-entry-links.html#reference.entry.links.type">entries[i].links[j].type</a></span></li>
+<li><span class="section"><a href="reference-entry-links.html#reference.entry.links.href">entries[i].links[j].href</a></span></li>
+<li><span class="section"><a href="reference-entry-links.html#reference.entry.links.title">entries[i].links[j].title</a></span></li>
+</ul>
+</li>
+<li><span class="section"><a href="reference-entry-summary.html">entries[i].summary</a></span></li>
+<li>
+<span class="section"><a href="reference-entry-summary_detail.html">entries[i].summary_detail</a></span><ul>
+<li><span class="section"><a href="reference-entry-summary_detail.html#reference.entry.summary_detail.value">entries[i].summary_detail.value</a></span></li>
+<li><span class="section"><a href="reference-entry-summary_detail.html#reference.entry.summary_detail.type">entries[i].summary_detail.type</a></span></li>
+<li><span class="section"><a href="reference-entry-summary_detail.html#reference.entry.summary_detail.language">entries[i].summary_detail.language</a></span></li>
+<li><span class="section"><a href="reference-entry-summary_detail.html#reference.entry.summary_detail.base">entries[i].summary_detail.base</a></span></li>
+</ul>
+</li>
+<li>
+<span class="section"><a href="reference-entry-content.html">entries[i].content</a></span><ul>
+<li><span class="section"><a href="reference-entry-content.html#reference.entry.content.value">entries[i].content[j].value</a></span></li>
+<li><span class="section"><a href="reference-entry-content.html#reference.entry.content.type">entries[i].content[j].type</a></span></li>
+<li><span class="section"><a href="reference-entry-content.html#reference.entry.content.language">entries[i].content[j].language</a></span></li>
+<li><span class="section"><a href="reference-entry-content.html#reference.entry.content.base">entries[i].content[j].base</a></span></li>
+</ul>
+</li>
+<li><span class="section"><a href="reference-entry-published.html">entries[i].published</a></span></li>
+<li><span class="section"><a href="reference-entry-published_parsed.html">entries[i].published_parsed</a></span></li>
+<li><span class="section"><a href="reference-entry-updated.html">entries[i].updated</a></span></li>
+<li><span class="section"><a href="reference-entry-updated_parsed.html">entries[i].updated_parsed</a></span></li>
+<li><span class="section"><a href="reference-entry-created.html">entries[i].created</a></span></li>
+<li><span class="section"><a href="reference-entry-created_parsed.html">entries[i].created_parsed</a></span></li>
+<li><span class="section"><a href="reference-entry-expired.html">entries[i].expired</a></span></li>
+<li><span class="section"><a href="reference-entry-expired_parsed.html">entries[i].expired_parsed</a></span></li>
+<li><span class="section"><a href="reference-entry-id.html">entries[i].id</a></span></li>
+<li><span class="section"><a href="reference-entry-author.html">entries[i].author</a></span></li>
+<li>
+<span class="section"><a href="reference-entry-author_detail.html">entries[i].author_detail</a></span><ul>
+<li><span class="section"><a href="reference-entry-author_detail.html#reference.entry.author_detail.name">entries[i].author_detail.name</a></span></li>
+<li><span class="section"><a href="reference-entry-author_detail.html#reference.entry.author_detail.href">entries[i].author_detail.href</a></span></li>
+<li><span class="section"><a href="reference-entry-author_detail.html#reference.entry.author_detail.email">entries[i].author_detail.email</a></span></li>
+</ul>
+</li>
+<li>
+<span class="section"><a href="reference-entry-contributors.html">entries[i].contributors</a></span><ul>
+<li><span class="section"><a href="reference-entry-contributors.html#reference.entry.contributors.name">entries[i].contributors[j].name</a></span></li>
+<li><span class="section"><a href="reference-entry-contributors.html#reference.entry.contributors.href">entries[i].contributors[j].href</a></span></li>
+<li><span class="section"><a href="reference-entry-contributors.html#reference.entry.contributors.email">entries[i].contributors[j].email</a></span></li>
+</ul>
+</li>
+<li>
+<span class="section"><a href="reference-entry-enclosures.html">entries[i].enclosures</a></span><ul>
+<li><span class="section"><a href="reference-entry-enclosures.html#reference.entry.enclosures.href">entries[i].enclosures[j].href</a></span></li>
+<li><span class="section"><a href="reference-entry-enclosures.html#reference.entry.enclosures.length">entries[i].enclosures[j].length</a></span></li>
+<li><span class="section"><a href="reference-entry-enclosures.html#reference.entry.enclosures.type">entries[i].enclosures[j].type</a></span></li>
+</ul>
+</li>
+<li><span class="section"><a href="reference-entry-publisher.html">entries[i].publisher</a></span></li>
+<li>
+<span class="section"><a href="reference-entry-publisher_detail.html">entries[i].publisher_detail</a></span><ul>
+<li><span class="section"><a href="reference-entry-publisher_detail.html#reference.entry.publisher_detail.name">entries[i].publisher_detail.name</a></span></li>
+<li><span class="section"><a href="reference-entry-publisher_detail.html#reference.entry.publisher_detail.href">entries[i].publisher_detail.href</a></span></li>
+<li><span class="section"><a href="reference-entry-publisher_detail.html#reference.entry.publisher_detail.email">entries[i].publisher_detail.email</a></span></li>
+</ul>
+</li>
+<li>
+<span class="section"><a href="reference-entry-tags.html">entries[i].tags</a></span><ul>
+<li><span class="section"><a href="reference-entry-tags.html#reference.entry.tags.term">entries[i].tags[j].term</a></span></li>
+<li><span class="section"><a href="reference-entry-tags.html#reference.entry.tags.scheme">entries[i].tags[j].scheme</a></span></li>
+<li><span class="section"><a href="reference-entry-tags.html#reference.entry.tags.label">entries[i].tags[j].label</a></span></li>
+</ul>
+</li>
+<li>
+<span class="section"><a href="reference-entry-source.html">entries[i].source</a></span><ul>
+<li><span class="section"><a href="reference-entry-source.html#reference.entry.source.author">entries[i].source.author</a></span></li>
+<li><span class="section"><a href="reference-entry-source.html#reference.entry.source.author_detail">entries[i].source.author_detail</a></span></li>
+<li><span class="section"><a href="reference-entry-source.html#reference.entry.source.contributors">entries[i].source.contributors</a></span></li>
+<li><span class="section"><a href="reference-entry-source.html#reference.entry.source.icon">entries[i].source.icon</a></span></li>
+<li><span class="section"><a href="reference-entry-source.html#reference.entry.source.id">entries[i].source.id</a></span></li>
+<li><span class="section"><a href="reference-entry-source.html#reference.entry.source.link">entries[i].source.link</a></span></li>
+<li><span class="section"><a href="reference-entry-source.html#reference.entry.source.links">entries[i].source.links</a></span></li>
+<li><span class="section"><a href="reference-entry-source.html#reference.entry.source.logo">entries[i].source.logo</a></span></li>
+<li><span class="section"><a href="reference-entry-source.html#reference.entry.source.rights">entries[i].source.rights</a></span></li>
+<li><span class="section"><a href="reference-entry-source.html#reference.entry.source.rights_detail">entries[i].source.rights_detail</a></span></li>
+<li><span class="section"><a href="reference-entry-source.html#reference.entry.source.subtitle">entries[i].source.subtitle</a></span></li>
+<li><span class="section"><a href="reference-entry-source.html#reference.entry.source.subtitle_details">entries[i].source.subtitle_detail</a></span></li>
+<li><span class="section"><a href="reference-entry-source.html#reference.entry.source.title">entries[i].source.title</a></span></li>
+<li><span class="section"><a href="reference-entry-source.html#reference.entry.source.title_details">entries[i].source.title_detail</a></span></li>
+<li><span class="section"><a href="reference-entry-source.html#reference.entry.source.updated">entries[i].source.updated</a></span></li>
+<li><span class="section"><a href="reference-entry-source.html#reference.entry.source.updated_parsed">entries[i].source.updated_parsed</a></span></li>
+</ul>
+</li>
+<li><span class="section"><a href="reference-entry-comments.html">entries[i].comments</a></span></li>
+<li><span class="section"><a href="reference-entry-license.html">entries[i].license</a></span></li>
+<li><span class="section"><a href="reference-version.html">version</a></span></li>
+<li><span class="section"><a href="reference-namespaces.html">namespaces</a></span></li>
+<li><span class="section"><a href="reference-encoding.html">encoding</a></span></li>
+<li><span class="section"><a href="reference-status.html">status</a></span></li>
+<li><span class="section"><a href="reference-href.html">href</a></span></li>
+<li><span class="section"><a href="reference-etag.html">etag</a></span></li>
+<li><span class="section"><a href="reference-modified.html">modified</a></span></li>
+<li><span class="section"><a href="reference-headers.html">headers</a></span></li>
+<li><span class="section"><a href="reference-bozo.html">bozo</a></span></li>
+<li><span class="section"><a href="reference-bozo_exception.html">bozo_exception</a></span></li>
+</ul>
+</li>
+<li><span class="appendix"><a href="license.html">Terms of use</a></span></li>
+</ul>
+</div>
+</div>
+<div style="float: left"></div>
+<div style="text-align: right">
+<a class="NavigationArrow" href="basic.html">Basic Features</a> →</div>
+<hr style="clear:both">
+<div class="footer"><p class="copyright">Copyright © 2004, 2005, 2006 Mark Pilgrim</p></div>
+</div></div>
+</body>
+</html>

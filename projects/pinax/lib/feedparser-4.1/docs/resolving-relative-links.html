@@ -1,0 +1,203 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Relative Link Resolution [Universal Feed Parser]</title>
+<link rel="stylesheet" href="feedparser.css" type="text/css">
+<link rev="made" href="mailto:mark@diveintomark.org">
+<meta name="generator" content="DocBook XSL Stylesheets V1.65.1">
+<meta name="keywords" content="RSS, Atom, CDF, XML, feed, parser, Python">
+<link rel="start" href="index.html" title="Documentation">
+<link rel="up" href="advanced.html" title="Advanced Features">
+<link rel="prev" href="namespace-handling.html" title="Namespace Handling">
+<link rel="next" href="version-detection.html" title="Feed Type and Version Detection">
+</head>
+<body id="feedparser-org" class="docs">
+<div class="z" id="intro"><div class="sectionInner"><div class="sectionInner2">
+<div class="s" id="pageHeader">
+<h1><a href="/"><span>Universal Feed Parser</span></a></h1>
+<p><span>Parse RSS and Atom feeds in Python.  3000 unit tests.  Open source.</span></p>
+</div>
+<div class="s" id="quickSummary"><ul>
+<li class="li1">
+<a href="http://sourceforge.net/projects/feedparser/"><span>Download</span></a> ·</li>
+<li class="li2">
+<a href="http://feedparser.org/docs/"><span>Documentation</span></a> ·</li>
+<li class="li3">
+<a href="http://feedparser.org/tests/"><span>Unit tests</span></a> ·</li>
+<li class="li4"><a href="http://sourceforge.net/tracker/?func=browse&amp;group_id=112328&amp;atid=661937"><span>Report a bug</span></a></li>
+</ul></div>
+</div></div></div>
+<div id="main"><div id="mainInner">
+<p id="breadcrumb">You are here: <a href="index.html">Documentation</a> → <a href="advanced.html">Advanced Features</a> → <span class="thispage">Relative Link Resolution</span></p>
+<div class="section" lang="en">
+<div class="titlepage">
+<div>
+<div><h2 class="title">
+<a name="advanced.base" class="skip" href="#advanced.base" title="link to this section"><img src="images/permalink.gif" alt="[link]" title="link to this section" width="8" height="9"></a> Relative Link Resolution</h2></div>
+<div><div class="abstract">
+<h3 class="title"></h3>
+<p>Many feed elements and attributes are <acronym title="Uniform Resource Identifier">URI</acronym>s.  <span class="application">Universal Feed Parser</span> resolves relative <acronym title="Uniform Resource Identifier">URI</acronym>s according to the <a href="http://www.w3.org/TR/xmlbase/"><acronym title="Extensible Markup Language">XML</acronym>:Base</a> specification.  We'll see how that works in a minute, but first let's talk about which values are treated as <acronym title="Uniform Resource Identifier">URI</acronym>s.</p>
+</div></div>
+</div>
+<div></div>
+</div>
+<div class="section" lang="en">
+<div class="titlepage">
+<div><div><h3 class="title">
+<a name="advanced.base.which" class="skip" href="#advanced.base.which" title="link to this section"><img src="images/permalink.gif" alt="[link]" title="link to this section" width="8" height="9"></a> Which Values Are <acronym title="Uniform Resource Identifier">URI</acronym>s</h3></div></div>
+<div></div>
+</div>
+<p>These feed elements are treated as <acronym title="Uniform Resource Identifier">URI</acronym>s, and resolved if they are relative:</p>
+<div class="itemizedlist"><ul>
+<li><a href="reference-feed-link.html" title="feed.link">feed.link</a></li>
+<li><a href="reference-feed-links.html#reference.feed.links.href" title="feed.links[i].href">feed.links[i].href</a></li>
+<li><a href="reference-feed-generator_detail.html#reference.feed.generator_detail.href" title="feed.generator_detail.href">feed.generator_detail.href</a></li>
+<li><a href="reference-feed-id.html" title="feed.id">feed.id</a></li>
+<li><a href="reference-feed-image.html#reference.feed.image.href" title="feed.image.href">feed.image.href</a></li>
+<li><a href="reference-feed-image.html#reference.feed.image.link" title="feed.image.link">feed.image.link</a></li>
+<li><a href="reference-feed-textinput.html#reference.feed.textinput.link" title="feed.textinput.link">feed.textinput.link</a></li>
+<li><a href="reference-feed-author_detail.html#reference.feed.author_detail.href" title="feed.author_detail.href">feed.author_detail.href</a></li>
+<li><a href="reference-feed-publisher_detail.html#reference.feed.publisher_detail.href" title="feed.publisher_detail.href">feed.publisher_detail.href</a></li>
+<li><a href="reference-feed-contributors.html#reference.feed.contributors.href" title="feed.contributors[i].href">feed.contributors[i].href</a></li>
+<li><a href="reference-feed-docs.html" title="feed.docs">feed.docs</a></li>
+<li><a href="reference-feed-license.html" title="feed.license">feed.license</a></li>
+<li><a href="reference-entry-link.html" title="entries[i].link">entries[i].link</a></li>
+<li><a href="reference-entry-links.html#reference.entry.links.href" title="entries[i].links[j].href">entries[i].links[j].href</a></li>
+<li><a href="reference-entry-id.html" title="entries[i].id">entries[i].id</a></li>
+<li><a href="reference-entry-author_detail.html#reference.entry.author_detail.href" title="entries[i].author_detail.href">entries[i].author_detail.href</a></li>
+<li><a href="reference-entry-publisher_detail.html#reference.entry.publisher_detail.href" title="entries[i].publisher_detail.href">entries[i].publisher_detail.href</a></li>
+<li><a href="reference-entry-contributors.html#reference.entry.contributors.href" title="entries[i].contributors[j].href">entries[i].contributors[j].href</a></li>
+<li><a href="reference-entry-enclosures.html#reference.entry.enclosures.href" title="entries[i].enclosures[j].href">entries[i].enclosures[j].href</a></li>
+<li><a href="reference-entry-source.html#reference.entry.source.author_detail.href" title="entries[i].source.author_detail.href">entries[i].source.author_detail.href</a></li>
+<li><a href="reference-entry-source.html#reference.entry.source.contributors.href" title="entries[i].source.contributors[j].href">entries[i].source.contributors[j].href</a></li>
+<li><a href="reference-entry-source.html#reference.entry.source.links.href" title="entries[i].source.links[j].href">entries[i].source.links[j].href</a></li>
+<li><a href="reference-entry-comments.html" title="entries[i].comments">entries[i].comments</a></li>
+<li><a href="reference-entry-license.html" title="entries[i].license">entries[i].license</a></li>
+</ul></div>
+<p>In addition, several feed elements may contain <acronym title="HyperText Markup Language">HTML</acronym> or <acronym title="Extensible HyperText Markup Language">XHTML</acronym> markup.  Certain elements and attributes in <acronym title="HyperText Markup Language">HTML</acronym> can be relative <acronym title="Uniform Resource Identifier">URI</acronym>s, and <span class="application">Universal Feed Parser</span> will resolve these <acronym title="Uniform Resource Identifier">URI</acronym>s according to the same rules as the feed elements listed above.</p>
+<p>These feed elements may contain <acronym title="HyperText Markup Language">HTML</acronym> or <acronym title="Extensible HyperText Markup Language">XHTML</acronym> markup.  In Atom feeds, whether these elements are treated as <acronym title="HyperText Markup Language">HTML</acronym> depends on the value of the <tt class="sgmltag-attribute">type</tt> attribute.  In <acronym title="Rich Site Summary">RSS</acronym> feeds, these values are always treated as <acronym title="HyperText Markup Language">HTML</acronym>.</p>
+<div class="itemizedlist"><ul>
+<li>
+<a href="reference-feed-title.html" title="feed.title">feed.title</a> (<a href="reference-feed-title_detail.html#reference.feed.title_detail.value" title="feed.title_detail.value">feed.title_detail.value</a>)</li>
+<li>
+<a href="reference-feed-subtitle.html" title="feed.subtitle">feed.subtitle</a> (<a href="reference-feed-subtitle_detail.html#reference.feed.subtitle_detail.value" title="feed.subtitle_detail.value">feed.subtitle_detail.value</a>))</li>
+<li>
+<a href="reference-feed-info.html" title="feed.info">feed.info</a> (<a href="reference-feed-info-detail.html#reference.feed.info_detail.value" title="feed.info_detail.value">feed.info_detail.value</a>)</li>
+<li>
+<a href="reference-feed-rights.html" title="feed.rights">feed.rights</a> (<a href="reference-feed-rights_detail.html#reference.feed.rights_detail.value" title="feed.rights_detail.value">feed.rights_detail.value</a>)</li>
+<li>
+<a href="reference-entry-title.html" title="entries[i].title">entries[i].title</a> (<a href="reference-entry-title_detail.html#reference.entry.title_detail.value" title="entries[i].title_detail.value">entries[i].title_detail.value</a>)</li>
+<li>
+<a href="reference-entry-summary.html" title="entries[i].summary">entries[i].summary</a> (<a href="reference-entry-summary_detail.html#reference.entry.summary_detail.value" title="entries[i].summary_detail.value">entries[i].summary_detail.value</a>)</li>
+<li><a href="reference-entry-content.html#reference.entry.content.value" title="entries[i].content[j].value">entries[i].content[j].value</a></li>
+</ul></div>
+<p>When any of these feed elements contains <acronym title="HyperText Markup Language">HTML</acronym> or <acronym title="Extensible HyperText Markup Language">XHTML</acronym> markup, the following <acronym title="HyperText Markup Language">HTML</acronym> elements are treated as <acronym title="Uniform Resource Identifier">URI</acronym>s and are resolved if they are relative:</p>
+<div class="itemizedlist"><ul>
+<li><tt class="sgmltag-element">&lt;a href="..."&gt;</tt></li>
+<li><tt class="sgmltag-element">&lt;applet codebase="..."&gt;</tt></li>
+<li><tt class="sgmltag-element">&lt;area href="..."&gt;</tt></li>
+<li><tt class="sgmltag-element">&lt;blockquote cite="..."&gt;</tt></li>
+<li><tt class="sgmltag-element">&lt;body background="..."&gt;</tt></li>
+<li><tt class="sgmltag-element">&lt;del cite="..."&gt;</tt></li>
+<li><tt class="sgmltag-element">&lt;form action="..."&gt;</tt></li>
+<li><tt class="sgmltag-element">&lt;frame longdesc="..."&gt;</tt></li>
+<li><tt class="sgmltag-element">&lt;frame src="..."&gt;</tt></li>
+<li><tt class="sgmltag-element">&lt;iframe longdesc="..."&gt;</tt></li>
+<li><tt class="sgmltag-element">&lt;iframe src="..."&gt;</tt></li>
+<li><tt class="sgmltag-element">&lt;head profile="..."&gt;</tt></li>
+<li><tt class="sgmltag-element">&lt;img longdesc="..."&gt;</tt></li>
+<li><tt class="sgmltag-element">&lt;img src="..."&gt;</tt></li>
+<li><tt class="sgmltag-element">&lt;img usemap="..."&gt;</tt></li>
+<li><tt class="sgmltag-element">&lt;input src="..."&gt;</tt></li>
+<li><tt class="sgmltag-element">&lt;input usemap="..."&gt;</tt></li>
+<li><tt class="sgmltag-element">&lt;ins cite="..."&gt;</tt></li>
+<li><tt class="sgmltag-element">&lt;link href="..."&gt;</tt></li>
+<li><tt class="sgmltag-element">&lt;object classid="..."&gt;</tt></li>
+<li><tt class="sgmltag-element">&lt;object codebase="..."&gt;</tt></li>
+<li><tt class="sgmltag-element">&lt;object data="..."&gt;</tt></li>
+<li><tt class="sgmltag-element">&lt;object usemap="..."&gt;</tt></li>
+<li><tt class="sgmltag-element">&lt;q cite="..."&gt;</tt></li>
+<li><tt class="sgmltag-element">&lt;script src="..."&gt;</tt></li>
+</ul></div>
+</div>
+<div class="section" lang="en">
+<div class="titlepage">
+<div><div><h3 class="title">
+<a name="advanced.base.how" class="skip" href="#advanced.base.how" title="link to this section"><img src="images/permalink.gif" alt="[link]" title="link to this section" width="8" height="9"></a> How Relative <acronym title="Uniform Resource Identifier">URI</acronym>s Are Resolved</h3></div></div>
+<div></div>
+</div>
+<p><span class="application">Universal Feed Parser</span> resolves relative <acronym title="Uniform Resource Identifier">URI</acronym>s according to the <a href="http://www.w3.org/TR/xmlbase/"><acronym title="Extensible Markup Language">XML</acronym>:Base</a> specification.  This defines a hierarchical inheritance system, where one element can define the base <acronym title="Uniform Resource Identifier">URI</acronym> for itself and all of its child elements, using an <tt class="sgmltag-attribute">xml:base</tt> attribute.  A child element can then override its parent's base <acronym title="Uniform Resource Identifier">URI</acronym> by redeclaring <tt class="sgmltag-attribute">xml:base</tt> to a different value.</p>
+<p>If no <tt class="sgmltag-attribute">xml:base</tt> is specified, the feed has a default base <acronym title="Uniform Resource Identifier">URI</acronym> defined in the <tt class="literal">Content-Location</tt> <acronym title="Hypertext Transfer Protocol">HTTP</acronym> header.</p>
+<p>If no <tt class="literal">Content-Location</tt> <acronym title="Hypertext Transfer Protocol">HTTP</acronym> header is present, the <acronym title="Uniform Resource Locator">URL</acronym> used to retrieve the feed itself is the default base <acronym title="Uniform Resource Identifier">URI</acronym> for all relative links within the feed.  If the feed was retrieved via an <acronym title="Hypertext Transfer Protocol">HTTP</acronym> redirect (any <acronym title="Hypertext Transfer Protocol">HTTP</acronym> 3xx status code), then the final <acronym title="Uniform Resource Locator">URL</acronym> of the feed is the default base <acronym title="Uniform Resource Identifier">URI</acronym>.</p>
+<p>For example, an <tt class="sgmltag-attribute">xml:base</tt> on the root-level element sets the base <acronym title="Uniform Resource Identifier">URI</acronym> for all <acronym title="Uniform Resource Identifier">URI</acronym>s in the feed.</p>
+<div class="example">
+<a name="id4959103" class="skip" href="#id4959103" title="link to this example"><img src="images/permalink.gif" alt="[link]" title="link to this example" width="8" height="9"></a> <h3 class="title">Example: <tt class="sgmltag-attribute">xml:base</tt> on the root-level element</h3>
+<pre class="screen"><tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput"><font color='navy'><b>import</b></font> feedparser</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d = feedparser.parse("<a href="http://feedparser.org/docs/examples/base.xml">http://feedparser.org/docs/examples/base.xml</a>")</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.feed.link</span>
+<span class="computeroutput">u'http://example.org/index.html'</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.feed.generator_detail.href</span>
+<span class="computeroutput">u'http://example.org/generator/'</span></pre>
+</div>
+<p>An <tt class="sgmltag-attribute">xml:base</tt> attribute on an <tt class="sgmltag-element">&lt;entry&gt;</tt> overrides the <tt class="sgmltag-attribute">xml:base</tt> on the parent <tt class="sgmltag-element">&lt;feed&gt;</tt>.</p>
+<div class="example">
+<a name="id4959198" class="skip" href="#id4959198" title="link to this example"><img src="images/permalink.gif" alt="[link]" title="link to this example" width="8" height="9"></a> <h3 class="title">Example: Overriding <tt class="sgmltag-attribute">xml:base</tt> on an <tt class="sgmltag-element">&lt;entry&gt;</tt></h3>
+<pre class="screen"><tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput"><font color='navy'><b>import</b></font> feedparser</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d = feedparser.parse("<a href="http://feedparser.org/docs/examples/base.xml">http://feedparser.org/docs/examples/base.xml</a>")</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.entries[0].link</span>
+<span class="computeroutput">u'http://example.org/archives/000001.html'</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.entries[0].author_detail.href</span>
+<span class="computeroutput">u'http://example.org/about/'</span></pre>
+</div>
+<p>An <tt class="sgmltag-attribute">xml:base</tt> on <tt class="sgmltag-element">&lt;content&gt;</tt> overrides the <tt class="sgmltag-attribute">xml:base</tt> on the parent <tt class="sgmltag-element">&lt;entry&gt;</tt>.  In addition, whatever the base <acronym title="Uniform Resource Identifier">URI</acronym> is for the <tt class="sgmltag-element">&lt;content&gt;</tt> element (whether defined directly on the <tt class="sgmltag-element">&lt;content&gt;</tt> element, or inherited from the parent element) is used as the base <acronym title="Uniform Resource Identifier">URI</acronym> for the embedded <acronym title="HyperText Markup Language">HTML</acronym> or <acronym title="Extensible HyperText Markup Language">XHTML</acronym> markup within the <tt class="sgmltag-element">content</tt>.</p>
+<div class="example">
+<a name="id4959342" class="skip" href="#id4959342" title="link to this example"><img src="images/permalink.gif" alt="[link]" title="link to this example" width="8" height="9"></a> <h3 class="title">Example: Relative links within embedded <acronym title="HyperText Markup Language">HTML</acronym></h3>
+<pre class="screen"><tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput"><font color='navy'><b>import</b></font> feedparser</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d = feedparser.parse("<a href="http://feedparser.org/docs/examples/base.xml">http://feedparser.org/docs/examples/base.xml</a>")</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.entries[0].content[0].value</span>
+<span class="computeroutput">u'&lt;p id="anchor1"&gt;&lt;a href="http://example.org/archives/000001.html#anchor2"&gt;skip to anchor 2&lt;/a&gt;&lt;/p&gt;
+ &lt;p&gt;Some content&lt;/p&gt;
+ &lt;p id="anchor2"&gt;This is anchor 2&lt;/p&gt;'</span></pre>
+</div>
+<p>The <tt class="sgmltag-attribute">xml:base</tt> affects other attributes in the element in which it is declared.</p>
+<div class="example">
+<a name="id4959417" class="skip" href="#id4959417" title="link to this example"><img src="images/permalink.gif" alt="[link]" title="link to this example" width="8" height="9"></a> <h3 class="title">Example: <tt class="sgmltag-attribute">xml:base</tt> and sibling attributes</h3>
+<pre class="screen"><tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput"><font color='navy'><b>import</b></font> feedparser</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d = feedparser.parse("<a href="http://feedparser.org/docs/examples/base.xml">http://feedparser.org/docs/examples/base.xml</a>")</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.entries[0].links[1].rel</span>
+<span class="computeroutput">u'service.edit'</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.entries[0].links[1].href</span>
+<span class="computeroutput">u'http://example.com/api/client/37'</span></pre>
+</div>
+<p>If no <tt class="sgmltag-attribute">xml:base</tt> is specified on the root-level element, the default base <acronym title="Uniform Resource Identifier">URI</acronym> is given in the <tt class="literal">Content-Location</tt> <acronym title="Hypertext Transfer Protocol">HTTP</acronym> header.  This can still be overridden by any child element that declares an <tt class="sgmltag-attribute">xml:base</tt> attribute.</p>
+<div class="example">
+<a name="id4959531" class="skip" href="#id4959531" title="link to this example"><img src="images/permalink.gif" alt="[link]" title="link to this example" width="8" height="9"></a> <h3 class="title">Example: <tt class="literal">Content-Location</tt> <acronym title="Hypertext Transfer Protocol">HTTP</acronym> header</h3>
+<pre class="screen"><tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput"><font color='navy'><b>import</b></font> feedparser</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d = feedparser.parse("<a href="http://feedparser.org/docs/examples/http_base.xml">http://feedparser.org/docs/examples/http_base.xml</a>")</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.feed.link</span>
+<span class="computeroutput">u'http://example.org/index.html'</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.entries[0].link</span>
+<span class="computeroutput">u'http://example.org/archives/000001.html'</span></pre>
+</div>
+<p>Finally, if no root-level <tt class="sgmltag-attribute">xml:base</tt> is declared, and no <tt class="literal">Content-Location</tt> <acronym title="Hypertext Transfer Protocol">HTTP</acronym> header is present, the <acronym title="Uniform Resource Locator">URL</acronym> of the feed itself is the default base <acronym title="Uniform Resource Identifier">URI</acronym>.  Again, this can still be overridden by any element that declares an <tt class="sgmltag-attribute">xml:base</tt> attribute.</p>
+<div class="example">
+<a name="id4959662" class="skip" href="#id4959662" title="link to this example"><img src="images/permalink.gif" alt="[link]" title="link to this example" width="8" height="9"></a> <h3 class="title">Example: Feed <acronym title="Uniform Resource Locator">URL</acronym> as default base <acronym title="Uniform Resource Identifier">URI</acronym></h3>
+<pre class="screen"><tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput"><font color='navy'><b>import</b></font> feedparser</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d = feedparser.parse("<a href="http://feedparser.org/docs/examples/no_base.xml">http://feedparser.org/docs/examples/no_base.xml</a>")</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.feed.link</span>
+<span class="computeroutput">u'http://feedparser.org/docs/examples/index.html</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.entries[0].link</span>
+<span class="computeroutput">u'http://example.org/archives/000001.html'</span></pre>
+</div>
+</div>
+</div>
+<div style="float: left">← <a class="NavigationArrow" href="namespace-handling.html">Namespace Handling</a>
+</div>
+<div style="text-align: right">
+<a class="NavigationArrow" href="version-detection.html">Feed Type and Version Detection</a> →</div>
+<hr style="clear:both">
+<div class="footer"><p class="copyright">Copyright © 2004, 2005, 2006 Mark Pilgrim</p></div>
+</div></div>
+</body>
+</html>

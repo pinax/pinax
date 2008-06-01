@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>ETag and Last-Modified Headers [Universal Feed Parser]</title>
+<link rel="stylesheet" href="feedparser.css" type="text/css">
+<link rev="made" href="mailto:mark@diveintomark.org">
+<meta name="generator" content="DocBook XSL Stylesheets V1.65.1">
+<meta name="keywords" content="RSS, Atom, CDF, XML, feed, parser, Python">
+<link rel="start" href="index.html" title="Documentation">
+<link rel="up" href="http.html" title="HTTP Features">
+<link rel="prev" href="http.html" title="HTTP Features">
+<link rel="next" href="http-useragent.html" title="User-Agent and Referer Headers">
+</head>
+<body id="feedparser-org" class="docs">
+<div class="z" id="intro"><div class="sectionInner"><div class="sectionInner2">
+<div class="s" id="pageHeader">
+<h1><a href="/"><span>Universal Feed Parser</span></a></h1>
+<p><span>Parse RSS and Atom feeds in Python.  3000 unit tests.  Open source.</span></p>
+</div>
+<div class="s" id="quickSummary"><ul>
+<li class="li1">
+<a href="http://sourceforge.net/projects/feedparser/"><span>Download</span></a> ·</li>
+<li class="li2">
+<a href="http://feedparser.org/docs/"><span>Documentation</span></a> ·</li>
+<li class="li3">
+<a href="http://feedparser.org/tests/"><span>Unit tests</span></a> ·</li>
+<li class="li4"><a href="http://sourceforge.net/tracker/?func=browse&amp;group_id=112328&amp;atid=661937"><span>Report a bug</span></a></li>
+</ul></div>
+</div></div></div>
+<div id="main"><div id="mainInner">
+<p id="breadcrumb">You are here: <a href="index.html">Documentation</a> → <a href="http.html">HTTP Features</a> → <span class="thispage">ETag and Last-Modified Headers</span></p>
+<div class="section" lang="en">
+<div class="titlepage">
+<div>
+<div><h2 class="title">
+<a name="http.etag" class="skip" href="#http.etag" title="link to this section"><img src="images/permalink.gif" alt="[link]" title="link to this section" width="8" height="9"></a> ETag and Last-Modified Headers</h2></div>
+<div><div class="abstract">
+<h3 class="title"></h3>
+<p>ETags and Last-Modified headers are two ways that feed publishers can save bandwidth, but they only work if clients take advantage of them.  <span class="application">Universal Feed Parser</span> gives you the ability to take advantage of these features, but you must use them properly.</p>
+</div></div>
+</div>
+<div></div>
+</div>
+<p>The basic concept is that a feed publisher may provide a special <acronym title="Hypertext Transfer Protocol">HTTP</acronym> header, called an ETag, when it publishes a feed.  You should send this ETag back to the server on subsequent requests.  If the feed has not changed since the last time you requested it, the server will return a special <acronym title="Hypertext Transfer Protocol">HTTP</acronym> status code (<tt class="constant">304</tt>) and no feed data.</p>
+<div class="example">
+<a name="example.etags" class="skip" href="#example.etags" title="link to this example"><img src="images/permalink.gif" alt="[link]" title="link to this example" width="8" height="9"></a> <h3 class="title">Example: Using ETags to reduce bandwidth</h3>
+<pre class="screen"><tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput"><font color='navy'><b>import</b></font> feedparser</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d = feedparser.parse('<a href="http://feedparser.org/docs/examples/atom10.xml">http://feedparser.org/docs/examples/atom10.xml</a>')</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.etag</span>
+<span class="computeroutput">'"6c132-941-ad7e3080"'</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d2 = feedparser.parse('<a href="http://feedparser.org/docs/examples/atom10.xml">http://feedparser.org/docs/examples/atom10.xml</a>', etag=d.etag)</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d2.status</span>
+<span class="computeroutput">304</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d2.feed</span>
+<span class="computeroutput">{}</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d2.entries</span>
+<span class="computeroutput">[]</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d2.debug_message</span>
+<span class="computeroutput">'The feed has not changed since you last checked, so
+the server sent no data.  This is a feature, not a bug!'</span></pre>
+</div>
+<p>There is a related concept which accomplishes the same thing, but slightly differently.  In this case, the server publishes the last-modified date of the feed in the <acronym title="Hypertext Transfer Protocol">HTTP</acronym> header.  You can send this back to the server on subsequent requests, and if the feed has not changed, the server will return <acronym title="Hypertext Transfer Protocol">HTTP</acronym> status code <tt class="constant">304</tt> and no feed data.</p>
+<div class="example">
+<a name="example.lastmodified" class="skip" href="#example.lastmodified" title="link to this example"><img src="images/permalink.gif" alt="[link]" title="link to this example" width="8" height="9"></a> <h3 class="title">Example: Using Last-Modified headers to reduce bandwidth</h3>
+<pre class="screen"><tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput"><font color='navy'><b>import</b></font> feedparser</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d = feedparser.parse('<a href="http://feedparser.org/docs/examples/atom10.xml">http://feedparser.org/docs/examples/atom10.xml</a>')</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.modified</span>
+<span class="computeroutput">(2004, 6, 11, 23, 0, 34, 4, 163, 0)</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d2 = feedparser.parse('<a href="http://feedparser.org/docs/examples/atom10.xml">http://feedparser.org/docs/examples/atom10.xml</a>', modified=d.modified)</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d2.status</span>
+<span class="computeroutput">304</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d2.feed</span>
+<span class="computeroutput">{}</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d2.entries</span>
+<span class="computeroutput">[]</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d2.debug_message</span>
+<span class="computeroutput">'The feed has not changed since you last checked, so
+the server sent no data.  This is a feature, not a bug!'</span></pre>
+</div>
+<p>Clients should support both ETag and Last-Modified headers, as some servers support one but not the other.</p>
+<a name="id4961658"></a><table class="important" border="0" summary="">
+<tr><td rowspan="2" align="center" valign="top" width="1%"><img src="images/important.png" alt="Important" title="" width="24" height="24"></td></tr>
+<tr><td colspan="2" align="left" valign="top" width="99%">If you do not support ETag and Last-Modified headers, you will repeatedly download feeds that have not changed.  This wastes your bandwidth and the publisher's bandwidth, and the publisher may ban you from accessing their server.</td></tr>
+</table>
+<div class="furtherreading">
+<h3>Elsewhere</h3>
+<ul>
+<li><a href="http://fishbowl.pastiche.org/2002/10/21/http_conditional_get_for_rss_hackers"><acronym title="Hypertext Transfer Protocol">HTTP</acronym> Conditional Get For <acronym title="Rich Site Summary">RSS</acronym> Hackers</a></li>
+<li><a href="http://diveintopython.org/http_web_services/"><acronym title="Hypertext Transfer Protocol">HTTP</acronym> Web Services</a></li>
+</ul>
+</div>
+</div>
+<div style="float: left">← <a class="NavigationArrow" href="http.html">HTTP Features</a>
+</div>
+<div style="text-align: right">
+<a class="NavigationArrow" href="http-useragent.html">User-Agent and Referer Headers</a> →</div>
+<hr style="clear:both">
+<div class="footer"><p class="copyright">Copyright © 2004, 2005, 2006 Mark Pilgrim</p></div>
+</div></div>
+</body>
+</html>

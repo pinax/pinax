@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Changes in version 4.0 [Universal Feed Parser]</title>
+<link rel="stylesheet" href="feedparser.css" type="text/css">
+<link rev="made" href="mailto:mark@diveintomark.org">
+<meta name="generator" content="DocBook XSL Stylesheets V1.65.1">
+<meta name="keywords" content="RSS, Atom, CDF, XML, feed, parser, Python">
+<link rel="start" href="index.html" title="Documentation">
+<link rel="up" href="history.html" title="Revision history">
+<link rel="prev" href="changes-41.html" title="Changes in version 4.1">
+<link rel="next" href="reference.html" title="Reference">
+</head>
+<body id="feedparser-org" class="docs">
+<div class="z" id="intro"><div class="sectionInner"><div class="sectionInner2">
+<div class="s" id="pageHeader">
+<h1><a href="/"><span>Universal Feed Parser</span></a></h1>
+<p><span>Parse RSS and Atom feeds in Python.  3000 unit tests.  Open source.</span></p>
+</div>
+<div class="s" id="quickSummary"><ul>
+<li class="li1">
+<a href="http://sourceforge.net/projects/feedparser/"><span>Download</span></a> ·</li>
+<li class="li2">
+<a href="http://feedparser.org/docs/"><span>Documentation</span></a> ·</li>
+<li class="li3">
+<a href="http://feedparser.org/tests/"><span>Unit tests</span></a> ·</li>
+<li class="li4"><a href="http://sourceforge.net/tracker/?func=browse&amp;group_id=112328&amp;atid=661937"><span>Report a bug</span></a></li>
+</ul></div>
+</div></div></div>
+<div id="main"><div id="mainInner">
+<p id="breadcrumb">You are here: <a href="index.html">Documentation</a> → <a href="history.html">Revision history</a> → <span class="thispage">Changes in version 4.0</span></p>
+<div class="section" lang="en">
+<div class="titlepage">
+<div><div><h2 class="title">
+<a name="changes.40" class="skip" href="#changes.40" title="link to this section"><img src="images/permalink.gif" alt="[link]" title="link to this section" width="8" height="9"></a> Changes in version 4.0</h2></div></div>
+<div></div>
+</div>
+<div class="abstract"><p>Here is a summary of the major changes in <span class="application">Universal Feed Parser</span> 4.0.</p></div>
+<div class="itemizedlist"><ul>
+<li>Support for <a href="annotated-atom10.html" title="Atom 1.0">Atom 1.0</a>.</li>
+<li>Support for <span class="application">iTunes</span> extensions.</li>
+<li>Support for <tt class="literal">dc:contributor</tt>.</li>
+<li>
+<span class="application">Universal Feed Parser</span> now captures the feed's <a href="reference-namespaces.html" title="namespaces">namespaces</a>.  See <a href="namespace-handling.html" title="Namespace Handling">Namespace Handling</a> for details.</li>
+<li>Lots of things have been renamed to match Atom 1.0 terminology.  <tt class="literal">issued</tt> is now <a href="reference-entry-published.html" title="entries[i].published">entries[i].published</a>, <tt class="literal">modified</tt> is now <a href="reference-entry-updated.html" title="entries[i].updated">entries[i].updated</a>, and <tt class="literal">url</tt> is now <tt class="literal">href</tt> everywhere.  You can still access these elements with the old names, so you shouldn't need to change any existing code, but don't be surprised if you can't find them during debugging.</li>
+<li>
+<tt class="literal">category</tt> and <tt class="literal">categories</tt> have been replaced by <tt class="literal">tags</tt>, see <a href="reference-feed-tags.html" title="feed.tags">feed.tags</a> and <a href="reference-entry-tags.html" title="entries[i].tags">entries[i].tags</a>.  The old names still work.</li>
+<li>
+<tt class="literal">mode</tt> is gone from all detail and content dictionaries.  It was never terribly useful, since <span class="application">Universal Feed Parser</span> unescapes content automatically.</li>
+<li>
+<a href="reference-entry-source.html" title="entries[i].source">entries[i].source</a> is now a dictionary of feed metadata as per section 4.2.11 of RFC 4287.  <span class="application">Universal Feed Parser</span> no longer supports the RSS 2.0's <tt class="literal">source</tt> element.</li>
+<li>Content in unknown namespaces is no longer discarded (<a href="http://sourceforge.net/tracker/index.php?func=detail&amp;aid=993305&amp;group_id=112328&amp;atid=661937">bug 993305</a>)</li>
+<li>Lots of other bug fixes.</li>
+</ul></div>
+</div>
+<div style="float: left">← <a class="NavigationArrow" href="changes-41.html">Changes in version 4.1</a>
+</div>
+<div style="text-align: right">
+<a class="NavigationArrow" href="reference.html">Reference</a> →</div>
+<hr style="clear:both">
+<div class="footer"><p class="copyright">Copyright © 2004, 2005, 2006 Mark Pilgrim</p></div>
+</div></div>
+</body>
+</html>

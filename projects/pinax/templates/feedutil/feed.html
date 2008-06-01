@@ -1,0 +1,7 @@
+{% for post in posts %}<div class="feed-entry">
+<h3><a href="{{ post.url }}" title="{{ post.title|escape }}">{{ post.title|escape }}</a></h3>
+<span class="feed-entry-published">{{ post.published }}</span>
+<br>
+<p class="feed-entry-summary">{{ post.summary }}</p>
+</div>
+{% endfor %}

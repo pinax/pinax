@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Uncommon Atom Elements [Universal Feed Parser]</title>
+<link rel="stylesheet" href="feedparser.css" type="text/css">
+<link rev="made" href="mailto:mark@diveintomark.org">
+<meta name="generator" content="DocBook XSL Stylesheets V1.65.1">
+<meta name="keywords" content="RSS, Atom, CDF, XML, feed, parser, Python">
+<link rel="start" href="index.html" title="Documentation">
+<link rel="up" href="basic.html" title="Basic Features">
+<link rel="prev" href="uncommon-rss.html" title="Uncommon RSS Elements">
+<link rel="next" href="basic-existence.html" title="Testing for Existence">
+</head>
+<body id="feedparser-org" class="docs">
+<div class="z" id="intro"><div class="sectionInner"><div class="sectionInner2">
+<div class="s" id="pageHeader">
+<h1><a href="/"><span>Universal Feed Parser</span></a></h1>
+<p><span>Parse RSS and Atom feeds in Python.  3000 unit tests.  Open source.</span></p>
+</div>
+<div class="s" id="quickSummary"><ul>
+<li class="li1">
+<a href="http://sourceforge.net/projects/feedparser/"><span>Download</span></a> ·</li>
+<li class="li2">
+<a href="http://feedparser.org/docs/"><span>Documentation</span></a> ·</li>
+<li class="li3">
+<a href="http://feedparser.org/tests/"><span>Unit tests</span></a> ·</li>
+<li class="li4"><a href="http://sourceforge.net/tracker/?func=browse&amp;group_id=112328&amp;atid=661937"><span>Report a bug</span></a></li>
+</ul></div>
+</div></div></div>
+<div id="main"><div id="mainInner">
+<p id="breadcrumb">You are here: <a href="index.html">Documentation</a> → <a href="basic.html">Basic Features</a> → <span class="thispage">Uncommon Atom Elements</span></p>
+<div class="section" lang="en">
+<div class="titlepage">
+<div>
+<div><h2 class="title">
+<a name="basic.atom.uncommon" class="skip" href="#basic.atom.uncommon" title="link to this section"><img src="images/permalink.gif" alt="[link]" title="link to this section" width="8" height="9"></a> Uncommon Atom Elements</h2></div>
+<div><div class="abstract">
+<h3 class="title"></h3>
+<p>These elements are less common, but are useful for niche applications and may be present in any Atom feed.</p>
+</div></div>
+</div>
+<div></div>
+</div>
+<p>Besides an author, each Atom feed or entry can have an arbitrary number of contributors.  <span class="application">Universal Feed Parser</span> makes these available as a list.</p>
+<div class="example">
+<a name="example.contributors" class="skip" href="#example.contributors" title="link to this example"><img src="images/permalink.gif" alt="[link]" title="link to this example" width="8" height="9"></a> <h3 class="title">Example: Accessing contributors</h3>
+<pre class="screen"><tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput"><font color='navy'><b>import</b></font> feedparser</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d = feedparser.parse('<a href="http://feedparser.org/docs/examples/atom10.xml">http://feedparser.org/docs/examples/atom10.xml</a>')</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">e = d.entries[0]</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">len(e.contributors)</span>
+<span class="computeroutput">2</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">e.contributors[0]</span>
+<span class="computeroutput">{'name': u'Joe',
+ 'href': u'http://example.org/joe/',
+ 'email': u'joe@example.org'}</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">e.contributors[1]</span>
+<span class="computeroutput">{'name': u'Sam',
+ 'href': u'http://example.org/sam/',
+ 'email': u'sam@example.org'}</span></pre>
+</div>
+<p>Besides an alternate link, each Atom feed or entry can have an arbitrary number of other links.  Each link is distinguished by its <tt class="sgmltag-attribute">type</tt> attribute, which is a MIME-style content type, and its <tt class="sgmltag-attribute">rel</tt> attribute.</p>
+<div class="example">
+<a name="example.links" class="skip" href="#example.links" title="link to this example"><img src="images/permalink.gif" alt="[link]" title="link to this example" width="8" height="9"></a> <h3 class="title">Example: Accessing multiple links</h3>
+<pre class="screen"><tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput"><font color='navy'><b>import</b></font> feedparser</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d = feedparser.parse('<a href="http://feedparser.org/docs/examples/atom10.xml">http://feedparser.org/docs/examples/atom10.xml</a>')</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">e = d.entries[0]</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">len(e.links)</span>
+<span class="computeroutput">4</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">e.links[0]</span>
+<span class="computeroutput">{'rel': u'alternate',
+ 'type': u'text/html',
+ 'href': u'http://example.org/entry/3'}</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">e.links[1]</span>
+<span class="computeroutput">{'rel': u'related',
+ 'type': u'text/html',
+ 'href': u'http://search.example.com/'}</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">e.links[2]</span>
+<span class="computeroutput">{'rel': u'via',
+ 'type': u'text/html',
+ 'href': u'http://toby.example.com/examples/atom10'}</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">e.links[3]</span>
+<span class="computeroutput">{'rel': u'enclosure',
+ 'type': u'video/mpeg4',
+ 'href': u'http://www.example.com/movie.mp4',
+ 'length': u'42301'}</span></pre>
+</div>
+<a name="id4953565"></a><table class="note" border="0" summary="">
+<tr><td rowspan="2" align="center" valign="top" width="1%"><img src="images/note.png" alt="Note" title="" width="24" height="24"></td></tr>
+<tr><td colspan="2" align="left" valign="top" width="99%">For more examples of accessing Atom elements, see the annotated examples <a href="annotated-atom10.html" title="Atom 1.0">Atom 1.0</a> and <a href="annotated-atom03.html" title="Atom 0.3">Atom 0.3</a>.</td></tr>
+</table>
+</div>
+<div style="float: left">← <a class="NavigationArrow" href="uncommon-rss.html">Uncommon RSS Elements</a>
+</div>
+<div style="text-align: right">
+<a class="NavigationArrow" href="basic-existence.html">Testing for Existence</a> →</div>
+<hr style="clear:both">
+<div class="footer"><p class="copyright">Copyright © 2004, 2005, 2006 Mark Pilgrim</p></div>
+</div></div>
+</body>
+</html>

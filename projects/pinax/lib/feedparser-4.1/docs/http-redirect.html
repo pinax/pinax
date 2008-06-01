@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>HTTP Redirects [Universal Feed Parser]</title>
+<link rel="stylesheet" href="feedparser.css" type="text/css">
+<link rev="made" href="mailto:mark@diveintomark.org">
+<meta name="generator" content="DocBook XSL Stylesheets V1.65.1">
+<meta name="keywords" content="RSS, Atom, CDF, XML, feed, parser, Python">
+<link rel="start" href="index.html" title="Documentation">
+<link rel="up" href="http.html" title="HTTP Features">
+<link rel="prev" href="http-useragent.html" title="User-Agent and Referer Headers">
+<link rel="next" href="http-authentication.html" title="Password-Protected Feeds">
+</head>
+<body id="feedparser-org" class="docs">
+<div class="z" id="intro"><div class="sectionInner"><div class="sectionInner2">
+<div class="s" id="pageHeader">
+<h1><a href="/"><span>Universal Feed Parser</span></a></h1>
+<p><span>Parse RSS and Atom feeds in Python.  3000 unit tests.  Open source.</span></p>
+</div>
+<div class="s" id="quickSummary"><ul>
+<li class="li1">
+<a href="http://sourceforge.net/projects/feedparser/"><span>Download</span></a> ·</li>
+<li class="li2">
+<a href="http://feedparser.org/docs/"><span>Documentation</span></a> ·</li>
+<li class="li3">
+<a href="http://feedparser.org/tests/"><span>Unit tests</span></a> ·</li>
+<li class="li4"><a href="http://sourceforge.net/tracker/?func=browse&amp;group_id=112328&amp;atid=661937"><span>Report a bug</span></a></li>
+</ul></div>
+</div></div></div>
+<div id="main"><div id="mainInner">
+<p id="breadcrumb">You are here: <a href="index.html">Documentation</a> → <a href="http.html">HTTP Features</a> → <span class="thispage">HTTP Redirects</span></p>
+<div class="section" lang="en">
+<div class="titlepage">
+<div>
+<div><h2 class="title">
+<a name="http.redirect" class="skip" href="#http.redirect" title="link to this section"><img src="images/permalink.gif" alt="[link]" title="link to this section" width="8" height="9"></a> <acronym title="Hypertext Transfer Protocol">HTTP</acronym> Redirects</h2></div>
+<div><div class="abstract">
+<h3 class="title"></h3>
+<p>When you download a feed from a remote web server, <span class="application">Universal Feed Parser</span> exposes the <acronym title="Hypertext Transfer Protocol">HTTP</acronym> status code.  You need to understand the different codes, including permanent and temporary redirects, and feeds that have been marked “<span class="quote">gone</span>”.</p>
+</div></div>
+</div>
+<div></div>
+</div>
+<p>When a feed has temporarily moved to a new location, the web server will return a <tt class="constant">302</tt> status code.  <span class="application">Universal Feed Parser</span> makes this available in <tt class="varname">d.status</tt>.</p>
+<p>There is nothing special you need to do with temporary redirects; by the time you learn about it, <span class="application">Universal Feed Parser</span> has already followed the redirect to the new location (available in <tt class="varname">d.href</tt>), downloaded the feed, and parsed it.  Since the redirect is temporary, you should continue requesting the original <acronym title="Uniform Resource Locator">URL</acronym> the next time you want to parse the feed.</p>
+<div class="example">
+<a name="example.redirect.temporary" class="skip" href="#example.redirect.temporary" title="link to this example"><img src="images/permalink.gif" alt="[link]" title="link to this example" width="8" height="9"></a> <h3 class="title">Example: Noticing temporary redirects</h3>
+<pre class="screen"><tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput"><font color='navy'><b>import</b></font> feedparser</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d = feedparser.parse('<a href="http://feedparser.org/docs/examples/temporary.xml">http://feedparser.org/docs/examples/temporary.xml</a>')</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.status</span>
+<span class="computeroutput">302</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.href</span>
+<span class="computeroutput">'http://feedparser.org/docs/examples/atom10.xml'</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.feed.title</span>
+<span class="computeroutput">u'Sample Feed'</span></pre>
+</div>
+<p>When a feed has permanently moved to a new location, the web server will return a <tt class="constant">301</tt> status code.  Again, <span class="application">Universal Feed Parser</span> makes this available in <tt class="varname">d.status</tt>.</p>
+<p>If you are polling a feed on a regular basis, it is very important to check the status code (<tt class="varname">d.status</tt>) every time you download.  If the feed has been permanently redirected, you should update your database or configuration file with the new address (<tt class="varname">d.href</tt>).  Repeatedly requesting the original address of a feed that has been permanently redirected is very rude, and may get you banned from the server.</p>
+<div class="example">
+<a name="example.redirect.permanent" class="skip" href="#example.redirect.permanent" title="link to this example"><img src="images/permalink.gif" alt="[link]" title="link to this example" width="8" height="9"></a> <h3 class="title">Example: Noticing permanent redirects</h3>
+<pre class="screen"><tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput"><font color='navy'><b>import</b></font> feedparser</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d = feedparser.parse('<a href="http://feedparser.org/docs/examples/permanent.xml">http://feedparser.org/docs/examples/permanent.xml</a>')</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.status</span>
+<span class="computeroutput">301</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.href</span>
+<span class="computeroutput">'http://feedparser.org/docs/examples/atom10.xml'</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.feed.title</span>
+<span class="computeroutput">u'Sample Feed'</span></pre>
+</div>
+<p>When a feed has been permanently deleted, the web server will return a <tt class="constant">410</tt> status code.  If you ever receive a <tt class="constant">410</tt>, you should stop polling the feed and inform the end user that the feed is gone for good.</p>
+<p>Repeatedly requesting a feed that has been marked as “<span class="quote">gone</span>” is very rude, and may get you banned from the server.</p>
+<div class="example">
+<a name="example.redirect.gone" class="skip" href="#example.redirect.gone" title="link to this example"><img src="images/permalink.gif" alt="[link]" title="link to this example" width="8" height="9"></a> <h3 class="title">Example: Noticing feeds marked “<span class="quote">gone</span>”</h3>
+<pre class="screen"><tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput"><font color='navy'><b>import</b></font> feedparser</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d = feedparser.parse('<a href="http://feedparser.org/docs/examples/gone.xml">http://feedparser.org/docs/examples/gone.xml</a>')</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.status</span>
+<span class="computeroutput">410</span></pre>
+</div>
+</div>
+<div style="float: left">← <a class="NavigationArrow" href="http-useragent.html">User-Agent and Referer Headers</a>
+</div>
+<div style="text-align: right">
+<a class="NavigationArrow" href="http-authentication.html">Password-Protected Feeds</a> →</div>
+<hr style="clear:both">
+<div class="footer"><p class="copyright">Copyright © 2004, 2005, 2006 Mark Pilgrim</p></div>
+</div></div>
+</body>
+</html>

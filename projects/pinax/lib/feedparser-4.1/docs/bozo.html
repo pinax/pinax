@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Bozo Detection [Universal Feed Parser]</title>
+<link rel="stylesheet" href="feedparser.css" type="text/css">
+<link rev="made" href="mailto:mark@diveintomark.org">
+<meta name="generator" content="DocBook XSL Stylesheets V1.65.1">
+<meta name="keywords" content="RSS, Atom, CDF, XML, feed, parser, Python">
+<link rel="start" href="index.html" title="Documentation">
+<link rel="up" href="advanced.html" title="Advanced Features">
+<link rel="prev" href="character-encoding.html" title="Character Encoding Detection">
+<link rel="next" href="http.html" title="HTTP Features">
+</head>
+<body id="feedparser-org" class="docs">
+<div class="z" id="intro"><div class="sectionInner"><div class="sectionInner2">
+<div class="s" id="pageHeader">
+<h1><a href="/"><span>Universal Feed Parser</span></a></h1>
+<p><span>Parse RSS and Atom feeds in Python.  3000 unit tests.  Open source.</span></p>
+</div>
+<div class="s" id="quickSummary"><ul>
+<li class="li1">
+<a href="http://sourceforge.net/projects/feedparser/"><span>Download</span></a> ·</li>
+<li class="li2">
+<a href="http://feedparser.org/docs/"><span>Documentation</span></a> ·</li>
+<li class="li3">
+<a href="http://feedparser.org/tests/"><span>Unit tests</span></a> ·</li>
+<li class="li4"><a href="http://sourceforge.net/tracker/?func=browse&amp;group_id=112328&amp;atid=661937"><span>Report a bug</span></a></li>
+</ul></div>
+</div></div></div>
+<div id="main"><div id="mainInner">
+<p id="breadcrumb">You are here: <a href="index.html">Documentation</a> → <a href="advanced.html">Advanced Features</a> → <span class="thispage">Bozo Detection</span></p>
+<div class="section" lang="en">
+<div class="titlepage">
+<div>
+<div><h2 class="title">
+<a name="advanced.bozo" class="skip" href="#advanced.bozo" title="link to this section"><img src="images/permalink.gif" alt="[link]" title="link to this section" width="8" height="9"></a> Bozo Detection</h2></div>
+<div><div class="abstract">
+<h3 class="title"></h3>
+<p><span class="application">Universal Feed Parser</span> can parse feeds whether they are well-formed <acronym title="Extensible Markup Language">XML</acronym> or not.  However, since some applications may wish to reject or warn users about non-well-formed feeds, <span class="application">Universal Feed Parser</span> sets the <tt class="varname">bozo</tt> bit when it detects that a feed is not well-formed.  Thanks to <a href="http://www.tbray.org/ongoing/When/200x/2004/01/11/PostelPilgrim">Tim Bray</a> for suggesting this terminology.</p>
+</div></div>
+</div>
+<div></div>
+</div>
+<div class="example">
+<a name="example.bozo" class="skip" href="#example.bozo" title="link to this example"><img src="images/permalink.gif" alt="[link]" title="link to this example" width="8" height="9"></a> <h3 class="title">Example: Detecting a non-well-formed feed</h3>
+<pre class="screen">
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d = feedparser.parse('<a href="http://feedparser.org/docs/examples/atom10.xml">http://feedparser.org/docs/examples/atom10.xml</a>')</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.bozo</span>
+<span class="computeroutput">0</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d = feedparser.parse('<a href="http://feedparser.org/tests/illformed/rss/aaa_illformed.xml">http://feedparser.org/tests/illformed/rss/aaa_illformed.xml</a>')</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.bozo</span>
+<span class="computeroutput">1</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d.bozo_exception</span>
+<span class="computeroutput">&lt;xml.sax._exceptions.SAXParseException instance at 0x00BAAA08&gt;</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">exc = d.bozo_exception</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">exc.getMessage()</span>
+<span class="computeroutput">"expected '&gt;'\n"</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">exc.getLineNumber()</span>
+<span class="computeroutput">6</span>
+</pre>
+</div>
+<p>There are many reasons an <acronym title="Extensible Markup Language">XML</acronym> document could be non-well-formed besides this example (incomplete end tags)  See <a href="character-encoding.html" title="Character Encoding Detection">Character Encoding Detection</a> for some other ways to trip the bozo bit.</p>
+</div>
+<div style="float: left">← <a class="NavigationArrow" href="character-encoding.html">Character Encoding Detection</a>
+</div>
+<div style="text-align: right">
+<a class="NavigationArrow" href="http.html">HTTP Features</a> →</div>
+<hr style="clear:both">
+<div class="footer"><p class="copyright">Copyright © 2004, 2005, 2006 Mark Pilgrim</p></div>
+</div></div>
+</body>
+</html>

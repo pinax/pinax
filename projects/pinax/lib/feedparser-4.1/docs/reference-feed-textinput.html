@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>feed.textinput [Universal Feed Parser]</title>
+<link rel="stylesheet" href="feedparser.css" type="text/css">
+<link rev="made" href="mailto:mark@diveintomark.org">
+<meta name="generator" content="DocBook XSL Stylesheets V1.65.1">
+<meta name="keywords" content="RSS, Atom, CDF, XML, feed, parser, Python">
+<link rel="start" href="index.html" title="Documentation">
+<link rel="up" href="reference.html" title="Reference">
+<link rel="prev" href="reference-feed-logo.html" title="feed.icon">
+<link rel="next" href="reference-feed-cloud.html" title="feed.cloud">
+</head>
+<body id="feedparser-org" class="docs">
+<div class="z" id="intro"><div class="sectionInner"><div class="sectionInner2">
+<div class="s" id="pageHeader">
+<h1><a href="/"><span>Universal Feed Parser</span></a></h1>
+<p><span>Parse RSS and Atom feeds in Python.  3000 unit tests.  Open source.</span></p>
+</div>
+<div class="s" id="quickSummary"><ul>
+<li class="li1">
+<a href="http://sourceforge.net/projects/feedparser/"><span>Download</span></a> ·</li>
+<li class="li2">
+<a href="http://feedparser.org/docs/"><span>Documentation</span></a> ·</li>
+<li class="li3">
+<a href="http://feedparser.org/tests/"><span>Unit tests</span></a> ·</li>
+<li class="li4"><a href="http://sourceforge.net/tracker/?func=browse&amp;group_id=112328&amp;atid=661937"><span>Report a bug</span></a></li>
+</ul></div>
+</div></div></div>
+<div id="main"><div id="mainInner">
+<p id="breadcrumb">You are here: <a href="index.html">Documentation</a> → <a href="reference.html">Reference</a> → <span class="thispage">feed.textinput</span></p>
+<div class="section" lang="en">
+<div class="titlepage">
+<div><div><h2 class="title">
+<a name="reference.feed.textinput" class="skip" href="#reference.feed.textinput" title="link to this section"><img src="images/permalink.gif" alt="[link]" title="link to this section" width="8" height="9"></a> feed.textinput</h2></div></div>
+<div></div>
+</div>
+<div class="abstract"><p>A text input form.  No one actually uses this.  Why are you?</p></div>
+<div class="reference-from">
+<h3>Comes from</h3>
+<ul>
+<li><tt class="literal">/rss/channel/textInput</tt></li>
+<li><tt class="literal">/rss/channel/textinput</tt></li>
+<li><tt class="literal">/rdf:RDF/rdf:textinput</tt></li>
+</ul>
+</div>
+<div class="section" lang="en">
+<div class="titlepage">
+<div><div><h3 class="title">
+<a name="reference.feed.textinput.title" class="skip" href="#reference.feed.textinput.title" title="link to this section"><img src="images/permalink.gif" alt="[link]" title="link to this section" width="8" height="9"></a> feed.textinput.title</h3></div></div>
+<div></div>
+</div>
+<p>The title of the text input form, which would go in the <tt class="sgmltag-attribute">value</tt> attribute of the form's submit button.</p>
+</div>
+<div class="section" lang="en">
+<div class="titlepage">
+<div><div><h3 class="title">
+<a name="reference.feed.textinput.link" class="skip" href="#reference.feed.textinput.link" title="link to this section"><img src="images/permalink.gif" alt="[link]" title="link to this section" width="8" height="9"></a> feed.textinput.link</h3></div></div>
+<div></div>
+</div>
+<p>The link of the script which processes the text input form, which would go in the <tt class="sgmltag-attribute">action</tt> attirbute of the form.</p>
+<p>If this is a relative <acronym title="Uniform Resource Identifier">URI</acronym>, it is <a href="resolving-relative-links.html" title="Relative Link Resolution">resolved according to a set of rules</a>.</p>
+</div>
+<div class="section" lang="en">
+<div class="titlepage">
+<div><div><h3 class="title">
+<a name="reference.feed.textinput.name" class="skip" href="#reference.feed.textinput.name" title="link to this section"><img src="images/permalink.gif" alt="[link]" title="link to this section" width="8" height="9"></a> feed.textinput.name</h3></div></div>
+<div></div>
+</div>
+<p>The name of the text input box in the form, which would go in the <tt class="sgmltag-attribute">name</tt> attribute of the form's input box.</p>
+</div>
+<div class="section" lang="en">
+<div class="titlepage">
+<div><div><h3 class="title">
+<a name="reference.feed.textinput.description" class="skip" href="#reference.feed.textinput.description" title="link to this section"><img src="images/permalink.gif" alt="[link]" title="link to this section" width="8" height="9"></a> feed.textinput.description</h3></div></div>
+<div></div>
+</div>
+<p>A short description of the text input form, which would go in the <tt class="sgmltag-element">label</tt> element of the form.</p>
+</div>
+<div class="section" lang="en">
+<div class="titlepage">
+<div><div><h3 class="title">
+<a name="id4969764" class="skip" href="#id4969764" title="link to this section"><img src="images/permalink.gif" alt="[link]" title="link to this section" width="8" height="9"></a> Annotated example</h3></div></div>
+<div></div>
+</div>
+<p>This is a text input in a feed:</p>
+<div class="informalexample"><pre class="programlisting ">&lt;textInput&gt;
+  &lt;title&gt;Go!&lt;/title&gt;
+  &lt;link&gt;http://example.org/search&lt;/link&gt;
+  &lt;name&gt;keyword&lt;/name&gt;
+  &lt;description&gt;Search this site:&lt;/description&gt;
+&lt;/textInput&gt;</pre></div>
+<p>This is how it could be rendered in <acronym title="HyperText Markup Language">HTML</acronym>:</p>
+<div class="informalexample"><pre class="programlisting ">&lt;form method="get" action="http://example.org/search"&gt;
+  &lt;label for="keyword"&gt;Search this site:&lt;/label&gt;
+  &lt;input type="text" id="keyword" name="keyword" value=""&gt;
+  &lt;input type="submit" value="Go!"&gt;
+&lt;/form&gt;</pre></div>
+</div>
+</div>
+<div style="float: left">← <a class="NavigationArrow" href="reference-feed-logo.html">feed.icon</a>
+</div>
+<div style="text-align: right">
+<a class="NavigationArrow" href="reference-feed-cloud.html">feed.cloud</a> →</div>
+<hr style="clear:both">
+<div class="footer"><p class="copyright">Copyright © 2004, 2005, 2006 Mark Pilgrim</p></div>
+</div></div>
+</body>
+</html>

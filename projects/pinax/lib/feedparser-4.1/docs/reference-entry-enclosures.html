@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>entries[i].enclosures [Universal Feed Parser]</title>
+<link rel="stylesheet" href="feedparser.css" type="text/css">
+<link rev="made" href="mailto:mark@diveintomark.org">
+<meta name="generator" content="DocBook XSL Stylesheets V1.65.1">
+<meta name="keywords" content="RSS, Atom, CDF, XML, feed, parser, Python">
+<link rel="start" href="index.html" title="Documentation">
+<link rel="up" href="reference.html" title="Reference">
+<link rel="prev" href="reference-entry-contributors.html" title="entries[i].contributors">
+<link rel="next" href="reference-entry-publisher.html" title="entries[i].publisher">
+</head>
+<body id="feedparser-org" class="docs">
+<div class="z" id="intro"><div class="sectionInner"><div class="sectionInner2">
+<div class="s" id="pageHeader">
+<h1><a href="/"><span>Universal Feed Parser</span></a></h1>
+<p><span>Parse RSS and Atom feeds in Python.  3000 unit tests.  Open source.</span></p>
+</div>
+<div class="s" id="quickSummary"><ul>
+<li class="li1">
+<a href="http://sourceforge.net/projects/feedparser/"><span>Download</span></a> ·</li>
+<li class="li2">
+<a href="http://feedparser.org/docs/"><span>Documentation</span></a> ·</li>
+<li class="li3">
+<a href="http://feedparser.org/tests/"><span>Unit tests</span></a> ·</li>
+<li class="li4"><a href="http://sourceforge.net/tracker/?func=browse&amp;group_id=112328&amp;atid=661937"><span>Report a bug</span></a></li>
+</ul></div>
+</div></div></div>
+<div id="main"><div id="mainInner">
+<p id="breadcrumb">You are here: <a href="index.html">Documentation</a> → <a href="reference.html">Reference</a> → <span class="thispage">entries[i].enclosures</span></p>
+<div class="section" lang="en">
+<div class="titlepage">
+<div><div><h2 class="title">
+<a name="reference.entry.enclosures" class="skip" href="#reference.entry.enclosures" title="link to this section"><img src="images/permalink.gif" alt="[link]" title="link to this section" width="8" height="9"></a> entries[i].enclosures</h2></div></div>
+<div></div>
+</div>
+<div class="abstract"><p>A list of links to external files associated with this entry.</p></div>
+<p>Some aggregators automatically download enclosures (although this technique has <a href="http://gonze.com/weblog/story/5-17-4">known problems</a>).  Some aggregators render each enclosure as a link.  Most aggregators ignore them.</p>
+<p>The <acronym title="Rich Site Summary">RSS</acronym> specification states that there can be at most one enclosure per item.  However, because some feeds break this rule, <span class="application">Universal Feed Parser</span> captures all of them and makes them available as a list.</p>
+<div class="reference-from">
+<h3>Comes from</h3>
+<ul>
+<li><tt class="literal">/atom10:feed/atom10:entry/atom10:link[@rel="enclosure"]</tt></li>
+<li><tt class="literal">/rss/channel/item/enclosure</tt></li>
+</ul>
+</div>
+<div class="section" lang="en">
+<div class="titlepage">
+<div><div><h3 class="title">
+<a name="reference.entry.enclosures.href" class="skip" href="#reference.entry.enclosures.href" title="link to this section"><img src="images/permalink.gif" alt="[link]" title="link to this section" width="8" height="9"></a> entries[i].enclosures[j].href</h3></div></div>
+<div></div>
+</div>
+<p>The <acronym title="Uniform Resource Locator">URL</acronym> of the linked file.</p>
+<p>If this is a relative <acronym title="Uniform Resource Identifier">URI</acronym>, it is <a href="resolving-relative-links.html" title="Relative Link Resolution">resolved according to a set of rules</a>.</p>
+</div>
+<div class="section" lang="en">
+<div class="titlepage">
+<div><div><h3 class="title">
+<a name="reference.entry.enclosures.length" class="skip" href="#reference.entry.enclosures.length" title="link to this section"><img src="images/permalink.gif" alt="[link]" title="link to this section" width="8" height="9"></a> entries[i].enclosures[j].length</h3></div></div>
+<div></div>
+</div>
+<p>The length of the linked file.</p>
+</div>
+<div class="section" lang="en">
+<div class="titlepage">
+<div><div><h3 class="title">
+<a name="reference.entry.enclosures.type" class="skip" href="#reference.entry.enclosures.type" title="link to this section"><img src="images/permalink.gif" alt="[link]" title="link to this section" width="8" height="9"></a> entries[i].enclosures[j].type</h3></div></div>
+<div></div>
+</div>
+<p>The content type of the linked file.</p>
+</div>
+</div>
+<div style="float: left">← <a class="NavigationArrow" href="reference-entry-contributors.html">entries[i].contributors</a>
+</div>
+<div style="text-align: right">
+<a class="NavigationArrow" href="reference-entry-publisher.html">entries[i].publisher</a> →</div>
+<hr style="clear:both">
+<div class="footer"><p class="copyright">Copyright © 2004, 2005, 2006 Mark Pilgrim</p></div>
+</div></div>
+</body>
+</html>

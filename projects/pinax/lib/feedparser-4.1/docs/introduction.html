@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Introduction [Universal Feed Parser]</title>
+<link rel="stylesheet" href="feedparser.css" type="text/css">
+<link rev="made" href="mailto:mark@diveintomark.org">
+<meta name="generator" content="DocBook XSL Stylesheets V1.65.1">
+<meta name="keywords" content="RSS, Atom, CDF, XML, feed, parser, Python">
+<link rel="start" href="index.html" title="Documentation">
+<link rel="up" href="basic.html" title="Basic Features">
+<link rel="prev" href="basic.html" title="Basic Features">
+<link rel="next" href="common-rss-elements.html" title="Common RSS Elements">
+</head>
+<body id="feedparser-org" class="docs">
+<div class="z" id="intro"><div class="sectionInner"><div class="sectionInner2">
+<div class="s" id="pageHeader">
+<h1><a href="/"><span>Universal Feed Parser</span></a></h1>
+<p><span>Parse RSS and Atom feeds in Python.  3000 unit tests.  Open source.</span></p>
+</div>
+<div class="s" id="quickSummary"><ul>
+<li class="li1">
+<a href="http://sourceforge.net/projects/feedparser/"><span>Download</span></a> ·</li>
+<li class="li2">
+<a href="http://feedparser.org/docs/"><span>Documentation</span></a> ·</li>
+<li class="li3">
+<a href="http://feedparser.org/tests/"><span>Unit tests</span></a> ·</li>
+<li class="li4"><a href="http://sourceforge.net/tracker/?func=browse&amp;group_id=112328&amp;atid=661937"><span>Report a bug</span></a></li>
+</ul></div>
+</div></div></div>
+<div id="main"><div id="mainInner">
+<p id="breadcrumb">You are here: <a href="index.html">Documentation</a> → <a href="basic.html">Basic Features</a> → <span class="thispage">Introduction</span></p>
+<div class="section" lang="en">
+<div class="titlepage">
+<div><div><h2 class="title">
+<a name="introduction" class="skip" href="#introduction" title="link to this section"><img src="images/permalink.gif" alt="[link]" title="link to this section" width="8" height="9"></a> Introduction</h2></div></div>
+<div></div>
+</div>
+<div class="abstract"><p><span class="application">Universal Feed Parser</span> is a <span class="application">Python</span> module for downloading and parsing syndicated feeds.  It can handle <acronym title="Rich Site Summary">RSS</acronym> 0.90, Netscape <acronym title="Rich Site Summary">RSS</acronym> 0.91, Userland <acronym title="Rich Site Summary">RSS</acronym> 0.91, <acronym title="Rich Site Summary">RSS</acronym> 0.92, <acronym title="Rich Site Summary">RSS</acronym> 0.93, <acronym title="Rich Site Summary">RSS</acronym> 0.94, <acronym title="Rich Site Summary">RSS</acronym> 1.0, <acronym title="Rich Site Summary">RSS</acronym> 2.0, Atom 0.3, Atom 1.0, and <acronym title="Channel Definition Format">CDF</acronym> feeds.  It also parses several popular extension modules, including Dublin Core and Apple's <span class="application">iTunes</span> extensions.</p></div>
+<p>To use <span class="application">Universal Feed Parser</span>, you will need <span class="application">Python</span> 2.1 or later.  <span class="application">Universal Feed Parser</span> is not meant to run standalone; it is a module for you to use as part of a larger <span class="application">Python</span> program.</p>
+<p><span class="application">Universal Feed Parser</span> is easy to use; the module is self-contained in a single file, <tt class="filename">feedparser.py</tt>, and it has one primary public function, <tt class="function">parse</tt>.  <tt class="function">parse</tt> takes a number of arguments, but only one is required, and it can be a <acronym title="Uniform Resource Locator">URL</acronym>, a local filename, or a raw string containing feed data in any format.</p>
+<div class="example">
+<a name="example.parse.remote" class="skip" href="#example.parse.remote" title="link to this example"><img src="images/permalink.gif" alt="[link]" title="link to this example" width="8" height="9"></a> <h3 class="title">Example: Parsing a feed from a remote <acronym title="Uniform Resource Locator">URL</acronym></h3>
+<pre class="screen"><tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput"><font color='navy'><b>import</b></font> feedparser</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d = feedparser.parse('<a href="http://feedparser.org/docs/examples/atom10.xml">http://feedparser.org/docs/examples/atom10.xml</a>')</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d[<font color='olive'>'feed'</font>][<font color='olive'>'title'</font>]</span>
+<span class="computeroutput">u'Sample Feed'</span></pre>
+</div>
+<p>The following example assumes you are on Windows, and that you have saved a feed at <tt class="filename">c:\incoming\atom10.xml</tt>.</p>
+<a name="id4899876"></a><table class="note" border="0" summary="">
+<tr><td rowspan="2" align="center" valign="top" width="1%"><img src="images/note.png" alt="Note" title="" width="24" height="24"></td></tr>
+<tr><td colspan="2" align="left" valign="top" width="99%">
+<span class="application">Universal Feed Parser</span> works on any platform that can run <span class="application">Python</span>; use the path syntax appropriate for your platform.</td></tr>
+</table>
+<div class="example">
+<a name="example.parse.local" class="skip" href="#example.parse.local" title="link to this example"><img src="images/permalink.gif" alt="[link]" title="link to this example" width="8" height="9"></a> <h3 class="title">Example: Parsing a feed from a local file</h3>
+<pre class="screen"><tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput"><font color='navy'><b>import</b></font> feedparser</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d = feedparser.parse(r<font color='olive'>'c:\incoming\atom10.xml'</font>)</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d[<font color='olive'>'feed'</font>][<font color='olive'>'title'</font>]</span>
+<span class="computeroutput">u'Sample Feed'</span></pre>
+</div>
+<p><span class="application">Universal Feed Parser</span> can also parse a feed in memory.</p>
+<div class="example">
+<a name="example.parse.string" class="skip" href="#example.parse.string" title="link to this example"><img src="images/permalink.gif" alt="[link]" title="link to this example" width="8" height="9"></a> <h3 class="title">Example: Parsing a feed from a string</h3>
+<pre class="screen"><tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput"><font color='navy'><b>import</b></font> feedparser</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">rawdata = <font color='olive'>"""&lt;rss version="2.0"&gt;
+&lt;channel&gt;
+&lt;title&gt;Sample Feed&lt;/title&gt;
+&lt;/channel&gt;
+&lt;/rss&gt;"""</font></span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d = feedparser.parse(rawdata)</span>
+<tt class="prompt">&gt;&gt;&gt; </tt><span class="userinput">d[<font color='olive'>'feed'</font>][<font color='olive'>'title'</font>]</span>
+<span class="computeroutput">u'Sample Feed'</span></pre>
+</div>
+<p>Values are returned as <span class="application">Python</span> Unicode strings (except when they're not -- see <a href="character-encoding.html" title="Character Encoding Detection">Character Encoding Detection</a> for all the gory details).</p>
+<div class="furtherreading">
+<h3>Elsewhere</h3>
+<ul><li><a href="http://docs.python.org/tut/node5.html#SECTION005130000000000000000">Introduction to <span class="application">Python</span> Unicode strings</a></li></ul>
+</div>
+</div>
+<div style="float: left">← <a class="NavigationArrow" href="basic.html">Basic Features</a>
+</div>
+<div style="text-align: right">
+<a class="NavigationArrow" href="common-rss-elements.html">Common RSS Elements</a> →</div>
+<hr style="clear:both">
+<div class="footer"><p class="copyright">Copyright © 2004, 2005, 2006 Mark Pilgrim</p></div>
+</div></div>
+</body>
+</html>
