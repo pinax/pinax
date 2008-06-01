@@ -57,6 +57,8 @@ def tribe(request, slug):
             tribe_form = TribeUpdateForm(request.POST, instance=tribe)
             if tribe_form.is_valid():
                 tribe = tribe_form.save()
+        else:
+            tribe_form = TribeUpdateForm(instance=tribe)
         if request.POST["action"] == "join":
             tribe.members.add(request.user)
             request.user.message_set.create(message="You have joined the tribe %s" % tribe.name)
@@ -69,8 +71,9 @@ def tribe(request, slug):
             request.user.message_set.create(message="You have left the tribe %s" % tribe.name)
             if notification:
                 pass # @@@
+    else:
+        tribe_form = TribeUpdateForm(instance=tribe)
     
-    tribe_form = TribeUpdateForm(instance=tribe)
     topics = tribe.topics.all()[:5]
     are_member = request.user in tribe.members.all()
     
