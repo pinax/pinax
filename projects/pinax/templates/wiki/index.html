@@ -1,6 +1,8 @@
 {% extends "wiki/base.html" %}
 
 {% load i18n %}
+{% load pagination_tags %}
+{% load humanize %}
 
 {% block head_title %}Pinax : {% trans "Index" %}{% endblock %}
 
@@ -11,10 +13,16 @@
     
     <h1>{% trans "Index" %}</h1>
     
+    {% autopaginate articles %}
+    {% regroup articles by created_at.date as articles_by_creation_date %}
+    
     {% if articles %}
     <ul>
-        {% for article in articles %}
-        <li><a href="{% url wiki_article article.title %}">{{ article.title }}</a></li>
+        {% for date in articles_by_creation_date %}
+        <h2 class="join_date">{{ date.grouper|naturalday:_("MONTH_DAY_FORMAT")|capfirst }}</h2>
+        {% for article in date.list %}
+        <a href="{% url wiki_article article.title %}">{{ article.title }}</a><br />
+        {% endfor %}
         {% endfor %}
     </ul>
     {% else %}
