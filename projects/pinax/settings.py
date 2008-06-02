@@ -163,6 +163,7 @@ LANGUAGES = (
 # URCHIN_ID = "ua-..."
 
 CACHE_BACKEND = "locmem:///?max_entries=3000"
+FEEDUTIL_SUMMARY_LEN = 60*7 # 7 hours
 
 try:
     from localsettings import *
