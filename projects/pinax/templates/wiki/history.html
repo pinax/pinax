@@ -1,25 +1,25 @@
 {% extends "wiki/base.html" %}
-
+{% load timezone_filters %}
 {% load i18n %}
 
 {% block head_title %}Pinax : {{ article.title }} {% endblock %}
-+
+
 {% block body %}
     <h1>{% trans "Wiki for Tribe" %} <a href="{% url tribe_detail group.slug %}">{{ group.name }}</a></h1>
     <h2>{% trans "History for article" %} <a href="{{ article.get_absolute_url }}"> {{ article.title }} </a></h2>
 
     {% if changes %}
-    <table>
+    <table class="messages">
         <tr class="tbheader">
-            <th>{% trans "At" %}</th>
-            <th>{% trans "User" %}</th>
+            <th>{% trans "Date" %}</th>
+            <th>{% trans "Editor" %}</th>
             <th>{% trans "Comment" %}</th>
             <th>{% trans "Revert" %}</th>
         </tr>
         {% for change in changes %}
-        <tr class="{% cycle 'tbodd' 'tbeven' %}">
+        <tr>
             <td><a href="{% url wiki_changeset group_slug=group.slug,title=article.title,revision=change.revision %}">
-                {{ change.modified|date:"M d, Y" }}</a></td>
+                {{ change.modified|localtime:user.get_profile.timezone|date:_("DATETIME_FORMAT") }}</a></td>
             <td>
                 {% if change.is_anonymous_change %}
                 {{ change.editor_ip }}
@@ -42,7 +42,6 @@
         </tr>
     </table>
 
-    <a href="{% url wiki_article_history article.title,next %}">{% trans "Next" %}</a>
     {% else %}
     <p> {% trans "No changes in this article" %}</p>
     {% endif %}
