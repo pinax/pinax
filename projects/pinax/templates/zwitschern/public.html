@@ -12,7 +12,7 @@
 {% block body %}
 <h1>{% trans "All Tweets" %}</h1>
 
-<p>These are tweets from everyone:</p>
+<p>{% blocktrans %}The latest {{ threshold }} tweets from everyone:{% endblocktrans %}</p>
 
 {% tweet_listing tweets 1 0 %}
 

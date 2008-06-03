@@ -26,14 +26,15 @@ def personal(request):
         "tweets": tweets,
     }, context_instance=RequestContext(request))
 
-def public(request):
+def public(request, threshold=10):
     """
-    all the tweets
+    the latest tweets limited by the threshold
     """
-    tweets = Tweet.objects.all().order_by("-sent")
+    tweets = Tweet.objects.all().order_by("-sent")[:threshold]
 
     return render_to_response("zwitschern/public.html", {
         "tweets": tweets,
+        "threshold": threshold,
     }, context_instance=RequestContext(request))
 
 def single(request, id):
