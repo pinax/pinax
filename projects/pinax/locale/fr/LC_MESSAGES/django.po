@@ -7,18 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-01 22:14+0200\n"
-"PO-Revision-Date: 2008-06-02 22:08+0100\n"
+"POT-Creation-Date: 2008-06-04 22:59+0200\n"
+"PO-Revision-Date: 2008-06-04 23:03+0100\n"
 "Last-Translator: Roland Frédéric <frederic.roland@creativeconvergence.be>\n"
 "Language-Team: Frédéric Roland <frederic.roland@creativeconvergence.be>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: French\n"
-
-#: settings.py:161
-msgid "French"
-msgstr "Français"
 
 #: account/forms.py:27
 #: account/forms.py:55
@@ -58,7 +54,7 @@ msgstr "Les noms d'utilisateur ne peuvent contenir que des lettres, des chiffres
 
 #: account/forms.py:68
 msgid "This username is already taken. Please choose another."
-msgstr "Ce nom d'utilisateur est déjà utilisé. Choisissez en un autre s'il vous plait."
+msgstr "Ce nom d'utilisateur est déjà utilisé. Choisissez-en un autre s'il vous plait."
 
 #: account/forms.py:73
 #: account/forms.py:155
@@ -213,7 +209,7 @@ msgid "Timestamp"
 msgstr "Horodatage"
 
 #: djangologging/templates/logging.html:16
-#: templates/profiles/profile.html:80
+#: templates/profiles/profile.html:82
 msgid "Location"
 msgstr "Emplacement"
 
@@ -490,6 +486,7 @@ msgstr "Action"
 #: templates/messages/outbox.html:17
 #: templates/messages/trash.html:17
 #: templates/messages/view.html:13
+#: templates/wiki/history.html:22
 msgid "DATETIME_FORMAT"
 msgstr "DATETIME_FORMAT"
 
@@ -521,6 +518,7 @@ msgstr "Messages Effacés"
 #: messages/templates/messages/view.html:10
 #: templates/messages/trash.html:8
 #: templates/messages/view.html:12
+#: templates/wiki/history.html:14
 msgid "Date"
 msgstr "Date"
 
@@ -807,6 +805,18 @@ msgstr "Inscription"
 msgid "Home"
 msgstr "Accueil"
 
+#: templates/site_base.html:27
+msgid "Apps"
+msgstr "Applications"
+
+#: templates/site_base.html:28
+msgid "Sites"
+msgstr "Sites"
+
+#: templates/site_base.html:29
+msgid "Team"
+msgstr "Equipe"
+
 #: templates/site_base.html:38
 msgid "Profile"
 msgstr "Profil"
@@ -818,7 +828,7 @@ msgid "Tribes"
 msgstr "Tribus"
 
 #: templates/site_base.html:40
-#: templates/profiles/profile.html:144
+#: templates/profiles/profile.html:146
 #: templates/zwitschern/personal.html:6
 #: templates/zwitschern/personal.html:13
 msgid "Tweets"
@@ -847,7 +857,7 @@ msgid "Privacy Policy"
 msgstr "Politique concernant la Vie Privée"
 
 #: templates/about/about.html:5
-#: templates/profiles/profile.html:79
+#: templates/profiles/profile.html:81
 msgid "About"
 msgstr "A propos de"
 
@@ -1124,7 +1134,7 @@ msgid "Someone with this email address has already joined:"
 msgstr "Quelqu'un avec cette adresse de courriel a déjà rejoint le site:"
 
 #: templates/friends_app/invitations.html:35
-#: templates/profiles/profile.html:135
+#: templates/profiles/profile.html:137
 msgid "invite"
 msgstr "inviter"
 
@@ -1133,7 +1143,7 @@ msgid "Friendship Requests Received"
 msgstr "Demande d'Amitié Reçue"
 
 #: templates/friends_app/invitations.html:53
-#: templates/profiles/profile.html:123
+#: templates/profiles/profile.html:125
 msgid "accept"
 msgstr "accepter"
 
@@ -1170,9 +1180,9 @@ msgstr "Avis"
 #: templates/notification/notices.html:19
 #: templates/profiles/profiles.html:18
 #: templates/tribes/tribes.html:30
-#: templates/wiki/index.html:22
+#: templates/wiki/index.html:20
 msgid "MONTH_DAY_FORMAT"
-msgstr ""
+msgstr "MONTH_DAY_FORMAT"
 
 #: templates/notification/notices.html:34
 msgid "No notices."
@@ -1249,103 +1259,108 @@ msgstr "Votre Profil"
 msgid "All Profiles"
 msgstr "Tout les Profils"
 
-#: templates/profiles/profile.html:9
-#: templates/profiles/profile.html.py:75
+#: templates/profiles/profile.html:10
+#: templates/profiles/profile.html.py:77
 #, python-format
 msgid "Profile for %(other_user)s"
 msgstr "Profil pour %(other_user)s"
 
-#: templates/profiles/profile.html:16
+#: templates/profiles/profile.html:17
 msgid "Your Tribes"
 msgstr "Vos Tribus"
 
-#: templates/profiles/profile.html:26
+#: templates/profiles/profile.html:24
+#, python-format
+msgid "You are not yet a member of any <a href=\"%(tribe_url)s\">tribes</a>."
+msgstr "Pas encore membre d'aucune <a href=\"%(tribe_url)s\">tribu</a>."
+
+#: templates/profiles/profile.html:28
 msgid "Your Friends"
 msgstr "Vos Amis"
 
-#: templates/profiles/profile.html:40
+#: templates/profiles/profile.html:42
 msgid "None. You should look at the list of <a href=\"/profiles/\">profiles</a> and see if there's anyone you know."
 msgstr "Aucun. Vous devriez consulter la liste de <a href=\"/profiles/\">profils</a> et voir si il y a quelqu'un que vous connaissez."
 
-#: templates/profiles/profile.html:47
+#: templates/profiles/profile.html:49
 #, python-format
 msgid "%(other_user)s's Tribes"
 msgstr "Les Tribus de %(other_user)s"
 
-#: templates/profiles/profile.html:53
+#: templates/profiles/profile.html:55
 msgid "Not yet a member of any tribes."
 msgstr "Pas encore membre d'aucune tribus."
 
-#: templates/profiles/profile.html:57
+#: templates/profiles/profile.html:59
 #, python-format
 msgid "%(other_user)s's Friends"
 msgstr "Les amis de %(other_user)s"
 
-#: templates/profiles/profile.html:78
+#: templates/profiles/profile.html:80
 msgid "Name"
 msgstr "Nom"
 
-#: templates/profiles/profile.html:81
+#: templates/profiles/profile.html:83
 msgid "Website"
 msgstr "Site web"
 
-#: templates/profiles/profile.html:84
+#: templates/profiles/profile.html:86
 msgid "Followers"
 msgstr "Suiveurs"
 
-#: templates/profiles/profile.html:85
+#: templates/profiles/profile.html:87
 msgid "Following"
 msgstr "Vous suivez"
 
-#: templates/profiles/profile.html:89
+#: templates/profiles/profile.html:91
 msgid "Edit profile"
 msgstr "Modifier le profil"
 
-#: templates/profiles/profile.html:94
+#: templates/profiles/profile.html:96
 #: templates/tribes/tribe.html:50
 msgid "update"
 msgstr "mettre à jour"
 
-#: templates/profiles/profile.html:103
+#: templates/profiles/profile.html:105
 msgid "unfollow"
 msgstr "ne plus suivre"
 
-#: templates/profiles/profile.html:105
+#: templates/profiles/profile.html:107
 msgid "follow tweets"
 msgstr "suivre les tweets"
 
-#: templates/profiles/profile.html:111
+#: templates/profiles/profile.html:113
 #, python-format
 msgid "You are friends with %(other_user)s."
 msgstr "Vous êtes amis avec %(other_user)s."
 
-#: templates/profiles/profile.html:111
+#: templates/profiles/profile.html:113
 msgid "Send a message"
 msgstr "Envoyer un message"
 
-#: templates/profiles/profile.html:114
+#: templates/profiles/profile.html:116
 #, python-format
 msgid "%(other_user)s has requested friendship."
 msgstr "%(other_user)s demande à être votre ami."
 
-#: templates/profiles/profile.html:129
+#: templates/profiles/profile.html:131
 msgid "Friendship request sent."
 msgstr "Demande d'amitié envoyée."
 
-#: templates/profiles/profile.html:131
+#: templates/profiles/profile.html:133
 msgid "Add As Friend"
 msgstr "Ajouter en temps qu'ami"
 
-#: templates/profiles/profile.html:135
+#: templates/profiles/profile.html:137
 #, python-format
 msgid "%(other_user)s to be a friend."
 msgstr "%(other_user)s pour devenir ami."
 
-#: templates/profiles/profile.html:153
+#: templates/profiles/profile.html:155
 msgid "Recent Blog Posts"
 msgstr "Articles Récents"
 
-#: templates/profiles/profile.html:158
+#: templates/profiles/profile.html:160
 msgid "<a href=\"/account/signup/\">Sign up</a> and <a href=\"/account/login/\">log in </a> to add this person as a friend."
 msgstr "<a href=\"/account/signup/\">Inscrivez-vous</a> et <a href=\"/account/login/\">connectez-vous</a> pour ajouter cette personne à votre liste d'amis."
 
@@ -1414,80 +1429,60 @@ msgstr "créer"
 msgid "All Articles"
 msgstr "Tout les Articles"
 
-#: templates/wiki/changeset.html:13
+#: templates/wiki/changeset.html:8
+#: templates/wiki/edit.html:8
+#: templates/wiki/history.html:8
+#: templates/wiki/index.html:12
+#: templates/wiki/view.html:11
+msgid "Wiki for Tribe"
+msgstr "Wiki pour Tribu"
+
+#: templates/wiki/changeset.html:14
 #: wiki/templates/wiki/changeset.html:10
 msgid "Markup:"
 msgstr "Marquage:"
 
-#: templates/wiki/changeset.html:17
+#: templates/wiki/changeset.html:18
 #: wiki/templates/wiki/changeset.html:12
 msgid "Plain Text."
 msgstr "Texte Simple."
 
-#: templates/wiki/edit.html:8
-#: wiki/templates/wiki/edit.html:5
-msgid "Edit"
-msgstr "Modifier"
+#: templates/wiki/edit.html:9
+msgid "Edit Article"
+msgstr "Modifier Article"
 
-#: templates/wiki/edit.html:13
-#: wiki/templates/wiki/edit.html:12
-msgid "Save"
-msgstr "Sauver"
+#: templates/wiki/edit.html:14
+msgid "Save Article"
+msgstr "Sauver Article"
 
-#: templates/wiki/history.html:12
-#: wiki/templates/wiki/history.html:9
-msgid "Article History"
-msgstr "Historique de l'Article"
+#: templates/wiki/history.html:9
+msgid "History for article"
+msgstr "Historique pour l'article"
 
-#: templates/wiki/history.html:17
-#: wiki/templates/wiki/history.html:14
-msgid "At"
-msgstr "A"
+#: templates/wiki/history.html:15
+#: wiki/models.py:105
+msgid "Editor"
+msgstr "Editeur"
 
-#: templates/wiki/history.html:18
-#: wiki/templates/wiki/history.html:15
-msgid "User"
-msgstr "Utilisateur"
-
-#: templates/wiki/history.html:19
+#: templates/wiki/history.html:16
 #: wiki/templates/wiki/history.html:16
 msgid "Comment"
 msgstr "Commentaire"
 
-#: templates/wiki/history.html:20
+#: templates/wiki/history.html:17
 #: wiki/templates/wiki/history.html:17
 msgid "Revert"
 msgstr "Revenir à l'état précédent"
 
-#: templates/wiki/history.html:40
+#: templates/wiki/history.html:37
 #: wiki/templates/wiki/history.html:36
 msgid "Revert Last Change"
 msgstr "Inverser Dernier Changement"
 
-#: templates/wiki/history.html:49
-#: wiki/templates/wiki/history.html:44
-msgid "Previous"
-msgstr "Précédent"
-
-#: templates/wiki/history.html:51
-#: wiki/templates/wiki/history.html:52
-msgid "Next"
-msgstr "Suivant"
-
-#: templates/wiki/history.html:53
+#: templates/wiki/history.html:46
 #: wiki/templates/wiki/history.html:55
 msgid "No changes in this article"
 msgstr "Pas de changement a cet article"
-
-#: templates/wiki/index.html:7
-#: templates/wiki/index.html.py:14
-msgid "Index"
-msgstr "Index"
-
-#: templates/wiki/index.html:29
-#: wiki/templates/wiki/index.html:14
-msgid "Create a new article"
-msgstr "Créer un nouvel article"
 
 #: templates/wiki/searchbox.html:7
 #: wiki/templates/wiki/searchbox.html:7
@@ -1499,27 +1494,27 @@ msgstr "Aller"
 msgid "Search"
 msgstr "Chercher"
 
-#: templates/wiki/view.html:14
+#: templates/wiki/view.html:15
 #: wiki/templates/wiki/view.html:15
 msgid "This article does not exist."
 msgstr "Cet article n'existe pas."
 
-#: templates/wiki/view.html:15
+#: templates/wiki/view.html:16
 #: wiki/templates/wiki/view.html:16
 msgid ">Create it now</a>?"
 msgstr ">Le Créer maintenant</a>?"
 
-#: templates/wiki/view.html:30
+#: templates/wiki/view.html:31
 #: wiki/templates/wiki/view.html:30
 msgid "Edit this article"
 msgstr "Modifier cet article"
 
-#: templates/wiki/view.html:31
+#: templates/wiki/view.html:32
 #: wiki/templates/wiki/view.html:32
 msgid "Editing history"
 msgstr "Historique des modifications"
 
-#: templates/wiki/view.html:33
+#: templates/wiki/view.html:34
 #: wiki/templates/wiki/view.html:34
 msgid "Create this article"
 msgstr "Créer cet article"
@@ -1586,6 +1581,11 @@ msgstr ""
 #: templates/zwitschern/public.html:6
 msgid "Public Tweets"
 msgstr "Tweets publics"
+
+#: templates/zwitschern/public.html:15
+#, python-format
+msgid "The latest %(threshold)s tweets from everyone:"
+msgstr "Les derniers %(threshold)s tweets de tout le monde:"
 
 #: templates/zwitschern/single.html:6
 #: templates/zwitschern/single.html.py:9
@@ -1789,7 +1789,7 @@ msgid "Article Content"
 msgstr "Contenu de l'Article"
 
 #: wiki/models.py:37
-#: wiki/models.py:103
+#: wiki/models.py:114
 msgid "Article Content Markup"
 msgstr "Marquage du Contenu de l'Article"
 
@@ -1801,52 +1801,48 @@ msgstr "Auteur de l'Article"
 msgid "IP Address of the Article Creator"
 msgstr "Adresse IP du créateur de l'Article"
 
-#: wiki/models.py:51
-#: wiki/models.py:90
+#: wiki/models.py:52
+#: wiki/models.py:101
 msgid "Article"
 msgstr "Article"
 
-#: wiki/models.py:52
+#: wiki/models.py:53
 msgid "Articles"
 msgstr "Articles"
 
-#: wiki/models.py:94
-msgid "Editor"
-msgstr "Editeur"
-
-#: wiki/models.py:96
+#: wiki/models.py:107
 msgid "IP Address of the Editor"
 msgstr "Adresse IP de l'éditeur"
 
-#: wiki/models.py:99
+#: wiki/models.py:110
 msgid "Revision Number"
 msgstr "Numéro de Révision"
 
-#: wiki/models.py:102
+#: wiki/models.py:113
 msgid "Old Title"
 msgstr "Ancien Titre"
 
-#: wiki/models.py:106
+#: wiki/models.py:117
 msgid "Content Patch"
 msgstr "Retouche du Contenu"
 
-#: wiki/models.py:108
+#: wiki/models.py:119
 msgid "Editor comment"
 msgstr "Commentaire de l'éditeur"
 
-#: wiki/models.py:109
+#: wiki/models.py:120
 msgid "Modified at"
 msgstr "Modifié à"
 
-#: wiki/models.py:111
+#: wiki/models.py:122
 msgid "Reverted Revision"
 msgstr "Révision Rétablie"
 
-#: wiki/models.py:114
+#: wiki/models.py:125
 msgid "Change set"
 msgstr "Ensemble de changements"
 
-#: wiki/models.py:115
+#: wiki/models.py:126
 msgid "Change sets"
 msgstr "Ensembles de changements"
 
@@ -1857,6 +1853,38 @@ msgstr "Lister tout les articles"
 #: wiki/templates/wiki/base.html:20
 msgid "Powered by"
 msgstr "Propulsé par"
+
+#: wiki/templates/wiki/edit.html:5
+msgid "Edit"
+msgstr "Modifier"
+
+#: wiki/templates/wiki/edit.html:12
+msgid "Save"
+msgstr "Sauver"
+
+#: wiki/templates/wiki/history.html:9
+msgid "Article History"
+msgstr "Historique de l'Article"
+
+#: wiki/templates/wiki/history.html:14
+msgid "At"
+msgstr "A"
+
+#: wiki/templates/wiki/history.html:15
+msgid "User"
+msgstr "Utilisateur"
+
+#: wiki/templates/wiki/history.html:44
+msgid "Previous"
+msgstr "Précédent"
+
+#: wiki/templates/wiki/history.html:52
+msgid "Next"
+msgstr "Suivant"
+
+#: wiki/templates/wiki/index.html:14
+msgid "Create a new article"
+msgstr "Créer un nouvel article"
 
 #: zwitschern/models.py:28
 #: zwitschern/models.py:48
@@ -1885,6 +1913,10 @@ msgstr "suiveur"
 msgid "followed"
 msgstr "suivi"
 
+#~ msgid "French"
+#~ msgstr "Français"
+#~ msgid "Index"
+#~ msgstr "Index"
 #~ msgid "English"
 #~ msgstr "Anglais"
 #~ msgid "German"
