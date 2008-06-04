@@ -89,6 +89,31 @@ Created: {{ tribe.created|date }}
 <p>None yet. <a href="{% url tribe_topics tribe.slug %}">Start one...</a></p>
 {% endif %}
 
+<h2>Wiki Articles{% if total_articles %} ({{ total_articles }}){% endif %}</h2>
+
+{% if articles %}
+<table class="topics">
+    {% for article in articles %}
+    <tr class="{% cycle odd,even %}">
+        <td class="meta">
+            <div class="avatar">{% gravatar article.latest_changeset.editor 40 %}</div>
+            <div class="details"><a href="{% url profiles.views.profile article.latest_changeset.editor.username %}">{{ article.creator }}</a>
+            </div>
+            {{ article.last_update|date }}
+        </td>
+        <td>
+            <h2><a href="{% url wiki_article title=article.title,group_slug=tribe.slug %}">{{ article.title }}</a></h2>
+            <div class="body">{{ article.content|truncatewords:25 }}</div>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<p><a href="{% url wiki_article_list group_slug=tribe.slug %}">more...</a></p>
+{% else %}
+<p>None yet. Start a <a href="{% url wiki_edit_article group_slug=tribe.slug,title="NewArticle" %}">NewArticle</a>...</p>
+{% endif %}
+
+
 </div>
 {% endblock %}
 

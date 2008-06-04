@@ -23,7 +23,7 @@
         {% endfor %}
         {% endfor %}
     </ul>
-    {% else %}
-    <p><a href="{% url wiki_edit_article title="NewArticle",group_slug=group.slug %}">{% trans "Create a new article" %}</a>.</p>
     {% endif %}
+    <p>Start a <a href="{% url wiki_edit_article title="NewArticle",group_slug=group.slug %}">NewArticle</a>.</p>
+
 {% endblock %}

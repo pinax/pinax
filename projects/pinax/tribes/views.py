@@ -22,6 +22,14 @@ try:
 except ImportError:
     forums = False
 
+try:
+    from wiki.models import Article
+    from wiki.views import get_ct
+    wiki = True
+except ImportError:
+    wiki = False
+
+
 def tribes(request):
     if request.user.is_authenticated() and request.method == "POST":
         if request.POST["action"] == "create":
@@ -38,12 +46,12 @@ def tribes(request):
                     notification.send(User.objects.all(), "tribes_new_tribe", "A new tribe %s has been created.", [tribe])
                     if friends: # @@@ might be worth having a shortcut for sending to all friends
                         notification.send((x['friend'] for x in Friendship.objects.friends_for_user(tribe.creator)), "tribes_friend_tribe", "%s has created a new tribe %s.", [tribe.creator, tribe])
-                
+
         else:
             tribe_form = TribeForm()
     else:
         tribe_form = TribeForm()
-    
+
     return render_to_response("tribes/tribes.html", {
         "tribe_form": tribe_form,
         "tribes": Tribe.objects.all().order_by("-created"),
@@ -51,7 +59,7 @@ def tribes(request):
 
 def tribe(request, slug):
     tribe = get_object_or_404(Tribe, slug=slug)
-    
+
     if request.user.is_authenticated() and request.method == "POST":
         if request.POST["action"] == "update" and request.user == tribe.creator:
             tribe_form = TribeUpdateForm(request.POST, instance=tribe)
@@ -73,20 +81,28 @@ def tribe(request, slug):
                 pass # @@@
     else:
         tribe_form = TribeUpdateForm(instance=tribe)
-    
+
     topics = tribe.topics.all()[:5]
+    articles = Article.objects.filter(
+        content_type=get_ct(tribe),
+        object_id=tribe.id).order_by('-last_update')
+    total_articles = articles.count()
+    articles = articles[:5]
+
     are_member = request.user in tribe.members.all()
-    
+
     return render_to_response("tribes/tribe.html", {
         "tribe_form": tribe_form,
         "tribe": tribe,
         "topics": topics,
+        "articles": articles,
+        "total_articles": total_articles,
         "are_member": are_member,
     }, context_instance=RequestContext(request))
 
 def topics(request, slug):
     tribe = get_object_or_404(Tribe, slug=slug)
-    
+
     if request.user.is_authenticated() and request.method == "POST" and request.user in tribe.members.all():
         topic_form = TopicForm(request.POST)
         if topic_form.is_valid():
@@ -100,7 +116,7 @@ def topics(request, slug):
             topic_form = TopicForm() # @@@ is this the right way to reset it?
     else:
         topic_form = TopicForm()
-    
+
     return render_to_response("tribes/topics.html", {
         "tribe": tribe,
         "topic_form": topic_form,
@@ -109,7 +125,7 @@ def topics(request, slug):
 
 def topic(request, id):
     topic = get_object_or_404(Topic, id=id)
-    
+
     return render_to_response("tribes/topic.html", {
         'topic': topic,
     }, context_instance=RequestContext(request))
