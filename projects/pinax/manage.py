@@ -2,8 +2,8 @@
 from os.path import abspath, dirname, join
 from site import addsitedir
 import sys
-packages = join(dirname(dirname(dirname(abspath(__file__)))), 'site-packages')
-sys.path = list(addsitedir(packages, set())) + sys.path
+path = addsitedir(abspath(join(dirname(__file__), 'site-packages')), set())
+if path: sys.path = list(path) + sys.path
 
 from django.core.management import execute_manager
 try:
