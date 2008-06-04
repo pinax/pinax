@@ -130,6 +130,7 @@ INSTALLED_APPS = (
     'zwitschern',
     'account',
     'tribes',
+    'core',
 )
 
 ABSOLUTE_URL_OVERRIDES = {

@@ -5,6 +5,7 @@
 {% load oembed_tags %}
 {% load pagination_tags %}
 {% load zwitschern %}
+{% load captureas_tag %}
 
 {% block head_title %}Pinax : {% blocktrans %}Profile for {{ other_user }}{% endblocktrans %}{% endblock %}
 
@@ -19,7 +20,8 @@
         <a href="{% url tribes.views.tribe tribe.slug %}">{{ tribe.name }}</a>
         {% endfor %}
         {% else %}
-        <p>You are not yet a member of any <a href="{% url tribes.views.tribes tribes %}">tribes</a>.</p>
+        {% captureas tribe_url %}{% url tribes.views.tribes tribes %}{% endcaptureas %}
+        <p>{% blocktrans %}You are not yet a member of any <a href="{{ tribe_url }}">tribes</a>.{% endblocktrans %}</p>
         {% endif %}
     </div>
     <div class="friends">
