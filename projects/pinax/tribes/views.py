@@ -71,6 +71,7 @@ def tribe(request, slug):
             tribe.members.add(request.user)
             request.user.message_set.create(message="You have joined the tribe %s" % tribe.name)
             if notification:
+                notification.send([tribe.creator], "tribes_created_new_member", "%s has joined the tribe %s.", [request.user, tribe])
                 notification.send(tribe.members.all(), "tribes_new_member", "%s has joined the tribe %s.", [request.user, tribe])
                 if friends: # @@@ might be worth having a shortcut for sending to all friends
                     notification.send((x['friend'] for x in Friendship.objects.friends_for_user(request.user)), "tribes_friend_joined", "%s has joined the tribe %s.", [request.user, tribe])
