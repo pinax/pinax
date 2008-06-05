@@ -1,0 +1,43 @@
+Metadata-Version: 1.0
+Name: vobject
+Version: 0.6.6
+Summary: VObject: module for reading vCard and vCalendar files
+Home-page: http://vobject.skyhouseconsulting.com
+Author: Jeffrey Harris
+Author-email: jeffrey@osafoundation.org
+License: Apache
+Description: Description
+        -----------
+        
+        Parses iCalendar and vCard files into Python data structures, decoding the relevant encodings. Also serializes vobject data structures to iCalendar, vCard, or (expirementally) hCalendar unicode strings.
+        
+        Requirements
+        ------------
+        
+        Requires python 2.4 or later, dateutil (http://labix.org/python-dateutil) 1.1 or later.
+        
+        Recent changes
+        --------------
+        
+        * Allow unicode names for TZIDs
+        * Worked around Lotus Notes use of underscores in names by just silently replacing
+        with dashes
+        * When allowing quoted-printable data, honor CHARSET for each line, defaulting to
+        iso-8859-1
+        * Simplified directory layout, unit tests are now available via setup.py test
+        * Added VAVAILABILITY support
+        * Improved wrapping of unicode lines, serialize encodes unicode as utf-8 by default
+        
+        For older changes, see
+        * http://vobject.skyhouseconsulting.com/history.html or
+        * http://websvn.osafoundation.org/listing.php?repname=vobject&path=/trunk/
+        
+Platform: any
+Classifier: Development Status :: 4 - Beta
+Classifier:       Environment :: Console
+Classifier:       License :: OSI Approved :: BSD License
+Classifier:       Intended Audience :: Developers
+Classifier:       Natural Language :: English
+Classifier:       Programming Language :: Python
+Classifier:       Operating System :: OS Independent
+Classifier:       Topic :: Text Processing
