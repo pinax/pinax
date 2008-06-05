@@ -1,0 +1,42 @@
+{% extends "messages/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}Pinax : {% trans "Contacts" %}{% endblock %}
+
+{% block body %}
+<h1>{% trans "Contacts" %}</h1>
+
+<p>Contacts are people you know but who may or may not be on this site (yet).</p>
+
+<p>Once this feature is complete, you will be able to import your contacts from a variety of places. You will then be notified whenever one of them joins Pinax. You can also help things along by sending them invites :-)</p>
+
+<p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time.</p>
+
+<h2>Import vCard</h2>
+
+<form enctype="multipart/form-data" method="post" action="">
+<table>
+{{ import_vcard_form }}
+<tr><td>&nbsp;</td><td><input type="submit" value="{% trans 'upload' %}" /></td></tr>
+</table>
+</form>
+
+<h2>Contacts</h2>
+
+{% if user.contact_set.all %}
+<table class="contact_list">
+{% for contact in user.contact_set.all %}
+    <tr>
+        <td>{% if contact.name %}{{ contact.name }}{% else %}?{% endif %}</td>
+        <td>{{ contact.email }}</td>
+    </tr>
+{% endfor %}
+</table>
+{% else %}
+<p>{% trans "No contacts." %}</p>
+{% endif %}
+
+
+
+{% endblock %}
