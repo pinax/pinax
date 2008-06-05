@@ -1,6 +1,7 @@
 {% extends "messages/base.html" %}
 
 {% load i18n %}
+{% load pagination_tags %}
 
 {% block head_title %}Pinax : {% trans "Contacts" %}{% endblock %}
 
@@ -24,19 +25,23 @@
 
 <h2>Contacts</h2>
 
-{% if user.contact_set.all %}
+{% with user.contact_set.all as contacts %}
+{% autopaginate contacts %}
+
+{% if contacts %}
 <table class="contact_list">
-{% for contact in user.contact_set.all %}
+{% for contact in contacts %}
     <tr>
         <td>{% if contact.name %}{{ contact.name }}{% else %}?{% endif %}</td>
         <td>{{ contact.email }}</td>
     </tr>
 {% endfor %}
 </table>
+{% paginate %}
+
 {% else %}
 <p>{% trans "No contacts." %}</p>
 {% endif %}
-
-
+{% endwith %}
 
 {% endblock %}
