@@ -14,5 +14,6 @@
     <li><a href="{% url messages_trash %}">{% trans "Trash" %}</a></li>
     <li><a href="{% url notification.views.notices %}">{% trans "Notices" %}{% if notice_unseen_count %} ({{ notice_unseen_count }}){% endif %}</a></li>
     <li><a href="{% url friends_app.views.friends %}">{% trans "Invitations" %}</a></li>
+    <li><a href="{% url friends_app.views.contacts %}">{% trans "Contacts" %}</a></li>
 </ul>
 {% endblock %}

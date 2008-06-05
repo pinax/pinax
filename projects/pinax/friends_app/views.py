@@ -7,6 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from friends.models import *
 from friends.forms import JoinRequestForm
+from friends_app.forms import ImportVCardForm
 from account.forms import SignupForm
 
 # @@@ if made more generic these could be moved to django-friends proper
@@ -56,3 +57,18 @@ def accept_join(request, confirmation_key):
             "form": form,
             "contact_email": settings.CONTACT_EMAIL,
         }, context_instance=RequestContext(request))
+
+@login_required
+def contacts(request):
+    if request.method == "POST":
+        import_vcard_form = ImportVCardForm(request.POST, request.FILES)
+        if import_vcard_form.is_valid():
+            imported, total = import_vcard_form.save(request.user)
+            request.user.message_set.create(message=_("%(total)s vCards found, %(imported)s contacts imported.") % {'imported': imported, 'total': total})
+            import_vcard_form = ImportVCardForm()
+    else:
+        import_vcard_form = ImportVCardForm()
+    
+    return render_to_response("friends_app/contacts.html", {
+        "import_vcard_form": import_vcard_form
+    }, context_instance=RequestContext(request))
