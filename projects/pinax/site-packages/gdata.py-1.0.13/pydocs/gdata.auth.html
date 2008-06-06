@@ -1,0 +1,143 @@
+
+<!doctype html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module gdata.auth</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.auth</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/svn/gdata-python-client-release/src/gdata/auth.py">/usr/local/svn/gdata-python-client-release/src/gdata/auth.py</a></font></td></tr></table>
+    <p><tt>#/usr/bin/python<br>
+#<br>
+#&nbsp;Copyright&nbsp;(C)&nbsp;2007&nbsp;Google&nbsp;Inc.<br>
+#<br>
+#&nbsp;Licensed&nbsp;under&nbsp;the&nbsp;Apache&nbsp;License,&nbsp;Version&nbsp;2.0&nbsp;(the&nbsp;"License");<br>
+#&nbsp;you&nbsp;may&nbsp;not&nbsp;use&nbsp;this&nbsp;file&nbsp;except&nbsp;in&nbsp;compliance&nbsp;with&nbsp;the&nbsp;License.<br>
+#&nbsp;You&nbsp;may&nbsp;obtain&nbsp;a&nbsp;copy&nbsp;of&nbsp;the&nbsp;License&nbsp;at<br>
+#<br>
+#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a><br>
+#<br>
+#&nbsp;Unless&nbsp;required&nbsp;by&nbsp;applicable&nbsp;law&nbsp;or&nbsp;agreed&nbsp;to&nbsp;in&nbsp;writing,&nbsp;software<br>
+#&nbsp;distributed&nbsp;under&nbsp;the&nbsp;License&nbsp;is&nbsp;distributed&nbsp;on&nbsp;an&nbsp;"AS&nbsp;IS"&nbsp;BASIS,<br>
+#&nbsp;WITHOUT&nbsp;WARRANTIES&nbsp;OR&nbsp;CONDITIONS&nbsp;OF&nbsp;ANY&nbsp;KIND,&nbsp;either&nbsp;express&nbsp;or&nbsp;implied.<br>
+#&nbsp;See&nbsp;the&nbsp;License&nbsp;for&nbsp;the&nbsp;specific&nbsp;language&nbsp;governing&nbsp;permissions&nbsp;and<br>
+#&nbsp;limitations&nbsp;under&nbsp;the&nbsp;License.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#fffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="re.html">re</a><br>
+</td><td width="25%" valign=top><a href="urllib.html">urllib</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-AuthSubTokenFromHttpBody"><strong>AuthSubTokenFromHttpBody</strong></a>(http_body)</dt><dd><tt>Extracts&nbsp;the&nbsp;AuthSub&nbsp;token&nbsp;from&nbsp;an&nbsp;HTTP&nbsp;body&nbsp;string.<br>
+&nbsp;<br>
+Used&nbsp;to&nbsp;find&nbsp;the&nbsp;new&nbsp;session&nbsp;token&nbsp;after&nbsp;making&nbsp;a&nbsp;request&nbsp;to&nbsp;upgrade&nbsp;a&nbsp;<br>
+single&nbsp;use&nbsp;AuthSub&nbsp;token.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;http_body:&nbsp;str&nbsp;The&nbsp;repsonse&nbsp;from&nbsp;the&nbsp;server&nbsp;which&nbsp;contains&nbsp;the&nbsp;AuthSub&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;key.&nbsp;For&nbsp;example,&nbsp;this&nbsp;function&nbsp;would&nbsp;find&nbsp;the&nbsp;new&nbsp;session&nbsp;token<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;the&nbsp;server's&nbsp;response&nbsp;to&nbsp;an&nbsp;upgrade&nbsp;token&nbsp;request.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;The&nbsp;header&nbsp;value&nbsp;to&nbsp;use&nbsp;for&nbsp;Authorization&nbsp;which&nbsp;contains&nbsp;the&nbsp;AuthSub<br>
+&nbsp;&nbsp;token.</tt></dd></dl>
+ <dl><dt><a name="-AuthSubTokenFromUrl"><strong>AuthSubTokenFromUrl</strong></a>(url)</dt><dd><tt>Extracts&nbsp;the&nbsp;AuthSub&nbsp;token&nbsp;from&nbsp;the&nbsp;URL.&nbsp;<br>
+&nbsp;<br>
+Used&nbsp;after&nbsp;the&nbsp;AuthSub&nbsp;redirect&nbsp;has&nbsp;sent&nbsp;the&nbsp;user&nbsp;to&nbsp;the&nbsp;'next'&nbsp;page&nbsp;and<br>
+appended&nbsp;the&nbsp;token&nbsp;to&nbsp;the&nbsp;URL.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;url:&nbsp;str&nbsp;The&nbsp;URL&nbsp;of&nbsp;the&nbsp;current&nbsp;page&nbsp;which&nbsp;contains&nbsp;the&nbsp;AuthSub&nbsp;token&nbsp;as<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;URL&nbsp;parameter.</tt></dd></dl>
+ <dl><dt><a name="-GenerateAuthSubUrl"><strong>GenerateAuthSubUrl</strong></a>(next, scope, secure<font color="#909090">=False</font>, session<font color="#909090">=True</font>, request_url<font color="#909090">='https://www.google.com/accounts/AuthSubRequest'</font>)</dt><dd><tt>Generate&nbsp;a&nbsp;URL&nbsp;at&nbsp;which&nbsp;the&nbsp;user&nbsp;will&nbsp;login&nbsp;and&nbsp;be&nbsp;redirected&nbsp;back.<br>
+&nbsp;<br>
+Users&nbsp;enter&nbsp;their&nbsp;credentials&nbsp;on&nbsp;a&nbsp;Google&nbsp;login&nbsp;page&nbsp;and&nbsp;a&nbsp;token&nbsp;is&nbsp;sent<br>
+to&nbsp;the&nbsp;URL&nbsp;specified&nbsp;in&nbsp;next.&nbsp;See&nbsp;documentation&nbsp;for&nbsp;AuthSub&nbsp;login&nbsp;at:<br>
+<a href="http://code.google.com/apis/accounts/AuthForWebApps.html">http://code.google.com/apis/accounts/AuthForWebApps.html</a><br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;request_url:&nbsp;str&nbsp;The&nbsp;beginning&nbsp;of&nbsp;the&nbsp;request&nbsp;URL.&nbsp;This&nbsp;is&nbsp;normally<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'<a href="http://www.google.com/accounts/AuthSubRequest">http://www.google.com/accounts/AuthSubRequest</a>'&nbsp;or&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'/accounts/AuthSubRequest'<br>
+&nbsp;&nbsp;next:&nbsp;string&nbsp;The&nbsp;URL&nbsp;user&nbsp;will&nbsp;be&nbsp;sent&nbsp;to&nbsp;after&nbsp;logging&nbsp;in.<br>
+&nbsp;&nbsp;scope:&nbsp;string&nbsp;The&nbsp;URL&nbsp;of&nbsp;the&nbsp;service&nbsp;to&nbsp;be&nbsp;accessed.<br>
+&nbsp;&nbsp;secure:&nbsp;boolean&nbsp;(optional)&nbsp;Determines&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;issued&nbsp;token<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;a&nbsp;secure&nbsp;token.<br>
+&nbsp;&nbsp;session:&nbsp;boolean&nbsp;(optional)&nbsp;Determines&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;issued&nbsp;token<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;can&nbsp;be&nbsp;upgraded&nbsp;to&nbsp;a&nbsp;session&nbsp;token.</tt></dd></dl>
+ <dl><dt><a name="-GenerateClientLoginAuthToken"><strong>GenerateClientLoginAuthToken</strong></a>(http_body)</dt><dd><tt>Returns&nbsp;the&nbsp;token&nbsp;value&nbsp;to&nbsp;use&nbsp;in&nbsp;Authorization&nbsp;headers.<br>
+&nbsp;<br>
+Reads&nbsp;the&nbsp;token&nbsp;from&nbsp;the&nbsp;server's&nbsp;response&nbsp;to&nbsp;a&nbsp;Client&nbsp;Login&nbsp;request&nbsp;and<br>
+creates&nbsp;header&nbsp;value&nbsp;to&nbsp;use&nbsp;in&nbsp;requests.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;http_body:&nbsp;str&nbsp;The&nbsp;body&nbsp;of&nbsp;the&nbsp;server's&nbsp;HTTP&nbsp;response&nbsp;to&nbsp;a&nbsp;Client&nbsp;Login<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;request<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;The&nbsp;value&nbsp;half&nbsp;of&nbsp;an&nbsp;Authorization&nbsp;header.</tt></dd></dl>
+ <dl><dt><a name="-GenerateClientLoginRequestBody"><strong>GenerateClientLoginRequestBody</strong></a>(email, password, service, source, account_type<font color="#909090">='HOSTED_OR_GOOGLE'</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Creates&nbsp;the&nbsp;body&nbsp;of&nbsp;the&nbsp;autentication&nbsp;request<br>
+&nbsp;<br>
+See&nbsp;<a href="http://code.google.com/apis/accounts/AuthForInstalledApps.html#Request">http://code.google.com/apis/accounts/AuthForInstalledApps.html#Request</a><br>
+for&nbsp;more&nbsp;details.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;email:&nbsp;str<br>
+&nbsp;&nbsp;password:&nbsp;str<br>
+&nbsp;&nbsp;service:&nbsp;str<br>
+&nbsp;&nbsp;source:&nbsp;str<br>
+&nbsp;&nbsp;account_type:&nbsp;str&nbsp;(optional)&nbsp;Defaul&nbsp;is&nbsp;'HOSTED_OR_GOOGLE',&nbsp;other&nbsp;valid<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;values&nbsp;are&nbsp;'GOOGLE'&nbsp;and&nbsp;'HOSTED'<br>
+&nbsp;&nbsp;captcha_token:&nbsp;str&nbsp;(optional)<br>
+&nbsp;&nbsp;captcha_response:&nbsp;str&nbsp;(optional)<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;The&nbsp;HTTP&nbsp;body&nbsp;to&nbsp;send&nbsp;in&nbsp;a&nbsp;request&nbsp;for&nbsp;a&nbsp;client&nbsp;login&nbsp;token.</tt></dd></dl>
+ <dl><dt><a name="-GetCaptchChallenge"><strong>GetCaptchChallenge</strong></a>(http_body, captcha_base_url<font color="#909090">='http://www.google.com/accounts/'</font>)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;and&nbsp;token&nbsp;for&nbsp;a&nbsp;CAPTCHA&nbsp;challenge&nbsp;issued&nbsp;bu&nbsp;the&nbsp;server.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;http_body:&nbsp;str&nbsp;The&nbsp;body&nbsp;of&nbsp;the&nbsp;HTTP&nbsp;response&nbsp;from&nbsp;the&nbsp;server&nbsp;which&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contains&nbsp;the&nbsp;CAPTCHA&nbsp;challenge.<br>
+&nbsp;&nbsp;captcha_base_url:&nbsp;str&nbsp;This&nbsp;function&nbsp;returns&nbsp;a&nbsp;full&nbsp;URL&nbsp;for&nbsp;viewing&nbsp;the&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;challenge&nbsp;image&nbsp;which&nbsp;is&nbsp;built&nbsp;from&nbsp;the&nbsp;server's&nbsp;response.&nbsp;This<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;base_url&nbsp;is&nbsp;used&nbsp;as&nbsp;the&nbsp;beginning&nbsp;of&nbsp;the&nbsp;URL&nbsp;because&nbsp;the&nbsp;server<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;only&nbsp;provides&nbsp;the&nbsp;end&nbsp;of&nbsp;the&nbsp;URL.&nbsp;For&nbsp;example&nbsp;the&nbsp;server&nbsp;provides<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'Captcha?ctoken=Hi...N'&nbsp;and&nbsp;the&nbsp;URL&nbsp;for&nbsp;the&nbsp;image&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'<a href="http://www.google.com/accounts/Captcha?ctoken=Hi...N">http://www.google.com/accounts/Captcha?ctoken=Hi...N</a>'<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;dictionary&nbsp;containing&nbsp;the&nbsp;information&nbsp;needed&nbsp;to&nbsp;repond&nbsp;to&nbsp;the&nbsp;CAPTCHA<br>
+&nbsp;&nbsp;challenge,&nbsp;the&nbsp;image&nbsp;URL&nbsp;and&nbsp;the&nbsp;ID&nbsp;token&nbsp;of&nbsp;the&nbsp;challenge.&nbsp;The&nbsp;<br>
+&nbsp;&nbsp;dictionary&nbsp;is&nbsp;in&nbsp;the&nbsp;form:<br>
+&nbsp;&nbsp;{'token':&nbsp;string&nbsp;identifying&nbsp;the&nbsp;CAPTCHA&nbsp;image,<br>
+&nbsp;&nbsp;&nbsp;'url':&nbsp;string&nbsp;containing&nbsp;the&nbsp;URL&nbsp;of&nbsp;the&nbsp;image}<br>
+&nbsp;&nbsp;Returns&nbsp;None&nbsp;if&nbsp;there&nbsp;was&nbsp;no&nbsp;CAPTCHA&nbsp;challenge&nbsp;in&nbsp;the&nbsp;response.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>AUTH_SUB_KEY_PATTERN</strong> = &lt;_sre.SRE_Pattern object&gt;<br>
+<strong>__author__</strong> = 'api.jscudder (Jeffrey Scudder)'</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#7799ee">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Author</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#7799ee"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">api.jscudder&nbsp;(Jeffrey&nbsp;Scudder)</td></tr></table>
+</body></html>

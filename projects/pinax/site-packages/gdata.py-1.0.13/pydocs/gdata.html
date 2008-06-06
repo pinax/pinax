@@ -1,0 +1,1323 @@
+
+<!doctype html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: package gdata</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>gdata</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/svn/gdata-python-client-release/src/gdata/__init__.py">/usr/local/svn/gdata-python-client-release/src/gdata/__init__.py</a></font></td></tr></table>
+    <p><tt>Contains&nbsp;classes&nbsp;representing&nbsp;Google&nbsp;Data&nbsp;elements.<br>
+&nbsp;<br>
+Extends&nbsp;Atom&nbsp;classes&nbsp;to&nbsp;add&nbsp;Google&nbsp;Data&nbsp;specific&nbsp;elements.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Package Contents</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="gdata.apps.html"><strong>apps</strong>&nbsp;(package)</a><br>
+<a href="gdata.auth.html">auth</a><br>
+<a href="gdata.base.html"><strong>base</strong>&nbsp;(package)</a><br>
+<a href="gdata.calendar.html"><strong>calendar</strong>&nbsp;(package)</a><br>
+</td><td width="25%" valign=top><a href="gdata.codesearch.html"><strong>codesearch</strong>&nbsp;(package)</a><br>
+<a href="gdata.contacts.html"><strong>contacts</strong>&nbsp;(package)</a><br>
+<a href="gdata.docs.html"><strong>docs</strong>&nbsp;(package)</a><br>
+<a href="gdata.exif.html"><strong>exif</strong>&nbsp;(package)</a><br>
+</td><td width="25%" valign=top><a href="gdata.geo.html"><strong>geo</strong>&nbsp;(package)</a><br>
+<a href="gdata.media.html"><strong>media</strong>&nbsp;(package)</a><br>
+<a href="gdata.photos.html"><strong>photos</strong>&nbsp;(package)</a><br>
+<a href="gdata.service.html">service</a><br>
+</td><td width="25%" valign=top><a href="gdata.spreadsheet.html"><strong>spreadsheet</strong>&nbsp;(package)</a><br>
+<a href="gdata.test_data.html">test_data</a><br>
+<a href="gdata.urlfetch.html">urlfetch</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="__builtin__.html#object">__builtin__.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.html#MediaSource">MediaSource</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="atom.html#AtomBase">atom.AtomBase</a>(<a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.html#BatchId">BatchId</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.html#BatchInterrupted">BatchInterrupted</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.html#BatchOperation">BatchOperation</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.html#BatchStatus">BatchStatus</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.html#EntryLink">EntryLink</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.html#FeedLink">FeedLink</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.html#ItemsPerPage">ItemsPerPage</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.html#StartIndex">StartIndex</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.html#TotalResults">TotalResults</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="atom.html#Entry">atom.Entry</a>(<a href="atom.html#FeedEntryParent">atom.FeedEntryParent</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.html#GDataEntry">GDataEntry</a>(<a href="atom.html#Entry">atom.Entry</a>, <a href="gdata.html#LinkFinder">LinkFinder</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.html#BatchEntry">BatchEntry</a>
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="atom.html#Feed">atom.Feed</a>(<a href="atom.html#Source">atom.Source</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.html#GDataFeed">GDataFeed</a>(<a href="atom.html#Feed">atom.Feed</a>, <a href="gdata.html#LinkFinder">LinkFinder</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.html#BatchFeed">BatchFeed</a>
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="atom.html#LinkFinder">atom.LinkFinder</a>(<a href="__builtin__.html#object">__builtin__.object</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.html#LinkFinder">LinkFinder</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.html#GDataEntry">GDataEntry</a>(<a href="atom.html#Entry">atom.Entry</a>, <a href="gdata.html#LinkFinder">LinkFinder</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.html#BatchEntry">BatchEntry</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="gdata.html#GDataFeed">GDataFeed</a>(<a href="atom.html#Feed">atom.Feed</a>, <a href="gdata.html#LinkFinder">LinkFinder</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.html#BatchFeed">BatchFeed</a>
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="exceptions.html#Exception">exceptions.Exception</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.html#Error">Error</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.html#MissingRequiredParameters">MissingRequiredParameters</a>
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="BatchEntry">class <strong>BatchEntry</strong></a>(<a href="gdata.html#GDataEntry">GDataEntry</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>An&nbsp;atom:entry&nbsp;for&nbsp;use&nbsp;in&nbsp;batch&nbsp;requests.<br>
+&nbsp;<br>
+The&nbsp;<a href="#BatchEntry">BatchEntry</a>&nbsp;contains&nbsp;additional&nbsp;members&nbsp;to&nbsp;specify&nbsp;the&nbsp;operation&nbsp;to&nbsp;be<br>
+performed&nbsp;on&nbsp;this&nbsp;entry&nbsp;and&nbsp;a&nbsp;batch&nbsp;ID&nbsp;so&nbsp;that&nbsp;the&nbsp;server&nbsp;can&nbsp;reference<br>
+individual&nbsp;operations&nbsp;in&nbsp;the&nbsp;response&nbsp;feed.&nbsp;For&nbsp;more&nbsp;information,&nbsp;see:<br>
+<a href="http://code.google.com/apis/gdata/batch.html">http://code.google.com/apis/gdata/batch.html</a><br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.html#BatchEntry">BatchEntry</a></dd>
+<dd><a href="gdata.html#GDataEntry">GDataEntry</a></dd>
+<dd><a href="atom.html#Entry">atom.Entry</a></dd>
+<dd><a href="atom.html#FeedEntryParent">atom.FeedEntryParent</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="gdata.html#LinkFinder">LinkFinder</a></dd>
+<dd><a href="atom.html#LinkFinder">atom.LinkFinder</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="BatchEntry-__init__"><strong>__init__</strong></a>(self, author<font color="#909090">=None</font>, category<font color="#909090">=None</font>, content<font color="#909090">=None</font>, contributor<font color="#909090">=None</font>, atom_id<font color="#909090">=None</font>, link<font color="#909090">=None</font>, published<font color="#909090">=None</font>, rights<font color="#909090">=None</font>, source<font color="#909090">=None</font>, summary<font color="#909090">=None</font>, control<font color="#909090">=None</font>, title<font color="#909090">=None</font>, updated<font color="#909090">=None</font>, batch_operation<font color="#909090">=None</font>, batch_id<font color="#909090">=None</font>, batch_status<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.html#GDataEntry">GDataEntry</a>:<br>
+<dl><dt><a name="BatchEntry-GetMediaURL"><strong>GetMediaURL</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;to&nbsp;the&nbsp;media&nbsp;content,&nbsp;if&nbsp;the&nbsp;entry&nbsp;is&nbsp;a&nbsp;media&nbsp;entry.<br>
+Otherwise&nbsp;returns&nbsp;None.</tt></dd></dl>
+
+<dl><dt><a name="BatchEntry-IsMedia"><strong>IsMedia</strong></a>(self)</dt><dd><tt>Determines&nbsp;whether&nbsp;or&nbsp;not&nbsp;an&nbsp;entry&nbsp;is&nbsp;a&nbsp;GData&nbsp;Media&nbsp;entry.</tt></dd></dl>
+
+<hr>
+Properties inherited from <a href="gdata.html#GDataEntry">GDataEntry</a>:<br>
+<dl><dt><strong>id</strong></dt>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = __GetId(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = __SetId(self, id)</dt><dd><tt>#&nbsp;This&nbsp;method&nbsp;was&nbsp;created&nbsp;to&nbsp;strip&nbsp;the&nbsp;unwanted&nbsp;whitespace&nbsp;from&nbsp;the&nbsp;id's&nbsp;<br>
+#&nbsp;text&nbsp;node.</tt></dd></dl>
+</dd>
+</dl>
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="BatchEntry-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="BatchEntry-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="BatchEntry-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.html#LinkFinder">LinkFinder</a>:<br>
+<dl><dt><a name="BatchEntry-GetAclLink"><strong>GetAclLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="BatchEntry-GetEditLink"><strong>GetEditLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="BatchEntry-GetEditMediaLink"><strong>GetEditMediaLink</strong></a>(self)</dt><dd><tt>The&nbsp;Picasa&nbsp;API&nbsp;mistakenly&nbsp;returns&nbsp;media-edit&nbsp;rather&nbsp;than&nbsp;edit-media,&nbsp;but<br>
+this&nbsp;may&nbsp;change&nbsp;soon.</tt></dd></dl>
+
+<dl><dt><a name="BatchEntry-GetFeedLink"><strong>GetFeedLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="BatchEntry-GetHtmlLink"><strong>GetHtmlLink</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;of&nbsp;alternate&nbsp;and&nbsp;type&nbsp;of&nbsp;text/html<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;atom.Link&nbsp;or&nbsp;None&nbsp;if&nbsp;no&nbsp;links&nbsp;matched</tt></dd></dl>
+
+<dl><dt><a name="BatchEntry-GetNextLink"><strong>GetNextLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="BatchEntry-GetPostLink"><strong>GetPostLink</strong></a>(self)</dt><dd><tt>Get&nbsp;a&nbsp;link&nbsp;containing&nbsp;the&nbsp;POST&nbsp;target&nbsp;URL.<br>
+&nbsp;<br>
+The&nbsp;POST&nbsp;target&nbsp;URL&nbsp;is&nbsp;used&nbsp;to&nbsp;insert&nbsp;new&nbsp;entries.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;link&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;a&nbsp;rel&nbsp;matching&nbsp;the&nbsp;POST&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="BatchEntry-GetSelfLink"><strong>GetSelfLink</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;set&nbsp;to&nbsp;'self'<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;atom.Link&nbsp;or&nbsp;none&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#LinkFinder">atom.LinkFinder</a>:<br>
+<dl><dt><a name="BatchEntry-GetAlternateLink"><strong>GetAlternateLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="BatchEntry-GetLicenseLink"><strong>GetLicenseLink</strong></a>(self)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="BatchFeed">class <strong>BatchFeed</strong></a>(<a href="gdata.html#GDataFeed">GDataFeed</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;feed&nbsp;containing&nbsp;a&nbsp;list&nbsp;of&nbsp;batch&nbsp;request&nbsp;entries.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.html#BatchFeed">BatchFeed</a></dd>
+<dd><a href="gdata.html#GDataFeed">GDataFeed</a></dd>
+<dd><a href="atom.html#Feed">atom.Feed</a></dd>
+<dd><a href="atom.html#Source">atom.Source</a></dd>
+<dd><a href="atom.html#FeedEntryParent">atom.FeedEntryParent</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="gdata.html#LinkFinder">LinkFinder</a></dd>
+<dd><a href="atom.html#LinkFinder">atom.LinkFinder</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="BatchFeed-AddBatchEntry"><strong>AddBatchEntry</strong></a>(self, entry<font color="#909090">=None</font>, id_url_string<font color="#909090">=None</font>, batch_id_string<font color="#909090">=None</font>, operation_string<font color="#909090">=None</font>)</dt><dd><tt>Logic&nbsp;for&nbsp;populating&nbsp;members&nbsp;of&nbsp;a&nbsp;<a href="#BatchEntry">BatchEntry</a>&nbsp;and&nbsp;adding&nbsp;to&nbsp;the&nbsp;feed.<br>
+&nbsp;<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;entry&nbsp;is&nbsp;not&nbsp;a&nbsp;<a href="#BatchEntry">BatchEntry</a>,&nbsp;it&nbsp;is&nbsp;converted&nbsp;to&nbsp;a&nbsp;<a href="#BatchEntry">BatchEntry</a>&nbsp;so<br>
+that&nbsp;the&nbsp;batch&nbsp;specific&nbsp;members&nbsp;will&nbsp;be&nbsp;present.&nbsp;<br>
+&nbsp;<br>
+The&nbsp;id_url_string&nbsp;can&nbsp;be&nbsp;used&nbsp;in&nbsp;place&nbsp;of&nbsp;an&nbsp;entry&nbsp;if&nbsp;the&nbsp;batch&nbsp;operation<br>
+applies&nbsp;to&nbsp;a&nbsp;URL.&nbsp;For&nbsp;example&nbsp;query&nbsp;and&nbsp;delete&nbsp;operations&nbsp;require&nbsp;just<br>
+the&nbsp;URL&nbsp;of&nbsp;an&nbsp;entry,&nbsp;no&nbsp;body&nbsp;is&nbsp;sent&nbsp;in&nbsp;the&nbsp;HTTP&nbsp;request.&nbsp;If&nbsp;an<br>
+id_url_string&nbsp;is&nbsp;sent&nbsp;instead&nbsp;of&nbsp;an&nbsp;entry,&nbsp;a&nbsp;<a href="#BatchEntry">BatchEntry</a>&nbsp;is&nbsp;created&nbsp;and<br>
+added&nbsp;to&nbsp;the&nbsp;feed.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;also&nbsp;assigns&nbsp;the&nbsp;desired&nbsp;batch&nbsp;id&nbsp;to&nbsp;the&nbsp;entry&nbsp;so&nbsp;that&nbsp;it&nbsp;<br>
+can&nbsp;be&nbsp;referenced&nbsp;in&nbsp;the&nbsp;server's&nbsp;response.&nbsp;If&nbsp;the&nbsp;batch_id_string&nbsp;is<br>
+None,&nbsp;this&nbsp;method&nbsp;will&nbsp;assign&nbsp;a&nbsp;batch_id&nbsp;to&nbsp;be&nbsp;the&nbsp;index&nbsp;at&nbsp;which&nbsp;this<br>
+entry&nbsp;will&nbsp;be&nbsp;in&nbsp;the&nbsp;feed's&nbsp;entry&nbsp;list.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;entry:&nbsp;<a href="#BatchEntry">BatchEntry</a>,&nbsp;atom.<a href="atom.html#Entry">Entry</a>,&nbsp;or&nbsp;another&nbsp;<a href="atom.html#Entry">Entry</a>&nbsp;flavor&nbsp;(optional)&nbsp;The<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;entry&nbsp;which&nbsp;will&nbsp;be&nbsp;sent&nbsp;to&nbsp;the&nbsp;server&nbsp;as&nbsp;part&nbsp;of&nbsp;the&nbsp;batch&nbsp;request.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;item&nbsp;must&nbsp;have&nbsp;a&nbsp;valid&nbsp;atom&nbsp;id&nbsp;so&nbsp;that&nbsp;the&nbsp;server&nbsp;knows&nbsp;which&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;entry&nbsp;this&nbsp;request&nbsp;references.<br>
+&nbsp;&nbsp;id_url_string:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;URL&nbsp;of&nbsp;the&nbsp;entry&nbsp;to&nbsp;be&nbsp;acted&nbsp;on.&nbsp;You<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;can&nbsp;find&nbsp;this&nbsp;URL&nbsp;in&nbsp;the&nbsp;text&nbsp;member&nbsp;of&nbsp;the&nbsp;atom&nbsp;id&nbsp;for&nbsp;an&nbsp;entry.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;an&nbsp;entry&nbsp;is&nbsp;not&nbsp;sent,&nbsp;this&nbsp;id&nbsp;will&nbsp;be&nbsp;used&nbsp;to&nbsp;construct&nbsp;a&nbsp;new<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#BatchEntry">BatchEntry</a>&nbsp;which&nbsp;will&nbsp;be&nbsp;added&nbsp;to&nbsp;the&nbsp;request&nbsp;feed.<br>
+&nbsp;&nbsp;batch_id_string:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;batch&nbsp;ID&nbsp;to&nbsp;be&nbsp;used&nbsp;to&nbsp;reference<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this&nbsp;batch&nbsp;operation&nbsp;in&nbsp;the&nbsp;results&nbsp;feed.&nbsp;If&nbsp;this&nbsp;parameter&nbsp;is&nbsp;None,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;current&nbsp;length&nbsp;of&nbsp;the&nbsp;feed's&nbsp;entry&nbsp;array&nbsp;will&nbsp;be&nbsp;used&nbsp;as&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count.&nbsp;Note&nbsp;that&nbsp;batch_ids&nbsp;should&nbsp;either&nbsp;always&nbsp;be&nbsp;specified&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;never,&nbsp;mixing&nbsp;could&nbsp;potentially&nbsp;result&nbsp;in&nbsp;duplicate&nbsp;batch&nbsp;ids.<br>
+&nbsp;&nbsp;operation_string:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;batch&nbsp;operation&nbsp;which&nbsp;will<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set&nbsp;the&nbsp;batch_operation.type&nbsp;member&nbsp;of&nbsp;the&nbsp;entry.&nbsp;Options&nbsp;are<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'insert',&nbsp;'update',&nbsp;'delete',&nbsp;and&nbsp;'query'<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;<a href="#MissingRequiredParameters">MissingRequiredParameters</a>:&nbsp;Raised&nbsp;if&nbsp;neither&nbsp;an&nbsp;id_&nbsp;url_string&nbsp;nor&nbsp;an<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;entry&nbsp;are&nbsp;provided&nbsp;in&nbsp;the&nbsp;request.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;The&nbsp;added&nbsp;entry.</tt></dd></dl>
+
+<dl><dt><a name="BatchFeed-AddDelete"><strong>AddDelete</strong></a>(self, url_string<font color="#909090">=None</font>, entry<font color="#909090">=None</font>, batch_id_string<font color="#909090">=None</font>)</dt><dd><tt>Adds&nbsp;a&nbsp;delete&nbsp;request&nbsp;to&nbsp;the&nbsp;batch&nbsp;request&nbsp;feed.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;takes&nbsp;either&nbsp;the&nbsp;url_string&nbsp;which&nbsp;is&nbsp;the&nbsp;atom&nbsp;id&nbsp;of&nbsp;the&nbsp;item<br>
+to&nbsp;be&nbsp;deleted,&nbsp;or&nbsp;the&nbsp;entry&nbsp;itself.&nbsp;The&nbsp;atom&nbsp;id&nbsp;of&nbsp;the&nbsp;entry&nbsp;must&nbsp;be&nbsp;<br>
+present&nbsp;so&nbsp;that&nbsp;the&nbsp;server&nbsp;knows&nbsp;which&nbsp;entry&nbsp;should&nbsp;be&nbsp;deleted.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;url_string:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;URL&nbsp;of&nbsp;the&nbsp;entry&nbsp;to&nbsp;be&nbsp;deleted.&nbsp;You&nbsp;can<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;find&nbsp;this&nbsp;URL&nbsp;in&nbsp;the&nbsp;text&nbsp;member&nbsp;of&nbsp;the&nbsp;atom&nbsp;id&nbsp;for&nbsp;an&nbsp;entry.&nbsp;<br>
+&nbsp;&nbsp;entry:&nbsp;<a href="#BatchEntry">BatchEntry</a>&nbsp;(optional)&nbsp;The&nbsp;entry&nbsp;to&nbsp;be&nbsp;deleted.<br>
+&nbsp;&nbsp;batch_id_string:&nbsp;str&nbsp;(optional)<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;<a href="#MissingRequiredParameters">MissingRequiredParameters</a>:&nbsp;Raised&nbsp;if&nbsp;neither&nbsp;a&nbsp;url_string&nbsp;nor&nbsp;an&nbsp;entry&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;are&nbsp;provided&nbsp;in&nbsp;the&nbsp;request.</tt></dd></dl>
+
+<dl><dt><a name="BatchFeed-AddInsert"><strong>AddInsert</strong></a>(self, entry, batch_id_string<font color="#909090">=None</font>)</dt><dd><tt>Add&nbsp;an&nbsp;insert&nbsp;request&nbsp;to&nbsp;the&nbsp;operations&nbsp;in&nbsp;this&nbsp;batch&nbsp;request&nbsp;feed.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;entry&nbsp;doesn't&nbsp;yet&nbsp;have&nbsp;an&nbsp;operation&nbsp;or&nbsp;a&nbsp;batch&nbsp;id,&nbsp;these&nbsp;will<br>
+be&nbsp;set&nbsp;to&nbsp;the&nbsp;insert&nbsp;operation&nbsp;and&nbsp;a&nbsp;batch_id&nbsp;specified&nbsp;as&nbsp;a&nbsp;parameter.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;entry:&nbsp;<a href="#BatchEntry">BatchEntry</a>&nbsp;The&nbsp;entry&nbsp;which&nbsp;will&nbsp;be&nbsp;sent&nbsp;in&nbsp;the&nbsp;batch&nbsp;feed&nbsp;as&nbsp;an<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;insert&nbsp;request.<br>
+&nbsp;&nbsp;batch_id_string:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;batch&nbsp;ID&nbsp;to&nbsp;be&nbsp;used&nbsp;to&nbsp;reference<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this&nbsp;batch&nbsp;operation&nbsp;in&nbsp;the&nbsp;results&nbsp;feed.&nbsp;If&nbsp;this&nbsp;parameter&nbsp;is&nbsp;None,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;current&nbsp;length&nbsp;of&nbsp;the&nbsp;feed's&nbsp;entry&nbsp;array&nbsp;will&nbsp;be&nbsp;used&nbsp;as&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count.&nbsp;Note&nbsp;that&nbsp;batch_ids&nbsp;should&nbsp;either&nbsp;always&nbsp;be&nbsp;specified&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;never,&nbsp;mixing&nbsp;could&nbsp;potentially&nbsp;result&nbsp;in&nbsp;duplicate&nbsp;batch&nbsp;ids.</tt></dd></dl>
+
+<dl><dt><a name="BatchFeed-AddQuery"><strong>AddQuery</strong></a>(self, url_string<font color="#909090">=None</font>, entry<font color="#909090">=None</font>, batch_id_string<font color="#909090">=None</font>)</dt><dd><tt>Adds&nbsp;a&nbsp;query&nbsp;request&nbsp;to&nbsp;the&nbsp;batch&nbsp;request&nbsp;feed.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;takes&nbsp;either&nbsp;the&nbsp;url_string&nbsp;which&nbsp;is&nbsp;the&nbsp;query&nbsp;URL&nbsp;<br>
+whose&nbsp;results&nbsp;will&nbsp;be&nbsp;added&nbsp;to&nbsp;the&nbsp;result&nbsp;feed.&nbsp;The&nbsp;query&nbsp;URL&nbsp;will<br>
+be&nbsp;encapsulated&nbsp;in&nbsp;a&nbsp;<a href="#BatchEntry">BatchEntry</a>,&nbsp;and&nbsp;you&nbsp;may&nbsp;pass&nbsp;in&nbsp;the&nbsp;<a href="#BatchEntry">BatchEntry</a><br>
+with&nbsp;a&nbsp;query&nbsp;URL&nbsp;instead&nbsp;of&nbsp;sending&nbsp;a&nbsp;url_string.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;url_string:&nbsp;str&nbsp;(optional)<br>
+&nbsp;&nbsp;entry:&nbsp;<a href="#BatchEntry">BatchEntry</a>&nbsp;(optional)<br>
+&nbsp;&nbsp;batch_id_string:&nbsp;str&nbsp;(optional)<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;<a href="#MissingRequiredParameters">MissingRequiredParameters</a></tt></dd></dl>
+
+<dl><dt><a name="BatchFeed-AddUpdate"><strong>AddUpdate</strong></a>(self, entry, batch_id_string<font color="#909090">=None</font>)</dt><dd><tt>Add&nbsp;an&nbsp;update&nbsp;request&nbsp;to&nbsp;the&nbsp;list&nbsp;of&nbsp;batch&nbsp;operations&nbsp;in&nbsp;this&nbsp;feed.<br>
+&nbsp;<br>
+Sets&nbsp;the&nbsp;operation&nbsp;type&nbsp;of&nbsp;the&nbsp;entry&nbsp;to&nbsp;insert&nbsp;if&nbsp;it&nbsp;is&nbsp;not&nbsp;already&nbsp;set<br>
+and&nbsp;assigns&nbsp;the&nbsp;desired&nbsp;batch&nbsp;id&nbsp;to&nbsp;the&nbsp;entry&nbsp;so&nbsp;that&nbsp;it&nbsp;can&nbsp;be&nbsp;<br>
+referenced&nbsp;in&nbsp;the&nbsp;server's&nbsp;response.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;entry:&nbsp;<a href="#BatchEntry">BatchEntry</a>&nbsp;The&nbsp;entry&nbsp;which&nbsp;will&nbsp;be&nbsp;sent&nbsp;to&nbsp;the&nbsp;server&nbsp;as&nbsp;an<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;update&nbsp;(HTTP&nbsp;PUT)&nbsp;request.&nbsp;The&nbsp;item&nbsp;must&nbsp;have&nbsp;a&nbsp;valid&nbsp;atom&nbsp;id<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;so&nbsp;that&nbsp;the&nbsp;server&nbsp;knows&nbsp;which&nbsp;entry&nbsp;to&nbsp;replace.<br>
+&nbsp;&nbsp;batch_id_string:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;batch&nbsp;ID&nbsp;to&nbsp;be&nbsp;used&nbsp;to&nbsp;reference<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this&nbsp;batch&nbsp;operation&nbsp;in&nbsp;the&nbsp;results&nbsp;feed.&nbsp;If&nbsp;this&nbsp;parameter&nbsp;is&nbsp;None,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;current&nbsp;length&nbsp;of&nbsp;the&nbsp;feed's&nbsp;entry&nbsp;array&nbsp;will&nbsp;be&nbsp;used&nbsp;as&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count.&nbsp;See&nbsp;also&nbsp;comments&nbsp;for&nbsp;AddInsert.</tt></dd></dl>
+
+<dl><dt><a name="BatchFeed-GetBatchLink"><strong>GetBatchLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="BatchFeed-__init__"><strong>__init__</strong></a>(self, author<font color="#909090">=None</font>, category<font color="#909090">=None</font>, contributor<font color="#909090">=None</font>, generator<font color="#909090">=None</font>, icon<font color="#909090">=None</font>, atom_id<font color="#909090">=None</font>, link<font color="#909090">=None</font>, logo<font color="#909090">=None</font>, rights<font color="#909090">=None</font>, subtitle<font color="#909090">=None</font>, title<font color="#909090">=None</font>, updated<font color="#909090">=None</font>, entry<font color="#909090">=None</font>, total_results<font color="#909090">=None</font>, start_index<font color="#909090">=None</font>, items_per_page<font color="#909090">=None</font>, interrupted<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Properties inherited from <a href="gdata.html#GDataFeed">GDataFeed</a>:<br>
+<dl><dt><strong>generator</strong></dt>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = __GetGenerator(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = __SetGenerator(self, generator)</dt></dl>
+</dd>
+</dl>
+<dl><dt><strong>id</strong></dt>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = __GetId(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = __SetId(self, id)</dt></dl>
+</dd>
+</dl>
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="BatchFeed-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="BatchFeed-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="BatchFeed-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.html#LinkFinder">LinkFinder</a>:<br>
+<dl><dt><a name="BatchFeed-GetAclLink"><strong>GetAclLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="BatchFeed-GetEditLink"><strong>GetEditLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="BatchFeed-GetEditMediaLink"><strong>GetEditMediaLink</strong></a>(self)</dt><dd><tt>The&nbsp;Picasa&nbsp;API&nbsp;mistakenly&nbsp;returns&nbsp;media-edit&nbsp;rather&nbsp;than&nbsp;edit-media,&nbsp;but<br>
+this&nbsp;may&nbsp;change&nbsp;soon.</tt></dd></dl>
+
+<dl><dt><a name="BatchFeed-GetFeedLink"><strong>GetFeedLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="BatchFeed-GetHtmlLink"><strong>GetHtmlLink</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;of&nbsp;alternate&nbsp;and&nbsp;type&nbsp;of&nbsp;text/html<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;atom.Link&nbsp;or&nbsp;None&nbsp;if&nbsp;no&nbsp;links&nbsp;matched</tt></dd></dl>
+
+<dl><dt><a name="BatchFeed-GetNextLink"><strong>GetNextLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="BatchFeed-GetPostLink"><strong>GetPostLink</strong></a>(self)</dt><dd><tt>Get&nbsp;a&nbsp;link&nbsp;containing&nbsp;the&nbsp;POST&nbsp;target&nbsp;URL.<br>
+&nbsp;<br>
+The&nbsp;POST&nbsp;target&nbsp;URL&nbsp;is&nbsp;used&nbsp;to&nbsp;insert&nbsp;new&nbsp;entries.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;link&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;a&nbsp;rel&nbsp;matching&nbsp;the&nbsp;POST&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="BatchFeed-GetSelfLink"><strong>GetSelfLink</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;set&nbsp;to&nbsp;'self'<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;atom.Link&nbsp;or&nbsp;none&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#LinkFinder">atom.LinkFinder</a>:<br>
+<dl><dt><a name="BatchFeed-GetAlternateLink"><strong>GetAlternateLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="BatchFeed-GetLicenseLink"><strong>GetLicenseLink</strong></a>(self)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="BatchId">class <strong>BatchId</strong></a>(<a href="atom.html#AtomBase">atom.AtomBase</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.html#BatchId">BatchId</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="BatchId-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="BatchId-__init__"><strong>__init__</strong></a>(self, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="BatchId-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="BatchId-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="BatchInterrupted">class <strong>BatchInterrupted</strong></a>(<a href="atom.html#AtomBase">atom.AtomBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;batch:interrupted&nbsp;element&nbsp;sent&nbsp;if&nbsp;batch&nbsp;request&nbsp;was&nbsp;interrupted.<br>
+&nbsp;<br>
+Only&nbsp;appears&nbsp;in&nbsp;a&nbsp;feed&nbsp;if&nbsp;some&nbsp;of&nbsp;the&nbsp;batch&nbsp;entries&nbsp;could&nbsp;not&nbsp;be&nbsp;processed.<br>
+See:&nbsp;<a href="http://code.google.com/apis/gdata/batch.html#Handling_Errors">http://code.google.com/apis/gdata/batch.html#Handling_Errors</a><br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.html#BatchInterrupted">BatchInterrupted</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="BatchInterrupted-__init__"><strong>__init__</strong></a>(self, reason<font color="#909090">=None</font>, success<font color="#909090">=None</font>, failures<font color="#909090">=None</font>, parsed<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="BatchInterrupted-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="BatchInterrupted-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="BatchInterrupted-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="BatchOperation">class <strong>BatchOperation</strong></a>(<a href="atom.html#AtomBase">atom.AtomBase</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.html#BatchOperation">BatchOperation</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="BatchOperation-__init__"><strong>__init__</strong></a>(self, op_type<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="BatchOperation-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="BatchOperation-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="BatchOperation-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="BatchStatus">class <strong>BatchStatus</strong></a>(<a href="atom.html#AtomBase">atom.AtomBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;batch:status&nbsp;element&nbsp;present&nbsp;in&nbsp;a&nbsp;batch&nbsp;response&nbsp;entry.<br>
+&nbsp;<br>
+A&nbsp;status&nbsp;element&nbsp;contains&nbsp;the&nbsp;code&nbsp;(HTTP&nbsp;response&nbsp;code)&nbsp;and&nbsp;<br>
+reason&nbsp;as&nbsp;elements.&nbsp;In&nbsp;a&nbsp;single&nbsp;request&nbsp;these&nbsp;fields&nbsp;would<br>
+be&nbsp;part&nbsp;of&nbsp;the&nbsp;HTTP&nbsp;response,&nbsp;but&nbsp;in&nbsp;a&nbsp;batch&nbsp;request&nbsp;each<br>
+<a href="atom.html#Entry">Entry</a>&nbsp;operation&nbsp;has&nbsp;a&nbsp;corresponding&nbsp;<a href="atom.html#Entry">Entry</a>&nbsp;in&nbsp;the&nbsp;response<br>
+feed&nbsp;which&nbsp;includes&nbsp;status&nbsp;information.<br>
+&nbsp;<br>
+See&nbsp;<a href="http://code.google.com/apis/gdata/batch.html#Handling_Errors">http://code.google.com/apis/gdata/batch.html#Handling_Errors</a><br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.html#BatchStatus">BatchStatus</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="BatchStatus-__init__"><strong>__init__</strong></a>(self, code<font color="#909090">=None</font>, reason<font color="#909090">=None</font>, content_type<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="BatchStatus-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="BatchStatus-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="BatchStatus-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="EntryLink">class <strong>EntryLink</strong></a>(<a href="atom.html#AtomBase">atom.AtomBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;gd:entryLink&nbsp;element<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.html#EntryLink">EntryLink</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="EntryLink-__init__"><strong>__init__</strong></a>(self, href<font color="#909090">=None</font>, read_only<font color="#909090">=None</font>, rel<font color="#909090">=None</font>, entry<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="EntryLink-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="EntryLink-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="EntryLink-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Error">class <strong>Error</strong></a>(<a href="exceptions.html#Exception">exceptions.Exception</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="Error-__getitem__"><strong>__getitem__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="Error-__init__"><strong>__init__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="Error-__str__"><strong>__str__</strong></a>(...)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="FeedLink">class <strong>FeedLink</strong></a>(<a href="atom.html#AtomBase">atom.AtomBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;gd:feedLink&nbsp;element<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.html#FeedLink">FeedLink</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="FeedLink-__init__"><strong>__init__</strong></a>(self, count_hint<font color="#909090">=None</font>, href<font color="#909090">=None</font>, read_only<font color="#909090">=None</font>, rel<font color="#909090">=None</font>, feed<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="FeedLink-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="FeedLink-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="FeedLink-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="GDataEntry">class <strong>GDataEntry</strong></a>(<a href="atom.html#Entry">atom.Entry</a>, <a href="gdata.html#LinkFinder">LinkFinder</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Extends&nbsp;Atom&nbsp;<a href="atom.html#Entry">Entry</a>&nbsp;to&nbsp;provide&nbsp;data&nbsp;processing<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.html#GDataEntry">GDataEntry</a></dd>
+<dd><a href="atom.html#Entry">atom.Entry</a></dd>
+<dd><a href="atom.html#FeedEntryParent">atom.FeedEntryParent</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="gdata.html#LinkFinder">LinkFinder</a></dd>
+<dd><a href="atom.html#LinkFinder">atom.LinkFinder</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="GDataEntry-GetMediaURL"><strong>GetMediaURL</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;to&nbsp;the&nbsp;media&nbsp;content,&nbsp;if&nbsp;the&nbsp;entry&nbsp;is&nbsp;a&nbsp;media&nbsp;entry.<br>
+Otherwise&nbsp;returns&nbsp;None.</tt></dd></dl>
+
+<dl><dt><a name="GDataEntry-IsMedia"><strong>IsMedia</strong></a>(self)</dt><dd><tt>Determines&nbsp;whether&nbsp;or&nbsp;not&nbsp;an&nbsp;entry&nbsp;is&nbsp;a&nbsp;GData&nbsp;Media&nbsp;entry.</tt></dd></dl>
+
+<hr>
+Properties defined here:<br>
+<dl><dt><strong>id</strong></dt>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = __GetId(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = __SetId(self, id)</dt><dd><tt>#&nbsp;This&nbsp;method&nbsp;was&nbsp;created&nbsp;to&nbsp;strip&nbsp;the&nbsp;unwanted&nbsp;whitespace&nbsp;from&nbsp;the&nbsp;id's&nbsp;<br>
+#&nbsp;text&nbsp;node.</tt></dd></dl>
+</dd>
+</dl>
+<hr>
+Methods inherited from <a href="atom.html#Entry">atom.Entry</a>:<br>
+<dl><dt><a name="GDataEntry-__init__"><strong>__init__</strong></a>(self, author<font color="#909090">=None</font>, category<font color="#909090">=None</font>, content<font color="#909090">=None</font>, contributor<font color="#909090">=None</font>, atom_id<font color="#909090">=None</font>, link<font color="#909090">=None</font>, published<font color="#909090">=None</font>, rights<font color="#909090">=None</font>, source<font color="#909090">=None</font>, summary<font color="#909090">=None</font>, control<font color="#909090">=None</font>, title<font color="#909090">=None</font>, updated<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;atom:entry<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;author:&nbsp;list&nbsp;A&nbsp;list&nbsp;of&nbsp;Author&nbsp;instances&nbsp;which&nbsp;belong&nbsp;to&nbsp;this&nbsp;class.<br>
+&nbsp;&nbsp;category:&nbsp;list&nbsp;A&nbsp;list&nbsp;of&nbsp;Category&nbsp;instances<br>
+&nbsp;&nbsp;content:&nbsp;Content&nbsp;The&nbsp;entry's&nbsp;Content<br>
+&nbsp;&nbsp;contributor:&nbsp;list&nbsp;A&nbsp;list&nbsp;on&nbsp;Contributor&nbsp;instances<br>
+&nbsp;&nbsp;id:&nbsp;Id&nbsp;The&nbsp;entry's&nbsp;Id&nbsp;element<br>
+&nbsp;&nbsp;link:&nbsp;list&nbsp;A&nbsp;list&nbsp;of&nbsp;Link&nbsp;instances<br>
+&nbsp;&nbsp;published:&nbsp;Published&nbsp;The&nbsp;entry's&nbsp;Published&nbsp;element<br>
+&nbsp;&nbsp;rights:&nbsp;Rights&nbsp;The&nbsp;entry's&nbsp;Rights&nbsp;element<br>
+&nbsp;&nbsp;source:&nbsp;Source&nbsp;the&nbsp;entry's&nbsp;source&nbsp;element<br>
+&nbsp;&nbsp;summary:&nbsp;Summary&nbsp;the&nbsp;entry's&nbsp;summary&nbsp;element<br>
+&nbsp;&nbsp;title:&nbsp;Title&nbsp;the&nbsp;entry's&nbsp;title&nbsp;element<br>
+&nbsp;&nbsp;updated:&nbsp;Updated&nbsp;the&nbsp;entry's&nbsp;updated&nbsp;element<br>
+&nbsp;&nbsp;control:&nbsp;The&nbsp;entry's&nbsp;app:control&nbsp;element&nbsp;which&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;mark&nbsp;an&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;entry&nbsp;as&nbsp;a&nbsp;draft&nbsp;which&nbsp;should&nbsp;not&nbsp;be&nbsp;publicly&nbsp;viewable.<br>
+&nbsp;&nbsp;text:&nbsp;String&nbsp;The&nbsp;text&nbsp;contents&nbsp;of&nbsp;the&nbsp;element.&nbsp;This&nbsp;is&nbsp;the&nbsp;contents<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of&nbsp;the&nbsp;<a href="atom.html#Entry">Entry</a>'s&nbsp;XML&nbsp;text&nbsp;node.&nbsp;(Example:&nbsp;&lt;foo&gt;This&nbsp;is&nbsp;the&nbsp;text&lt;/foo&gt;)<br>
+&nbsp;&nbsp;extension_elements:&nbsp;list&nbsp;A&nbsp;list&nbsp;of&nbsp;ExtensionElement&nbsp;instances&nbsp;which&nbsp;are<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;children&nbsp;of&nbsp;this&nbsp;element.<br>
+&nbsp;&nbsp;extension_attributes:&nbsp;dict&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;strings&nbsp;which&nbsp;are&nbsp;the&nbsp;values<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;additional&nbsp;XML&nbsp;attributes&nbsp;of&nbsp;this&nbsp;element.</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="GDataEntry-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="GDataEntry-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="GDataEntry-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.html#LinkFinder">LinkFinder</a>:<br>
+<dl><dt><a name="GDataEntry-GetAclLink"><strong>GetAclLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="GDataEntry-GetEditLink"><strong>GetEditLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="GDataEntry-GetEditMediaLink"><strong>GetEditMediaLink</strong></a>(self)</dt><dd><tt>The&nbsp;Picasa&nbsp;API&nbsp;mistakenly&nbsp;returns&nbsp;media-edit&nbsp;rather&nbsp;than&nbsp;edit-media,&nbsp;but<br>
+this&nbsp;may&nbsp;change&nbsp;soon.</tt></dd></dl>
+
+<dl><dt><a name="GDataEntry-GetFeedLink"><strong>GetFeedLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="GDataEntry-GetHtmlLink"><strong>GetHtmlLink</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;of&nbsp;alternate&nbsp;and&nbsp;type&nbsp;of&nbsp;text/html<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;atom.Link&nbsp;or&nbsp;None&nbsp;if&nbsp;no&nbsp;links&nbsp;matched</tt></dd></dl>
+
+<dl><dt><a name="GDataEntry-GetNextLink"><strong>GetNextLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="GDataEntry-GetPostLink"><strong>GetPostLink</strong></a>(self)</dt><dd><tt>Get&nbsp;a&nbsp;link&nbsp;containing&nbsp;the&nbsp;POST&nbsp;target&nbsp;URL.<br>
+&nbsp;<br>
+The&nbsp;POST&nbsp;target&nbsp;URL&nbsp;is&nbsp;used&nbsp;to&nbsp;insert&nbsp;new&nbsp;entries.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;link&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;a&nbsp;rel&nbsp;matching&nbsp;the&nbsp;POST&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="GDataEntry-GetSelfLink"><strong>GetSelfLink</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;set&nbsp;to&nbsp;'self'<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;atom.Link&nbsp;or&nbsp;none&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#LinkFinder">atom.LinkFinder</a>:<br>
+<dl><dt><a name="GDataEntry-GetAlternateLink"><strong>GetAlternateLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="GDataEntry-GetLicenseLink"><strong>GetLicenseLink</strong></a>(self)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="GDataFeed">class <strong>GDataFeed</strong></a>(<a href="atom.html#Feed">atom.Feed</a>, <a href="gdata.html#LinkFinder">LinkFinder</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;<a href="atom.html#Feed">Feed</a>&nbsp;from&nbsp;a&nbsp;GData&nbsp;service<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.html#GDataFeed">GDataFeed</a></dd>
+<dd><a href="atom.html#Feed">atom.Feed</a></dd>
+<dd><a href="atom.html#Source">atom.Source</a></dd>
+<dd><a href="atom.html#FeedEntryParent">atom.FeedEntryParent</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="gdata.html#LinkFinder">LinkFinder</a></dd>
+<dd><a href="atom.html#LinkFinder">atom.LinkFinder</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="GDataFeed-__init__"><strong>__init__</strong></a>(self, author<font color="#909090">=None</font>, category<font color="#909090">=None</font>, contributor<font color="#909090">=None</font>, generator<font color="#909090">=None</font>, icon<font color="#909090">=None</font>, atom_id<font color="#909090">=None</font>, link<font color="#909090">=None</font>, logo<font color="#909090">=None</font>, rights<font color="#909090">=None</font>, subtitle<font color="#909090">=None</font>, title<font color="#909090">=None</font>, updated<font color="#909090">=None</font>, entry<font color="#909090">=None</font>, total_results<font color="#909090">=None</font>, start_index<font color="#909090">=None</font>, items_per_page<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;Source<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;author:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;Author&nbsp;instances&nbsp;which&nbsp;belong&nbsp;to&nbsp;this<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class.<br>
+&nbsp;&nbsp;category:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;Category&nbsp;instances<br>
+&nbsp;&nbsp;contributor:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;on&nbsp;Contributor&nbsp;instances<br>
+&nbsp;&nbsp;generator:&nbsp;Generator&nbsp;(optional)&nbsp;<br>
+&nbsp;&nbsp;icon:&nbsp;Icon&nbsp;(optional)&nbsp;<br>
+&nbsp;&nbsp;id:&nbsp;Id&nbsp;(optional)&nbsp;The&nbsp;entry's&nbsp;Id&nbsp;element<br>
+&nbsp;&nbsp;link:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;Link&nbsp;instances<br>
+&nbsp;&nbsp;logo:&nbsp;Logo&nbsp;(optional)&nbsp;<br>
+&nbsp;&nbsp;rights:&nbsp;Rights&nbsp;(optional)&nbsp;The&nbsp;entry's&nbsp;Rights&nbsp;element<br>
+&nbsp;&nbsp;subtitle:&nbsp;Subtitle&nbsp;(optional)&nbsp;The&nbsp;entry's&nbsp;subtitle&nbsp;element<br>
+&nbsp;&nbsp;title:&nbsp;Title&nbsp;(optional)&nbsp;the&nbsp;entry's&nbsp;title&nbsp;element<br>
+&nbsp;&nbsp;updated:&nbsp;Updated&nbsp;(optional)&nbsp;the&nbsp;entry's&nbsp;updated&nbsp;element<br>
+&nbsp;&nbsp;entry:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;<a href="atom.html#Entry">Entry</a>&nbsp;instances&nbsp;contained&nbsp;in&nbsp;the&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;feed.<br>
+&nbsp;&nbsp;text:&nbsp;String&nbsp;(optional)&nbsp;The&nbsp;text&nbsp;contents&nbsp;of&nbsp;the&nbsp;element.&nbsp;This&nbsp;is&nbsp;the&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contents&nbsp;of&nbsp;the&nbsp;<a href="atom.html#Entry">Entry</a>'s&nbsp;XML&nbsp;text&nbsp;node.&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Example:&nbsp;&lt;foo&gt;This&nbsp;is&nbsp;the&nbsp;text&lt;/foo&gt;)<br>
+&nbsp;&nbsp;extension_elements:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;ExtensionElement&nbsp;instances<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;which&nbsp;are&nbsp;children&nbsp;of&nbsp;this&nbsp;element.<br>
+&nbsp;&nbsp;extension_attributes:&nbsp;dict&nbsp;(optional)&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;strings&nbsp;which&nbsp;are&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;values&nbsp;for&nbsp;additional&nbsp;XML&nbsp;attributes&nbsp;of&nbsp;this&nbsp;element.</tt></dd></dl>
+
+<hr>
+Properties defined here:<br>
+<dl><dt><strong>generator</strong></dt>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = __GetGenerator(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = __SetGenerator(self, generator)</dt></dl>
+</dd>
+</dl>
+<dl><dt><strong>id</strong></dt>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = __GetId(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = __SetId(self, id)</dt></dl>
+</dd>
+</dl>
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="GDataFeed-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="GDataFeed-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="GDataFeed-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.html#LinkFinder">LinkFinder</a>:<br>
+<dl><dt><a name="GDataFeed-GetAclLink"><strong>GetAclLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="GDataFeed-GetEditLink"><strong>GetEditLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="GDataFeed-GetEditMediaLink"><strong>GetEditMediaLink</strong></a>(self)</dt><dd><tt>The&nbsp;Picasa&nbsp;API&nbsp;mistakenly&nbsp;returns&nbsp;media-edit&nbsp;rather&nbsp;than&nbsp;edit-media,&nbsp;but<br>
+this&nbsp;may&nbsp;change&nbsp;soon.</tt></dd></dl>
+
+<dl><dt><a name="GDataFeed-GetFeedLink"><strong>GetFeedLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="GDataFeed-GetHtmlLink"><strong>GetHtmlLink</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;of&nbsp;alternate&nbsp;and&nbsp;type&nbsp;of&nbsp;text/html<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;atom.Link&nbsp;or&nbsp;None&nbsp;if&nbsp;no&nbsp;links&nbsp;matched</tt></dd></dl>
+
+<dl><dt><a name="GDataFeed-GetNextLink"><strong>GetNextLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="GDataFeed-GetPostLink"><strong>GetPostLink</strong></a>(self)</dt><dd><tt>Get&nbsp;a&nbsp;link&nbsp;containing&nbsp;the&nbsp;POST&nbsp;target&nbsp;URL.<br>
+&nbsp;<br>
+The&nbsp;POST&nbsp;target&nbsp;URL&nbsp;is&nbsp;used&nbsp;to&nbsp;insert&nbsp;new&nbsp;entries.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;link&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;a&nbsp;rel&nbsp;matching&nbsp;the&nbsp;POST&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="GDataFeed-GetSelfLink"><strong>GetSelfLink</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;set&nbsp;to&nbsp;'self'<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;atom.Link&nbsp;or&nbsp;none&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#LinkFinder">atom.LinkFinder</a>:<br>
+<dl><dt><a name="GDataFeed-GetAlternateLink"><strong>GetAlternateLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="GDataFeed-GetLicenseLink"><strong>GetLicenseLink</strong></a>(self)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ItemsPerPage">class <strong>ItemsPerPage</strong></a>(<a href="atom.html#AtomBase">atom.AtomBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;opensearch:itemsPerPage&nbsp;element&nbsp;in&nbsp;GData&nbsp;feed<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.html#ItemsPerPage">ItemsPerPage</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="ItemsPerPage-__init__"><strong>__init__</strong></a>(self, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="ItemsPerPage-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="ItemsPerPage-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="ItemsPerPage-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="LinkFinder">class <strong>LinkFinder</strong></a>(<a href="atom.html#LinkFinder">atom.LinkFinder</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>An&nbsp;"interface"&nbsp;providing&nbsp;methods&nbsp;to&nbsp;find&nbsp;link&nbsp;elements<br>
+&nbsp;<br>
+GData&nbsp;<a href="atom.html#Entry">Entry</a>&nbsp;elements&nbsp;often&nbsp;contain&nbsp;multiple&nbsp;links&nbsp;which&nbsp;differ&nbsp;in&nbsp;the&nbsp;rel<br>
+attribute&nbsp;or&nbsp;content&nbsp;type.&nbsp;Often,&nbsp;developers&nbsp;are&nbsp;interested&nbsp;in&nbsp;a&nbsp;specific<br>
+type&nbsp;of&nbsp;link&nbsp;so&nbsp;this&nbsp;class&nbsp;provides&nbsp;methods&nbsp;to&nbsp;find&nbsp;specific&nbsp;classes&nbsp;of<br>
+links.<br>
+&nbsp;<br>
+This&nbsp;class&nbsp;is&nbsp;used&nbsp;as&nbsp;a&nbsp;mixin&nbsp;in&nbsp;GData&nbsp;entries.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.html#LinkFinder">LinkFinder</a></dd>
+<dd><a href="atom.html#LinkFinder">atom.LinkFinder</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="LinkFinder-GetAclLink"><strong>GetAclLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="LinkFinder-GetEditLink"><strong>GetEditLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="LinkFinder-GetEditMediaLink"><strong>GetEditMediaLink</strong></a>(self)</dt><dd><tt>The&nbsp;Picasa&nbsp;API&nbsp;mistakenly&nbsp;returns&nbsp;media-edit&nbsp;rather&nbsp;than&nbsp;edit-media,&nbsp;but<br>
+this&nbsp;may&nbsp;change&nbsp;soon.</tt></dd></dl>
+
+<dl><dt><a name="LinkFinder-GetFeedLink"><strong>GetFeedLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="LinkFinder-GetHtmlLink"><strong>GetHtmlLink</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;of&nbsp;alternate&nbsp;and&nbsp;type&nbsp;of&nbsp;text/html<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;atom.Link&nbsp;or&nbsp;None&nbsp;if&nbsp;no&nbsp;links&nbsp;matched</tt></dd></dl>
+
+<dl><dt><a name="LinkFinder-GetNextLink"><strong>GetNextLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="LinkFinder-GetPostLink"><strong>GetPostLink</strong></a>(self)</dt><dd><tt>Get&nbsp;a&nbsp;link&nbsp;containing&nbsp;the&nbsp;POST&nbsp;target&nbsp;URL.<br>
+&nbsp;<br>
+The&nbsp;POST&nbsp;target&nbsp;URL&nbsp;is&nbsp;used&nbsp;to&nbsp;insert&nbsp;new&nbsp;entries.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;link&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;a&nbsp;rel&nbsp;matching&nbsp;the&nbsp;POST&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="LinkFinder-GetSelfLink"><strong>GetSelfLink</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;set&nbsp;to&nbsp;'self'<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;atom.Link&nbsp;or&nbsp;none&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#LinkFinder">atom.LinkFinder</a>:<br>
+<dl><dt><a name="LinkFinder-GetAlternateLink"><strong>GetAlternateLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="LinkFinder-GetLicenseLink"><strong>GetLicenseLink</strong></a>(self)</dt></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#LinkFinder">atom.LinkFinder</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'LinkFinder' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="MediaSource">class <strong>MediaSource</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>GData&nbsp;Entries&nbsp;can&nbsp;refer&nbsp;to&nbsp;media&nbsp;sources,&nbsp;so&nbsp;this&nbsp;class&nbsp;provides&nbsp;a<br>
+place&nbsp;to&nbsp;store&nbsp;references&nbsp;to&nbsp;these&nbsp;objects&nbsp;along&nbsp;with&nbsp;some&nbsp;metadata.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="MediaSource-__init__"><strong>__init__</strong></a>(self, file_handle<font color="#909090">=None</font>, content_type<font color="#909090">=None</font>, content_length<font color="#909090">=None</font>, file_path<font color="#909090">=None</font>, file_name<font color="#909090">=None</font>)</dt><dd><tt>Creates&nbsp;an&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;of&nbsp;type&nbsp;<a href="#MediaSource">MediaSource</a>.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;file_handle:&nbsp;A&nbsp;file&nbsp;handle&nbsp;pointing&nbsp;to&nbsp;the&nbsp;file&nbsp;to&nbsp;be&nbsp;encapsulated&nbsp;in&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#MediaSource">MediaSource</a><br>
+&nbsp;&nbsp;content_type:&nbsp;string&nbsp;The&nbsp;MIME&nbsp;type&nbsp;of&nbsp;the&nbsp;file.&nbsp;Required&nbsp;if&nbsp;a&nbsp;file_handle<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;given.<br>
+&nbsp;&nbsp;content_length:&nbsp;int&nbsp;The&nbsp;size&nbsp;of&nbsp;the&nbsp;file.&nbsp;Required&nbsp;if&nbsp;a&nbsp;file_handle&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;given.<br>
+&nbsp;&nbsp;file_path:&nbsp;string&nbsp;(optional)&nbsp;A&nbsp;full&nbsp;path&nbsp;name&nbsp;to&nbsp;the&nbsp;file.&nbsp;Used&nbsp;in<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;place&nbsp;of&nbsp;a&nbsp;file_handle.<br>
+&nbsp;&nbsp;file_name:&nbsp;string&nbsp;The&nbsp;name&nbsp;of&nbsp;the&nbsp;file&nbsp;without&nbsp;any&nbsp;path&nbsp;information.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Required&nbsp;if&nbsp;a&nbsp;file_handle&nbsp;is&nbsp;given.</tt></dd></dl>
+
+<dl><dt><a name="MediaSource-setFile"><strong>setFile</strong></a>(self, file_name, content_type)</dt><dd><tt>A&nbsp;helper&nbsp;function&nbsp;which&nbsp;can&nbsp;create&nbsp;a&nbsp;file&nbsp;handle&nbsp;from&nbsp;a&nbsp;given&nbsp;filename<br>
+and&nbsp;set&nbsp;the&nbsp;content&nbsp;type&nbsp;and&nbsp;length&nbsp;all&nbsp;at&nbsp;once.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;file_name:&nbsp;string&nbsp;The&nbsp;path&nbsp;and&nbsp;file&nbsp;name&nbsp;to&nbsp;the&nbsp;file&nbsp;containing&nbsp;the&nbsp;media<br>
+&nbsp;&nbsp;content_type:&nbsp;string&nbsp;A&nbsp;MIME&nbsp;type&nbsp;representing&nbsp;the&nbsp;type&nbsp;of&nbsp;the&nbsp;media</tt></dd></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'MediaSource' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="MissingRequiredParameters">class <strong>MissingRequiredParameters</strong></a>(<a href="gdata.html#Error">Error</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.html#MissingRequiredParameters">MissingRequiredParameters</a></dd>
+<dd><a href="gdata.html#Error">Error</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="MissingRequiredParameters-__getitem__"><strong>__getitem__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="MissingRequiredParameters-__init__"><strong>__init__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="MissingRequiredParameters-__str__"><strong>__str__</strong></a>(...)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="StartIndex">class <strong>StartIndex</strong></a>(<a href="atom.html#AtomBase">atom.AtomBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;opensearch:startIndex&nbsp;element&nbsp;in&nbsp;GData&nbsp;feed<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.html#StartIndex">StartIndex</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="StartIndex-__init__"><strong>__init__</strong></a>(self, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="StartIndex-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="StartIndex-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="StartIndex-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TotalResults">class <strong>TotalResults</strong></a>(<a href="atom.html#AtomBase">atom.AtomBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>opensearch:<a href="#TotalResults">TotalResults</a>&nbsp;for&nbsp;a&nbsp;GData&nbsp;feed<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.html#TotalResults">TotalResults</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TotalResults-__init__"><strong>__init__</strong></a>(self, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="TotalResults-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="TotalResults-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="TotalResults-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-BatchEntryFromString"><strong>BatchEntryFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-BatchFeedFromString"><strong>BatchFeedFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-BatchIdFromString"><strong>BatchIdFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-BatchInterruptedFromString"><strong>BatchInterruptedFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-BatchOperationFromString"><strong>BatchOperationFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-BatchStatusFromString"><strong>BatchStatusFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-EntryLinkFromString"><strong>EntryLinkFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-FeedLinkFromString"><strong>FeedLinkFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-GDataEntryFromString"><strong>GDataEntryFromString</strong></a>(xml_string)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;<a href="#GDataEntry">GDataEntry</a>&nbsp;instance&nbsp;given&nbsp;a&nbsp;string&nbsp;of&nbsp;XML.</tt></dd></dl>
+ <dl><dt><a name="-GDataFeedFromString"><strong>GDataFeedFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-ItemsPerPageFromString"><strong>ItemsPerPageFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-StartIndexFromString"><strong>StartIndexFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-TotalResultsFromString"><strong>TotalResultsFromString</strong></a>(xml_string)</dt></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>BATCH_DELETE</strong> = 'delete'<br>
+<strong>BATCH_INSERT</strong> = 'insert'<br>
+<strong>BATCH_NAMESPACE</strong> = 'http://schemas.google.com/gdata/batch'<br>
+<strong>BATCH_QUERY</strong> = 'query'<br>
+<strong>BATCH_UPDATE</strong> = 'update'<br>
+<strong>GACL_NAMESPACE</strong> = 'http://schemas.google.com/acl/2007'<br>
+<strong>GACL_TEMPLATE</strong> = '{http://schemas.google.com/acl/2007}%s'<br>
+<strong>GDATA_NAMESPACE</strong> = 'http://schemas.google.com/g/2005'<br>
+<strong>GDATA_TEMPLATE</strong> = '{http://schemas.google.com/g/2005}%s'<br>
+<strong>OPENSEARCH_NAMESPACE</strong> = 'http://a9.com/-/spec/opensearchrss/1.0/'<br>
+<strong>OPENSEARCH_TEMPLATE</strong> = '{http://a9.com/-/spec/opensearchrss/1.0/}%s'<br>
+<strong>__author__</strong> = 'api.jscudder (Jeffrey Scudder)'</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#7799ee">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Author</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#7799ee"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">api.jscudder&nbsp;(Jeffrey&nbsp;Scudder)</td></tr></table>
+</body></html>

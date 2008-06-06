@@ -1,0 +1,550 @@
+
+<!doctype html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module gdata.apps.service</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.apps.html"><font color="#ffffff">apps</font></a>.service</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/svn/gdata-python-client-release/src/gdata/apps/service.py">/usr/local/svn/gdata-python-client-release/src/gdata/apps/service.py</a></font></td></tr></table>
+    <p><tt>#&nbsp;Copyright&nbsp;(C)&nbsp;2007&nbsp;SIOS&nbsp;Technology,&nbsp;Inc.<br>
+#<br>
+#&nbsp;Licensed&nbsp;under&nbsp;the&nbsp;Apache&nbsp;License,&nbsp;Version&nbsp;2.0&nbsp;(the&nbsp;"License");<br>
+#&nbsp;you&nbsp;may&nbsp;not&nbsp;use&nbsp;this&nbsp;file&nbsp;except&nbsp;in&nbsp;compliance&nbsp;with&nbsp;the&nbsp;License.<br>
+#&nbsp;You&nbsp;may&nbsp;obtain&nbsp;a&nbsp;copy&nbsp;of&nbsp;the&nbsp;License&nbsp;at<br>
+#<br>
+#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a><br>
+#<br>
+#&nbsp;Unless&nbsp;required&nbsp;by&nbsp;applicable&nbsp;law&nbsp;or&nbsp;agreed&nbsp;to&nbsp;in&nbsp;writing,&nbsp;software<br>
+#&nbsp;distributed&nbsp;under&nbsp;the&nbsp;License&nbsp;is&nbsp;distributed&nbsp;on&nbsp;an&nbsp;"AS&nbsp;IS"&nbsp;BASIS,<br>
+#&nbsp;WITHOUT&nbsp;WARRANTIES&nbsp;OR&nbsp;CONDITIONS&nbsp;OF&nbsp;ANY&nbsp;KIND,&nbsp;either&nbsp;express&nbsp;or&nbsp;implied.<br>
+#&nbsp;See&nbsp;the&nbsp;License&nbsp;for&nbsp;the&nbsp;specific&nbsp;language&nbsp;governing&nbsp;permissions&nbsp;and<br>
+#&nbsp;limitations&nbsp;under&nbsp;the&nbsp;License.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#fffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="cElementTree.html">cElementTree</a><br>
+</td><td width="25%" valign=top><a href="atom.html">atom</a><br>
+</td><td width="25%" valign=top><a href="gdata.html">gdata</a><br>
+</td><td width="25%" valign=top><a href="urllib.html">urllib</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="exceptions.html#Exception">exceptions.Exception</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.apps.service.html#Error">Error</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.apps.service.html#AppsForYourDomainException">AppsForYourDomainException</a>
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="gdata.service.html#GDataService">gdata.service.GDataService</a>(<a href="atom.service.html#AtomService">atom.service.AtomService</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.apps.service.html#AppsService">AppsService</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="AppsForYourDomainException">class <strong>AppsForYourDomainException</strong></a>(<a href="gdata.apps.service.html#Error">Error</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.apps.service.html#AppsForYourDomainException">AppsForYourDomainException</a></dd>
+<dd><a href="gdata.apps.service.html#Error">Error</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="AppsForYourDomainException-__init__"><strong>__init__</strong></a>(self, response)</dt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="AppsForYourDomainException-__getitem__"><strong>__getitem__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="AppsForYourDomainException-__str__"><strong>__str__</strong></a>(...)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="AppsService">class <strong>AppsService</strong></a>(<a href="gdata.service.html#GDataService">gdata.service.GDataService</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Client&nbsp;for&nbsp;the&nbsp;Google&nbsp;Apps&nbsp;Provisioning&nbsp;service.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.apps.service.html#AppsService">AppsService</a></dd>
+<dd><a href="gdata.service.html#GDataService">gdata.service.GDataService</a></dd>
+<dd><a href="atom.service.html#AtomService">atom.service.AtomService</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="AppsService-AddAllElementsFromAllPages"><strong>AddAllElementsFromAllPages</strong></a>(self, link_finder, func)</dt><dd><tt>retrieve&nbsp;all&nbsp;pages&nbsp;and&nbsp;add&nbsp;all&nbsp;elements</tt></dd></dl>
+
+<dl><dt><a name="AppsService-AddRecipientToEmailList"><strong>AddRecipientToEmailList</strong></a>(self, recipient, list_name)</dt><dd><tt>Add&nbsp;a&nbsp;recipient&nbsp;to&nbsp;a&nbsp;email&nbsp;list.</tt></dd></dl>
+
+<dl><dt><a name="AppsService-CreateEmailList"><strong>CreateEmailList</strong></a>(self, list_name)</dt><dd><tt>Create&nbsp;a&nbsp;email&nbsp;list.</tt></dd></dl>
+
+<dl><dt><a name="AppsService-CreateNickname"><strong>CreateNickname</strong></a>(self, user_name, nickname)</dt><dd><tt>Create&nbsp;a&nbsp;nickname</tt></dd></dl>
+
+<dl><dt><a name="AppsService-CreateUser"><strong>CreateUser</strong></a>(self, user_name, family_name, given_name, password, suspended<font color="#909090">='false'</font>, quota_limit<font color="#909090">=None</font>, password_hash_function<font color="#909090">=None</font>)</dt><dd><tt>Create&nbsp;a&nbsp;user&nbsp;account.</tt></dd></dl>
+
+<dl><dt><a name="AppsService-DeleteEmailList"><strong>DeleteEmailList</strong></a>(self, list_name)</dt><dd><tt>Delete&nbsp;a&nbsp;email&nbsp;list</tt></dd></dl>
+
+<dl><dt><a name="AppsService-DeleteNickname"><strong>DeleteNickname</strong></a>(self, nickname)</dt><dd><tt>Delete&nbsp;a&nbsp;nickname</tt></dd></dl>
+
+<dl><dt><a name="AppsService-DeleteUser"><strong>DeleteUser</strong></a>(self, user_name)</dt><dd><tt>Delete&nbsp;a&nbsp;user&nbsp;account</tt></dd></dl>
+
+<dl><dt><a name="AppsService-RemoveRecipientFromEmailList"><strong>RemoveRecipientFromEmailList</strong></a>(self, recipient, list_name)</dt><dd><tt>Remove&nbsp;recipient&nbsp;from&nbsp;email&nbsp;list.</tt></dd></dl>
+
+<dl><dt><a name="AppsService-RestoreUser"><strong>RestoreUser</strong></a>(self, user_name)</dt></dl>
+
+<dl><dt><a name="AppsService-RetrieveAllEmailLists"><strong>RetrieveAllEmailLists</strong></a>(self)</dt><dd><tt>Retrieve&nbsp;all&nbsp;email&nbsp;list&nbsp;of&nbsp;a&nbsp;domain.</tt></dd></dl>
+
+<dl><dt><a name="AppsService-RetrieveAllNicknames"><strong>RetrieveAllNicknames</strong></a>(self)</dt><dd><tt>Retrieve&nbsp;all&nbsp;nicknames&nbsp;in&nbsp;the&nbsp;domain</tt></dd></dl>
+
+<dl><dt><a name="AppsService-RetrieveAllRecipients"><strong>RetrieveAllRecipients</strong></a>(self, list_name)</dt><dd><tt>Retrieve&nbsp;all&nbsp;recipient&nbsp;of&nbsp;an&nbsp;email&nbsp;list.</tt></dd></dl>
+
+<dl><dt><a name="AppsService-RetrieveAllUsers"><strong>RetrieveAllUsers</strong></a>(self)</dt><dd><tt>Retrieve&nbsp;all&nbsp;users&nbsp;in&nbsp;this&nbsp;domain.</tt></dd></dl>
+
+<dl><dt><a name="AppsService-RetrieveEmailList"><strong>RetrieveEmailList</strong></a>(self, list_name)</dt><dd><tt>Retreive&nbsp;a&nbsp;single&nbsp;email&nbsp;list&nbsp;by&nbsp;the&nbsp;list's&nbsp;name.</tt></dd></dl>
+
+<dl><dt><a name="AppsService-RetrieveEmailLists"><strong>RetrieveEmailLists</strong></a>(self, recipient)</dt><dd><tt>Retrieve&nbsp;All&nbsp;Email&nbsp;List&nbsp;Subscriptions&nbsp;for&nbsp;an&nbsp;Email&nbsp;Address.</tt></dd></dl>
+
+<dl><dt><a name="AppsService-RetrieveNickname"><strong>RetrieveNickname</strong></a>(self, nickname)</dt><dd><tt>Retrieve&nbsp;a&nbsp;nickname.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;nickname:&nbsp;string&nbsp;The&nbsp;nickname&nbsp;to&nbsp;retrieve<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;gdata.apps.NicknameEntry</tt></dd></dl>
+
+<dl><dt><a name="AppsService-RetrieveNicknames"><strong>RetrieveNicknames</strong></a>(self, user_name)</dt><dd><tt>Retrieve&nbsp;nicknames&nbsp;of&nbsp;the&nbsp;user</tt></dd></dl>
+
+<dl><dt><a name="AppsService-RetrievePageOfEmailLists"><strong>RetrievePageOfEmailLists</strong></a>(self, start_email_list_name<font color="#909090">=None</font>)</dt><dd><tt>Retrieve&nbsp;one&nbsp;page&nbsp;of&nbsp;email&nbsp;list</tt></dd></dl>
+
+<dl><dt><a name="AppsService-RetrievePageOfNicknames"><strong>RetrievePageOfNicknames</strong></a>(self, start_nickname<font color="#909090">=None</font>)</dt><dd><tt>Retrieve&nbsp;one&nbsp;page&nbsp;of&nbsp;nicknames&nbsp;in&nbsp;the&nbsp;domain</tt></dd></dl>
+
+<dl><dt><a name="AppsService-RetrievePageOfRecipients"><strong>RetrievePageOfRecipients</strong></a>(self, list_name, start_recipient<font color="#909090">=None</font>)</dt><dd><tt>Retrieve&nbsp;one&nbsp;page&nbsp;of&nbsp;recipient&nbsp;of&nbsp;an&nbsp;email&nbsp;list.</tt></dd></dl>
+
+<dl><dt><a name="AppsService-RetrievePageOfUsers"><strong>RetrievePageOfUsers</strong></a>(self, start_username<font color="#909090">=None</font>)</dt><dd><tt>Retrieve&nbsp;one&nbsp;page&nbsp;of&nbsp;users&nbsp;in&nbsp;this&nbsp;domain.</tt></dd></dl>
+
+<dl><dt><a name="AppsService-RetrieveUser"><strong>RetrieveUser</strong></a>(self, user_name)</dt><dd><tt>Retrieve&nbsp;an&nbsp;user&nbsp;account.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;user_name:&nbsp;string&nbsp;The&nbsp;user&nbsp;name&nbsp;to&nbsp;retrieve<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;gdata.apps.UserEntry</tt></dd></dl>
+
+<dl><dt><a name="AppsService-SuspendUser"><strong>SuspendUser</strong></a>(self, user_name)</dt></dl>
+
+<dl><dt><a name="AppsService-UpdateUser"><strong>UpdateUser</strong></a>(self, user_name, user_entry)</dt><dd><tt>Update&nbsp;a&nbsp;user&nbsp;account.</tt></dd></dl>
+
+<dl><dt><a name="AppsService-__init__"><strong>__init__</strong></a>(self, email<font color="#909090">=None</font>, password<font color="#909090">=None</font>, domain<font color="#909090">=None</font>, source<font color="#909090">=None</font>, server<font color="#909090">='www.google.com'</font>, additional_headers<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.service.html#GDataService">gdata.service.GDataService</a>:<br>
+<dl><dt><a name="AppsService-ClientLogin"><strong>ClientLogin</strong></a>(self, username, password, account_type<font color="#909090">=None</font>, service<font color="#909090">=None</font>, source<font color="#909090">=None</font>, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Convenience&nbsp;method&nbsp;for&nbsp;authenticating&nbsp;using&nbsp;ProgrammaticLogin.&nbsp;<br>
+&nbsp;<br>
+Sets&nbsp;values&nbsp;for&nbsp;email,&nbsp;password,&nbsp;and&nbsp;other&nbsp;optional&nbsp;members.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;username:<br>
+&nbsp;&nbsp;password:<br>
+&nbsp;&nbsp;account_type:&nbsp;string&nbsp;(optional)<br>
+&nbsp;&nbsp;service:&nbsp;string&nbsp;(optional)<br>
+&nbsp;&nbsp;captcha_token:&nbsp;string&nbsp;(optional)<br>
+&nbsp;&nbsp;captcha_response:&nbsp;string&nbsp;(optional)</tt></dd></dl>
+
+<dl><dt><a name="AppsService-Delete"><strong>Delete</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>, redirects_remaining<font color="#909090">=4</font>)</dt><dd><tt>Deletes&nbsp;the&nbsp;entry&nbsp;at&nbsp;the&nbsp;given&nbsp;URI.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;uri:&nbsp;string&nbsp;The&nbsp;URI&nbsp;of&nbsp;the&nbsp;entry&nbsp;to&nbsp;be&nbsp;deleted.&nbsp;Example:&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'/base/feeds/items/ITEM-ID'<br>
+&nbsp;&nbsp;extra_headers:&nbsp;dict&nbsp;(optional)&nbsp;HTTP&nbsp;headers&nbsp;which&nbsp;are&nbsp;to&nbsp;be&nbsp;included.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;client&nbsp;automatically&nbsp;sets&nbsp;the&nbsp;Content-Type&nbsp;and<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Authorization&nbsp;headers.<br>
+&nbsp;&nbsp;url_params:&nbsp;dict&nbsp;(optional)&nbsp;Additional&nbsp;URL&nbsp;parameters&nbsp;to&nbsp;be&nbsp;included<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;the&nbsp;URI.&nbsp;These&nbsp;are&nbsp;translated&nbsp;into&nbsp;query&nbsp;arguments<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;the&nbsp;form&nbsp;'&amp;dict_key=value&amp;...'.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example:&nbsp;{'max-results':&nbsp;'250'}&nbsp;becomes&nbsp;&amp;max-results=250<br>
+&nbsp;&nbsp;escape_params:&nbsp;boolean&nbsp;(optional)&nbsp;If&nbsp;false,&nbsp;the&nbsp;calling&nbsp;code&nbsp;has&nbsp;already<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ensured&nbsp;that&nbsp;the&nbsp;query&nbsp;will&nbsp;form&nbsp;a&nbsp;valid&nbsp;URL&nbsp;(all<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reserved&nbsp;characters&nbsp;have&nbsp;been&nbsp;escaped).&nbsp;If&nbsp;true,&nbsp;this<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;method&nbsp;will&nbsp;escape&nbsp;the&nbsp;query&nbsp;and&nbsp;any&nbsp;URL&nbsp;parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;provided.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;True&nbsp;if&nbsp;the&nbsp;entry&nbsp;was&nbsp;deleted.</tt></dd></dl>
+
+<dl><dt><a name="AppsService-GenerateAuthSubURL"><strong>GenerateAuthSubURL</strong></a>(self, next, scope, secure<font color="#909090">=False</font>, session<font color="#909090">=True</font>)</dt><dd><tt>Generate&nbsp;a&nbsp;URL&nbsp;at&nbsp;which&nbsp;the&nbsp;user&nbsp;will&nbsp;login&nbsp;and&nbsp;be&nbsp;redirected&nbsp;back.<br>
+&nbsp;<br>
+Users&nbsp;enter&nbsp;their&nbsp;credentials&nbsp;on&nbsp;a&nbsp;Google&nbsp;login&nbsp;page&nbsp;and&nbsp;a&nbsp;token&nbsp;is&nbsp;sent<br>
+to&nbsp;the&nbsp;URL&nbsp;specified&nbsp;in&nbsp;next.&nbsp;See&nbsp;documentation&nbsp;for&nbsp;AuthSub&nbsp;login&nbsp;at:<br>
+<a href="http://code.google.com/apis/accounts/AuthForWebApps.html">http://code.google.com/apis/accounts/AuthForWebApps.html</a><br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;next:&nbsp;string&nbsp;The&nbsp;URL&nbsp;user&nbsp;will&nbsp;be&nbsp;sent&nbsp;to&nbsp;after&nbsp;logging&nbsp;in.<br>
+&nbsp;&nbsp;scope:&nbsp;string&nbsp;The&nbsp;URL&nbsp;of&nbsp;the&nbsp;service&nbsp;to&nbsp;be&nbsp;accessed.<br>
+&nbsp;&nbsp;secure:&nbsp;boolean&nbsp;(optional)&nbsp;Determines&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;issued&nbsp;token<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;a&nbsp;secure&nbsp;token.<br>
+&nbsp;&nbsp;session:&nbsp;boolean&nbsp;(optional)&nbsp;Determines&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;issued&nbsp;token<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;can&nbsp;be&nbsp;upgraded&nbsp;to&nbsp;a&nbsp;session&nbsp;token.</tt></dd></dl>
+
+<dl><dt><a name="AppsService-Get"><strong>Get</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, redirects_remaining<font color="#909090">=4</font>, encoding<font color="#909090">='UTF-8'</font>, converter<font color="#909090">=None</font>)</dt><dd><tt>Query&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI<br>
+&nbsp;<br>
+The&nbsp;uri&nbsp;is&nbsp;the&nbsp;portion&nbsp;of&nbsp;the&nbsp;URI&nbsp;after&nbsp;the&nbsp;server&nbsp;value&nbsp;<br>
+(ex:&nbsp;www.google.com).<br>
+&nbsp;<br>
+To&nbsp;perform&nbsp;a&nbsp;query&nbsp;against&nbsp;Google&nbsp;Base,&nbsp;set&nbsp;the&nbsp;server&nbsp;to&nbsp;<br>
+'base.google.com'&nbsp;and&nbsp;set&nbsp;the&nbsp;uri&nbsp;to&nbsp;'/base/feeds/...',&nbsp;where&nbsp;...&nbsp;is&nbsp;<br>
+your&nbsp;query.&nbsp;For&nbsp;example,&nbsp;to&nbsp;find&nbsp;snippets&nbsp;for&nbsp;all&nbsp;digital&nbsp;cameras&nbsp;uri&nbsp;<br>
+should&nbsp;be&nbsp;set&nbsp;to:&nbsp;'/base/feeds/snippets?bq=digital+camera'<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;uri:&nbsp;string&nbsp;The&nbsp;query&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;URI.&nbsp;Example:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'/base/feeds/snippets?bq=digital+camera'.<br>
+&nbsp;&nbsp;extra_headers:&nbsp;dictionary&nbsp;(optional)&nbsp;Extra&nbsp;HTTP&nbsp;headers&nbsp;to&nbsp;be&nbsp;included<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;the&nbsp;GET&nbsp;request.&nbsp;These&nbsp;headers&nbsp;are&nbsp;in&nbsp;addition&nbsp;to&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;those&nbsp;stored&nbsp;in&nbsp;the&nbsp;client's&nbsp;additional_headers&nbsp;property.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;client&nbsp;automatically&nbsp;sets&nbsp;the&nbsp;Content-Type&nbsp;and&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Authorization&nbsp;headers.<br>
+&nbsp;&nbsp;redirects_remaining:&nbsp;int&nbsp;(optional)&nbsp;Tracks&nbsp;the&nbsp;number&nbsp;of&nbsp;additional<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;redirects&nbsp;this&nbsp;method&nbsp;will&nbsp;allow.&nbsp;If&nbsp;the&nbsp;service&nbsp;object&nbsp;receives<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;redirect&nbsp;and&nbsp;remaining&nbsp;is&nbsp;0,&nbsp;it&nbsp;will&nbsp;not&nbsp;follow&nbsp;the&nbsp;redirect.&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;was&nbsp;added&nbsp;to&nbsp;avoid&nbsp;infinite&nbsp;redirect&nbsp;loops.<br>
+&nbsp;&nbsp;encoding:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;character&nbsp;encoding&nbsp;for&nbsp;the&nbsp;server's<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response.&nbsp;Default&nbsp;is&nbsp;UTF-8<br>
+&nbsp;&nbsp;converter:&nbsp;func&nbsp;(optional)&nbsp;A&nbsp;function&nbsp;which&nbsp;will&nbsp;transform<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;server's&nbsp;results&nbsp;before&nbsp;it&nbsp;is&nbsp;returned.&nbsp;Example:&nbsp;use&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GDataFeedFromString&nbsp;to&nbsp;parse&nbsp;the&nbsp;server&nbsp;response&nbsp;as&nbsp;if&nbsp;it<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;were&nbsp;a&nbsp;GDataFeed.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;If&nbsp;there&nbsp;is&nbsp;no&nbsp;ResultsTransformer&nbsp;specified&nbsp;in&nbsp;the&nbsp;call,&nbsp;a&nbsp;GDataFeed&nbsp;<br>
+&nbsp;&nbsp;or&nbsp;GDataEntry&nbsp;depending&nbsp;on&nbsp;which&nbsp;is&nbsp;sent&nbsp;from&nbsp;the&nbsp;server.&nbsp;If&nbsp;the&nbsp;<br>
+&nbsp;&nbsp;response&nbsp;is&nbsp;niether&nbsp;a&nbsp;feed&nbsp;or&nbsp;entry&nbsp;and&nbsp;there&nbsp;is&nbsp;no&nbsp;ResultsTransformer,<br>
+&nbsp;&nbsp;return&nbsp;a&nbsp;string.&nbsp;If&nbsp;there&nbsp;is&nbsp;a&nbsp;ResultsTransformer,&nbsp;the&nbsp;returned&nbsp;value&nbsp;<br>
+&nbsp;&nbsp;will&nbsp;be&nbsp;that&nbsp;of&nbsp;the&nbsp;ResultsTransformer&nbsp;function.</tt></dd></dl>
+
+<dl><dt><a name="AppsService-GetAuthSubToken"><strong>GetAuthSubToken</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="AppsService-GetClientLoginToken"><strong>GetClientLoginToken</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="AppsService-GetEntry"><strong>GetEntry</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>)</dt><dd><tt>Query&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI&nbsp;and&nbsp;receive&nbsp;an&nbsp;Entry.<br>
+&nbsp;<br>
+See&nbsp;also&nbsp;documentation&nbsp;for&nbsp;gdata.service.Get<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;uri:&nbsp;string&nbsp;The&nbsp;query&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;URI.&nbsp;Example:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'/base/feeds/snippets?bq=digital+camera'.<br>
+&nbsp;&nbsp;extra_headers:&nbsp;dictionary&nbsp;(optional)&nbsp;Extra&nbsp;HTTP&nbsp;headers&nbsp;to&nbsp;be&nbsp;included<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;the&nbsp;GET&nbsp;request.&nbsp;These&nbsp;headers&nbsp;are&nbsp;in&nbsp;addition&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;those&nbsp;stored&nbsp;in&nbsp;the&nbsp;client's&nbsp;additional_headers&nbsp;property.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;client&nbsp;automatically&nbsp;sets&nbsp;the&nbsp;Content-Type&nbsp;and<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Authorization&nbsp;headers.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;GDataEntry&nbsp;built&nbsp;from&nbsp;the&nbsp;XML&nbsp;in&nbsp;the&nbsp;server's&nbsp;response.</tt></dd></dl>
+
+<dl><dt><a name="AppsService-GetFeed"><strong>GetFeed</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>, converter<font color="#909090">=&lt;function GDataFeedFromString&gt;</font>)</dt><dd><tt>Query&nbsp;the&nbsp;GData&nbsp;API&nbsp;with&nbsp;the&nbsp;given&nbsp;URI&nbsp;and&nbsp;receive&nbsp;a&nbsp;Feed.<br>
+&nbsp;<br>
+See&nbsp;also&nbsp;documentation&nbsp;for&nbsp;gdata.service.Get<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;uri:&nbsp;string&nbsp;The&nbsp;query&nbsp;in&nbsp;the&nbsp;form&nbsp;of&nbsp;a&nbsp;URI.&nbsp;Example:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'/base/feeds/snippets?bq=digital+camera'.<br>
+&nbsp;&nbsp;extra_headers:&nbsp;dictionary&nbsp;(optional)&nbsp;Extra&nbsp;HTTP&nbsp;headers&nbsp;to&nbsp;be&nbsp;included<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;the&nbsp;GET&nbsp;request.&nbsp;These&nbsp;headers&nbsp;are&nbsp;in&nbsp;addition&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;those&nbsp;stored&nbsp;in&nbsp;the&nbsp;client's&nbsp;additional_headers&nbsp;property.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;client&nbsp;automatically&nbsp;sets&nbsp;the&nbsp;Content-Type&nbsp;and<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Authorization&nbsp;headers.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;GDataFeed&nbsp;built&nbsp;from&nbsp;the&nbsp;XML&nbsp;in&nbsp;the&nbsp;server's&nbsp;response.</tt></dd></dl>
+
+<dl><dt><a name="AppsService-GetMedia"><strong>GetMedia</strong></a>(self, uri, extra_headers<font color="#909090">=None</font>)</dt><dd><tt>Returns&nbsp;a&nbsp;MediaSource&nbsp;containing&nbsp;media&nbsp;and&nbsp;its&nbsp;metadata&nbsp;from&nbsp;the&nbsp;given<br>
+URI&nbsp;string.</tt></dd></dl>
+
+<dl><dt><a name="AppsService-GetNext"><strong>GetNext</strong></a>(self, feed)</dt><dd><tt>Requests&nbsp;the&nbsp;next&nbsp;'page'&nbsp;of&nbsp;results&nbsp;in&nbsp;the&nbsp;feed.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;uses&nbsp;the&nbsp;feed's&nbsp;next&nbsp;link&nbsp;to&nbsp;request&nbsp;an&nbsp;additional&nbsp;feed<br>
+and&nbsp;uses&nbsp;the&nbsp;class&nbsp;of&nbsp;the&nbsp;feed&nbsp;to&nbsp;convert&nbsp;the&nbsp;results&nbsp;of&nbsp;the&nbsp;GET&nbsp;request.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;feed:&nbsp;atom.Feed&nbsp;or&nbsp;a&nbsp;subclass.&nbsp;The&nbsp;feed&nbsp;should&nbsp;contain&nbsp;a&nbsp;next&nbsp;link&nbsp;and<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;type&nbsp;of&nbsp;the&nbsp;feed&nbsp;will&nbsp;be&nbsp;applied&nbsp;to&nbsp;the&nbsp;results&nbsp;from&nbsp;the&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;server.&nbsp;The&nbsp;new&nbsp;feed&nbsp;which&nbsp;is&nbsp;returned&nbsp;will&nbsp;be&nbsp;of&nbsp;the&nbsp;same&nbsp;class<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;as&nbsp;this&nbsp;feed&nbsp;which&nbsp;was&nbsp;passed&nbsp;in.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;new&nbsp;feed&nbsp;representing&nbsp;the&nbsp;next&nbsp;set&nbsp;of&nbsp;results&nbsp;in&nbsp;the&nbsp;server's&nbsp;feed.<br>
+&nbsp;&nbsp;The&nbsp;type&nbsp;of&nbsp;this&nbsp;feed&nbsp;will&nbsp;match&nbsp;that&nbsp;of&nbsp;the&nbsp;feed&nbsp;argument.</tt></dd></dl>
+
+<dl><dt><a name="AppsService-Post"><strong>Post</strong></a>(self, data, uri, extra_headers<font color="#909090">=None</font>, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>, redirects_remaining<font color="#909090">=4</font>, media_source<font color="#909090">=None</font>, converter<font color="#909090">=None</font>)</dt><dd><tt>Insert&nbsp;or&nbsp;update&nbsp;&nbsp;data&nbsp;into&nbsp;a&nbsp;GData&nbsp;service&nbsp;at&nbsp;the&nbsp;given&nbsp;URI.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;data:&nbsp;string,&nbsp;ElementTree._Element,&nbsp;atom.Entry,&nbsp;or&nbsp;gdata.GDataEntry&nbsp;The<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XML&nbsp;to&nbsp;be&nbsp;sent&nbsp;to&nbsp;the&nbsp;uri.<br>
+&nbsp;&nbsp;uri:&nbsp;string&nbsp;The&nbsp;location&nbsp;(feed)&nbsp;to&nbsp;which&nbsp;the&nbsp;data&nbsp;should&nbsp;be&nbsp;inserted.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example:&nbsp;'/base/feeds/items'.<br>
+&nbsp;&nbsp;extra_headers:&nbsp;dict&nbsp;(optional)&nbsp;HTTP&nbsp;headers&nbsp;which&nbsp;are&nbsp;to&nbsp;be&nbsp;included.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;client&nbsp;automatically&nbsp;sets&nbsp;the&nbsp;Content-Type,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Authorization,&nbsp;and&nbsp;Content-Length&nbsp;headers.<br>
+&nbsp;&nbsp;url_params:&nbsp;dict&nbsp;(optional)&nbsp;Additional&nbsp;URL&nbsp;parameters&nbsp;to&nbsp;be&nbsp;included<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;the&nbsp;URI.&nbsp;These&nbsp;are&nbsp;translated&nbsp;into&nbsp;query&nbsp;arguments<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;the&nbsp;form&nbsp;'&amp;dict_key=value&amp;...'.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example:&nbsp;{'max-results':&nbsp;'250'}&nbsp;becomes&nbsp;&amp;max-results=250<br>
+&nbsp;&nbsp;escape_params:&nbsp;boolean&nbsp;(optional)&nbsp;If&nbsp;false,&nbsp;the&nbsp;calling&nbsp;code&nbsp;has&nbsp;already<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ensured&nbsp;that&nbsp;the&nbsp;query&nbsp;will&nbsp;form&nbsp;a&nbsp;valid&nbsp;URL&nbsp;(all<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reserved&nbsp;characters&nbsp;have&nbsp;been&nbsp;escaped).&nbsp;If&nbsp;true,&nbsp;this<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;method&nbsp;will&nbsp;escape&nbsp;the&nbsp;query&nbsp;and&nbsp;any&nbsp;URL&nbsp;parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;provided.<br>
+&nbsp;&nbsp;media_source:&nbsp;MediaSource&nbsp;(optional)&nbsp;Container&nbsp;for&nbsp;the&nbsp;media&nbsp;to&nbsp;be&nbsp;sent<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;along&nbsp;with&nbsp;the&nbsp;entry,&nbsp;if&nbsp;provided.<br>
+&nbsp;&nbsp;converter:&nbsp;func&nbsp;(optional)&nbsp;A&nbsp;function&nbsp;which&nbsp;will&nbsp;be&nbsp;executed&nbsp;on&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;server's&nbsp;response.&nbsp;Often&nbsp;this&nbsp;is&nbsp;a&nbsp;function&nbsp;like<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GDataEntryFromString&nbsp;which&nbsp;will&nbsp;parse&nbsp;the&nbsp;body&nbsp;of&nbsp;the&nbsp;server's<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;and&nbsp;return&nbsp;a&nbsp;GDataEntry.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;If&nbsp;the&nbsp;post&nbsp;succeeded,&nbsp;this&nbsp;method&nbsp;will&nbsp;return&nbsp;a&nbsp;GDataFeed,&nbsp;GDataEntry,<br>
+&nbsp;&nbsp;or&nbsp;the&nbsp;results&nbsp;of&nbsp;running&nbsp;converter&nbsp;on&nbsp;the&nbsp;server's&nbsp;result&nbsp;body&nbsp;(if<br>
+&nbsp;&nbsp;converter&nbsp;was&nbsp;specified).</tt></dd></dl>
+
+<dl><dt><a name="AppsService-PostOrPut"><strong>PostOrPut</strong></a>(self, verb, data, uri, extra_headers<font color="#909090">=None</font>, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>, redirects_remaining<font color="#909090">=4</font>, media_source<font color="#909090">=None</font>, converter<font color="#909090">=None</font>)</dt><dd><tt>Insert&nbsp;data&nbsp;into&nbsp;a&nbsp;GData&nbsp;service&nbsp;at&nbsp;the&nbsp;given&nbsp;URI.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;verb:&nbsp;string,&nbsp;either&nbsp;'POST'&nbsp;or&nbsp;'PUT'<br>
+&nbsp;&nbsp;data:&nbsp;string,&nbsp;ElementTree._Element,&nbsp;atom.Entry,&nbsp;or&nbsp;gdata.GDataEntry&nbsp;The<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XML&nbsp;to&nbsp;be&nbsp;sent&nbsp;to&nbsp;the&nbsp;uri.&nbsp;<br>
+&nbsp;&nbsp;uri:&nbsp;string&nbsp;The&nbsp;location&nbsp;(feed)&nbsp;to&nbsp;which&nbsp;the&nbsp;data&nbsp;should&nbsp;be&nbsp;inserted.&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example:&nbsp;'/base/feeds/items'.&nbsp;<br>
+&nbsp;&nbsp;extra_headers:&nbsp;dict&nbsp;(optional)&nbsp;HTTP&nbsp;headers&nbsp;which&nbsp;are&nbsp;to&nbsp;be&nbsp;included.&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;client&nbsp;automatically&nbsp;sets&nbsp;the&nbsp;Content-Type,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Authorization,&nbsp;and&nbsp;Content-Length&nbsp;headers.<br>
+&nbsp;&nbsp;url_params:&nbsp;dict&nbsp;(optional)&nbsp;Additional&nbsp;URL&nbsp;parameters&nbsp;to&nbsp;be&nbsp;included<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;the&nbsp;URI.&nbsp;These&nbsp;are&nbsp;translated&nbsp;into&nbsp;query&nbsp;arguments<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;the&nbsp;form&nbsp;'&amp;dict_key=value&amp;...'.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example:&nbsp;{'max-results':&nbsp;'250'}&nbsp;becomes&nbsp;&amp;max-results=250<br>
+&nbsp;&nbsp;escape_params:&nbsp;boolean&nbsp;(optional)&nbsp;If&nbsp;false,&nbsp;the&nbsp;calling&nbsp;code&nbsp;has&nbsp;already<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ensured&nbsp;that&nbsp;the&nbsp;query&nbsp;will&nbsp;form&nbsp;a&nbsp;valid&nbsp;URL&nbsp;(all<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reserved&nbsp;characters&nbsp;have&nbsp;been&nbsp;escaped).&nbsp;If&nbsp;true,&nbsp;this<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;method&nbsp;will&nbsp;escape&nbsp;the&nbsp;query&nbsp;and&nbsp;any&nbsp;URL&nbsp;parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;provided.<br>
+&nbsp;&nbsp;media_source:&nbsp;MediaSource&nbsp;(optional)&nbsp;Container&nbsp;for&nbsp;the&nbsp;media&nbsp;to&nbsp;be&nbsp;sent<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;along&nbsp;with&nbsp;the&nbsp;entry,&nbsp;if&nbsp;provided.<br>
+&nbsp;&nbsp;converter:&nbsp;func&nbsp;(optional)&nbsp;A&nbsp;function&nbsp;which&nbsp;will&nbsp;be&nbsp;executed&nbsp;on&nbsp;the&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;server's&nbsp;response.&nbsp;Often&nbsp;this&nbsp;is&nbsp;a&nbsp;function&nbsp;like&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GDataEntryFromString&nbsp;which&nbsp;will&nbsp;parse&nbsp;the&nbsp;body&nbsp;of&nbsp;the&nbsp;server's&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;and&nbsp;return&nbsp;a&nbsp;GDataEntry.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;If&nbsp;the&nbsp;post&nbsp;succeeded,&nbsp;this&nbsp;method&nbsp;will&nbsp;return&nbsp;a&nbsp;GDataFeed,&nbsp;GDataEntry,<br>
+&nbsp;&nbsp;or&nbsp;the&nbsp;results&nbsp;of&nbsp;running&nbsp;converter&nbsp;on&nbsp;the&nbsp;server's&nbsp;result&nbsp;body&nbsp;(if<br>
+&nbsp;&nbsp;converter&nbsp;was&nbsp;specified).</tt></dd></dl>
+
+<dl><dt><a name="AppsService-ProgrammaticLogin"><strong>ProgrammaticLogin</strong></a>(self, captcha_token<font color="#909090">=None</font>, captcha_response<font color="#909090">=None</font>)</dt><dd><tt>Authenticates&nbsp;the&nbsp;user&nbsp;and&nbsp;sets&nbsp;the&nbsp;GData&nbsp;Auth&nbsp;token.<br>
+&nbsp;<br>
+Login&nbsp;retreives&nbsp;a&nbsp;temporary&nbsp;auth&nbsp;token&nbsp;which&nbsp;must&nbsp;be&nbsp;used&nbsp;with&nbsp;all<br>
+requests&nbsp;to&nbsp;GData&nbsp;services.&nbsp;The&nbsp;auth&nbsp;token&nbsp;is&nbsp;stored&nbsp;in&nbsp;the&nbsp;GData&nbsp;client<br>
+object.<br>
+&nbsp;<br>
+Login&nbsp;is&nbsp;also&nbsp;used&nbsp;to&nbsp;respond&nbsp;to&nbsp;a&nbsp;captcha&nbsp;challenge.&nbsp;If&nbsp;the&nbsp;user's&nbsp;login<br>
+attempt&nbsp;failed&nbsp;with&nbsp;a&nbsp;CaptchaRequired&nbsp;error,&nbsp;the&nbsp;user&nbsp;can&nbsp;respond&nbsp;by<br>
+calling&nbsp;Login&nbsp;with&nbsp;the&nbsp;captcha&nbsp;token&nbsp;and&nbsp;the&nbsp;answer&nbsp;to&nbsp;the&nbsp;challenge.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;captcha_token:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;identifier&nbsp;for&nbsp;the&nbsp;captcha&nbsp;challenge<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;which&nbsp;was&nbsp;presented&nbsp;to&nbsp;the&nbsp;user.<br>
+&nbsp;&nbsp;captcha_response:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;user's&nbsp;answer&nbsp;to&nbsp;the&nbsp;captch&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;challenge.<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;CaptchaRequired&nbsp;if&nbsp;the&nbsp;login&nbsp;service&nbsp;will&nbsp;require&nbsp;a&nbsp;captcha&nbsp;response<br>
+&nbsp;&nbsp;BadAuthentication&nbsp;if&nbsp;the&nbsp;login&nbsp;service&nbsp;rejected&nbsp;the&nbsp;username&nbsp;or&nbsp;password<br>
+&nbsp;&nbsp;<a href="#Error">Error</a>&nbsp;if&nbsp;the&nbsp;login&nbsp;service&nbsp;responded&nbsp;with&nbsp;a&nbsp;403&nbsp;different&nbsp;from&nbsp;the&nbsp;above</tt></dd></dl>
+
+<dl><dt><a name="AppsService-Put"><strong>Put</strong></a>(self, data, uri, extra_headers<font color="#909090">=None</font>, url_params<font color="#909090">=None</font>, escape_params<font color="#909090">=True</font>, redirects_remaining<font color="#909090">=3</font>, media_source<font color="#909090">=None</font>, converter<font color="#909090">=None</font>)</dt><dd><tt>Updates&nbsp;an&nbsp;entry&nbsp;at&nbsp;the&nbsp;given&nbsp;URI.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;data:&nbsp;string,&nbsp;ElementTree._Element,&nbsp;or&nbsp;xml_wrapper.ElementWrapper&nbsp;The&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XML&nbsp;containing&nbsp;the&nbsp;updated&nbsp;data.<br>
+&nbsp;&nbsp;uri:&nbsp;string&nbsp;A&nbsp;URI&nbsp;indicating&nbsp;entry&nbsp;to&nbsp;which&nbsp;the&nbsp;update&nbsp;will&nbsp;be&nbsp;applied.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example:&nbsp;'/base/feeds/items/ITEM-ID'<br>
+&nbsp;&nbsp;extra_headers:&nbsp;dict&nbsp;(optional)&nbsp;HTTP&nbsp;headers&nbsp;which&nbsp;are&nbsp;to&nbsp;be&nbsp;included.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;client&nbsp;automatically&nbsp;sets&nbsp;the&nbsp;Content-Type,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Authorization,&nbsp;and&nbsp;Content-Length&nbsp;headers.<br>
+&nbsp;&nbsp;url_params:&nbsp;dict&nbsp;(optional)&nbsp;Additional&nbsp;URL&nbsp;parameters&nbsp;to&nbsp;be&nbsp;included<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;the&nbsp;URI.&nbsp;These&nbsp;are&nbsp;translated&nbsp;into&nbsp;query&nbsp;arguments<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;the&nbsp;form&nbsp;'&amp;dict_key=value&amp;...'.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example:&nbsp;{'max-results':&nbsp;'250'}&nbsp;becomes&nbsp;&amp;max-results=250<br>
+&nbsp;&nbsp;escape_params:&nbsp;boolean&nbsp;(optional)&nbsp;If&nbsp;false,&nbsp;the&nbsp;calling&nbsp;code&nbsp;has&nbsp;already<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ensured&nbsp;that&nbsp;the&nbsp;query&nbsp;will&nbsp;form&nbsp;a&nbsp;valid&nbsp;URL&nbsp;(all<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reserved&nbsp;characters&nbsp;have&nbsp;been&nbsp;escaped).&nbsp;If&nbsp;true,&nbsp;this<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;method&nbsp;will&nbsp;escape&nbsp;the&nbsp;query&nbsp;and&nbsp;any&nbsp;URL&nbsp;parameters<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;provided.<br>
+&nbsp;&nbsp;converter:&nbsp;func&nbsp;(optional)&nbsp;A&nbsp;function&nbsp;which&nbsp;will&nbsp;be&nbsp;executed&nbsp;on&nbsp;the&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;server's&nbsp;response.&nbsp;Often&nbsp;this&nbsp;is&nbsp;a&nbsp;function&nbsp;like&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GDataEntryFromString&nbsp;which&nbsp;will&nbsp;parse&nbsp;the&nbsp;body&nbsp;of&nbsp;the&nbsp;server's&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;and&nbsp;return&nbsp;a&nbsp;GDataEntry.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;If&nbsp;the&nbsp;put&nbsp;succeeded,&nbsp;this&nbsp;method&nbsp;will&nbsp;return&nbsp;a&nbsp;GDataFeed,&nbsp;GDataEntry,<br>
+&nbsp;&nbsp;or&nbsp;the&nbsp;results&nbsp;of&nbsp;running&nbsp;converter&nbsp;on&nbsp;the&nbsp;server's&nbsp;result&nbsp;body&nbsp;(if<br>
+&nbsp;&nbsp;converter&nbsp;was&nbsp;specified).</tt></dd></dl>
+
+<dl><dt><a name="AppsService-RevokeAuthSubToken"><strong>RevokeAuthSubToken</strong></a>(self)</dt><dd><tt>Revokes&nbsp;an&nbsp;existing&nbsp;AuthSub&nbsp;token.<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;NonAuthSubToken&nbsp;if&nbsp;the&nbsp;user's&nbsp;auth&nbsp;token&nbsp;is&nbsp;not&nbsp;an&nbsp;AuthSub&nbsp;token</tt></dd></dl>
+
+<dl><dt><a name="AppsService-SetAuthSubToken"><strong>SetAuthSubToken</strong></a>(self, token)</dt></dl>
+
+<dl><dt><a name="AppsService-SetClientLoginToken"><strong>SetClientLoginToken</strong></a>(self, token)</dt></dl>
+
+<dl><dt><a name="AppsService-UpgradeToSessionToken"><strong>UpgradeToSessionToken</strong></a>(self)</dt><dd><tt>Upgrades&nbsp;a&nbsp;single&nbsp;use&nbsp;AuthSub&nbsp;token&nbsp;to&nbsp;a&nbsp;session&nbsp;token.<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;NonAuthSubToken&nbsp;if&nbsp;the&nbsp;user's&nbsp;auth&nbsp;token&nbsp;is&nbsp;not&nbsp;an&nbsp;AuthSub&nbsp;token</tt></dd></dl>
+
+<hr>
+Properties inherited from <a href="gdata.service.html#GDataService">gdata.service.GDataService</a>:<br>
+<dl><dt><strong>auth_token</strong></dt>
+<dd><tt>Get&nbsp;or&nbsp;set&nbsp;the&nbsp;token&nbsp;used&nbsp;for&nbsp;authentication.</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = __GetAuthToken(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = __SetAuthSubToken(self, auth_token)</dt></dl>
+</dd>
+</dl>
+<dl><dt><strong>captcha_token</strong></dt>
+<dd><tt>Get&nbsp;the&nbsp;captcha&nbsp;token&nbsp;for&nbsp;a&nbsp;login&nbsp;request.</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = __GetCaptchaToken(self)</dt></dl>
+</dd>
+</dl>
+<dl><dt><strong>captcha_url</strong></dt>
+<dd><tt>Get&nbsp;the&nbsp;captcha&nbsp;URL&nbsp;for&nbsp;a&nbsp;login&nbsp;request.</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = __GetCaptchaURL(self)</dt></dl>
+</dd>
+</dl>
+<dl><dt><strong>source</strong></dt>
+<dd><tt>The&nbsp;source&nbsp;is&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;application&nbsp;making&nbsp;the&nbsp;request.&nbsp;<br>
+It&nbsp;should&nbsp;be&nbsp;in&nbsp;the&nbsp;form&nbsp;company_id-app_name-app_version</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = __GetSource(self)</dt><dd><tt>#&nbsp;Private&nbsp;methods&nbsp;to&nbsp;create&nbsp;the&nbsp;source&nbsp;property.</tt></dd></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = __SetSource(self, new_source)</dt></dl>
+</dd>
+</dl>
+<hr>
+Methods inherited from <a href="atom.service.html#AtomService">atom.service.AtomService</a>:<br>
+<dl><dt><a name="AppsService-PrepareConnection"><strong>PrepareConnection</strong></a>(self, full_uri)</dt><dd><tt>Opens&nbsp;a&nbsp;connection&nbsp;to&nbsp;the&nbsp;server&nbsp;based&nbsp;on&nbsp;the&nbsp;full&nbsp;URI.<br>
+&nbsp;<br>
+Examines&nbsp;the&nbsp;target&nbsp;URI&nbsp;and&nbsp;the&nbsp;proxy&nbsp;settings,&nbsp;which&nbsp;are&nbsp;set&nbsp;as&nbsp;<br>
+environment&nbsp;variables,&nbsp;to&nbsp;open&nbsp;a&nbsp;connection&nbsp;with&nbsp;the&nbsp;server.&nbsp;This&nbsp;<br>
+connection&nbsp;is&nbsp;used&nbsp;to&nbsp;make&nbsp;an&nbsp;HTTP&nbsp;request.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;full_uri:&nbsp;str&nbsp;Which&nbsp;is&nbsp;the&nbsp;target&nbsp;relative&nbsp;(lacks&nbsp;protocol&nbsp;and&nbsp;host)&nbsp;or<br>
+&nbsp;&nbsp;absolute&nbsp;URL&nbsp;to&nbsp;be&nbsp;opened.&nbsp;Example:<br>
+&nbsp;&nbsp;'https://www.google.com/accounts/ClientLogin'&nbsp;or<br>
+&nbsp;&nbsp;'base/feeds/snippets'&nbsp;where&nbsp;the&nbsp;server&nbsp;is&nbsp;set&nbsp;to&nbsp;www.google.com.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;tuple&nbsp;containing&nbsp;the&nbsp;httplib.HTTPConnection&nbsp;and&nbsp;the&nbsp;full_uri&nbsp;for&nbsp;the<br>
+&nbsp;&nbsp;request.</tt></dd></dl>
+
+<dl><dt><a name="AppsService-UseBasicAuth"><strong>UseBasicAuth</strong></a>(self, username, password, for_proxy<font color="#909090">=False</font>)</dt><dd><tt>Sets&nbsp;an&nbsp;Authenticaiton:&nbsp;Basic&nbsp;HTTP&nbsp;header&nbsp;containing&nbsp;plaintext.<br>
+&nbsp;<br>
+The&nbsp;username&nbsp;and&nbsp;password&nbsp;are&nbsp;base64&nbsp;encoded&nbsp;and&nbsp;added&nbsp;to&nbsp;an&nbsp;HTTP&nbsp;header<br>
+which&nbsp;will&nbsp;be&nbsp;included&nbsp;in&nbsp;each&nbsp;request.&nbsp;Note&nbsp;that&nbsp;your&nbsp;username&nbsp;and&nbsp;<br>
+password&nbsp;are&nbsp;sent&nbsp;in&nbsp;plaintext.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;username:&nbsp;str<br>
+&nbsp;&nbsp;password:&nbsp;str</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.service.html#AtomService">atom.service.AtomService</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'AtomService' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>debug</strong> = False</dl>
+
+<dl><dt><strong>port</strong> = 80</dl>
+
+<dl><dt><strong>ssl</strong> = False</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Error">class <strong>Error</strong></a>(<a href="exceptions.html#Exception">exceptions.Exception</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="Error-__getitem__"><strong>__getitem__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="Error-__init__"><strong>__init__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="Error-__str__"><strong>__str__</strong></a>(...)</dt></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>API_VER</strong> = '2.0'<br>
+<strong>DEFAULT_QUOTA_LIMIT</strong> = '2048'<br>
+<strong>DOMAIN_ALIAS_LIMIT_EXCEEDED</strong> = 1201<br>
+<strong>DOMAIN_FEATURE_UNAVAILABLE</strong> = 1203<br>
+<strong>DOMAIN_SUSPENDED</strong> = 1202<br>
+<strong>DOMAIN_USER_LIMIT_EXCEEDED</strong> = 1200<br>
+<strong>ENTITY_DOES_NOT_EXIST</strong> = 1301<br>
+<strong>ENTITY_EXISTS</strong> = 1300<br>
+<strong>ENTITY_NAME_IS_RESERVED</strong> = 1302<br>
+<strong>ENTITY_NAME_NOT_VALID</strong> = 1303<br>
+<strong>HTTP_OK</strong> = 200<br>
+<strong>INVALID_EMAIL_ADDRESS</strong> = 1406<br>
+<strong>INVALID_FAMILY_NAME</strong> = 1401<br>
+<strong>INVALID_GIVEN_NAME</strong> = 1400<br>
+<strong>INVALID_HASH_DIGGEST_LENGTH</strong> = 1405<br>
+<strong>INVALID_HASH_FUNCTION_NAME</strong> = 1404<br>
+<strong>INVALID_PASSWORD</strong> = 1402<br>
+<strong>INVALID_QUERY_PARAMETER_VALUE</strong> = 1407<br>
+<strong>INVALID_USERNAME</strong> = 1403<br>
+<strong>TOO_MANY_RECIPIENTS_ON_EMAIL_LIST</strong> = 1500<br>
+<strong>UNKOWN_ERROR</strong> = 1000<br>
+<strong>USER_DELETED_RECENTLY</strong> = 1100<br>
+<strong>USER_SUSPENDED</strong> = 1101<br>
+<strong>__author__</strong> = 'tmatsuo@sios.com (Takashi MATSUO)'</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#7799ee">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Author</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#7799ee"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">tmatsuo@sios.com&nbsp;(Takashi&nbsp;MATSUO)</td></tr></table>
+</body></html>

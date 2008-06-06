@@ -1,0 +1,1326 @@
+
+<!doctype html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: package gdata.spreadsheet</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.spreadsheet</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/svn/gdata-python-client-release/src/gdata/spreadsheet/__init__.py">/usr/local/svn/gdata-python-client-release/src/gdata/spreadsheet/__init__.py</a></font></td></tr></table>
+    <p><tt>Contains&nbsp;extensions&nbsp;to&nbsp;Atom&nbsp;objects&nbsp;used&nbsp;with&nbsp;Google&nbsp;Spreadsheets.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Package Contents</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="gdata.spreadsheet.service.html">service</a><br>
+</td><td width="25%" valign=top><a href="gdata.spreadsheet.text_db.html">text_db</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="atom.html#AtomBase">atom.AtomBase</a>(<a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.spreadsheet.html#Cell">Cell</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.spreadsheet.html#ColCount">ColCount</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.spreadsheet.html#Custom">Custom</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.spreadsheet.html#RowCount">RowCount</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="gdata.html#BatchEntry">gdata.BatchEntry</a>(<a href="gdata.html#GDataEntry">gdata.GDataEntry</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.spreadsheet.html#SpreadsheetsCell">SpreadsheetsCell</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="gdata.html#BatchFeed">gdata.BatchFeed</a>(<a href="gdata.html#GDataFeed">gdata.GDataFeed</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.spreadsheet.html#SpreadsheetsCellsFeed">SpreadsheetsCellsFeed</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="gdata.html#GDataEntry">gdata.GDataEntry</a>(<a href="atom.html#Entry">atom.Entry</a>, <a href="gdata.html#LinkFinder">gdata.LinkFinder</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.spreadsheet.html#SpreadsheetsList">SpreadsheetsList</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.spreadsheet.html#SpreadsheetsSpreadsheet">SpreadsheetsSpreadsheet</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.spreadsheet.html#SpreadsheetsWorksheet">SpreadsheetsWorksheet</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="gdata.html#GDataFeed">gdata.GDataFeed</a>(<a href="atom.html#Feed">atom.Feed</a>, <a href="gdata.html#LinkFinder">gdata.LinkFinder</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.spreadsheet.html#SpreadsheetsListFeed">SpreadsheetsListFeed</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.spreadsheet.html#SpreadsheetsSpreadsheetsFeed">SpreadsheetsSpreadsheetsFeed</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.spreadsheet.html#SpreadsheetsWorksheetsFeed">SpreadsheetsWorksheetsFeed</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Cell">class <strong>Cell</strong></a>(<a href="atom.html#AtomBase">atom.AtomBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;Google&nbsp;Spreadsheets&nbsp;cell&nbsp;element<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.spreadsheet.html#Cell">Cell</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Cell-__init__"><strong>__init__</strong></a>(self, text<font color="#909090">=None</font>, row<font color="#909090">=None</font>, col<font color="#909090">=None</font>, inputValue<font color="#909090">=None</font>, numericValue<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="Cell-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;object&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Cell-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="Cell-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;object&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ColCount">class <strong>ColCount</strong></a>(<a href="atom.html#AtomBase">atom.AtomBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;Google&nbsp;Spreadsheets&nbsp;colCount&nbsp;element<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.spreadsheet.html#ColCount">ColCount</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="ColCount-__init__"><strong>__init__</strong></a>(self, text<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="ColCount-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;object&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="ColCount-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="ColCount-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;object&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Custom">class <strong>Custom</strong></a>(<a href="atom.html#AtomBase">atom.AtomBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;Google&nbsp;Spreadsheets&nbsp;custom&nbsp;element<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.spreadsheet.html#Custom">Custom</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Custom-__init__"><strong>__init__</strong></a>(self, column<font color="#909090">=None</font>, text<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="Custom-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;object&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Custom-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="Custom-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;object&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="RowCount">class <strong>RowCount</strong></a>(<a href="atom.html#AtomBase">atom.AtomBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;Google&nbsp;Spreadsheets&nbsp;rowCount&nbsp;element<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.spreadsheet.html#RowCount">RowCount</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="RowCount-__init__"><strong>__init__</strong></a>(self, text<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="RowCount-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;object&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="RowCount-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="RowCount-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;object&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SpreadsheetsCell">class <strong>SpreadsheetsCell</strong></a>(<a href="gdata.html#BatchEntry">gdata.BatchEntry</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;Google&nbsp;Spreadsheets&nbsp;flavor&nbsp;of&nbsp;a&nbsp;<a href="#Cell">Cell</a>&nbsp;Atom&nbsp;Entry<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.spreadsheet.html#SpreadsheetsCell">SpreadsheetsCell</a></dd>
+<dd><a href="gdata.html#BatchEntry">gdata.BatchEntry</a></dd>
+<dd><a href="gdata.html#GDataEntry">gdata.GDataEntry</a></dd>
+<dd><a href="atom.html#Entry">atom.Entry</a></dd>
+<dd><a href="atom.html#FeedEntryParent">atom.FeedEntryParent</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="gdata.html#LinkFinder">gdata.LinkFinder</a></dd>
+<dd><a href="atom.html#LinkFinder">atom.LinkFinder</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="SpreadsheetsCell-__init__"><strong>__init__</strong></a>(self, author<font color="#909090">=None</font>, category<font color="#909090">=None</font>, content<font color="#909090">=None</font>, contributor<font color="#909090">=None</font>, atom_id<font color="#909090">=None</font>, link<font color="#909090">=None</font>, published<font color="#909090">=None</font>, rights<font color="#909090">=None</font>, source<font color="#909090">=None</font>, summary<font color="#909090">=None</font>, title<font color="#909090">=None</font>, control<font color="#909090">=None</font>, updated<font color="#909090">=None</font>, cell<font color="#909090">=None</font>, batch_operation<font color="#909090">=None</font>, batch_id<font color="#909090">=None</font>, batch_status<font color="#909090">=None</font>, text<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.html#GDataEntry">gdata.GDataEntry</a>:<br>
+<dl><dt><a name="SpreadsheetsCell-GetMediaURL"><strong>GetMediaURL</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;to&nbsp;the&nbsp;media&nbsp;content,&nbsp;if&nbsp;the&nbsp;entry&nbsp;is&nbsp;a&nbsp;media&nbsp;entry.<br>
+Otherwise&nbsp;returns&nbsp;None.</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsCell-IsMedia"><strong>IsMedia</strong></a>(self)</dt><dd><tt>Determines&nbsp;whether&nbsp;or&nbsp;not&nbsp;an&nbsp;entry&nbsp;is&nbsp;a&nbsp;GData&nbsp;Media&nbsp;entry.</tt></dd></dl>
+
+<hr>
+Properties inherited from <a href="gdata.html#GDataEntry">gdata.GDataEntry</a>:<br>
+<dl><dt><strong>id</strong></dt>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = __GetId(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = __SetId(self, id)</dt><dd><tt>#&nbsp;This&nbsp;method&nbsp;was&nbsp;created&nbsp;to&nbsp;strip&nbsp;the&nbsp;unwanted&nbsp;whitespace&nbsp;from&nbsp;the&nbsp;id's&nbsp;<br>
+#&nbsp;text&nbsp;node.</tt></dd></dl>
+</dd>
+</dl>
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="SpreadsheetsCell-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;object&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsCell-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="SpreadsheetsCell-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;object&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.html#LinkFinder">gdata.LinkFinder</a>:<br>
+<dl><dt><a name="SpreadsheetsCell-GetAclLink"><strong>GetAclLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsCell-GetEditLink"><strong>GetEditLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsCell-GetEditMediaLink"><strong>GetEditMediaLink</strong></a>(self)</dt><dd><tt>The&nbsp;Picasa&nbsp;API&nbsp;mistakenly&nbsp;returns&nbsp;media-edit&nbsp;rather&nbsp;than&nbsp;edit-media,&nbsp;but<br>
+this&nbsp;may&nbsp;change&nbsp;soon.</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsCell-GetFeedLink"><strong>GetFeedLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsCell-GetHtmlLink"><strong>GetHtmlLink</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;of&nbsp;alternate&nbsp;and&nbsp;type&nbsp;of&nbsp;text/html<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;atom.Link&nbsp;or&nbsp;None&nbsp;if&nbsp;no&nbsp;links&nbsp;matched</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsCell-GetNextLink"><strong>GetNextLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsCell-GetPostLink"><strong>GetPostLink</strong></a>(self)</dt><dd><tt>Get&nbsp;a&nbsp;link&nbsp;containing&nbsp;the&nbsp;POST&nbsp;target&nbsp;URL.<br>
+&nbsp;<br>
+The&nbsp;POST&nbsp;target&nbsp;URL&nbsp;is&nbsp;used&nbsp;to&nbsp;insert&nbsp;new&nbsp;entries.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;link&nbsp;object&nbsp;with&nbsp;a&nbsp;rel&nbsp;matching&nbsp;the&nbsp;POST&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsCell-GetSelfLink"><strong>GetSelfLink</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;set&nbsp;to&nbsp;'self'<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;atom.Link&nbsp;or&nbsp;none&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#LinkFinder">atom.LinkFinder</a>:<br>
+<dl><dt><a name="SpreadsheetsCell-GetAlternateLink"><strong>GetAlternateLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsCell-GetLicenseLink"><strong>GetLicenseLink</strong></a>(self)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SpreadsheetsCellsFeed">class <strong>SpreadsheetsCellsFeed</strong></a>(<a href="gdata.html#BatchFeed">gdata.BatchFeed</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;feed&nbsp;containing&nbsp;Google&nbsp;Spreadsheets&nbsp;Cells<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.spreadsheet.html#SpreadsheetsCellsFeed">SpreadsheetsCellsFeed</a></dd>
+<dd><a href="gdata.html#BatchFeed">gdata.BatchFeed</a></dd>
+<dd><a href="gdata.html#GDataFeed">gdata.GDataFeed</a></dd>
+<dd><a href="atom.html#Feed">atom.Feed</a></dd>
+<dd><a href="atom.html#Source">atom.Source</a></dd>
+<dd><a href="atom.html#FeedEntryParent">atom.FeedEntryParent</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="gdata.html#LinkFinder">gdata.LinkFinder</a></dd>
+<dd><a href="atom.html#LinkFinder">atom.LinkFinder</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="SpreadsheetsCellsFeed-GetBatchLink"><strong>GetBatchLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsCellsFeed-__init__"><strong>__init__</strong></a>(self, author<font color="#909090">=None</font>, category<font color="#909090">=None</font>, contributor<font color="#909090">=None</font>, generator<font color="#909090">=None</font>, icon<font color="#909090">=None</font>, atom_id<font color="#909090">=None</font>, link<font color="#909090">=None</font>, logo<font color="#909090">=None</font>, rights<font color="#909090">=None</font>, subtitle<font color="#909090">=None</font>, title<font color="#909090">=None</font>, updated<font color="#909090">=None</font>, entry<font color="#909090">=None</font>, total_results<font color="#909090">=None</font>, start_index<font color="#909090">=None</font>, items_per_page<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>, row_count<font color="#909090">=None</font>, col_count<font color="#909090">=None</font>, interrupted<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.html#BatchFeed">gdata.BatchFeed</a>:<br>
+<dl><dt><a name="SpreadsheetsCellsFeed-AddBatchEntry"><strong>AddBatchEntry</strong></a>(self, entry<font color="#909090">=None</font>, id_url_string<font color="#909090">=None</font>, batch_id_string<font color="#909090">=None</font>, operation_string<font color="#909090">=None</font>)</dt><dd><tt>Logic&nbsp;for&nbsp;populating&nbsp;members&nbsp;of&nbsp;a&nbsp;<a href="gdata.html#BatchEntry">BatchEntry</a>&nbsp;and&nbsp;adding&nbsp;to&nbsp;the&nbsp;feed.<br>
+&nbsp;<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;entry&nbsp;is&nbsp;not&nbsp;a&nbsp;<a href="gdata.html#BatchEntry">BatchEntry</a>,&nbsp;it&nbsp;is&nbsp;converted&nbsp;to&nbsp;a&nbsp;<a href="gdata.html#BatchEntry">BatchEntry</a>&nbsp;so<br>
+that&nbsp;the&nbsp;batch&nbsp;specific&nbsp;members&nbsp;will&nbsp;be&nbsp;present.&nbsp;<br>
+&nbsp;<br>
+The&nbsp;id_url_string&nbsp;can&nbsp;be&nbsp;used&nbsp;in&nbsp;place&nbsp;of&nbsp;an&nbsp;entry&nbsp;if&nbsp;the&nbsp;batch&nbsp;operation<br>
+applies&nbsp;to&nbsp;a&nbsp;URL.&nbsp;For&nbsp;example&nbsp;query&nbsp;and&nbsp;delete&nbsp;operations&nbsp;require&nbsp;just<br>
+the&nbsp;URL&nbsp;of&nbsp;an&nbsp;entry,&nbsp;no&nbsp;body&nbsp;is&nbsp;sent&nbsp;in&nbsp;the&nbsp;HTTP&nbsp;request.&nbsp;If&nbsp;an<br>
+id_url_string&nbsp;is&nbsp;sent&nbsp;instead&nbsp;of&nbsp;an&nbsp;entry,&nbsp;a&nbsp;<a href="gdata.html#BatchEntry">BatchEntry</a>&nbsp;is&nbsp;created&nbsp;and<br>
+added&nbsp;to&nbsp;the&nbsp;feed.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;also&nbsp;assigns&nbsp;the&nbsp;desired&nbsp;batch&nbsp;id&nbsp;to&nbsp;the&nbsp;entry&nbsp;so&nbsp;that&nbsp;it&nbsp;<br>
+can&nbsp;be&nbsp;referenced&nbsp;in&nbsp;the&nbsp;server's&nbsp;response.&nbsp;If&nbsp;the&nbsp;batch_id_string&nbsp;is<br>
+None,&nbsp;this&nbsp;method&nbsp;will&nbsp;assign&nbsp;a&nbsp;batch_id&nbsp;to&nbsp;be&nbsp;the&nbsp;index&nbsp;at&nbsp;which&nbsp;this<br>
+entry&nbsp;will&nbsp;be&nbsp;in&nbsp;the&nbsp;feed's&nbsp;entry&nbsp;list.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;entry:&nbsp;<a href="gdata.html#BatchEntry">BatchEntry</a>,&nbsp;atom.Entry,&nbsp;or&nbsp;another&nbsp;Entry&nbsp;flavor&nbsp;(optional)&nbsp;The<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;entry&nbsp;which&nbsp;will&nbsp;be&nbsp;sent&nbsp;to&nbsp;the&nbsp;server&nbsp;as&nbsp;part&nbsp;of&nbsp;the&nbsp;batch&nbsp;request.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;item&nbsp;must&nbsp;have&nbsp;a&nbsp;valid&nbsp;atom&nbsp;id&nbsp;so&nbsp;that&nbsp;the&nbsp;server&nbsp;knows&nbsp;which&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;entry&nbsp;this&nbsp;request&nbsp;references.<br>
+&nbsp;&nbsp;id_url_string:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;URL&nbsp;of&nbsp;the&nbsp;entry&nbsp;to&nbsp;be&nbsp;acted&nbsp;on.&nbsp;You<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;can&nbsp;find&nbsp;this&nbsp;URL&nbsp;in&nbsp;the&nbsp;text&nbsp;member&nbsp;of&nbsp;the&nbsp;atom&nbsp;id&nbsp;for&nbsp;an&nbsp;entry.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;an&nbsp;entry&nbsp;is&nbsp;not&nbsp;sent,&nbsp;this&nbsp;id&nbsp;will&nbsp;be&nbsp;used&nbsp;to&nbsp;construct&nbsp;a&nbsp;new<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="gdata.html#BatchEntry">BatchEntry</a>&nbsp;which&nbsp;will&nbsp;be&nbsp;added&nbsp;to&nbsp;the&nbsp;request&nbsp;feed.<br>
+&nbsp;&nbsp;batch_id_string:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;batch&nbsp;ID&nbsp;to&nbsp;be&nbsp;used&nbsp;to&nbsp;reference<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this&nbsp;batch&nbsp;operation&nbsp;in&nbsp;the&nbsp;results&nbsp;feed.&nbsp;If&nbsp;this&nbsp;parameter&nbsp;is&nbsp;None,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;current&nbsp;length&nbsp;of&nbsp;the&nbsp;feed's&nbsp;entry&nbsp;array&nbsp;will&nbsp;be&nbsp;used&nbsp;as&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count.&nbsp;Note&nbsp;that&nbsp;batch_ids&nbsp;should&nbsp;either&nbsp;always&nbsp;be&nbsp;specified&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;never,&nbsp;mixing&nbsp;could&nbsp;potentially&nbsp;result&nbsp;in&nbsp;duplicate&nbsp;batch&nbsp;ids.<br>
+&nbsp;&nbsp;operation_string:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;batch&nbsp;operation&nbsp;which&nbsp;will<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set&nbsp;the&nbsp;batch_operation.type&nbsp;member&nbsp;of&nbsp;the&nbsp;entry.&nbsp;Options&nbsp;are<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'insert',&nbsp;'update',&nbsp;'delete',&nbsp;and&nbsp;'query'<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;MissingRequiredParameters:&nbsp;Raised&nbsp;if&nbsp;neither&nbsp;an&nbsp;id_&nbsp;url_string&nbsp;nor&nbsp;an<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;entry&nbsp;are&nbsp;provided&nbsp;in&nbsp;the&nbsp;request.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;The&nbsp;added&nbsp;entry.</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsCellsFeed-AddDelete"><strong>AddDelete</strong></a>(self, url_string<font color="#909090">=None</font>, entry<font color="#909090">=None</font>, batch_id_string<font color="#909090">=None</font>)</dt><dd><tt>Adds&nbsp;a&nbsp;delete&nbsp;request&nbsp;to&nbsp;the&nbsp;batch&nbsp;request&nbsp;feed.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;takes&nbsp;either&nbsp;the&nbsp;url_string&nbsp;which&nbsp;is&nbsp;the&nbsp;atom&nbsp;id&nbsp;of&nbsp;the&nbsp;item<br>
+to&nbsp;be&nbsp;deleted,&nbsp;or&nbsp;the&nbsp;entry&nbsp;itself.&nbsp;The&nbsp;atom&nbsp;id&nbsp;of&nbsp;the&nbsp;entry&nbsp;must&nbsp;be&nbsp;<br>
+present&nbsp;so&nbsp;that&nbsp;the&nbsp;server&nbsp;knows&nbsp;which&nbsp;entry&nbsp;should&nbsp;be&nbsp;deleted.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;url_string:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;URL&nbsp;of&nbsp;the&nbsp;entry&nbsp;to&nbsp;be&nbsp;deleted.&nbsp;You&nbsp;can<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;find&nbsp;this&nbsp;URL&nbsp;in&nbsp;the&nbsp;text&nbsp;member&nbsp;of&nbsp;the&nbsp;atom&nbsp;id&nbsp;for&nbsp;an&nbsp;entry.&nbsp;<br>
+&nbsp;&nbsp;entry:&nbsp;<a href="gdata.html#BatchEntry">BatchEntry</a>&nbsp;(optional)&nbsp;The&nbsp;entry&nbsp;to&nbsp;be&nbsp;deleted.<br>
+&nbsp;&nbsp;batch_id_string:&nbsp;str&nbsp;(optional)<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;MissingRequiredParameters:&nbsp;Raised&nbsp;if&nbsp;neither&nbsp;a&nbsp;url_string&nbsp;nor&nbsp;an&nbsp;entry&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;are&nbsp;provided&nbsp;in&nbsp;the&nbsp;request.</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsCellsFeed-AddInsert"><strong>AddInsert</strong></a>(self, entry, batch_id_string<font color="#909090">=None</font>)</dt><dd><tt>Add&nbsp;an&nbsp;insert&nbsp;request&nbsp;to&nbsp;the&nbsp;operations&nbsp;in&nbsp;this&nbsp;batch&nbsp;request&nbsp;feed.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;entry&nbsp;doesn't&nbsp;yet&nbsp;have&nbsp;an&nbsp;operation&nbsp;or&nbsp;a&nbsp;batch&nbsp;id,&nbsp;these&nbsp;will<br>
+be&nbsp;set&nbsp;to&nbsp;the&nbsp;insert&nbsp;operation&nbsp;and&nbsp;a&nbsp;batch_id&nbsp;specified&nbsp;as&nbsp;a&nbsp;parameter.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;entry:&nbsp;<a href="gdata.html#BatchEntry">BatchEntry</a>&nbsp;The&nbsp;entry&nbsp;which&nbsp;will&nbsp;be&nbsp;sent&nbsp;in&nbsp;the&nbsp;batch&nbsp;feed&nbsp;as&nbsp;an<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;insert&nbsp;request.<br>
+&nbsp;&nbsp;batch_id_string:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;batch&nbsp;ID&nbsp;to&nbsp;be&nbsp;used&nbsp;to&nbsp;reference<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this&nbsp;batch&nbsp;operation&nbsp;in&nbsp;the&nbsp;results&nbsp;feed.&nbsp;If&nbsp;this&nbsp;parameter&nbsp;is&nbsp;None,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;current&nbsp;length&nbsp;of&nbsp;the&nbsp;feed's&nbsp;entry&nbsp;array&nbsp;will&nbsp;be&nbsp;used&nbsp;as&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count.&nbsp;Note&nbsp;that&nbsp;batch_ids&nbsp;should&nbsp;either&nbsp;always&nbsp;be&nbsp;specified&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;never,&nbsp;mixing&nbsp;could&nbsp;potentially&nbsp;result&nbsp;in&nbsp;duplicate&nbsp;batch&nbsp;ids.</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsCellsFeed-AddQuery"><strong>AddQuery</strong></a>(self, url_string<font color="#909090">=None</font>, entry<font color="#909090">=None</font>, batch_id_string<font color="#909090">=None</font>)</dt><dd><tt>Adds&nbsp;a&nbsp;query&nbsp;request&nbsp;to&nbsp;the&nbsp;batch&nbsp;request&nbsp;feed.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;takes&nbsp;either&nbsp;the&nbsp;url_string&nbsp;which&nbsp;is&nbsp;the&nbsp;query&nbsp;URL&nbsp;<br>
+whose&nbsp;results&nbsp;will&nbsp;be&nbsp;added&nbsp;to&nbsp;the&nbsp;result&nbsp;feed.&nbsp;The&nbsp;query&nbsp;URL&nbsp;will<br>
+be&nbsp;encapsulated&nbsp;in&nbsp;a&nbsp;<a href="gdata.html#BatchEntry">BatchEntry</a>,&nbsp;and&nbsp;you&nbsp;may&nbsp;pass&nbsp;in&nbsp;the&nbsp;<a href="gdata.html#BatchEntry">BatchEntry</a><br>
+with&nbsp;a&nbsp;query&nbsp;URL&nbsp;instead&nbsp;of&nbsp;sending&nbsp;a&nbsp;url_string.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;url_string:&nbsp;str&nbsp;(optional)<br>
+&nbsp;&nbsp;entry:&nbsp;<a href="gdata.html#BatchEntry">BatchEntry</a>&nbsp;(optional)<br>
+&nbsp;&nbsp;batch_id_string:&nbsp;str&nbsp;(optional)<br>
+&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;MissingRequiredParameters</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsCellsFeed-AddUpdate"><strong>AddUpdate</strong></a>(self, entry, batch_id_string<font color="#909090">=None</font>)</dt><dd><tt>Add&nbsp;an&nbsp;update&nbsp;request&nbsp;to&nbsp;the&nbsp;list&nbsp;of&nbsp;batch&nbsp;operations&nbsp;in&nbsp;this&nbsp;feed.<br>
+&nbsp;<br>
+Sets&nbsp;the&nbsp;operation&nbsp;type&nbsp;of&nbsp;the&nbsp;entry&nbsp;to&nbsp;insert&nbsp;if&nbsp;it&nbsp;is&nbsp;not&nbsp;already&nbsp;set<br>
+and&nbsp;assigns&nbsp;the&nbsp;desired&nbsp;batch&nbsp;id&nbsp;to&nbsp;the&nbsp;entry&nbsp;so&nbsp;that&nbsp;it&nbsp;can&nbsp;be&nbsp;<br>
+referenced&nbsp;in&nbsp;the&nbsp;server's&nbsp;response.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;entry:&nbsp;<a href="gdata.html#BatchEntry">BatchEntry</a>&nbsp;The&nbsp;entry&nbsp;which&nbsp;will&nbsp;be&nbsp;sent&nbsp;to&nbsp;the&nbsp;server&nbsp;as&nbsp;an<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;update&nbsp;(HTTP&nbsp;PUT)&nbsp;request.&nbsp;The&nbsp;item&nbsp;must&nbsp;have&nbsp;a&nbsp;valid&nbsp;atom&nbsp;id<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;so&nbsp;that&nbsp;the&nbsp;server&nbsp;knows&nbsp;which&nbsp;entry&nbsp;to&nbsp;replace.<br>
+&nbsp;&nbsp;batch_id_string:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;batch&nbsp;ID&nbsp;to&nbsp;be&nbsp;used&nbsp;to&nbsp;reference<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this&nbsp;batch&nbsp;operation&nbsp;in&nbsp;the&nbsp;results&nbsp;feed.&nbsp;If&nbsp;this&nbsp;parameter&nbsp;is&nbsp;None,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;current&nbsp;length&nbsp;of&nbsp;the&nbsp;feed's&nbsp;entry&nbsp;array&nbsp;will&nbsp;be&nbsp;used&nbsp;as&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count.&nbsp;See&nbsp;also&nbsp;comments&nbsp;for&nbsp;AddInsert.</tt></dd></dl>
+
+<hr>
+Properties inherited from <a href="gdata.html#GDataFeed">gdata.GDataFeed</a>:<br>
+<dl><dt><strong>generator</strong></dt>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = __GetGenerator(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = __SetGenerator(self, generator)</dt></dl>
+</dd>
+</dl>
+<dl><dt><strong>id</strong></dt>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = __GetId(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = __SetId(self, id)</dt></dl>
+</dd>
+</dl>
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="SpreadsheetsCellsFeed-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;object&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsCellsFeed-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="SpreadsheetsCellsFeed-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;object&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.html#LinkFinder">gdata.LinkFinder</a>:<br>
+<dl><dt><a name="SpreadsheetsCellsFeed-GetAclLink"><strong>GetAclLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsCellsFeed-GetEditLink"><strong>GetEditLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsCellsFeed-GetEditMediaLink"><strong>GetEditMediaLink</strong></a>(self)</dt><dd><tt>The&nbsp;Picasa&nbsp;API&nbsp;mistakenly&nbsp;returns&nbsp;media-edit&nbsp;rather&nbsp;than&nbsp;edit-media,&nbsp;but<br>
+this&nbsp;may&nbsp;change&nbsp;soon.</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsCellsFeed-GetFeedLink"><strong>GetFeedLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsCellsFeed-GetHtmlLink"><strong>GetHtmlLink</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;of&nbsp;alternate&nbsp;and&nbsp;type&nbsp;of&nbsp;text/html<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;atom.Link&nbsp;or&nbsp;None&nbsp;if&nbsp;no&nbsp;links&nbsp;matched</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsCellsFeed-GetNextLink"><strong>GetNextLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsCellsFeed-GetPostLink"><strong>GetPostLink</strong></a>(self)</dt><dd><tt>Get&nbsp;a&nbsp;link&nbsp;containing&nbsp;the&nbsp;POST&nbsp;target&nbsp;URL.<br>
+&nbsp;<br>
+The&nbsp;POST&nbsp;target&nbsp;URL&nbsp;is&nbsp;used&nbsp;to&nbsp;insert&nbsp;new&nbsp;entries.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;link&nbsp;object&nbsp;with&nbsp;a&nbsp;rel&nbsp;matching&nbsp;the&nbsp;POST&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsCellsFeed-GetSelfLink"><strong>GetSelfLink</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;set&nbsp;to&nbsp;'self'<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;atom.Link&nbsp;or&nbsp;none&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#LinkFinder">atom.LinkFinder</a>:<br>
+<dl><dt><a name="SpreadsheetsCellsFeed-GetAlternateLink"><strong>GetAlternateLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsCellsFeed-GetLicenseLink"><strong>GetLicenseLink</strong></a>(self)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SpreadsheetsList">class <strong>SpreadsheetsList</strong></a>(<a href="gdata.html#GDataEntry">gdata.GDataEntry</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;Google&nbsp;Spreadsheets&nbsp;flavor&nbsp;of&nbsp;a&nbsp;List&nbsp;Atom&nbsp;Entry<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.spreadsheet.html#SpreadsheetsList">SpreadsheetsList</a></dd>
+<dd><a href="gdata.html#GDataEntry">gdata.GDataEntry</a></dd>
+<dd><a href="atom.html#Entry">atom.Entry</a></dd>
+<dd><a href="atom.html#FeedEntryParent">atom.FeedEntryParent</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="gdata.html#LinkFinder">gdata.LinkFinder</a></dd>
+<dd><a href="atom.html#LinkFinder">atom.LinkFinder</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="SpreadsheetsList-__init__"><strong>__init__</strong></a>(self, author<font color="#909090">=None</font>, category<font color="#909090">=None</font>, content<font color="#909090">=None</font>, contributor<font color="#909090">=None</font>, atom_id<font color="#909090">=None</font>, link<font color="#909090">=None</font>, published<font color="#909090">=None</font>, rights<font color="#909090">=None</font>, source<font color="#909090">=None</font>, summary<font color="#909090">=None</font>, title<font color="#909090">=None</font>, control<font color="#909090">=None</font>, updated<font color="#909090">=None</font>, custom<font color="#909090">=None</font>, text<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.html#GDataEntry">gdata.GDataEntry</a>:<br>
+<dl><dt><a name="SpreadsheetsList-GetMediaURL"><strong>GetMediaURL</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;to&nbsp;the&nbsp;media&nbsp;content,&nbsp;if&nbsp;the&nbsp;entry&nbsp;is&nbsp;a&nbsp;media&nbsp;entry.<br>
+Otherwise&nbsp;returns&nbsp;None.</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsList-IsMedia"><strong>IsMedia</strong></a>(self)</dt><dd><tt>Determines&nbsp;whether&nbsp;or&nbsp;not&nbsp;an&nbsp;entry&nbsp;is&nbsp;a&nbsp;GData&nbsp;Media&nbsp;entry.</tt></dd></dl>
+
+<hr>
+Properties inherited from <a href="gdata.html#GDataEntry">gdata.GDataEntry</a>:<br>
+<dl><dt><strong>id</strong></dt>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = __GetId(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = __SetId(self, id)</dt><dd><tt>#&nbsp;This&nbsp;method&nbsp;was&nbsp;created&nbsp;to&nbsp;strip&nbsp;the&nbsp;unwanted&nbsp;whitespace&nbsp;from&nbsp;the&nbsp;id's&nbsp;<br>
+#&nbsp;text&nbsp;node.</tt></dd></dl>
+</dd>
+</dl>
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="SpreadsheetsList-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;object&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsList-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="SpreadsheetsList-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;object&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.html#LinkFinder">gdata.LinkFinder</a>:<br>
+<dl><dt><a name="SpreadsheetsList-GetAclLink"><strong>GetAclLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsList-GetEditLink"><strong>GetEditLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsList-GetEditMediaLink"><strong>GetEditMediaLink</strong></a>(self)</dt><dd><tt>The&nbsp;Picasa&nbsp;API&nbsp;mistakenly&nbsp;returns&nbsp;media-edit&nbsp;rather&nbsp;than&nbsp;edit-media,&nbsp;but<br>
+this&nbsp;may&nbsp;change&nbsp;soon.</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsList-GetFeedLink"><strong>GetFeedLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsList-GetHtmlLink"><strong>GetHtmlLink</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;of&nbsp;alternate&nbsp;and&nbsp;type&nbsp;of&nbsp;text/html<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;atom.Link&nbsp;or&nbsp;None&nbsp;if&nbsp;no&nbsp;links&nbsp;matched</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsList-GetNextLink"><strong>GetNextLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsList-GetPostLink"><strong>GetPostLink</strong></a>(self)</dt><dd><tt>Get&nbsp;a&nbsp;link&nbsp;containing&nbsp;the&nbsp;POST&nbsp;target&nbsp;URL.<br>
+&nbsp;<br>
+The&nbsp;POST&nbsp;target&nbsp;URL&nbsp;is&nbsp;used&nbsp;to&nbsp;insert&nbsp;new&nbsp;entries.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;link&nbsp;object&nbsp;with&nbsp;a&nbsp;rel&nbsp;matching&nbsp;the&nbsp;POST&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsList-GetSelfLink"><strong>GetSelfLink</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;set&nbsp;to&nbsp;'self'<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;atom.Link&nbsp;or&nbsp;none&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#LinkFinder">atom.LinkFinder</a>:<br>
+<dl><dt><a name="SpreadsheetsList-GetAlternateLink"><strong>GetAlternateLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsList-GetLicenseLink"><strong>GetLicenseLink</strong></a>(self)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SpreadsheetsListFeed">class <strong>SpreadsheetsListFeed</strong></a>(<a href="gdata.html#GDataFeed">gdata.GDataFeed</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;feed&nbsp;containing&nbsp;Google&nbsp;Spreadsheets&nbsp;Spreadsheets<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.spreadsheet.html#SpreadsheetsListFeed">SpreadsheetsListFeed</a></dd>
+<dd><a href="gdata.html#GDataFeed">gdata.GDataFeed</a></dd>
+<dd><a href="atom.html#Feed">atom.Feed</a></dd>
+<dd><a href="atom.html#Source">atom.Source</a></dd>
+<dd><a href="atom.html#FeedEntryParent">atom.FeedEntryParent</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="gdata.html#LinkFinder">gdata.LinkFinder</a></dd>
+<dd><a href="atom.html#LinkFinder">atom.LinkFinder</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods inherited from <a href="gdata.html#GDataFeed">gdata.GDataFeed</a>:<br>
+<dl><dt><a name="SpreadsheetsListFeed-__init__"><strong>__init__</strong></a>(self, author<font color="#909090">=None</font>, category<font color="#909090">=None</font>, contributor<font color="#909090">=None</font>, generator<font color="#909090">=None</font>, icon<font color="#909090">=None</font>, atom_id<font color="#909090">=None</font>, link<font color="#909090">=None</font>, logo<font color="#909090">=None</font>, rights<font color="#909090">=None</font>, subtitle<font color="#909090">=None</font>, title<font color="#909090">=None</font>, updated<font color="#909090">=None</font>, entry<font color="#909090">=None</font>, total_results<font color="#909090">=None</font>, start_index<font color="#909090">=None</font>, items_per_page<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;Source<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;author:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;Author&nbsp;instances&nbsp;which&nbsp;belong&nbsp;to&nbsp;this<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class.<br>
+&nbsp;&nbsp;category:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;Category&nbsp;instances<br>
+&nbsp;&nbsp;contributor:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;on&nbsp;Contributor&nbsp;instances<br>
+&nbsp;&nbsp;generator:&nbsp;Generator&nbsp;(optional)&nbsp;<br>
+&nbsp;&nbsp;icon:&nbsp;Icon&nbsp;(optional)&nbsp;<br>
+&nbsp;&nbsp;id:&nbsp;Id&nbsp;(optional)&nbsp;The&nbsp;entry's&nbsp;Id&nbsp;element<br>
+&nbsp;&nbsp;link:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;Link&nbsp;instances<br>
+&nbsp;&nbsp;logo:&nbsp;Logo&nbsp;(optional)&nbsp;<br>
+&nbsp;&nbsp;rights:&nbsp;Rights&nbsp;(optional)&nbsp;The&nbsp;entry's&nbsp;Rights&nbsp;element<br>
+&nbsp;&nbsp;subtitle:&nbsp;Subtitle&nbsp;(optional)&nbsp;The&nbsp;entry's&nbsp;subtitle&nbsp;element<br>
+&nbsp;&nbsp;title:&nbsp;Title&nbsp;(optional)&nbsp;the&nbsp;entry's&nbsp;title&nbsp;element<br>
+&nbsp;&nbsp;updated:&nbsp;Updated&nbsp;(optional)&nbsp;the&nbsp;entry's&nbsp;updated&nbsp;element<br>
+&nbsp;&nbsp;entry:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;Entry&nbsp;instances&nbsp;contained&nbsp;in&nbsp;the&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;feed.<br>
+&nbsp;&nbsp;text:&nbsp;String&nbsp;(optional)&nbsp;The&nbsp;text&nbsp;contents&nbsp;of&nbsp;the&nbsp;element.&nbsp;This&nbsp;is&nbsp;the&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contents&nbsp;of&nbsp;the&nbsp;Entry's&nbsp;XML&nbsp;text&nbsp;node.&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Example:&nbsp;&lt;foo&gt;This&nbsp;is&nbsp;the&nbsp;text&lt;/foo&gt;)<br>
+&nbsp;&nbsp;extension_elements:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;ExtensionElement&nbsp;instances<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;which&nbsp;are&nbsp;children&nbsp;of&nbsp;this&nbsp;element.<br>
+&nbsp;&nbsp;extension_attributes:&nbsp;dict&nbsp;(optional)&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;strings&nbsp;which&nbsp;are&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;values&nbsp;for&nbsp;additional&nbsp;XML&nbsp;attributes&nbsp;of&nbsp;this&nbsp;element.</tt></dd></dl>
+
+<hr>
+Properties inherited from <a href="gdata.html#GDataFeed">gdata.GDataFeed</a>:<br>
+<dl><dt><strong>generator</strong></dt>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = __GetGenerator(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = __SetGenerator(self, generator)</dt></dl>
+</dd>
+</dl>
+<dl><dt><strong>id</strong></dt>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = __GetId(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = __SetId(self, id)</dt></dl>
+</dd>
+</dl>
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="SpreadsheetsListFeed-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;object&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsListFeed-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="SpreadsheetsListFeed-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;object&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.html#LinkFinder">gdata.LinkFinder</a>:<br>
+<dl><dt><a name="SpreadsheetsListFeed-GetAclLink"><strong>GetAclLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsListFeed-GetEditLink"><strong>GetEditLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsListFeed-GetEditMediaLink"><strong>GetEditMediaLink</strong></a>(self)</dt><dd><tt>The&nbsp;Picasa&nbsp;API&nbsp;mistakenly&nbsp;returns&nbsp;media-edit&nbsp;rather&nbsp;than&nbsp;edit-media,&nbsp;but<br>
+this&nbsp;may&nbsp;change&nbsp;soon.</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsListFeed-GetFeedLink"><strong>GetFeedLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsListFeed-GetHtmlLink"><strong>GetHtmlLink</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;of&nbsp;alternate&nbsp;and&nbsp;type&nbsp;of&nbsp;text/html<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;atom.Link&nbsp;or&nbsp;None&nbsp;if&nbsp;no&nbsp;links&nbsp;matched</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsListFeed-GetNextLink"><strong>GetNextLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsListFeed-GetPostLink"><strong>GetPostLink</strong></a>(self)</dt><dd><tt>Get&nbsp;a&nbsp;link&nbsp;containing&nbsp;the&nbsp;POST&nbsp;target&nbsp;URL.<br>
+&nbsp;<br>
+The&nbsp;POST&nbsp;target&nbsp;URL&nbsp;is&nbsp;used&nbsp;to&nbsp;insert&nbsp;new&nbsp;entries.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;link&nbsp;object&nbsp;with&nbsp;a&nbsp;rel&nbsp;matching&nbsp;the&nbsp;POST&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsListFeed-GetSelfLink"><strong>GetSelfLink</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;set&nbsp;to&nbsp;'self'<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;atom.Link&nbsp;or&nbsp;none&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#LinkFinder">atom.LinkFinder</a>:<br>
+<dl><dt><a name="SpreadsheetsListFeed-GetAlternateLink"><strong>GetAlternateLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsListFeed-GetLicenseLink"><strong>GetLicenseLink</strong></a>(self)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SpreadsheetsSpreadsheet">class <strong>SpreadsheetsSpreadsheet</strong></a>(<a href="gdata.html#GDataEntry">gdata.GDataEntry</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;Google&nbsp;Spreadsheets&nbsp;flavor&nbsp;of&nbsp;a&nbsp;Spreadsheet&nbsp;Atom&nbsp;Entry<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.spreadsheet.html#SpreadsheetsSpreadsheet">SpreadsheetsSpreadsheet</a></dd>
+<dd><a href="gdata.html#GDataEntry">gdata.GDataEntry</a></dd>
+<dd><a href="atom.html#Entry">atom.Entry</a></dd>
+<dd><a href="atom.html#FeedEntryParent">atom.FeedEntryParent</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="gdata.html#LinkFinder">gdata.LinkFinder</a></dd>
+<dd><a href="atom.html#LinkFinder">atom.LinkFinder</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="SpreadsheetsSpreadsheet-__init__"><strong>__init__</strong></a>(self, author<font color="#909090">=None</font>, category<font color="#909090">=None</font>, content<font color="#909090">=None</font>, contributor<font color="#909090">=None</font>, atom_id<font color="#909090">=None</font>, link<font color="#909090">=None</font>, published<font color="#909090">=None</font>, rights<font color="#909090">=None</font>, source<font color="#909090">=None</font>, summary<font color="#909090">=None</font>, title<font color="#909090">=None</font>, control<font color="#909090">=None</font>, updated<font color="#909090">=None</font>, text<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.html#GDataEntry">gdata.GDataEntry</a>:<br>
+<dl><dt><a name="SpreadsheetsSpreadsheet-GetMediaURL"><strong>GetMediaURL</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;to&nbsp;the&nbsp;media&nbsp;content,&nbsp;if&nbsp;the&nbsp;entry&nbsp;is&nbsp;a&nbsp;media&nbsp;entry.<br>
+Otherwise&nbsp;returns&nbsp;None.</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsSpreadsheet-IsMedia"><strong>IsMedia</strong></a>(self)</dt><dd><tt>Determines&nbsp;whether&nbsp;or&nbsp;not&nbsp;an&nbsp;entry&nbsp;is&nbsp;a&nbsp;GData&nbsp;Media&nbsp;entry.</tt></dd></dl>
+
+<hr>
+Properties inherited from <a href="gdata.html#GDataEntry">gdata.GDataEntry</a>:<br>
+<dl><dt><strong>id</strong></dt>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = __GetId(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = __SetId(self, id)</dt><dd><tt>#&nbsp;This&nbsp;method&nbsp;was&nbsp;created&nbsp;to&nbsp;strip&nbsp;the&nbsp;unwanted&nbsp;whitespace&nbsp;from&nbsp;the&nbsp;id's&nbsp;<br>
+#&nbsp;text&nbsp;node.</tt></dd></dl>
+</dd>
+</dl>
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="SpreadsheetsSpreadsheet-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;object&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsSpreadsheet-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="SpreadsheetsSpreadsheet-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;object&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.html#LinkFinder">gdata.LinkFinder</a>:<br>
+<dl><dt><a name="SpreadsheetsSpreadsheet-GetAclLink"><strong>GetAclLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsSpreadsheet-GetEditLink"><strong>GetEditLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsSpreadsheet-GetEditMediaLink"><strong>GetEditMediaLink</strong></a>(self)</dt><dd><tt>The&nbsp;Picasa&nbsp;API&nbsp;mistakenly&nbsp;returns&nbsp;media-edit&nbsp;rather&nbsp;than&nbsp;edit-media,&nbsp;but<br>
+this&nbsp;may&nbsp;change&nbsp;soon.</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsSpreadsheet-GetFeedLink"><strong>GetFeedLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsSpreadsheet-GetHtmlLink"><strong>GetHtmlLink</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;of&nbsp;alternate&nbsp;and&nbsp;type&nbsp;of&nbsp;text/html<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;atom.Link&nbsp;or&nbsp;None&nbsp;if&nbsp;no&nbsp;links&nbsp;matched</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsSpreadsheet-GetNextLink"><strong>GetNextLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsSpreadsheet-GetPostLink"><strong>GetPostLink</strong></a>(self)</dt><dd><tt>Get&nbsp;a&nbsp;link&nbsp;containing&nbsp;the&nbsp;POST&nbsp;target&nbsp;URL.<br>
+&nbsp;<br>
+The&nbsp;POST&nbsp;target&nbsp;URL&nbsp;is&nbsp;used&nbsp;to&nbsp;insert&nbsp;new&nbsp;entries.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;link&nbsp;object&nbsp;with&nbsp;a&nbsp;rel&nbsp;matching&nbsp;the&nbsp;POST&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsSpreadsheet-GetSelfLink"><strong>GetSelfLink</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;set&nbsp;to&nbsp;'self'<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;atom.Link&nbsp;or&nbsp;none&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#LinkFinder">atom.LinkFinder</a>:<br>
+<dl><dt><a name="SpreadsheetsSpreadsheet-GetAlternateLink"><strong>GetAlternateLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsSpreadsheet-GetLicenseLink"><strong>GetLicenseLink</strong></a>(self)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SpreadsheetsSpreadsheetsFeed">class <strong>SpreadsheetsSpreadsheetsFeed</strong></a>(<a href="gdata.html#GDataFeed">gdata.GDataFeed</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;feed&nbsp;containing&nbsp;Google&nbsp;Spreadsheets&nbsp;Spreadsheets<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.spreadsheet.html#SpreadsheetsSpreadsheetsFeed">SpreadsheetsSpreadsheetsFeed</a></dd>
+<dd><a href="gdata.html#GDataFeed">gdata.GDataFeed</a></dd>
+<dd><a href="atom.html#Feed">atom.Feed</a></dd>
+<dd><a href="atom.html#Source">atom.Source</a></dd>
+<dd><a href="atom.html#FeedEntryParent">atom.FeedEntryParent</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="gdata.html#LinkFinder">gdata.LinkFinder</a></dd>
+<dd><a href="atom.html#LinkFinder">atom.LinkFinder</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods inherited from <a href="gdata.html#GDataFeed">gdata.GDataFeed</a>:<br>
+<dl><dt><a name="SpreadsheetsSpreadsheetsFeed-__init__"><strong>__init__</strong></a>(self, author<font color="#909090">=None</font>, category<font color="#909090">=None</font>, contributor<font color="#909090">=None</font>, generator<font color="#909090">=None</font>, icon<font color="#909090">=None</font>, atom_id<font color="#909090">=None</font>, link<font color="#909090">=None</font>, logo<font color="#909090">=None</font>, rights<font color="#909090">=None</font>, subtitle<font color="#909090">=None</font>, title<font color="#909090">=None</font>, updated<font color="#909090">=None</font>, entry<font color="#909090">=None</font>, total_results<font color="#909090">=None</font>, start_index<font color="#909090">=None</font>, items_per_page<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;Source<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;author:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;Author&nbsp;instances&nbsp;which&nbsp;belong&nbsp;to&nbsp;this<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class.<br>
+&nbsp;&nbsp;category:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;Category&nbsp;instances<br>
+&nbsp;&nbsp;contributor:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;on&nbsp;Contributor&nbsp;instances<br>
+&nbsp;&nbsp;generator:&nbsp;Generator&nbsp;(optional)&nbsp;<br>
+&nbsp;&nbsp;icon:&nbsp;Icon&nbsp;(optional)&nbsp;<br>
+&nbsp;&nbsp;id:&nbsp;Id&nbsp;(optional)&nbsp;The&nbsp;entry's&nbsp;Id&nbsp;element<br>
+&nbsp;&nbsp;link:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;Link&nbsp;instances<br>
+&nbsp;&nbsp;logo:&nbsp;Logo&nbsp;(optional)&nbsp;<br>
+&nbsp;&nbsp;rights:&nbsp;Rights&nbsp;(optional)&nbsp;The&nbsp;entry's&nbsp;Rights&nbsp;element<br>
+&nbsp;&nbsp;subtitle:&nbsp;Subtitle&nbsp;(optional)&nbsp;The&nbsp;entry's&nbsp;subtitle&nbsp;element<br>
+&nbsp;&nbsp;title:&nbsp;Title&nbsp;(optional)&nbsp;the&nbsp;entry's&nbsp;title&nbsp;element<br>
+&nbsp;&nbsp;updated:&nbsp;Updated&nbsp;(optional)&nbsp;the&nbsp;entry's&nbsp;updated&nbsp;element<br>
+&nbsp;&nbsp;entry:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;Entry&nbsp;instances&nbsp;contained&nbsp;in&nbsp;the&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;feed.<br>
+&nbsp;&nbsp;text:&nbsp;String&nbsp;(optional)&nbsp;The&nbsp;text&nbsp;contents&nbsp;of&nbsp;the&nbsp;element.&nbsp;This&nbsp;is&nbsp;the&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contents&nbsp;of&nbsp;the&nbsp;Entry's&nbsp;XML&nbsp;text&nbsp;node.&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Example:&nbsp;&lt;foo&gt;This&nbsp;is&nbsp;the&nbsp;text&lt;/foo&gt;)<br>
+&nbsp;&nbsp;extension_elements:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;ExtensionElement&nbsp;instances<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;which&nbsp;are&nbsp;children&nbsp;of&nbsp;this&nbsp;element.<br>
+&nbsp;&nbsp;extension_attributes:&nbsp;dict&nbsp;(optional)&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;strings&nbsp;which&nbsp;are&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;values&nbsp;for&nbsp;additional&nbsp;XML&nbsp;attributes&nbsp;of&nbsp;this&nbsp;element.</tt></dd></dl>
+
+<hr>
+Properties inherited from <a href="gdata.html#GDataFeed">gdata.GDataFeed</a>:<br>
+<dl><dt><strong>generator</strong></dt>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = __GetGenerator(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = __SetGenerator(self, generator)</dt></dl>
+</dd>
+</dl>
+<dl><dt><strong>id</strong></dt>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = __GetId(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = __SetId(self, id)</dt></dl>
+</dd>
+</dl>
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="SpreadsheetsSpreadsheetsFeed-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;object&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsSpreadsheetsFeed-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="SpreadsheetsSpreadsheetsFeed-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;object&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.html#LinkFinder">gdata.LinkFinder</a>:<br>
+<dl><dt><a name="SpreadsheetsSpreadsheetsFeed-GetAclLink"><strong>GetAclLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsSpreadsheetsFeed-GetEditLink"><strong>GetEditLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsSpreadsheetsFeed-GetEditMediaLink"><strong>GetEditMediaLink</strong></a>(self)</dt><dd><tt>The&nbsp;Picasa&nbsp;API&nbsp;mistakenly&nbsp;returns&nbsp;media-edit&nbsp;rather&nbsp;than&nbsp;edit-media,&nbsp;but<br>
+this&nbsp;may&nbsp;change&nbsp;soon.</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsSpreadsheetsFeed-GetFeedLink"><strong>GetFeedLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsSpreadsheetsFeed-GetHtmlLink"><strong>GetHtmlLink</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;of&nbsp;alternate&nbsp;and&nbsp;type&nbsp;of&nbsp;text/html<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;atom.Link&nbsp;or&nbsp;None&nbsp;if&nbsp;no&nbsp;links&nbsp;matched</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsSpreadsheetsFeed-GetNextLink"><strong>GetNextLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsSpreadsheetsFeed-GetPostLink"><strong>GetPostLink</strong></a>(self)</dt><dd><tt>Get&nbsp;a&nbsp;link&nbsp;containing&nbsp;the&nbsp;POST&nbsp;target&nbsp;URL.<br>
+&nbsp;<br>
+The&nbsp;POST&nbsp;target&nbsp;URL&nbsp;is&nbsp;used&nbsp;to&nbsp;insert&nbsp;new&nbsp;entries.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;link&nbsp;object&nbsp;with&nbsp;a&nbsp;rel&nbsp;matching&nbsp;the&nbsp;POST&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsSpreadsheetsFeed-GetSelfLink"><strong>GetSelfLink</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;set&nbsp;to&nbsp;'self'<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;atom.Link&nbsp;or&nbsp;none&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#LinkFinder">atom.LinkFinder</a>:<br>
+<dl><dt><a name="SpreadsheetsSpreadsheetsFeed-GetAlternateLink"><strong>GetAlternateLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsSpreadsheetsFeed-GetLicenseLink"><strong>GetLicenseLink</strong></a>(self)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SpreadsheetsWorksheet">class <strong>SpreadsheetsWorksheet</strong></a>(<a href="gdata.html#GDataEntry">gdata.GDataEntry</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;Google&nbsp;Spreadsheets&nbsp;flavor&nbsp;of&nbsp;a&nbsp;Worksheet&nbsp;Atom&nbsp;Entry<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.spreadsheet.html#SpreadsheetsWorksheet">SpreadsheetsWorksheet</a></dd>
+<dd><a href="gdata.html#GDataEntry">gdata.GDataEntry</a></dd>
+<dd><a href="atom.html#Entry">atom.Entry</a></dd>
+<dd><a href="atom.html#FeedEntryParent">atom.FeedEntryParent</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="gdata.html#LinkFinder">gdata.LinkFinder</a></dd>
+<dd><a href="atom.html#LinkFinder">atom.LinkFinder</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="SpreadsheetsWorksheet-__init__"><strong>__init__</strong></a>(self, author<font color="#909090">=None</font>, category<font color="#909090">=None</font>, content<font color="#909090">=None</font>, contributor<font color="#909090">=None</font>, atom_id<font color="#909090">=None</font>, link<font color="#909090">=None</font>, published<font color="#909090">=None</font>, rights<font color="#909090">=None</font>, source<font color="#909090">=None</font>, summary<font color="#909090">=None</font>, title<font color="#909090">=None</font>, control<font color="#909090">=None</font>, updated<font color="#909090">=None</font>, row_count<font color="#909090">=None</font>, col_count<font color="#909090">=None</font>, text<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.html#GDataEntry">gdata.GDataEntry</a>:<br>
+<dl><dt><a name="SpreadsheetsWorksheet-GetMediaURL"><strong>GetMediaURL</strong></a>(self)</dt><dd><tt>Returns&nbsp;the&nbsp;URL&nbsp;to&nbsp;the&nbsp;media&nbsp;content,&nbsp;if&nbsp;the&nbsp;entry&nbsp;is&nbsp;a&nbsp;media&nbsp;entry.<br>
+Otherwise&nbsp;returns&nbsp;None.</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsWorksheet-IsMedia"><strong>IsMedia</strong></a>(self)</dt><dd><tt>Determines&nbsp;whether&nbsp;or&nbsp;not&nbsp;an&nbsp;entry&nbsp;is&nbsp;a&nbsp;GData&nbsp;Media&nbsp;entry.</tt></dd></dl>
+
+<hr>
+Properties inherited from <a href="gdata.html#GDataEntry">gdata.GDataEntry</a>:<br>
+<dl><dt><strong>id</strong></dt>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = __GetId(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = __SetId(self, id)</dt><dd><tt>#&nbsp;This&nbsp;method&nbsp;was&nbsp;created&nbsp;to&nbsp;strip&nbsp;the&nbsp;unwanted&nbsp;whitespace&nbsp;from&nbsp;the&nbsp;id's&nbsp;<br>
+#&nbsp;text&nbsp;node.</tt></dd></dl>
+</dd>
+</dl>
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="SpreadsheetsWorksheet-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;object&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsWorksheet-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="SpreadsheetsWorksheet-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;object&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.html#LinkFinder">gdata.LinkFinder</a>:<br>
+<dl><dt><a name="SpreadsheetsWorksheet-GetAclLink"><strong>GetAclLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsWorksheet-GetEditLink"><strong>GetEditLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsWorksheet-GetEditMediaLink"><strong>GetEditMediaLink</strong></a>(self)</dt><dd><tt>The&nbsp;Picasa&nbsp;API&nbsp;mistakenly&nbsp;returns&nbsp;media-edit&nbsp;rather&nbsp;than&nbsp;edit-media,&nbsp;but<br>
+this&nbsp;may&nbsp;change&nbsp;soon.</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsWorksheet-GetFeedLink"><strong>GetFeedLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsWorksheet-GetHtmlLink"><strong>GetHtmlLink</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;of&nbsp;alternate&nbsp;and&nbsp;type&nbsp;of&nbsp;text/html<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;atom.Link&nbsp;or&nbsp;None&nbsp;if&nbsp;no&nbsp;links&nbsp;matched</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsWorksheet-GetNextLink"><strong>GetNextLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsWorksheet-GetPostLink"><strong>GetPostLink</strong></a>(self)</dt><dd><tt>Get&nbsp;a&nbsp;link&nbsp;containing&nbsp;the&nbsp;POST&nbsp;target&nbsp;URL.<br>
+&nbsp;<br>
+The&nbsp;POST&nbsp;target&nbsp;URL&nbsp;is&nbsp;used&nbsp;to&nbsp;insert&nbsp;new&nbsp;entries.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;link&nbsp;object&nbsp;with&nbsp;a&nbsp;rel&nbsp;matching&nbsp;the&nbsp;POST&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsWorksheet-GetSelfLink"><strong>GetSelfLink</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;set&nbsp;to&nbsp;'self'<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;atom.Link&nbsp;or&nbsp;none&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#LinkFinder">atom.LinkFinder</a>:<br>
+<dl><dt><a name="SpreadsheetsWorksheet-GetAlternateLink"><strong>GetAlternateLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsWorksheet-GetLicenseLink"><strong>GetLicenseLink</strong></a>(self)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SpreadsheetsWorksheetsFeed">class <strong>SpreadsheetsWorksheetsFeed</strong></a>(<a href="gdata.html#GDataFeed">gdata.GDataFeed</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;feed&nbsp;containing&nbsp;Google&nbsp;Spreadsheets&nbsp;Spreadsheets<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.spreadsheet.html#SpreadsheetsWorksheetsFeed">SpreadsheetsWorksheetsFeed</a></dd>
+<dd><a href="gdata.html#GDataFeed">gdata.GDataFeed</a></dd>
+<dd><a href="atom.html#Feed">atom.Feed</a></dd>
+<dd><a href="atom.html#Source">atom.Source</a></dd>
+<dd><a href="atom.html#FeedEntryParent">atom.FeedEntryParent</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="gdata.html#LinkFinder">gdata.LinkFinder</a></dd>
+<dd><a href="atom.html#LinkFinder">atom.LinkFinder</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods inherited from <a href="gdata.html#GDataFeed">gdata.GDataFeed</a>:<br>
+<dl><dt><a name="SpreadsheetsWorksheetsFeed-__init__"><strong>__init__</strong></a>(self, author<font color="#909090">=None</font>, category<font color="#909090">=None</font>, contributor<font color="#909090">=None</font>, generator<font color="#909090">=None</font>, icon<font color="#909090">=None</font>, atom_id<font color="#909090">=None</font>, link<font color="#909090">=None</font>, logo<font color="#909090">=None</font>, rights<font color="#909090">=None</font>, subtitle<font color="#909090">=None</font>, title<font color="#909090">=None</font>, updated<font color="#909090">=None</font>, entry<font color="#909090">=None</font>, total_results<font color="#909090">=None</font>, start_index<font color="#909090">=None</font>, items_per_page<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;Source<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;author:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;Author&nbsp;instances&nbsp;which&nbsp;belong&nbsp;to&nbsp;this<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class.<br>
+&nbsp;&nbsp;category:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;Category&nbsp;instances<br>
+&nbsp;&nbsp;contributor:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;on&nbsp;Contributor&nbsp;instances<br>
+&nbsp;&nbsp;generator:&nbsp;Generator&nbsp;(optional)&nbsp;<br>
+&nbsp;&nbsp;icon:&nbsp;Icon&nbsp;(optional)&nbsp;<br>
+&nbsp;&nbsp;id:&nbsp;Id&nbsp;(optional)&nbsp;The&nbsp;entry's&nbsp;Id&nbsp;element<br>
+&nbsp;&nbsp;link:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;Link&nbsp;instances<br>
+&nbsp;&nbsp;logo:&nbsp;Logo&nbsp;(optional)&nbsp;<br>
+&nbsp;&nbsp;rights:&nbsp;Rights&nbsp;(optional)&nbsp;The&nbsp;entry's&nbsp;Rights&nbsp;element<br>
+&nbsp;&nbsp;subtitle:&nbsp;Subtitle&nbsp;(optional)&nbsp;The&nbsp;entry's&nbsp;subtitle&nbsp;element<br>
+&nbsp;&nbsp;title:&nbsp;Title&nbsp;(optional)&nbsp;the&nbsp;entry's&nbsp;title&nbsp;element<br>
+&nbsp;&nbsp;updated:&nbsp;Updated&nbsp;(optional)&nbsp;the&nbsp;entry's&nbsp;updated&nbsp;element<br>
+&nbsp;&nbsp;entry:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;Entry&nbsp;instances&nbsp;contained&nbsp;in&nbsp;the&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;feed.<br>
+&nbsp;&nbsp;text:&nbsp;String&nbsp;(optional)&nbsp;The&nbsp;text&nbsp;contents&nbsp;of&nbsp;the&nbsp;element.&nbsp;This&nbsp;is&nbsp;the&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contents&nbsp;of&nbsp;the&nbsp;Entry's&nbsp;XML&nbsp;text&nbsp;node.&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Example:&nbsp;&lt;foo&gt;This&nbsp;is&nbsp;the&nbsp;text&lt;/foo&gt;)<br>
+&nbsp;&nbsp;extension_elements:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;ExtensionElement&nbsp;instances<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;which&nbsp;are&nbsp;children&nbsp;of&nbsp;this&nbsp;element.<br>
+&nbsp;&nbsp;extension_attributes:&nbsp;dict&nbsp;(optional)&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;strings&nbsp;which&nbsp;are&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;values&nbsp;for&nbsp;additional&nbsp;XML&nbsp;attributes&nbsp;of&nbsp;this&nbsp;element.</tt></dd></dl>
+
+<hr>
+Properties inherited from <a href="gdata.html#GDataFeed">gdata.GDataFeed</a>:<br>
+<dl><dt><strong>generator</strong></dt>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = __GetGenerator(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = __SetGenerator(self, generator)</dt></dl>
+</dd>
+</dl>
+<dl><dt><strong>id</strong></dt>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = __GetId(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = __SetId(self, id)</dt></dl>
+</dd>
+</dl>
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="SpreadsheetsWorksheetsFeed-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;object&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsWorksheetsFeed-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="SpreadsheetsWorksheetsFeed-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;object&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dl>
+
+<hr>
+Methods inherited from <a href="gdata.html#LinkFinder">gdata.LinkFinder</a>:<br>
+<dl><dt><a name="SpreadsheetsWorksheetsFeed-GetAclLink"><strong>GetAclLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsWorksheetsFeed-GetEditLink"><strong>GetEditLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsWorksheetsFeed-GetEditMediaLink"><strong>GetEditMediaLink</strong></a>(self)</dt><dd><tt>The&nbsp;Picasa&nbsp;API&nbsp;mistakenly&nbsp;returns&nbsp;media-edit&nbsp;rather&nbsp;than&nbsp;edit-media,&nbsp;but<br>
+this&nbsp;may&nbsp;change&nbsp;soon.</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsWorksheetsFeed-GetFeedLink"><strong>GetFeedLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsWorksheetsFeed-GetHtmlLink"><strong>GetHtmlLink</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;of&nbsp;alternate&nbsp;and&nbsp;type&nbsp;of&nbsp;text/html<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;atom.Link&nbsp;or&nbsp;None&nbsp;if&nbsp;no&nbsp;links&nbsp;matched</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsWorksheetsFeed-GetNextLink"><strong>GetNextLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsWorksheetsFeed-GetPostLink"><strong>GetPostLink</strong></a>(self)</dt><dd><tt>Get&nbsp;a&nbsp;link&nbsp;containing&nbsp;the&nbsp;POST&nbsp;target&nbsp;URL.<br>
+&nbsp;<br>
+The&nbsp;POST&nbsp;target&nbsp;URL&nbsp;is&nbsp;used&nbsp;to&nbsp;insert&nbsp;new&nbsp;entries.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;link&nbsp;object&nbsp;with&nbsp;a&nbsp;rel&nbsp;matching&nbsp;the&nbsp;POST&nbsp;type.</tt></dd></dl>
+
+<dl><dt><a name="SpreadsheetsWorksheetsFeed-GetSelfLink"><strong>GetSelfLink</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;set&nbsp;to&nbsp;'self'<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;atom.Link&nbsp;or&nbsp;none&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#LinkFinder">atom.LinkFinder</a>:<br>
+<dl><dt><a name="SpreadsheetsWorksheetsFeed-GetAlternateLink"><strong>GetAlternateLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SpreadsheetsWorksheetsFeed-GetLicenseLink"><strong>GetLicenseLink</strong></a>(self)</dt></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-CellFromString"><strong>CellFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-ColCountFromString"><strong>ColCountFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-CustomFromString"><strong>CustomFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-RowCountFromString"><strong>RowCountFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-SpreadsheetsCellFromString"><strong>SpreadsheetsCellFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-SpreadsheetsCellsFeedFromString"><strong>SpreadsheetsCellsFeedFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-SpreadsheetsListFeedFromString"><strong>SpreadsheetsListFeedFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-SpreadsheetsListFromString"><strong>SpreadsheetsListFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-SpreadsheetsSpreadsheetFromString"><strong>SpreadsheetsSpreadsheetFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-SpreadsheetsSpreadsheetsFeedFromString"><strong>SpreadsheetsSpreadsheetsFeedFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-SpreadsheetsWorksheetFromString"><strong>SpreadsheetsWorksheetFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-SpreadsheetsWorksheetsFeedFromString"><strong>SpreadsheetsWorksheetsFeedFromString</strong></a>(xml_string)</dt></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>GSPREADSHEETS_EXTENDED_NAMESPACE</strong> = 'http://schemas.google.com/spreadsheets/2006/extended'<br>
+<strong>GSPREADSHEETS_EXTENDED_TEMPLATE</strong> = '{http://schemas.google.com/spreadsheets/2006/extended}%s'<br>
+<strong>GSPREADSHEETS_NAMESPACE</strong> = 'http://schemas.google.com/spreadsheets/2006'<br>
+<strong>GSPREADSHEETS_TEMPLATE</strong> = '{http://schemas.google.com/spreadsheets/2006}%s'<br>
+<strong>__author__</strong> = 'api.laurabeth@gmail.com (Laura Beth Lincoln)'</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#7799ee">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Author</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#7799ee"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">api.laurabeth@gmail.com&nbsp;(Laura&nbsp;Beth&nbsp;Lincoln)</td></tr></table>
+</body></html>

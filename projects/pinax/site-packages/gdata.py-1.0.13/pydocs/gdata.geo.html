@@ -1,0 +1,327 @@
+
+<!doctype html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: package gdata.geo</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.geo</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/svn/gdata-python-client-release/src/gdata/geo/__init__.py">/usr/local/svn/gdata-python-client-release/src/gdata/geo/__init__.py</a></font></td></tr></table>
+    <p><tt>Picasa&nbsp;Web&nbsp;Albums&nbsp;uses&nbsp;the&nbsp;georss&nbsp;and&nbsp;gml&nbsp;namespaces&nbsp;for&nbsp;<br>
+elements&nbsp;defined&nbsp;in&nbsp;the&nbsp;GeoRSS&nbsp;and&nbsp;Geography&nbsp;Markup&nbsp;Language&nbsp;specifications.<br>
+&nbsp;<br>
+Specifically,&nbsp;Picasa&nbsp;Web&nbsp;Albums&nbsp;uses&nbsp;the&nbsp;following&nbsp;elements:<br>
+&nbsp;<br>
+georss:where<br>
+gml:<a href="#Point">Point</a><br>
+gml:pos<br>
+&nbsp;<br>
+<a href="http://code.google.com/apis/picasaweb/reference.html#georss_reference">http://code.google.com/apis/picasaweb/reference.html#georss_reference</a><br>
+&nbsp;<br>
+&nbsp;<br>
+Picasa&nbsp;Web&nbsp;Albums&nbsp;also&nbsp;accepts&nbsp;geographic-location&nbsp;data&nbsp;in&nbsp;two&nbsp;other&nbsp;formats:<br>
+W3C&nbsp;format&nbsp;and&nbsp;plain-GeoRSS&nbsp;(without&nbsp;GML)&nbsp;format.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Package Contents</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="atom.html#AtomBase">atom.AtomBase</a>(<a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.geo.html#GeoBaseElement">GeoBaseElement</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.geo.html#Point">Point</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.geo.html#Pos">Pos</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.geo.html#Where">Where</a>
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="GeoBaseElement">class <strong>GeoBaseElement</strong></a>(<a href="atom.html#AtomBase">atom.AtomBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Base&nbsp;class&nbsp;for&nbsp;elements.<br>
+&nbsp;<br>
+To&nbsp;add&nbsp;new&nbsp;elements,&nbsp;you&nbsp;only&nbsp;need&nbsp;to&nbsp;add&nbsp;the&nbsp;element&nbsp;tag&nbsp;name&nbsp;to&nbsp;self.<strong>_tag</strong><br>
+and&nbsp;the&nbsp;namespace&nbsp;to&nbsp;self.<strong>_namespace</strong><br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.geo.html#GeoBaseElement">GeoBaseElement</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="GeoBaseElement-__init__"><strong>__init__</strong></a>(self, name<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="GeoBaseElement-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;object&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="GeoBaseElement-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="GeoBaseElement-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;object&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Point">class <strong>Point</strong></a>(<a href="gdata.geo.html#GeoBaseElement">GeoBaseElement</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>(container)&nbsp;&nbsp;Specifies&nbsp;a&nbsp;particular&nbsp;geographical&nbsp;point,&nbsp;by&nbsp;means&nbsp;of<br>
+a&nbsp;&lt;gml:pos&gt;&nbsp;element.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.geo.html#Point">Point</a></dd>
+<dd><a href="gdata.geo.html#GeoBaseElement">GeoBaseElement</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Point-__init__"><strong>__init__</strong></a>(self, pos<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="Point-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;object&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Point-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="Point-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;object&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Pos">class <strong>Pos</strong></a>(<a href="gdata.geo.html#GeoBaseElement">GeoBaseElement</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>(string)&nbsp;Specifies&nbsp;a&nbsp;latitude&nbsp;and&nbsp;longitude,&nbsp;separated&nbsp;by&nbsp;a&nbsp;space,<br>
+e.g.&nbsp;`35.669998&nbsp;139.770004'<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.geo.html#Pos">Pos</a></dd>
+<dd><a href="gdata.geo.html#GeoBaseElement">GeoBaseElement</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods inherited from <a href="gdata.geo.html#GeoBaseElement">GeoBaseElement</a>:<br>
+<dl><dt><a name="Pos-__init__"><strong>__init__</strong></a>(self, name<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="Pos-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;object&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Pos-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="Pos-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;object&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Where">class <strong>Where</strong></a>(<a href="gdata.geo.html#GeoBaseElement">GeoBaseElement</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>(container)&nbsp;Specifies&nbsp;a&nbsp;geographical&nbsp;location&nbsp;or&nbsp;region.<br>
+A&nbsp;container&nbsp;element,&nbsp;containing&nbsp;a&nbsp;single&nbsp;&lt;gml:<a href="#Point">Point</a>&gt;&nbsp;element.<br>
+(Not&nbsp;to&nbsp;be&nbsp;confused&nbsp;with&nbsp;&lt;gd:where&gt;.)&nbsp;<br>
+&nbsp;<br>
+Note&nbsp;that&nbsp;the&nbsp;(only)&nbsp;child&nbsp;attribute,&nbsp;.<a href="#Point">Point</a>,&nbsp;is&nbsp;title-cased.<br>
+This&nbsp;reflects&nbsp;the&nbsp;names&nbsp;of&nbsp;elements&nbsp;in&nbsp;the&nbsp;xml&nbsp;stream<br>
+(principle&nbsp;of&nbsp;least&nbsp;surprise).<br>
+&nbsp;<br>
+As&nbsp;a&nbsp;convenience,&nbsp;you&nbsp;can&nbsp;get&nbsp;a&nbsp;tuple&nbsp;of&nbsp;(lat,&nbsp;lon)&nbsp;with&nbsp;<a href="#Where">Where</a>.<a href="#Where-location">location</a>(),<br>
+and&nbsp;set&nbsp;the&nbsp;same&nbsp;data&nbsp;with&nbsp;<a href="#Where">Where</a>.setLocation(&nbsp;(lat,&nbsp;lon)&nbsp;).<br>
+&nbsp;<br>
+Similarly,&nbsp;there&nbsp;are&nbsp;methods&nbsp;to&nbsp;set&nbsp;and&nbsp;get&nbsp;only&nbsp;latitude&nbsp;and&nbsp;longtitude.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.geo.html#Where">Where</a></dd>
+<dd><a href="gdata.geo.html#GeoBaseElement">GeoBaseElement</a></dd>
+<dd><a href="atom.html#AtomBase">atom.AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Where-__init__"><strong>__init__</strong></a>(self, point<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="Where-latitude"><strong>latitude</strong></a>(self)</dt><dd><tt>(float)&nbsp;Get&nbsp;the&nbsp;latitude&nbsp;value&nbsp;of&nbsp;the&nbsp;geo-tag.&nbsp;See&nbsp;also&nbsp;.<a href="#Where-location">location</a>()</tt></dd></dl>
+
+<dl><dt><a name="Where-location"><strong>location</strong></a>(self)</dt><dd><tt>(float,&nbsp;float)&nbsp;Return&nbsp;<a href="#Where">Where</a>.<a href="#Point">Point</a>.pos.text&nbsp;as&nbsp;a&nbsp;(lat,lon)&nbsp;tuple</tt></dd></dl>
+
+<dl><dt><a name="Where-longtitude"><strong>longtitude</strong></a>(self)</dt><dd><tt>(float)&nbsp;Get&nbsp;the&nbsp;longtitude&nbsp;value&nbsp;of&nbsp;the&nbsp;geo-tag.&nbsp;See&nbsp;also&nbsp;.<a href="#Where-location">location</a>()</tt></dd></dl>
+
+<dl><dt><a name="Where-set_latitude"><strong>set_latitude</strong></a>(self, lat)</dt><dd><tt>(bool)&nbsp;Set&nbsp;the&nbsp;latitude&nbsp;value&nbsp;of&nbsp;the&nbsp;geo-tag.<br>
+&nbsp;<br>
+Args:<br>
+lat&nbsp;(float):&nbsp;The&nbsp;new&nbsp;latitude&nbsp;value<br>
+&nbsp;<br>
+See&nbsp;also&nbsp;.<a href="#Where-set_location">set_location</a>()</tt></dd></dl>
+
+<dl><dt><a name="Where-set_location"><strong>set_location</strong></a>(self, latlon)</dt><dd><tt>(bool)&nbsp;Set&nbsp;<a href="#Where">Where</a>.<a href="#Point">Point</a>.pos.text&nbsp;from&nbsp;a&nbsp;(lat,lon)&nbsp;tuple.<br>
+&nbsp;<br>
+Arguments:<br>
+lat&nbsp;(float):&nbsp;The&nbsp;latitude&nbsp;in&nbsp;degrees,&nbsp;from&nbsp;-90.0&nbsp;to&nbsp;90.0<br>
+lon&nbsp;(float):&nbsp;The&nbsp;longitude&nbsp;in&nbsp;degrees,&nbsp;from&nbsp;-180.0&nbsp;to&nbsp;180.0<br>
+&nbsp;<br>
+Returns&nbsp;True&nbsp;on&nbsp;success.</tt></dd></dl>
+
+<dl><dt><a name="Where-set_longtitude"><strong>set_longtitude</strong></a>(self, lon)</dt><dd><tt>(bool)&nbsp;Set&nbsp;the&nbsp;longtitude&nbsp;value&nbsp;of&nbsp;the&nbsp;geo-tag.<br>
+&nbsp;<br>
+Args:<br>
+lat&nbsp;(float):&nbsp;The&nbsp;new&nbsp;latitude&nbsp;value<br>
+&nbsp;<br>
+See&nbsp;also&nbsp;.<a href="#Where-set_location">set_location</a>()</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">atom.AtomBase</a>:<br>
+<dl><dt><a name="Where-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;object&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Where-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><a name="Where-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;object&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">atom.ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-PointFromString"><strong>PointFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-PosFromString"><strong>PosFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-WhereFromString"><strong>WhereFromString</strong></a>(xml_string)</dt></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>GEORSS_NAMESPACE</strong> = 'http://www.georss.org/georss'<br>
+<strong>GEO_NAMESPACE</strong> = 'http://www.w3.org/2003/01/geo/wgs84_pos#'<br>
+<strong>GML_NAMESPACE</strong> = 'http://www.opengis.net/gml'<br>
+<strong>__author__</strong> = u'havard@gulldahl.no'<br>
+<strong>__license__</strong> = 'Apache License v2'</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#7799ee">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Author</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#7799ee"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">havard@gulldahl.no</td></tr></table>
+</body></html>

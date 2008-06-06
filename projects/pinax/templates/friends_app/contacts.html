@@ -24,6 +24,20 @@
 </table>
 </form>
 
+<h2>Import from Google Contacts</h2>
+
+{% if authsub_token %}
+<form method="POST" action="">
+<input type="hidden" name="action" value="import_google" />
+<input type="submit" value="{% trans 'Import Google Contacts' %}" />
+</form>
+{% else %}
+<p>This will be a two step process. First you must
+<a href="{% url authsub.views.login %}">authenticate with Google</a>.
+Once you have agreed to let Pinax have access to your Google Contacts, you will be taken back here and
+an "Import Google Contacts" button will appear here.</p>
+{% endif %}
+
 <h2>Import from Yahoo Address Book</h2>
 
 {% if bbauth_token %}
@@ -37,9 +51,6 @@
 Once you have agreed to let Pinax have access to your Yahoo Address Book, you will be taken back here and
 an "Import Yahoo Address Book" button will appear here.</p>
 {% endif %}
-
-{{ yahoo_contacts }}
-
 
 <h2>Contacts</h2>
 

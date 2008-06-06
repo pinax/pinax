@@ -9,7 +9,7 @@ from friends.models import *
 from friends.forms import JoinRequestForm
 from friends_app.forms import ImportVCardForm
 from account.forms import SignupForm
-from friends.importer import import_yahoo
+from friends.importer import import_yahoo, import_google
 
 
 # @@@ if made more generic these could be moved to django-friends proper
@@ -76,10 +76,16 @@ def contacts(request):
                 if bbauth_token:
                     imported, total = import_yahoo(bbauth_token, request.user)
                     request.user.message_set.create(message=_("%(total)s people with email found, %(imported)s contacts imported.") % {'imported': imported, 'total': total})
+            if request.POST["action"] == "import_google":
+                authsub_token = request.session.get('authsub_token')
+                if authsub_token:
+                    imported, total = import_google(authsub_token, request.user)
+                    request.user.message_set.create(message=_("%(total)s people with email found, %(imported)s contacts imported.") % {'imported': imported, 'total': total})
     else:
         import_vcard_form = ImportVCardForm()
     
     return render_to_response("friends_app/contacts.html", {
         "import_vcard_form": import_vcard_form,
         "bbauth_token": request.session.get('bbauth_token'),
+        "authsub_token": request.session.get('authsub_token'),
     }, context_instance=RequestContext(request))

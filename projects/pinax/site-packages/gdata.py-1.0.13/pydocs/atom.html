@@ -1,0 +1,1962 @@
+
+<!doctype html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: package atom</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>atom</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/svn/gdata-python-client-release/src/atom/__init__.py">/usr/local/svn/gdata-python-client-release/src/atom/__init__.py</a></font></td></tr></table>
+    <p><tt>Contains&nbsp;classes&nbsp;representing&nbsp;Atom&nbsp;elements.<br>
+&nbsp;<br>
+Module&nbsp;objective:&nbsp;provide&nbsp;data&nbsp;classes&nbsp;for&nbsp;Atom&nbsp;constructs.&nbsp;These&nbsp;classes&nbsp;hide<br>
+the&nbsp;XML-ness&nbsp;of&nbsp;Atom&nbsp;and&nbsp;provide&nbsp;a&nbsp;set&nbsp;of&nbsp;native&nbsp;Python&nbsp;classes&nbsp;to&nbsp;interact&nbsp;<br>
+with.<br>
+&nbsp;<br>
+Conversions&nbsp;to&nbsp;and&nbsp;from&nbsp;XML&nbsp;should&nbsp;only&nbsp;be&nbsp;necessary&nbsp;when&nbsp;the&nbsp;Atom&nbsp;classes<br>
+"touch&nbsp;the&nbsp;wire"&nbsp;and&nbsp;are&nbsp;sent&nbsp;over&nbsp;HTTP.&nbsp;For&nbsp;this&nbsp;reason&nbsp;this&nbsp;module&nbsp;<br>
+provides&nbsp;&nbsp;methods&nbsp;and&nbsp;functions&nbsp;to&nbsp;convert&nbsp;Atom&nbsp;classes&nbsp;to&nbsp;and&nbsp;from&nbsp;strings.<br>
+&nbsp;<br>
+For&nbsp;more&nbsp;information&nbsp;on&nbsp;the&nbsp;Atom&nbsp;data&nbsp;model,&nbsp;see&nbsp;<a href="http://www.rfc-editor.org/rfc/rfc4287.txt">RFC&nbsp;4287</a>&nbsp;<br>
+(<a href="http://www.ietf.org/rfc/rfc4287.txt">http://www.ietf.org/rfc/rfc4287.txt</a>)<br>
+&nbsp;<br>
+<a href="#AtomBase">AtomBase</a>:&nbsp;A&nbsp;foundation&nbsp;class&nbsp;on&nbsp;which&nbsp;Atom&nbsp;classes&nbsp;are&nbsp;built.&nbsp;It&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;handles&nbsp;the&nbsp;parsing&nbsp;of&nbsp;attributes&nbsp;and&nbsp;children&nbsp;which&nbsp;are&nbsp;common&nbsp;to&nbsp;all<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Atom&nbsp;classes.&nbsp;By&nbsp;default,&nbsp;the&nbsp;<a href="#AtomBase">AtomBase</a>&nbsp;class&nbsp;translates&nbsp;all&nbsp;XML&nbsp;child&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;nodes&nbsp;into&nbsp;ExtensionElements.<br>
+&nbsp;<br>
+<a href="#ExtensionElement">ExtensionElement</a>:&nbsp;Atom&nbsp;allows&nbsp;Atom&nbsp;objects&nbsp;to&nbsp;contain&nbsp;XML&nbsp;which&nbsp;is&nbsp;not&nbsp;part&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;of&nbsp;the&nbsp;Atom&nbsp;specification,&nbsp;these&nbsp;are&nbsp;called&nbsp;extension&nbsp;elements.&nbsp;If&nbsp;a&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;classes&nbsp;parser&nbsp;encounters&nbsp;an&nbsp;unexpected&nbsp;XML&nbsp;construct,&nbsp;it&nbsp;is&nbsp;translated<br>
+&nbsp;&nbsp;&nbsp;&nbsp;into&nbsp;an&nbsp;<a href="#ExtensionElement">ExtensionElement</a>&nbsp;instance.&nbsp;<a href="#ExtensionElement">ExtensionElement</a>&nbsp;is&nbsp;designed&nbsp;to&nbsp;fully<br>
+&nbsp;&nbsp;&nbsp;&nbsp;capture&nbsp;the&nbsp;information&nbsp;in&nbsp;the&nbsp;XML.&nbsp;Child&nbsp;nodes&nbsp;in&nbsp;an&nbsp;XML&nbsp;extension&nbsp;are<br>
+&nbsp;&nbsp;&nbsp;&nbsp;turned&nbsp;into&nbsp;ExtensionElements&nbsp;as&nbsp;well.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Package Contents</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="atom.mock_service.html">mock_service</a><br>
+</td><td width="25%" valign=top><a href="atom.service.html">service</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="__builtin__.html#object">__builtin__.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="atom.html#ExtensionContainer">ExtensionContainer</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="atom.html#AtomBase">AtomBase</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="atom.html#Category">Category</a>
+</font></dt><dt><font face="helvetica, arial"><a href="atom.html#Control">Control</a>
+</font></dt><dt><font face="helvetica, arial"><a href="atom.html#Date">Date</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="atom.html#Published">Published</a>
+</font></dt><dt><font face="helvetica, arial"><a href="atom.html#Updated">Updated</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="atom.html#Draft">Draft</a>
+</font></dt><dt><font face="helvetica, arial"><a href="atom.html#Email">Email</a>
+</font></dt><dt><font face="helvetica, arial"><a href="atom.html#FeedEntryParent">FeedEntryParent</a>(<a href="atom.html#AtomBase">AtomBase</a>, <a href="atom.html#LinkFinder">LinkFinder</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="atom.html#Entry">Entry</a>
+</font></dt><dt><font face="helvetica, arial"><a href="atom.html#Source">Source</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="atom.html#Feed">Feed</a>
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="atom.html#Generator">Generator</a>
+</font></dt><dt><font face="helvetica, arial"><a href="atom.html#Icon">Icon</a>
+</font></dt><dt><font face="helvetica, arial"><a href="atom.html#Id">Id</a>
+</font></dt><dt><font face="helvetica, arial"><a href="atom.html#Link">Link</a>
+</font></dt><dt><font face="helvetica, arial"><a href="atom.html#Logo">Logo</a>
+</font></dt><dt><font face="helvetica, arial"><a href="atom.html#Name">Name</a>
+</font></dt><dt><font face="helvetica, arial"><a href="atom.html#Person">Person</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="atom.html#Author">Author</a>
+</font></dt><dt><font face="helvetica, arial"><a href="atom.html#Contributor">Contributor</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="atom.html#Text">Text</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="atom.html#Content">Content</a>
+</font></dt><dt><font face="helvetica, arial"><a href="atom.html#Rights">Rights</a>
+</font></dt><dt><font face="helvetica, arial"><a href="atom.html#Subtitle">Subtitle</a>
+</font></dt><dt><font face="helvetica, arial"><a href="atom.html#Summary">Summary</a>
+</font></dt><dt><font face="helvetica, arial"><a href="atom.html#Title">Title</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="atom.html#Uri">Uri</a>
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="atom.html#ExtensionElement">ExtensionElement</a>
+</font></dt><dt><font face="helvetica, arial"><a href="atom.html#LinkFinder">LinkFinder</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="AtomBase">class <strong>AtomBase</strong></a>(<a href="atom.html#ExtensionContainer">ExtensionContainer</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="atom.html#AtomBase">AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="AtomBase-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="AtomBase-__init__"><strong>__init__</strong></a>(self, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="AtomBase-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><a name="AtomBase-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Author">class <strong>Author</strong></a>(<a href="atom.html#Person">Person</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;atom:author&nbsp;element<br>
+&nbsp;<br>
+An&nbsp;author&nbsp;is&nbsp;a&nbsp;required&nbsp;element&nbsp;in&nbsp;<a href="#Feed">Feed</a>.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="atom.html#Author">Author</a></dd>
+<dd><a href="atom.html#Person">Person</a></dd>
+<dd><a href="atom.html#AtomBase">AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Author-__init__"><strong>__init__</strong></a>(self, name<font color="#909090">=None</font>, email<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;<a href="#Author">Author</a><br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;name:&nbsp;<a href="#Name">Name</a><br>
+&nbsp;&nbsp;email:&nbsp;<a href="#Email">Email</a><br>
+&nbsp;&nbsp;uri:&nbsp;<a href="#Uri">Uri</a><br>
+&nbsp;&nbsp;extension_elements:&nbsp;list&nbsp;A&nbsp;&nbsp;list&nbsp;of&nbsp;<a href="#ExtensionElement">ExtensionElement</a>&nbsp;instances<br>
+&nbsp;&nbsp;extension_attributes:&nbsp;dict&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;attribute&nbsp;value&nbsp;string&nbsp;pairs<br>
+&nbsp;&nbsp;text:&nbsp;str&nbsp;The&nbsp;text&nbsp;data&nbsp;in&nbsp;the&nbsp;this&nbsp;element</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">AtomBase</a>:<br>
+<dl><dt><a name="Author-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Author-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><a name="Author-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Category">class <strong>Category</strong></a>(<a href="atom.html#AtomBase">AtomBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;atom:category&nbsp;element<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="atom.html#Category">Category</a></dd>
+<dd><a href="atom.html#AtomBase">AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Category-__init__"><strong>__init__</strong></a>(self, term<font color="#909090">=None</font>, scheme<font color="#909090">=None</font>, label<font color="#909090">=None</font>, text<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;<a href="#Category">Category</a><br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;term:&nbsp;str<br>
+&nbsp;&nbsp;scheme:&nbsp;str<br>
+&nbsp;&nbsp;label:&nbsp;str<br>
+&nbsp;&nbsp;text:&nbsp;str&nbsp;The&nbsp;text&nbsp;data&nbsp;in&nbsp;the&nbsp;this&nbsp;element<br>
+&nbsp;&nbsp;extension_elements:&nbsp;list&nbsp;A&nbsp;&nbsp;list&nbsp;of&nbsp;<a href="#ExtensionElement">ExtensionElement</a>&nbsp;instances<br>
+&nbsp;&nbsp;extension_attributes:&nbsp;dict&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;attribute&nbsp;value&nbsp;string&nbsp;pairs</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">AtomBase</a>:<br>
+<dl><dt><a name="Category-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Category-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><a name="Category-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Content">class <strong>Content</strong></a>(<a href="atom.html#Text">Text</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;atom:content&nbsp;element<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="atom.html#Content">Content</a></dd>
+<dd><a href="atom.html#Text">Text</a></dd>
+<dd><a href="atom.html#AtomBase">AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Content-__init__"><strong>__init__</strong></a>(self, content_type<font color="#909090">=None</font>, src<font color="#909090">=None</font>, text<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;<a href="#Content">Content</a><br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;content_type:&nbsp;string<br>
+&nbsp;&nbsp;src:&nbsp;string<br>
+&nbsp;&nbsp;text:&nbsp;str&nbsp;The&nbsp;text&nbsp;data&nbsp;in&nbsp;the&nbsp;this&nbsp;element<br>
+&nbsp;&nbsp;extension_elements:&nbsp;list&nbsp;A&nbsp;&nbsp;list&nbsp;of&nbsp;<a href="#ExtensionElement">ExtensionElement</a>&nbsp;instances<br>
+&nbsp;&nbsp;extension_attributes:&nbsp;dict&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;attribute&nbsp;value&nbsp;string&nbsp;pairs</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">AtomBase</a>:<br>
+<dl><dt><a name="Content-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Content-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><a name="Content-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Contributor">class <strong>Contributor</strong></a>(<a href="atom.html#Person">Person</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;atom:contributor&nbsp;element<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="atom.html#Contributor">Contributor</a></dd>
+<dd><a href="atom.html#Person">Person</a></dd>
+<dd><a href="atom.html#AtomBase">AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Contributor-__init__"><strong>__init__</strong></a>(self, name<font color="#909090">=None</font>, email<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;<a href="#Contributor">Contributor</a><br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;name:&nbsp;<a href="#Name">Name</a><br>
+&nbsp;&nbsp;email:&nbsp;<a href="#Email">Email</a><br>
+&nbsp;&nbsp;uri:&nbsp;<a href="#Uri">Uri</a><br>
+&nbsp;&nbsp;extension_elements:&nbsp;list&nbsp;A&nbsp;&nbsp;list&nbsp;of&nbsp;<a href="#ExtensionElement">ExtensionElement</a>&nbsp;instances<br>
+&nbsp;&nbsp;extension_attributes:&nbsp;dict&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;attribute&nbsp;value&nbsp;string&nbsp;pairs<br>
+&nbsp;&nbsp;text:&nbsp;str&nbsp;The&nbsp;text&nbsp;data&nbsp;in&nbsp;the&nbsp;this&nbsp;element</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">AtomBase</a>:<br>
+<dl><dt><a name="Contributor-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Contributor-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><a name="Contributor-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Control">class <strong>Control</strong></a>(<a href="atom.html#AtomBase">AtomBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;app:control&nbsp;element&nbsp;indicating&nbsp;restrictions&nbsp;on&nbsp;publication.<br>
+&nbsp;<br>
+The&nbsp;APP&nbsp;control&nbsp;element&nbsp;may&nbsp;contain&nbsp;a&nbsp;draft&nbsp;element&nbsp;indicating&nbsp;whether&nbsp;or<br>
+not&nbsp;this&nbsp;entry&nbsp;should&nbsp;be&nbsp;publicly&nbsp;available.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="atom.html#Control">Control</a></dd>
+<dd><a href="atom.html#AtomBase">AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Control-__init__"><strong>__init__</strong></a>(self, draft<font color="#909090">=None</font>, text<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;app:control</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">AtomBase</a>:<br>
+<dl><dt><a name="Control-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Control-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><a name="Control-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Date">class <strong>Date</strong></a>(<a href="atom.html#AtomBase">AtomBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;parent&nbsp;class&nbsp;for&nbsp;atom:updated,&nbsp;published,&nbsp;etc.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="atom.html#Date">Date</a></dd>
+<dd><a href="atom.html#AtomBase">AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Date-__init__"><strong>__init__</strong></a>(self, text<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">AtomBase</a>:<br>
+<dl><dt><a name="Date-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Date-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><a name="Date-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Draft">class <strong>Draft</strong></a>(<a href="atom.html#AtomBase">AtomBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;app:draft&nbsp;element&nbsp;which&nbsp;indicates&nbsp;if&nbsp;this&nbsp;entry&nbsp;should&nbsp;be&nbsp;public.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="atom.html#Draft">Draft</a></dd>
+<dd><a href="atom.html#AtomBase">AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Draft-__init__"><strong>__init__</strong></a>(self, text<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;app:draft<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;text:&nbsp;str&nbsp;The&nbsp;text&nbsp;data&nbsp;in&nbsp;the&nbsp;this&nbsp;element<br>
+&nbsp;&nbsp;extension_elements:&nbsp;list&nbsp;A&nbsp;&nbsp;list&nbsp;of&nbsp;<a href="#ExtensionElement">ExtensionElement</a>&nbsp;instances<br>
+&nbsp;&nbsp;extension_attributes:&nbsp;dict&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;attribute&nbsp;value&nbsp;string&nbsp;pairs</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">AtomBase</a>:<br>
+<dl><dt><a name="Draft-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Draft-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><a name="Draft-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Email">class <strong>Email</strong></a>(<a href="atom.html#AtomBase">AtomBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;atom:email&nbsp;element<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="atom.html#Email">Email</a></dd>
+<dd><a href="atom.html#AtomBase">AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Email-__init__"><strong>__init__</strong></a>(self, text<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;<a href="#Email">Email</a><br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;extension_elements:&nbsp;list&nbsp;A&nbsp;&nbsp;list&nbsp;of&nbsp;<a href="#ExtensionElement">ExtensionElement</a>&nbsp;instances<br>
+&nbsp;&nbsp;extension_attributes:&nbsp;dict&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;attribute&nbsp;value&nbsp;string&nbsp;pairs<br>
+&nbsp;&nbsp;text:&nbsp;str&nbsp;The&nbsp;text&nbsp;data&nbsp;in&nbsp;the&nbsp;this&nbsp;element</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">AtomBase</a>:<br>
+<dl><dt><a name="Email-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Email-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><a name="Email-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Entry">class <strong>Entry</strong></a>(<a href="atom.html#FeedEntryParent">FeedEntryParent</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;atom:entry&nbsp;element<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="atom.html#Entry">Entry</a></dd>
+<dd><a href="atom.html#FeedEntryParent">FeedEntryParent</a></dd>
+<dd><a href="atom.html#AtomBase">AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">ExtensionContainer</a></dd>
+<dd><a href="atom.html#LinkFinder">LinkFinder</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Entry-__init__"><strong>__init__</strong></a>(self, author<font color="#909090">=None</font>, category<font color="#909090">=None</font>, content<font color="#909090">=None</font>, contributor<font color="#909090">=None</font>, atom_id<font color="#909090">=None</font>, link<font color="#909090">=None</font>, published<font color="#909090">=None</font>, rights<font color="#909090">=None</font>, source<font color="#909090">=None</font>, summary<font color="#909090">=None</font>, control<font color="#909090">=None</font>, title<font color="#909090">=None</font>, updated<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;atom:entry<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;author:&nbsp;list&nbsp;A&nbsp;list&nbsp;of&nbsp;<a href="#Author">Author</a>&nbsp;instances&nbsp;which&nbsp;belong&nbsp;to&nbsp;this&nbsp;class.<br>
+&nbsp;&nbsp;category:&nbsp;list&nbsp;A&nbsp;list&nbsp;of&nbsp;<a href="#Category">Category</a>&nbsp;instances<br>
+&nbsp;&nbsp;content:&nbsp;<a href="#Content">Content</a>&nbsp;The&nbsp;entry's&nbsp;<a href="#Content">Content</a><br>
+&nbsp;&nbsp;contributor:&nbsp;list&nbsp;A&nbsp;list&nbsp;on&nbsp;<a href="#Contributor">Contributor</a>&nbsp;instances<br>
+&nbsp;&nbsp;id:&nbsp;<a href="#Id">Id</a>&nbsp;The&nbsp;entry's&nbsp;<a href="#Id">Id</a>&nbsp;element<br>
+&nbsp;&nbsp;link:&nbsp;list&nbsp;A&nbsp;list&nbsp;of&nbsp;<a href="#Link">Link</a>&nbsp;instances<br>
+&nbsp;&nbsp;published:&nbsp;<a href="#Published">Published</a>&nbsp;The&nbsp;entry's&nbsp;<a href="#Published">Published</a>&nbsp;element<br>
+&nbsp;&nbsp;rights:&nbsp;<a href="#Rights">Rights</a>&nbsp;The&nbsp;entry's&nbsp;<a href="#Rights">Rights</a>&nbsp;element<br>
+&nbsp;&nbsp;source:&nbsp;<a href="#Source">Source</a>&nbsp;the&nbsp;entry's&nbsp;source&nbsp;element<br>
+&nbsp;&nbsp;summary:&nbsp;<a href="#Summary">Summary</a>&nbsp;the&nbsp;entry's&nbsp;summary&nbsp;element<br>
+&nbsp;&nbsp;title:&nbsp;<a href="#Title">Title</a>&nbsp;the&nbsp;entry's&nbsp;title&nbsp;element<br>
+&nbsp;&nbsp;updated:&nbsp;<a href="#Updated">Updated</a>&nbsp;the&nbsp;entry's&nbsp;updated&nbsp;element<br>
+&nbsp;&nbsp;control:&nbsp;The&nbsp;entry's&nbsp;app:control&nbsp;element&nbsp;which&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;mark&nbsp;an&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;entry&nbsp;as&nbsp;a&nbsp;draft&nbsp;which&nbsp;should&nbsp;not&nbsp;be&nbsp;publicly&nbsp;viewable.<br>
+&nbsp;&nbsp;text:&nbsp;String&nbsp;The&nbsp;text&nbsp;contents&nbsp;of&nbsp;the&nbsp;element.&nbsp;This&nbsp;is&nbsp;the&nbsp;contents<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of&nbsp;the&nbsp;<a href="#Entry">Entry</a>'s&nbsp;XML&nbsp;text&nbsp;node.&nbsp;(Example:&nbsp;&lt;foo&gt;This&nbsp;is&nbsp;the&nbsp;text&lt;/foo&gt;)<br>
+&nbsp;&nbsp;extension_elements:&nbsp;list&nbsp;A&nbsp;list&nbsp;of&nbsp;<a href="#ExtensionElement">ExtensionElement</a>&nbsp;instances&nbsp;which&nbsp;are<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;children&nbsp;of&nbsp;this&nbsp;element.<br>
+&nbsp;&nbsp;extension_attributes:&nbsp;dict&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;strings&nbsp;which&nbsp;are&nbsp;the&nbsp;values<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;additional&nbsp;XML&nbsp;attributes&nbsp;of&nbsp;this&nbsp;element.</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">AtomBase</a>:<br>
+<dl><dt><a name="Entry-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Entry-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><a name="Entry-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#LinkFinder">LinkFinder</a>:<br>
+<dl><dt><a name="Entry-GetAlternateLink"><strong>GetAlternateLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Entry-GetEditLink"><strong>GetEditLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Entry-GetLicenseLink"><strong>GetLicenseLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Entry-GetNextLink"><strong>GetNextLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Entry-GetSelfLink"><strong>GetSelfLink</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;set&nbsp;to&nbsp;'self'<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;atom.<a href="#Link">Link</a>&nbsp;or&nbsp;none&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ExtensionContainer">class <strong>ExtensionContainer</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="ExtensionContainer-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<dl><dt><a name="ExtensionContainer-__init__"><strong>__init__</strong></a>(self, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ExtensionElement">class <strong>ExtensionElement</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Represents&nbsp;extra&nbsp;XML&nbsp;elements&nbsp;contained&nbsp;in&nbsp;Atom&nbsp;classes.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="ExtensionElement-FindChildren"><strong>FindChildren</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;child&nbsp;nodes&nbsp;for&nbsp;objects&nbsp;with&nbsp;the&nbsp;desired&nbsp;tag/namespace.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;children&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<dl><dt><a name="ExtensionElement-ToString"><strong>ToString</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="ExtensionElement-__init__"><strong>__init__</strong></a>(self, tag, namespace<font color="#909090">=None</font>, attributes<font color="#909090">=None</font>, children<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;EtensionElement<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;namespace:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;XML&nbsp;namespace&nbsp;for&nbsp;this&nbsp;element.<br>
+&nbsp;&nbsp;tag:&nbsp;string&nbsp;(optional)&nbsp;The&nbsp;tag&nbsp;(without&nbsp;the&nbsp;namespace&nbsp;qualifier)&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this&nbsp;element.&nbsp;To&nbsp;reconstruct&nbsp;the&nbsp;full&nbsp;qualified&nbsp;name&nbsp;of&nbsp;the&nbsp;element,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;combine&nbsp;this&nbsp;tag&nbsp;with&nbsp;the&nbsp;namespace.<br>
+&nbsp;&nbsp;attributes:&nbsp;dict&nbsp;(optinal)&nbsp;The&nbsp;attribute&nbsp;value&nbsp;string&nbsp;pairs&nbsp;for&nbsp;the&nbsp;XML&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;attributes&nbsp;of&nbsp;this&nbsp;element.<br>
+&nbsp;&nbsp;children:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;ExtensionElements&nbsp;which&nbsp;represent&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;XML&nbsp;child&nbsp;nodes&nbsp;of&nbsp;this&nbsp;element.</tt></dd></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionElement' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Feed">class <strong>Feed</strong></a>(<a href="atom.html#Source">Source</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;atom:feed&nbsp;element<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="atom.html#Feed">Feed</a></dd>
+<dd><a href="atom.html#Source">Source</a></dd>
+<dd><a href="atom.html#FeedEntryParent">FeedEntryParent</a></dd>
+<dd><a href="atom.html#AtomBase">AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">ExtensionContainer</a></dd>
+<dd><a href="atom.html#LinkFinder">LinkFinder</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Feed-__init__"><strong>__init__</strong></a>(self, author<font color="#909090">=None</font>, category<font color="#909090">=None</font>, contributor<font color="#909090">=None</font>, generator<font color="#909090">=None</font>, icon<font color="#909090">=None</font>, atom_id<font color="#909090">=None</font>, link<font color="#909090">=None</font>, logo<font color="#909090">=None</font>, rights<font color="#909090">=None</font>, subtitle<font color="#909090">=None</font>, title<font color="#909090">=None</font>, updated<font color="#909090">=None</font>, entry<font color="#909090">=None</font>, text<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;<a href="#Source">Source</a><br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;author:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;<a href="#Author">Author</a>&nbsp;instances&nbsp;which&nbsp;belong&nbsp;to&nbsp;this<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class.<br>
+&nbsp;&nbsp;category:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;<a href="#Category">Category</a>&nbsp;instances<br>
+&nbsp;&nbsp;contributor:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;on&nbsp;<a href="#Contributor">Contributor</a>&nbsp;instances<br>
+&nbsp;&nbsp;generator:&nbsp;<a href="#Generator">Generator</a>&nbsp;(optional)&nbsp;<br>
+&nbsp;&nbsp;icon:&nbsp;<a href="#Icon">Icon</a>&nbsp;(optional)&nbsp;<br>
+&nbsp;&nbsp;id:&nbsp;<a href="#Id">Id</a>&nbsp;(optional)&nbsp;The&nbsp;entry's&nbsp;<a href="#Id">Id</a>&nbsp;element<br>
+&nbsp;&nbsp;link:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;<a href="#Link">Link</a>&nbsp;instances<br>
+&nbsp;&nbsp;logo:&nbsp;<a href="#Logo">Logo</a>&nbsp;(optional)&nbsp;<br>
+&nbsp;&nbsp;rights:&nbsp;<a href="#Rights">Rights</a>&nbsp;(optional)&nbsp;The&nbsp;entry's&nbsp;<a href="#Rights">Rights</a>&nbsp;element<br>
+&nbsp;&nbsp;subtitle:&nbsp;<a href="#Subtitle">Subtitle</a>&nbsp;(optional)&nbsp;The&nbsp;entry's&nbsp;subtitle&nbsp;element<br>
+&nbsp;&nbsp;title:&nbsp;<a href="#Title">Title</a>&nbsp;(optional)&nbsp;the&nbsp;entry's&nbsp;title&nbsp;element<br>
+&nbsp;&nbsp;updated:&nbsp;<a href="#Updated">Updated</a>&nbsp;(optional)&nbsp;the&nbsp;entry's&nbsp;updated&nbsp;element<br>
+&nbsp;&nbsp;entry:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;the&nbsp;<a href="#Entry">Entry</a>&nbsp;instances&nbsp;contained&nbsp;in&nbsp;the&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;feed.<br>
+&nbsp;&nbsp;text:&nbsp;String&nbsp;(optional)&nbsp;The&nbsp;text&nbsp;contents&nbsp;of&nbsp;the&nbsp;element.&nbsp;This&nbsp;is&nbsp;the&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contents&nbsp;of&nbsp;the&nbsp;<a href="#Entry">Entry</a>'s&nbsp;XML&nbsp;text&nbsp;node.&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Example:&nbsp;&lt;foo&gt;This&nbsp;is&nbsp;the&nbsp;text&lt;/foo&gt;)<br>
+&nbsp;&nbsp;extension_elements:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;<a href="#ExtensionElement">ExtensionElement</a>&nbsp;instances<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;which&nbsp;are&nbsp;children&nbsp;of&nbsp;this&nbsp;element.<br>
+&nbsp;&nbsp;extension_attributes:&nbsp;dict&nbsp;(optional)&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;strings&nbsp;which&nbsp;are&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;values&nbsp;for&nbsp;additional&nbsp;XML&nbsp;attributes&nbsp;of&nbsp;this&nbsp;element.</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">AtomBase</a>:<br>
+<dl><dt><a name="Feed-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Feed-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><a name="Feed-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#LinkFinder">LinkFinder</a>:<br>
+<dl><dt><a name="Feed-GetAlternateLink"><strong>GetAlternateLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Feed-GetEditLink"><strong>GetEditLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Feed-GetLicenseLink"><strong>GetLicenseLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Feed-GetNextLink"><strong>GetNextLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Feed-GetSelfLink"><strong>GetSelfLink</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;set&nbsp;to&nbsp;'self'<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;atom.<a href="#Link">Link</a>&nbsp;or&nbsp;none&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="FeedEntryParent">class <strong>FeedEntryParent</strong></a>(<a href="atom.html#AtomBase">AtomBase</a>, <a href="atom.html#LinkFinder">LinkFinder</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;super&nbsp;class&nbsp;for&nbsp;atom:feed&nbsp;and&nbsp;entry,&nbsp;contains&nbsp;shared&nbsp;attributes<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="atom.html#FeedEntryParent">FeedEntryParent</a></dd>
+<dd><a href="atom.html#AtomBase">AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">ExtensionContainer</a></dd>
+<dd><a href="atom.html#LinkFinder">LinkFinder</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="FeedEntryParent-__init__"><strong>__init__</strong></a>(self, author<font color="#909090">=None</font>, category<font color="#909090">=None</font>, contributor<font color="#909090">=None</font>, atom_id<font color="#909090">=None</font>, link<font color="#909090">=None</font>, rights<font color="#909090">=None</font>, title<font color="#909090">=None</font>, updated<font color="#909090">=None</font>, text<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">AtomBase</a>:<br>
+<dl><dt><a name="FeedEntryParent-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="FeedEntryParent-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><a name="FeedEntryParent-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#LinkFinder">LinkFinder</a>:<br>
+<dl><dt><a name="FeedEntryParent-GetAlternateLink"><strong>GetAlternateLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="FeedEntryParent-GetEditLink"><strong>GetEditLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="FeedEntryParent-GetLicenseLink"><strong>GetLicenseLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="FeedEntryParent-GetNextLink"><strong>GetNextLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="FeedEntryParent-GetSelfLink"><strong>GetSelfLink</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;set&nbsp;to&nbsp;'self'<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;atom.<a href="#Link">Link</a>&nbsp;or&nbsp;none&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Generator">class <strong>Generator</strong></a>(<a href="atom.html#AtomBase">AtomBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;atom:generator&nbsp;element<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="atom.html#Generator">Generator</a></dd>
+<dd><a href="atom.html#AtomBase">AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Generator-__init__"><strong>__init__</strong></a>(self, uri<font color="#909090">=None</font>, version<font color="#909090">=None</font>, text<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;<a href="#Generator">Generator</a><br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;uri:&nbsp;string<br>
+&nbsp;&nbsp;version:&nbsp;string<br>
+&nbsp;&nbsp;text:&nbsp;str&nbsp;The&nbsp;text&nbsp;data&nbsp;in&nbsp;the&nbsp;this&nbsp;element<br>
+&nbsp;&nbsp;extension_elements:&nbsp;list&nbsp;A&nbsp;&nbsp;list&nbsp;of&nbsp;<a href="#ExtensionElement">ExtensionElement</a>&nbsp;instances<br>
+&nbsp;&nbsp;extension_attributes:&nbsp;dict&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;attribute&nbsp;value&nbsp;string&nbsp;pairs</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">AtomBase</a>:<br>
+<dl><dt><a name="Generator-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Generator-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><a name="Generator-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Icon">class <strong>Icon</strong></a>(<a href="atom.html#AtomBase">AtomBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;atom:icon&nbsp;element.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="atom.html#Icon">Icon</a></dd>
+<dd><a href="atom.html#AtomBase">AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Icon-__init__"><strong>__init__</strong></a>(self, text<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;<a href="#Icon">Icon</a><br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;text:&nbsp;str&nbsp;The&nbsp;text&nbsp;data&nbsp;in&nbsp;the&nbsp;this&nbsp;element<br>
+&nbsp;&nbsp;extension_elements:&nbsp;list&nbsp;A&nbsp;&nbsp;list&nbsp;of&nbsp;<a href="#ExtensionElement">ExtensionElement</a>&nbsp;instances<br>
+&nbsp;&nbsp;extension_attributes:&nbsp;dict&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;attribute&nbsp;value&nbsp;string&nbsp;pairs</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">AtomBase</a>:<br>
+<dl><dt><a name="Icon-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Icon-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><a name="Icon-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Id">class <strong>Id</strong></a>(<a href="atom.html#AtomBase">AtomBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;atom:id&nbsp;element.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="atom.html#Id">Id</a></dd>
+<dd><a href="atom.html#AtomBase">AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Id-__init__"><strong>__init__</strong></a>(self, text<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;<a href="#Id">Id</a><br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;text:&nbsp;str&nbsp;The&nbsp;text&nbsp;data&nbsp;in&nbsp;the&nbsp;this&nbsp;element<br>
+&nbsp;&nbsp;extension_elements:&nbsp;list&nbsp;A&nbsp;&nbsp;list&nbsp;of&nbsp;<a href="#ExtensionElement">ExtensionElement</a>&nbsp;instances<br>
+&nbsp;&nbsp;extension_attributes:&nbsp;dict&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;attribute&nbsp;value&nbsp;string&nbsp;pairs</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">AtomBase</a>:<br>
+<dl><dt><a name="Id-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Id-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><a name="Id-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Link">class <strong>Link</strong></a>(<a href="atom.html#AtomBase">AtomBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;atom:link&nbsp;element<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="atom.html#Link">Link</a></dd>
+<dd><a href="atom.html#AtomBase">AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Link-__init__"><strong>__init__</strong></a>(self, href<font color="#909090">=None</font>, rel<font color="#909090">=None</font>, link_type<font color="#909090">=None</font>, hreflang<font color="#909090">=None</font>, title<font color="#909090">=None</font>, length<font color="#909090">=None</font>, text<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;<a href="#Link">Link</a><br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;href:&nbsp;string&nbsp;The&nbsp;href&nbsp;attribute&nbsp;of&nbsp;the&nbsp;link<br>
+&nbsp;&nbsp;rel:&nbsp;string<br>
+&nbsp;&nbsp;type:&nbsp;string<br>
+&nbsp;&nbsp;hreflang:&nbsp;string&nbsp;The&nbsp;language&nbsp;for&nbsp;the&nbsp;href<br>
+&nbsp;&nbsp;title:&nbsp;string<br>
+&nbsp;&nbsp;length:&nbsp;string&nbsp;The&nbsp;length&nbsp;of&nbsp;the&nbsp;href's&nbsp;destination<br>
+&nbsp;&nbsp;extension_elements:&nbsp;list&nbsp;A&nbsp;&nbsp;list&nbsp;of&nbsp;<a href="#ExtensionElement">ExtensionElement</a>&nbsp;instances<br>
+&nbsp;&nbsp;extension_attributes:&nbsp;dict&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;attribute&nbsp;value&nbsp;string&nbsp;pairs<br>
+&nbsp;&nbsp;text:&nbsp;str&nbsp;The&nbsp;text&nbsp;data&nbsp;in&nbsp;the&nbsp;this&nbsp;element</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">AtomBase</a>:<br>
+<dl><dt><a name="Link-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Link-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><a name="Link-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="LinkFinder">class <strong>LinkFinder</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>An&nbsp;"interface"&nbsp;providing&nbsp;methods&nbsp;to&nbsp;find&nbsp;link&nbsp;elements<br>
+&nbsp;<br>
+<a href="#Entry">Entry</a>&nbsp;elements&nbsp;often&nbsp;contain&nbsp;multiple&nbsp;links&nbsp;which&nbsp;differ&nbsp;in&nbsp;the&nbsp;rel<br>
+attribute&nbsp;or&nbsp;content&nbsp;type.&nbsp;Often,&nbsp;developers&nbsp;are&nbsp;interested&nbsp;in&nbsp;a&nbsp;specific<br>
+type&nbsp;of&nbsp;link&nbsp;so&nbsp;this&nbsp;class&nbsp;provides&nbsp;methods&nbsp;to&nbsp;find&nbsp;specific&nbsp;classes&nbsp;of<br>
+links.<br>
+&nbsp;<br>
+This&nbsp;class&nbsp;is&nbsp;used&nbsp;as&nbsp;a&nbsp;mixin&nbsp;in&nbsp;Atom&nbsp;entries&nbsp;and&nbsp;feeds.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="LinkFinder-GetAlternateLink"><strong>GetAlternateLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="LinkFinder-GetEditLink"><strong>GetEditLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="LinkFinder-GetLicenseLink"><strong>GetLicenseLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="LinkFinder-GetNextLink"><strong>GetNextLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="LinkFinder-GetSelfLink"><strong>GetSelfLink</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;set&nbsp;to&nbsp;'self'<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;atom.<a href="#Link">Link</a>&nbsp;or&nbsp;none&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'LinkFinder' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Logo">class <strong>Logo</strong></a>(<a href="atom.html#AtomBase">AtomBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;atom:logo&nbsp;element.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="atom.html#Logo">Logo</a></dd>
+<dd><a href="atom.html#AtomBase">AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Logo-__init__"><strong>__init__</strong></a>(self, text<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;<a href="#Logo">Logo</a><br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;text:&nbsp;str&nbsp;The&nbsp;text&nbsp;data&nbsp;in&nbsp;the&nbsp;this&nbsp;element<br>
+&nbsp;&nbsp;extension_elements:&nbsp;list&nbsp;A&nbsp;&nbsp;list&nbsp;of&nbsp;<a href="#ExtensionElement">ExtensionElement</a>&nbsp;instances<br>
+&nbsp;&nbsp;extension_attributes:&nbsp;dict&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;attribute&nbsp;value&nbsp;string&nbsp;pairs</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">AtomBase</a>:<br>
+<dl><dt><a name="Logo-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Logo-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><a name="Logo-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Name">class <strong>Name</strong></a>(<a href="atom.html#AtomBase">AtomBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;atom:name&nbsp;element<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="atom.html#Name">Name</a></dd>
+<dd><a href="atom.html#AtomBase">AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Name-__init__"><strong>__init__</strong></a>(self, text<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;<a href="#Name">Name</a><br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;text:&nbsp;str&nbsp;The&nbsp;text&nbsp;data&nbsp;in&nbsp;the&nbsp;this&nbsp;element<br>
+&nbsp;&nbsp;extension_elements:&nbsp;list&nbsp;A&nbsp;&nbsp;list&nbsp;of&nbsp;<a href="#ExtensionElement">ExtensionElement</a>&nbsp;instances<br>
+&nbsp;&nbsp;extension_attributes:&nbsp;dict&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;attribute&nbsp;value&nbsp;string&nbsp;pairs</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">AtomBase</a>:<br>
+<dl><dt><a name="Name-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Name-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><a name="Name-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Person">class <strong>Person</strong></a>(<a href="atom.html#AtomBase">AtomBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;foundation&nbsp;class&nbsp;from&nbsp;which&nbsp;atom:author&nbsp;and&nbsp;atom:contributor&nbsp;extend.<br>
+&nbsp;<br>
+A&nbsp;person&nbsp;contains&nbsp;information&nbsp;like&nbsp;name,&nbsp;email&nbsp;address,&nbsp;and&nbsp;web&nbsp;page&nbsp;URI&nbsp;for<br>
+an&nbsp;author&nbsp;or&nbsp;contributor&nbsp;to&nbsp;an&nbsp;Atom&nbsp;feed.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="atom.html#Person">Person</a></dd>
+<dd><a href="atom.html#AtomBase">AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Person-__init__"><strong>__init__</strong></a>(self, name<font color="#909090">=None</font>, email<font color="#909090">=None</font>, uri<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>, text<font color="#909090">=None</font>)</dt><dd><tt>Foundation&nbsp;from&nbsp;which&nbsp;author&nbsp;and&nbsp;contributor&nbsp;are&nbsp;derived.<br>
+&nbsp;<br>
+The&nbsp;constructor&nbsp;is&nbsp;provided&nbsp;for&nbsp;illustrative&nbsp;purposes,&nbsp;you&nbsp;should&nbsp;not<br>
+need&nbsp;to&nbsp;instantiate&nbsp;a&nbsp;<a href="#Person">Person</a>.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;name:&nbsp;<a href="#Name">Name</a>&nbsp;The&nbsp;person's&nbsp;name<br>
+&nbsp;&nbsp;email:&nbsp;<a href="#Email">Email</a>&nbsp;The&nbsp;person's&nbsp;email&nbsp;address<br>
+&nbsp;&nbsp;uri:&nbsp;<a href="#Uri">Uri</a>&nbsp;The&nbsp;URI&nbsp;of&nbsp;the&nbsp;person's&nbsp;webpage<br>
+&nbsp;&nbsp;extension_elements:&nbsp;list&nbsp;A&nbsp;list&nbsp;of&nbsp;<a href="#ExtensionElement">ExtensionElement</a>&nbsp;instances&nbsp;which&nbsp;are<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;children&nbsp;of&nbsp;this&nbsp;element.<br>
+&nbsp;&nbsp;extension_attributes:&nbsp;dict&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;strings&nbsp;which&nbsp;are&nbsp;the&nbsp;values<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;additional&nbsp;XML&nbsp;attributes&nbsp;of&nbsp;this&nbsp;element.<br>
+&nbsp;&nbsp;text:&nbsp;String&nbsp;The&nbsp;text&nbsp;contents&nbsp;of&nbsp;the&nbsp;element.&nbsp;This&nbsp;is&nbsp;the&nbsp;contents<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of&nbsp;the&nbsp;<a href="#Entry">Entry</a>'s&nbsp;XML&nbsp;text&nbsp;node.&nbsp;(Example:&nbsp;&lt;foo&gt;This&nbsp;is&nbsp;the&nbsp;text&lt;/foo&gt;)</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">AtomBase</a>:<br>
+<dl><dt><a name="Person-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Person-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><a name="Person-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Published">class <strong>Published</strong></a>(<a href="atom.html#Date">Date</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;atom:published&nbsp;element.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="atom.html#Published">Published</a></dd>
+<dd><a href="atom.html#Date">Date</a></dd>
+<dd><a href="atom.html#AtomBase">AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Published-__init__"><strong>__init__</strong></a>(self, text<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;<a href="#Published">Published</a><br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;text:&nbsp;str&nbsp;The&nbsp;text&nbsp;data&nbsp;in&nbsp;the&nbsp;this&nbsp;element<br>
+&nbsp;&nbsp;extension_elements:&nbsp;list&nbsp;A&nbsp;&nbsp;list&nbsp;of&nbsp;<a href="#ExtensionElement">ExtensionElement</a>&nbsp;instances<br>
+&nbsp;&nbsp;extension_attributes:&nbsp;dict&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;attribute&nbsp;value&nbsp;string&nbsp;pairs</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">AtomBase</a>:<br>
+<dl><dt><a name="Published-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Published-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><a name="Published-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Rights">class <strong>Rights</strong></a>(<a href="atom.html#Text">Text</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;atom:rights&nbsp;element<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="atom.html#Rights">Rights</a></dd>
+<dd><a href="atom.html#Text">Text</a></dd>
+<dd><a href="atom.html#AtomBase">AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Rights-__init__"><strong>__init__</strong></a>(self, rights_type<font color="#909090">=None</font>, text<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;<a href="#Rights">Rights</a><br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;rights_type:&nbsp;string<br>
+&nbsp;&nbsp;text:&nbsp;str&nbsp;The&nbsp;text&nbsp;data&nbsp;in&nbsp;the&nbsp;this&nbsp;element<br>
+&nbsp;&nbsp;extension_elements:&nbsp;list&nbsp;A&nbsp;&nbsp;list&nbsp;of&nbsp;<a href="#ExtensionElement">ExtensionElement</a>&nbsp;instances<br>
+&nbsp;&nbsp;extension_attributes:&nbsp;dict&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;attribute&nbsp;value&nbsp;string&nbsp;pairs</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">AtomBase</a>:<br>
+<dl><dt><a name="Rights-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Rights-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><a name="Rights-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Source">class <strong>Source</strong></a>(<a href="atom.html#FeedEntryParent">FeedEntryParent</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;atom:source&nbsp;element<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="atom.html#Source">Source</a></dd>
+<dd><a href="atom.html#FeedEntryParent">FeedEntryParent</a></dd>
+<dd><a href="atom.html#AtomBase">AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">ExtensionContainer</a></dd>
+<dd><a href="atom.html#LinkFinder">LinkFinder</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Source-__init__"><strong>__init__</strong></a>(self, author<font color="#909090">=None</font>, category<font color="#909090">=None</font>, contributor<font color="#909090">=None</font>, generator<font color="#909090">=None</font>, icon<font color="#909090">=None</font>, atom_id<font color="#909090">=None</font>, link<font color="#909090">=None</font>, logo<font color="#909090">=None</font>, rights<font color="#909090">=None</font>, subtitle<font color="#909090">=None</font>, title<font color="#909090">=None</font>, updated<font color="#909090">=None</font>, text<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;<a href="#Source">Source</a><br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;author:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;<a href="#Author">Author</a>&nbsp;instances&nbsp;which&nbsp;belong&nbsp;to&nbsp;this<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class.<br>
+&nbsp;&nbsp;category:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;<a href="#Category">Category</a>&nbsp;instances<br>
+&nbsp;&nbsp;contributor:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;on&nbsp;<a href="#Contributor">Contributor</a>&nbsp;instances<br>
+&nbsp;&nbsp;generator:&nbsp;<a href="#Generator">Generator</a>&nbsp;(optional)<br>
+&nbsp;&nbsp;icon:&nbsp;<a href="#Icon">Icon</a>&nbsp;(optional)<br>
+&nbsp;&nbsp;id:&nbsp;<a href="#Id">Id</a>&nbsp;(optional)&nbsp;The&nbsp;entry's&nbsp;<a href="#Id">Id</a>&nbsp;element<br>
+&nbsp;&nbsp;link:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;<a href="#Link">Link</a>&nbsp;instances<br>
+&nbsp;&nbsp;logo:&nbsp;<a href="#Logo">Logo</a>&nbsp;(optional)<br>
+&nbsp;&nbsp;rights:&nbsp;<a href="#Rights">Rights</a>&nbsp;(optional)&nbsp;The&nbsp;entry's&nbsp;<a href="#Rights">Rights</a>&nbsp;element<br>
+&nbsp;&nbsp;subtitle:&nbsp;<a href="#Subtitle">Subtitle</a>&nbsp;(optional)&nbsp;The&nbsp;entry's&nbsp;subtitle&nbsp;element<br>
+&nbsp;&nbsp;title:&nbsp;<a href="#Title">Title</a>&nbsp;(optional)&nbsp;the&nbsp;entry's&nbsp;title&nbsp;element<br>
+&nbsp;&nbsp;updated:&nbsp;<a href="#Updated">Updated</a>&nbsp;(optional)&nbsp;the&nbsp;entry's&nbsp;updated&nbsp;element<br>
+&nbsp;&nbsp;text:&nbsp;String&nbsp;(optional)&nbsp;The&nbsp;text&nbsp;contents&nbsp;of&nbsp;the&nbsp;element.&nbsp;This&nbsp;is&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contents&nbsp;of&nbsp;the&nbsp;<a href="#Entry">Entry</a>'s&nbsp;XML&nbsp;text&nbsp;node.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Example:&nbsp;&lt;foo&gt;This&nbsp;is&nbsp;the&nbsp;text&lt;/foo&gt;)<br>
+&nbsp;&nbsp;extension_elements:&nbsp;list&nbsp;(optional)&nbsp;A&nbsp;list&nbsp;of&nbsp;<a href="#ExtensionElement">ExtensionElement</a>&nbsp;instances<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;which&nbsp;are&nbsp;children&nbsp;of&nbsp;this&nbsp;element.<br>
+&nbsp;&nbsp;extension_attributes:&nbsp;dict&nbsp;(optional)&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;strings&nbsp;which&nbsp;are<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;values&nbsp;for&nbsp;additional&nbsp;XML&nbsp;attributes&nbsp;of&nbsp;this&nbsp;element.</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">AtomBase</a>:<br>
+<dl><dt><a name="Source-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Source-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><a name="Source-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#LinkFinder">LinkFinder</a>:<br>
+<dl><dt><a name="Source-GetAlternateLink"><strong>GetAlternateLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Source-GetEditLink"><strong>GetEditLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Source-GetLicenseLink"><strong>GetLicenseLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Source-GetNextLink"><strong>GetNextLink</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Source-GetSelfLink"><strong>GetSelfLink</strong></a>(self)</dt><dd><tt>Find&nbsp;the&nbsp;first&nbsp;link&nbsp;with&nbsp;rel&nbsp;set&nbsp;to&nbsp;'self'<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;atom.<a href="#Link">Link</a>&nbsp;or&nbsp;none&nbsp;if&nbsp;none&nbsp;of&nbsp;the&nbsp;links&nbsp;had&nbsp;rel&nbsp;equal&nbsp;to&nbsp;'self'</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Subtitle">class <strong>Subtitle</strong></a>(<a href="atom.html#Text">Text</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;atom:subtitle&nbsp;element<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="atom.html#Subtitle">Subtitle</a></dd>
+<dd><a href="atom.html#Text">Text</a></dd>
+<dd><a href="atom.html#AtomBase">AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Subtitle-__init__"><strong>__init__</strong></a>(self, subtitle_type<font color="#909090">=None</font>, text<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;<a href="#Subtitle">Subtitle</a><br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;subtitle_type:&nbsp;string<br>
+&nbsp;&nbsp;text:&nbsp;str&nbsp;The&nbsp;text&nbsp;data&nbsp;in&nbsp;the&nbsp;this&nbsp;element<br>
+&nbsp;&nbsp;extension_elements:&nbsp;list&nbsp;A&nbsp;&nbsp;list&nbsp;of&nbsp;<a href="#ExtensionElement">ExtensionElement</a>&nbsp;instances<br>
+&nbsp;&nbsp;extension_attributes:&nbsp;dict&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;attribute&nbsp;value&nbsp;string&nbsp;pairs</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">AtomBase</a>:<br>
+<dl><dt><a name="Subtitle-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Subtitle-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><a name="Subtitle-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Summary">class <strong>Summary</strong></a>(<a href="atom.html#Text">Text</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;atom:summary&nbsp;element<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="atom.html#Summary">Summary</a></dd>
+<dd><a href="atom.html#Text">Text</a></dd>
+<dd><a href="atom.html#AtomBase">AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Summary-__init__"><strong>__init__</strong></a>(self, summary_type<font color="#909090">=None</font>, text<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;<a href="#Summary">Summary</a><br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;summary_type:&nbsp;string<br>
+&nbsp;&nbsp;text:&nbsp;str&nbsp;The&nbsp;text&nbsp;data&nbsp;in&nbsp;the&nbsp;this&nbsp;element<br>
+&nbsp;&nbsp;extension_elements:&nbsp;list&nbsp;A&nbsp;&nbsp;list&nbsp;of&nbsp;<a href="#ExtensionElement">ExtensionElement</a>&nbsp;instances<br>
+&nbsp;&nbsp;extension_attributes:&nbsp;dict&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;attribute&nbsp;value&nbsp;string&nbsp;pairs</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">AtomBase</a>:<br>
+<dl><dt><a name="Summary-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Summary-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><a name="Summary-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Text">class <strong>Text</strong></a>(<a href="atom.html#AtomBase">AtomBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;foundation&nbsp;class&nbsp;from&nbsp;which&nbsp;atom:title,&nbsp;summary,&nbsp;etc.&nbsp;extend.<br>
+&nbsp;<br>
+This&nbsp;class&nbsp;should&nbsp;never&nbsp;be&nbsp;instantiated.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="atom.html#Text">Text</a></dd>
+<dd><a href="atom.html#AtomBase">AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Text-__init__"><strong>__init__</strong></a>(self, text_type<font color="#909090">=None</font>, text<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;<a href="#Text">Text</a><br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;text_type:&nbsp;string<br>
+&nbsp;&nbsp;text:&nbsp;str&nbsp;The&nbsp;text&nbsp;data&nbsp;in&nbsp;the&nbsp;this&nbsp;element<br>
+&nbsp;&nbsp;extension_elements:&nbsp;list&nbsp;A&nbsp;&nbsp;list&nbsp;of&nbsp;<a href="#ExtensionElement">ExtensionElement</a>&nbsp;instances<br>
+&nbsp;&nbsp;extension_attributes:&nbsp;dict&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;attribute&nbsp;value&nbsp;string&nbsp;pairs</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">AtomBase</a>:<br>
+<dl><dt><a name="Text-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Text-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><a name="Text-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Title">class <strong>Title</strong></a>(<a href="atom.html#Text">Text</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;atom:title&nbsp;element<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="atom.html#Title">Title</a></dd>
+<dd><a href="atom.html#Text">Text</a></dd>
+<dd><a href="atom.html#AtomBase">AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Title-__init__"><strong>__init__</strong></a>(self, title_type<font color="#909090">=None</font>, text<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;<a href="#Title">Title</a><br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;title_type:&nbsp;string<br>
+&nbsp;&nbsp;text:&nbsp;str&nbsp;The&nbsp;text&nbsp;data&nbsp;in&nbsp;the&nbsp;this&nbsp;element<br>
+&nbsp;&nbsp;extension_elements:&nbsp;list&nbsp;A&nbsp;&nbsp;list&nbsp;of&nbsp;<a href="#ExtensionElement">ExtensionElement</a>&nbsp;instances<br>
+&nbsp;&nbsp;extension_attributes:&nbsp;dict&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;attribute&nbsp;value&nbsp;string&nbsp;pairs</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">AtomBase</a>:<br>
+<dl><dt><a name="Title-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Title-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><a name="Title-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Updated">class <strong>Updated</strong></a>(<a href="atom.html#Date">Date</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;atom:updated&nbsp;element.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="atom.html#Updated">Updated</a></dd>
+<dd><a href="atom.html#Date">Date</a></dd>
+<dd><a href="atom.html#AtomBase">AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Updated-__init__"><strong>__init__</strong></a>(self, text<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;<a href="#Updated">Updated</a><br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;text:&nbsp;str&nbsp;The&nbsp;text&nbsp;data&nbsp;in&nbsp;the&nbsp;this&nbsp;element<br>
+&nbsp;&nbsp;extension_elements:&nbsp;list&nbsp;A&nbsp;&nbsp;list&nbsp;of&nbsp;<a href="#ExtensionElement">ExtensionElement</a>&nbsp;instances<br>
+&nbsp;&nbsp;extension_attributes:&nbsp;dict&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;attribute&nbsp;value&nbsp;string&nbsp;pairs</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">AtomBase</a>:<br>
+<dl><dt><a name="Updated-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Updated-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><a name="Updated-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Uri">class <strong>Uri</strong></a>(<a href="atom.html#AtomBase">AtomBase</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;atom:uri&nbsp;element<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="atom.html#Uri">Uri</a></dd>
+<dd><a href="atom.html#AtomBase">AtomBase</a></dd>
+<dd><a href="atom.html#ExtensionContainer">ExtensionContainer</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Uri-__init__"><strong>__init__</strong></a>(self, text<font color="#909090">=None</font>, extension_elements<font color="#909090">=None</font>, extension_attributes<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;<a href="#Uri">Uri</a><br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;extension_elements:&nbsp;list&nbsp;A&nbsp;&nbsp;list&nbsp;of&nbsp;<a href="#ExtensionElement">ExtensionElement</a>&nbsp;instances<br>
+&nbsp;&nbsp;extension_attributes:&nbsp;dict&nbsp;A&nbsp;dictionary&nbsp;of&nbsp;attribute&nbsp;value&nbsp;string&nbsp;pairs<br>
+&nbsp;&nbsp;text:&nbsp;str&nbsp;The&nbsp;text&nbsp;data&nbsp;in&nbsp;the&nbsp;this&nbsp;element</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#AtomBase">AtomBase</a>:<br>
+<dl><dt><a name="Uri-ToString"><strong>ToString</strong></a>(self, string_encoding<font color="#909090">='UTF-8'</font>)</dt><dd><tt>Converts&nbsp;the&nbsp;Atom&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;a&nbsp;string&nbsp;containing&nbsp;XML.</tt></dd></dl>
+
+<dl><dt><a name="Uri-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><a name="Uri-FindExtensions"><strong>FindExtensions</strong></a>(self, tag<font color="#909090">=None</font>, namespace<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;extension&nbsp;elements&nbsp;for&nbsp;child&nbsp;nodes&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;extension&nbsp;elements&nbsp;within&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;whose&nbsp;tag<br>
+and/or&nbsp;namespace&nbsp;match&nbsp;those&nbsp;passed&nbsp;in.&nbsp;To&nbsp;find&nbsp;all&nbsp;extensions&nbsp;in<br>
+a&nbsp;particular&nbsp;namespace,&nbsp;specify&nbsp;the&nbsp;namespace&nbsp;but&nbsp;not&nbsp;the&nbsp;tag&nbsp;name.<br>
+If&nbsp;you&nbsp;specify&nbsp;only&nbsp;the&nbsp;tag,&nbsp;the&nbsp;result&nbsp;list&nbsp;may&nbsp;contain&nbsp;extension<br>
+elements&nbsp;in&nbsp;multiple&nbsp;namespaces.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;tag:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;tag<br>
+&nbsp;&nbsp;namespace:&nbsp;str&nbsp;(optional)&nbsp;The&nbsp;desired&nbsp;namespace<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;elements&nbsp;whose&nbsp;tag&nbsp;and/or&nbsp;namespace&nbsp;match&nbsp;the&nbsp;parameters<br>
+&nbsp;&nbsp;values</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="atom.html#ExtensionContainer">ExtensionContainer</a>:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'ExtensionContainer' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-AuthorFromString"><strong>AuthorFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-CategoryFromString"><strong>CategoryFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-ContentFromString"><strong>ContentFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-ContributorFromString"><strong>ContributorFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-ControlFromString"><strong>ControlFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-CreateClassFromXMLString"><strong>CreateClassFromXMLString</strong></a>(target_class, xml_string, string_encoding<font color="#909090">=None</font>)</dt><dd><tt>Creates&nbsp;an&nbsp;instance&nbsp;of&nbsp;the&nbsp;target&nbsp;class&nbsp;from&nbsp;the&nbsp;string&nbsp;contents.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;target_class:&nbsp;class&nbsp;The&nbsp;class&nbsp;which&nbsp;will&nbsp;be&nbsp;instantiated&nbsp;and&nbsp;populated<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;the&nbsp;contents&nbsp;of&nbsp;the&nbsp;XML.&nbsp;This&nbsp;class&nbsp;must&nbsp;have&nbsp;a&nbsp;_tag&nbsp;and&nbsp;a<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_namespace&nbsp;class&nbsp;variable.<br>
+&nbsp;&nbsp;xml_string:&nbsp;str&nbsp;A&nbsp;string&nbsp;which&nbsp;contains&nbsp;valid&nbsp;XML.&nbsp;The&nbsp;root&nbsp;element<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of&nbsp;the&nbsp;XML&nbsp;string&nbsp;should&nbsp;match&nbsp;the&nbsp;tag&nbsp;and&nbsp;namespace&nbsp;of&nbsp;the&nbsp;desired<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class.<br>
+&nbsp;&nbsp;string_encoding:&nbsp;str&nbsp;The&nbsp;character&nbsp;encoding&nbsp;which&nbsp;the&nbsp;xml_string&nbsp;should<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;be&nbsp;converted&nbsp;to&nbsp;before&nbsp;it&nbsp;is&nbsp;interpreted&nbsp;and&nbsp;translated&nbsp;into&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;objects.&nbsp;The&nbsp;default&nbsp;is&nbsp;None&nbsp;in&nbsp;which&nbsp;case&nbsp;the&nbsp;string&nbsp;encoding<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;not&nbsp;changed.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;An&nbsp;instance&nbsp;of&nbsp;the&nbsp;target&nbsp;class&nbsp;with&nbsp;members&nbsp;assigned&nbsp;according&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;contents&nbsp;of&nbsp;the&nbsp;XML&nbsp;-&nbsp;or&nbsp;None&nbsp;if&nbsp;the&nbsp;root&nbsp;XML&nbsp;tag&nbsp;and&nbsp;namespace&nbsp;did&nbsp;not<br>
+&nbsp;&nbsp;match&nbsp;those&nbsp;of&nbsp;the&nbsp;target&nbsp;class.</tt></dd></dl>
+ <dl><dt><a name="-DraftFromString"><strong>DraftFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-EmailFromString"><strong>EmailFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-EntryFromString"><strong>EntryFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-ExtensionElementFromString"><strong>ExtensionElementFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-FeedFromString"><strong>FeedFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-GeneratorFromString"><strong>GeneratorFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-IconFromString"><strong>IconFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-IdFromString"><strong>IdFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-LinkFromString"><strong>LinkFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-LogoFromString"><strong>LogoFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-NameFromString"><strong>NameFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-PublishedFromString"><strong>PublishedFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-RightsFromString"><strong>RightsFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-SourceFromString"><strong>SourceFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-SubtitleFromString"><strong>SubtitleFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-SummaryFromString"><strong>SummaryFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-TitleFromString"><strong>TitleFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-UpdatedFromString"><strong>UpdatedFromString</strong></a>(xml_string)</dt></dl>
+ <dl><dt><a name="-UriFromString"><strong>UriFromString</strong></a>(xml_string)</dt></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>APP_NAMESPACE</strong> = 'http://purl.org/atom/app#'<br>
+<strong>APP_TEMPLATE</strong> = '{http://purl.org/atom/app#}%s'<br>
+<strong>ATOM_NAMESPACE</strong> = 'http://www.w3.org/2005/Atom'<br>
+<strong>ELEMENT_TEMPLATE</strong> = '{http://www.w3.org/2005/Atom}%s'<br>
+<strong>MEMBER_STRING_ENCODING</strong> = 'utf-8'<br>
+<strong>XML_STRING_ENCODING</strong> = 'utf-8'<br>
+<strong>__author__</strong> = 'api.jscudder (Jeffrey Scudder)'</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#7799ee">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Author</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#7799ee"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">api.jscudder&nbsp;(Jeffrey&nbsp;Scudder)</td></tr></table>
+</body></html>

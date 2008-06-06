@@ -1,0 +1,192 @@
+=== 1.0.13 ===
+May 8, 2008 (revision 357)
+
+- Added sample code illustrating the use of the Contacts API modules.
+- Added a mock_service module which will allow for faster test execution
+    by simulating a server and replaying recordings instead of making
+    HTTP requests to a remote server.
+- Fixed a but in the gdata.auth module which could cause certain characters
+    at the start of the token to be removed incorrectly.
+- Fixed a bug in the gdata.apps.service module which caused an import to 
+    fail when loading ElementTree in some cases.
+- Service unit tests should run correctly when using run_service_tests 
+    and run_all_tests now that the subtests have been made into packages.
+
+=== 1.0.12.1 ===
+April 10, 2008 (revision 341)
+
+- Added new import statements so that xml.etree.ElementTree can be used. 
+    Needed for the library to run on Google App Engine.
+
+=== 1.0.12 ===
+April 8, 2008 (revision 334)
+
+- Added support for the Google Contacts API.
+- Added a gdata.urlfetch module which allows this library to be used in 
+    Google App Engine. This module uses urlfetch instead of httplib to 
+    perform HTTP requests.
+- Refactored atom.service and gdata.service to make it easier to swap out the
+    HTTP communication layer.
+- Fixed a bug in the Push method of gdata.spreadsheet.text_db.
+- Sped up InsertRow method in gdata.spreadsheet.service.
+- Improved XML parsing efficiency in gdata.calendar.service.
+- Added new attribuges for the Google Apps login element.
+- Improved UpdatePhotoBlob in gdata.photo.service.
+- Added pydocs for Google Contacts API and updates in other modules.
+
+=== 1.0.11.1 ===
+March 13, 2008 (revision 314)
+
+- Added text_db module to gdata.spreadsheet which makes using the Spreadsheets
+    API feel more like using a simple database. This module streamlines use
+    of the list feed.
+- Compatibility fixes for geo and photos modules to run on Python 2.2 and 2.3.
+- Added the orderby parameter to gdata.service's Query class.
+- Changed the blogger sample to use orderby=updated so that queries on 
+    updated min or max will work.
+- Fix to string encoding in the atom core when converting text members to XML.
+
+=== 1.0.11 ===
+February 11, 2008 (revision 290)
+
+- Modified the gdata.service.GDataService to include a handler member to 
+    which all HTTP requests are delegated. This will allow the underlying
+    HTTP client to be swapped out and pave the way for use of a mock server
+    in unit tests.
+- Fixed character encoding problems when parsing non ASCII XML.
+- Added pydocs for gdata's geo, exif, and media packages. 
+
+
+=== 1.0.10.1 ===
+December 20, 2007 (revision 265)
+
+- Photos packages for working with the Picasa Web Albums Data API.
+- New modules for handling media, geo, and exif XML elements.
+- Packages for the Google Code Seach API.
+- New PyDoc HTML pages generated from the source code.
+- Extracted authentication code into a seperate module which can be used in
+    other applications.
+- The core XML parser should now fully support UTF-8 strings, there are also
+    options to change the default encoding.
+- Bugfixes in Atom service's proxy support when authenticating with the proxy.
+- Spreadsheets UpdateCell can now take integers for the row and column 
+    parameters.
+- Added INSTALL.txt to explain the installation process. The content was 
+    copied from the getting started article here:
+    http://code.google.com/support/bin/answer.py?answer=75582
+- You can now create update and delete worksheets within a Google 
+    Spreadsheet.
+- Added convenience methods to service object to ease the process of 
+    iterating through a feed.
+- For Document List queries, added the ability to construct schema-qualified
+    named folder queries.
+
+=== 1.0.9 === 
+October 15, 2007 (revision 213)
+
+- Added support for batch requests for the Google Spreadsheets cells feed,
+    Google Calendar's events feed, and Google Base's items feed.
+- Authentication requests can now be sent to a different server by modifying 
+    a module variable in gdata.service.
+- Fixed the birthdaySample mashup.
+- User Agent headers now fit the pattern used in other Google data client 
+    libraries.
+- Made it easier to access custom elements for Google Base items. 
+
+=== 1.0.8 ===
+August 31, 2007 (revision 192)
+
+- Major refactoring of the data model classes. Improved XML parsing
+    performance.
+- Created a script to run all of the tests, one to run the data model tests,
+    and one to run all service tests.
+- Changes to MediaSource to handle uploading files on Windows.
+- All of the sample code should now work in Python 2.2 and higher. I removed
+    2.4 dependancies.
+- Minor change to the Blogger sample; it now uses entry.GetSelfLink().
+- Added fix to prevent socket.sslerror and redirect failures when using a
+    proxy.
+- Google Calendar event entries can now contain a reference to the original
+    event. The original event element is present when describing a recurrance
+    exception.
+- Added timezone parameter to Google Calendar queries. This allows the client
+    to request that event times be expressed in a specific timezone.
+
+=== 1.0.7 ===
+August 7, 2007
+
+- Added new test for the Documents List data API's service module.
+- Updated setup.py to include the docs package in the installation.
+
+=== 1.0.6 ===
+Aug 2, 2007
+
+- Support for Documents List API added along with sample code.
+
+=== 1.0.5 ===
+July 31, 2007
+
+- XML parsing can now use cElementTree if it is available, this should speed 
+    up XML parsing.
+- Redirects now include all params in the original HTTP request.
+- Added support for WebContent and QuickAdd features of Google Calendar data 
+    API.
+- Proxy support added.
+- Binary MIME uploads now work for Windows files when performing media uploads.
+- New calendar functionality for add/edit/delete calendar and add/edit/delete 
+    subscriptions. Also, added new functionality for Calendar Gadgets.
+
+=== 1.0.4 ===
+June 23, 2007
+
+- Added data and service modules for Google Apps.
+- XML parsing can now be configured in gdata module service calls to avoid 
+    multiparsing to convert to the desired type.
+- Fixed UTF-8 support in the Atom modules.
+- The spreadsheets example now works with UTF-8 column names.
+- Fixed a type in the Google Base dry-run sample.
+- Calendar's Who element no longer requires a name when converting to XML.
+
+=== 1.0.3 ===
+May 30, 2007
+
+- Added a mashup sample using the spreadsheets and calendar services.
+- Reduced the number of unnecessary namespace declarations in the XML produced 
+    by objects.
+- Changed type of custom elements in a spreadsheets list entry.
+- Fixed bugs in spreadsheetsExample.py.
+- Spreadsheet entries now inherit from GDataEntry and have gdata specific 
+    convenience methods. 
+
+=== 1.0.2 ===
+May 4, 2007
+
+- Added support for media. Services can now upload images, the tests for this
+    service use the Picasa Web Albums data API.
+- Added example code illustrating Blogger operations.
+- Fixed host name processing for URLs which have -'s in the host name.
+- Added a debug setting for service classes.
+- Added user agent header.
+- Made finding links of a specific type easier when dealing with Atom elements.
+    Atom Entries now have GetXLink methods.
+- Simplified finding license links in Atom Entries. 
+
+=== 1.0.1 ===
+April 20, 2007
+
+- Rearranged package structure, tests are in their own directory and Google
+    data API extension classes are nested under the gdata package.
+- Simplified accessing extension elements by adding FindExtesions.
+- Provided a setup.py file for distutils based installation.
+- Added support for the app:draft element.
+- Imports ElementTree from XML libraries in Python 2.5
+- Fixed _EntryLinkFromElementTree in the calendar data module.
+- Fixed various _TakeChildFromElementTree methods in calendar data module.
+- Fixed delete and update operations in the spreadsheetExample script.
+- Fixed setting sort order and order by in calendar's service module.
+- Added HTTP BasicAuth for AtomService.
+
+=== 1.0 ===
+March 26, 2007
+
+Initial release

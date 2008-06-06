@@ -1,0 +1,512 @@
+
+<!doctype html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module gdata.spreadsheet.text_db</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="gdata.html"><font color="#ffffff">gdata</font></a>.<a href="gdata.spreadsheet.html"><font color="#ffffff">spreadsheet</font></a>.text_db</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/svn/gdata-python-client-release/src/gdata/spreadsheet/text_db.py">/usr/local/svn/gdata-python-client-release/src/gdata/spreadsheet/text_db.py</a></font></td></tr></table>
+    <p><tt>#&nbsp;Copyright&nbsp;Google&nbsp;2007-2008,&nbsp;all&nbsp;rights&nbsp;reserved.<br>
+#<br>
+#&nbsp;Licensed&nbsp;under&nbsp;the&nbsp;Apache&nbsp;License,&nbsp;Version&nbsp;2.0&nbsp;(the&nbsp;"License");<br>
+#&nbsp;you&nbsp;may&nbsp;not&nbsp;use&nbsp;this&nbsp;file&nbsp;except&nbsp;in&nbsp;compliance&nbsp;with&nbsp;the&nbsp;License.<br>
+#&nbsp;You&nbsp;may&nbsp;obtain&nbsp;a&nbsp;copy&nbsp;of&nbsp;the&nbsp;License&nbsp;at<br>
+#<br>
+#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a><br>
+#<br>
+#&nbsp;Unless&nbsp;required&nbsp;by&nbsp;applicable&nbsp;law&nbsp;or&nbsp;agreed&nbsp;to&nbsp;in&nbsp;writing,&nbsp;software<br>
+#&nbsp;distributed&nbsp;under&nbsp;the&nbsp;License&nbsp;is&nbsp;distributed&nbsp;on&nbsp;an&nbsp;"AS&nbsp;IS"&nbsp;BASIS,<br>
+#&nbsp;WITHOUT&nbsp;WARRANTIES&nbsp;OR&nbsp;CONDITIONS&nbsp;OF&nbsp;ANY&nbsp;KIND,&nbsp;either&nbsp;express&nbsp;or&nbsp;implied.<br>
+#&nbsp;See&nbsp;the&nbsp;License&nbsp;for&nbsp;the&nbsp;specific&nbsp;language&nbsp;governing&nbsp;permissions&nbsp;and<br>
+#&nbsp;limitations&nbsp;under&nbsp;the&nbsp;License.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#fffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="StringIO.html">StringIO</a><br>
+</td><td width="25%" valign=top><a href="gdata.html">gdata</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="__builtin__.html#list">__builtin__.list</a>(<a href="__builtin__.html#object">__builtin__.object</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.spreadsheet.text_db.html#RecordResultSet">RecordResultSet</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="__builtin__.html#object">__builtin__.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.spreadsheet.text_db.html#Database">Database</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.spreadsheet.text_db.html#DatabaseClient">DatabaseClient</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.spreadsheet.text_db.html#Record">Record</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.spreadsheet.text_db.html#Table">Table</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="exceptions.html#Exception">exceptions.Exception</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.spreadsheet.text_db.html#Error">Error</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gdata.spreadsheet.text_db.html#BadCredentials">BadCredentials</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gdata.spreadsheet.text_db.html#CaptchaRequired">CaptchaRequired</a>
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="BadCredentials">class <strong>BadCredentials</strong></a>(<a href="gdata.spreadsheet.text_db.html#Error">Error</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.spreadsheet.text_db.html#BadCredentials">BadCredentials</a></dd>
+<dd><a href="gdata.spreadsheet.text_db.html#Error">Error</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="BadCredentials-__getitem__"><strong>__getitem__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="BadCredentials-__init__"><strong>__init__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="BadCredentials-__str__"><strong>__str__</strong></a>(...)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="CaptchaRequired">class <strong>CaptchaRequired</strong></a>(<a href="gdata.spreadsheet.text_db.html#Error">Error</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.spreadsheet.text_db.html#CaptchaRequired">CaptchaRequired</a></dd>
+<dd><a href="gdata.spreadsheet.text_db.html#Error">Error</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+</dl>
+<hr>
+Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="CaptchaRequired-__getitem__"><strong>__getitem__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="CaptchaRequired-__init__"><strong>__init__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="CaptchaRequired-__str__"><strong>__str__</strong></a>(...)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Database">class <strong>Database</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Provides&nbsp;interface&nbsp;to&nbsp;find&nbsp;and&nbsp;create&nbsp;tables.<br>
+&nbsp;<br>
+The&nbsp;database&nbsp;represents&nbsp;a&nbsp;Google&nbsp;Spreadsheet.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Database-CreateTable"><strong>CreateTable</strong></a>(self, name, fields<font color="#909090">=None</font>)</dt><dd><tt>Add&nbsp;a&nbsp;new&nbsp;worksheet&nbsp;to&nbsp;this&nbsp;spreadsheet&nbsp;and&nbsp;fill&nbsp;in&nbsp;column&nbsp;names.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;name:&nbsp;str&nbsp;The&nbsp;title&nbsp;of&nbsp;the&nbsp;new&nbsp;worksheet.<br>
+&nbsp;&nbsp;fields:&nbsp;<a href="__builtin__.html#list">list</a>&nbsp;of&nbsp;strings&nbsp;The&nbsp;column&nbsp;names&nbsp;which&nbsp;are&nbsp;placed&nbsp;in&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;first&nbsp;row&nbsp;of&nbsp;this&nbsp;worksheet.&nbsp;These&nbsp;names&nbsp;are&nbsp;converted&nbsp;into&nbsp;XML<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tags&nbsp;by&nbsp;the&nbsp;server.&nbsp;To&nbsp;avoid&nbsp;changes&nbsp;during&nbsp;the&nbsp;translation<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;process&nbsp;I&nbsp;recommend&nbsp;using&nbsp;all&nbsp;lowercase&nbsp;alphabetic&nbsp;names.&nbsp;For<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;example&nbsp;['somelongname',&nbsp;'theothername']<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;<a href="#Table">Table</a>&nbsp;representing&nbsp;the&nbsp;newly&nbsp;created&nbsp;worksheet.</tt></dd></dl>
+
+<dl><dt><a name="Database-Delete"><strong>Delete</strong></a>(self)</dt><dd><tt>Deletes&nbsp;the&nbsp;entire&nbsp;database&nbsp;spreadsheet&nbsp;from&nbsp;Google&nbsp;Spreadsheets.</tt></dd></dl>
+
+<dl><dt><a name="Database-GetTables"><strong>GetTables</strong></a>(self, worksheet_id<font color="#909090">=None</font>, name<font color="#909090">=None</font>)</dt><dd><tt>Searches&nbsp;for&nbsp;a&nbsp;worksheet&nbsp;with&nbsp;the&nbsp;specified&nbsp;ID&nbsp;or&nbsp;name.<br>
+&nbsp;<br>
+The&nbsp;<a href="__builtin__.html#list">list</a>&nbsp;of&nbsp;results&nbsp;should&nbsp;have&nbsp;one&nbsp;table&nbsp;at&nbsp;most,&nbsp;or&nbsp;no&nbsp;results<br>
+if&nbsp;the&nbsp;id&nbsp;or&nbsp;name&nbsp;were&nbsp;not&nbsp;found.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;worksheet_id:&nbsp;str&nbsp;The&nbsp;ID&nbsp;of&nbsp;the&nbsp;worksheet,&nbsp;example:&nbsp;'od6'<br>
+&nbsp;&nbsp;name:&nbsp;str&nbsp;The&nbsp;title&nbsp;of&nbsp;the&nbsp;worksheet.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;<a href="__builtin__.html#list">list</a>&nbsp;of&nbsp;length&nbsp;0&nbsp;or&nbsp;1&nbsp;containing&nbsp;the&nbsp;desired&nbsp;<a href="#Table">Table</a>.&nbsp;A&nbsp;<a href="__builtin__.html#list">list</a>&nbsp;is&nbsp;returned<br>
+&nbsp;&nbsp;to&nbsp;make&nbsp;this&nbsp;method&nbsp;feel&nbsp;like&nbsp;GetDatabases&nbsp;and&nbsp;GetRecords.</tt></dd></dl>
+
+<dl><dt><a name="Database-__init__"><strong>__init__</strong></a>(self, spreadsheet_entry<font color="#909090">=None</font>, database_client<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;a&nbsp;database&nbsp;<a href="__builtin__.html#object">object</a>.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;spreadsheet_entry:&nbsp;gdata.docs.DocumentListEntry&nbsp;The&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Atom&nbsp;entry&nbsp;which&nbsp;represents&nbsp;the&nbsp;Google&nbsp;Spreadsheet.&nbsp;The<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;spreadsheet's&nbsp;key&nbsp;is&nbsp;extracted&nbsp;from&nbsp;the&nbsp;entry&nbsp;and&nbsp;stored&nbsp;as&nbsp;a&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;member.<br>
+&nbsp;&nbsp;database_client:&nbsp;<a href="#DatabaseClient">DatabaseClient</a>&nbsp;A&nbsp;client&nbsp;which&nbsp;can&nbsp;talk&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Google&nbsp;Spreadsheets&nbsp;servers&nbsp;to&nbsp;perform&nbsp;operations&nbsp;on&nbsp;worksheets<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;within&nbsp;this&nbsp;spreadsheet.</tt></dd></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'Database' objects&gt;<dd><tt><a href="__builtin__.html#list">list</a>&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="DatabaseClient">class <strong>DatabaseClient</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Allows&nbsp;creation&nbsp;and&nbsp;finding&nbsp;of&nbsp;Google&nbsp;Spreadsheets&nbsp;databases.<br>
+&nbsp;<br>
+The&nbsp;<a href="#DatabaseClient">DatabaseClient</a>&nbsp;simplifies&nbsp;the&nbsp;process&nbsp;of&nbsp;creating&nbsp;and&nbsp;finding&nbsp;Google&nbsp;<br>
+Spreadsheets&nbsp;and&nbsp;will&nbsp;talk&nbsp;to&nbsp;both&nbsp;the&nbsp;Google&nbsp;Spreadsheets&nbsp;API&nbsp;and&nbsp;the&nbsp;<br>
+Google&nbsp;Documents&nbsp;List&nbsp;API.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="DatabaseClient-CreateDatabase"><strong>CreateDatabase</strong></a>(self, name)</dt><dd><tt>Creates&nbsp;a&nbsp;new&nbsp;Google&nbsp;Spreadsheet&nbsp;with&nbsp;the&nbsp;desired&nbsp;name.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;name:&nbsp;str&nbsp;The&nbsp;title&nbsp;for&nbsp;the&nbsp;spreadsheet.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;<a href="#Database">Database</a>&nbsp;instance&nbsp;representing&nbsp;the&nbsp;new&nbsp;spreadsheet.</tt></dd></dl>
+
+<dl><dt><a name="DatabaseClient-GetDatabases"><strong>GetDatabases</strong></a>(self, spreadsheet_key<font color="#909090">=None</font>, name<font color="#909090">=None</font>)</dt><dd><tt>Finds&nbsp;spreadsheets&nbsp;which&nbsp;have&nbsp;the&nbsp;unique&nbsp;key&nbsp;or&nbsp;title.<br>
+&nbsp;<br>
+If&nbsp;querying&nbsp;on&nbsp;the&nbsp;spreadsheet_key&nbsp;there&nbsp;will&nbsp;be&nbsp;at&nbsp;most&nbsp;one&nbsp;result,&nbsp;but<br>
+searching&nbsp;by&nbsp;name&nbsp;could&nbsp;yield&nbsp;multiple&nbsp;results.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;spreadsheet_key:&nbsp;str&nbsp;The&nbsp;unique&nbsp;key&nbsp;for&nbsp;the&nbsp;spreadsheet,&nbsp;this&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;usually&nbsp;in&nbsp;the&nbsp;the&nbsp;form&nbsp;'pk23...We'&nbsp;or&nbsp;'o23...423.12,,,3'.<br>
+&nbsp;&nbsp;name:&nbsp;str&nbsp;The&nbsp;title&nbsp;of&nbsp;the&nbsp;spreadsheets.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;<a href="__builtin__.html#list">list</a>&nbsp;of&nbsp;<a href="#Database">Database</a>&nbsp;objects&nbsp;representing&nbsp;the&nbsp;desired&nbsp;spreadsheets.</tt></dd></dl>
+
+<dl><dt><a name="DatabaseClient-SetCredentials"><strong>SetCredentials</strong></a>(self, username, password)</dt><dd><tt>Attempts&nbsp;to&nbsp;log&nbsp;in&nbsp;to&nbsp;Google&nbsp;APIs&nbsp;using&nbsp;the&nbsp;provided&nbsp;credentials.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;username&nbsp;or&nbsp;password&nbsp;are&nbsp;None,&nbsp;the&nbsp;client&nbsp;will&nbsp;not&nbsp;request&nbsp;auth&nbsp;<br>
+tokens.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;username:&nbsp;str&nbsp;(optional)&nbsp;Example:&nbsp;jo@example.com<br>
+&nbsp;&nbsp;password:&nbsp;str&nbsp;(optional)</tt></dd></dl>
+
+<dl><dt><a name="DatabaseClient-__init__"><strong>__init__</strong></a>(self, username<font color="#909090">=None</font>, password<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;a&nbsp;<a href="#Database">Database</a>&nbsp;Client.&nbsp;<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;username&nbsp;and&nbsp;password&nbsp;are&nbsp;present,&nbsp;the&nbsp;constructor&nbsp;&nbsp;will&nbsp;contact<br>
+the&nbsp;Google&nbsp;servers&nbsp;to&nbsp;authenticate.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;username:&nbsp;str&nbsp;(optional)&nbsp;Example:&nbsp;jo@example.com<br>
+&nbsp;&nbsp;password:&nbsp;str&nbsp;(optional)</tt></dd></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'DatabaseClient' objects&gt;<dd><tt><a href="__builtin__.html#list">list</a>&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Error">class <strong>Error</strong></a>(<a href="exceptions.html#Exception">exceptions.Exception</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><a name="Error-__getitem__"><strong>__getitem__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="Error-__init__"><strong>__init__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="Error-__str__"><strong>__str__</strong></a>(...)</dt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Record">class <strong>Record</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Represents&nbsp;one&nbsp;row&nbsp;in&nbsp;a&nbsp;worksheet&nbsp;and&nbsp;provides&nbsp;a&nbsp;dictionary&nbsp;of&nbsp;values.<br>
+&nbsp;<br>
+Attributes:<br>
+&nbsp;&nbsp;custom:&nbsp;dict&nbsp;Represents&nbsp;the&nbsp;contents&nbsp;of&nbsp;the&nbsp;row&nbsp;with&nbsp;cell&nbsp;values&nbsp;mapped<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;column&nbsp;headers.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Record-Delete"><strong>Delete</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Record-ExtractContentFromEntry"><strong>ExtractContentFromEntry</strong></a>(self, entry)</dt><dd><tt>Populates&nbsp;the&nbsp;content&nbsp;and&nbsp;row_id&nbsp;based&nbsp;on&nbsp;content&nbsp;of&nbsp;the&nbsp;entry.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;is&nbsp;used&nbsp;in&nbsp;the&nbsp;<a href="#Record">Record</a>'s&nbsp;contructor.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;entry:&nbsp;gdata.spreadsheet.SpreadsheetsList&nbsp;The&nbsp;Atom&nbsp;entry&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;representing&nbsp;this&nbsp;row&nbsp;in&nbsp;the&nbsp;worksheet.</tt></dd></dl>
+
+<dl><dt><a name="Record-Pull"><strong>Pull</strong></a>(self)</dt><dd><tt>Query&nbsp;Google&nbsp;Spreadsheets&nbsp;to&nbsp;get&nbsp;the&nbsp;latest&nbsp;data&nbsp;from&nbsp;the&nbsp;server.<br>
+&nbsp;<br>
+Fetches&nbsp;the&nbsp;entry&nbsp;for&nbsp;this&nbsp;row&nbsp;and&nbsp;repopulates&nbsp;the&nbsp;content&nbsp;dictionary&nbsp;<br>
+with&nbsp;the&nbsp;data&nbsp;found&nbsp;in&nbsp;the&nbsp;row.</tt></dd></dl>
+
+<dl><dt><a name="Record-Push"><strong>Push</strong></a>(self)</dt><dd><tt>Send&nbsp;the&nbsp;content&nbsp;of&nbsp;the&nbsp;record&nbsp;to&nbsp;spreadsheets&nbsp;to&nbsp;edit&nbsp;the&nbsp;row.<br>
+&nbsp;<br>
+All&nbsp;items&nbsp;in&nbsp;the&nbsp;content&nbsp;dictionary&nbsp;will&nbsp;be&nbsp;sent.&nbsp;Items&nbsp;which&nbsp;have&nbsp;been<br>
+removed&nbsp;from&nbsp;the&nbsp;content&nbsp;may&nbsp;remain&nbsp;in&nbsp;the&nbsp;row.&nbsp;The&nbsp;content&nbsp;member<br>
+of&nbsp;the&nbsp;record&nbsp;will&nbsp;not&nbsp;be&nbsp;modified&nbsp;so&nbsp;additional&nbsp;fields&nbsp;in&nbsp;the&nbsp;row<br>
+might&nbsp;be&nbsp;absent&nbsp;from&nbsp;this&nbsp;local&nbsp;copy.</tt></dd></dl>
+
+<dl><dt><a name="Record-__init__"><strong>__init__</strong></a>(self, content<font color="#909090">=None</font>, row_entry<font color="#909090">=None</font>, spreadsheet_key<font color="#909090">=None</font>, worksheet_id<font color="#909090">=None</font>, database_client<font color="#909090">=None</font>)</dt><dd><tt>Constructor&nbsp;for&nbsp;a&nbsp;record.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;content:&nbsp;dict&nbsp;of&nbsp;strings&nbsp;Mapping&nbsp;of&nbsp;string&nbsp;values&nbsp;to&nbsp;column&nbsp;names.<br>
+&nbsp;&nbsp;row_entry:&nbsp;gdata.spreadsheet.SpreadsheetsList&nbsp;The&nbsp;Atom&nbsp;entry&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;representing&nbsp;this&nbsp;row&nbsp;in&nbsp;the&nbsp;worksheet.<br>
+&nbsp;&nbsp;spreadsheet_key:&nbsp;str&nbsp;The&nbsp;ID&nbsp;of&nbsp;the&nbsp;spreadsheet&nbsp;in&nbsp;which&nbsp;this&nbsp;row&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;belongs.<br>
+&nbsp;&nbsp;worksheet_id:&nbsp;str&nbsp;The&nbsp;ID&nbsp;of&nbsp;the&nbsp;worksheet&nbsp;in&nbsp;which&nbsp;this&nbsp;row&nbsp;belongs.<br>
+&nbsp;&nbsp;database_client:&nbsp;<a href="#DatabaseClient">DatabaseClient</a>&nbsp;The&nbsp;client&nbsp;which&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;talk<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;Google&nbsp;Spreadsheets&nbsp;server&nbsp;to&nbsp;edit&nbsp;this&nbsp;row.</tt></dd></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'Record' objects&gt;<dd><tt><a href="__builtin__.html#list">list</a>&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="RecordResultSet">class <strong>RecordResultSet</strong></a>(<a href="__builtin__.html#list">__builtin__.list</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;collection&nbsp;of&nbsp;rows&nbsp;which&nbsp;allows&nbsp;fetching&nbsp;of&nbsp;the&nbsp;next&nbsp;set&nbsp;of&nbsp;results.<br>
+&nbsp;<br>
+The&nbsp;server&nbsp;may&nbsp;not&nbsp;send&nbsp;all&nbsp;rows&nbsp;in&nbsp;the&nbsp;requested&nbsp;range&nbsp;because&nbsp;there&nbsp;are<br>
+too&nbsp;many.&nbsp;Using&nbsp;this&nbsp;result&nbsp;set&nbsp;you&nbsp;can&nbsp;access&nbsp;the&nbsp;first&nbsp;set&nbsp;of&nbsp;results<br>
+as&nbsp;if&nbsp;it&nbsp;is&nbsp;a&nbsp;<a href="__builtin__.html#list">list</a>,&nbsp;then&nbsp;get&nbsp;the&nbsp;next&nbsp;batch&nbsp;(if&nbsp;there&nbsp;are&nbsp;more&nbsp;results)&nbsp;by<br>
+calling&nbsp;<a href="#RecordResultSet-GetNext">GetNext</a>().<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="gdata.spreadsheet.text_db.html#RecordResultSet">RecordResultSet</a></dd>
+<dd><a href="__builtin__.html#list">__builtin__.list</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="RecordResultSet-GetNext"><strong>GetNext</strong></a>(self)</dt><dd><tt>Fetches&nbsp;the&nbsp;next&nbsp;batch&nbsp;of&nbsp;rows&nbsp;in&nbsp;the&nbsp;result&nbsp;set.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;new&nbsp;<a href="#RecordResultSet">RecordResultSet</a>.</tt></dd></dl>
+
+<dl><dt><a name="RecordResultSet-__init__"><strong>__init__</strong></a>(self, feed, client, spreadsheet_key, worksheet_id)</dt></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'RecordResultSet' objects&gt;<dd><tt><a href="__builtin__.html#list">list</a>&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+<hr>
+Methods inherited from <a href="__builtin__.html#list">__builtin__.list</a>:<br>
+<dl><dt><a name="RecordResultSet-__add__"><strong>__add__</strong></a>(...)</dt><dd><tt>x.<a href="#RecordResultSet-__add__">__add__</a>(y)&nbsp;&lt;==&gt;&nbsp;x+y</tt></dd></dl>
+
+<dl><dt><a name="RecordResultSet-__contains__"><strong>__contains__</strong></a>(...)</dt><dd><tt>x.<a href="#RecordResultSet-__contains__">__contains__</a>(y)&nbsp;&lt;==&gt;&nbsp;y&nbsp;in&nbsp;x</tt></dd></dl>
+
+<dl><dt><a name="RecordResultSet-__delitem__"><strong>__delitem__</strong></a>(...)</dt><dd><tt>x.<a href="#RecordResultSet-__delitem__">__delitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;del&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="RecordResultSet-__delslice__"><strong>__delslice__</strong></a>(...)</dt><dd><tt>x.<a href="#RecordResultSet-__delslice__">__delslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;del&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="RecordResultSet-__eq__"><strong>__eq__</strong></a>(...)</dt><dd><tt>x.<a href="#RecordResultSet-__eq__">__eq__</a>(y)&nbsp;&lt;==&gt;&nbsp;x==y</tt></dd></dl>
+
+<dl><dt><a name="RecordResultSet-__ge__"><strong>__ge__</strong></a>(...)</dt><dd><tt>x.<a href="#RecordResultSet-__ge__">__ge__</a>(y)&nbsp;&lt;==&gt;&nbsp;x&gt;=y</tt></dd></dl>
+
+<dl><dt><a name="RecordResultSet-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#RecordResultSet-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="RecordResultSet-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#RecordResultSet-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="RecordResultSet-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#RecordResultSet-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="RecordResultSet-__gt__"><strong>__gt__</strong></a>(...)</dt><dd><tt>x.<a href="#RecordResultSet-__gt__">__gt__</a>(y)&nbsp;&lt;==&gt;&nbsp;x&gt;y</tt></dd></dl>
+
+<dl><dt><a name="RecordResultSet-__hash__"><strong>__hash__</strong></a>(...)</dt><dd><tt>x.<a href="#RecordResultSet-__hash__">__hash__</a>()&nbsp;&lt;==&gt;&nbsp;hash(x)</tt></dd></dl>
+
+<dl><dt><a name="RecordResultSet-__iadd__"><strong>__iadd__</strong></a>(...)</dt><dd><tt>x.<a href="#RecordResultSet-__iadd__">__iadd__</a>(y)&nbsp;&lt;==&gt;&nbsp;x+=y</tt></dd></dl>
+
+<dl><dt><a name="RecordResultSet-__imul__"><strong>__imul__</strong></a>(...)</dt><dd><tt>x.<a href="#RecordResultSet-__imul__">__imul__</a>(y)&nbsp;&lt;==&gt;&nbsp;x*=y</tt></dd></dl>
+
+<dl><dt><a name="RecordResultSet-__iter__"><strong>__iter__</strong></a>(...)</dt><dd><tt>x.<a href="#RecordResultSet-__iter__">__iter__</a>()&nbsp;&lt;==&gt;&nbsp;iter(x)</tt></dd></dl>
+
+<dl><dt><a name="RecordResultSet-__le__"><strong>__le__</strong></a>(...)</dt><dd><tt>x.<a href="#RecordResultSet-__le__">__le__</a>(y)&nbsp;&lt;==&gt;&nbsp;x&lt;=y</tt></dd></dl>
+
+<dl><dt><a name="RecordResultSet-__len__"><strong>__len__</strong></a>(...)</dt><dd><tt>x.<a href="#RecordResultSet-__len__">__len__</a>()&nbsp;&lt;==&gt;&nbsp;len(x)</tt></dd></dl>
+
+<dl><dt><a name="RecordResultSet-__lt__"><strong>__lt__</strong></a>(...)</dt><dd><tt>x.<a href="#RecordResultSet-__lt__">__lt__</a>(y)&nbsp;&lt;==&gt;&nbsp;x&lt;y</tt></dd></dl>
+
+<dl><dt><a name="RecordResultSet-__mul__"><strong>__mul__</strong></a>(...)</dt><dd><tt>x.<a href="#RecordResultSet-__mul__">__mul__</a>(n)&nbsp;&lt;==&gt;&nbsp;x*n</tt></dd></dl>
+
+<dl><dt><a name="RecordResultSet-__ne__"><strong>__ne__</strong></a>(...)</dt><dd><tt>x.<a href="#RecordResultSet-__ne__">__ne__</a>(y)&nbsp;&lt;==&gt;&nbsp;x!=y</tt></dd></dl>
+
+<dl><dt><a name="RecordResultSet-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#RecordResultSet-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="RecordResultSet-__reversed__"><strong>__reversed__</strong></a>(...)</dt><dd><tt>L.<a href="#RecordResultSet-__reversed__">__reversed__</a>()&nbsp;--&nbsp;return&nbsp;a&nbsp;reverse&nbsp;iterator&nbsp;over&nbsp;the&nbsp;<a href="__builtin__.html#list">list</a></tt></dd></dl>
+
+<dl><dt><a name="RecordResultSet-__rmul__"><strong>__rmul__</strong></a>(...)</dt><dd><tt>x.<a href="#RecordResultSet-__rmul__">__rmul__</a>(n)&nbsp;&lt;==&gt;&nbsp;n*x</tt></dd></dl>
+
+<dl><dt><a name="RecordResultSet-__setitem__"><strong>__setitem__</strong></a>(...)</dt><dd><tt>x.<a href="#RecordResultSet-__setitem__">__setitem__</a>(i,&nbsp;y)&nbsp;&lt;==&gt;&nbsp;x[i]=y</tt></dd></dl>
+
+<dl><dt><a name="RecordResultSet-__setslice__"><strong>__setslice__</strong></a>(...)</dt><dd><tt>x.<a href="#RecordResultSet-__setslice__">__setslice__</a>(i,&nbsp;j,&nbsp;y)&nbsp;&lt;==&gt;&nbsp;x[i:j]=y<br>
+&nbsp;<br>
+Use&nbsp;&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="RecordResultSet-append"><strong>append</strong></a>(...)</dt><dd><tt>L.<a href="#RecordResultSet-append">append</a>(<a href="__builtin__.html#object">object</a>)&nbsp;--&nbsp;append&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;to&nbsp;end</tt></dd></dl>
+
+<dl><dt><a name="RecordResultSet-count"><strong>count</strong></a>(...)</dt><dd><tt>L.<a href="#RecordResultSet-count">count</a>(value)&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="RecordResultSet-extend"><strong>extend</strong></a>(...)</dt><dd><tt>L.<a href="#RecordResultSet-extend">extend</a>(iterable)&nbsp;--&nbsp;extend&nbsp;<a href="__builtin__.html#list">list</a>&nbsp;by&nbsp;appending&nbsp;elements&nbsp;from&nbsp;the&nbsp;iterable</tt></dd></dl>
+
+<dl><dt><a name="RecordResultSet-index"><strong>index</strong></a>(...)</dt><dd><tt>L.<a href="#RecordResultSet-index">index</a>(value,&nbsp;[start,&nbsp;[stop]])&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;first&nbsp;index&nbsp;of&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="RecordResultSet-insert"><strong>insert</strong></a>(...)</dt><dd><tt>L.<a href="#RecordResultSet-insert">insert</a>(index,&nbsp;<a href="__builtin__.html#object">object</a>)&nbsp;--&nbsp;insert&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;before&nbsp;index</tt></dd></dl>
+
+<dl><dt><a name="RecordResultSet-pop"><strong>pop</strong></a>(...)</dt><dd><tt>L.<a href="#RecordResultSet-pop">pop</a>([index])&nbsp;-&gt;&nbsp;item&nbsp;--&nbsp;remove&nbsp;and&nbsp;return&nbsp;item&nbsp;at&nbsp;index&nbsp;(default&nbsp;last)</tt></dd></dl>
+
+<dl><dt><a name="RecordResultSet-remove"><strong>remove</strong></a>(...)</dt><dd><tt>L.<a href="#RecordResultSet-remove">remove</a>(value)&nbsp;--&nbsp;remove&nbsp;first&nbsp;occurrence&nbsp;of&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="RecordResultSet-reverse"><strong>reverse</strong></a>(...)</dt><dd><tt>L.<a href="#RecordResultSet-reverse">reverse</a>()&nbsp;--&nbsp;reverse&nbsp;*IN&nbsp;PLACE*</tt></dd></dl>
+
+<dl><dt><a name="RecordResultSet-sort"><strong>sort</strong></a>(...)</dt><dd><tt>L.<a href="#RecordResultSet-sort">sort</a>(cmp=None,&nbsp;key=None,&nbsp;reverse=False)&nbsp;--&nbsp;stable&nbsp;sort&nbsp;*IN&nbsp;PLACE*;<br>
+cmp(x,&nbsp;y)&nbsp;-&gt;&nbsp;-1,&nbsp;0,&nbsp;1</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from <a href="__builtin__.html#list">__builtin__.list</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#RecordResultSet-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Table">class <strong>Table</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Table-AddRecord"><strong>AddRecord</strong></a>(self, data)</dt><dd><tt>Adds&nbsp;a&nbsp;new&nbsp;row&nbsp;to&nbsp;this&nbsp;worksheet.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;data:&nbsp;dict&nbsp;of&nbsp;strings&nbsp;Mapping&nbsp;of&nbsp;string&nbsp;values&nbsp;to&nbsp;column&nbsp;names.&nbsp;<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;<a href="#Record">Record</a>&nbsp;which&nbsp;represents&nbsp;this&nbsp;row&nbsp;of&nbsp;the&nbsp;spreadsheet.</tt></dd></dl>
+
+<dl><dt><a name="Table-Delete"><strong>Delete</strong></a>(self)</dt><dd><tt>Deletes&nbsp;this&nbsp;worksheet&nbsp;from&nbsp;the&nbsp;spreadsheet.</tt></dd></dl>
+
+<dl><dt><a name="Table-FindRecords"><strong>FindRecords</strong></a>(self, query_string)</dt><dd><tt>Performs&nbsp;a&nbsp;query&nbsp;against&nbsp;the&nbsp;worksheet&nbsp;to&nbsp;find&nbsp;rows&nbsp;which&nbsp;match.<br>
+&nbsp;<br>
+For&nbsp;details&nbsp;on&nbsp;query&nbsp;string&nbsp;syntax&nbsp;see&nbsp;the&nbsp;section&nbsp;on&nbsp;sq&nbsp;under<br>
+<a href="http://code.google.com/apis/spreadsheets/reference.html#list_Parameters">http://code.google.com/apis/spreadsheets/reference.html#list_Parameters</a><br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;query_string:&nbsp;str&nbsp;Examples:&nbsp;'name&nbsp;==&nbsp;john'&nbsp;to&nbsp;find&nbsp;all&nbsp;rows&nbsp;with&nbsp;john<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;the&nbsp;name&nbsp;column,&nbsp;'(cost&nbsp;&lt;&nbsp;19.50&nbsp;and&nbsp;name&nbsp;!=&nbsp;toy)&nbsp;or&nbsp;cost&nbsp;&gt;&nbsp;500'<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;<a href="#RecordResultSet">RecordResultSet</a>&nbsp;with&nbsp;the&nbsp;first&nbsp;group&nbsp;of&nbsp;matches.</tt></dd></dl>
+
+<dl><dt><a name="Table-GetRecord"><strong>GetRecord</strong></a>(self, row_id<font color="#909090">=None</font>, row_number<font color="#909090">=None</font>)</dt><dd><tt>Gets&nbsp;a&nbsp;single&nbsp;record&nbsp;from&nbsp;the&nbsp;worksheet&nbsp;based&nbsp;on&nbsp;row&nbsp;ID&nbsp;or&nbsp;number.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;row_id:&nbsp;The&nbsp;ID&nbsp;for&nbsp;the&nbsp;individual&nbsp;row.<br>
+&nbsp;&nbsp;row_number:&nbsp;str&nbsp;or&nbsp;int&nbsp;The&nbsp;position&nbsp;of&nbsp;the&nbsp;desired&nbsp;row.&nbsp;Numbering&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;begins&nbsp;at&nbsp;1,&nbsp;which&nbsp;refers&nbsp;to&nbsp;the&nbsp;second&nbsp;row&nbsp;in&nbsp;the&nbsp;worksheet&nbsp;since<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;first&nbsp;row&nbsp;is&nbsp;used&nbsp;for&nbsp;column&nbsp;names.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;<a href="#Record">Record</a>&nbsp;for&nbsp;the&nbsp;desired&nbsp;row.</tt></dd></dl>
+
+<dl><dt><a name="Table-GetRecords"><strong>GetRecords</strong></a>(self, start_row, end_row)</dt><dd><tt>Gets&nbsp;all&nbsp;rows&nbsp;between&nbsp;the&nbsp;start&nbsp;and&nbsp;end&nbsp;row&nbsp;numbers&nbsp;inclusive.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;start_row:&nbsp;str&nbsp;or&nbsp;int<br>
+&nbsp;&nbsp;end_row:&nbsp;str&nbsp;or&nbsp;int<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;<a href="#RecordResultSet">RecordResultSet</a>&nbsp;for&nbsp;the&nbsp;desired&nbsp;rows.</tt></dd></dl>
+
+<dl><dt><a name="Table-LookupFields"><strong>LookupFields</strong></a>(self)</dt><dd><tt>Queries&nbsp;to&nbsp;find&nbsp;the&nbsp;column&nbsp;names&nbsp;in&nbsp;the&nbsp;first&nbsp;row&nbsp;of&nbsp;the&nbsp;worksheet.<br>
+&nbsp;<br>
+Useful&nbsp;when&nbsp;you&nbsp;have&nbsp;retrieved&nbsp;the&nbsp;table&nbsp;from&nbsp;the&nbsp;server&nbsp;and&nbsp;you&nbsp;don't&nbsp;<br>
+know&nbsp;the&nbsp;column&nbsp;names.</tt></dd></dl>
+
+<dl><dt><a name="Table-SetFields"><strong>SetFields</strong></a>(self, fields)</dt><dd><tt>Changes&nbsp;the&nbsp;contents&nbsp;of&nbsp;the&nbsp;cells&nbsp;in&nbsp;the&nbsp;first&nbsp;row&nbsp;of&nbsp;this&nbsp;worksheet.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;fields:&nbsp;<a href="__builtin__.html#list">list</a>&nbsp;of&nbsp;strings&nbsp;The&nbsp;names&nbsp;in&nbsp;the&nbsp;<a href="__builtin__.html#list">list</a>&nbsp;comprise&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;first&nbsp;row&nbsp;of&nbsp;the&nbsp;worksheet.&nbsp;These&nbsp;names&nbsp;are&nbsp;converted&nbsp;into&nbsp;XML<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tags&nbsp;by&nbsp;the&nbsp;server.&nbsp;To&nbsp;avoid&nbsp;changes&nbsp;during&nbsp;the&nbsp;translation<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;process&nbsp;I&nbsp;recommend&nbsp;using&nbsp;all&nbsp;lowercase&nbsp;alphabetic&nbsp;names.&nbsp;For<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;example&nbsp;['somelongname',&nbsp;'theothername']</tt></dd></dl>
+
+<dl><dt><a name="Table-__init__"><strong>__init__</strong></a>(self, name<font color="#909090">=None</font>, worksheet_entry<font color="#909090">=None</font>, database_client<font color="#909090">=None</font>, spreadsheet_key<font color="#909090">=None</font>, fields<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'Table' objects&gt;<dd><tt><a href="__builtin__.html#list">list</a>&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-ConvertStringsToColumnHeaders"><strong>ConvertStringsToColumnHeaders</strong></a>(proposed_headers)</dt><dd><tt>Converts&nbsp;a&nbsp;<a href="__builtin__.html#list">list</a>&nbsp;of&nbsp;strings&nbsp;to&nbsp;column&nbsp;names&nbsp;which&nbsp;spreadsheets&nbsp;accepts.<br>
+&nbsp;<br>
+When&nbsp;setting&nbsp;values&nbsp;in&nbsp;a&nbsp;record,&nbsp;the&nbsp;keys&nbsp;which&nbsp;represent&nbsp;column&nbsp;names&nbsp;must<br>
+fit&nbsp;certain&nbsp;rules.&nbsp;They&nbsp;are&nbsp;all&nbsp;lower&nbsp;case,&nbsp;contain&nbsp;no&nbsp;spaces&nbsp;or&nbsp;special<br>
+characters.&nbsp;If&nbsp;two&nbsp;columns&nbsp;have&nbsp;the&nbsp;same&nbsp;name&nbsp;after&nbsp;being&nbsp;sanitized,&nbsp;the&nbsp;<br>
+columns&nbsp;further&nbsp;to&nbsp;the&nbsp;right&nbsp;have&nbsp;_2,&nbsp;_3&nbsp;_4,&nbsp;etc.&nbsp;appended&nbsp;to&nbsp;them.<br>
+&nbsp;<br>
+If&nbsp;there&nbsp;are&nbsp;column&nbsp;names&nbsp;which&nbsp;consist&nbsp;of&nbsp;all&nbsp;special&nbsp;characters,&nbsp;or&nbsp;if<br>
+the&nbsp;column&nbsp;header&nbsp;is&nbsp;blank,&nbsp;an&nbsp;obfuscated&nbsp;value&nbsp;will&nbsp;be&nbsp;used&nbsp;for&nbsp;a&nbsp;column<br>
+name.&nbsp;This&nbsp;method&nbsp;does&nbsp;not&nbsp;handle&nbsp;blank&nbsp;column&nbsp;names&nbsp;or&nbsp;column&nbsp;names&nbsp;with<br>
+only&nbsp;special&nbsp;characters.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>__author__</strong> = 'api.jscudder (Jeffrey Scudder)'</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#7799ee">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Author</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#7799ee"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">api.jscudder&nbsp;(Jeffrey&nbsp;Scudder)</td></tr></table>
+</body></html>
