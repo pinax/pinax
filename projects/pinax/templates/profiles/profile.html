@@ -4,7 +4,7 @@
 {% load gravatar %}
 {% load oembed_tags %}
 {% load pagination_tags %}
-{% load zwitschern %}
+{% load app_plugins %}
 {% load captureas_tag %}
 
 {% block head_title %}Pinax : {% blocktrans %}Profile for {{ other_user }}{% endblocktrans %}{% endblock %}
@@ -143,19 +143,8 @@
     
 {% endif %}
 
-<h2>{% trans "Tweets" %}</h2>
-{% if user.is_authenticated and is_me %}
-{% tweet_listing user.sent_tweets.all 0 is_me %}
-{% else %}
-{% tweet_listing other_user.sent_tweets.all 0 is_me %}
-{% endif %}
+{% plugin_point "profile" %}
 
-{% if other_user.get_profile.blogrss %}
-    <div id='feed-entries'>
-    <h2>{% trans "Recent Blog Posts" %}</h2>
-    {% load feedutil %}{% feed other_user.get_profile.blogrss 5 %}
-    </div>
-{% endif %}
 {% else %}
 <p>{% blocktrans %}<a href="/account/signup/">Sign up</a> and <a href="/account/login/">log in </a> to add this person as a friend.{% endblocktrans %}</p>
 {% endif %}

@@ -123,6 +123,7 @@ INSTALLED_APPS = (
     'django_evolution',
     'timezones',
     'feedutil',
+    'app_plugins',
     
     # internal (for now)
     'analytics',
