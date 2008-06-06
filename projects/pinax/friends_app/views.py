@@ -9,6 +9,8 @@ from friends.models import *
 from friends.forms import JoinRequestForm
 from friends_app.forms import ImportVCardForm
 from account.forms import SignupForm
+from friends.importer import import_yahoo
+
 
 # @@@ if made more generic these could be moved to django-friends proper
 
@@ -61,14 +63,23 @@ def accept_join(request, confirmation_key):
 @login_required
 def contacts(request):
     if request.method == "POST":
-        import_vcard_form = ImportVCardForm(request.POST, request.FILES)
-        if import_vcard_form.is_valid():
-            imported, total = import_vcard_form.save(request.user)
-            request.user.message_set.create(message=_("%(total)s vCards found, %(imported)s contacts imported.") % {'imported': imported, 'total': total})
+        if request.POST["action"] == "upload_vcard":
+            import_vcard_form = ImportVCardForm(request.POST, request.FILES)
+            if import_vcard_form.is_valid():
+                imported, total = import_vcard_form.save(request.user)
+                request.user.message_set.create(message=_("%(total)s vCards found, %(imported)s contacts imported.") % {'imported': imported, 'total': total})
+                import_vcard_form = ImportVCardForm()
+        else:
             import_vcard_form = ImportVCardForm()
+            if request.POST["action"] == "import_yahoo":
+                bbauth_token = request.session.get('bbauth_token')
+                if bbauth_token:
+                    imported, total = import_yahoo(bbauth_token, request.user)
+                    request.user.message_set.create(message=_("%(total)s people with email found, %(imported)s contacts imported.") % {'imported': imported, 'total': total})
     else:
         import_vcard_form = ImportVCardForm()
     
     return render_to_response("friends_app/contacts.html", {
-        "import_vcard_form": import_vcard_form
+        "import_vcard_form": import_vcard_form,
+        "bbauth_token": request.session.get('bbauth_token'),
     }, context_instance=RequestContext(request))

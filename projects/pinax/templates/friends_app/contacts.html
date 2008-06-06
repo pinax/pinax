@@ -17,11 +17,29 @@
 <h2>Import vCard</h2>
 
 <form enctype="multipart/form-data" method="post" action="">
+<input type="hidden" name="action" value="upload_vcard" />
 <table>
 {{ import_vcard_form }}
 <tr><td>&nbsp;</td><td><input type="submit" value="{% trans 'upload' %}" /></td></tr>
 </table>
 </form>
+
+<h2>Import from Yahoo Address Book</h2>
+
+{% if bbauth_token %}
+<form method="POST" action="">
+<input type="hidden" name="action" value="import_yahoo" />
+<input type="submit" value="{% trans 'Import Yahoo Address Book' %}" />
+</form>
+{% else %}
+<p>This will be a two step process. First you must
+<a href="{% url bbauth.views.login %}">authenticate with Yahoo</a>.
+Once you have agreed to let Pinax have access to your Yahoo Address Book, you will be taken back here and
+an "Import Yahoo Address Book" button will appear here.</p>
+{% endif %}
+
+{{ yahoo_contacts }}
+
 
 <h2>Contacts</h2>
 
