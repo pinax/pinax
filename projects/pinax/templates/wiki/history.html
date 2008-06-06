@@ -22,9 +22,9 @@
                 {{ change.modified|localtime:user.get_profile.timezone|date:_("DATETIME_FORMAT") }}</a></td>
             <td>
                 {% if change.is_anonymous_change %}
-                {{ change.editor_ip }}
+                    {{ change.editor_ip }}
                 {% else %}
-                {{ change.editor }}
+                    <a href="{% url profiles.views.profile change.editor.username %}">{{ change.editor }}</a>
                 {% endif %}
             </td>
             <td>
