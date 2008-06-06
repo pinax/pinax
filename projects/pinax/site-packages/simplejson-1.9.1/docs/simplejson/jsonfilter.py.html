@@ -1,0 +1,112 @@
+<html><head><title>/Users/bob/src/simplejson/simplejson/jsonfilter.py</title>
+        <script type="text/javascript"><!--
+        
+function show_line_range() {
+    var href = document.location.href;
+    if (href.indexOf('?') == -1) {
+        return;
+    }
+    var qs = href.substring(href.indexOf('?')+1);
+    if (qs.indexOf('#') >= 0) {
+        qs = qs.substring(0, qs.indexOf('#'));
+    }
+    var first = qs.match(/f=(\d+)/)[1];
+    var last = qs.match(/l=(\d+)/)[1];
+    if (! first || ! last) {
+        return;
+    }
+    var anchors = document.getElementsByTagName('A');
+    var container = document.createElement('DIV');
+    container.className = 'highlighted';
+    var children = [];
+    var start = null;
+    var parent = null;
+    var highlight = false;
+    for (var i = 0; i < anchors.length; i++) {
+        var el = anchors[i];
+        if (el.getAttribute('name') == first) {
+            start = el.previousSibling;
+            parent = el.parentNode;
+            highlight = true;
+        }
+        if (el.getAttribute('name') == last) {
+            break;
+        }
+        if (highlight) {
+            children[children.length] = el;
+            el = el.nextSibling;
+            while (el && el.tagName != 'A') {
+                children[children.length] = el;
+                el = el.nextSibling;
+            }
+        }
+    }
+    for (i=0; i<children.length; i++) {
+        container.appendChild(children[i]);
+    }
+    if (start) {
+        start.parentNode.insertBefore(container, start.nextSibling);
+    } else {
+        parent.insertBefore(container, parent.childNodes[0]);
+    }
+}
+
+        // --></script>
+        <style>
+        div.python {
+          color: #333
+        }
+        div.python a.lnum {
+          color: #555;
+          background-color: #eee;
+          border-right: 1px solid #999;
+          padding-right: 2px;
+          margin-right: 4px;
+        }
+        div.python span.comment { color: #933 }
+        div.python span.keyword { color: #a3e; font-weight: bold  }
+        div.python span.op { color: #c96 }
+        div.python span.string { color: #6a6 }
+        div.python span.name { }
+        div.python span.text { color: #333 }
+        div.highlighted { background-color: #ff9; border: 1px solid #009 }
+        </style></head><body onload="show_line_range()"><div class="python"><code><a class="lnum" href="#1" name="1">0001</a><span class="keyword">import</span>&#0160;<span class="name">simplejson</span><br />
+<a class="lnum" href="#2" name="2">0002</a><span class="keyword">import</span>&#0160;<span class="name">cgi</span><br />
+<a class="lnum" href="#3" name="3">0003</a><br />
+<a class="lnum" href="#4" name="4">0004</a><span class="keyword">class</span>&#0160;<span class="name">JSONFilter</span><span class="op">(</span><span class="name">object</span><span class="op">)</span><span class="op">:</span><br />
+<a class="lnum" href="#5" name="5">0005</a>&#0160;&#0160;&#0160;&#0160;<span class="keyword">def</span>&#0160;<span class="name">__init__</span><span class="op">(</span><span class="name">self</span><span class="op">,</span>&#0160;<span class="name">app</span><span class="op">,</span>&#0160;<span class="name">mime_type</span><span class="op">=</span><span class="string">'text/x-json'</span><span class="op">)</span><span class="op">:</span><br />
+<a class="lnum" href="#6" name="6">0006</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">self</span><span class="op">.</span><span class="name">app</span>&#0160;<span class="op">=</span>&#0160;<span class="name">app</span><br />
+<a class="lnum" href="#7" name="7">0007</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">self</span><span class="op">.</span><span class="name">mime_type</span>&#0160;<span class="op">=</span>&#0160;<span class="name">mime_type</span><br />
+<a class="lnum" href="#8" name="8">0008</a><br />
+<a class="lnum" href="#9" name="9">0009</a>&#0160;&#0160;&#0160;&#0160;<span class="keyword">def</span>&#0160;<span class="name">__call__</span><span class="op">(</span><span class="name">self</span><span class="op">,</span>&#0160;<span class="name">environ</span><span class="op">,</span>&#0160;<span class="name">start_response</span><span class="op">)</span><span class="op">:</span><br />
+<a class="lnum" href="#10" name="10">0010</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="comment">#&#0160;Read&#0160;JSON&#0160;POST&#0160;input&#0160;to&#0160;jsonfilter.json&#0160;if&#0160;matching&#0160;mime&#0160;type</span><br />
+<a class="lnum" href="#11" name="11">0011</a><span class="comment"></span>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">response</span>&#0160;<span class="op">=</span>&#0160;<span class="op">{</span><span class="string">'status'</span><span class="op">:</span>&#0160;<span class="string">'200&#0160;OK'</span><span class="op">,</span>&#0160;<span class="string">'headers'</span><span class="op">:</span>&#0160;<span class="op">[</span><span class="op">]</span><span class="op">}</span><br />
+<a class="lnum" href="#12" name="12">0012</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="keyword">def</span>&#0160;<span class="name">json_start_response</span><span class="op">(</span><span class="name">status</span><span class="op">,</span>&#0160;<span class="name">headers</span><span class="op">)</span><span class="op">:</span><br />
+<a class="lnum" href="#13" name="13">0013</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">response</span><span class="op">[</span><span class="string">'status'</span><span class="op">]</span>&#0160;<span class="op">=</span>&#0160;<span class="name">status</span><br />
+<a class="lnum" href="#14" name="14">0014</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">response</span><span class="op">[</span><span class="string">'headers'</span><span class="op">]</span><span class="op">.</span><span class="name">extend</span><span class="op">(</span><span class="name">headers</span><span class="op">)</span><br />
+<a class="lnum" href="#15" name="15">0015</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">environ</span><span class="op">[</span><span class="string">'jsonfilter.mime_type'</span><span class="op">]</span>&#0160;<span class="op">=</span>&#0160;<span class="name">self</span><span class="op">.</span><span class="name">mime_type</span><br />
+<a class="lnum" href="#16" name="16">0016</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="keyword">if</span>&#0160;<span class="name">environ</span><span class="op">.</span><span class="name">get</span><span class="op">(</span><span class="string">'REQUEST_METHOD'</span><span class="op">,</span>&#0160;<span class="string">''</span><span class="op">)</span>&#0160;<span class="op">==</span>&#0160;<span class="string">'POST'</span><span class="op">:</span><br />
+<a class="lnum" href="#17" name="17">0017</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="keyword">if</span>&#0160;<span class="name">environ</span><span class="op">.</span><span class="name">get</span><span class="op">(</span><span class="string">'CONTENT_TYPE'</span><span class="op">,</span>&#0160;<span class="string">''</span><span class="op">)</span>&#0160;<span class="op">==</span>&#0160;<span class="name">self</span><span class="op">.</span><span class="name">mime_type</span><span class="op">:</span><br />
+<a class="lnum" href="#18" name="18">0018</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">args</span>&#0160;<span class="op">=</span>&#0160;<span class="op">[</span><span class="name">_</span>&#0160;<span class="keyword">for</span>&#0160;<span class="name">_</span>&#0160;<span class="keyword">in</span>&#0160;<span class="op">[</span><span class="name">environ</span><span class="op">.</span><span class="name">get</span><span class="op">(</span><span class="string">'CONTENT_LENGTH'</span><span class="op">)</span><span class="op">]</span>&#0160;<span class="keyword">if</span>&#0160;<span class="name">_</span><span class="op">]</span><br />
+<a class="lnum" href="#19" name="19">0019</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">data</span>&#0160;<span class="op">=</span>&#0160;<span class="name">environ</span><span class="op">[</span><span class="string">'wsgi.input'</span><span class="op">]</span><span class="op">.</span><span class="name">read</span><span class="op">(</span><span class="op">*</span><span class="name">map</span><span class="op">(</span><span class="name">int</span><span class="op">,</span>&#0160;<span class="name">args</span><span class="op">)</span><span class="op">)</span><br />
+<a class="lnum" href="#20" name="20">0020</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">environ</span><span class="op">[</span><span class="string">'jsonfilter.json'</span><span class="op">]</span>&#0160;<span class="op">=</span>&#0160;<span class="name">simplejson</span><span class="op">.</span><span class="name">loads</span><span class="op">(</span><span class="name">data</span><span class="op">)</span><br />
+<a class="lnum" href="#21" name="21">0021</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">res</span>&#0160;<span class="op">=</span>&#0160;<span class="name">simplejson</span><span class="op">.</span><span class="name">dumps</span><span class="op">(</span><span class="name">self</span><span class="op">.</span><span class="name">app</span><span class="op">(</span><span class="name">environ</span><span class="op">,</span>&#0160;<span class="name">json_start_response</span><span class="op">)</span><span class="op">)</span><br />
+<a class="lnum" href="#22" name="22">0022</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">jsonp</span>&#0160;<span class="op">=</span>&#0160;<span class="name">cgi</span><span class="op">.</span><span class="name">parse_qs</span><span class="op">(</span><span class="name">environ</span><span class="op">.</span><span class="name">get</span><span class="op">(</span><span class="string">'QUERY_STRING'</span><span class="op">,</span>&#0160;<span class="string">''</span><span class="op">)</span><span class="op">)</span><span class="op">.</span><span class="name">get</span><span class="op">(</span><span class="string">'jsonp'</span><span class="op">)</span><br />
+<a class="lnum" href="#23" name="23">0023</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="keyword">if</span>&#0160;<span class="name">jsonp</span><span class="op">:</span><br />
+<a class="lnum" href="#24" name="24">0024</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">content_type</span>&#0160;<span class="op">=</span>&#0160;<span class="string">'text/javascript'</span><br />
+<a class="lnum" href="#25" name="25">0025</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">res</span>&#0160;<span class="op">=</span>&#0160;<span class="string">''</span><span class="op">.</span><span class="name">join</span><span class="op">(</span><span class="name">jsonp</span>&#0160;<span class="op">+</span>&#0160;<span class="op">[</span><span class="string">'('</span><span class="op">,</span>&#0160;<span class="name">res</span><span class="op">,</span>&#0160;<span class="string">')'</span><span class="op">]</span><span class="op">)</span><br />
+<a class="lnum" href="#26" name="26">0026</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="keyword">elif</span>&#0160;<span class="string">'Opera'</span>&#0160;<span class="keyword">in</span>&#0160;<span class="name">environ</span><span class="op">.</span><span class="name">get</span><span class="op">(</span><span class="string">'HTTP_USER_AGENT'</span><span class="op">,</span>&#0160;<span class="string">''</span><span class="op">)</span><span class="op">:</span><br />
+<a class="lnum" href="#27" name="27">0027</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="comment">#&#0160;Opera&#0160;has&#0160;bunk&#0160;XMLHttpRequest&#0160;support&#0160;for&#0160;most&#0160;mime&#0160;types</span><br />
+<a class="lnum" href="#28" name="28">0028</a><span class="comment"></span>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">content_type</span>&#0160;<span class="op">=</span>&#0160;<span class="string">'text/plain'</span><br />
+<a class="lnum" href="#29" name="29">0029</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="keyword">else</span><span class="op">:</span><br />
+<a class="lnum" href="#30" name="30">0030</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">content_type</span>&#0160;<span class="op">=</span>&#0160;<span class="name">self</span><span class="op">.</span><span class="name">mime_type</span><br />
+<a class="lnum" href="#31" name="31">0031</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">headers</span>&#0160;<span class="op">=</span>&#0160;<span class="op">[</span><br />
+<a class="lnum" href="#32" name="32">0032</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="op">(</span><span class="string">'Content-type'</span><span class="op">,</span>&#0160;<span class="name">content_type</span><span class="op">)</span><span class="op">,</span><br />
+<a class="lnum" href="#33" name="33">0033</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="op">(</span><span class="string">'Content-length'</span><span class="op">,</span>&#0160;<span class="name">len</span><span class="op">(</span><span class="name">res</span><span class="op">)</span><span class="op">)</span><span class="op">,</span><br />
+<a class="lnum" href="#34" name="34">0034</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="op">]</span><br />
+<a class="lnum" href="#35" name="35">0035</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">headers</span><span class="op">.</span><span class="name">extend</span><span class="op">(</span><span class="name">response</span><span class="op">[</span><span class="string">'headers'</span><span class="op">]</span><span class="op">)</span><br />
+<a class="lnum" href="#36" name="36">0036</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">start_response</span><span class="op">(</span><span class="name">response</span><span class="op">[</span><span class="string">'status'</span><span class="op">]</span><span class="op">,</span>&#0160;<span class="name">headers</span><span class="op">)</span><br />
+<a class="lnum" href="#37" name="37">0037</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="keyword">return</span>&#0160;<span class="op">[</span><span class="name">res</span><span class="op">]</span><br />
+<a class="lnum" href="#38" name="38">0038</a><br />
+<a class="lnum" href="#39" name="39">0039</a><span class="keyword">def</span>&#0160;<span class="name">factory</span><span class="op">(</span><span class="name">app</span><span class="op">,</span>&#0160;<span class="name">global_conf</span><span class="op">,</span>&#0160;<span class="op">**</span><span class="name">kw</span><span class="op">)</span><span class="op">:</span><br />
+<a class="lnum" href="#40" name="40">0040</a>&#0160;&#0160;&#0160;&#0160;<span class="keyword">return</span>&#0160;<span class="name">JSONFilter</span><span class="op">(</span><span class="name">app</span><span class="op">,</span>&#0160;<span class="op">**</span><span class="name">kw</span><span class="op">)</span></code></div></body></html>

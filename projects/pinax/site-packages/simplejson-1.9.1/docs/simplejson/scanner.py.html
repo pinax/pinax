@@ -1,0 +1,139 @@
+<html><head><title>/Users/bob/src/simplejson/simplejson/scanner.py</title>
+        <script type="text/javascript"><!--
+        
+function show_line_range() {
+    var href = document.location.href;
+    if (href.indexOf('?') == -1) {
+        return;
+    }
+    var qs = href.substring(href.indexOf('?')+1);
+    if (qs.indexOf('#') >= 0) {
+        qs = qs.substring(0, qs.indexOf('#'));
+    }
+    var first = qs.match(/f=(\d+)/)[1];
+    var last = qs.match(/l=(\d+)/)[1];
+    if (! first || ! last) {
+        return;
+    }
+    var anchors = document.getElementsByTagName('A');
+    var container = document.createElement('DIV');
+    container.className = 'highlighted';
+    var children = [];
+    var start = null;
+    var parent = null;
+    var highlight = false;
+    for (var i = 0; i < anchors.length; i++) {
+        var el = anchors[i];
+        if (el.getAttribute('name') == first) {
+            start = el.previousSibling;
+            parent = el.parentNode;
+            highlight = true;
+        }
+        if (el.getAttribute('name') == last) {
+            break;
+        }
+        if (highlight) {
+            children[children.length] = el;
+            el = el.nextSibling;
+            while (el && el.tagName != 'A') {
+                children[children.length] = el;
+                el = el.nextSibling;
+            }
+        }
+    }
+    for (i=0; i<children.length; i++) {
+        container.appendChild(children[i]);
+    }
+    if (start) {
+        start.parentNode.insertBefore(container, start.nextSibling);
+    } else {
+        parent.insertBefore(container, parent.childNodes[0]);
+    }
+}
+
+        // --></script>
+        <style>
+        div.python {
+          color: #333
+        }
+        div.python a.lnum {
+          color: #555;
+          background-color: #eee;
+          border-right: 1px solid #999;
+          padding-right: 2px;
+          margin-right: 4px;
+        }
+        div.python span.comment { color: #933 }
+        div.python span.keyword { color: #a3e; font-weight: bold  }
+        div.python span.op { color: #c96 }
+        div.python span.string { color: #6a6 }
+        div.python span.name { }
+        div.python span.text { color: #333 }
+        div.highlighted { background-color: #ff9; border: 1px solid #009 }
+        </style></head><body onload="show_line_range()"><div class="python"><code><a class="lnum" href="#1" name="1">0001</a><span class="string">"""</span><br />
+<a class="lnum" href="#2" name="2">0002</a><span class="string">Iterator&#0160;based&#0160;sre&#0160;token&#0160;scanner</span><br />
+<a class="lnum" href="#3" name="3">0003</a><span class="string">"""</span><br />
+<a class="lnum" href="#4" name="4">0004</a><span class="keyword">import</span>&#0160;<span class="name">re</span><br />
+<a class="lnum" href="#5" name="5">0005</a><span class="keyword">from</span>&#0160;<span class="name">re</span>&#0160;<span class="keyword">import</span>&#0160;<span class="name">VERBOSE</span><span class="op">,</span>&#0160;<span class="name">MULTILINE</span><span class="op">,</span>&#0160;<span class="name">DOTALL</span><br />
+<a class="lnum" href="#6" name="6">0006</a><span class="keyword">import</span>&#0160;<span class="name">sre_parse</span><br />
+<a class="lnum" href="#7" name="7">0007</a><span class="keyword">import</span>&#0160;<span class="name">sre_compile</span><br />
+<a class="lnum" href="#8" name="8">0008</a><span class="keyword">import</span>&#0160;<span class="name">sre_constants</span><br />
+<a class="lnum" href="#9" name="9">0009</a><span class="keyword">from</span>&#0160;<span class="name">sre_constants</span>&#0160;<span class="keyword">import</span>&#0160;<span class="name">BRANCH</span><span class="op">,</span>&#0160;<span class="name">SUBPATTERN</span><br />
+<a class="lnum" href="#10" name="10">0010</a><br />
+<a class="lnum" href="#11" name="11">0011</a><span class="name">__all__</span>&#0160;<span class="op">=</span>&#0160;<span class="op">[</span><span class="string">'Scanner'</span><span class="op">,</span>&#0160;<span class="string">'pattern'</span><span class="op">]</span><br />
+<a class="lnum" href="#12" name="12">0012</a><br />
+<a class="lnum" href="#13" name="13">0013</a><span class="name">FLAGS</span>&#0160;<span class="op">=</span>&#0160;<span class="op">(</span><span class="name">VERBOSE</span>&#0160;<span class="op">|</span>&#0160;<span class="name">MULTILINE</span>&#0160;<span class="op">|</span>&#0160;<span class="name">DOTALL</span><span class="op">)</span><br />
+<a class="lnum" href="#14" name="14">0014</a><br />
+<a class="lnum" href="#15" name="15">0015</a><span class="keyword">class</span>&#0160;<span class="name">Scanner</span><span class="op">(</span><span class="name">object</span><span class="op">)</span><span class="op">:</span><br />
+<a class="lnum" href="#16" name="16">0016</a>&#0160;&#0160;&#0160;&#0160;<span class="keyword">def</span>&#0160;<span class="name">__init__</span><span class="op">(</span><span class="name">self</span><span class="op">,</span>&#0160;<span class="name">lexicon</span><span class="op">,</span>&#0160;<span class="name">flags</span><span class="op">=</span><span class="name">FLAGS</span><span class="op">)</span><span class="op">:</span><br />
+<a class="lnum" href="#17" name="17">0017</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">self</span><span class="op">.</span><span class="name">actions</span>&#0160;<span class="op">=</span>&#0160;<span class="op">[</span><span class="name">None</span><span class="op">]</span><br />
+<a class="lnum" href="#18" name="18">0018</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="comment">#&#0160;Combine&#0160;phrases&#0160;into&#0160;a&#0160;compound&#0160;pattern</span><br />
+<a class="lnum" href="#19" name="19">0019</a><span class="comment"></span>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">s</span>&#0160;<span class="op">=</span>&#0160;<span class="name">sre_parse</span><span class="op">.</span><span class="name">Pattern</span><span class="op">(</span><span class="op">)</span><br />
+<a class="lnum" href="#20" name="20">0020</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">s</span><span class="op">.</span><span class="name">flags</span>&#0160;<span class="op">=</span>&#0160;<span class="name">flags</span><br />
+<a class="lnum" href="#21" name="21">0021</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">p</span>&#0160;<span class="op">=</span>&#0160;<span class="op">[</span><span class="op">]</span><br />
+<a class="lnum" href="#22" name="22">0022</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="keyword">for</span>&#0160;<span class="name">idx</span><span class="op">,</span>&#0160;<span class="name">token</span>&#0160;<span class="keyword">in</span>&#0160;<span class="name">enumerate</span><span class="op">(</span><span class="name">lexicon</span><span class="op">)</span><span class="op">:</span><br />
+<a class="lnum" href="#23" name="23">0023</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">phrase</span>&#0160;<span class="op">=</span>&#0160;<span class="name">token</span><span class="op">.</span><span class="name">pattern</span><br />
+<a class="lnum" href="#24" name="24">0024</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="keyword">try</span><span class="op">:</span><br />
+<a class="lnum" href="#25" name="25">0025</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">subpattern</span>&#0160;<span class="op">=</span>&#0160;<span class="name">sre_parse</span><span class="op">.</span><span class="name">SubPattern</span><span class="op">(</span><span class="name">s</span><span class="op">,</span><br />
+<a class="lnum" href="#26" name="26">0026</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="op">[</span><span class="op">(</span><span class="name">SUBPATTERN</span><span class="op">,</span>&#0160;<span class="op">(</span><span class="name">idx</span>&#0160;<span class="op">+</span>&#0160;<span class="number">1</span><span class="op">,</span>&#0160;<span class="name">sre_parse</span><span class="op">.</span><span class="name">parse</span><span class="op">(</span><span class="name">phrase</span><span class="op">,</span>&#0160;<span class="name">flags</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><br />
+<a class="lnum" href="#27" name="27">0027</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="keyword">except</span>&#0160;<span class="name">sre_constants</span><span class="op">.</span><span class="name">error</span><span class="op">:</span><br />
+<a class="lnum" href="#28" name="28">0028</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="keyword">raise</span><br />
+<a class="lnum" href="#29" name="29">0029</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">p</span><span class="op">.</span><span class="name">append</span><span class="op">(</span><span class="name">subpattern</span><span class="op">)</span><br />
+<a class="lnum" href="#30" name="30">0030</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">self</span><span class="op">.</span><span class="name">actions</span><span class="op">.</span><span class="name">append</span><span class="op">(</span><span class="name">token</span><span class="op">)</span><br />
+<a class="lnum" href="#31" name="31">0031</a><br />
+<a class="lnum" href="#32" name="32">0032</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">s</span><span class="op">.</span><span class="name">groups</span>&#0160;<span class="op">=</span>&#0160;<span class="name">len</span><span class="op">(</span><span class="name">p</span><span class="op">)</span>&#0160;<span class="op">+</span>&#0160;<span class="number">1</span>&#0160;<span class="comment">#&#0160;NOTE(guido):&#0160;Added&#0160;to&#0160;make&#0160;SRE&#0160;validation&#0160;work</span><br />
+<a class="lnum" href="#33" name="33">0033</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">p</span>&#0160;<span class="op">=</span>&#0160;<span class="name">sre_parse</span><span class="op">.</span><span class="name">SubPattern</span><span class="op">(</span><span class="name">s</span><span class="op">,</span>&#0160;<span class="op">[</span><span class="op">(</span><span class="name">BRANCH</span><span class="op">,</span>&#0160;<span class="op">(</span><span class="name">None</span><span class="op">,</span>&#0160;<span class="name">p</span><span class="op">)</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><br />
+<a class="lnum" href="#34" name="34">0034</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">self</span><span class="op">.</span><span class="name">scanner</span>&#0160;<span class="op">=</span>&#0160;<span class="name">sre_compile</span><span class="op">.</span><span class="name">compile</span><span class="op">(</span><span class="name">p</span><span class="op">)</span><br />
+<a class="lnum" href="#35" name="35">0035</a><br />
+<a class="lnum" href="#36" name="36">0036</a>&#0160;&#0160;&#0160;&#0160;<span class="keyword">def</span>&#0160;<span class="name">iterscan</span><span class="op">(</span><span class="name">self</span><span class="op">,</span>&#0160;<span class="name">string</span><span class="op">,</span>&#0160;<span class="name">idx</span><span class="op">=</span><span class="number">0</span><span class="op">,</span>&#0160;<span class="name">context</span><span class="op">=</span><span class="name">None</span><span class="op">)</span><span class="op">:</span><br />
+<a class="lnum" href="#37" name="37">0037</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="string">"""</span><br />
+<a class="lnum" href="#38" name="38">0038</a><span class="string">&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;Yield&#0160;match,&#0160;end_idx&#0160;for&#0160;each&#0160;match</span><br />
+<a class="lnum" href="#39" name="39">0039</a><span class="string">&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;"""</span><br />
+<a class="lnum" href="#40" name="40">0040</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">match</span>&#0160;<span class="op">=</span>&#0160;<span class="name">self</span><span class="op">.</span><span class="name">scanner</span><span class="op">.</span><span class="name">scanner</span><span class="op">(</span><span class="name">string</span><span class="op">,</span>&#0160;<span class="name">idx</span><span class="op">)</span><span class="op">.</span><span class="name">match</span><br />
+<a class="lnum" href="#41" name="41">0041</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">actions</span>&#0160;<span class="op">=</span>&#0160;<span class="name">self</span><span class="op">.</span><span class="name">actions</span><br />
+<a class="lnum" href="#42" name="42">0042</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">lastend</span>&#0160;<span class="op">=</span>&#0160;<span class="name">idx</span><br />
+<a class="lnum" href="#43" name="43">0043</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">end</span>&#0160;<span class="op">=</span>&#0160;<span class="name">len</span><span class="op">(</span><span class="name">string</span><span class="op">)</span><br />
+<a class="lnum" href="#44" name="44">0044</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="keyword">while</span>&#0160;<span class="name">True</span><span class="op">:</span><br />
+<a class="lnum" href="#45" name="45">0045</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">m</span>&#0160;<span class="op">=</span>&#0160;<span class="name">match</span><span class="op">(</span><span class="op">)</span><br />
+<a class="lnum" href="#46" name="46">0046</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="keyword">if</span>&#0160;<span class="name">m</span>&#0160;<span class="keyword">is</span>&#0160;<span class="name">None</span><span class="op">:</span><br />
+<a class="lnum" href="#47" name="47">0047</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="keyword">break</span><br />
+<a class="lnum" href="#48" name="48">0048</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">matchbegin</span><span class="op">,</span>&#0160;<span class="name">matchend</span>&#0160;<span class="op">=</span>&#0160;<span class="name">m</span><span class="op">.</span><span class="name">span</span><span class="op">(</span><span class="op">)</span><br />
+<a class="lnum" href="#49" name="49">0049</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="keyword">if</span>&#0160;<span class="name">lastend</span>&#0160;<span class="op">==</span>&#0160;<span class="name">matchend</span><span class="op">:</span><br />
+<a class="lnum" href="#50" name="50">0050</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="keyword">break</span><br />
+<a class="lnum" href="#51" name="51">0051</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">action</span>&#0160;<span class="op">=</span>&#0160;<span class="name">actions</span><span class="op">[</span><span class="name">m</span><span class="op">.</span><span class="name">lastindex</span><span class="op">]</span><br />
+<a class="lnum" href="#52" name="52">0052</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="keyword">if</span>&#0160;<span class="name">action</span>&#0160;<span class="keyword">is</span>&#0160;<span class="keyword">not</span>&#0160;<span class="name">None</span><span class="op">:</span><br />
+<a class="lnum" href="#53" name="53">0053</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">rval</span><span class="op">,</span>&#0160;<span class="name">next_pos</span>&#0160;<span class="op">=</span>&#0160;<span class="name">action</span><span class="op">(</span><span class="name">m</span><span class="op">,</span>&#0160;<span class="name">context</span><span class="op">)</span><br />
+<a class="lnum" href="#54" name="54">0054</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="keyword">if</span>&#0160;<span class="name">next_pos</span>&#0160;<span class="keyword">is</span>&#0160;<span class="keyword">not</span>&#0160;<span class="name">None</span>&#0160;<span class="keyword">and</span>&#0160;<span class="name">next_pos</span>&#0160;<span class="op">!=</span>&#0160;<span class="name">matchend</span><span class="op">:</span><br />
+<a class="lnum" href="#55" name="55">0055</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="comment">#&#0160;"fast&#0160;forward"&#0160;the&#0160;scanner</span><br />
+<a class="lnum" href="#56" name="56">0056</a><span class="comment"></span>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">matchend</span>&#0160;<span class="op">=</span>&#0160;<span class="name">next_pos</span><br />
+<a class="lnum" href="#57" name="57">0057</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">match</span>&#0160;<span class="op">=</span>&#0160;<span class="name">self</span><span class="op">.</span><span class="name">scanner</span><span class="op">.</span><span class="name">scanner</span><span class="op">(</span><span class="name">string</span><span class="op">,</span>&#0160;<span class="name">matchend</span><span class="op">)</span><span class="op">.</span><span class="name">match</span><br />
+<a class="lnum" href="#58" name="58">0058</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="keyword">yield</span>&#0160;<span class="name">rval</span><span class="op">,</span>&#0160;<span class="name">matchend</span><br />
+<a class="lnum" href="#59" name="59">0059</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">lastend</span>&#0160;<span class="op">=</span>&#0160;<span class="name">matchend</span><br />
+<a class="lnum" href="#60" name="60">0060</a><br />
+<a class="lnum" href="#61" name="61">0061</a><br />
+<a class="lnum" href="#62" name="62">0062</a><span class="keyword">def</span>&#0160;<span class="name">pattern</span><span class="op">(</span><span class="name">pattern</span><span class="op">,</span>&#0160;<span class="name">flags</span><span class="op">=</span><span class="name">FLAGS</span><span class="op">)</span><span class="op">:</span><br />
+<a class="lnum" href="#63" name="63">0063</a>&#0160;&#0160;&#0160;&#0160;<span class="keyword">def</span>&#0160;<span class="name">decorator</span><span class="op">(</span><span class="name">fn</span><span class="op">)</span><span class="op">:</span><br />
+<a class="lnum" href="#64" name="64">0064</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">fn</span><span class="op">.</span><span class="name">pattern</span>&#0160;<span class="op">=</span>&#0160;<span class="name">pattern</span><br />
+<a class="lnum" href="#65" name="65">0065</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">fn</span><span class="op">.</span><span class="name">regex</span>&#0160;<span class="op">=</span>&#0160;<span class="name">re</span><span class="op">.</span><span class="name">compile</span><span class="op">(</span><span class="name">pattern</span><span class="op">,</span>&#0160;<span class="name">flags</span><span class="op">)</span><br />
+<a class="lnum" href="#66" name="66">0066</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="keyword">return</span>&#0160;<span class="name">fn</span><br />
+<a class="lnum" href="#67" name="67">0067</a>&#0160;&#0160;&#0160;&#0160;<span class="keyword">return</span>&#0160;<span class="name">decorator</span></code></div></body></html>

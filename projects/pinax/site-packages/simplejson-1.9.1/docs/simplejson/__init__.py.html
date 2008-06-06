@@ -1,0 +1,472 @@
+<html><head><title>/Users/bob/src/simplejson/simplejson/__init__.py</title>
+        <script type="text/javascript"><!--
+        
+function show_line_range() {
+    var href = document.location.href;
+    if (href.indexOf('?') == -1) {
+        return;
+    }
+    var qs = href.substring(href.indexOf('?')+1);
+    if (qs.indexOf('#') >= 0) {
+        qs = qs.substring(0, qs.indexOf('#'));
+    }
+    var first = qs.match(/f=(\d+)/)[1];
+    var last = qs.match(/l=(\d+)/)[1];
+    if (! first || ! last) {
+        return;
+    }
+    var anchors = document.getElementsByTagName('A');
+    var container = document.createElement('DIV');
+    container.className = 'highlighted';
+    var children = [];
+    var start = null;
+    var parent = null;
+    var highlight = false;
+    for (var i = 0; i < anchors.length; i++) {
+        var el = anchors[i];
+        if (el.getAttribute('name') == first) {
+            start = el.previousSibling;
+            parent = el.parentNode;
+            highlight = true;
+        }
+        if (el.getAttribute('name') == last) {
+            break;
+        }
+        if (highlight) {
+            children[children.length] = el;
+            el = el.nextSibling;
+            while (el && el.tagName != 'A') {
+                children[children.length] = el;
+                el = el.nextSibling;
+            }
+        }
+    }
+    for (i=0; i<children.length; i++) {
+        container.appendChild(children[i]);
+    }
+    if (start) {
+        start.parentNode.insertBefore(container, start.nextSibling);
+    } else {
+        parent.insertBefore(container, parent.childNodes[0]);
+    }
+}
+
+        // --></script>
+        <style>
+        div.python {
+          color: #333
+        }
+        div.python a.lnum {
+          color: #555;
+          background-color: #eee;
+          border-right: 1px solid #999;
+          padding-right: 2px;
+          margin-right: 4px;
+        }
+        div.python span.comment { color: #933 }
+        div.python span.keyword { color: #a3e; font-weight: bold  }
+        div.python span.op { color: #c96 }
+        div.python span.string { color: #6a6 }
+        div.python span.name { }
+        div.python span.text { color: #333 }
+        div.highlighted { background-color: #ff9; border: 1px solid #009 }
+        </style></head><body onload="show_line_range()"><div class="python"><code><a class="lnum" href="#1" name="1">0001</a><span class="string">r"""</span><br />
+<a class="lnum" href="#2" name="2">0002</a><span class="string">A&#0160;simple,&#0160;fast,&#0160;extensible&#0160;JSON&#0160;encoder&#0160;and&#0160;decoder</span><br />
+<a class="lnum" href="#3" name="3">0003</a><span class="string"></span><br />
+<a class="lnum" href="#4" name="4">0004</a><span class="string">JSON&#0160;(JavaScript&#0160;Object&#0160;Notation)&#0160;&lt;http://json.org&gt;&#0160;is&#0160;a&#0160;subset&#0160;of</span><br />
+<a class="lnum" href="#5" name="5">0005</a><span class="string">JavaScript&#0160;syntax&#0160;(ECMA-262&#0160;3rd&#0160;edition)&#0160;used&#0160;as&#0160;a&#0160;lightweight&#0160;data</span><br />
+<a class="lnum" href="#6" name="6">0006</a><span class="string">interchange&#0160;format.</span><br />
+<a class="lnum" href="#7" name="7">0007</a><span class="string"></span><br />
+<a class="lnum" href="#8" name="8">0008</a><span class="string">simplejson&#0160;exposes&#0160;an&#0160;API&#0160;familiar&#0160;to&#0160;uses&#0160;of&#0160;the&#0160;standard&#0160;library</span><br />
+<a class="lnum" href="#9" name="9">0009</a><span class="string">marshal&#0160;and&#0160;pickle&#0160;modules.</span><br />
+<a class="lnum" href="#10" name="10">0010</a><span class="string"></span><br />
+<a class="lnum" href="#11" name="11">0011</a><span class="string">Encoding&#0160;basic&#0160;Python&#0160;object&#0160;hierarchies::</span><br />
+<a class="lnum" href="#12" name="12">0012</a><span class="string">&#0160;&#0160;&#0160;&#0160;</span><br />
+<a class="lnum" href="#13" name="13">0013</a><span class="string">&#0160;&#0160;&#0160;&#0160;&gt;&gt;&gt;&#0160;import&#0160;simplejson</span><br />
+<a class="lnum" href="#14" name="14">0014</a><span class="string">&#0160;&#0160;&#0160;&#0160;&gt;&gt;&gt;&#0160;simplejson.dumps(['foo',&#0160;{'bar':&#0160;('baz',&#0160;None,&#0160;1.0,&#0160;2)}])</span><br />
+<a class="lnum" href="#15" name="15">0015</a><span class="string">&#0160;&#0160;&#0160;&#0160;'["foo",&#0160;{"bar":&#0160;["baz",&#0160;null,&#0160;1.0,&#0160;2]}]'</span><br />
+<a class="lnum" href="#16" name="16">0016</a><span class="string">&#0160;&#0160;&#0160;&#0160;&gt;&gt;&gt;&#0160;print&#0160;simplejson.dumps("\"foo\bar")</span><br />
+<a class="lnum" href="#17" name="17">0017</a><span class="string">&#0160;&#0160;&#0160;&#0160;"\"foo\bar"</span><br />
+<a class="lnum" href="#18" name="18">0018</a><span class="string">&#0160;&#0160;&#0160;&#0160;&gt;&gt;&gt;&#0160;print&#0160;simplejson.dumps(u'\u1234')</span><br />
+<a class="lnum" href="#19" name="19">0019</a><span class="string">&#0160;&#0160;&#0160;&#0160;"\u1234"</span><br />
+<a class="lnum" href="#20" name="20">0020</a><span class="string">&#0160;&#0160;&#0160;&#0160;&gt;&gt;&gt;&#0160;print&#0160;simplejson.dumps('\\')</span><br />
+<a class="lnum" href="#21" name="21">0021</a><span class="string">&#0160;&#0160;&#0160;&#0160;"\\"</span><br />
+<a class="lnum" href="#22" name="22">0022</a><span class="string">&#0160;&#0160;&#0160;&#0160;&gt;&gt;&gt;&#0160;print&#0160;simplejson.dumps({"c":&#0160;0,&#0160;"b":&#0160;0,&#0160;"a":&#0160;0},&#0160;sort_keys=True)</span><br />
+<a class="lnum" href="#23" name="23">0023</a><span class="string">&#0160;&#0160;&#0160;&#0160;{"a":&#0160;0,&#0160;"b":&#0160;0,&#0160;"c":&#0160;0}</span><br />
+<a class="lnum" href="#24" name="24">0024</a><span class="string">&#0160;&#0160;&#0160;&#0160;&gt;&gt;&gt;&#0160;from&#0160;StringIO&#0160;import&#0160;StringIO</span><br />
+<a class="lnum" href="#25" name="25">0025</a><span class="string">&#0160;&#0160;&#0160;&#0160;&gt;&gt;&gt;&#0160;io&#0160;=&#0160;StringIO()</span><br />
+<a class="lnum" href="#26" name="26">0026</a><span class="string">&#0160;&#0160;&#0160;&#0160;&gt;&gt;&gt;&#0160;simplejson.dump(['streaming&#0160;API'],&#0160;io)</span><br />
+<a class="lnum" href="#27" name="27">0027</a><span class="string">&#0160;&#0160;&#0160;&#0160;&gt;&gt;&gt;&#0160;io.getvalue()</span><br />
+<a class="lnum" href="#28" name="28">0028</a><span class="string">&#0160;&#0160;&#0160;&#0160;'["streaming&#0160;API"]'</span><br />
+<a class="lnum" href="#29" name="29">0029</a><span class="string"></span><br />
+<a class="lnum" href="#30" name="30">0030</a><span class="string">Compact&#0160;encoding::</span><br />
+<a class="lnum" href="#31" name="31">0031</a><span class="string"></span><br />
+<a class="lnum" href="#32" name="32">0032</a><span class="string">&#0160;&#0160;&#0160;&#0160;&gt;&gt;&gt;&#0160;import&#0160;simplejson</span><br />
+<a class="lnum" href="#33" name="33">0033</a><span class="string">&#0160;&#0160;&#0160;&#0160;&gt;&gt;&gt;&#0160;simplejson.dumps([1,2,3,{'4':&#0160;5,&#0160;'6':&#0160;7}],&#0160;separators=(',',':'))</span><br />
+<a class="lnum" href="#34" name="34">0034</a><span class="string">&#0160;&#0160;&#0160;&#0160;'[1,2,3,{"4":5,"6":7}]'</span><br />
+<a class="lnum" href="#35" name="35">0035</a><span class="string"></span><br />
+<a class="lnum" href="#36" name="36">0036</a><span class="string">Pretty&#0160;printing::</span><br />
+<a class="lnum" href="#37" name="37">0037</a><span class="string"></span><br />
+<a class="lnum" href="#38" name="38">0038</a><span class="string">&#0160;&#0160;&#0160;&#0160;&gt;&gt;&gt;&#0160;import&#0160;simplejson</span><br />
+<a class="lnum" href="#39" name="39">0039</a><span class="string">&#0160;&#0160;&#0160;&#0160;&gt;&gt;&gt;&#0160;print&#0160;simplejson.dumps({'4':&#0160;5,&#0160;'6':&#0160;7},&#0160;sort_keys=True,&#0160;indent=4)</span><br />
+<a class="lnum" href="#40" name="40">0040</a><span class="string">&#0160;&#0160;&#0160;&#0160;{</span><br />
+<a class="lnum" href="#41" name="41">0041</a><span class="string">&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;"4":&#0160;5,&#0160;</span><br />
+<a class="lnum" href="#42" name="42">0042</a><span class="string">&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;"6":&#0160;7</span><br />
+<a class="lnum" href="#43" name="43">0043</a><span class="string">&#0160;&#0160;&#0160;&#0160;}</span><br />
+<a class="lnum" href="#44" name="44">0044</a><span class="string"></span><br />
+<a class="lnum" href="#45" name="45">0045</a><span class="string">Decoding&#0160;JSON::</span><br />
+<a class="lnum" href="#46" name="46">0046</a><span class="string">&#0160;&#0160;&#0160;&#0160;</span><br />
+<a class="lnum" href="#47" name="47">0047</a><span class="string">&#0160;&#0160;&#0160;&#0160;&gt;&gt;&gt;&#0160;import&#0160;simplejson</span><br />
+<a class="lnum" href="#48" name="48">0048</a><span class="string">&#0160;&#0160;&#0160;&#0160;&gt;&gt;&gt;&#0160;simplejson.loads('["foo",&#0160;{"bar":["baz",&#0160;null,&#0160;1.0,&#0160;2]}]')</span><br />
+<a class="lnum" href="#49" name="49">0049</a><span class="string">&#0160;&#0160;&#0160;&#0160;[u'foo',&#0160;{u'bar':&#0160;[u'baz',&#0160;None,&#0160;1.0,&#0160;2]}]</span><br />
+<a class="lnum" href="#50" name="50">0050</a><span class="string">&#0160;&#0160;&#0160;&#0160;&gt;&gt;&gt;&#0160;simplejson.loads('"\\"foo\\bar"')</span><br />
+<a class="lnum" href="#51" name="51">0051</a><span class="string">&#0160;&#0160;&#0160;&#0160;u'"foo\x08ar'</span><br />
+<a class="lnum" href="#52" name="52">0052</a><span class="string">&#0160;&#0160;&#0160;&#0160;&gt;&gt;&gt;&#0160;from&#0160;StringIO&#0160;import&#0160;StringIO</span><br />
+<a class="lnum" href="#53" name="53">0053</a><span class="string">&#0160;&#0160;&#0160;&#0160;&gt;&gt;&gt;&#0160;io&#0160;=&#0160;StringIO('["streaming&#0160;API"]')</span><br />
+<a class="lnum" href="#54" name="54">0054</a><span class="string">&#0160;&#0160;&#0160;&#0160;&gt;&gt;&gt;&#0160;simplejson.load(io)</span><br />
+<a class="lnum" href="#55" name="55">0055</a><span class="string">&#0160;&#0160;&#0160;&#0160;[u'streaming&#0160;API']</span><br />
+<a class="lnum" href="#56" name="56">0056</a><span class="string"></span><br />
+<a class="lnum" href="#57" name="57">0057</a><span class="string">Specializing&#0160;JSON&#0160;object&#0160;decoding::</span><br />
+<a class="lnum" href="#58" name="58">0058</a><span class="string"></span><br />
+<a class="lnum" href="#59" name="59">0059</a><span class="string">&#0160;&#0160;&#0160;&#0160;&gt;&gt;&gt;&#0160;import&#0160;simplejson</span><br />
+<a class="lnum" href="#60" name="60">0060</a><span class="string">&#0160;&#0160;&#0160;&#0160;&gt;&gt;&gt;&#0160;def&#0160;as_complex(dct):</span><br />
+<a class="lnum" href="#61" name="61">0061</a><span class="string">&#0160;&#0160;&#0160;&#0160;...&#0160;&#0160;&#0160;&#0160;&#0160;if&#0160;'__complex__'&#0160;in&#0160;dct:</span><br />
+<a class="lnum" href="#62" name="62">0062</a><span class="string">&#0160;&#0160;&#0160;&#0160;...&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;return&#0160;complex(dct['real'],&#0160;dct['imag'])</span><br />
+<a class="lnum" href="#63" name="63">0063</a><span class="string">&#0160;&#0160;&#0160;&#0160;...&#0160;&#0160;&#0160;&#0160;&#0160;return&#0160;dct</span><br />
+<a class="lnum" href="#64" name="64">0064</a><span class="string">&#0160;&#0160;&#0160;&#0160;...&#0160;</span><br />
+<a class="lnum" href="#65" name="65">0065</a><span class="string">&#0160;&#0160;&#0160;&#0160;&gt;&gt;&gt;&#0160;simplejson.loads('{"__complex__":&#0160;true,&#0160;"real":&#0160;1,&#0160;"imag":&#0160;2}',</span><br />
+<a class="lnum" href="#66" name="66">0066</a><span class="string">&#0160;&#0160;&#0160;&#0160;...&#0160;&#0160;&#0160;&#0160;&#0160;object_hook=as_complex)</span><br />
+<a class="lnum" href="#67" name="67">0067</a><span class="string">&#0160;&#0160;&#0160;&#0160;(1+2j)</span><br />
+<a class="lnum" href="#68" name="68">0068</a><span class="string">&#0160;&#0160;&#0160;&#0160;&gt;&gt;&gt;&#0160;import&#0160;decimal</span><br />
+<a class="lnum" href="#69" name="69">0069</a><span class="string">&#0160;&#0160;&#0160;&#0160;&gt;&gt;&gt;&#0160;simplejson.loads('1.1',&#0160;parse_float=decimal.Decimal)</span><br />
+<a class="lnum" href="#70" name="70">0070</a><span class="string">&#0160;&#0160;&#0160;&#0160;Decimal("1.1")</span><br />
+<a class="lnum" href="#71" name="71">0071</a><span class="string"></span><br />
+<a class="lnum" href="#72" name="72">0072</a><span class="string">Extending&#0160;JSONEncoder::</span><br />
+<a class="lnum" href="#73" name="73">0073</a><span class="string">&#0160;&#0160;&#0160;&#0160;</span><br />
+<a class="lnum" href="#74" name="74">0074</a><span class="string">&#0160;&#0160;&#0160;&#0160;&gt;&gt;&gt;&#0160;import&#0160;simplejson</span><br />
+<a class="lnum" href="#75" name="75">0075</a><span class="string">&#0160;&#0160;&#0160;&#0160;&gt;&gt;&gt;&#0160;class&#0160;ComplexEncoder(simplejson.JSONEncoder):</span><br />
+<a class="lnum" href="#76" name="76">0076</a><span class="string">&#0160;&#0160;&#0160;&#0160;...&#0160;&#0160;&#0160;&#0160;&#0160;def&#0160;default(self,&#0160;obj):</span><br />
+<a class="lnum" href="#77" name="77">0077</a><span class="string">&#0160;&#0160;&#0160;&#0160;...&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;if&#0160;isinstance(obj,&#0160;complex):</span><br />
+<a class="lnum" href="#78" name="78">0078</a><span class="string">&#0160;&#0160;&#0160;&#0160;...&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;return&#0160;[obj.real,&#0160;obj.imag]</span><br />
+<a class="lnum" href="#79" name="79">0079</a><span class="string">&#0160;&#0160;&#0160;&#0160;...&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;return&#0160;simplejson.JSONEncoder.default(self,&#0160;obj)</span><br />
+<a class="lnum" href="#80" name="80">0080</a><span class="string">&#0160;&#0160;&#0160;&#0160;...&#0160;</span><br />
+<a class="lnum" href="#81" name="81">0081</a><span class="string">&#0160;&#0160;&#0160;&#0160;&gt;&gt;&gt;&#0160;dumps(2&#0160;+&#0160;1j,&#0160;cls=ComplexEncoder)</span><br />
+<a class="lnum" href="#82" name="82">0082</a><span class="string">&#0160;&#0160;&#0160;&#0160;'[2.0,&#0160;1.0]'</span><br />
+<a class="lnum" href="#83" name="83">0083</a><span class="string">&#0160;&#0160;&#0160;&#0160;&gt;&gt;&gt;&#0160;ComplexEncoder().encode(2&#0160;+&#0160;1j)</span><br />
+<a class="lnum" href="#84" name="84">0084</a><span class="string">&#0160;&#0160;&#0160;&#0160;'[2.0,&#0160;1.0]'</span><br />
+<a class="lnum" href="#85" name="85">0085</a><span class="string">&#0160;&#0160;&#0160;&#0160;&gt;&gt;&gt;&#0160;list(ComplexEncoder().iterencode(2&#0160;+&#0160;1j))</span><br />
+<a class="lnum" href="#86" name="86">0086</a><span class="string">&#0160;&#0160;&#0160;&#0160;['[',&#0160;'2.0',&#0160;',&#0160;',&#0160;'1.0',&#0160;']']</span><br />
+<a class="lnum" href="#87" name="87">0087</a><span class="string">&#0160;&#0160;&#0160;&#0160;</span><br />
+<a class="lnum" href="#88" name="88">0088</a><span class="string"></span><br />
+<a class="lnum" href="#89" name="89">0089</a><span class="string">Using&#0160;simplejson&#0160;from&#0160;the&#0160;shell&#0160;to&#0160;validate&#0160;and</span><br />
+<a class="lnum" href="#90" name="90">0090</a><span class="string">pretty-print::</span><br />
+<a class="lnum" href="#91" name="91">0091</a><span class="string">&#0160;&#0160;&#0160;&#0160;</span><br />
+<a class="lnum" href="#92" name="92">0092</a><span class="string">&#0160;&#0160;&#0160;&#0160;$&#0160;echo&#0160;'{"json":"obj"}'&#0160;|&#0160;python&#0160;-msimplejson</span><br />
+<a class="lnum" href="#93" name="93">0093</a><span class="string">&#0160;&#0160;&#0160;&#0160;{</span><br />
+<a class="lnum" href="#94" name="94">0094</a><span class="string">&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;"json":&#0160;"obj"</span><br />
+<a class="lnum" href="#95" name="95">0095</a><span class="string">&#0160;&#0160;&#0160;&#0160;}</span><br />
+<a class="lnum" href="#96" name="96">0096</a><span class="string">&#0160;&#0160;&#0160;&#0160;$&#0160;echo&#0160;'{&#0160;1.2:3.4}'&#0160;|&#0160;python&#0160;-msimplejson</span><br />
+<a class="lnum" href="#97" name="97">0097</a><span class="string">&#0160;&#0160;&#0160;&#0160;Expecting&#0160;property&#0160;name:&#0160;line&#0160;1&#0160;column&#0160;2&#0160;(char&#0160;2)</span><br />
+<a class="lnum" href="#98" name="98">0098</a><span class="string"></span><br />
+<a class="lnum" href="#99" name="99">0099</a><span class="string">Note&#0160;that&#0160;the&#0160;JSON&#0160;produced&#0160;by&#0160;this&#0160;module's&#0160;default&#0160;settings</span><br />
+<a class="lnum" href="#100" name="100">0100</a><span class="string">is&#0160;a&#0160;subset&#0160;of&#0160;YAML,&#0160;so&#0160;it&#0160;may&#0160;be&#0160;used&#0160;as&#0160;a&#0160;serializer&#0160;for&#0160;that&#0160;as&#0160;well.</span><br />
+<a class="lnum" href="#101" name="101">0101</a><span class="string">"""</span><br />
+<a class="lnum" href="#102" name="102">0102</a><span class="name">__version__</span>&#0160;<span class="op">=</span>&#0160;<span class="string">'1.9'</span><br />
+<a class="lnum" href="#103" name="103">0103</a><span class="name">__all__</span>&#0160;<span class="op">=</span>&#0160;<span class="op">[</span><br />
+<a class="lnum" href="#104" name="104">0104</a>&#0160;&#0160;&#0160;&#0160;<span class="string">'dump'</span><span class="op">,</span>&#0160;<span class="string">'dumps'</span><span class="op">,</span>&#0160;<span class="string">'load'</span><span class="op">,</span>&#0160;<span class="string">'loads'</span><span class="op">,</span><br />
+<a class="lnum" href="#105" name="105">0105</a>&#0160;&#0160;&#0160;&#0160;<span class="string">'JSONDecoder'</span><span class="op">,</span>&#0160;<span class="string">'JSONEncoder'</span><span class="op">,</span><br />
+<a class="lnum" href="#106" name="106">0106</a><span class="op">]</span><br />
+<a class="lnum" href="#107" name="107">0107</a><br />
+<a class="lnum" href="#108" name="108">0108</a><span class="keyword">if</span>&#0160;<span class="name">__name__</span>&#0160;<span class="op">==</span>&#0160;<span class="string">'__main__'</span><span class="op">:</span><br />
+<a class="lnum" href="#109" name="109">0109</a>&#0160;&#0160;&#0160;&#0160;<span class="keyword">from</span>&#0160;<span class="name">simplejson</span><span class="op">.</span><span class="name">decoder</span>&#0160;<span class="keyword">import</span>&#0160;<span class="name">JSONDecoder</span><br />
+<a class="lnum" href="#110" name="110">0110</a>&#0160;&#0160;&#0160;&#0160;<span class="keyword">from</span>&#0160;<span class="name">simplejson</span><span class="op">.</span><span class="name">encoder</span>&#0160;<span class="keyword">import</span>&#0160;<span class="name">JSONEncoder</span><br />
+<a class="lnum" href="#111" name="111">0111</a><span class="keyword">else</span><span class="op">:</span><br />
+<a class="lnum" href="#112" name="112">0112</a>&#0160;&#0160;&#0160;&#0160;<span class="keyword">from</span>&#0160;<span class="name">decoder</span>&#0160;<span class="keyword">import</span>&#0160;<span class="name">JSONDecoder</span><br />
+<a class="lnum" href="#113" name="113">0113</a>&#0160;&#0160;&#0160;&#0160;<span class="keyword">from</span>&#0160;<span class="name">encoder</span>&#0160;<span class="keyword">import</span>&#0160;<span class="name">JSONEncoder</span><br />
+<a class="lnum" href="#114" name="114">0114</a><br />
+<a class="lnum" href="#115" name="115">0115</a><span class="name">_default_encoder</span>&#0160;<span class="op">=</span>&#0160;<span class="name">JSONEncoder</span><span class="op">(</span><br />
+<a class="lnum" href="#116" name="116">0116</a>&#0160;&#0160;&#0160;&#0160;<span class="name">skipkeys</span><span class="op">=</span><span class="name">False</span><span class="op">,</span><br />
+<a class="lnum" href="#117" name="117">0117</a>&#0160;&#0160;&#0160;&#0160;<span class="name">ensure_ascii</span><span class="op">=</span><span class="name">True</span><span class="op">,</span><br />
+<a class="lnum" href="#118" name="118">0118</a>&#0160;&#0160;&#0160;&#0160;<span class="name">check_circular</span><span class="op">=</span><span class="name">True</span><span class="op">,</span><br />
+<a class="lnum" href="#119" name="119">0119</a>&#0160;&#0160;&#0160;&#0160;<span class="name">allow_nan</span><span class="op">=</span><span class="name">True</span><span class="op">,</span><br />
+<a class="lnum" href="#120" name="120">0120</a>&#0160;&#0160;&#0160;&#0160;<span class="name">indent</span><span class="op">=</span><span class="name">None</span><span class="op">,</span><br />
+<a class="lnum" href="#121" name="121">0121</a>&#0160;&#0160;&#0160;&#0160;<span class="name">separators</span><span class="op">=</span><span class="name">None</span><span class="op">,</span><br />
+<a class="lnum" href="#122" name="122">0122</a>&#0160;&#0160;&#0160;&#0160;<span class="name">encoding</span><span class="op">=</span><span class="string">'utf-8'</span><span class="op">,</span><br />
+<a class="lnum" href="#123" name="123">0123</a>&#0160;&#0160;&#0160;&#0160;<span class="name">default</span><span class="op">=</span><span class="name">None</span><span class="op">,</span><br />
+<a class="lnum" href="#124" name="124">0124</a><span class="op">)</span><br />
+<a class="lnum" href="#125" name="125">0125</a><br />
+<a class="lnum" href="#126" name="126">0126</a><span class="keyword">def</span>&#0160;<span class="name">dump</span><span class="op">(</span><span class="name">obj</span><span class="op">,</span>&#0160;<span class="name">fp</span><span class="op">,</span>&#0160;<span class="name">skipkeys</span><span class="op">=</span><span class="name">False</span><span class="op">,</span>&#0160;<span class="name">ensure_ascii</span><span class="op">=</span><span class="name">True</span><span class="op">,</span>&#0160;<span class="name">check_circular</span><span class="op">=</span><span class="name">True</span><span class="op">,</span><br />
+<a class="lnum" href="#127" name="127">0127</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">allow_nan</span><span class="op">=</span><span class="name">True</span><span class="op">,</span>&#0160;<span class="name">cls</span><span class="op">=</span><span class="name">None</span><span class="op">,</span>&#0160;<span class="name">indent</span><span class="op">=</span><span class="name">None</span><span class="op">,</span>&#0160;<span class="name">separators</span><span class="op">=</span><span class="name">None</span><span class="op">,</span><br />
+<a class="lnum" href="#128" name="128">0128</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">encoding</span><span class="op">=</span><span class="string">'utf-8'</span><span class="op">,</span>&#0160;<span class="name">default</span><span class="op">=</span><span class="name">None</span><span class="op">,</span>&#0160;<span class="op">**</span><span class="name">kw</span><span class="op">)</span><span class="op">:</span><br />
+<a class="lnum" href="#129" name="129">0129</a>&#0160;&#0160;&#0160;&#0160;<span class="string">"""</span><br />
+<a class="lnum" href="#130" name="130">0130</a><span class="string">&#0160;&#0160;&#0160;&#0160;Serialize&#0160;``obj``&#0160;as&#0160;a&#0160;JSON&#0160;formatted&#0160;stream&#0160;to&#0160;``fp``&#0160;(a</span><br />
+<a class="lnum" href="#131" name="131">0131</a><span class="string">&#0160;&#0160;&#0160;&#0160;``.write()``-supporting&#0160;file-like&#0160;object).</span><br />
+<a class="lnum" href="#132" name="132">0132</a><span class="string"></span><br />
+<a class="lnum" href="#133" name="133">0133</a><span class="string">&#0160;&#0160;&#0160;&#0160;If&#0160;``skipkeys``&#0160;is&#0160;``True``&#0160;then&#0160;``dict``&#0160;keys&#0160;that&#0160;are&#0160;not&#0160;basic&#0160;types</span><br />
+<a class="lnum" href="#134" name="134">0134</a><span class="string">&#0160;&#0160;&#0160;&#0160;(``str``,&#0160;``unicode``,&#0160;``int``,&#0160;``long``,&#0160;``float``,&#0160;``bool``,&#0160;``None``)&#0160;</span><br />
+<a class="lnum" href="#135" name="135">0135</a><span class="string">&#0160;&#0160;&#0160;&#0160;will&#0160;be&#0160;skipped&#0160;instead&#0160;of&#0160;raising&#0160;a&#0160;``TypeError``.</span><br />
+<a class="lnum" href="#136" name="136">0136</a><span class="string"></span><br />
+<a class="lnum" href="#137" name="137">0137</a><span class="string">&#0160;&#0160;&#0160;&#0160;If&#0160;``ensure_ascii``&#0160;is&#0160;``False``,&#0160;then&#0160;the&#0160;some&#0160;chunks&#0160;written&#0160;to&#0160;``fp``</span><br />
+<a class="lnum" href="#138" name="138">0138</a><span class="string">&#0160;&#0160;&#0160;&#0160;may&#0160;be&#0160;``unicode``&#0160;instances,&#0160;subject&#0160;to&#0160;normal&#0160;Python&#0160;``str``&#0160;to</span><br />
+<a class="lnum" href="#139" name="139">0139</a><span class="string">&#0160;&#0160;&#0160;&#0160;``unicode``&#0160;coercion&#0160;rules.&#0160;Unless&#0160;``fp.write()``&#0160;explicitly</span><br />
+<a class="lnum" href="#140" name="140">0140</a><span class="string">&#0160;&#0160;&#0160;&#0160;understands&#0160;``unicode``&#0160;(as&#0160;in&#0160;``codecs.getwriter()``)&#0160;this&#0160;is&#0160;likely</span><br />
+<a class="lnum" href="#141" name="141">0141</a><span class="string">&#0160;&#0160;&#0160;&#0160;to&#0160;cause&#0160;an&#0160;error.</span><br />
+<a class="lnum" href="#142" name="142">0142</a><span class="string"></span><br />
+<a class="lnum" href="#143" name="143">0143</a><span class="string">&#0160;&#0160;&#0160;&#0160;If&#0160;``check_circular``&#0160;is&#0160;``False``,&#0160;then&#0160;the&#0160;circular&#0160;reference&#0160;check</span><br />
+<a class="lnum" href="#144" name="144">0144</a><span class="string">&#0160;&#0160;&#0160;&#0160;for&#0160;container&#0160;types&#0160;will&#0160;be&#0160;skipped&#0160;and&#0160;a&#0160;circular&#0160;reference&#0160;will</span><br />
+<a class="lnum" href="#145" name="145">0145</a><span class="string">&#0160;&#0160;&#0160;&#0160;result&#0160;in&#0160;an&#0160;``OverflowError``&#0160;(or&#0160;worse).</span><br />
+<a class="lnum" href="#146" name="146">0146</a><span class="string"></span><br />
+<a class="lnum" href="#147" name="147">0147</a><span class="string">&#0160;&#0160;&#0160;&#0160;If&#0160;``allow_nan``&#0160;is&#0160;``False``,&#0160;then&#0160;it&#0160;will&#0160;be&#0160;a&#0160;``ValueError``&#0160;to</span><br />
+<a class="lnum" href="#148" name="148">0148</a><span class="string">&#0160;&#0160;&#0160;&#0160;serialize&#0160;out&#0160;of&#0160;range&#0160;``float``&#0160;values&#0160;(``nan``,&#0160;``inf``,&#0160;``-inf``)</span><br />
+<a class="lnum" href="#149" name="149">0149</a><span class="string">&#0160;&#0160;&#0160;&#0160;in&#0160;strict&#0160;compliance&#0160;of&#0160;the&#0160;JSON&#0160;specification,&#0160;instead&#0160;of&#0160;using&#0160;the</span><br />
+<a class="lnum" href="#150" name="150">0150</a><span class="string">&#0160;&#0160;&#0160;&#0160;JavaScript&#0160;equivalents&#0160;(``NaN``,&#0160;``Infinity``,&#0160;``-Infinity``).</span><br />
+<a class="lnum" href="#151" name="151">0151</a><span class="string"></span><br />
+<a class="lnum" href="#152" name="152">0152</a><span class="string">&#0160;&#0160;&#0160;&#0160;If&#0160;``indent``&#0160;is&#0160;a&#0160;non-negative&#0160;integer,&#0160;then&#0160;JSON&#0160;array&#0160;elements&#0160;and&#0160;object</span><br />
+<a class="lnum" href="#153" name="153">0153</a><span class="string">&#0160;&#0160;&#0160;&#0160;members&#0160;will&#0160;be&#0160;pretty-printed&#0160;with&#0160;that&#0160;indent&#0160;level.&#0160;An&#0160;indent&#0160;level</span><br />
+<a class="lnum" href="#154" name="154">0154</a><span class="string">&#0160;&#0160;&#0160;&#0160;of&#0160;0&#0160;will&#0160;only&#0160;insert&#0160;newlines.&#0160;``None``&#0160;is&#0160;the&#0160;most&#0160;compact&#0160;representation.</span><br />
+<a class="lnum" href="#155" name="155">0155</a><span class="string"></span><br />
+<a class="lnum" href="#156" name="156">0156</a><span class="string">&#0160;&#0160;&#0160;&#0160;If&#0160;``separators``&#0160;is&#0160;an&#0160;``(item_separator,&#0160;dict_separator)``&#0160;tuple</span><br />
+<a class="lnum" href="#157" name="157">0157</a><span class="string">&#0160;&#0160;&#0160;&#0160;then&#0160;it&#0160;will&#0160;be&#0160;used&#0160;instead&#0160;of&#0160;the&#0160;default&#0160;``(',&#0160;',&#0160;':&#0160;')``&#0160;separators.</span><br />
+<a class="lnum" href="#158" name="158">0158</a><span class="string">&#0160;&#0160;&#0160;&#0160;``(',',&#0160;':')``&#0160;is&#0160;the&#0160;most&#0160;compact&#0160;JSON&#0160;representation.</span><br />
+<a class="lnum" href="#159" name="159">0159</a><span class="string"></span><br />
+<a class="lnum" href="#160" name="160">0160</a><span class="string">&#0160;&#0160;&#0160;&#0160;``encoding``&#0160;is&#0160;the&#0160;character&#0160;encoding&#0160;for&#0160;str&#0160;instances,&#0160;default&#0160;is&#0160;UTF-8.</span><br />
+<a class="lnum" href="#161" name="161">0161</a><span class="string"></span><br />
+<a class="lnum" href="#162" name="162">0162</a><span class="string">&#0160;&#0160;&#0160;&#0160;``default(obj)``&#0160;is&#0160;a&#0160;function&#0160;that&#0160;should&#0160;return&#0160;a&#0160;serializable&#0160;version</span><br />
+<a class="lnum" href="#163" name="163">0163</a><span class="string">&#0160;&#0160;&#0160;&#0160;of&#0160;obj&#0160;or&#0160;raise&#0160;TypeError.&#0160;The&#0160;default&#0160;simply&#0160;raises&#0160;TypeError.</span><br />
+<a class="lnum" href="#164" name="164">0164</a><span class="string"></span><br />
+<a class="lnum" href="#165" name="165">0165</a><span class="string">&#0160;&#0160;&#0160;&#0160;To&#0160;use&#0160;a&#0160;custom&#0160;``JSONEncoder``&#0160;subclass&#0160;(e.g.&#0160;one&#0160;that&#0160;overrides&#0160;the</span><br />
+<a class="lnum" href="#166" name="166">0166</a><span class="string">&#0160;&#0160;&#0160;&#0160;``.default()``&#0160;method&#0160;to&#0160;serialize&#0160;additional&#0160;types),&#0160;specify&#0160;it&#0160;with</span><br />
+<a class="lnum" href="#167" name="167">0167</a><span class="string">&#0160;&#0160;&#0160;&#0160;the&#0160;``cls``&#0160;kwarg.</span><br />
+<a class="lnum" href="#168" name="168">0168</a><span class="string">&#0160;&#0160;&#0160;&#0160;"""</span><br />
+<a class="lnum" href="#169" name="169">0169</a>&#0160;&#0160;&#0160;&#0160;<span class="comment">#&#0160;cached&#0160;encoder</span><br />
+<a class="lnum" href="#170" name="170">0170</a><span class="comment"></span>&#0160;&#0160;&#0160;&#0160;<span class="keyword">if</span>&#0160;<span class="op">(</span><span class="name">skipkeys</span>&#0160;<span class="keyword">is</span>&#0160;<span class="name">False</span>&#0160;<span class="keyword">and</span>&#0160;<span class="name">ensure_ascii</span>&#0160;<span class="keyword">is</span>&#0160;<span class="name">True</span>&#0160;<span class="keyword">and</span><br />
+<a class="lnum" href="#171" name="171">0171</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">check_circular</span>&#0160;<span class="keyword">is</span>&#0160;<span class="name">True</span>&#0160;<span class="keyword">and</span>&#0160;<span class="name">allow_nan</span>&#0160;<span class="keyword">is</span>&#0160;<span class="name">True</span>&#0160;<span class="keyword">and</span><br />
+<a class="lnum" href="#172" name="172">0172</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">cls</span>&#0160;<span class="keyword">is</span>&#0160;<span class="name">None</span>&#0160;<span class="keyword">and</span>&#0160;<span class="name">indent</span>&#0160;<span class="keyword">is</span>&#0160;<span class="name">None</span>&#0160;<span class="keyword">and</span>&#0160;<span class="name">separators</span>&#0160;<span class="keyword">is</span>&#0160;<span class="name">None</span>&#0160;<span class="keyword">and</span><br />
+<a class="lnum" href="#173" name="173">0173</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">encoding</span>&#0160;<span class="op">==</span>&#0160;<span class="string">'utf-8'</span>&#0160;<span class="keyword">and</span>&#0160;<span class="name">default</span>&#0160;<span class="keyword">is</span>&#0160;<span class="name">None</span>&#0160;<span class="keyword">and</span>&#0160;<span class="keyword">not</span>&#0160;<span class="name">kw</span><span class="op">)</span><span class="op">:</span><br />
+<a class="lnum" href="#174" name="174">0174</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">iterable</span>&#0160;<span class="op">=</span>&#0160;<span class="name">_default_encoder</span><span class="op">.</span><span class="name">iterencode</span><span class="op">(</span><span class="name">obj</span><span class="op">)</span><br />
+<a class="lnum" href="#175" name="175">0175</a>&#0160;&#0160;&#0160;&#0160;<span class="keyword">else</span><span class="op">:</span><br />
+<a class="lnum" href="#176" name="176">0176</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="keyword">if</span>&#0160;<span class="name">cls</span>&#0160;<span class="keyword">is</span>&#0160;<span class="name">None</span><span class="op">:</span><br />
+<a class="lnum" href="#177" name="177">0177</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">cls</span>&#0160;<span class="op">=</span>&#0160;<span class="name">JSONEncoder</span><br />
+<a class="lnum" href="#178" name="178">0178</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">iterable</span>&#0160;<span class="op">=</span>&#0160;<span class="name">cls</span><span class="op">(</span><span class="name">skipkeys</span><span class="op">=</span><span class="name">skipkeys</span><span class="op">,</span>&#0160;<span class="name">ensure_ascii</span><span class="op">=</span><span class="name">ensure_ascii</span><span class="op">,</span><br />
+<a class="lnum" href="#179" name="179">0179</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">check_circular</span><span class="op">=</span><span class="name">check_circular</span><span class="op">,</span>&#0160;<span class="name">allow_nan</span><span class="op">=</span><span class="name">allow_nan</span><span class="op">,</span>&#0160;<span class="name">indent</span><span class="op">=</span><span class="name">indent</span><span class="op">,</span><br />
+<a class="lnum" href="#180" name="180">0180</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">separators</span><span class="op">=</span><span class="name">separators</span><span class="op">,</span>&#0160;<span class="name">encoding</span><span class="op">=</span><span class="name">encoding</span><span class="op">,</span><br />
+<a class="lnum" href="#181" name="181">0181</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">default</span><span class="op">=</span><span class="name">default</span><span class="op">,</span>&#0160;<span class="op">**</span><span class="name">kw</span><span class="op">)</span><span class="op">.</span><span class="name">iterencode</span><span class="op">(</span><span class="name">obj</span><span class="op">)</span><br />
+<a class="lnum" href="#182" name="182">0182</a>&#0160;&#0160;&#0160;&#0160;<span class="comment">#&#0160;could&#0160;accelerate&#0160;with&#0160;writelines&#0160;in&#0160;some&#0160;versions&#0160;of&#0160;Python,&#0160;at</span><br />
+<a class="lnum" href="#183" name="183">0183</a><span class="comment"></span>&#0160;&#0160;&#0160;&#0160;<span class="comment">#&#0160;a&#0160;debuggability&#0160;cost</span><br />
+<a class="lnum" href="#184" name="184">0184</a><span class="comment"></span>&#0160;&#0160;&#0160;&#0160;<span class="keyword">for</span>&#0160;<span class="name">chunk</span>&#0160;<span class="keyword">in</span>&#0160;<span class="name">iterable</span><span class="op">:</span><br />
+<a class="lnum" href="#185" name="185">0185</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">fp</span><span class="op">.</span><span class="name">write</span><span class="op">(</span><span class="name">chunk</span><span class="op">)</span><br />
+<a class="lnum" href="#186" name="186">0186</a><br />
+<a class="lnum" href="#187" name="187">0187</a><br />
+<a class="lnum" href="#188" name="188">0188</a><span class="keyword">def</span>&#0160;<span class="name">dumps</span><span class="op">(</span><span class="name">obj</span><span class="op">,</span>&#0160;<span class="name">skipkeys</span><span class="op">=</span><span class="name">False</span><span class="op">,</span>&#0160;<span class="name">ensure_ascii</span><span class="op">=</span><span class="name">True</span><span class="op">,</span>&#0160;<span class="name">check_circular</span><span class="op">=</span><span class="name">True</span><span class="op">,</span><br />
+<a class="lnum" href="#189" name="189">0189</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">allow_nan</span><span class="op">=</span><span class="name">True</span><span class="op">,</span>&#0160;<span class="name">cls</span><span class="op">=</span><span class="name">None</span><span class="op">,</span>&#0160;<span class="name">indent</span><span class="op">=</span><span class="name">None</span><span class="op">,</span>&#0160;<span class="name">separators</span><span class="op">=</span><span class="name">None</span><span class="op">,</span><br />
+<a class="lnum" href="#190" name="190">0190</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">encoding</span><span class="op">=</span><span class="string">'utf-8'</span><span class="op">,</span>&#0160;<span class="name">default</span><span class="op">=</span><span class="name">None</span><span class="op">,</span>&#0160;<span class="op">**</span><span class="name">kw</span><span class="op">)</span><span class="op">:</span><br />
+<a class="lnum" href="#191" name="191">0191</a>&#0160;&#0160;&#0160;&#0160;<span class="string">"""</span><br />
+<a class="lnum" href="#192" name="192">0192</a><span class="string">&#0160;&#0160;&#0160;&#0160;Serialize&#0160;``obj``&#0160;to&#0160;a&#0160;JSON&#0160;formatted&#0160;``str``.</span><br />
+<a class="lnum" href="#193" name="193">0193</a><span class="string"></span><br />
+<a class="lnum" href="#194" name="194">0194</a><span class="string">&#0160;&#0160;&#0160;&#0160;If&#0160;``skipkeys``&#0160;is&#0160;``True``&#0160;then&#0160;``dict``&#0160;keys&#0160;that&#0160;are&#0160;not&#0160;basic&#0160;types</span><br />
+<a class="lnum" href="#195" name="195">0195</a><span class="string">&#0160;&#0160;&#0160;&#0160;(``str``,&#0160;``unicode``,&#0160;``int``,&#0160;``long``,&#0160;``float``,&#0160;``bool``,&#0160;``None``)&#0160;</span><br />
+<a class="lnum" href="#196" name="196">0196</a><span class="string">&#0160;&#0160;&#0160;&#0160;will&#0160;be&#0160;skipped&#0160;instead&#0160;of&#0160;raising&#0160;a&#0160;``TypeError``.</span><br />
+<a class="lnum" href="#197" name="197">0197</a><span class="string"></span><br />
+<a class="lnum" href="#198" name="198">0198</a><span class="string">&#0160;&#0160;&#0160;&#0160;If&#0160;``ensure_ascii``&#0160;is&#0160;``False``,&#0160;then&#0160;the&#0160;return&#0160;value&#0160;will&#0160;be&#0160;a</span><br />
+<a class="lnum" href="#199" name="199">0199</a><span class="string">&#0160;&#0160;&#0160;&#0160;``unicode``&#0160;instance&#0160;subject&#0160;to&#0160;normal&#0160;Python&#0160;``str``&#0160;to&#0160;``unicode``</span><br />
+<a class="lnum" href="#200" name="200">0200</a><span class="string">&#0160;&#0160;&#0160;&#0160;coercion&#0160;rules&#0160;instead&#0160;of&#0160;being&#0160;escaped&#0160;to&#0160;an&#0160;ASCII&#0160;``str``.</span><br />
+<a class="lnum" href="#201" name="201">0201</a><span class="string"></span><br />
+<a class="lnum" href="#202" name="202">0202</a><span class="string">&#0160;&#0160;&#0160;&#0160;If&#0160;``check_circular``&#0160;is&#0160;``False``,&#0160;then&#0160;the&#0160;circular&#0160;reference&#0160;check</span><br />
+<a class="lnum" href="#203" name="203">0203</a><span class="string">&#0160;&#0160;&#0160;&#0160;for&#0160;container&#0160;types&#0160;will&#0160;be&#0160;skipped&#0160;and&#0160;a&#0160;circular&#0160;reference&#0160;will</span><br />
+<a class="lnum" href="#204" name="204">0204</a><span class="string">&#0160;&#0160;&#0160;&#0160;result&#0160;in&#0160;an&#0160;``OverflowError``&#0160;(or&#0160;worse).</span><br />
+<a class="lnum" href="#205" name="205">0205</a><span class="string"></span><br />
+<a class="lnum" href="#206" name="206">0206</a><span class="string">&#0160;&#0160;&#0160;&#0160;If&#0160;``allow_nan``&#0160;is&#0160;``False``,&#0160;then&#0160;it&#0160;will&#0160;be&#0160;a&#0160;``ValueError``&#0160;to</span><br />
+<a class="lnum" href="#207" name="207">0207</a><span class="string">&#0160;&#0160;&#0160;&#0160;serialize&#0160;out&#0160;of&#0160;range&#0160;``float``&#0160;values&#0160;(``nan``,&#0160;``inf``,&#0160;``-inf``)&#0160;in</span><br />
+<a class="lnum" href="#208" name="208">0208</a><span class="string">&#0160;&#0160;&#0160;&#0160;strict&#0160;compliance&#0160;of&#0160;the&#0160;JSON&#0160;specification,&#0160;instead&#0160;of&#0160;using&#0160;the</span><br />
+<a class="lnum" href="#209" name="209">0209</a><span class="string">&#0160;&#0160;&#0160;&#0160;JavaScript&#0160;equivalents&#0160;(``NaN``,&#0160;``Infinity``,&#0160;``-Infinity``).</span><br />
+<a class="lnum" href="#210" name="210">0210</a><span class="string"></span><br />
+<a class="lnum" href="#211" name="211">0211</a><span class="string">&#0160;&#0160;&#0160;&#0160;If&#0160;``indent``&#0160;is&#0160;a&#0160;non-negative&#0160;integer,&#0160;then&#0160;JSON&#0160;array&#0160;elements&#0160;and</span><br />
+<a class="lnum" href="#212" name="212">0212</a><span class="string">&#0160;&#0160;&#0160;&#0160;object&#0160;members&#0160;will&#0160;be&#0160;pretty-printed&#0160;with&#0160;that&#0160;indent&#0160;level.&#0160;An&#0160;indent</span><br />
+<a class="lnum" href="#213" name="213">0213</a><span class="string">&#0160;&#0160;&#0160;&#0160;level&#0160;of&#0160;0&#0160;will&#0160;only&#0160;insert&#0160;newlines.&#0160;``None``&#0160;is&#0160;the&#0160;most&#0160;compact</span><br />
+<a class="lnum" href="#214" name="214">0214</a><span class="string">&#0160;&#0160;&#0160;&#0160;representation.</span><br />
+<a class="lnum" href="#215" name="215">0215</a><span class="string"></span><br />
+<a class="lnum" href="#216" name="216">0216</a><span class="string">&#0160;&#0160;&#0160;&#0160;If&#0160;``separators``&#0160;is&#0160;an&#0160;``(item_separator,&#0160;dict_separator)``&#0160;tuple</span><br />
+<a class="lnum" href="#217" name="217">0217</a><span class="string">&#0160;&#0160;&#0160;&#0160;then&#0160;it&#0160;will&#0160;be&#0160;used&#0160;instead&#0160;of&#0160;the&#0160;default&#0160;``(',&#0160;',&#0160;':&#0160;')``&#0160;separators.</span><br />
+<a class="lnum" href="#218" name="218">0218</a><span class="string">&#0160;&#0160;&#0160;&#0160;``(',',&#0160;':')``&#0160;is&#0160;the&#0160;most&#0160;compact&#0160;JSON&#0160;representation.</span><br />
+<a class="lnum" href="#219" name="219">0219</a><span class="string"></span><br />
+<a class="lnum" href="#220" name="220">0220</a><span class="string">&#0160;&#0160;&#0160;&#0160;``encoding``&#0160;is&#0160;the&#0160;character&#0160;encoding&#0160;for&#0160;str&#0160;instances,&#0160;default&#0160;is&#0160;UTF-8.</span><br />
+<a class="lnum" href="#221" name="221">0221</a><span class="string"></span><br />
+<a class="lnum" href="#222" name="222">0222</a><span class="string">&#0160;&#0160;&#0160;&#0160;``default(obj)``&#0160;is&#0160;a&#0160;function&#0160;that&#0160;should&#0160;return&#0160;a&#0160;serializable&#0160;version</span><br />
+<a class="lnum" href="#223" name="223">0223</a><span class="string">&#0160;&#0160;&#0160;&#0160;of&#0160;obj&#0160;or&#0160;raise&#0160;TypeError.&#0160;The&#0160;default&#0160;simply&#0160;raises&#0160;TypeError.</span><br />
+<a class="lnum" href="#224" name="224">0224</a><span class="string"></span><br />
+<a class="lnum" href="#225" name="225">0225</a><span class="string">&#0160;&#0160;&#0160;&#0160;To&#0160;use&#0160;a&#0160;custom&#0160;``JSONEncoder``&#0160;subclass&#0160;(e.g.&#0160;one&#0160;that&#0160;overrides&#0160;the</span><br />
+<a class="lnum" href="#226" name="226">0226</a><span class="string">&#0160;&#0160;&#0160;&#0160;``.default()``&#0160;method&#0160;to&#0160;serialize&#0160;additional&#0160;types),&#0160;specify&#0160;it&#0160;with</span><br />
+<a class="lnum" href="#227" name="227">0227</a><span class="string">&#0160;&#0160;&#0160;&#0160;the&#0160;``cls``&#0160;kwarg.</span><br />
+<a class="lnum" href="#228" name="228">0228</a><span class="string">&#0160;&#0160;&#0160;&#0160;"""</span><br />
+<a class="lnum" href="#229" name="229">0229</a>&#0160;&#0160;&#0160;&#0160;<span class="comment">#&#0160;cached&#0160;encoder</span><br />
+<a class="lnum" href="#230" name="230">0230</a><span class="comment"></span>&#0160;&#0160;&#0160;&#0160;<span class="keyword">if</span>&#0160;<span class="op">(</span><span class="name">skipkeys</span>&#0160;<span class="keyword">is</span>&#0160;<span class="name">False</span>&#0160;<span class="keyword">and</span>&#0160;<span class="name">ensure_ascii</span>&#0160;<span class="keyword">is</span>&#0160;<span class="name">True</span>&#0160;<span class="keyword">and</span><br />
+<a class="lnum" href="#231" name="231">0231</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">check_circular</span>&#0160;<span class="keyword">is</span>&#0160;<span class="name">True</span>&#0160;<span class="keyword">and</span>&#0160;<span class="name">allow_nan</span>&#0160;<span class="keyword">is</span>&#0160;<span class="name">True</span>&#0160;<span class="keyword">and</span><br />
+<a class="lnum" href="#232" name="232">0232</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">cls</span>&#0160;<span class="keyword">is</span>&#0160;<span class="name">None</span>&#0160;<span class="keyword">and</span>&#0160;<span class="name">indent</span>&#0160;<span class="keyword">is</span>&#0160;<span class="name">None</span>&#0160;<span class="keyword">and</span>&#0160;<span class="name">separators</span>&#0160;<span class="keyword">is</span>&#0160;<span class="name">None</span>&#0160;<span class="keyword">and</span><br />
+<a class="lnum" href="#233" name="233">0233</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">encoding</span>&#0160;<span class="op">==</span>&#0160;<span class="string">'utf-8'</span>&#0160;<span class="keyword">and</span>&#0160;<span class="name">default</span>&#0160;<span class="keyword">is</span>&#0160;<span class="name">None</span>&#0160;<span class="keyword">and</span>&#0160;<span class="keyword">not</span>&#0160;<span class="name">kw</span><span class="op">)</span><span class="op">:</span><br />
+<a class="lnum" href="#234" name="234">0234</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="keyword">return</span>&#0160;<span class="name">_default_encoder</span><span class="op">.</span><span class="name">encode</span><span class="op">(</span><span class="name">obj</span><span class="op">)</span><br />
+<a class="lnum" href="#235" name="235">0235</a>&#0160;&#0160;&#0160;&#0160;<span class="keyword">if</span>&#0160;<span class="name">cls</span>&#0160;<span class="keyword">is</span>&#0160;<span class="name">None</span><span class="op">:</span><br />
+<a class="lnum" href="#236" name="236">0236</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">cls</span>&#0160;<span class="op">=</span>&#0160;<span class="name">JSONEncoder</span><br />
+<a class="lnum" href="#237" name="237">0237</a>&#0160;&#0160;&#0160;&#0160;<span class="keyword">return</span>&#0160;<span class="name">cls</span><span class="op">(</span><br />
+<a class="lnum" href="#238" name="238">0238</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">skipkeys</span><span class="op">=</span><span class="name">skipkeys</span><span class="op">,</span>&#0160;<span class="name">ensure_ascii</span><span class="op">=</span><span class="name">ensure_ascii</span><span class="op">,</span><br />
+<a class="lnum" href="#239" name="239">0239</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">check_circular</span><span class="op">=</span><span class="name">check_circular</span><span class="op">,</span>&#0160;<span class="name">allow_nan</span><span class="op">=</span><span class="name">allow_nan</span><span class="op">,</span>&#0160;<span class="name">indent</span><span class="op">=</span><span class="name">indent</span><span class="op">,</span><br />
+<a class="lnum" href="#240" name="240">0240</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">separators</span><span class="op">=</span><span class="name">separators</span><span class="op">,</span>&#0160;<span class="name">encoding</span><span class="op">=</span><span class="name">encoding</span><span class="op">,</span>&#0160;<span class="name">default</span><span class="op">=</span><span class="name">default</span><span class="op">,</span><br />
+<a class="lnum" href="#241" name="241">0241</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="op">**</span><span class="name">kw</span><span class="op">)</span><span class="op">.</span><span class="name">encode</span><span class="op">(</span><span class="name">obj</span><span class="op">)</span><br />
+<a class="lnum" href="#242" name="242">0242</a><br />
+<a class="lnum" href="#243" name="243">0243</a><br />
+<a class="lnum" href="#244" name="244">0244</a><span class="name">_default_decoder</span>&#0160;<span class="op">=</span>&#0160;<span class="name">JSONDecoder</span><span class="op">(</span><span class="name">encoding</span><span class="op">=</span><span class="name">None</span><span class="op">,</span>&#0160;<span class="name">object_hook</span><span class="op">=</span><span class="name">None</span><span class="op">)</span><br />
+<a class="lnum" href="#245" name="245">0245</a><br />
+<a class="lnum" href="#246" name="246">0246</a><br />
+<a class="lnum" href="#247" name="247">0247</a><span class="keyword">def</span>&#0160;<span class="name">load</span><span class="op">(</span><span class="name">fp</span><span class="op">,</span>&#0160;<span class="name">encoding</span><span class="op">=</span><span class="name">None</span><span class="op">,</span>&#0160;<span class="name">cls</span><span class="op">=</span><span class="name">None</span><span class="op">,</span>&#0160;<span class="name">object_hook</span><span class="op">=</span><span class="name">None</span><span class="op">,</span>&#0160;<span class="name">parse_float</span><span class="op">=</span><span class="name">None</span><span class="op">,</span><br />
+<a class="lnum" href="#248" name="248">0248</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">parse_int</span><span class="op">=</span><span class="name">None</span><span class="op">,</span>&#0160;<span class="name">parse_constant</span><span class="op">=</span><span class="name">None</span><span class="op">,</span>&#0160;<span class="op">**</span><span class="name">kw</span><span class="op">)</span><span class="op">:</span><br />
+<a class="lnum" href="#249" name="249">0249</a>&#0160;&#0160;&#0160;&#0160;<span class="string">"""</span><br />
+<a class="lnum" href="#250" name="250">0250</a><span class="string">&#0160;&#0160;&#0160;&#0160;Deserialize&#0160;``fp``&#0160;(a&#0160;``.read()``-supporting&#0160;file-like&#0160;object&#0160;containing</span><br />
+<a class="lnum" href="#251" name="251">0251</a><span class="string">&#0160;&#0160;&#0160;&#0160;a&#0160;JSON&#0160;document)&#0160;to&#0160;a&#0160;Python&#0160;object.</span><br />
+<a class="lnum" href="#252" name="252">0252</a><span class="string"></span><br />
+<a class="lnum" href="#253" name="253">0253</a><span class="string">&#0160;&#0160;&#0160;&#0160;If&#0160;the&#0160;contents&#0160;of&#0160;``fp``&#0160;is&#0160;encoded&#0160;with&#0160;an&#0160;ASCII&#0160;based&#0160;encoding&#0160;other</span><br />
+<a class="lnum" href="#254" name="254">0254</a><span class="string">&#0160;&#0160;&#0160;&#0160;than&#0160;utf-8&#0160;(e.g.&#0160;latin-1),&#0160;then&#0160;an&#0160;appropriate&#0160;``encoding``&#0160;name&#0160;must</span><br />
+<a class="lnum" href="#255" name="255">0255</a><span class="string">&#0160;&#0160;&#0160;&#0160;be&#0160;specified.&#0160;Encodings&#0160;that&#0160;are&#0160;not&#0160;ASCII&#0160;based&#0160;(such&#0160;as&#0160;UCS-2)&#0160;are</span><br />
+<a class="lnum" href="#256" name="256">0256</a><span class="string">&#0160;&#0160;&#0160;&#0160;not&#0160;allowed,&#0160;and&#0160;should&#0160;be&#0160;wrapped&#0160;with</span><br />
+<a class="lnum" href="#257" name="257">0257</a><span class="string">&#0160;&#0160;&#0160;&#0160;``codecs.getreader(fp)(encoding)``,&#0160;or&#0160;simply&#0160;decoded&#0160;to&#0160;a&#0160;``unicode``</span><br />
+<a class="lnum" href="#258" name="258">0258</a><span class="string">&#0160;&#0160;&#0160;&#0160;object&#0160;and&#0160;passed&#0160;to&#0160;``loads()``</span><br />
+<a class="lnum" href="#259" name="259">0259</a><span class="string"></span><br />
+<a class="lnum" href="#260" name="260">0260</a><span class="string">&#0160;&#0160;&#0160;&#0160;``object_hook``&#0160;is&#0160;an&#0160;optional&#0160;function&#0160;that&#0160;will&#0160;be&#0160;called&#0160;with&#0160;the</span><br />
+<a class="lnum" href="#261" name="261">0261</a><span class="string">&#0160;&#0160;&#0160;&#0160;result&#0160;of&#0160;any&#0160;object&#0160;literal&#0160;decode&#0160;(a&#0160;``dict``).&#0160;The&#0160;return&#0160;value&#0160;of</span><br />
+<a class="lnum" href="#262" name="262">0262</a><span class="string">&#0160;&#0160;&#0160;&#0160;``object_hook``&#0160;will&#0160;be&#0160;used&#0160;instead&#0160;of&#0160;the&#0160;``dict``.&#0160;This&#0160;feature</span><br />
+<a class="lnum" href="#263" name="263">0263</a><span class="string">&#0160;&#0160;&#0160;&#0160;can&#0160;be&#0160;used&#0160;to&#0160;implement&#0160;custom&#0160;decoders&#0160;(e.g.&#0160;JSON-RPC&#0160;class&#0160;hinting).</span><br />
+<a class="lnum" href="#264" name="264">0264</a><span class="string">&#0160;&#0160;&#0160;&#0160;</span><br />
+<a class="lnum" href="#265" name="265">0265</a><span class="string">&#0160;&#0160;&#0160;&#0160;To&#0160;use&#0160;a&#0160;custom&#0160;``JSONDecoder``&#0160;subclass,&#0160;specify&#0160;it&#0160;with&#0160;the&#0160;``cls``</span><br />
+<a class="lnum" href="#266" name="266">0266</a><span class="string">&#0160;&#0160;&#0160;&#0160;kwarg.</span><br />
+<a class="lnum" href="#267" name="267">0267</a><span class="string">&#0160;&#0160;&#0160;&#0160;"""</span><br />
+<a class="lnum" href="#268" name="268">0268</a>&#0160;&#0160;&#0160;&#0160;<span class="keyword">return</span>&#0160;<span class="name">loads</span><span class="op">(</span><span class="name">fp</span><span class="op">.</span><span class="name">read</span><span class="op">(</span><span class="op">)</span><span class="op">,</span><br />
+<a class="lnum" href="#269" name="269">0269</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">encoding</span><span class="op">=</span><span class="name">encoding</span><span class="op">,</span>&#0160;<span class="name">cls</span><span class="op">=</span><span class="name">cls</span><span class="op">,</span>&#0160;<span class="name">object_hook</span><span class="op">=</span><span class="name">object_hook</span><span class="op">,</span><br />
+<a class="lnum" href="#270" name="270">0270</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">parse_float</span><span class="op">=</span><span class="name">parse_float</span><span class="op">,</span>&#0160;<span class="name">parse_int</span><span class="op">=</span><span class="name">parse_int</span><span class="op">,</span><br />
+<a class="lnum" href="#271" name="271">0271</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">parse_constant</span><span class="op">=</span><span class="name">parse_constant</span><span class="op">,</span>&#0160;<span class="op">**</span><span class="name">kw</span><span class="op">)</span><br />
+<a class="lnum" href="#272" name="272">0272</a><br />
+<a class="lnum" href="#273" name="273">0273</a><br />
+<a class="lnum" href="#274" name="274">0274</a><span class="keyword">def</span>&#0160;<span class="name">loads</span><span class="op">(</span><span class="name">s</span><span class="op">,</span>&#0160;<span class="name">encoding</span><span class="op">=</span><span class="name">None</span><span class="op">,</span>&#0160;<span class="name">cls</span><span class="op">=</span><span class="name">None</span><span class="op">,</span>&#0160;<span class="name">object_hook</span><span class="op">=</span><span class="name">None</span><span class="op">,</span>&#0160;<span class="name">parse_float</span><span class="op">=</span><span class="name">None</span><span class="op">,</span><br />
+<a class="lnum" href="#275" name="275">0275</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">parse_int</span><span class="op">=</span><span class="name">None</span><span class="op">,</span>&#0160;<span class="name">parse_constant</span><span class="op">=</span><span class="name">None</span><span class="op">,</span>&#0160;<span class="op">**</span><span class="name">kw</span><span class="op">)</span><span class="op">:</span><br />
+<a class="lnum" href="#276" name="276">0276</a>&#0160;&#0160;&#0160;&#0160;<span class="string">"""</span><br />
+<a class="lnum" href="#277" name="277">0277</a><span class="string">&#0160;&#0160;&#0160;&#0160;Deserialize&#0160;``s``&#0160;(a&#0160;``str``&#0160;or&#0160;``unicode``&#0160;instance&#0160;containing&#0160;a&#0160;JSON</span><br />
+<a class="lnum" href="#278" name="278">0278</a><span class="string">&#0160;&#0160;&#0160;&#0160;document)&#0160;to&#0160;a&#0160;Python&#0160;object.</span><br />
+<a class="lnum" href="#279" name="279">0279</a><span class="string"></span><br />
+<a class="lnum" href="#280" name="280">0280</a><span class="string">&#0160;&#0160;&#0160;&#0160;If&#0160;``s``&#0160;is&#0160;a&#0160;``str``&#0160;instance&#0160;and&#0160;is&#0160;encoded&#0160;with&#0160;an&#0160;ASCII&#0160;based&#0160;encoding</span><br />
+<a class="lnum" href="#281" name="281">0281</a><span class="string">&#0160;&#0160;&#0160;&#0160;other&#0160;than&#0160;utf-8&#0160;(e.g.&#0160;latin-1)&#0160;then&#0160;an&#0160;appropriate&#0160;``encoding``&#0160;name</span><br />
+<a class="lnum" href="#282" name="282">0282</a><span class="string">&#0160;&#0160;&#0160;&#0160;must&#0160;be&#0160;specified.&#0160;Encodings&#0160;that&#0160;are&#0160;not&#0160;ASCII&#0160;based&#0160;(such&#0160;as&#0160;UCS-2)</span><br />
+<a class="lnum" href="#283" name="283">0283</a><span class="string">&#0160;&#0160;&#0160;&#0160;are&#0160;not&#0160;allowed&#0160;and&#0160;should&#0160;be&#0160;decoded&#0160;to&#0160;``unicode``&#0160;first.</span><br />
+<a class="lnum" href="#284" name="284">0284</a><span class="string"></span><br />
+<a class="lnum" href="#285" name="285">0285</a><span class="string">&#0160;&#0160;&#0160;&#0160;``object_hook``&#0160;is&#0160;an&#0160;optional&#0160;function&#0160;that&#0160;will&#0160;be&#0160;called&#0160;with&#0160;the</span><br />
+<a class="lnum" href="#286" name="286">0286</a><span class="string">&#0160;&#0160;&#0160;&#0160;result&#0160;of&#0160;any&#0160;object&#0160;literal&#0160;decode&#0160;(a&#0160;``dict``).&#0160;The&#0160;return&#0160;value&#0160;of</span><br />
+<a class="lnum" href="#287" name="287">0287</a><span class="string">&#0160;&#0160;&#0160;&#0160;``object_hook``&#0160;will&#0160;be&#0160;used&#0160;instead&#0160;of&#0160;the&#0160;``dict``.&#0160;This&#0160;feature</span><br />
+<a class="lnum" href="#288" name="288">0288</a><span class="string">&#0160;&#0160;&#0160;&#0160;can&#0160;be&#0160;used&#0160;to&#0160;implement&#0160;custom&#0160;decoders&#0160;(e.g.&#0160;JSON-RPC&#0160;class&#0160;hinting).</span><br />
+<a class="lnum" href="#289" name="289">0289</a><span class="string"></span><br />
+<a class="lnum" href="#290" name="290">0290</a><span class="string">&#0160;&#0160;&#0160;&#0160;``parse_float``,&#0160;if&#0160;specified,&#0160;will&#0160;be&#0160;called&#0160;with&#0160;the&#0160;string</span><br />
+<a class="lnum" href="#291" name="291">0291</a><span class="string">&#0160;&#0160;&#0160;&#0160;of&#0160;every&#0160;JSON&#0160;float&#0160;to&#0160;be&#0160;decoded.&#0160;By&#0160;default&#0160;this&#0160;is&#0160;equivalent&#0160;to</span><br />
+<a class="lnum" href="#292" name="292">0292</a><span class="string">&#0160;&#0160;&#0160;&#0160;float(num_str).&#0160;This&#0160;can&#0160;be&#0160;used&#0160;to&#0160;use&#0160;another&#0160;datatype&#0160;or&#0160;parser</span><br />
+<a class="lnum" href="#293" name="293">0293</a><span class="string">&#0160;&#0160;&#0160;&#0160;for&#0160;JSON&#0160;floats&#0160;(e.g.&#0160;decimal.Decimal).</span><br />
+<a class="lnum" href="#294" name="294">0294</a><span class="string"></span><br />
+<a class="lnum" href="#295" name="295">0295</a><span class="string">&#0160;&#0160;&#0160;&#0160;``parse_int``,&#0160;if&#0160;specified,&#0160;will&#0160;be&#0160;called&#0160;with&#0160;the&#0160;string</span><br />
+<a class="lnum" href="#296" name="296">0296</a><span class="string">&#0160;&#0160;&#0160;&#0160;of&#0160;every&#0160;JSON&#0160;int&#0160;to&#0160;be&#0160;decoded.&#0160;By&#0160;default&#0160;this&#0160;is&#0160;equivalent&#0160;to</span><br />
+<a class="lnum" href="#297" name="297">0297</a><span class="string">&#0160;&#0160;&#0160;&#0160;int(num_str).&#0160;This&#0160;can&#0160;be&#0160;used&#0160;to&#0160;use&#0160;another&#0160;datatype&#0160;or&#0160;parser</span><br />
+<a class="lnum" href="#298" name="298">0298</a><span class="string">&#0160;&#0160;&#0160;&#0160;for&#0160;JSON&#0160;integers&#0160;(e.g.&#0160;float).</span><br />
+<a class="lnum" href="#299" name="299">0299</a><span class="string"></span><br />
+<a class="lnum" href="#300" name="300">0300</a><span class="string">&#0160;&#0160;&#0160;&#0160;``parse_constant``,&#0160;if&#0160;specified,&#0160;will&#0160;be&#0160;called&#0160;with&#0160;one&#0160;of&#0160;the</span><br />
+<a class="lnum" href="#301" name="301">0301</a><span class="string">&#0160;&#0160;&#0160;&#0160;following&#0160;strings:&#0160;-Infinity,&#0160;Infinity,&#0160;NaN,&#0160;null,&#0160;true,&#0160;false.</span><br />
+<a class="lnum" href="#302" name="302">0302</a><span class="string">&#0160;&#0160;&#0160;&#0160;This&#0160;can&#0160;be&#0160;used&#0160;to&#0160;raise&#0160;an&#0160;exception&#0160;if&#0160;invalid&#0160;JSON&#0160;numbers</span><br />
+<a class="lnum" href="#303" name="303">0303</a><span class="string">&#0160;&#0160;&#0160;&#0160;are&#0160;encountered.</span><br />
+<a class="lnum" href="#304" name="304">0304</a><span class="string"></span><br />
+<a class="lnum" href="#305" name="305">0305</a><span class="string">&#0160;&#0160;&#0160;&#0160;To&#0160;use&#0160;a&#0160;custom&#0160;``JSONDecoder``&#0160;subclass,&#0160;specify&#0160;it&#0160;with&#0160;the&#0160;``cls``</span><br />
+<a class="lnum" href="#306" name="306">0306</a><span class="string">&#0160;&#0160;&#0160;&#0160;kwarg.</span><br />
+<a class="lnum" href="#307" name="307">0307</a><span class="string">&#0160;&#0160;&#0160;&#0160;"""</span><br />
+<a class="lnum" href="#308" name="308">0308</a>&#0160;&#0160;&#0160;&#0160;<span class="keyword">if</span>&#0160;<span class="op">(</span><span class="name">cls</span>&#0160;<span class="keyword">is</span>&#0160;<span class="name">None</span>&#0160;<span class="keyword">and</span>&#0160;<span class="name">encoding</span>&#0160;<span class="keyword">is</span>&#0160;<span class="name">None</span>&#0160;<span class="keyword">and</span>&#0160;<span class="name">object_hook</span>&#0160;<span class="keyword">is</span>&#0160;<span class="name">None</span>&#0160;<span class="keyword">and</span><br />
+<a class="lnum" href="#309" name="309">0309</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">parse_int</span>&#0160;<span class="keyword">is</span>&#0160;<span class="name">None</span>&#0160;<span class="keyword">and</span>&#0160;<span class="name">parse_float</span>&#0160;<span class="keyword">is</span>&#0160;<span class="name">None</span>&#0160;<span class="keyword">and</span><br />
+<a class="lnum" href="#310" name="310">0310</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">parse_constant</span>&#0160;<span class="keyword">is</span>&#0160;<span class="name">None</span>&#0160;<span class="keyword">and</span>&#0160;<span class="keyword">not</span>&#0160;<span class="name">kw</span><span class="op">)</span><span class="op">:</span><br />
+<a class="lnum" href="#311" name="311">0311</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="keyword">return</span>&#0160;<span class="name">_default_decoder</span><span class="op">.</span><span class="name">decode</span><span class="op">(</span><span class="name">s</span><span class="op">)</span><br />
+<a class="lnum" href="#312" name="312">0312</a>&#0160;&#0160;&#0160;&#0160;<span class="keyword">if</span>&#0160;<span class="name">cls</span>&#0160;<span class="keyword">is</span>&#0160;<span class="name">None</span><span class="op">:</span><br />
+<a class="lnum" href="#313" name="313">0313</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">cls</span>&#0160;<span class="op">=</span>&#0160;<span class="name">JSONDecoder</span><br />
+<a class="lnum" href="#314" name="314">0314</a>&#0160;&#0160;&#0160;&#0160;<span class="keyword">if</span>&#0160;<span class="name">object_hook</span>&#0160;<span class="keyword">is</span>&#0160;<span class="keyword">not</span>&#0160;<span class="name">None</span><span class="op">:</span><br />
+<a class="lnum" href="#315" name="315">0315</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">kw</span><span class="op">[</span><span class="string">'object_hook'</span><span class="op">]</span>&#0160;<span class="op">=</span>&#0160;<span class="name">object_hook</span><br />
+<a class="lnum" href="#316" name="316">0316</a>&#0160;&#0160;&#0160;&#0160;<span class="keyword">if</span>&#0160;<span class="name">parse_float</span>&#0160;<span class="keyword">is</span>&#0160;<span class="keyword">not</span>&#0160;<span class="name">None</span><span class="op">:</span><br />
+<a class="lnum" href="#317" name="317">0317</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">kw</span><span class="op">[</span><span class="string">'parse_float'</span><span class="op">]</span>&#0160;<span class="op">=</span>&#0160;<span class="name">parse_float</span><br />
+<a class="lnum" href="#318" name="318">0318</a>&#0160;&#0160;&#0160;&#0160;<span class="keyword">if</span>&#0160;<span class="name">parse_int</span>&#0160;<span class="keyword">is</span>&#0160;<span class="keyword">not</span>&#0160;<span class="name">None</span><span class="op">:</span><br />
+<a class="lnum" href="#319" name="319">0319</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">kw</span><span class="op">[</span><span class="string">'parse_int'</span><span class="op">]</span>&#0160;<span class="op">=</span>&#0160;<span class="name">parse_int</span><br />
+<a class="lnum" href="#320" name="320">0320</a>&#0160;&#0160;&#0160;&#0160;<span class="keyword">if</span>&#0160;<span class="name">parse_constant</span>&#0160;<span class="keyword">is</span>&#0160;<span class="keyword">not</span>&#0160;<span class="name">None</span><span class="op">:</span><br />
+<a class="lnum" href="#321" name="321">0321</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">kw</span><span class="op">[</span><span class="string">'parse_constant'</span><span class="op">]</span>&#0160;<span class="op">=</span>&#0160;<span class="name">parse_constant</span><br />
+<a class="lnum" href="#322" name="322">0322</a>&#0160;&#0160;&#0160;&#0160;<span class="keyword">return</span>&#0160;<span class="name">cls</span><span class="op">(</span><span class="name">encoding</span><span class="op">=</span><span class="name">encoding</span><span class="op">,</span>&#0160;<span class="op">**</span><span class="name">kw</span><span class="op">)</span><span class="op">.</span><span class="name">decode</span><span class="op">(</span><span class="name">s</span><span class="op">)</span><br />
+<a class="lnum" href="#323" name="323">0323</a><br />
+<a class="lnum" href="#324" name="324">0324</a><br />
+<a class="lnum" href="#325" name="325">0325</a><span class="comment">#</span><br />
+<a class="lnum" href="#326" name="326">0326</a><span class="comment"></span><span class="comment">#&#0160;Compatibility&#0160;cruft&#0160;from&#0160;other&#0160;libraries</span><br />
+<a class="lnum" href="#327" name="327">0327</a><span class="comment"></span><span class="comment">#</span><br />
+<a class="lnum" href="#328" name="328">0328</a><span class="comment"></span><br />
+<a class="lnum" href="#329" name="329">0329</a><br />
+<a class="lnum" href="#330" name="330">0330</a><span class="keyword">def</span>&#0160;<span class="name">decode</span><span class="op">(</span><span class="name">s</span><span class="op">)</span><span class="op">:</span><br />
+<a class="lnum" href="#331" name="331">0331</a>&#0160;&#0160;&#0160;&#0160;<span class="string">"""</span><br />
+<a class="lnum" href="#332" name="332">0332</a><span class="string">&#0160;&#0160;&#0160;&#0160;demjson,&#0160;python-cjson&#0160;API&#0160;compatibility&#0160;hook.&#0160;Use&#0160;loads(s)&#0160;instead.</span><br />
+<a class="lnum" href="#333" name="333">0333</a><span class="string">&#0160;&#0160;&#0160;&#0160;"""</span><br />
+<a class="lnum" href="#334" name="334">0334</a>&#0160;&#0160;&#0160;&#0160;<span class="keyword">import</span>&#0160;<span class="name">warnings</span><br />
+<a class="lnum" href="#335" name="335">0335</a>&#0160;&#0160;&#0160;&#0160;<span class="name">warnings</span><span class="op">.</span><span class="name">warn</span><span class="op">(</span><span class="string">"simplejson.loads(s)&#0160;should&#0160;be&#0160;used&#0160;instead&#0160;of&#0160;decode(s)"</span><span class="op">,</span><br />
+<a class="lnum" href="#336" name="336">0336</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">DeprecationWarning</span><span class="op">)</span><br />
+<a class="lnum" href="#337" name="337">0337</a>&#0160;&#0160;&#0160;&#0160;<span class="keyword">return</span>&#0160;<span class="name">loads</span><span class="op">(</span><span class="name">s</span><span class="op">)</span><br />
+<a class="lnum" href="#338" name="338">0338</a><br />
+<a class="lnum" href="#339" name="339">0339</a><br />
+<a class="lnum" href="#340" name="340">0340</a><span class="keyword">def</span>&#0160;<span class="name">encode</span><span class="op">(</span><span class="name">obj</span><span class="op">)</span><span class="op">:</span><br />
+<a class="lnum" href="#341" name="341">0341</a>&#0160;&#0160;&#0160;&#0160;<span class="string">"""</span><br />
+<a class="lnum" href="#342" name="342">0342</a><span class="string">&#0160;&#0160;&#0160;&#0160;demjson,&#0160;python-cjson&#0160;compatibility&#0160;hook.&#0160;Use&#0160;dumps(s)&#0160;instead.</span><br />
+<a class="lnum" href="#343" name="343">0343</a><span class="string">&#0160;&#0160;&#0160;&#0160;"""</span><br />
+<a class="lnum" href="#344" name="344">0344</a>&#0160;&#0160;&#0160;&#0160;<span class="keyword">import</span>&#0160;<span class="name">warnings</span><br />
+<a class="lnum" href="#345" name="345">0345</a>&#0160;&#0160;&#0160;&#0160;<span class="name">warnings</span><span class="op">.</span><span class="name">warn</span><span class="op">(</span><span class="string">"simplejson.dumps(s)&#0160;should&#0160;be&#0160;used&#0160;instead&#0160;of&#0160;encode(s)"</span><span class="op">,</span><br />
+<a class="lnum" href="#346" name="346">0346</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">DeprecationWarning</span><span class="op">)</span><br />
+<a class="lnum" href="#347" name="347">0347</a>&#0160;&#0160;&#0160;&#0160;<span class="keyword">return</span>&#0160;<span class="name">dumps</span><span class="op">(</span><span class="name">obj</span><span class="op">)</span><br />
+<a class="lnum" href="#348" name="348">0348</a><br />
+<a class="lnum" href="#349" name="349">0349</a><br />
+<a class="lnum" href="#350" name="350">0350</a><span class="keyword">def</span>&#0160;<span class="name">read</span><span class="op">(</span><span class="name">s</span><span class="op">)</span><span class="op">:</span><br />
+<a class="lnum" href="#351" name="351">0351</a>&#0160;&#0160;&#0160;&#0160;<span class="string">"""</span><br />
+<a class="lnum" href="#352" name="352">0352</a><span class="string">&#0160;&#0160;&#0160;&#0160;jsonlib,&#0160;JsonUtils,&#0160;python-json,&#0160;json-py&#0160;API&#0160;compatibility&#0160;hook.</span><br />
+<a class="lnum" href="#353" name="353">0353</a><span class="string">&#0160;&#0160;&#0160;&#0160;Use&#0160;loads(s)&#0160;instead.</span><br />
+<a class="lnum" href="#354" name="354">0354</a><span class="string">&#0160;&#0160;&#0160;&#0160;"""</span><br />
+<a class="lnum" href="#355" name="355">0355</a>&#0160;&#0160;&#0160;&#0160;<span class="keyword">import</span>&#0160;<span class="name">warnings</span><br />
+<a class="lnum" href="#356" name="356">0356</a>&#0160;&#0160;&#0160;&#0160;<span class="name">warnings</span><span class="op">.</span><span class="name">warn</span><span class="op">(</span><span class="string">"simplejson.loads(s)&#0160;should&#0160;be&#0160;used&#0160;instead&#0160;of&#0160;read(s)"</span><span class="op">,</span><br />
+<a class="lnum" href="#357" name="357">0357</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">DeprecationWarning</span><span class="op">)</span><br />
+<a class="lnum" href="#358" name="358">0358</a>&#0160;&#0160;&#0160;&#0160;<span class="keyword">return</span>&#0160;<span class="name">loads</span><span class="op">(</span><span class="name">s</span><span class="op">)</span><br />
+<a class="lnum" href="#359" name="359">0359</a><br />
+<a class="lnum" href="#360" name="360">0360</a><br />
+<a class="lnum" href="#361" name="361">0361</a><span class="keyword">def</span>&#0160;<span class="name">write</span><span class="op">(</span><span class="name">obj</span><span class="op">)</span><span class="op">:</span><br />
+<a class="lnum" href="#362" name="362">0362</a>&#0160;&#0160;&#0160;&#0160;<span class="string">"""</span><br />
+<a class="lnum" href="#363" name="363">0363</a><span class="string">&#0160;&#0160;&#0160;&#0160;jsonlib,&#0160;JsonUtils,&#0160;python-json,&#0160;json-py&#0160;API&#0160;compatibility&#0160;hook.</span><br />
+<a class="lnum" href="#364" name="364">0364</a><span class="string">&#0160;&#0160;&#0160;&#0160;Use&#0160;dumps(s)&#0160;instead.</span><br />
+<a class="lnum" href="#365" name="365">0365</a><span class="string">&#0160;&#0160;&#0160;&#0160;"""</span><br />
+<a class="lnum" href="#366" name="366">0366</a>&#0160;&#0160;&#0160;&#0160;<span class="keyword">import</span>&#0160;<span class="name">warnings</span><br />
+<a class="lnum" href="#367" name="367">0367</a>&#0160;&#0160;&#0160;&#0160;<span class="name">warnings</span><span class="op">.</span><span class="name">warn</span><span class="op">(</span><span class="string">"simplejson.dumps(s)&#0160;should&#0160;be&#0160;used&#0160;instead&#0160;of&#0160;write(s)"</span><span class="op">,</span><br />
+<a class="lnum" href="#368" name="368">0368</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">DeprecationWarning</span><span class="op">)</span><br />
+<a class="lnum" href="#369" name="369">0369</a>&#0160;&#0160;&#0160;&#0160;<span class="keyword">return</span>&#0160;<span class="name">dumps</span><span class="op">(</span><span class="name">obj</span><span class="op">)</span><br />
+<a class="lnum" href="#370" name="370">0370</a><br />
+<a class="lnum" href="#371" name="371">0371</a><br />
+<a class="lnum" href="#372" name="372">0372</a><span class="comment">#</span><br />
+<a class="lnum" href="#373" name="373">0373</a><span class="comment"></span><span class="comment">#&#0160;Pretty&#0160;printer:</span><br />
+<a class="lnum" href="#374" name="374">0374</a><span class="comment"></span><span class="comment">#&#0160;&#0160;&#0160;&#0160;&#0160;curl&#0160;http://mochikit.com/examples/ajax_tables/domains.json&#0160;|&#0160;python&#0160;-msimplejson</span><br />
+<a class="lnum" href="#375" name="375">0375</a><span class="comment"></span><span class="comment">#</span><br />
+<a class="lnum" href="#376" name="376">0376</a><span class="comment"></span><br />
+<a class="lnum" href="#377" name="377">0377</a><br />
+<a class="lnum" href="#378" name="378">0378</a><span class="keyword">def</span>&#0160;<span class="name">main</span><span class="op">(</span><span class="op">)</span><span class="op">:</span><br />
+<a class="lnum" href="#379" name="379">0379</a>&#0160;&#0160;&#0160;&#0160;<span class="keyword">import</span>&#0160;<span class="name">sys</span><br />
+<a class="lnum" href="#380" name="380">0380</a>&#0160;&#0160;&#0160;&#0160;<span class="keyword">if</span>&#0160;<span class="name">len</span><span class="op">(</span><span class="name">sys</span><span class="op">.</span><span class="name">argv</span><span class="op">)</span>&#0160;<span class="op">==</span>&#0160;<span class="number">1</span><span class="op">:</span><br />
+<a class="lnum" href="#381" name="381">0381</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">infile</span>&#0160;<span class="op">=</span>&#0160;<span class="name">sys</span><span class="op">.</span><span class="name">stdin</span><br />
+<a class="lnum" href="#382" name="382">0382</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">outfile</span>&#0160;<span class="op">=</span>&#0160;<span class="name">sys</span><span class="op">.</span><span class="name">stdout</span><br />
+<a class="lnum" href="#383" name="383">0383</a>&#0160;&#0160;&#0160;&#0160;<span class="keyword">elif</span>&#0160;<span class="name">len</span><span class="op">(</span><span class="name">sys</span><span class="op">.</span><span class="name">argv</span><span class="op">)</span>&#0160;<span class="op">==</span>&#0160;<span class="number">2</span><span class="op">:</span><br />
+<a class="lnum" href="#384" name="384">0384</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">infile</span>&#0160;<span class="op">=</span>&#0160;<span class="name">open</span><span class="op">(</span><span class="name">sys</span><span class="op">.</span><span class="name">argv</span><span class="op">[</span><span class="number">1</span><span class="op">]</span><span class="op">,</span>&#0160;<span class="string">'rb'</span><span class="op">)</span><br />
+<a class="lnum" href="#385" name="385">0385</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">outfile</span>&#0160;<span class="op">=</span>&#0160;<span class="name">sys</span><span class="op">.</span><span class="name">stdout</span><br />
+<a class="lnum" href="#386" name="386">0386</a>&#0160;&#0160;&#0160;&#0160;<span class="keyword">elif</span>&#0160;<span class="name">len</span><span class="op">(</span><span class="name">sys</span><span class="op">.</span><span class="name">argv</span><span class="op">)</span>&#0160;<span class="op">==</span>&#0160;<span class="number">3</span><span class="op">:</span><br />
+<a class="lnum" href="#387" name="387">0387</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">infile</span>&#0160;<span class="op">=</span>&#0160;<span class="name">open</span><span class="op">(</span><span class="name">sys</span><span class="op">.</span><span class="name">argv</span><span class="op">[</span><span class="number">1</span><span class="op">]</span><span class="op">,</span>&#0160;<span class="string">'rb'</span><span class="op">)</span><br />
+<a class="lnum" href="#388" name="388">0388</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">outfile</span>&#0160;<span class="op">=</span>&#0160;<span class="name">open</span><span class="op">(</span><span class="name">sys</span><span class="op">.</span><span class="name">argv</span><span class="op">[</span><span class="number">2</span><span class="op">]</span><span class="op">,</span>&#0160;<span class="string">'wb'</span><span class="op">)</span><br />
+<a class="lnum" href="#389" name="389">0389</a>&#0160;&#0160;&#0160;&#0160;<span class="keyword">else</span><span class="op">:</span><br />
+<a class="lnum" href="#390" name="390">0390</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="keyword">raise</span>&#0160;<span class="name">SystemExit</span><span class="op">(</span><span class="string">"%s&#0160;[infile&#0160;[outfile]]"</span>&#0160;<span class="op">%</span>&#0160;<span class="op">(</span><span class="name">sys</span><span class="op">.</span><span class="name">argv</span><span class="op">[</span><span class="number">0</span><span class="op">]</span><span class="op">,</span><span class="op">)</span><span class="op">)</span><br />
+<a class="lnum" href="#391" name="391">0391</a>&#0160;&#0160;&#0160;&#0160;<span class="keyword">try</span><span class="op">:</span><br />
+<a class="lnum" href="#392" name="392">0392</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="name">obj</span>&#0160;<span class="op">=</span>&#0160;<span class="name">load</span><span class="op">(</span><span class="name">infile</span><span class="op">)</span><br />
+<a class="lnum" href="#393" name="393">0393</a>&#0160;&#0160;&#0160;&#0160;<span class="keyword">except</span>&#0160;<span class="name">ValueError</span><span class="op">,</span>&#0160;<span class="name">e</span><span class="op">:</span><br />
+<a class="lnum" href="#394" name="394">0394</a>&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;&#0160;<span class="keyword">raise</span>&#0160;<span class="name">SystemExit</span><span class="op">(</span><span class="name">e</span><span class="op">)</span><br />
+<a class="lnum" href="#395" name="395">0395</a>&#0160;&#0160;&#0160;&#0160;<span class="name">dump</span><span class="op">(</span><span class="name">obj</span><span class="op">,</span>&#0160;<span class="name">outfile</span><span class="op">,</span>&#0160;<span class="name">sort_keys</span><span class="op">=</span><span class="name">True</span><span class="op">,</span>&#0160;<span class="name">indent</span><span class="op">=</span><span class="number">4</span><span class="op">)</span><br />
+<a class="lnum" href="#396" name="396">0396</a>&#0160;&#0160;&#0160;&#0160;<span class="name">outfile</span><span class="op">.</span><span class="name">write</span><span class="op">(</span><span class="string">'\n'</span><span class="op">)</span><br />
+<a class="lnum" href="#397" name="397">0397</a><br />
+<a class="lnum" href="#398" name="398">0398</a><br />
+<a class="lnum" href="#399" name="399">0399</a><span class="keyword">if</span>&#0160;<span class="name">__name__</span>&#0160;<span class="op">==</span>&#0160;<span class="string">'__main__'</span><span class="op">:</span><br />
+<a class="lnum" href="#400" name="400">0400</a>&#0160;&#0160;&#0160;&#0160;<span class="name">main</span><span class="op">(</span><span class="op">)</span></code></div></body></html>

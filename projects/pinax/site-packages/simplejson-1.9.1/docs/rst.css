@@ -1,0 +1,142 @@
+/* Headings
+   ------------------------------- */
+
+.rst h1 { font-size: 110% }
+.rst h2 { font-size: 100% }
+
+/*.rst-doc h1 { font-size: 200% }
+.rst-doc h2 { font-size: 140% }
+.rst-doc h3 { font-size: 110% }*/
+.rst-doc h1.title { font-size: 220% }
+.rst-doc h1 a, .rst-doc h2 a, .rst-doc h3 a { 
+  color: inherit ;
+  font-weight: inherit;
+  text-decoration: inherit;
+}
+
+/* Blockquotes
+   ------------------------------- */
+
+.rst blockquote,
+.rst-doc blockquote { 
+  font-style: italic;
+  font-family: Georgia, serif;
+  max-width: 30em;
+}
+
+/* Document Info
+   ------------------------------- */
+.rst-doc table.docinfo { 
+  margin: 2em 0 
+  width: 100%;
+}
+.rst-doc table.docinfo th { 
+  text-align: left ;
+  padding-right: 2em;
+  color: #555;
+}
+.rst-doc table.docinfo td { 
+  text-align: left
+}
+
+/* Field Lists 
+   ------------------------------- */
+
+.rst table.field-list, 
+.rst-doc table.field-list { 
+  border: 0;
+  margin-left: 0;
+}
+.rst table.field-list ul,
+.rst-doc table.field-list ul { 
+  margin-left: 0;
+}
+.rst-doc table.field-list ul { 
+  border: 0;
+  margin-left: 2em;
+  background: #fff;
+  color: #119;
+}
+
+/* Tables
+   ------------------------------- */
+
+.rst table.docutils,
+.rst-doc table.docutils { 
+  border: 0;
+}
+.rst table.docutils th,
+.rst-doc table.docutils th { 
+  border: 0;
+  background: #777;
+  color: #fff;
+  padding: 3px;
+}
+.rst table.docutils td,
+.rst-doc table.docutils td { 
+  border: 0;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 2px;
+}
+
+/* Contents and Back References
+   ------------------------------- */
+
+.rst-doc div.contents { 
+  margin: 2em inherit;
+}
+.rst-doc div.contents ul { 
+  margin-left: 0;
+  padding-left: 2em;
+  line-height: 150%;
+}
+.rst-doc div.contents ul li { 
+  font-weight: bold;
+  list-style-type: none;
+} 
+.rst-doc div.contents p.topic-title {
+  font-size: 160%;
+  font-weight: normal;
+  color: #555;
+  margin-top: .5em;
+}
+.rst-doc .contents .reference,
+.rst-doc .toc-backref { 
+  text-decoration: none;
+}
+
+/* Admonitions
+   ------------------------------- */
+
+.rst-doc div.admonition,
+.rst-doc div.warning,
+.rst-doc div.note { 
+  margin: 2.5em 6em;
+  padding: .6em 2.5em;
+  background: #ddf;
+  border: 2px solid #ccc;
+  font-family: Georgia, serif;
+  color: #333;
+}
+.rst-doc div.warning { 
+  background: #ff8;
+  border-color: #fe2;
+}
+.rst-doc div .admonition-title { 
+  font-weight: bold;
+  font-style: italic;
+  color: #223;
+  font-size: 110%;
+  font-family: sans-serif;
+}
+
+/* Misc
+   ------------------------------- */
+
+tt.literal { 
+  color: #333;
+}
+.footnote-reference { 
+  vertical-align: super;
+  font-size: 20%;
+}

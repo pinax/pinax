@@ -1,0 +1,484 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+  
+  <HEAD><META CONTENT="text/html; charset=utf-8" HTTP-EQUIV="Content-Type">
+    <TITLE>simplejson -- A simple, fast, extensible JSON encoder and decoder</TITLE>
+    <LINK HREF="layout.css" TYPE="text/css" REL="stylesheet">
+  </HEAD>
+  <BODY>
+    <DIV ID="page">
+      
+    <DIV ID="top-nav">
+        <H1 ID="doc-title"><A HREF="index.html" REL="index">simplejson 1.9</A></H1>
+        <DIV CLASS="online-navigation">
+          <A HREF="index.html" REL="index">index</A>
+          <SPAN ID="nav-docs">
+            
+          </SPAN>
+          
+          
+
+          <BR>
+
+          <A HREF="module-simplejson.html" TITLE="simplejson reference">
+            simplejson
+          </A>
+
+          
+            
+            <A HREF="module-simplejson.html">details</A>
+            
+            <A HREF="module-simplejson-index.html">
+              tree
+            </A>
+            
+          
+        </DIV>
+    </DIV>
+    
+    <DIV ID="main-content">
+  
+  <H1 CLASS="pudge-member-page-heading">
+    <TT>simplejson</TT>
+  </H1>
+  <H4 CLASS="pudge-member-page-subheading">
+    A simple, fast, extensible JSON encoder and decoder
+  </H4>
+  
+  <DIV ID="pudge-section-nav">
+  <UL>
+    <LI>
+      
+      <SPAN CLASS="pudge-missing-section-link">
+        Attributes
+      </SPAN>
+    </LI><LI>
+      <A HREF="#functions" CLASS="pudge-section-link">
+        Functions (4)
+      </A>
+      
+    </LI><LI>
+      <A HREF="#classes" CLASS="pudge-section-link">
+        Classes (2)
+      </A>
+      
+    </LI><LI>
+      
+      <SPAN CLASS="pudge-missing-section-link">
+        Modules
+      </SPAN>
+    </LI>
+    <LI>
+      <A HREF="module-simplejson-index.html" CLASS="pudge-section-link">
+        Index
+      </A>
+    </LI>
+    <LI>
+      <A HREF="simplejson/__init__.py.html" CLASS="pudge-section-link">
+        Source
+      </A>
+    </LI>
+  </UL>
+  </DIV>
+  <DIV STYLE="clear: left"></DIV>
+  <DIV CLASS="rst pudge-module-doc">
+    <P>JSON (JavaScript Object Notation) &lt;<A HREF="http://json.org" CLASS="reference">http://json.org</A>> is a subset of
+JavaScript syntax (ECMA-262 3rd edition) used as a lightweight data
+interchange format.</P>
+<P>simplejson exposes an API familiar to uses of the standard library
+marshal and pickle modules.</P>
+<P>Encoding basic Python object hierarchies:</P>
+<PRE CLASS="literal-block">
+>>> import simplejson
+>>> simplejson.dumps(['foo', {'bar': ('baz', None, 1.0, 2)}])
+'["foo", {"bar": ["baz", null, 1.0, 2]}]'
+>>> print simplejson.dumps("\"foo\bar")
+"\"foo\bar"
+>>> print simplejson.dumps(u'\u1234')
+"\u1234"
+>>> print simplejson.dumps('\\')
+"\\"
+>>> print simplejson.dumps({"c": 0, "b": 0, "a": 0}, sort_keys=True)
+{"a": 0, "b": 0, "c": 0}
+>>> from StringIO import StringIO
+>>> io = StringIO()
+>>> simplejson.dump(['streaming API'], io)
+>>> io.getvalue()
+'["streaming API"]'
+</PRE>
+<P>Compact encoding:</P>
+<PRE CLASS="literal-block">
+>>> import simplejson
+>>> simplejson.dumps([1,2,3,{'4': 5, '6': 7}], separators=(',',':'))
+'[1,2,3,{"4":5,"6":7}]'
+</PRE>
+<P>Pretty printing:</P>
+<PRE CLASS="literal-block">
+>>> import simplejson
+>>> print simplejson.dumps({'4': 5, '6': 7}, sort_keys=True, indent=4)
+{
+    "4": 5,
+    "6": 7
+}
+</PRE>
+<P>Decoding JSON:</P>
+<PRE CLASS="literal-block">
+>>> import simplejson
+>>> simplejson.loads('["foo", {"bar":["baz", null, 1.0, 2]}]')
+[u'foo', {u'bar': [u'baz', None, 1.0, 2]}]
+>>> simplejson.loads('"\\"foo\\bar"')
+u'"foo\x08ar'
+>>> from StringIO import StringIO
+>>> io = StringIO('["streaming API"]')
+>>> simplejson.load(io)
+[u'streaming API']
+</PRE>
+<P>Specializing JSON object decoding:</P>
+<PRE CLASS="literal-block">
+>>> import simplejson
+>>> def as_complex(dct):
+...     if '__complex__' in dct:
+...         return complex(dct['real'], dct['imag'])
+...     return dct
+...
+>>> simplejson.loads('{"__complex__": true, "real": 1, "imag": 2}',
+...     object_hook=as_complex)
+(1+2j)
+>>> import decimal
+>>> simplejson.loads('1.1', parse_float=decimal.Decimal)
+Decimal("1.1")
+</PRE>
+<P>Extending JSONEncoder:</P>
+<PRE CLASS="literal-block">
+>>> import simplejson
+>>> class ComplexEncoder(simplejson.JSONEncoder):
+...     def default(self, obj):
+...         if isinstance(obj, complex):
+...             return [obj.real, obj.imag]
+...         return simplejson.JSONEncoder.default(self, obj)
+...
+>>> dumps(2 + 1j, cls=ComplexEncoder)
+'[2.0, 1.0]'
+>>> ComplexEncoder().encode(2 + 1j)
+'[2.0, 1.0]'
+>>> list(ComplexEncoder().iterencode(2 + 1j))
+['[', '2.0', ', ', '1.0', ']']
+</PRE>
+<P>Using simplejson from the shell to validate and
+pretty-print:</P>
+<PRE CLASS="literal-block">
+$ echo '{"json":"obj"}' | python -msimplejson
+{
+    "json": "obj"
+}
+$ echo '{ 1.2:3.4}' | python -msimplejson
+Expecting property name: line 1 column 2 (char 2)
+</PRE>
+<P>Note that the JSON produced by this module's default settings
+is a subset of YAML, so it may be used as a serializer for that as well.</P>
+
+  </DIV>
+  
+  <HR>
+  
+  
+    <A NAME="functions"></A>
+    <H2>Functions</H2>
+    <DIV CLASS="pudge-member routine ">
+    <A NAME="dump"></A>
+    <H4 CLASS="pudge-member-name"><SPAN CLASS="prefix">f</SPAN>
+      <TT><A HREF="module-simplejson.html#dump" CLASS="pudge-obj-link">dump</A>(obj, fp, skipkeys=False, ensure_ascii=True, check_circular=True, allow_nan=True, cls=None, indent=None, separators=None, encoding='utf-8', default=None, **kw)</TT>
+      <A HREF="simplejson/__init__.py.html?f=126&amp;l=186#126" TITLE="View Source">...</A>
+    </H4>
+    <DIV CLASS="pudge-section rst">
+      
+    <P CLASS="pudge-member-blurb">
+      Serialize <TT CLASS="docutils literal"><SPAN CLASS="pre">obj</SPAN></TT> as a JSON formatted stream to <TT CLASS="docutils literal"><SPAN CLASS="pre">fp</SPAN></TT> (a
+<TT CLASS="docutils literal"><SPAN CLASS="pre">.write()</SPAN></TT>-supporting file-like object).
+    </P>
+    <P>If <TT CLASS="docutils literal"><SPAN CLASS="pre">skipkeys</SPAN></TT> is <TT CLASS="docutils literal"><SPAN CLASS="pre">True</SPAN></TT> then <TT CLASS="docutils literal"><SPAN CLASS="pre">dict</SPAN></TT> keys that are not basic types
+(<TT CLASS="docutils literal"><SPAN CLASS="pre">str</SPAN></TT>, <TT CLASS="docutils literal"><SPAN CLASS="pre">unicode</SPAN></TT>, <TT CLASS="docutils literal"><SPAN CLASS="pre">int</SPAN></TT>, <TT CLASS="docutils literal"><SPAN CLASS="pre">long</SPAN></TT>, <TT CLASS="docutils literal"><SPAN CLASS="pre">float</SPAN></TT>, <TT CLASS="docutils literal"><SPAN CLASS="pre">bool</SPAN></TT>, <TT CLASS="docutils literal"><SPAN CLASS="pre">None</SPAN></TT>)
+will be skipped instead of raising a <TT CLASS="docutils literal"><SPAN CLASS="pre">TypeError</SPAN></TT>.</P>
+<P>If <TT CLASS="docutils literal"><SPAN CLASS="pre">ensure_ascii</SPAN></TT> is <TT CLASS="docutils literal"><SPAN CLASS="pre">False</SPAN></TT>, then the some chunks written to <TT CLASS="docutils literal"><SPAN CLASS="pre">fp</SPAN></TT>
+may be <TT CLASS="docutils literal"><SPAN CLASS="pre">unicode</SPAN></TT> instances, subject to normal Python <TT CLASS="docutils literal"><SPAN CLASS="pre">str</SPAN></TT> to
+<TT CLASS="docutils literal"><SPAN CLASS="pre">unicode</SPAN></TT> coercion rules. Unless <TT CLASS="docutils literal"><SPAN CLASS="pre">fp.write()</SPAN></TT> explicitly
+understands <TT CLASS="docutils literal"><SPAN CLASS="pre">unicode</SPAN></TT> (as in <TT CLASS="docutils literal"><SPAN CLASS="pre">codecs.getwriter()</SPAN></TT>) this is likely
+to cause an error.</P>
+<P>If <TT CLASS="docutils literal"><SPAN CLASS="pre">check_circular</SPAN></TT> is <TT CLASS="docutils literal"><SPAN CLASS="pre">False</SPAN></TT>, then the circular reference check
+for container types will be skipped and a circular reference will
+result in an <TT CLASS="docutils literal"><SPAN CLASS="pre">OverflowError</SPAN></TT> (or worse).</P>
+<P>If <TT CLASS="docutils literal"><SPAN CLASS="pre">allow_nan</SPAN></TT> is <TT CLASS="docutils literal"><SPAN CLASS="pre">False</SPAN></TT>, then it will be a <TT CLASS="docutils literal"><SPAN CLASS="pre">ValueError</SPAN></TT> to
+serialize out of range <TT CLASS="docutils literal"><SPAN CLASS="pre">float</SPAN></TT> values (<TT CLASS="docutils literal"><SPAN CLASS="pre">nan</SPAN></TT>, <TT CLASS="docutils literal"><SPAN CLASS="pre">inf</SPAN></TT>, <TT CLASS="docutils literal"><SPAN CLASS="pre">-inf</SPAN></TT>)
+in strict compliance of the JSON specification, instead of using the
+JavaScript equivalents (<TT CLASS="docutils literal"><SPAN CLASS="pre">NaN</SPAN></TT>, <TT CLASS="docutils literal"><SPAN CLASS="pre">Infinity</SPAN></TT>, <TT CLASS="docutils literal"><SPAN CLASS="pre">-Infinity</SPAN></TT>).</P>
+<P>If <TT CLASS="docutils literal"><SPAN CLASS="pre">indent</SPAN></TT> is a non-negative integer, then JSON array elements and object
+members will be pretty-printed with that indent level. An indent level
+of 0 will only insert newlines. <TT CLASS="docutils literal"><SPAN CLASS="pre">None</SPAN></TT> is the most compact representation.</P>
+<P>If <TT CLASS="docutils literal"><SPAN CLASS="pre">separators</SPAN></TT> is an <TT CLASS="docutils literal"><SPAN CLASS="pre">(item_separator,</SPAN> <SPAN CLASS="pre">dict_separator)</SPAN></TT> tuple
+then it will be used instead of the default <TT CLASS="docutils literal"><SPAN CLASS="pre">(',</SPAN> <SPAN CLASS="pre">',</SPAN> <SPAN CLASS="pre">':</SPAN> <SPAN CLASS="pre">')</SPAN></TT> separators.
+<TT CLASS="docutils literal"><SPAN CLASS="pre">(',',</SPAN> <SPAN CLASS="pre">':')</SPAN></TT> is the most compact JSON representation.</P>
+<P><TT CLASS="docutils literal"><SPAN CLASS="pre">encoding</SPAN></TT> is the character encoding for str instances, default is UTF-8.</P>
+<P><TT CLASS="docutils literal"><SPAN CLASS="pre">default(obj)</SPAN></TT> is a function that should return a serializable version
+of obj or raise TypeError. The default simply raises TypeError.</P>
+<P>To use a custom <TT CLASS="docutils literal"><SPAN CLASS="pre">JSONEncoder</SPAN></TT> subclass (e.g. one that overrides the
+<TT CLASS="docutils literal"><SPAN CLASS="pre">.default()</SPAN></TT> method to serialize additional types), specify it with
+the <TT CLASS="docutils literal"><SPAN CLASS="pre">cls</SPAN></TT> kwarg.</P>
+
+  
+    </DIV>
+  </DIV><DIV CLASS="pudge-member routine ">
+    <A NAME="dumps"></A>
+    <H4 CLASS="pudge-member-name"><SPAN CLASS="prefix">f</SPAN>
+      <TT><A HREF="module-simplejson.html#dumps" CLASS="pudge-obj-link">dumps</A>(obj, skipkeys=False, ensure_ascii=True, check_circular=True, allow_nan=True, cls=None, indent=None, separators=None, encoding='utf-8', default=None, **kw)</TT>
+      <A HREF="simplejson/__init__.py.html?f=188&amp;l=242#188" TITLE="View Source">...</A>
+    </H4>
+    <DIV CLASS="pudge-section rst">
+      
+    <P CLASS="pudge-member-blurb">
+      Serialize <TT CLASS="docutils literal"><SPAN CLASS="pre">obj</SPAN></TT> to a JSON formatted <TT CLASS="docutils literal"><SPAN CLASS="pre">str</SPAN></TT>.
+    </P>
+    <P>If <TT CLASS="docutils literal"><SPAN CLASS="pre">skipkeys</SPAN></TT> is <TT CLASS="docutils literal"><SPAN CLASS="pre">True</SPAN></TT> then <TT CLASS="docutils literal"><SPAN CLASS="pre">dict</SPAN></TT> keys that are not basic types
+(<TT CLASS="docutils literal"><SPAN CLASS="pre">str</SPAN></TT>, <TT CLASS="docutils literal"><SPAN CLASS="pre">unicode</SPAN></TT>, <TT CLASS="docutils literal"><SPAN CLASS="pre">int</SPAN></TT>, <TT CLASS="docutils literal"><SPAN CLASS="pre">long</SPAN></TT>, <TT CLASS="docutils literal"><SPAN CLASS="pre">float</SPAN></TT>, <TT CLASS="docutils literal"><SPAN CLASS="pre">bool</SPAN></TT>, <TT CLASS="docutils literal"><SPAN CLASS="pre">None</SPAN></TT>)
+will be skipped instead of raising a <TT CLASS="docutils literal"><SPAN CLASS="pre">TypeError</SPAN></TT>.</P>
+<P>If <TT CLASS="docutils literal"><SPAN CLASS="pre">ensure_ascii</SPAN></TT> is <TT CLASS="docutils literal"><SPAN CLASS="pre">False</SPAN></TT>, then the return value will be a
+<TT CLASS="docutils literal"><SPAN CLASS="pre">unicode</SPAN></TT> instance subject to normal Python <TT CLASS="docutils literal"><SPAN CLASS="pre">str</SPAN></TT> to <TT CLASS="docutils literal"><SPAN CLASS="pre">unicode</SPAN></TT>
+coercion rules instead of being escaped to an ASCII <TT CLASS="docutils literal"><SPAN CLASS="pre">str</SPAN></TT>.</P>
+<P>If <TT CLASS="docutils literal"><SPAN CLASS="pre">check_circular</SPAN></TT> is <TT CLASS="docutils literal"><SPAN CLASS="pre">False</SPAN></TT>, then the circular reference check
+for container types will be skipped and a circular reference will
+result in an <TT CLASS="docutils literal"><SPAN CLASS="pre">OverflowError</SPAN></TT> (or worse).</P>
+<P>If <TT CLASS="docutils literal"><SPAN CLASS="pre">allow_nan</SPAN></TT> is <TT CLASS="docutils literal"><SPAN CLASS="pre">False</SPAN></TT>, then it will be a <TT CLASS="docutils literal"><SPAN CLASS="pre">ValueError</SPAN></TT> to
+serialize out of range <TT CLASS="docutils literal"><SPAN CLASS="pre">float</SPAN></TT> values (<TT CLASS="docutils literal"><SPAN CLASS="pre">nan</SPAN></TT>, <TT CLASS="docutils literal"><SPAN CLASS="pre">inf</SPAN></TT>, <TT CLASS="docutils literal"><SPAN CLASS="pre">-inf</SPAN></TT>) in
+strict compliance of the JSON specification, instead of using the
+JavaScript equivalents (<TT CLASS="docutils literal"><SPAN CLASS="pre">NaN</SPAN></TT>, <TT CLASS="docutils literal"><SPAN CLASS="pre">Infinity</SPAN></TT>, <TT CLASS="docutils literal"><SPAN CLASS="pre">-Infinity</SPAN></TT>).</P>
+<P>If <TT CLASS="docutils literal"><SPAN CLASS="pre">indent</SPAN></TT> is a non-negative integer, then JSON array elements and
+object members will be pretty-printed with that indent level. An indent
+level of 0 will only insert newlines. <TT CLASS="docutils literal"><SPAN CLASS="pre">None</SPAN></TT> is the most compact
+representation.</P>
+<P>If <TT CLASS="docutils literal"><SPAN CLASS="pre">separators</SPAN></TT> is an <TT CLASS="docutils literal"><SPAN CLASS="pre">(item_separator,</SPAN> <SPAN CLASS="pre">dict_separator)</SPAN></TT> tuple
+then it will be used instead of the default <TT CLASS="docutils literal"><SPAN CLASS="pre">(',</SPAN> <SPAN CLASS="pre">',</SPAN> <SPAN CLASS="pre">':</SPAN> <SPAN CLASS="pre">')</SPAN></TT> separators.
+<TT CLASS="docutils literal"><SPAN CLASS="pre">(',',</SPAN> <SPAN CLASS="pre">':')</SPAN></TT> is the most compact JSON representation.</P>
+<P><TT CLASS="docutils literal"><SPAN CLASS="pre">encoding</SPAN></TT> is the character encoding for str instances, default is UTF-8.</P>
+<P><TT CLASS="docutils literal"><SPAN CLASS="pre">default(obj)</SPAN></TT> is a function that should return a serializable version
+of obj or raise TypeError. The default simply raises TypeError.</P>
+<P>To use a custom <TT CLASS="docutils literal"><SPAN CLASS="pre">JSONEncoder</SPAN></TT> subclass (e.g. one that overrides the
+<TT CLASS="docutils literal"><SPAN CLASS="pre">.default()</SPAN></TT> method to serialize additional types), specify it with
+the <TT CLASS="docutils literal"><SPAN CLASS="pre">cls</SPAN></TT> kwarg.</P>
+
+  
+    </DIV>
+  </DIV><DIV CLASS="pudge-member routine ">
+    <A NAME="load"></A>
+    <H4 CLASS="pudge-member-name"><SPAN CLASS="prefix">f</SPAN>
+      <TT><A HREF="module-simplejson.html#load" CLASS="pudge-obj-link">load</A>(fp, encoding=None, cls=None, object_hook=None, parse_float=None, parse_int=None, parse_constant=None, **kw)</TT>
+      <A HREF="simplejson/__init__.py.html?f=247&amp;l=272#247" TITLE="View Source">...</A>
+    </H4>
+    <DIV CLASS="pudge-section rst">
+      
+    <P CLASS="pudge-member-blurb">
+      Deserialize <TT CLASS="docutils literal"><SPAN CLASS="pre">fp</SPAN></TT> (a <TT CLASS="docutils literal"><SPAN CLASS="pre">.read()</SPAN></TT>-supporting file-like object containing
+a JSON document) to a Python object.
+    </P>
+    <P>If the contents of <TT CLASS="docutils literal"><SPAN CLASS="pre">fp</SPAN></TT> is encoded with an ASCII based encoding other
+than utf-8 (e.g. latin-1), then an appropriate <TT CLASS="docutils literal"><SPAN CLASS="pre">encoding</SPAN></TT> name must
+be specified. Encodings that are not ASCII based (such as UCS-2) are
+not allowed, and should be wrapped with
+<TT CLASS="docutils literal"><SPAN CLASS="pre">codecs.getreader(fp)(encoding)</SPAN></TT>, or simply decoded to a <TT CLASS="docutils literal"><SPAN CLASS="pre">unicode</SPAN></TT>
+object and passed to <TT CLASS="docutils literal"><SPAN CLASS="pre">loads()</SPAN></TT></P>
+<P><TT CLASS="docutils literal"><SPAN CLASS="pre">object_hook</SPAN></TT> is an optional function that will be called with the
+result of any object literal decode (a <TT CLASS="docutils literal"><SPAN CLASS="pre">dict</SPAN></TT>). The return value of
+<TT CLASS="docutils literal"><SPAN CLASS="pre">object_hook</SPAN></TT> will be used instead of the <TT CLASS="docutils literal"><SPAN CLASS="pre">dict</SPAN></TT>. This feature
+can be used to implement custom decoders (e.g. JSON-RPC class hinting).</P>
+<P>To use a custom <TT CLASS="docutils literal"><SPAN CLASS="pre">JSONDecoder</SPAN></TT> subclass, specify it with the <TT CLASS="docutils literal"><SPAN CLASS="pre">cls</SPAN></TT>
+kwarg.</P>
+
+  
+    </DIV>
+  </DIV><DIV CLASS="pudge-member routine ">
+    <A NAME="loads"></A>
+    <H4 CLASS="pudge-member-name"><SPAN CLASS="prefix">f</SPAN>
+      <TT><A HREF="module-simplejson.html#loads" CLASS="pudge-obj-link">loads</A>(s, encoding=None, cls=None, object_hook=None, parse_float=None, parse_int=None, parse_constant=None, **kw)</TT>
+      <A HREF="simplejson/__init__.py.html?f=274&amp;l=323#274" TITLE="View Source">...</A>
+    </H4>
+    <DIV CLASS="pudge-section rst">
+      
+    <P CLASS="pudge-member-blurb">
+      Deserialize <TT CLASS="docutils literal"><SPAN CLASS="pre">s</SPAN></TT> (a <TT CLASS="docutils literal"><SPAN CLASS="pre">str</SPAN></TT> or <TT CLASS="docutils literal"><SPAN CLASS="pre">unicode</SPAN></TT> instance containing a JSON
+document) to a Python object.
+    </P>
+    <P>If <TT CLASS="docutils literal"><SPAN CLASS="pre">s</SPAN></TT> is a <TT CLASS="docutils literal"><SPAN CLASS="pre">str</SPAN></TT> instance and is encoded with an ASCII based encoding
+other than utf-8 (e.g. latin-1) then an appropriate <TT CLASS="docutils literal"><SPAN CLASS="pre">encoding</SPAN></TT> name
+must be specified. Encodings that are not ASCII based (such as UCS-2)
+are not allowed and should be decoded to <TT CLASS="docutils literal"><SPAN CLASS="pre">unicode</SPAN></TT> first.</P>
+<P><TT CLASS="docutils literal"><SPAN CLASS="pre">object_hook</SPAN></TT> is an optional function that will be called with the
+result of any object literal decode (a <TT CLASS="docutils literal"><SPAN CLASS="pre">dict</SPAN></TT>). The return value of
+<TT CLASS="docutils literal"><SPAN CLASS="pre">object_hook</SPAN></TT> will be used instead of the <TT CLASS="docutils literal"><SPAN CLASS="pre">dict</SPAN></TT>. This feature
+can be used to implement custom decoders (e.g. JSON-RPC class hinting).</P>
+<P><TT CLASS="docutils literal"><SPAN CLASS="pre">parse_float</SPAN></TT>, if specified, will be called with the string
+of every JSON float to be decoded. By default this is equivalent to
+float(num_str). This can be used to use another datatype or parser
+for JSON floats (e.g. decimal.Decimal).</P>
+<P><TT CLASS="docutils literal"><SPAN CLASS="pre">parse_int</SPAN></TT>, if specified, will be called with the string
+of every JSON int to be decoded. By default this is equivalent to
+int(num_str). This can be used to use another datatype or parser
+for JSON integers (e.g. float).</P>
+<P><TT CLASS="docutils literal"><SPAN CLASS="pre">parse_constant</SPAN></TT>, if specified, will be called with one of the
+following strings: -Infinity, Infinity, NaN, null, true, false.
+This can be used to raise an exception if invalid JSON numbers
+are encountered.</P>
+<P>To use a custom <TT CLASS="docutils literal"><SPAN CLASS="pre">JSONDecoder</SPAN></TT> subclass, specify it with the <TT CLASS="docutils literal"><SPAN CLASS="pre">cls</SPAN></TT>
+kwarg.</P>
+
+  
+    </DIV>
+  </DIV>
+    
+  
+    <A NAME="classes"></A>
+    <H2>Classes</H2>
+    <DIV CLASS="pudge-member class alias">
+    <H4 CLASS="pudge-member-name"><SPAN CLASS="prefix">C</SPAN>
+      <TT>
+        <A HREF="class-simplejson.JSONEncoder.html" CLASS="pudge-obj-link">JSONEncoder</A>(...)</TT>
+      <A HREF="simplejson/encoder.py.html?f=83&amp;l=382#83" CLASS="pudge-member-view-source" TITLE="View Source">...</A>
+    </H4>
+    <DIV CLASS="pudge-section rst">
+      
+    <P CLASS="pudge-member-blurb">
+      Extensible JSON &lt;<A HREF="http://json.org" CLASS="reference">http://json.org</A>> encoder for Python data structures.
+    </P>
+    <P>Supports the following objects and types by default:</P>
+<TABLE BORDER="1" CLASS="docutils">
+<COLGROUP>
+<COL WIDTH="56%">
+<COL WIDTH="44%">
+</COLGROUP>
+<THEAD VALIGN="bottom">
+<TR><TH CLASS="head">Python</TH>
+<TH CLASS="head">JSON</TH>
+</TR>
+</THEAD>
+<TBODY VALIGN="top">
+<TR><TD>dict</TD>
+<TD>object</TD>
+</TR>
+<TR><TD>list, tuple</TD>
+<TD>array</TD>
+</TR>
+<TR><TD>str, unicode</TD>
+<TD>string</TD>
+</TR>
+<TR><TD>int, long, float</TD>
+<TD>number</TD>
+</TR>
+<TR><TD>True</TD>
+<TD>true</TD>
+</TR>
+<TR><TD>False</TD>
+<TD>false</TD>
+</TR>
+<TR><TD>None</TD>
+<TD>null</TD>
+</TR>
+</TBODY>
+</TABLE>
+<P>To extend this to recognize other objects, subclass and implement a
+<TT CLASS="docutils literal"><SPAN CLASS="pre">.default()</SPAN></TT> method with another method that returns a serializable
+object for <TT CLASS="docutils literal"><SPAN CLASS="pre">o</SPAN></TT> if possible, otherwise it should call the superclass
+implementation (to raise <TT CLASS="docutils literal"><SPAN CLASS="pre">TypeError</SPAN></TT>).</P>
+
+  
+      
+      <P CLASS="note">
+        This class contains <A HREF="class-simplejson.JSONEncoder.html#members">
+          5 members</A>.
+      </P>
+    </DIV>
+  </DIV><DIV CLASS="pudge-member class alias">
+    <H4 CLASS="pudge-member-name"><SPAN CLASS="prefix">C</SPAN>
+      <TT>
+        <A HREF="class-simplejson.JSONDecoder.html" CLASS="pudge-obj-link">JSONDecoder</A>(...)</TT>
+      <A HREF="simplejson/decoder.py.html?f=244&amp;l=340#244" CLASS="pudge-member-view-source" TITLE="View Source">...</A>
+    </H4>
+    <DIV CLASS="pudge-section rst">
+      
+    <P CLASS="pudge-member-blurb">
+      Simple JSON &lt;<A HREF="http://json.org" CLASS="reference">http://json.org</A>> decoder
+    </P>
+    <P>Performs the following translations in decoding by default:</P>
+<TABLE BORDER="1" CLASS="docutils">
+<COLGROUP>
+<COL WIDTH="44%">
+<COL WIDTH="56%">
+</COLGROUP>
+<THEAD VALIGN="bottom">
+<TR><TH CLASS="head">JSON</TH>
+<TH CLASS="head">Python</TH>
+</TR>
+</THEAD>
+<TBODY VALIGN="top">
+<TR><TD>object</TD>
+<TD>dict</TD>
+</TR>
+<TR><TD>array</TD>
+<TD>list</TD>
+</TR>
+<TR><TD>string</TD>
+<TD>unicode</TD>
+</TR>
+<TR><TD>number (int)</TD>
+<TD>int, long</TD>
+</TR>
+<TR><TD>number (real)</TD>
+<TD>float</TD>
+</TR>
+<TR><TD>true</TD>
+<TD>True</TD>
+</TR>
+<TR><TD>false</TD>
+<TD>False</TD>
+</TR>
+<TR><TD>null</TD>
+<TD>None</TD>
+</TR>
+</TBODY>
+</TABLE>
+<P>It also understands <TT CLASS="docutils literal"><SPAN CLASS="pre">NaN</SPAN></TT>, <TT CLASS="docutils literal"><SPAN CLASS="pre">Infinity</SPAN></TT>, and <TT CLASS="docutils literal"><SPAN CLASS="pre">-Infinity</SPAN></TT> as
+their corresponding <TT CLASS="docutils literal"><SPAN CLASS="pre">float</SPAN></TT> values, which is outside the JSON spec.</P>
+
+  
+      
+      <P CLASS="note">
+        This class contains <A HREF="class-simplejson.JSONDecoder.html#members">
+          4 members</A>.
+      </P>
+    </DIV>
+  </DIV>
+    
+  
+  
+  <P>
+    <SMALL>
+    
+    
+    See 
+    <A HREF="simplejson/__init__.py.html" TITLE="simplejson/__init__.py:0">the source</A>
+    for more information.
+    </SMALL>
+  </P>
+
+</DIV>
+    
+    <DIV ID="footer">
+      
+      <P ID="pudge">
+        Built with
+        <A HREF="http://lesscode.org/projects/pudge/">
+          Pudge/0.1.3</A>
+      </P>
+
+      
+    </DIV>
+    </DIV>
+  </BODY>
+
+</HTML>
