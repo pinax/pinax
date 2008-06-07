@@ -9,6 +9,8 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 
+from tribes.models import Tribe
+
 # relational databases are a terrible way to do
 # multicast messages (just ask Twitter) but here you have it :-)
 
@@ -88,16 +90,20 @@ class TweetInstance(models.Model):
         return format_tweet(self.text)
     
     class Admin:
-        list_display = ('id', 'sender', 'text',)
+        list_display = ('id', 'sender', 'text', 'recipient_type', 'recipient_id')
 
 def tweet(user, text):
     now = datetime.now()
     Tweet(text=text, sender=user, sent=now).save()
     recipients = set() # keep track of who's received it
+    
+    # add the sender's followers
     for follower in (following.follower for following in user.followers.all()):
         recipients.add(follower)
+    
     # add sender
     recipients.add(user)
+    
     # if starts with @user send it to them too even if not following
     match = reply_re.match(text)
     if match:
@@ -105,6 +111,16 @@ def tweet(user, text):
             recipients.add(User.objects.get(username=match.group(1)))
         except User.DoesNotExist:
             pass # oh well
+    
+    # if contains #tribe sent it to that tribe too (the tribe itself, not the members)
+    search = tribe_ref_re.search(text)
+    if search:
+        try:
+            recipients.add(Tribe.objects.get(slug=search.group(1)))
+        except Tribe.DoesNotExist:
+            pass # oh well
+    
+    # now send to all the recipients
     for recipient in recipients:
         TweetInstance(text=text, sender=user, recipient=recipient, sent=now).save()
 
@@ -127,7 +143,7 @@ class FollowingManager(models.Manager):
             following = self.get(follower=follower, followed=followed)
             following.delete()
         except Following.DoesNotExist:
-            pass    
+            pass
 
 
 class Following(models.Model):
