@@ -16,7 +16,7 @@ from django.contrib.contenttypes import generic
 
 import re
 user_ref_re = re.compile("@(\w+)")
-tribe_ref_re = re.compile("#(\w+)")
+tribe_ref_re = re.compile("(?<!&)#(\w+)")
 reply_re = re.compile("^@(\w+)")
 
 def make_user_link(text):
