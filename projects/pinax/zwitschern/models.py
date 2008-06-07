@@ -9,16 +9,26 @@ from django.contrib.auth.models import User
 # relational databases are a terrible way to do
 # multicast messages (just ask Twitter) but here you have it :-)
 
+# @@@ need to make @ and # handling more abstract
+
 import re
-ref_re = re.compile("@(\w+)")
+user_ref_re = re.compile("@(\w+)")
+tribe_ref_re = re.compile("#(\w+)")
 reply_re = re.compile("^@(\w+)")
 
-def make_link(text):
+def make_user_link(text):
     username = text.group(1)
     return """@<a href="/profiles/%s/">%s</a>""" % (username, username)
 
+def make_tribe_link(text):
+    tribe_slug = text.group(1)
+    return """#<a href="/tribes/%s/">%s</a>""" % (tribe_slug, tribe_slug)
+
 def format_tweet(text):
-    return ref_re.sub(make_link, escape(text))
+    text = escape(text)
+    text = user_ref_re.sub(make_user_link, text)
+    text = tribe_ref_re.sub(make_tribe_link, text)
+    return text
     
 class Tweet(models.Model):
     """
