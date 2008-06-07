@@ -14,7 +14,7 @@
             <td>
                 {% if message.new %}<strong>{% endif %}
                 {% if message.replied %}<em>{% endif %}
-                <a href="{{ message.get_absolute_url }}">{{ message.subject }}</a>
+                <a href="{{ message.get_absolute_url }}">{% if message.subject %}{{ message.subject }}{% else %}(none){% endif %}</a>
                 {% if message.replied %}</em>{% endif %}
                 {% if message.new %}</strong>{% endif %}</td>
             <td>{{ message.sent_at|localtime:user.get_profile.timezone|date:_("DATETIME_FORMAT") }}</td>
