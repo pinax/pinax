@@ -77,6 +77,8 @@ class TweetInstance(models.Model):
     #     ADD COLUMN "recipient_type_id" integer NOT NULL
     #     REFERENCES "django_content_type" ("id")
     #     DEFAULT <user content type id>;
+    #
+    # NOTE: you will also need to drop the foreign key constraint if it exists
     
     # recipient = models.ForeignKey(User, related_name="received_tweet_instances", verbose_name=_('recipient'))
     
