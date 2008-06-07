@@ -6,6 +6,9 @@ from django.utils.translation import ugettext_lazy as _
 
 from django.contrib.auth.models import User
 
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes import generic
+
 # relational databases are a terrible way to do
 # multicast messages (just ask Twitter) but here you have it :-)
 
@@ -48,6 +51,14 @@ class Tweet(models.Model):
     class Admin:
         list_display = ('id', 'sender', 'text',)
 
+
+class TweetInstanceManager(models.Manager):
+    
+    def tweets_for(self, recipient):
+        recipient_type = ContentType.objects.get_for_model(recipient)
+        return TweetInstance.objects.filter(recipient_type=recipient_type, recipient_id=recipient.id)
+
+
 class TweetInstance(models.Model):
     """
     the appearance of a tweet in a follower's timeline
@@ -57,14 +68,27 @@ class TweetInstance(models.Model):
     
     text = models.CharField(_('text'), max_length=140)
     sender = models.ForeignKey(User, related_name="sent_tweet_instances", verbose_name=_('sender'))
-    recipient = models.ForeignKey(User, related_name="received_tweet_instances", verbose_name=_('recipient'))
     sent = models.DateTimeField(_('sent'))
+    
+    # to migrate to generic foreign key, find out the content_type id of User and do something like:
+    # ALTER TABLE "zwitschern_tweetinstance"
+    #     ADD COLUMN "recipient_type_id" integer NOT NULL
+    #     REFERENCES "django_content_type" ("id")
+    #     DEFAULT <user content type id>;
+    
+    # recipient = models.ForeignKey(User, related_name="received_tweet_instances", verbose_name=_('recipient'))
+    
+    recipient_type = models.ForeignKey(ContentType)
+    recipient_id = models.PositiveIntegerField()
+    recipient = generic.GenericForeignKey('recipient_type', 'recipient_id')
+    
+    objects = TweetInstanceManager()
     
     def html(self):
         return format_tweet(self.text)
     
     class Admin:
-        list_display = ('id', 'sender', 'text', 'recipient',)
+        list_display = ('id', 'sender', 'text',)
 
 def tweet(user, text):
     now = datetime.now()

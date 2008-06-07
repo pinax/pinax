@@ -19,7 +19,7 @@ def personal(request):
     else:
         reply = request.GET.get("reply")
             
-    tweets = TweetInstance.objects.filter(recipient=request.user).order_by("-sent")
+    tweets = TweetInstance.objects.tweets_for(request.user).order_by("-sent")
     
     return render_to_response("zwitschern/personal.html", {
         "reply": reply,
