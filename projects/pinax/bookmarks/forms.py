@@ -11,7 +11,7 @@ class BookmarkForm(forms.ModelForm):
     def clean_url(self):
         if Bookmark.objects.filter(url=self.cleaned_data["url"]).count() > 0:
             raise forms.ValidationError(_("That url has already been submitted and Pinax does not yet support multiple bookmarking of a URL"))
-        return self.cleaned_data["name"]
+        return self.cleaned_data["url"]
     
     class Meta:
         model = Bookmark
