@@ -115,10 +115,9 @@ def tweet(user, text):
             pass # oh well
     
     # if contains #tribe sent it to that tribe too (the tribe itself, not the members)
-    search = tribe_ref_re.search(text)
-    if search:
+    for tribe in tribe_ref_re.findall(text):
         try:
-            recipients.add(Tribe.objects.get(slug=search.group(1)))
+            recipients.add(Tribe.objects.get(slug=tribe))
         except Tribe.DoesNotExist:
             pass # oh well
     
