@@ -32,10 +32,12 @@
             </td>
             <td>
                 {% ifequal forloop.counter 1 %}
+                {% ifnotequal changes.count 1 %}
                 <form action="{% url wiki_revert_revision title=article.title,group_slug=group.slug %}" method="POST">
                     <input name="revision" type="hidden" value="{{ change.revision }}">
                     <input name="revert" type="submit" value="{% trans "Revert Last Change" %}">
                 </form>
+                {% endifnotequal %}
                 {% endifequal %}
             </td>
             {% endfor %}
