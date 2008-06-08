@@ -29,6 +29,8 @@ try:
 except ImportError:
     wiki = False
 
+from zwitschern.models import TweetInstance
+
 
 def tribes(request):
     if request.user.is_authenticated() and request.method == "POST":
@@ -59,7 +61,7 @@ def tribes(request):
 
 def tribe(request, slug):
     tribe = get_object_or_404(Tribe, slug=slug)
-
+    
     if request.user.is_authenticated() and request.method == "POST":
         if request.POST["action"] == "update" and request.user == tribe.creator:
             tribe_form = TribeUpdateForm(request.POST, instance=tribe)
@@ -82,21 +84,24 @@ def tribe(request, slug):
                 pass # @@@
     else:
         tribe_form = TribeUpdateForm(instance=tribe)
-
+    
     topics = tribe.topics.all()[:5]
     articles = Article.objects.filter(
         content_type=get_ct(tribe),
         object_id=tribe.id).order_by('-last_update')
     total_articles = articles.count()
     articles = articles[:5]
-
+    
+    tweets = TweetInstance.objects.tweets_for(tribe).order_by("-sent")
+    
     are_member = request.user in tribe.members.all()
-
+    
     return render_to_response("tribes/tribe.html", {
         "tribe_form": tribe_form,
         "tribe": tribe,
         "topics": topics,
         "articles": articles,
+        "tweets": tweets,
         "total_articles": total_articles,
         "are_member": are_member,
     }, context_instance=RequestContext(request))

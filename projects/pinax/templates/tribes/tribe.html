@@ -1,5 +1,6 @@
 {% extends "tribes/base.html" %}
 
+{% load zwitschern %}
 {% load i18n %}
 {% load gravatar %}
 {% load threadedcommentstags %}
@@ -113,6 +114,9 @@ Created: {{ tribe.created|date }}
 <p>None yet. Start a <a href="{% url wiki_edit_article group_slug=tribe.slug,title="NewArticle" %}">NewArticle</a>...</p>
 {% endif %}
 
+<h2>{% trans "Tweets" %}</h2>
+
+{% tweet_listing tweets 1 0 %}
 
 </div>
 {% endblock %}
