@@ -1,0 +1,12 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+
+{% block rtab_id %}id="bookmarks_tab"{% endblock %}
+
+{% block subnav %}
+    <ul>
+        <li><a href="{% url bookmarks.views.add %} ">{% trans "Add Bookmark" %}</a></li>
+        <li><a href="{% url bookmarks.views.bookmarks %} ">{% trans "All Bookmarks" %}</a></li>
+    </ul>
+{% endblock %}

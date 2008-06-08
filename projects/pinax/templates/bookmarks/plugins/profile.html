@@ -1,0 +1,21 @@
+{% load i18n %}
+
+<h2>{% trans "Bookmarks" %}</h2>
+
+{% if other_user.added_bookmarks.all %}
+    <table class="bookmarks">
+        {% for bookmark in  other_user.added_bookmarks.all %}
+        <tr class="{% cycle odd,even %}">
+            <td class="meta">
+                {{ bookmark.added|date }}
+            </td>
+            <td>
+                <h2><a href="{{ bookmark.url }}">{{ bookmark.description }}</a></h2>
+                <div class="body">{{ bookmark.note|linebreaks }}</div>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>{% trans "No bookmarks yet." %}</p>
+{% endif %}

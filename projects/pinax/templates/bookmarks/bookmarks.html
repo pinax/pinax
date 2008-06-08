@@ -1,0 +1,39 @@
+{% extends "bookmarks/base.html" %}
+
+{% load i18n %}
+{% load gravatar %}
+
+{% block head_title %}Pinax : {% blocktrans %}All Bookmarks{% endblocktrans %}{% endblock %}
+
+{% block extra_head %}
+    <link rel="alternate" type="application/atom+xml" title="Bookmarks Feed" href="/feeds/bookmarks/" />
+{% endblock %}
+
+{% block body %}
+    <h1>{% trans "All Bookmarks" %}</h1>
+    
+    <p><span class="warning">Note</span>: Pinax Bookmarks are currently experimental but will eventually support tagging, multiple submissions of the same URL and a whole lot more.</p>
+    
+    {% if bookmarks %}
+        <p>{% trans "These are bookmarks from everyone:" %}</p>
+        
+        <table class="bookmarks">
+            {% for bookmark in bookmarks %}
+            <tr class="{% cycle odd,even %}">
+                <td class="meta">
+                    <div class="avatar">{% gravatar bookmark.adder 40 %}</div>
+                    <div class="details"><a href="{% url profiles.views.profile bookmark.adder.username %}">{{ bookmark.adder }}</a></div>
+                    {{ bookmark.added|date }}
+                </td>
+                <td>
+                    <h2><a href="{{ bookmark.url }}">{{ bookmark.description }}</a></h2>
+                    <div class="body">{{ bookmark.note|linebreaks }}</div>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>{% trans "No bookmarks yet." %}</p>
+    {% endif %}
+    
+{% endblock %}

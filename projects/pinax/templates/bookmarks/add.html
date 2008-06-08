@@ -1,0 +1,19 @@
+{% extends "bookmarks/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}Pinax : {% blocktrans %}Add Bookmark{% endblocktrans %}{% endblock %}
+
+
+{% block body %}
+    <h1>{% trans "Add Bookmark" %}</h1>
+    
+    <p><span class="warning">Note</span>: Pinax Bookmarks are currently experimental but will eventually support tagging, multiple submissions of the same URL and a whole lot more.</p>
+    
+    <form method="POST" action="">
+        <table>
+            {{ bookmark_form }}
+            <tr><td></td><td><input type="submit" value="{% trans 'add bookmark' %}"></td></tr>
+        </table>
+    </form>
+{% endblock %}

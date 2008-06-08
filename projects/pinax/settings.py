@@ -132,6 +132,7 @@ INSTALLED_APPS = (
     'account',
     'tribes',
     'core',
+    'bookmarks',
 )
 
 ABSOLUTE_URL_OVERRIDES = {
