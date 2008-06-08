@@ -1,4 +1,4 @@
-from atom import Feed
+from atomformat import Feed
 from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.contrib.sites.models import Site
@@ -33,9 +33,10 @@ class TweetFeed(Feed):
             return 'Tweets Feed'
     
     def feed_updated(self, user):
-        qs = TweetInstance.objects.all()
         if user:
-            qs = qs.filter(recipient=user)
+            qs = TweetInstance.objects.tweets_for(user)
+        else:
+            qs = TweetInstance.objects.all()
         return qs.latest('sent').sent
     
     def feed_links(self, user):
@@ -51,7 +52,7 @@ class TweetFeed(Feed):
     
     def items(self, user):
         if user:
-            return TweetInstance.objects.filter(recipient=user).order_by("-sent")[:ITEMS_PER_FEED]
+            return TweetInstance.objects.tweets_for(user).order_by("-sent")[:ITEMS_PER_FEED]
         else:
             return TweetInstance.objects.order_by("-sent")[:ITEMS_PER_FEED]
     
