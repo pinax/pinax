@@ -14,6 +14,7 @@
 
 <p>A <b>tribe</b> is a group of people with some common interest.</p>
 
+{% if user.is_authenticated %}
 <p><a href="#" onclick="$('#tribe_form').toggle(); return false;">{% trans "Start your own" %}</a></p>
 
 <form id="tribe_form" method="POST" action="" style="display: none;">
@@ -22,6 +23,9 @@
 <tr><td></td><td><input type="hidden" name="action" value="create" /><input type="submit" value="{% trans 'create' %}"/></td></tr>
 </table>
 </form>
+{% else %}
+<p>{% blocktrans %}<a href="/account/signup/">Sign up</a> and <a href="/account/login/">log in </a> to create your own tribe or join an existing one.{% endblocktrans %}</p>
+{% endif %}
 
 {% autopaginate tribes %}
 {% regroup tribes by created.date as tribes_by_created %}

@@ -10,6 +10,7 @@
 
 {% block body %}
 
+{% if user.is_authenticated %}
 <div class="right_panel">
     <div class="members">
         <h2>{% trans "Members" %}</h2>
@@ -26,6 +27,7 @@
         </table>
     </div>
 </div>
+{% endif %}
 
 <div style="width: 550px;">
 <p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time.</p>
@@ -53,6 +55,7 @@ Created: {{ tribe.created|date }}
 </form>
 {% endifequal %}
 
+{% if user.is_authenticated %}
 <div>
 <form method="POST" action="">
 {% if are_member %}
@@ -66,6 +69,12 @@ Created: {{ tribe.created|date }}
 {% endif %}
 </form>
 </div>
+{% else %}
+<p>{% blocktrans %}<a href="/account/signup/">Sign up</a> and <a href="/account/login/">log in </a> to join this tribe.{% endblocktrans %}</p>
+{% endif %}
+
+
+{% if user.is_authenticated %}
 
 <h2>Discussion Topics{% if tribe.topics.all.count %} ({{ tribe.topics.all.count }}){% endif %}</h2>
 
@@ -119,6 +128,8 @@ Created: {{ tribe.created|date }}
 {% tweet_listing tweets 1 0 %}
 
 </div>
+
+{% endif %}
 {% endblock %}
 
 {% block extra_body %}
