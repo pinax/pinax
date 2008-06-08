@@ -40,6 +40,7 @@ def signup(request):
         "form": form,
     }, context_instance=RequestContext(request))
 
+@login_required
 def email(request):
     if request.method == "POST" and request.user.is_authenticated():
         if request.POST["action"] == "add":
@@ -75,8 +76,8 @@ def email(request):
     return render_to_response("account/email.html", {
         "add_email_form": add_email_form,
     }, context_instance=RequestContext(request))
-email = login_required(email)
 
+@login_required
 def password_change(request):
     if request.method == "POST":
         password_change_form = ChangePasswordForm(request.user, request.POST)
@@ -105,6 +106,7 @@ def password_reset(request):
         "password_reset_form": password_reset_form,
     }, context_instance=RequestContext(request))
 
+@login_required
 def timezone_change(request):
     if request.method == "POST":
         form = ChangeTimezoneForm(request.user, request.POST)
