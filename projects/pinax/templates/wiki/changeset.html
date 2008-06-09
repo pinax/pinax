@@ -6,15 +6,18 @@
 
 {% block body %}
     <h1>{% trans "Wiki for Tribe" %} <a href="{% url tribe_detail group.slug %}">{{ group.name }}</a></h1>
-    <h2> <a href="{% url wiki_article title=article_title,group_slug=group.slug %}"> {{ article_title }} </a> </h2>
+    
+    <h2><a href="{% url wiki_article title=article_title,group_slug=group.slug %}">{{ article_title }}</a></h2>
+    
     {% if changeset.old_title %}
-    <h3> {{ changeset.old_title }} </h3>
+        <h3>{{ changeset.old_title }}</h3>
     {% endif %}
-    {{ changeset.display_diff|safe }}
-    <br /><b>{% trans "Markup:" %}</b>
+    
+    {{ changeset.display_diff|safe }}<br />
+    <b>{% trans "Markup:" %}</b>
     {% if changeset.old_markup %}
-    {{ changeset.old_markup }}
+        {{ changeset.old_markup }}
     {% else %}
-    {% trans "Plain Text." %}
+        {% trans "Plain Text." %}
     {% endif %}
 {% endblock %}

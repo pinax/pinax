@@ -6,9 +6,13 @@
 
 {% block body %}
     <h1>{% trans "Timezone" %}</h1>
+    
     <p>{% trans "Pinax can localize all times into your preferred timezone. Change your timezone below." %}</p>
+    
     <form method="POST" action="">
-        {{ form.as_p }}
-        <input type="submit" value="{% trans "Change my timezone" %}" />
+        <table>
+            {{ form }}
+            <tr><td></td><td><input type="submit" value="{% trans "Change my timezone" %}" /></td></tr>
+        </table>
     </form>
 {% endblock %}

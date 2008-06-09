@@ -5,13 +5,12 @@
 {% block rtab_id %}id="profile_tab"{% endblock %}
 
 {% block subnav %}
-{% if user.is_authenticated %}
-<ul>
-    <li><a href="{% url profiles.views.profile user.username %} ">{% trans "Your Profile" %}</a></li>
-    <li><a href="{% url profiles.views.profiles %} ">{% trans "All Profiles" %}</a></li>
-</ul>
-{% else %}
-&nbsp;
-{% endif %}
-
+    {% if user.is_authenticated %}
+        <ul>
+            <li><a href="{% url profiles.views.profile user.username %} ">{% trans "Your Profile" %}</a></li>
+            <li><a href="{% url profiles.views.profiles %} ">{% trans "All Profiles" %}</a></li>
+        </ul>
+    {% else %}
+        &nbsp;
+    {% endif %}
 {% endblock %}

@@ -1,23 +1,28 @@
 {% extends "site_base.html" %}
 
 {% load i18n %}
+{% load captureas_tag %}
 
 {% block head_title %}Pinax{% endblock %}
 
 {% block tab_id %}id="home_tab"{% endblock %}
 
-{% block body %}{% blocktrans %}
-<p><b>Pinax</b> is a <a href="http://djangoproject.com/">Django</a> project intended to provide a starting point for websites. By integrating numerous reusable Django apps to take care of the things that many sites have in common, it lets you focus on what makes your site different.</p>
-
-<p>This site is just a running example of Pinax. The source code is available as part of the <a href="http://code.google.com/p/django-hotclub/">Hot Club of France</a> project.</p>
-
-<p>If you have any questions about this site or the <b>Pinax</b> project, please <a href="mailto:jtauber@jtauber.com">contact James Tauber</a>.</p>
-{% endblocktrans %}
-
-{% if user.is_authenticated %}
-{% else %}
-<p>{% blocktrans %}You can <a href="/account/signup/">Sign up</a> and <a href="/account/login/">Log in</a> to try out the site.{% endblocktrans %}</p>
-
-<p><b>{% blocktrans %}At this stage, there is openid support, email verification, password management, site announcements, user-to-user messaging, friend invitation (both internal and external to the site), a basic twitter clone, interest groups (called tribes), per-tribe threaded discussions, per-tribe wikis, contact import from vCard, Google or Yahoo and a notification framework.{% endblocktrans %}</b></p>
-{% endif %}
+{% block body %}
+    {% blocktrans %}
+        <p><b>Pinax</b> is a <a href="http://djangoproject.com/">Django</a> project intended to provide a starting point for websites. By integrating numerous reusable Django apps to take care of the things that many sites have in common, it lets you focus on what makes your site different.</p>
+        
+        <p>This site is just a running example of Pinax. The source code is available as part of the <a href="http://code.google.com/p/django-hotclub/">Hot Club of France</a> project.</p>
+        
+        <p>If you have any questions about this site or the <b>Pinax</b> project, please <a href="mailto:jtauber@jtauber.com">contact James Tauber</a>.</p>
+    {% endblocktrans %}
+    
+    {% if user.is_authenticated %}
+    {% else %}
+        {% captureas signup_url %}{% url acct_signup %}{% endcaptureas %}
+        {% captureas login_url %}{% url acct_login %}{% endcaptureas %}
+        <p>{% blocktrans %}You can <a href="{{ signup_url }}">Sign up</a> and <a href="{{ login_url }}">Log in</a> to try out the site.{% endblocktrans %}</p>
+        
+        <p><b>{% blocktrans %}At this stage, there is openid support, email verification, password management, site announcements, user-to-user messaging, friend invitation (both internal and external to the site), a basic twitter clone, interest groups (called tribes), per-tribe threaded discussions, per-tribe wikis, blog aggregation, bookmarks, contact import from vCard, Google or Yahoo and a notification framework.{% endblocktrans %}</b></p>
+    {% endif %}
+    
 {% endblock %}

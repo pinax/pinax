@@ -1,4 +1,5 @@
 {% extends "wiki/base.html" %}
+
 {% load timezone_filters %}
 {% load i18n %}
 
@@ -6,46 +7,49 @@
 
 {% block body %}
     <h1>{% trans "Wiki for Tribe" %} <a href="{% url tribe_detail group.slug %}">{{ group.name }}</a></h1>
+    
     <h2>{% trans "History for article" %} <a href="{{ article.get_absolute_url }}"> {{ article.title }} </a></h2>
-
+    
     {% if changes %}
-    <table class="messages">
-        <tr class="tbheader">
-            <th>{% trans "Date" %}</th>
-            <th>{% trans "Editor" %}</th>
-            <th>{% trans "Comment" %}</th>
-            <th>{% trans "Revert" %}</th>
-        </tr>
-        {% for change in changes %}
-        <tr>
-            <td><a href="{% url wiki_changeset group_slug=group.slug,title=article.title,revision=change.revision %}">
-                {{ change.modified|localtime:user.get_profile.timezone|date:_("DATETIME_FORMAT") }}</a></td>
-            <td>
-                {% if change.is_anonymous_change %}
-                    {{ change.editor_ip }}
-                {% else %}
-                    <a href="{% url profiles.views.profile change.editor.username %}">{{ change.editor }}</a>
-                {% endif %}
-            </td>
-            <td>
-                {% if change.comment %}<i>'{{ change.comment}}'</i> {% endif %}
-            </td>
-            <td>
-                {% ifequal forloop.counter 1 %}
-                {% ifnotequal changes.count 1 %}
-                <form action="{% url wiki_revert_revision title=article.title,group_slug=group.slug %}" method="POST">
-                    <input name="revision" type="hidden" value="{{ change.revision }}">
-                    <input name="revert" type="submit" value="{% trans "Revert Last Change" %}">
-                </form>
-                {% endifnotequal %}
-                {% endifequal %}
-            </td>
+        <table class="messages">
+            <tr class="tbheader">
+                <th>{% trans "Date" %}</th>
+                <th>{% trans "Editor" %}</th>
+                <th>{% trans "Comment" %}</th>
+                <th>{% trans "Revert" %}</th>
+            </tr>
+            {% for change in changes %}
+                <tr>
+                    <td>
+                        <a href="{% url wiki_changeset group_slug=group.slug,title=article.title,revision=change.revision %}">
+                        {{ change.modified|localtime:user.get_profile.timezone|date:_("DATETIME_FORMAT") }}</a>
+                    </td>
+                    <td>
+                        {% if change.is_anonymous_change %}
+                            {{ change.editor_ip }}
+                        {% else %}
+                            <a href="{% url profiles.views.profile change.editor.username %}">{{ change.editor }}</a>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if change.comment %}<i>'{{ change.comment}}'</i> {% endif %}
+                    </td>
+                    <td>
+                        {% ifequal forloop.counter 1 %}
+                            {% ifnotequal changes.count 1 %}
+                                <form action="{% url wiki_revert_revision title=article.title,group_slug=group.slug %}" method="POST">
+                                    <input name="revision" type="hidden" value="{{ change.revision }}">
+                                    <input name="revert" type="submit" value="{% trans "Revert Last Change" %}">
+                                </form>
+                            {% endifnotequal %}
+                        {% endifequal %}
+                    </td>
+                </tr>
             {% endfor %}
-        </tr>
-    </table>
-
+        </table>
+        
     {% else %}
-    <p> {% trans "No changes in this article" %}</p>
+        <p>{% trans "No changes in this article" %}</p>
     {% endif %}
-
+    
 {% endblock %}

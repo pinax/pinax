@@ -19,17 +19,17 @@
         
         <table class="bookmarks">
             {% for bookmark in bookmarks %}
-            <tr class="{% cycle odd,even %}">
-                <td class="meta">
-                    <div class="avatar">{% gravatar bookmark.adder 40 %}</div>
-                    <div class="details"><a href="{% url profiles.views.profile bookmark.adder.username %}">{{ bookmark.adder }}</a></div>
-                    {{ bookmark.added|date }}
-                </td>
-                <td>
-                    <h2><a href="{{ bookmark.url }}">{{ bookmark.description }}</a></h2>
-                    <div class="body">{{ bookmark.note|linebreaks }}</div>
-                </td>
-            </tr>
+                <tr class="{% cycle odd,even %}">
+                    <td class="meta">
+                        <div class="avatar">{% gravatar bookmark.adder 40 %}</div>
+                        <div class="details"><a href="{% url profiles.views.profile bookmark.adder.username %}">{{ bookmark.adder }}</a></div>
+                        {{ bookmark.added|date }}
+                    </td>
+                    <td>
+                        <h2><a href="{{ bookmark.url }}">{{ bookmark.description }}</a></h2>
+                        <div class="body">{{ bookmark.note|linebreaks }}</div>
+                    </td>
+                </tr>
             {% endfor %}
         </table>
     {% else %}

@@ -11,9 +11,9 @@ feed_dict = {"feed_dict": {
 
 urlpatterns = patterns('',
     url(r'^$', direct_to_template, {"template": "homepage.html"}, name="home"),
-    (r'^apps/$', direct_to_template, {"template": "apps.html"}),
-    (r'^sites/$', direct_to_template, {"template": "sites.html"}),
-    (r'^team/$', direct_to_template, {"template": "team.html"}),
+    url(r'^apps/$', direct_to_template, {"template": "apps.html"}, name="apps"),
+    url(r'^sites/$', direct_to_template, {"template": "sites.html"}, name="sites"),
+    url(r'^team/$', direct_to_template, {"template": "team.html"}, name="team"),
     
     (r'^about/', include('about.urls')),
     (r'^account/', include('account.urls')),

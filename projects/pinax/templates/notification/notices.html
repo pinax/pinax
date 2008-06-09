@@ -3,73 +3,85 @@
 {% load humanize i18n %}
 {% load pagination_tags %}
 {% load timezone_filters %}
+{% load captureas_tag %}
 
 {% block head_title %}Pinax : {% trans "Notices" %}{% endblock %}
 
 {% block body %}
-
-<h1>{% trans "Notices" %}</h1>
-
-{% autopaginate notices %}
-{% if notices %}
-{# TODO: get timezone support working with regroup #}
-{% regroup notices by added.date as notices_by_date %}
-
-{% for date in notices_by_date %}
-<h2 class="notice_date">{{ date.grouper|naturalday:_("MONTH_DAY_FORMAT")|capfirst }}</h2>
-{% for notice in date.list %}
-{% if notice.is_unseen %}
-<div class="unseen_notice">
-{% else %}
-<div class="notice">
-{% endif %}
-    <span class="notice_type">[{% trans notice.notice_type.display %}]</span>
-    <span class="notice_message">{{ notice.html_message|safe }}</span>
-    <span class="notice_time">{{ notice.added|localtime:user.get_profile.timezone|time:"P" }}</span>
-</div>
-{% endfor %}
-{% endfor %}
-{% paginate %}
-{% else %}
-<p>{% trans "No notices." %}</p>
-{% endif %}
-
-<div class="notice_settings">
-    <h2>{% trans "Settings" %}</h2>
     
-    {% if user.email %}
-    <p>{% trans "Primary email" %}:<br />
-        <b>{{ user.email }}</b><br />
-        ({% blocktrans %}change under <a href="/account/email/">Account</a>{% endblocktrans %})</p>
+    <h1>{% trans "Notices" %}</h1>
+    
+    {% autopaginate notices %}
+    
+    {% if notices %}
+        {# TODO: get timezone support working with regroup #}
+        {% regroup notices by added.date as notices_by_date %}
+        
+        {% for date in notices_by_date %}
+            <h2 class="notice_date">{{ date.grouper|naturalday:_("MONTH_DAY_FORMAT")|capfirst }}</h2>
+            
+            {% for notice in date.list %}
+                {% if notice.is_unseen %}
+                    <div class="unseen_notice">
+                {% else %}
+                    <div class="notice">
+                {% endif %}
+                    <span class="notice_type">[{% trans notice.notice_type.display %}]</span>
+                    <span class="notice_message">{{ notice.html_message|safe }}</span>
+                    <span class="notice_time">{{ notice.added|localtime:user.get_profile.timezone|time:"P" }}</span>
+                </div>
+            {% endfor %}
+        {% endfor %}
+        
+        {% paginate %}
+        
     {% else %}
-    <p><span class="warning">{% trans "Note" %}</span>: {% blocktrans %}You do not have a verified email address to which notices can be sent. You can add one by going to <a href="/account/email/">Account</a>.{% endblocktrans %}</p>
+        <p>{% trans "No notices." %}</p>
     {% endif %}
     
-    <form method="POST" action="">
-        <table class="notice_settings">
-            <tr>
-                <th>{% trans "Notification Type" %}</th>
-                {% for header in notice_settings.column_headers %}
-                <th>{{ header }}</th>
+    
+    <div class="notice_settings">
+        <h2>{% trans "Settings" %}</h2>
+        
+        {% captureas email_url %}{% url acct_email %}{% endcaptureas %}
+        {% if user.email %}
+            <p>
+                {% trans "Primary email" %}:<br />
+                <b>{{ user.email }}</b><br />
+                ({% blocktrans %}change under <a href="{{ email_url }}">Account</a>{% endblocktrans %})
+            </p>
+        {% else %}
+            <p>
+                <span class="warning">{% trans "Note" %}</span>:
+                {% blocktrans %}You do not have a verified email address to which notices can be sent. You can add one by going to <a href="{{ email_url }}">Account</a>.{% endblocktrans %}
+            </p>
+        {% endif %}
+        
+        <form method="POST" action="">
+            <table class="notice_settings">
+                <tr>
+                    <th>{% trans "Notification Type" %}</th>
+                    {% for header in notice_settings.column_headers %}
+                        <th>{{ header }}</th>
+                    {% endfor %}
+                </tr>
+                {% for row in notice_settings.rows %}
+                    <tr>
+                        <td>{% trans row.notice_type.display %}<br/>
+                            <span class="notice_type_description">{% trans row.notice_type.description %}</span>
+                        </td>
+                        {% for cell in row.cells %}
+                            <td>
+                                <input type="checkbox" name="{{ cell.0 }}" {% if cell.1 %}checked="yes"{% endif %}/>
+                            </td>
+                        {% endfor %}
+                    </tr>
                 {% endfor %}
-            </tr>
-            {% for row in notice_settings.rows %}
-            <tr>
-                <td>{% trans row.notice_type.display %}<br/>
-                    <span class="notice_type_description">{% trans row.notice_type.description %}</span>
-                </td>
-                {% for cell in row.cells %}
-                <td>
-                    <input type="checkbox" name="{{ cell.0 }}" {% if cell.1 %}checked="yes"{% endif %}/>
-                </td>
-                {% endfor %}
-            </tr>
-            {% endfor %}
-            <tr>
-                <td><input type="submit" value="{% trans "Change" %}" /></td>
-            </tr>
-        </table>
-    </form>
-</div>
+                <tr>
+                    <td><input type="submit" value="{% trans "Change" %}" /></td>
+                </tr>
+            </table>
+        </form>
+    </div>
 
 {% endblock %}

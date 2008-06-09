@@ -15,32 +15,33 @@
     
     <body>
         {% if site_wide_announcements %}
-        <div id="site_wide_announcements">
-            <ul>
-                {% for announcement in site_wide_announcements %}
-                <li>
-                    <a href="{{ announcement.get_absolute_url }}">{{ announcement }}</a> -
-                    <a href="{% url announcement_hide announcement.pk %}?next={{ request.path }}">{% trans "Hide announcement" %}</a>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
+            <div id="site_wide_announcements">
+                <ul>
+                    {% for announcement in site_wide_announcements %}
+                    <li>
+                        <a href="{{ announcement.get_absolute_url }}">{{ announcement }}</a> -
+                        <a href="{% url announcement_hide announcement.pk %}?next={{ request.path }}">{% trans "Hide announcement" %}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
         {% endif %}
+        
         <div id="tabhead">
             <div class="logo">{% block logo_link_image %}{% endblock %}</div>
             <div class="login">{% block login %}{% endblock %}{% block locale_switcher %}{% endblock %}</div>
             <div class="tabs" {% block tab_id %}{% endblock %}>{% block tabs %}{% endblock %}</div>
             <div class="right_tab" {% block rtab_id %}{% endblock %}>{% block right_tab %}{% endblock %}</div>
         </div>
-        <div id="subnav">{% block subnav %}&nbsp;{% endblock %}<div style="clear: right;"></div></div>
+        <div id="subnav" class="clearfix">{% block subnav %}&nbsp;{% endblock %}</div>
         
         <div id="body">
             {% if messages %}
-            <ul id="messages">
-                {% for message in messages %}
-                <li id="message_{{ forloop.counter }}"><a href="#" onclick="$('#message_{{ forloop.counter }}').fadeOut(); return false;"><small>{% trans "clear" %}</small></a> {{ message }}</li>
-                {% endfor %}
-            </ul>
+                <ul id="messages">
+                    {% for message in messages %}
+                    <li id="message_{{ forloop.counter }}"><a href="#" onclick="$('#message_{{ forloop.counter }}').fadeOut(); return false;"><small>{% trans "clear" %}</small></a> {{ message }}</li>
+                    {% endfor %}
+                </ul>
             {% endif %}
             
             {% block body %}

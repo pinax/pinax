@@ -4,49 +4,55 @@
 {% load gravatar %}
 {% load humanize %}
 {% load pagination_tags %}
+{% load captureas_tag %}
 
 {% block head_title %}Pinax : {% blocktrans %}Tribes{% endblocktrans %}{% endblock %}
 
 {% block body %}
-<p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time.</p>
-
-<h1>{% trans "Tribes" %}</h1>
-
-<p>A <b>tribe</b> is a group of people with some common interest.</p>
-
-{% if user.is_authenticated %}
-<p><a href="#" onclick="$('#tribe_form').toggle(); return false;">{% trans "Start your own" %}</a></p>
-
-<form id="tribe_form" method="POST" action="" style="display: none;">
-<table>
-{{ tribe_form }}
-<tr><td></td><td><input type="hidden" name="action" value="create" /><input type="submit" value="{% trans 'create' %}"/></td></tr>
-</table>
-</form>
-{% else %}
-<p>{% blocktrans %}<a href="/account/signup/">Sign up</a> and <a href="/account/login/">log in </a> to create your own tribe or join an existing one.{% endblocktrans %}</p>
-{% endif %}
-
-{% autopaginate tribes %}
-{% regroup tribes by created.date as tribes_by_created %}
-
-{% for date in tribes_by_created %}
-<h2 class="creation_date">{{ date.grouper|naturalday:_("MONTH_DAY_FORMAT")|capfirst }}</h2>
-<dl>
-{% for tribe in date.list %}
-    <dt>{{ tribe.name }} (<a href="{% url tribes.views.tribe tribe.slug %}">{{ tribe.slug }}</a>)</dt>
-    <dd>{{ tribe.description }}</dd>
-{% endfor %}
-</dl>
-{% endfor %}
-
-{% paginate %}
+    <p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time.</p>
+    
+    
+    <h1>{% trans "Tribes" %}</h1>
+    
+    <p>A <b>tribe</b> is a group of people with some common interest.</p>
+    
+    {% if user.is_authenticated %}
+        <p><a href="#" onclick="$('#tribe_form').toggle(); return false;">{% trans "Start your own" %}</a></p>
+        
+        <form id="tribe_form" method="POST" action="" style="display: none;">
+            <table>
+                {{ tribe_form }}
+                <tr><td></td><td><input type="hidden" name="action" value="create" /><input type="submit" value="{% trans 'create' %}"/></td></tr>
+            </table>
+        </form>
+    {% else %}
+        {% captureas signup_url %}{% url acct_signup %}{% endcaptureas %}
+        {% captureas login_url %}{% url acct_login %}{% endcaptureas %}
+        <p>{% blocktrans %}<a href="{{ signup_url }}">Sign up</a> and <a href="{{ login_url }}">log in </a> to create your own tribe or join an existing one.{% endblocktrans %}</p>
+    {% endif %}
+    
+    {% autopaginate tribes %}
+    
+    {% regroup tribes by created.date as tribes_by_created %}
+    
+    {% for date in tribes_by_created %}
+        <h2 class="creation_date">{{ date.grouper|naturalday:_("MONTH_DAY_FORMAT")|capfirst }}</h2>
+        <dl>
+            {% for tribe in date.list %}
+                <dt>{{ tribe.name }} (<a href="{% url tribes.views.tribe tribe.slug %}">{{ tribe.slug }}</a>)</dt>
+                <dd>{{ tribe.description }}</dd>
+            {% endfor %}
+        </dl>
+    {% endfor %}
+    
+    {% paginate %}
+    
 {% endblock %}
 
 {% block extra_body %}
-<script>
-{% if tribe_form.errors %}
-    $('#tribe_form').show();
-{% endif %}
-</script>
+    <script>
+        {% if tribe_form.errors %}
+            $('#tribe_form').show();
+        {% endif %}
+    </script>
 {% endblock %}

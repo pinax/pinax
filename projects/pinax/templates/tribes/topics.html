@@ -8,35 +8,37 @@
 {% block head_title %}Pinax : Topics for {{ tribe.name }}{% endblock %}
 
 {% block body %}
-<h1>{% trans "Discussion Topics for Tribe" %} <a href="{% url tribe_detail tribe.slug %}">{{ tribe.name }}</a></h1>
-
-{% autopaginate tribe.topics.all %}
-<table class="topics">
-    {% for topic in tribe.topics.all %}
-    <tr class="{% cycle odd,even %}">
-        <td class="meta">
-            <div class="avatar">{% gravatar topic.creator 40 %}</div>
-            <div class="details"><a href="{% url profiles.views.profile topic.creator.username %}">{{ topic.creator }}</a></div>
-            {{ topic.created|date }}
-        </td>
-        <td>
-            <h2><a href="{% url tribe_topic topic.id %}">{{ topic.title }}</a></h2>
-            <div class="body">{{ topic.body|urlize|linebreaks }}</div>
-        </td>
-    </tr>
-    {% endfor %}
-</table>
-
-{% paginate %}
-
-<h2>New Topic</h2>
-
-<form action="{% url tribe_topics tribe.slug %}" method="POST">
-    <table>
-    {{ topic_form }}
-    <tr><td><input type="submit" value="{% trans "Create New Topic" %}" /></td></tr>
+    <h1>{% trans "Discussion Topics for Tribe" %} <a href="{% url tribe_detail tribe.slug %}">{{ tribe.name }}</a></h1>
+    
+    {% autopaginate tribe.topics.all %}
+    
+    <table class="topics">
+        {% for topic in tribe.topics.all %}
+            <tr class="{% cycle odd,even %}">
+                <td class="meta">
+                    <div class="avatar">{% gravatar topic.creator 40 %}</div>
+                    <div class="details"><a href="{% url profiles.views.profile topic.creator.username %}">{{ topic.creator }}</a></div>
+                    {{ topic.created|date }}
+                </td>
+                <td>
+                    <h2><a href="{% url tribe_topic topic.id %}">{{ topic.title }}</a></h2>
+                    <div class="body">{{ topic.body|urlize|linebreaks }}</div>
+                </td>
+            </tr>
+        {% endfor %}
     </table>
-    <input type="hidden" name="next" value="{{ request.path }}" />
-</form>
-
+    
+    {% paginate %}
+    
+    
+    <h2>New Topic</h2>
+    
+    <form action="{% url tribe_topics tribe.slug %}" method="POST">
+        <table>
+            {{ topic_form }}
+            <tr><td><input type="submit" value="{% trans "Create New Topic" %}" /></td></tr>
+        </table>
+        <input type="hidden" name="next" value="{{ request.path }}" />
+    </form>
+    
 {% endblock %}

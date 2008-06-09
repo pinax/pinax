@@ -6,18 +6,17 @@
 {% block head_title %}Pinax : {% blocktrans %}Single Tweet{% endblocktrans %}{% endblock %}
 
 {% block body %}
-<h1>{% trans "Single Tweet" %}</h1>
-
-<p>Here is a single tweet from {{ tweet.sender.username }}:</p>
-
-{% oembed %}
-<div class="tweet" id="t{{ tweet.id }}">
-<a href="{% url profiles.views.profile tweet.sender %}"><b>{{ tweet.sender }}</b></a>
-{{ tweet.html|safe }}
-<span class="timesince">{{ tweet.sent|timesince }} ago</span>
-<a class="reply" href="{% url zwitschern.views.personal %}?reply={{ tweet.sender }}">reply</a>
-</div>
-{% endoembed %}
-
-
+    <h1>{% trans "Single Tweet" %}</h1>
+    
+    <p>Here is a single tweet from {{ tweet.sender.username }}:</p>
+    
+    {% oembed %}
+        <div class="tweet" id="t{{ tweet.id }}">
+            <a href="{% url profiles.views.profile tweet.sender %}"><b>{{ tweet.sender }}</b></a>
+            {{ tweet.html|safe }}
+            <span class="timesince">{{ tweet.sent|timesince }} ago</span>
+            <a class="reply" href="{% url zwitschern.views.personal %}?reply={{ tweet.sender }}">reply</a>
+        </div>
+    {% endoembed %}
+    
 {% endblock %}

@@ -6,14 +6,14 @@
 {% block head_title %}Pinax : {% blocktrans %}Public Tweets{% endblocktrans %}{% endblock %}
 
 {% block extra_head %}
-<link rel="alternate" type="application/atom+xml" title="Tweets Feed" href="/feeds/tweets/" />
+    {# @@@ use url tag #}
+    <link rel="alternate" type="application/atom+xml" title="Tweets Feed" href="/feeds/tweets/" />
 {% endblock %}
 
 {% block body %}
-<h1>{% trans "All Tweets" %}</h1>
-
-<p>{% trans "These are tweets from everyone:" %}</p>
-
-{% tweet_listing tweets 1 0 %}
-
+    <h1>{% trans "All Tweets" %}</h1>
+    
+    <p>{% trans "These are tweets from everyone:" %}</p>
+    
+    {% tweet_listing tweets 1 0 %}
 {% endblock %}

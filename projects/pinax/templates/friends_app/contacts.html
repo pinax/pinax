@@ -6,71 +6,77 @@
 {% block head_title %}Pinax : {% trans "Contacts" %}{% endblock %}
 
 {% block body %}
-<h1>{% trans "Contacts" %}</h1>
-
-<p>Contacts are people you know but who may or may not be on this site (yet).</p>
-
-<p>Once this feature is complete, you will be able to import your contacts from a variety of places. You will then be notified whenever one of them joins Pinax. You can also help things along by sending them invites :-)</p>
-
-<p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time.</p>
-
-<h2>Import vCard</h2>
-
-<form enctype="multipart/form-data" method="post" action="">
-<input type="hidden" name="action" value="upload_vcard" />
-<table>
-{{ import_vcard_form }}
-<tr><td>&nbsp;</td><td><input type="submit" value="{% trans 'upload' %}" /></td></tr>
-</table>
-</form>
-
-<h2>Import from Google Contacts</h2>
-
-{% if authsub_token %}
-<form method="POST" action="">
-<input type="hidden" name="action" value="import_google" />
-<input type="submit" value="{% trans 'Import Google Contacts' %}" />
-</form>
-{% else %}
-<p>This will be a two step process. First you must
-<a href="{% url authsub.views.login %}">authenticate with Google</a>.
-Once you have agreed to let Pinax have access to your Google Contacts, you will be taken back here and
-an "Import Google Contacts" button will appear here.</p>
-{% endif %}
-
-<h2>Import from Yahoo Address Book</h2>
-
-{% if bbauth_token %}
-<form method="POST" action="">
-<input type="hidden" name="action" value="import_yahoo" />
-<input type="submit" value="{% trans 'Import Yahoo Address Book' %}" />
-</form>
-{% else %}
-<p>This will be a two step process. First you must
-<a href="{% url bbauth.views.login %}">authenticate with Yahoo</a>.
-Once you have agreed to let Pinax have access to your Yahoo Address Book, you will be taken back here and
-an "Import Yahoo Address Book" button will appear here.</p>
-{% endif %}
-
-<h2>Contacts</h2>
-
-{% with user.contact_set.all as contacts %}
-{% autopaginate contacts %}
-
-{% if contacts %}
-<table class="contact_list">
-{% for contact in contacts %}
-    <tr>
-        <td>{% if contact.name %}{{ contact.name }}{% else %}?{% endif %}</td>
-        <td>{{ contact.email }}</td>
-    </tr>
-{% endfor %}
-</table>
-{% paginate %}
-
-{% else %}
-<p>{% trans "No contacts." %}</p>
-{% endif %}
-{% endwith %}
-
+    <h1>{% trans "Contacts" %}</h1>
+    
+    <p>Contacts are people you know but who may or may not be on this site (yet).</p>
+    
+    <p>Once this feature is complete, you will be able to import your contacts from a variety of places. You will then be notified whenever one of them joins Pinax. You can also help things along by sending them invites :-)</p>
+    
+    <p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time.</p>
+    
+    <h2>Import vCard</h2>
+    
+    <form enctype="multipart/form-data" method="post" action="">
+        <input type="hidden" name="action" value="upload_vcard" />
+        <table>
+            {{ import_vcard_form }}
+            <tr><td></td><td><input type="submit" value="{% trans 'upload' %}" /></td></tr>
+        </table>
+    </form>
+    
+    <h2>Import from Google Contacts</h2>
+    
+    {% if authsub_token %}
+        <form method="POST" action="">
+            <input type="hidden" name="action" value="import_google" />
+            <input type="submit" value="{% trans 'Import Google Contacts' %}" />
+        </form>
+    {% else %}
+        <p>
+            This will be a two step process. First you must
+            <a href="{% url authsub.views.login %}">authenticate with Google</a>.
+            Once you have agreed to let Pinax have access to your Google Contacts, you will be taken back here and
+            an "Import Google Contacts" button will appear here.
+        </p>
+    {% endif %}
+    
+    <h2>Import from Yahoo Address Book</h2>
+    
+    {% if bbauth_token %}
+        <form method="POST" action="">
+            <input type="hidden" name="action" value="import_yahoo" />
+            <input type="submit" value="{% trans 'Import Yahoo Address Book' %}" />
+        </form>
+    {% else %}
+        <p>
+            This will be a two step process. First you must
+            <a href="{% url bbauth.views.login %}">authenticate with Yahoo</a>.
+            Once you have agreed to let Pinax have access to your Yahoo Address Book, you will be taken back here and
+            an "Import Yahoo Address Book" button will appear here.
+        </p>
+    {% endif %}
+    
+    <h2>Contacts</h2>
+    
+    {% with user.contact_set.all as contacts %}
+        
+        {% autopaginate contacts %}
+        
+        {% if contacts %}
+            <table class="contact_list">
+                {% for contact in contacts %}
+                    <tr>
+                        <td>{% if contact.name %}{{ contact.name }}{% else %}?{% endif %}</td>
+                        <td>{{ contact.email }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+            
+            {% paginate %}
+            
+        {% else %}
+            <p>{% trans "No contacts." %}</p>
+        {% endif %}
+    {% endwith %}
+    
 {% endblock %}

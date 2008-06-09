@@ -1,4 +1,4 @@
-You have been invited by {{ user }} to join Pinax.
+{% load i18n %}{% blocktrans %}You have been invited by {{ user }} to join Pinax.
 
 Pinax is both a platform for building social websites in Django as well
 as a demonstration of a site built on that platform.
@@ -12,3 +12,4 @@ To accept this invitation, go to
 {{ accept_url }}
 
 If you have any questions about Pinax, don't hesitate to contact jtauber@jtauber.com
+{% endblocktrans %}

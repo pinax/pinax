@@ -5,12 +5,11 @@
 {% block rtab_id %}id="tribes_tab"{% endblock %}
 
 {% block subnav %}
-{% if user.is_authenticated %}
-<ul>
-    <li><a href="{% url tribes.views.tribes %} ">{% trans "All Tribes" %}</a></li>
-</ul>
-{% else %}
-&nbsp;
-{% endif %}
-
+    {% if user.is_authenticated %}
+        <ul>
+            <li><a href="{% url tribes.views.tribes %} ">{% trans "All Tribes" %}</a></li>
+        </ul>
+    {% else %}
+        &nbsp;
+    {% endif %}
 {% endblock %}

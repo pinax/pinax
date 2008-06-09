@@ -8,24 +8,25 @@
 
 {% block body %}
     <p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time.</p>
-
+    
     <h1>{% trans "Wiki for Tribe" %} <a href="{% url tribe_detail group.slug %}">{{ group.name }}</a></h1>
-    <br>
+    
     {% include "wiki/searchbox.html" %}
-
+    
     {% autopaginate articles %}
+    
     {% regroup articles by created_at.date as articles_by_creation_date %}
-
+    
     {% if articles %}
-    <ul>
         {% for date in articles_by_creation_date %}
-        <h2 class="join_date">{{ date.grouper|naturalday:_("MONTH_DAY_FORMAT")|capfirst }}</h2>
-        {% for article in date.list %}
-        <a href="{% url wiki_article title=article.title,group_slug=group.slug %}">{{ article.title }}</a><br />
+            <h2 class="join_date">{{ date.grouper|naturalday:_("MONTH_DAY_FORMAT")|capfirst }}</h2>
+            
+            {% for article in date.list %}
+                <a href="{% url wiki_article title=article.title,group_slug=group.slug %}">{{ article.title }}</a><br />
+            {% endfor %}
         {% endfor %}
-        {% endfor %}
-    </ul>
     {% endif %}
+    
     <p>Start a <a href="{% url wiki_edit_article title="NewArticle",group_slug=group.slug %}">NewArticle</a>.</p>
-
+    
 {% endblock %}

@@ -13,44 +13,47 @@
 
 {% block locale_switcher %}
     <form action="/i18n/setlang/" method="post" id="locale_switcher">
-    <select name="language" onchange="$('#locale_switcher').submit()">{% for lang in LANGUAGES %}
-        <option value="{{ lang.0 }}"{% ifequal lang.0 LANGUAGE_CODE %} selected="selected"{% endifequal %}>{{ lang.1 }}</option>
-    {% endfor %}</select></form>
+        <select name="language" onchange="$('#locale_switcher').submit()">
+            {% for lang in LANGUAGES %}
+                <option value="{{ lang.0 }}"{% ifequal lang.0 LANGUAGE_CODE %} selected="selected"{% endifequal %}>{{ lang.1 }}</option>
+            {% endfor %}
+        </select>
+    </form>
 {% endblock %}
 
 {% block logo_link_image %}<a href="{% url home %}"><img src="/site_media/logo.png" alt="Pinax"/></a>{% endblock %}
 
 {% block tabs %}
-<table>
-    <tr>
-        <td class="tab tab_home"><div><a href="{% url home %}">{% trans "Home" %}</a></div></td>
-        <td class="tab tab_apps"><div><a href="/apps/">{% trans "Apps" %}</a></div></td>
-        <td class="tab tab_sites"><div><a href="/sites/">{% trans "Sites" %}</a></div></td>
-        <td class="tab tab_team"><div><a href="/team/">{% trans "Team" %}</a></div></td>
-    </tr>
-</table>
+    <table>
+        <tr>
+            <td class="tab tab_home"><div><a href="{% url home %}">{% trans "Home" %}</a></div></td>
+            <td class="tab tab_apps"><div><a href="{% url apps %}">{% trans "Apps" %}</a></div></td>
+            <td class="tab tab_sites"><div><a href="{% url sites %}">{% trans "Sites" %}</a></div></td>
+            <td class="tab tab_team"><div><a href="{% url team %}">{% trans "Team" %}</a></div></td>
+        </tr>
+    </table>
 {% endblock %}
 
 {% block right_tab %}
-{% if user.is_authenticated %}
-<table>
-    <tr>
-        <td class="tab rtab_profile"><div><a href="{% url profiles.views.profile user %}">{% trans "Profile" %}</a></div></td>
-        <td class="tab rtab_tribes"><div><a href="{% url tribes.views.tribes %}">{% trans "Tribes" %}</a></div></td>
-        <td class="tab rtab_tweets"><div><a href="{% url zwitschern.views.personal %}">{% trans "Tweets" %}</a></div></td>
-        <td class="tab rtab_bookmarks"><div><a href="{% url bookmarks.views.bookmarks %}">{% trans "Bookmarks" %}</a></div></td>
-        <td class="tab rtab_inbox"><div><a href="/messages/inbox/">{% trans "Inbox" %} ({% if messages_inbox_count %}{{ messages_inbox_count }}{% else %}0{% endif %}{% if notice_unseen_count %}+{{ notice_unseen_count }}{% endif %})</a></div></td>
-    </tr>
-</table>
-{% endif %}
+    {% if user.is_authenticated %}
+        <table>
+            <tr>
+                <td class="tab rtab_profile"><div><a href="{% url profiles.views.profile user %}">{% trans "Profile" %}</a></div></td>
+                <td class="tab rtab_tribes"><div><a href="{% url tribes.views.tribes %}">{% trans "Tribes" %}</a></div></td>
+                <td class="tab rtab_tweets"><div><a href="{% url zwitschern.views.personal %}">{% trans "Tweets" %}</a></div></td>
+                <td class="tab rtab_bookmarks"><div><a href="{% url bookmarks.views.bookmarks %}">{% trans "Bookmarks" %}</a></div></td>
+                <td class="tab rtab_inbox"><div><a href="{% url messages_inbox %}">{% trans "Inbox" %} ({% if messages_inbox_count %}{{ messages_inbox_count }}{% else %}0{% endif %}{% if notice_unseen_count %}+{{ notice_unseen_count }}{% endif %})</a></div></td>
+            </tr>
+        </table>
+    {% endif %}
 {% endblock %}
 
 {% block footer %}
 <div class="legal">
     {% trans "&copy; 2008 &lt;your company here&gt;" %}
-    - <a href="/about/">{% trans "About Pinax" %}</a>
+    - <a href="{% url about %}">{% trans "About Pinax" %}</a>
     - <a href="http://jtauber.com/pinax/">{% trans "Pinax Blog" %}</a>
-    - <a href="/about/terms/">{% trans "Terms of Service" %}</a>
-    - <a href="/about/privacy/">{% trans "Privacy Policy" %}</a>
+    - <a href="{% url terms %}">{% trans "Terms of Service" %}</a>
+    - <a href="{% url privacy %}">{% trans "Privacy Policy" %}</a>
 </div>
 {% endblock %}

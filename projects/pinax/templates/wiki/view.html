@@ -8,7 +8,7 @@
 {% block head_title %}Pinax : Wiki for {{ group.name }} {% endblock %}
 
 {% block body %}
-
+    
     <div class="right_panel">
         <div class="tribes">
             <h2>{% trans "Actions" %}</h2>
@@ -20,14 +20,18 @@
             {% endif %}
         </div>
     </div>
-
+    
     <h1>{% trans "Wiki for Tribe" %} <a href="{% url tribe_detail group.slug %}">{{ group.name }}</a></h1>
+    
     <h2><a href="{{ article.get_absolute_url }}" rel="bookmark">{{ article.title }}</a></h2>
-
+    
     {% if not article.id %}
-    <p>{% trans "This article does not exist." %}
-        <a href="{% url wiki_edit_article title=article.title,group_slug=group.slug %}" {% trans ">Create it now</a>?" %}</p>
+        <p>
+            {% trans "This article does not exist." %}
+            <a href="{% url wiki_edit_article title=article.title,group_slug=group.slug %}" {% trans ">Create it now</a>?" %}
+        </p>
     {% endif %}
+    
     {# Yes, the following mess is necessary #}
     {% with article.content as content %}
         {% switch article.markup %}
@@ -37,5 +41,5 @@
             {% case '' %} {{ content|force_escape|wikiwords|linebreaks|safe }} {% endcase %}
         {% endswitch %}
     {% endwith %}
-
+    
 {% endblock %}

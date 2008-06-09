@@ -1,21 +1,23 @@
 {% load i18n %}
+{% load captureas_tag %}
 
 <h2>{% trans "Bookmarks" %}</h2>
 
 {% if other_user.added_bookmarks.all %}
     <table class="bookmarks">
         {% for bookmark in  other_user.added_bookmarks.all %}
-        <tr class="{% cycle odd,even %}">
-            <td class="meta">
-                {{ bookmark.added|date }}
-            </td>
-            <td>
-                <h2><a href="{{ bookmark.url }}">{{ bookmark.description }}</a></h2>
-                <div class="body">{{ bookmark.note|linebreaks }}</div>
-            </td>
-        </tr>
+            <tr class="{% cycle odd,even %}">
+                <td class="meta">
+                    {{ bookmark.added|date }}
+                </td>
+                <td>
+                    <h2><a href="{{ bookmark.url }}">{{ bookmark.description }}</a></h2>
+                    <div class="body">{{ bookmark.note|linebreaks }}</div>
+                </td>
+            </tr>
         {% endfor %}
     </table>
 {% else %}
-    <p>{% trans "No bookmarks yet." %}</p>
+    {% captureas add_bookmark_url %}{% url bookmarks.views.add %}{% endcaptureas %}
+    <p>{% blocktrans %}You haven't added any <a href="{{ add_bookmark_url }}">bookmarks</a> yet.{% endblocktrans %}</p>
 {% endif %}
