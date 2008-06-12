@@ -84,7 +84,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.i18n",
     "django.core.context_processors.media",
     "django.core.context_processors.request",
-    
+
     "notification.context_processors.notification",
     "announcements.context_processors.site_wide_announcements",
     "account.context_processors.openid",
@@ -101,7 +101,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.humanize',
     'django.contrib.markup',
-    
+
     # external
     'notification', # must be first
     'emailconfirmation',
@@ -124,7 +124,7 @@ INSTALLED_APPS = (
     'timezones',
     'feedutil',
     'app_plugins',
-    
+
     # internal (for now)
     'analytics',
     'profiles',
@@ -168,6 +168,18 @@ LANGUAGES = (
 
 CACHE_BACKEND = "locmem:///?max_entries=3000"
 FEEDUTIL_SUMMARY_LEN = 60*7 # 7 hours
+
+class NullStream(object):
+    def write(*args, **kw):
+        pass
+    writeline = write
+    writelines = write
+
+RESTRUCTUREDTEXT_FILTER_SETTINGS = { 'cloak_email_addresses': True,
+                                     'file_insertion_enabled': False,
+                                     'raw_enabled': False,
+                                     'warning_stream': NullStream(),
+                                     'strip_comments': True,}
 
 try:
     from localsettings import *
