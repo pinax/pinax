@@ -1,10 +1,10 @@
 {% load feedutil %}
 {% load i18n %}
 
-{% if other_user.get_profile.blogrss %}
+{% if owner.get_profile.blogrss %}
     <div class="feed-entries">
         <h2>{% trans "Recent Blog Posts" %}</h2>
         
-        {% feed other_user.get_profile.blogrss 5 %}
+        {% feed owner.get_profile.blogrss 5 %}
     </div>
 {% endif %}

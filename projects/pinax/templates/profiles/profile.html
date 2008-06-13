@@ -88,7 +88,7 @@
         
         {% endif %} {# is me #}
         
-        {% plugin_point "profile" %}
+        {% plugin_point "profiles.profile" user=other_user owner=other_user viewer=user %}
     
     {% else %} {# not user.is_authenticated #}
         {% captureas signup_url %}{% url acct_signup %}{% endcaptureas %}
