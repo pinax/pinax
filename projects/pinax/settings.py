@@ -124,7 +124,8 @@ INSTALLED_APPS = (
     'timezones',
     'feedutil',
     'app_plugins',
-
+    'voting',
+    
     # internal (for now)
     'analytics',
     'profiles',
