@@ -20,7 +20,7 @@
                         {% if forloop.counter0|divisibleby:"3" %}<tr>{% endif %}
                         <td>
                             <div class="avatar">{% gravatar member 40 %}</div>
-                            <div class="details"><a href="{% url profiles.views.profile member.username %}">{{ member }}</a></div>
+                            <div class="details"><a href="{% url profiles.views.profile member.username %}" title="{{ member.username }}">{{ member.username }}</a></div>
                         </td>
                         {% if forloop.counter0|add:"1"|divisibleby:"3" %}</tr>{% endif %}
                     {% endfor %}

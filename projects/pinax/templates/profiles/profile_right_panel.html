@@ -22,7 +22,7 @@
                 {% if forloop.counter0|divisibleby:"3" %}<tr>{% endif %}
                     <td>
                         <div class="avatar">{% gravatar friendship.friend 40 %}</div>
-                        <div class="details"><a href="{% url profiles.views.profile friendship.friend.username %}">{{ friendship.friend }}</a></div>
+                        <div class="details"><a href="{% url profiles.views.profile friendship.friend.username %}" title="{{ friendship.friend.username }}">{{ friendship.friend.username }}</a></div>
                     </td>
                 {% if forloop.counter0|add:"1"|divisibleby:"3" %}</tr>{% endif %}
                 {% endfor %}
@@ -52,7 +52,7 @@
                 {% if forloop.counter0|divisibleby:"3" %}<tr>{% endif %}
                 <td>
                     <div class="avatar">{% gravatar friendship.friend 40 %}</div>
-                    <div class="details"><a href="{% url profiles.views.profile friendship.friend.username %}">{{ friendship.friend }}</a></div>
+                    <div class="details"><a href="{% url profiles.views.profile friendship.friend.username %}" title="{{ friendship.friend.username }}">{{ friendship.friend.username }}</a></div>
                 </td>
                 {% if forloop.counter0|add:"1"|divisibleby:"3" %}</tr>{% endif %}
             {% endfor %}
