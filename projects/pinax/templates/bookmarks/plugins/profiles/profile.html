@@ -3,9 +3,9 @@
 
 <h2>{% trans "Bookmarks" %}</h2>
 
-{% if other_user.added_bookmarks.all %}
+{% if owner.added_bookmarks.all %}
     <table class="bookmarks">
-        {% for bookmark in  other_user.added_bookmarks.all %}
+        {% for bookmark in  owner.added_bookmarks.all %}
             <tr class="{% cycle odd,even %}">
                 <td class="meta">
                     {{ bookmark.added|date }}
