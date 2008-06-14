@@ -98,7 +98,6 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
-    'django.contrib.admin',
     'django.contrib.humanize',
     'django.contrib.markup',
 
@@ -134,6 +133,9 @@ INSTALLED_APPS = (
     'tribes',
     'core',
     'bookmarks',
+
+    'django.contrib.admin',
+
 )
 
 ABSOLUTE_URL_OVERRIDES = {
