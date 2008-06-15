@@ -9,14 +9,14 @@ from bookmarks.forms import BookmarkForm
 
 def bookmarks(request):
     bookmarks = Bookmark.objects.all().order_by("-added")
-    
+
     return render_to_response("bookmarks/bookmarks.html", {
         "bookmarks": bookmarks,
     }, context_instance=RequestContext(request))
 
 @login_required
 def add(request):
-    
+
     if request.method == "POST":
         bookmark_form = BookmarkForm(request.POST)
         if bookmark_form.is_valid():
@@ -25,11 +25,17 @@ def add(request):
             bookmark.save()
             return HttpResponseRedirect(reverse("bookmarks.views.bookmarks"))
     else:
-        if "url" in request.GET:
-            bookmark_form = BookmarkForm(initial={"url": request.GET["url"]})
+        initial = {}
+        if 'url' in request.GET:
+            initial['url'] = request.GET["url"]
+        if 'description' in request.GET:
+            initial['description'] = request.GET["description"]
+
+        if initial:
+            bookmark_form = BookmarkForm(initial=initial)
         else:
             bookmark_form = BookmarkForm()
-    
+
     return render_to_response("bookmarks/add.html", {
         "bookmark_form": bookmark_form,
     }, context_instance=RequestContext(request))
