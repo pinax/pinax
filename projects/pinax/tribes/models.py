@@ -47,6 +47,7 @@ class Topic(models.Model):
     title = models.CharField(_('title'), max_length="50")
     creator = models.ForeignKey(User, related_name="created_topics", verbose_name=_('creator'))
     created = models.DateTimeField(_('created'), default=datetime.now)
+    modified = models.DateTimeField(_('modified'), default=datetime.now) # topic modified when commented on
     body = models.TextField(_('body'), blank=True)
     
     def __unicode__(self):
@@ -57,16 +58,18 @@ class Topic(models.Model):
     get_absolute_url = models.permalink(get_absolute_url)
     
     class Meta:
-        ordering = ('-created', )
+        ordering = ('-modified', )
     
     class Admin:
         list_display = ('title', )
 
 
-if notification:
-    from threadedcomments.models import ThreadedComment
-    def new_comment(sender, instance):
-        if isinstance(instance.content_object, Topic):
-            topic = instance.content_object
+from threadedcomments.models import ThreadedComment
+def new_comment(sender, instance):
+    if isinstance(instance.content_object, Topic):
+        topic = instance.content_object
+        topic.modified = datetime.now()
+        topic.save()
+        if notification:
             notification.send([topic.creator], "tribes_topic_response", "%(user)s has responded to your topic '%(topic)s'.", {"user": instance.user, "topic": topic})
-    dispatcher.connect(new_comment, signal=signals.post_save, sender=ThreadedComment)
+dispatcher.connect(new_comment, signal=signals.post_save, sender=ThreadedComment)
