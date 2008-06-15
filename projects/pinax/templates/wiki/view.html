@@ -43,4 +43,15 @@
         {% endswitch %}
     {% endwith %}
 
+    {% if can_observe %}
+        {% if is_observing %}
+            <form action="{% url wiki_stop_observing_article title=article.title,group_slug=group.slug %}" method="post">
+                <input type="submit" value="Stop Observing Article">
+            </form>
+        {% else %}
+            <form action="{% url wiki_observe_article title=article.title,group_slug=group.slug %}" method="post">
+                <input type="submit" value="Observe Article">
+            </form>
+        {% endif %}
+    {% endif %}
 {% endblock %}
