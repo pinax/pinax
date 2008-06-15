@@ -4,3 +4,8 @@
 
 ALTER TABLE "tribes_topic" ADD COLUMN "modified" datetime NOT NULL DEFAULT 0;
 UPDATE "tribes_topic" SET modified=created;
+
+# postgresql
+
+ALTER TABLE "tribes_topic" ADD COLUMN "modified" timestamp with time zone NOT NULL DEFAULT now();
+UPDATE "tribes_topic" SET modified=created;
