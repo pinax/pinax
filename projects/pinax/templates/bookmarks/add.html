@@ -7,9 +7,11 @@
 
 {% block body %}
     <h1>{% trans "Add Bookmark" %}</h1>
-    
+
     <p><span class="warning">Note</span>: Pinax Bookmarks are currently experimental but will eventually support tagging, multiple submissions of the same URL and a whole lot more.</p>
-    
+
+    <p>You can drag this '<a href="javascript:location.href='http://pinax.hotcluboffrance.com/bookmarks/add/?url='+encodeURIComponent(location.href)+';description='+encodeURIComponent(document.title)">Add to Pinax Bookmarks</a>' link to your bookmark bar to post the pages you visit!</p>
+
     <form method="POST" action="">
         <table>
             {{ bookmark_form }}
