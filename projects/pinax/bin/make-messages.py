@@ -13,7 +13,8 @@ from itertools import dropwhile
 
 pythonize_re = re.compile(r'\n\s*//')
 
-EXCLUDE_SUBDIRS = ['.svn', 'site-packages']
+exclude_svn_re = re.compile(r'/\.svn/?')
+exclude_site_re = re.compile(r'^./site-packages')
 
 def make_messages():
     localedir = None
@@ -78,8 +79,9 @@ def make_messages():
 
         all_files = []
         for (dirpath, dirnames, filenames) in os.walk("."):
-            if any(dir in EXCLUDE_SUBDIRS for dir in dirnames): continue
-            all_files.extend([(dirpath, f) for f in filenames])
+            if not (exclude_svn_re.search(dirpath) or
+                    exclude_site_re.match(dirpath)):
+                all_files.extend([(dirpath, f) for f in filenames])
         all_files.sort()
         for dirpath, file in all_files:
             if domain == 'djangojs' and file.endswith('.js'):
