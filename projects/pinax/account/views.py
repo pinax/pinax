@@ -14,7 +14,7 @@ from emailconfirmation.models import EmailAddress, EmailConfirmation
 from friends.models import Friendship
 
 def login(request):
-    redirect_to = request.REQUEST.get("next", reverse("acct_email"))
+    redirect_to = request.REQUEST.get("next", reverse("what_next"))
     if request.method == "POST":
         form = LoginForm(request.POST)
         if form.login(request):
@@ -33,7 +33,7 @@ def signup(request):
             user = authenticate(username=username, password=password)
             auth_login(request, user)
             request.user.message_set.create(message=_("Successfully logged in as %(username)s.") % {'username': user.username})
-            return HttpResponseRedirect("/")
+            return HttpResponseRedirect(reverse("what_next"))
     else:
         form = SignupForm()
     return render_to_response("account/signup.html", {

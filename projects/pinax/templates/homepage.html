@@ -17,6 +17,7 @@
     {% endblocktrans %}
     
     {% if user.is_authenticated %}
+        <p class="what_next">Wondering <a href="{% url what_next %}">What Next</a>?</p>
     {% else %}
         {% captureas signup_url %}{% url acct_signup %}{% endcaptureas %}
         {% captureas login_url %}{% url acct_login %}{% endcaptureas %}
