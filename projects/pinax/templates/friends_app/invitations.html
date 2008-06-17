@@ -103,3 +103,11 @@
     {% endif %}
     
 {% endblock %}
+
+{% block extra_body %}
+    <script>
+        {% if join_request_form.errors %}
+            $('#join_invite').show();
+        {% endif %}
+    </script>
+{% endblock %}
