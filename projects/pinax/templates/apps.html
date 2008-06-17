@@ -1,70 +1,70 @@
 {% extends "site_base.html" %}
 
 {% load i18n %}
-
+{% load svn_app_version %}
 {% block head_title %}Pinax : Apps{% endblock %}
 
 {% block tab_id %}id="apps_tab"{% endblock %}
 
 {% block body %}
     <h1>Apps</h1>
-    
+
     <p>More about the apps that make up Pinax.</p>
-    
+
     <h2>External</h2>
-    
+
     <p>These already exist as independent apps. Some pre-existed Pinax, some were written especially for it.</p>
-    
+
     <dl>
-        <dt><a href="http://code.google.com/p/django-notification/">django-notification</a></dt>
+        <dt><a href="http://code.google.com/p/django-notification/">django-notification</a> <em>{% svn_app_version "notification" %}</em></dt>
         <dd>user notification management</dd>
-        <dt><a href="http://code.google.com/p/django-email-confirmation/">django-email-confirmation</a></dt>
+        <dt><a href="http://code.google.com/p/django-email-confirmation/">django-email-confirmation</a> <em>{% svn_app_version "emailconfirmation" %}</em></dt>
         <dd>simple email verification</dd>
-        <dt><a href="http://code.google.com/p/django-command-extensions/">django-command-extensions</a></dt>
+        <dt><a href="http://code.google.com/p/django-command-extensions/">django-command-extensions</a> <em>{% svn_app_version "extensions" %}</em></dt>
         <dd>useful management commands</dd>
-        <dt><a href="http://code.google.com/p/django-robots/">django-robots</a></dt>
+        <dt><a href="http://code.google.com/p/django-robots/">django-robots</a> <em>{% svn_app_version "robots" %}</em></dt>
         <dd>for managing robots.txt files</dd>
-        <dt><a href="http://code.google.com/p/django-databasetemplateloader/">django-databasetemplateloader</a></dt>
+        <dt><a href="http://code.google.com/p/django-databasetemplateloader/">django-databasetemplateloader</a> <em>{% svn_app_version "dbtemplates" %}</em></dt>
         <dd>loader for templates from the database</dd>
-        <dt><a href="http://code.google.com/p/django-friends/">django-friends</a></dt>
+        <dt><a href="http://code.google.com/p/django-friends/">django-friends</a> <em>{% svn_app_version "friends" %}</em></dt>
         <dd>friendship, contact and invitation management</dd>
-        <dt><a href="http://code.google.com/p/django-mailer/">django-mailer</a></dt>
+        <dt><a href="http://code.google.com/p/django-mailer/">django-mailer</a> <em>{% svn_app_version "mailer" %}</em></dt>
         <dd>mail queuing and management</dd>
-        <dt><a href="http://code.google.com/p/django-messages/">django-messages</a></dt>
+        <dt><a href="http://code.google.com/p/django-messages/">django-messages</a> <em>{% svn_app_version "messages" %}</em></dt>
         <dd>private messages between users</dd>
-        <dt><a href="http://code.google.com/p/django-announcements/">django-announcements</a></dt>
+        <dt><a href="http://code.google.com/p/django-announcements/">django-announcements</a> <em>{% svn_app_version "announcements" %}</em></dt>
         <dd>site announcements</dd>
-        <dt><a href="http://code.google.com/p/django-oembed/">django-oembed</a></dt>
+        <dt><a href="http://code.google.com/p/django-oembed/">django-oembed</a> <em>{% svn_app_version "oembed" %}</em></dt>
         <dd>support for oembeded links</dd>
-        <dt><a href="http://code.google.com/p/django-logging/">django-logging</a></dt>
+        <dt><a href="http://code.google.com/p/django-logging/">django-logging</a> <em>{% svn_app_version "djangologging" %}</em></dt>
         <dd>debugging and logging</dd>
-        <dt><a href="http://code.google.com/p/django-db-log/">django-db-log</a></dt>
+        <dt><a href="http://code.google.com/p/django-db-log/">django-db-log</a> <em>{% svn_app_version "djangodblog" %}</em></dt>
         <dd>exception logging to the database</dd>
-        <dt><a href="http://code.google.com/p/django-pagination/">django-pagination</a></dt>
+        <dt><a href="http://code.google.com/p/django-pagination/">django-pagination</a> <em>{% svn_app_version "pagination" %}</em></dt>
         <dd>easy pagination</dd>
-        <dt><a href="http://code.google.com/p/django-threadedcomments/">django-threadedcomments</a></dt>
+        <dt><a href="http://code.google.com/p/django-threadedcomments/">django-threadedcomments</a> <em>{% svn_app_version "threadedcomments" %}</em></dt>
         <dd>threaded comments</dd>
-        <dt><a href="http://code.google.com/p/django-wikiapp/">django-wikiapp</a></dt>
+        <dt><a href="http://code.google.com/p/django-wikiapp/">django-wikiapp</a> <em>{% svn_app_version "threadedcomments" %}</em></dt>
         <dd>simple wiki</dd>
-        <dt><a href="http://code.google.com/p/django-evolution/">django-evolution</a></dt>
+        <dt><a href="http://code.google.com/p/django-evolution/">django-evolution</a> <em>{% svn_app_version "django_evolution" %}</em></dt>
         <dd>db schema evolution</dd>
-        <dt><a href="http://code.google.com/p/django-timezones/">django-timezones</a></dt>
+        <dt><a href="http://code.google.com/p/django-timezones/">django-timezones</a> <em>{% svn_app_version "timezones" %}</em></dt>
         <dd>timezone localization</dd>
-        <dt><a href="http://code.google.com/p/django-feedutil/">django-feedutil</a></dt>
+        <dt><a href="http://code.google.com/p/django-feedutil/">django-feedutil</a> <em>{% svn_app_version "feedutil" %}</em></dt>
         <dd>feed aggregation</dd>
-        <dt><a href="http://code.google.com/p/django-app-plugins/">django-app-plugins</a></dt>
+        <dt><a href="http://code.google.com/p/django-app-plugins/">django-app-plugins</a> <em>{% svn_app_version "app_plugins" %}</em></dt>
         <dd>extension points in templates</dd>
-        <dt><a href="http://code.google.com/p/django-voting/">django-voting</a></dt>
+        <dt><a href="http://code.google.com/p/django-voting/">django-voting</a> <em>{% svn_app_version "voting" %}</em></dt>
         <dd>generic voting</dd>
     </dl>
-    
+
     <p><a href="http://code.google.com/p/django-openid/">django-openid</a> is also used but locally for modification.</p>
-    
-    
+
+
     <h2>Local</h2>
-    
+
     <p>These are currently inside Pinax but could potentially be broken out as generic apps.</p>
-    
+
     <dl>
         <dt>analytics</dt>
         <dd>Google analytics javascript</dd>
@@ -85,5 +85,5 @@
         <dt>bookmarks</dt>
         <dd>URL bookmarking</dd>
     </dl>
-    
+
 {% endblock %}

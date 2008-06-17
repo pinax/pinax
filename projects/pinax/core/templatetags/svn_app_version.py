@@ -17,7 +17,9 @@ def svn_app_version(appname=None):
 
     if appname not in settings.INSTALLED_APPS: return 'SVN-None'
     try:
-        module = __import__(app_name,{},{},[''])
+        module = __import__(appname,{},{},[''])
     except:
+        if settings.DEBUG:
+            raise
         return 'SVN-Error'
-    return get_svn_revision(dn(abspath(module.__file__))
+    return get_svn_revision(dn(abspath(module.__file__)))

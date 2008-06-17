@@ -12,7 +12,7 @@
         {% block extra_head %}
         {% endblock %}
     </head>
-    
+
     <body>
         {% if site_wide_announcements %}
             <div id="site_wide_announcements">
@@ -26,15 +26,15 @@
                 </ul>
             </div>
         {% endif %}
-        
+
         <div id="tabhead">
             <div class="logo">{% block logo_link_image %}{% endblock %}</div>
-            <div class="login">{% block login %}{% endblock %}{% block locale_switcher %}{% endblock %}</div>
+            <div class="login">{% block login %}{% endblock %}{% block locale_switcher %}{% endblock %}<div style="text-align: right;">{% block version %}{% endblock %}</div></div>
             <div class="tabs" {% block tab_id %}{% endblock %}>{% block tabs %}{% endblock %}</div>
             <div class="right_tab" {% block rtab_id %}{% endblock %}>{% block right_tab %}{% endblock %}</div>
         </div>
         <div id="subnav" class="clearfix">{% block subnav %}&nbsp;{% endblock %}</div>
-        
+
         <div id="body">
             {% if messages %}
                 <ul id="messages">
@@ -43,14 +43,14 @@
                     {% endfor %}
                 </ul>
             {% endif %}
-            
+
             {% block body %}
             {% endblock %}
-            
+
         </div>
-        
+
         <div id="footer">{% block footer %}{% endblock %}</div>
-        
+
         <script src="/site_media/jquery.js" type="text/javascript"></script>
         {% load analytics %}
         {% urchin %}
