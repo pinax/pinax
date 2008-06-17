@@ -21,9 +21,6 @@
     </form>
 {% endblock %}
 
-{% block version %}
-Version: {% svn_app_version %}
-{% endblock %}
 {% block logo_link_image %}<a href="{% url home %}"><img src="/site_media/logo.png" alt="Pinax"/></a>{% endblock %}
 
 {% block tabs %}
@@ -58,5 +55,6 @@ Version: {% svn_app_version %}
     - <a href="http://jtauber.com/pinax/">{% trans "Pinax Blog" %}</a>
     - <a href="{% url terms %}">{% trans "Terms of Service" %}</a>
     - <a href="{% url privacy %}">{% trans "Privacy Policy" %}</a>
+    - Version: {% svn_app_version %}
 </div>
 {% endblock %}
