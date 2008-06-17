@@ -14,7 +14,9 @@ from itertools import dropwhile
 pythonize_re = re.compile(r'\n\s*//')
 
 exclude_svn_re = re.compile(r'/\.svn/?')
-exclude_site_re = re.compile(r'^./site-packages')
+exclude_site_re = re.compile(r'^\./site-packages')
+
+template_extensions = re.compile('\.(html|txt|rst|ical|csv)$')
 
 def make_messages():
     localedir = None
@@ -109,9 +111,9 @@ def make_messages():
                 if msgs:
                     open(potfile, 'ab').write(msgs)
                 os.unlink(os.path.join(dirpath, thefile))
-            elif domain == 'django' and (file.endswith('.py') or file.endswith('.html')):
+            elif domain == 'django' and (file.endswith('.py') or template_extensions.match(file)):
                 thefile = file
-                if file.endswith('.html'):
+                if template_extensions.match(file):
                     src = open(os.path.join(dirpath, file), "rb").read()
                     thefile = '%s.py' % file
                     open(os.path.join(dirpath, thefile), "wb").write(templatize(src))
