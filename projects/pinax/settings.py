@@ -67,6 +67,7 @@ MIDDLEWARE_CLASSES = (
     'djangologging.middleware.LoggingMiddleware',
     'django_openidconsumer.middleware.OpenIDMiddleware',
     'pagination.middleware.PaginationMiddleware',
+    'things.middleware.SortOrderMiddleware',
     'djangodblog.DBLogMiddleware',
 )
 

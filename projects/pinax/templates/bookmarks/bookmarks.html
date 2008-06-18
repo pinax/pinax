@@ -3,6 +3,8 @@
 {% load i18n %}
 {% load gravatar %}
 {% load voting_tags %}
+{% load pagination_tags %}
+{% load extra_voting_tags %}
 
 {% block head_title %}Pinax : {% blocktrans %}All Bookmarks{% endblocktrans %}{% endblock %}
 
@@ -17,6 +19,21 @@
     
     {% if bookmarks %}
         <p>{% trans "These are bookmarks from everyone:" %}</p>
+        
+        <p>Sort by:
+            {% ifequal request.sort_order "points" %}
+                <b>points</b>
+                or
+                <a href="?sort_order=date">date added</a>
+                {% order_by_votes bookmarks %}
+            {% else %}
+                <a href="?sort_order=points">points</a>
+                or
+                <b>date added</b>
+            {% endifequal %}
+        </p>
+        
+        {% autopaginate bookmarks %}
         
         {% votes_by_user user on bookmarks as vote_dict %}
         {% scores_for_objects bookmarks as score_dict %}
@@ -45,6 +62,9 @@
                 </tr>
             {% endfor %}
         </table>
+        
+        {% paginate %}
+        
     {% else %}
         <p>{% trans "No bookmarks yet." %}</p>
     {% endif %}
