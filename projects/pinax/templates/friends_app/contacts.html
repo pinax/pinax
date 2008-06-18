@@ -58,7 +58,7 @@
     
     <h2>Contacts</h2>
     
-    {% with user.contact_set.all as contacts %}
+    {% with user.contacts.all as contacts %}
         
         {% autopaginate contacts %}
         
@@ -68,6 +68,10 @@
                     <tr>
                         <td>{% if contact.name %}{{ contact.name }}{% else %}?{% endif %}</td>
                         <td>{{ contact.email }}</td>
+                        <td>
+                            {% for other_user in contact.users.all %}
+                                <a href="{% url profiles.views.profile other_user.username %}">{{ other_user }}</a>
+                            {% endfor %}
                     </tr>
                 {% endfor %}
             </table>
