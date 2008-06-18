@@ -17,8 +17,8 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 
 from emailconfirmation.models import EmailAddress
-
 from friends.models import JoinInvitation
+from profiles.models import Profile
 
 from timezones import TIMEZONE_CHOICES
 
@@ -119,7 +119,10 @@ class ProfileForm(UserForm):
     
     def __init__(self, *args, **kwargs):
         super(ProfileForm, self).__init__(*args, **kwargs)
-        self.profile = self.user.get_profile()
+        try:
+            self.profile = self.user.get_profile()
+        except Profile.DoesNotExist:
+            self.profile = Profile(user=self.user)
 
 
 class AddEmailForm(UserForm):
