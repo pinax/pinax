@@ -72,6 +72,7 @@
                             {% for other_user in contact.users.all %}
                                 <a href="{% url profiles.views.profile other_user.username %}">{{ other_user }}</a>
                             {% endfor %}
+                        </td>
                     </tr>
                 {% endfor %}
             </table>
