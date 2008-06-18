@@ -124,6 +124,7 @@ INSTALLED_APPS = (
     'feedutil',
     'app_plugins',
     'voting',
+    'bookmarks',
     
     # internal (for now)
     'analytics',
@@ -132,7 +133,7 @@ INSTALLED_APPS = (
     'account',
     'tribes',
     'core',
-    'bookmarks',
+    'things',
 
     'django.contrib.admin',
 
