@@ -29,40 +29,9 @@ class OrderByVotesNode(template.Node):
                 FROM %s
                 WHERE content_type_id = %s
                 AND object_id = %s."id"
-            """ %     (qn(Vote._meta.db_table),
-                               ctype.id, qn(model._meta.db_table))},
+            """ % (qn(Vote._meta.db_table), ctype.id, qn(model._meta.db_table))},
             order_by=['-score'])
         context[key] = by_score
         return u""
-        
-        
-        #ctype = ContentType.objects.get_for_model(value.model)
-        #query = """
-        #SELECT
-        #    %(table)s, SUM(vote) AS score
-        #FROM
-        #    votes, (%(subquery)s) AS foo
-        #WHERE
-        #    content_type_id = %(ctype_id)s AND object_id = %(table)s
-        #GROUP BY
-        #    %(table)s
-        #ORDER BY
-        #    score DESC;""" % {
-        #        "table": value.model._meta.db_table,
-        #        "subquery": value.query,
-        #        "ctype_id": ctype.id,
-        #    }
-        #    
-        #cursor = connection.cursor()
-        #cursor.execute(query)
-        #results = cursor.fetchall()
-        #
-        #objects = value.model.objects.in_bulk([id for id, score in results])
-        #def r():
-        #    for id, score in results:
-        #        if id in objects:
-        #            yield objects[id]
-        #context[key] = r()
-        #return u""
 
 register.tag('order_by_votes', do_order_by_votes)
