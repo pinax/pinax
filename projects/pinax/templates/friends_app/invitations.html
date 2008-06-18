@@ -95,6 +95,11 @@
                     <td>{{ invitation.contact.email }}</td>
                     <td>{{ invitation.sent }}</td>
                     <td class="invitation_{{ invitation.status }}">{{ invitation.get_status_display }}</td>
+                    <td>
+                        {% for other_user in invitation.contact.users.all %}
+                            <a href="{% url profiles.views.profile other_user.username %}">{{ other_user }}</a>
+                        {% endfor %}
+                    </td>
                 </tr>
             {% endfor %}
         </table>
