@@ -7,7 +7,7 @@ MASK_IN_EXCEPTION_EMAIL= ['password', 'mail', 'protected', 'private' ]
 mask_re = re.compile('(' + '|'.join(MASK_IN_EXCEPTION_EMAIL) + ')', re.I)
 
 def clean_request_for_except_repr(signal=None, sender=None, request=None):
-    if not request or not request.POST or setings.DEBUG: return False
+    if not request or not request.POST or settings.DEBUG: return False
     masked = False
     mutable = True
     if hasattr(request.POST, '_mutable'):
