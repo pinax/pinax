@@ -91,15 +91,16 @@ class SignupForm(forms.Form):
         if confirmed:
             if email == join_invitation.contact.email:
                 new_user = User.objects.create_user(username, email, password)
+                join_invitation.accept(new_user) # should go before creation of EmailAddress below
                 new_user.message_set.create(message=ugettext(u"Your email address has already been verified"))
                 # already verified so can just create
                 EmailAddress(user=new_user, email=email, verified=True, primary=True).save()
             else:
                 new_user = User.objects.create_user(username, "", password)
+                join_invitation.accept(new_user) # should go before creation of EmailAddress below
                 if email:
                     new_user.message_set.create(message=ugettext(u"Confirmation email sent to %(email)s") % {'email': email})
                     EmailAddress.objects.add_email(new_user, email)
-            join_invitation.accept(new_user)
             return username, password # required for authenticate()
         else:
             new_user = User.objects.create_user(username, "", password)

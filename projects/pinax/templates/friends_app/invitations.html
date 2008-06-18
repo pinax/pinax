@@ -59,7 +59,7 @@
                     <tr>
                         <td><a href="{% url profiles.views.profile invitation.from_user.username %}">{{ invitation.from_user }}</a></td>
                         <td>{{ invitation.sent }}</td>
-                        <td class="invitation_{{ invitation.get_status_display }}">{{ invitation.get_status_display }}</td>
+                        <td class="invitation_{{ invitation.status }}">{{ invitation.get_status_display }}</td>
                     </tr>
                 {% endifequal %}        
             {% endfor %}
@@ -77,7 +77,7 @@
                 <tr>
                     <td><a href="{% url profiles.views.profile invitation.to_user.username %}">{{ invitation.to_user }}</a></td>
                     <td>{{ invitation.sent }}</td>
-                    <td class="invitation_{{ invitation.get_status_display }}">{{ invitation.get_status_display }}</td>
+                    <td class="invitation_{{ invitation.status }}">{{ invitation.get_status_display }}</td>
                 </tr>
             {% endfor %}
         </table>
@@ -94,7 +94,7 @@
                 <tr>
                     <td>{{ invitation.contact.email }}</td>
                     <td>{{ invitation.sent }}</td>
-                    <td class="invitation_{{ invitation.get_status_display }}">{{ invitation.get_status_display }}</td>
+                    <td class="invitation_{{ invitation.status }}">{{ invitation.get_status_display }}</td>
                 </tr>
             {% endfor %}
         </table>
