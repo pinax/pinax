@@ -32,7 +32,6 @@ def insert_svn_app_versions(signal=None, sender=None, request=None):
         mutable = request.META._mutable
         request.META._mutable = True
     added = False
-    print "HELLO!", get_all_versions(False)
     prefix = 'svn_app_version'
     for app, version in get_all_versions(True):
         request.META[prefix + app] = version
