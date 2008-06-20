@@ -5,9 +5,8 @@ from wiki import models as wiki_models
 
 
 wiki_args = {'group_slug_field': 'slug',
-             'group_qs': Tribe.objects.all(),
-             'article_qs': wiki_models.Article.objects.all(),
-             'changes_qs': wiki_models.ChangeSet.objects.all()}
+             'group_qs': Tribe.objects.all()}
+
 
 urlpatterns = patterns('',
     url(r'^$', 'tribes.views.tribes', name="tribes_list"),
