@@ -17,7 +17,7 @@
                     <th>{% trans "Date" %}</th>
                     <th>{% trans "Editor" %}</th>
                     <th>{% trans "Comment" %}</th>
-                    <th>{% trans "Revert" %}</th>
+                    <th>{% trans "Revert to..." %}</th>
                 </tr>
                 {% for change in changes %}
                     <tr>
@@ -36,10 +36,12 @@
                             {% if change.comment %}<i>'{{ change.comment}}'</i> {% endif %}
                         </td>
                         <td>
-                            {% ifnotequal changes.count 1 %}
+                            {% if forloop.first %}
+                                {% trans "Current Revision" %}
+                            {% else %}
                                 <input name="revision" type="radio"
                                        value="{{ change.revision }}">
-                            {% endifnotequal %}
+                            {% endif %}
                         </td>
                     </tr>
              {% endfor %}
