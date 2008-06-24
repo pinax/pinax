@@ -2,9 +2,6 @@
 
 {% load i18n %}
 {% load wiki %}
-{% load markup %}
-{% load switchcase %}
-{% load restructuredtext %}
 
 {% block head_title %}Pinax : Wiki for {{ group.name }} {% endblock %}
 
@@ -33,15 +30,7 @@
         </p>
     {% endif %}
 
-    {# Yes, the following mess is necessary #}
-    {% with article.content as content %}
-        {% switch article.markup %}
-            {% case 'rst' %} {{ content|restructuredtext|wikiwords|safe }} {% endcase %}
-            {% case 'mrk' %} {{ content|force_escape|markdown|wikiwords }} {% endcase %}
-            {% case 'txl' %} {{ content|force_escape|textile|wikiwords }} {% endcase %}
-            {% case '' %} {{ content|force_escape|wikiwords|linebreaks|safe }} {% endcase %}
-        {% endswitch %}
-    {% endwith %}
+    {% render_content article %}
 
     {% if can_observe %}
         {% if is_observing %}
