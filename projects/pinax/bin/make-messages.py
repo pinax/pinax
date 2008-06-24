@@ -16,7 +16,7 @@ pythonize_re = re.compile(r'\n\s*//')
 exclude_svn_re = re.compile(r'/\.svn/?')
 exclude_site_re = re.compile(r'^\./site-packages')
 
-template_extensions = re.compile('\.(html|txt|rst|ical|csv)$')
+template_extensions = re.compile('.+\.(html|txt|rst|ical|csv)$')
 
 def make_messages():
     localedir = None
