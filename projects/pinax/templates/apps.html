@@ -2,87 +2,87 @@
 
 {% load i18n %}
 {% load svn_app_version %}
-{% block head_title %}Pinax : Apps{% endblock %}
+{% block head_title %}Pinax : {% trans "Apps" %}{% endblock %}
 
 {% block tab_id %}id="apps_tab"{% endblock %}
 
 {% block body %}
-    <h1>Apps</h1>
+    <h1>{% trans "Apps" %}</h1>
 
-    <p>More about the apps that make up Pinax.</p>
+    <p>{% trans "More about the apps that make up Pinax." %}</p>
 
-    <h2>External</h2>
+    <h2>{% trans "External" %}</h2>
 
-    <p>These already exist as independent apps. Some pre-existed Pinax, some were written especially for it.</p>
+    <p>{% trans "These already exist as independent apps. Some pre-existed Pinax, some were written especially for it." %}</p>
 
     <dl>
         <dt><a href="http://code.google.com/p/django-notification/">django-notification</a> <em>{% svn_app_version "notification" %}</em></dt>
-        <dd>user notification management</dd>
+        <dd>{% trans "user notification management" %}</dd>
         <dt><a href="http://code.google.com/p/django-email-confirmation/">django-email-confirmation</a> <em>{% svn_app_version "emailconfirmation" %}</em></dt>
-        <dd>simple email verification</dd>
+        <dd>{% trans "simple email verification" %}</dd>
         <dt><a href="http://code.google.com/p/django-command-extensions/">django-command-extensions</a> <em>{% svn_app_version "extensions" %}</em></dt>
-        <dd>useful management commands</dd>
+        <dd>{% trans "useful management commands" %}</dd>
         <dt><a href="http://code.google.com/p/django-robots/">django-robots</a> <em>{% svn_app_version "robots" %}</em></dt>
-        <dd>for managing robots.txt files</dd>
+        <dd>{% trans "for managing robots.txt files" %}</dd>
         <dt><a href="http://code.google.com/p/django-databasetemplateloader/">django-databasetemplateloader</a> <em>{% svn_app_version "dbtemplates" %}</em></dt>
-        <dd>loader for templates from the database</dd>
+        <dd>{% trans "loader for templates from the database" %}</dd>
         <dt><a href="http://code.google.com/p/django-friends/">django-friends</a> <em>{% svn_app_version "friends" %}</em></dt>
-        <dd>friendship, contact and invitation management</dd>
+        <dd>{% trans "friendship, contact and invitation management" %}</dd>
         <dt><a href="http://code.google.com/p/django-mailer/">django-mailer</a> <em>{% svn_app_version "mailer" %}</em></dt>
-        <dd>mail queuing and management</dd>
+        <dd>{% trans "mail queuing and management" %}</dd>
         <dt><a href="http://code.google.com/p/django-messages/">django-messages</a> <em>{% svn_app_version "messages" %}</em></dt>
-        <dd>private messages between users</dd>
+        <dd>{% trans "private messages between users" %}</dd>
         <dt><a href="http://code.google.com/p/django-announcements/">django-announcements</a> <em>{% svn_app_version "announcements" %}</em></dt>
-        <dd>site announcements</dd>
+        <dd>{% trans "site announcements" %}</dd>
         <dt><a href="http://code.google.com/p/django-oembed/">django-oembed</a> <em>{% svn_app_version "oembed" %}</em></dt>
-        <dd>support for oembeded links</dd>
+        <dd>{% trans "support for oembeded links" %}</dd>
         <dt><a href="http://code.google.com/p/django-logging/">django-logging</a> <em>{% svn_app_version "djangologging" %}</em></dt>
-        <dd>debugging and logging</dd>
+        <dd>{% trans "debugging and logging" %}</dd>
         <dt><a href="http://code.google.com/p/django-db-log/">django-db-log</a> <em>{% svn_app_version "djangodblog" %}</em></dt>
-        <dd>exception logging to the database</dd>
+        <dd>{% trans "exception logging to the database" %}</dd>
         <dt><a href="http://code.google.com/p/django-pagination/">django-pagination</a> <em>{% svn_app_version "pagination" %}</em></dt>
-        <dd>easy pagination</dd>
+        <dd>{% trans "easy pagination" %}</dd>
         <dt><a href="http://code.google.com/p/django-threadedcomments/">django-threadedcomments</a> <em>{% svn_app_version "threadedcomments" %}</em></dt>
-        <dd>threaded comments</dd>
+        <dd>{% trans "threaded comments" %}</dd>
         <dt><a href="http://code.google.com/p/django-wikiapp/">django-wikiapp</a> <em>{% svn_app_version "wiki" %}</em></dt>
-        <dd>simple wiki</dd>
+        <dd>{% trans "simple wiki" %}</dd>
         <dt><a href="http://code.google.com/p/django-evolution/">django-evolution</a> <em>{% svn_app_version "django_evolution" %}</em></dt>
-        <dd>db schema evolution</dd>
+        <dd>{% trans "db schema evolution" %}</dd>
         <dt><a href="http://code.google.com/p/django-timezones/">django-timezones</a> <em>{% svn_app_version "timezones" %}</em></dt>
-        <dd>timezone localization</dd>
+        <dd>{% trans "timezone localization" %}</dd>
         <dt><a href="http://code.google.com/p/django-feedutil/">django-feedutil</a> <em>{% svn_app_version "feedutil" %}</em></dt>
-        <dd>feed aggregation</dd>
+        <dd>{% trans "feed aggregation" %}</dd>
         <dt><a href="http://code.google.com/p/django-app-plugins/">django-app-plugins</a> <em>{% svn_app_version "app_plugins" %}</em></dt>
-        <dd>extension points in templates</dd>
+        <dd>{% trans "extension points in templates" %}</dd>
         <dt><a href="http://code.google.com/p/django-voting/">django-voting</a> <em>{% svn_app_version "voting" %}</em></dt>
-        <dd>generic voting</dd>
+        <dd>{% trans "generic voting" %}</dd>
         <dt><a href="http://code.google.com/p/django-bookmarks/">django-bookmarks</a> <em>{% svn_app_version "bookmarks" %}</em></dt>
-        <dd>URL bookmarking</dd>
+        <dd>{% trans "URL bookmarking" %}</dd>
     </dl>
     
-    <p><a href="http://code.google.com/p/django-openid/">django-openid</a> is also used but locally for modification.</p>
+    <p>{% blocktrans %}<a href="http://code.google.com/p/django-openid/">django-openid</a> is also used but locally for modification.{% endblocktrans %}</p>
     
-    <h2>Local</h2>
+    <h2>{% trans "Local" %}</h2>
     
-    <p>These are currently inside Pinax but could potentially be broken out as generic apps.</p>
+    <p>{% trans "These are currently inside Pinax but could potentially be broken out as generic apps." %}</p>
     
     <dl>
         <dt>analytics</dt>
-        <dd>Google analytics javascript</dd>
+        <dd>{% trans "Google analytics javascript" %}</dd>
         <dt>profiles</dt>
-        <dd>profile pages</dd>
+        <dd>{% trans "profile pages" %}</dd>
         <dt>zwitschern</dt>
-        <dd>a Twitter clone</dd>
+        <dd>{% trans "a Twitter clone" %}</dd>
         <dt>account</dt>
-        <dd>overall account management: signup, login, password change/reset, etc</dd>
+        <dd>{% trans "overall account management: signup, login, password change/reset, etc" %}</dd>
         <dt>tribes</dt>
-        <dd>groups of people with common interests</dd>
+        <dd>{% trans "groups of people with common interests" %}</dd>
         <dt>gravatar</dt>
-        <dd>for displaying gravatars</dd>
+        <dd>{% trans "for displaying gravatars" %}</dd>
         <dt>authsub</dt>
-        <dd>for authenticating with Google's AuthSub</dd>
+        <dd>{% trans "for authenticating with Google's AuthSub" %}</dd>
         <dt>bbauth</dt>
-        <dd>for authenticating with Yahoo's BBAuth</dd>
+        <dd>{% trans "for authenticating with Yahoo's BBAuth" %}</dd>
     </dl>
 
 {% endblock %}

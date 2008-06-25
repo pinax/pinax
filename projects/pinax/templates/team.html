@@ -3,14 +3,14 @@
 {% load i18n %}
 {% load gravatar %}
 
-{% block head_title %}Pinax : Team{% endblock %}
+{% block head_title %}Pinax : {% trans "Team" %}{% endblock %}
 
 {% block tab_id %}id="team_tab"{% endblock %}
 
 {% block body %}
-    <h1>Team</h1>
+    <h1>{% trans "Team" %}</h1>
     
-    <p>The people responsible for Pinax.</p>
+    <p>{% trans "The people responsible for Pinax." %}</p>
     
     {# @@@ factor out css into css file #}
     <div class="profile clearfix">
@@ -38,6 +38,32 @@
         <div style="padding: 5px; margin-left: 50px; font-size: 14pt"><a href="{% url profiles.views.profile "edcrypt" %}">Eduardo de Oliveira Padoan</a></div>
     </div>
     
-    <p>and the developers of the awesome re-usable django apps we used and the translators who provided localization of Pinax.</p>
+    <p>{% trans "and the developers of the awesome re-usable django apps we used." %}</p>
+    
+    <h2>{% trans "Translators" %}</h2>
+    <div class="profile clearfix">
+        <div style="float: left;">{% gravatar "jezdez" 40 %}</div>
+        <div style="padding: 5px; margin-left: 50px; font-size: 14pt"><a href="{% url profiles.views.profile "jezdez" %}">Jannis Leidel</a> (Deutsch)</div>
+    </div>
+    <div class="profile clearfix">
+        <div style="float: left;">{% gravatar "robertrv" 40 %}</div>
+        <div style="padding: 5px; margin-left: 50px; font-size: 14pt"><a href="{% url profiles.views.profile "robertrv" %}">Robert Ramírez Vique</a> (Español)</div>
+    </div>
+    <div class="profile clearfix">
+        <div style="float: left;">{% gravatar "roland" 40 %}</div>
+        <div style="padding: 5px; margin-left: 50px; font-size: 14pt"><a href="{% url profiles.views.profile "roland" %}">Frédéric Roland</a> (Français)</div>
+    </div>
+    <div class="profile clearfix">
+        <div style="float: left;">{% gravatar "mrshark" 40 %}</div>
+        <div style="padding: 5px; margin-left: 50px; font-size: 14pt"><a href="http://djangopeople.net/mrshark/">Jens Persson</a> (Svenska)</div>
+    </div>
+    <div class="profile clearfix">
+        <div style="float: left;">{% gravatar "edcrypt" 40 %}</div>
+        <div style="padding: 5px; margin-left: 50px; font-size: 14pt"><a href="{% url profiles.views.profile "edcrypt" %}">Eduardo de Oliveira Padoan</a> (Português brasileiro)</div>
+    </div>
+    <div class="profile clearfix">
+        <div style="float: left;">{% gravatar "gklein" 40 %}</div>
+        <div style="padding: 5px; margin-left: 50px; font-size: 14pt"><a href="{% url profiles.views.profile "gklein" %}">Gil Klein</a> (עברית)</div>
+    </div>
 
 {% endblock %}
