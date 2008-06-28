@@ -20,10 +20,8 @@ def blogs(request):
     blogs = Post.objects.filter(status=2).order_by("-publish")
     return render_to_response("blog/blogs.html", {"blogs": blogs}, context_instance=RequestContext(request))
     
-def article(request, username, month, year, slug):
-    post = Post.objects.filter(slug=slug, 
-                            publish__year = int(year), 
-                            publish__month = int(month)).filter(author__username=username)
+def article(request, username, year, month, slug):
+    post = Post.objects.filter(slug=slug, publish__year=int(year), publish__month=int(month)).filter(author__username=username)
     if not post:
         raise Http404
     
@@ -46,6 +44,7 @@ def new(request):
                 blog.creator_ip = request.META['REMOTE_ADDR']
                 blog.save()
                 request.user.message_set.create(message="Successfully saved article '%s'" % blog.title)
+                
                 return HttpResponseRedirect(reverse("your_articles"))
         else:
             blog_form = BlogForm()
@@ -63,6 +62,7 @@ def edit(request, id):
             blog = blog_form.save(commit=False)
             blog.save()
             request.user.message_set.create(message="Successfully updated article '%s'" % blog.title)
+            
             return HttpResponseRedirect(reverse("your_articles"))
         else:
             blog_form = BlogForm(instance=post)
@@ -74,4 +74,5 @@ def edit(request, id):
             is_author = False
     
     blog_form = BlogForm(instance=post)
+    
     return render_to_response("blog/edit.html", {"is_author": is_author, "blog_form": blog_form}, context_instance=RequestContext(request))
