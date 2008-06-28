@@ -5,16 +5,6 @@
 
 {% block head_title %}Pinax : {% trans "Signup" %}{% endblock %}
 
-{% block extra_head %}
-	{% load jquery_validation %}
-	{% include_validation %}
-	<script type="text/javascript">
-	    $(function(){
-	        $('#signup_form').validate('{% url signup_form_validate %}', {type: 'table', fields: ['username'], dom: $('#id_username'), event: 'change'});
-	    });
-	</script>
-{% endblock %}
-
 {% block body %}
     <h1>{% trans "Sign Up" %}</h1>
     
@@ -41,7 +31,12 @@
 {% endblock %}
 
 {% block extra_body %}
-<script>
-    $("#id_username").focus();
-</script>
+    {% load jquery_validation %}
+    {% include_validation %}
+    <script type="text/javascript">
+        $(function(){
+            $('#signup_form').validate('{% url signup_form_validate %}', {type: 'table', fields: ['username'], dom: $('#id_username'), event: 'change'});
+            $("#id_username").focus();
+        });
+    </script>
 {% endblock %}
