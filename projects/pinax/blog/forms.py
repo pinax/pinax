@@ -24,7 +24,7 @@ class BlogForm(forms.ModelForm):
                 raise forms.ValidationError(u'This field must be unique for username, year, and month')
             return self.cleaned_data['slug']
         try:
-            post = Post.objects.get(author=self.user, created_at__month=self.instance.created_at.month, created_at__year=self.instance.created_at.year, slug.cleaned_data['slug'])
+            post = Post.objects.get(author=self.user, created_at__month=self.instance.created_at.month, created_at__year=self.instance.created_at.year, slug=slug.cleaned_data['slug'])
             if post != self.instance:
                 raise forms.ValidationError(u'This field must be unique for username, year, and month')
         except Post.DoesNotExist:
