@@ -36,7 +36,7 @@ class Post(models.Model):
     title           = models.CharField(_('title'), max_length=200)
     slug            = models.SlugField(_('slug'))
     author          = models.ForeignKey(User, related_name="added_posts", blank=True, null=True)
-    creator_ip      = models.IPAddressField(_("IP Address of the Article Creator"), blank=True, null=True)
+    creator_ip      = models.IPAddressField(_("IP Address of the Post Creator"), blank=True, null=True)
     body            = models.TextField(_('body'))
     tease           = models.TextField(_('tease'), blank=True)
     status          = models.IntegerField(_('status'), choices=STATUS_CHOICES, default=2)
@@ -44,7 +44,7 @@ class Post(models.Model):
     publish         = models.DateTimeField(_('publish'), default=datetime.now)
     created_at      = models.DateTimeField(_('created at'), default=datetime.now)
     updated_at      = models.DateTimeField(_('updated at'))
-    markup          = models.CharField(_(u"Article Content Markup"), max_length=3,
+    markup          = models.CharField(_(u"Post Content Markup"), max_length=3,
                               choices=markup_choices,
                               null=True, blank=True)
     tags            = TagField()
@@ -61,7 +61,7 @@ class Post(models.Model):
     
     @permalink
     def get_absolute_url(self):
-        return ('article', None, {
+        return ('post', None, {
             'username': self.author.username,
             'year': self.publish.year,
             'month': "%02d" % self.publish.month,

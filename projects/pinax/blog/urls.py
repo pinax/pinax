@@ -6,13 +6,13 @@ from blog.forms import *
 
 urlpatterns = patterns('',
     # blog post
-    url(r'^article/(?P<username>[-\w]+)/(?P<year>\d{4})/(?P<month>\d{2})/(?P<slug>[-\w]+)/$', 'blog.views.article', name='article'),
+    url(r'^post/(?P<username>[-\w]+)/(?P<year>\d{4})/(?P<month>\d{2})/(?P<slug>[-\w]+)/$', 'blog.views.post', name='post'),
     
     # all blog posts
     url(r'^$', 'blog.views.blogs'),
     
-    # your articles
-    url(r'^yourarticles/$', 'blog.views.yourarticles', name="your_articles"),
+    # your posts
+    url(r'^your_posts/$', 'blog.views.your_posts', name="your_posts"),
     
     # new blog post
     url(r'^new/$', 'blog.views.new'),

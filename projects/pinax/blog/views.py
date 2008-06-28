@@ -20,18 +20,20 @@ def blogs(request):
     blogs = Post.objects.filter(status=2).order_by("-publish")
     return render_to_response("blog/blogs.html", {"blogs": blogs}, context_instance=RequestContext(request))
     
-def article(request, username, year, month, slug):
+def post(request, username, year, month, slug):
     post = Post.objects.filter(slug=slug, publish__year=int(year), publish__month=int(month)).filter(author__username=username)
     if not post:
         raise Http404
     
-    return render_to_response("blog/article.html", {
-                        "post": post[0]}, context_instance=RequestContext(request))
+    return render_to_response("blog/post.html", {
+        "post": post[0]
+    }, context_instance=RequestContext(request))
 
-def yourarticles(request):
+def your_posts(request):
     user = request.user
     blogs = Post.objects.filter(author=user)
-    return render_to_response("blog/yourarticles.html", {"blogs": blogs}, context_instance=RequestContext(request))
+    
+    return render_to_response("blog/your_posts.html", {"blogs": blogs}, context_instance=RequestContext(request))
 
 @login_required
 def new(request):
@@ -43,13 +45,14 @@ def new(request):
                 blog.author = request.user
                 blog.creator_ip = request.META['REMOTE_ADDR']
                 blog.save()
-                request.user.message_set.create(message="Successfully saved article '%s'" % blog.title)
+                request.user.message_set.create(message="Successfully saved post '%s'" % blog.title)
                 
-                return HttpResponseRedirect(reverse("your_articles"))
+                return HttpResponseRedirect(reverse("your_posts"))
         else:
             blog_form = BlogForm()
     else:
         blog_form = BlogForm()
+    
     return render_to_response("blog/new.html", {
                         "blog_form": blog_form,
                         }, context_instance=RequestContext(request))
@@ -61,9 +64,9 @@ def edit(request, id):
             blog_form = BlogForm(request.POST, instance=post)
             blog = blog_form.save(commit=False)
             blog.save()
-            request.user.message_set.create(message="Successfully updated article '%s'" % blog.title)
+            request.user.message_set.create(message="Successfully updated post '%s'" % blog.title)
             
-            return HttpResponseRedirect(reverse("your_articles"))
+            return HttpResponseRedirect(reverse("your_posts"))
         else:
             blog_form = BlogForm(instance=post)
     else:
