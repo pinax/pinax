@@ -25,9 +25,15 @@ def post(request, username, year, month, slug):
     post = Post.objects.filter(slug=slug, publish__year=int(year), publish__month=int(month)).filter(author__username=username)
     if not post:
         raise Http404
+
+    if post[0].author == request.user:
+        is_author = True
+    else:
+        is_author = False
     
     return render_to_response("blog/post.html", {
-        "post": post[0]
+        "post": post[0],
+        "is_author": is_author,
     }, context_instance=RequestContext(request))
 
 def your_posts(request):
