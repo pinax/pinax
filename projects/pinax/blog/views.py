@@ -37,7 +37,7 @@ def your_posts(request):
 
 @login_required
 def new(request):
-    if request.user.is_authenticated() and request.method == "POST":
+    if request.method == "POST":
         if request.POST["action"] == "create":
             blog_form = BlogForm(request.POST)
             if blog_form.is_valid():
@@ -57,9 +57,13 @@ def new(request):
                         "blog_form": blog_form,
                         }, context_instance=RequestContext(request))
 
+@login_required
 def edit(request, id):
-    if request.user.is_authenticated() and request.method == "POST":
+    if request.method == "POST":
         post = get_object_or_404(Post, id=id)
+        if post.author != request.user:
+            request.user.message_set.create(message="You can't edit posts that aren't yours")
+            return HttpResponseRedirect(reverse("your_posts"))
         if request.POST["action"] == "update":
             blog_form = BlogForm(request.POST, instance=post)
             if blog_form.is_valid():
