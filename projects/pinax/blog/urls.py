@@ -21,5 +21,5 @@ urlpatterns = patterns('',
     url(r'^edit/(\d+)/$', 'blog.views.edit', name="edit_post"),
 
     # ajax validation
-    (r'^validate/$', 'ajax_validation.views.validate', {'form_class': BlogForm}, 'blog_form_validate'),
+    (r'^validate/$', 'ajax_validation.views.validate', {'form_class': BlogForm, 'callback': lambda request, *args, **kwargs: {'user': request.user}}, 'blog_form_validate'),
 )
