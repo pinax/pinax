@@ -26,6 +26,7 @@ class LoginForm(forms.Form):
 
     username = forms.CharField(label=_("Username"), max_length=30, widget=forms.TextInput())
     password = forms.CharField(label=_("Password"), widget=forms.PasswordInput(render_value=False))
+    remember = forms.BooleanField(label=_("Remember Me"), help_text=_("If checked you will stay logged in for 3 weeks"))
 
     user = None
 
@@ -46,6 +47,10 @@ class LoginForm(forms.Form):
         if self.is_valid():
             login(request, self.user)
             request.user.message_set.create(message=ugettext(u"Successfully logged in as %(username)s.") % {'username': self.user.username})
+            if self.cleaned_data['remember']:
+                request.session.set_expiry(60 * 60 * 24 * 7 * 3)
+            else:
+                request.session.set_expiry(0)
             return True
         return False
 
