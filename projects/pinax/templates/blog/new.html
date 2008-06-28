@@ -1,35 +1,19 @@
 {% extends "blog/base.html" %}
 
 {% load i18n %}
-{% load gravatar %}
-{% load humanize %}
-{% load pagination_tags %}
-{% load captureas_tag %}
 
-{% block head_title %}Pinax : {% blocktrans %}Write A Blog Articles{% endblocktrans %}{% endblock %}
-
-
+{% block head_title %}Pinax : {% blocktrans %}Write a Blog Post{% endblocktrans %}{% endblock %}
 
 {% block body %}
-	<p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time.</p>
-	
-	<h1>{% trans "Write A New Article" %}</h1>
-	
+    <p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time.</p>
+    
+    <h1>{% trans "Write a Blog Post" %}</h1>
+    
+    <form id="blog_form" method="POST" action="">
+        <table>
+            {{ blog_form }}
+            <tr><td></td><td><input type="hidden" name="action" value="create" /><input type="submit" value="create"/></td></tr>
+        </table>
+    </form>
 
-	{% if user.is_authenticated %}  
-	    <form id="blog_form" method="POST" action="">
-	        <table>
-	            {{ blog_form }}
-	            <tr><td></td><td><input type="hidden" name="action" value="create" /><input type="submit" value="create"/></td></tr>
-	        </table>
-	    </form>
-	
-		
-		
-	{% else %}
-	    {% captureas signup_url %}{% url acct_signup %}{% endcaptureas %}
-	    {% captureas login_url %}{% url acct_login %}{% endcaptureas %}
-	    <p>{% blocktrans %}<a href="{{ signup_url }}">Sign up</a> and <a href="{{ login_url }}">log in </a> to write a new blog post.{% endblocktrans %}</p>
-	{% endif %}
-	
 {% endblock %}

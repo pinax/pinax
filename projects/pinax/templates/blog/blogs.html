@@ -16,49 +16,49 @@
 
 {% block body %}
     <p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time.</p>
-
-	<h1>{% trans "All Blogs" %}</h1>
+    
+    <h1>{% trans "All Blogs" %}</h1>
     
     
-	{% if blogs %}
-		<p>{% trans "These are blog posts from everyone:" %}</p>
-	
-		{% autopaginate blogs %}
-	
-			{% for blogs in blogs %}
-				<div class="blog-post clearfix">
-					<h2><a href="{{ blogs.get_absolute_url }}">{{ blogs.title }}</a></h2>
-					<div class="blog-post-tease">
-					
-						{% with blogs.tease as body %}
-					        {% switch blogs.markup %}
-					            {% case 'rst' %} {{ body|restructuredtext|wikiwords|safe }} {% endcase %}
-					            {% case 'mrk' %} {{ body|force_escape|markdown|wikiwords }} {% endcase %}
-					            {% case 'txl' %} {{ body|force_escape|textile|wikiwords }} {% endcase %}
-					            {% case '' %} {{ body|force_escape|wikiwords|linebreaks|safe }} {% endcase %}
-					        {% endswitch %}
-					    {% endwith %}
-				
-					</div>
-					<div class="blog-post-meta">
-						{% gravatar blogs.author 40 %}
-						<p><b>Posted:</b><br /><a href="{% url profiles.views.profile blogs.author.username %}">{{ blogs.author.username }}</a> on {{ blogs.publish|date }}</p>
-						<div class="blog-tags">
-							<p><img src="/site_media/tags.png" border="0" class="noborder" align="absmiddle" /> 
-							{% tags_for_object blogs as tags %}
-							{% for tag in tags %}
-								<a href="/tags/{{ tag }}">{{ tag }}</a>
-							{% endfor %}<br />
-							<img src="/site_media/comment.png" border="0" class="noborder" align="absmiddle" /><a href="{{ blogs.get_absolute_url }}#comments">{% get_comment_count for blogs as commentcount %} {{ commentcount }} Comments</a></p>
-						</div>
-					</div>
-				</div>
-			{% endfor %}
-		
-		{% paginate %}
-	
-	{% else %}
-		No blog posts yet.
-	{% endif %}
+    {% if blogs %}
+        <p>{% trans "These are blog posts from everyone:" %}</p>
+        
+        {% autopaginate blogs %}
+            
+            {% for blogs in blogs %}
+                <div class="blog-post clearfix">
+                    <h2><a href="{{ blogs.get_absolute_url }}">{{ blogs.title }}</a></h2>
+                    <div class="blog-post-tease">
+                        
+                        {% with blogs.tease as body %}
+                            {% switch blogs.markup %}
+                                {% case 'rst' %} {{ body|restructuredtext|wikiwords|safe }} {% endcase %}
+                                {% case 'mrk' %} {{ body|force_escape|markdown|wikiwords }} {% endcase %}
+                                {% case 'txl' %} {{ body|force_escape|textile|wikiwords }} {% endcase %}
+                                {% case '' %} {{ body|force_escape|wikiwords|linebreaks|safe }} {% endcase %}
+                            {% endswitch %}
+                        {% endwith %}
+                    
+                    </div>
+                    <div class="blog-post-meta">
+                        {% gravatar blogs.author 40 %}
+                        <p><b>Posted:</b><br /><a href="{% url profiles.views.profile blogs.author.username %}">{{ blogs.author.username }}</a> on {{ blogs.publish|date }}</p>
+                        <div class="blog-tags">
+                            <p><img src="/site_media/tags.png" border="0" class="noborder" align="absmiddle" /> 
+                            {% tags_for_object blogs as tags %}
+                            {% for tag in tags %}
+                                <a href="/tags/{{ tag }}">{{ tag }}</a>
+                            {% endfor %}<br />
+                            <img src="/site_media/comment.png" border="0" class="noborder" align="absmiddle" /><a href="{{ blogs.get_absolute_url }}#comments">{% get_comment_count for blogs as commentcount %} {{ commentcount }} Comments</a></p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        
+        {% paginate %}
+    
+    {% else %}
+        No blog posts yet.
+    {% endif %}
     
 {% endblock %}

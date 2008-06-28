@@ -8,51 +8,51 @@
 {% load tagging_tags %}
 {% load restructuredtext %}
 
-{% block head_title %}Pinax : {% blocktrans %}Your Blog Articles{% endblocktrans %}{% endblock %}
+{% block head_title %}Pinax : {% blocktrans %}Your Blog Posts{% endblocktrans %}{% endblock %}
 
 {% block body %}
     <p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time.</p>
-
-	<h1>{% trans "Your Articles" %}</h1>
-
-	{% if blogs %}
-		<table cellpadding="3" cellspacing="0" border="0" class="blog-list" width="100%">
-			<th>Title</th>
-			<th>Teaser</th>
-			<th>Published On</th>
-			<th>Status</th>
-			<th></th>
-		{% for blogs in blogs %}
-			<tr class="{% cycle odd,even %}">
-				<td><a href="{{ blogs.get_absolute_url }}">{{ blogs.title }}</a></td>
-				<td>{% with blogs.tease as body %}
-				        {% switch blogs.markup %}
-				            {% case 'rst' %} {{ body|restructuredtext|wikiwords|safe }} {% endcase %}
-				            {% case 'mrk' %} {{ body|force_escape|markdown|wikiwords }} {% endcase %}
-				            {% case 'txl' %} {{ body|force_escape|textile|wikiwords }} {% endcase %}
-				            {% case '' %} {{ body|force_escape|wikiwords|linebreaks|safe }} {% endcase %}
-				        {% endswitch %}
-				    {% endwith %}
-				</td>
-				<td>{{ blogs.publish|date }}</td>
-				<td>
-					{% with blogs.status as status %}
-						{% switch status %}
-							{% case 2 %} Published {% endcase %}
-							{% case 1 %} Draft {% endcase %}
-						{% endswitch %}
-					{% endwith %}
-				</td>
-				<td>
-					<form action="{% url edit_post blogs.id %}" method="GET">
-				            <input type="submit" value="{% trans "Edit Post" %}" />
-				    </form>
-				</td>
-			</tr>
-		{% endfor %}
-		</table>
-	{% else %}
-		No blog posts yet.
-	{% endif %}
+    
+    <h1>{% trans "Your Posts" %}</h1>
+    
+    {% if blogs %}
+        <table cellpadding="3" cellspacing="0" border="0" class="blog-list" width="100%">
+            <th>Title</th>
+            <th>Teaser</th>
+            <th>Published On</th>
+            <th>Status</th>
+            <th></th>
+        {% for blogs in blogs %}
+            <tr class="{% cycle odd,even %}">
+                <td><a href="{{ blogs.get_absolute_url }}">{{ blogs.title }}</a></td>
+                <td>{% with blogs.tease as body %}
+                        {% switch blogs.markup %}
+                            {% case 'rst' %} {{ body|restructuredtext|wikiwords|safe }} {% endcase %}
+                            {% case 'mrk' %} {{ body|force_escape|markdown|wikiwords }} {% endcase %}
+                            {% case 'txl' %} {{ body|force_escape|textile|wikiwords }} {% endcase %}
+                            {% case '' %} {{ body|force_escape|wikiwords|linebreaks|safe }} {% endcase %}
+                        {% endswitch %}
+                    {% endwith %}
+                </td>
+                <td>{{ blogs.publish|date }}</td>
+                <td>
+                    {% with blogs.status as status %}
+                        {% switch status %}
+                            {% case 2 %} Published {% endcase %}
+                            {% case 1 %} Draft {% endcase %}
+                        {% endswitch %}
+                    {% endwith %}
+                </td>
+                <td>
+                    <form action="{% url edit_post blogs.id %}" method="GET">
+                            <input type="submit" value="{% trans "Edit Post" %}" />
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+    {% else %}
+        No blog posts yet.
+    {% endif %}
 
 {% endblock %}

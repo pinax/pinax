@@ -7,31 +7,30 @@
 {% load tagging_tags %}
 {% load wiki %}
 
-{% block head_title %}Pinax : {% blocktrans %}Blog Article{% endblocktrans %}{% endblock %}
+{% block head_title %}Pinax : {% blocktrans %}Blog Post{% endblocktrans %} : {{ post.title }}{% endblock %}
 
 {% block body %}
     <p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time.</p>
-
-
-	<div class="blog-article">
-		<h2>{{ post.title }}</h2>
-		<div class="blog-meta"><p>Posted by: <a href="{% url profiles.views.profile post.author.username %}">{{ post.author.username }}</a> on {{ post.publish|date }}</p></div>
-		<div class="blog-tags">
-			<p><img src="/site_media/comment.png" border="0" class="noborder" align="absmiddle" />
-			{% tags_for_object post as tags %}
-			{% for tag in tags %}
-				<a href="/tags/{{ tag }}">{{ tag }}</a>
-			{% endfor %}</p>
-		</div>
-
+    
+    <div class="blog-post">
+        <h2>{{ post.title }}</h2>
+        <div class="blog-meta"><p>Posted by: <a href="{% url profiles.views.profile post.author.username %}">{{ post.author.username }}</a> on {{ post.publish|date }}</p></div>
+        <div class="blog-tags">
+            <p><img src="/site_media/comment.png" border="0" class="noborder" align="absmiddle" />
+            {% tags_for_object post as tags %}
+            {% for tag in tags %}
+                <a href="/tags/{{ tag }}">{{ tag }}</a>
+            {% endfor %}</p>
+        </div>
+        
         {% render_content post 'body' %}
-
-	</div>
-
-	<h3>Comments on This Post:</h3>
+        
+    </div>
+    
+    <h3>Comments on This Post:</h3>
     {% get_threaded_comment_tree for post as responses %}
-
-	<a name="comments"></a>
+    
+    <a name="comments"></a>
     <ul class="responses">
         {% for response in responses %}
             <li class="{% cycle even,odd %} thread-{{ response.depth }} clearfix">
@@ -45,7 +44,7 @@
                     {% ifequal user response.user %}
                     <form method="POST" action="{% url tc_comment_delete response.id %}">
                         <input type="submit" value="{% trans "Delete Post" %}" />
-                        <input type="hidden" name="next" value="{% url article response.content_object.slug %}" />
+                        <input type="hidden" name="next" value="{% url post response.content_object.slug %}" />
                     </form>
                     {% endifequal %}
                     <a href="javascript:toggle_comment_form({{ response.id }})">Reply to This Post</a>
@@ -58,7 +57,7 @@
             </li>
         {% endfor %}
     </ul>
-
+    
     <form action="{% get_comment_url post %}" method="POST">
         <table>
             <tr><td><textarea id="id_comment" rows="10" cols="40" name="comment"></textarea></td></tr>
@@ -66,9 +65,6 @@
         </table>
         <input type="hidden" name="next" value="{{ request.path }}" />
     </form>
-
-
-
 {% endblock %}
 
 {% block extra_body %}

@@ -7,9 +7,9 @@
 {% block subnav %}
     {% if user.is_authenticated %}
         <ul>
-            <li><a href="{% url blog.views.blogs %} ">{% trans "All Articles" %}</a></li>
-			<li><a href="{% url blog.views.yourarticles %}">Your Articles</a></li>
-			<li><a href="{% url blog.views.new %}">Write an Article</a></li>
+            <li><a href="{% url blog.views.blogs %} ">{% trans "All Blogs" %}</a></li>
+            <li><a href="{% url blog.views.your_posts %}">{% trans "Your Posts" %}</a></li>
+            <li><a href="{% url blog.views.new %}">{% trans "Write a Blog Post" %}</a></li>
         </ul>
     {% else %}
         &nbsp;
