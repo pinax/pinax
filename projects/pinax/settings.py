@@ -190,6 +190,11 @@ RESTRUCTUREDTEXT_FILTER_SETTINGS = { 'cloak_email_addresses': True,
                                      'warning_stream': NullStream(),
                                      'strip_comments': True,}
 
+# if Django is running behind a proxy, we need to do things like use
+# HTTP_X_FORWARDED_FOR instead of REMOTE_ADDR. This setting is used
+# to inform apps of this fact
+BEHIND_PROXY = False
+
 try:
     from localsettings import *
 except ImportError:

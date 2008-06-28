@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.views.generic import date_based
+from django.conf import settings
 
 from blog.models import Post
 from blog.forms import *
@@ -43,7 +44,10 @@ def new(request):
             if blog_form.is_valid():
                 blog = blog_form.save(commit=False)
                 blog.author = request.user
-                blog.creator_ip = request.META['REMOTE_ADDR']
+                if settings.BEHIND_PROXY:
+                    blog.creator_ip = request.META["HTTP_X_FORWARDED_FOR"]
+                else:
+                    blog.creator_ip = request.META['REMOTE_ADDR']
                 blog.save()
                 request.user.message_set.create(message="Successfully saved post '%s'" % blog.title)
                 
