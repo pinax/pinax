@@ -46,7 +46,7 @@ def your_posts(request):
 def new(request):
     if request.method == "POST":
         if request.POST["action"] == "create":
-            blog_form = BlogForm(request.POST)
+            blog_form = BlogForm(request.user, request.POST)
             if blog_form.is_valid():
                 blog = blog_form.save(commit=False)
                 blog.author = request.user
@@ -75,7 +75,7 @@ def edit(request, id):
             request.user.message_set.create(message="You can't edit posts that aren't yours")
             return HttpResponseRedirect(reverse("your_posts"))
         if request.POST["action"] == "update":
-            blog_form = BlogForm(request.POST, instance=post)
+            blog_form = BlogForm(request.user, request.POST, instance=post)
             if blog_form.is_valid():
                 blog = blog_form.save(commit=False)
                 blog.save()
