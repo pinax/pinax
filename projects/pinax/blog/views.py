@@ -40,12 +40,13 @@ def new(request):
     if request.user.is_authenticated() and request.method == "POST":
         if request.POST["action"] == "create":
             blog_form = BlogForm(request.POST)
-            blog = blog_form.save(commit=False)
-            blog.author = request.user
-            blog.creator_ip = request.META['REMOTE_ADDR']
-            blog.save()
-            request.user.message_set.create(message="Successfully saved article '%s'" % blog.title)
-            return HttpResponseRedirect(reverse("your_articles"))
+            if blog_form.is_valid():
+                blog = blog_form.save(commit=False)
+                blog.author = request.user
+                blog.creator_ip = request.META['REMOTE_ADDR']
+                blog.save()
+                request.user.message_set.create(message="Successfully saved article '%s'" % blog.title)
+                return HttpResponseRedirect(reverse("your_articles"))
         else:
             blog_form = BlogForm()
     else:
