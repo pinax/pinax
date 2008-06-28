@@ -62,11 +62,12 @@ def edit(request, id):
         post = get_object_or_404(Post, id=id)
         if request.POST["action"] == "update":
             blog_form = BlogForm(request.POST, instance=post)
-            blog = blog_form.save(commit=False)
-            blog.save()
-            request.user.message_set.create(message="Successfully updated post '%s'" % blog.title)
+            if blog_form.is_valid():
+                blog = blog_form.save(commit=False)
+                blog.save()
+                request.user.message_set.create(message="Successfully updated post '%s'" % blog.title)
             
-            return HttpResponseRedirect(reverse("your_posts"))
+                return HttpResponseRedirect(reverse("your_posts"))
         else:
             blog_form = BlogForm(instance=post)
     else:
