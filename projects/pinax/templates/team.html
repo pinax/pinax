@@ -37,7 +37,15 @@
         <div style="float: left;">{% gravatar "edcrypt" 40 %}</div>
         <div style="padding: 5px; margin-left: 50px; font-size: 14pt"><a href="{% url profiles.views.profile "edcrypt" %}">Eduardo de Oliveira Padoan</a></div>
     </div>
-    
+    <div class="profile clearfix">
+        <div style="float: left;">{% gravatar "empty" 40 %}</div>
+        <div style="padding: 5px; margin-left: 50px; font-size: 14pt"><a href="{% url profiles.views.profile "empty" %}">Michael Trier</a></div>
+    </div>
+    <div class="profile clearfix">
+        <div style="float: left;">{% gravatar "20seven" 40 %}</div>
+        <div style="padding: 5px; margin-left: 50px; font-size: 14pt"><a href="{% url profiles.views.profile "20seven" %}">Greg Newman</a></div>
+    </div>
+        
     <p>{% trans "and the developers of the awesome re-usable django apps we used." %}</p>
     
     <h2>{% trans "Translators" %}</h2>

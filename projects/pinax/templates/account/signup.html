@@ -5,6 +5,16 @@
 
 {% block head_title %}Pinax : {% trans "Signup" %}{% endblock %}
 
+{% block extra_head %}
+	{% load jquery_validation %}
+	{% include_validation %}
+	<script type="text/javascript">
+	    $(function(){
+	        $('#signup_form').validate('{% url signup_form_validate %}', {type: 'table', fields: ['username'], dom: $('#id_username'), event: 'change'});
+	    });
+	</script>
+{% endblock %}
+
 {% block body %}
     <h1>{% trans "Sign Up" %}</h1>
     
@@ -13,7 +23,7 @@
     {% else %}
         <p>{% trans "Already have an account?" %} <a href="{% url acct_login %}">{% trans "Log In" %}</a>!</p>
         
-        <form class="signup" method="post" action="{% url acct_signup %}">
+        <form class="signup" id="signup_form" method="post" action="{% url acct_signup %}">
             <table>
                 {{ form.as_table }}
                 <tr><td></td><td><input type="submit" value="{% trans "Sign Up &raquo;" %}" /></td></tr>

@@ -1,4 +1,5 @@
 from django.conf.urls.defaults import *
+from account.forms import *
 
 urlpatterns = patterns('',
     url(r'^email/$', 'account.views.email', name="acct_email"),
@@ -11,4 +12,7 @@ urlpatterns = patterns('',
     
     url(r'^confirm_email/(\w+)/$', 'emailconfirmation.views.confirm_email', name="acct_confirm_email"),
     url(r'^username_autocomplete/$', 'account.views.username_autocomplete'),
+
+	# ajax validation
+    (r'^validate/$', 'ajax_validation.views.validate', {'form_class': SignupForm}, 'signup_form_validate'),
 )

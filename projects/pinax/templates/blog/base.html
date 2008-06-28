@@ -1,0 +1,17 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+
+{% block rtab_id %}id="blogs_tab"{% endblock %}
+
+{% block subnav %}
+    {% if user.is_authenticated %}
+        <ul>
+            <li><a href="{% url blog.views.blogs %} ">{% trans "All Articles" %}</a></li>
+			<li><a href="{% url blog.views.yourarticles %}">Your Articles</a></li>
+			<li><a href="{% url blog.views.new %}">Write an Article</a></li>
+        </ul>
+    {% else %}
+        &nbsp;
+    {% endif %}
+{% endblock %}

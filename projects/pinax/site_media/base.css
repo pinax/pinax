@@ -97,7 +97,7 @@ h1 {
 }
 #tabhead .tabs td {
     vertical-align: bottom;
-    padding-right: 10px;
+    padding-right: 0; /* space between tabs */
     padding-bottom: 1px; /* must be same thickness as tab border */
 }
 #tabhead .tab a, #tabhead .tab a:visited {
@@ -125,7 +125,7 @@ h1 {
 }
 #tabhead .right_tab td {
     vertical-align: bottom;
-    padding-right: 10px;
+    padding-right: 0; /* space between tabs */
     padding-bottom: 1px; /* must be same thickness as tab border */
 }
 
@@ -135,6 +135,7 @@ h1 {
 #sites_tab .tab_sites,
 #team_tab .tab_team,
 #profile_tab .rtab_profile,
+#blogs_tab .rtab_blogs,
 #tribes_tab .rtab_tribes,
 #tweets_tab .rtab_tweets,
 #bookmarks_tab .rtab_bookmarks,
@@ -149,6 +150,7 @@ h1 {
 #sites_tab .tab_sites a,
 #team_tab .tab_team a,
 #profile_tab .rtab_profile a,
+#blogs_tab .rtab_blogs a,
 #tribes_tab .rtab_tribes a,
 #tweets_tab .rtab_tweets a,
 #bookmarks_tab .rtab_bookmarks a,
@@ -162,6 +164,7 @@ h1 {
 #sites_tab .tab_sites div,
 #team_tab .tab_team div,
 #profile_tab .rtab_profile div,
+#blogs_tab .rtab_blogs div,
 #tribes_tab .rtab_tribes div,
 #tweets_tab .rtab_tweets div,
 #bookmarks_tab .rtab_bookmarks div,
@@ -678,4 +681,36 @@ dl.what_next dd {
 }
 p.what_next {
     font-size: 120%;
+}
+/* blogs */
+.blog-post h2 {
+	margin: 10px 0 0 0;
+	font-style: italic;
+}
+.blog-post-tease {
+	width: 500px;
+	float: left;
+}
+.blog-post-meta {
+	width: 200px;
+	float: left;
+	margin-left: 30px;
+}
+.blog-post-meta img { 
+	border: 1px solid #666;
+}
+.blog-list tr.odd {
+	background-color: #f3f3f3;
+}
+.blog-list td {
+	vertical-align: top;
+	padding: 3px 3px 15px 3px;
+}
+.blog-list td p {
+	padding: 0;
+	margin: 0;
+}
+
+.blog-post-meta img.noborder {
+	border: 0;
 }
