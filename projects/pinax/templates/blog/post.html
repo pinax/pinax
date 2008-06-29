@@ -21,11 +21,11 @@
             {% for tag in tags %}
                 <a href="/tags/{{ tag }}">{{ tag }}</a>
             {% endfor %}</p>
-			{% if is_author %}
-				<form action="{% url edit_post post.id %}" method="GET">
+            {% ifequal post.author request.user %}
+                <form action="{% url edit_post post.id %}" method="GET">
                         <input type="submit" value="{% trans "Edit Post" %}" />
                 </form>
-			{% endif %}
+            {% endifequal %}
         </div>
         
         {% render_content post 'body' %}

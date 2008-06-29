@@ -25,15 +25,9 @@ def post(request, username, year, month, slug):
     post = Post.objects.filter(slug=slug, publish__year=int(year), publish__month=int(month)).filter(author__username=username)
     if not post:
         raise Http404
-
-    if post[0].author == request.user:
-        is_author = True
-    else:
-        is_author = False
     
     return render_to_response("blog/post.html", {
         "post": post[0],
-        "is_author": is_author,
     }, context_instance=RequestContext(request))
 
 def your_posts(request):
@@ -64,13 +58,14 @@ def new(request):
         blog_form = BlogForm()
     
     return render_to_response("blog/new.html", {
-                        "blog_form": blog_form,
-                        }, context_instance=RequestContext(request))
+        "blog_form": blog_form
+    }, context_instance=RequestContext(request))
 
 @login_required
 def edit(request, id):
+    post = get_object_or_404(Post, id=id)
+    
     if request.method == "POST":
-        post = get_object_or_404(Post, id=id)
         if post.author != request.user:
             request.user.message_set.create(message="You can't edit posts that aren't yours")
             return HttpResponseRedirect(reverse("your_posts"))
@@ -80,17 +75,14 @@ def edit(request, id):
                 blog = blog_form.save(commit=False)
                 blog.save()
                 request.user.message_set.create(message="Successfully updated post '%s'" % blog.title)
-            
+                
                 return HttpResponseRedirect(reverse("your_posts"))
         else:
             blog_form = BlogForm(instance=post)
     else:
-        post = get_object_or_404(Post, id=id)
-        if post.author == request.user:
-            is_author = True
-        else:
-            is_author = False
+        blog_form = BlogForm(instance=post)
     
-    blog_form = BlogForm(instance=post)
-    
-    return render_to_response("blog/edit.html", {"is_author": is_author, "blog_form": blog_form}, context_instance=RequestContext(request))
+    return render_to_response("blog/edit.html", {
+        "blog_form": blog_form,
+        "post": post,
+    }, context_instance=RequestContext(request))

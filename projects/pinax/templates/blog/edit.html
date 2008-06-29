@@ -15,7 +15,7 @@
     
     <h1>{% trans "Editing Post" %}</h1>
     
-    {% if is_author %}
+    {% ifequal post.author request.user %}
         <div>
             <form id="blog_form" method="POST" action="">
                 <table>
@@ -24,5 +24,7 @@
                 </table>
             </form>
         </div>
-    {% endif %}
+    {% else %}
+        <p>You are not the author of this post.</p>
+    {% endifequal %}
 {% endblock %}
