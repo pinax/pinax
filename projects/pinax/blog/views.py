@@ -17,6 +17,12 @@ try:
 except ImportError:
     notification = None
 
+try:
+    from friends.models import Friendship
+    friends = True
+except ImportError:
+    friends = False
+
 def blogs(request):
     blogs = Post.objects.filter(status=2).order_by("-publish")
     return render_to_response("blog/blogs.html", {"blogs": blogs}, context_instance=RequestContext(request))
@@ -50,6 +56,9 @@ def new(request):
                     blog.creator_ip = request.META['REMOTE_ADDR']
                 blog.save()
                 request.user.message_set.create(message="Successfully saved post '%s'" % blog.title)
+                if notification:
+                    if friends: # @@@ might be worth having a shortcut for sending to all friends
+                        notification.send((x['friend'] for x in Friendship.objects.friends_for_user(blog.author)), "blog_friend_post", "%s has posted to their blog.", [blog.author])
                 
                 return HttpResponseRedirect(reverse("your_posts"))
         else:
