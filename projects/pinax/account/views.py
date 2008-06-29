@@ -12,6 +12,8 @@ from django.contrib.auth.models import User
 from forms import SignupForm, AddEmailForm, LoginForm, ChangePasswordForm, ResetPasswordForm, ChangeTimezoneForm
 from emailconfirmation.models import EmailAddress, EmailConfirmation
 from friends.models import Friendship
+from profiles.models import Profile
+
 
 def login(request):
     redirect_to = request.REQUEST.get("next", reverse("what_next"))
@@ -127,12 +129,15 @@ def username_autocomplete(request):
         content = []
         for friendship in friends:
             if friendship["friend"].username.startswith(q):
-                profile = friendship["friend"].get_profile()
-                entry = "%s,,%s,,%s" % (
-                    gravatar(friendship["friend"], 40),
-                    friendship["friend"].username,
-                    profile.location
-                )
+                try:
+                    profile = friendship["friend"].get_profile()
+                    entry = "%s,,%s,,%s" % (
+                        gravatar(friendship["friend"], 40),
+                        friendship["friend"].username,
+                        profile.location
+                    )
+                except Profile.DoesNotExist:
+                    pass
                 content.append(entry)
         response = HttpResponse("\n".join(content))
     else:
