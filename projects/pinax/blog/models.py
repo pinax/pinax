@@ -75,3 +75,12 @@ class Post(models.Model):
     class Admin:
         pass
 
+
+# handle notification of new comments
+from threadedcomments.models import ThreadedComment
+def new_comment(sender, instance):
+    if isinstance(instance.content_object, Post):
+        post = instance.content_object
+        if notification:
+            notification.send([post.author], "blog_post_comment", "%(user)s has commented on your blog post '%(post)s'.", {"user": instance.user, "post": post})
+dispatcher.connect(new_comment, signal=signals.post_save, sender=ThreadedComment)
