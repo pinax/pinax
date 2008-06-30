@@ -26,7 +26,7 @@ class OrderByRedditNode(template.Node):
         votes = Vote.objects.get_scores_in_bulk(values)
         ratings = []
         for obj in values:
-            age = (getattr(values, self.date_var) - datetime(2005, 12, 8, 7, 46, 43)).seconds
+            age = (getattr(obj, self.date_var) - datetime(2005, 12, 8, 7, 46, 43)).seconds
             obj_votes = votes[obj.id]['score']
             if obj_votes > 0:
                 y = 1
