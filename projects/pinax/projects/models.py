@@ -28,7 +28,7 @@ class Project(models.Model):
     members = models.ManyToManyField(User, verbose_name=_('members'))
     
     # private means only members can see the project
-    private =models.BooleanField(_('private'))
+    private =models.BooleanField(_('private'), default=False)
     
     def __unicode__(self):
         return self.name
