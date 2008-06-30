@@ -28,7 +28,10 @@ class OrderByRedditNode(template.Node):
         ratings = []
         for obj in values:
             age = (getattr(obj, self.date_var) - datetime(2005, 12, 8, 7, 46, 43)).seconds
-            obj_votes = votes[obj.id]['score']
+            try:
+                obj_votes = votes[obj.id]['score']
+            except KeyError:
+                obj_votes = 0
             if obj_votes > 0:
                 y = 1
             elif obj_votes < 0:
