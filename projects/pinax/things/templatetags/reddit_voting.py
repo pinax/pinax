@@ -23,7 +23,7 @@ class OrderByRedditNode(template.Node):
     def render(self, context):
         key = self.queryset_var.var
         values = self.queryset_var.resolve(context)
-        votes = Vote.objects.get_scores_in_bulk([x.id for x in values])
+        votes = Vote.objects.get_scores_in_bulk(values)
         ratings = []
         for obj in values:
             age = (getattr(values, self.date_var) - datetime(2005, 12, 8, 7, 46, 43)).seconds
