@@ -101,7 +101,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.humanize',
     'django.contrib.markup',
-
+    
     # external
     'notification', # must be first
     'emailconfirmation',
@@ -136,9 +136,10 @@ INSTALLED_APPS = (
     'zwitschern',
     'account',
     'tribes',
+    'projects',
     'core',
     'things',
-
+    
     'django.contrib.admin',
 
 )

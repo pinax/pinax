@@ -1,0 +1,173 @@
+{% extends "projects/base.html" %}
+
+{% load zwitschern %}
+{% load i18n %}
+{% load gravatar %}
+{% load threadedcommentstags %}
+{% load pagination_tags %}
+{% load captureas_tag %}
+
+{% block head_title %}Pinax : {{ project.name }}{% endblock %}
+
+{% block body %}
+    
+    {% if user.is_authenticated %}
+        <div class="right_panel">
+            <div class="members">
+                <h2>{% trans "Members" %}</h2>
+                <table width="100%">
+                    {% for member in project.members.all %}
+                        {% if forloop.counter0|divisibleby:"3" %}<tr>{% endif %}
+                        <td>
+                            <div class="avatar">{% gravatar member 40 %}</div>
+                            <div class="details"><a href="{% url profiles.views.profile member.username %}" title="{{ member.username }}">{{ member.username }}</a></div>
+                        </td>
+                        {% if forloop.counter0|add:"1"|divisibleby:"3" %}</tr>{% endif %}
+                    {% endfor %}
+                    {% if project.members.all|length|divisibleby:"3" %}{% else %}</tr>{% endif %}
+                </table>
+            </div>
+        </div>
+    {% endif %}
+    
+    <div style="width: 550px;">
+        <p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time.</p>
+        
+        <h1>{% trans "Project" %} {{ project.name }}</h1>
+        
+        <p>
+            Slug: <tt>{{ project.slug }}</tt><br />
+            Creator: <a href="{% url profiles.views.profile project.creator.username %}">{{ project.creator }}</a><br />
+            Created: {{ project.created|date }}
+        </p>
+        
+        <p>{{ project.description }}</p>
+        
+        {% ifequal user project.creator %}
+            <p><a href="#" onclick="$('#project_form').toggle(); return false;">{% trans "Edit details" %}</a></p>
+        
+            <form id="project_form" method="POST" action="" style="display: none;">
+                <table>
+                    {{ project_form }}
+                    <tr><td></td><td><input type="hidden" name="action" value="update" /><input type="submit" value="{% trans 'update' %}"/></td></tr>
+                </table>
+            </form>
+        {% endifequal %}
+        
+        {% if user.is_authenticated %}
+            <div>
+                {% if are_member %}
+                    {% ifequal user project.creator %}
+                        <p>You are the creator of this project.</p>
+                        <p><a href="#" onclick="$('#adduser_form').toggle(); return false;">{% trans "Add new member" %}</a></p>
+                        <form id="adduser_form" method="POST" action="" style="display: none;">
+                            <table>
+                                {{ adduser_form }}
+                                <tr><td></td><td><input type="hidden" name="action" value="add" /><input type="submit" value="{% trans 'add' %}"/></td></tr>
+                            </table>
+                        </form>
+                    {% else %}
+                        <p>You are member of this project.</p>
+                    {% endifequal %}
+                {% else %}
+                    <p>It is up to the creator of this project (<a href="{% url profiles.views.profile project.creator.username %}">{{ project.creator }}</a>) to add you.</p>
+                {% endif %}
+            </div>
+        {% endif %}
+        
+        
+        {% if user.is_authenticated %}
+            
+            <h2>Discussion Topics{% if project.topics.all.count %} ({{ project.topics.all.count }}){% endif %}</h2>
+            
+            {% if topics %}
+                <table class="topics">
+                    {% for topic in topics %}
+                        <tr class="{% cycle odd,even %}">
+                            <td class="meta">
+                                <div class="avatar">{% gravatar topic.creator 40 %}</div>
+                                <div class="details"><a href="{% url profiles.views.profile topic.creator.username %}">{{ topic.creator }}</a></div>
+                                <div class="created">{{ topic.created|date }}</div>
+                            </td>
+                            <td>
+                                <h2><a href="{% url project_topic topic.id %}">{{ topic.title }}</a></h2>
+                                <div class="body">{{ topic.body|urlize|linebreaks }}</div>
+                                {% get_comment_count for topic as comment_count %}
+                                {% if comment_count %}
+                                    <div class="comment_stats">
+                                        {{ comment_count }} comment{{ comment_count|pluralize }}
+                                        (most recent: {{ topic.modified|date }})
+                                    </div>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                <p><a href="{% url project_topics project.slug %}">more...</a></p>
+            {% else %}
+                <p>None yet. <a href="{% url project_topics project.slug %}">Start one...</a></p>
+            {% endif %}
+            
+            
+            <h2>Wiki Articles{% if total_articles %} ({{ total_articles }}){% endif %}</h2>
+            
+            {% if articles %}
+                <table class="topics">
+                    {% for article in articles %}
+                        <tr class="{% cycle odd,even %}">
+                            <td class="meta">
+                                <div class="avatar">{% gravatar article.latest_changeset.editor 40 %}</div>
+                                <div class="details"><a href="{% url profiles.views.profile article.latest_changeset.editor.username %}">{{ article.creator }}</a></div>
+                                {{ article.last_update|date }}
+                            </td>
+                            <td>
+                                <h2><a href="{% url wiki_article title=article.title,group_slug=project.slug %}">{{ article.title }}</a></h2>
+                                <div class="body">{{ article.content|truncatewords:25 }}</div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                <p><a href="{% url wiki_article_list group_slug=project.slug %}">more...</a></p>
+            {% else %}
+                <p>None yet. Start a <a href="{% url wiki_edit_article group_slug=project.slug,title="NewArticle" %}">NewArticle</a>...</p>
+            {% endif %}
+            
+            {% comment %}
+                <h2>{% trans "Tweets" %}</h2>
+                
+                {% tweet_listing tweets 1 0 %}
+            {% endcomment %}
+            
+        {% endif %}
+    </div>
+        
+{% endblock %}
+
+{% block extra_body %}
+    {{ block.super }}
+    <script type="text/javascript" src="/site_media/jquery.bgiframe.js"></script>
+    <script type="text/javascript" src="/site_media/jquery.dimensions.js"></script>
+    <script type="text/javascript" src="/site_media/jquery.ajaxQueue.js"></script>
+    <script type="text/javascript" src="/site_media/jquery.autocomplete.js"></script>
+    <script type="text/javascript">
+        $().ready(function() {
+            $("#id_recipient").autocomplete("/account/username_autocomplete/", {
+                formatItem: function(data, i, n, value) {
+                    values = value.split(",,");
+                    return values[0] + values[1] + "<br />" + values[2];
+                },
+                formatResult: function(data, value) {
+                    return value.split(",,")[1];
+                },
+                // TODO: improve highlighting to only affect username.
+                highlight: false,
+            });
+            {% if project_form.errors %}
+                $('#project_form').show();
+            {% endif %}
+            {% if adduser_form.errors %}
+                $('#adduser_form').show();
+            {% endif %}
+        });
+    </script>
+{% endblock %}

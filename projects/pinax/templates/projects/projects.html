@@ -1,0 +1,58 @@
+{% extends "projects/base.html" %}
+
+{% load i18n %}
+{% load gravatar %}
+{% load humanize %}
+{% load pagination_tags %}
+{% load captureas_tag %}
+
+{% block head_title %}Pinax : {% blocktrans %}Projects{% endblocktrans %}{% endblock %}
+
+{% block body %}
+    <p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time.</p>
+    
+    
+    <h1>{% trans "Projects" %}</h1>
+    
+    <p>A <b>project</b> is a place to manage a group of people working on a common set of tasks. It is similar to a tribe in providing a wiki and threaded discussion but is invitation only and adds issue tracking.</p>
+    
+    {% if user.is_authenticated %}
+        <p><a href="#" onclick="$('#project_form').toggle(); return false;">{% trans "Start your own" %}</a></p>
+        
+        <form id="project_form" method="POST" action="" style="display: none;">
+            <table>
+                {{ project_form }}
+                <tr><td></td><td><input type="hidden" name="action" value="create" /><input type="submit" value="{% trans 'create' %}"/></td></tr>
+            </table>
+        </form>
+    {% else %}
+        {% captureas signup_url %}{% url acct_signup %}{% endcaptureas %}
+        {% captureas login_url %}{% url acct_login %}{% endcaptureas %}
+        <p>{% blocktrans %}<a href="{{ signup_url }}">Sign up</a> and <a href="{{ login_url }}">log in </a> to create your own project or join an existing one.{% endblocktrans %}</p>
+    {% endif %}
+    
+    {% autopaginate projects %}
+    
+    {% regroup projects by created.date as projects_by_created %}
+    
+    {% for date in projects_by_created %}
+        <h2 class="creation_date">{{ date.grouper|naturalday:_("MONTH_DAY_FORMAT")|capfirst }}</h2>
+        <dl>
+            {% for project in date.list %}
+                <dt>{{ project.name }} (<a href="{% url projects.views.project project.slug %}">{{ project.slug }}</a>)</dt>
+                <dd>{{ project.description }}</dd>
+            {% endfor %}
+        </dl>
+    {% endfor %}
+    
+    {% paginate %}
+    
+{% endblock %}
+
+{% block extra_body %}
+    <script>
+        {% if project_form.errors %}
+            $('#project_form').show();
+        {% endif %}
+    </script>
+{% endblock %}

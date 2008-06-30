@@ -1,0 +1,52 @@
+{% extends "projects/base.html" %}
+
+{% load i18n %}
+{% load gravatar %}
+{% load threadedcommentstags %}
+{% load pagination_tags %}
+
+{% block head_title %}Pinax : Topics for {{ project.name }}{% endblock %}
+
+{% block body %}
+    <h1>{% trans "Discussion Topics for Project" %} <a href="{% url project_detail project.slug %}">{{ project.name }}</a></h1>
+    
+    {% autopaginate project.topics.all %}
+    
+    <table class="topics">
+        {% for topic in project.topics.all %}
+            <tr class="{% cycle odd,even %}">
+                <td class="meta">
+                    <div class="avatar">{% gravatar topic.creator 40 %}</div>
+                    <div class="details"><a href="{% url profiles.views.profile topic.creator.username %}">{{ topic.creator }}</a></div>
+                    <div class="created">{{ topic.created|date }}</p>
+                </td>
+                <td>
+                    <h2><a href="{% url project_topic topic.id %}">{{ topic.title }}</a></h2>
+                    <div class="body">{{ topic.body|urlize|linebreaks }}</div>
+                    {% get_comment_count for topic as comment_count %}
+                    {% if comment_count %}
+                        <div class="comment_stats">
+                            {{ comment_count }} comment{{ comment_count|pluralize }}
+                            (most recent: {{ topic.modified|date }})
+                        </div>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    
+    {% paginate %}
+    
+    {% if is_member %}
+        <h2>New Topic</h2>
+        
+        <form action="{% url project_topics project.slug %}" method="POST">
+            <table>
+                {{ topic_form }}
+                <tr><td><input type="submit" value="{% trans "Create New Topic" %}" /></td></tr>
+            </table>
+            <input type="hidden" name="next" value="{{ request.path }}" />
+        </form>
+    {% endif %}
+    
+{% endblock %}
