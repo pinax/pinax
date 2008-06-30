@@ -22,14 +22,27 @@
         
         <p>Sort by:
             {% ifequal request.sort_order "points" %}
-                <b>points</b>
+                <a href="?sort_order=hotness">reddit-like hotness</a>
+                or
+                <b>total points</b>
                 or
                 <a href="?sort_order=date">date added</a>
                 {% order_by_votes bookmarks %}
             {% else %}
-                <a href="?sort_order=points">points</a>
-                or
-                <b>date added</b>
+                {% ifequal request.sort_order "hotness" %}
+                    <b>reddit-like hotness</b>
+                    or
+                    <a href="?sort_order=points">total points</a>
+                    or
+                    <a href="?sort_order=date">date added</a>
+                    {% order_by_reddit bookmarks added %}
+                {% else %}
+                    <a href="?sort_order=hotness">reddit-like hotness</a>
+                    or
+                    <a href="?sort_order=points">total points</a>
+                    or
+                    <b>date added</b>
+                {% endifequal %}
             {% endifequal %}
         </p>
         
