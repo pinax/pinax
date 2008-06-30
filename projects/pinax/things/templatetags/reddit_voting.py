@@ -40,9 +40,9 @@ class OrderByRedditNode(template.Node):
                 y = 0
             z = max(abs(obj_votes), 1)
             
-            rating = log(z, 10) + (y * age) / 45000
+            rating = log(z, 10) + (y * age) / 45000.0
             ratings.append((rating, obj))
-        ratings.sort(cmp=lambda x, y: y[0] - x[0])
+        ratings.sort(cmp=lambda x, y: cmp(y[0], x[0]))
         by_score = [x[1] for x in ratings]
         
 
