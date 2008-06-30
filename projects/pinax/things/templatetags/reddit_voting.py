@@ -34,7 +34,7 @@ class OrderByRedditNode(template.Node):
                 y = -1
             else:
                 y = 0
-            z = max(abs(x), 1)
+            z = max(abs(obj_votes), 1)
             
             rating = log(z, 10) + (y * age) / 45000
             ratings.append((rating, obj))
