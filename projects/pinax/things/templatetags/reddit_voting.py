@@ -1,4 +1,5 @@
 from datetime import datetime
+from math import log
 
 from django import template
 from django.contrib.contenttypes.models import ContentType
