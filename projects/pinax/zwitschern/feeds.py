@@ -5,6 +5,7 @@ from django.contrib.sites.models import Site
 from django.contrib.auth.models import User
 from zwitschern.models import TweetInstance
 from django.template.defaultfilters import linebreaks, escape, capfirst
+from datetime import datetime
 
 ITEMS_PER_FEED = getattr(settings, 'PINAX_ITEMS_PER_FEED', 20)
 
@@ -37,6 +38,11 @@ class TweetFeed(Feed):
             qs = TweetInstance.objects.tweets_for(user)
         else:
             qs = TweetInstance.objects.all()
+        # We return an arbitrary date if there are no results, because there
+        # must be a feed_updated field as per the Atom specifications, however
+        # there is no real data to go by, and an arbitrary date can be static.
+        if qs.count() == 0:
+            return datetime(year=2008, month=7, day=1)
         return qs.latest('sent').sent
     
     def feed_links(self, user):
