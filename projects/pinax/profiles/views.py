@@ -92,14 +92,13 @@ def profile(request, username):
         if request.method == "POST":
             if request.POST["action"] == "update":
                 profile_form = ProfileForm(request.POST, instance=other_user.get_profile())
-                profile = profile_form.save(commit=False)
-                profile.user = other_user
-                profile.save()
-        try:
-            profile_form = ProfileForm(instance=other_user.get_profile())
-        except Profile.DoesNotExist:
-            profile = Profile(user=other_user)
-            profile.save()
+                if profile_form.is_valid():
+                    profile = profile_form.save(commit=False)
+                    profile.user = other_user
+                    profile.save()
+            else:
+                profile_form = ProfileForm(instance=other_user.get_profile())
+        else:
             profile_form = ProfileForm(instance=other_user.get_profile())
     else:
         profile_form = None
