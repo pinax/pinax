@@ -6,6 +6,7 @@ from django.template import RequestContext
 from django.core.validators import alnum_re
 from django.contrib.auth.models import User
 from emailconfirmation.models import EmailAddress
+from profiles.models import Profile
 
 from django_openidauth.models import associate_openid
 
@@ -26,6 +27,7 @@ class RegistrationFormOpenID(forms.Form):
         username = self.cleaned_data["username"]
         email = self.cleaned_data["email"]
         new_user = User.objects.create_user(username, "", "!")
+        Profile(user=new_user).save()
         if email:
             new_user.message_set.create(message="Confirmation email sent to %s" % email)
             EmailAddress.objects.add_email(new_user, email)
