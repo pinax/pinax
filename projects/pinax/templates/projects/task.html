@@ -1,0 +1,147 @@
+{% extends "projects/base.html" %}
+
+{% load i18n %}
+{% load threadedcommentstags %}
+{% load gravatar %}
+
+{% block head_title %}Pinax : {{ task.summary }}{% endblock %}
+
+{% block body %}
+    <p><a href="{% url project_tasks task.project.slug %}">&larr; {% trans "Back to Task List for Project " %} {{ task.project }}</a></p>
+    
+    {% get_threaded_comment_tree for task as responses %}
+    
+    <div class="clearfix">
+        <div class="meta">
+            {% if task.assignee %}
+                <div class="avatar">{% gravatar task.assignee 40 %}</div>
+                <div class="details"><a href="{% url profiles.views.profile task.assignee.username %}">{{ task.assignee }}</a></div>
+            {% else %}
+                <span class="warning">Unassigned</span>
+            {% endif %}
+            <div><b>State</b>: {{ task.get_state_display }}</div>
+            <div><b>Creator</b>: {{ task.creator }}</div>
+            <div><b>Created</b>: {{ task.created|date }}</div>
+        </div>
+        <div class="bulk">
+            <h1>{{ task.summary }}</h1>
+            <div class="body">{{ task.detail }}</div>
+            {% ifequal user task.creator %}
+            {% endifequal %}
+        </div>
+    </div>
+    
+    {% ifequal request.user task.assignee %}
+    <form action="" method="POST">
+        <table>
+            {{ status_form }}
+            <tr><td></td><td><input type="submit" value="{% trans "Update Status" %}" /></td></tr>
+        </table>
+        <input type="hidden" name="action" value="update_status" />
+    </form>
+    {% else %}
+        <div><b>Status</b>: {{ task.status }}</div>
+    {% endifequal %}
+    
+    {% if is_member %}
+        <form action="" method="POST">
+            <table>
+                {{ assign_form }}
+                {% if task.assignee %}
+                    <tr><td></td><td><input type="submit" value="{% trans 'Reassign' %}" /></td></tr>
+                {% else %}
+                    <tr><td></td><td><input type="submit" value="{% trans 'Assign' %}" /></td></tr>
+                {% endif %}
+            </table>
+            <input type="hidden" name="action" value="assign" />
+        </form>
+    {% endif %}
+    
+    {% ifequal task.get_state_display 'open' %}
+        {% ifequal request.user task.assignee %}
+            <form action="" method="POST">
+                <input type="hidden" name="action" value="mark_resolved" />
+                <input type="submit" value="{% trans 'Mark Resolved' %}" />
+            </form>
+        {% endifequal %}
+    {% else %}
+        {% ifequal task.get_state_display 'resolved' %}
+            {% ifequal request.user task.creator %}
+                <form action="" method="POST">
+                    <input type="hidden" name="action" value="mark_closed" />
+                    <input type="submit" value="{% trans 'Mark Closed' %}" />
+                </form>
+            {% endifequal %}
+            {% if is_member %}
+                <form action="" method="POST">
+                    <input type="hidden" name="action" value="reopen" />
+                    <input type="submit" value="{% trans 'Reopen' %}" />
+                </form>
+            {% endif %}
+        {% else %}
+            {% if is_member %}
+                <form action="" method="POST">
+                    <input type="hidden" name="action" value="reopen" />
+                    <input type="submit" value="{% trans 'Reopen' %}" />
+                </form>
+            {% endif %}
+        {% endifequal %}
+    {% endifequal %}
+    
+    <h2>Discussion</h2>
+    
+    <ul class="responses">
+        {% for response in responses %}
+            <li class="{% cycle even,odd %} thread-{{ response.depth }} clearfix">
+                <div class="meta">
+                    <div class="avatar">{% gravatar response.user 40 %}</div>
+                    <div class="details"><a href="{% url profiles.views.profile response.user.username %}">{{ response.user }}</a></div>
+                    {{ response.date_submitted|date }}
+                </div>
+                <div class="bulk">
+                    <div class="body">{{ response.comment|urlize|linebreaks }}</div>
+                    {% ifequal user response.user %}
+                    <form method="POST" action="{% url tc_comment_delete response.id %}">
+                        <input type="submit" value="{% trans "Delete Post" %}" />
+                        <input type="hidden" name="next" value="{% url project_detail response.content_object.slug %}" />
+                    </form>
+                    {% endifequal %}
+                    <a href="javascript:toggle_comment_form({{ response.id }})">Reply to This Post</a>
+                    <form class="hidden" method="POST" action="{% get_comment_url task response %}" id="comment_form_{{ response.id }}">
+                        <table><tr><td><textarea id="id_comment" rows="10" cols="40" name="comment"></textarea></td></tr>
+                        <tr><td><input type="submit" value="{% trans "Post Response" %}" /></td></tr></table>
+                        <input type="hidden" name="next" value="{{ request.path }}" />
+                    </form>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+    
+    {% if is_member %}
+        <form action="{% get_comment_url task %}" method="POST">
+            <table>
+                <tr><td><textarea id="id_comment" rows="10" cols="40" name="comment"></textarea></td></tr>
+                <tr><td><input type="submit" value="{% trans "Post Response" %}" /></td></tr>
+            </table>
+            <input type="hidden" name="next" value="{{ request.path }}" />
+        </form>
+    {% endif %}
+    
+{% endblock %}
+
+{% block extra_body %}
+    <script type="text/javascript">
+        function toggle_comment_form(id){
+            var cform = $('#comment_form_' + id);
+            if(cform.hasClass('hidden')) {
+                cform.prev().text("Stop Replying to This Post");
+                cform.slideDown();
+            }
+            else {
+                cform.prev().text("Reply to This Post");
+                cform.slideUp();
+            }
+            cform.toggleClass('hidden');
+        }
+    </script>
+{% endblock %}

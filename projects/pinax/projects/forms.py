@@ -49,6 +49,35 @@ class TopicForm(forms.ModelForm):
         fields = ('title', 'body')
 
 
+class TaskForm(forms.ModelForm):
+    def __init__(self, project, *args, **kwargs):
+        super(TaskForm, self).__init__(*args, **kwargs)
+        self.fields["assignee"].queryset = self.fields["assignee"].queryset.filter(project=project)
+    
+    class Meta:
+        model = Task
+        fields = ('summary', 'detail', 'assignee')
+
+
+class AssignForm(TaskForm):
+    """
+    a form for changing the assignee of a task
+    """
+    class Meta(TaskForm.Meta):
+        fields = ('assignee',)
+
+
+class StatusForm(forms.ModelForm):
+    """
+    a form for changing the status of a task
+    """
+    status = forms.CharField(widget=forms.TextInput(attrs={'size':'40'}))
+    
+    class Meta:
+        model = Task
+        fields = ('status',)
+
+
 class AddUserForm(forms.Form):
     
     recipient = forms.CharField(label=_(u"User"))

@@ -78,6 +78,16 @@
         
         {% if user.is_authenticated %}
             
+            <h2>Tasks</h2>
+            
+            <ul>
+                {% for task in project.tasks.all %}
+                    <li>{{ task }}</li>
+                {% endfor %}
+            </ul>
+            
+            <p><a href="{% url project_tasks project.slug %}">more...</a></p>
+            
             <h2>Discussion Topics{% if project.topics.all.count %} ({{ project.topics.all.count }}){% endif %}</h2>
             
             {% if topics %}

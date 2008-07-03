@@ -75,7 +75,6 @@ def project(request, slug):
         adduser_form = AddUserForm()
         project_form = ProjectUpdateForm(instance=project)
     
-    
     topics = project.topics.all()[:5]
     articles = Article.objects.filter(
         content_type=get_ct(project),
@@ -132,4 +131,79 @@ def topic(request, id):
     
     return render_to_response("projects/topic.html", {
         'topic': topic,
+    }, context_instance=RequestContext(request))
+
+def tasks(request, slug):
+    project = get_object_or_404(Project, slug=slug)
+    is_member = request.user.is_authenticated() and request.user in project.members.all()
+    
+    if request.user.is_authenticated() and request.method == "POST":
+        if request.POST["action"] == "add_task":
+            task_form = TaskForm(project, request.POST)
+            if task_form.is_valid():
+                task = task_form.save(commit=False)
+                task.creator = request.user
+                task.project = project
+                # @@@ we should check that assignee is really a member
+                task.save()
+                request.user.message_set.create(message="added task '%s'" % task.summary)
+                # @@@ notification
+                task_form = TaskForm(project=project) # @@@ is this the right way to clear it?
+        else:
+            task_form = TaskForm(project=project)
+    else:
+        task_form = TaskForm(project=project)
+    
+    return render_to_response("projects/tasks.html", {
+        "project": project,
+        "is_member": is_member,
+        "task_form": task_form,
+    }, context_instance=RequestContext(request))
+
+def task(request, id):
+    task = get_object_or_404(Task, id=id)
+    is_member = request.user.is_authenticated() and request.user in task.project.members.all()
+    
+    if is_member and request.method == "POST":
+        if request.POST["action"] == "assign":
+            status_form = StatusForm(instance=task)
+            assign_form = AssignForm(task.project, request.POST, instance=task)
+            if assign_form.is_valid():
+                task = assign_form.save()
+                request.user.message_set.create(message="reassigned task to '%s'" % task.assignee)
+                # @@@ notification
+        elif request.POST["action"] == "update_status":
+            assign_form = AssignForm(task.project, instance=task)
+            status_form = StatusForm(request.POST, instance=task)
+            if status_form.is_valid():
+                task = status_form.save()
+                request.user.message_set.create(message="updated your status on the task")
+                # @@@ notification
+        else:
+            assign_form = AssignForm(task.project, instance=task)
+            status_form = StatusForm(instance=task)
+            if request.POST["action"] == "mark_resolved" and request.user == task.assignee:
+                task.state = '2'
+                task.save()
+                # @@@ message
+                # @@@ notification
+            elif request.POST["action"] == "mark_closed" and request.user == task.creator:
+                task.state = '3'
+                task.save()
+                # @@@ message
+                # @@@ notification
+            elif request.POST["action"] == "reopen" and is_member:
+                task.state = '1'
+                task.save()
+                # @@@ message
+                # @@@ notification
+    else:
+        assign_form = AssignForm(task.project, instance=task)
+        status_form = StatusForm(instance=task)
+    
+    return render_to_response("projects/task.html", {
+        "task": task,
+        "is_member": is_member,
+        "assign_form": assign_form,
+        "status_form": status_form,
     }, context_instance=RequestContext(request))

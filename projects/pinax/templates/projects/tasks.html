@@ -1,0 +1,53 @@
+{% extends "projects/base.html" %}
+
+{% load i18n %}
+{% load gravatar %}
+{% load threadedcommentstags %}
+{% load pagination_tags %}
+
+{% block head_title %}Pinax : Tasks for {{ project.name }}{% endblock %}
+
+{% block body %}
+    <h1>{% trans "Tasks for Project" %} <a href="{% url project_detail project.slug %}">{{ project.name }}</a></h1>
+    
+    {% autopaginate project.tasks.all %}
+    
+    <table class="tasks">
+        {% for task in project.tasks.all %}
+            <tr class="{% cycle odd,even %}">
+                <td class="meta">
+                    {% if task.assignee %}
+                        <div class="avatar">{% gravatar task.assignee 40 %}</div>
+                        <div class="details"><a href="{% url profiles.views.profile task.assignee.username %}">{{ task.assignee }}</a></div>
+                    {% else %}
+                        <span class="warning">Unassigned</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <h2><a href="{% url project_task task.id %}">{{ task.summary }}</a></h2>
+                    <div class="body">{{ task.detail }}</div>
+                    {% get_comment_count for task as comment_count %}
+                    {% if comment_count %}
+                        <div class="comment_stats">
+                            {{ comment_count }} comment{{ comment_count|pluralize }}
+                        </div>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    
+    {% paginate %}
+    
+    {% if is_member %}
+        <h2>New Task</h2>
+        
+        <form action="{% url project_tasks project.slug %}" method="POST">
+            <table>
+                {{ task_form }}
+                <tr><td></td><td><input type="hidden" name="action" value="add_task" /><input type="submit" value="{% trans 'add task' %}"/></td></tr>
+            </table>
+        </form>
+    {% endif %}
+    
+{% endblock %}
