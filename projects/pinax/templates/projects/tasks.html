@@ -10,32 +10,43 @@
 {% block body %}
     <h1>{% trans "Tasks for Project" %} <a href="{% url project_detail project.slug %}">{{ project.name }}</a></h1>
     
-    {% autopaginate project.tasks.all %}
+    {% autopaginate tasks %}
     
-    <table class="tasks">
-        {% for task in project.tasks.all %}
-            <tr class="{% cycle odd,even %}">
-                <td class="meta">
-                    {% if task.assignee %}
-                        <div class="avatar">{% gravatar task.assignee 40 %}</div>
-                        <div class="details"><a href="{% url profiles.views.profile task.assignee.username %}">{{ task.assignee }}</a></div>
-                    {% else %}
-                        <span class="warning">Unassigned</span>
-                    {% endif %}
-                </td>
-                <td>
-                    <h2><a href="{% url project_task task.id %}">{{ task.summary }}</a></h2>
-                    <div class="body">{{ task.detail }}</div>
-                    {% get_comment_count for task as comment_count %}
-                    {% if comment_count %}
-                        <div class="comment_stats">
-                            {{ comment_count }} comment{{ comment_count|pluralize }}
-                        </div>
-                    {% endif %}
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
+    {% regroup tasks by get_state_display as tasks_by_state %}
+    
+    {% for state in tasks_by_state %}
+        <h2 class="join_date">{{ state.grouper }}</h2>
+        
+        <table class="tasks">
+            
+            {% for task in state.list %}
+                
+                <tr class="{% cycle odd,even %}">
+                    <td class="meta">
+                        {% if task.assignee %}
+                            <div class="avatar">{% gravatar task.assignee 40 %}</div>
+                            <div class="details"><a href="{% url profiles.views.profile task.assignee.username %}">{{ task.assignee }}</a></div>
+                        {% else %}
+                            <span class="warning">Unassigned</span>
+                        {% endif %}
+                        <div><b>State</b>: {{ task.get_state_display }}</div>
+                    </td>
+                    <td>
+                        <h2><a href="{% url project_task task.id %}">{{ task.summary }}</a></h2>
+                        <div class="body">{{ task.detail }}</div>
+                        {% get_comment_count for task as comment_count %}
+                        {% if comment_count %}
+                            <div class="comment_stats">
+                                {{ comment_count }} comment{{ comment_count|pluralize }}
+                            </div>
+                        {% endif %}
+                        <div><b>Status</b>: {{ task.status }}</div>
+                    </td>
+                </tr>
+            {% endfor %}
+        
+        </table>
+    {% endfor %}
     
     {% paginate %}
     
