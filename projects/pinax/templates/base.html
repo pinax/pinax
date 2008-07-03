@@ -1,5 +1,5 @@
 {% load i18n %}<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}" xml:lang="{{ LANGUAGE_CODE }}" lang="{{ LANGUAGE_CODE }}">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <title>{% block head_title %}{% endblock %}</title>
@@ -28,7 +28,7 @@
         {% endif %}
         
         <div id="tabhead">
-            <div class="logo">{% block logo_link_image %}{% endblock %}</div>
+            <div class="logo" dir="ltr">{% block logo_link_image %}{% endblock %}</div>
             <div class="login">{% block login %}{% endblock %}{% block locale_switcher %}{% endblock %}<div style="text-align: right;"></div></div>
             <div class="tabs" {% block tab_id %}{% endblock %}>{% block tabs %}{% endblock %}</div>
             <div class="right_tab" {% block rtab_id %}{% endblock %}>{% block right_tab %}{% endblock %}</div>
