@@ -78,30 +78,6 @@
         
         {% if user.is_authenticated %}
             
-            <h2>Tasks</h2>
-            
-            <ul>
-                {% for task in project.tasks.all %}
-                    <li><a href="#" onclick="$('#task_{{ forloop.counter }}').toggle(); return false;">{{ task }}</a>
-                        <div id="task_{{ forloop.counter }}" style="display: none;">
-                            {{ task.detail }}
-                        </div>
-                    </li>
-                {% endfor %}
-            </ul>
-            
-            {% if are_member %}
-                <p><a href="#" onclick="$('#task_form').toggle(); return false;">{% trans "Add task" %}</a></p>
-                
-                <form id="task_form" method="POST" action="" style="display: none;">
-                    <table>
-                        {{ task_form }}
-                        <tr><td></td><td><input type="hidden" name="action" value="add_task" /><input type="submit" value="{% trans 'add task' %}"/></td></tr>
-                    </table>
-                </form>
-            {% endif %}
-            
-            
             <h2>Discussion Topics{% if project.topics.all.count %} ({{ project.topics.all.count }}){% endif %}</h2>
             
             {% if topics %}
@@ -191,9 +167,6 @@
             {% endif %}
             {% if adduser_form.errors %}
                 $('#adduser_form').show();
-            {% endif %}
-            {% if task_form.errors %}
-                $('#task_form').show();
             {% endif %}
         });
     </script>

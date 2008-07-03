@@ -68,35 +68,6 @@ class Topic(models.Model):
         list_display = ('title', )
 
 
-class Task(models.Model):
-    """
-    a task to be performed for the project.
-    """
-    
-    STATE_CHOICES = (
-        ('1', 'open'),
-        ('2', 'resolved'), # the assignee thinks it's done
-        ('3', 'closed'), # the creator has confirmed it's done
-    )
-    
-    project = models.ForeignKey(Project, related_name="tasks", verbose_name=_('project'))
-    
-    summary = models.CharField(_('summary'), max_length="100")
-    detail = models.TextField(_('detail'), blank=True)
-    creator = models.ForeignKey(User, related_name="created_project_tasks", verbose_name=_('creator'))
-    created = models.DateTimeField(_('created'), default=datetime.now)
-    assignee = models.ForeignKey(User, related_name="assigned_project_tasks", verbose_name=_('assignee'), null=True, blank=True)
-    
-    # status is a short message the assignee can give on their current status
-    status = models.CharField(_('status'), max_length="50", blank=True)
-    state = models.CharField(_('state'), max_length="1", choices=STATE_CHOICES)
-    
-    def __unicode__(self):
-        return self.summary
-    
-    class Admin:
-        pass
-
 from threadedcomments.models import ThreadedComment
 def new_comment(sender, instance):
     if isinstance(instance.content_object, Topic):
