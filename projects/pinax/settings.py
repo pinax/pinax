@@ -172,6 +172,7 @@ LANGUAGES = (
   ('sv', u'Svenska'),
   ('pt-br', u'Português brasileiro'),
   ('he', u'עברית'),
+  ('ar', u'العربية'),
 )
 
 # URCHIN_ID = "ua-..."
