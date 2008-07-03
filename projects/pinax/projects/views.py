@@ -75,6 +75,21 @@ def project(request, slug):
         adduser_form = AddUserForm()
         project_form = ProjectUpdateForm(instance=project)
     
+    if request.user.is_authenticated() and request.method == "POST":
+        if request.POST["action"] == "add_task":
+            task_form = TaskForm(request.POST)
+            if task_form.is_valid():
+                task = task_form.save(commit=False)
+                task.creator = request.user
+                task.project = project
+                task.save()
+                request.user.message_set.create(message="added task '%s'" % task.summary)
+                task_form = TaskForm() # @@@ is this the right way to clear it?
+        else:
+            task_form = TaskForm()
+    else:
+        task_form = TaskForm()
+    
     
     topics = project.topics.all()[:5]
     articles = Article.objects.filter(
@@ -87,9 +102,12 @@ def project(request, slug):
     
     are_member = request.user in project.members.all()
     
+    task_form = TaskForm()
+    
     return render_to_response("projects/project.html", {
         "project_form": project_form,
         "adduser_form": adduser_form,
+        "task_form": task_form,
         "project": project,
         "topics": topics,
         "articles": articles,

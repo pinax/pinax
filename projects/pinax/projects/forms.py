@@ -49,6 +49,13 @@ class TopicForm(forms.ModelForm):
         fields = ('title', 'body')
 
 
+class TaskForm(forms.ModelForm):
+    
+    class Meta:
+        model = Task
+        fields = ('summary', 'detail')
+
+
 class AddUserForm(forms.Form):
     
     recipient = forms.CharField(label=_(u"User"))
