@@ -9,7 +9,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
-from forms import SignupForm, AddEmailForm, LoginForm, ChangePasswordForm, ResetPasswordForm, ChangeTimezoneForm
+from forms import SignupForm, AddEmailForm, LoginForm, ChangePasswordForm, ResetPasswordForm, ChangeTimezoneForm, ChangeLanguageForm
 from emailconfirmation.models import EmailAddress, EmailConfirmation
 from friends.models import Friendship
 from profiles.models import Profile
@@ -117,6 +117,20 @@ def timezone_change(request):
     else:
         form = ChangeTimezoneForm(request.user)
     return render_to_response("account/timezone_change.html", {
+        "form": form,
+    }, context_instance=RequestContext(request))
+
+@login_required
+def language_change(request):
+    if request.method == "POST":
+        form = ChangeLanguageForm(request.user, request.POST)
+        if form.is_valid():
+            form.save()
+            next = request.META.get('HTTP_REFERER', None)
+            return HttpResponseRedirect(next)
+    else:
+        form = ChangeLanguageForm(request.user)
+    return render_to_response("account/language_change.html", {
         "form": form,
     }, context_instance=RequestContext(request))
 

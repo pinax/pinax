@@ -27,7 +27,7 @@ TIME_ZONE = 'US/Eastern'
 # Language code for this installation. All choices can be found here:
 # http://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes
 # http://blogs.law.harvard.edu/tech/stories/storyReader$15
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
 
 SITE_ID = 1
 
@@ -61,11 +61,11 @@ TEMPLATE_LOADERS = (
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django_openidconsumer.middleware.OpenIDMiddleware',
+    'profiles.middleware.LocaleMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'djangologging.middleware.LoggingMiddleware',
-    'django_openidconsumer.middleware.OpenIDMiddleware',
     'pagination.middleware.PaginationMiddleware',
     'things.middleware.SortOrderMiddleware',
     'djangodblog.DBLogMiddleware',

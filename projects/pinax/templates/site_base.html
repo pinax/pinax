@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block locale_switcher %}
-    <form action="/i18n/setlang/" method="post" id="locale_switcher">
+    <form action="{% if request.user.is_authenticated %}{% url acct_language_change %}{% else %}/i18n/setlang/{% endif %}" method="post" id="locale_switcher">
         <select name="language" onchange="$('#locale_switcher').submit()">
             {% for lang in LANGUAGES %}
                 <option value="{{ lang.0 }}"{% ifequal lang.0 LANGUAGE_CODE %} selected="selected"{% endifequal %}>{{ lang.1 }}</option>

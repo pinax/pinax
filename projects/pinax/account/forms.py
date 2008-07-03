@@ -206,3 +206,16 @@ class ChangeTimezoneForm(ProfileForm):
         self.profile.timezone = self.cleaned_data["timezone"]
         self.profile.save()
         self.user.message_set.create(message=ugettext(u"Timezone successfully updated."))
+
+class ChangeLanguageForm(ProfileForm):
+
+    language = forms.ChoiceField(label=_("Language"), required=True, choices=settings.LANGUAGES)
+
+    def __init__(self, *args, **kwargs):
+        super(ChangeLanguageForm, self).__init__(*args, **kwargs)
+        self.initial.update({"language": self.profile.language})
+
+    def save(self):
+        self.profile.language = self.cleaned_data["language"]
+        self.profile.save()
+        self.user.message_set.create(message=ugettext(u"Language successfully updated."))

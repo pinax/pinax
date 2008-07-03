@@ -1,3 +1,4 @@
+from django.conf import settings
 from django import newforms as forms
 
 from profiles.models import Profile
@@ -11,4 +12,4 @@ class ProfileForm(forms.ModelForm):
     
     class Meta:
         model = Profile
-        exclude = ('user', 'timezone')
+        exclude = ('user', 'timezone', 'language')
