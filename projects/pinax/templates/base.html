@@ -9,6 +9,13 @@
             }
         </style><![endif]-->
         <link rel="stylesheet" href="/site_media/base.css?488" />
+        {% if LANGUAGE_BIDI %}
+        <style type="text/css" media="screen">
+            div.right_panel {
+                float: left; /* hotfix for sidebar */
+            }
+        </style>
+        {% endif %}
         {% block extra_head %}
         {% endblock %}
     </head>
