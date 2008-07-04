@@ -1,7 +1,9 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+
 from projects.models import Project
 from projects.forms import *
 
@@ -218,4 +220,14 @@ def task(request, id):
         "is_member": is_member,
         "assign_form": assign_form,
         "status_form": status_form,
+    }, context_instance=RequestContext(request))
+
+@login_required
+def user_tasks(request, username):
+    other_user = get_object_or_404(User, username=username)
+    tasks = other_user.assigned_project_tasks.order_by("state")
+    
+    return render_to_response("projects/user_tasks.html", {
+        "tasks": tasks,
+        "other_user": other_user,
     }, context_instance=RequestContext(request))

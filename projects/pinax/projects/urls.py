@@ -19,6 +19,7 @@ urlpatterns = patterns('',
     # tasks
     url(r'^(\w+)/tasks/$', 'projects.views.tasks', name="project_tasks"),
     url(r'^task/(\d+)/$', 'projects.views.task', name="project_task"),
+    url(r'^tasks/(\w+)/$', 'projects.views.user_tasks', name="project_user_tasks"),
     
     # wiki
     url(r'^(?P<group_slug>\w+)/wiki/', include('wiki.urls'), kwargs=wiki_args),
