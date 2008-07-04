@@ -83,7 +83,7 @@ def project(request, slug):
     articles = articles[:5]
     
     total_tasks = project.tasks.count()
-    tasks = project.tasks.order_by("state")[:3]
+    tasks = project.tasks.order_by("state")[:10]
     
     # tweets = TweetInstance.objects.tweets_for(project).order_by("-sent")
     
