@@ -12,7 +12,11 @@ try:
         
         notification.create_notice_type("projects_new_topic", _("New Project Topic Started"), _("a new topic has started in a project you're a member of"), default=2)
         notification.create_notice_type("projects_topic_response", _("Response To Your Project Topic"), _("someone has responded on a project topic you started"), default=2)
-    
+        
+        notification.create_notice_type("projects_new_task", _("New Project Task"), _("a new task been created in a project you're a member of"), default=2)
+        notification.create_notice_type("projects_task_comment", _("Comment on Project Task"), _("a new comment has been made on a task in a project you're a member of"), default=2)
+        notification.create_notice_type("projects_task_change", _("Change to Project Task"), _("there has been a change to a task in a project you're a member of"), default=2)
+        
     dispatcher.connect(create_notice_types, signal=signals.post_syncdb, sender=notification)
 except ImportError:
     print "Skipping creation of NoticeTypes as notification app not found"

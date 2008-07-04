@@ -106,4 +106,10 @@ def new_comment(sender, instance):
         topic.save()
         if notification:
             notification.send([topic.creator], "projects_topic_response", "%(user)s has responded to your topic '%(topic)s'.", {"user": instance.user, "topic": topic})
+    elif isinstance(instance.content_object, Task):
+        task = instance.content_object
+        project = task.project
+        # @@@ update task modified time once it has one :-)
+        if notification:
+            notification.send(project.members.all(), "projects_task_comment", "%(user)s has commented on task '%(task)s' in project %(project)s.", {"user": instance.user, "task": task, "project": project})
 dispatcher.connect(new_comment, signal=signals.post_save, sender=ThreadedComment)

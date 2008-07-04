@@ -151,7 +151,8 @@ def tasks(request, slug):
                 # @@@ we should check that assignee is really a member
                 task.save()
                 request.user.message_set.create(message="added task '%s'" % task.summary)
-                # @@@ notification
+                if notification:
+                    notification.send(project.members.all(), "projects_new_task", "%(creator)s has added a task '%(task)s' in project %(project)s.", {"creator": request.user, "task": task, "project": project})
                 task_form = TaskForm(project=project) # @@@ is this the right way to clear it?
         else:
             task_form = TaskForm(project=project)
@@ -167,43 +168,49 @@ def tasks(request, slug):
 
 def task(request, id):
     task = get_object_or_404(Task, id=id)
-    is_member = request.user.is_authenticated() and request.user in task.project.members.all()
+    project = task.project
+    is_member = request.user.is_authenticated() and request.user in project.members.all()
     
     if is_member and request.method == "POST":
         if request.POST["action"] == "assign":
             status_form = StatusForm(instance=task)
-            assign_form = AssignForm(task.project, request.POST, instance=task)
+            assign_form = AssignForm(project, request.POST, instance=task)
             if assign_form.is_valid():
                 task = assign_form.save()
-                request.user.message_set.create(message="reassigned task to '%s'" % task.assignee)
-                # @@@ notification
+                request.user.message_set.create(message="assigned task to '%s'" % task.assignee)
+                if notification:
+                    notification.send(project.members.all(), "projects_task_change", "%(user)s has assigned task '%(task)s' in project %(project)s to %(assignee)s.", {"user": request.user, "task": task, "project": project, "assignee": task.assignee})
         elif request.POST["action"] == "update_status":
-            assign_form = AssignForm(task.project, instance=task)
+            assign_form = AssignForm(project, instance=task)
             status_form = StatusForm(request.POST, instance=task)
             if status_form.is_valid():
                 task = status_form.save()
                 request.user.message_set.create(message="updated your status on the task")
-                # @@@ notification
+                if notification:
+                    notification.send(project.members.all(), "projects_task_change", "%(user)s has updated the status of task '%(task)s' in project %(project)s.", {"user": request.user, "task": task, "project": project})
         else:
-            assign_form = AssignForm(task.project, instance=task)
+            assign_form = AssignForm(project, instance=task)
             status_form = StatusForm(instance=task)
             if request.POST["action"] == "mark_resolved" and request.user == task.assignee:
                 task.state = '2'
                 task.save()
-                # @@@ message
-                # @@@ notification
+                request.user.message_set.create(message="task marked resolved")
+                if notification:
+                    notification.send(project.members.all(), "projects_task_change", "%(creator)s has marked task '%(task)s' in project %(project)s as resolved.", {"user": request.user, "task": task, "project": project})
             elif request.POST["action"] == "mark_closed" and request.user == task.creator:
                 task.state = '3'
                 task.save()
-                # @@@ message
-                # @@@ notification
+                request.user.message_set.create(message="task marked closed")
+                if notification:
+                    notification.send(project.members.all(), "projects_task_change", "%(creator)s has marked task '%(task)s' in project %(project)s as closed.", {"user": request.user, "task": task, "project": project})
             elif request.POST["action"] == "reopen" and is_member:
                 task.state = '1'
                 task.save()
-                # @@@ message
-                # @@@ notification
+                request.user.message_set.create(message="task reopened")
+                if notification:
+                    notification.send(project.members.all(), "projects_task_change", "%(creator)s has reopened task '%(task)s' in project %(project)s.", {"user": request.user, "task": task, "project": project})
     else:
-        assign_form = AssignForm(task.project, instance=task)
+        assign_form = AssignForm(project, instance=task)
         status_form = StatusForm(instance=task)
     
     return render_to_response("projects/task.html", {
