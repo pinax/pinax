@@ -30,7 +30,8 @@
                             <div><b>State</b>: {{ task.get_state_display }}</div>
                         </td>
                         <td>
-                            <h2><a href="{% url project_task task.id %}">{{ task.summary }}</a></h2>
+                            <h2><a href="{% url project_task task.id %}">{{ task.summary }}</a>
+                                (<a href="{% url projects.views.project task.project.slug %}">{{ task.project }}</a>)</h2>
                             <div class="body">{{ task.detail }}</div>
                             {% get_comment_count for task as comment_count %}
                             {% if comment_count %}
