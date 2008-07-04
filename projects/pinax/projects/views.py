@@ -82,6 +82,9 @@ def project(request, slug):
     total_articles = articles.count()
     articles = articles[:5]
     
+    total_tasks = project.tasks.count()
+    tasks = project.tasks.order_by("state")[:3]
+    
     # tweets = TweetInstance.objects.tweets_for(project).order_by("-sent")
     
     are_member = request.user in project.members.all()
@@ -92,7 +95,8 @@ def project(request, slug):
         "project": project,
         "topics": topics,
         "articles": articles,
-        # "tweets": tweets,
+        "total_tasks": total_tasks,
+        "tasks": tasks,
         "total_articles": total_articles,
         "are_member": are_member,
     }, context_instance=RequestContext(request))

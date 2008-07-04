@@ -75,16 +75,23 @@
             </div>
         {% endif %}
         
-        
         {% if user.is_authenticated %}
             
-            <h2>Tasks</h2>
+            <h2>Tasks{% if total_tasks %} ({{ total_tasks }}){% endif %}</h2>
             
-            <ul>
-                {% for task in project.tasks.all %}
-                    <li>{{ task }}</li>
+            <table class="tasks">
+                {% for task in tasks %}
+                    <tr>
+                        <td><a href="{% url project_task task.id %}">{{ task.summary }}</a></td>
+                        <td>{{ task.get_state_display }}</td>
+                        {% if task.assignee %}
+                            <td>{{ task.assignee }}</td>
+                        {% else %}
+                            <td><span class="warning">unassigned</span></td>
+                        {% endif %}
+                    </tr>
                 {% endfor %}
-            </ul>
+            </table>
             
             <p><a href="{% url project_tasks project.slug %}">more...</a></p>
             
