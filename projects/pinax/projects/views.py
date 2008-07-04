@@ -196,19 +196,19 @@ def task(request, id):
                 task.save()
                 request.user.message_set.create(message="task marked resolved")
                 if notification:
-                    notification.send(project.members.all(), "projects_task_change", "%(creator)s has marked task '%(task)s' in project %(project)s as resolved.", {"user": request.user, "task": task, "project": project})
+                    notification.send(project.members.all(), "projects_task_change", "%(user)s has marked task '%(task)s' in project %(project)s as resolved.", {"user": request.user, "task": task, "project": project})
             elif request.POST["action"] == "mark_closed" and request.user == task.creator:
                 task.state = '3'
                 task.save()
                 request.user.message_set.create(message="task marked closed")
                 if notification:
-                    notification.send(project.members.all(), "projects_task_change", "%(creator)s has marked task '%(task)s' in project %(project)s as closed.", {"user": request.user, "task": task, "project": project})
+                    notification.send(project.members.all(), "projects_task_change", "%(user)s has marked task '%(task)s' in project %(project)s as closed.", {"user": request.user, "task": task, "project": project})
             elif request.POST["action"] == "reopen" and is_member:
                 task.state = '1'
                 task.save()
                 request.user.message_set.create(message="task reopened")
                 if notification:
-                    notification.send(project.members.all(), "projects_task_change", "%(creator)s has reopened task '%(task)s' in project %(project)s.", {"user": request.user, "task": task, "project": project})
+                    notification.send(project.members.all(), "projects_task_change", "%(user)s has reopened task '%(task)s' in project %(project)s.", {"user": request.user, "task": task, "project": project})
     else:
         assign_form = AssignForm(project, instance=task)
         status_form = StatusForm(instance=task)
