@@ -40,7 +40,15 @@
         <dl>
             {% for project in date.list %}
                 <dt>{{ project.name }} (<a href="{% url projects.views.project project.slug %}">{{ project.slug }}</a>)</dt>
-                <dd>{{ project.description }}</dd>
+                <dd>
+                    {{ project.description }}
+                    <div class="project_stats">
+                        Members: <b>{{ project.members.count }}</b>
+                        Tasks: <b>{{ project.tasks.count }}</b>
+                        Topics: <b>{{ project.topics.count }}</b>
+                        Wiki Pages: ???
+                    </div>
+                </dd>
             {% endfor %}
         </dl>
     {% endfor %}
