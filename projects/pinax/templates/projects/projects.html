@@ -39,7 +39,7 @@
         <h2 class="creation_date">{{ date.grouper|naturalday:_("MONTH_DAY_FORMAT")|capfirst }}</h2>
         <dl>
             {% for project in date.list %}
-                <dt><a href="{% url projects.views.project project.slug %}">{{ project.name }}</a></dt>
+                <dt>{{ project.name }} (<a href="{% url projects.views.project project.slug %}">{{ project.slug }}</a>)</dt>
                 <dd>
                     {{ project.description }}
                     <div class="project_stats">
