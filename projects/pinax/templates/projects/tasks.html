@@ -5,29 +5,39 @@
 {% load threadedcommentstags %}
 {% load pagination_tags %}
 {% load order_by %}
+{% load var_tag %}
 
 {% block head_title %}Pinax : Tasks for {{ project.name }}{% endblock %}
 
 {% block body %}
     <h1>{% trans "Tasks for Project" %} <a href="{% url project_detail project.slug %}">{{ project.name }}</a></h1>
     
+    
+    {# the use of var tag is temporary until we have our uber things tag #}
+    {% var final_tasks = "to_be_set_in_lower_scope" %}
     <p>Group by:
         {% ifequal group_by "state" %}
             <b>state</b>
             or
             <a href="?group_by=assignee">assignee</a>
-            {% regroup tasks|order_by:"state" by get_state_display as grouped_tasks %}
+            {% with tasks|order_by:"state" as ordered_tasks %}
+                {% autopaginate ordered_tasks %}
+                {% regroup ordered_tasks by get_state_display as grouped_tasks %}
+                {% var final_tasks = grouped_tasks %}
+            {% endwith %}
         {% else %}
             <a href="?group_by=state">state</a>
             or
             <b>assignee</b>
-            {% regroup tasks|order_by:"assignee" by assignee as grouped_tasks %}
+            {% with tasks|order_by:"assignee" as ordered_tasks %}
+                {% autopaginate ordered_tasks %}
+                {% regroup ordered_tasks by assignee as grouped_tasks %}
+                {% var final_tasks = grouped_tasks %}
+            {% endwith %}
         {% endifequal %}
     </p>
     
-    {% autopaginate tasks %}
-    
-    {% for section in grouped_tasks %}
+    {% for section in final_tasks %}
         <h2 class="join_date">{{ section.grouper }}</h2>
         
         <table class="tasks">
