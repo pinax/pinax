@@ -161,9 +161,13 @@ def tasks(request, slug):
     else:
         task_form = TaskForm(project=project)
     
+    group_by = request.GET.get("group_by")
+    tasks = project.tasks.all()
+    
     return render_to_response("projects/tasks.html", {
         "project": project,
-        "tasks": project.tasks.order_by("state"),
+        "tasks": tasks,
+        "group_by": group_by,
         "is_member": is_member,
         "task_form": task_form,
     }, context_instance=RequestContext(request))

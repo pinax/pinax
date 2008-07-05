@@ -4,22 +4,35 @@
 {% load gravatar %}
 {% load threadedcommentstags %}
 {% load pagination_tags %}
+{% load order_by %}
 
 {% block head_title %}Pinax : Tasks for {{ project.name }}{% endblock %}
 
 {% block body %}
     <h1>{% trans "Tasks for Project" %} <a href="{% url project_detail project.slug %}">{{ project.name }}</a></h1>
     
+    <p>Group by:
+        {% ifequal group_by "state" %}
+            <b>state</b>
+            or
+            <a href="?group_by=assignee">assignee</a>
+            {% regroup tasks|order_by:"state" by get_state_display as grouped_tasks %}
+        {% else %}
+            <a href="?group_by=state">state</a>
+            or
+            <b>assignee</b>
+            {% regroup tasks|order_by:"assignee" by assignee as grouped_tasks %}
+        {% endifequal %}
+    </p>
+    
     {% autopaginate tasks %}
     
-    {% regroup tasks by get_state_display as tasks_by_state %}
-    
-    {% for state in tasks_by_state %}
-        <h2 class="join_date">{{ state.grouper }}</h2>
+    {% for section in grouped_tasks %}
+        <h2 class="join_date">{{ section.grouper }}</h2>
         
         <table class="tasks">
             
-            {% for task in state.list %}
+            {% for task in section.list %}
                 
                 <tr class="{% cycle odd,even %}">
                     <td class="meta">
