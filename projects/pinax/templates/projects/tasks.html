@@ -19,14 +19,14 @@
                 or
                 <a href="?group_by=assignee">assignee</a>
                 {% order tasks by state %}
-                {% autopaginate tasks %}
+                {% autopaginate tasks 10 %}
                 {% regroup tasks by get_state_display as grouped_tasks %}
             {% else %}
                 <a href="?group_by=state">state</a>
                 or
                 <b>assignee</b>
                 {% order tasks by assignee %}
-                {% autopaginate tasks %}
+                {% autopaginate tasks 10 %}
                 {% regroup tasks by assignee as grouped_tasks %}
             {% endifequal %}
         </p>
