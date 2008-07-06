@@ -92,6 +92,7 @@
                             <td><span class="warning">unassigned</span></td>
                         {% endif %}
                         <td>{{ task.modified|timesince }} ago</td>
+                        <td>{{ task.status }}</td>
                     </tr>
                 {% endfor %}
             </table>
