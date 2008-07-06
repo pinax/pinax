@@ -6,6 +6,7 @@
 {% load threadedcommentstags %}
 {% load pagination_tags %}
 {% load captureas_tag %}
+{% load shorttimesince_tag %}
 
 {% block head_title %}Pinax : {{ project.name }}{% endblock %}
 
@@ -45,7 +46,7 @@
         
         {% ifequal user project.creator %}
             <p><a href="#" onclick="$('#project_form').toggle(); return false;">{% trans "Edit details" %}</a></p>
-        
+            
             <form id="project_form" method="POST" action="" style="display: none;">
                 <table>
                     {{ project_form }}
@@ -83,15 +84,16 @@
             
             <table class="tasks">
                 {% for task in tasks %}
-                    <tr class="{% cycle odd,even %}">
+                    <tr class="task_{{ task.get_state_display }} {% cycle odd,even %}">
                         <td><a href="{% url project_task task.id %}">{{ task.summary }}</a></td>
-                        <td>{{ task.get_state_display }}</td>
-                        {% if task.assignee %}
-                            <td>{{ task.assignee }}</td>
-                        {% else %}
-                            <td><span class="warning">unassigned</span></td>
-                        {% endif %}
-                        <td>{{ task.modified|timesince }} ago</td>
+                        <td>{{ task.modified|shorttimesince }} ago</td>
+                        <td>
+                            {% if task.assignee %}
+                                {{ task.assignee }}
+                            {% else %}
+                                <span class="warning">unassigned</span>
+                            {% endif %}
+                        </td>
                         <td>{{ task.status }}</td>
                     </tr>
                 {% endfor %}
