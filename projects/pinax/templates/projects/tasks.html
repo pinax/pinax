@@ -11,25 +11,23 @@
 {% block body %}
     <h1>{% trans "Tasks for Project" %} <a href="{% url project_detail project.slug %}">{{ project.name }}</a></h1>
     
-    
-    {# the use of var tag is temporary until we have our uber things tag #}
-        <p>Group by:
-            {% ifequal group_by "state" %}
-                <b>state</b>
-                or
-                <a href="?group_by=assignee">assignee</a>
-                {% order tasks by state %}
-                {% autopaginate tasks 10 %}
-                {% regroup tasks by get_state_display as grouped_tasks %}
-            {% else %}
-                <a href="?group_by=state">state</a>
-                or
-                <b>assignee</b>
-                {% order tasks by assignee %}
-                {% autopaginate tasks 10 %}
-                {% regroup tasks by assignee as grouped_tasks %}
-            {% endifequal %}
-        </p>
+    <p>Group by:
+        {% ifequal group_by "state" %}
+            <b>state</b>
+            or
+            <a href="?group_by=assignee">assignee</a>
+            {% order tasks by state %}
+            {% autopaginate tasks 10 %}
+            {% regroup tasks by get_state_display as grouped_tasks %}
+        {% else %}
+            <a href="?group_by=state">state</a>
+            or
+            <b>assignee</b>
+            {% order tasks by assignee %}
+            {% autopaginate tasks 10 %}
+            {% regroup tasks by assignee as grouped_tasks %}
+        {% endifequal %}
+    </p>
     
     {% for section in grouped_tasks %}
         <h2 class="join_date">{{ section.grouper }}</h2>
@@ -40,7 +38,7 @@
                 <div class="task-meta">
                     {% if task.assignee %}
                         <div class="avatar">{% gravatar task.assignee 40 %}</div>
-                        <div class="details"><a href="{% url profiles.views.profile task.assignee.username %}">{{ task.assignee }}</a></div>
+                        <div class="details"><b>Assignee</b>: <a href="{% url profiles.views.profile task.assignee.username %}">{{ task.assignee }}</a></div>
                     {% else %}
                         <span class="warning">Unassigned</span>
                     {% endif %}
