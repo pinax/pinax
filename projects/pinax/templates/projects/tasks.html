@@ -43,7 +43,7 @@
                         <span class="warning">Unassigned</span>
                     {% endif %}
                     <div><b>State</b>: {{ task.get_state_display }}</div>
-                    <div><b>Creator</b>: {{ task.creator }}</div>
+                    <div><b>Creator</b>: <a href="{% url profiles.views.profile task.creator.username %}">{{ task.creator }}</a></div>
                     <div><b>Created</b>: {{ task.created|date }}</div>
                     <div><b>Modified</b>: {{ task.modified|timesince }} ago</div>
                 </div>
