@@ -79,9 +79,11 @@
             
             <h2>Tasks{% if total_tasks %} ({{ total_tasks }}){% endif %}</h2>
             
+            <p><a href="{% url project_tasks project.slug %}">view more details or add task...</a></p>
+            
             <table class="tasks">
                 {% for task in tasks %}
-                    <tr>
+                    <tr class="{% cycle odd,even %}">
                         <td><a href="{% url project_task task.id %}">{{ task.summary }}</a></td>
                         <td>{{ task.get_state_display }}</td>
                         {% if task.assignee %}
@@ -93,11 +95,11 @@
                 {% endfor %}
             </table>
             
-            <p><a href="{% url project_tasks project.slug %}">more...</a></p>
-            
             <h2>Discussion Topics{% if project.topics.all.count %} ({{ project.topics.all.count }}){% endif %}</h2>
             
             {% if topics %}
+                <p><a href="{% url project_topics project.slug %}">view more details or start new topic...</a></p>
+                
                 <table class="topics">
                     {% for topic in topics %}
                         <tr class="{% cycle odd,even %}">
@@ -120,7 +122,6 @@
                         </tr>
                     {% endfor %}
                 </table>
-                <p><a href="{% url project_topics project.slug %}">more...</a></p>
             {% else %}
                 <p>None yet. <a href="{% url project_topics project.slug %}">Start one...</a></p>
             {% endif %}
