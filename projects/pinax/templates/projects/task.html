@@ -11,8 +11,8 @@
     
     {% get_threaded_comment_tree for task as responses %}
     
-    <div class="clearfix">
-        <div class="meta">
+    <div class="task clearfix">
+        <div class="task-meta">
             {% if task.assignee %}
                 <div class="avatar">{% gravatar task.assignee 40 %}</div>
                 <div class="details"><a href="{% url profiles.views.profile task.assignee.username %}">{{ task.assignee }}</a></div>
@@ -22,6 +22,7 @@
             <div><b>State</b>: {{ task.get_state_display }}</div>
             <div><b>Creator</b>: {{ task.creator }}</div>
             <div><b>Created</b>: {{ task.created|date }}</div>
+            <div><b>Modified</b>: {{ task.modified|timesince }} ago</div>
         </div>
         <div class="bulk">
             <h1>{{ task.summary }}</h1>

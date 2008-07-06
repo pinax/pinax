@@ -91,6 +91,7 @@
                         {% else %}
                             <td><span class="warning">unassigned</span></td>
                         {% endif %}
+                        <td>{{ task.modified|timesince }} ago</td>
                     </tr>
                 {% endfor %}
             </table>

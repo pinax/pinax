@@ -85,6 +85,7 @@ class Task(models.Model):
     detail = models.TextField(_('detail'), blank=True)
     creator = models.ForeignKey(User, related_name="created_project_tasks", verbose_name=_('creator'))
     created = models.DateTimeField(_('created'), default=datetime.now)
+    modified = models.DateTimeField(_('modified'), default=datetime.now) # task modified when commented on or when various fields changed
     assignee = models.ForeignKey(User, related_name="assigned_project_tasks", verbose_name=_('assignee'), null=True, blank=True)
     
     # status is a short message the assignee can give on their current status
@@ -93,6 +94,10 @@ class Task(models.Model):
     
     def __unicode__(self):
         return self.summary
+    
+    def save(self):
+        self.modified = datetime.now()
+        super(Task, self).save()
     
     @models.permalink
     def get_absolute_url(self):
@@ -112,8 +117,9 @@ def new_comment(sender, instance):
             notification.send([topic.creator], "projects_topic_response", "%(user)s has responded to your topic '%(topic)s'.", {"user": instance.user, "topic": topic})
     elif isinstance(instance.content_object, Task):
         task = instance.content_object
+        task.modified = datetime.now()
+        task.save()
         project = task.project
-        # @@@ update task modified time once it has one :-)
         if notification:
             notification.send(project.members.all(), "projects_task_comment", "%(user)s has commented on task '%(task)s' in project %(project)s.", {"user": instance.user, "task": task, "project": project})
 dispatcher.connect(new_comment, signal=signals.post_save, sender=ThreadedComment)
