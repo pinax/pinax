@@ -1,0 +1,48 @@
+{% extends "wiki/base.html" %}
+
+{% load i18n %}
+{% load wiki %}
+{% load wikiurl %}
+
+
+{% block head_title %}Pinax : Wiki for {{ group.name }} {% endblock %}
+
+{% block body %}
+
+    <div class="right_panel">
+        <div class="tribes">
+            <h2>{% trans "Actions" %}</h2>
+            {% if article.id %}
+            <li><a href="{% wikiurl edit group article %}">{% trans "Edit this article" %}</a> </li>
+            <li><a href="{% wikiurl article_history group article %}">{% trans "Editing history" %}</a> </li>
+            {% else %}
+            <li><a href="{% wikiurl edit group article %}">{% trans "Create this article" %}</a></li>
+            {% endif %}
+        </div>
+    </div>
+
+    <h1>{% trans "Wiki for Project" %} <a href="{% url tribe_detail group.slug %}">{{ group.name }}</a></h1>
+
+    <h2><a href="{% wikiurl article group article }}" rel="bookmark">{{ article.title }}</a></h2>
+
+    {% if not article.id %}
+        <p>
+            {% trans "This article does not exist." %}
+            <a href="{% wikiurl edit group article %}" {% trans ">Create it now</a>?" %}
+        </p>
+    {% endif %}
+
+    {% render_content article %}
+
+    {% if can_observe %}
+        {% if is_observing %}
+            <form action="{% wikiurl stop_observing group article %}" method="post">
+                <input type="submit" value="Stop Observing Article">
+            </form>
+        {% else %}
+            <form action="{% wikiurl observe group article %}" method="post">
+                <input type="submit" value="Observe Article">
+            </form>
+        {% endif %}
+    {% endif %}
+{% endblock %}

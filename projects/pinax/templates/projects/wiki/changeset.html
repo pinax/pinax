@@ -1,0 +1,24 @@
+{% extends 'wiki/base.html' %}
+
+{% load i18n %}
+{% load wikiurl %}
+
+{% block head_title %}Pinax : Wiki for {{ group.title }} {% endblock %}
+
+{% block body %}
+    <h1>{% trans "Wiki for Project" %} <a href="{% url tribe_detail group.slug %}">{{ group.name }}</a></h1>
+
+    <h2><a href="{% wikiurl article group article %}">{{ article.title }}</a></h2>
+
+    {% if changeset.old_title %}
+        <h3>{{ changeset.old_title }}</h3>
+    {% endif %}
+
+    {{ changeset.display_diff|safe }}<br />
+    <b>{% trans "Markup:" %}</b>
+    {% if changeset.old_markup %}
+        {{ changeset.old_markup }}
+    {% else %}
+        {% trans "Plain Text." %}
+    {% endif %}
+{% endblock %}
