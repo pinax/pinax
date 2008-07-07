@@ -2,16 +2,17 @@
 
 {% load timezone_filters %}
 {% load i18n %}
+{% load wikiurl %}
 
 {% block head_title %}Pinax : {{ article.title }} {% endblock %}
 
 {% block body %}
-    <h1>{% trans "Wiki for Tribe" %} <a href="{% url tribe_detail group.slug %}">{{ group.name }}</a></h1>
+    <h1>{% trans "Wiki for Project" %} <a href="{% url tribe_detail group.slug %}">{{ group.name }}</a></h1>
 
-    <h2>{% trans "History for article" %} <a href="{{ article.get_absolute_url }}"> {{ article.title }} </a></h2>
+    <h2>{% trans "History for article" %} <a href="{% wikiurl article group article }}"> {{ article.title }} </a></h2>
 
     {% if changes %}
-         <form method="post" action="{% url wiki_revert_to_revision title=article.title,group_slug=group.slug %}">
+         <form method="post" action="{% wikiurl revert_to_revision group article %}">
             <table class="messages">
                 <tr class="tbheader">
                     <th>{% trans "Date" %}</th>
@@ -22,7 +23,7 @@
                 {% for change in changes %}
                     <tr>
                         <td>
-                            <a href="{% url wiki_changeset group_slug=group.slug,title=article.title,revision=change.revision %}">
+                            <a href="{% wikiurl changeset group article change.revision %}">
                             {{ change.modified|localtime:user.get_profile.timezone|date:_("DATETIME_FORMAT") }}</a>
                         </td>
                         <td>
