@@ -142,7 +142,7 @@ def username_autocomplete(request):
         friends = Friendship.objects.friends_for_user(request.user)
         content = []
         for friendship in friends:
-            if friendship["friend"].username.startswith(q):
+            if friendship["friend"].username.lower().startswith(q):
                 try:
                     profile = friendship["friend"].get_profile()
                     entry = "%s,,%s,,%s" % (
