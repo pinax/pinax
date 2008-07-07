@@ -15,7 +15,9 @@ try:
         
         notification.create_notice_type("projects_new_task", _("New Project Task"), _("a new task been created in a project you're a member of"), default=2)
         notification.create_notice_type("projects_task_comment", _("Comment on Project Task"), _("a new comment has been made on a task in a project you're a member of"), default=2)
-        notification.create_notice_type("projects_task_change", _("Change to Project Task"), _("there has been a change to a task in a project you're a member of"), default=2)
+        notification.create_notice_type("projects_task_change", _("Change to Project Task"), _("there has been a change in the state of a task in a project you're a member of"), default=2)
+        notification.create_notice_type("projects_task_assignment", _("Change to Project Task"), _("a task has been (re)assigned in a project you're a member of"), default=2)
+        notification.create_notice_type("projects_task_status", _("Change to Project Task"), _("there has been a status update to a task in a project you're a member of"), default=2)
         
     dispatcher.connect(create_notice_types, signal=signals.post_syncdb, sender=notification)
 except ImportError:

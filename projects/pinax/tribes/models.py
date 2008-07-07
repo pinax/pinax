@@ -71,5 +71,5 @@ def new_comment(sender, instance):
         topic.modified = datetime.now()
         topic.save()
         if notification:
-            notification.send([topic.creator], "tribes_topic_response", "%(user)s has responded to your topic '%(topic)s'.", {"user": instance.user, "topic": topic})
+            notification.send([topic.creator], "tribes_topic_response", {"user": instance.user, "topic": topic})
 dispatcher.connect(new_comment, signal=signals.post_save, sender=ThreadedComment)

@@ -46,9 +46,9 @@ def tribes(request):
                 tribe_form = TribeForm()
                 if notification:
                     # @@@ might be worth having a shortcut for sending to all users
-                    notification.send(User.objects.all(), "tribes_new_tribe", "A new tribe %s has been created.", [tribe])
+                    notification.send(User.objects.all(), "tribes_new_tribe", {"tribe": tribe})
                     if friends: # @@@ might be worth having a shortcut for sending to all friends
-                        notification.send((x['friend'] for x in Friendship.objects.friends_for_user(tribe.creator)), "tribes_friend_tribe", "%s has created a new tribe %s.", [tribe.creator, tribe])
+                        notification.send((x['friend'] for x in Friendship.objects.friends_for_user(tribe.creator)), "tribes_friend_tribe", {"tribe": tribe})
 
         else:
             tribe_form = TribeForm()
@@ -80,10 +80,10 @@ def tribe(request, slug):
             tribe.members.add(request.user)
             request.user.message_set.create(message="You have joined the tribe %s" % tribe.name)
             if notification:
-                notification.send([tribe.creator], "tribes_created_new_member", "%s has joined the tribe %s.", [request.user, tribe])
-                notification.send(tribe.members.all(), "tribes_new_member", "%s has joined the tribe %s.", [request.user, tribe])
+                notification.send([tribe.creator], "tribes_created_new_member", {"user": request.user, "tribe": tribe})
+                notification.send(tribe.members.all(), "tribes_new_member", {"user": request.user, "tribe": tribe})
                 if friends: # @@@ might be worth having a shortcut for sending to all friends
-                    notification.send((x['friend'] for x in Friendship.objects.friends_for_user(request.user)), "tribes_friend_joined", "%s has joined the tribe %s.", [request.user, tribe])
+                    notification.send((x['friend'] for x in Friendship.objects.friends_for_user(request.user)), "tribes_friend_joined", {"user": request.user, "tribe": tribe})
         elif request.POST["action"] == "leave":
             tribe.members.remove(request.user)
             request.user.message_set.create(message="You have left the tribe %s" % tribe.name)
@@ -125,7 +125,7 @@ def topics(request, slug):
             topic.save()
             request.user.message_set.create(message="You have started the topic %s" % topic.title)
             if notification:
-                notification.send(tribe.members.all(), "tribes_new_topic", "%(creator)s has started a topic '%(topic)s' in tribe %(tribe)s.", {"creator": request.user, "topic": topic, "tribe": tribe})
+                notification.send(tribe.members.all(), "tribes_new_topic", {"topic": topic})
             topic_form = TopicForm() # @@@ is this the right way to reset it?
     else:
         topic_form = TopicForm()

@@ -58,7 +58,7 @@ def new(request):
                 request.user.message_set.create(message="Successfully saved post '%s'" % blog.title)
                 if notification:
                     if friends: # @@@ might be worth having a shortcut for sending to all friends
-                        notification.send((x['friend'] for x in Friendship.objects.friends_for_user(blog.author)), "blog_friend_post", "%s has posted to their blog.", [blog.author])
+                        notification.send((x['friend'] for x in Friendship.objects.friends_for_user(blog.author)), "blog_friend_post", {"post": blog})
                 
                 return HttpResponseRedirect(reverse("your_posts"))
         else:

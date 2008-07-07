@@ -117,7 +117,7 @@ def topics(request, slug):
                 topic.save()
                 request.user.message_set.create(message="You have started the topic %s" % topic.title)
                 if notification:
-                    notification.send(project.members.all(), "projects_new_topic", "%(creator)s has started a topic '%(topic)s' in project %(project)s.", {"creator": request.user, "topic": topic, "project": project})
+                    notification.send(project.members.all(), "projects_new_topic", {"creator": request.user, "topic": topic, "project": project})
                 topic_form = TopicForm() # @@@ is this the right way to reset it?
         else:
             request.user.message_set.create(message="You are not a member and so cannot start a new topic")
@@ -154,7 +154,7 @@ def tasks(request, slug):
                 task.save()
                 request.user.message_set.create(message="added task '%s'" % task.summary)
                 if notification:
-                    notification.send(project.members.all(), "projects_new_task", "%(creator)s has added a task '%(task)s' in project %(project)s.", {"creator": request.user, "task": task, "project": project})
+                    notification.send(project.members.all(), "projects_new_task", {"creator": request.user, "task": task, "project": project})
                 task_form = TaskForm(project=project) # @@@ is this the right way to clear it?
         else:
             task_form = TaskForm(project=project)
@@ -185,7 +185,7 @@ def task(request, id):
                 task = assign_form.save()
                 request.user.message_set.create(message="assigned task to '%s'" % task.assignee)
                 if notification:
-                    notification.send(project.members.all(), "projects_task_change", "%(user)s has assigned task '%(task)s' in project %(project)s to %(assignee)s.", {"user": request.user, "task": task, "project": project, "assignee": task.assignee})
+                    notification.send(project.members.all(), "projects_task_assignment", {"user": request.user, "task": task, "project": project, "assignee": task.assignee})
         elif request.POST["action"] == "update_status":
             assign_form = AssignForm(project, instance=task)
             status_form = StatusForm(request.POST, instance=task)
@@ -193,7 +193,7 @@ def task(request, id):
                 task = status_form.save()
                 request.user.message_set.create(message="updated your status on the task")
                 if notification:
-                    notification.send(project.members.all(), "projects_task_change", "%(user)s has updated the status of task '%(task)s' in project %(project)s.", {"user": request.user, "task": task, "project": project})
+                    notification.send(project.members.all(), "projects_task_status", {"user": request.user, "task": task, "project": project})
         else:
             assign_form = AssignForm(project, instance=task)
             status_form = StatusForm(instance=task)
@@ -202,19 +202,19 @@ def task(request, id):
                 task.save()
                 request.user.message_set.create(message="task marked resolved")
                 if notification:
-                    notification.send(project.members.all(), "projects_task_change", "%(user)s has marked task '%(task)s' in project %(project)s as resolved.", {"user": request.user, "task": task, "project": project})
+                    notification.send(project.members.all(), "projects_task_change", {"user": request.user, "task": task, "project": project, "new_state": "resolved"})
             elif request.POST["action"] == "mark_closed" and request.user == task.creator:
                 task.state = '3'
                 task.save()
                 request.user.message_set.create(message="task marked closed")
                 if notification:
-                    notification.send(project.members.all(), "projects_task_change", "%(user)s has marked task '%(task)s' in project %(project)s as closed.", {"user": request.user, "task": task, "project": project})
+                    notification.send(project.members.all(), "projects_task_change", {"user": request.user, "task": task, "project": project, "new_state": "closed"})
             elif request.POST["action"] == "reopen" and is_member:
                 task.state = '1'
                 task.save()
                 request.user.message_set.create(message="task reopened")
                 if notification:
-                    notification.send(project.members.all(), "projects_task_change", "%(user)s has reopened task '%(task)s' in project %(project)s.", {"user": request.user, "task": task, "project": project})
+                    notification.send(project.members.all(), "projects_task_change", {"user": request.user, "task": task, "project": project, "new_state": "reopened"})
     else:
         assign_form = AssignForm(project, instance=task)
         status_form = StatusForm(instance=task)

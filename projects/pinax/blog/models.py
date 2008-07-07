@@ -82,5 +82,5 @@ def new_comment(sender, instance):
     if isinstance(instance.content_object, Post):
         post = instance.content_object
         if notification:
-            notification.send([post.author], "blog_post_comment", "%(user)s has commented on your blog post '%(post)s'.", {"user": instance.user, "post": post})
+            notification.send([post.author], "blog_post_comment", {"user": instance.user, "post": post})
 dispatcher.connect(new_comment, signal=signals.post_save, sender=ThreadedComment)
