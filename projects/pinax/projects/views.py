@@ -49,7 +49,7 @@ def projects(request):
             project_form = ProjectForm()
     else:
         project_form = ProjectForm()
-    
+
     return render_to_response("projects/projects.html", {
         "project_form": project_form,
         "projects": Project.objects.all().order_by("-created"),
@@ -57,7 +57,7 @@ def projects(request):
 
 def project(request, slug):
     project = get_object_or_404(Project, slug=slug)
-    
+
     if request.user.is_authenticated() and request.method == "POST" and request.user == project.creator:
         if request.POST["action"] == "update":
             adduser_form = AddUserForm()
@@ -76,21 +76,21 @@ def project(request, slug):
     else:
         adduser_form = AddUserForm()
         project_form = ProjectUpdateForm(instance=project)
-    
+
     topics = project.topics.all()[:5]
     articles = Article.objects.filter(
         content_type=get_ct(project),
         object_id=project.id).order_by('-last_update')
     total_articles = articles.count()
     articles = articles[:5]
-    
+
     total_tasks = project.tasks.count()
     tasks = project.tasks.order_by("-modified")[:10]
-    
+
     # tweets = TweetInstance.objects.tweets_for(project).order_by("-sent")
-    
+
     are_member = request.user in project.members.all()
-    
+
     return render_to_response("projects/project.html", {
         "project_form": project_form,
         "adduser_form": adduser_form,
@@ -106,7 +106,7 @@ def project(request, slug):
 def topics(request, slug):
     project = get_object_or_404(Project, slug=slug)
     is_member = request.user.is_authenticated() and request.user in project.members.all()
-    
+
     if request.method == "POST":
         if is_member:
             topic_form = TopicForm(request.POST)
@@ -124,7 +124,7 @@ def topics(request, slug):
             topic_form = TopicForm()
     else:
         topic_form = TopicForm()
-    
+
     return render_to_response("projects/topics.html", {
         "project": project,
         "is_member": is_member,
@@ -134,7 +134,7 @@ def topics(request, slug):
 
 def topic(request, id):
     topic = get_object_or_404(Topic, id=id)
-    
+
     return render_to_response("projects/topic.html", {
         'topic': topic,
     }, context_instance=RequestContext(request))
@@ -142,7 +142,7 @@ def topic(request, id):
 def tasks(request, slug):
     project = get_object_or_404(Project, slug=slug)
     is_member = request.user.is_authenticated() and request.user in project.members.all()
-    
+
     if request.user.is_authenticated() and request.method == "POST":
         if request.POST["action"] == "add_task":
             task_form = TaskForm(project, request.POST)
@@ -160,10 +160,10 @@ def tasks(request, slug):
             task_form = TaskForm(project=project)
     else:
         task_form = TaskForm(project=project)
-    
+
     group_by = request.GET.get("group_by")
     tasks = project.tasks.all()
-    
+
     return render_to_response("projects/tasks.html", {
         "project": project,
         "tasks": tasks,
@@ -176,7 +176,7 @@ def task(request, id):
     task = get_object_or_404(Task, id=id)
     project = task.project
     is_member = request.user.is_authenticated() and request.user in project.members.all()
-    
+
     if is_member and request.method == "POST":
         if request.POST["action"] == "assign":
             status_form = StatusForm(instance=task)
@@ -218,7 +218,7 @@ def task(request, id):
     else:
         assign_form = AssignForm(project, instance=task)
         status_form = StatusForm(instance=task)
-    
+
     return render_to_response("projects/task.html", {
         "task": task,
         "is_member": is_member,
@@ -230,7 +230,7 @@ def task(request, id):
 def user_tasks(request, username):
     other_user = get_object_or_404(User, username=username)
     tasks = other_user.assigned_project_tasks.order_by("state")
-    
+
     return render_to_response("projects/user_tasks.html", {
         "tasks": tasks,
         "other_user": other_user,

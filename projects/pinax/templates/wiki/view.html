@@ -23,7 +23,7 @@
 
     <h1>{% trans "Wiki for Project" %} <a href="{% url tribe_detail group.slug %}">{{ group.name }}</a></h1>
 
-    <h2><a href="{% wikiurl article group article }}" rel="bookmark">{{ article.title }}</a></h2>
+    <h2><a href="{% wikiurl article group article %}" rel="bookmark">{{ article.title }}</a></h2>
 
     {% if not article.id %}
         <p>

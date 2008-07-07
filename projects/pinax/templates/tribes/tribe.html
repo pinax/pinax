@@ -2,6 +2,7 @@
 
 {% load zwitschern %}
 {% load i18n %}
+{% load wikiurl %}
 {% load gravatar %}
 {% load threadedcommentstags %}
 {% load pagination_tags %}
@@ -10,7 +11,7 @@
 {% block head_title %}Pinax : {{ tribe.name }}{% endblock %}
 
 {% block body %}
-    
+
     {% if user.is_authenticated %}
         <div class="right_panel">
             <div class="members">
@@ -29,23 +30,23 @@
             </div>
         </div>
     {% endif %}
-    
+
     <div style="width: 550px;">
         <p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time.</p>
-        
+
         <h1>{% trans "Tribe" %} {{ tribe.name }}</h1>
-        
+
         <p>
             Slug: <tt>{{ tribe.slug }}</tt><br />
             Creator: <a href="{% url profiles.views.profile tribe.creator.username %}">{{ tribe.creator }}</a><br />
             Created: {{ tribe.created|date }}
         </p>
-        
+
         <p>{{ tribe.description }}</p>
-        
+
         {% ifequal user tribe.creator %}
             <p><a href="#" onclick="$('#tribe_form').toggle(); return false;">{% trans "Edit details" %}</a></p>
-        
+
             <form id="tribe_form" method="POST" action="" style="display: none;">
                 <table>
                     {{ tribe_form }}
@@ -53,7 +54,7 @@
                 </table>
             </form>
         {% endifequal %}
-        
+
         {% if user.is_authenticated %}
             <div>
                 <form method="POST" action="">
@@ -75,12 +76,12 @@
             {% captureas login_url %}{% url acct_login %}{% endcaptureas %}
             <p>{% blocktrans %}<a href="{{ signup_url }}">Sign up</a> and <a href="{{ login_url }}">log in </a> to join this tribe.{% endblocktrans %}</p>
         {% endif %}
-        
-        
+
+
         {% if user.is_authenticated %}
-            
+
             <h2>Discussion Topics{% if tribe.topics.all.count %} ({{ tribe.topics.all.count }}){% endif %}</h2>
-            
+
             {% if topics %}
                 <table class="topics">
                     {% for topic in topics %}
@@ -108,39 +109,39 @@
             {% else %}
                 <p>None yet. <a href="{% url tribe_topics tribe.slug %}">Start one...</a></p>
             {% endif %}
-            
-            
+
+
             <h2>Wiki Articles{% if total_articles %} ({{ total_articles }}){% endif %}</h2>
-            
+
             {% if articles %}
                 <table class="topics">
                     {% for article in articles %}
                         <tr class="{% cycle odd,even %}">
                             <td class="meta">
                                 <div class="avatar">{% gravatar article.latest_changeset.editor 40 %}</div>
-                                <div class="details"><a href="{% url profiles.views.profile article.latest_changeset.editor.username %}">{{ article.creator }}</a></div>
+                                <div class="details"><a href="{% url profiles.views.profile article.latest_changeset.editor.username %}">{{ article.latest_changeset.editor }}</a></div>
                                 {{ article.last_update|date }}
                             </td>
                             <td>
-                                <h2><a href="{% url wiki_article title=article.title,group_slug=tribe.slug %}">{{ article.title }}</a></h2>
+                                <h2><a href="{% wikiurl article tribe article }}">{{ article.title }}</a></h2>
                                 <div class="body">{{ article.content|truncatewords:25 }}</div>
                             </td>
                         </tr>
                     {% endfor %}
                 </table>
-                <p><a href="{% url wiki_article_list group_slug=tribe.slug %}">more...</a></p>
+                <p><a href="{% wikiurl list tribe %}">more...</a></p>
             {% else %}
-                <p>None yet. Start a <a href="{% url wiki_edit_article group_slug=tribe.slug,title="NewArticle" %}">NewArticle</a>...</p>
+                <p>None yet. Go to this Tribe's <a href="{% wikiurl list tribe %}">wiki</a> to start a new one.</p>
             {% endif %}
-            
-            
+
+
             <h2>{% trans "Tweets" %}</h2>
-            
+
             {% tweet_listing tweets 1 0 %}
-            
+
         {% endif %}
     </div>
-        
+
 {% endblock %}
 
 {% block extra_body %}
