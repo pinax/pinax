@@ -10,6 +10,9 @@ class TribeForm(forms.ModelForm):
         error_message = _("This value must contain only letters, numbers and underscores."))
             
     def clean_slug(self):
+        reserved_slugs = ["your_tribes"]
+        if self.cleaned_data["slug"] in reserved_slugs:
+            raise forms.ValidationError(_("The slug you've chosen is reserved for internal use."))
         if Tribe.objects.filter(slug=self.cleaned_data["slug"]).count() > 0:
             raise forms.ValidationError(_("A tribe already exists with that slug."))
         return self.cleaned_data["slug"]

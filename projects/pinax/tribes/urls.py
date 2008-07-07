@@ -10,6 +10,7 @@ wiki_args = {'group_slug_field': 'slug',
 
 urlpatterns = patterns('',
     url(r'^$', 'tribes.views.tribes', name="tribes_list"),
+    url(r'^your_tribes/$', 'tribes.views.your_tribes', name="your_tribes"),
     url(r'^(\w+)/$', 'tribes.views.tribe', name="tribe_detail"),
 
     # topics

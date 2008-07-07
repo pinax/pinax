@@ -1,0 +1,29 @@
+{% extends "tribes/base.html" %}
+
+{% load i18n %}
+{% load pagination_tags %}
+
+{% block head_title %}Pinax : {% trans "Your Tribes" %}{% endblock %}
+
+{% block body %}
+    <p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time.</p>
+    
+    <h1>{% trans "Your Tribes" %}</h1>
+    
+    <p>{% trans "These are the tribes you participate in." %}</p>
+        
+    {% autopaginate tribes %}
+    
+    <dl>
+        {% for tribe in tribes %}
+            <dt>{{ tribe.name }} (<a href="{% url tribes.views.tribe tribe.slug %}">{{ tribe.slug }}</a>)</dt>
+            <dd>
+                {% ifequal user tribe.creator %}({% trans "You are the creator." %})<br /> {% endifequal %}
+                {{ tribe.description }}
+            </dd>
+        {% endfor %}
+    </dl>
+    
+    {% paginate %}
+    
+{% endblock %}

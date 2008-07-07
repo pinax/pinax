@@ -1,6 +1,7 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from tribes.models import Tribe
 from tribes.forms import *
@@ -58,6 +59,12 @@ def tribes(request):
         "tribe_form": tribe_form,
         "tribes": Tribe.objects.all().order_by("-created"),
     }, context_instance=RequestContext(request))
+
+def your_tribes(request):
+    return render_to_response("tribes/your_tribes.html", {
+        "tribes": Tribe.objects.filter(members=request.user).order_by("name"),
+    }, context_instance=RequestContext(request))
+your_tribes = login_required(your_tribes)
 
 def tribe(request, slug):
     tribe = get_object_or_404(Tribe, slug=slug)
