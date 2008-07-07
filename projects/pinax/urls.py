@@ -4,9 +4,11 @@ from django.views.generic.simple import direct_to_template
 
 import os.path
 
-from zwitschern.feeds import TweetFeed
-feed_dict = {"feed_dict": {
-    'tweets': TweetFeed,
+from zwitschern.feeds import TweetFeedAll, TweetFeedUser, TweetFeedUserWithFriends
+tweets_feed_dict = {"feed_dict": {
+    'all': TweetFeedAll,
+    'only': TweetFeedUser,
+    'with_friends': TweetFeedUserWithFriends,
 }}
 
 urlpatterns = patterns('',
@@ -36,7 +38,7 @@ urlpatterns = patterns('',
     (r'^bookmarks/', include('bookmarks.urls')),
     (r'^admin/', include('django.contrib.admin.urls')),
     
-    (r'^feeds/(.*)/$', 'django.contrib.syndication.views.feed', feed_dict),
+    (r'^feeds/tweets/(.*)/$', 'django.contrib.syndication.views.feed', tweets_feed_dict),
 )
 
 if settings.DEBUG:
