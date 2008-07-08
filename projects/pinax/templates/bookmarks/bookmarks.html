@@ -69,7 +69,8 @@
                         <a id="down_{{ bookmark.id }}" href="#" onclick="vote({{ bookmark.id }}, '{% if vote and vote.is_upvote %}clear{% else %}down{% endif %}'); return false;"><img id="img_{{ bookmark.id }}_down" src="/site_media/down_{% if vote and vote.is_downvote %}mod{% else %}grey{% endif %}.png"/></a>
                     </td>
                     <td>
-						<h2><a href="{{ bookmark.url }}">{{ bookmark.description }}</a></h2><td>{% if bookmark.get_favicon_url %}<img src="{{ bookmark.get_favicon_url }}" />{% endif %}</td>
+                        <h2><a href="{{ bookmark.url }}">{{ bookmark.description }}</a></h2>
+                        <div class="url">{% if bookmark.get_favicon_url %}<img src="{{ bookmark.get_favicon_url }}" /> {% endif %}{{ bookmark.url }}</div>
                         <div class="body">{{ bookmark.note|linebreaks }}</div>
                     </td>
                 </tr>
