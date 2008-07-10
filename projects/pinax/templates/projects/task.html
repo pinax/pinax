@@ -26,7 +26,7 @@
         </div>
         <div class="bulk">
             <h1>{{ task.summary }}</h1>
-            <div class="body">{{ task.detail }}</div>
+            <div class="body">{{ task.detail|urlize|linebreaks }}</div>
             {% ifequal user task.creator %}
             {% endifequal %}
         </div>

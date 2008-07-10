@@ -77,7 +77,7 @@
                 </div>
                 <div class="bulk">
                     <h2><a href="{% url project_task task.id %}">{{ task.summary }}</a></h2>
-                    <div class="body">{{ task.detail }}</div>
+                    <div class="body">{{ task.detail|urlize|linebreaks }}</div>
                     <div class="task-meta2">
                         {% get_comment_count for task as comment_count %}
                         {% if comment_count %}
