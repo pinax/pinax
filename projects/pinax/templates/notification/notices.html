@@ -14,6 +14,8 @@
     {% autopaginate notices %}
     
     {% if notices %}
+        <a href="{% url notification_mark_all_seen %}">{% trans "Mark all unseen notices seen" %}</a>
+        
         {# TODO: get timezone support working with regroup #}
         {% regroup notices by added.date as notices_by_date %}
         
