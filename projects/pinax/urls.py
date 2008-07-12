@@ -17,6 +17,9 @@ blogs_feed_dict = {"feed_dict": {
     'only': BlogFeedUser,
 }}
 
+from bookmarks.feeds import BookmarkFeed
+bookmarks_feed_dict = {"feed_dict": { '': BookmarkFeed }}
+
 urlpatterns = patterns('',
     url(r'^$', direct_to_template, {"template": "homepage.html"}, name="home"),
     url(r'^apps/$', direct_to_template, {"template": "apps.html"}, name="apps"),
@@ -46,6 +49,7 @@ urlpatterns = patterns('',
     
     (r'^feeds/tweets/(.*)/$', 'django.contrib.syndication.views.feed', tweets_feed_dict),
     (r'^feeds/posts/(.*)/$', 'django.contrib.syndication.views.feed', blogs_feed_dict),
+    (r'^feeds/bookmarks/(.*)/?$', 'django.contrib.syndication.views.feed', bookmarks_feed_dict),
 )
 
 if settings.DEBUG:

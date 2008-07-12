@@ -95,37 +95,3 @@ class BlogFeedUser(BasePostFeed):
 
     def items(self, user):
         return Post.objects.filter(author=user).order_by("-created_at")[:ITEMS_PER_FEED]
-
-class BlogFeedUserWithFriends(BasePostFeed):
-    def get_object(self, params):
-        return get_object_or_404(User, username=params[0].lower())
-
-    def feed_id(self, user):
-        return 'http://%s/feeds/posts/with_friends/%s/' % (
-            Site.objects.get_current().domain,
-            user.username,
-        )
-
-    def feed_title(self, user):
-        return 'Blog post feed for user %s and friends' % user.username
-
-    def feed_updated(self, user):
-        friends = friend_set_for(user)
-        qs = Post.objects.filter(author=user) | Post.objects.filter(author__in=friends)
-        # We return an arbitrary date if there are no results, because there
-        # must be a feed_updated field as per the Atom specifications, however
-        # there is no real data to go by, and an arbitrary date can be static.
-        if qs.count() == 0:
-            return datetime(year=2008, month=7, day=1)
-        return qs.latest('created_at').created_at
-
-    def feed_links(self, user):
-        absolute_url = reverse('blog_list_user', kwargs={'username': user.username})
-        complete_url = "http://%s%s" % (
-                Site.objects.get_current().domain,
-                absolute_url,
-            )
-        return ({'href': complete_url},)
-
-    def items(self, user):
-        return Post.objects.filter(author=user).order_by("-created_at")[:ITEMS_PER_FEED]
