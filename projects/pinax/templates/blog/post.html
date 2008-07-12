@@ -22,7 +22,7 @@
                 <a href="/tags/{{ tag }}">{{ tag }}</a>
             {% endfor %}</p>
             {% ifequal post.author request.user %}
-                <form action="{% url edit_post post.id %}" method="GET">
+                <form action="{% url blog_edit post.id %}" method="GET">
                         <input type="submit" value="{% trans "Edit Post" %}" />
                 </form>
             {% endifequal %}
@@ -49,7 +49,7 @@
                     {% ifequal user response.user %}
                     <form method="POST" action="{% url tc_comment_delete response.id %}">
                         <input type="submit" value="{% trans "Delete Post" %}" />
-                        <input type="hidden" name="next" value="{% url post response.content_object.slug %}" />
+                        <input type="hidden" name="next" value="{% url blog_post response.content_object.slug %}" />
                     </form>
                     {% endifequal %}
                     <a href="javascript:toggle_comment_form({{ response.id }})">Reply to This Post</a>

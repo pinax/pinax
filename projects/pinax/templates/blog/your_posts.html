@@ -10,6 +10,11 @@
 
 {% block head_title %}Pinax : {% blocktrans %}Your Blog Posts{% endblocktrans %}{% endblock %}
 
+{% block extra_head %}
+    <link rel="alternate" type="application/atom+xml" title="Blog Post Feed for All Users" href="/feeds/posts/all/" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Post Feed for User {{ user.username }}" href="/feeds/posts/only/{{ user.username }}/" />
+{% endblock %}
+
 {% block body %}
     <p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time.</p>
     
@@ -44,7 +49,7 @@
                     {% endwith %}
                 </td>
                 <td>
-                    <form action="{% url edit_post blogs.id %}" method="GET">
+                    <form action="{% url blog_edit blogs.id %}" method="GET">
                             <input type="submit" value="{% trans "Edit Post" %}" />
                     </form>
                 </td>

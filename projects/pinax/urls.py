@@ -11,6 +11,12 @@ tweets_feed_dict = {"feed_dict": {
     'with_friends': TweetFeedUserWithFriends,
 }}
 
+from blog.feeds import BlogFeedAll, BlogFeedUser
+blogs_feed_dict = {"feed_dict": {
+    'all': BlogFeedAll,
+    'only': BlogFeedUser,
+}}
+
 urlpatterns = patterns('',
     url(r'^$', direct_to_template, {"template": "homepage.html"}, name="home"),
     url(r'^apps/$', direct_to_template, {"template": "apps.html"}, name="apps"),
@@ -39,6 +45,7 @@ urlpatterns = patterns('',
     (r'^admin/', include('django.contrib.admin.urls')),
     
     (r'^feeds/tweets/(.*)/$', 'django.contrib.syndication.views.feed', tweets_feed_dict),
+    (r'^feeds/posts/(.*)/$', 'django.contrib.syndication.views.feed', blogs_feed_dict),
 )
 
 if settings.DEBUG:

@@ -23,8 +23,11 @@ try:
 except ImportError:
     friends = False
 
-def blogs(request):
+def blogs(request, username=None):
     blogs = Post.objects.filter(status=2).order_by("-publish")
+    if username is not None:
+        user = get_object_or_404(User, username=username.lower())
+        blogs = blogs.filter(author=user)
     return render_to_response("blog/blogs.html", {"blogs": blogs}, context_instance=RequestContext(request))
     
 def post(request, username, year, month, slug):
