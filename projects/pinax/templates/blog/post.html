@@ -9,6 +9,11 @@
 
 {% block head_title %}Pinax : {% blocktrans %}Blog Post{% endblocktrans %} : {{ post.title }}{% endblock %}
 
+{% block extra_head %}
+    <link rel="alternate" type="application/atom+xml" title="Blog Post Feed for All Users" href="/feeds/posts/all/" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Post Feed for User {{ post.author.username }}" href="/feeds/posts/only/{{ post.author.username }}/" />
+{% endblock %}
+
 {% block body %}
     <p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time.</p>
     
