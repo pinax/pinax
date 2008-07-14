@@ -1,0 +1,2 @@
+{% load i18n captureas %}{% captureas author_url %}{% url profile_detail username=post.author.username %}{% endcaptureas %}
+{% blocktrans %}<a href="{{ author_url }}">{{ post.author }}</a> has posted to their blog.{% endblocktrans %}
