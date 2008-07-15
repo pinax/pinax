@@ -13,6 +13,8 @@ wiki_args = {
 
 urlpatterns = patterns('',
     url(r'^$', 'projects.views.projects', name="projects_list"),
+    # @@@ what to do about clash with project with slug 'your_projects'?
+    url(r'^your_projects/$', 'projects.views.your_projects', name="your_projects"),
     url(r'^(\w+)/$', 'projects.views.project', name="project_detail"),
 
     # topics

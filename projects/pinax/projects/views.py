@@ -55,6 +55,12 @@ def projects(request):
         "projects": Project.objects.all().order_by("-created"),
     }, context_instance=RequestContext(request))
 
+@login_required
+def your_projects(request):
+    return render_to_response("projects/your_projects.html", {
+        "projects": Project.objects.filter(members=request.user).order_by("name"),
+    }, context_instance=RequestContext(request))
+
 def project(request, slug):
     project = get_object_or_404(Project, slug=slug)
 

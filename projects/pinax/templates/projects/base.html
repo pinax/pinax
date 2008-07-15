@@ -8,6 +8,7 @@
     {% if user.is_authenticated %}
         <ul>
             <li><a href="{% url projects.views.user_tasks user.username %}">{% trans "Your Tasks" %}</a></li>
+            <li><a href="{% url your_projects %} ">{% trans "Your Projects" %}</a></li>
             <li><a href="{% url projects.views.projects %}">{% trans "All Projects" %}</a></li>
         </ul>
     {% else %}
