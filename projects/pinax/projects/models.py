@@ -28,14 +28,14 @@ class Project(models.Model):
     members = models.ManyToManyField(User, verbose_name=_('members'))
     
     # private means only members can see the project
-    private =models.BooleanField(_('private'), default=False)
+    private = models.BooleanField(_('private'), default=False)
     
     def __unicode__(self):
         return self.name
     
     @models.permalink
     def get_absolute_url(self):
-        return ("tribe_detail", [self.slug])
+        return ("project_detail", [self.slug])
     
     class Admin:
         list_display = ('name', 'creator', 'created', 'private')
