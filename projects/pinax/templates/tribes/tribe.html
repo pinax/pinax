@@ -32,14 +32,14 @@
     {% endif %}
 
     <div style="width: 550px;">
-        <p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time.</p>
+        <p><span class="warning">{% trans "Note" %}</span>: {% trans "this is an <b>experimental</b> feature that is subject to massive change at any time." %}</p>
 
         <h1>{% trans "Tribe" %} {{ tribe.name }}</h1>
 
         <p>
-            Slug: <tt>{{ tribe.slug }}</tt><br />
-            Creator: <a href="{% url profiles.views.profile tribe.creator.username %}">{{ tribe.creator }}</a><br />
-            Created: {{ tribe.created|date }}
+            {% trans "Slug:" %} <tt>{{ tribe.slug }}</tt><br />
+            {% trans "Creator:" %} <a href="{% url profiles.views.profile tribe.creator.username %}">{{ tribe.creator }}</a><br />
+            {% trans "Created:" %} {{ tribe.created|date }}
         </p>
 
         <p>{{ tribe.description }}</p>
@@ -60,10 +60,10 @@
                 <form method="POST" action="">
                     {% if are_member %}
                         {% ifequal user tribe.creator %}
-                            <p>You are the creator of this tribe so can't leave (yet).</p>
+                            <p>{% trans "You are the creator of this tribe so can't leave (yet)." %}</p>
                         {% else %}
                             <input type="hidden" name="action" value="leave" />
-                            <input type="submit" value="{% trans "leave" %}"/>
+                            <input type="submit" value="{% trans 'leave' %}"/>
                         {% endifequal %}
                     {% else %}
                         <input type="hidden" name="action" value="join" />
@@ -79,8 +79,7 @@
 
 
         {% if user.is_authenticated %}
-
-            <h2>Discussion Topics{% if tribe.topics.all.count %} ({{ tribe.topics.all.count }}){% endif %}</h2>
+            <h2>{% trans "Discussion Topics" %}{% if tribe.topics.all.count %} ({{ tribe.topics.all.count }}){% endif %}</h2>
 
             {% if topics %}
                 <table class="topics">
@@ -97,21 +96,23 @@
                                 {% get_comment_count for topic as comment_count %}
                                 {% if comment_count %}
                                     <div class="comment_stats">
-                                        {{ comment_count }} comment{{ comment_count|pluralize }}
+                                        {% blocktrans %}{{ comment_count }} comment{{ comment_count|pluralize }}
                                         (most recent: {{ topic.modified|date }})
+                                        {% endblocktrans %}
                                     </div>
                                 {% endif %}
                             </td>
                         </tr>
                     {% endfor %}
                 </table>
-                <p><a href="{% url tribe_topics tribe.slug %}">more...</a></p>
+                <p><a href="{% url tribe_topics tribe.slug %}">{% trans "more..." %}</a></p>
             {% else %}
-                <p>None yet. <a href="{% url tribe_topics tribe.slug %}">Start one...</a></p>
+                {% captureas new_tribe_url %}{% url tribe_topics tribe.slug %}{% endcaptureas %}
+                <p>{% blocktrans %}None yet. <a href="{{ new_tribe_url }}">Start one...</a>{% endblocktrans %}</p>
             {% endif %}
 
 
-            <h2>Wiki Articles{% if total_articles %} ({{ total_articles }}){% endif %}</h2>
+            <h2>{% trans "Wiki Articles" %}{% if total_articles %} ({{ total_articles }}){% endif %}</h2>
 
             {% if articles %}
                 <table class="topics">
@@ -129,9 +130,10 @@
                         </tr>
                     {% endfor %}
                 </table>
-                <p><a href="{% wikiurl list tribe %}">more...</a></p>
+                <p><a href="{% wikiurl list tribe %}">{% trans "more..." %}</a></p>
             {% else %}
-                <p>None yet. Go to this Tribe's <a href="{% wikiurl list tribe %}">wiki</a> to start a new one.</p>
+                {% captureas wiki_url %}{% url wiki_edit_article group_slug=tribe.slug %}{% endcaptureas %}
+                <p>{% blocktrans %}None yet. Start a <a href="{{ wiki_url }}", title="NewArticle">NewArticle</a>...{% endblocktrans %}</p>
             {% endif %}
 
 

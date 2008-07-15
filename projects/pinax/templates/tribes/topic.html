@@ -47,7 +47,7 @@
                         <input type="hidden" name="next" value="{% url tribe_detail response.content_object.slug %}" />
                     </form>
                     {% endifequal %}
-                    <a href="javascript:toggle_comment_form({{ response.id }})">Reply to This Post</a>
+                    <a href="javascript:toggle_comment_form({{ response.id }})">{% trans "Reply to This Post" %}</a>
                     <form class="hidden" method="POST" action="{% get_comment_url topic response %}" id="comment_form_{{ response.id }}">
                         <table><tr><td><textarea id="id_comment" rows="10" cols="40" name="comment"></textarea></td></tr>
                         <tr><td><input type="submit" value="{% trans "Post Response" %}" /></td></tr></table>
