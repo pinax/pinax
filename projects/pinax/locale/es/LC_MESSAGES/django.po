@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-hotclub-0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-17 12:47+0200\n"
+"POT-Creation-Date: 2008-07-06 18:14+0200\n"
 "PO-Revision-Date: 2008-06-17 13:23+0100\n"
 "Last-Translator: Robert Ramírez Vique <robertrv@gmail.com>\n"
 "Language-Team:  <robertrv@gmail.com>\n"
@@ -19,144 +19,259 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: /home/rrv/projects/eclipse-ws/pinax\n"
 
-#: account/forms.py:27
-#: account/forms.py:55
+#: __notification/models.py:27
+msgid "label"
+msgstr "etiqueta"
+
+#: __notification/models.py:28
+msgid "display"
+msgstr "mostrado"
+
+#: __notification/models.py:29 bookmarks/models.py:11 projects/models.py:27
+#: tribes/models.py:26
+msgid "description"
+msgstr "descripción"
+
+#: __notification/models.py:32
+msgid "default"
+msgstr "defecto"
+
+#: __notification/models.py:41 __notification/models.py:62
+#: __notification/models.py:90 __notification/models.py:331
+msgid "notice type"
+msgstr "tipo de notificación"
+
+#: __notification/models.py:42
+msgid "notice types"
+msgstr "tipo de avisos"
+
+#: __notification/models.py:47 account/forms.py:138 account/forms.py:177
+msgid "Email"
+msgstr "Email"
+
+#: __notification/models.py:61 __notification/models.py:88
+#: __notification/models.py:325 profiles/models.py:11
+msgid "user"
+msgstr "usuario"
+
+#: __notification/models.py:63
+msgid "medium"
+msgstr "medio"
+
+#: __notification/models.py:64
+msgid "send"
+msgstr "enviado"
+
+#: __notification/models.py:70
+msgid "notice setting"
+msgstr "Configurar avisos"
+
+#: __notification/models.py:71
+msgid "notice settings"
+msgstr "Configuraciones de los avisos"
+
+#: __notification/models.py:89
+msgid "message"
+msgstr "mensaje"
+
+#: __notification/models.py:91 __notification/models.py:334
+#: bookmarks/models.py:15
+msgid "added"
+msgstr "añadido"
+
+#: __notification/models.py:92
+msgid "unseen"
+msgstr "no visto"
+
+#: __notification/models.py:93
+msgid "archived"
+msgstr "archivados"
+
+#: __notification/models.py:120
+msgid "notice"
+msgstr "aviso"
+
+#: __notification/models.py:121
+msgid "notices"
+msgstr "avisos"
+
+#: __notification/models.py:332
+msgid "message template"
+msgstr "plantilla de mensaje"
+
+#: __notification/models.py:337
+msgid "signal"
+msgstr "señal"
+
+#: __notification/models.py:343
+msgid "observed item"
+msgstr "elemento observado"
+
+#: __notification/models.py:344
+msgid "observed items"
+msgstr "elementos observados"
+
+#: __notification/templates/notification/notification_body.txt:1
+#, python-format
+msgid ""
+"You have received the following notice:\n"
+"\n"
+"%(message)s\n"
+"\n"
+"To see other notices or change how you receive notifications,\n"
+"please go to %(notices_url)s\n"
+"\n"
+"If you have any issues, please don't hesitate to contact %(contact_email)s\n"
+msgstr ""
+
+#: __notification/templates/notification/notification_subject.txt:1
+#, python-format
+msgid "%(display)s Notification"
+msgstr ""
+
+#: account/forms.py:27 account/forms.py:60
 msgid "Username"
 msgstr "Usuario"
 
-#: account/forms.py:28
-#: account/forms.py:56
+#: account/forms.py:28 account/forms.py:61
 msgid "Password"
 msgstr "Contraseña"
 
-#: account/forms.py:40
+#: account/forms.py:29
+#, fuzzy
+msgid "Remember Me"
+msgstr "miembros"
+
+#: account/forms.py:29
+msgid "If checked you will stay logged in for 3 weeks"
+msgstr ""
+
+#: account/forms.py:41
 msgid "This account is currently inactive."
 msgstr "Esta cuenta está actualmente inactiva"
 
-#: account/forms.py:42
+#: account/forms.py:43
 msgid "The username and/or password you specified are not correct."
 msgstr "El usuario y/o contraseña especificados no son válidos"
 
-#: account/forms.py:48
-#: account/views.py:35
+#: account/forms.py:49 account/views.py:37
 #, python-format
 msgid "Successfully logged in as %(username)s."
 msgstr "Has accedido como %(username)s"
 
-#: account/forms.py:57
+#: account/forms.py:62
 msgid "Password (again)"
 msgstr "Contraseña (otra vez)"
 
-#: account/forms.py:58
+#: account/forms.py:63
 msgid "Email (optional)"
 msgstr "Email (opcional)"
 
-#: account/forms.py:63
+#: account/forms.py:68
 msgid "Usernames can only contain letters, numbers and underscores."
 msgstr "Usuario solo pueden contener letras, números y subrayados (_)"
 
-#: account/forms.py:68
+#: account/forms.py:73
 msgid "This username is already taken. Please choose another."
 msgstr "Usuario ya ocupado. Por favor, escoge otro."
 
-#: account/forms.py:73
-#: account/forms.py:155
+#: account/forms.py:78 account/forms.py:166
 msgid "You must type the same password each time."
 msgstr "Debes escribir la misma contraseña."
 
-#: account/forms.py:94
+#: account/forms.py:100
 msgid "Your email address has already been verified"
 msgstr "Tu email ya ha sido verificado"
 
-#: account/forms.py:100
-#: account/forms.py:107
-#: account/forms.py:137
+#: account/forms.py:107 account/forms.py:114 account/forms.py:148
 #, python-format
 msgid "Confirmation email sent to %(email)s"
 msgstr "Email de confirmación enviado a %(email)s"
 
-#: account/forms.py:127
-#: account/forms.py:166
-#: notification/models.py:47
-msgid "Email"
-msgstr "Email"
-
-#: account/forms.py:134
+#: account/forms.py:145
 msgid "This email address already associated with this account."
 msgstr "Este email ya está asociado con esta cuenta."
 
-#: account/forms.py:143
+#: account/forms.py:154
 msgid "Current Password"
 msgstr "Contraseña actual"
 
-#: account/forms.py:144
+#: account/forms.py:155
 msgid "New Password"
 msgstr "Nueva contraseña"
 
-#: account/forms.py:145
+#: account/forms.py:156
 msgid "New Password (again)"
 msgstr "Nueva contraseña (otra vez)"
 
-#: account/forms.py:149
+#: account/forms.py:160
 msgid "Please type your current password."
 msgstr "Por favor, escribe tu contraseña actual"
 
-#: account/forms.py:161
+#: account/forms.py:172
 msgid "Password successfully changed."
 msgstr "Contraseña cambiada correctamente."
 
-#: account/forms.py:170
+#: account/forms.py:181
 msgid "Email address not verified for any user account"
 msgstr "Dirección de correo no verificada para ninguna cuenta de usuario"
 
-#: account/forms.py:178
+#: account/forms.py:189
 msgid "Password reset"
 msgstr "Contraseña reseteada"
 
-#: account/forms.py:188
-#: templates/account/base.html:14
+#: account/forms.py:199 templates/account/base.html:15
 #: templates/account/timezone_change.html:5
 #: templates/account/timezone_change.html:8
 msgid "Timezone"
 msgstr "Franja horaria"
 
-#: account/forms.py:197
+#: account/forms.py:208
 msgid "Timezone successfully updated."
 msgstr "Franja horaria correctamente modificada"
 
-#: announcements/models.py:34
+#: account/forms.py:212 templates/account/base.html:14
+#: templates/account/language_change.html:5
+#: templates/account/language_change.html:8
+msgid "Language"
+msgstr ""
+
+#: account/forms.py:221
+#, fuzzy
+msgid "Language successfully updated."
+msgstr "Franja horaria correctamente modificada"
+
+#: announcements/models.py:50 blog/models.py:36 projects/models.py:51
 #: tribes/models.py:47
 msgid "title"
 msgstr "título"
 
-#: announcements/models.py:35
-#: dbtemplates/models.py:15
+#: announcements/models.py:51 dbtemplates/models.py:15
 msgid "content"
 msgstr "contenido"
 
-#: announcements/models.py:36
-#: tribes/models.py:24
-#: tribes/models.py:48
+#: announcements/models.py:52 projects/models.py:25 projects/models.py:52
+#: projects/models.py:86 tribes/models.py:24 tribes/models.py:48
 msgid "creator"
 msgstr "creador"
 
-#: announcements/models.py:37
+#: announcements/models.py:53
 msgid "creation_date"
 msgstr "fecha_creacion"
 
-#: announcements/models.py:38
+#: announcements/models.py:54
 msgid "site wide"
 msgstr "para toda la web?"
 
-#: announcements/models.py:39
+#: announcements/models.py:55
 msgid "members only"
 msgstr "sólo miembros"
 
-#: announcements/models.py:51
+#: announcements/models.py:67
 msgid "announcement"
 msgstr "noticia"
 
-#: announcements/models.py:52
+#: announcements/models.py:68
 msgid "announcements"
 msgstr "noticias"
 
@@ -173,11 +288,11 @@ msgid "Removed"
 msgstr "Borrado"
 
 #: app_plugins/models.py:31
-msgid "This value must contain only letters, numbers, underscores, and '.' dots."
+msgid ""
+"This value must contain only letters, numbers, underscores, and '.' dots."
 msgstr "Este valor solo puede contener letras, números y subrayados (_)"
 
-#: app_plugins/models.py:38
-#: app_plugins/models.py:105
+#: app_plugins/models.py:38 app_plugins/models.py:105
 msgid "The label for the plugin point."
 msgstr "La etiqueta para el punto de enlaze del complemento"
 
@@ -197,15 +312,123 @@ msgstr "Usuarios no pueden borrar este complemento"
 msgid "template to load for the plugin."
 msgstr "plantilla a cargar para el plugin"
 
-#: bookmarks/forms.py:13
-msgid "That url has already been submitted and Pinax does not yet support multiple bookmarking of a URL"
-msgstr "La dirección ya ha sido enviada anteriormente, y Pinax aún no soporta multiples favoritos de una dirección"
+#: blog/forms.py:10
+#, fuzzy
+msgid ""
+"a short version of the title consisting only of letters, numbers and "
+"underscores."
+msgstr ""
+"una versión corta del nombre compuesta solamente de letras, números y "
+"subrayados (_)"
 
-#: bookmarks/models.py:11
-#: notification/models.py:29
-#: tribes/models.py:26
-msgid "description"
-msgstr "descripción"
+#: blog/forms.py:11 projects/forms.py:12 tribes/forms.py:10
+msgid "This value must contain only letters, numbers and underscores."
+msgstr "Este valor solo puede contener letras, números y subrayados (_)"
+
+#: blog/management.py:10
+msgid "Friend Posted to Blog"
+msgstr ""
+
+#: blog/management.py:10
+#, fuzzy
+msgid "a friend of yours posted to their blog"
+msgstr "Un amigo tuyo se ha unido a una tribu"
+
+#: blog/management.py:11
+#, fuzzy
+msgid "New Comment on Blog Post"
+msgstr "Recientes entradas de tu blog"
+
+#: blog/management.py:11
+msgid "a comment was made on one of your blog posts"
+msgstr ""
+
+#: blog/models.py:25 wiki/models.py:33
+msgid "reStructuredText"
+msgstr "texto reStructured"
+
+#: blog/models.py:26 wiki/models.py:34
+msgid "Textile"
+msgstr "fichero de texto"
+
+#: blog/models.py:27 wiki/models.py:35
+msgid "Markdown"
+msgstr "lenguaje de marcas"
+
+#: blog/models.py:33
+#, fuzzy
+msgid "Draft"
+msgstr "Fecha"
+
+#: blog/models.py:34
+#, fuzzy
+msgid "Public"
+msgstr "es publico"
+
+#: blog/models.py:37 projects/models.py:23 tribes/models.py:22
+msgid "slug"
+msgstr "slug"
+
+#: blog/models.py:39
+#, fuzzy
+msgid "IP Address of the Post Creator"
+msgstr "Dirección IP del Creador del Artículo"
+
+#: blog/models.py:40 projects/models.py:55 tribes/models.py:51
+msgid "body"
+msgstr "Cuerpo"
+
+#: blog/models.py:41
+#, fuzzy
+msgid "tease"
+msgstr "plantilla"
+
+#: blog/models.py:42 projects/models.py:92
+#, fuzzy
+msgid "status"
+msgstr "Enviado"
+
+#: blog/models.py:43
+#, fuzzy
+msgid "allow comments"
+msgstr "comentario"
+
+#: blog/models.py:44
+#, fuzzy
+msgid "publish"
+msgstr "es publico"
+
+#: blog/models.py:45
+#, fuzzy
+msgid "created at"
+msgstr "Leído"
+
+#: blog/models.py:46
+#, fuzzy
+msgid "updated at"
+msgstr "actualizar"
+
+#: blog/models.py:47
+#, fuzzy
+msgid "Post Content Markup"
+msgstr "Lenguaje de marcas del contenido del artículo"
+
+#: blog/models.py:53 templates/zwitschern/personal.html:18
+msgid "post"
+msgstr "Enviar"
+
+#: blog/models.py:54
+#, fuzzy
+msgid "posts"
+msgstr "Enviar"
+
+#: bookmarks/forms.py:14
+msgid ""
+"That url has already been submitted and Pinax does not yet support multiple "
+"bookmarking of a URL"
+msgstr ""
+"La dirección ya ha sido enviada anteriormente, y Pinax aún no soporta "
+"multiples favoritos de una dirección"
 
 #: bookmarks/models.py:12
 msgid "note"
@@ -215,16 +438,55 @@ msgstr "aviso"
 msgid "adder"
 msgstr "añadido"
 
-#: bookmarks/models.py:15
-#: notification/models.py:91
-#: notification/models.py:334
-msgid "added"
-msgstr "añadido"
+#: core/templatetags/shorttimesince_tag.py:15
+msgid "yr"
+msgid_plural "yr"
+msgstr[0] ""
+msgstr[1] ""
 
-#: dbtemplates/models.py:14
-#: profiles/models.py:12
-#: threadedcomments/models.py:268
-#: tribes/models.py:23
+#: core/templatetags/shorttimesince_tag.py:16
+msgid "mn"
+msgid_plural "mn"
+msgstr[0] ""
+msgstr[1] ""
+
+#: core/templatetags/shorttimesince_tag.py:17
+msgid "wk"
+msgid_plural "wk"
+msgstr[0] ""
+msgstr[1] ""
+
+#: core/templatetags/shorttimesince_tag.py:18
+msgid "d"
+msgid_plural "d"
+msgstr[0] ""
+msgstr[1] ""
+
+#: core/templatetags/shorttimesince_tag.py:19
+msgid "hr"
+msgid_plural "hr"
+msgstr[0] ""
+msgstr[1] ""
+
+#: core/templatetags/shorttimesince_tag.py:20
+#: core/templatetags/shorttimesince_tag.py:40
+msgid "min"
+msgid_plural "min"
+msgstr[0] ""
+msgstr[1] ""
+
+#: core/templatetags/shorttimesince_tag.py:45
+#, python-format
+msgid "%(number)d%(type)s"
+msgstr ""
+
+#: core/templatetags/shorttimesince_tag.py:51
+#, python-format
+msgid ", %(number)d%(type)s"
+msgstr ""
+
+#: dbtemplates/models.py:14 profiles/models.py:12 projects/models.py:24
+#: tagging/models.py:464 threadedcomments/models.py:268 tribes/models.py:23
 msgid "name"
 msgstr "nombre"
 
@@ -272,13 +534,11 @@ msgstr "Nivel"
 msgid "Timestamp"
 msgstr "Marca de tiempo"
 
-#: djangologging/templates/logging.html:16
-#: templates/profiles/profile.html:23
+#: djangologging/templates/logging.html:16 templates/profiles/profile.html:23
 msgid "Location"
 msgstr "Localización"
 
-#: djangologging/templates/logging.html:17
-#: messages/models.py:98
+#: djangologging/templates/logging.html:17 messages/models.py:98
 msgid "Message"
 msgstr "Mensaje"
 
@@ -322,40 +582,35 @@ msgstr "Aceptada petición de amistad de %(from_user)s"
 msgid "%(total)s vCards found, %(imported)s contacts imported."
 msgstr "%(total)s vCards encontradas, %(imported)s contactos importados/as."
 
-#: friends_app/views.py:79
-#: friends_app/views.py:85
+#: friends_app/views.py:79 friends_app/views.py:85
 #, python-format
 msgid "%(total)s people with email found, %(imported)s contacts imported."
-msgstr "%(total)s personas con email encontrados/as, %(imported)s contactos importados."
+msgstr ""
+"%(total)s personas con email encontrados/as, %(imported)s contactos "
+"importados."
 
-#: messages/forms.py:19
-#: messages/models.py:58
+#: messages/forms.py:19 messages/models.py:58
 #: messages/templates/messages/outbox.html:7
-#: messages/templates/messages/view.html:12
-#: templates/messages/outbox.html:11
+#: messages/templates/messages/view.html:12 templates/messages/outbox.html:11
 #: templates/messages/view.html:17
 msgid "Recipient"
 msgstr "Receptor"
 
-#: messages/forms.py:20
-#: messages/models.py:55
+#: messages/forms.py:20 messages/models.py:55
 #: messages/templates/messages/inbox.html:7
 #: messages/templates/messages/outbox.html:7
 #: messages/templates/messages/trash.html:7
-#: messages/templates/messages/view.html:6
-#: templates/messages/inbox.html:11
-#: templates/messages/outbox.html:11
-#: templates/messages/trash.html:11
+#: messages/templates/messages/view.html:6 templates/messages/inbox.html:11
+#: templates/messages/outbox.html:11 templates/messages/trash.html:11
 #: templates/messages/view.html:13
 msgid "Subject"
 msgstr "Asunto"
 
-#: messages/forms.py:21
-#: messages/models.py:56
+#: messages/forms.py:21 messages/models.py:56
 msgid "Body"
 msgstr "Mensaje"
 
-#: messages/forms.py:28
+#: messages/forms.py:28 projects/forms.py:90
 msgid "There is no user with this username."
 msgstr "No existe ningún usuario con ese nombre de usuario"
 
@@ -427,13 +682,10 @@ msgstr "Mensaje recuperado."
 msgid "you have undelete a message"
 msgstr "has recuperado un mensaje"
 
-#: messages/models.py:57
-#: messages/templates/messages/inbox.html:7
+#: messages/models.py:57 messages/templates/messages/inbox.html:7
 #: messages/templates/messages/trash.html:7
-#: messages/templates/messages/view.html:8
-#: templates/messages/inbox.html:11
-#: templates/messages/trash.html:11
-#: templates/messages/view.html:11
+#: messages/templates/messages/view.html:8 templates/messages/inbox.html:11
+#: templates/messages/trash.html:11 templates/messages/view.html:11
 msgid "Sender"
 msgstr "Remitente"
 
@@ -469,8 +721,7 @@ msgstr "Mensajes"
 msgid "New Message:"
 msgstr "Nuevo mensaje:"
 
-#: messages/views.py:82
-#: messages/views.py:114
+#: messages/views.py:82 messages/views.py:114
 msgid "Message successfully sent."
 msgstr "Mensaje enviado."
 
@@ -507,16 +758,13 @@ msgid "you have recovered the message %(message)s."
 msgstr "has recuperado el mensaje %(message)s."
 
 #: messages/templates/messages/base.html:8
-#: messages/templates/messages/inbox.html:4
-#: templates/site_base.html:45
-#: templates/messages/base.html:12
-#: templates/messages/inbox.html:7
+#: messages/templates/messages/inbox.html:4 templates/site_base.html:49
+#: templates/messages/base.html:12 templates/messages/inbox.html:7
 msgid "Inbox"
 msgstr "Bandeja de entrada"
 
 #: messages/templates/messages/base.html:9
-#: messages/templates/messages/outbox.html:4
-#: templates/messages/outbox.html:7
+#: messages/templates/messages/outbox.html:4 templates/messages/outbox.html:7
 msgid "Sent Messages"
 msgstr "Enviados"
 
@@ -524,8 +772,7 @@ msgstr "Enviados"
 msgid "New Message"
 msgstr "Nuevo mensaje"
 
-#: messages/templates/messages/base.html:11
-#: templates/messages/base.html:14
+#: messages/templates/messages/base.html:11 templates/messages/base.html:14
 msgid "Trash"
 msgstr "Papelera"
 
@@ -539,35 +786,28 @@ msgstr "Redactar"
 msgid "Send"
 msgstr "Enviar"
 
-#: messages/templates/messages/inbox.html:7
-#: templates/messages/inbox.html:11
+#: messages/templates/messages/inbox.html:7 templates/messages/inbox.html:11
 msgid "Received"
 msgstr "Recibidos"
 
 #: messages/templates/messages/inbox.html:7
 #: messages/templates/messages/outbox.html:7
-#: messages/templates/messages/trash.html:7
-#: templates/messages/inbox.html:11
-#: templates/messages/outbox.html:11
-#: templates/messages/trash.html:11
+#: messages/templates/messages/trash.html:7 templates/messages/inbox.html:11
+#: templates/messages/outbox.html:11 templates/messages/trash.html:11
 msgid "Action"
 msgstr "Acción"
 
 #: messages/templates/messages/inbox.html:19
 #: messages/templates/messages/outbox.html:16
 #: messages/templates/messages/trash.html:16
-#: messages/templates/messages/view.html:11
-#: templates/messages/inbox.html:23
-#: templates/messages/outbox.html:20
-#: templates/messages/trash.html:20
-#: templates/messages/view.html:16
-#: templates/wiki/history.html:25
+#: messages/templates/messages/view.html:11 templates/messages/inbox.html:23
+#: templates/messages/outbox.html:20 templates/messages/trash.html:20
+#: templates/messages/view.html:16 templates/wiki/history.html:26
 msgid "DATETIME_FORMAT"
 msgstr ""
 
 #: messages/templates/messages/inbox.html:20
-#: messages/templates/messages/outbox.html:17
-#: templates/messages/inbox.html:24
+#: messages/templates/messages/outbox.html:17 templates/messages/inbox.html:24
 #: templates/messages/outbox.html:21
 msgid "delete"
 msgstr "borrar"
@@ -578,130 +818,44 @@ msgstr "borrar"
 msgid "Sent from %(site_url)s"
 msgstr "Enviado desde %(site_url)s"
 
-#: messages/templates/messages/outbox.html:7
-#: templates/messages/base.html:13
+#: messages/templates/messages/outbox.html:7 templates/messages/base.html:13
 #: templates/messages/outbox.html:11
 msgid "Sent"
 msgstr "Enviados"
 
-#: messages/templates/messages/trash.html:4
-#: templates/messages/trash.html:7
+#: messages/templates/messages/trash.html:4 templates/messages/trash.html:7
 msgid "Deleted Messages"
 msgstr "Mensajes borrados"
 
 #: messages/templates/messages/trash.html:7
-#: messages/templates/messages/view.html:10
-#: templates/messages/trash.html:11
-#: templates/messages/view.html:15
-#: templates/wiki/history.html:16
+#: messages/templates/messages/view.html:10 templates/messages/trash.html:11
+#: templates/messages/view.html:15 templates/wiki/history.html:17
 msgid "Date"
 msgstr "Fecha"
 
-#: messages/templates/messages/trash.html:17
-#: templates/messages/trash.html:21
+#: messages/templates/messages/trash.html:17 templates/messages/trash.html:21
 msgid "undelete"
 msgstr "recuperar"
 
 #: messages/templates/messages/trash.html:23
-msgid "Deleted Messages are removed from the trash at unregular intervals, don't rely on this feature for long-time storage."
-msgstr "Mensajes borrados son eliminadors de la papelera en intérvalos irregulares, no confie en esta sistema como almacenamiento duradero"
+msgid ""
+"Deleted Messages are removed from the trash at unregular intervals, don't "
+"rely on this feature for long-time storage."
+msgstr ""
+"Mensajes borrados son eliminadors de la papelera en intérvalos irregulares, "
+"no confie en esta sistema como almacenamiento duradero"
 
-#: messages/templates/messages/view.html:4
-#: templates/messages/view.html:8
+#: messages/templates/messages/view.html:4 templates/messages/view.html:8
 msgid "View Message"
 msgstr "Ver mensajes"
 
-#: messages/templates/messages/view.html:18
-#: templates/messages/view.html:24
+#: messages/templates/messages/view.html:18 templates/messages/view.html:24
 msgid "Reply"
 msgstr "Responder"
 
-#: messages/templates/messages/view.html:20
-#: templates/messages/view.html:27
+#: messages/templates/messages/view.html:20 templates/messages/view.html:27
 msgid "Delete"
 msgstr "Borrar"
-
-#: notification/models.py:27
-msgid "label"
-msgstr "etiqueta"
-
-#: notification/models.py:28
-msgid "display"
-msgstr "mostrado"
-
-#: notification/models.py:32
-msgid "default"
-msgstr "defecto"
-
-#: notification/models.py:41
-#: notification/models.py:62
-#: notification/models.py:90
-#: notification/models.py:331
-msgid "notice type"
-msgstr "tipo de notificación"
-
-#: notification/models.py:42
-msgid "notice types"
-msgstr "tipo de avisos"
-
-#: notification/models.py:61
-#: notification/models.py:88
-#: notification/models.py:325
-#: profiles/models.py:11
-msgid "user"
-msgstr "usuario"
-
-#: notification/models.py:63
-msgid "medium"
-msgstr "medio"
-
-#: notification/models.py:64
-msgid "send"
-msgstr "enviado"
-
-#: notification/models.py:70
-msgid "notice setting"
-msgstr "Configurar avisos"
-
-#: notification/models.py:71
-msgid "notice settings"
-msgstr "Configuraciones de los avisos"
-
-#: notification/models.py:89
-msgid "message"
-msgstr "mensaje"
-
-#: notification/models.py:92
-msgid "unseen"
-msgstr "no visto"
-
-#: notification/models.py:93
-msgid "archived"
-msgstr "archivados"
-
-#: notification/models.py:120
-msgid "notice"
-msgstr "aviso"
-
-#: notification/models.py:121
-msgid "notices"
-msgstr "avisos"
-
-#: notification/models.py:332
-msgid "message template"
-msgstr "plantilla de mensaje"
-
-#: notification/models.py:337
-msgid "signal"
-msgstr "señal"
-
-#: notification/models.py:343
-msgid "observed item"
-msgstr "elemento observado"
-
-#: notification/models.py:344
-msgid "observed items"
-msgstr "elementos observados"
 
 #: profiles/models.py:13
 msgid "about"
@@ -723,6 +877,10 @@ msgstr "blog rss/atom"
 msgid "timezone"
 msgstr "franja horaria"
 
+#: profiles/models.py:18
+msgid "language"
+msgstr ""
+
 #: profiles/models.py:27
 msgid "profile"
 msgstr "perfil"
@@ -736,31 +894,168 @@ msgstr "perfiles"
 msgid "You are now following %(other_user)s"
 msgstr "Ahora estas siguiendo a %(other_user)s."
 
-#: profiles/views.py:55
+#: profiles/views.py:57
 #, python-format
 msgid "You have stopped following %(other_user)s"
 msgstr "Ya no sigues a %(other_user)s."
 
-#: profiles/views.py:70
-#: profiles/views.py:86
+#: profiles/views.py:72 profiles/views.py:88
 msgid "Let's be friends!"
 msgstr "Quieres ser mi amigo/a?"
 
-#: profiles/views.py:78
+#: profiles/views.py:80
 #, python-format
 msgid "You have accepted the friendship request from %(from_user)s"
 msgstr "Aceptada petición de amistad de %(from_user)s"
+
+#: projects/forms.py:11 tribes/forms.py:9
+msgid ""
+"a short version of the name consisting only of letters, numbers and "
+"underscores."
+msgstr ""
+"una versión corta del nombre compuesta solamente de letras, números y "
+"subrayados (_)"
+
+#: projects/forms.py:16
+#, fuzzy
+msgid "A project already exists with that slug."
+msgstr "Ya existe una tribu con ese slug"
+
+#: projects/forms.py:21 projects/forms.py:38
+#, fuzzy
+msgid "A project already exists with that name."
+msgstr "Ya existe una tribu con ese nombre"
+
+#: projects/forms.py:83 wiki/templates/wiki/history.html:20
+msgid "User"
+msgstr "Usuario"
+
+#: projects/management.py:10
+#, fuzzy
+msgid "New Project Member"
+msgstr "Nuevo miembro de Tribu"
+
+#: projects/management.py:10
+#, fuzzy
+msgid "a project you are a member of has a new member"
+msgstr "una tribu de la que eres miembro tiene un nuevo miembro"
+
+#: projects/management.py:11
+msgid "Added to Project"
+msgstr ""
+
+#: projects/management.py:11
+#, fuzzy
+msgid "you have been added to a project"
+msgstr "has respondido al mensaje"
+
+#: projects/management.py:13
+#, fuzzy
+msgid "New Project Topic Started"
+msgstr "Nuevo tema iniciado"
+
+#: projects/management.py:13
+#, fuzzy
+msgid "a new topic has started in a project you're a member of"
+msgstr "Un nuevo tema se ha iniciado en una tribu de la que tu eres miembro"
+
+#: projects/management.py:14
+#, fuzzy
+msgid "Response To Your Project Topic"
+msgstr "Respuesta a tu tema"
+
+#: projects/management.py:14
+#, fuzzy
+msgid "someone has responded on a project topic you started"
+msgstr "Alguien ha respondido a un tema que tu iniciaste"
+
+#: projects/management.py:16
+msgid "New Project Task"
+msgstr ""
+
+#: projects/management.py:16
+#, fuzzy
+msgid "a new task been created in a project you're a member of"
+msgstr "Un nuevo tema se ha iniciado en una tribu de la que tu eres miembro"
+
+#: projects/management.py:17
+msgid "Comment on Project Task"
+msgstr ""
+
+#: projects/management.py:17
+#, fuzzy
+msgid "a new comment has been made on a task in a project you're a member of"
+msgstr "Un nuevo tema se ha iniciado en una tribu de la que tu eres miembro"
+
+#: projects/management.py:18
+#, fuzzy
+msgid "Change to Project Task"
+msgstr "Número de cambios"
+
+#: projects/management.py:18
+#, fuzzy
+msgid "there has been a change to a task in a project you're a member of"
+msgstr "Un nuevo tema se ha iniciado en una tribu de la que tu eres miembro"
+
+#: projects/models.py:26 projects/models.py:53 projects/models.py:87
+#: tribes/models.py:25 tribes/models.py:49
+msgid "created"
+msgstr "creado"
+
+#: projects/models.py:28 tribes/models.py:27
+msgid "members"
+msgstr "miembros"
+
+#: projects/models.py:31
+#, fuzzy
+msgid "private"
+msgstr "invitar"
+
+#: projects/models.py:49 projects/models.py:82
+#, fuzzy
+msgid "project"
+msgstr "id de objeto"
+
+#: projects/models.py:54 projects/models.py:88 tribes/models.py:50
+msgid "modified"
+msgstr "modificada"
+
+#: projects/models.py:84
+msgid "summary"
+msgstr ""
+
+#: projects/models.py:85
+#, fuzzy
+msgid "detail"
+msgstr "Editar detalles"
+
+#: projects/models.py:89
+msgid "assignee"
+msgstr ""
+
+#: projects/models.py:93
+#, fuzzy
+msgid "state"
+msgstr "Enviado"
 
 #: robots/models.py:23
 msgid "pattern"
 msgstr "patron"
 
 #: robots/models.py:23
-msgid "Case-sensitive. A missing trailing slash does also match to files which start with the name of the pattern, e.g., '/admin' matches /admin.html too. Some major search engines allow an asterisk (*) as a wildcard and a dollar sign ($) to match the end of the URL, e.g., '/*.jpg$'."
-msgstr "Sensible a mayúsculas. Una barra final no concuerda con el fichero que empieza con el mismo nombre del patrón, por ejemplo: '/admin' también conicide con /admin.html. Algunos de los mayores buscadores permiten un asterisco (*) como comodín y dolar ($) para coincidir con el final de la url, por ejemplo: '/*.jpg$'."
+msgid ""
+"Case-sensitive. A missing trailing slash does also match to files which "
+"start with the name of the pattern, e.g., '/admin' matches /admin.html too. "
+"Some major search engines allow an asterisk (*) as a wildcard and a dollar "
+"sign ($) to match the end of the URL, e.g., '/*.jpg$'."
+msgstr ""
+"Sensible a mayúsculas. Una barra final no concuerda con el fichero que "
+"empieza con el mismo nombre del patrón, por ejemplo: '/admin' también "
+"conicide con /admin.html. Algunos de los mayores buscadores permiten un "
+"asterisco (*) como comodín y dolar ($) para coincidir con el final de la "
+"url, por ejemplo: '/*.jpg$'."
 
-#: robots/models.py:26
-#: robots/models.py:27
+#: robots/models.py:26 robots/models.py:27
 msgid "url"
 msgstr "dirección"
 
@@ -769,8 +1064,16 @@ msgid "robot"
 msgstr "robot"
 
 #: robots/models.py:47
-msgid "This should be a user agent string like 'Googlebot'. Enter an asterisk (*) for all user agents. For a full list look at the <a target=_blank href='http://www.robotstxt.org/wc/active/html/index.html'>database of Web Robots</a>."
-msgstr "Debería ser una <i>user agent string</i> como 'Googlebot'. Usa un asterisco (*) para todos los agentes. Para ver la lista completa mira la <a target=_blank href='http://www.robotstxt.org/wc/active/html/index.html'>base de datos de robos web</a>."
+msgid ""
+"This should be a user agent string like 'Googlebot'. Enter an asterisk (*) "
+"for all user agents. For a full list look at the <a target=_blank "
+"href='http://www.robotstxt.org/wc/active/html/index.html'>database of Web "
+"Robots</a>."
+msgstr ""
+"Debería ser una <i>user agent string</i> como 'Googlebot'. Usa un asterisco "
+"(*) para todos los agentes. Para ver la lista completa mira la <a "
+"target=_blank href='http://www.robotstxt.org/wc/active/html/index.html'>base "
+"de datos de robos web</a>."
 
 #: robots/models.py:48
 msgid "These are URLs which are allowed to be accessed by web robots."
@@ -792,18 +1095,15 @@ msgstr "regla"
 msgid "rules"
 msgstr "reglas"
 
-#: robots/models.py:60
-#: robots/models.py:87
+#: robots/models.py:60 robots/models.py:87
 msgid "URL patterns"
 msgstr "Patrones para las direcciones"
 
-#: robots/models.py:61
-#: robots/models.py:88
+#: robots/models.py:61 robots/models.py:88
 msgid "Advanced options"
 msgstr "Opciones avanzadas"
 
-#: robots/models.py:71
-#: robots/models.py:75
+#: robots/models.py:71 robots/models.py:75
 msgid "and"
 msgstr "y"
 
@@ -814,6 +1114,178 @@ msgstr "permitida"
 #: robots/models.py:76
 msgid "disallowed"
 msgstr "no permitida"
+
+#: tagging/__init__.py:22
+#, fuzzy, python-format
+msgid "The model %s has already been registered."
+msgstr "Tu email ya ha sido verificado"
+
+#: tagging/fields.py:72
+#, python-format
+msgid "%s can only be set on instances."
+msgstr ""
+
+#: tagging/forms.py:22 tagging/validators.py:19
+#, python-format
+msgid "Each tag may be no more than %s characters long."
+msgstr ""
+
+#: tagging/models.py:62
+#, python-format
+msgid "No tags were given: \"%s\"."
+msgstr ""
+
+#: tagging/models.py:64
+#, python-format
+msgid "Multiple tags were given: \"%s\"."
+msgstr ""
+
+#: tagging/models.py:470 tagging/models.py:483
+msgid "tag"
+msgstr ""
+
+#: tagging/models.py:471
+msgid "tags"
+msgstr ""
+
+#: tagging/models.py:484
+#, fuzzy
+msgid "content type"
+msgstr "contenido"
+
+#: tagging/models.py:485
+#, fuzzy
+msgid "object id"
+msgstr "id de objeto"
+
+#: tagging/models.py:493
+msgid "tagged item"
+msgstr ""
+
+#: tagging/models.py:494
+#, fuzzy
+msgid "tagged items"
+msgstr "elementos observados"
+
+#: tagging/utils.py:187
+msgid ""
+"If a list or tuple of tags is provided, they must all be tag names, Tag "
+"objects or Tag ids."
+msgstr ""
+
+#: tagging/utils.py:189
+msgid "The tag input given was invalid."
+msgstr ""
+
+#: tagging/utils.py:234
+#, python-format
+msgid "Invalid distribution algorithm specified: %s."
+msgstr ""
+
+#: tagging/validators.py:27
+msgid "Multiple tags were given."
+msgstr ""
+
+#: tagging/validators.py:30
+#, python-format
+msgid "A tag may be no more than %s characters long."
+msgstr ""
+
+#: tagging/views.py:33
+msgid "tagged_object_list must be called with a queryset or a model."
+msgstr ""
+
+#: tagging/views.py:39
+msgid "tagged_object_list must be called with a tag."
+msgstr ""
+
+#: tagging/views.py:43
+#, python-format
+msgid "No Tag found matching \"%s\"."
+msgstr ""
+
+#: tagging/templatetags/tagging_tags.py:19
+#, python-format
+msgid "tags_for_model tag was given an invalid model: %s"
+msgstr ""
+
+#: tagging/templatetags/tagging_tags.py:32
+#, python-format
+msgid "tag_cloud_for_model tag was given an invalid model: %s"
+msgstr ""
+
+#: tagging/templatetags/tagging_tags.py:56
+#, python-format
+msgid "tagged_objects tag was given an invalid model: %s"
+msgstr ""
+
+#: tagging/templatetags/tagging_tags.py:89
+#, python-format
+msgid "%s tag requires either three or five arguments"
+msgstr ""
+
+#: tagging/templatetags/tagging_tags.py:91
+#: tagging/templatetags/tagging_tags.py:143
+#: tagging/templatetags/tagging_tags.py:198
+#, python-format
+msgid "second argument to %s tag must be 'as'"
+msgstr ""
+
+#: tagging/templatetags/tagging_tags.py:94
+#: tagging/templatetags/tagging_tags.py:147
+#, python-format
+msgid "if given, fourth argument to %s tag must be 'with'"
+msgstr ""
+
+#: tagging/templatetags/tagging_tags.py:96
+#, python-format
+msgid "if given, fifth argument to %s tag must be 'counts'"
+msgstr ""
+
+#: tagging/templatetags/tagging_tags.py:141
+#, python-format
+msgid "%s tag requires either three or between five and seven arguments"
+msgstr ""
+
+#: tagging/templatetags/tagging_tags.py:155
+#, python-format
+msgid "%(tag)s tag's '%(option)s' option was not a valid integer: '%(value)s'"
+msgstr ""
+
+#: tagging/templatetags/tagging_tags.py:164
+#, python-format
+msgid "%(tag)s tag's '%(option)s' option was not a valid choice: '%(value)s'"
+msgstr ""
+
+#: tagging/templatetags/tagging_tags.py:170
+#, python-format
+msgid "%(tag)s tag was given an invalid option: '%(option)s'"
+msgstr ""
+
+#: tagging/templatetags/tagging_tags.py:175
+#, python-format
+msgid "%(tag)s tag was given a badly formatted option: '%(option)s'"
+msgstr ""
+
+#: tagging/templatetags/tagging_tags.py:196
+#, python-format
+msgid "%s tag requires exactly three arguments"
+msgstr ""
+
+#: tagging/templatetags/tagging_tags.py:221
+#, python-format
+msgid "%s tag requires exactly five arguments"
+msgstr ""
+
+#: tagging/templatetags/tagging_tags.py:223
+#, python-format
+msgid "second argument to %s tag must be 'in'"
+msgstr ""
+
+#: tagging/templatetags/tagging_tags.py:225
+#, python-format
+msgid "fourth argument to %s tag must be 'as'"
+msgstr ""
 
 #: templates/404.html:5
 msgid "Not Found"
@@ -828,56 +1300,258 @@ msgid "Server Error"
 msgstr "Error del servidor"
 
 #: templates/500.html:8
-msgid "We're sorry but a server error has occurred. We've been notified and will look into it as soon as possible."
-msgstr "Lo sentido pero ha sucedido un error en el servidor. Lo hemos reportado y trataremos de subsanarlo lo antes posible"
+msgid ""
+"We're sorry but a server error has occurred. We've been notified and will "
+"look into it as soon as possible."
+msgstr ""
+"Lo sentido pero ha sucedido un error en el servidor. Lo hemos reportado y "
+"trataremos de subsanarlo lo antes posible"
 
-#: templates/base.html:23
-#: templates/announcements/announcement_list.html:15
+#: templates/apps.html:5 templates/apps.html.py:10 templates/site_base.html:31
+msgid "Apps"
+msgstr "Apps"
+
+#: templates/apps.html:12
+msgid "More about the apps that make up Pinax."
+msgstr ""
+
+#: templates/apps.html:14
+msgid "External"
+msgstr ""
+
+#: templates/apps.html:16
+msgid ""
+"These already exist as independent apps. Some pre-existed Pinax, some were "
+"written especially for it."
+msgstr ""
+
+#: templates/apps.html:20
+msgid "user notification management"
+msgstr ""
+
+#: templates/apps.html:22
+msgid "simple email verification"
+msgstr ""
+
+#: templates/apps.html:24
+msgid "useful management commands"
+msgstr ""
+
+#: templates/apps.html:26
+msgid "for managing robots.txt files"
+msgstr ""
+
+#: templates/apps.html:28
+msgid "loader for templates from the database"
+msgstr ""
+
+#: templates/apps.html:30
+msgid "friendship, contact and invitation management"
+msgstr ""
+
+#: templates/apps.html:32
+msgid "mail queuing and management"
+msgstr ""
+
+#: templates/apps.html:34
+msgid "private messages between users"
+msgstr ""
+
+#: templates/apps.html:36
+#, fuzzy
+msgid "site announcements"
+msgstr "Esconder noticia"
+
+#: templates/apps.html:38
+msgid "support for oembeded links"
+msgstr ""
+
+#: templates/apps.html:40
+msgid "debugging and logging"
+msgstr ""
+
+#: templates/apps.html:42
+msgid "exception logging to the database"
+msgstr ""
+
+#: templates/apps.html:44
+msgid "easy pagination"
+msgstr ""
+
+#: templates/apps.html:46
+#, fuzzy
+msgid "threaded comments"
+msgstr "Comentarios con hilos"
+
+#: templates/apps.html:48
+msgid "simple wiki"
+msgstr ""
+
+#: templates/apps.html:50
+msgid "db schema evolution"
+msgstr ""
+
+#: templates/apps.html:52
+#, fuzzy
+msgid "timezone localization"
+msgstr "Borrar asociación"
+
+#: templates/apps.html:54
+msgid "feed aggregation"
+msgstr ""
+
+#: templates/apps.html:56
+msgid "extension points in templates"
+msgstr ""
+
+#: templates/apps.html:58
+msgid "generic voting"
+msgstr ""
+
+#: templates/apps.html:60
+#, fuzzy
+msgid "URL bookmarking"
+msgstr "añade favorito"
+
+#: templates/apps.html:62
+msgid "for displaying gravatars"
+msgstr ""
+
+#: templates/apps.html:64
+msgid "form validation via AJAX"
+msgstr ""
+
+#: templates/apps.html:67
+msgid ""
+"<a href=\"http://code.google.com/p/django-openid/\">django-openid</a> is "
+"also used but locally for modification."
+msgstr ""
+
+#: templates/apps.html:69
+#, fuzzy
+msgid "Local"
+msgstr "Localización"
+
+#: templates/apps.html:71
+msgid ""
+"These are currently inside Pinax but could potentially be broken out as "
+"generic apps."
+msgstr ""
+
+#: templates/apps.html:75
+msgid "Google analytics javascript"
+msgstr ""
+
+#: templates/apps.html:77
+#, fuzzy
+msgid "profile pages"
+msgstr "perfiles"
+
+#: templates/apps.html:79
+msgid "a Twitter clone"
+msgstr ""
+
+#: templates/apps.html:81
+msgid "overall account management: signup, login, password change/reset, etc"
+msgstr ""
+
+#: templates/apps.html:83
+msgid "groups of people with common interests"
+msgstr ""
+
+#: templates/apps.html:85
+msgid "for authenticating with Google's AuthSub"
+msgstr ""
+
+#: templates/apps.html:87
+msgid "for authenticating with Yahoo's BBAuth"
+msgstr ""
+
+#: templates/apps.html:89
+msgid "per-user blogging support"
+msgstr ""
+
+#: templates/base.html:30 templates/announcements/announcement_list.html:15
 msgid "Hide announcement"
 msgstr "Esconder noticia"
 
-#: templates/base.html:42
+#: templates/base.html:49
 msgid "clear"
 msgstr "limpiar"
 
 #: templates/homepage.html:11
+#, fuzzy
 msgid ""
 "\n"
-"        <p><b>Pinax</b> is a <a href=\"http://djangoproject.com/\">Django</a> project intended to provide a starting point for websites. By integrating numerous reusable Django apps to take care of the things that many sites have in common, it lets you focus on what makes your site different.</p>\n"
+"        <p><b>Pinax</b> is a <a href=\"http://djangoproject.com/\">Django</"
+"a> project intended to provide a starting point for websites. By integrating "
+"numerous reusable Django apps to take care of the things that many sites "
+"have in common, it lets you focus on what makes your site different.</p>\n"
 "        \n"
-"        <p>This site is just a running example of Pinax. The source code is available as part of the <a href=\"http://code.google.com/p/django-hotclub/\">Hot Club of France</a> project.</p>\n"
+"        <p>This site is just a running example of Pinax. The source code is "
+"available as part of the <a href=\"http://code.google.com/p/django-hotclub/"
+"\">Hot Club of France</a> project.</p>\n"
 "        \n"
-"        <p>If you have any questions about this site or the <b>Pinax</b> project, please <a href=\"mailto:jtauber@jtauber.com\">contact James Tauber</a>.</p>\n"
+"        <p>If you have any questions about this site or the <b>Pinax</b> "
+"project, please <a href=\"mailto:jtauber@jtauber.com\">contact James Tauber</"
+"a>.</p>\n"
+"    "
 msgstr ""
 "\n"
-"<p><b>Pinax</b> es un proyecto <a href=\"http://djangoproject.com/\">Django</a> concevido para proporcionar un punto de inicio a páginas web. A través de la integración de numerosas aplicaciones Django reusables para proporcionar funcionalidades que muchos sitios tienen en común, permitiendo centrarse en lo que la hace diferente</p>\n"
+"<p><b>Pinax</b> es un proyecto <a href=\"http://djangoproject.com/\">Django</"
+"a> concevido para proporcionar un punto de inicio a páginas web. A través de "
+"la integración de numerosas aplicaciones Django reusables para proporcionar "
+"funcionalidades que muchos sitios tienen en común, permitiendo centrarse en "
+"lo que la hace diferente</p>\n"
 "\n"
-"<p>Este sitio es sólo un ejemplo de Pinax. El código fuente esta disponible como parte del proyecto <a href=\"http://code.google.com/p/django-hotclub/\">Hot Club of France</a> </p>\n"
+"<p>Este sitio es sólo un ejemplo de Pinax. El código fuente esta disponible "
+"como parte del proyecto <a href=\"http://code.google.com/p/django-hotclub/"
+"\">Hot Club of France</a> </p>\n"
 "\n"
-"<p>Si tienes alguna pregunta sobre este sitio o sobre el proyecto <b>Pinax</b>, por favor <a href=\"mailto:jtauber@jtauber.com\">contacta cons James Tauber</a>.</p>\n"
+"<p>Si tienes alguna pregunta sobre este sitio o sobre el proyecto <b>Pinax</"
+"b>, por favor <a href=\"mailto:jtauber@jtauber.com\">contacta cons James "
+"Tauber</a>.</p>\n"
 
-#: templates/homepage.html:24
+#: templates/homepage.html:21
 #, python-format
-msgid "You can <a href=\"%(signup_url)s\">Sign up</a> and <a href=\"%(login_url)s\">Log in</a> to try out the site."
-msgstr "Tu puedes <a href=\"%(signup_url)s\">darte de alta</a> y <a href=\"%(login_url)s\">entrar</a> para probar este sitio"
+msgid "Wondering <a href=\"%(what_next_url)s\">What Next</a>?"
+msgstr ""
 
-#: templates/homepage.html:26
-msgid "At this stage, there is openid support, email verification, password management, site announcements, user-to-user messaging, friend invitation (both internal and external to the site), a basic twitter clone, interest groups (called tribes), per-tribe threaded discussions, per-tribe wikis, blog aggregation, bookmarks, contact import from vCard, Google or Yahoo and a notification framework."
-msgstr "En este sitio existe soporte para openid, verificación de email, gestión de contraseñas, noticias del sitio, mensajes entre usuarios, invitación de amigos (internos y externos al sitio), un clon básico de twitter, grupos de interés (llamados tribus), discusiones con hilos por tribu, agregación de blogs, gestión de favoritos, importación desde vCard, google o yahoo y un framework de notificaciones."
+#: templates/homepage.html:25
+#, python-format
+msgid ""
+"You can <a href=\"%(signup_url)s\">Sign up</a> and <a href=\"%(login_url)s"
+"\">Log in</a> to try out the site."
+msgstr ""
+"Tu puedes <a href=\"%(signup_url)s\">darte de alta</a> y <a href=\"%"
+"(login_url)s\">entrar</a> para probar este sitio"
 
-#: templates/site_base.html:8
-#: templates/account/email.html:5
+#: templates/homepage.html:27
+msgid ""
+"At this stage, there is openid support, email verification, password "
+"management, site announcements, user-to-user messaging, friend invitation "
+"(both internal and external to the site), a basic twitter clone, interest "
+"groups (called tribes), per-tribe threaded discussions, per-tribe wikis, "
+"blog aggregation, bookmarks, contact import from vCard, Google or Yahoo and "
+"a notification framework."
+msgstr ""
+"En este sitio existe soporte para openid, verificación de email, gestión de "
+"contraseñas, noticias del sitio, mensajes entre usuarios, invitación de "
+"amigos (internos y externos al sitio), un clon básico de twitter, grupos de "
+"interés (llamados tribus), discusiones con hilos por tribu, agregación de "
+"blogs, gestión de favoritos, importación desde vCard, google o yahoo y un "
+"framework de notificaciones."
+
+#: templates/site_base.html:8 templates/account/email.html:5
 #: templates/account/email.html.py:8
 msgid "Account"
 msgstr "Cuenta"
 
-#: templates/site_base.html:8
-#: templates/account/logout.html:5
+#: templates/site_base.html:8 templates/account/logout.html:5
 msgid "Logout"
 msgstr "Salir"
 
-#: templates/site_base.html:10
-#: templates/account/login.html:6
+#: templates/site_base.html:10 templates/account/login.html:6
 msgid "Login"
 msgstr "Entrar"
 
@@ -885,94 +1559,128 @@ msgstr "Entrar"
 msgid "Sign up"
 msgstr "Darse de alta"
 
-#: templates/site_base.html:29
+#: templates/site_base.html:30
 msgid "Home"
 msgstr "Inicio"
 
-#: templates/site_base.html:30
-msgid "Apps"
-msgstr "Apps"
-
-#: templates/site_base.html:31
+#: templates/site_base.html:32 templates/sites.html:5
+#: templates/sites.html.py:10
 msgid "Sites"
 msgstr "Sitios"
 
-#: templates/site_base.html:32
+#: templates/site_base.html:33 templates/team.html:6 templates/team.html.py:11
 msgid "Team"
 msgstr "Equipop"
 
-#: templates/site_base.html:41
-#: templates/about/what_next.html:42
+#: templates/site_base.html:43 templates/about/what_next.html:42
 msgid "Profile"
 msgstr "Perfil"
 
-#: templates/site_base.html:42
-#: templates/tribes/tribes.html:9
+#: templates/site_base.html:44
+msgid "Blogs"
+msgstr ""
+
+#: templates/site_base.html:45 templates/projects/projects.html:9
+#: templates/projects/projects.html:15
+#, fuzzy
+msgid "Projects"
+msgstr "Perfiles"
+
+#: templates/site_base.html:46 templates/tribes/tribes.html:9
 #: templates/tribes/tribes.html.py:15
 msgid "Tribes"
 msgstr "Tribus"
 
-#: templates/site_base.html:43
-#: templates/tribes/tribe.html:137
-#: templates/zwitschern/personal.html:6
+#: templates/site_base.html:47 templates/projects/project.html:158
+#: templates/tribes/tribe.html:137 templates/zwitschern/personal.html:6
 #: templates/zwitschern/personal.html:13
-#: templates/zwitschern/plugins/profile.html:4
 #: templates/zwitschern/plugins/profiles/profile.html:4
 msgid "Tweets"
 msgstr "Tweets"
 
-#: templates/site_base.html:44
-#: templates/bookmarks/plugins/profile.html:4
+#: templates/site_base.html:48
 #: templates/bookmarks/plugins/profiles/profile.html:4
 msgid "Bookmarks"
 msgstr "Favoritos"
 
-#: templates/site_base.html:53
+#: templates/site_base.html:57
 msgid "&copy; 2008 &lt;your company here&gt;"
 msgstr "&copy; 2008 &lt;nombre de la empresa&gt;"
 
-#: templates/site_base.html:54
+#: templates/site_base.html:58
 msgid "About Pinax"
 msgstr "Sobre Pinax"
 
-#: templates/site_base.html:55
+#: templates/site_base.html:59
 msgid "Pinax Blog"
 msgstr "Pinax Blog"
 
-#: templates/site_base.html:56
-#: templates/about/terms.html:5
+#: templates/site_base.html:60 templates/about/terms.html:5
 msgid "Terms of Service"
 msgstr "Términos del servicio"
 
-#: templates/site_base.html:57
-#: templates/about/privacy.html:5
+#: templates/site_base.html:61 templates/about/privacy.html:5
 msgid "Privacy Policy"
 msgstr "Política de privacidad"
 
-#: templates/about/about.html:5
-#: templates/profiles/profile.html:22
+#: templates/sites.html:12
+msgid "Sites built on Pinax, both originals and contrafacts."
+msgstr ""
+
+#: templates/team.html:13
+msgid "The people responsible for Pinax."
+msgstr ""
+
+#: templates/team.html:49
+msgid "and the developers of the awesome re-usable django apps we used."
+msgstr ""
+
+#: templates/team.html:51
+msgid "Translators"
+msgstr ""
+
+#: templates/about/about.html:5 templates/profiles/profile.html:22
 msgid "About"
 msgstr "Contacto"
 
 #: templates/about/about.html:8
+#, fuzzy
 msgid ""
 "\n"
-"        <p>Your <b>About Page</b> would normally go here, be here's a temporary one...</p>\n"
+"        <p>Your <b>About Page</b> would normally go here, be here's a "
+"temporary one...</p>\n"
 "        \n"
-"        <p><b>Pinax</b> is a <a href=\"http://djangoproject.com/\">Django</a> project intended to provide a starting point for websites. By integrating numerous reusable Django apps to take care of the things that many sites have in common, it lets you focus on what makes your site different.</p>\n"
+"        <p><b>Pinax</b> is a <a href=\"http://djangoproject.com/\">Django</"
+"a> project intended to provide a starting point for websites. By integrating "
+"numerous reusable Django apps to take care of the things that many sites "
+"have in common, it lets you focus on what makes your site different.</p>\n"
 "        \n"
-"        <p>This site is just a running example of Pinax. The source code is available as part of the <a href=\"http://code.google.com/p/django-hotclub/\">Hot Club of France</a> project.</p>\n"
+"        <p>This site is just a running example of Pinax. The source code is "
+"available as part of the <a href=\"http://code.google.com/p/django-hotclub/"
+"\">Hot Club of France</a> project.</p>\n"
 "        \n"
-"        <p>If you have any questions about this site or the <b>Pinax</b> project, please <a href=\"mailto:jtauber@jtauber.com\">contact James Tauber</a>.</p>\n"
+"        <p>If you have any questions about this site or the <b>Pinax</b> "
+"project, please <a href=\"mailto:jtauber@jtauber.com\">contact James Tauber</"
+"a>.</p>\n"
+"    "
 msgstr ""
 "\n"
-"<p>Tu <b>Página de contacto</b> normalmente estará aquí. Aquí tienes una temporal...</p>\n"
+"<p>Tu <b>Página de contacto</b> normalmente estará aquí. Aquí tienes una "
+"temporal...</p>\n"
 "\n"
-"<p><b>Pinax</b> es un proyecto <a href=\"http://djangoproject.com/\">Django</a> concevido para proporcionar un punto de inicio a páginas web. A través de la integración de numerosas aplicaciones Django reusables para proporcionar funcionalidades que muchos sitios tienen en común, permitiendo centrarse en lo que la hace diferente</p>\n"
+"<p><b>Pinax</b> es un proyecto <a href=\"http://djangoproject.com/\">Django</"
+"a> concevido para proporcionar un punto de inicio a páginas web. A través de "
+"la integración de numerosas aplicaciones Django reusables para proporcionar "
+"funcionalidades que muchos sitios tienen en común, permitiendo centrarse en "
+"lo que la hace diferente</p>\n"
 "\n"
-"<p>Este sitio es sólo un ejemplo de Pinax. El código fuente esta disponible como parte del proyecto <a href=\"http://code.google.com/p/django-hotclub/\">Hot Club of France</a> </p>\n"
+"<p>Este sitio es sólo un ejemplo de Pinax. El código fuente esta disponible "
+"como parte del proyecto <a href=\"http://code.google.com/p/django-hotclub/"
+"\">Hot Club of France</a> </p>\n"
 "\n"
-"<p>Si tienes alguna pregunta sobre este sitio o sobre el proyecto <b>Pinax</b>, por favor <a href=\"mailto:jtauber@jtauber.com\">contacta cons James Tauber</a>.</p>\n"
+"<p>Si tienes alguna pregunta sobre este sitio o sobre el proyecto <b>Pinax</"
+"b>, por favor <a href=\"mailto:jtauber@jtauber.com\">contacta cons James "
+"Tauber</a>.</p>\n"
 
 #: templates/about/privacy.html:8
 msgid "<p>Your <b>Privacy Policy</b> would normally go here...</p>"
@@ -982,27 +1690,28 @@ msgstr "<p>Tu <b>política de privacidad</b> normalmente vendrá aquí...</p>"
 msgid "<p>Your <b>Terms of Service</b> would normally go here...</p>"
 msgstr "<p>Los <b>Términos del servicio</b> irán normalmente aquí..</p>"
 
-#: templates/about/what_next.html:6
-#: templates/about/what_next.html.py:9
+#: templates/about/what_next.html:6 templates/about/what_next.html.py:9
 msgid "What Next?"
 msgstr "¿Que es lo siguiente?"
 
 #: templates/about/what_next.html:37
 #, python-format
-msgid "Start by <a href=\"%(signup_url)s\">signing up</a> and <a href=\"%(login_url)s\">logging in</a>."
-msgstr "Tu puedes<a href=\"%(signup_url)s\">darte de alta</a> y <a href=\"%(login_url)s\">entrar</a> para probar este sitio"
+msgid ""
+"Start by <a href=\"%(signup_url)s\">signing up</a> and <a href=\"%(login_url)"
+"s\">logging in</a>."
+msgstr ""
+"Tu puedes<a href=\"%(signup_url)s\">darte de alta</a> y <a href=\"%"
+"(login_url)s\">entrar</a> para probar este sitio"
 
 #: templates/account/base.html:10
 msgid "E-Mail Addresses"
 msgstr "Direcciones de email"
 
-#: templates/account/base.html:11
-#: templates/openid/associations.html:5
+#: templates/account/base.html:11 templates/openid/associations.html:5
 msgid "OpenID Associations"
 msgstr "Asociaciones OpenID"
 
-#: templates/account/base.html:12
-#: templates/account/password_change.html:5
+#: templates/account/base.html:12 templates/account/password_change.html:5
 #: templates/account/password_change.html:8
 msgid "Change Password"
 msgstr "Cambia contraseña"
@@ -1044,31 +1753,41 @@ msgid "None"
 msgstr "Ninguna/o"
 
 #: templates/account/email.html:56
-msgid "You should really add one so you can receive notifications, reset your password if you forget it, etc."
-msgstr "Deberías añadir una para poder recibir notificaciones, resetear tu contraseña si la olvidas, etc."
+msgid ""
+"You should really add one so you can receive notifications, reset your "
+"password if you forget it, etc."
+msgstr ""
+"Deberías añadir una para poder recibir notificaciones, resetear tu "
+"contraseña si la olvidas, etc."
 
 #: templates/account/email.html:59
 msgid "Add Email Address"
 msgstr "Añadir dirección de email"
 
-#: templates/account/email.html:64
+#: templates/account/email.html:64 templates/projects/project.html:67
 msgid "add"
 msgstr "añadir"
 
-#: templates/account/login.html:9
-#: templates/account/signup.html:14
+#: templates/account/language_change.html:10
+msgid "Pinax can be used in your preferred language."
+msgstr ""
+
+#: templates/account/language_change.html:15
+#, fuzzy
+msgid "Change my language"
+msgstr "Cambia tu franja horaria"
+
+#: templates/account/login.html:9 templates/account/signup.html:14
 msgid "Log In"
 msgstr "Entrar"
 
-#: templates/account/login.html:12
-#: templates/account/password_reset.html:11
+#: templates/account/login.html:12 templates/account/password_reset.html:11
 #: templates/account/password_reset_done.html:12
 #: templates/notification/notices.html:55
 msgid "Note"
 msgstr "Nota"
 
-#: templates/account/login.html:12
-#: templates/account/password_reset.html:11
+#: templates/account/login.html:12 templates/account/password_reset.html:11
 #: templates/account/password_reset_done.html:12
 #, python-format
 msgid "you are already logged in as %(user)s."
@@ -1083,8 +1802,7 @@ msgstr "¿No tienes una cuenta? <a href=\"%(signup_url)s\">Date de alta</a>!"
 msgid "Forgot password?"
 msgstr "Olvidaste la contraseña?"
 
-#: templates/account/login.html:22
-#: templates/account/login.html.py:31
+#: templates/account/login.html:22 templates/account/login.html.py:31
 msgid "Log in &raquo;"
 msgstr "Entrar &raquo;"
 
@@ -1098,8 +1816,12 @@ msgstr "Identificador OpenID"
 
 #: templates/account/login.html:35
 #, python-format
-msgid "If you have any trouble logging in to your account, contact us at <a href=\"mailto:%(contact_email)s\">%(contact_email)s</a>."
-msgstr "Si tienes algún problema entrando en tu cuenta, contacta con nosotros en <a href=\"mailto:%(contact_email)s\">%(contact_email)s</a>."
+msgid ""
+"If you have any trouble logging in to your account, contact us at <a href="
+"\"mailto:%(contact_email)s\">%(contact_email)s</a>."
+msgstr ""
+"Si tienes algún problema entrando en tu cuenta, contacta con nosotros en <a "
+"href=\"mailto:%(contact_email)s\">%(contact_email)s</a>."
 
 #: templates/account/logout.html:8
 msgid "You've been logged out."
@@ -1117,8 +1839,12 @@ msgid "Password Reset"
 msgstr "Contraseña reseteada"
 
 #: templates/account/password_reset.html:14
-msgid "Forgotten your password? Enter your e-mail address below, and we'll reset your password and e-mail the new one to you."
-msgstr "Has olvidado la contraseña? Introduce tu dirección de email debajo, y resetearemos la contraseña y te la enviaremos por e-mail"
+msgid ""
+"Forgotten your password? Enter your e-mail address below, and we'll reset "
+"your password and e-mail the new one to you."
+msgstr ""
+"Has olvidado la contraseña? Introduce tu dirección de email debajo, y "
+"resetearemos la contraseña y te la enviaremos por e-mail"
 
 #: templates/account/password_reset.html:19
 msgid "Reset my password"
@@ -1126,18 +1852,47 @@ msgstr "Resetea mi contraseña"
 
 #: templates/account/password_reset.html:23
 #, python-format
-msgid "If you have any trouble resetting your password, contact us at <a href=\"mailto:%(contact_email)s\">%(contact_email)s</a>."
-msgstr "Si tienes problemas reseteando tu contraseña, contacta con nosotros en <a href=\"mailto:%(contact_email)s\">%(contact_email)s</a>."
+msgid ""
+"If you have any trouble resetting your password, contact us at <a href="
+"\"mailto:%(contact_email)s\">%(contact_email)s</a>."
+msgstr ""
+"Si tienes problemas reseteando tu contraseña, contacta con nosotros en <a "
+"href=\"mailto:%(contact_email)s\">%(contact_email)s</a>."
 
 #: templates/account/password_reset_done.html:15
 #, python-format
-msgid "A new password has been sent to <b>%(email)s</b>. If you do not receive it within a few minutes, contact us at <a href=\"mailto:%(contact_email)s\">%(contact_email)s</a>."
-msgstr "Una nueva contraseña te ha sido enviada a <b>%(email)s</b>. Si tu no lo recibes en unos minutos, contacta con nosotros en <a href=\"mailto:%(contact_email)s\">%(contact_email)s</a>."
+msgid ""
+"A new password has been sent to <b>%(email)s</b>. If you do not receive it "
+"within a few minutes, contact us at <a href=\"mailto:%(contact_email)s\">%"
+"(contact_email)s</a>."
+msgstr ""
+"Una nueva contraseña te ha sido enviada a <b>%(email)s</b>. Si tu no lo "
+"recibes en unos minutos, contacta con nosotros en <a href=\"mailto:%"
+"(contact_email)s\">%(contact_email)s</a>."
 
 #: templates/account/password_reset_done.html:18
 #, python-format
-msgid "When you receive the new password, you should <a href=\"%(login_url)s\">log in</a> and change it as soon as possible."
-msgstr "Cuando recibas la nueva contraseña, debes <a href=\"%(login_url)s\">entrar</a> y cambiarla lo antes posible."
+msgid ""
+"When you receive the new password, you should <a href=\"%(login_url)s\">log "
+"in</a> and change it as soon as possible."
+msgstr ""
+"Cuando recibas la nueva contraseña, debes <a href=\"%(login_url)s\">entrar</"
+"a> y cambiarla lo antes posible."
+
+#: templates/account/password_reset_message.txt:1
+#, python-format
+msgid ""
+"You're receiving this e-mail because you requested a password reset\n"
+"for your user account at Pinax.\n"
+"\n"
+"Your new password is: %(new_password)s\n"
+"\n"
+"Your username, in case you've forgotten: %(username)s\n"
+"\n"
+"You should log in as soon as possible and change your password.\n"
+"\n"
+"Thanks for using our site!\n"
+msgstr ""
 
 #: templates/account/signup.html:6
 msgid "Signup"
@@ -1155,25 +1910,37 @@ msgstr "Ya estás dentro del sistema"
 msgid "Already have an account?"
 msgstr "¿Ya tienes una cuenta?"
 
-#: templates/account/signup.html:19
-#: templates/openid/signup.html:17
+#: templates/account/signup.html:19 templates/openid/signup.html:17
 msgid "Sign Up &raquo;"
 msgstr "Darse de alta &raquo;"
 
 #: templates/account/signup.html:25
 #, python-format
-msgid "By clicking \"Sign Up\", you are indicating that you have read and agree to the <a href=\"%(terms_url)s\">Terms of Use</a> and <a href=\"%(privacy_url)s\">Privacy Policy</a>."
-msgstr "Clickando en \"Darse de alta\", tu indicas que has leído y aceptas los <a href=\"%(terms_url)s\">Términos de uso</a> y  las <a href=\"%(privacy_url)s\">Políticas de privacidad</a>."
+msgid ""
+"By clicking \"Sign Up\", you are indicating that you have read and agree to "
+"the <a href=\"%(terms_url)s\">Terms of Use</a> and <a href=\"%(privacy_url)s"
+"\">Privacy Policy</a>."
+msgstr ""
+"Clickando en \"Darse de alta\", tu indicas que has leído y aceptas los <a "
+"href=\"%(terms_url)s\">Términos de uso</a> y  las <a href=\"%(privacy_url)s"
+"\">Políticas de privacidad</a>."
 
-#: templates/account/signup.html:27
-#: templates/openid/signup.html:23
+#: templates/account/signup.html:27 templates/openid/signup.html:23
 #, python-format
-msgid "If you have any trouble creating your account, contact us at <a href=\"mailto:%(contact_email)s\">%(contact_email)s</a>."
-msgstr "Si tienes problemas creando tu cuenta, contacta con nosotros en <a href=\"mailto:%(contact_email)s\">%(contact_email)s</a>."
+msgid ""
+"If you have any trouble creating your account, contact us at <a href="
+"\"mailto:%(contact_email)s\">%(contact_email)s</a>."
+msgstr ""
+"Si tienes problemas creando tu cuenta, contacta con nosotros en <a href="
+"\"mailto:%(contact_email)s\">%(contact_email)s</a>."
 
 #: templates/account/timezone_change.html:10
-msgid "Pinax can localize all times into your preferred timezone. Change your timezone below."
-msgstr "Pinax puede personalizar todas las horas/fechas según tu franja horaria. Cambia tu franja horaria aquí abajo."
+msgid ""
+"Pinax can localize all times into your preferred timezone. Change your "
+"timezone below."
+msgstr ""
+"Pinax puede personalizar todas las horas/fechas según tu franja horaria. "
+"Cambia tu franja horaria aquí abajo."
 
 #: templates/account/timezone_change.html:15
 msgid "Change my timezone"
@@ -1193,8 +1960,71 @@ msgstr "Noticias"
 msgid "There are no announcements for you."
 msgstr "No hay noticias para ti."
 
-#: templates/bookmarks/add.html:5
-#: templates/bookmarks/add.html.py:9
+#: templates/blog/base.html:10 templates/blog/blogs.html:15
+#: templates/blog/blogs.html.py:20
+#, fuzzy
+msgid "All Blogs"
+msgstr "Todos los favoritos"
+
+#: templates/blog/base.html:11 templates/blog/your_posts.html:16
+#, fuzzy
+msgid "Your Posts"
+msgstr "Tu perfil"
+
+#: templates/blog/base.html:12 templates/blog/new.html:5
+#: templates/blog/new.html.py:10
+#, fuzzy
+msgid "Write a Blog Post"
+msgstr "Recientes entradas de tu blog"
+
+#: templates/blog/blogs.html:24 templates/tags/index.html:22
+#, fuzzy
+msgid "These are blog posts from everyone:"
+msgstr "Estos son los favoritos de todos:"
+
+#: templates/blog/edit.html:11 templates/blog/edit.html.py:16
+#, fuzzy
+msgid "Editing Post"
+msgstr "Editando historia"
+
+#: templates/blog/edit.html:23 templates/profiles/profile.html:37
+#: templates/projects/project.html:53 templates/tribes/tribe.html:52
+msgid "update"
+msgstr "actualizar"
+
+#: templates/blog/post.html:10
+#, fuzzy
+msgid "Blog Post"
+msgstr "Recientes entradas de tu blog"
+
+#: templates/blog/post.html:26 templates/blog/your_posts.html:48
+#, fuzzy
+msgid "Edit Post"
+msgstr "Editor"
+
+#: templates/blog/post.html:51 templates/projects/task.html:106
+#: templates/projects/topic.html:46 templates/tribes/topic.html:46
+msgid "Delete Post"
+msgstr "Borrar entrada"
+
+#: templates/blog/post.html:58 templates/blog/post.html.py:69
+#: templates/projects/task.html:113 templates/projects/task.html.py:125
+#: templates/projects/topic.html:53 templates/projects/topic.html.py:64
+#: templates/tribes/topic.html:53 templates/tribes/topic.html.py:64
+msgid "Post Response"
+msgstr "Enviar respuesta"
+
+#: templates/blog/your_posts.html:11
+#, fuzzy
+msgid "Your Blog Posts"
+msgstr "Recientes entradas de tu blog"
+
+#: templates/blog/plugins/profiles/profile.html:10
+#, fuzzy
+msgid "Blog Posts"
+msgstr "Recientes entradas de tu blog"
+
+#: templates/bookmarks/add.html:5 templates/bookmarks/add.html.py:9
 #: templates/bookmarks/base.html:9
 msgid "Add Bookmark"
 msgstr "Añade Favorito"
@@ -1203,25 +2033,25 @@ msgstr "Añade Favorito"
 msgid "add bookmark"
 msgstr "añade favorito"
 
-#: templates/bookmarks/base.html:10
-#: templates/bookmarks/bookmarks.html:7
-#: templates/bookmarks/bookmarks.html:14
+#: templates/bookmarks/base.html:10 templates/bookmarks/bookmarks.html:9
+#: templates/bookmarks/bookmarks.html:16
 msgid "All Bookmarks"
 msgstr "Todos los favoritos"
 
-#: templates/bookmarks/bookmarks.html:19
+#: templates/bookmarks/bookmarks.html:21
 msgid "These are bookmarks from everyone:"
 msgstr "Estos son los favoritos de todos:"
 
-#: templates/bookmarks/bookmarks.html:49
+#: templates/bookmarks/bookmarks.html:82
 msgid "No bookmarks yet."
 msgstr "Aún no hay favoritos"
 
-#: templates/bookmarks/plugins/profile.html:22
 #: templates/bookmarks/plugins/profiles/profile.html:22
 #, python-format
-msgid "You haven't added any <a href=\"%(add_bookmark_url)s\">bookmarks</a> yet."
-msgstr "Aún no has añadido ningún <a href=\"%(add_bookmark_url)s\">favorito</a>."
+msgid ""
+"You haven't added any <a href=\"%(add_bookmark_url)s\">bookmarks</a> yet."
+msgstr ""
+"Aún no has añadido ningún <a href=\"%(add_bookmark_url)s\">favorito</a>."
 
 #: templates/emailconfirmation/confirm_email.html:5
 msgid "Confirm Email"
@@ -1233,25 +2063,62 @@ msgstr "Email confirmado"
 
 #: templates/emailconfirmation/confirm_email.html:11
 #, python-format
-msgid "You have confirmed that %(email)s is an email address for user '%(user)s'."
-msgstr "Tu has confirmado que %(email)s es una dirección de email válida para el usuario '%(user)s'."
+msgid ""
+"You have confirmed that %(email)s is an email address for user '%(user)s'."
+msgstr ""
+"Tu has confirmado que %(email)s es una dirección de email válida para el "
+"usuario '%(user)s'."
 
 #: templates/emailconfirmation/confirm_email.html:13
 msgid "Invalid confirmation key."
 msgstr "Clave de confirmación inválida."
+
+#: templates/emailconfirmation/email_confirmation_message.txt:1
+#, python-format
+msgid ""
+"User '%(user)s' at Pinax has given this as an email address.\n"
+"\n"
+"To confirm this is correct, go to %(activate_url)s\n"
+msgstr ""
+
+#: templates/emailconfirmation/email_confirmation_subject.txt:1
+msgid "Confirm email address for Pinax"
+msgstr ""
 
 #: templates/feedutil/feed.html:8
 #, python-format
 msgid "%(post_age)s ago"
 msgstr "hace %(post_age)s "
 
-#: templates/feedutil/plugins/profile.html:6
 #: templates/feedutil/plugins/profiles/profile.html:6
 msgid "Recent Blog Posts"
 msgstr "Recientes entradas de tu blog"
 
-#: templates/friends_app/contacts.html:6
-#: templates/friends_app/contacts.html:9
+#: templates/friends/join_invite_message.txt:1
+#, python-format
+msgid ""
+"You have been invited by %(user)s to join Pinax.\n"
+"\n"
+"Pinax is both a platform for building social websites in Django as well\n"
+"as a demonstration of a site built on that platform.\n"
+"\n"
+"%(user)s said:\n"
+"\n"
+"%(message)s\n"
+"\n"
+"To accept this invitation, go to\n"
+"\n"
+"%(accept_url)s\n"
+"\n"
+"If you have any questions about Pinax, don't hesitate to contact "
+"jtauber@jtauber.com\n"
+msgstr ""
+
+#: templates/friends/join_invite_subject.txt:1
+msgid "You have been invited to join Pinax"
+msgstr ""
+
+#: templates/friends_app/contacts.html:6 templates/friends_app/contacts.html:9
 #: templates/messages/base.html:17
 msgid "Contacts"
 msgstr "Contactos"
@@ -1268,13 +2135,12 @@ msgstr "Importar contactos de Google Contacts"
 msgid "Import Yahoo Address Book"
 msgstr "Importar contactos de Yahoo Address Book"
 
-#: templates/friends_app/contacts.html:78
+#: templates/friends_app/contacts.html:83
 msgid "No contacts."
 msgstr "No hay contactos"
 
 #: templates/friends_app/invitations.html:5
-#: templates/friends_app/invitations.html:8
-#: templates/messages/base.html:16
+#: templates/friends_app/invitations.html:8 templates/messages/base.html:16
 msgid "Invitations"
 msgstr "Invitaciones"
 
@@ -1283,8 +2149,12 @@ msgid "Invite someone new to join"
 msgstr "Invita a alguien nuevo"
 
 #: templates/friends_app/invitations.html:13
-msgid "If you'd like to invite someone to join Pinax, you can enter their email address and a message for them below:"
-msgstr "Si quieres invitar alguien a Pinax, you puedes introducir su dirección de email y un mensaje para ellos debajo:"
+msgid ""
+"If you'd like to invite someone to join Pinax, you can enter their email "
+"address and a message for them below:"
+msgstr ""
+"Si quieres invitar alguien a Pinax, you puedes introducir su dirección de "
+"email y un mensaje para ellos debajo:"
 
 #: templates/friends_app/invitations.html:20
 msgid "Someone with this email address has already joined:"
@@ -1320,7 +2190,7 @@ msgstr "No hay peticiones de amistad enviadas"
 msgid "Join Requests Sent"
 msgstr "Enviada invitación"
 
-#: templates/friends_app/invitations.html:102
+#: templates/friends_app/invitations.html:107
 msgid "No join requests sent."
 msgstr "Ninguna invitación enviada"
 
@@ -1328,20 +2198,22 @@ msgstr "Ninguna invitación enviada"
 msgid "Compose"
 msgstr "Redactar"
 
-#: templates/messages/base.html:15
-#: templates/notification/notices.html:8
+#: templates/messages/base.html:15 templates/notification/notices.html:8
 #: templates/notification/notices.html:12
 msgid "Notices"
 msgstr "Avisos"
 
 #: templates/messages/trash.html:27
-msgid "Deleted Messages are removed from the trash at irregular intervals, don't rely on this feature for long-time storage."
-msgstr "Mensajes borrados son eliminadors de la papelera en intérvalos irregulares, no confie en esta sistema como almacenamiento duradero"
+msgid ""
+"Deleted Messages are removed from the trash at irregular intervals, don't "
+"rely on this feature for long-time storage."
+msgstr ""
+"Mensajes borrados son eliminadors de la papelera en intérvalos irregulares, "
+"no confie en esta sistema como almacenamiento duradero"
 
-#: templates/notification/notices.html:21
-#: templates/profiles/profiles.html:18
-#: templates/tribes/tribes.html:39
-#: templates/wiki/index.html:22
+#: templates/notification/notices.html:21 templates/profiles/profiles.html:18
+#: templates/projects/projects.html:39 templates/projects/tasks.html:59
+#: templates/tribes/tribes.html:39 templates/wiki/index.html:22
 msgid "MONTH_DAY_FORMAT"
 msgstr ""
 
@@ -1364,8 +2236,12 @@ msgstr "Cambialo desde <a href=\"%(email_url)s\">tu Cuenta</a>"
 
 #: templates/notification/notices.html:56
 #, python-format
-msgid "You do not have a verified email address to which notices can be sent. You can add one by going to <a href=\"%(email_url)s\">Account</a>."
-msgstr "Tu no tienes una dirección de email verificada donde enviar los avisos. Tu puedes añadir uno yendo a tu  <a href=\"%(email_url)s\">Cuenta</a>."
+msgid ""
+"You do not have a verified email address to which notices can be sent. You "
+"can add one by going to <a href=\"%(email_url)s\">Account</a>."
+msgstr ""
+"Tu no tienes una dirección de email verificada donde enviar los avisos. Tu "
+"puedes añadir uno yendo a tu  <a href=\"%(email_url)s\">Cuenta</a>."
 
 #: templates/notification/notices.html:63
 msgid "Notification Type"
@@ -1375,13 +2251,47 @@ msgstr "Tipo de notificación"
 msgid "Change"
 msgstr "Cambiar"
 
+#: templates/notification/notification_body.txt:1
+#, python-format
+msgid ""
+"You have received the following notice from Pinax:\n"
+"\n"
+"%(message)s\n"
+"\n"
+"To see other notices or change how you receive notifications,\n"
+"please go to %(notices_url)s\n"
+"\n"
+"If you have any issues, please don't hesitate to contact %(contact_email)s\n"
+msgstr ""
+
+#: templates/notification/notification_subject.txt:1
+#, python-format
+msgid "%(display)s Notification From Pinax"
+msgstr ""
+
+#: templates/notification/tweet_follow/full.txt:1
+#, python-format
+msgid "[full] %(sender)s is now following your tweets"
+msgstr "[full] %(sender)s esta blabla paella"
+
+#: templates/notification/tweet_follow/plain.txt:1
+#, python-format
+msgid "[plain] %(sender)s is now following your tweets"
+msgstr "[plain] %(sender)s esta blabla paella"
+
+#: templates/notification/tweet_follow/short.txt:1
+#, python-format
+msgid "[short] %(sender)s is now following your tweets"
+msgstr "[short] %(sender)s esta blabla paella"
+
 #: templates/openid/associations.html:8
 msgid "Manage OpenID Associations"
 msgstr "Gestión las asociaciones de OpenID"
 
 #: templates/openid/associations.html:12
 #, python-format
-msgid "Your account is currently associated with the following OpenID %(buttons)s:"
+msgid ""
+"Your account is currently associated with the following OpenID %(buttons)s:"
 msgstr "Tu cuenta está asociada con las siguientes OpenID %(buttons)s:"
 
 #: templates/openid/associations.html:15
@@ -1394,14 +2304,14 @@ msgstr "Asociar"
 
 #: templates/openid/associations.html:30
 msgid "To associate a new OpenID with this account, sign in with it here:"
-msgstr "Para asociar un nuevo OpenID con esta cuenta, registrate con ella aquí:"
+msgstr ""
+"Para asociar un nuevo OpenID con esta cuenta, registrate con ella aquí:"
 
 #: templates/openid/associations.html:35
 msgid "Authenticate and associate with this account"
 msgstr "Autenticar y asociar con esta cuenta"
 
-#: templates/openid/signup.html:5
-#: templates/openid/signup.html.py:8
+#: templates/openid/signup.html:5 templates/openid/signup.html.py:8
 msgid "Sign Up with OpenID"
 msgstr "Entrar con OpenId"
 
@@ -1410,24 +2320,32 @@ msgid "Please correct the errors below:"
 msgstr "Por favor, corrige los siguientes errores"
 
 #: templates/openid/signup.html:21
-msgid "Already have an account? <a href=\"/account/login/?next=/openid/associations/\">Login here</a> to associate your OpenID with your existing account."
-msgstr "¿Ya tienes una cuenta? <a href=\"/account/login/?next=/openid/associations/\">Accede aquí</a> para asociar tus  OpenID con tu cuenta existente."
+msgid ""
+"Already have an account? <a href=\"/account/login/?next=/openid/associations/"
+"\">Login here</a> to associate your OpenID with your existing account."
+msgstr ""
+"¿Ya tienes una cuenta? <a href=\"/account/login/?next=/openid/associations/"
+"\">Accede aquí</a> para asociar tus  OpenID con tu cuenta existente."
 
 #: templates/openid/signup.html:22
-msgid "By clicking \"Sign Up\", you are indicating that you have read and agree to the <a href=\"/about/terms\">Terms of Use</a> and <a href=\"/about/privacy\">Privacy Policy</a>."
-msgstr "Clickando en \"Darse de alta\", tu indicas que has leído y aceptas los <a href=\"/about/terms\">Términos de uso</a> y  las <a href=\"/about/privacy\">Políticas de privacidad</a>."
+msgid ""
+"By clicking \"Sign Up\", you are indicating that you have read and agree to "
+"the <a href=\"/about/terms\">Terms of Use</a> and <a href=\"/about/privacy"
+"\">Privacy Policy</a>."
+msgstr ""
+"Clickando en \"Darse de alta\", tu indicas que has leído y aceptas los <a "
+"href=\"/about/terms\">Términos de uso</a> y  las <a href=\"/about/privacy"
+"\">Políticas de privacidad</a>."
 
 #: templates/profiles/base.html:10
 msgid "Your Profile"
 msgstr "Tu perfil"
 
-#: templates/profiles/base.html:11
-#: templates/profiles/profiles.html:8
+#: templates/profiles/base.html:11 templates/profiles/profiles.html:8
 msgid "All Profiles"
 msgstr "Todos los perfiles"
 
-#: templates/profiles/profile.html:8
-#: templates/profiles/profile.html.py:18
+#: templates/profiles/profile.html:8 templates/profiles/profile.html.py:18
 #, python-format
 msgid "Profile for %(other_user)s"
 msgstr "Perfil de %(other_user)s"
@@ -1451,11 +2369,6 @@ msgstr "Seguidos"
 #: templates/profiles/profile.html:32
 msgid "Edit profile"
 msgstr "Editar perfil"
-
-#: templates/profiles/profile.html:37
-#: templates/tribes/tribe.html:52
-msgid "update"
-msgstr "actualizar"
 
 #: templates/profiles/profile.html:44
 msgid "unfollow"
@@ -1492,10 +2405,14 @@ msgstr "Añadir como amigo/a"
 msgid "%(other_user)s to be a friend."
 msgstr "%(other_user)s ser un amigo/a."
 
-#: templates/profiles/profile.html:96
+#: templates/profiles/profile.html:98
 #, python-format
-msgid "<a href=\"%(signup_url)s\">Sign up</a> and <a href=\"%(login_url)s\">log in </a> to add this person as a friend and see their tweets and blog posts."
-msgstr "<a href=\"%(signup_url)s\">Darte de alta</a> o <a href=\"%(login_url)s\"> registrate </a> para añadir esta persona como amigo/a."
+msgid ""
+"<a href=\"%(signup_url)s\">Sign up</a> and <a href=\"%(login_url)s\">log in "
+"</a> to add this person as a friend and see their tweets and blog posts."
+msgstr ""
+"<a href=\"%(signup_url)s\">Darte de alta</a> o <a href=\"%(login_url)s\"> "
+"registrate </a> para añadir esta persona como amigo/a."
 
 #: templates/profiles/profile_right_panel.html:7
 msgid "Your Tribes"
@@ -1511,8 +2428,12 @@ msgid "Your Friends"
 msgstr "Tus amigos"
 
 #: templates/profiles/profile_right_panel.html:32
-msgid "None. You should look at the list of <a href=\"/profiles/\">profiles</a> and see if there's anyone you know."
-msgstr "Ninguno. Tu puedes mirar a la lista de <a href=\"/profiles/\">perfiles</a> y ver si allí hay alguien que conozcas."
+msgid ""
+"None. You should look at the list of <a href=\"/profiles/\">profiles</a> and "
+"see if there's anyone you know."
+msgstr ""
+"Ninguno. Tu puedes mirar a la lista de <a href=\"/profiles/\">perfiles</a> y "
+"ver si allí hay alguien que conozcas."
 
 #: templates/profiles/profile_right_panel.html:39
 #, python-format
@@ -1532,6 +2453,121 @@ msgstr "Amigos de %(other_user)s"
 msgid "Profiles"
 msgstr "Perfiles"
 
+#: templates/projects/base.html:10
+#, fuzzy
+msgid "Your Tasks"
+msgstr "Tus tribus"
+
+#: templates/projects/base.html:11
+#, fuzzy
+msgid "All Projects"
+msgstr "Todos los perfiles"
+
+#: templates/projects/project.html:18 templates/tribes/tribe.html:17
+msgid "Members"
+msgstr "Miembros"
+
+#: templates/projects/project.html:37
+#, fuzzy
+msgid "Project"
+msgstr "id de objeto"
+
+#: templates/projects/project.html:48 templates/tribes/tribe.html:47
+msgid "Edit details"
+msgstr "Editar detalles"
+
+#: templates/projects/project.html:63
+msgid "Add new member"
+msgstr ""
+
+#: templates/projects/projects.html:20 templates/tribes/tribes.html:20
+msgid "Start your own"
+msgstr "Comenzar la tuya propia"
+
+#: templates/projects/projects.html:25 templates/tribes/tribes.html:25
+msgid "create"
+msgstr "crear"
+
+#: templates/projects/projects.html:31
+#, fuzzy, python-format
+msgid ""
+"<a href=\"%(signup_url)s\">Sign up</a> and <a href=\"%(login_url)s\">log in "
+"</a> to create your own project or join an existing one."
+msgstr ""
+"<a href=\"%(signup_url)s\">Date de alta</a> o <a href=\"%(login_url)s"
+"\">entrar</a> para añadir esta persona como amigo/a."
+
+#: templates/projects/task.html:10
+#, fuzzy
+msgid "Back to Task List for Project "
+msgstr "Vuelve a la lista de temas para la tribu"
+
+#: templates/projects/task.html:39
+msgid "Update Status"
+msgstr ""
+
+#: templates/projects/task.html:52
+msgid "Reassign"
+msgstr ""
+
+#: templates/projects/task.html:54
+#, fuzzy
+msgid "Assign"
+msgstr "señal"
+
+#: templates/projects/task.html:65
+msgid "Mark Resolved"
+msgstr ""
+
+#: templates/projects/task.html:73
+msgid "Mark Closed"
+msgstr ""
+
+#: templates/projects/task.html:79 templates/projects/task.html.py:86
+#, fuzzy
+msgid "Reopen"
+msgstr "Receptor"
+
+#: templates/projects/tasks.html:14
+msgid "Tasks for Project"
+msgstr ""
+
+#: templates/projects/tasks.html:107
+msgid "add task"
+msgstr ""
+
+#: templates/projects/topic.html:11
+#, fuzzy
+msgid "Back to Topic List for Project "
+msgstr "Vuelve a la lista de temas para la tribu"
+
+#: templates/projects/topic.html:29 templates/tribes/topic.html:29
+msgid "Delete Topic"
+msgstr "Borrar tema"
+
+#: templates/projects/topics.html:11
+#, fuzzy
+msgid "Discussion Topics for Project"
+msgstr "Temas de discusión de la tribu"
+
+#: templates/projects/topics.html:46 templates/tribes/topics.html:46
+msgid "Create New Topic"
+msgstr "Crear un nuevo tema"
+
+#: templates/projects/user_tasks.html:10
+#, fuzzy, python-format
+msgid "Tasks for %(other_user)s"
+msgstr "Perfil de %(other_user)s"
+
+#: templates/tags/index.html:14
+#, fuzzy
+msgid "Tags"
+msgstr "Papelera"
+
+#: templates/tags/index.html:19
+msgid "All Blog Posts Matching "
+msgstr ""
+
 #: templates/tribes/base.html:10
 msgid "All Tribes"
 msgstr "Todos las tribus"
@@ -1540,38 +2576,13 @@ msgstr "Todos las tribus"
 msgid "Back to Topic List for Tribe "
 msgstr "Vuelve a la lista de temas para la tribu"
 
-#: templates/tribes/topic.html:29
-msgid "Delete Topic"
-msgstr "Borrar tema"
-
-#: templates/tribes/topic.html:46
-msgid "Delete Post"
-msgstr "Borrar entrada"
-
-#: templates/tribes/topic.html:53
-#: templates/tribes/topic.html.py:64
-msgid "Post Response"
-msgstr "Enviar respuesta"
-
 #: templates/tribes/topics.html:11
 msgid "Discussion Topics for Tribe"
 msgstr "Temas de discusión de la tribu"
 
-#: templates/tribes/topics.html:46
-msgid "Create New Topic"
-msgstr "Crear un nuevo tema"
-
-#: templates/tribes/tribe.html:17
-msgid "Members"
-msgstr "Miembros"
-
 #: templates/tribes/tribe.html:36
 msgid "Tribe"
 msgstr "Tribu"
-
-#: templates/tribes/tribe.html:47
-msgid "Edit details"
-msgstr "Editar detalles"
 
 #: templates/tribes/tribe.html:65
 msgid "leave"
@@ -1583,41 +2594,37 @@ msgstr "unirte a la tribu"
 
 #: templates/tribes/tribe.html:76
 #, python-format
-msgid "<a href=\"%(signup_url)s\">Sign up</a> and <a href=\"%(login_url)s\">log in </a> to join this tribe."
-msgstr "<a href=\"%(signup_url)s\">Darte de alta</a> o <a href=\"%(login_url)s\"> registrate </a> para añadir esta persona como amigo/a."
-
-#: templates/tribes/tribes.html:20
-msgid "Start your own"
-msgstr "Comenzar la tuya propia"
-
-#: templates/tribes/tribes.html:25
-msgid "create"
-msgstr "crear"
+msgid ""
+"<a href=\"%(signup_url)s\">Sign up</a> and <a href=\"%(login_url)s\">log in "
+"</a> to join this tribe."
+msgstr ""
+"<a href=\"%(signup_url)s\">Darte de alta</a> o <a href=\"%(login_url)s\"> "
+"registrate </a> para añadir esta persona como amigo/a."
 
 #: templates/tribes/tribes.html:31
 #, python-format
-msgid "<a href=\"%(signup_url)s\">Sign up</a> and <a href=\"%(login_url)s\">log in </a> to create your own tribe or join an existing one."
-msgstr "<a href=\"%(signup_url)s\">Date de alta</a> o <a href=\"%(login_url)s\">entrar</a> para añadir esta persona como amigo/a."
+msgid ""
+"<a href=\"%(signup_url)s\">Sign up</a> and <a href=\"%(login_url)s\">log in "
+"</a> to create your own tribe or join an existing one."
+msgstr ""
+"<a href=\"%(signup_url)s\">Date de alta</a> o <a href=\"%(login_url)s"
+"\">entrar</a> para añadir esta persona como amigo/a."
 
 #: templates/wiki/base.html:9
 msgid "All Articles"
 msgstr "Todos los artículo"
 
-#: templates/wiki/changeset.html:8
-#: templates/wiki/edit.html:8
-#: templates/wiki/history.html:9
-#: templates/wiki/index.html:12
-#: templates/wiki/view.html:25
+#: templates/wiki/changeset.html:8 templates/wiki/edit.html:8
+#: templates/wiki/history.html:9 templates/wiki/index.html:12
+#: templates/wiki/view.html:22
 msgid "Wiki for Tribe"
 msgstr "Wiki para la tribu"
 
-#: templates/wiki/changeset.html:17
-#: wiki/templates/wiki/changeset.html:10
+#: templates/wiki/changeset.html:17 wiki/templates/wiki/changeset.html:14
 msgid "Markup:"
 msgstr "Markup:"
 
-#: templates/wiki/changeset.html:21
-#: wiki/templates/wiki/changeset.html:12
+#: templates/wiki/changeset.html:21 wiki/templates/wiki/changeset.html:16
 msgid "Plain Text."
 msgstr "Texto plano"
 
@@ -1633,28 +2640,30 @@ msgstr "Guardar artículo"
 msgid "History for article"
 msgstr "Historia del artículo"
 
-#: templates/wiki/history.html:17
-#: wiki/models.py:110
+#: templates/wiki/history.html:18 wiki/models.py:140
 msgid "Editor"
 msgstr "Editor"
 
-#: templates/wiki/history.html:18
-#: wiki/templates/wiki/history.html:16
+#: templates/wiki/history.html:19 wiki/templates/wiki/history.html:21
 msgid "Comment"
 msgstr "Comentario"
 
-#: templates/wiki/history.html:19
-#: wiki/templates/wiki/history.html:17
+#: templates/wiki/history.html:20
+#, fuzzy
+msgid "Revert to..."
+msgstr "Deshacer"
+
+#: templates/wiki/history.html:40
+#, fuzzy
+msgid "Current Revision"
+msgstr "Revisión deshecha"
+
+#: templates/wiki/history.html:49 wiki/templates/wiki/history.html:22
+#: wiki/templates/wiki/history.html:51
 msgid "Revert"
 msgstr "Deshacer"
 
-#: templates/wiki/history.html:42
-#: wiki/templates/wiki/history.html:36
-msgid "Revert Last Change"
-msgstr "Deshacer último cambio"
-
 #: templates/wiki/history.html:52
-#: wiki/templates/wiki/history.html:55
 msgid "No changes in this article"
 msgstr "No hay cambios en este artículo"
 
@@ -1662,41 +2671,34 @@ msgstr "No hay cambios en este artículo"
 msgid "Go"
 msgstr "Ir"
 
-#: templates/wiki/view.html:15
+#: templates/wiki/view.html:12
 msgid "Actions"
 msgstr "Acciones"
 
-#: templates/wiki/view.html:17
-#: wiki/templates/wiki/view.html:31
+#: templates/wiki/view.html:14 wiki/templates/wiki/view.html:23
 msgid "Edit this article"
 msgstr "Editar este artículo"
 
-#: templates/wiki/view.html:18
-#: wiki/templates/wiki/view.html:33
+#: templates/wiki/view.html:15 wiki/templates/wiki/view.html:25
 msgid "Editing history"
 msgstr "Editando historia"
 
-#: templates/wiki/view.html:20
-#: wiki/templates/wiki/view.html:35
+#: templates/wiki/view.html:17 wiki/templates/wiki/view.html:27
 msgid "Create this article"
 msgstr "Crear este artículo"
 
-#: templates/wiki/view.html:31
-#: wiki/templates/wiki/view.html:16
+#: templates/wiki/view.html:28 wiki/templates/wiki/view.html:13
 msgid "This article does not exist."
 msgstr "El artículo no existe"
 
-#: templates/wiki/view.html:32
-#: wiki/templates/wiki/view.html:17
+#: templates/wiki/view.html:29 wiki/templates/wiki/view.html:14
 msgid ">Create it now</a>?"
 msgstr ">Crearlo ahora</a>?"
 
-#: templates/wiki/plugins/profile.html:3
 #: templates/wiki/plugins/profiles/profile.html:3
 msgid "Wiki Articles"
 msgstr "Artículo de la Wiki"
 
-#: templates/wiki/plugins/profile.html:20
 #: templates/wiki/plugins/profiles/profile.html:20
 msgid "No wiki articles yet."
 msgstr "No hay artículo wiki todavía"
@@ -1705,8 +2707,7 @@ msgstr "No hay artículo wiki todavía"
 msgid "Tweets You Follow"
 msgstr "Tweets que tu sigues"
 
-#: templates/zwitschern/base.html:10
-#: templates/zwitschern/public.html:14
+#: templates/zwitschern/base.html:10 templates/zwitschern/public.html:14
 msgid "All Tweets"
 msgstr "All Tweets"
 
@@ -1722,7 +2723,8 @@ msgstr "responder"
 #: templates/zwitschern/listing.html:21
 #, python-format
 msgid "You haven't posted any <a href=\"%(tweets_url)s\">tweets</a> yet."
-msgstr "No has enviado ningun <i>tweet</i> <a href=\"%(tweets_url)s\">tweets</a> aún"
+msgstr ""
+"No has enviado ningun <i>tweet</i> <a href=\"%(tweets_url)s\">tweets</a> aún"
 
 #: templates/zwitschern/listing.html:23
 msgid "There are currently no tweets to be listed."
@@ -1736,10 +2738,6 @@ msgstr "¿Que estás haciendo?"
 msgid "chars left."
 msgstr "cars. restantes"
 
-#: templates/zwitschern/personal.html:18
-msgid "post"
-msgstr "Enviar"
-
 #: templates/zwitschern/personal.html:23
 msgid "person,people"
 msgstr "persona,personas"
@@ -1748,10 +2746,12 @@ msgstr "persona,personas"
 #, python-format
 msgid ""
 "\n"
-"        These are tweets from the %(follow_count)s %(follow_name)s you are following (plus your own)"
+"        These are tweets from the %(follow_count)s %(follow_name)s you are "
+"following (plus your own)"
 msgstr ""
 "\n"
-"      Estos son tweets de las  %(follow_count)s %(follow_name)s que sigues (más los propios)"
+"      Estos son tweets de las  %(follow_count)s %(follow_name)s que sigues "
+"(más los propios)"
 
 #: templates/zwitschern/public.html:6
 msgid "Public Tweets"
@@ -1761,15 +2761,12 @@ msgstr "Tweets públicos"
 msgid "These are tweets from everyone:"
 msgstr "Hay tweets para todos:"
 
-#: templates/zwitschern/single.html:6
-#: templates/zwitschern/single.html.py:9
+#: templates/zwitschern/single.html:6 templates/zwitschern/single.html.py:9
 msgid "Single Tweet"
 msgstr "Tweet único"
 
-#: threadedcomments/forms.py:17
-#: threadedcomments/forms.py:36
-#: threadedcomments/models.py:162
-#: threadedcomments/models.py:278
+#: threadedcomments/forms.py:17 threadedcomments/forms.py:36
+#: threadedcomments/models.py:162 threadedcomments/models.py:278
 msgid "comment"
 msgstr "comentario"
 
@@ -1789,38 +2786,31 @@ msgstr "texto reStructured"
 msgid "plaintext"
 msgstr "fichero plano"
 
-#: threadedcomments/models.py:147
-#: threadedcomments/models.py:261
+#: threadedcomments/models.py:147 threadedcomments/models.py:261
 msgid "object ID"
 msgstr "id de objeto"
 
-#: threadedcomments/models.py:157
-#: threadedcomments/models.py:273
+#: threadedcomments/models.py:157 threadedcomments/models.py:273
 msgid "date/time submitted"
 msgstr "dia/hora enviado"
 
-#: threadedcomments/models.py:158
-#: threadedcomments/models.py:274
+#: threadedcomments/models.py:158 threadedcomments/models.py:274
 msgid "date/time modified"
 msgstr "dia/hora modificado"
 
-#: threadedcomments/models.py:159
-#: threadedcomments/models.py:275
+#: threadedcomments/models.py:159 threadedcomments/models.py:275
 msgid "date/time approved"
 msgstr "dia/hora aprovado"
 
-#: threadedcomments/models.py:166
-#: threadedcomments/models.py:282
+#: threadedcomments/models.py:166 threadedcomments/models.py:282
 msgid "is public"
 msgstr "es publico"
 
-#: threadedcomments/models.py:167
-#: threadedcomments/models.py:283
+#: threadedcomments/models.py:167 threadedcomments/models.py:283
 msgid "is approved"
 msgstr "esta aprovado"
 
-#: threadedcomments/models.py:170
-#: threadedcomments/models.py:286
+#: threadedcomments/models.py:170 threadedcomments/models.py:286
 msgid "IP address"
 msgstr "Dirección IP"
 
@@ -1848,20 +2838,11 @@ msgstr "Comentario público con hilos"
 msgid "Free Threaded Comments"
 msgstr "Comentarios públicos con hilos"
 
-#: tribes/forms.py:9
-msgid "a short version of the name consisting only of letters, numbers and underscores."
-msgstr "una versión corta del nombre compuesta solamente de letras, números y subrayados (_)"
-
-#: tribes/forms.py:10
-msgid "This value must contain only letters, numbers and underscores."
-msgstr "Este valor solo puede contener letras, números y subrayados (_)"
-
 #: tribes/forms.py:14
 msgid "A tribe already exists with that slug."
 msgstr "Ya existe una tribu con ese slug"
 
-#: tribes/forms.py:19
-#: tribes/forms.py:36
+#: tribes/forms.py:19 tribes/forms.py:36
 msgid "A tribe already exists with that name."
 msgstr "Ya existe una tribu con ese nombre"
 
@@ -1921,150 +2902,123 @@ msgstr "Respuesta a tu tema"
 msgid "someone has responded on a topic you started"
 msgstr "Alguien ha respondido a un tema que tu iniciaste"
 
-#: tribes/models.py:22
-msgid "slug"
-msgstr "slug"
-
-#: tribes/models.py:25
-#: tribes/models.py:49
-msgid "created"
-msgstr "creado"
-
-#: tribes/models.py:27
-msgid "members"
-msgstr "miembros"
-
 #: tribes/models.py:45
 msgid "tribe"
 msgstr "tribu"
-
-#: tribes/models.py:50
-msgid "modified"
-msgstr "modificada"
-
-#: tribes/models.py:51
-msgid "body"
-msgstr "Cuerpo"
 
 #: wiki/forms.py:29
 msgid "Must be a WikiWord."
 msgstr "Debe ser una PalabraWiki (WikiWord)"
 
-#: wiki/models.py:29
-msgid "reStructuredText"
-msgstr "texto reStructured"
-
-#: wiki/models.py:30
-msgid "Textile"
-msgstr "fichero de texto"
-
-#: wiki/models.py:31
-msgid "Markdown"
-msgstr "lenguaje de marcas"
-
-#: wiki/models.py:37
+#: wiki/models.py:42
 msgid "Article Title"
 msgstr "Título del artículo"
 
-#: wiki/models.py:38
+#: wiki/models.py:43
 msgid "Article Content"
 msgstr "contenido del artículo"
 
-#: wiki/models.py:39
-#: wiki/models.py:119
+#: wiki/models.py:44 wiki/models.py:149
 msgid "Article Content Markup"
 msgstr "Lenguaje de marcas del contenido del artículo"
 
-#: wiki/models.py:42
+#: wiki/models.py:47
 msgid "Article Creator"
 msgstr "creador del artículo"
 
-#: wiki/models.py:44
+#: wiki/models.py:49
 msgid "IP Address of the Article Creator"
 msgstr "Dirección IP del Creador del Artículo"
 
-#: wiki/models.py:54
-#: wiki/models.py:106
+#: wiki/models.py:59 wiki/models.py:136
 msgid "Article"
 msgstr "Artículo"
 
-#: wiki/models.py:55
+#: wiki/models.py:60
 msgid "Articles"
 msgstr "Artículos"
 
-#: wiki/models.py:112
+#: wiki/models.py:142
 msgid "IP Address of the Editor"
 msgstr "Dirección IP del Editor"
 
-#: wiki/models.py:115
+#: wiki/models.py:145
 msgid "Revision Number"
 msgstr "Número de Revisión"
 
-#: wiki/models.py:118
+#: wiki/models.py:148
 msgid "Old Title"
 msgstr "Título antiguo"
 
-#: wiki/models.py:122
+#: wiki/models.py:152
 msgid "Content Patch"
 msgstr "Contenido del patch"
 
-#: wiki/models.py:124
+#: wiki/models.py:154
 msgid "Editor comment"
 msgstr "Comentarios del editor"
 
-#: wiki/models.py:125
+#: wiki/models.py:155
 msgid "Modified at"
 msgstr "Modificado el "
 
-#: wiki/models.py:127
+#: wiki/models.py:157
 msgid "Reverted Revision"
 msgstr "Revisión deshecha"
 
-#: wiki/models.py:130
+#: wiki/models.py:163
 msgid "Change set"
 msgstr "Número de cambio"
 
-#: wiki/models.py:131
+#: wiki/models.py:164
 msgid "Change sets"
 msgstr "Número de cambios"
 
-#: wiki/templates/wiki/base.html:18
+#: wiki/templates/feeds/history_description.html:3
+msgid "edited by user"
+msgstr ""
+
+#: wiki/templates/feeds/history_description.html:3
+#, fuzzy
+msgid "at"
+msgstr "Fecha"
+
+#: wiki/templates/wiki/base.html:20
 msgid "List all articles"
 msgstr "Lista de todos los artículos"
 
-#: wiki/templates/wiki/base.html:20
-msgid "Powered by"
-msgstr "Powered by"
-
 #: wiki/templates/wiki/edit.html:5
+#, fuzzy
+msgid "Editing article"
+msgstr "Editar Artículo"
+
+#: wiki/templates/wiki/edit.html:9
 msgid "Edit"
 msgstr "Editar"
 
-#: wiki/templates/wiki/edit.html:12
+#: wiki/templates/wiki/edit.html:16
 msgid "Save"
 msgstr "Guardar"
 
-#: wiki/templates/wiki/history.html:9
+#: wiki/templates/wiki/history.html:6
+#, fuzzy
+msgid "History for"
+msgstr "Historia del artículo"
+
+#: wiki/templates/wiki/history.html:14
 msgid "Article History"
 msgstr "Historia del Artículo"
 
-#: wiki/templates/wiki/history.html:14
+#: wiki/templates/wiki/history.html:19
 msgid "At"
 msgstr "En"
 
-#: wiki/templates/wiki/history.html:15
-msgid "User"
-msgstr "Usuario"
+#: wiki/templates/wiki/history.html:41
+#, fuzzy
+msgid "Current revision"
+msgstr "Contraseña actual"
 
-#: wiki/templates/wiki/history.html:44
-msgid "Previous"
-msgstr "Previo"
-
-#: wiki/templates/wiki/history.html:52
-msgid "Next"
-msgstr "Siguiente"
-
-#: wiki/templates/wiki/index.html:14
+#: wiki/templates/wiki/index.html:19
 msgid "Create a new article"
 msgstr "Crear un nuevo artículo"
 
@@ -2076,18 +3030,15 @@ msgstr "Cambios recientes"
 msgid "Article by title"
 msgstr "Artículo por título"
 
-#: zwitschern/models.py:43
-#: zwitschern/models.py:71
+#: zwitschern/models.py:43 zwitschern/models.py:71
 msgid "text"
 msgstr "texto"
 
-#: zwitschern/models.py:44
-#: zwitschern/models.py:72
+#: zwitschern/models.py:44 zwitschern/models.py:72
 msgid "sender"
 msgstr "remitente"
 
-#: zwitschern/models.py:45
-#: zwitschern/models.py:73
+#: zwitschern/models.py:45 zwitschern/models.py:73
 msgid "sent"
 msgstr "enviado"
 
@@ -2099,30 +3050,53 @@ msgstr "seguidor"
 msgid "followed"
 msgstr "seguido"
 
+#~ msgid "Revert Last Change"
+#~ msgstr "Deshacer último cambio"
+
+#~ msgid "Powered by"
+#~ msgstr "Powered by"
+
+#~ msgid "Previous"
+#~ msgstr "Previo"
+
+#~ msgid "Next"
+#~ msgstr "Siguiente"
+
 #~ msgid "Not logged in."
 #~ msgstr "No autorizado"
+
 #~ msgid "recipient"
 #~ msgstr "receptor"
+
 #~ msgid "Put whatever you want on these tabs :-)"
 #~ msgstr "Pon lo que quieras en estos tabs :-)"
+
 #~ msgid "External Projects Used"
 #~ msgstr "Proyectos externos utilizados"
+
 #~ msgid "with lots more to come..."
 #~ msgstr "Con muchos más por venir"
+
 #~ msgid "Back to"
 #~ msgstr "Volver a "
+
 #~ msgid "configure settings"
 #~ msgstr "Configurar avisos"
+
 #~ msgid "English"
 #~ msgstr "Ingles"
+
 #~ msgid "German"
 #~ msgstr "Alemán"
+
 #~ msgid "Spanish"
 #~ msgstr "Español"
+
 #~ msgid "clear messages"
 #~ msgstr "Limpiar mensajes"
+
 #~ msgid "follow"
 #~ msgstr "seguir"
+
 #~ msgid "Manage Your OpenID Associations Here"
 #~ msgstr "Gestiona tus asociaciones OpenID aquí"
-
