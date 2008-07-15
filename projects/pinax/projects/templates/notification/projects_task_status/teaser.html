@@ -1,0 +1,3 @@
+{% load i18n captureas_tag %}
+{% captureas user_url %}{% url profile_detail username=user.username %}{% endcaptureas %}
+{% blocktrans %}<a href="{{ user_url }}">{{ user }}</a> has updated the status of task '<a href="{{ task.get_absolute_url }}">{{ task }}</a>' in project <a href="{{ project.get_absolute_url }}">{{ project }}</a>.{% endblocktrans %}

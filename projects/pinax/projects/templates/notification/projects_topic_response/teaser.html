@@ -1,0 +1,3 @@
+{% load i18n captureas_tag %}
+{% captureas user_url %}{% url profile_detail username=user.username %}{% endcaptureas %}
+{% blocktrans %}<a href="{{ user_url }}">{{ user }}</a> has responded to your topic '<a href="{{ topic.get_absolute_url }}">{{ topic }}</a>'.{% endblocktrans %}

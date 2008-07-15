@@ -1,0 +1,3 @@
+{% load i18n captureas_tag %}
+{% captureas adder_url %}{% url profile_detail username=adder.username %}{% endcaptureas %}
+{% blocktrans %}You have been added to project '<a href="{{ project.get_absolute_url }}">{{ project }}</a>' by <a href="{{ adder_url }}">{{ adder }}</a>.{% endblocktrans %}
