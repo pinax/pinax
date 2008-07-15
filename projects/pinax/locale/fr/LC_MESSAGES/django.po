@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-04 22:59+0200\n"
-"PO-Revision-Date: 2008-06-04 23:03+0100\n"
-"Last-Translator: Roland Frédéric <frederic.roland@creativeconvergence.be>\n"
+"POT-Creation-Date: 2008-06-05 00:20+0200\n"
+"PO-Revision-Date: 2008-07-15 10:34+0100\n"
+"Last-Translator: Jannis Leidel <jannis@leidel.info>\n"
 "Language-Team: Frédéric Roland <frederic.roland@creativeconvergence.be>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -488,7 +488,7 @@ msgstr "Action"
 #: templates/messages/view.html:13
 #: templates/wiki/history.html:22
 msgid "DATETIME_FORMAT"
-msgstr "j F Y, G:i"
+msgstr ""
 
 #: messages/templates/messages/inbox.html:20
 #: messages/templates/messages/outbox.html:17
@@ -823,7 +823,7 @@ msgstr "Profil"
 
 #: templates/site_base.html:39
 #: templates/tribes/tribes.html:8
-#: templates/tribes/tribes.html.py:13
+#: templates/tribes/tribes.html.py:12
 msgid "Tribes"
 msgstr "Tribus"
 
@@ -957,6 +957,8 @@ msgstr "ajouter"
 #: templates/account/password_reset.html:10
 #: templates/account/password_reset_done.html:10
 #: templates/notification/notices.html:45
+#: templates/tribes/tribe.html:30
+#: templates/tribes/tribes.html:11
 msgid "Note"
 msgstr "Note"
 
@@ -1179,10 +1181,10 @@ msgstr "Avis"
 
 #: templates/notification/notices.html:19
 #: templates/profiles/profiles.html:18
-#: templates/tribes/tribes.html:30
+#: templates/tribes/tribes.html:29
 #: templates/wiki/index.html:20
 msgid "MONTH_DAY_FORMAT"
-msgstr "j F"
+msgstr ""
 
 #: templates/notification/notices.html:34
 msgid "No notices."
@@ -1317,7 +1319,7 @@ msgid "Edit profile"
 msgstr "Modifier le profil"
 
 #: templates/profiles/profile.html:96
-#: templates/tribes/tribe.html:50
+#: templates/tribes/tribe.html:49
 msgid "update"
 msgstr "mettre à jour"
 
@@ -1401,27 +1403,78 @@ msgstr "Créer Nouveau Sujet"
 msgid "Members"
 msgstr "Membres"
 
-#: templates/tribes/tribe.html:32
+#: templates/tribes/tribe.html:30
+#: templates/tribes/tribes.html:11
+msgid "this is an <b>experimental</b> feature that is subject to massive change at any time."
+msgstr "ceci est  une fonctionnalité <b>expérimentale</b> qui peut-être sujette à des changements massifs à n'importe quel moment."
+
+#: templates/tribes/tribe.html:31
 msgid "Tribe"
 msgstr "Tribu"
 
-#: templates/tribes/tribe.html:45
+#: templates/tribes/tribe.html:34
+msgid "Slug"
+msgstr "Libellé court"
+
+#: templates/tribes/tribe.html:35
+msgid "Creator"
+msgstr "Créateur"
+
+#: templates/tribes/tribe.html:36
+msgid "Created"
+msgstr "Créé"
+
+#: templates/tribes/tribe.html:44
 msgid "Edit details"
 msgstr "Modifier les détails"
 
-#: templates/tribes/tribe.html:61
+#: templates/tribes/tribe.html:58
+msgid "You are the creator of this tribe so can't leave (yet)."
+msgstr "Vous êtes le créateur de cette tribu donc vous ne pouvez la quitter (pour le moment)."
+
+#: templates/tribes/tribe.html:60
 msgid "leave"
 msgstr "quitter"
 
-#: templates/tribes/tribe.html:64
+#: templates/tribes/tribe.html:63
 msgid "join tribe"
 msgstr "rejoindre la tribu"
 
-#: templates/tribes/tribes.html:17
+#: templates/tribes/tribe.html:68
+msgid "Discussion Topics"
+msgstr "Sujets de Discussion"
+
+#: templates/tribes/tribe.html:86
+#: templates/tribes/tribe.html.py:110
+msgid "more..."
+msgstr "suite..."
+
+#: templates/tribes/tribe.html:88
+msgid "None yet."
+msgstr "Aucun pour l'instant."
+
+#: templates/tribes/tribe.html:88
+msgid "Start one..."
+msgstr "En démarrer un..."
+
+#: templates/tribes/tribe.html:91
+msgid "Wiki Articles"
+msgstr "Articles Wiki"
+
+#: templates/tribes/tribe.html:113
+#, python-format
+msgid "None yet. Start a <a href=\"%(wiki_edit_article_url)s\" title=\"NewArticle\">NewArticle</a>..."
+msgstr "Aucun pour l'instant. Démarrez un <a href=\"%(wiki_edit_article_url)s\" title=\"Nouvel Article\">Nouvel Article</a>..."
+
+#: templates/tribes/tribes.html:14
+msgid "A <b>tribe</b> is a group of people with some common interest."
+msgstr "Une <b>tribu</b> est un groupe de personne avec certains intérets communs."
+
+#: templates/tribes/tribes.html:16
 msgid "Start your own"
 msgstr "Démarrez la votre"
 
-#: templates/tribes/tribes.html:22
+#: templates/tribes/tribes.html:21
 msgid "create"
 msgstr "créer"
 
