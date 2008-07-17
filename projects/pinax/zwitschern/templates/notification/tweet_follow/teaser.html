@@ -1,0 +1,2 @@
+{% load i18n captureas_tag %}{% captureas profile_url %}{% url profile_detail username=user.username %}{% endcaptureas %}
+{% blocktrans %}<a href="{{ profile_url }}">{{ user }}</a> is now following your tweets.{% endblocktrans %}
