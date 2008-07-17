@@ -3,17 +3,18 @@
 
 <h2>{% trans "Bookmarks" %}</h2>
 
-{% if owner.added_bookmarks.all %}
+{% if owner.saved_bookmarks.all %}
     <table class="bookmarks narrow">
-        {% for bookmark in  owner.added_bookmarks.all %}
+        {% for bookmark_instance in owner.saved_bookmarks.all %}
             <tr class="{% cycle odd,even %}">
                 <td class="meta">
-                    {{ bookmark.added|date }}
+                    {{ bookmark_instance.saved|date }}
+                    {# add who originally added it and when #}
                 </td>
                 <td>
-                    <h2><a href="{{ bookmark.url }}">{{ bookmark.description }}</a></h2>
-                    <div class="url">{% if bookmark.get_favicon_url %}<img src="{{ bookmark.get_favicon_url }}" /> {% endif %}{{ bookmark.url }}</div>
-                    <div class="body">{{ bookmark.note|linebreaks }}</div>
+                    <h2><a href="{{ bookmark_instance.bookmark.url }}">{{ bookmark_instance.description }}</a></h2>
+                    <div class="url">{% if bookmark_instance.bookmark.get_favicon_url %}<img src="{{ bookmark_instance.bookmark.get_favicon_url }}" /> {% endif %}{{ bookmark_instance.bookmark.url }}</div>
+                    <div class="body">{{ bookmark_instance.note|linebreaks }}</div>
                 </td>
             </tr>
         {% endfor %}
