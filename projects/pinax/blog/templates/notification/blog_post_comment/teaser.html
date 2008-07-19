@@ -1,2 +1,2 @@
-{% load i18n captureas %}{% captureas user_url %}{% url profile_detail username=user.username %}{% endcaptureas %}
+{% load i18n captureas_tag %}{% captureas user_url %}{% url profile_detail username=user.username %}{% endcaptureas %}
 {% blocktrans with post.get_absolute_url as post_url %}<a href="{{ user_url }}">{{ user }}</a> has commented on your blog post '<a href="{{ post_url }}">{{ post }}</a>'.{% endblocktrans %}
