@@ -120,7 +120,7 @@ INSTALLED_APPS = (
     'gravatar', # This needs to go before threadedcomments.
     'threadedcomments',
     'wiki',
-    'django_evolution',
+    # 'django_evolution',
     'timezones',
     'feedutil',
     'app_plugins',
