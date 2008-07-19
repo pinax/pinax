@@ -21,6 +21,8 @@ blogs_feed_dict = {"feed_dict": {
 from bookmarks.feeds import BookmarkFeed
 bookmarks_feed_dict = {"feed_dict": { '': BookmarkFeed }}
 
+admin.autodiscover()
+
 urlpatterns = patterns('',
     url(r'^$', direct_to_template, {"template": "homepage.html"}, name="home"),
     url(r'^apps/$', direct_to_template, {"template": "apps.html"}, name="apps"),
