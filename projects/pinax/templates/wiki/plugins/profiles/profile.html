@@ -11,7 +11,7 @@
                 {{ article.created_at|date }}
             </td>
             <td>
-                <h2><a href="{% wikiurl article group article %}">{{ article.title }}</a></h2>
+                <h2><a href="{% wikiurl article article.group article %}">{{ article.title }}</a></h2>
                 <div class="body">{{ article.content|truncatewords:25 }}</div>
             </td>
         </tr>

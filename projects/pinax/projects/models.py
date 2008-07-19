@@ -13,6 +13,8 @@ try:
 except ImportError:
     notification = None
 
+from wiki.views import get_articles_for_object
+
 # @@@ this is based on Tribes -- can we re-use anything?
 
 class Project(models.Model):
@@ -29,6 +31,10 @@ class Project(models.Model):
     
     # private means only members can see the project
     private = models.BooleanField(_('private'), default=False)
+    
+    # @@@ this might be better as a filter provided by wikiapp
+    def wiki_articles(self):
+        return get_articles_for_object(self)
     
     def __unicode__(self):
         return self.name
