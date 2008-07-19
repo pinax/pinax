@@ -1,4 +1,4 @@
-from django import newforms as forms
+from django import forms
 from django.core.validators import alnum_re
 
 from django.template.loader import render_to_string

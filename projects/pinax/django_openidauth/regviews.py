@@ -1,4 +1,4 @@
-from django import newforms as forms
+from django import forms
 from django.contrib.auth import login as log_user_in, load_backend
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
@@ -72,7 +72,7 @@ def register(request, success_url='/accounts/register/complete/',
                               context_instance=RequestContext(request))
 
 def demo_delete_me_asap(request):
-    import django.newforms as forms
+    import django.forms
     
     class UserProfileForm(forms.Form):
         name = forms.CharField(max_length=100)
@@ -81,7 +81,7 @@ def demo_delete_me_asap(request):
         dob = forms.DateField(required=False)
         receive_newsletter = forms.BooleanField(required=False)
         def clean_email(self):
-            from django.newforms.util import ValidationError
+            from django.forms.util import ValidationError
             if self.cleaned_data['email'].split('@')[1] == 'hotmail.com':
                 raise ValidationError, "No hotmail.com emails, please."
 
