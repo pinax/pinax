@@ -68,7 +68,7 @@ MIDDLEWARE_CLASSES = (
     'djangologging.middleware.LoggingMiddleware',
     'pagination.middleware.PaginationMiddleware',
     'things.middleware.SortOrderMiddleware',
-    'djangodblog.DBLogMiddleware',
+    'crashlog.CrashLogMiddleware',
 )
 
 ROOT_URLCONF = 'pinax.urls'
@@ -115,7 +115,7 @@ INSTALLED_APPS = (
     'django_openidconsumer',
     'django_openidauth',
     'oembed',
-    'djangodblog',
+    'crashlog',
     'pagination',
     'gravatar', # This needs to go before threadedcomments.
     'threadedcomments',
