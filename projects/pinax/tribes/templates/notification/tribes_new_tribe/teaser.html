@@ -1,2 +1,2 @@
 {% load i18n captureas_tag %}
-{% blocktrans %}A new tribe <a href="{{ tribe.get_absolute_url }}">{{ tribe }}</a> has been created.{% endblocktrans %}
+{% blocktrans with tribe.get_absolute_url as tribe_url %}A new tribe <a href="{{ tribe_url }}">{{ tribe }}</a> has been created.{% endblocktrans %}

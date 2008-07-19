@@ -1,3 +1,2 @@
-{% load i18n captureas_tag %}
-{% captureas creator_url %}{% url profile_detail username=creator.username %}{% endcaptureas %}
-{% blocktrans %}<a href="{{ creator_url }}">{{ creator }}</a> has started a topic '<a href="{{ topic.get_absolute_url }}">{{ topic }}</a>' in project <a href="{{ project.get_absolute_url }}">{{ project }}</a>.{% endblocktrans %}
+{% load i18n captureas_tag %}{% captureas creator_url %}{% url profile_detail username=creator.username %}{% endcaptureas %}
+{% blocktrans with topic.get_absolute_url as topic_url and project.get_absolute_url as project_url %}<a href="{{ creator_url }}">{{ creator }}</a> has started a topic '<a href="{{ topic_url }}">{{ topic }}</a>' in project <a href="{{ project_url }}">{{ project }}</a>.{% endblocktrans %}

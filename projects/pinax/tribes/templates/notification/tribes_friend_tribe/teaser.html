@@ -1,3 +1,2 @@
-{% load i18n captureas_tag %}
-{% captureas user_url %}{% url profile_detail username=tribe.creator.username %}{% endcaptureas %}
-{% blocktrans %}<a href="{{ user_url }}">{{ tribe.creator }}</a> has created a new tribe <a href="{{ tribe.get_absolute_url }}">{{ tribe }}</a>.{% endblocktrans %}
+{% load i18n captureas_tag %}{% captureas user_url %}{% url profile_detail username=tribe.creator.username %}{% endcaptureas %}
+{% blocktrans with tribe.creator as tribe_creator and tribe.get_absolute_url as tribe_url %}<a href="{{ user_url }}">{{ tribe_creator }}</a> has created a new tribe <a href="{{ tribe_url }}">{{ tribe }}</a>.{% endblocktrans %}
