@@ -1,1 +1,1 @@
-{% load i18n %}{% blocktrans %}{{ post.author }} has posted to their blog.{% endblocktrans %}
+{% load i18n %}{% blocktrans with post.author as post_author %}{{ post_author }} has posted to their blog.{% endblocktrans %}
