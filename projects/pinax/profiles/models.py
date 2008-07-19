@@ -20,9 +20,6 @@ class Profile(models.Model):
     def __unicode__(self):
         return self.user.username
 
-    class Admin:
-        pass
-
     class Meta:
         verbose_name = _('profile')
         verbose_name_plural = _('profiles')

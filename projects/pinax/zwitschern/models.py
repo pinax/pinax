@@ -49,9 +49,6 @@ class Tweet(models.Model):
     
     class Meta:
         ordering = ('-sent', )
-    
-    class Admin:
-        list_display = ('id', 'sender', 'text',)
 
 
 class TweetInstanceManager(models.Manager):
@@ -90,9 +87,7 @@ class TweetInstance(models.Model):
     
     def html(self):
         return format_tweet(self.text)
-    
-    class Admin:
-        list_display = ('id', 'sender', 'text', 'recipient_type', 'recipient_id')
+
 
 def tweet(user, text):
     now = datetime.now()
@@ -153,8 +148,3 @@ class Following(models.Model):
     followed = models.ForeignKey(User, related_name="followers", verbose_name=_('followed'))
     
     objects = FollowingManager()
-    
-    class Admin:
-        list_display = ('id', 'follower', 'followed',)
-
-

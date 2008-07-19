@@ -4,8 +4,9 @@ class Nonce(models.Model):
     server_url = models.URLField()
     timestamp  = models.IntegerField()
     salt       = models.CharField( max_length=50 )
-    def __str__(self):
-        return "Nonce: %s" % self.nonce
+
+    def __unicode__(self):
+        return u"Nonce: %s" % self.nonce
 
 class Association(models.Model):
     server_url = models.TextField(max_length=2047)
@@ -14,5 +15,6 @@ class Association(models.Model):
     issued = models.IntegerField()
     lifetime = models.IntegerField()
     assoc_type = models.TextField(max_length=64)
-    def __str__(self):
-        return "Association: %s, %s" % (self.server_url, self.handle)
+
+    def __unicdoe__(self):
+        return u"Association: %s, %s" % (self.server_url, self.handle)

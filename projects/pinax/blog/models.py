@@ -55,10 +55,10 @@ class Post(models.Model):
         ordering            = ('-publish',)
         get_latest_by       = 'publish'
         unique_together     = ('author', 'slug')
-    
+
     def __unicode__(self):
-        return u'%s' % self.title
-    
+        return self.title
+
     @permalink
     def get_absolute_url(self):
         return ('blog_post', None, {
@@ -67,14 +67,10 @@ class Post(models.Model):
             'month': "%02d" % self.publish.month,
             'slug': self.slug
     })
-    
+
     def save(self):
         self.updated_at = datetime.now()
         super(Post, self).save()
-    
-    class Admin:
-        pass
-
 
 # handle notification of new comments
 from threadedcomments.models import ThreadedComment

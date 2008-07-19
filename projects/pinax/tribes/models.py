@@ -28,13 +28,10 @@ class Tribe(models.Model):
     
     def __unicode__(self):
         return self.name
-    
+
+    @models.permalink
     def get_absolute_url(self):
         return ("tribe_detail", [self.slug])
-    get_absolute_url = models.permalink(get_absolute_url)
-    
-    class Admin:
-        list_display = ('name', 'creator', 'created',)
 
 
 class Topic(models.Model):
@@ -52,16 +49,13 @@ class Topic(models.Model):
     
     def __unicode__(self):
         return self.title
-    
+
+    @models.permalink
     def get_absolute_url(self):
         return ("tribe_topic", [self.pk])
-    get_absolute_url = models.permalink(get_absolute_url)
     
     class Meta:
         ordering = ('-modified', )
-    
-    class Admin:
-        list_display = ('title', )
 
 
 from threadedcomments.models import ThreadedComment

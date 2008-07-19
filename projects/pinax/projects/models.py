@@ -36,9 +36,6 @@ class Project(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ("project_detail", [self.slug])
-    
-    class Admin:
-        list_display = ('name', 'creator', 'created', 'private')
 
 
 class Topic(models.Model):
@@ -63,9 +60,6 @@ class Topic(models.Model):
     
     class Meta:
         ordering = ('-modified', )
-    
-    class Admin:
-        list_display = ('title', )
 
 
 class Task(models.Model):
@@ -102,10 +96,6 @@ class Task(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ("project_task", [self.pk])
-    
-    class Admin:
-        pass
-
 
 from threadedcomments.models import ThreadedComment
 def new_comment(sender, instance):

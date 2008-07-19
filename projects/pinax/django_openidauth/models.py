@@ -5,14 +5,14 @@ from django.contrib.auth.models import User
 
 from django_openidconsumer.util import OpenID
 
-class UserOpenID( models.Model ):
-    user = models.ForeignKey(User, raw_id_admin=True)
+class UserOpenID(models.Model):
+    user = models.ForeignKey(User)
     openid = models.CharField(max_length=255)
     created_at = models.DateTimeField()
-    def __str__(self):
-        return "<User %s has OpenID %s>" % (self.user, self.openid)
-    class Admin:
-        pass
+
+    def __unicode__(self):
+        return u"<User %s has OpenID %s>" % (self.user, self.openid)
+
     class Meta:
         ordering = ('-created_at',)
 
