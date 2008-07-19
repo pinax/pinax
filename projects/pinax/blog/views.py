@@ -58,12 +58,13 @@ def new(request):
                 else:
                     blog.creator_ip = request.META['REMOTE_ADDR']
                 blog.save()
+                # @@@ should message be different if published?
                 request.user.message_set.create(message="Successfully saved post '%s'" % blog.title)
                 if notification:
                     if friends: # @@@ might be worth having a shortcut for sending to all friends
                         notification.send((x['friend'] for x in Friendship.objects.friends_for_user(blog.author)), "blog_friend_post", {"post": blog})
                 
-                return HttpResponseRedirect(reverse("your_posts"))
+                return HttpResponseRedirect(reverse("blog_list_yours"))
         else:
             blog_form = BlogForm()
     else:
