@@ -1,1 +1,1 @@
-{% load i18n %}{% blocktrans %}{{ tribe.creator }} has created a new tribe {{ tribe }}.{% endblocktrans %}
+{% load i18n %}{% blocktrans with tribe.creator as tribe_creator %}{{ tribe_creator }} has created a new tribe {{ tribe }}.{% endblocktrans %}

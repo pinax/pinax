@@ -1,1 +1,1 @@
-{% load i18n %}{% blocktrans %}{{ topic.creator }} has started a topic '{{ topic }}' in tribe {{ topic.tribe }}.{% endblocktrans %}
+{% load i18n %}{% blocktrans with topic.creator as topic_creator and topic.tribe as topic_tribe %}{{ topic_creator }} has started a topic '{{ topic }}' in tribe {{ topic_tribe }}.{% endblocktrans %}
