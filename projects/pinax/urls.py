@@ -49,6 +49,7 @@ urlpatterns = patterns('',
     (r'^i18n/', include('django.conf.urls.i18n')),
     (r'^bookmarks/', include('bookmarks.urls')),
     (r'^admin/(.*)', admin.site.root),
+    (r'^photos/', include('photos.urls')),
     
     (r'^feeds/tweets/(.*)/$', 'django.contrib.syndication.views.feed', tweets_feed_dict),
     (r'^feeds/posts/(.*)/$', 'django.contrib.syndication.views.feed', blogs_feed_dict),

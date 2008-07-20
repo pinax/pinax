@@ -7,6 +7,7 @@ from django.utils.translation import ugettext
 
 from friends.forms import InviteFriendForm
 from friends.models import FriendshipInvitation, Friendship
+from photos.models import Photos
 
 from zwitschern.models import Following
 
@@ -102,11 +103,15 @@ def profile(request, username):
             profile_form = ProfileForm(instance=other_user.get_profile())
     else:
         profile_form = None
+        
+    # TODO: change this to plugin
+    photos = Photos.objects.filter(member=other_user)
     
     return render_to_response("profiles/profile.html", {
         "profile_form": profile_form,
         "is_me": is_me,
         "is_friend": is_friend,
+        "photos": photos,
         "is_following": is_following,
         "other_user": other_user,
         "other_friends": other_friends,
