@@ -59,7 +59,7 @@ def new(request):
                     blog.creator_ip = request.META['REMOTE_ADDR']
                 blog.save()
                 # @@@ should message be different if published?
-                request.user.message_set.create(message="Successfully saved post '%s'" % blog.title)
+                request.user.message_set.create(message=_("Successfully saved post '%s'") % blog.title)
                 if notification:
                     if friends: # @@@ might be worth having a shortcut for sending to all friends
                         notification.send((x['friend'] for x in Friendship.objects.friends_for_user(blog.author)), "blog_friend_post", {"post": blog})
@@ -87,7 +87,7 @@ def edit(request, id):
             if blog_form.is_valid():
                 blog = blog_form.save(commit=False)
                 blog.save()
-                request.user.message_set.create(message="Successfully updated post '%s'" % blog.title)
+                request.user.message_set.create(message=_("Successfully updated post '%s'") % blog.title)
                 
                 return HttpResponseRedirect(reverse("your_posts"))
         else:
