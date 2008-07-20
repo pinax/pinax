@@ -21,28 +21,28 @@
     {% if bookmarks %}
         <p>{% trans "These are bookmarks from everyone:" %}</p>
         
-        <p>Sort by:
+        <p>{% trans "Sort by:" %}
             {% ifequal request.sort_order "points" %}
-                <a href="?sort_order=hotness">reddit-like hotness</a>
-                or
-                <b>total points</b>
-                or
-                <a href="?sort_order=date">date added</a>
+                <a href="?sort_order=hotness">{% trans "reddit-like hotness" %}</a>
+                {% trans "or" %}
+                <b>{% trans "total points" %}</b>
+                {% trans "or" %}
+                <a href="?sort_order=date">{% trans "date added" %}</a>
                 {% order_by_votes bookmarks %}
             {% else %}
                 {% ifequal request.sort_order "hotness" %}
-                    <b>reddit-like hotness</b>
-                    or
-                    <a href="?sort_order=points">total points</a>
-                    or
-                    <a href="?sort_order=date">date added</a>
+                    <b>{% trans "reddit-like hotness" %}</b>
+                    {% trans "or" %}
+                    <a href="?sort_order=points">{% trans "total points" %}</a>
+                    {% trans "or" %}
+                    <a href="?sort_order=date">{% trans "date added" %}</a>
                     {% order_by_reddit bookmarks added %}
                 {% else %}
-                    <a href="?sort_order=hotness">reddit-like hotness</a>
-                    or
-                    <a href="?sort_order=points">total points</a>
-                    or
-                    <b>date added</b>
+                    <a href="?sort_order=hotness">{% trans "reddit-like hotness" %}</a>
+                    {% trans "or" %}
+                    <a href="?sort_order=points">{% trans "total points" %}</a>
+                    {% trans "or" %}
+                    <b>{% trans "date added" %}</b>
                 {% endifequal %}
             {% endifequal %}
         </p>
