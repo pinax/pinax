@@ -1,0 +1,29 @@
+{% extends "photos/base.html" %}
+
+{% load i18n %}
+{% load gravatar %}
+{% load humanize %}
+{% load pagination_tags %}
+{% load captureas_tag %}
+{% load tagging_tags %}
+{% load wiki %}
+{% load markup %}
+{% load switchcase %}
+{% load restructuredtext %}
+{% load threadedcommentstags %}
+
+{% block head_title %}Pinax : {% blocktrans %}Latest Photos{% endblocktrans %}{% endblock %}
+
+{% block body %}
+    <p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time.</p>
+    
+    <h1>{% trans "Upload Photos" %}</h1>
+
+    <form enctype="multipart/form-data"  action="" method="POST" id="uploadform">
+        <table>
+            {{ photo_form }}
+        </table>
+        <tr><td></td><td><input type="hidden" name="action" value="upload" /><input type="submit" value="upload"/></td></tr>
+    </form>
+
+{% endblock %}

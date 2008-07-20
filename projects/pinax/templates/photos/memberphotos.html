@@ -1,0 +1,37 @@
+{% extends "photos/base.html" %}
+
+{% load i18n %}
+{% load gravatar %}
+{% load humanize %}
+{% load pagination_tags %}
+{% load captureas_tag %}
+{% load tagging_tags %}
+{% load wiki %}
+{% load markup %}
+{% load switchcase %}
+{% load restructuredtext %}
+{% load threadedcommentstags %}
+
+{% block head_title %}Pinax : {% blocktrans %}Your Photos{% endblocktrans %}{% endblock %}
+
+{% block body %}
+    <p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time.</p>
+    
+    <h1>{% trans "Photos from " %}{{ user.username }}</h1>
+    
+    {% if photos %}
+    {% autopaginate photos %}
+        <div class="clearfix">
+        {% for photo in photos %}
+        <div class="gallery-photo-thumb">
+            <a href="/photos/details/{{ photo.id }}/"><img src="/site_media/{{ photo.get_thumbnail_url }}" alt="{{ photo.title }}"/></a>
+        </div>
+        {% endfor %}
+        </div>
+    {% paginate %}
+    {% else %}
+    <p>No photos were found.</p>
+    {% endif %}
+    
+    
+{% endblock %}
