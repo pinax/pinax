@@ -32,13 +32,13 @@ def upload(request):
 def yourphotos(request):
     '''photos for the currently authenticated user'''
     user = request.user
-    photos = Photos.objects.filter(member=user)
+    photos = Photos.objects.filter(member=user).order_by("-date_added")
     return render_to_response("photos/yourphotos.html", {"photos": photos}, context_instance=RequestContext(request))
 
 @login_required    
 def photos(request):
     '''latest photos'''
-    photos = Photos.objects.filter(is_public=True)
+    photos = Photos.objects.filter(is_public=True).order_by("-date_added")
     return render_to_response("photos/latest.html", {"photos": photos}, context_instance=RequestContext(request))
 
 @login_required
@@ -51,5 +51,5 @@ def details(request, id):
 def memberphotos(request, username):
     '''Get the members photos and display them'''
     user = get_object_or_404(User, username=username)
-    photos = Photos.objects.filter(member__username=username)
+    photos = Photos.objects.filter(member__username=username,is_public=True).order_by("-date_added")
     return render_to_response("photos/memberphotos.html", {"photos": photos}, context_instance=RequestContext(request))
