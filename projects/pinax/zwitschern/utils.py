@@ -30,7 +30,7 @@ def twitter_verify_credentials(account):
 
 def get_twitter_password(key, text, decode=False):
     rand = random.Random(key).randrange
-    xortext = lambda text : ''.join([chr(ord(elem)^rand(256)) for elem in text])
+    xortext = lambda text: "".join([chr(ord(c)^rand(256)) for c in text])
     if not decode:
         text = base64.encodestring(xortext(zlib.compress(text)))
     else:
