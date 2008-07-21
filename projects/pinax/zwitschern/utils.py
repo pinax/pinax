@@ -11,7 +11,7 @@ from django.conf import settings
 def twitter_account_raw(username, password):
     if username and password:
         twitter_password = get_twitter_password(settings.SECRET_KEY,
-            password, reverse=True)
+            password, decode=True)
         return twitter.Api(username=username, password=twitter_password)
 
 def twitter_account_for_user(user):
@@ -28,12 +28,12 @@ def twitter_verify_credentials(account):
         return False
     return True
 
-def get_twitter_password(key, text, reverse=False):
+def get_twitter_password(key, text, decode=False):
     rand = random.Random(key).randrange
     xortext = lambda text : ''.join([chr(ord(elem)^rand(256)) for elem in text])
-    if not reverse:
+    if not decode:
         text = base64.encodestring(xortext(zlib.compress(text)))
-    if reverse:
+    else:
         text = zlib.decompress(xortext(base64.decodestring(text)))
     return text
 
