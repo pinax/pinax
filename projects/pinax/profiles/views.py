@@ -109,7 +109,6 @@ def profile(request, username):
         "profile_form": profile_form,
         "is_me": is_me,
         "is_friend": is_friend,
-        "photos": photos,
         "is_following": is_following,
         "other_user": other_user,
         "other_friends": other_friends,
