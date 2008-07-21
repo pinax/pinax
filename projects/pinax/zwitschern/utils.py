@@ -9,14 +9,14 @@ import twitter
 from django.conf import settings
 
 def twitter_account_raw(username, password):
-    if username and password:
-        twitter_password = get_twitter_password(settings.SECRET_KEY,
-            password, decode=True)
-        return twitter.Api(username=username, password=twitter_password)
+    return twitter.Api(username=username, password=password)
 
 def twitter_account_for_user(user):
     profile = user.get_profile()
-    return twitter_account_raw(profile.twitter_user, profile.twitter_password)
+    if profile.twitter_user and profile.twitter_password:
+        twitter_password = get_twitter_password(settings.SECRET_KEY,
+            password, decode=True)
+        return twitter_account_raw(profile.twitter_user, twitter_password)
 
 def twitter_verify_credentials(account):
     if account is None:
