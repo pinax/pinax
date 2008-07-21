@@ -23,7 +23,7 @@ def upload(request):
                 photo = photo_form.save(commit=False)
                 photo.member = request.user
                 photo.save()
-                request.user.message_set.create(message="Successfully uploaded photo '%s'" % photo.title)
+                request.user.message_set.create(message=_("Successfully uploaded photo '%s'") % photo.title)
                 return HttpResponseRedirect(reverse("photo_upload"))
 
     return render_to_response("photos/upload.html", {"photo_form": photo_form}, context_instance=RequestContext(request))
