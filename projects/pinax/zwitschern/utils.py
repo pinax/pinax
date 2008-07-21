@@ -9,15 +9,18 @@ import twitter
 from django.conf import settings
 
 def twitter_account_raw(username, password):
-    return twitter.Api(username=username, password=password)
+    if username and password:
+        twitter_password = get_twitter_password(settings.SECRET_KEY,
+            password, reverse=True)
+        return twitter.Api(username=username, password=twitter_password)
 
 def twitter_account_for_user(user):
     profile = user.get_profile()
-    twitter_password = get_twitter_password(settings.SECRET_KEY,
-        profile.twitter_password, reverse=True)
-    return twitter_account_raw(profile.twitter_user, twitter_password)
+    return twitter_account_raw(profile.twitter_user, profile.twitter_password)
 
 def twitter_verify_credentials(account):
+    if account is None:
+        return False
     url = 'http://twitter.com/account/verify_credentials.json'
     try:
         json = account._FetchUrl(url)
