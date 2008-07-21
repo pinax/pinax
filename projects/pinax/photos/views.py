@@ -18,9 +18,9 @@ def upload(request):
     photo_form = PhotoUploadForm()
     if request.method == 'POST':
         if request.POST["action"] == "upload":
-            photoform = PhotoUploadForm(request.user, request.POST, request.FILES)
-            if photoform.is_valid():
-                photo = photoform.save(commit=False)
+            photo_form = PhotoUploadForm(request.user, request.POST, request.FILES)
+            if photo_form.is_valid():
+                photo = photo_form.save(commit=False)
                 photo.member = request.user
                 photo.save()
                 request.user.message_set.create(message="Successfully uploaded photo '%s'" % photo.title)
