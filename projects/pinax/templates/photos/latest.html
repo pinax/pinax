@@ -26,7 +26,7 @@
         <div class="gallery-photo-thumb">
             <a href="details/{{ photo.id }}/"><img src="/site_media/{{ photo.get_thumbnail_url }}" alt="{{ photo.title }}"/></a><br />
             from <a href="{% url profiles.views.profile photo.member.username %}">{{ photo.member.username }}</a><br />
-            Viewed {{ photo.view_count }} Times
+            <img src="/site_media/comment.png" border="0" class="noborder" align="absmiddle" /><a href="details/{{ photo.id }}/">{% get_comment_count for photo as commentcount %} {{ commentcount }} Comments</a>
         </div>
         {% endfor %}
         </div>

@@ -30,8 +30,7 @@
             <p>{{ photo.caption }}</p>
         </div>
         <div class="photo-meta">
-            Viewed {{ photo.view_count }} times<br />
-            Tags: {% tags_for_object photo as tags %}
+            <img src="/site_media/tags.png" border="0" class="noborder" align="absmiddle" />  {% tags_for_object photo as tags %}
             {% for tag in tags %}
                 <a href="/tags/{{ tag }}">{{ tag }}</a>
             {% endfor %}</p>
