@@ -87,7 +87,7 @@
                 {% for task in tasks %}
                     <tr class="task_{{ task.get_state_display }} {% cycle odd,even %}">
                         <td><a href="{% url project_task task.id %}">{{ task.summary }}</a></td>
-                        <td>{{ task.modified|shorttimesince }} ago</td>
+                        <td nowrap="true">{{ task.modified|shorttimesince }} ago</td>
                         <td>
                             {% if task.assignee %}
                                 {{ task.assignee }}
