@@ -39,7 +39,5 @@ class Photos(ImageModel):
     member = models.ForeignKey(User, related_name="added_photos", blank=True, null=True)
     safetylevel = models.IntegerField(_('safetylevel'), choices=SAFETY_LEVEL, default=1)
     photoset = models.ManyToManyField(PhotoSets, verbose_name=_('photo set'))
-    tags = TagField()
-    
-    
+    tags = TagField()    
         

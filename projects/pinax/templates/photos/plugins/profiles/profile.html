@@ -1,17 +1,13 @@
 {% load i18n %}
 {% load captureas_tag %}
-{% load wiki %}
-{% load markup %}
-{% load switchcase %}
-{% load restructuredtext %}
 {% load tagging_tags %}
 {% load threadedcommentstags %}
 
 <h2>{% trans "Photos" %}</h2>
 
-    {% if photos %}
+    {% if owner.added_photos.all %}
         <div class="clearfix">
-        {% for photo in photos %}
+        {% for photo in owner.added_photos.all %}
             <div class="gallery-photo-thumb">
                 <a href="/photos/details/{{ photo.id }}/"><img src="/site_media/{{ photo.get_thumbnail_url }}" alt="{{ photo.title }}"/></a>
             </div>
