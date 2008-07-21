@@ -9,3 +9,10 @@ UPDATE "tribes_topic" SET modified=created;
 
 ALTER TABLE "tribes_topic" ADD COLUMN "modified" timestamp with time zone NOT NULL DEFAULT now();
 UPDATE "tribes_topic" SET modified=created;
+
+## added twitter_user and twitter_password to Profile model.
+
+# postgresql
+
+ALTER TABLE "profiles.profile" ADD COLUMN "twitter_user" varchar(50) NOT NULL DEFAULT '';
+ALTER TABLE "profiles.profile" ADD COLUMN "twitter_password" varchar(50) NOT NULL DEFAULT '';
