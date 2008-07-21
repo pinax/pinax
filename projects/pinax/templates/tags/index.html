@@ -15,13 +15,27 @@
 
 {% block body %}
     <p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time.</p>
+    
+    <h1>{% trans "All Photos Matching " %}<i>"{{ tag }}"</i></h1>
+    
+    {% if phototags %}
+        {% for photo in phototags %}
+            <div class="clearfix">
+                <div class="gallery-photo-thumb">
+                    <a href="details/{{ photo.id }}/"><img src="/site_media/{{ photo.get_thumbnail_url }}" alt="{{ photo.title }}"/></a><br />
+                    from <a href="{% url profiles.views.profile photo.member.username %}">{{ photo.member.username }}</a><br />
+                    Viewed {{ photo.view_count }} Times
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        No photos matching tag.
+    {% endif %}
 
 	<h1>{% trans "All Blog Posts Matching " %}<i>"{{ tag }}"</i></h1>
 	
 	{% if alltags %}
 		<p>{% trans "These are blog posts from everyone:" %}</p>
-	
-		{% autopaginate alltags %}
 	
 			{% for blogs in alltags %}
 				<div class="blog-post clearfix">
@@ -51,11 +65,9 @@
 					</div>
 				</div>
 			{% endfor %}
-		
-		{% paginate %}
 	
 	{% else %}
-		No blog posts yet.
+		No blog posts matching tag.
 	{% endif %}
 	
 	
