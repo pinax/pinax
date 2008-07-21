@@ -26,7 +26,7 @@ def personal(request):
         if request.POST["action"] == "post":
             text = request.POST["tweet"].strip()
             tweet(request.user, text)
-            if request.POST['pub2twitter'] == "yes":
+            if request.POST.get('pub2twitter', '') == "yes":
                 twitter_account.PostUpdate(text)
         reply = None
     else:
