@@ -1,0 +1,260 @@
+Metadata-Version: 1.0
+Name: python-twitter
+Version: 0.5
+Summary: UNKNOWN
+Home-page: http://code.google.com/p/python-twitter/
+Author: DeWitt Clinton
+Author-email: dewitt@google.com
+License: Apache License 2.0
+Description: =Python Twitter=
+        
+        _A python wrapper around the Twitter API_
+        
+        Author: `DeWitt Clinton <dewitt@google.com>`
+        
+        ==Introduction==
+        
+        This library provides a pure python interface for the Twitter API.
+        
+        Twitter (http://twitter.com) provides a service that allows people to
+        connect via the web, IM, and SMS.  Twitter exposes a web services API
+        (http://twitter.com/help/api) and this library is intended to make
+        it even easier for python programmers to use.
+        
+        
+        ==Building==
+        
+        *From source:*
+        
+        Install the dependencies:
+        
+        http://cheeseshop.python.org/pypi/simplejson
+        
+        Download the latest python-twitter library from:
+        
+        http://code.google.com/p/python-twitter/
+        
+        
+        Untar the source distribution and run:
+        
+        {{{
+        $ python setup.py build
+        $ python setup.py install
+        }}}
+        
+        *Testing*
+        
+        With setuptools installed:
+        
+        {{{
+        $ python setup.py test
+        }}}
+        
+        Without setuptools installed:
+        
+        {{{
+        $ python twitter_test.py
+        }}}
+        
+        ==Getting the code==
+        
+        View the trunk at:
+        
+        http://python-twitter.googlecode.com/svn/trunk/
+        
+        Check out the latest development version anonymously with:
+        
+        {{{
+        $ svn checkout http://python-twitter.googlecode.com/svn/trunk/ python-twitter
+        }}}
+        
+        ==Documentation==
+        
+        View the last release API documentation at:
+        
+        http://static.unto.net/python-twitter/0.5/doc/twitter.html
+        
+        ==Using==
+        
+        The library provides a python wrapper around the Twitter API and
+        the twitter data model.
+        
+        *Model:*
+        
+        The three model classes are twitter.Status, twitter.User, and
+        twitter.DirectMessage.  The API methods return instances of these
+        classes.
+        
+        To read the full API for twitter.Status, twitter.User, or
+        twitter.DirectMessage, run:
+        
+        {{{
+        $ pydoc twitter.Status
+        $ pydoc twitter.User
+        $ pydoc twitter.DirectMessage
+        }}}
+        
+        *API:*
+        
+        The API is exposed via the twitter.Api class.
+        
+        To create an instance of the twitter.Api class:
+        
+        {{{
+        >>> import twitter
+        >>> api = twitter.Api()
+        }}}
+        
+        To create an instance of the twitter.Api with login credentials (many API
+        calls required the client to be authenticated):
+        
+        >>> api = twitter.Api(username='username', password='password)
+        
+        To fetch the most recently posted public twitter status messages:
+        
+        {{{
+        >>> statuses = api.GetPublicTimeline()
+        >>> print [s.user.name for s in statuses]
+        [u'DeWitt', u'Kesuke Miyagi', u'ev', u'Buzz Andersen', u'Biz Stone']
+        }}}
+        
+        To fetch a single user's public status messages, where "user" is either
+        a Twitter "short name" or their user id.
+        
+        {{{
+        >>> statuses = api.GetUserTimeline(user)
+        >>> print [s.text for s in statuses]
+        }}}
+        
+        To fetch a list a user's friends (requires authentication):
+        
+        {{{
+        >>> users = api.GetFriends()
+        >>> print [u.name for u in users]
+        }}}
+        
+        To post a twitter status message (requires authentication):
+        
+        {{{
+        >>> status = api.PostUpdate(username, password, 'I love python-twitter!')
+        >>> print status.text
+        I love python-twitter!
+        }}}
+        
+        There are many more API methods, to read the full API documentation:
+        
+        {{{
+        $ pydoc twitter.Api
+        }}}
+        
+        ==Todo==
+        
+        Patches and bug reports are welcome, just please keep the style
+        consistent with the original source.
+        
+        Add more example scripts.
+        
+        The twitter.Status and twitter.User classes are going to be hard
+        to keep in sync with the API if the API changes.  More of the
+        code could probably be written with introspection.
+        
+        Statement coverage of twitter_test is only about 80% of twitter.py.
+        
+        The twitter.Status and twitter.User classes could perform more validation
+        on the property setters.
+        
+        ==More Information==
+        
+        Please visit http://groups.google.com/group/python-twitter for more discussion.
+        
+        ==Contributors==
+        
+        Additional thanks to Pierre-Jean Coudert, Omar Kilani, Jodok Batlogg,
+        and the rest of the python-twitter mailing list.
+        
+        ==License==
+        
+        {{{
+        Copyright 2007 Google Inc. All Rights Reserved.
+        
+        Licensed under the Apache License, Version 2.0 (the 'License');
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at
+        
+        http://www.apache.org/licenses/LICENSE-2.0
+        
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an 'AS IS' BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.
+        }}}
+        
+        2007-09-13
+        
+        Released version 0.5.
+        Added back support for setuptools (conditionally)
+        Added support for X-Twitter-* HTTP headers
+        Fixed the tests to work across all timezones
+        Removed the 140 character limit from PostUpdate
+        Added support for per-user tmp cache directories
+        
+        2007-06-13
+        
+        Released 0.4.
+        Fixed a unicode error that prevented tweet.py from working.
+        Added DestroyStatus
+        Added DestroyDirectMessage
+        Added CreateFriendship
+        Added DestoryFriendship
+        
+        2007-06-03
+        
+        Fixed the bug that prevented unicode strings being posted
+        Username and password now set on twitter.Api, not individual method calls
+        Added SetCredentials and ClearCredentials
+        Added GetUser ("users/show" in the twitter web api)
+        Added GetFeatured
+        Added GetDirectMessages
+        Added GetStatus ("statuses/show" in the twitter web api)
+        Added GetReplies
+        Added optional since_id parameter on GetPublicTimeline
+        Added optional since parameter on GetUserTimeline
+        Added optional since and user parameters on GetFriendsTimeline
+        Added optional user parameter on GetFriends
+        
+        2007-04-27
+        
+        Modified examples/twitter-to-xhtml.py to handle unicode
+        Dropped dependency on setuptools (too complicated/buggy)
+        Added unicode test cases
+        Fixed issue 2 "Rename needs an unlink in front"
+        
+        2007-04-02
+        
+        Released 0.3.
+        Use gmtime not localtime to calculate relative_created_at.
+        
+        2007-03-26
+        
+        Released 0.2
+        GetUserTimeline can accept userid or username.
+        
+        2007-03-21
+        
+        Calculate relative_created_at on the fly
+        
+        2007-01-28
+        
+        Released 0.1
+        Initial checkin of python-twitter
+        
+        
+Keywords: twitter api
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Communications :: Chat
+Classifier: Topic :: Internet

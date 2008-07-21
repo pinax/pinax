@@ -14,13 +14,19 @@
     <h1>{% trans "Tweets" %}</h1>
     
     <form method="POST" action="{% url zwitschern.views.personal %}">
-        <p>{% trans 'What are you doing?' %}</p>
+        <p>{% trans "What are you doing?" %}</p>
         <textarea id="new_tweet" name="tweet" cols="30" rows="4">{% if reply %}@{{ reply }} {% endif %}</textarea>
-        <p><span id="chars_left"></span> {% trans "chars left." %} <input type="hidden" name="action" value="post" /><input type="submit" value="{% trans "post" %}"></p>
+		{% if twitter_authorized %}
+        <h2>{% trans "You have authorized a twitter accout." %}</h2>
+        <input name="pub2twitter" type="checkbox" id="pub2twitter" value="yes" />
+        <label for="pub2twitter">Publish to Twitter?</label>
+        {% endif %}
+      <p><span id="chars_left"></span> {% trans "chars left." %} <input type="hidden" name="action" value="post" />
+  <input type="submit" value="{% trans "post" %}">
+</p>
+</form>
     
-    </form>
-    
-    <p>
+<p>
         {% blocktrans with user.followed.count as follow_count and user.followed.count|pluralize:_("person,people") as follow_name %}
         These are tweets from the {{ follow_count }} {{ follow_name }} you are following (plus your own){% endblocktrans %}:
     </p>

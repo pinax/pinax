@@ -1,0 +1,32 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load captureas_tag %}
+
+{% block head_title %}Pinax : {% trans "Other Services" %}{% endblock %}
+
+{% block body %}
+    <h1>{% trans "Other Services" %}</h1>
+    {% if twitter_authorized %}
+    <h2>{% trans "You have already authorized a twitter accout." %}</h2>
+    {% trans "Change your account wtih the form below." %}<br />
+    {% endif %}
+	<h3>{% trans "Twitter:" %}</h3>
+    <form action="" method="POST">
+        <table>
+            {{ twitter_form }}
+            <tr>
+                <td>&nbsp;</td>
+                <td><input type="hidden" name="action" value="add" /><input type="submit" value="{% trans "Save" %}"/></td>
+            </tr>
+        </table>
+    </form>
+{% endblock %}
+
+{% block extra_body %}
+    {% load jquery_validation %}
+    {% include_validation %}
+    <script type="text/javascript">
+       <!-- nothing here -->
+    </script>
+{% endblock %}

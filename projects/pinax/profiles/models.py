@@ -15,6 +15,8 @@ class Profile(models.Model):
     website = models.URLField(_('website'), null=True, blank=True)
     blogrss = models.URLField(_('blog rss/atom'), null=True, blank=True)
     timezone = TimeZoneField(_('timezone'))
+    twitter_user = models.CharField(_('Twitter Username'), max_length=50, null=True, blank=True)
+    twitter_password = models.CharField(_('Twitter Password'), max_length=50, null=True, blank=True)
     language = models.CharField(_('language'), max_length=10, choices=settings.LANGUAGES, default=settings.LANGUAGE_CODE)
 
     def __unicode__(self):

@@ -1,3 +1,4 @@
+
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect, HttpResponse, HttpResponseForbidden
 from django.contrib.auth import authenticate
@@ -9,7 +10,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
-from forms import SignupForm, AddEmailForm, LoginForm, ChangePasswordForm, ResetPasswordForm, ChangeTimezoneForm, ChangeLanguageForm
+from forms import SignupForm, AddEmailForm, LoginForm, ChangePasswordForm, ResetPasswordForm, ChangeTimezoneForm, ChangeLanguageForm, TwitterForm
 from emailconfirmation.models import EmailAddress, EmailConfirmation
 from friends.models import Friendship
 from profiles.models import Profile
@@ -135,6 +136,31 @@ def language_change(request):
     }, context_instance=RequestContext(request))
 
 from gravatar.templatetags.gravatar import gravatar
+
+@login_required
+def other_services(request):
+    from zwitschern.utils import twitter_verify_credentials
+    twitter_form = TwitterForm(request.user)
+    twitter_authorized = False
+    if request.method == "POST":
+        twitter_form = TwitterForm(request.user, request.POST)
+        if twitter_form.is_valid():
+            from zwitschern.utils import twitter_account_raw
+            twitter_account = twitter_account_raw(request.POST['username'], request.POST['password'])
+            twitter_authorized = twitter_verify_credentials(twitter_account)
+            if not twitter_authorized:
+                request.user.message_set.create(message="Twitter authentication failed")
+            else:
+                twitter_form.save()
+    else:
+        from zwitschern.utils import twitter_account_for_user
+        twitter_account = twitter_account_for_user(request.user)
+        twitter_authorized = twitter_verify_credentials(twitter_account)
+        twitter_form = TwitterForm(request.user)
+    return render_to_response("account/other_services.html", {
+        "twitter_form": twitter_form,
+        "twitter_authorized": twitter_authorized,
+    }, context_instance=RequestContext(request))    
 
 def username_autocomplete(request):
     if request.user.is_authenticated():

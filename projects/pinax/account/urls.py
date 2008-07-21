@@ -8,6 +8,7 @@ urlpatterns = patterns('',
     url(r'^password_change/$', 'account.views.password_change', name="acct_passwd"),
     url(r'^password_reset/$', 'account.views.password_reset', name="acct_passwd_reset"),
     url(r'^timezone/$', 'account.views.timezone_change', name="acct_timezone_change"),
+    url(r'^other_services/$', 'account.views.other_services', name="acct_other_services"),
     url(r'^language/$', 'account.views.language_change', name="acct_language_change"),
     url(r'^logout/$', 'django.contrib.auth.views.logout', {"template_name": "account/logout.html"}, name="acct_logout"),
     

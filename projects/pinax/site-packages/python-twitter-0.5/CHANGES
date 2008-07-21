@@ -1,0 +1,59 @@
+2007-09-13
+
+  Released version 0.5.
+  Added back support for setuptools (conditionally)
+  Added support for X-Twitter-* HTTP headers
+  Fixed the tests to work across all timezones
+  Removed the 140 character limit from PostUpdate  
+  Added support for per-user tmp cache directories
+
+2007-06-13
+
+  Released 0.4.
+  Fixed a unicode error that prevented tweet.py from working.
+  Added DestroyStatus
+  Added DestroyDirectMessage
+  Added CreateFriendship
+  Added DestoryFriendship
+
+2007-06-03
+
+  Fixed the bug that prevented unicode strings being posted
+  Username and password now set on twitter.Api, not individual method calls
+  Added SetCredentials and ClearCredentials
+  Added GetUser ("users/show" in the twitter web api)
+  Added GetFeatured
+  Added GetDirectMessages
+  Added GetStatus ("statuses/show" in the twitter web api)
+  Added GetReplies
+  Added optional since_id parameter on GetPublicTimeline
+  Added optional since parameter on GetUserTimeline 
+  Added optional since and user parameters on GetFriendsTimeline
+  Added optional user parameter on GetFriends 
+  
+2007-04-27
+  
+  Modified examples/twitter-to-xhtml.py to handle unicode
+  Dropped dependency on setuptools (too complicated/buggy)
+  Added unicode test cases
+  Fixed issue 2 "Rename needs an unlink in front"
+  
+2007-04-02
+
+  Released 0.3.
+  Use gmtime not localtime to calculate relative_created_at.
+
+2007-03-26
+
+  Released 0.2
+  GetUserTimeline can accept userid or username.
+
+2007-03-21
+
+  Calculate relative_created_at on the fly
+
+2007-01-28
+
+  Released 0.1
+  Initial checkin of python-twitter
+
