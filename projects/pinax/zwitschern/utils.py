@@ -15,7 +15,7 @@ def twitter_account_for_user(user):
     profile = user.get_profile()
     if profile.twitter_user and profile.twitter_password:
         twitter_password = get_twitter_password(settings.SECRET_KEY,
-            password, decode=True)
+            profile.twitter_password, decode=True)
         return twitter_account_raw(profile.twitter_user, twitter_password)
 
 def twitter_verify_credentials(account):
