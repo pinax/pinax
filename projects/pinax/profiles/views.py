@@ -104,8 +104,6 @@ def profile(request, username):
     else:
         profile_form = None
         
-    # TODO: change this to plugin
-    photos = Photos.objects.filter(member=other_user)
     
     return render_to_response("profiles/profile.html", {
         "profile_form": profile_form,
