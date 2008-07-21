@@ -25,7 +25,8 @@
         {% for photo in photos %}
         <div class="gallery-photo-thumb">
             <a href="details/{{ photo.id }}/"><img src="/site_media/{{ photo.get_thumbnail_url }}" alt="{{ photo.title }}"/></a><br />
-            from <a href="{% url profiles.views.profile photo.member.username %}">{{ photo.member.username }}</a>
+            from <a href="{% url profiles.views.profile photo.member.username %}">{{ photo.member.username }}</a><br />
+            Viewed {{ photo.view_count }} Times
         </div>
         {% endfor %}
         </div>
