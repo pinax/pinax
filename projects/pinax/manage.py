@@ -1,4 +1,4 @@
-#!/usr/bin/env python2.5
+#!/usr/bin/env python
 from os.path import abspath, dirname, join
 from site import addsitedir
 import sys
