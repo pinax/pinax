@@ -1,5 +1,5 @@
 from django.contrib import admin
-from tribes.models import Project, Topic, Task
+from projects.models import Project, Topic, Task
 
 class ProjectAdmin(admin.ModelAdmin):
     list_display = ('name', 'creator', 'created', 'private')    
