@@ -15,6 +15,6 @@ urlpatterns = patterns('',
     url(r'^confirm_email/(\w+)/$', 'emailconfirmation.views.confirm_email', name="acct_confirm_email"),
     url(r'^username_autocomplete/$', 'account.views.username_autocomplete'),
 
-	# ajax validation
+    # ajax validation
     (r'^validate/$', 'ajax_validation.views.validate', {'form_class': SignupForm}, 'signup_form_validate'),
 )

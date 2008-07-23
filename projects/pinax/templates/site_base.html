@@ -7,7 +7,7 @@
     {% if user.is_authenticated %}
         {% openid_icon openid user %}<b>{{ user }}</b> | <a href="{% url acct_email %}">{% trans "Account" %}</a> | <a href="{% url openid_logout %}?next={% url acct_logout %}">{% trans "Logout" %}</a>
     {% else %}
-        <a href="{% url acct_login %}">{% trans "Login" %}</a> or <a href="{% url acct_signup %}"><b>{% trans "Sign up" %}</b></a>
+        <a href="{% url acct_login %}">{% trans "Login" %}</a> {% trans "or" %} <a href="{% url acct_signup %}"><b>{% trans "Sign up" %}</b></a>
     {% endif %}
 {% endblock %}
 

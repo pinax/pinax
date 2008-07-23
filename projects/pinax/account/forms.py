@@ -237,5 +237,4 @@ class TwitterForm(ProfileForm):
         self.profile.twitter_user = self.cleaned_data['username']
         self.profile.twitter_password = get_twitter_password(settings.SECRET_KEY, self.cleaned_data['password'])
         self.profile.save()
-        self.user.message_set.create(message=ugettext(u"Sucessfully authenticated."))
-        
+        self.user.message_set.create(message=ugettext(u"Successfully authenticated."))
