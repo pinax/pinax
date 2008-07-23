@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-22 17:39+0200\n"
-"PO-Revision-Date: 2008-07-15 11:47+0100\n"
-"Last-Translator: Jannis Leidel <jannis@leidel.info>\n"
+"POT-Creation-Date: 2008-07-23 19:05+0200\n"
+"PO-Revision-Date: 2008-07-23 19:01+0200\n"
+"Last-Translator: Nicola Larosa <nico@tekNico.net>\n"
 "Language-Team: Italiano\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: account/forms.py:29 account/forms.py:62 account/forms.py:227
 msgid "Username"
@@ -23,7 +23,7 @@ msgstr "Nome utente"
 
 #: account/forms.py:30 account/forms.py:63 account/forms.py:228
 msgid "Password"
-msgstr "Password"
+msgstr ""
 
 #: account/forms.py:31
 msgid "Remember Me"
@@ -132,9 +132,8 @@ msgid "Language successfully updated."
 msgstr "Lingua aggiornata correttamente."
 
 #: account/forms.py:240
-#, fuzzy
 msgid "Successfully authenticated."
-msgstr "Fuso orario aggiornato correttamente."
+msgstr "Autenticato correttamente."
 
 #: blog/forms.py:10
 msgid ""
@@ -232,7 +231,7 @@ msgstr "Markup del Contenuto dell'Articolo"
 
 #: blog/models.py:53 templates/zwitschern/personal.html:25
 msgid "post"
-msgstr "articolo"
+msgstr "invia"
 
 #: blog/models.py:54
 msgid "posts"
@@ -241,28 +240,29 @@ msgstr "articoli"
 #: blog/views.py:62
 #, python-format
 msgid "Successfully saved post '%s'"
-msgstr ""
+msgstr "Articolo '%s' salvato correttamente"
 
 #: blog/views.py:90
-#, fuzzy, python-format
+#, python-format
 msgid "Successfully updated post '%s'"
-msgstr "Fuso orario aggiornato correttamente."
+msgstr "Articolo '%s' aggiornato correttamente"
 
 #: blog/templates/notification/blog_friend_post/plain.txt:1
-#, fuzzy, python-format
+#, python-format
 msgid "%(post_author)s has posted to their blog."
-msgstr "un tuo amico ha scritto nel suo blog"
+msgstr "%(post_author)s ha scritto nel suo blog."
 
 #: blog/templates/notification/blog_friend_post/teaser.html:2
 #, python-format
 msgid ""
 "<a href=\"%(author_url)s\">%(post_author)s</a> has posted to their blog."
 msgstr ""
+"<a href=\"%(author_url)s\">%(post_author)s</a> ha scritto nel suo blog."
 
 #: blog/templates/notification/blog_post_comment/plain.txt:1
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s has commented on your blog post '%(post)s'."
-msgstr "è stato lasciato un commento in uno dei tuoi articoli di blog"
+msgstr "%(user)s ha lasciato un commento nel tuo articolo di blog '%(post)s'."
 
 #: blog/templates/notification/blog_post_comment/teaser.html:2
 #, python-format
@@ -270,6 +270,8 @@ msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> has commented on your blog post '<a "
 "href=\"%(post_url)s\">%(post)s</a>'."
 msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> ha lasciato un commento nel tuo "
+"articolo di blog '<a href=\"%(post_url)s\">%(post)s</a>'."
 
 #: core/templatetags/shorttimesince_tag.py:15
 msgid "yr"
@@ -334,7 +336,6 @@ msgid "%(total)s people with email found, %(imported)s contacts imported."
 msgstr "Trovate %(total)s persone con email, importati %(imported)s contatti."
 
 #: photos/models.py:14
-#, fuzzy
 msgid "Private"
 msgstr "privato"
 
@@ -348,57 +349,50 @@ msgid "description"
 msgstr "descrizione"
 
 #: photos/models.py:21
-#, fuzzy
 msgid "publish_type"
-msgstr "pubblica"
+msgstr "tipo_di_pubblicazione"
 
 #: photos/models.py:25 photos/models.py:41
-#, fuzzy
 msgid "photo set"
-msgstr "articolo"
+msgstr "album"
 
 #: photos/models.py:26
-#, fuzzy
 msgid "photo sets"
-msgstr "articoli"
+msgstr "album"
 
 #: photos/models.py:31
-#, fuzzy
 msgid "Safe"
-msgstr "Salva"
+msgstr "Sicuro"
 
 #: photos/models.py:32
-#, fuzzy
 msgid "Not Safe"
-msgstr "Nota"
+msgstr "Non Sicuro"
 
 #: photos/models.py:36
-#, fuzzy
 msgid "caption"
-msgstr "Posizione"
+msgstr "legenda"
 
 #: photos/models.py:37 templates/bookmarks/bookmarks.html:30
 #: templates/bookmarks/bookmarks.html:38 templates/bookmarks/bookmarks.html:45
-#, fuzzy
 msgid "date added"
-msgstr "aggiunto"
+msgstr "aggiunta in data"
 
 #: photos/models.py:38
 msgid "is public"
-msgstr "è pubblico"
+msgstr "è pubblica"
 
 #: photos/models.py:38
 msgid "Public photographs will be displayed in the default views."
-msgstr ""
+msgstr "Le foto pubbliche verranno mostrate nelle viste di default."
 
 #: photos/models.py:40
 msgid "safetylevel"
-msgstr ""
+msgstr "livello_di_sicurezza"
 
 #: photos/views.py:26
 #, python-format
 msgid "Successfully uploaded photo '%s'"
-msgstr ""
+msgstr "Foto '%s' caricata correttamente"
 
 #: profiles/models.py:11
 msgid "user"
@@ -425,14 +419,12 @@ msgid "timezone"
 msgstr "fuso orario"
 
 #: profiles/models.py:18
-#, fuzzy
 msgid "Twitter Username"
-msgstr "Nome utente"
+msgstr "Nome utente Twitter"
 
 #: profiles/models.py:19
-#, fuzzy
 msgid "Twitter Password"
-msgstr "Nuova Password"
+msgstr "Password Twitter"
 
 #: profiles/models.py:20
 msgid "language"
@@ -606,9 +598,9 @@ msgid "state"
 msgstr "stato"
 
 #: projects/templates/notification/projects_added_as_member/plain.txt:1
-#, fuzzy, python-format
+#, python-format
 msgid "You have been added to project %(project)s by %(adder)s."
-msgstr "sei stato aggiunto a un progetto"
+msgstr "Sei stato aggiunto al progetto %(project)s da %(adder)s."
 
 #: projects/templates/notification/projects_added_as_member/teaser.html:2
 #, python-format
@@ -616,11 +608,13 @@ msgid ""
 "You have been added to project '<a href=\"%(project_url)s\">%(project)s</a>' "
 "by <a href=\"%(adder_url)s\">%(adder)s</a>."
 msgstr ""
+"Sei stato aggiunto al progetto '<a href=\"%(project_url)s\">%(project)s</a>' "
+"da <a href=\"%(adder_url)s\">%(adder)s</a>."
 
 #: projects/templates/notification/projects_new_member/plain.txt:1
-#, fuzzy, python-format
+#, python-format
 msgid "%(new_member)s has been added to project %(project)s."
-msgstr "sei stato aggiunto a un progetto"
+msgstr "%(new_member)s è stato aggiunto al progetto %(project)s."
 
 #: projects/templates/notification/projects_new_member/teaser.html:2
 #, python-format
@@ -628,11 +622,13 @@ msgid ""
 "<a href=\"%(new_member_url)s\">%(new_member)s</a> has been added to project "
 "'<a href=\"%(project_url)s\">%(project)s</a>'."
 msgstr ""
+"<a href=\"%(new_member_url)s\">%(new_member)s</a> è stato aggiunto al "
+"progetto '<a href=\"%(project_url)s\">%(project)s</a>'."
 
 #: projects/templates/notification/projects_new_task/plain.txt:1
 #, python-format
 msgid "%(creator)s has added a task '%(task)s' in project %(project)s."
-msgstr ""
+msgstr "%(creator)s ha aggiunto il compito '%(task)s' al progetto %(project)s."
 
 #: projects/templates/notification/projects_new_task/teaser.html:2
 #, python-format
@@ -641,11 +637,15 @@ msgid ""
 "(task_url)s\">%(task)s</a>' in project '<a href=\"%(project_url)s\">%"
 "(project)s</a>'."
 msgstr ""
+"<a href=\"%(creator_url)s\">%(creator)s</a> ha aggiunto il compito '<a href="
+"\"%(task_url)s\">%(task)s</a>' al progetto '<a href=\"%(project_url)s\">%"
+"(project)s</a>'."
 
 #: projects/templates/notification/projects_new_topic/plain.txt:1
 #, python-format
 msgid "%(creator)s has started a topic '%(topic)s' in project %(project)s."
 msgstr ""
+"%(creator)s ha avviato l'argomento '%(topic)s' nel progetto %(project)s."
 
 #: projects/templates/notification/projects_new_topic/teaser.html:2
 #, python-format
@@ -654,12 +654,17 @@ msgid ""
 "(topic_url)s\">%(topic)s</a>' in project <a href=\"%(project_url)s\">%"
 "(project)s</a>."
 msgstr ""
+"<a href=\"%(creator_url)s\">%(creator)s</a> ha avviato l'argomento '<a href="
+"\"%(topic_url)s\">%(topic)s</a>' nel progetto <a href=\"%(project_url)s\">%"
+"(project)s</a>."
 
 #: projects/templates/notification/projects_task_assignment/plain.txt:1
 #, python-format
 msgid ""
 "%(user)s has assigned task '%(task)s' in project %(project)s to %(assignee)s."
 msgstr ""
+"%(user)s ha assegnato il compito '%(task)s' nel progetto %(project)s a %"
+"(assignee)s."
 
 #: projects/templates/notification/projects_task_assignment/teaser.html:2
 #, python-format
@@ -668,12 +673,17 @@ msgid ""
 "(task_url)s\">%(task)s</a>' in project <a href=\"%(project_url)s\">%(project)"
 "s</a> to <a href=\"%(assignee_url)s\">%(assignee)s</a>."
 msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> ha assegnato il compito '<a href=\"%"
+"(task_url)s\">%(task)s</a>' nel progetto <a href=\"%(project_url)s\">%"
+"(project)s</a> a <a href=\"%(assignee_url)s\">%(assignee)s</a>."
 
 #: projects/templates/notification/projects_task_change/plain.txt:1
 #, python-format
 msgid ""
 "%(user)s has marked task '%(task)s' in project %(project)s as %(new_state)s."
 msgstr ""
+"%(user)s ha contrassegnato il compito '%(task)s' nel progetto %(project)s "
+"come %(new_state)s."
 
 #: projects/templates/notification/projects_task_change/teaser.html:2
 #, python-format
@@ -682,11 +692,16 @@ msgid ""
 "\">%(task)s</a>' in project <a href=\"%(project_url)s\">%(project)s</a> as %"
 "(new_state)s."
 msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> ha contrassegnato il compito '<a href="
+"\"%(task_url)s\">%(task)s</a>' nel progetto <a href=\"%(project_url)s\">%"
+"(project)s</a> come %(new_state)s."
 
 #: projects/templates/notification/projects_task_comment/plain.txt:1
 #, python-format
 msgid "%(user)s has commented on task '%(task)s' in project %(project)s."
 msgstr ""
+"%(user)s ha lasciato un commento sul compito '%(task)s' nel progetto %"
+"(project)s."
 
 #: projects/templates/notification/projects_task_comment/teaser.html:2
 #, python-format
@@ -695,12 +710,17 @@ msgid ""
 "(task_url)s\">%(task)s</a>' in project <a href=\"%(project_url)s\">%(project)"
 "s</a>."
 msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> ha lasciato un commento sul compito "
+"'<a href=\"%(task_url)s\">%(task)s</a>' nel progetto <a href=\"%(project_url)"
+"s\">%(project)s</a>."
 
 #: projects/templates/notification/projects_task_status/plain.txt:1
 #, python-format
 msgid ""
 "%(user)s has updated the status of task '%(task)s' in project %(project)s."
 msgstr ""
+"%(user)s ha aggiornato lo status del compito '%(task)s' nel progetto %"
+"(project)s."
 
 #: projects/templates/notification/projects_task_status/teaser.html:2
 #, python-format
@@ -709,12 +729,15 @@ msgid ""
 "href=\"%(task_url)s\">%(task)s</a>' in project <a href=\"%(project_url)s\">%"
 "(project)s</a>."
 msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> ha aggiornato lo status of compito '<a "
+"href=\"%(task_url)s\">%(task)s</a>' nel progettoproject <a href=\"%"
+"(project_url)s\">%(project)s</a>."
 
 #: projects/templates/notification/projects_topic_response/plain.txt:1
 #: tribes/templates/notification/tribes_topic_response/plain.txt:1
-#, fuzzy, python-format
+#, python-format
 msgid "%(user)s has responded to your topic '%(topic)s'."
-msgstr "qualcuno ha risposto a un argomento che hai avviato"
+msgstr "%(user)s ha risposto al tuo argomento '%(topic)s'."
 
 #: projects/templates/notification/projects_topic_response/teaser.html:2
 #: tribes/templates/notification/tribes_topic_response/teaser.html:2
@@ -723,6 +746,8 @@ msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> has responded to your topic '<a href="
 "\"%(topic_url)s\">%(topic)s</a>'."
 msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> ha risposto al tuo argomento '<a href="
+"\"%(topic_url)s\">%(topic)s</a>'."
 
 #: templates/404.html:5
 msgid "Not Found"
@@ -991,15 +1016,22 @@ msgstr "Logout"
 
 #: templates/site_base.html:10 templates/account/login.html:6
 msgid "Login"
-msgstr "Login"
+msgstr "Accedi"
+
+#: templates/site_base.html:10 templates/bookmarks/bookmarks.html:27
+#: templates/bookmarks/bookmarks.html:29 templates/bookmarks/bookmarks.html:35
+#: templates/bookmarks/bookmarks.html:37 templates/bookmarks/bookmarks.html:42
+#: templates/bookmarks/bookmarks.html:44
+msgid "or"
+msgstr "o"
 
 #: templates/site_base.html:10
 msgid "Sign up"
-msgstr "Registrazione"
+msgstr "Registrati"
 
 #: templates/site_base.html:30
 msgid "Home"
-msgstr "Home"
+msgstr ""
 
 #: templates/site_base.html:32 templates/sites.html:5
 #: templates/sites.html.py:10
@@ -1017,7 +1049,7 @@ msgstr "Profilo"
 #: templates/site_base.html:44
 #: templates/photos/plugins/profiles/profile.html:6
 msgid "Photos"
-msgstr ""
+msgstr "Foto"
 
 #: templates/site_base.html:45
 msgid "Blogs"
@@ -1034,7 +1066,7 @@ msgid "Tribes"
 msgstr "Tribù"
 
 #: templates/site_base.html:48 templates/projects/project.html:159
-#: templates/tribes/tribe.html:141 templates/zwitschern/personal.html:6
+#: templates/tribes/tribe.html:145 templates/zwitschern/personal.html:6
 #: templates/zwitschern/personal.html:14
 #: templates/zwitschern/plugins/profiles/profile.html:4
 msgid "Tweets"
@@ -1172,9 +1204,8 @@ msgstr "Reimposta Password"
 
 #: templates/account/base.html:16 templates/account/other_services.html:6
 #: templates/account/other_services.html:9
-#, fuzzy
 msgid "Other Services"
-msgstr "Condizioni di Servizio"
+msgstr "Altri Servizi"
 
 #: templates/account/email.html:10
 msgid "Email Addresses"
@@ -1286,16 +1317,15 @@ msgstr "Sessione terminata."
 
 #: templates/account/other_services.html:11
 msgid "You have already authorized a twitter account."
-msgstr ""
+msgstr "Hai già autorizzato un account twitter."
 
 #: templates/account/other_services.html:12
 msgid "Change your account wtih the form below."
-msgstr ""
+msgstr "Cambia il tuo account tramite la scheda in basso."
 
 #: templates/account/other_services.html:14
-#, fuzzy
 msgid "Twitter:"
-msgstr "un clone di Twitter"
+msgstr "Twitter:"
 
 #: templates/account/other_services.html:20
 msgid "Save"
@@ -1521,39 +1551,44 @@ msgstr "Ecco i segnalibro di tutti:"
 
 #: templates/bookmarks/bookmarks.html:24
 msgid "Sort by:"
-msgstr ""
+msgstr "Ordina per:"
 
 #: templates/bookmarks/bookmarks.html:26 templates/bookmarks/bookmarks.html:34
 #: templates/bookmarks/bookmarks.html:41
 msgid "reddit-like hotness"
-msgstr ""
-
-#: templates/bookmarks/bookmarks.html:27 templates/bookmarks/bookmarks.html:29
-#: templates/bookmarks/bookmarks.html:35 templates/bookmarks/bookmarks.html:37
-#: templates/bookmarks/bookmarks.html:42 templates/bookmarks/bookmarks.html:44
-msgid "or"
-msgstr ""
+msgstr "Importanza in stile reddit"
 
 #: templates/bookmarks/bookmarks.html:28 templates/bookmarks/bookmarks.html:36
 #: templates/bookmarks/bookmarks.html:43
 msgid "total points"
-msgstr ""
+msgstr "totale punti"
 
 #: templates/bookmarks/bookmarks.html:81
 #, python-format
-msgid "%(count)s save%(pluralize)s"
-msgstr ""
+msgid ""
+"\n"
+"                                Saved once\n"
+"                            "
+msgid_plural ""
+"\n"
+"                                Saved %(count)s times\n"
+"                            "
+msgstr[0] ""
+"\n"
+"Salvato una volta"
+msgstr[1] ""
+"\n"
+"Salvato %(count)s volte"
 
-#: templates/bookmarks/bookmarks.html:83
+#: templates/bookmarks/bookmarks.html:87
 msgid "(including you)"
-msgstr ""
+msgstr "(incluso te)"
 
-#: templates/bookmarks/bookmarks.html:85
-#, fuzzy
+#: templates/bookmarks/bookmarks.html:89
 msgid "save"
-msgstr "Salva"
+msgstr "salva"
 
-#: templates/bookmarks/bookmarks.html:96
+#: templates/bookmarks/bookmarks.html:100
 msgid "No bookmarks yet."
 msgstr "Ancora nessun segnalibro."
 
@@ -1728,7 +1763,7 @@ msgstr "Componi"
 
 #: templates/messages/base.html:13 templates/messages/outbox.html:11
 msgid "Sent"
-msgstr "Inviato"
+msgstr "Inviati"
 
 #: templates/messages/base.html:14
 msgid "Trash"
@@ -1950,31 +1985,28 @@ msgstr ""
 #: templates/photos/base.html:10 templates/photos/latest.html:15
 #: templates/photos/latest.html.py:20 templates/photos/upload.html:15
 msgid "Latest Photos"
-msgstr ""
+msgstr "Ultime Foto"
 
 #: templates/photos/base.html:11 templates/photos/memberphotos.html:15
 #: templates/photos/yourphotos.html:15 templates/photos/yourphotos.html:20
-#, fuzzy
 msgid "Your Photos"
-msgstr "I Tuoi Articoli"
+msgstr "Le Tue Foto"
 
 #: templates/photos/base.html:12
 msgid "Upload a Photo"
-msgstr ""
+msgstr "Carica una Foto"
 
 #: templates/photos/details.html:15 templates/photos/details.html.py:20
-#, fuzzy
 msgid "Photo Details"
-msgstr "Modifica i dettagli"
+msgstr "Dettagli della Foto"
 
 #: templates/photos/memberphotos.html:20
 msgid "Photos from "
-msgstr ""
+msgstr "Foto di "
 
 #: templates/photos/upload.html:20
-#, fuzzy
 msgid "Upload Photos"
-msgstr "Articoli di Blog"
+msgstr "Carica Foto"
 
 #: templates/profiles/base.html:10
 msgid "Your Profile"
@@ -2003,11 +2035,11 @@ msgstr "Sito web"
 
 #: templates/profiles/profile.html:27
 msgid "Followers"
-msgstr "Chi mi segue"
+msgstr "Seguono"
 
 #: templates/profiles/profile.html:28
 msgid "Following"
-msgstr "Chi io seguo"
+msgstr "Segue"
 
 #: templates/profiles/profile.html:32
 msgid "Edit profile"
@@ -2104,9 +2136,8 @@ msgstr "I Tuoi Compiti"
 
 #: templates/projects/base.html:11 templates/projects/your_projects.html:6
 #: templates/projects/your_projects.html:11
-#, fuzzy
 msgid "Your Projects"
-msgstr "I Tuoi Articoli"
+msgstr "I Tuoi Progetti"
 
 #: templates/projects/base.html:12
 msgid "All Projects"
@@ -2129,9 +2160,8 @@ msgid "Add new member"
 msgstr "Aggiungi un nuovo membro"
 
 #: templates/projects/projects.html:20
-#, fuzzy
 msgid "Start your own project"
-msgstr "Avvia il tuo"
+msgstr "Avvia il tuo progetto"
 
 #: templates/projects/projects.html:25 templates/tribes/tribes.html:24
 msgid "create"
@@ -2194,7 +2224,7 @@ msgstr "Cancella Argomento"
 msgid "Discussion Topics for Project"
 msgstr "Argomenti di Discussione per Progetto"
 
-#: templates/projects/topics.html:46 templates/tribes/topics.html:47
+#: templates/projects/topics.html:46 templates/tribes/topics.html:52
 msgid "Create New Topic"
 msgstr "Crea Nuovo Argomento"
 
@@ -2209,11 +2239,12 @@ msgid ""
 "this is an <b>experimental</b> feature that is subject to massive change at "
 "any time."
 msgstr ""
+"questa è una funzionalità <b>sperimentale</b>, soggetta a grossi cambiamenti "
+"in qualsiasi momento."
 
 #: templates/projects/your_projects.html:13
-#, fuzzy
 msgid "These are the projects you participate in."
-msgstr "Partecipi a queste tribù."
+msgstr "Ecco i progetti a cui partecipi."
 
 #: templates/projects/wiki/base.html:10 templates/wiki/base.html:10
 msgid "All Articles"
@@ -2304,9 +2335,8 @@ msgid "Tags"
 msgstr "Tag"
 
 #: templates/tags/index.html:19
-#, fuzzy
 msgid "All Photos Matching "
-msgstr "Tutti gli Articoli di Blog Individuati da "
+msgstr "Tutte le Foto Individuate da "
 
 #: templates/tags/index.html:35
 msgid "All Blog Posts Matching "
@@ -2322,12 +2352,12 @@ msgstr "Torna alla Lista di Argomenti per Tribù"
 
 #: templates/tribes/topic.html:50
 msgid "Reply to This Post"
-msgstr ""
+msgstr "Rispondi a Questo Articolo"
 
 #: templates/tribes/topics.html:8
-#, fuzzy, python-format
+#, python-format
 msgid "Topics for %(tribe_name)s"
-msgstr "Compiti per %(other_user)s"
+msgstr "Argomenti per %(tribe_name)s"
 
 #: templates/tribes/topics.html:11
 msgid "Discussion Topics for Tribe"
@@ -2336,38 +2366,54 @@ msgstr "Argomenti di Discussione per Tribù"
 #: templates/tribes/topics.html:29
 #, python-format
 msgid ""
-"%(comment_count)s comment%(comment_count|pluralize)s\n"
-"                            (most recent: %(topic.modified|date)s)\n"
+"\n"
+"                                One comment\n"
+"                            "
+msgid_plural ""
+"\n"
+"                                %(comment_count)s comments\n"
+"                            "
+msgstr[0] ""
+"\n"
+"Un commento"
+msgstr[1] ""
+"\n"
+"%(comment_count)s commenti"
+
+#: templates/tribes/topics.html:34
+#, python-format
+msgid ""
+"\n"
+"                                (most recent: %(topic_modified_date)s)\n"
 "                            "
 msgstr ""
+"\n"
+"(il più recente: %(topic_modified_date)s)"
 
-#: templates/tribes/topics.html:42
-#, fuzzy
+#: templates/tribes/topics.html:47
 msgid "New Topic"
-msgstr "Crea Nuovo Argomento"
+msgstr "Nuovo Argomento"
 
 #: templates/tribes/tribe.html:37
 msgid "Tribe"
 msgstr "Tribù"
 
 #: templates/tribes/tribe.html:40
-#, fuzzy
 msgid "Slug:"
-msgstr "slug"
+msgstr ""
 
 #: templates/tribes/tribe.html:41
-#, fuzzy
 msgid "Creator:"
-msgstr "creatore"
+msgstr "Creatore:"
 
 #: templates/tribes/tribe.html:42
-#, fuzzy
 msgid "Created:"
-msgstr "creato"
+msgstr "Creato:"
 
 #: templates/tribes/tribe.html:63
 msgid "You are the creator of this tribe so can't leave (yet)."
 msgstr ""
+"Sei il creatore di questa tribù, quindi non puoi abbandonarla (per ora)."
 
 #: templates/tribes/tribe.html:66
 msgid "leave"
@@ -2387,52 +2433,69 @@ msgstr ""
 "\">accedi</a> per partecipare a questa tribù."
 
 #: templates/tribes/tribe.html:82
-#, fuzzy
 msgid "Discussion Topics"
-msgstr "Argomenti di Discussione per Tribù"
+msgstr "Argomenti di Discussione"
 
 #: templates/tribes/tribe.html:99
 #, python-format
 msgid ""
 "\n"
-"                                            %(comment_count)s comment%"
-"(comment_count_pluralize)s\n"
+"                                            One comment\n"
+"                                        "
+msgid_plural ""
+"\n"
+"                                            %(comment_count)s comments\n"
+"                                        "
+msgstr[0] ""
+"\n"
+"Un commento"
+msgstr[1] ""
+"\n"
+"%(comment_count)s commenti"
+
+#: templates/tribes/tribe.html:104
+#, python-format
+msgid ""
+"\n"
 "                                            (most recent: %"
 "(topic_modified_date)s)\n"
 "                                        "
 msgstr ""
+"\n"
+"(il più recente: %(topic_modified_date)s)"
 
-#: templates/tribes/tribe.html:109 templates/tribes/tribe.html.py:134
+#: templates/tribes/tribe.html:113 templates/tribes/tribe.html.py:138
 msgid "more..."
-msgstr ""
-
-#: templates/tribes/tribe.html:112
-#, fuzzy, python-format
-msgid "None yet. <a href=\"%(new_tribe_url)s\">Start one...</a>"
-msgstr "E ora <a href=\"%(what_next_url)s\">Cos'Altro</a>?"
+msgstr "continua..."
 
 #: templates/tribes/tribe.html:116
+#, python-format
+msgid "None yet. <a href=\"%(new_tribe_url)s\">Start one...</a>"
+msgstr "Ancora nessuna. <a href=\"%(new_tribe_url)s\">Avvìane una...</a>"
+
+#: templates/tribes/tribe.html:120
 #: templates/wiki/plugins/profiles/profile.html:4
 #: templates/wiki/profiles/profile.html:4
 msgid "Wiki Articles"
 msgstr "Articoli di Wiki"
 
-#: templates/tribes/tribe.html:137
+#: templates/tribes/tribe.html:141
 #, python-format
 msgid ""
-"None yet. Start a <a href=\"%(wiki_url)s\", title=\"NewArticle\">NewArticle</"
-"a>..."
+"None yet. Start a <a href=\"%(wiki_url)s\", title=\"NewArticle\">New "
+"Article</a>..."
 msgstr ""
+"Ancora nessuno. Avvia un <a href=\"%(wiki_url)s\", title=\"NewArticle"
+"\">Nuovo Articolo</a>..."
 
 #: templates/tribes/tribes.html:16
-#, fuzzy
 msgid "A <b>tribe</b> is a group of people with some common interest."
-msgstr "gruppi di persone con interessi comuni"
+msgstr ""
+"Una <b>tribù</b> è un gruppo di persone con un qualche interesse comune."
 
 #: templates/tribes/tribes.html:19
-#, fuzzy
 msgid "Start your own tribe"
-msgstr "Avvia il tuo"
+msgstr "Avvia la tua tribù"
 
 #: templates/tribes/tribes.html:30
 #, python-format
@@ -2445,7 +2508,7 @@ msgstr ""
 
 #: templates/tribes/your_tribes.html:13
 msgid "These are the tribes you participate in."
-msgstr "Partecipi a queste tribù."
+msgstr "Ecco le tribù a cui partecipi."
 
 #: templates/wiki/changeset.html:10 templates/wiki/index.html:13
 msgid "Wiki for Tribe"
@@ -2488,7 +2551,7 @@ msgstr "Che fai ora?"
 
 #: templates/zwitschern/personal.html:20
 msgid "You have authorized a twitter account."
-msgstr ""
+msgstr "Hai autorizzato un account twitter."
 
 #: templates/zwitschern/personal.html:24
 msgid "chars left."
@@ -2506,8 +2569,8 @@ msgid ""
 "following (plus your own)"
 msgstr ""
 "\n"
-"        Ecco i tweet dei %(follow_count)s %(follow_name)s che stai seguendo "
-"(più i tuoi)"
+"        Ecco i tweet delle %(follow_count)s %(follow_name)s che stai "
+"seguendo (più i tuoi)"
 
 #: templates/zwitschern/public.html:6
 msgid "Public Tweets"
@@ -2535,7 +2598,7 @@ msgstr "Esiste già una tribù con quel nome."
 
 #: tribes/management.py:10
 msgid "Friend Joined Tribe"
-msgstr "Un Amico si è Aggiunto all Tribù"
+msgstr "Un Amico si è Aggiunto alla Tribù"
 
 #: tribes/management.py:10
 msgid "a friend of yours joined a tribe"
@@ -2598,7 +2661,7 @@ msgstr "tribù"
 #: tribes/templates/notification/tribes_new_member/plain.txt:1
 #, python-format
 msgid "%(user)s has joined the tribe %(tribe)s."
-msgstr ""
+msgstr "%(user)s si è unito alla tribù %(tribe)s."
 
 #: tribes/templates/notification/tribes_created_new_member/teaser.html:2
 #: tribes/templates/notification/tribes_friend_joined/teaser.html:2
@@ -2608,11 +2671,13 @@ msgid ""
 "<a href=\"%(user_url)s\">%(user)s</a> has joined the tribe <a href=\"%"
 "(tribe_url)s\">%(tribe)s</a>."
 msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> si è unito alla tribù <a href=\"%"
+"(tribe_url)s\">%(tribe)s</a>."
 
 #: tribes/templates/notification/tribes_friend_tribe/plain.txt:1
-#, fuzzy, python-format
+#, python-format
 msgid "%(tribe_creator)s has created a new tribe %(tribe)s."
-msgstr "un amico ha creato una nuova tribù"
+msgstr "%(tribe_creator)s ha creato una nuova tribù %(tribe)s."
 
 #: tribes/templates/notification/tribes_friend_tribe/teaser.html:2
 #, python-format
@@ -2620,12 +2685,16 @@ msgid ""
 "<a href=\"%(user_url)s\">%(tribe_creator)s</a> has created a new tribe <a "
 "href=\"%(tribe_url)s\">%(tribe)s</a>."
 msgstr ""
+"<a href=\"%(user_url)s\">%(tribe_creator)s</a> ha creato una nuova tribù <a "
+"href=\"%(tribe_url)s\">%(tribe)s</a>."
 
 #: tribes/templates/notification/tribes_new_topic/plain.txt:1
 #, python-format
 msgid ""
 "%(topic_creator)s has started a topic '%(topic)s' in tribe %(topic_tribe)s."
 msgstr ""
+"%(topic_creator)s ha avviato l'argomento '%(topic)s' nella tribù %"
+"(topic_tribe)s."
 
 #: tribes/templates/notification/tribes_new_topic/teaser.html:2
 #, python-format
@@ -2634,16 +2703,20 @@ msgid ""
 "\"%(topic_url)s\">%(topic)s</a>' in tribe <a href=\"%(tribe_url)s\">%"
 "(topic_tribe)s</a>."
 msgstr ""
+"<a href=\"%(user_url)s\">%(topic_creator)s</a> ha avviato l'argomento '<a "
+"href=\"%(topic_url)s\">%(topic)s</a>' nella tribù <a href=\"%(tribe_url)s\">%"
+"(topic_tribe)s</a>."
 
 #: tribes/templates/notification/tribes_new_tribe/plain.txt:1
-#, fuzzy, python-format
+#, python-format
 msgid "A new tribe %(tribe)s has been created."
-msgstr "una nuova tribù è stata creata"
+msgstr "Una nuova tribù, %(tribe)s, è stata creata."
 
 #: tribes/templates/notification/tribes_new_tribe/teaser.html:2
-#, fuzzy, python-format
+#, python-format
 msgid "A new tribe <a href=\"%(tribe_url)s\">%(tribe)s</a> has been created."
-msgstr "Non sei membro di alcuna <a href=\"%(tribe_url)s\">tribù</a>."
+msgstr ""
+"Una nuova tribù, <a href=\"%(tribe_url)s\">%(tribe)s</a>, è stata creata."
 
 #: zwitschern/management.py:9
 msgid "New Tweet Follower"
@@ -2663,7 +2736,7 @@ msgstr "mittente"
 
 #: zwitschern/models.py:45 zwitschern/models.py:70
 msgid "sent"
-msgstr "inviato"
+msgstr "inviati"
 
 #: zwitschern/models.py:147
 msgid "follower"
@@ -2676,5 +2749,4 @@ msgstr "colui che viene seguito"
 #: zwitschern/templates/notification/tweet_follow/teaser.html:2
 #, python-format
 msgid "<a href=\"%(profile_url)s\">%(user)s</a> is now following your tweets."
-msgstr ""
-
+msgstr "<a href=\"%(profile_url)s\">%(user)s</a> ora segue i tuoi tweet."
