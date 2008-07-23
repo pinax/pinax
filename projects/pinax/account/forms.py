@@ -183,17 +183,17 @@ class ResetPasswordForm(forms.Form):
             raise forms.ValidationError(_("Email address not verified for any user account"))
         return self.cleaned_data["email"]
 
-	def save(self):
-		for user in User.objects.filter(email__iexact=self.cleaned_data["email"]):
-			new_password = User.objects.make_random_password()
-			user.set_password(new_password)
-			user.save()
-			subject = _("Password reset")
-			message = render_to_string("account/password_reset_message.txt", {
+    def save(self):
+        for user in User.objects.filter(email__iexact=self.cleaned_data["email"]):
+            new_password = User.objects.make_random_password()
+            user.set_password(new_password)
+            user.save()
+            subject = _("Password reset")
+            message = render_to_string("account/password_reset_message.txt", {
                 "user": user,
                 "new_password": new_password,
             })
-			send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user.email])
+            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user.email])
         return self.cleaned_data["email"]
 
 class ChangeTimezoneForm(ProfileForm):
@@ -224,18 +224,18 @@ class ChangeLanguageForm(ProfileForm):
 
 
 class TwitterForm(ProfileForm):
-	username = forms.CharField(label=_("Username"), required=True)
-	password = forms.CharField(label=_("Password"), required=True,
-	                           widget=forms.PasswordInput(render_value=False))
-	                           
-	def __init__(self, *args, **kwargs):
-		super(TwitterForm, self).__init__(*args, **kwargs)
-		self.initial.update({"username": self.profile.twitter_user})
-		
-	def save(self):
-	    from zwitschern.utils import get_twitter_password
-	    self.profile.twitter_user = self.cleaned_data['username']
-	    self.profile.twitter_password = get_twitter_password(settings.SECRET_KEY, self.cleaned_data['password'])
-	    self.profile.save()
-	    self.user.message_set.create(message=ugettext(u"Sucessfully authenticated."))
-		
+    username = forms.CharField(label=_("Username"), required=True)
+    password = forms.CharField(label=_("Password"), required=True,
+                               widget=forms.PasswordInput(render_value=False))
+                               
+    def __init__(self, *args, **kwargs):
+        super(TwitterForm, self).__init__(*args, **kwargs)
+        self.initial.update({"username": self.profile.twitter_user})
+        
+    def save(self):
+        from zwitschern.utils import get_twitter_password
+        self.profile.twitter_user = self.cleaned_data['username']
+        self.profile.twitter_password = get_twitter_password(settings.SECRET_KEY, self.cleaned_data['password'])
+        self.profile.save()
+        self.user.message_set.create(message=ugettext(u"Sucessfully authenticated."))
+        
