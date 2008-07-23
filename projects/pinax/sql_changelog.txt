@@ -16,3 +16,8 @@ UPDATE "tribes_topic" SET modified=created;
 
 ALTER TABLE "profiles_profile" ADD COLUMN "twitter_user" varchar(50) NOT NULL DEFAULT '';
 ALTER TABLE "profiles_profile" ADD COLUMN "twitter_password" varchar(50) NOT NULL DEFAULT '';
+
+
+## for addition of upscale to photologue
+
+ALTER TABLE photologue_photosize ADD COLUMN "upscale" boolean NOT NULL DEFAULT FALSE;
