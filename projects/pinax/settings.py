@@ -93,6 +93,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "announcements.context_processors.site_wide_announcements",
     "account.context_processors.openid",
     "core.context_processors.contact_email",
+    "core.context_processors.site_name",
     "messages.context_processors.inbox"
 )
 
@@ -158,6 +159,7 @@ AUTH_PROFILE_MODULE = 'profiles.Profile'
 EMAIL_CONFIRMATION_DAYS = 2
 EMAIL_DEBUG = DEBUG
 CONTACT_EMAIL = "feedback@example.com"
+SITE_NAME = "Pinax"
 LOGIN_URL = "/account/login"
 
 LOGGING_OUTPUT_ENABLED = True
