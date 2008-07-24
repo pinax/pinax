@@ -3,7 +3,7 @@
 {% load i18n %}
 {% load zwitschern %}
 
-{% block head_title %}Pinax : {% blocktrans %}Tweets{% endblocktrans %}{% endblock %}
+{% block head_title %}{% blocktrans %}Tweets{% endblocktrans %}{% endblock %}
 
 {% block extra_head %}
     <link rel="alternate" type="application/atom+xml" title="Tweets Feed for User {{ user.username|capfirst }}" href="/feeds/tweets/only/{{ user.username }}/" />
@@ -16,7 +16,7 @@
     <form method="POST" action="{% url zwitschern.views.personal %}">
         <p>{% trans "What are you doing?" %}</p>
         <textarea id="new_tweet" name="tweet" cols="30" rows="4">{% if reply %}@{{ reply }} {% endif %}</textarea>
-		{% if twitter_authorized %}
+        {% if twitter_authorized %}
         <h2>{% trans "You have authorized a twitter account." %}</h2>
         <input name="pub2twitter" type="checkbox" id="pub2twitter" value="yes" />
         <label for="pub2twitter">Publish to Twitter?</label>

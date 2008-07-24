@@ -4,7 +4,7 @@
 {% load threadedcommentstags %}
 {% load gravatar %}
 
-{% block head_title %}Pinax : {{ task.summary }}{% endblock %}
+{% block head_title %}{{ task.summary }}{% endblock %}
 
 {% block body %}
     <p><a href="{% url project_tasks task.project.slug %}">&larr; {% trans "Back to Task List for Project " %} {{ task.project }}</a></p>

@@ -7,7 +7,7 @@
 {% load tagging_tags %}
 {% load wiki %}
 
-{% block head_title %}Pinax : {% blocktrans %}Blog Post{% endblocktrans %} : {{ post.title }}{% endblock %}
+{% block head_title %}{% blocktrans %}Blog Post{% endblocktrans %} : {{ post.title }}{% endblock %}
 
 {% block extra_head %}
     <link rel="alternate" type="application/atom+xml" title="Blog Post Feed for All Users" href="/feeds/posts/all/" />

@@ -5,7 +5,7 @@
 {% load timezone_filters %}
 {% load captureas_tag %}
 
-{% block head_title %}Pinax : {% trans "Notices" %}{% endblock %}
+{% block head_title %}{% trans "Notices" %}{% endblock %}
 
 {% block extra_head %}
     <link rel="alternate" type="application/atom+xml" title="Notices Feed" href="{% url notification_feed_for_user %}" />

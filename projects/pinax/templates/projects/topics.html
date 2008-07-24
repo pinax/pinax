@@ -5,7 +5,7 @@
 {% load threadedcommentstags %}
 {% load pagination_tags %}
 
-{% block head_title %}Pinax : Topics for {{ project.name }}{% endblock %}
+{% block head_title %}Topics for {{ project.name }}{% endblock %}
 
 {% block body %}
     <h1>{% trans "Discussion Topics for Project" %} <a href="{% url project_detail project.slug %}">{{ project.name }}</a></h1>

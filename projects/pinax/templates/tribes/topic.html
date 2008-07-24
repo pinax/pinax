@@ -5,7 +5,7 @@
 {% load pagination_tags %}
 {% load gravatar %}
 
-{% block head_title %}Pinax : {{ topic.title }}{% endblock %}
+{% block head_title %}{{ topic.title }}{% endblock %}
 
 {% block body %}
     <p><a href="{% url tribe_topics topic.tribe.slug %}">&larr; {% trans "Back to Topic List for Tribe " %} {{ topic.tribe }}</a></p>

@@ -8,7 +8,7 @@
 {% load humanize %}
 {% load shorttimesince_tag %}
 
-{% block head_title %}Pinax : Tasks for {{ project.name }}{% endblock %}
+{% block head_title %}Tasks for {{ project.name }}{% endblock %}
 
 {% block body %}
     <h1>{% trans "Tasks for Project" %} <a href="{% url project_detail project.slug %}">{{ project.name }}</a></h1>

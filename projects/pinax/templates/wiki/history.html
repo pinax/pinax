@@ -4,7 +4,7 @@
 {% load i18n %}
 {% load wikiurl %}
 
-{% block head_title %}Pinax : {{ article.title }} {% endblock %}
+{% block head_title %}{{ article.title }} {% endblock %}
 
 {% block body %}
     <h1>{% trans "Wiki for Project" %} <a href="{% url tribe_detail group.slug %}">{{ group.name }}</a></h1>
