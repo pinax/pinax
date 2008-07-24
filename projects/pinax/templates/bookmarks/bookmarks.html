@@ -79,8 +79,6 @@
                         <div class="body">{{ bookmark.note|linebreaks }}</div>
                         <div class="save">
                             {% blocktrans with bookmark.saved_instances.count as count %}
-                                Saved once
-                            {% plural %}
                                 Saved {{ count }} times
                             {% endblocktrans %}
                             {% if bookmark|in_list:user_bookmarks %}
