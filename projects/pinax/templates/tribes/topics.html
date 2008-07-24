@@ -26,7 +26,7 @@
                     {% get_comment_count for topic as comment_count %}
                     {% if comment_count %}
                         <div class="comment_stats">
-                            {% blocktrans %}
+                            {% blocktrans count comment_count as comment_count %}
                                 One comment
                             {% plural %}
                                 {{ comment_count }} comments
