@@ -97,8 +97,6 @@
                                 {% if comment_count %}
                                     <div class="comment_stats">
                                         {% blocktrans %}
-                                            One comment
-                                        {% plural %}
                                             {{ comment_count }} comments
                                         {% endblocktrans %}
                                         {% blocktrans with topic.modified|date as topic_modified_date %}
