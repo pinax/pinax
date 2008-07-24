@@ -1,0 +1,22 @@
+{% extends "messages/base.html" %}
+
+{% load i18n %}
+{% load humanize %}
+{% load timezone_filters %}
+
+{% block head_title %}Pinax : {% trans "Notice" %}{% endblock %}
+
+{% block body %}
+    <h1>{% trans "Notice" %}</h1>
+    
+    {% if notice.is_unseen %}
+        <div class="unseen_notice">
+    {% else %}
+        <div class="notice">
+    {% endif %}
+        <span class="notice_type">[{% trans notice.notice_type.display %}]</span>
+        <span class="notice_message">{{ notice.message|safe }}</span>
+        <span class="notice_time">{{ notice.added|localtime:user.get_profile.timezone|time:"P" }}</span>
+    </div>
+    
+{% endblock %}
