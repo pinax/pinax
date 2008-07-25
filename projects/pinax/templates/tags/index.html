@@ -10,6 +10,7 @@
 {% load markup %}
 {% load switchcase %}
 {% load restructuredtext %}
+{% load threadedcommentstags %}
 
 {% block head_title %}{% blocktrans %}Tags{% endblocktrans %}{% endblock %}
 
@@ -19,15 +20,17 @@
     <h1>{% trans "All Photos Matching " %}<i>"{{ tag }}"</i></h1>
     
     {% if phototags %}
+        <div class="thumb-row clearfix">
         {% for photo in phototags %}
-            <div class="clearfix">
                 <div class="gallery-photo-thumb">
                     <a href="/photos/details/{{ photo.id }}/"><img src="/site_media/{{ photo.get_thumbnail_url }}" alt="{{ photo.title }}"/></a><br />
                     from <a href="{% url profiles.views.profile photo.member.username %}">{{ photo.member.username }}</a><br />
+                    <img src="/site_media/comment.png" border="0" class="noborder" align="absmiddle" /><a href="/photos/details/{{ photo.id }}/">{% get_comment_count for photo as commentcount %} {{ commentcount }} Comments</a>
+                    <br />
                     Viewed {{ photo.view_count }} Times
                 </div>
-            </div>
         {% endfor %}
+        </div>
     {% else %}
         No photos matching tag.
     {% endif %}
