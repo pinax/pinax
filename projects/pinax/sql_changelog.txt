@@ -21,3 +21,8 @@ ALTER TABLE "profiles_profile" ADD COLUMN "twitter_password" varchar(50) NOT NUL
 ## for addition of upscale to photologue
 
 ALTER TABLE photologue_photosize ADD COLUMN "upscale" boolean NOT NULL DEFAULT FALSE;
+
+
+## for tagging on bookmarks
+
+ALTER TABLE "bookmarks_bookmarkinstance" ADD COLUMN "tags" varchar(255) NOT NULL DEFAULT "";

@@ -89,6 +89,9 @@
                                 (<a href="{% url bookmarks.views.add %}?url={{ bookmark.url }};description={{ bookmark.description }}">{% blocktrans %}save{% endblocktrans %}</a>)
                             {% endif %}
                         </div>
+                        <div class="tags">
+                            <p class="with-counts"><span class="label">Tags:</span> {% for tag in bookmark.all_tags_with_counts %}<span class="tag">{{ tag.name }}</span> <span class="count">({{ tag.count }})</span> {% endfor %}
+                        </div>
                     </td>
                 </tr>
             {% endfor %}
