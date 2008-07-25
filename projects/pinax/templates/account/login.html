@@ -6,9 +6,10 @@
 {% block head_title %}{% trans "Login" %}{% endblock %}
 
 {% block body %}
-
-    <div id="basic-form">
-        <h1>{% trans "Log In" %}</h1>
+    <div class="clearfix">
+    <div id="basic-form" class="left-form">
+    <fieldset>
+        <legend>{% trans "Log In" %}</legend>
     
         {% if user.is_authenticated %}
             <p><span class="warning">{% trans "Note" %}</span>: {% blocktrans %}you are already logged in as {{ user }}.{% endblocktrans %}</p>
@@ -21,26 +22,33 @@
             <table>
                 {% for field in form %}
     			    {% if field.errors %}{{ field.errors }}{% endif %}
-    			    <tr><td width="150px">{{ field.label_tag }}</td><td>
+    			    <tr><td width="100px">{{ field.label_tag }}</td><td>
     			    {{ field }}
-    			    {% if field.help_text %}<span>{{ field.help_text }}</span>{% endif %}</td></tr>
+    			    {% if field.help_text %}<br /><span>{{ field.help_text }}</span>{% endif %}</td></tr>
     			{% endfor %}
                 <tr><td></td><td><input type="submit" value="{% trans "Log in &raquo;" %}" class="button" /></td></tr>
             </table>
         </form>
+        </fieldset>
+    </div>
     
     
     {% if not openid %}
-        <p>{% trans "Or sign in with your OpenID" %}:</p>
+    <div id="basic-form" class="right-form">
+        <fieldset>
+        <legend>{% trans "Or sign in with your OpenID" %}</legend>
         <form class="login" action="{% url django_openidconsumer.views.begin %}" method="POST">
             <table>
-                <tr><td width="150px">{% trans "OpenID Identifier" %}: </td><td><input class="openid" type="text" name="openid_url"></td></tr>
+                <tr><td width="150px"><img src="/site_media/openid-icon.png" align="absmiddle" /> {% trans "OpenID Identifier" %}: </td><td><input class="openid" type="text" name="openid_url"></td></tr>
                 <tr><td></td><td><input type="submit" value="{% trans "Log in &raquo;" %}" class="button" /></td></tr>
             </table>
+            <p>Not OpenID enabled?  <a href="http://claimid.com/">Get started now.</a></p>
         </form>
+        </fieldset>
+        <p>{% blocktrans %}If you have any trouble logging in to your account, contact us at <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>.{% endblocktrans %}</p>
+    </div>
     {% endif %}
     </div>
-    <p>{% blocktrans %}If you have any trouble logging in to your account, contact us at <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>.{% endblocktrans %}</p>
 {% endblock %}
 
 {% block extra_body %}
