@@ -6,32 +6,40 @@
 {% block head_title %}{% trans "Login" %}{% endblock %}
 
 {% block body %}
-    <h1>{% trans "Log In" %}</h1>
+
+    <div id="basic-form">
+        <h1>{% trans "Log In" %}</h1>
     
-    {% if user.is_authenticated %}
-        <p><span class="warning">{% trans "Note" %}</span>: {% blocktrans %}you are already logged in as {{ user }}.{% endblocktrans %}</p>
-    {% else %}
-        {% captureas signup_url %}{% url account.views.signup %}{% endcaptureas %}
-        <p>{% blocktrans %}Don't have an account? <a href="{{ signup_url }}">Sign up</a>!{% endblocktrans %}</p>
-    {% endif %}
+        {% if user.is_authenticated %}
+            <p><span class="warning">{% trans "Note" %}</span>: {% blocktrans %}you are already logged in as {{ user }}.{% endblocktrans %}</p>
+        {% else %}
+            {% captureas signup_url %}{% url account.views.signup %}{% endcaptureas %}
+            <p>{% blocktrans %}Don't have an account? <a href="{{ signup_url }}">Sign up</a>!{% endblocktrans %}.  <a href="{% url account.views.password_reset %}">{% trans "Forgot password?" %}</a></p>
+        {% endif %}
     
-    <form class="login" method="POST" action="">
-        <table>
-            {{ form.as_table }}
-            <tr><td></td><td><a href="{% url account.views.password_reset %}">{% trans "Forgot password?" %}</a></td></tr>
-            <tr><td></td><td><input type="submit" value="{% trans "Log in &raquo;" %}" /></td></tr>
-        </table>
-    </form>
+        <form class="login" method="POST" action="">
+            <table>
+                {% for field in form %}
+    			    {% if field.errors %}{{ field.errors }}{% endif %}
+    			    <tr><td width="150px">{{ field.label_tag }}</td><td>
+    			    {{ field }}
+    			    {% if field.help_text %}<span>{{ field.help_text }}</span>{% endif %}</td></tr>
+    			{% endfor %}
+                <tr><td></td><td><input type="submit" value="{% trans "Log in &raquo;" %}" class="button" /></td></tr>
+            </table>
+        </form>
+    
     
     {% if not openid %}
         <p>{% trans "Or sign in with your OpenID" %}:</p>
         <form class="login" action="{% url django_openidconsumer.views.begin %}" method="POST">
             <table>
-                <tr><th>{% trans "OpenID Identifier" %}: </th><td><input class="openid" type="text" name="openid_url"></td></tr>
-                <tr><td></td><td><input type="submit" value="{% trans "Log in &raquo;" %}" /></td></tr>
+                <tr><td width="150px">{% trans "OpenID Identifier" %}: </td><td><input class="openid" type="text" name="openid_url"></td></tr>
+                <tr><td></td><td><input type="submit" value="{% trans "Log in &raquo;" %}" class="button" /></td></tr>
             </table>
         </form>
     {% endif %}
+    </div>
     <p>{% blocktrans %}If you have any trouble logging in to your account, contact us at <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>.{% endblocktrans %}</p>
 {% endblock %}
 
