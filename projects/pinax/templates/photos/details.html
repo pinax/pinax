@@ -17,6 +17,10 @@
 {% block body %}
     <p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time.</p>
     
+    <div class="right_panel">
+        {% include "photos/photo_right_panel.html" %}
+    </div>
+    
     <h1>{% trans "Photo Details" %}</h1>
     
     {% if photo %}
@@ -28,12 +32,6 @@
         </div>
         <div class="photo-caption">
             <p>{{ photo.caption }}</p>
-        </div>
-        <div class="photo-meta">
-            <img src="/site_media/tags.png" border="0" class="noborder" align="absmiddle" />  {% tags_for_object photo as tags %}
-            {% for tag in tags %}
-                <a href="/tags/{{ tag }}">{{ tag }}</a>
-            {% endfor %}</p>
         </div>
         
         

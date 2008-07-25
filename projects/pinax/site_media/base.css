@@ -405,6 +405,7 @@ div.right_panel {
     margin-top: 20px;
     width: 200px;
     float: right;
+    z-index: 999;
 }
 div.friends {
     background: #DEF;
@@ -777,9 +778,62 @@ div.task-meta2 b {
     text-decoration: line-through;
 }
 /* PHOTOS **************************************/
+.thumb-row {
+    margin-bottom: 20px;
+}
 .gallery-photo-thumb {
     width: 100px; 
     margin-right: 10px;
     float: left;
     text-align: center;
+}
+
+.photo-right-profile, .photo-right-tools {
+    background: #DEF;
+    padding: 8px;
+    margin-bottom: 20px;
+}
+
+.photo-profile-details {
+    font-size: 0.9em;
+}
+
+.photo-avatar {
+    float: left;
+    margin-right: 10px;
+}
+
+.photo-avatar img {
+    border: 1px solid #666;
+}
+
+.photo-right-tools ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.photo-right-tools ul li {
+    background: #fff;
+    padding: 2px 4px;
+    margin: 2px 0;
+}
+
+.photo-right-tools li a {
+    text-decoration: none;
+}
+
+.photo-right-tools li:hover {
+    background: #DDDDDD;
+}
+
+.photo-profile-details h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 1.1em;
+}
+
+.photo-right-tools h2 {
+    margin: 0 0 5px 0;
+    padding: 0;
 }
