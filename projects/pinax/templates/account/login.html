@@ -6,7 +6,7 @@
 {% block head_title %}{% trans "Login" %}{% endblock %}
 
 {% block body %}
-    <div class="clearfix">
+    <div class="clearfix padtop">
     <div id="basic-form" class="left-form">
     <fieldset>
         <legend>{% trans "Log In" %}</legend>
@@ -15,7 +15,7 @@
             <p><span class="warning">{% trans "Note" %}</span>: {% blocktrans %}you are already logged in as {{ user }}.{% endblocktrans %}</p>
         {% else %}
             {% captureas signup_url %}{% url account.views.signup %}{% endcaptureas %}
-            <p>{% blocktrans %}Don't have an account? <a href="{{ signup_url }}">Sign up</a>!{% endblocktrans %}.  <a href="{% url account.views.password_reset %}">{% trans "Forgot password?" %}</a></p>
+            <p>{% blocktrans %}Don't have an account? <a href="{{ signup_url }}">Sign up</a>!{% endblocktrans %}</p>
         {% endif %}
     
         <form class="login" method="POST" action="">
@@ -23,11 +23,12 @@
                 {% for field in form %}
     			    {% if field.errors %}{{ field.errors }}{% endif %}
     			    <tr><td width="100px">{{ field.label_tag }}</td><td>
-    			    {{ field }}
-    			    {% if field.help_text %}<br /><span>{{ field.help_text }}</span>{% endif %}</td></tr>
+    			    {{ field }}</td></tr>
+    			    {% if field.help_text %}<tr><td colspan="2"><span>{{ field.help_text }}</span></td></tr>{% endif %}
     			{% endfor %}
                 <tr><td></td><td><input type="submit" value="{% trans "Log in &raquo;" %}" class="button" /></td></tr>
             </table>
+            <a href="{% url account.views.password_reset %}">{% trans "Forgot password?" %}</a>
         </form>
         </fieldset>
     </div>
