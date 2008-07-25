@@ -137,8 +137,12 @@
                 </table>
                 <p><a href="{% wikiurl list tribe %}">{% trans "more..." %}</a></p>
             {% else %}
-                {% captureas wiki_url %}{% url wiki_edit_article group_slug=tribe.slug %}{% endcaptureas %}
-                <p>{% blocktrans %}None yet. Start a <a href="{{ wiki_url }}", title="NewArticle">New Article</a>...{% endblocktrans %}</p>
+                {% captureas wiki_url %}{% wikiurl list tribe %}{% endcaptureas %}
+                <p>
+                    {% blocktrans %}
+                        None yet. Go to the <a href="{{ wiki_url }}", title="wiki">wiki</a> to start a new article.
+                    {% endblocktrans %}
+                </p>
             {% endif %}
 
 
