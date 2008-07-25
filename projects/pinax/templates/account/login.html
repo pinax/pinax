@@ -40,7 +40,7 @@
         <legend>{% trans "Or sign in with your OpenID" %}</legend>
         <form class="login" action="{% url django_openidconsumer.views.begin %}" method="POST">
             <table>
-                <tr><td width="150px"><img src="/site_media/openid-icon.png" align="absmiddle" /> {% trans "OpenID Identifier" %}: </td><td><input class="openid" type="text" name="openid_url"></td></tr>
+                <tr><td width="150px"><img src="/site_media/openid-icon.png" /> {% trans "OpenID Identifier" %}: </td><td><input class="openid" type="text" name="openid_url"></td></tr>
                 <tr><td></td><td><input type="submit" value="{% trans "Log in &raquo;" %}" class="button" /></td></tr>
             </table>
             <p>Not OpenID enabled?  <a href="http://openid.net/get/" target="_blank">Get started now.</a></p>
