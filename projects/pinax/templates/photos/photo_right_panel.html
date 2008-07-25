@@ -1,0 +1,31 @@
+{% load i18n %}
+{% load captureas_tag %}
+{% load gravatar %}
+{% load tagging_tags %}
+
+<div class="photo-right-profile clearfix">
+    <div class="photo-avatar">{% gravatar photo.member.username 50 %}</div>
+    <div class="photo-profile-details">
+        <h2>Taken By</h2>
+        <a href="{% url profiles.views.profile photo.member.username %}" title="{{ photo.member.username }}">{{ photo.member.username }}</a><br />
+        {{ photo.date_taken|date }}<br />
+        Viewed {{ photo.view_count }} times
+    
+    </div>
+</div>
+
+<div class="photo-right-tools">
+    {% if photo.tags %}
+        <h2><img src="/site_media/tags.png" border="0" class="noborder" align="absmiddle" /> Tags</h2> 
+        <ul>
+            {% tags_for_object photo as tags %}
+            {% for tag in tags %}
+                <li><a href="/tags/{{ tag }}">{{ tag }}</a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div>
+
+<div class="photo-right-exif">
+
+</div>
