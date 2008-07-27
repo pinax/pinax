@@ -12,8 +12,8 @@
     
     {% ifequal request.user other_user %}
         
+        {% if tasks %}
         {% regroup tasks by get_state_display as tasks_by_state %}
-        
         {% for state in tasks_by_state %}
             <h2 class="join_date">{{ state.grouper }}</h2>
             
@@ -52,6 +52,9 @@
                     
             {% endfor %}
         {% endfor %}
+        {% else %}
+        {% trans "You have no tasks right now." %}
+        {% endif %}
         
     {% else %}
         <p>You are not allowed to view another person's tasks at this time.</p>
