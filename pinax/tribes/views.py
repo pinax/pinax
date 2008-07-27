@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 
@@ -43,13 +44,12 @@ def tribes(request):
                 tribe.save()
                 tribe.members.add(request.user)
                 tribe.save()
-                tribe_form = TribeForm()
                 if notification:
                     # @@@ might be worth having a shortcut for sending to all users
                     notification.send(User.objects.all(), "tribes_new_tribe", {"tribe": tribe})
                     if friends: # @@@ might be worth having a shortcut for sending to all friends
                         notification.send((x['friend'] for x in Friendship.objects.friends_for_user(tribe.creator)), "tribes_friend_tribe", {"tribe": tribe})
-
+                return HttpResponseRedirect(tribe.get_absolute_url())
         else:
             tribe_form = TribeForm()
     else:
