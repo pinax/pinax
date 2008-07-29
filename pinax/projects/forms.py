@@ -23,7 +23,7 @@ class ProjectForm(forms.ModelForm):
     
     class Meta:
         model = Project
-        fields = ('name', 'slug', 'description')
+        fields = ('name', 'slug', 'description', 'tags')
 
 
 # @@@ is this the right approach, to have two forms where creation and update fields differ?
@@ -40,13 +40,13 @@ class ProjectUpdateForm(forms.ModelForm):
     
     class Meta:
         model = Project
-        fields = ('name', 'description')
+        fields = ('name', 'description', 'tags')
 
 class TopicForm(forms.ModelForm):
     
     class Meta:
         model = Topic
-        fields = ('title', 'body')
+        fields = ('title', 'body', 'tags')
 
 
 class TaskForm(forms.ModelForm):
@@ -56,7 +56,7 @@ class TaskForm(forms.ModelForm):
     
     class Meta:
         model = Task
-        fields = ('summary', 'detail', 'assignee')
+        fields = ('summary', 'detail', 'assignee', 'tags')
 
 
 class AssignForm(TaskForm):

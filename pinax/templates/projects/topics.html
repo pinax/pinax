@@ -4,6 +4,7 @@
 {% load gravatar %}
 {% load threadedcommentstags %}
 {% load pagination_tags %}
+{% load tagging_tags %}
 
 {% block head_title %}Topics for {{ project.name }}{% endblock %}
 
@@ -30,6 +31,13 @@
                             (most recent: {{ topic.modified|date }})
                         </div>
                     {% endif %}
+                    <p>
+                        <img src="/site_media/tags.png" border="0" class="noborder" align="absmiddle" />
+                        {% tags_for_object topic as tags %}
+                        {% for tag in tags %}
+                            <a href="/tags/{{ tag }}">{{ tag }}</a>
+                        {% endfor %}
+                    </p>
                 </td>
             </tr>
         {% endfor %}

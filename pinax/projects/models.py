@@ -7,6 +7,8 @@ from django.utils.html import escape
 from django.utils.translation import ugettext_lazy as _
 
 from django.contrib.auth.models import User
+from tagging.fields import TagField
+from tagging.models import Tag
 
 try:
     from notification import models as notification
@@ -32,6 +34,8 @@ class Project(models.Model):
     # private means only members can see the project
     private = models.BooleanField(_('private'), default=False)
     
+    tags = TagField()
+    
     # @@@ this might be better as a filter provided by wikiapp
     def wiki_articles(self):
         return get_articles_for_object(self)
@@ -56,6 +60,8 @@ class Topic(models.Model):
     created = models.DateTimeField(_('created'), default=datetime.now)
     modified = models.DateTimeField(_('modified'), default=datetime.now) # topic modified when commented on
     body = models.TextField(_('body'), blank=True)
+    
+    tags = TagField()
     
     def __unicode__(self):
         return self.title
@@ -87,6 +93,8 @@ class Task(models.Model):
     created = models.DateTimeField(_('created'), default=datetime.now)
     modified = models.DateTimeField(_('modified'), default=datetime.now) # task modified when commented on or when various fields changed
     assignee = models.ForeignKey(User, related_name="assigned_project_tasks", verbose_name=_('assignee'), null=True, blank=True)
+    
+    tags = TagField()
     
     # status is a short message the assignee can give on their current status
     status = models.CharField(_('status'), max_length="50", blank=True)

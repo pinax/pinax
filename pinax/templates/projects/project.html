@@ -8,6 +8,7 @@
 {% load pagination_tags %}
 {% load captureas_tag %}
 {% load shorttimesince_tag %}
+{% load tagging_tags %}
 
 {% block head_title %}{{ project.name }}{% endblock %}
 
@@ -31,23 +32,28 @@
             </div>
         </div>
     {% endif %}
-
+    
     <div style="width: 550px;">
         <p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time.</p>
-
+        
         <h1>{% trans "Project" %} {{ project.name }}</h1>
-
+        
         <p>
             Slug: <tt>{{ project.slug }}</tt><br />
             Creator: <a href="{% url profiles.views.profile project.creator.username %}">{{ project.creator }}</a><br />
             Created: {{ project.created|date }}
+            <br /><img src="/site_media/tags.png" border="0" class="noborder" align="absmiddle" />
+            {% tags_for_object project as tags %}
+            {% for tag in tags %}
+                <a href="/tags/{{ tag }}">{{ tag }}</a>
+            {% endfor %}
         </p>
-
+        
         <p>{{ project.description }}</p>
-
+        
         {% ifequal user project.creator %}
             <p><a href="#" onclick="$('#project_form').toggle(); return false;">{% trans "Edit details" %}</a></p>
-
+            
             <form id="project_form" method="POST" action="" style="display: none;">
                 <table>
                     {{ project_form }}
@@ -55,7 +61,7 @@
                 </table>
             </form>
         {% endifequal %}
-
+        
         {% if user.is_authenticated %}
             <div>
                 {% if are_member %}
@@ -76,13 +82,13 @@
                 {% endif %}
             </div>
         {% endif %}
-
+        
         {% if user.is_authenticated %}
-
+            
             <h2>Tasks{% if total_tasks %} ({{ total_tasks }}){% endif %}</h2>
-
+            
             <p><a href="{% url project_tasks project.slug %}">view more details or add task...</a></p>
-
+            
             <table class="tasks">
                 {% for task in tasks %}
                     <tr class="task_{{ task.get_state_display }} {% cycle odd,even %}">
@@ -99,12 +105,12 @@
                     </tr>
                 {% endfor %}
             </table>
-
+            
             <h2>Discussion Topics{% if project.topics.all.count %} ({{ project.topics.all.count }}){% endif %}</h2>
-
+            
             {% if topics %}
                 <p><a href="{% url project_topics project.slug %}">view more details or start new topic...</a></p>
-
+                
                 <table class="topics">
                     {% for topic in topics %}
                         <tr class="{% cycle odd,even %}">
@@ -130,10 +136,10 @@
             {% else %}
                 <p>None yet. <a href="{% url project_topics project.slug %}">Start one...</a></p>
             {% endif %}
-
-
+            
+            
             <h2>Wiki Articles{% if total_articles %} ({{ total_articles }}){% endif %}</h2>
-
+            
             {% if articles %}
                 <table class="topics">
                     {% for article in articles %}
@@ -154,13 +160,13 @@
             {% else %}
                 <p>None yet. Go this project's <a href="{% wikiurl list project %}">wiki</a> to start a article</p>
             {% endif %}
-
+            
             {% comment %}
                 <h2>{% trans "Tweets" %}</h2>
-
+                
                 {% tweet_listing tweets 1 0 %}
             {% endcomment %}
-
+            
         {% endif %}
     </div>
 

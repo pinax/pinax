@@ -4,6 +4,7 @@
 {% load gravatar %}
 {% load threadedcommentstags %}
 {% load shorttimesince_tag %}
+{% load tagging_tags %}
 
 {% block head_title %}Tasks for {{ other_user }}{% endblock %}
 
@@ -46,6 +47,13 @@
                             {% else %}
                                 none
                             {% endif %}
+                            <p>
+                                <img src="/site_media/tags.png" border="0" class="noborder" align="absmiddle" />
+                                {% tags_for_object task as tags %}
+                                {% for tag in tags %}
+                                    <a href="/tags/{{ tag }}">{{ tag }}</a>
+                                {% endfor %}
+                            </p>
                         </div>
                     </div>
                 </div>

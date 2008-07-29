@@ -3,6 +3,7 @@
 {% load i18n %}
 {% load threadedcommentstags %}
 {% load gravatar %}
+{% load tagging_tags %}
 
 {% block head_title %}{{ task.summary }}{% endblock %}
 
@@ -31,6 +32,14 @@
             {% endifequal %}
         </div>
     </div>
+    
+    <p>
+        <img src="/site_media/tags.png" border="0" class="noborder" align="absmiddle" />
+        {% tags_for_object task as tags %}
+        {% for tag in tags %}
+            <a href="/tags/{{ tag }}">{{ tag }}</a>
+        {% endfor %}
+    </p>
     
     {% ifequal request.user task.assignee %}
     <form action="" method="POST">

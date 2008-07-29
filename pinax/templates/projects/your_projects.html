@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load pagination_tags %}
+{% load tagging_tags %}
 
 {% block head_title %}{% trans "Your Projects" %}{% endblock %}
 
@@ -19,6 +20,12 @@
             <dt>{{ project.name }} (<a href="{% url projects.views.project project.slug %}">{{ project.slug }}</a>)</dt>
             <dd>
                 {{ project.description }}
+                <br />
+                <img src="/site_media/tags.png" border="0" class="noborder" align="absmiddle" />
+                {% tags_for_object project as tags %}
+                {% for tag in tags %}
+                    <a href="/tags/{{ tag }}">{{ tag }}</a>
+                {% endfor %}
             </dd>
         {% endfor %}
     </dl>

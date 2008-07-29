@@ -11,6 +11,8 @@
 {% load switchcase %}
 {% load restructuredtext %}
 {% load threadedcommentstags %}
+{% load shorttimesince_tag %}
+
 
 {% block head_title %}{% blocktrans %}Tags{% endblocktrans %}{% endblock %}
 
@@ -69,6 +71,104 @@
     {% else %}
         No blog posts matching tag.
     {% endif %}
+    
+    <h1>{% blocktrans %}All Projects Matching <i>{{ tag }}</i>{% endblocktrans %}</h1>
+    
+    <dl>
+        {% for project in project_tags %}
+            <dt>{{ project.name }} (<a href="{% url projects.views.project project.slug %}">{{ project.slug }}</a>)</dt>
+            <dd>
+                {{ project.description }}
+                <div class="project_stats">
+                    Members: <b>{{ project.members.count }}</b>
+                    Tasks: <b>{{ project.tasks.count }}</b>
+                    Topics: <b>{{ project.topics.count }}</b>
+                    Wiki Pages: <b>{{ project.wiki_articles.count }}</b>
+                    <br /><img src="/site_media/tags.png" border="0" class="noborder" align="absmiddle" />
+                    {% tags_for_object project as tags %}
+                    {% for tag in tags %}
+                        <a href="/tags/{{ tag }}">{{ tag }}</a>
+                    {% endfor %}
+                </div>
+            </dd>
+        {% endfor %}
+    </dl>
+    
+    <h1>{% blocktrans %}All Project Topics Matching <i>{{ tag }}</i>{% endblocktrans %}</h1>
+    
+    <table class="topics">
+        {% for topic in project_topic_tags %}
+            <tr class="{% cycle odd,even %}">
+                <td class="meta">
+                    <div class="avatar">{% gravatar topic.creator 40 %}</div>
+                    <div class="details"><a href="{% url profiles.views.profile topic.creator.username %}">{{ topic.creator }}</a></div>
+                    <div class="created">{{ topic.created|date }}</p>
+                </td>
+                <td>
+                    <h2><a href="{% url project_topic topic.id %}">{{ topic.title }}</a></h2>
+                    <div class="body">{{ topic.body|urlize|linebreaks }}</div>
+                    {% get_comment_count for topic as comment_count %}
+                    {% if comment_count %}
+                        <div class="comment_stats">
+                            {{ comment_count }} comment{{ comment_count|pluralize }}
+                            (most recent: {{ topic.modified|date }})
+                        </div>
+                    {% endif %}
+                    <p>
+                        <img src="/site_media/tags.png" border="0" class="noborder" align="absmiddle" />
+                        {% tags_for_object topic as tags %}
+                        {% for tag in tags %}
+                            <a href="/tags/{{ tag }}">{{ tag }}</a>
+                        {% endfor %}
+                    </p>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    
+    <h1>{% blocktrans %}All Project Tasks Matching <i>{{ tag }}</i>{% endblocktrans %}</h1>
+    
+    {% for task in project_task_tags %}
+        
+        <div class="task clearfix">
+            <div class="task-meta">
+                {% if task.assignee %}
+                    <div class="avatar">{% gravatar task.assignee 40 %}</div>
+                    <div class="details"><b>Assignee</b>: <a href="{% url profiles.views.profile task.assignee.username %}">{{ task.assignee }}</a></div>
+                {% else %}
+                    <span class="warning">Unassigned</span>
+                {% endif %}
+                <div><b>State</b>: {{ task.get_state_display }}</div>
+                <div><b>Creator</b>: <a href="{% url profiles.views.profile task.creator.username %}">{{ task.creator }}</a></div>
+                <div><b>Created</b>: {{ task.created|date }}</div>
+                <div><b>Modified</b>: {{ task.modified|shorttimesince }} ago</div>
+            </div>
+            <div class="bulk">
+                <h2><a href="{% url project_task task.id %}">{{ task.summary }}</a></h2>
+                <div class="body">{{ task.detail|urlize|linebreaks }}</div>
+                <div class="task-meta2">
+                    {% get_comment_count for task as comment_count %}
+                    {% if comment_count %}
+                        {{ comment_count }} comment{{ comment_count|pluralize }};
+                    {% endif %}
+                    <b>Status</b>: 
+                    {% if task.status %}
+                        {{ task.status }}
+                    {% else %}
+                        none
+                    {% endif %}
+                </div>
+                <p>
+                    <img src="/site_media/tags.png" border="0" class="noborder" align="absmiddle" />
+                    {% tags_for_object task as tags %}
+                    {% for tag in tags %}
+                        <a href="/tags/{{ tag }}">{{ tag }}</a>
+                    {% endfor %}
+                </p>
+            </div>
+        </div>
+        
+    {% endfor %}
     
     
 {% endblock %}
