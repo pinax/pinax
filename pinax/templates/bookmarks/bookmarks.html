@@ -75,7 +75,7 @@
                     </td>
                     <td>
                         <h2><a href="{{ bookmark.url }}">{{ bookmark.description }}</a></h2>
-                        <div class="url">{% if bookmark.get_favicon_url %}<img src="{{ bookmark.get_favicon_url }}" /> {% endif %}{{ bookmark.url }}</div>
+                        <div class="url">{% if bookmark.get_favicon_url %}<img src="{{ bookmark.get_favicon_url }}" width="16px" height="16px" /> {% endif %}{{ bookmark.url }}</div>
                         <div class="body">{{ bookmark.note|linebreaks }}</div>
                         <div class="save">
                             {% blocktrans count bookmark.saved_instances.count as count %}
