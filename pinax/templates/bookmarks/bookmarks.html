@@ -6,6 +6,7 @@
 {% load pagination_tags %}
 {% load extra_voting_tags %}
 {% load in_filter %}
+{% load extra_tagging_tags %}
 
 {% block head_title %}{% blocktrans %}All Bookmarks{% endblocktrans %}{% endblock %}
 
@@ -89,9 +90,7 @@
                                 (<a href="{% url bookmarks.views.add %}?url={{ bookmark.url }};description={{ bookmark.description }}">{% blocktrans %}save{% endblocktrans %}</a>)
                             {% endif %}
                         </div>
-                        <div class="tags">
-                            <p class="with-counts"><span class="label">Tags:</span> {% for tag in bookmark.all_tags_with_counts %}<span class="tag">{{ tag.name }}</span> <span class="count">({{ tag.count }})</span> {% endfor %}
-                        </div>
+                        <div class="tags">{% show_tag_counts bookmark.all_tags_with_counts %}</div>
                     </td>
                 </tr>
             {% endfor %}
