@@ -20,8 +20,9 @@
         
         <form class="login" method="POST" action="">
             <table>
+                <tr><td colspan="2">{{ form.non_field_errors }}</td></tr>
                 {% for field in form %}
-                    {% if field.errors %}{{ field.errors }}{% endif %}
+                    {% if field.errors %}<tr><td colspan="2">{{ field.errors }}</td></tr>{% endif %}
                     <tr><td width="100px">{{ field.label_tag }}</td><td>{{ field }}</td></tr>
                     {% if field.help_text %}<tr><td colspan="2"><span>{{ field.help_text }}</span></td></tr>{% endif %}
                 {% endfor %}
