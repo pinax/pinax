@@ -11,3 +11,6 @@ def show_project_topic(topic):
 def show_project(project):
     return {"project": project}
 
+@register.inclusion_tag("projects/task_item.html")
+def show_task(task):
+    return {"task": task}

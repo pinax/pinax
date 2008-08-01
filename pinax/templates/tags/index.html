@@ -87,39 +87,7 @@
     <h1>{% blocktrans %}All Project Tasks Matching <i>{{ tag }}</i>{% endblocktrans %}</h1>
     
     {% for task in project_task_tags %}
-        
-        <div class="task clearfix">
-            <div class="task-meta">
-                {% if task.assignee %}
-                    <div class="avatar">{% gravatar task.assignee 40 %}</div>
-                    <div class="details"><b>Assignee</b>: <a href="{% url profiles.views.profile task.assignee.username %}">{{ task.assignee }}</a></div>
-                {% else %}
-                    <span class="warning">Unassigned</span>
-                {% endif %}
-                <div><b>State</b>: {{ task.get_state_display }}</div>
-                <div><b>Creator</b>: <a href="{% url profiles.views.profile task.creator.username %}">{{ task.creator }}</a></div>
-                <div><b>Created</b>: {{ task.created|date }}</div>
-                <div><b>Modified</b>: {{ task.modified|shorttimesince }} ago</div>
-            </div>
-            <div class="bulk">
-                <h2><a href="{% url project_task task.id %}">{{ task.summary }}</a></h2>
-                <div class="body">{{ task.detail|urlize|linebreaks }}</div>
-                <div class="task-meta2">
-                    {% get_comment_count for task as comment_count %}
-                    {% if comment_count %}
-                        {{ comment_count }} comment{{ comment_count|pluralize }};
-                    {% endif %}
-                    <b>Status</b>: 
-                    {% if task.status %}
-                        {{ task.status }}
-                    {% else %}
-                        none
-                    {% endif %}
-                </div>
-                <p>{% show_tags_for task %}</p>
-            </div>
-        </div>
-        
+        {% show_task task %}
     {% endfor %}
     
     <h1>{% blocktrans %}All Tribes Matching <i>{{ tag }}</i>{% endblocktrans %}</h1>

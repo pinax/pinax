@@ -3,7 +3,7 @@
 {% load i18n %}
 {% load threadedcommentstags %}
 {% load gravatar %}
-{% load extra_tagging_tags %}
+{% load project_tags %}
 
 {% block head_title %}{{ task.summary }}{% endblock %}
 
@@ -12,28 +12,7 @@
     
     {% get_threaded_comment_tree for task as responses %}
     
-    <div class="task clearfix">
-        <div class="task-meta">
-            {% if task.assignee %}
-                <div class="avatar">{% gravatar task.assignee 40 %}</div>
-                <div class="details"><a href="{% url profiles.views.profile task.assignee.username %}">{{ task.assignee }}</a></div>
-            {% else %}
-                <span class="warning">Unassigned</span>
-            {% endif %}
-            <div><b>State</b>: {{ task.get_state_display }}</div>
-            <div><b>Creator</b>: {{ task.creator }}</div>
-            <div><b>Created</b>: {{ task.created|date }}</div>
-            <div><b>Modified</b>: {{ task.modified|timesince }} ago</div>
-        </div>
-        <div class="bulk">
-            <h1>{{ task.summary }}</h1>
-            <div class="body">{{ task.detail|urlize|linebreaks }}</div>
-            {% ifequal user task.creator %}
-            {% endifequal %}
-        </div>
-    </div>
-    
-    <p>{% show_tags_for task %}</p>
+    {% show_task task %}
     
     {% ifequal request.user task.assignee %}
     <form action="" method="POST">
