@@ -74,18 +74,7 @@
     
     <dl>
         {% for project in project_tags %}
-            <dt>{{ project.name }} (<a href="{% url projects.views.project project.slug %}">{{ project.slug }}</a>)</dt>
-            <dd>
-                {{ project.description }}
-                <div class="project_stats">
-                    Members: <b>{{ project.members.count }}</b>
-                    Tasks: <b>{{ project.tasks.count }}</b>
-                    Topics: <b>{{ project.topics.count }}</b>
-                    Wiki Pages: <b>{{ project.wiki_articles.count }}</b>
-                    <br />
-                    {% show_tags_for project %}
-                </div>
-            </dd>
+            {% show_project project %}
         {% endfor %}
     </dl>
     

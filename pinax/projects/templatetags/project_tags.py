@@ -7,3 +7,7 @@ register = Library()
 def show_project_topic(topic):
     return {"topic": topic}
 
+@register.inclusion_tag("projects/project_item.html")
+def show_project(project):
+    return {"project": project}
+

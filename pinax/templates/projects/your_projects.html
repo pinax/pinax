@@ -2,7 +2,7 @@
 
 {% load i18n %}
 {% load pagination_tags %}
-{% load extra_tagging_tags %}
+{% load project_tags %}
 
 {% block head_title %}{% trans "Your Projects" %}{% endblock %}
 
@@ -17,12 +17,7 @@
     
     <dl>
         {% for project in projects %}
-            <dt>{{ project.name }} (<a href="{% url projects.views.project project.slug %}">{{ project.slug }}</a>)</dt>
-            <dd>
-                {{ project.description }}
-                <br />
-                {% show_tags_for project %}
-            </dd>
+            {% show_project project %}
         {% endfor %}
     </dl>
     
