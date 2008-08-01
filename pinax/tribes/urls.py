@@ -15,6 +15,8 @@ urlpatterns = patterns('',
 
     # topics
     url(r'^(\w+)/topics/$', 'tribes.views.topics', name="tribe_topics"),
+    url(r'^topic/(\d+)/edit/$', 'tribes.views.topic', kwargs={"edit": True}, name="tribe_topic_edit"),
+    url(r'^topic/(\d+)/delete/$', 'tribes.views.topic_delete', name="tribe_topic_delete"),
     url(r'^topic/(\d+)/$', 'tribes.views.topic', name="tribe_topic"),
 
     # wiki

@@ -1,11 +1,13 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
+from django.http import HttpResponseRedirect
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from tribes.models import Tribe
 from tribes.forms import *
+from django.core.urlresolvers import reverse
 
 try:
     from notification import models as notification
@@ -135,10 +137,24 @@ def topics(request, slug):
         "topic_form": topic_form,
     }, context_instance=RequestContext(request))
 
-
-def topic(request, id):
+def topic(request, id, edit=False):
     topic = get_object_or_404(Topic, id=id)
-
+    if request.method == "POST" and edit == True and \
+        (request.user == topic.creator or request.user == topic.tribe.creator):
+        topic.body = request.POST["body"]
+        topic.save()
+        return HttpResponseRedirect(reverse('tribe_topic', args=[topic.id]))
     return render_to_response("tribes/topic.html", {
         'topic': topic,
+        'edit': edit,
     }, context_instance=RequestContext(request))
+
+def topic_delete(request, pk):
+    topic = Topic.objects.get(pk=pk)
+    if request.method == "POST" and (request.user == topic.creator or \
+        request.user == topic.tribe.creator): 
+        if forums:
+            ThreadedComment.objects.all_for_object(topic).delete()
+        topic.delete()
+
+    return HttpResponseRedirect(request.POST["next"])

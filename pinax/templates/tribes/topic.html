@@ -27,16 +27,25 @@
                 {% ifequal user topic.creator %}
                 <form method="POST" action="{% url tc_comment_delete topic.id %}">
                     <input type="submit" value="{% trans "Delete Topic" %}" />
-                    <input type="hidden" name="next" value="{% url tribe_detail topic.content_object.slug %}" />
+                    <input type="hidden" name="next" value="{% url tribe_topics topic.tribe.slug %}" />
                 </form>
+                {% if not edit %}<p><a href="{{ request.path }}edit/">Edit Topic</a></p>{% endif %}
                 {% endifequal %}
             </div>
         </li>
-        {% for response in responses %}
-            <li class="{% cycle even,odd %} thread-{{ response.depth }} clearfix">
-                <div class="meta">
-                    <div class="avatar">{% gravatar response.user 40 %}</div>
-                    <div class="details"><a href="{% url profiles.views.profile response.user.username %}">{{ response.user }}</a></div>
+        {% if edit %}
+            </ul>
+            <h2>Edit {{ topic.name }}</h2>
+            <form method="post" action="{{ request.path }}">
+                <textarea id="id_body" rows="10" cols="40" name="body">{{ topic.body }}</textarea>
+                <input type="submit" name="edit" value="Edit!" />
+            </form>
+        {% else %}
+            {% for response in responses %}
+                <li class="{% cycle even,odd %} thread-{{ response.depth }} clearfix">
+                    <div class="meta">
+                        <div class="avatar">{% gravatar response.user 40 %}</div>
+                        <div class="details"><a href="{% url profiles.views.profile response.user.username %}">{{ response.user }}</a></div>
                     {{ response.date_submitted|date }}
                 </div>
                 <div class="bulk">
@@ -44,7 +53,7 @@
                     {% ifequal user response.user %}
                     <form method="POST" action="{% url tc_comment_delete response.id %}">
                         <input type="submit" value="{% trans "Delete Post" %}" />
-                        <input type="hidden" name="next" value="{% url tribe_detail response.content_object.slug %}" />
+                        <input type="hidden" name="next" value="{{ request.path }}" />
                     </form>
                     {% endifequal %}
                     <a href="javascript:toggle_comment_form({{ response.id }})">{% trans "Reply to This Post" %}</a>
@@ -66,6 +75,7 @@
         <input type="hidden" name="next" value="{{ request.path }}" />
     </form>
     {% paginate %}
+    {% endif %}
 {% endblock %}
 
 {% block extra_body %}
