@@ -17,10 +17,6 @@
 
 {% block extra_head %}
     <link rel="alternate" type="application/atom+xml" title="Blog Post Feed for All Users" href="/feeds/posts/all/" />
-    {% autopaginate blogs %}
-    {% for blog in blogs %}
-        <link rel="alternate" type="application/atom+xml" title="Blog Post Feed for User {{ blog.author.username }}" href="/feeds/posts/only/{{ blog.author.username }}/" />
-    {% endfor %}
 {% endblock %}
 
 {% block body %}
