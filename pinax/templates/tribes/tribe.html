@@ -8,6 +8,7 @@
 {% load pagination_tags %}
 {% load captureas_tag %}
 {% load extra_tagging_tags %}
+{% load tribe_tags %}
 
 {% block head_title %}{{ tribe.name }}{% endblock %}
 
@@ -85,34 +86,9 @@
             <h2>{% trans "Discussion Topics" %}{% if tribe.topics.all.count %} ({{ tribe.topics.all.count }}){% endif %}</h2>
 
             {% if topics %}
-                <table class="topics">
-                    {% for topic in topics %}
-                        <tr class="{% cycle odd,even %}">
-                            <td class="meta">
-                                <div class="avatar">{% gravatar topic.creator 40 %}</div>
-                                <div class="details"><a href="{% url profiles.views.profile topic.creator.username %}">{{ topic.creator }}</a></div>
-                                <div class="created">{{ topic.created|date }}</div>
-                            </td>
-                            <td>
-                                <h2><a href="{% url tribe_topic topic.id %}">{{ topic.title }}</a></h2>
-                                <div class="body">{{ topic.body|urlize|linebreaks }}</div>
-                                {% get_comment_count for topic as comment_count %}
-                                {% if comment_count %}
-                                    <div class="comment_stats">
-                                        {% blocktrans count comment_count as comment_count %}
-                                            One comment
-                                        {% plural %}
-                                            {{ comment_count }} comments
-                                        {% endblocktrans %}
-                                        {% blocktrans with topic.modified|date as topic_modified_date %}
-                                            (most recent: {{ topic_modified_date }})
-                                        {% endblocktrans %}
-                                    </div>
-                                {% endif %}
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </table>
+                {% for topic in topics %}
+                    {% show_tribe_topic topic %}
+                {% endfor %}
                 <p><a href="{% url tribe_topics tribe.slug %}">{% trans "more..." %}</a></p>
             {% else %}
                 {% captureas new_tribe_url %}{% url tribe_topics tribe.slug %}{% endcaptureas %}
