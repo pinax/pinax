@@ -5,7 +5,7 @@
 {% load humanize %}
 {% load pagination_tags %}
 {% load captureas_tag %}
-{% load tagging_tags %}
+{% load extra_tagging_tags %}
 {% load wiki %}
 {% load markup %}
 {% load switchcase %}
@@ -58,11 +58,8 @@
                         {% gravatar blogs.author 40 %}
                         <p><b>Posted:</b><br /><a href="{% url profiles.views.profile blogs.author.username %}">{{ blogs.author.username }}</a> on {{ blogs.publish|date }}</p>
                         <div class="blog-tags">
-                            <p><b>Tags:</b><br /> 
-                            {% tags_for_object blogs as tags %}
-                            {% for tag in tags %}
-                                <a href="/tags/{{ tag }}">{{ tag }}</a>
-                            {% endfor %}</p>
+                            <p>{% show_tags_for blogs %}
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -84,11 +81,8 @@
                     Tasks: <b>{{ project.tasks.count }}</b>
                     Topics: <b>{{ project.topics.count }}</b>
                     Wiki Pages: <b>{{ project.wiki_articles.count }}</b>
-                    <br /><img src="/site_media/tags.png" border="0" class="noborder" align="absmiddle" />
-                    {% tags_for_object project as tags %}
-                    {% for tag in tags %}
-                        <a href="/tags/{{ tag }}">{{ tag }}</a>
-                    {% endfor %}
+                    <br />
+                    {% show_tags_for project %}
                 </div>
             </dd>
         {% endfor %}
@@ -114,13 +108,7 @@
                             (most recent: {{ topic.modified|date }})
                         </div>
                     {% endif %}
-                    <p>
-                        <img src="/site_media/tags.png" border="0" class="noborder" align="absmiddle" />
-                        {% tags_for_object topic as tags %}
-                        {% for tag in tags %}
-                            <a href="/tags/{{ tag }}">{{ tag }}</a>
-                        {% endfor %}
-                    </p>
+                    <p>{% show_tags_for topic %}</p>
                 </td>
             </tr>
         {% endfor %}
@@ -158,13 +146,7 @@
                         none
                     {% endif %}
                 </div>
-                <p>
-                    <img src="/site_media/tags.png" border="0" class="noborder" align="absmiddle" />
-                    {% tags_for_object task as tags %}
-                    {% for tag in tags %}
-                        <a href="/tags/{{ tag }}">{{ tag }}</a>
-                    {% endfor %}
-                </p>
+                <p>{% show_tags_for task %}</p>
             </div>
         </div>
         
@@ -177,11 +159,7 @@
             <dt>{{ tribe.name }} (<a href="{% url tribes.views.tribe tribe.slug %}">{{ tribe.slug }}</a>)</dt>
             <dd>{{ tribe.description }}
                 <br />
-                <img src="/site_media/tags.png" border="0" class="noborder" align="absmiddle" />
-                {% tags_for_object tribe as tags %}
-                {% for tag in tags %}
-                    <a href="/tags/{{ tag }}">{{ tag }}</a>
-                {% endfor %}
+                {% show_tags_for tribe %}
             </dd>
         {% endfor %}
     </dl>
@@ -206,13 +184,7 @@
                             (most recent: {{ topic.modified|date }})
                         </div>
                     {% endif %}
-                    <p>
-                        <img src="/site_media/tags.png" border="0" class="noborder" align="absmiddle" />
-                        {% tags_for_object topic as tags %}
-                        {% for tag in tags %}
-                            <a href="/tags/{{ tag }}">{{ tag }}</a>
-                        {% endfor %}
-                    </p>
+                    <p>{% show_tags_for topic %}</p>
                 </td>
             </tr>
         {% endfor %}

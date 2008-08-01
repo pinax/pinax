@@ -4,7 +4,7 @@
 {% load markup %}
 {% load switchcase %}
 {% load restructuredtext %}
-{% load tagging_tags %}
+{% load extra_tagging_tags %}
 {% load threadedcommentstags %}
 
 <h2>{% trans "Blog Posts" %}</h2>
@@ -26,12 +26,10 @@
                 <div class="blog-post-meta">
                     <p><b>Posted:</b><br /> {{ blogs.publish|date }}</p>
                     <div class="blog-tags">
-                        <p><img src="/site_media/tags.png" border="0" class="noborder" align="absmiddle" /> 
-                        {% tags_for_object blogs as tags %}
-                        {% for tag in tags %}
-                            <a href="/tags/{{ tag }}">{{ tag }}</a>
-                        {% endfor %}<br />
-                        <img src="/site_media/comment.png" border="0" class="noborder" align="absmiddle" /><a href="{{ blogs.get_absolute_url }}#comments">{% get_comment_count for blogs as commentcount %} {{ commentcount }} Comments</a></p>
+                        <p>
+                            {% show_tags_for blogs %}
+                            <br />
+                            <img src="/site_media/comment.png" border="0" class="noborder" align="absmiddle" /><a href="{{ blogs.get_absolute_url }}#comments">{% get_comment_count for blogs as commentcount %} {{ commentcount }} Comments</a></p>
                     </div>
                 </div>
             </div>

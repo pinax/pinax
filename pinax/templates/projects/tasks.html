@@ -7,7 +7,7 @@
 {% load order_by %}
 {% load humanize %}
 {% load shorttimesince_tag %}
-{% load tagging_tags %}
+{% load extra_tagging_tags %}
 
 {% block head_title %}Tasks for {{ project.name }}{% endblock %}
 
@@ -91,13 +91,7 @@
                             none
                         {% endif %}
                     </div>
-                    <p>
-                        <img src="/site_media/tags.png" border="0" class="noborder" align="absmiddle" />
-                        {% tags_for_object task as tags %}
-                        {% for tag in tags %}
-                            <a href="/tags/{{ tag }}">{{ tag }}</a>
-                        {% endfor %}
-                    </p>
+                    <p>{% show_tags_for task %}</p>
                 </div>
             </div>
             

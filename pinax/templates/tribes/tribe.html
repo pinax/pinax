@@ -7,7 +7,7 @@
 {% load threadedcommentstags %}
 {% load pagination_tags %}
 {% load captureas_tag %}
-{% load tagging_tags %}
+{% load extra_tagging_tags %}
 
 {% block head_title %}{{ tribe.name }}{% endblock %}
 
@@ -41,11 +41,8 @@
             {% trans "Slug:" %} <tt>{{ tribe.slug }}</tt><br />
             {% trans "Creator:" %} <a href="{% url profiles.views.profile tribe.creator.username %}">{{ tribe.creator }}</a><br />
             {% trans "Created:" %} {{ tribe.created|date }}
-            <br /><img src="/site_media/tags.png" border="0" class="noborder" align="absmiddle" />
-            {% tags_for_object tribe as tags %}
-            {% for tag in tags %}
-                <a href="/tags/{{ tag }}">{{ tag }}</a>
-            {% endfor %}
+            <br />
+            {% show_tags_for tribe %}
         </p>
 
         <p>{{ tribe.description }}</p>

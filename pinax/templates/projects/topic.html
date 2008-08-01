@@ -4,7 +4,7 @@
 {% load threadedcommentstags %}
 {% load pagination_tags %}
 {% load gravatar %}
-{% load tagging_tags %}
+{% load extra_tagging_tags %}
 
 {% block head_title %}{{ topic.title }}{% endblock %}
 
@@ -25,13 +25,7 @@
             <div class="bulk">
                 <h1>{{ topic.title }}</h1>
                 <div class="body">{{ topic.body|urlize|linebreaks }}</div>
-                <p>
-                    <img src="/site_media/tags.png" border="0" class="noborder" align="absmiddle" />
-                    {% tags_for_object topic as tags %}
-                    {% for tag in tags %}
-                        <a href="/tags/{{ tag }}">{{ tag }}</a>
-                    {% endfor %}
-                </p>
+                <p>{% show_tags_for topic %}</p>
                 {% ifequal user topic.creator %}
                 <form method="POST" action="{% url tc_comment_delete topic.id %}">
                     <input type="submit" value="{% trans "Delete Topic" %}" />

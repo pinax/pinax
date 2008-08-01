@@ -20,11 +20,7 @@
             <dt>{{ tribe.name }} (<a href="{% url tribes.views.tribe tribe.slug %}">{{ tribe.slug }}</a>)</dt>
             <dd>{{ tribe.description }}
                 <br />
-                <img src="/site_media/tags.png" border="0" class="noborder" align="absmiddle" />
-                {% tags_for_object tribe as tags %}
-                {% for tag in tags %}
-                    <a href="/tags/{{ tag }}">{{ tag }}</a>
-                {% endfor %}
+                {% show_tags_for tribe %}
             </dd>
         {% endfor %}
     </dl>
