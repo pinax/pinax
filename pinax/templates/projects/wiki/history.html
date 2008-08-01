@@ -7,7 +7,7 @@
 {% block head_title %}{{ article.title }} {% endblock %}
 
 {% block body %}
-    <h1>{% trans "Wiki for Project" %} <a href="{% url tribe_detail group.slug %}">{{ group.name }}</a></h1>
+    <h1>{% trans "Wiki for Project" %} <a href="{% url project_detail group.slug %}">{{ group.name }}</a></h1>
 
     <h2>{% trans "History for article" %} <a href="{% wikiurl article group article }}"> {{ article.title }} </a></h2>
 
