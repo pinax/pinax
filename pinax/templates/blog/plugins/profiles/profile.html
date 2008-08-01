@@ -1,40 +1,12 @@
 {% load i18n %}
-{% load captureas_tag %}
-{% load wiki %}
-{% load markup %}
-{% load switchcase %}
-{% load restructuredtext %}
-{% load extra_tagging_tags %}
-{% load threadedcommentstags %}
+{% load blog_tags %}
 
 <h2>{% trans "Blog Posts" %}</h2>
-
-    {% if owner.added_posts.all %}
-        {% for blogs in owner.added_posts.all %}
-            <div class="blog-post clearfix">
-                <h2><a href="{{ blogs.get_absolute_url }}">{{ blogs.title }}</a></h2>
-                <div class="blog-post-tease">
-                    {% with blogs.tease as body %}
-                        {% switch blogs.markup %}
-                            {% case 'rst' %} {{ body|restructuredtext|wikiwords|safe }} {% endcase %}
-                            {% case 'mrk' %} {{ body|force_escape|markdown|wikiwords }} {% endcase %}
-                            {% case 'txl' %} {{ body|force_escape|textile|wikiwords }} {% endcase %}
-                            {% case '' %} {{ body|force_escape|wikiwords|linebreaks|safe }} {% endcase %}
-                        {% endswitch %}
-                    {% endwith %}
-                </div>
-                <div class="blog-post-meta">
-                    <p><b>Posted:</b><br /> {{ blogs.publish|date }}</p>
-                    <div class="blog-tags">
-                        <p>
-                            {% show_tags_for blogs %}
-                            <br />
-                            <img src="/site_media/comment.png" border="0" class="noborder" align="absmiddle" /><a href="{{ blogs.get_absolute_url }}#comments">{% get_comment_count for blogs as commentcount %} {{ commentcount }} Comments</a></p>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
-    {% else %}
-        No blog posts yet.
-    {% endif %}
-
+    
+{% if owner.added_posts.all %}
+    {% for blog_post in owner.added_posts.all %}
+        {% show_blog_post blog_post %}
+    {% endfor %}
+{% else %}
+    No blog posts yet.
+{% endif %}

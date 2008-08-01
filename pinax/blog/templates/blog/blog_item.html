@@ -1,0 +1,28 @@
+{% load switchcase %}
+{% load restructuredtext %}
+{% load wiki %}
+{% load markup %}
+{% load gravatar %}
+{% load extra_tagging_tags %}
+
+<div class="blog-post clearfix">
+    <h2><a href="{{ blog_post.get_absolute_url }}">{{ blog_post.title }}</a></h2>
+    <div class="blog-post-tease">
+        {% with blog_post.tease as body %}
+            {% switch blog_post.markup %}
+                {% case 'rst' %} {{ body|restructuredtext|wikiwords|safe }} {% endcase %}
+                {% case 'mrk' %} {{ body|force_escape|markdown|wikiwords }} {% endcase %}
+                {% case 'txl' %} {{ body|force_escape|textile|wikiwords }} {% endcase %}
+                {% case '' %} {{ body|force_escape|wikiwords|linebreaks|safe }} {% endcase %}
+            {% endswitch %}
+        {% endwith %}
+    </div>
+    <div class="blog-post-meta">
+        {% gravatar blog_post.author 40 %}
+        <p><b>Posted:</b><br />
+            <a href="{% url profiles.views.profile blog_post.author.username %}">{{ blog_post.author.username }}</a> on {{ blog_post.publish|date }}</p>
+        <div class="blog-tags">
+            <p>{% show_tags_for blog_post %}</p>
+        </div>
+    </div>
+</div>

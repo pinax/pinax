@@ -11,6 +11,7 @@
 {% load switchcase %}
 {% load restructuredtext %}
 {% load threadedcommentstags %}
+{% load blog_tags %}
 
 {% block head_title %}{% blocktrans %}All Blogs{% endblocktrans %}{% endblock %}
 
@@ -27,39 +28,13 @@
     
     <h1>{% trans "All Blogs" %}</h1>
     
-    
     {% if blogs %}
         <p>{% trans "These are blog posts from everyone:" %}</p>
         
         {% autopaginate blogs %}
             
-            {% for blogs in blogs %}
-                <div class="blog-post clearfix">
-                    <h2><a href="{{ blogs.get_absolute_url }}">{{ blogs.title }}</a></h2>
-                    <div class="blog-post-tease">
-                        
-                        {% with blogs.tease as body %}
-                            {% switch blogs.markup %}
-                                {% case 'rst' %} {{ body|restructuredtext|wikiwords|safe }} {% endcase %}
-                                {% case 'mrk' %} {{ body|force_escape|markdown|wikiwords }} {% endcase %}
-                                {% case 'txl' %} {{ body|force_escape|textile|wikiwords }} {% endcase %}
-                                {% case '' %} {{ body|force_escape|wikiwords|linebreaks|safe }} {% endcase %}
-                            {% endswitch %}
-                        {% endwith %}
-                    
-                    </div>
-                    <div class="blog-post-meta">
-                        {% gravatar blogs.author 40 %}
-                        <p><b>Posted:</b><br /><a href="{% url profiles.views.profile blogs.author.username %}">{{ blogs.author.username }}</a> on {{ blogs.publish|date }}</p>
-                        <div class="blog-tags">
-                            <p>
-                                {% show_tags_for blogs %}
-                                <br />
-                                <img src="/site_media/comment.png" border="0" class="noborder" align="absmiddle" /><a href="{{ blogs.get_absolute_url }}#comments">{% get_comment_count for blogs as commentcount %} {{ commentcount }} Comments</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
+            {% for blog_post in blogs %}
+                {% show_blog_post blog_post %}
             {% endfor %}
         
         {% paginate %}
