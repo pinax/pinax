@@ -2,7 +2,7 @@
 
 {% load i18n %}
 {% load pagination_tags %}
-{% load tagging_tags %}
+{% load tribe_tags %}
 
 {% block head_title %}{% trans "Your Tribes" %}{% endblock %}
 
@@ -17,11 +17,7 @@
     
     <dl>
         {% for tribe in tribes %}
-            <dt>{{ tribe.name }} (<a href="{% url tribes.views.tribe tribe.slug %}">{{ tribe.slug }}</a>)</dt>
-            <dd>{{ tribe.description }}
-                <br />
-                {% show_tags_for tribe %}
-            </dd>
+            {% show_tribe tribe %}
         {% endfor %}
     </dl>
     

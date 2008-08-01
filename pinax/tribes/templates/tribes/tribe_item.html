@@ -1,0 +1,7 @@
+{% load extra_tagging_tags %}
+
+<dt>{{ tribe.name }} (<a href="{% url tribes.views.tribe tribe.slug %}">{{ tribe.slug }}</a>)</dt>
+<dd>{{ tribe.description }}
+    <br />
+    {% show_tags_for tribe %}
+</dd>

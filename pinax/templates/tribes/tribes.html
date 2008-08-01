@@ -6,6 +6,7 @@
 {% load pagination_tags %}
 {% load captureas_tag %}
 {% load extra_tagging_tags %}
+{% load tribe_tags %}
 
 {% block head_title %}{% blocktrans %}Tribes{% endblocktrans %}{% endblock %}
 
@@ -39,11 +40,7 @@
         <h2 class="creation_date">{{ date.grouper|naturalday:_("MONTH_DAY_FORMAT")|capfirst }}</h2>
         <dl>
             {% for tribe in date.list %}
-                <dt>{{ tribe.name }} (<a href="{% url tribes.views.tribe tribe.slug %}">{{ tribe.slug }}</a>)</dt>
-                <dd>{{ tribe.description }}
-                    <br />
-                    {% show_tags_for tribe %}
-                </dd>
+                {% show_tribe tribe %}
             {% endfor %}
         </dl>
     {% endfor %}
