@@ -145,6 +145,7 @@ INSTALLED_APPS = (
     'core',
     'things',
     'photos',
+    'tag_app',
     
     'django.contrib.admin',
 
