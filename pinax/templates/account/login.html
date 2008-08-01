@@ -10,22 +10,21 @@
     <div id="basic-form" class="left-form">
     <fieldset>
         <legend>{% trans "Log In" %}</legend>
-    
+        
         {% if user.is_authenticated %}
             <p><span class="warning">{% trans "Note" %}</span>: {% blocktrans %}you are already logged in as {{ user }}.{% endblocktrans %}</p>
         {% else %}
             {% captureas signup_url %}{% url account.views.signup %}{% endcaptureas %}
             <p>{% blocktrans %}Don't have an account? <a href="{{ signup_url }}">Sign up</a>!{% endblocktrans %}</p>
         {% endif %}
-    
+        
         <form class="login" method="POST" action="">
             <table>
                 {% for field in form %}
-    			    {% if field.errors %}{{ field.errors }}{% endif %}
-    			    <tr><td width="100px">{{ field.label_tag }}</td><td>
-    			    {{ field }}</td></tr>
-    			    {% if field.help_text %}<tr><td colspan="2"><span>{{ field.help_text }}</span></td></tr>{% endif %}
-    			{% endfor %}
+                    {% if field.errors %}{{ field.errors }}{% endif %}
+                    <tr><td width="100px">{{ field.label_tag }}</td><td>{{ field }}</td></tr>
+                    {% if field.help_text %}<tr><td colspan="2"><span>{{ field.help_text }}</span></td></tr>{% endif %}
+                {% endfor %}
                 <tr><td></td><td><input type="submit" value="{% trans "Log in &raquo;" %}" class="button" /></td></tr>
             </table>
             <a href="{% url account.views.password_reset %}">{% trans "Forgot password?" %}</a>
