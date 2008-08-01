@@ -8,6 +8,9 @@ from django.utils.translation import ugettext_lazy as _
 
 from django.contrib.auth.models import User
 
+from tagging.fields import TagField
+from tagging.models import Tag
+
 try:
     from notification import models as notification
 except ImportError:
@@ -25,6 +28,8 @@ class Tribe(models.Model):
     created = models.DateTimeField(_('created'), default=datetime.now)
     description = models.TextField(_('description'))
     members = models.ManyToManyField(User, verbose_name=_('members'))
+    
+    tags = TagField()
     
     def __unicode__(self):
         return self.name
@@ -46,6 +51,8 @@ class Topic(models.Model):
     created = models.DateTimeField(_('created'), default=datetime.now)
     modified = models.DateTimeField(_('modified'), default=datetime.now) # topic modified when commented on
     body = models.TextField(_('body'), blank=True)
+    
+    tags = TagField()
     
     def __unicode__(self):
         return self.title

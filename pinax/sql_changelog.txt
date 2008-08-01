@@ -27,8 +27,15 @@ ALTER TABLE photologue_photosize ADD COLUMN "upscale" boolean NOT NULL DEFAULT F
 
 ALTER TABLE "bookmarks_bookmarkinstance" ADD COLUMN "tags" varchar(255) NOT NULL DEFAULT '';
 
+
 ## for tagging on projects, project topics and project tasks
 
 ALTER TABLE "projects_project" ADD COLUMN "tags" varchar(255) NOT NULL DEFAULT '';
 ALTER TABLE "projects_topic" ADD COLUMN "tags" varchar(255) NOT NULL DEFAULT '';
 ALTER TABLE "projects_task" ADD COLUMN "tags" varchar(255) NOT NULL DEFAULT '';
+
+
+## for tagging on tribes and tribe topics
+
+ALTER TABLE "tribes_tribe" ADD COLUMN "tags" varchar(255) NOT NULL DEFAULT '';
+ALTER TABLE "tribes_topic" ADD COLUMN "tags" varchar(255) NOT NULL DEFAULT '';

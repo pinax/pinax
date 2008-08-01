@@ -170,5 +170,52 @@
         
     {% endfor %}
     
+    <h1>{% blocktrans %}All Tribes Matching <i>{{ tag }}</i>{% endblocktrans %}</h1>
+    
+    <dl>
+        {% for tribe in tribe_tags %}
+            <dt>{{ tribe.name }} (<a href="{% url tribes.views.tribe tribe.slug %}">{{ tribe.slug }}</a>)</dt>
+            <dd>{{ tribe.description }}
+                <br />
+                <img src="/site_media/tags.png" border="0" class="noborder" align="absmiddle" />
+                {% tags_for_object tribe as tags %}
+                {% for tag in tags %}
+                    <a href="/tags/{{ tag }}">{{ tag }}</a>
+                {% endfor %}
+            </dd>
+        {% endfor %}
+    </dl>
+    
+    <h1>{% blocktrans %}All Tribe Topics Matching <i>{{ tag }}</i>{% endblocktrans %}</h1>
+    
+    <table class="topics">
+        {% for topic in tribe_topic_tags %}
+            <tr class="{% cycle odd,even %}">
+                <td class="meta">
+                    <div class="avatar">{% gravatar topic.creator 40 %}</div>
+                    <div class="details"><a href="{% url profiles.views.profile topic.creator.username %}">{{ topic.creator }}</a></div>
+                    <div class="created">{{ topic.created|date }}</p>
+                </td>
+                <td>
+                    <h2><a href="{% url tribe_topic topic.id %}">{{ topic.title }}</a></h2>
+                    <div class="body">{{ topic.body|urlize|linebreaks }}</div>
+                    {% get_comment_count for topic as comment_count %}
+                    {% if comment_count %}
+                        <div class="comment_stats">
+                            {{ comment_count }} comment{{ comment_count|pluralize }}
+                            (most recent: {{ topic.modified|date }})
+                        </div>
+                    {% endif %}
+                    <p>
+                        <img src="/site_media/tags.png" border="0" class="noborder" align="absmiddle" />
+                        {% tags_for_object topic as tags %}
+                        {% for tag in tags %}
+                            <a href="/tags/{{ tag }}">{{ tag }}</a>
+                        {% endfor %}
+                    </p>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
     
 {% endblock %}
