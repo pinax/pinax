@@ -13,6 +13,7 @@
 {% load threadedcommentstags %}
 {% load shorttimesince_tag %}
 {% load tribe_tags %}
+{% load project_tags %}
 
 {% block head_title %}{% blocktrans %}Tags{% endblocktrans %}{% endblock %}
 
@@ -91,25 +92,7 @@
     <h1>{% blocktrans %}All Project Topics Matching <i>{{ tag }}</i>{% endblocktrans %}</h1>
     
     {% for topic in project_topic_tags %}
-        <div class="topic clearfix">
-            <div class="task-meta">
-                <div class="avatar">{% gravatar topic.creator 40 %}</div>
-                <div class="details"><a href="{% url profiles.views.profile topic.creator.username %}">{{ topic.creator }}</a></div>
-                <div class="created">{{ topic.created|date }}</div>
-            </div>
-            <div>
-                <h2><a href="{% url project_topic topic.id %}">{{ topic.title }}</a></h2>
-                <div class="body">{{ topic.body|urlize|linebreaks }}</div>
-                {% get_comment_count for topic as comment_count %}
-                {% if comment_count %}
-                    <div class="comment_stats">
-                        {{ comment_count }} comment{{ comment_count|pluralize }}
-                        (most recent: {{ topic.modified|date }})
-                    </div>
-                {% endif %}
-                <p>{% show_tags_for topic %}</p>
-            </div>
-        </div>
+        {% show_project_topic topic %}
     {% endfor %}
     
     <h1>{% blocktrans %}All Project Tasks Matching <i>{{ tag }}</i>{% endblocktrans %}</h1>

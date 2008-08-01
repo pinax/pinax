@@ -5,6 +5,7 @@
 {% load threadedcommentstags %}
 {% load pagination_tags %}
 {% load extra_tagging_tags %}
+{% load project_tags %}
 
 {% block head_title %}Topics for {{ project.name }}{% endblock %}
 
@@ -13,29 +14,9 @@
     
     {% autopaginate project.topics.all %}
     
-    <table class="topics">
-        {% for topic in project.topics.all %}
-            <tr class="{% cycle odd,even %}">
-                <td class="meta">
-                    <div class="avatar">{% gravatar topic.creator 40 %}</div>
-                    <div class="details"><a href="{% url profiles.views.profile topic.creator.username %}">{{ topic.creator }}</a></div>
-                    <div class="created">{{ topic.created|date }}</p>
-                </td>
-                <td>
-                    <h2><a href="{% url project_topic topic.id %}">{{ topic.title }}</a></h2>
-                    <div class="body">{{ topic.body|urlize|linebreaks }}</div>
-                    {% get_comment_count for topic as comment_count %}
-                    {% if comment_count %}
-                        <div class="comment_stats">
-                            {{ comment_count }} comment{{ comment_count|pluralize }}
-                            (most recent: {{ topic.modified|date }})
-                        </div>
-                    {% endif %}
-                    <p>{% show_tags_for topic %}</p>
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
+    {% for topic in project.topics.all %}
+        {% show_project_topic topic %}
+    {% endfor %}
     
     {% paginate %}
     
