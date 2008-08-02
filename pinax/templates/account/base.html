@@ -13,6 +13,7 @@
             <li><a href="{% url acct_passwd_reset %}">{% trans "Reset Password" %}</a></li>
             <li><a href="{% url acct_language_change %}">{% trans "Language" %}</a></li>
             <li><a href="{% url acct_timezone_change %}">{% trans "Timezone" %}</a></li>
+            <li><a href="{% url avatar_change %}?next={% url acct_email %}">{% trans "Avatar" %}</a></li>
             <li><a href="{% url acct_other_services %}">{% trans "Other Services" %}</a></li>
         </ul>
 {% else %}

@@ -1,0 +1,29 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load gravatar %}
+
+{% block head_title %}{% trans "Avatar" %}{% endblock %}
+
+{% block body %}
+    <h1>{% trans "Avatar" %}</h1>
+    {% trans "Here is your current avatar:" %}<br />
+	{% gravatar user 80 %}
+    <form enctype="multipart/form-data" method="POST" action="">
+        <input type="file" name="avatar" />
+        <input type="submit" value="Upload New Avatar" />
+        <input type="hidden" name="next" value="{{ next }}" />
+    </form>
+    <form method="POST" action="{% url avatar_delete %}">
+        <input type="hidden" name="next" value="{{ next }}" />
+        <input type="submit" value="Delete Avatar" />
+    </form>
+{% endblock %}
+
+{% block extra_body %}
+    {% load jquery_validation %}
+    {% include_validation %}
+    <script type="text/javascript">
+       <!-- nothing here -->
+    </script>
+{% endblock %}
