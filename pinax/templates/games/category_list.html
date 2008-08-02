@@ -1,0 +1,16 @@
+{% extends "games/base.html" %}
+
+{% load i18n %}
+{% load pagination_tags %}
+
+{% block head_title %}{% blocktrans %}Games{% endblocktrans %} : {% blocktrans %}Categories{% endblocktrans %}{% endblock %}
+
+{% block body %}
+    {% autopaginate categories %}
+    <ul>
+    {% for category, game_count in categories %}
+        <li><a href="{% url games_category category.slug %}">{{ category.name }} ({{ game_count }} {% trans "Games" %})</a></li>
+    {% endfor %}
+    </ul>
+    {% paginate %}
+{% endblock %}

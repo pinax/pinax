@@ -7,6 +7,7 @@
 {% block subnav %}
     {% if user.is_authenticated %}
         <ul>
+            <li><a href="{% url games_categories %} ">{% trans "Categories" %}</a></li>
             <li><a href="{% url games_index %} ">{% trans "All Games" %}</a></li>
         </ul>
     {% else %}

@@ -1,13 +1,54 @@
 {% extends "games/base.html" %}
 
 {% load i18n %}
+{% load pagination_tags %}
 
 {% block head_title %}{% blocktrans %}Games{% endblocktrans %}{% endblock %}
 
 {% block body %}
-    <ul>
-        {% for game in games %}
-            <li><a href="{% url games_detail game.slug %}"><img src="{{ game.get_thumbnail_url }}" /></a></li>
-        {% endfor %}
-    </ul>
+    {% if category %}
+        <h1>{% trans "Games for Category" %}: {{ category.name }}</h1>
+    {% else %}
+        <h1>{% trans "All Games" %}</h1>
+    {% endif %}
+    <p>{% trans "Sort by:" %}
+        {% ifequal sort "most-played" %}
+            <b>{% trans "Most Played" %}</b>
+        {% else %}
+            {% if category %}
+                <a href="{% url games_category_list category.slug,"most-played" %}">{% trans "Most Played" %}</a>
+            {% else %}
+                <a href="{% url games_list "most-played" %}">{% trans "Most Played" %}</a>
+            {% endif %}
+        {% endifequal %}
+        {% trans "or" %}
+        {% ifequal sort "newest" %}
+            <b>{% trans "Newest" %}</b>
+        {% else %}
+            {% if category %}
+                <a href="{% url games_category_list category.slug,"newest" %}">{% trans "Newest" %}</a>
+            {% else %}
+                <a href="{% url games_list "newest" %}">{% trans "Newest" %}</a>
+            {% endif %}
+        {% endifequal %}
+        {% trans "or" %}
+        {% ifequal sort "alphabetical" %}
+            <b>{% trans "Alphabetical" %}</b>
+        {% else %}
+            {% if category %}
+                <a href="{% url games_category_list category.slug,"alphabetical" %}">{% trans "Alphabetical" %}</a>
+            {% else %}
+                <a href="{% url games_list "alphabetical" %}">{% trans "Alphabetical" %}</a>
+            {% endif %}
+        {% endifequal%}
+    </p>
+    {% autopaginate games 24 %}
+    {% for game in games %}
+        <div class="game_item">
+            <a href="{% url games_detail game.slug %}" title="{{ game.name }}: {{ game.description }}"><img src="{{ game.get_thumbnail_url }}" /></a>
+            <span class="game_name"><b>{{ game.name }}</b></span>
+            <span class="game_plays">{{ game.game_plays }} Plays</span>
+        </div>
+    {% endfor %}
+    {% paginate %}
 {% endblock %}
