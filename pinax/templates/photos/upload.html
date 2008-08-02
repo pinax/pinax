@@ -17,13 +17,22 @@
 {% block body %}
     <p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time.</p>
     
-    <h1>{% trans "Upload Photos" %}</h1>
+    <div id="basic-form">
+        <fieldset>
+            <legend>{% trans "Upload Photos" %}</legend>
 
-    <form enctype="multipart/form-data"  action="" method="POST" id="photo_form">
-        <table>
-            {{ photo_form }}
-        </table>
-        <tr><td></td><td><input type="hidden" name="action" value="upload" /><input type="submit" value="upload"/></td></tr>
-    </form>
+            <form enctype="multipart/form-data"  action="" method="POST" id="photo_form">
+                <table>
+                <tr><td colspan="2">{{ photo_form.non_field_errors }}</td></tr>
+                {% for field in photo_form %}
+                    {% if field.errors %}<tr><td></td><td>{{ field.errors }}</td></tr>{% endif %}
+                    <tr><td width="100px" valign="top">{{ field.label_tag }}</td><td>{{ field }}</td></tr>
+                    {% if field.help_text %}<tr><td colspan="2"><span>{{ field.help_text }}</span></td></tr>{% endif %}
+                {% endfor %}
+                <tr><td width="150px"></td><td><input type="hidden" name="action" value="upload" /><input type="submit" value="upload" class="button" /></td></tr>
+                </table>
+            </form>
+        </fieldset>
+    </div>
 
 {% endblock %}
