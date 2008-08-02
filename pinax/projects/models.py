@@ -118,12 +118,12 @@ def new_comment(sender, instance):
         topic.modified = datetime.now()
         topic.save()
         if notification:
-            notification.send([topic.creator], "projects_topic_response", {"user": instance.user, "topic": topic})
+            notification.send([topic.creator], "projects_topic_response", {"user": instance.user, "topic": topic, "comment": instance})
     elif isinstance(instance.content_object, Task):
         task = instance.content_object
         task.modified = datetime.now()
         task.save()
         project = task.project
         if notification:
-            notification.send(project.members.all(), "projects_task_comment", {"user": instance.user, "task": task, "project": project})
+            notification.send(project.members.all(), "projects_task_comment", {"user": instance.user, "task": task, "project": project, "comment": instance})
 dispatcher.connect(new_comment, signal=signals.post_save, sender=ThreadedComment)

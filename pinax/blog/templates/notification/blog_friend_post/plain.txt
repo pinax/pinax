@@ -1,1 +1,3 @@
-{% load i18n %}{% blocktrans with post.author as post_author %}{{ post_author }} has posted to their blog.{% endblocktrans %}
+{% load i18n %}{% blocktrans with post.author as post_author and post.get_absolute_url as post_url %}{{ post_author }} has posted to their blog.
+
+http://{{ current_site }}{{ post_url }}{% endblocktrans %}

@@ -1,1 +1,5 @@
-{% load i18n %}{% blocktrans %}{{ user }} has commented on your blog post '{{ post }}'.{% endblocktrans %}
+{% load i18n %}{% blocktrans with comment.comment as post_comment and post.get_absolute_url as post_url %}{{ user }} has commented on your blog post '{{ post }}':
+
+{{ post_comment }}
+
+http://{{ current_site }}{{ post_url }}{% endblocktrans %}
