@@ -2,6 +2,7 @@
 
 {% load zwitschern %}
 {% load i18n %}
+{% load wiki %}
 {% load wikiurl %}
 {% load gravatar %}
 {% load threadedcommentstags %}
@@ -101,17 +102,7 @@
             {% if articles %}
                 <table class="topics">
                     {% for article in articles %}
-                        <tr class="{% cycle odd,even %}">
-                            <td class="meta">
-                                <div class="avatar">{% gravatar article.latest_changeset.editor 40 %}</div>
-                                <div class="details"><a href="{% url profiles.views.profile article.latest_changeset.editor.username %}">{{ article.latest_changeset.editor }}</a></div>
-                                {{ article.last_update|date }}
-                            </td>
-                            <td>
-                                <h2><a href="{% wikiurl article tribe article %}">{{ article.title }}</a></h2>
-                                <div class="body">{{ article.content|truncatewords:25 }}</div>
-                            </td>
-                        </tr>
+                        {% show_teaser article %}
                     {% endfor %}
                 </table>
                 <p><a href="{% wikiurl list tribe %}">{% trans "more..." %}</a></p>

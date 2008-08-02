@@ -6,6 +6,7 @@
 {% load tribe_tags %}
 {% load project_tags %}
 {% load blog_tags %}
+{% load wiki %}
 
 {% block head_title %}{% blocktrans %}Tags{% endblocktrans %}{% endblock %}
 
@@ -77,11 +78,11 @@
 
     <h1>{% blocktrans %}All Wiki Articles Matching <i>{{ tag }}</i>{% endblocktrans %}</h1>
 
-    {% for article in wiki_article_tags %}
-        {{ article }}
-        {# @@@ Show a box like we do on projects and tribes pages, but using a inclusion tag to escape DRYolation #}
-    {% endfor %}
-
+    <table class="topics">
+        {% for article in wiki_article_tags %}
+            {% show_teaser article %}
+        {% endfor %}
+    </table>
 
 
 {% endblock %}
