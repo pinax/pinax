@@ -134,6 +134,7 @@ INSTALLED_APPS = (
     'blog',
     'ajax_validation',
     'photologue',
+    'avatar',
     
     # internal (for now)
     'analytics',
@@ -205,6 +206,8 @@ RESTRUCTUREDTEXT_FILTER_SETTINGS = { 'cloak_email_addresses': True,
 # HTTP_X_FORWARDED_FOR instead of REMOTE_ADDR. This setting is used
 # to inform apps of this fact
 BEHIND_PROXY = False
+
+GRAVATAR_URL_PREFIX = '/'
 
 try:
     from localsettings import *
