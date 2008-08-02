@@ -18,8 +18,8 @@
             <legend>{% trans "Editing Post" %}</legend>
     
         {% ifequal post.author request.user %}
-            <form id="blog_form" method="POST" action="">
-                <table>
+            <form method="POST" action="">
+                <table align="center">
                     <tr><td colspan="2">{{ blog_form.non_field_errors }}</td></tr>
                     {% for field in blog_form %}
                         {% if field.errors %}<tr><td></td><td>{{ field.errors }}</td></tr>{% endif %}
