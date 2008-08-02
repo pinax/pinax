@@ -39,3 +39,13 @@ ALTER TABLE "projects_task" ADD COLUMN "tags" varchar(255) NOT NULL DEFAULT '';
 
 ALTER TABLE "tribes_tribe" ADD COLUMN "tags" varchar(255) NOT NULL DEFAULT '';
 ALTER TABLE "tribes_topic" ADD COLUMN "tags" varchar(255) NOT NULL DEFAULT '';
+
+
+## for tagging on wiki articles
+
+ALTER TABLE "wiki_article" ADD COLUMN "tags" varchar(255) NOT NULL DEFAULT '';
+
+
+## for addition of summary to wiki article
+
+ALTER TABLE "wiki_article" ADD COLUMN "summary" varchar(150) NOT NULL DEFAULT '';
