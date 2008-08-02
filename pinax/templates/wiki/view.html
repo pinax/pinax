@@ -3,6 +3,7 @@
 {% load i18n %}
 {% load wiki %}
 {% load wikiurl %}
+{% load extra_tagging_tags %}
 
 
 {% block head_title %}Wiki for {{ group.name }} {% endblock %}
@@ -33,6 +34,8 @@
     {% endif %}
 
     {% render_content article %}
+
+    {% show_tags_for article %}
 
     {% if can_observe %}
         {% if is_observing %}

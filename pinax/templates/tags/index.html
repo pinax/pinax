@@ -11,9 +11,9 @@
 
 {% block body %}
     <p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time.</p>
-    
+
     <h1>{% trans "All Photos Matching " %}<i>"{{ tag }}"</i></h1>
-    
+
     {% if phototags %}
         <div class="thumb-row clearfix">
         {% for photo in phototags %}
@@ -31,7 +31,7 @@
     {% endif %}
 
     <h1>{% trans "All Blog Posts Matching " %}<i>"{{ tag }}"</i></h1>
-    
+
     {% if alltags %}
         <p>{% trans "These are blog posts from everyone:" %}</p>
         {% for blog_post in alltags %}
@@ -40,39 +40,48 @@
     {% else %}
         No blog posts matching tag.
     {% endif %}
-    
+
     <h1>{% blocktrans %}All Projects Matching <i>{{ tag }}</i>{% endblocktrans %}</h1>
-    
+
     <dl>
         {% for project in project_tags %}
             {% show_project project %}
         {% endfor %}
     </dl>
-    
+
     <h1>{% blocktrans %}All Project Topics Matching <i>{{ tag }}</i>{% endblocktrans %}</h1>
-    
+
     {% for topic in project_topic_tags %}
         {% show_project_topic topic %}
     {% endfor %}
-    
+
     <h1>{% blocktrans %}All Project Tasks Matching <i>{{ tag }}</i>{% endblocktrans %}</h1>
-    
+
     {% for task in project_task_tags %}
         {% show_task task %}
     {% endfor %}
-    
+
     <h1>{% blocktrans %}All Tribes Matching <i>{{ tag }}</i>{% endblocktrans %}</h1>
-    
+
     <dl>
         {% for tribe in tribe_tags %}
             {% show_tribe tribe %}
         {% endfor %}
     </dl>
-    
+
     <h1>{% blocktrans %}All Tribe Topics Matching <i>{{ tag }}</i>{% endblocktrans %}</h1>
-    
+
     {% for topic in tribe_topic_tags %}
         {% show_tribe_topic topic %}
     {% endfor %}
-    
+
+    <h1>{% blocktrans %}All Wiki Articles Matching <i>{{ tag }}</i>{% endblocktrans %}</h1>
+
+    {% for article in wiki_article_tags %}
+        {{ article }}
+        {# @@@ Show a box like we do on projects and tribes pages, but using a inclusion tag to escape DRYolation #}
+    {% endfor %}
+
+
+
 {% endblock %}
