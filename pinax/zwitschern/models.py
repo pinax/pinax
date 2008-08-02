@@ -11,6 +11,11 @@ from django.contrib.contenttypes import generic
 
 from tribes.models import Tribe
 
+try:
+    from notification import models as notification
+except ImportError:
+    notification = None
+
 # relational databases are a terrible way to do
 # multicast messages (just ask Twitter) but here you have it :-)
 
@@ -105,7 +110,8 @@ def tweet(user, text):
     match = reply_re.match(text)
     if match:
         try:
-            recipients.add(User.objects.get(username=match.group(1)))
+            reply_recipient = User.objects.get(username=match.group(1))
+            recipients.add(reply_recipient)
         except User.DoesNotExist:
             pass # oh well
     
@@ -118,7 +124,10 @@ def tweet(user, text):
     
     # now send to all the recipients
     for recipient in recipients:
-        TweetInstance(text=text, sender=user, recipient=recipient, sent=now).save()
+        tweet_instance = TweetInstance.objects.create(text=text, sender=user, recipient=recipient, sent=now)
+    if match:
+        if notification:
+            notification.send([reply_recipient], "tweet_reply_received", {'tweet': tweet_instance,})
 
 
 class FollowingManager(models.Manager):

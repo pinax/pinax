@@ -1,0 +1,4 @@
+{% load i18n captureas_tag %}
+{% captureas profile_url %}{% url profile_detail username=tweet.sender.username %}{% endcaptureas %}
+{% captureas reply_url %}{% url zwitschern.views.single tweet.id %}{% endcaptureas %}
+{% blocktrans with tweet.sender as tweet_sender %}<a href="{{ profile_url }}">{{ tweet_sender }}</a> sent you a <a href="{{ reply_url }}">tweet reply</a>.{% endblocktrans %}

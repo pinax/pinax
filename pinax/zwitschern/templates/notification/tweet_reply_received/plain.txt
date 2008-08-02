@@ -1,0 +1,2 @@
+{% load i18n %}{% blocktrans with tweet.sender as tweet_sender and tweet.text as tweet_text %}{{ tweet_sender }} sent you the following tweet reply:
+{{ tweet_text }}{% endblocktrans %}
