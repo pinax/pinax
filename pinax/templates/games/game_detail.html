@@ -1,0 +1,9 @@
+{% extends "games/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% blocktrans %}Game{% endblocktrans %} : {{ game.name }}{% endblock %}
+
+{% block body %}
+    <embed src="{{ game.get_swf_url }}" width="{{ game.width }}" height="{{ game.height }}"></embed>
+{% endblock %}

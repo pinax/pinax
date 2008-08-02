@@ -135,6 +135,7 @@ INSTALLED_APPS = (
     'ajax_validation',
     'photologue',
     'avatar',
+    'arcade',
     
     # internal (for now)
     'analytics',
@@ -208,6 +209,10 @@ RESTRUCTUREDTEXT_FILTER_SETTINGS = { 'cloak_email_addresses': True,
 BEHIND_PROXY = False
 
 GRAVATAR_URL_PREFIX = '/'
+
+ARCADE_STORAGE_MODULE = 'arcade.storage.file'
+ARCADE_STORAGE_PATH = os.path.join(MEDIA_ROOT, 'data', 'game_files')
+ARCADE_STATIC_URL = "/site_media/data/game_files/"
 
 try:
     from localsettings import *

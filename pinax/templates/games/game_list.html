@@ -1,0 +1,13 @@
+{% extends "games/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% blocktrans %}Games{% endblocktrans %}{% endblock %}
+
+{% block body %}
+    <ul>
+        {% for game in games %}
+            <li><a href="{% url games_detail game.slug %}"><img src="{{ game.get_thumbnail_url }}" /></a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
