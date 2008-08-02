@@ -13,18 +13,25 @@
 {% block body %}
     <p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time.</p>
     
-    <h1>{% trans "Editing Post" %}</h1>
+    <div id="basic-form">
+        <fieldset>
+            <legend>{% trans "Editing Post" %}</legend>
     
-    {% ifequal post.author request.user %}
-        <div>
+        {% ifequal post.author request.user %}
             <form id="blog_form" method="POST" action="">
                 <table>
-                    {{ blog_form }}
-                    <tr><td></td><td><input type="hidden" name="action" value="update" /><input type="submit" value="{% trans "update" %}"/></td></tr>
+                    <tr><td colspan="2">{{ blog_form.non_field_errors }}</td></tr>
+                    {% for field in blog_form %}
+                        {% if field.errors %}<tr><td></td><td>{{ field.errors }}</td></tr>{% endif %}
+                        <tr><td width="150px" valign="top">{{ field.label_tag }}</td><td>{{ field }}</td></tr>
+                        {% if field.help_text %}<tr><td colspan="2"><span>{{ field.help_text }}</span></td></tr>{% endif %}
+                    {% endfor %}
+                    <tr><td></td><td><input type="hidden" name="action" value="update" /><input type="submit" value="{% trans "update" %}" class="button" /></td></tr>
                 </table>
             </form>
-        </div>
-    {% else %}
-        <p>You are not the author of this post.</p>
-    {% endifequal %}
+        {% else %}
+            <p>You are not the author of this post.</p>
+        {% endifequal %}
+        </fieldset>
+    </div>
 {% endblock %}
