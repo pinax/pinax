@@ -924,13 +924,19 @@ legend { padding: 0 .4em; font-weight: bold; font-size: 1.2em; }
 .signupform {
     float: left;
 }
-.game_item { 
-    display: block;
-    text-align: center;
+.game_item {
     float: left;
+    text-align: center;
     width: 125px;
     height: 160px;
 }
+.game_item {
+    z-index: 10;
+}
 .game_item span {
     display: block;
+}
+.game_item a {
+    color: inherit;
+    text-decoration: none;
 }

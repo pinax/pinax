@@ -33,7 +33,7 @@ def categories(request):
 
 def game_detail(request, slug=''):
     game = get_object_or_404(Game, slug=slug.lower())
-    if request.META['HTTP_REFERER'] != request.path:
+    if request.META.get('HTTP_REFERER', '') != request.path:
         game.add_play()
     context = {
         'game': game,

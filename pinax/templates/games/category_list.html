@@ -9,7 +9,7 @@
     {% autopaginate categories %}
     <ul>
     {% for category, game_count in categories %}
-        <li><a href="{% url games_category category.slug %}">{{ category.name }} ({{ game_count }} {% trans "Games" %})</a></li>
+        <li><a href="{% url games_category category.slug %}">{{ category.name }} ({{ game_count }} {% trans "Game" %}{{ game_count|pluralize }})</a></li>
     {% endfor %}
     </ul>
     {% paginate %}

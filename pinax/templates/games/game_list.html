@@ -46,9 +46,10 @@
     {% for game in games %}
         <div class="game_item">
             <a href="{% url games_detail game.slug %}" title="{{ game.name }}: {{ game.description }}"><img src="{{ game.get_thumbnail_url }}" /></a>
-            <span class="game_name"><b>{{ game.name }}</b></span>
+            <span class="game_name"><b><a href="{% url games_detail game.slug %}">{{ game.name }}</a></b></span>
             <span class="game_plays">{{ game.game_plays }} Plays</span>
         </div>
     {% endfor %}
+    <div class="clearfix"></div>
     {% paginate %}
 {% endblock %}
