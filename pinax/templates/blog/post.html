@@ -1,9 +1,8 @@
 {% extends "blog/base.html" %}
 
 {% load i18n %}
-{% load gravatar %}
 {% load humanize %}
-{% load threadedcommentstags %}
+{% load comments_tag %}
 {% load tagging_tags %}
 {% load wiki %}
 {% load blog_tags %}
@@ -39,59 +38,5 @@
     </div>
     
     <h3>Comments on This Post:</h3>
-    {% get_threaded_comment_tree for post as responses %}
-    
-    <a name="comments"></a>
-    <ul class="responses">
-        {% for response in responses %}
-            <li class="{% cycle even,odd %} thread-{{ response.depth }} clearfix">
-                <div class="meta">
-                    <div class="avatar">{% gravatar response.user 40 %}</div>
-                    <div class="details"><a href="{% url profiles.views.profile response.user.username %}">{{ response.user }}</a></div>
-                    {{ response.date_submitted|date }}
-                </div>
-                <div class="bulk">
-                    <div class="body">{{ response.comment|urlize|linebreaks }}</div>
-                    {% ifequal user response.user %}
-                    <form method="POST" action="{% url tc_comment_delete response.id %}">
-                        <input type="submit" value="{% trans "Delete Post" %}" />
-                        <input type="hidden" name="next" value="{% url blog_post response.content_object.slug %}" />
-                    </form>
-                    {% endifequal %}
-                    <a href="javascript:toggle_comment_form({{ response.id }})">Reply to This Post</a>
-                    <form class="hidden" method="POST" action="{% get_comment_url post response %}" id="comment_form_{{ response.id }}">
-                        <table><tr><td><textarea id="id_comment" rows="10" cols="40" name="comment"></textarea></td></tr>
-                        <tr><td><input type="submit" value="{% trans "Post Response" %}" /></td></tr></table>
-                        <input type="hidden" name="next" value="{{ request.path }}" />
-                    </form>
-                </div>
-            </li>
-        {% endfor %}
-    </ul>
-    
-    <form action="{% get_comment_url post %}" method="POST">
-        <table>
-            <tr><td><textarea id="id_comment" rows="10" cols="40" name="comment"></textarea></td></tr>
-            <tr><td><input type="submit" value="{% trans "Post Response" %}" /></td></tr>
-        </table>
-        <input type="hidden" name="next" value="{{ request.path }}" />
-    </form>
-{% endblock %}
-
-{% block extra_body %}
-    <script type="text/javascript">
-        function toggle_comment_form(id){
-            var cform = $('#comment_form_' + id);
-            if(cform.hasClass('hidden')) {
-                cform.prev().text("Stop Replying to This Post");
-                cform.slideDown();
-            }
-            else {
-                cform.prev().text("Reply to This Post");
-                cform.slideUp();
-            }
-            cform.toggleClass('hidden');
-        }
-    </script>
-
+    {% comments post %}
 {% endblock %}
