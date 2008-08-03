@@ -5,7 +5,6 @@ from wiki import models as wiki_models
 
 
 wiki_args = {
-    'template_dir': 'projects/wiki',
     'group_slug_field': 'slug',
     'group_qs': Project.objects.all()
 }
