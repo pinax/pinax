@@ -211,6 +211,8 @@ BEHIND_PROXY = False
 
 GRAVATAR_URL_PREFIX = '/'
 
+AVATAR_CACHE_SECONDS = 3600
+
 ARCADE_STORAGE_MODULE = 'arcade.storage.file'
 ARCADE_STORAGE_PATH = os.path.join(MEDIA_ROOT, 'data', 'game_files')
 ARCADE_STATIC_URL = "/site_media/data/game_files/"
