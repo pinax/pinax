@@ -136,6 +136,7 @@ INSTALLED_APPS = (
     'photologue',
     'avatar',
     'arcade',
+    'games',
     
     # internal (for now)
     'analytics',
