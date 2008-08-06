@@ -14,7 +14,6 @@ from django.contrib.auth.models import User
 try:
     from notification import models as notification
     from django.db.models import signals
-    from django.dispatch import dispatcher
 except ImportError:
     notification = None
 
@@ -74,9 +73,9 @@ class Post(models.Model):
 
 # handle notification of new comments
 from threadedcomments.models import ThreadedComment
-def new_comment(sender, instance):
+def new_comment(sender, instance, **kwargs):
     if isinstance(instance.content_object, Post):
         post = instance.content_object
         if notification:
             notification.send([post.author], "blog_post_comment", {"user": instance.user, "post": post, "comment": instance})
-dispatcher.connect(new_comment, signal=signals.post_save, sender=ThreadedComment)
+signals.post_save.connect(new_comment, sender=ThreadedComment)

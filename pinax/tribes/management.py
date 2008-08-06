@@ -1,4 +1,3 @@
-from django.dispatch import dispatcher
 from django.db.models import signals
 
 from django.utils.translation import ugettext_noop as _
@@ -16,6 +15,6 @@ try:
         notification.create_notice_type("tribes_new_topic", _("New Topic Started"), _("a new topic has started in a tribe you're a member of"), default=2)
         notification.create_notice_type("tribes_topic_response", _("Response To Your Topic"), _("someone has responded on a topic you started"), default=2)
     
-    dispatcher.connect(create_notice_types, signal=signals.post_syncdb, sender=notification)
+    signals.post_syncdb.connect(create_notice_types, sender=notification)
 except ImportError:
     print "Skipping creation of NoticeTypes as notification app not found"

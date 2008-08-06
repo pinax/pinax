@@ -1,12 +1,11 @@
 from django.conf import settings
 from django.core import signals
-from django.dispatch import dispatcher
 import re
 MASK_IN_EXCEPTION_EMAIL= ['password', 'mail', 'protected', 'private' ]
 
 mask_re = re.compile('(' + '|'.join(MASK_IN_EXCEPTION_EMAIL) + ')', re.I)
 
-def clean_request_for_except_repr(signal=None, sender=None, request=None):
+def clean_request_for_except_repr(signal=None, sender=None, request=None, **kwargs):
     if not request or not request.POST or settings.DEBUG: return False
     masked = False
     mutable = True
@@ -21,7 +20,7 @@ def clean_request_for_except_repr(signal=None, sender=None, request=None):
         request.POST._mutable = mutable
     return masked
 
-def insert_svn_app_versions(signal=None, sender=None, request=None):
+def insert_svn_app_versions(signal=None, sender=None, request=None, **kwargs):
     if not request or not request.META: return False
     try:
         from templatetags.svn_app_version import get_all_versions
@@ -41,7 +40,5 @@ def insert_svn_app_versions(signal=None, sender=None, request=None):
         request.META._mutable = mutable
     return added
 
-dispatcher.connect(clean_request_for_except_repr,
-                   signal=signals.got_request_exception)
-dispatcher.connect(insert_svn_app_versions,
-                   signal=signals.got_request_exception)
+signals.got_request_exception.connect(clean_request_for_except_repr)
+signals.got_request_exception.connect(insert_svn_app_versions)

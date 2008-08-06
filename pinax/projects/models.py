@@ -1,7 +1,6 @@
 from datetime import datetime
 
 from django.db import models
-from django.dispatch import dispatcher
 from django.db.models import signals
 from django.utils.html import escape
 from django.utils.translation import ugettext_lazy as _
@@ -112,7 +111,7 @@ class Task(models.Model):
         return ("project_task", [self.pk])
 
 from threadedcomments.models import ThreadedComment
-def new_comment(sender, instance):
+def new_comment(sender, instance, **kwargs):
     if isinstance(instance.content_object, Topic):
         topic = instance.content_object
         topic.modified = datetime.now()
@@ -126,4 +125,4 @@ def new_comment(sender, instance):
         project = task.project
         if notification:
             notification.send(project.members.all(), "projects_task_comment", {"user": instance.user, "task": task, "project": project, "comment": instance})
-dispatcher.connect(new_comment, signal=signals.post_save, sender=ThreadedComment)
+signals.post_save.connect(new_comment, sender=ThreadedComment)
