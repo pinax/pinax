@@ -2,7 +2,7 @@ from django.contrib import admin
 from tribes.models import Tribe, Topic
 
 class TribeAdmin(admin.ModelAdmin):
-    list_display = ('name', 'creator', 'created',)  
+    list_display = ('name', 'slug', 'creator', 'created',)  
 
 class TopicAdmin(admin.ModelAdmin):
     list_display = ('title', )
