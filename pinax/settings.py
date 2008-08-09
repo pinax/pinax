@@ -109,7 +109,7 @@ INSTALLED_APPS = (
     # external
     'notification', # must be first
     'emailconfirmation',
-    'extensions',
+    'django_extensions',
     'robots',
     'dbtemplates',
     'friends',
