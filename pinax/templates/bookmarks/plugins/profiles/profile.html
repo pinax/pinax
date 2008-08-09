@@ -13,7 +13,7 @@
                 </td>
                 <td>
                     <h2><a href="{{ bookmark_instance.bookmark.url }}">{{ bookmark_instance.description }}</a></h2>
-                    <div class="url">{% if bookmark_instance.bookmark.get_favicon_url %}<img src="{{ bookmark_instance.bookmark.get_favicon_url }}" /> {% endif %}{{ bookmark_instance.bookmark.url }}</div>
+                    <div class="url">{% if bookmark_instance.bookmark.get_favicon_url %}<img src="{{ bookmark_instance.bookmark.get_favicon_url }}" height="16" width="16"/> {% endif %}{{ bookmark_instance.bookmark.url }}</div>
                     <div class="body">{{ bookmark_instance.note|linebreaks }}</div>
                 </td>
             </tr>
