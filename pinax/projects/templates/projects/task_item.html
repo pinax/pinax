@@ -17,7 +17,7 @@
         <div><b>Modified</b>: {{ task.modified|shorttimesince }} ago</div>
     </div>
     <div class="bulk">
-        <h2><a href="{% url project_task task.id %}">{{ task.summary }}</a></h2>
+        <h2 class="task_{{ task.get_state_display }}"><a href="{% url project_task task.id %}">{{ task.summary }}</a></h2>
         <div class="body">{{ task.detail|urlize|linebreaks }}</div>
         <div class="task-meta2">
             {% get_comment_count for task as comment_count %}
