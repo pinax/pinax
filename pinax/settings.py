@@ -209,8 +209,6 @@ RESTRUCTUREDTEXT_FILTER_SETTINGS = { 'cloak_email_addresses': True,
 # to inform apps of this fact
 BEHIND_PROXY = False
 
-GRAVATAR_URL_PREFIX = '/'
-
 AVATAR_CACHE_SECONDS = 3600
 
 ARCADE_STORAGE_MODULE = 'arcade.storage.file'
