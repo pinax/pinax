@@ -72,6 +72,7 @@ MIDDLEWARE_CLASSES = (
     'pagination.middleware.PaginationMiddleware',
     'things.middleware.SortOrderMiddleware',
     'crashlog.CrashLogMiddleware',
+    'django.middleware.transaction.TransactionMiddleware',
 )
 
 ROOT_URLCONF = 'pinax.urls'
@@ -124,7 +125,7 @@ INSTALLED_APPS = (
     'gravatar', # This needs to go before threadedcomments.
     'threadedcomments',
     'wiki',
-    # 'django_evolution',
+    'swaps',
     'timezones',
     'feedutil',
     'app_plugins',
