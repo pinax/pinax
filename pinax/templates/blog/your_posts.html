@@ -21,7 +21,7 @@
     <h1>{% trans "Your Posts" %}</h1>
 
     {% if blogs %}
-        <table cellpadding="3" cellspacing="0" border="0" class="blog-list" width="100%">
+        <table cellpadding="5" cellspacing="0" border="0" class="blog-list" width="100%">
             <th>Title</th>
             <th>Teaser</th>
             <th>Published On</th>
@@ -29,8 +29,8 @@
             <th></th>
         {% for blogs in blogs %}
             <tr class="{% cycle odd,even %}">
-				<td><b><a href="{{ blogs.get_absolute_url }}">{{ blogs.title }}</a></b><br />
-                    {% with blogs.tease as body %}
+                <td><b><a href="{{ blogs.get_absolute_url }}">{{ blogs.title }}</a></b><br />
+                    {% with blogs.tease|truncatewords:"50" as body %}
                         {% switch blogs.markup %}
                             {% case 'rst' %} {{ body|restructuredtext|wikiwords|safe }} {% endcase %}
                             {% case 'mrk' %} {{ body|force_escape|markdown|wikiwords }} {% endcase %}
@@ -39,7 +39,7 @@
                         {% endswitch %}
                     {% endwith %}
                 </td>
-                <td>{{ blogs.publish|date }}</td>
+                <td nowrap>{{ blogs.publish|date }}</td>
                 <td>
                     {% with blogs.status as status %}
                         {% switch status %}
