@@ -12,11 +12,11 @@
 
 {% block body %}
     <p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time.</p>
-    
+
     <div id="basic-form">
         <fieldset>
             <legend>{% trans "Editing Post" %}</legend>
-    
+
         {% ifequal post.author request.user %}
             <form method="POST" action="">
                 <table align="center">
