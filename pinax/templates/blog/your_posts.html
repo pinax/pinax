@@ -17,9 +17,9 @@
 
 {% block body %}
     <p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time.</p>
-    
+
     <h1>{% trans "Your Posts" %}</h1>
-    
+
     {% if blogs %}
         <table cellpadding="3" cellspacing="0" border="0" class="blog-list" width="100%">
             <th>Title</th>
@@ -52,6 +52,12 @@
                     <form action="{% url blog_edit blogs.id %}" method="GET">
                             <input type="submit" value="{% trans "Edit Post" %}" />
                     </form>
+                </td>
+                <td>
+                    <form action="{% url blog_destroy blogs.id %}" method="POST">
+                        <input type="submit" value="{% trans "Delete Post" %}" />
+                        <input type="hidden" name="action" value="delete"/>
+                   </form>
                 </td>
             </tr>
         {% endfor %}

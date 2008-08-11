@@ -23,10 +23,16 @@
                     <tr><td colspan="2">{{ blog_form.non_field_errors }}</td></tr>
                     {% for field in blog_form %}
                         {% if field.errors %}<tr><td></td><td>{{ field.errors }}</td></tr>{% endif %}
-                        <tr><td width="150px" valign="top">{{ field.label_tag }}</td><td>{{ field }}</td></tr>
+                        {% ifequal field.name "tease" %}<tr style="display: none;" id="teaser">{% else %}<tr>{% endifequal %}
+                            <td width="150px" valign="top">{{ field.label_tag }}
+                                    {% ifequal field.name "body" %}
+                                    <a href="#" onclick="$('#teaser').toggle(); return false;">{% trans "Teaser" %}</a>
+                                    {% endifequal %}
+                            </td>
+                            <td>{{ field }}</td></tr>
                         {% if field.help_text %}<tr><td colspan="2"><span>{{ field.help_text }}</span></td></tr>{% endif %}
                     {% endfor %}
-                    <tr><td></td><td><input type="hidden" name="action" value="update" /><input type="submit" value="{% trans "update" %}" class="button" /></td></tr>
+                    <tr><td></td><td><input type="hidden" name="action" value="update" /><input type="submit" value="update" class="button"/></td></tr>
                 </table>
             </form>
         {% else %}

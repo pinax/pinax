@@ -29,12 +29,12 @@ def blogs(request, username=None):
         user = get_object_or_404(User, username=username.lower())
         blogs = blogs.filter(author=user)
     return render_to_response("blog/blogs.html", {"blogs": blogs}, context_instance=RequestContext(request))
-    
+
 def post(request, username, year, month, slug):
     post = Post.objects.filter(slug=slug, publish__year=int(year), publish__month=int(month)).filter(author__username=username)
     if not post:
         raise Http404
-    
+
     return render_to_response("blog/post.html", {
         "post": post[0],
     }, context_instance=RequestContext(request))
@@ -42,8 +42,29 @@ def post(request, username, year, month, slug):
 def your_posts(request):
     user = request.user
     blogs = Post.objects.filter(author=user)
-    
+
     return render_to_response("blog/your_posts.html", {"blogs": blogs}, context_instance=RequestContext(request))
+
+
+@login_required
+def destroy(request, id):
+    post = Post.objects.get(pk=id)
+    user = request.user
+    title = post.title
+    if post.author != request.user:
+            request.user.message_set.create(message="You can't delete posts that aren't yours")
+            return HttpResponseRedirect(reverse("blog_list_yours"))
+
+    if request.method == "POST" and request.POST["action"] == "delete":
+        post.delete()
+        request.user.message_set.create(message=_("Successfully deleted post '%s'") % title)
+        return HttpResponseRedirect(reverse("blog_list_yours"))
+    else:
+        return HttpResponseRedirect(reverse("blog_list_yours")) 
+
+    return render_to_response(context_instance=RequestContext(request))
+
+
 
 @login_required
 def new(request):
@@ -63,13 +84,13 @@ def new(request):
                 if notification:
                     if friends: # @@@ might be worth having a shortcut for sending to all friends
                         notification.send((x['friend'] for x in Friendship.objects.friends_for_user(blog.author)), "blog_friend_post", {"post": blog})
-                
+
                 return HttpResponseRedirect(reverse("blog_list_yours"))
         else:
             blog_form = BlogForm()
     else:
         blog_form = BlogForm()
-    
+
     return render_to_response("blog/new.html", {
         "blog_form": blog_form
     }, context_instance=RequestContext(request))
@@ -77,7 +98,7 @@ def new(request):
 @login_required
 def edit(request, id):
     post = get_object_or_404(Post, id=id)
-    
+
     if request.method == "POST":
         if post.author != request.user:
             request.user.message_set.create(message="You can't edit posts that aren't yours")
@@ -88,13 +109,14 @@ def edit(request, id):
                 blog = blog_form.save(commit=False)
                 blog.save()
                 request.user.message_set.create(message=_("Successfully updated post '%s'") % blog.title)
-                
+
                 return HttpResponseRedirect(reverse("blog_list_yours"))
         else:
             blog_form = BlogForm(instance=post)
+
     else:
         blog_form = BlogForm(instance=post)
-    
+
     return render_to_response("blog/edit.html", {
         "blog_form": blog_form,
         "post": post,
