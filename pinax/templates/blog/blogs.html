@@ -21,22 +21,22 @@
 
 {% block body %}
     <p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time.</p>
-    
+
     <h1>{% trans "All Blogs" %}</h1>
-    
+
     {% if blogs %}
         <p>{% trans "These are blog posts from everyone:" %}</p>
-        
+
         {% autopaginate blogs %}
-            
+
             {% for blog_post in blogs %}
                 {% show_blog_post blog_post %}
             {% endfor %}
-        
+
         {% paginate %}
-    
+
     {% else %}
         No blog posts yet.
     {% endif %}
-    
+
 {% endblock %}

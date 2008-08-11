@@ -60,7 +60,7 @@ def destroy(request, id):
         request.user.message_set.create(message=_("Successfully deleted post '%s'") % title)
         return HttpResponseRedirect(reverse("blog_list_yours"))
     else:
-        return HttpResponseRedirect(reverse("blog_list_yours")) 
+        return HttpResponseRedirect(reverse("blog_list_yours"))
 
     return render_to_response(context_instance=RequestContext(request))
 

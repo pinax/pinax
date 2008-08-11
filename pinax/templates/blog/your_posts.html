@@ -29,8 +29,8 @@
             <th></th>
         {% for blogs in blogs %}
             <tr class="{% cycle odd,even %}">
-                <td><a href="{{ blogs.get_absolute_url }}">{{ blogs.title }}</a></td>
-                <td>{% with blogs.tease as body %}
+				<td><b><a href="{{ blogs.get_absolute_url }}">{{ blogs.title }}</a></b><br />
+                    {% with blogs.tease as body %}
                         {% switch blogs.markup %}
                             {% case 'rst' %} {{ body|restructuredtext|wikiwords|safe }} {% endcase %}
                             {% case 'mrk' %} {{ body|force_escape|markdown|wikiwords }} {% endcase %}
@@ -48,14 +48,14 @@
                         {% endswitch %}
                     {% endwith %}
                 </td>
-                <td>
+                <td width="50px" align="center">
                     <form action="{% url blog_edit blogs.id %}" method="GET">
-                            <input type="submit" value="{% trans "Edit Post" %}" />
+                            <input type="image" src="/site_media/pencil.png" border="0" title="{% trans "Edit Post" %}" />
                     </form>
                 </td>
-                <td>
+                <td align="right">
                     <form action="{% url blog_destroy blogs.id %}" method="POST">
-                        <input type="submit" value="{% trans "Delete Post" %}" />
+                        <input type="image" src="/site_media/delete.png" border="0" title="{% trans "Delete Post" %}" />
                         <input type="hidden" name="action" value="delete"/>
                    </form>
                 </td>

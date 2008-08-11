@@ -7,7 +7,7 @@
 
 <div class="blog-post clearfix">
     <h2><a href="{{ blog_post.get_absolute_url }}">{{ blog_post.title }}</a></h2>
-	<div class="blog-post-tease">
+    <div class="blog-post-tease">
         {% if blog_post.tease %}
              {% with blog_post.tease as body %}
                 {% switch blog_post.markup %}
