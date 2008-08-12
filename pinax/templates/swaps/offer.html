@@ -1,0 +1,45 @@
+{% extends "swaps/base.html" %}
+
+{% load i18n %}
+{% load humanize %}
+{% load threadedcommentstags %}
+{% load tagging_tags %}
+{% load wiki %}
+
+{% block head_title %}{% blocktrans %}Offer{% endblocktrans %} : {{ offer.short_description }}{% endblock %}
+
+
+{% block body %}
+    <p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time.</p>
+    
+    <div class="blog-post">
+        <h2>{{ offer.short_description }}</h2>
+        <div class="blog-meta"><p>Offered by: <a href="{% url profiles.views.profile offer.offerer.username %}">{{ offer.offerer.username }}</a> on {{ offer.offered_time|date }}</p></div>
+        <p>
+			Offering: {{ offer.offering|urlize }}
+		</p>
+		<p>
+			Want: {{ offer.want|urlize }}
+		</p>
+		<p>
+			State: {{ offer.get_state_display }}
+		</p>
+		<div class="blog-tags">
+            <p><img src="/site_media/tags.png" border="0" class="noborder" align="absmiddle" />
+            {% tags_for_object offer as tags %}
+            {% for tag in tags %}
+                <a href="/tags/{{ tag }}">{{ tag }}</a>
+            {% endfor %}</p>
+			{% if offer.is_changeable %}
+				{% ifequal offer.offerer request.user %}
+					<form action="{% url offer_edit offer.id %}" method="GET">
+						<input type="hidden" name="returnto" value="offer_list_yours" />
+						<input type="submit" value="{% trans "Edit Offer" %}" />
+					</form>
+				{% endifequal %}
+			{% endif %}
+        </div>
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Avatar" %}{% endblock %}
+
+{% block body %}
+    <h1>{% trans "Avatar" %}</h1>
+	{% if not avatars %}
+        <h3>You have no avatars to delete.  Please <a href="{% url avatar_change %}">upload one</a> now.</h3>
+    {% else %}
+        <h3>Select which avatars to delete:</h3>
+        <form method="POST" action="">
+            <ul class="avatar_choices">
+                {{ delete_avatar_form.choices }}
+            </ul>
+            <input type="hidden" name="next" value="{% url avatar_change %}" />
+            <input type="submit" value="Delete These" />
+        </form>
+    {% endif %}
+{% endblock %}
+
+{% block extra_body %}
+    {% load jquery_validation %}
+    {% include_validation %}
+    <script type="text/javascript">
+       <!-- nothing here -->
+    </script>
+{% endblock %}

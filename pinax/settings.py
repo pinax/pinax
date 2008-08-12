@@ -44,7 +44,7 @@ MEDIA_ROOT = os.path.join(os.path.dirname(__file__), "site_media")
 
 # URL that handles the media served from MEDIA_ROOT.
 # Example: "http://media.lawrence.com"
-MEDIA_URL = ''
+MEDIA_URL = '/site_media/'
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
@@ -122,7 +122,6 @@ INSTALLED_APPS = (
     'oembed',
     'crashlog',
     'pagination',
-    'gravatar', # This needs to go before threadedcomments.
     'threadedcomments',
     'wiki',
     'swaps',
@@ -209,8 +208,6 @@ RESTRUCTUREDTEXT_FILTER_SETTINGS = { 'cloak_email_addresses': True,
 # HTTP_X_FORWARDED_FOR instead of REMOTE_ADDR. This setting is used
 # to inform apps of this fact
 BEHIND_PROXY = False
-
-AVATAR_CACHE_SECONDS = 3600
 
 ARCADE_STORAGE_MODULE = 'arcade.storage.file'
 ARCADE_STORAGE_PATH = os.path.join(MEDIA_ROOT, 'data', 'game_files')

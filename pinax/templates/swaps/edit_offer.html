@@ -1,0 +1,29 @@
+{% extends "swaps/base.html" %}
+
+{% load i18n %}
+{% load wiki %}
+{% load markup %}
+{% load switchcase %}
+{% load tagging_tags %}
+{% load restructuredtext %}
+
+{% block head_title %}{% blocktrans %}Editing Offer{% endblocktrans %}{% endblock %}
+
+{% block body %}
+    <p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time.</p>
+    
+    <h1>{% trans "Editing Offer" %}</h1>
+    
+    {% ifequal offer.offerer request.user %}
+        <div>
+            <form id="offer_form" method="POST" action="">
+                <table>
+                    {{ offer_form }}
+                    <tr><td></td><td><input type="hidden" name="action" value="update" /><input type="submit" value="{% trans "update" %}"/></td></tr>
+                </table>
+            </form>
+        </div>
+    {% else %}
+        <p>You are not the creator of this offer.</p>
+    {% endifequal %}
+{% endblock %}

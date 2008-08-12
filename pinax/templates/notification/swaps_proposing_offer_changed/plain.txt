@@ -1,0 +1,3 @@
+{% load i18n %}{% blocktrans with swap.get_absolute_url as swap_url %}{{ creator }} has changed their offer {{ proposing_offer }} in a proposed swap for your {{ responding_offer }}.
+
+http://{{ current_site }}{{ swap_url }}{% endblocktrans %}

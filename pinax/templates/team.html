@@ -1,7 +1,7 @@
 {% extends "site_base.html" %}
 
 {% load i18n %}
-{% load gravatar %}
+{% load avatar_tags %}
 
 {% block head_title %}{% trans "Team" %}{% endblock %}
 
@@ -14,35 +14,35 @@
     
     {# @@@ factor out css into css file #}
     <div class="profile clearfix">
-        <div style="float: left;">{% gravatar "jtauber" 40 %}</div>
+        <div style="float: left;">{% avatar "jtauber" 40 %}</div>
         <div style="padding: 5px; margin-left: 50px; font-size: 14pt"><a href="{% url profiles.views.profile "jtauber" %}">James Tauber</a></div>
     </div>
     <div class="profile clearfix">
-        <div style="float: left;">{% gravatar "dougn" 40 %}</div>
+        <div style="float: left;">{% avatar "dougn" 40 %}</div>
         <div style="padding: 5px; margin-left: 50px; font-size: 14pt"><a href="{% url profiles.views.profile "dougn" %}">Doug Napoleone</a></div>
     </div>
     <div class="profile clearfix">
-        <div style="float: left;">{% gravatar "brosner" 40 %}</div>
+        <div style="float: left;">{% avatar "brosner" 40 %}</div>
         <div style="padding: 5px; margin-left: 50px; font-size: 14pt"><a href="{% url profiles.views.profile "brosner" %}">Brian Rosner</a></div>
     </div>
     <div class="profile clearfix">
-        <div style="float: left;">{% gravatar "jezdez" 40 %}</div>
+        <div style="float: left;">{% avatar "jezdez" 40 %}</div>
         <div style="padding: 5px; margin-left: 50px; font-size: 14pt"><a href="{% url profiles.views.profile "jezdez" %}">Jannis Leidel</a></div>
     </div>
     <div class="profile clearfix">
-        <div style="float: left;">{% gravatar "ericflo" 40 %}</div>
+        <div style="float: left;">{% avatar "ericflo" 40 %}</div>
         <div style="padding: 5px; margin-left: 50px; font-size: 14pt"><a href="{% url profiles.views.profile "ericflo" %}">Eric Florenzano</a></div>
     </div>
     <div class="profile clearfix">
-        <div style="float: left;">{% gravatar "edcrypt" 40 %}</div>
+        <div style="float: left;">{% avatar "edcrypt" 40 %}</div>
         <div style="padding: 5px; margin-left: 50px; font-size: 14pt"><a href="{% url profiles.views.profile "edcrypt" %}">Eduardo de Oliveira Padoan</a></div>
     </div>
     <div class="profile clearfix">
-        <div style="float: left;">{% gravatar "empty" 40 %}</div>
+        <div style="float: left;">{% avatar "empty" 40 %}</div>
         <div style="padding: 5px; margin-left: 50px; font-size: 14pt"><a href="{% url profiles.views.profile "empty" %}">Michael Trier</a></div>
     </div>
     <div class="profile clearfix">
-        <div style="float: left;">{% gravatar "20seven" 40 %}</div>
+        <div style="float: left;">{% avatar "20seven" 40 %}</div>
         <div style="padding: 5px; margin-left: 50px; font-size: 14pt"><a href="{% url profiles.views.profile "20seven" %}">Greg Newman</a></div>
     </div>
         
@@ -50,27 +50,27 @@
     
     <h2>{% trans "Translators" %}</h2>
     <div class="profile clearfix">
-        <div style="float: left;">{% gravatar "jezdez" 40 %}</div>
+        <div style="float: left;">{% avatar "jezdez" 40 %}</div>
         <div style="padding: 5px; margin-left: 50px; font-size: 14pt"><a href="{% url profiles.views.profile "jezdez" %}">Jannis Leidel</a> (Deutsch)</div>
     </div>
     <div class="profile clearfix">
-        <div style="float: left;">{% gravatar "robertrv" 40 %}</div>
+        <div style="float: left;">{% avatar "robertrv" 40 %}</div>
         <div style="padding: 5px; margin-left: 50px; font-size: 14pt"><a href="{% url profiles.views.profile "robertrv" %}">Robert Ramírez Vique</a> (Español)</div>
     </div>
     <div class="profile clearfix">
-        <div style="float: left;">{% gravatar "roland" 40 %}</div>
+        <div style="float: left;">{% avatar "roland" 40 %}</div>
         <div style="padding: 5px; margin-left: 50px; font-size: 14pt"><a href="{% url profiles.views.profile "roland" %}">Frédéric Roland</a> (Français)</div>
     </div>
     <div class="profile clearfix">
-        <div style="float: left;">{% gravatar "Mr_Shark" 40 %}</div>
+        <div style="float: left;">{% avatar "Mr_Shark" 40 %}</div>
         <div style="padding: 5px; margin-left: 50px; font-size: 14pt"><a href="{% url profiles.views.profile "Mr_Shark" %}">Jens Persson</a> (Svenska)</div>
     </div>
     <div class="profile clearfix">
-        <div style="float: left;">{% gravatar "edcrypt" 40 %}</div>
+        <div style="float: left;">{% avatar "edcrypt" 40 %}</div>
         <div style="padding: 5px; margin-left: 50px; font-size: 14pt"><a href="{% url profiles.views.profile "edcrypt" %}">Eduardo de Oliveira Padoan</a> (Português brasileiro)</div>
     </div>
     <div class="profile clearfix">
-        <div style="float: left;">{% gravatar "gklein" 40 %}</div>
+        <div style="float: left;">{% avatar "gklein" 40 %}</div>
         <div style="padding: 5px; margin-left: 50px; font-size: 14pt"><a href="{% url profiles.views.profile "gklein" %}">Gil Klein</a> (עברית)</div>
     </div>
 

@@ -1,0 +1,21 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+
+{% block rtab_id %}id="swaps_tab"{% endblock %}
+
+{% block subnav %}
+    {% if user.is_authenticated %}
+        <ul>
+            <li><a href="{% url offer_list_all %} ">{% trans "Open Offers" %}</a></li>
+            <li><a href="{% url offer_list_yours %}">{% trans "Your Offers" %}</a></li>
+			<li><a href="{% url offer_new %}">{% trans "Make an Offer" %}</a></li>
+			<li><a href="{% url proposed_to_you %}">{% trans "Proposed to you" %}</a></li>
+			<li><a href="{% url proposed_by_you %}">{% trans "Proposed by you" %}</a></li>
+            <li><a href="{% url accepted_swaps %}">{% trans "Accepted" %}</a></li>
+			<li><a href="{% url dead_swaps %}">{% trans "Dead" %}</a></li>
+        </ul>
+    {% else %}
+        &nbsp;
+    {% endif %}
+{% endblock %}

@@ -1,6 +1,6 @@
 {% load i18n %}
 {% load captureas_tag %}
-{% load gravatar %}
+{% load avatar_tags %}
 
 {% if is_me %}
     <div class="tribes">
@@ -21,7 +21,7 @@
                 {% for friendship in other_friends %}
                 {% if forloop.counter0|divisibleby:"3" %}<tr>{% endif %}
                     <td>
-                        <div class="avatar">{% gravatar friendship.friend 40 %}</div>
+                        <div class="avatar">{% avatar friendship.friend 40 %}</div>
                         <div class="details"><a href="{% url profiles.views.profile friendship.friend.username %}" title="{{ friendship.friend.username }}">{{ friendship.friend.username }}</a></div>
                     </td>
                 {% if forloop.counter0|add:"1"|divisibleby:"3" %}</tr>{% endif %}
@@ -51,7 +51,7 @@
             {% for friendship in other_friends %}
                 {% if forloop.counter0|divisibleby:"3" %}<tr>{% endif %}
                 <td>
-                    <div class="avatar">{% gravatar friendship.friend 40 %}</div>
+                    <div class="avatar">{% avatar friendship.friend 40 %}</div>
                     <div class="details"><a href="{% url profiles.views.profile friendship.friend.username %}" title="{{ friendship.friend.username }}">{{ friendship.friend.username }}</a></div>
                 </td>
                 {% if forloop.counter0|add:"1"|divisibleby:"3" %}</tr>{% endif %}

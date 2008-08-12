@@ -1,0 +1,19 @@
+{% extends "swaps/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% blocktrans %}Add a new Offer{% endblocktrans %}{% endblock %}
+
+{% block body %}
+    <p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time.</p>
+    
+    <h1>{% trans "Add a new Offer" %}</h1>
+    
+    <form id="offer_form" method="POST" action="">
+        <table>
+            {{ offer_form }}
+            <tr><td></td><td><input type="hidden" name="action" value="create" /><input type="submit" value="create"/></td></tr>
+        </table>
+    </form>
+
+{% endblock %}

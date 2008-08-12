@@ -4,7 +4,7 @@
 {% load i18n %}
 {% load wiki %}
 {% load wikiurl %}
-{% load gravatar %}
+{% load avatar_tags %}
 {% load threadedcommentstags %}
 {% load pagination_tags %}
 {% load captureas_tag %}
@@ -23,7 +23,7 @@
                     {% for member in tribe.members.all %}
                         {% if forloop.counter0|divisibleby:"3" %}<tr>{% endif %}
                         <td>
-                            <div class="avatar">{% gravatar member 40 %}</div>
+                            <div class="avatar">{% avatar member 40 %}</div>
                             <div class="details"><a href="{% url profiles.views.profile member.username %}" title="{{ member.username }}">{{ member.username }}</a></div>
                         </td>
                         {% if forloop.counter0|add:"1"|divisibleby:"3" %}</tr>{% endif %}
