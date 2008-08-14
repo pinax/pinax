@@ -49,3 +49,10 @@ ALTER TABLE "wiki_article" ADD COLUMN "tags" varchar(255) NOT NULL DEFAULT '';
 ## for addition of summary to wiki article
 
 ALTER TABLE "wiki_article" ADD COLUMN "summary" varchar(150) NOT NULL DEFAULT '';
+
+## django-app-plugins (r13) change template from a vchar to text
+
+# sqlite and postgresql
+
+ALTER TABLE app_plugins_plugin ALTER COLUMN template TYPE text;
+
