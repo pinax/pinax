@@ -6,7 +6,7 @@
 <div class="task clearfix">
     <div class="task-meta">
         {% if task.assignee %}
-            <div class="avatar">{% avatar_tags task.assignee 40 %}</div>
+            <div class="avatar">{% avatar task.assignee 40 %}</div>
             <div class="details"><b>Assignee</b>: <a href="{% url profiles.views.profile task.assignee.username %}">{{ task.assignee }}</a></div>
         {% else %}
             <span class="warning">Unassigned</span>
