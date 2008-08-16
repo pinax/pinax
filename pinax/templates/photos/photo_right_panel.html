@@ -24,6 +24,14 @@
             {% endfor %}
         </ul>
     {% endif %}
+    
+    {% if is_me %}
+        <form action="{% url photo_destroy photo.id %}" method="POST">
+                        <input type="image" src="/site_media/delete.png" border="0" title="{% trans "Delete Photo" %}" />
+                        <input type="hidden" name="action" value="delete"/>
+                    </form>
+    {% endif %}
+
 </div>
 
 <div class="photo-right-exif">

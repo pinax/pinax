@@ -45,7 +45,12 @@ def photos(request):
 def details(request, id):
     '''show the photo details'''
     photo = get_object_or_404(Photos, id=id)
-    return render_to_response("photos/details.html", {"photo": photo}, context_instance=RequestContext(request))
+    if photo.member == request.user:
+        is_me = True
+    else:
+        is_me = False
+
+    return render_to_response("photos/details.html", {"photo": photo, "is_me": is_me}, context_instance=RequestContext(request))
     
 @login_required
 def memberphotos(request, username):
@@ -53,3 +58,19 @@ def memberphotos(request, username):
     user = get_object_or_404(User, username=username)
     photos = Photos.objects.filter(member__username=username,is_public=True).order_by("-date_added")
     return render_to_response("photos/memberphotos.html", {"photos": photos}, context_instance=RequestContext(request))
+
+@login_required
+def destroy(request, id):
+    photo = Photos.objects.get(pk=id)
+    user = request.user
+    title = photo.title
+    if photo.member != request.user:
+            request.user.message_set.create(message="You can't delete photos that aren't yours")
+            return HttpResponseRedirect(reverse("photos_yours"))
+
+    if request.method == "POST" and request.POST["action"] == "delete":
+        photo.delete()
+        request.user.message_set.create(message=_("Successfully deleted photo '%s'") % title)
+        return HttpResponseRedirect(reverse("photos_yours"))
+    else:
+        return HttpResponseRedirect(reverse("photos_yours"))
