@@ -56,3 +56,6 @@ ALTER TABLE "wiki_article" ADD COLUMN "summary" varchar(150) NOT NULL DEFAULT ''
 
 ALTER TABLE app_plugins_plugin ALTER COLUMN template TYPE text;
 
+# for handling larger file paths than originally intended
+
+ALTER TABLE avatar_avatar ALTER COLUMN avatar TYPE varchar(1024);
