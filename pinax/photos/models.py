@@ -20,7 +20,7 @@ class PhotoSets(models.Model):
     description = models.TextField(_('description'))
     publish_type = models.IntegerField(_('publish_type'), choices=PUBLISH_CHOICES, default=1)
     tags = TagField()
-    
+
     class Meta:
         verbose_name = _('photo set')
         verbose_name_plural = _('photo sets')
@@ -40,6 +40,3 @@ class Photos(ImageModel):
     safetylevel = models.IntegerField(_('safetylevel'), choices=SAFETY_LEVEL, default=1)
     photoset = models.ManyToManyField(PhotoSets, verbose_name=_('photo set'))
     tags = TagField() 
-        
-
-        

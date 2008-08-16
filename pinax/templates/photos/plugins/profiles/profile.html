@@ -9,7 +9,7 @@
         <div class="clearfix">
         {% for photo in owner.added_photos.all %}
             <div class="gallery-photo-thumb">
-                <a href="/photos/details/{{ photo.id }}/"><img src="/site_media/{{ photo.get_thumbnail_url }}" alt="{{ photo.title }}"/></a>
+                <a href="/photos/details/{{ photo.id }}/"><img src="{{ photo.get_thumbnail_url }}" alt="{{ photo.title }}"/></a>
             </div>
         {% endfor %}
         </div>
