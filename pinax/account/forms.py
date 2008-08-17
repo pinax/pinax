@@ -64,7 +64,7 @@ class SignupForm(forms.Form):
     password2 = forms.CharField(label=_("Password (again)"), widget=forms.PasswordInput(render_value=False))
     email = forms.EmailField(label=_("Email (optional)"), required=False, widget=forms.TextInput())
     confirmation_key = forms.CharField(max_length=40, required=False, widget=forms.HiddenInput())
-    
+
     def clean_username(self):
         if not alnum_re.search(self.cleaned_data["username"]):
             raise forms.ValidationError(_("Usernames can only contain letters, numbers and underscores."))
@@ -73,13 +73,13 @@ class SignupForm(forms.Form):
         except User.DoesNotExist:
             return self.cleaned_data["username"]
         raise forms.ValidationError(_("This username is already taken. Please choose another."))
-    
+
     def clean(self):
         if "password1" in self.cleaned_data and "password2" in self.cleaned_data:
             if self.cleaned_data["password1"] != self.cleaned_data["password2"]:
                 raise forms.ValidationError(_("You must type the same password each time."))
         return self.cleaned_data
-    
+
     def save(self):
         username = self.cleaned_data["username"]
         email = self.cleaned_data["email"]
@@ -92,9 +92,9 @@ class SignupForm(forms.Form):
                 confirmed = False
         else:
             confirmed = False
-        
+
         # @@@ clean up some of the repetition below -- DRY!
-        
+
         if confirmed:
             if email == join_invitation.contact.email:
                 new_user = User.objects.create_user(username, email, password)
@@ -108,14 +108,17 @@ class SignupForm(forms.Form):
                 if email:
                     new_user.message_set.create(message=ugettext(u"Confirmation email sent to %(email)s") % {'email': email})
                     EmailAddress.objects.add_email(new_user, email)
-            Profile(user=new_user).save()
+            profile, is_new = Profile.objects.get_or_create(user=new_user)
+            if is_new: profile.save()
             return username, password # required for authenticate()
         else:
             new_user = User.objects.create_user(username, "", password)
             if email:
                 new_user.message_set.create(message=ugettext(u"Confirmation email sent to %(email)s") % {'email': email})
                 EmailAddress.objects.add_email(new_user, email)
-            Profile(user=new_user).save()
+            # profile app may have user post_save signal for user integrity, so a profile may already exist
+            profile, is_new = Profile.objects.get_or_create(user=new_user)
+            if is_new: profile.save()
             return username, password # required for authenticate()
 
 
@@ -227,11 +230,11 @@ class TwitterForm(ProfileForm):
     username = forms.CharField(label=_("Username"), required=True)
     password = forms.CharField(label=_("Password"), required=True,
                                widget=forms.PasswordInput(render_value=False))
-                               
+
     def __init__(self, *args, **kwargs):
         super(TwitterForm, self).__init__(*args, **kwargs)
         self.initial.update({"username": self.profile.twitter_user})
-        
+
     def save(self):
         from zwitschern.utils import get_twitter_password
         self.profile.twitter_user = self.cleaned_data['username']
