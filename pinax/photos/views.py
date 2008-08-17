@@ -7,6 +7,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.views.generic import date_based
 from django.conf import settings
+from photologue.utils import EXIF
+from photologue.models import *
 
 from photos.models import *
 from photos.forms import *
@@ -50,6 +52,8 @@ def details(request, id):
     tribes = Tribe.objects.filter(members=request.user)
     projects = Project.objects.filter(members=request.user)
     photo = get_object_or_404(Photos, id=id)
+    f = open(("site_media/%s" % photo.image), 'rb')
+    exif = EXIF.process_file(f)
     title = photo.title
     host = "http://%s" % get_host(request)
     if photo.member == request.user:
@@ -89,7 +93,8 @@ def details(request, id):
 
     return render_to_response("photos/details.html", {
                       "host": host, 
-                      "photo": photo, 
+                      "photo": photo,
+                      "exif": exif,
                       "is_me": is_me, 
                       "other_user": other_user, 
                       "projects": projects,

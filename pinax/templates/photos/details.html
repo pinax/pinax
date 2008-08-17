@@ -33,6 +33,10 @@
         </div>
 
         
+        {% for e in exif %}
+        <b>{{ e }}:</b> Experimental<br />
+        {% endfor %}
+        
         <h3>Comments on This Photo:</h3>
         {% comments photo %}
     {% else %}
