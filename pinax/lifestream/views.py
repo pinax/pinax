@@ -20,45 +20,45 @@ from zwitschern.models import Tweet, TweetInstance, tweet
 
 @login_required
 def personal(request):
-	"""
-	personal lifestream
-	"""
-	twitter_account = twitter_account_for_user(request.user) # twitter account 
-	pownce_account  = pownce_account_for_user(request.user) # pownce account
-	stream = []
-	twitter_timeline = twitter_account.GetUserTimeline()
-	pownce_timeline = pownce_account.get_notes(pownce_account.username)
-	for post in twitter_timeline:
-		stream.append((post.created_at, post.GetText(), post.id))
-	
-	for post in pownce_timeline:
-		stream.append(( post.timestamp_parsed,post.body, post.id))
-	
-	stream.sort()
-	if request.method == "POST":
-		pass
-	else:
-		pass
+    """
+    personal lifestream
+    """
+    twitter_account = twitter_account_for_user(request.user) # twitter account 
+    pownce_account  = pownce_account_for_user(request.user) # pownce account
+    stream = []
+    twitter_timeline = twitter_account.GetUserTimeline()
+    pownce_timeline = pownce_account.get_notes(pownce_account.username)
+    for post in twitter_timeline:
+        stream.append((post.created_at, post.GetText(), post.id))
     
-	return render_to_response("lifestream/personal.html", {
-		"stream": stream,
-	}, context_instance=RequestContext(request))
+    for post in pownce_timeline:
+        stream.append(( post.timestamp_parsed,post.body, post.id))
+    
+    stream.sort()
+    if request.method == "POST":
+        pass
+    else:
+        pass
+    
+    return render_to_response("lifestream/personal.html", {
+        "stream": stream,
+    }, context_instance=RequestContext(request))
 
 def public(request):
-	"""
-	all the tweets
-	"""
-	tweets = Tweet.objects.all().order_by("-sent")
+    """
+    all the tweets
+    """
+    tweets = Tweet.objects.all().order_by("-sent")
 
-	return render_to_response("lifestream/friends.html", {
-		"tweets": tweets,
-	}, context_instance=RequestContext(request))
+    return render_to_response("lifestream/friends.html", {
+        "tweets": tweets,
+    }, context_instance=RequestContext(request))
 
 def single(request, id):
-	"""
-	A single tweet.
-	"""
-	tweet = get_object_or_404(TweetInstance, id=id)
-	return render_to_response("lifestream/single.html", {
-		"tweet": tweet,
-	}, context_instance=RequestContext(request))
+    """
+    A single tweet.
+    """
+    tweet = get_object_or_404(TweetInstance, id=id)
+    return render_to_response("lifestream/single.html", {
+        "tweet": tweet,
+    }, context_instance=RequestContext(request))
