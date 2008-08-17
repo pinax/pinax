@@ -59,3 +59,9 @@ ALTER TABLE app_plugins_plugin ALTER COLUMN template TYPE text;
 # for handling larger file paths than originally intended
 
 ALTER TABLE avatar_avatar ALTER COLUMN avatar TYPE varchar(1024);
+
+
+## for addition of pownce integration 
+
+ALTER TABLE profiles_profile ADD COLUMN "pownce_user" varchar(50) NOT NULL DEFAULT '';
+ALTER TABLE profiles_profile ADD COLUMN "pownce_password" varchar(50) NOT NULL DEFAULT '';
