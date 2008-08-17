@@ -23,13 +23,23 @@
                 <li><a href="/tags/{{ tag }}">{{ tag }}</a></li>
             {% endfor %}
         </ul>
+
+        <div class="embed">
+        <a href="#" onclick="$('#embed-code').toggle(); return false;">{% trans "Get Embed Code" %}</a>
+             <div id="embed-code" style="display: none;">
+                <textarea>
+                    <a href="{{ host }}/photos/details/{{ photo.id }}"><img src="{{ host }}/{{ photo.get_display_url }}" alt="{{ photo.title }}"/></a>
+                </textarea>
+            </div>
+        </div>
+
     {% endif %}
     
     {% if is_me %}
         <form action="{% url photo_destroy photo.id %}" method="POST">
-                        <input type="image" src="/site_media/delete.png" border="0" title="{% trans "Delete Photo" %}" />
+            <label>Delete Photo</label> <input type="image" src="/site_media/delete.png" border="0" title="{% trans "Delete Photo" %}" />
                         <input type="hidden" name="action" value="delete"/>
-                    </form>
+        </form>
     {% endif %}
 
 </div>
@@ -37,3 +47,17 @@
 <div class="photo-right-exif">
 
 </div>
+{% if is_me %}
+<div class="photo-right-profile ">
+    {% if projects %}
+        {% for project in projects %}
+            <form action="{% url details photo.id %}" method="POST">
+                <input type="hidden" name="action" value="add_to_project"/>
+                <input type="hidden" name="project" value="{{ project.id }}"/>
+                <input type="submit" value="add"/>
+                <a href="{% url projects.views.project project.slug %}">{{ project.name }}</a>
+            </form>
+        {% endfor %}
+    {% endif %}
+</div>
+{% endif %}

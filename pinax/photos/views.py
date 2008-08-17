@@ -1,5 +1,5 @@
 from django.shortcuts import render_to_response, get_object_or_404
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, Http404, get_host
 from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
@@ -10,6 +10,7 @@ from django.conf import settings
 
 from photos.models import *
 from photos.forms import *
+from projects.models import *
 import datetime
 
 @login_required
@@ -44,13 +45,27 @@ def photos(request):
 @login_required
 def details(request, id):
     '''show the photo details'''
+    other_user = get_object_or_404(User, username=request.user.username)
+    projects = Project.objects.filter(members=request.user)
     photo = get_object_or_404(Photos, id=id)
+    title = photo.title
+    host = "http://%s" % get_host(request)
     if photo.member == request.user:
         is_me = True
     else:
         is_me = False
+    # TODO: check for authorized user and catch errors
+    if photo.member == request.user:
+        if request.method == "POST" and request.POST["action"] == "add_to_project":
+            projectid = request.POST["project"]
+            myproject = Project.objects.get(pk=projectid)
+            myproject.photos.create(photo=photo)
+            request.user.message_set.create(message=_("Successfully add photo '%s' to project") % title)
+            # TODO: figure out why reverse doesn't work and redo this
+            return render_to_response("photos/details.html", {"host": host, "photo": photo, "is_me": is_me, "other_user": other_user, "projects": projects}, context_instance=RequestContext(request))
+        
 
-    return render_to_response("photos/details.html", {"photo": photo, "is_me": is_me}, context_instance=RequestContext(request))
+    return render_to_response("photos/details.html", {"host": host, "photo": photo, "is_me": is_me, "other_user": other_user, "projects": projects}, context_instance=RequestContext(request))
     
 @login_required
 def memberphotos(request, username):
@@ -74,3 +89,13 @@ def destroy(request, id):
         return HttpResponseRedirect(reverse("photos_yours"))
     else:
         return HttpResponseRedirect(reverse("photos_yours"))
+
+@login_required
+def addproject(request, project):
+    photo = get_object_or_404(Photos, id=id)
+    title = photo.title
+    project = Project.objects.get(pk=tribe)
+    pool = Pool(content_type=photo)
+    pool.save()
+    request.user.message_set.create(message=_("Successfully add photo '%s' to tribe") % title)
+    return HttpResponseRedirect(reverse("photos_yours", photo))

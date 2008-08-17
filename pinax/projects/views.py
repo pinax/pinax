@@ -63,6 +63,7 @@ def your_projects(request):
 
 def project(request, slug):
     project = get_object_or_404(Project, slug=slug)
+    photos = project.photos.all()
 
     if request.user.is_authenticated() and request.method == "POST" and request.user == project.creator:
         if request.POST["action"] == "update":
@@ -101,6 +102,7 @@ def project(request, slug):
         "project_form": project_form,
         "adduser_form": adduser_form,
         "project": project,
+        "photos": photos,
         "topics": topics,
         "articles": articles,
         "total_tasks": total_tasks,

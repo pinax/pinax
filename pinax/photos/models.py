@@ -3,6 +3,9 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from photologue.models import *
 from datetime import datetime
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes import generic
+
 
 from tagging.fields import TagField
 from tagging.models import Tag
@@ -39,4 +42,25 @@ class Photos(ImageModel):
     member = models.ForeignKey(User, related_name="added_photos", blank=True, null=True)
     safetylevel = models.IntegerField(_('safetylevel'), choices=SAFETY_LEVEL, default=1)
     photoset = models.ManyToManyField(PhotoSets, verbose_name=_('photo set'))
-    tags = TagField() 
+    tags = TagField()
+
+    def __unicode__(self):
+        return self.title
+    
+
+class Pool(models.Model):
+    """
+    model for a photo to be applied to an object
+    """
+
+    photo           = models.ForeignKey(Photos)
+    content_type    = models.ForeignKey(ContentType)
+    object_id       = models.PositiveIntegerField()
+    content_object  = generic.GenericForeignKey()
+    created_at      = models.DateTimeField(_('created_at'), default=datetime.now)
+
+    class Meta:
+        # Enforce unique associations per object
+        unique_together = (('photo', 'content_type', 'object_id'),)
+        verbose_name = _('pool')
+        verbose_name_plural = _('pools')
