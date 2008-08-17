@@ -23,16 +23,20 @@ def personal(request):
     """
     personal lifestream
     """
-    twitter_account = twitter_account_for_user(request.user) # twitter account 
-    pownce_account  = pownce_account_for_user(request.user) # pownce account
-    stream = []
-    twitter_timeline = twitter_account.GetUserTimeline()
-    pownce_timeline = pownce_account.get_notes(pownce_account.username)
-    for post in twitter_timeline:
-        stream.append((post.created_at, post.GetText(), post.id))
     
-    for post in pownce_timeline:
-        stream.append(( post.timestamp_parsed,post.body, post.id))
+    stream = []
+    
+    twitter_account = twitter_account_for_user(request.user)
+    if twitter_account:
+        twitter_timeline = twitter_account.GetUserTimeline()
+        for post in twitter_timeline:
+            stream.append((post.created_at, post.GetText(), post.id))
+            
+    pownce_account  = pownce_account_for_user(request.user)
+    if pownce_account:
+        pownce_timeline = pownce_account.get_notes(pownce_account.username)
+        for post in pownce_timeline:
+            stream.append(( post.timestamp_parsed,post.body, post.id))
     
     stream.sort()
     if request.method == "POST":
