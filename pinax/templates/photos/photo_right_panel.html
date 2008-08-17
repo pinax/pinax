@@ -50,6 +50,7 @@
 {% if is_me %}
 <div class="photo-right-profile ">
     {% if projects %}
+    <h2>Add photo to project</h2>
         {% for project in projects %}
             <form action="{% url details photo.id %}" method="POST">
                 <input type="hidden" name="action" value="add_to_project"/>
@@ -59,5 +60,18 @@
             </form>
         {% endfor %}
     {% endif %}
+
+    {% if tribes %}
+        <h2>Add photo to tribe</h2>
+        {% for tribe in tribes %}
+            <form action="{% url details photo.id %}" method="POST">
+                <input type="hidden" name="action" value="add_to_tribe"/>
+                <input type="hidden" name="tribe" value="{{ tribe.id }}"/>
+                <input type="submit" value="add"/>
+                <a href="{% url tribes.views.tribe tribe.slug %}">{{ tribe.name }}</a>
+            </form>
+        {% endfor %}
+    {% endif %}
+
 </div>
 {% endif %}

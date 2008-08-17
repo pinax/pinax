@@ -70,6 +70,7 @@ your_tribes = login_required(your_tribes)
 
 def tribe(request, slug):
     tribe = get_object_or_404(Tribe, slug=slug)
+    photos = tribe.photos.all()
     
     if request.user.is_authenticated() and request.method == "POST":
         if request.POST["action"] == "update" and request.user == tribe.creator:
@@ -108,6 +109,7 @@ def tribe(request, slug):
     return render_to_response("tribes/tribe.html", {
         "tribe_form": tribe_form,
         "tribe": tribe,
+        "photos": photos,
         "topics": topics,
         "articles": articles,
         "tweets": tweets,

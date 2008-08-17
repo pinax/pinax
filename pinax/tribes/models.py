@@ -4,11 +4,14 @@ from django.db import models
 from django.db.models import signals
 from django.utils.html import escape
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.contenttypes import generic
+
 
 from django.contrib.auth.models import User
 
 from tagging.fields import TagField
 from tagging.models import Tag
+from photos.models import Pool
 
 try:
     from notification import models as notification
@@ -29,6 +32,9 @@ class Tribe(models.Model):
     members = models.ManyToManyField(User, verbose_name=_('members'))
     
     tags = TagField()
+
+    photos = generic.GenericRelation(Pool)
+
     
     def __unicode__(self):
         return self.name

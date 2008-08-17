@@ -11,6 +11,7 @@ from django.conf import settings
 from photos.models import *
 from photos.forms import *
 from projects.models import *
+from tribes.models import *
 import datetime
 
 @login_required
@@ -46,6 +47,7 @@ def photos(request):
 def details(request, id):
     '''show the photo details'''
     other_user = get_object_or_404(User, username=request.user.username)
+    tribes = Tribe.objects.filter(members=request.user)
     projects = Project.objects.filter(members=request.user)
     photo = get_object_or_404(Photos, id=id)
     title = photo.title
@@ -62,10 +64,37 @@ def details(request, id):
             myproject.photos.create(photo=photo)
             request.user.message_set.create(message=_("Successfully add photo '%s' to project") % title)
             # TODO: figure out why reverse doesn't work and redo this
-            return render_to_response("photos/details.html", {"host": host, "photo": photo, "is_me": is_me, "other_user": other_user, "projects": projects}, context_instance=RequestContext(request))
+            return render_to_response("photos/details.html", {
+                      "host": host, 
+                      "photo": photo, 
+                      "is_me": is_me, 
+                      "other_user": other_user, 
+                      "projects": projects,
+                      "tribes": tribes}, context_instance=RequestContext(request))
         
+        if request.method == "POST" and request.POST["action"] == "add_to_tribe":
+            tribeid = request.POST["tribe"]
+            mytribe = Tribe.objects.get(pk=tribeid)
+            mytribe.photos.create(photo=photo)
+            request.user.message_set.create(message=_("Successfully add photo '%s' to tribe") % title)
+            # TODO: figure out why reverse doesn't work and redo this
+            return render_to_response("photos/details.html", {
+                      "host": host, 
+                      "photo": photo, 
+                      "is_me": is_me, 
+                      "other_user": other_user, 
+                      "projects": projects,
+                      "tribes": tribes}, context_instance=RequestContext(request))
 
-    return render_to_response("photos/details.html", {"host": host, "photo": photo, "is_me": is_me, "other_user": other_user, "projects": projects}, context_instance=RequestContext(request))
+
+    return render_to_response("photos/details.html", {
+                      "host": host, 
+                      "photo": photo, 
+                      "is_me": is_me, 
+                      "other_user": other_user, 
+                      "projects": projects,
+                      "tribes": tribes
+                      }, context_instance=RequestContext(request))
     
 @login_required
 def memberphotos(request, username):
