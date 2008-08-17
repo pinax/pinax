@@ -9,6 +9,7 @@
 {% load switchcase %}
 {% load restructuredtext %}
 {% load comments_tag %}
+{% load photo_tags %}
 
 {% block head_title %}{% blocktrans %}Photo Details{% endblocktrans %}{% endblock %}
 
@@ -32,10 +33,7 @@
             <p>{{ photo.caption }}</p>
         </div>
 
-        
-        {% for e in exif %}
-        <b>{{ e }}:</b> Experimental<br />
-        {% endfor %}
+        {% print_exif exif %}
         
         <h3>Comments on This Photo:</h3>
         {% comments photo %}
