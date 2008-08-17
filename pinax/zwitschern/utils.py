@@ -6,6 +6,7 @@ import urllib2
 
 import twitter
 
+
 from django.conf import settings
 
 def twitter_account_raw(username, password):
@@ -36,4 +37,5 @@ def get_twitter_password(key, text, decode=False):
     else:
         text = zlib.decompress(xortext(base64.decodestring(text)))
     return text
+
 

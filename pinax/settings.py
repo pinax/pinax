@@ -142,6 +142,7 @@ INSTALLED_APPS = (
     'analytics',
     'profiles',
     'zwitschern',
+    'lifestream',
     'account',
     'tribes',
     'projects',

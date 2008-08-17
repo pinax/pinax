@@ -47,6 +47,7 @@
                 <td class="tab rtab_projects"><div><a href="{% url projects.views.projects %}">{% trans "Projects" %}</a></div></td>
                 <td class="tab rtab_tribes"><div><a href="{% url tribes.views.tribes %}">{% trans "Tribes" %}</a></div></td>
                 <td class="tab rtab_tweets"><div><a href="{% url zwitschern.views.personal %}">{% trans "Tweets" %}</a></div></td>
+				<td class="tab rtab_lifestream"><div><a href="{% url lifestream.views.personal %}">{% trans "LifeStream" %}</a></div></td>
                 <td class="tab rtab_bookmarks"><div><a href="{% url bookmarks.views.bookmarks %}">{% trans "Bookmarks" %}</a></div></td>
                 <td class="tab rtab_swaps"><div><a href="{% url swaps.views.offers %}">{% trans "Swaps" %}</a></div></td>
                 <td class="tab rtab_inbox"><div><a href="{% url messages_inbox %}">{% trans "Inbox" %} ({% if messages_inbox_count %}{{ messages_inbox_count }}{% else %}0{% endif %}{% if notice_unseen_count %}+{{ notice_unseen_count }}{% endif %})</a></div></td>

@@ -17,6 +17,9 @@ class Profile(models.Model):
     timezone = TimeZoneField(_('timezone'))
     twitter_user = models.CharField(_('Twitter Username'), max_length=50, blank=True)
     twitter_password = models.CharField(_('Twitter Password'), max_length=50, blank=True)
+    pownce_user = models.CharField(_('Pownce Username'), max_length=50, blank=True)
+    pownce_password = models.CharField(_('Pownce Password'), max_length=50, blank=True)
+   # enable_lifestream = models.BooleanField(_('Enable LifeStream'))
     language = models.CharField(_('language'), max_length=10, choices=settings.LANGUAGES, default=settings.LANGUAGE_CODE)
 
     def __unicode__(self):

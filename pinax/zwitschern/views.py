@@ -5,10 +5,12 @@ from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 
 import twitter
+import pownce
 import random
 import zlib
 import base64
 from zwitschern.utils import twitter_account_for_user, twitter_verify_credentials
+from zwitschern.pownce_utils import pownce_account_for_user, pownce_verify_credentials
 from settings import SECRET_KEY
 
 # from django.contrib.auth.models import User
@@ -21,24 +23,28 @@ def personal(request):
     just the tweets the current user is following
     """
     twitter_account = twitter_account_for_user(request.user)
-    
+    pownce_account  = pownce_account_for_user(request.user)
     if request.method == "POST":
         if request.POST["action"] == "post":
             text = request.POST["tweet"].strip()
             tweet(request.user, text)
             if request.POST.get("pub2twitter", False) == "yes":
                 twitter_account.PostUpdate(text)
+            if request.POST.get("pub2pownce", False) == "yes":
+                pownce_account.post_message('all', text)
         reply = None
     else:
         reply = request.GET.get("reply")
     
     tweets = TweetInstance.objects.tweets_for(request.user).order_by("-sent")
     twitter_authorized = twitter_verify_credentials(twitter_account)
+    pownce_authorized  = pownce_verify_credentials(pownce_account)
     
     return render_to_response("zwitschern/personal.html", {
         "reply": reply,
         "tweets": tweets,
         "twitter_authorized": twitter_authorized,
+        "pownce_authorized": pownce_authorized,
     }, context_instance=RequestContext(request))
 
 def public(request):

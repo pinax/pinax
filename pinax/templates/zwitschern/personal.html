@@ -21,6 +21,12 @@
         <input name="pub2twitter" type="checkbox" id="pub2twitter" value="yes" />
         <label for="pub2twitter">Publish to Twitter?</label>
         {% endif %}
+        
+        {% if pownce_authorized %}
+        <h2>{% trans "You have authorized a pownce account." %}</h2>
+        <input name="pub2pownce" type="checkbox" id="pub2pownce" value="yes" />
+        <label for="pub2pownce">Publish to Pownce?</label>
+        {% endif %}
       <p><span id="chars_left"></span> {% trans "chars left." %} <input type="hidden" name="action" value="post" />
   <input type="submit" value="{% trans "post" %}">
 </p>

@@ -241,3 +241,19 @@ class TwitterForm(ProfileForm):
         self.profile.twitter_password = get_twitter_password(settings.SECRET_KEY, self.cleaned_data['password'])
         self.profile.save()
         self.user.message_set.create(message=ugettext(u"Successfully authenticated."))
+
+class PownceForm(ProfileForm):
+    usernamep = forms.CharField(label=_("Username"), required=True)
+    passwordp = forms.CharField(label=_("Password"), required=True,
+                               widget=forms.PasswordInput(render_value=False))
+                               
+    def __init__(self, *args, **kwargs):
+        super(PownceForm, self).__init__(*args, **kwargs)
+        self.initial.update({"usernamep": self.profile.pownce_user})
+        
+    def save(self):
+        from zwitschern.pownce_utils import get_pownce_password
+        self.profile.pownce_user = self.cleaned_data['usernamep']
+        self.profile.pownce_password = get_pownce_password(settings.SECRET_KEY, self.cleaned_data['passwordp'])
+        self.profile.save()
+        self.user.message_set.create(message=ugettext(u"Successfully authenticated."))
