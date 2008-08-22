@@ -1,10 +1,10 @@
 {% load i18n %}
 {% load captureas_tag %}
-{% load avatar_tags %}
+{% load gravatar %}
 {% load tagging_tags %}
 
 <div class="photo-right-profile clearfix">
-    <div class="photo-avatar">{% avatar photo.member.username 50 %}</div>
+    <div class="photo-avatar">{% gravatar photo.member.username 50 %}</div>
     <div class="photo-profile-details">
         <h2>Taken By</h2>
         <a href="{% url profiles.views.profile photo.member.username %}" title="{{ photo.member.username }}">{{ photo.member.username }}</a><br />

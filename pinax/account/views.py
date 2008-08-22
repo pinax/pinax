@@ -135,7 +135,7 @@ def language_change(request):
         "form": form,
     }, context_instance=RequestContext(request))
 
-from avatar.templatetags.avatar_tags import avatar
+from gravatar.templatetags.gravatar import gravatar
 
 @login_required
 def other_services(request):
@@ -194,7 +194,7 @@ def username_autocomplete(request):
                 try:
                     profile = friendship["friend"].get_profile()
                     entry = "%s,,%s,,%s" % (
-                        avatar(friendship["friend"], 40),
+                        gravatar(friendship["friend"], 40),
                         friendship["friend"].username,
                         profile.location
                     )

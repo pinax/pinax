@@ -1,7 +1,7 @@
 {% extends "swaps/base.html" %}
 
 {% load i18n %}
-{% load avatar_tags %}
+{% load gravatar %}
 {% load humanize %}
 {% load pagination_tags %}
 {% load captureas_tag %}
@@ -43,7 +43,7 @@
 						{% endifnotequal %}
 					</td>
                     <td class="meta">
-                        {% avatar offer.offerer 40 %}
+                        {% gravatar offer.offerer 40 %}
                         <p><b>Offered by:</b><br /><a href="{% url profiles.views.profile offer.offerer.username %}">{{ offer.offerer.username }}</a> on {{ offer.offered_time|date }}</p>
                         <div class="blog-tags">
                             <p><img src="/site_media/tags.png" border="0" class="noborder" align="absmiddle" /> 

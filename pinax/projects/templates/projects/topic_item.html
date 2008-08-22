@@ -1,10 +1,10 @@
-{% load avatar_tags %}
+{% load gravatar %}
 {% load threadedcommentstags %}
 {% load extra_tagging_tags %}
 
 <div class="topic clearfix">
     <div class="task-meta">
-        <div class="avatar">{% avatar topic.creator 40 %}</div>
+        <div class="avatar">{% gravatar topic.creator 40 %}</div>
         <div class="details"><a href="{% url profiles.views.profile topic.creator.username %}">{{ topic.creator }}</a></div>
         <div class="created">{{ topic.created|date }}</div>
     </div>

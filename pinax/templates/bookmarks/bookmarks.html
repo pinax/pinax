@@ -1,7 +1,7 @@
 {% extends "bookmarks/base.html" %}
 
 {% load i18n %}
-{% load avatar_tags %}
+{% load gravatar %}
 {% load voting_tags %}
 {% load pagination_tags %}
 {% load extra_voting_tags %}
@@ -57,7 +57,7 @@
             {% for bookmark in bookmarks %}
                 <tr class="{% cycle odd,even %}">
                     <td class="meta">
-                        <div class="avatar">{% avatar bookmark.adder 40 %}</div>
+                        <div class="avatar">{% gravatar bookmark.adder 40 %}</div>
                         <div class="details"><a href="{% url profiles.views.profile bookmark.adder.username %}">{{ bookmark.adder }}</a></div>
                         {{ bookmark.added|date }}
                     </td>

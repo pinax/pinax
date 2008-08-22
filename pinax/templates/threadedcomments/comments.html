@@ -1,14 +1,14 @@
 {% load threadedcommentstags %}
 {% load i18n %}
 {% load pagination_tags %}
-{% load avatar_tags %}
+{% load gravatar %}
 {% get_threaded_comment_tree for object as responses %}
 {% autopaginate responses %}
 <ul class="responses">
     {% for response in responses %}
         <li class="{% cycle even,odd %} thread-{{ response.depth }} clearfix">
             <div class="meta">
-                <div class="avatar">{% avatar response.user 40 %}</div>
+                <div class="avatar">{% gravatar response.user 40 %}</div>
                 <div class="details"><a href="{% url profiles.views.profile response.user.username %}">{{ response.user     }}</a></div>
                 {{ response.date_submitted|date }}
             </div>
