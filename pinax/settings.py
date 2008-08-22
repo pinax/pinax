@@ -137,6 +137,7 @@ INSTALLED_APPS = (
     'avatar',
     'arcade',
     'games',
+    'locations',
     
     # internal (for now)
     'analytics',
