@@ -10,6 +10,7 @@ Contents:
 .. toctree::
 
    external/emailconfirmation/index.rst
+   external/timezones/index.rst
 
 Indices and tables
 ==================
