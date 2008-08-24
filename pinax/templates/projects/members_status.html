@@ -1,0 +1,61 @@
+{% extends "projects/base.html" %}
+
+{% load shorttimesince_tag %}
+{% load i18n %}
+
+{% block head_title %}{{ project.name }} Members' Status{% endblock %}
+
+{% block body %}
+    <h1><a href="{% url project_detail project.slug %}">{{ project.name }}</a> {% trans "Members' Status" %}</h1>
+    {% if is_member %}
+        {% if not project_member.away %}
+            <h2>{% trans 'Set Away' %}</h2>
+            
+            <form action="{% url project_members_status project.slug %}" method="POST">
+                <table>
+                    {{ away_form }}
+                    <tr><td></td><td><input type="hidden" name="action" value="set_away" /><input type="submit" value="{% trans 'set away' %}"/></td></tr>
+                </table>
+            </form>
+        {% else %}
+            <h2>{% trans 'Set Back' %}</h2>
+            <form action="{% url project_members_status project.slug %}" method="POST">
+                <table>
+                    <tr><td></td><td><input type="hidden" name="action" value="set_back" /><input type="submit" value="{% trans 'set back' %}"/></td></tr>
+                </table>
+            </form>
+        {% endif %}
+    {% endif %}
+
+    {% if away_members %}
+        <h2>Away Members</h2>
+        <table class="status-table away">
+            <tr>
+                <th>Member</th>
+                <th>Away Since</th>
+                <th>Message</th>
+            </tr>
+            {% for member in away_members %}
+                <tr class="{% cycle odd,even %}">
+                    <td><a href="{% url profiles.views.profile member.user.username %}" title="{{ member.user.username }}">{{ member.user.username }}</a></td>
+                    <td>{{ member.away_since|shorttimesince }}</td>
+                    <td>{{ member.away_message }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+    {% if active_members %}
+        <h2>Active Members</h2>
+        <table class="status-table active">
+            <tr>
+                <th>Member</th>
+            </tr>
+            {% for member in active_members %}
+                <tr class="{% cycle odd,even %}">
+                    <td><a href="{% url profiles.views.profile member.user.username %}" title="{{ member.user.username }}">{{ member.user.username }}</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+{% endblock %}

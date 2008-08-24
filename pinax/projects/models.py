@@ -30,7 +30,6 @@ class Project(models.Model):
     creator = models.ForeignKey(User, related_name="created_projects", verbose_name=_('creator'))
     created = models.DateTimeField(_('created'), default=datetime.now)
     description = models.TextField(_('description'))
-    members = models.ManyToManyField(User, verbose_name=_('members'))
     
     # private means only members can see the project
     private = models.BooleanField(_('private'), default=False)
@@ -49,6 +48,15 @@ class Project(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ("project_detail", [self.slug])
+
+
+class ProjectMember(models.Model):
+    project = models.ForeignKey(Project, related_name="members", verbose_name=_('project'))
+    user = models.ForeignKey(User, related_name="projects", verbose_name=_('user'))
+    
+    away = models.BooleanField(_('away'), default=False)
+    away_message = models.CharField(_('away_message'), max_length=500)
+    away_since = models.DateTimeField(_('away since'), default=datetime.now)
 
 
 class Topic(models.Model):

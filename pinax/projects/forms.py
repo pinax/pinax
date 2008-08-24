@@ -82,18 +82,40 @@ class AddUserForm(forms.Form):
     
     recipient = forms.CharField(label=_(u"User"))
     
+    def __init__(self, project, *args, **kwargs):
+        super(AddUserForm, self).__init__(*args, **kwargs)
+        self.project = project
+    
     def clean_recipient(self):
-        # @@@ really should also check if already a member
         try:
-            User.objects.get(username__exact=self.cleaned_data['recipient'])
+            user = User.objects.get(username__exact=self.cleaned_data['recipient'])
         except User.DoesNotExist:
             raise forms.ValidationError(_("There is no user with this username."))
+            
+        if ProjectMember.objects.filter(project=project, user=user).count() > 0:
+            raise forms.ValidationError(_("User is already a member of this project."))
+        
         return self.cleaned_data['recipient']
     
+    # @@@ we don't need to pass in project any more as we have self.project
     def save(self, project, user):
         new_member = User.objects.get(username__exact=self.cleaned_data['recipient'])
-        project.members.add(new_member)
+        project_member = ProjectMember(project=project, user=new_member)
+        project_member.save()
+        project.members.add(project_member)
         if notification:
             notification.send(project.members.all(), "projects_new_member", {"new_member": new_member, "project": project})
             notification.send([new_member], "projects_added_as_member", {"adder": user, "project": project})
         user.message_set.create(message="added %s to project" % new_member)
+
+
+class AwayForm(forms.Form):
+    
+    away_message = forms.CharField(label=_(u"Message"))
+    
+    def save(self, project_member):
+        project_member.away = True
+        project_member.away_message = self.cleaned_data['away_message']
+        project_member.away_since = datetime.now()
+        project_member.save()
+

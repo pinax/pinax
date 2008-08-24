@@ -23,9 +23,9 @@
                 <table width="100%">
                     {% for member in project.members.all %}
                         {% if forloop.counter0|divisibleby:"3" %}<tr>{% endif %}
-                        <td>
-                            <div class="avatar">{% gravatar member 40 %}</div>
-                            <div class="details"><a href="{% url profiles.views.profile member.username %}" title="{{ member.username }}">{{ member.username }}</a></div>
+                        <td class="{% if member.away %}away{% else %}active{% endif %}-member">
+                            <div class="avatar">{% gravatar member.user 40 %}</div>
+                            <div class="details"><a href="{% url profiles.views.profile member.user.username %}" title="{{ member.user.username }}">{{ member.user.username }}</a></div>
                         </td>
                         {% if forloop.counter0|add:"1"|divisibleby:"3" %}</tr>{% endif %}
                     {% endfor %}

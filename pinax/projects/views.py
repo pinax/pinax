@@ -42,8 +42,9 @@ def projects(request):
                 project = project_form.save(commit=False)
                 project.creator = request.user
                 project.save()
-                project.members.add(request.user)
-                project.save()
+                project_member = ProjectMember(project=project, user=request.user)
+                project.members.add(project_member)
+                project_member.save()
                 project_form = ProjectForm()
         else:
             project_form = ProjectForm()
@@ -58,45 +59,45 @@ def projects(request):
 @login_required
 def your_projects(request):
     return render_to_response("projects/your_projects.html", {
-        "projects": Project.objects.filter(members=request.user).order_by("name"),
+        "projects": Project.objects.filter(members__user=request.user).order_by("name"),
     }, context_instance=RequestContext(request))
 
 def project(request, slug):
     project = get_object_or_404(Project, slug=slug)
     photos = project.photos.all()
-
+    
     if request.user.is_authenticated() and request.method == "POST" and request.user == project.creator:
         if request.POST["action"] == "update":
-            adduser_form = AddUserForm()
+            adduser_form = AddUserForm(project=project)
             project_form = ProjectUpdateForm(request.POST, instance=project)
             if project_form.is_valid():
                 project = project_form.save()
         elif request.POST["action"] == "add":
             project_form = ProjectUpdateForm(instance=project)
-            adduser_form = AddUserForm(request.POST)
+            adduser_form = AddUserForm(project, request.POST)
             if adduser_form.is_valid():
                 adduser_form.save(project, request.user)
-                adduser_form = AddUserForm() # @@@ is this the right way to clear it?
+                adduser_form = AddUserForm(project=project) # @@@ is this the right way to clear it?
         else:
             project_form = ProjectUpdateForm(instance=project)
-            adduser_form = AddUserForm()
+            adduser_form = AddUserForm(project=project)
     else:
-        adduser_form = AddUserForm()
+        adduser_form = AddUserForm(project=project)
         project_form = ProjectUpdateForm(instance=project)
-
+    
     topics = project.topics.all()[:5]
     articles = Article.objects.filter(
         content_type=get_ct(project),
         object_id=project.id).order_by('-last_update')
     total_articles = articles.count()
     articles = articles[:5]
-
+    
     total_tasks = project.tasks.count()
     tasks = project.tasks.order_by("-modified")[:10]
-
+    
     # tweets = TweetInstance.objects.tweets_for(project).order_by("-sent")
-
-    are_member = request.user in project.members.all()
+    
+    are_member =  project.members.filter(user=request.user).count() > 0 # @@@ should this be == 1
 
     return render_to_response("projects/project.html", {
         "project_form": project_form,
@@ -113,8 +114,8 @@ def project(request, slug):
 
 def topics(request, slug):
     project = get_object_or_404(Project, slug=slug)
-    is_member = request.user.is_authenticated() and request.user in project.members.all()
-
+    is_member = request.user.is_authenticated() and project.members.filter(user=request.user).count() > 0
+    
     if request.method == "POST":
         if is_member:
             topic_form = TopicForm(request.POST)
@@ -149,8 +150,8 @@ def topic(request, id):
 
 def tasks(request, slug):
     project = get_object_or_404(Project, slug=slug)
-    is_member = request.user.is_authenticated() and request.user in project.members.all()
-
+    is_member = request.user.is_authenticated() and project.members.filter(user=request.user).count() > 0
+    
     if request.user.is_authenticated() and request.method == "POST":
         if request.POST["action"] == "add_task":
             task_form = TaskForm(project, request.POST)
@@ -168,7 +169,7 @@ def tasks(request, slug):
             task_form = TaskForm(project=project)
     else:
         task_form = TaskForm(project=project)
-
+    
     group_by = request.GET.get("group_by")
     tasks = project.tasks.all()
 
@@ -183,8 +184,8 @@ def tasks(request, slug):
 def task(request, id):
     task = get_object_or_404(Task, id=id)
     project = task.project
-    is_member = request.user.is_authenticated() and request.user in project.members.all()
-
+    is_member = request.user.is_authenticated() and project.members.filter(user=request.user).count() > 0
+    
     if is_member and request.method == "POST":
         if request.POST["action"] == "assign":
             status_form = StatusForm(instance=task)
@@ -242,4 +243,40 @@ def user_tasks(request, username):
     return render_to_response("projects/user_tasks.html", {
         "tasks": tasks,
         "other_user": other_user,
+    }, context_instance=RequestContext(request))
+
+@login_required
+def members_status(request, slug):
+    project = get_object_or_404(Project, slug=slug)
+    
+    is_member = project.members.filter(user=request.user).count() > 0
+    try:
+        project_member = project.members.get(user=request.user)
+    except ProjectMember.DoesNotExist:
+        project_member = None
+    
+    away_form = None
+    if is_member and request.method == "POST":
+        if request.POST["action"] == "set_away":
+            away_form = AwayForm(request.POST)
+            if away_form.is_valid():
+                away_form.save(project_member)
+                away_form = AwayForm()
+        elif request.POST["action"] == "set_back":
+            project_member.away = False
+            project_member.save()
+    
+    if away_form is None:
+        away_form = AwayForm()
+    
+    active_members = project.members.filter(away=False)
+    away_members = project.members.filter(away=True).order_by('away_since')
+    
+    return render_to_response("projects/members_status.html", {
+        "project": project,
+        "is_member": is_member,
+        "project_member": project_member,
+        "away_form": away_form,
+        "active_members": active_members,
+        "away_members": away_members,
     }, context_instance=RequestContext(request))
