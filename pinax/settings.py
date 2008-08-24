@@ -95,7 +95,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "account.context_processors.openid",
     "core.context_processors.contact_email",
     "core.context_processors.site_name",
-    "messages.context_processors.inbox"
+    "messages.context_processors.inbox",
+    "friends_app.context_processors.invitations",
 )
 
 INSTALLED_APPS = (
