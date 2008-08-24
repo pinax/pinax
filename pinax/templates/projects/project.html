@@ -32,6 +32,7 @@
                     {% if project.members.all|length|divisibleby:"3" %}{% else %}</tr>{% endif %}
                 </table>
             </div>
+            <p><a href="{% url project_members_status project.slug %}">Members' Status</a></p>
         </div>
     {% endif %}
 
