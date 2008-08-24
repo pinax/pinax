@@ -65,3 +65,13 @@ ALTER TABLE avatar_avatar ALTER COLUMN avatar TYPE varchar(1024);
 
 ALTER TABLE profiles_profile ADD COLUMN "pownce_user" varchar(50) NOT NULL DEFAULT '';
 ALTER TABLE profiles_profile ADD COLUMN "pownce_password" varchar(50) NOT NULL DEFAULT '';
+
+
+## change to make project member association explicit table
+
+# sqlite
+
+INSERT INTO "projects_projectmember" SELECT *, 0, "", datetime('now') FROM "projects_project_members";
+
+
+
