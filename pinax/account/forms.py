@@ -69,7 +69,7 @@ class SignupForm(forms.Form):
         if not alnum_re.search(self.cleaned_data["username"]):
             raise forms.ValidationError(_("Usernames can only contain letters, numbers and underscores."))
         try:
-            user = User.objects.get(username__exact=self.cleaned_data["username"])
+            user = User.objects.get(username__iexact=self.cleaned_data["username"])
         except User.DoesNotExist:
             return self.cleaned_data["username"]
         raise forms.ValidationError(_("This username is already taken. Please choose another."))
