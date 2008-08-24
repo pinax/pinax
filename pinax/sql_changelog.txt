@@ -73,5 +73,8 @@ ALTER TABLE profiles_profile ADD COLUMN "pownce_password" varchar(50) NOT NULL D
 
 INSERT INTO "projects_projectmember" SELECT *, 0, "", datetime('now') FROM "projects_project_members";
 
+# postgresql
+
+INSERT INTO "projects_projectmember" SELECT *, false, '', now() FROM "projects_project_members";
 
 
