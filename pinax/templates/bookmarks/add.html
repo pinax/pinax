@@ -8,7 +8,7 @@
 {% block body %}
     <h1>{% trans "Add Bookmark" %}</h1>
     
-    <p>You can drag this '<a href="javascript:location.href='http://pinax.hotcluboffrance.com/bookmarks/add/?url='+encodeURIComponent(location.href)+';description='+encodeURIComponent(document.title)+';redirect=on'">Add to Pinax Bookmarks</a>' link to your bookmark bar to post the pages you visit!</p>
+    <p>You can drag this '<a href="{{ bookmarklet }}">Add to Pinax Bookmarks</a>' link to your bookmark bar to post the pages you visit!</p>
     
     <form method="POST" action="">
         <table>
