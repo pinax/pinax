@@ -10,12 +10,10 @@
 {% block head_title %}{% blocktrans %}Tribes{% endblocktrans %}{% endblock %}
 
 {% block body %}
-    <p><span class="warning">{% trans "Note" %}</span>: {% blocktrans %}this is an <b>experimental</b> feature that is subject to massive change at any time.{% endblocktrans%}</p>
-    
     <h1>{% trans "Tribes" %}</h1>
     
     <p>{% trans "A <b>tribe</b> is a group of people with some common interest." %}</p>
-
+    
     {% if user.is_authenticated %}
         <p><a href="#" onclick="$('#tribe_form').toggle(); return false;">{% trans "Start your own tribe" %}</a></p>
         
