@@ -8,9 +8,11 @@ Welcome to Pinax's documentation!
 Contents:
 
 .. toctree::
+   :maxdepth: 2
 
    external/emailconfirmation/index.rst
    external/timezones/index.rst
+   external/threadedcomments/index.rst
 
 Indices and tables
 ==================
