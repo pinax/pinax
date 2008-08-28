@@ -1,0 +1,169 @@
+diff --git a/docs/overview.txt b/docs/overview.txt
+index 9641f03..c698290 100644
+--- a/docs/overview.txt
++++ b/docs/overview.txt
+@@ -699,7 +699,7 @@ model::
+ 
+ This field will also validate that it has been given a valid list of
+ tag names, separated by a single comma, a single space or a comma
+-followed by a space, using the ``isTagList`` validator from
++followed by a space, using the ``is_tag_list`` validator from
+ ``tagging.validators``.
+ 
+ 
+diff --git a/tagging/fields.py b/tagging/fields.py
+index 5b39e84..f52daff 100644
+--- a/tagging/fields.py
++++ b/tagging/fields.py
+@@ -8,7 +8,6 @@ from django.utils.translation import ugettext_lazy as _
+ from tagging import settings
+ from tagging.models import Tag
+ from tagging.utils import edit_string_for_tags
+-from tagging.validators import isTagList
+ 
+ class TagField(CharField):
+     """
+@@ -19,7 +18,6 @@ class TagField(CharField):
+     def __init__(self, *args, **kwargs):
+         kwargs['max_length'] = kwargs.get('max_length', 255)
+         kwargs['blank'] = kwargs.get('blank', True)
+-        kwargs['validator_list'] = [isTagList] + kwargs.get('validator_list', [])
+         super(TagField, self).__init__(*args, **kwargs)
+ 
+     def contribute_to_class(self, cls, name):
+diff --git a/tagging/forms.py b/tagging/forms.py
+index e65aec4..4d4de03 100644
+--- a/tagging/forms.py
++++ b/tagging/forms.py
+@@ -5,8 +5,19 @@ from django import forms
+ from django.utils.translation import ugettext as _
+ 
+ from tagging import settings
++from tagging.models import Tag
++from tagging.validators import is_tag, is_tag_list
+ from tagging.utils import parse_tag_input
+ 
++class AdminTagForm(forms.ModelForm):
++    class Meta:
++        model = Tag
++    
++    def clean_name(self):
++        value = self.cleaned_data["name"]
++        return is_tag(value)
++        
++
+ class TagField(forms.CharField):
+     """
+     A ``CharField`` which validates that its input is a valid list of
+@@ -16,8 +27,4 @@ class TagField(forms.CharField):
+         value = super(TagField, self).clean(value)
+         if value == u'':
+             return value
+-        for tag_name in parse_tag_input(value):
+-            if len(tag_name) > settings.MAX_TAG_LENGTH:
+-                raise forms.ValidationError(
+-                    _('Each tag may be no more than %s characters long.') % settings.MAX_TAG_LENGTH)
+-        return value
++        return is_tag_list(value)
+diff --git a/tagging/models.py b/tagging/models.py
+index 16b4dbd..15b6c0f 100644
+--- a/tagging/models.py
++++ b/tagging/models.py
+@@ -16,7 +16,6 @@ from django.utils.translation import ugettext_lazy as _
+ from tagging import settings
+ from tagging.utils import calculate_cloud, get_tag_list, get_queryset_and_model, parse_tag_input
+ from tagging.utils import LOGARITHMIC
+-from tagging.validators import isTag
+ 
+ qn = connection.ops.quote_name
+ 
+@@ -463,7 +462,7 @@ class Tag(models.Model):
+     """
+     A tag.
+     """
+-    name = models.CharField(_('name'), max_length=50, unique=True, db_index=True, validator_list=[isTag])
++    name = models.CharField(_('name'), max_length=50, unique=True, db_index=True)
+ 
+     objects = TagManager()
+ 
+diff --git a/tagging/tests/tests.py b/tagging/tests/tests.py
+index 574fa92..596e4f0 100644
+--- a/tagging/tests/tests.py
++++ b/tagging/tests/tests.py
+@@ -8,7 +8,7 @@ tests = r"""
+ >>> from tagging.tests.models import Article, Link, Perch, Parrot, FormTest
+ >>> from tagging.utils import calculate_cloud, get_tag_list, get_tag, parse_tag_input
+ >>> from tagging.utils import LINEAR
+->>> from tagging.validators import isTagList, isTag
++>>> from tagging.validators import is_tag_list, is_tag
+ 
+ #############
+ # Utilities #
+@@ -154,18 +154,18 @@ ValueError: Invalid distribution algorithm specified: cheese.
+ 
+ # Validators ##################################################################
+ 
+->>> isTagList('foo qwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbn bar', {})
++>>> is_tag_list('foo qwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbn bar', {})
+ Traceback (most recent call last):
+     ...
+ ValidationError: [u'Each tag may be no more than 50 characters long.']
+ 
+->>> isTag('"test"', {})
+->>> isTag(',test', {})
+->>> isTag('f o o', {})
++>>> is_tag('"test"', {})
++>>> is_tag(',test', {})
++>>> is_tag('f o o', {})
+ Traceback (most recent call last):
+     ...
+ ValidationError: [u'Multiple tags were given.']
+->>> isTagList('foo qwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbn bar', {})
++>>> is_tag_list('foo qwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjklzxcvbn bar', {})
+ Traceback (most recent call last):
+     ...
+ ValidationError: [u'Each tag may be no more than 50 characters long.']
+diff --git a/tagging/validators.py b/tagging/validators.py
+index e902237..082f0a5 100644
+--- a/tagging/validators.py
++++ b/tagging/validators.py
+@@ -3,28 +3,30 @@ Oldforms validators for tagging related fields - these are still
+ required for basic ``django.contrib.admin`` application field validation
+ until the ``newforms-admin`` branch lands in trunk.
+ """
+-from django.core.validators import ValidationError
++from django import forms
+ from django.utils.translation import ugettext as _
+ 
+ from tagging import settings
+ from tagging.utils import parse_tag_input
+ 
+-def isTagList(field_data, all_data):
++def is_tag_list(value):
+     """
+-    Validates that ``field_data`` is a valid list of tags.
++    Validates that ``value`` is a valid list of tags.
+     """
+-    for tag_name in parse_tag_input(field_data):
++    for tag_name in parse_tag_input(value):
+         if len(tag_name) > settings.MAX_TAG_LENGTH:
+-            raise ValidationError(
++            raise forms.ValidationError(
+                 _('Each tag may be no more than %s characters long.') % settings.MAX_TAG_LENGTH)
++    return value
+ 
+-def isTag(field_data, all_data):
++def is_tag(value):
+     """
+-    Validates that ``field_data`` is a valid tag.
++    Validates that ``value`` is a valid tag.
+     """
+-    tag_names = parse_tag_input(field_data)
++    tag_names = parse_tag_input(value)
+     if len(tag_names) > 1:
+         raise ValidationError(_('Multiple tags were given.'))
+     elif len(tag_names[0]) > settings.MAX_TAG_LENGTH:
+-        raise ValidationError(
++        raise forms.ValidationError(
+             _('A tag may be no more than %s characters long.') % settings.MAX_TAG_LENGTH)
++    return value
