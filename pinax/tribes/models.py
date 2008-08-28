@@ -5,6 +5,7 @@ from django.db.models import signals
 from django.utils.html import escape
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes import generic
+from django.db.models.query import QuerySet
 
 
 from django.contrib.auth.models import User
@@ -18,6 +19,20 @@ try:
 except ImportError:
     notification = None
 
+class GroupByQuerySet(QuerySet):
+    """
+    A QuerySet that taps into TODO functionality of a QuerySet in
+    queryset-refactor. This is to be used ONLY with the very limited use-case
+    for this logger.
+    """
+    def group_by(self, *fields):
+        obj = self._clone()
+        obj.query.group_by.extend(fields)
+        return obj
+
+class TribeManager(models.Manager):
+    def get_query_set(self):
+        return GroupByQuerySet(self.model)
 
 class Tribe(models.Model):
     """
@@ -34,7 +49,8 @@ class Tribe(models.Model):
     tags = TagField()
 
     photos = generic.GenericRelation(Pool)
-
+    
+    objects = TribeManager()
     
     def __unicode__(self):
         return self.name
