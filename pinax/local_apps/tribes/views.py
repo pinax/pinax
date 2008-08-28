@@ -56,10 +56,13 @@ def tribes(request):
             tribe_form = TribeForm()
     else:
         tribe_form = TribeForm()
-
+    
+    order_by = request.GET.get("order_by")
+    
     return render_to_response("tribes/tribes.html", {
         "tribe_form": tribe_form,
-        "tribes": Tribe.objects.all().order_by("-created"),
+        "tribes": Tribe.objects.all(),
+        "order_by": order_by,
     }, context_instance=RequestContext(request))
 
 def your_tribes(request):
