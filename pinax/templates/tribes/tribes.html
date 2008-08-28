@@ -3,6 +3,7 @@
 {% load i18n %}
 {% load humanize %}
 {% load pagination_tags %}
+{% load order_by %}
 {% load captureas_tag %}
 {% load extra_tagging_tags %}
 {% load tribe_tags %}
@@ -29,20 +30,50 @@
         <p>{% blocktrans %}<a href="{{ signup_url }}">Sign up</a> and <a href="{{ login_url }}">log in </a> to create your own tribe or join an existing one.{% endblocktrans %}</p>
     {% endif %}
     
-    {% autopaginate tribes %}
-    
-    {% regroup tribes by created.date as tribes_by_created %}
-    
-    {% for date in tribes_by_created %}
-        <h2 class="creation_date">{{ date.grouper|naturalday:_("MONTH_DAY_FORMAT")|capfirst }}</h2>
+    {% if tribes %}
+        
+        <p>Order by:
+            {% ifequal order_by "size" %}
+                <a href="?order_by=name">name</a>
+                or
+                <b>size</b>
+                or
+                <a href="?order_by=date">date created</a>
+                
+                {% order tribes by members %}
+                {% autopaginate tribes 10 %}
+            {% else %}
+                {% ifequal order_by "date" %}
+                    <a href="?order_by=name">name</a>
+                    or
+                    <a href="?order_by=size">size</a>
+                    or
+                    <b>date created</b>
+                    
+                    {% order tribes by -created %}
+                    {% autopaginate tribes 10 %}
+                {% else %}
+                    <b>name</b>
+                    or
+                    <a href="?order_by=size">size</a>
+                    or
+                    <a href="?order_by=date">date created</a>
+                    
+                    {% order tribes by name %}
+                    {% autopaginate tribes 10 %}
+                {% endifequal %}
+            {% endifequal %}
+        </p>
+        
         <dl>
-            {% for tribe in date.list %}
-                {% show_tribe tribe %}
-            {% endfor %}
+        {% for tribe in tribes %}
+            {% show_tribe tribe %}
+        {% endfor %}
         </dl>
-    {% endfor %}
-    
-    {% paginate %}
+        
+        {% paginate %}
+        
+    {% endif %}
     
 {% endblock %}
 
