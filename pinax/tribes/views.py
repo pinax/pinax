@@ -105,7 +105,6 @@ def tribe(request, slug):
     tweets = TweetInstance.objects.tweets_for(tribe).order_by("-sent")
     
     are_member = request.user in tribe.members.all()
-    # print are_member
     
     return render_to_response("tribes/tribe.html", {
         "tribe_form": tribe_form,
