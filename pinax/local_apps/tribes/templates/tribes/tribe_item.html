@@ -2,6 +2,11 @@
 
 <dt>{{ tribe.name }} (<a href="{% url tribe_detail tribe.slug %}">{{ tribe.slug }}</a>)</dt>
 <dd>{{ tribe.description }}
-    <br />
-    {% show_tags_for tribe %}
+    <div class="project_stats">
+        Members: <b>{{ tribe.members.count }}</b>
+        Topics: <b>{{ tribe.topics.count }}</b>
+        Wiki Pages: <b>{{ tribe.wiki_articles.count }}</b>
+        <br />
+        {% show_tags_for tribe %}
+    </div>
 </dd>

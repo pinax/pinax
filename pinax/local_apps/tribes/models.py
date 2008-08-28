@@ -18,6 +18,7 @@ try:
 except ImportError:
     notification = None
 
+from wiki.views import get_articles_for_object
 
 class Tribe(models.Model):
     """
@@ -32,13 +33,16 @@ class Tribe(models.Model):
     members = models.ManyToManyField(User, verbose_name=_('members'))
     
     tags = TagField()
-
+    
     photos = generic.GenericRelation(Pool)
-
+    
+    # @@@ this might be better as a filter provided by wikiapp
+    def wiki_articles(self):
+        return get_articles_for_object(self)
     
     def __unicode__(self):
         return self.name
-
+    
     @models.permalink
     def get_absolute_url(self):
         return ("tribe_detail", [self.slug])
