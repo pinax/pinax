@@ -1,12 +1,10 @@
+
+import re
+
 from django import forms
-from django.core.validators import alnum_re
-
 from django.template.loader import render_to_string
-
 from django.conf import settings
-
 from django.utils.translation import ugettext_lazy as _, ugettext
-
 from django.utils.encoding import smart_unicode
 
 # favour django-mailer but fall back to django.core.mail
@@ -23,6 +21,8 @@ from friends.models import JoinInvitation
 from profiles.models import Profile
 
 from timezones.forms import TimeZoneField
+
+alnum_re = re.compile(r'^\w+$')
 
 class LoginForm(forms.Form):
 

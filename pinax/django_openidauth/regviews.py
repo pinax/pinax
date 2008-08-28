@@ -1,14 +1,18 @@
+
+import re
+
 from django import forms
 from django.contrib.auth import login as log_user_in, load_backend
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
-from django.core.validators import alnum_re
 from django.contrib.auth.models import User
 from emailconfirmation.models import EmailAddress
 from profiles.models import Profile
 
 from django_openidauth.models import associate_openid
+
+alnum_re = re.compile(r'^\w+$')
 
 class RegistrationFormOpenID(forms.Form):
     username = forms.CharField(label="Username", max_length=30, widget=forms.TextInput())
