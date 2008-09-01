@@ -114,9 +114,9 @@ class Task(models.Model):
     def __unicode__(self):
         return self.summary
     
-    def save(self):
+    def save(self, force_insert=False, force_update=False):
         self.modified = datetime.now()
-        super(Task, self).save()
+        super(Task, self).save(force_insert, force_update)
     
     @models.permalink
     def get_absolute_url(self):

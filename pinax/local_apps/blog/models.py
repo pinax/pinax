@@ -67,9 +67,9 @@ class Post(models.Model):
             'slug': self.slug
     })
 
-    def save(self):
+    def save(self, force_insert=False, force_update=False):
         self.updated_at = datetime.now()
-        super(Post, self).save()
+        super(Post, self).save(force_insert, force_update)
 
 # handle notification of new comments
 from threadedcomments.models import ThreadedComment
