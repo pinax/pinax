@@ -1,0 +1,179 @@
+Index: dbtemplates/models.py
+===================================================================
+--- dbtemplates/models.py	(revision 47)
++++ dbtemplates/models.py	(working copy)
+@@ -24,9 +24,9 @@
+     def __unicode__(self):
+         return self.name
+     
+-    def save(self):
++    def save(self, force_insert=False, force_update=False):
+         self.last_changed = datetime.now()
+-        super(Template, self).save()
++        super(Template, self).save(force_insert, force_update)
+ 
+ 
+ __test__ = {'API_TESTS':"""
+Index: messages/models.py
+===================================================================
+--- messages/models.py	(revision 72)
++++ messages/models.py	(working copy)
+@@ -79,10 +79,10 @@
+         return ('messages_detail', [self.id])
+     get_absolute_url = models.permalink(get_absolute_url)
+     
+-    def save(self):
++    def save(self, force_insert=False, force_update=False):
+         if not self.id:
+             self.sent_at = datetime.datetime.now()
+-        super(Message, self).save() 
++        super(Message, self).save(force_insert, force_update) 
+     
+     class Meta:
+         ordering = ['-sent_at']
+Index: photologue/models.py
+===================================================================
+--- photologue/models.py	(revision 301)
++++ photologue/models.py	(working copy)
+@@ -185,8 +185,8 @@
+         verbose_name = _('gallery upload')
+         verbose_name_plural = _('gallery uploads')
+ 
+-    def save(self):
+-        super(GalleryUpload, self).save()
++    def save(self, force_insert=False, force_update=False):
++        super(GalleryUpload, self).save(force_insert, force_update)
+         gallery = self.process_zipfile()
+         super(GalleryUpload, self).delete()
+         return gallery
+@@ -560,7 +560,7 @@
+     def __str__(self):
+         return self.__unicode__()
+ 
+-    def save(self):
++    def save(self, force_insert=False, force_update=False):
+         try:
+             os.remove(self.sample_filename())
+         except:
+@@ -669,10 +669,10 @@
+                     obj.create_size(self)
+         PhotoSizeCache().reset()
+ 
+-    def save(self):
++    def save(self, force_insert=False, force_update=False):
+         if self.width + self.height <= 0:
+             raise ValueError(_('A PhotoSize must have a positive height or width.'))
+-        super(PhotoSize, self).save()
++        super(PhotoSize, self).save(force_insert, force_update)
+         PhotoSizeCache().reset()
+         self.clear_cache()
+ 
+Index: robots/models.py
+===================================================================
+--- robots/models.py	(revision 21)
++++ robots/models.py	(working copy)
+@@ -22,10 +22,10 @@
+     def __unicode__(self):
+         return u"%s" % self.pattern
+ 
+-    def save(self):
++    def save(self, force_insert=False, force_update=False):
+         if not self.pattern.startswith('/'):
+             self.pattern = '/' + self.pattern
+-        super(Url, self).save()
++        super(Url, self).save(force_insert, force_update)
+ 
+ class Rule(models.Model):
+     """
+Index: swaps/models.py
+===================================================================
+--- swaps/models.py	(revision 66)
++++ swaps/models.py	(working copy)
+@@ -184,7 +184,7 @@
+         self.revert_offers()
+               
+     @transaction.commit_manually
+-    def save(self):
++    def save(self, force_insert=False, force_update=False):
+         
+         """ Enforce state change rules...
+         
+@@ -218,7 +218,7 @@
+                 changeable = True
+                 
+             if changeable: 
+-                super(Swap, self).save()
++                super(Swap, self).save(force_insert, force_update)
+                 # swap offers usually changed when swap changes
+                 # must be covered in same transaction
+                 self.proposing_offer.save()
+Index: threadedcomments/models.py
+===================================================================
+--- threadedcomments/models.py	(revision 122)
++++ threadedcomments/models.py	(working copy)
+@@ -177,13 +177,13 @@
+             return self.comment[:50] + "..."
+         return self.comment[:50]
+     
+-    def save(self):
++    def save(self, force_insert=False, force_update=False):
+         if not self.markup:
+             self.markup = DEFAULT_MARKUP
+         self.date_modified = datetime.now()
+         if not self.date_approved and self.is_approved:
+             self.date_approved = datetime.now()
+-        super(ThreadedComment, self).save()
++        super(ThreadedComment, self).save(force_insert, force_update)
+     
+     def get_content_object(self):
+         """
+@@ -282,13 +282,13 @@
+             return self.comment[:50] + "..."
+         return self.comment[:50]
+     
+-    def save(self):
++    def save(self, force_insert=False, force_update=False):
+         if not self.markup:
+             self.markup = DEFAULT_MARKUP
+         self.date_modified = datetime.now()
+         if not self.date_approved and self.is_approved:
+             self.date_approved = datetime.now()
+-        super(FreeThreadedComment, self).save()
++        super(FreeThreadedComment, self).save(force_insert, force_update)
+     
+     def get_content_object(self):
+         """
+Index: wiki/models.py
+===================================================================
+--- wiki/models.py	(revision 159)
++++ wiki/models.py	(working copy)
+@@ -72,9 +72,9 @@
+             return reverse('wiki_article', args=(self.title,))
+         return self.group.get_absolute_url() + 'wiki/' + self.title
+ 
+-    def save(self):
++    def save(self, force_insert=False, force_update=False):
+         self.last_update = datetime.now()
+-        super(Article, self).save()
++        super(Article, self).save(force_insert, force_update)
+ 
+     def latest_changeset(self):
+         return self.changeset_set.filter(
+@@ -224,7 +224,7 @@
+             notification.send([self.editor], "wiki_revision_reverted",
+                               {'revision': self, 'article': self.article})
+ 
+-    def save(self):
++    def save(self, force_insert=False, force_update=False):
+         """ Saves the article with a new revision.
+         """
+         if self.id is None:
+@@ -233,7 +233,7 @@
+                     article=self.article).latest().revision + 1
+             except self.DoesNotExist:
+                 self.revision = 1
+-        super(ChangeSet, self).save()
++        super(ChangeSet, self).save(force_insert, force_update)
+ 
+     def display_diff(self):
+         ''' Returns a HTML representation of the diff.
