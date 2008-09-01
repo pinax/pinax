@@ -1,6 +1,6 @@
 import re
 from django import template
-from photologue.utils import EXIF
+#from photologue.utils import EXIF
 register = template.Library()
 
 @register.tag(name="print_exif")
