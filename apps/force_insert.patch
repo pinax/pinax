@@ -107,42 +107,6 @@ Index: swaps/models.py
                  # swap offers usually changed when swap changes
                  # must be covered in same transaction
                  self.proposing_offer.save()
-Index: threadedcomments/models.py
-===================================================================
---- threadedcomments/models.py	(revision 122)
-+++ threadedcomments/models.py	(working copy)
-@@ -177,13 +177,13 @@
-             return self.comment[:50] + "..."
-         return self.comment[:50]
-     
--    def save(self):
-+    def save(self, force_insert=False, force_update=False):
-         if not self.markup:
-             self.markup = DEFAULT_MARKUP
-         self.date_modified = datetime.now()
-         if not self.date_approved and self.is_approved:
-             self.date_approved = datetime.now()
--        super(ThreadedComment, self).save()
-+        super(ThreadedComment, self).save(force_insert, force_update)
-     
-     def get_content_object(self):
-         """
-@@ -282,13 +282,13 @@
-             return self.comment[:50] + "..."
-         return self.comment[:50]
-     
--    def save(self):
-+    def save(self, force_insert=False, force_update=False):
-         if not self.markup:
-             self.markup = DEFAULT_MARKUP
-         self.date_modified = datetime.now()
-         if not self.date_approved and self.is_approved:
-             self.date_approved = datetime.now()
--        super(FreeThreadedComment, self).save()
-+        super(FreeThreadedComment, self).save(force_insert, force_update)
-     
-     def get_content_object(self):
-         """
 Index: wiki/models.py
 ===================================================================
 --- wiki/models.py	(revision 159)
