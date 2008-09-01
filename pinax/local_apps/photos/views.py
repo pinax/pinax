@@ -52,7 +52,9 @@ def details(request, id):
     tribes = Tribe.objects.filter(members=request.user)
     projects = Project.objects.filter(members=request.user)
     photo = get_object_or_404(Photos, id=id)
-    f = open(("site_media/%s" % photo.image), 'rb')
+    # @@@ is there a better way?
+    photo_path = os.path.join(settings.MEDIA_ROOT, "photologue/photos", photo.image_filename())
+    f = open(photo_path, 'rb')
     exif = EXIF.process_file(f)
     title = photo.title
     host = "http://%s" % get_host(request)
