@@ -85,28 +85,6 @@ Index: robots/models.py
  
  class Rule(models.Model):
      """
-Index: swaps/models.py
-===================================================================
---- swaps/models.py	(revision 66)
-+++ swaps/models.py	(working copy)
-@@ -184,7 +184,7 @@
-         self.revert_offers()
-               
-     @transaction.commit_manually
--    def save(self):
-+    def save(self, force_insert=False, force_update=False):
-         
-         """ Enforce state change rules...
-         
-@@ -218,7 +218,7 @@
-                 changeable = True
-                 
-             if changeable: 
--                super(Swap, self).save()
-+                super(Swap, self).save(force_insert, force_update)
-                 # swap offers usually changed when swap changes
-                 # must be covered in same transaction
-                 self.proposing_offer.save()
 Index: wiki/models.py
 ===================================================================
 --- wiki/models.py	(revision 159)
