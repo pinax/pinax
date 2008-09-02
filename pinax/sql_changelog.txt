@@ -81,3 +81,12 @@ INSERT INTO "projects_projectmember" SELECT *, false, '', now() FROM "projects_p
 ## removed message_template from ObservedItem
 
 ALTER TABLE notification_observeditem DROP COLUMN message_template;
+
+
+## model changes to blog_post
+
+# postgresql
+
+ALTER TABLE blog_post DROP CONSTRAINT "blog_post_author_id_key";
+ALTER TABLE blog_post ALTER author_id SET NOT NULL;
+
