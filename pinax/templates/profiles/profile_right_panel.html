@@ -10,7 +10,7 @@
                 <a href="{% url tribes.views.tribe tribe.slug %}">{{ tribe.name }}</a>
             {% endfor %}
         {% else %}
-            {% captureas tribe_url %}{% url tribes.views.tribes tribes %}{% endcaptureas %}
+            {% captureas tribe_url %}{% url tribes.views.tribes %}{% endcaptureas %}
             <p>{% blocktrans %}You are not yet a member of any <a href="{{ tribe_url }}">tribes</a>.{% endblocktrans %}</p>
         {% endif %}
     </div>
