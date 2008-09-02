@@ -22,13 +22,15 @@ settings.DATABASE_NAME = ':memory:'
 from django.core.management.commands.dumpdata import Command as DumpdataCommand
 from django.core.management.commands.syncdb import Command as SyncDBCommand
 
+FIXTURES_TO_GENERATE = ('auth', 'profiles', 'friends', 'zwitschern')
+
 def main():
     SyncDBCommand().handle_noargs(interactive=False)
-    for module_name in glob.glob('*.py'):
-        module_name = module_name[:-3]
-        if module_name in ('__init__', 'run'):
-            continue
-        mod = __import__(module_name)
+    for module_name in FIXTURES_TO_GENERATE:
+        full_module_name = 'pinax.fixtures.generate.%s' % (module_name,)
+        mod = __import__(full_module_name)
+        for comp in full_module_name.split('.')[1:]:
+            mod = getattr(mod, comp)
         mod.generate()
         path = abspath('../%s.json' % module_name)
         fixture_file = open(path, 'w')
