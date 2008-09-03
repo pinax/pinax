@@ -29,12 +29,15 @@
                 <tr class="{% cycle odd,even %}">
                     <td><b><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></b><br />
                         {% with post.tease|truncatewords:"50" as body %}
-                            {% switch post.markup %}
-                                {% case 'rst' %}{{ body|restructuredtext|wikiwords|safe }}{% endcase %}
-                                {% case 'mrk' %}{{ body|force_escape|markdown|wikiwords }}{% endcase %}
-                                {% case 'txl' %}{{ body|force_escape|textile|wikiwords }}{% endcase %}
-                                {% case '' %}{{ body|force_escape|wikiwords|linebreaks|safe }}{% endcase %}
-                            {% endswitch %}
+                            {% if post.markup %}
+                                {% switch post.markup %}
+                                    {% case 'rst' %}{{ body|restructuredtext|wikiwords|safe }}{% endcase %}
+                                    {% case 'mrk' %}{{ body|force_escape|markdown|wikiwords }}{% endcase %}
+                                    {% case 'txl' %}{{ body|force_escape|textile|wikiwords }}{% endcase %}
+                                {% endswitch %}
+                            {% else %}
+                                {{ body|force_escape|wikiwords|linebreaks|safe }}
+                            {% endif %}
                         {% endwith %}
                     </td>
                     <td nowrap>{{ post.publish|date }}</td>
