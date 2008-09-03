@@ -15,19 +15,21 @@ from wiki.models import Article as WikiArticle
 
 def tags(request, tag):
     tag = get_object_or_404(Tag, name=tag)
-    alltags = TaggedItem.objects.get_by_model(Post, tag)
+    
+    alltags = TaggedItem.objects.get_by_model(Post, tag).filter(status=2)
+    
     phototags = TaggedItem.objects.get_by_model(Photos, tag)
-
+    
     project_tags = TaggedItem.objects.get_by_model(Project, tag)
     project_topic_tags = TaggedItem.objects.get_by_model(ProjectTopic, tag)
     project_task_tags = TaggedItem.objects.get_by_model(Task, tag)
-
+    
     tribe_tags = TaggedItem.objects.get_by_model(Tribe, tag)
     tribe_topic_tags = TaggedItem.objects.get_by_model(TribeTopic, tag)
-
+    
     # @@@ TODO: tribe_wiki_article_tags and project_wiki_article_tags
     wiki_article_tags = TaggedItem.objects.get_by_model(WikiArticle, tag)
-
+    
     return render_to_response('tags/index.html', {
         'tag': tag,
         'alltags': alltags,
