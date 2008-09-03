@@ -26,11 +26,11 @@
             <th>Published On</th>
             <th>Status</th>
             <th></th>
-        {% for blogs in blogs %}
+        {% for post in blogs %}
             <tr class="{% cycle odd,even %}">
-                <td><b><a href="{{ blogs.get_absolute_url }}">{{ blogs.title }}</a></b><br />
-                    {% with blogs.tease|truncatewords:"50" as body %}
-                        {% switch blogs.markup %}
+                <td><b><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></b><br />
+                    {% with post.tease|truncatewords:"50" as body %}
+                        {% switch post.markup %}
                             {% case 'rst' %} {{ body|restructuredtext|wikiwords|safe }} {% endcase %}
                             {% case 'mrk' %} {{ body|force_escape|markdown|wikiwords }} {% endcase %}
                             {% case 'txl' %} {{ body|force_escape|textile|wikiwords }} {% endcase %}
@@ -38,9 +38,9 @@
                         {% endswitch %}
                     {% endwith %}
                 </td>
-                <td nowrap>{{ blogs.publish|date }}</td>
+                <td nowrap>{{ post.publish|date }}</td>
                 <td>
-                    {% with blogs.status as status %}
+                    {% with post.status as status %}
                         {% switch status %}
                             {% case 2 %} Published {% endcase %}
                             {% case 1 %} Draft {% endcase %}
@@ -48,12 +48,12 @@
                     {% endwith %}
                 </td>
                 <td width="50px" align="center">
-                    <form action="{% url blog_edit blogs.id %}" method="GET">
+                    <form action="{% url blog_edit post.id %}" method="GET">
                             <input type="image" src="/site_media/pencil.png" border="0" title="{% trans "Edit Post" %}" />
                     </form>
                 </td>
                 <td align="right">
-                    <form action="{% url blog_destroy blogs.id %}" method="POST">
+                    <form action="{% url blog_destroy post.id %}" method="POST">
                         <input type="image" src="/site_media/delete.png" border="0" title="{% trans "Delete Post" %}" />
                         <input type="hidden" name="action" value="delete"/>
                    </form>
