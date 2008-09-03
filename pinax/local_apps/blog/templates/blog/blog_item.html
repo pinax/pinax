@@ -10,21 +10,27 @@
     <div class="blog-post-tease">
         {% if blog_post.tease %}
              {% with blog_post.tease as body %}
-                {% switch blog_post.markup %}
-                    {% case 'rst' %} {{ body|restructuredtext|wikiwords|safe }} {% endcase %}
-                    {% case 'mrk' %} {{ body|force_escape|markdown|wikiwords }} {% endcase %}
-                    {% case 'txl' %} {{ body|force_escape|textile|wikiwords }} {% endcase %}
-                    {% case '' %} {{ body|force_escape|wikiwords|linebreaks|safe }} {% endcase %}
-                {% endswitch %}
+                {% if blog_post.markup %}
+                    {% switch blog_post.markup %}
+                        {% case 'rst' %} {{ body|restructuredtext|wikiwords|safe }} {% endcase %}
+                        {% case 'mrk' %} {{ body|force_escape|markdown|wikiwords }} {% endcase %}
+                        {% case 'txl' %} {{ body|force_escape|textile|wikiwords }} {% endcase %}
+                    {% endswitch %}
+                {% else %}
+                    {{ body|force_escape|wikiwords|linebreaks|safe }}
+                {% endif %}
             {% endwith %}
         {% else %}
             {% with blog_post.body|truncatewords:"150" as body %}
-                {% switch blog_post.markup %}
-                    {% case 'rst' %} {{ body|restructuredtext|wikiwords|safe }} {% endcase %}
-                    {% case 'mrk' %} {{ body|force_escape|markdown|wikiwords }} {% endcase %}
-                    {% case 'txl' %} {{ body|force_escape|textile|wikiwords }} {% endcase %}
-                    {% case '' %} {{ body|force_escape|wikiwords|linebreaks|safe }} {% endcase %}
-                {% endswitch %}
+                {% if blog_post.markup %}
+                    {% switch blog_post.markup %}
+                        {% case 'rst' %} {{ body|restructuredtext|wikiwords|safe }} {% endcase %}
+                        {% case 'mrk' %} {{ body|force_escape|markdown|wikiwords }} {% endcase %}
+                        {% case 'txl' %} {{ body|force_escape|textile|wikiwords }} {% endcase %}
+                    {% endswitch %}
+                {% else %}
+                    {{ body|force_escape|wikiwords|linebreaks|safe }}
+                {% endif %}
             {% endwith %}
         {% endif %}
     </div>
