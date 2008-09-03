@@ -16,52 +16,52 @@
 
 {% block body %}
     <p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time.</p>
-
+    
     <h1>{% trans "Your Posts" %}</h1>
-
+    
     {% if blogs %}
         <table cellpadding="5" cellspacing="0" border="0" class="blog-list" width="100%">
             <th>Title</th>
             <th>Published On</th>
             <th>Status</th>
             <th></th>
-        {% for post in blogs %}
-            <tr class="{% cycle odd,even %}">
-                <td><b><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></b><br />
-                    {% with post.tease|truncatewords:"50" as body %}
-                        {% switch post.markup %}
-                            {% case 'rst' %} {{ body|restructuredtext|wikiwords|safe }} {% endcase %}
-                            {% case 'mrk' %} {{ body|force_escape|markdown|wikiwords }} {% endcase %}
-                            {% case 'txl' %} {{ body|force_escape|textile|wikiwords }} {% endcase %}
-                            {% case '' %} {{ body|force_escape|wikiwords|linebreaks|safe }} {% endcase %}
-                        {% endswitch %}
-                    {% endwith %}
-                </td>
-                <td nowrap>{{ post.publish|date }}</td>
-                <td>
-                    {% with post.status as status %}
-                        {% switch status %}
-                            {% case 2 %} Published {% endcase %}
-                            {% case 1 %} Draft {% endcase %}
-                        {% endswitch %}
-                    {% endwith %}
-                </td>
-                <td width="50px" align="center">
-                    <form action="{% url blog_edit post.id %}" method="GET">
+            {% for post in blogs %}
+                <tr class="{% cycle odd,even %}">
+                    <td><b><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></b><br />
+                        {% with post.tease|truncatewords:"50" as body %}
+                            {% switch post.markup %}
+                                {% case 'rst' %}{{ body|restructuredtext|wikiwords|safe }}{% endcase %}
+                                {% case 'mrk' %}{{ body|force_escape|markdown|wikiwords }}{% endcase %}
+                                {% case 'txl' %}{{ body|force_escape|textile|wikiwords }}{% endcase %}
+                                {% case '' %}{{ body|force_escape|wikiwords|linebreaks|safe }}{% endcase %}
+                            {% endswitch %}
+                        {% endwith %}
+                    </td>
+                    <td nowrap>{{ post.publish|date }}</td>
+                    <td>
+                        {% with post.status as status %}
+                            {% switch status %}
+                                {% case 2 %}Published{% endcase %}
+                                {% case 1 %}Draft{% endcase %}
+                            {% endswitch %}
+                        {% endwith %}
+                    </td>
+                    <td width="50px" align="center">
+                        <form action="{% url blog_edit post.id %}" method="GET">
                             <input type="image" src="/site_media/pencil.png" border="0" title="{% trans "Edit Post" %}" />
-                    </form>
-                </td>
-                <td align="right">
-                    <form action="{% url blog_destroy post.id %}" method="POST">
-                        <input type="image" src="/site_media/delete.png" border="0" title="{% trans "Delete Post" %}" />
-                        <input type="hidden" name="action" value="delete"/>
-                   </form>
-                </td>
-            </tr>
-        {% endfor %}
+                        </form>
+                    </td>
+                    <td align="right">
+                        <form action="{% url blog_destroy post.id %}" method="POST">
+                            <input type="image" src="/site_media/delete.png" border="0" title="{% trans "Delete Post" %}" />
+                            <input type="hidden" name="action" value="delete"/>
+                       </form>
+                    </td>
+                </tr>
+            {% endfor %}
         </table>
     {% else %}
         No blog posts yet.
     {% endif %}
-
+    
 {% endblock %}
