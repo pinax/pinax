@@ -82,9 +82,10 @@ def new(request):
                 # @@@ should message be different if published?
                 request.user.message_set.create(message=_("Successfully saved post '%s'") % blog.title)
                 if notification:
-                    if friends: # @@@ might be worth having a shortcut for sending to all friends
-                        notification.send((x['friend'] for x in Friendship.objects.friends_for_user(blog.author)), "blog_friend_post", {"post": blog})
-
+                    if blog.status == 2: # published
+                        if friends: # @@@ might be worth having a shortcut for sending to all friends
+                            notification.send((x['friend'] for x in Friendship.objects.friends_for_user(blog.author)), "blog_friend_post", {"post": blog})
+                
                 return HttpResponseRedirect(reverse("blog_list_yours"))
         else:
             blog_form = BlogForm()
@@ -109,7 +110,11 @@ def edit(request, id):
                 blog = blog_form.save(commit=False)
                 blog.save()
                 request.user.message_set.create(message=_("Successfully updated post '%s'") % blog.title)
-
+                if notification:
+                    if blog.status == 2: # published
+                        if friends: # @@@ might be worth having a shortcut for sending to all friends
+                            notification.send((x['friend'] for x in Friendship.objects.friends_for_user(blog.author)), "blog_friend_post", {"post": blog})
+                
                 return HttpResponseRedirect(reverse("blog_list_yours"))
         else:
             blog_form = BlogForm(instance=post)
