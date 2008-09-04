@@ -4,6 +4,8 @@ from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 
 def game_list(request, sort="most-played", category=None):
+    cats = ArcadeCategory.objects.all()
+    cats = [(c, c.game_set.filter(downloaded=True).count()) for c in cats]
     games = Game.objects.filter(downloaded=True)
     if category is not None:
         category = get_object_or_404(ArcadeCategory, slug=category.lower())
@@ -18,6 +20,7 @@ def game_list(request, sort="most-played", category=None):
         'games': games,
         'sort': sort,
         'category': category,
+        'categories': cates,
     }
     return render_to_response('games/game_list.html',
         context, context_instance=RequestContext(request))
