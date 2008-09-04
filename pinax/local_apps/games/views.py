@@ -20,7 +20,7 @@ def game_list(request, sort="most-played", category=None):
         'games': games,
         'sort': sort,
         'category': category,
-        'categories': cates,
+        'categories': cats,
     }
     return render_to_response('games/game_list.html',
         context, context_instance=RequestContext(request))
