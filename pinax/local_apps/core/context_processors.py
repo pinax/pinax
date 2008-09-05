@@ -1,4 +1,9 @@
 from django.conf import settings
+from zwitschern.models import Tweet 
+from tribes.models import Tribe 
+from django.contrib.auth.models import User 
+from bookmarks.models import Bookmark
+
 
 def contact_email(request):
     return {'contact_email': getattr(settings, 'CONTACT_EMAIL', '')}
