@@ -87,7 +87,7 @@
 
             <h2>Tasks{% if total_tasks %} ({{ total_tasks }}){% endif %}</h2>
 
-            <p><a href="{% url project_tasks project.slug %}">view more details or add task...</a></p>
+            <p><a href="{% url project_tasks project.slug %}" method="Post">view more details or add task...</a></p>
 
             <table class="tasks">
                 {% for task in tasks %}
