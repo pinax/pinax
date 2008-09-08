@@ -3,7 +3,6 @@
 {% load i18n %}
 {% load gravatar %}
 {% load app_plugins %}
-{% load captureas_tag %}
 
 {% block head_title %}{% blocktrans %}Profile for {{ other_user }}{% endblocktrans %}{% endblock %}
 
@@ -92,8 +91,8 @@
         {% plugin_point "profiles.profile" user=other_user owner=other_user viewer=user %}
     
     {% else %} {# not user.is_authenticated #}
-        {% captureas signup_url %}{% url acct_signup %}{% endcaptureas %}
-        {% captureas login_url %}{% url acct_login %}{% endcaptureas %}
+        {% url acct_signup as signup_url %}
+        {% url acct_login as login_url %}
         <p>{% blocktrans %}<a href="{{ signup_url }}">Sign up</a> and <a href="{{ login_url }}">log in </a> to add this person as a friend and see their tweets and blog posts.{% endblocktrans %}</p>
     {% endif %}
 

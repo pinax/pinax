@@ -77,8 +77,8 @@
                 </form>
             </div>
         {% else %}
-            {% captureas signup_url %}{% url acct_signup %}{% endcaptureas %}
-            {% captureas login_url %}{% url acct_login %}{% endcaptureas %}
+            {% url acct_signup as signup_url %}
+            {% url acct_login as login_url %}
             <p>{% blocktrans %}<a href="{{ signup_url }}">Sign up</a> and <a href="{{ login_url }}">log in </a> to join this tribe.{% endblocktrans %}</p>
         {% endif %}
 
@@ -92,7 +92,7 @@
                 {% endfor %}
                 <p><a href="{% url tribe_topics tribe.slug %}">{% trans "more..." %}</a></p>
             {% else %}
-                {% captureas new_tribe_url %}{% url tribe_topics tribe.slug %}{% endcaptureas %}
+                {% url tribe_topics tribe.slug as new_tribe_url %}
                 <p>{% blocktrans %}None yet. <a href="{{ new_tribe_url }}">Start one...</a>{% endblocktrans %}</p>
             {% endif %}
 

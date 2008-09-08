@@ -1,5 +1,4 @@
 {% load i18n %}
-{% load captureas_tag %}
 {% load gravatar %}
 
 {% if is_me %}
@@ -10,7 +9,7 @@
                 <a href="{% url tribes.views.tribe tribe.slug %}">{{ tribe.name }}</a>
             {% endfor %}
         {% else %}
-            {% captureas tribe_url %}{% url tribes.views.tribes %}{% endcaptureas %}
+            {% url tribes.views.tribes as tribe_url %}
             <p>{% blocktrans %}You are not yet a member of any <a href="{{ tribe_url }}">tribes</a>.{% endblocktrans %}</p>
         {% endif %}
     </div>

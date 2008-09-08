@@ -3,7 +3,6 @@
 {% load i18n %}
 {% load humanize %}
 {% load pagination_tags %}
-{% load captureas_tag %}
 {% load project_tags %}
 
 {% block head_title %}{% blocktrans %}Projects{% endblocktrans %}{% endblock %}
@@ -26,8 +25,8 @@
             </table>
         </form>
     {% else %}
-        {% captureas signup_url %}{% url acct_signup %}{% endcaptureas %}
-        {% captureas login_url %}{% url acct_login %}{% endcaptureas %}
+        {% url acct_signup as signup_url %}
+        {% url acct_login as login_url %}
         <p>{% blocktrans %}<a href="{{ signup_url }}">Sign up</a> and <a href="{{ login_url }}">log in </a> to create your own project or join an existing one.{% endblocktrans %}</p>
     {% endif %}
     

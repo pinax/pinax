@@ -1,7 +1,6 @@
 {% extends "site_base.html" %}
 
 {% load i18n %}
-{% load captureas_tag %}
 
 {% block head_title %}{% trans "Signup" %}{% endblock %}
 
@@ -23,8 +22,8 @@
                     </table>
                 </form>
         
-                {% captureas terms_url %}{% url terms %}{% endcaptureas %}
-                {% captureas privacy_url %}{% url privacy %}{% endcaptureas %}
+                {% url terms as terms_url %}
+                {% url privacy as privacy_url %}
                 <div class="right-form">
                     <p>{% blocktrans %}By clicking "Sign Up", you are indicating that you have read and agree to the <a href="{{ terms_url }}">Terms of Use</a> and <a href="{{ privacy_url }}">Privacy Policy</a>.{% endblocktrans %}</p>
         

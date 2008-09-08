@@ -1,7 +1,6 @@
 {% extends "site_base.html" %}
 
 {% load i18n %}
-{% load captureas_tag %}
 
 {% block head_title %}{% trans "What Next?" %}{% endblock %}
 
@@ -31,8 +30,8 @@
             <dd>so more people can share in the fun.</dd>
         </dl>
         {% else %}
-            {% captureas signup_url %}{% url acct_signup %}{% endcaptureas %}
-            {% captureas login_url %}{% url acct_login %}{% endcaptureas %}
+            {% url acct_signup as signup_url %}
+            {% url acct_login as login_url %}
             
             <p class="what_next">{% blocktrans %}Start by <a href="{{ signup_url }}">signing up</a> and <a href="{{ login_url }}">logging in</a>.{% endblocktrans %}</p>
         {% endif %}

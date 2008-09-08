@@ -1,5 +1,4 @@
 {% load i18n %}
-{% load captureas_tag %}
 
 <h2>{% trans "Bookmarks" %}</h2>
 
@@ -20,6 +19,6 @@
         {% endfor %}
     </table>
 {% else %}
-    {% captureas add_bookmark_url %}{% url bookmarks.views.add %}{% endcaptureas %}
+    {% url bookmarks.views.add as add_bookmark_url %}
     <p>{% blocktrans %}You haven't added any <a href="{{ add_bookmark_url }}">bookmarks</a> yet.{% endblocktrans %}</p>
 {% endif %}

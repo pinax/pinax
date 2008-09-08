@@ -3,7 +3,6 @@
 {% load humanize i18n %}
 {% load pagination_tags %}
 {% load timezone_filters %}
-{% load captureas_tag %}
 
 {% block head_title %}{% trans "Notices" %}{% endblock %}
 
@@ -49,7 +48,7 @@
     <div class="notice_settings">
         <h2>{% trans "Settings" %}</h2>
         
-        {% captureas email_url %}{% url acct_email %}{% endcaptureas %}
+        {% url acct_email as email_url %}
         {% if user.email %}
             <p>
                 {% trans "Primary email" %}:<br />

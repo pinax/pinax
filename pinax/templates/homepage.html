@@ -1,7 +1,6 @@
 {% extends "site_base.html" %}
 
 {% load i18n %}
-{% load captureas_tag %}
 
 {% block head_title %}{% trans "Welcome" %}{% endblock %}
 
@@ -17,11 +16,11 @@
     {% endblocktrans %}
     
     {% if user.is_authenticated %}
-        {% captureas what_next_url %}{% url what_next %}{% endcaptureas %}
+        {% url what_next as what_next_url %}
         <p class="what_next">{% blocktrans %}Wondering <a href="{{ what_next_url }}">What Next</a>?{% endblocktrans %}</p>
     {% else %}
-        {% captureas signup_url %}{% url acct_signup %}{% endcaptureas %}
-        {% captureas login_url %}{% url acct_login %}{% endcaptureas %}
+        {% url acct_signup as signup_url %}
+        {% url acct_login as login_url %}
         <p>{% blocktrans %}You can <a href="{{ signup_url }}">Sign up</a> and <a href="{{ login_url }}">Log in</a> to try out the site.{% endblocktrans %}</p>
         
         <p><b>{% blocktrans %}At this stage, there is openid support, email verification, password management, site announcements, user-to-user messaging, friend invitation (both internal and external to the site), a basic twitter clone, interest groups (called tribes), projects with basic task and issue management, threaded discussions, wikis, blogging, bookmarks, contact import (from vCard, Google or Yahoo), photo management and a notification framework.{% endblocktrans %}</b></p>

@@ -1,7 +1,6 @@
 {% load i18n %}
 {% load oembed_tags %}
 {% load pagination_tags %}
-{% load captureas_tag %}
 
 {% autopaginate tweets %}
 
@@ -16,7 +15,7 @@
     {% endfor %}
 {% else %}
     {% if are_mine %}
-        {% captureas tweets_url %}{% url zwitschern.views.personal %}{% endcaptureas %}
+        {% url zwitschern.views.personal as tweets_url %}
         <p>{% blocktrans %}You haven't posted any <a href="{{ tweets_url }}">tweets</a> yet.{% endblocktrans %}</p>
     {% else %}
         <p>{% blocktrans %}There are currently no tweets to be listed.{% endblocktrans %}</p>
