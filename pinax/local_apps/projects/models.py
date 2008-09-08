@@ -31,11 +31,13 @@ class Project(models.Model):
     created = models.DateTimeField(_('created'), default=datetime.now)
     description = models.TextField(_('description'))
     
+    member_users = models.ManyToManyField(User, through="ProjectMember", verbose_name=_('members'))
+    
     # private means only members can see the project
     private = models.BooleanField(_('private'), default=False)
     
     tags = TagField()
-
+    
     photos = generic.GenericRelation(Pool)
     
     # @@@ this might be better as a filter provided by wikiapp
