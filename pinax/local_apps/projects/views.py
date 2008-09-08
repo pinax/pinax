@@ -126,7 +126,7 @@ def topics(request, slug):
                 topic.save()
                 request.user.message_set.create(message="You have started the topic %s" % topic.title)
                 if notification:
-                    notification.send(project.members.all(), "projects_new_topic", {"creator": request.user, "topic": topic, "project": project})
+                    notification.send(project.member_users.all(), "projects_new_topic", {"creator": request.user, "topic": topic, "project": project})
                 topic_form = TopicForm() # @@@ is this the right way to reset it?
         else:
             request.user.message_set.create(message="You are not a member and so cannot start a new topic")
