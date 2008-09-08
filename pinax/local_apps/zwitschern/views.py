@@ -61,7 +61,7 @@ def single(request, id):
     """
     A single tweet.
     """
-    tweet = get_object_or_404(TweetInstance, id=id)
+    tweet = get_object_or_404(Tweet, id=id)
     return render_to_response("zwitschern/single.html", {
         "tweet": tweet,
     }, context_instance=RequestContext(request))
