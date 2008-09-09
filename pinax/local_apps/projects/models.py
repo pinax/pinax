@@ -44,6 +44,12 @@ class Project(models.Model):
     def wiki_articles(self):
         return get_articles_for_object(self)
     
+    def has_member(self, user):
+        if user.is_authenticated():
+            if ProjectMember.objects.filter(project=self, user=user).count() > 0: # @@@ is there a better way?
+                return True
+        return False
+    
     def __unicode__(self):
         return self.name
     

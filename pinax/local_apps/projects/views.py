@@ -97,8 +97,8 @@ def project(request, slug):
     
     # tweets = TweetInstance.objects.tweets_for(project).order_by("-sent")
     
-    are_member =  project.member_users.filter(user=request.user).count() > 0 # @@@ should this be == 1
-
+    are_member = project.has_member(request.user)
+    
     return render_to_response("projects/project.html", {
         "project_form": project_form,
         "adduser_form": adduser_form,
@@ -114,7 +114,7 @@ def project(request, slug):
 
 def topics(request, slug):
     project = get_object_or_404(Project, slug=slug)
-    is_member = request.user.is_authenticated() and project.member_users.filter(user=request.user).count() > 0
+    is_member = project.has_member(request.user)
     
     if request.method == "POST":
         if is_member:
@@ -150,7 +150,7 @@ def topic(request, id):
 
 def tasks(request, slug):
     project = get_object_or_404(Project, slug=slug)
-    is_member = request.user.is_authenticated() and project.member_users.filter(user=request.user).count() > 0
+    is_member = project.has_member(request.user)
     
     if request.user.is_authenticated() and request.method == "POST":
         if request.POST["action"] == "add_task":
@@ -184,7 +184,7 @@ def tasks(request, slug):
 def task(request, id):
     task = get_object_or_404(Task, id=id)
     project = task.project
-    is_member = request.user.is_authenticated() and project.member_users.filter(user=request.user).count() > 0
+    is_member = project.has_member(request.user)
     
     if is_member and request.method == "POST":
         if request.POST["action"] == "assign":
@@ -249,7 +249,7 @@ def user_tasks(request, username):
 def members_status(request, slug):
     project = get_object_or_404(Project, slug=slug)
     
-    is_member = project.member_users.filter(user=request.user).count() > 0
+    is_member = project.has_member(request.user)
     try:
         project_member = project.members.get(user=request.user)
     except ProjectMember.DoesNotExist:
