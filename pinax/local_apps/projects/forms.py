@@ -104,7 +104,7 @@ class AddUserForm(forms.Form):
         project_member.save()
         project.members.add(project_member)
         if notification:
-            notification.send(project.members.all(), "projects_new_member", {"new_member": new_member, "project": project})
+            notification.send(project.member_users.all(), "projects_new_member", {"new_member": new_member, "project": project})
             notification.send([new_member], "projects_added_as_member", {"adder": user, "project": project})
         user.message_set.create(message="added %s to project" % new_member)
 

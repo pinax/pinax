@@ -138,5 +138,5 @@ def new_comment(sender, instance, **kwargs):
         task.save()
         project = task.project
         if notification:
-            notification.send(project.members.all(), "projects_task_comment", {"user": instance.user, "task": task, "project": project, "comment": instance})
+            notification.send(project.member_users.all(), "projects_task_comment", {"user": instance.user, "task": task, "project": project, "comment": instance})
 signals.post_save.connect(new_comment, sender=ThreadedComment)

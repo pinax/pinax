@@ -97,7 +97,7 @@ def project(request, slug):
     
     # tweets = TweetInstance.objects.tweets_for(project).order_by("-sent")
     
-    are_member =  project.members.filter(user=request.user).count() > 0 # @@@ should this be == 1
+    are_member =  project.member_users.filter(user=request.user).count() > 0 # @@@ should this be == 1
 
     return render_to_response("projects/project.html", {
         "project_form": project_form,
@@ -114,7 +114,7 @@ def project(request, slug):
 
 def topics(request, slug):
     project = get_object_or_404(Project, slug=slug)
-    is_member = request.user.is_authenticated() and project.members.filter(user=request.user).count() > 0
+    is_member = request.user.is_authenticated() and project.member_users.filter(user=request.user).count() > 0
     
     if request.method == "POST":
         if is_member:
@@ -150,7 +150,7 @@ def topic(request, id):
 
 def tasks(request, slug):
     project = get_object_or_404(Project, slug=slug)
-    is_member = request.user.is_authenticated() and project.members.filter(user=request.user).count() > 0
+    is_member = request.user.is_authenticated() and project.member_users.filter(user=request.user).count() > 0
     
     if request.user.is_authenticated() and request.method == "POST":
         if request.POST["action"] == "add_task":
@@ -163,7 +163,7 @@ def tasks(request, slug):
                 task.save()
                 request.user.message_set.create(message="added task '%s'" % task.summary)
                 if notification:
-                    notification.send(project.members.all(), "projects_new_task", {"creator": request.user, "task": task, "project": project})
+                    notification.send(project.member_users.all(), "projects_new_task", {"creator": request.user, "task": task, "project": project})
                 task_form = TaskForm(project=project) # @@@ is this the right way to clear it?
         else:
             task_form = TaskForm(project=project)
@@ -184,7 +184,7 @@ def tasks(request, slug):
 def task(request, id):
     task = get_object_or_404(Task, id=id)
     project = task.project
-    is_member = request.user.is_authenticated() and project.members.filter(user=request.user).count() > 0
+    is_member = request.user.is_authenticated() and project.member_users.filter(user=request.user).count() > 0
     
     if is_member and request.method == "POST":
         if request.POST["action"] == "assign":
@@ -194,7 +194,7 @@ def task(request, id):
                 task = assign_form.save()
                 request.user.message_set.create(message="assigned task to '%s'" % task.assignee)
                 if notification:
-                    notification.send(project.members.all(), "projects_task_assignment", {"user": request.user, "task": task, "project": project, "assignee": task.assignee})
+                    notification.send(project.member_users.all(), "projects_task_assignment", {"user": request.user, "task": task, "project": project, "assignee": task.assignee})
         elif request.POST["action"] == "update_status":
             assign_form = AssignForm(project, instance=task)
             status_form = StatusForm(request.POST, instance=task)
@@ -202,7 +202,7 @@ def task(request, id):
                 task = status_form.save()
                 request.user.message_set.create(message="updated your status on the task")
                 if notification:
-                    notification.send(project.members.all(), "projects_task_status", {"user": request.user, "task": task, "project": project})
+                    notification.send(project.member_users.all(), "projects_task_status", {"user": request.user, "task": task, "project": project})
         else:
             assign_form = AssignForm(project, instance=task)
             status_form = StatusForm(instance=task)
@@ -211,19 +211,19 @@ def task(request, id):
                 task.save()
                 request.user.message_set.create(message="task marked resolved")
                 if notification:
-                    notification.send(project.members.all(), "projects_task_change", {"user": request.user, "task": task, "project": project, "new_state": "resolved"})
+                    notification.send(project.member_users.all(), "projects_task_change", {"user": request.user, "task": task, "project": project, "new_state": "resolved"})
             elif request.POST["action"] == "mark_closed" and request.user == task.creator:
                 task.state = '3'
                 task.save()
                 request.user.message_set.create(message="task marked closed")
                 if notification:
-                    notification.send(project.members.all(), "projects_task_change", {"user": request.user, "task": task, "project": project, "new_state": "closed"})
+                    notification.send(project.member_users.all(), "projects_task_change", {"user": request.user, "task": task, "project": project, "new_state": "closed"})
             elif request.POST["action"] == "reopen" and is_member:
                 task.state = '1'
                 task.save()
                 request.user.message_set.create(message="task reopened")
                 if notification:
-                    notification.send(project.members.all(), "projects_task_change", {"user": request.user, "task": task, "project": project, "new_state": "reopened"})
+                    notification.send(project.member_users.all(), "projects_task_change", {"user": request.user, "task": task, "project": project, "new_state": "reopened"})
     else:
         assign_form = AssignForm(project, instance=task)
         status_form = StatusForm(instance=task)
@@ -249,7 +249,7 @@ def user_tasks(request, username):
 def members_status(request, slug):
     project = get_object_or_404(Project, slug=slug)
     
-    is_member = project.members.filter(user=request.user).count() > 0
+    is_member = project.member_users.filter(user=request.user).count() > 0
     try:
         project_member = project.members.get(user=request.user)
     except ProjectMember.DoesNotExist:
