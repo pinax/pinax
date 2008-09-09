@@ -16,7 +16,7 @@ from settings import SECRET_KEY
 
 # from django.contrib.auth.models import User
 
-from zwitschern.models import Tweet, TweetInstance, tweet
+from zwitschern.models import Tweet, TweetInstance
 
 @login_required
 def personal(request):

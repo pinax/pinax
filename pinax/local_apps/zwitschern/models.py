@@ -47,7 +47,7 @@ class Tweet(models.Model):
     
     text = models.CharField(_('text'), max_length=140)
     sender = models.ForeignKey(User, related_name="sent_tweets", verbose_name=_('sender'))
-    sent = models.DateTimeField(_('sent'))
+    sent = models.DateTimeField(_('sent'), default=datetime.now)
     
     def html(self):
         return format_tweet(self.text)
@@ -94,9 +94,9 @@ class TweetInstance(models.Model):
         return format_tweet(self.text)
 
 
-def tweet(user, text):
-    now = datetime.now()
-    Tweet(text=text, sender=user, sent=now).save()
+def tweet(user, text, tweet=None):
+    if tweet is None:
+        tweet = Tweet.objects.create(text=text, sender=user)
     recipients = set() # keep track of who's received it
     
     # add the sender's followers
@@ -124,10 +124,10 @@ def tweet(user, text):
     
     # now send to all the recipients
     for recipient in recipients:
-        tweet_instance = TweetInstance.objects.create(text=text, sender=user, recipient=recipient, sent=now)
+        tweet_instance = TweetInstance.objects.create(text=text, sender=user, recipient=recipient, sent=tweet.sent)
     if match:
         if notification:
-            notification.send([reply_recipient], "tweet_reply_received", {'tweet': tweet_instance,})
+            notification.send([reply_recipient], "tweet_reply_received", {'tweet': tweet,})
 
 
 class FollowingManager(models.Manager):
