@@ -6,7 +6,7 @@ urlpatterns = patterns('',
     
     url(r'^terms/$', direct_to_template, {"template": "about/terms.html"}, name="terms"),
     url(r'^privacy/$', direct_to_template, {"template": "about/privacy.html"}, name="privacy"),
-    url(r'^dcma/$', direct_to_template, {"template": "about/dcma.html"}, name="dcma"),
+    url(r'^dmca/$', direct_to_template, {"template": "about/dmca.html"}, name="dmca"),
     
     url(r'^what_next/$', direct_to_template, {"template": "about/what_next.html"}, name="what_next"),
 )
