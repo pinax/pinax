@@ -1,0 +1,363 @@
+Pygments changelog
+==================
+
+Version 0.11.1
+--------------
+(released Aug 24, 2008)
+
+- Fix a Jython compatibility issue in pygments.unistring (#358).
+
+
+Version 0.11
+------------
+(codename Straußenei, released Aug 23, 2008)
+
+Many thanks go to Tim Hatch for writing or integrating most of the bug
+fixes and new features.
+
+- Lexers added:
+
+  * Nasm-style assembly language, thanks to delroth
+  * YAML, thanks to Kirill Simonov
+  * ActionScript 3, thanks to Pierre Bourdon
+  * Cheetah/Spitfire templates, thanks to Matt Good
+  * Lighttpd config files
+  * Nginx config files
+  * Gnuplot plotting scripts
+  * Clojure
+  * POV-Ray scene files
+  * Sqlite3 interactive console sessions
+  * Scala source files, thanks to Krzysiek Goj
+
+- Lexers improved:
+  * C lexer highlights standard library functions now and supports C99
+    types.
+  * Bash lexer now correctly highlights heredocs without preceding
+    whitespace.
+  * Vim lexer now highlights hex colors properly and knows a couple
+    more keywords.
+  * Irc logs lexer now handles xchat's default time format (#340) and
+    correctly highlights lines ending in ``>``.
+  * Support more delimiters for perl regular expressions (#258).
+  * ObjectiveC lexer now supports 2.0 features.
+
+- Added "Visual Studio" style.
+
+- Updated markdown processor to Markdown 1.7.
+
+- Support roman/sans/mono style defs and use them in the LaTeX
+  formatter.
+
+- The RawTokenFormatter is no longer registered to ``*.raw`` and it's
+  documented that tokenization with this lexer may raise exceptions.
+
+- New option ``hl_lines`` to HTML formatter, to highlight certain
+  lines.
+
+- New option ``prestyles`` to HTML formatter.
+
+- New option *-g* to pygmentize, to allow lexer guessing based on
+  filetext (can be slowish, so file extensions are still checked
+  first).
+
+- ``guess_lexer()`` now makes its decision much faster due to a cache
+  of whether data is xml-like (a check which is used in several
+  versions of ``analyse_text()``.  Several lexers also have more
+  accurate ``analyse_text()`` now.
+
+
+Version 0.10
+------------
+(codename Malzeug, released May 06, 2008)
+
+- Lexers added:
+
+  * Io
+  * Smalltalk
+  * Darcs patches
+  * Tcl
+  * Matlab
+  * Matlab sessions
+  * FORTRAN
+  * XSLT
+  * tcsh
+  * NumPy
+  * Python 3
+  * S, S-plus, R statistics languages
+  * Logtalk
+
+- In the LatexFormatter, the *commandprefix* option is now by default
+  'PY' instead of 'C', since the latter resulted in several collisions
+  with other packages.  Also, the special meaning of the *arg*
+  argument to ``get_style_defs()`` was removed.
+
+- Added ImageFormatter, to format code as PNG, JPG, GIF or BMP.
+  (Needs the Python Imaging Library.)
+
+- Support doc comments in the PHP lexer.
+
+- Handle format specifications in the Perl lexer.
+
+- Fix comment handling in the Batch lexer.
+
+- Add more file name extensions for the C++, INI and XML lexers.
+
+- Fixes in the IRC and MuPad lexers.
+
+- Fix function and interface name highlighting in the Java lexer.
+
+- Fix at-rule handling in the CSS lexer.
+
+- Handle KeyboardInterrupts gracefully in pygmentize.
+
+- Added BlackWhiteStyle.
+
+- Bash lexer now correctly highlights math, does not require
+  whitespace after semicolons, and correctly highlights boolean
+  operators.
+
+- Makefile lexer is now capable of handling BSD and GNU make syntax.
+
+
+Version 0.9
+-----------
+(codename Herbstzeitlose, released Oct 14, 2007)
+
+- Lexers added:
+
+  * Erlang
+  * ActionScript
+  * Literate Haskell
+  * Common Lisp
+  * Various assembly languages
+  * Gettext catalogs
+  * Squid configuration
+  * Debian control files
+  * MySQL-style SQL
+  * MOOCode
+
+- Lexers improved:
+
+  * Greatly improved the Haskell and OCaml lexers.
+  * Improved the Bash lexer's handling of nested constructs.
+  * The C# and Java lexers exhibited abysmal performance with some
+    input code; this should now be fixed.
+  * The IRC logs lexer is now able to colorize weechat logs too.
+  * The Lua lexer now recognizes multi-line comments.
+  * Fixed bugs in the D and MiniD lexer.
+
+- The encoding handling of the command line mode (pygmentize) was
+  enhanced. You shouldn't get UnicodeErrors from it anymore if you
+  don't give an encoding option.
+
+- Added a ``-P`` option to the command line mode which can be used to
+  give options whose values contain commas or equals signs.
+
+- Added 256-color terminal formatter.
+
+- Added an experimental SVG formatter.
+
+- Added the ``lineanchors`` option to the HTML formatter, thanks to
+  Ian Charnas for the idea.
+
+- Gave the line numbers table a CSS class in the HTML formatter.
+
+- Added a Vim 7-like style.
+
+
+Version 0.8.1
+-------------
+(released Jun 27, 2007)
+
+- Fixed POD highlighting in the Ruby lexer.
+
+- Fixed Unicode class and namespace name highlighting in the C# lexer.
+
+- Fixed Unicode string prefix highlighting in the Python lexer.
+
+- Fixed a bug in the D and MiniD lexers.
+
+- Fixed the included MoinMoin parser.
+
+
+Version 0.8
+-----------
+(codename Maikäfer, released May 30, 2007)
+
+- Lexers added:
+
+  * Haskell, thanks to Adam Blinkinsop
+  * Redcode, thanks to Adam Blinkinsop
+  * D, thanks to Kirk McDonald
+  * MuPad, thanks to Christopher Creutzig
+  * MiniD, thanks to Jarrett Billingsley
+  * Vim Script, by Tim Hatch
+
+- The HTML formatter now has a second line-numbers mode in which it
+  will just integrate the numbers in the same ``<pre>`` tag as the
+  code.
+
+- The `CSharpLexer` now is Unicode-aware, which means that it has an
+  option that can be set so that it correctly lexes Unicode
+  identifiers allowed by the C# specs.
+
+- Added a `RaiseOnErrorTokenFilter` that raises an exception when the
+  lexer generates an error token, and a `VisibleWhitespaceFilter` that
+  converts whitespace (spaces, tabs, newlines) into visible
+  characters.
+
+- Fixed the `do_insertions()` helper function to yield correct
+  indices.
+
+- The ReST lexer now automatically highlights source code blocks in
+  ".. sourcecode:: language" and ".. code:: language" directive
+  blocks.
+
+- Improved the default style (thanks to Tiberius Teng). The old
+  default is still available as the "emacs" style (which was an alias
+  before).
+
+- The `get_style_defs` method of HTML formatters now uses the
+  `cssclass` option as the default selector if it was given.
+
+- Improved the ReST and Bash lexers a bit.
+
+- Fixed a few bugs in the Makefile and Bash lexers, thanks to Tim
+  Hatch.
+
+- Fixed a bug in the command line code that disallowed ``-O`` options
+  when using the ``-S`` option.
+
+- Fixed a bug in the `RawTokenFormatter`.
+
+
+Version 0.7.1
+-------------
+(released Feb 15, 2007)
+
+- Fixed little highlighting bugs in the Python, Java, Scheme and
+  Apache Config lexers.
+
+- Updated the included manpage.
+
+- Included a built version of the documentation in the source tarball.
+
+
+Version 0.7
+-----------
+(codename Faschingskrapfn, released Feb 14, 2007)
+
+- Added a MoinMoin parser that uses Pygments. With it, you get
+  Pygments highlighting in Moin Wiki pages.
+
+- Changed the exception raised if no suitable lexer, formatter etc. is
+  found in one of the `get_*_by_*` functions to a custom exception,
+  `pygments.util.ClassNotFound`. It is, however, a subclass of
+  `ValueError` in order to retain backwards compatibility.
+
+- Added a `-H` command line option which can be used to get the
+  docstring of a lexer, formatter or filter.
+
+- Made the handling of lexers and formatters more consistent. The
+  aliases and filename patterns of formatters are now attributes on
+  them.
+
+- Added an OCaml lexer, thanks to Adam Blinkinsop.
+
+- Made the HTML formatter more flexible, and easily subclassable in
+  order to make it easy to implement custom wrappers, e.g. alternate
+  line number markup. See the documentation.
+
+- Added an `outencoding` option to all formatters, making it possible
+  to override the `encoding` (which is used by lexers and formatters)
+  when using the command line interface. Also, if using the terminal
+  formatter and the output file is a terminal and has an encoding
+  attribute, use it if no encoding is given.
+
+- Made it possible to just drop style modules into the `styles`
+  subpackage of the Pygments installation.
+
+- Added a "state" keyword argument to the `using` helper.
+
+- Added a `commandprefix` option to the `LatexFormatter` which allows
+  to control how the command names are constructed.
+
+- Added quite a few new lexers, thanks to Tim Hatch:
+
+  * Java Server Pages
+  * Windows batch files
+  * Trac Wiki markup
+  * Python tracebacks
+  * ReStructuredText
+  * Dylan
+  * and the Befunge esoteric programming language (yay!)
+
+- Added Mako lexers by Ben Bangert.
+
+- Added "fruity" style, another dark background originally vim-based
+  theme.
+
+- Added sources.list lexer by Dennis Kaarsemaker.
+
+- Added token stream filters, and a pygmentize option to use them.
+
+- Changed behavior of `in` Operator for tokens. 
+
+- Added mimetypes for all lexers.
+
+- Fixed some problems lexing Python strings.
+
+- Fixed tickets: #167, #178, #179, #180, #185, #201.
+
+
+Version 0.6
+-----------
+(codename Zimtstern, released Dec 20, 2006)
+
+- Added option for the HTML formatter to write the CSS to an external
+  file in "full document" mode.
+
+- Added RTF formatter.
+
+- Added Bash and Apache configuration lexers (thanks to Tim Hatch).
+
+- Improved guessing methods for various lexers.
+
+- Added `@media` support to CSS lexer (thanks to Tim Hatch).
+
+- Added a Groff lexer (thanks to Tim Hatch).
+
+- License change to BSD.
+
+- Added lexers for the Myghty template language.
+
+- Added a Scheme lexer (thanks to Marek Kubica).
+
+- Added some functions to iterate over existing lexers, formatters and
+  lexers.
+
+- The HtmlFormatter's `get_style_defs()` can now take a list as an
+  argument to generate CSS with multiple prefixes.
+
+- Support for guessing input encoding added.
+
+- Encoding support added: all processing is now done with Unicode
+  strings, input and output are converted from and optionally to byte
+  strings (see the ``encoding`` option of lexers and formatters).
+
+- Some improvements in the C(++) lexers handling comments and line
+  continuations.
+
+
+Version 0.5.1
+-------------
+(released Oct 30, 2006)
+
+- Fixed traceback in ``pygmentize -L`` (thanks to Piotr Ozarowski).
+
+
+Version 0.5
+-----------
+(codename PyKleur, released Oct 30, 2006)
+
+- Initial public release.
