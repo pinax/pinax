@@ -84,7 +84,7 @@ def details(request, id):
             else:
                 # TODO: this applies to pinax in general. dont use ugettext_lazy here. its usage is fragile.
                 request.user.message_set.create(message=_("Did not add photo '%s' to project because it already exists.") % title)
-            # TODO: figure out why reverse doesn't work and redo this
+
             return HttpResponseRedirect(reverse('details', args=(photo.id,)))
         
         if request.method == "POST":
@@ -97,7 +97,7 @@ def details(request, id):
                 else:
                     # TODO: this applies to pinax in general. dont use ugettext_lazy here. its usage is fragile.
                     request.user.message_set.create(message=_("Did not add photo '%s' to tribe because it already exists.") % title)
-                # TODO: figure out why reverse doesn't work and redo this
+
                 return HttpResponseRedirect(reverse('details', args=(photo.id,)))
 
             if request.POST["action"] == "removefromtribe":
@@ -109,7 +109,7 @@ def details(request, id):
                 else:
                     # TODO: this applies to pinax in general. dont use ugettext_lazy here. its usage is fragile.
                     request.user.message_set.create(message=_("Did not add photo '%s' to tribe because it already exists.") % title)
-                # TODO: figure out why reverse doesn't work and redo this
+
                 return HttpResponseRedirect(reverse('details', args=(photo.id,)))
 
 
