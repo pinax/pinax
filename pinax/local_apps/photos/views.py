@@ -81,8 +81,12 @@ def details(request, id):
         if request.method == "POST" and request.POST["action"] == "add_to_tribe":
             tribeid = request.POST["tribe"]
             mytribe = Tribe.objects.get(pk=tribeid)
-            mytribe.photos.create(photo=photo)
-            request.user.message_set.create(message=_("Successfully add photo '%s' to tribe") % title)
+            if not mytribe.photos.filter(photo=photo).count():
+                mytribe.photos.create(photo=photo)
+                request.user.message_set.create(message=_("Successfully add photo '%s' to tribe") % title)
+            else:
+                # TODO: this applies to pinax in general. dont use ugettext_lazy here. its usage is fragile.
+                request.user.message_set.create(message=_("Did not add photo '%s' to tribe because it already exists.") % title)
             # TODO: figure out why reverse doesn't work and redo this
             return render_to_response("photos/details.html", {
                       "host": host, 
