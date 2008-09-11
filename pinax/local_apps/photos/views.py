@@ -105,10 +105,10 @@ def details(request, id):
                 mytribe = Tribe.objects.get(pk=tribeid)
                 if mytribe.photos.filter(photo=photo).count():
                     mytribe.photos.filter(photo=photo).delete()
-                    request.user.message_set.create(message=_("Successfully add photo '%s' to tribe") % title)
+                    request.user.message_set.create(message=_("Successfully removed photo '%s' from tribe") % title)
                 else:
                     # TODO: this applies to pinax in general. dont use ugettext_lazy here. its usage is fragile.
-                    request.user.message_set.create(message=_("Did not add photo '%s' to tribe because it already exists.") % title)
+                    request.user.message_set.create(message=_("Did not remove photo '%s' from tribe.") % title)
 
                 return HttpResponseRedirect(reverse('details', args=(photo.id,)))
 
