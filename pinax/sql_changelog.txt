@@ -91,3 +91,5 @@ ALTER TABLE notification_observeditem DROP COLUMN message_template;
 ALTER TABLE blog_post DROP CONSTRAINT "blog_post_author_id_key";
 ALTER TABLE blog_post ALTER author_id SET NOT NULL;
 
+## model change to oembed
+ALTER TABLE oembed_storedoembed ALTER COLUMN match TYPE text;
