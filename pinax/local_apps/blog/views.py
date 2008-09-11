@@ -42,6 +42,7 @@ def post(request, username, year, month, slug):
         "post": post[0],
     }, context_instance=RequestContext(request))
 
+@login_required
 def your_posts(request):
     user = request.user
     blogs = Post.objects.filter(author=user)
