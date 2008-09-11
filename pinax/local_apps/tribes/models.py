@@ -55,7 +55,7 @@ class Topic(models.Model):
     
     tribe = models.ForeignKey(Tribe, related_name="topics", verbose_name=_('tribe'))
     
-    title = models.CharField(_('title'), max_length="50")
+    title = models.CharField(_('title'), max_length=50)
     creator = models.ForeignKey(User, related_name="created_topics", verbose_name=_('creator'))
     created = models.DateTimeField(_('created'), default=datetime.now)
     modified = models.DateTimeField(_('modified'), default=datetime.now) # topic modified when commented on

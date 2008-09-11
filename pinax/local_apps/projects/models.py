@@ -74,7 +74,7 @@ class Topic(models.Model):
     
     project = models.ForeignKey(Project, related_name="topics", verbose_name=_('project'))
     
-    title = models.CharField(_('title'), max_length="50")
+    title = models.CharField(_('title'), max_length=50)
     creator = models.ForeignKey(User, related_name="created_project_topics", verbose_name=_('creator'))
     created = models.DateTimeField(_('created'), default=datetime.now)
     modified = models.DateTimeField(_('modified'), default=datetime.now) # topic modified when commented on
@@ -106,7 +106,7 @@ class Task(models.Model):
     
     project = models.ForeignKey(Project, related_name="tasks", verbose_name=_('project'))
     
-    summary = models.CharField(_('summary'), max_length="100")
+    summary = models.CharField(_('summary'), max_length=100)
     detail = models.TextField(_('detail'), blank=True)
     creator = models.ForeignKey(User, related_name="created_project_tasks", verbose_name=_('creator'))
     created = models.DateTimeField(_('created'), default=datetime.now)
@@ -116,8 +116,8 @@ class Task(models.Model):
     tags = TagField()
     
     # status is a short message the assignee can give on their current status
-    status = models.CharField(_('status'), max_length="50", blank=True)
-    state = models.CharField(_('state'), max_length="1", choices=STATE_CHOICES, default=1)
+    status = models.CharField(_('status'), max_length=50, blank=True)
+    state = models.CharField(_('state'), max_length=1, choices=STATE_CHOICES, default=1)
     
     def __unicode__(self):
         return self.summary
