@@ -52,7 +52,19 @@ def details(request, id):
     tribes = Tribe.objects.filter(members=request.user)
     projects = Project.objects.filter(members=request.user)
     photo = get_object_or_404(Photos, id=id)
+
+    
+    if tribes:
+        t = []
+        for tribe in tribes:
+            phototribe = Tribe.objects.get(pk=tribe.id)
+            if phototribe.photos.filter(photo=photo).count():
+                t.append({"name":tribe.name, "slug":tribe.slug, "id":tribe.id, "has_photo":True})
+            else:
+                t.append({"name":tribe.name, "slug":tribe.slug, "id":tribe.id, "has_photo":False})
+
     # @@@ is there a better way?
+    # TODO: redo this exif routine
     photo_path = os.path.join(settings.MEDIA_ROOT, "photologue/photos", photo.image_filename())
     f = open(photo_path, 'rb')
     exif = EXIF.process_file(f)
@@ -74,31 +86,33 @@ def details(request, id):
                 # TODO: this applies to pinax in general. dont use ugettext_lazy here. its usage is fragile.
                 request.user.message_set.create(message=_("Did not add photo '%s' to project because it already exists.") % title)
             # TODO: figure out why reverse doesn't work and redo this
-            return render_to_response("photos/details.html", {
-                      "host": host, 
-                      "photo": photo, 
-                      "is_me": is_me, 
-                      "other_user": other_user, 
-                      "projects": projects,
-                      "tribes": tribes}, context_instance=RequestContext(request))
+            return HttpResponseRedirect(reverse('details', args=(photo.id,)))
         
-        if request.method == "POST" and request.POST["action"] == "add_to_tribe":
-            tribeid = request.POST["tribe"]
-            mytribe = Tribe.objects.get(pk=tribeid)
-            if not mytribe.photos.filter(photo=photo).count():
-                mytribe.photos.create(photo=photo)
-                request.user.message_set.create(message=_("Successfully add photo '%s' to tribe") % title)
-            else:
-                # TODO: this applies to pinax in general. dont use ugettext_lazy here. its usage is fragile.
-                request.user.message_set.create(message=_("Did not add photo '%s' to tribe because it already exists.") % title)
-            # TODO: figure out why reverse doesn't work and redo this
-            return render_to_response("photos/details.html", {
-                      "host": host, 
-                      "photo": photo, 
-                      "is_me": is_me, 
-                      "other_user": other_user, 
-                      "projects": projects,
-                      "tribes": tribes}, context_instance=RequestContext(request))
+        if request.method == "POST":
+            if request.POST["action"] == "addtotribe":
+                tribeid = request.POST["tribe"]
+                mytribe = Tribe.objects.get(pk=tribeid)
+                if not mytribe.photos.filter(photo=photo).count():
+                    mytribe.photos.create(photo=photo)
+                    request.user.message_set.create(message=_("Successfully add photo '%s' to tribe") % title)
+                else:
+                    # TODO: this applies to pinax in general. dont use ugettext_lazy here. its usage is fragile.
+                    request.user.message_set.create(message=_("Did not add photo '%s' to tribe because it already exists.") % title)
+                # TODO: figure out why reverse doesn't work and redo this
+                return HttpResponseRedirect(reverse('details', args=(photo.id,)))
+
+            if request.POST["action"] == "removefromtribe":
+                tribeid = request.POST["tribe"]
+                mytribe = Tribe.objects.get(pk=tribeid)
+                if mytribe.photos.filter(photo=photo).count():
+                    mytribe.photos.destroy(photo=photo)
+                    request.user.message_set.create(message=_("Successfully add photo '%s' to tribe") % title)
+                else:
+                    # TODO: this applies to pinax in general. dont use ugettext_lazy here. its usage is fragile.
+                    request.user.message_set.create(message=_("Did not add photo '%s' to tribe because it already exists.") % title)
+                # TODO: figure out why reverse doesn't work and redo this
+                return HttpResponseRedirect(reverse('details', args=(photo.id,)))
+
 
 
     return render_to_response("photos/details.html", {
@@ -108,7 +122,7 @@ def details(request, id):
                       "is_me": is_me, 
                       "other_user": other_user, 
                       "projects": projects,
-                      "tribes": tribes
+                      "tribes": t
                       }, context_instance=RequestContext(request))
     
 @login_required
@@ -133,13 +147,3 @@ def destroy(request, id):
         return HttpResponseRedirect(reverse("photos_yours"))
     else:
         return HttpResponseRedirect(reverse("photos_yours"))
-
-@login_required
-def addproject(request, project):
-    photo = get_object_or_404(Photos, id=id)
-    title = photo.title
-    project = Project.objects.get(pk=tribe)
-    pool = Pool(content_type=photo)
-    pool.save()
-    request.user.message_set.create(message=_("Successfully add photo '%s' to tribe") % title)
-    return HttpResponseRedirect(reverse("photos_yours", photo))

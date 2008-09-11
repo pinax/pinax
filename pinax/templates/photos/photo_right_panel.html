@@ -64,10 +64,14 @@
         <h2>Add photo to tribe</h2>
         {% for tribe in tribes %}
             <form action="{% url details photo.id %}" method="POST">
-                <input type="hidden" name="action" value="add_to_tribe"/>
                 <input type="hidden" name="tribe" value="{{ tribe.id }}"/>
+            {% if tribe.has_photo %}
+                {{ tribe.name }}
+            {% else %}
+                <input type="hidden" name="action" value="addtotribe"/>
                 <input type="submit" value="add"/>
-                <a href="{% url tribes.views.tribe tribe.slug %}">{{ tribe.name }}</a>
+                {{ tribe.name }}
+            {% endif %}
             </form>
         {% endfor %}
     {% endif %}
