@@ -76,7 +76,7 @@ INSERT INTO "projects_projectmember" SELECT *, 0, "", datetime('now') FROM "proj
 # postgresql
 
 INSERT INTO "projects_projectmember" SELECT *, false, '', now() FROM "projects_project_members";
-SELECT setval("public.projects_projectmember_id_seq", (SELECT max(id) FROM "projects_projectmember"), true);
+SELECT setval('public.projects_projectmember_id_seq', (SELECT max(id) FROM "projects_projectmember"), true);
 
 
 ## removed message_template from ObservedItem
