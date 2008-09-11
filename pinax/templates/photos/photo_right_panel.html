@@ -66,6 +66,8 @@
             <form action="{% url details photo.id %}" method="POST">
                 <input type="hidden" name="tribe" value="{{ tribe.id }}"/>
             {% if tribe.has_photo %}
+                <input type="hidden" name="action" value="removefromtribe"/>
+                <input type="submit" value="remove"/>
                 {{ tribe.name }}
             {% else %}
                 <input type="hidden" name="action" value="addtotribe"/>

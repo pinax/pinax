@@ -104,7 +104,7 @@ def details(request, id):
                 tribeid = request.POST["tribe"]
                 mytribe = Tribe.objects.get(pk=tribeid)
                 if mytribe.photos.filter(photo=photo).count():
-                    # mytribe.photos(photo=photo)
+                    mytribe.photos.filter(photo=photo).delete()
                     request.user.message_set.create(message=_("Successfully add photo '%s' to tribe") % title)
                 else:
                     # TODO: this applies to pinax in general. dont use ugettext_lazy here. its usage is fragile.
