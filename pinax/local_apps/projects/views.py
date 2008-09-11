@@ -43,8 +43,6 @@ def projects(request):
                 project.creator = request.user
                 project.save()
                 project_member = ProjectMember(project=project, user=request.user)
-                project_member.save()
-                import pdb ; pdb.set_trace()
                 project.members.add(project_member)
                 project_member.save()
                 project_form = ProjectForm()
