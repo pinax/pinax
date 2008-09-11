@@ -67,8 +67,12 @@ def details(request, id):
         if request.method == "POST" and request.POST["action"] == "add_to_project":
             projectid = request.POST["project"]
             myproject = Project.objects.get(pk=projectid)
-            myproject.photos.create(photo=photo)
-            request.user.message_set.create(message=_("Successfully add photo '%s' to project") % title)
+            if not myproject.photos.filter(photo=photo).count():
+                myproject.photos.create(photo=photo)
+                request.user.message_set.create(message=_("Successfully add photo '%s' to project") % title)
+            else:
+                # TODO: this applies to pinax in general. dont use ugettext_lazy here. its usage is fragile.
+                request.user.message_set.create(message=_("Did not add photo '%s' to project because it already exists.") % title)
             # TODO: figure out why reverse doesn't work and redo this
             return render_to_response("photos/details.html", {
                       "host": host, 
