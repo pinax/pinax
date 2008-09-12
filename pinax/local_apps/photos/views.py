@@ -50,7 +50,7 @@ def details(request, id):
     '''show the photo details'''
     other_user = get_object_or_404(User, username=request.user.username)
     tribes = Tribe.objects.filter(members=request.user)
-    projects = Project.objects.filter(members=request.user)
+    projects = Project.objects.filter(members__user=request.user)
     photo = get_object_or_404(Photos, id=id)
     
     # Build a list of tribes and the photos from the pool
