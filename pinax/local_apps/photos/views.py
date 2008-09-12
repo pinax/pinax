@@ -52,8 +52,9 @@ def details(request, id):
     tribes = Tribe.objects.filter(members=request.user)
     projects = Project.objects.filter(members=request.user)
     photo = get_object_or_404(Photos, id=id)
-    t = []
     
+    # Build a list of tribes and the photos from the pool
+    t = []
     if tribes:
         for tribe in tribes:
             phototribe = Tribe.objects.get(pk=tribe.id)
@@ -61,6 +62,17 @@ def details(request, id):
                 t.append({"name":tribe.name, "slug":tribe.slug, "id":tribe.id, "has_photo":True})
             else:
                 t.append({"name":tribe.name, "slug":tribe.slug, "id":tribe.id, "has_photo":False})
+
+    # Build a list of projects and the photos from the pool
+    p = []
+    if projects:
+        for project in projects:
+            photoproject = Project.objects.get(pk=tribe.id)
+            if photoproject.photos.filter(photo=photo).count():
+                p.append({"name":project.name, "slug":project.slug, "id":project.id, "has_photo":True})
+            else:
+                p.append({"name":project.name, "slug":project.slug, "id":project.id, "has_photo":False})
+
 
     # @@@ is there a better way?
     # TODO: redo this exif routine
@@ -112,6 +124,31 @@ def details(request, id):
 
                 return HttpResponseRedirect(reverse('details', args=(photo.id,)))
 
+            if request.POST["action"] == "addtoproject":
+                projectid = request.POST["project"]
+                myproject = Project.objects.get(pk=projectid)
+                if not myproject.photos.filter(photo=photo).count():
+                    myproject.photos.create(photo=photo)
+                    request.user.message_set.create(message=_("Successfully add photo '%s' to project") % title)
+                else:
+                    # TODO: this applies to pinax in general. dont use ugettext_lazy here. its usage is fragile.
+                    request.user.message_set.create(message=_("Did not add photo '%s' to project because it already exists.") % title)
+
+                return HttpResponseRedirect(reverse('details', args=(photo.id,)))
+
+            if request.POST["action"] == "removefromproject":
+                projectid = request.POST["project"]
+                myproject = Project.objects.get(pk=projectid)
+                if myproject.photos.filter(photo=photo).count():
+                    myproject.photos.filter(photo=photo).delete()
+                    request.user.message_set.create(message=_("Successfully removed photo '%s' from project") % title)
+                else:
+                    # TODO: this applies to pinax in general. dont use ugettext_lazy here. its usage is fragile.
+                    request.user.message_set.create(message=_("Did not remove photo '%s' from project.") % title)
+
+                return HttpResponseRedirect(reverse('details', args=(photo.id,)))
+
+
 
 
     return render_to_response("photos/details.html", {
@@ -120,7 +157,7 @@ def details(request, id):
                       "exif": exif,
                       "is_me": is_me, 
                       "other_user": other_user, 
-                      "projects": projects,
+                      "projects": p,
                       "tribes": t
                       }, context_instance=RequestContext(request))
     

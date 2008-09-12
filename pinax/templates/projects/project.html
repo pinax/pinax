@@ -142,8 +142,8 @@
                 <div class="thumb-row clearfix">
                     {% for photo in photos %}
                     <div class="gallery-photo-thumb">
-                        <a href="/photos/details/{{ photo.id }}/"><img src="{{ photo.get_thumbnail_url }}" alt="{{ photo.title }}"/></a><br />
-                        <img src="/site_media/comment.png" border="0" class="noborder" align="absmiddle" /><a href="/photos/details/{{ photo.id }}/">{% get_comment_count for photo as commentcount %} {{ commentcount }} Comments</a>
+                        <a href="/photos/details/{{ photo.photo.id }}/"><img src="{{ photo.photo.get_thumbnail_url }}" alt="{{ photo.photo.title }}"/></a><br />
+                        <img src="/site_media/comment.png" border="0" class="noborder" align="absmiddle" /><a href="/photos/details/{{ photo.photo.id }}/">{% get_comment_count for photo.photo as commentcount %} {{ commentcount }} Comments</a>
                    </div>
                    {% endfor %}
                </div>
