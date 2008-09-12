@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      xmlns:py="http://genshi.edgewall.org/">
+  <xi:include href="master.html" />
+
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+    <title>Welcome to TurboGears</title>
+  </head>
+
+  <body>
+    <p>Congratulations, your TurboGears application is running as of
+    <span py:replace="now">now</span>.</p>
+
+    <h2>Using Genshi in TurboGears</h2>
+
+    <p>
+      Please see the online
+      <a href="http://genshi.edgewall.org/wiki/Documentation">documentation</a>
+      for general information on Genshi.
+    </p>
+
+    <p>Here's an example for using a TurboGears widget in a Genshi template:</p>
+    ${ET(widget.display())}
+
+    <p>
+      And here's a <a href="plain">link</a> to the output of a plain-text
+      template.
+    </p>
+
+  </body>
+</html>

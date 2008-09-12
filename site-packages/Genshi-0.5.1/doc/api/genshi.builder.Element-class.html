@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>genshi.builder.Element</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="genshi-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="../index.html">Documentation Index</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="genshi-module.html">Package&nbsp;genshi</a> ::
+        <a href="genshi.builder-module.html">Module&nbsp;builder</a> ::
+        Class&nbsp;Element
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class Element</h1><p class="nomargin-top"></p>
+<pre class="base-tree">
+object --+    
+         |    
+  <a href="genshi.builder.Fragment-class.html">Fragment</a> --+
+             |
+            <strong class="uidshort">Element</strong>
+</pre>
+
+<hr />
+<p>Simple XML output generator based on the builder pattern.</p>
+<p>Construct XML elements by passing the tag name to the constructor:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> Element(<span class="py-string">'strong'</span>)
+<span class="py-output">&lt;strong/&gt;</span></pre>
+<p>Attributes can be specified using keyword arguments. The values of the
+arguments will be converted to strings and any special XML characters
+escaped:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> Element(<span class="py-string">'textarea'</span>, rows=10, cols=60)
+<span class="py-output">&lt;textarea rows=&quot;10&quot; cols=&quot;60&quot;/&gt;</span>
+<span class="py-output"></span><span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> Element(<span class="py-string">'span'</span>, title=<span class="py-string">'1 &lt; 2'</span>)
+<span class="py-output">&lt;span title=&quot;1 &amp;lt; 2&quot;/&gt;</span>
+<span class="py-output"></span><span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> Element(<span class="py-string">'span'</span>, title=<span class="py-string">'&quot;baz&quot;'</span>)
+<span class="py-output">&lt;span title=&quot;&amp;#34;baz&amp;#34;&quot;/&gt;</span></pre>
+<p>The &quot; character is escaped using a numerical entity.
+The order in which attributes are rendered is undefined.</p>
+<p>If an attribute value evaluates to <code class="link">None</code>, that attribute is not included
+in the output:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> Element(<span class="py-string">'a'</span>, name=None)
+<span class="py-output">&lt;a/&gt;</span></pre>
+<p>Attribute names that conflict with Python keywords can be specified by
+appending an underscore:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> Element(<span class="py-string">'div'</span>, class_=<span class="py-string">'warning'</span>)
+<span class="py-output">&lt;div class=&quot;warning&quot;/&gt;</span></pre>
+<p>Nested elements can be added to an element using item access notation.
+The call notation can also be used for this and for adding attributes
+using keyword arguments, as one would do in the constructor.</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> Element(<span class="py-string">'ul'</span>)(Element(<span class="py-string">'li'</span>), Element(<span class="py-string">'li'</span>))
+<span class="py-output">&lt;ul&gt;&lt;li/&gt;&lt;li/&gt;&lt;/ul&gt;</span>
+<span class="py-output"></span><span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> Element(<span class="py-string">'a'</span>)(<span class="py-string">'Label'</span>)
+<span class="py-output">&lt;a&gt;Label&lt;/a&gt;</span>
+<span class="py-output"></span><span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> Element(<span class="py-string">'a'</span>)(<span class="py-string">'Label'</span>, href=<span class="py-string">&quot;target&quot;</span>)
+<span class="py-output">&lt;a href=&quot;target&quot;&gt;Label&lt;/a&gt;</span></pre>
+<p>Text nodes can be nested in an element by adding strings instead of
+elements. Any special characters in the strings are escaped automatically:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> Element(<span class="py-string">'em'</span>)(<span class="py-string">'Hello world'</span>)
+<span class="py-output">&lt;em&gt;Hello world&lt;/em&gt;</span>
+<span class="py-output"></span><span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> Element(<span class="py-string">'em'</span>)(42)
+<span class="py-output">&lt;em&gt;42&lt;/em&gt;</span>
+<span class="py-output"></span><span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> Element(<span class="py-string">'em'</span>)(<span class="py-string">'1 &lt; 2'</span>)
+<span class="py-output">&lt;em&gt;1 &amp;lt; 2&lt;/em&gt;</span></pre>
+<p>This technique also allows mixed content:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> Element(<span class="py-string">'p'</span>)(<span class="py-string">'Hello '</span>, Element(<span class="py-string">'b'</span>)(<span class="py-string">'world'</span>))
+<span class="py-output">&lt;p&gt;Hello &lt;b&gt;world&lt;/b&gt;&lt;/p&gt;</span></pre>
+<p>Quotes are not escaped inside text nodes:
+&gt;&gt;&gt; print Element('p')('&quot;Hello&quot;')
+&lt;p&gt;&quot;Hello&quot;&lt;/p&gt;</p>
+<p>Elements can also be combined with other elements or strings using the
+addition operator, which results in a <a href="genshi.builder.Fragment-class.html" class="link">Fragment</a> object that contains the
+operands:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> Element(<span class="py-string">'br'</span>) + <span class="py-string">'some text'</span> + Element(<span class="py-string">'br'</span>)
+<span class="py-output">&lt;br/&gt;some text&lt;br/&gt;</span></pre>
+<p>Elements with a namespace can be generated using the <a href="genshi.core.Namespace-class.html" class="link">Namespace</a> and/or
+<a href="genshi.core.QName-class.html" class="link">QName</a> classes:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">from</span> genshi.core <span class="py-keyword">import</span> Namespace
+<span class="py-prompt">&gt;&gt;&gt; </span>xhtml = Namespace(<span class="py-string">'http://www.w3.org/1999/xhtml'</span>)
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> Element(xhtml.html, lang=<span class="py-string">'en'</span>)
+<span class="py-output">&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; lang=&quot;en&quot;/&gt;</span></pre>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Instance Methods</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.builder.Element-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">tag_</span>,
+        <span class="summary-sig-arg">**attrib</span>)</span><br />
+      Create a new fragment.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="genshi.builder.Element-class.html" class="link">Element</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.builder.Element-class.html#__call__" class="summary-sig-name">__call__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Append any positional arguments as child nodes, and keyword arguments
+as attributes.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.builder.Element-class.html#__repr__" class="summary-sig-name">__repr__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      repr(x)</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="genshi.core.Stream-class.html" class="link">Stream</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.builder.Element-class.html#generate" class="summary-sig-name">generate</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Return a markup event stream for the fragment.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="genshi.builder.Fragment-class.html">Fragment</a></code></b>:
+      <code><a href="genshi.builder.Fragment-class.html#__add__">__add__</a></code>,
+      <code><a href="genshi.builder.Fragment-class.html#__html__">__html__</a></code>,
+      <code><a href="genshi.builder.Fragment-class.html#__iter__">__iter__</a></code>,
+      <code><a href="genshi.builder.Fragment-class.html#__str__">__str__</a></code>,
+      <code><a href="genshi.builder.Fragment-class.html#__unicode__">__unicode__</a></code>,
+      <code><a href="genshi.builder.Fragment-class.html#append">append</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__setattr__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Properties</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="attrib"></a><span class="summary-name">attrib</span>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="tag"></a><span class="summary-name">tag</span>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="genshi.builder.Fragment-class.html">Fragment</a></code></b>:
+      <code><a href="genshi.builder.Fragment-class.html#children">children</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Method Details</span></td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">tag_</span>,
+        <span class="sig-arg">**attrib</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  Create a new fragment.
+  <dl class="fields">
+    <dt>Overrides:
+        object.__init__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__call__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__call__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">*args</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+    <br /><em class="fname">(Call operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  Append any positional arguments as child nodes, and keyword arguments
+as attributes.
+  <dl class="fields">
+    <dt>Returns: <a href="genshi.builder.Element-class.html" class="link">Element</a></dt>
+        <dd>the element itself so that calls can be chained</dd>
+    <dt>Overrides:
+        <a href="genshi.builder.Fragment-class.html#__call__">Fragment.__call__</a>
+    </dt>
+  </dl>
+<div class="fields">      <p><strong>See Also:</strong>
+        <a href="genshi.builder.Fragment-class.html#append" class="link">Fragment.append</a>
+      </p>
+</div></td></tr></table>
+</div>
+<a name="__repr__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__repr__</span>(<span class="sig-arg">self</span>)</span>
+    <br /><em class="fname">(Representation operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  repr(x)
+  <dl class="fields">
+    <dt>Overrides:
+        object.__repr__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="generate"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">generate</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  Return a markup event stream for the fragment.
+  <dl class="fields">
+    <dt>Returns: <a href="genshi.core.Stream-class.html" class="link">Stream</a></dt>
+    <dt>Overrides:
+        <a href="genshi.builder.Fragment-class.html#generate">Fragment.generate</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="genshi-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="../index.html">Documentation Index</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Wed Jul  9 18:16:20 2008
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

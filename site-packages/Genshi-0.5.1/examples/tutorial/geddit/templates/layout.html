@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/" py:strip="">
+
+  <py:match path="head" once="true">
+    <head py:attrs="select('@*')">
+      <title py:with="title = list(select('title/text()'))">
+        Geddit<py:if test="title">: ${title}</py:if>
+      </title>
+      <link rel="stylesheet" href="${url('/media/layout.css')}" type="text/css" />
+      <script type="text/javascript" src="${url('/media/jquery.js')}"></script>
+      ${select('*[local-name()!="title"]')}
+    </head>
+  </py:match>
+
+  <py:match path="body" once="true">
+    <body py:attrs="select('@*')"><div id="wrap">
+      <div id="header">
+        <a href="/"><img src="${url('/media/logo.gif')}" width="201" height="79" alt="geddit?" /></a>
+      </div>
+      <div id="content">
+        ${select('*|text()')}
+      </div>
+      <div id="footer">
+        <hr />
+        <p class="legalese">© 2007 Edgewall Software</p>
+      </div>
+    </div></body>
+  </py:match>
+
+</html>

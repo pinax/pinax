@@ -1,0 +1,1502 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>genshi.filters.transform.Transformer</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="genshi-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="../index.html">Documentation Index</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="genshi-module.html">Package&nbsp;genshi</a> ::
+        <a href="genshi.filters-module.html">Package&nbsp;filters</a> ::
+        <a href="genshi.filters.transform-module.html">Module&nbsp;transform</a> ::
+        Class&nbsp;Transformer
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class Transformer</h1><p class="nomargin-top"></p>
+<pre class="base-tree">
+object --+
+         |
+        <strong class="uidshort">Transformer</strong>
+</pre>
+
+<hr />
+<p>Stream filter that can apply a variety of different transformations to
+a stream.</p>
+<p>This is achieved by selecting the events to be transformed using XPath,
+then applying the transformations to the events matched by the path
+expression. Each marked event is in the form (mark, (kind, data, pos)),
+where mark can be any of <a href="genshi.filters.transform-module.html#ENTER" class="link">ENTER</a>, <a href="genshi.filters.transform-module.html#INSIDE" class="link">INSIDE</a>, <a href="genshi.filters.transform-module.html#EXIT" class="link">EXIT</a>, <a href="genshi.filters.transform-module.html#OUTSIDE" class="link">OUTSIDE</a>, or <code class="link">None</code>.</p>
+<p>The first three marks match START and END events, and any events
+contained <a href="genshi.filters.transform-module.html#INSIDE" class="link">INSIDE</a> any selected XML/HTML element. A non-element match
+outside a START/END container (e.g. <tt class="rst-docutils literal"><span class="pre">text()</span></tt>) will yield an <a href="genshi.filters.transform-module.html#OUTSIDE" class="link">OUTSIDE</a>
+mark.</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>html = HTML(<span class="py-string">'&lt;html&gt;&lt;head&gt;&lt;title&gt;Some Title&lt;/title&gt;&lt;/head&gt;'</span>
+<span class="py-more">... </span>            <span class="py-string">'&lt;body&gt;Some &lt;em&gt;body&lt;/em&gt; text.&lt;/body&gt;&lt;/html&gt;'</span>)</pre>
+<p>Transformations act on selected stream events matching an XPath expression.
+Here's an example of removing some markup (the title, in this case)
+selected by an expression:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> html | Transformer(<span class="py-string">'head/title'</span>).remove()
+<span class="py-output">&lt;html&gt;&lt;head/&gt;&lt;body&gt;Some &lt;em&gt;body&lt;/em&gt; text.&lt;/body&gt;&lt;/html&gt;</span></pre>
+<p>Inserted content can be passed in the form of a string, or a markup event
+stream, which includes streams generated programmatically via the
+<a href="genshi.builder-module.html" class="link">builder</a> module:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">from</span> genshi.builder <span class="py-keyword">import</span> tag
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> html | Transformer(<span class="py-string">'body'</span>).prepend(tag.h1(<span class="py-string">'Document Title'</span>))
+<span class="py-output">&lt;html&gt;&lt;head&gt;&lt;title&gt;Some Title&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;Document</span>
+<span class="py-output">Title&lt;/h1&gt;Some &lt;em&gt;body&lt;/em&gt; text.&lt;/body&gt;&lt;/html&gt;</span></pre>
+<p>Each XPath expression determines the set of tags that will be acted upon by
+subsequent transformations. In this example we select the <tt class="rst-docutils literal"><span class="pre">&lt;title&gt;</span></tt> text,
+copy it into a buffer, then select the <tt class="rst-docutils literal"><span class="pre">&lt;body&gt;</span></tt> element and paste the
+copied text into the body as <tt class="rst-docutils literal"><span class="pre">&lt;h1&gt;</span></tt> enclosed text:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>buffer = StreamBuffer()
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> html | Transformer(<span class="py-string">'head/title/text()'</span>).copy(buffer) \
+<span class="py-more">... </span>    .end().select(<span class="py-string">'body'</span>).prepend(tag.h1(buffer))
+<span class="py-output">&lt;html&gt;&lt;head&gt;&lt;title&gt;Some Title&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;Some Title&lt;/h1&gt;Some</span>
+<span class="py-output">&lt;em&gt;body&lt;/em&gt; text.&lt;/body&gt;&lt;/html&gt;</span></pre>
+<p>Transformations can also be assigned and reused, although care must be
+taken when using buffers, to ensure that buffers are cleared between
+transforms:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>emphasis = Transformer(<span class="py-string">'body//em'</span>).attr(<span class="py-string">'class'</span>, <span class="py-string">'emphasis'</span>)
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> html | emphasis
+<span class="py-output">&lt;html&gt;&lt;head&gt;&lt;title&gt;Some Title&lt;/title&gt;&lt;/head&gt;&lt;body&gt;Some &lt;em</span>
+<span class="py-output">class=&quot;emphasis&quot;&gt;body&lt;/em&gt; text.&lt;/body&gt;&lt;/html&gt;</span></pre>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Instance Methods</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.filters.transform.Transformer-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">path</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">.</code><code class="variable-quote">'</code></span>)</span><br />
+      Construct a new transformation filter.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="genshi.core.Stream-class.html" class="link">Stream</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.filters.transform.Transformer-class.html#__call__" class="summary-sig-name">__call__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">stream</span>,
+        <span class="summary-sig-arg">keep_marks</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Apply the transform filter to the marked stream.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.filters.transform.Transformer-class.html#apply" class="summary-sig-name">apply</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">function</span>)</span><br />
+      Apply a transformation to the stream.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__str__</code>
+      </p>
+    </td>
+  </tr>
+<tr bgcolor="#e8f0f8" >
+  <th colspan="2" class="group-header"
+    >&nbsp;&nbsp;&nbsp;&nbsp;Selection operations</th></tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="genshi.filters.transform.Transformer-class.html" class="link">Transformer</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.filters.transform.Transformer-class.html#select" class="summary-sig-name">select</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">path</span>)</span><br />
+      Mark events matching the given XPath expression, within the current
+selection.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="genshi.filters.transform.Transformer-class.html" class="link">Transformer</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.filters.transform.Transformer-class.html#invert" class="summary-sig-name">invert</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Invert selection so that marked events become unmarked, and vice
+versa.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="genshi.filters.transform.Transformer-class.html" class="link">Transformer</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.filters.transform.Transformer-class.html#end" class="summary-sig-name">end</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      End current selection, allowing all events to be selected.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr bgcolor="#e8f0f8" >
+  <th colspan="2" class="group-header"
+    >&nbsp;&nbsp;&nbsp;&nbsp;Deletion operations</th></tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="genshi.filters.transform.Transformer-class.html" class="link">Transformer</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.filters.transform.Transformer-class.html#empty" class="summary-sig-name">empty</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Empty selected elements of all content.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="genshi.filters.transform.Transformer-class.html" class="link">Transformer</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.filters.transform.Transformer-class.html#remove" class="summary-sig-name">remove</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Remove selection from the stream.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr bgcolor="#e8f0f8" >
+  <th colspan="2" class="group-header"
+    >&nbsp;&nbsp;&nbsp;&nbsp;Direct element operations</th></tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="genshi.filters.transform.Transformer-class.html" class="link">Transformer</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.filters.transform.Transformer-class.html#unwrap" class="summary-sig-name">unwrap</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Remove outermost enclosing elements from selection.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="genshi.filters.transform.Transformer-class.html" class="link">Transformer</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.filters.transform.Transformer-class.html#wrap" class="summary-sig-name">wrap</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">element</span>)</span><br />
+      Wrap selection in an element.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr bgcolor="#e8f0f8" >
+  <th colspan="2" class="group-header"
+    >&nbsp;&nbsp;&nbsp;&nbsp;Content insertion operations</th></tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="genshi.filters.transform.Transformer-class.html" class="link">Transformer</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.filters.transform.Transformer-class.html#replace" class="summary-sig-name">replace</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">content</span>)</span><br />
+      Replace selection with content.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="genshi.filters.transform.Transformer-class.html" class="link">Transformer</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.filters.transform.Transformer-class.html#before" class="summary-sig-name">before</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">content</span>)</span><br />
+      Insert content before selection.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="genshi.filters.transform.Transformer-class.html" class="link">Transformer</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.filters.transform.Transformer-class.html#after" class="summary-sig-name">after</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">content</span>)</span><br />
+      Insert content after selection.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="genshi.filters.transform.Transformer-class.html" class="link">Transformer</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.filters.transform.Transformer-class.html#prepend" class="summary-sig-name">prepend</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">content</span>)</span><br />
+      Insert content after the ENTER event of the selection.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="genshi.filters.transform.Transformer-class.html" class="link">Transformer</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.filters.transform.Transformer-class.html#append" class="summary-sig-name">append</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">content</span>)</span><br />
+      Insert content before the END event of the selection.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr bgcolor="#e8f0f8" >
+  <th colspan="2" class="group-header"
+    >&nbsp;&nbsp;&nbsp;&nbsp;Attribute manipulation</th></tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="genshi.filters.transform.Transformer-class.html" class="link">Transformer</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.filters.transform.Transformer-class.html#attr" class="summary-sig-name">attr</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">name</span>,
+        <span class="summary-sig-arg">value</span>)</span><br />
+      Add, replace or delete an attribute on selected elements.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr bgcolor="#e8f0f8" >
+  <th colspan="2" class="group-header"
+    >&nbsp;&nbsp;&nbsp;&nbsp;Buffer operations</th></tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="genshi.filters.transform.Transformer-class.html" class="link">Transformer</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.filters.transform.Transformer-class.html#copy" class="summary-sig-name">copy</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">buffer</span>,
+        <span class="summary-sig-arg">accumulate</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Copy selection into buffer.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="genshi.filters.transform.Transformer-class.html" class="link">Transformer</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.filters.transform.Transformer-class.html#cut" class="summary-sig-name">cut</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">buffer</span>,
+        <span class="summary-sig-arg">accumulate</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Copy selection into buffer and remove the selection from the stream.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.filters.transform.Transformer-class.html#buffer" class="summary-sig-name">buffer</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Buffer the entire stream (can consume a considerable amount of
+memory).</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr bgcolor="#e8f0f8" >
+  <th colspan="2" class="group-header"
+    >&nbsp;&nbsp;&nbsp;&nbsp;Miscellaneous operations</th></tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="genshi.filters.transform.Transformer-class.html" class="link">Transformer</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.filters.transform.Transformer-class.html#filter" class="summary-sig-name">filter</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">filter</span>)</span><br />
+      Apply a normal stream filter to the selection.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="genshi.filters.transform.Transformer-class.html" class="link">Transformer</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.filters.transform.Transformer-class.html#map" class="summary-sig-name">map</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">function</span>,
+        <span class="summary-sig-arg">kind</span>)</span><br />
+      Applies a function to the <tt class="rst-docutils literal"><span class="pre">data</span></tt> element of events of <tt class="rst-docutils literal"><span class="pre">kind</span></tt> in
+the selection.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="genshi.filters.transform.Transformer-class.html" class="link">Transformer</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.filters.transform.Transformer-class.html#substitute" class="summary-sig-name">substitute</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">pattern</span>,
+        <span class="summary-sig-arg">replace</span>,
+        <span class="summary-sig-arg">count</span>=<span class="summary-sig-default">1</span>)</span><br />
+      Replace text matching a regular expression.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="rename"></a><span class="summary-sig-name">rename</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">name</span>)</span><br />
+      Rename matching elements.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="genshi.filters.transform.Transformer-class.html" class="link">Transformer</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.filters.transform.Transformer-class.html#trace" class="summary-sig-name">trace</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">prefix</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">fileobj</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Print events as they pass through the transform.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Properties</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="transforms"></a><span class="summary-name">transforms</span>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Method Details</span></td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">path</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">.</code><code class="variable-quote">'</code></span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  Construct a new transformation filter.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>path</code></strong> - an XPath expression (as string) or a <a href="genshi.path.Path-class.html" class="link">Path</a> instance</li>
+    </ul></dd>
+    <dt>Overrides:
+        object.__init__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__call__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__call__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">stream</span>,
+        <span class="sig-arg">keep_marks</span>=<span class="sig-default">False</span>)</span>
+    <br /><em class="fname">(Call operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  Apply the transform filter to the marked stream.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>stream</code></strong> - the marked event stream to filter</li>
+        <li><strong class="pname"><code>keep_marks</code></strong> - Do not strip transformer selection marks from the
+stream. Useful for testing.</li>
+    </ul></dd>
+    <dt>Returns: <a href="genshi.core.Stream-class.html" class="link">Stream</a></dt>
+        <dd>the transformed stream</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="apply"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">apply</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">function</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Apply a transformation to the stream.</p>
+<p>Transformations can be chained, similar to stream filters. Any callable
+accepting a marked stream can be used as a transform.</p>
+<p>As an example, here is a simple TEXT event upper-casing transform:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">def</span> <span class="py-defname">upper</span>(stream):
+<span class="py-more">... </span>    <span class="py-keyword">for</span> mark, (kind, data, pos) <span class="py-keyword">in</span> stream:
+<span class="py-more">... </span>        <span class="py-keyword">if</span> mark <span class="py-keyword">and</span> kind <span class="py-keyword">is</span> TEXT:
+<span class="py-more">... </span>            yield mark, (kind, data.upper(), pos)
+<span class="py-more">... </span>        <span class="py-keyword">else</span>:
+<span class="py-more">... </span>            yield mark, (kind, data, pos)
+<span class="py-prompt">&gt;&gt;&gt; </span>short_stream = HTML(<span class="py-string">'&lt;body&gt;Some &lt;em&gt;test&lt;/em&gt; text&lt;/body&gt;'</span>)
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> short_stream | Transformer(<span class="py-string">'.//em/text()'</span>).apply(upper)
+<span class="py-output">&lt;body&gt;Some &lt;em&gt;TEST&lt;/em&gt; text&lt;/body&gt;</span></pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="select"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">select</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">path</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Mark events matching the given XPath expression, within the current
+selection.</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>html = HTML(<span class="py-string">'&lt;body&gt;Some &lt;em&gt;test&lt;/em&gt; text&lt;/body&gt;'</span>)
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> html | Transformer().select(<span class="py-string">'.//em'</span>).trace()
+<span class="py-output">(None, ('START', (QName(u'body'), Attrs()), (None, 1, 0)))</span>
+<span class="py-output">(None, ('TEXT', u'Some ', (None, 1, 6)))</span>
+<span class="py-output">('ENTER', ('START', (QName(u'em'), Attrs()), (None, 1, 11)))</span>
+<span class="py-output">('INSIDE', ('TEXT', u'test', (None, 1, 15)))</span>
+<span class="py-output">('EXIT', ('END', QName(u'em'), (None, 1, 19)))</span>
+<span class="py-output">(None, ('TEXT', u' text', (None, 1, 24)))</span>
+<span class="py-output">(None, ('END', QName(u'body'), (None, 1, 29)))</span>
+<span class="py-output">&lt;body&gt;Some &lt;em&gt;test&lt;/em&gt; text&lt;/body&gt;</span></pre>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>path</code></strong> - an XPath expression (as string) or a <a href="genshi.path.Path-class.html" class="link">Path</a> instance</li>
+    </ul></dd>
+    <dt>Returns: <a href="genshi.filters.transform.Transformer-class.html" class="link">Transformer</a></dt>
+        <dd>the stream augmented by transformation marks</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="invert"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">invert</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Invert selection so that marked events become unmarked, and vice
+versa.</p>
+<p>Specificaly, all marks are converted to null marks, and all null marks
+are converted to OUTSIDE marks.</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>html = HTML(<span class="py-string">'&lt;body&gt;Some &lt;em&gt;test&lt;/em&gt; text&lt;/body&gt;'</span>)
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> html | Transformer(<span class="py-string">'//em'</span>).invert().trace()
+<span class="py-output">('OUTSIDE', ('START', (QName(u'body'), Attrs()), (None, 1, 0)))</span>
+<span class="py-output">('OUTSIDE', ('TEXT', u'Some ', (None, 1, 6)))</span>
+<span class="py-output">(None, ('START', (QName(u'em'), Attrs()), (None, 1, 11)))</span>
+<span class="py-output">(None, ('TEXT', u'test', (None, 1, 15)))</span>
+<span class="py-output">(None, ('END', QName(u'em'), (None, 1, 19)))</span>
+<span class="py-output">('OUTSIDE', ('TEXT', u' text', (None, 1, 24)))</span>
+<span class="py-output">('OUTSIDE', ('END', QName(u'body'), (None, 1, 29)))</span>
+<span class="py-output">&lt;body&gt;Some &lt;em&gt;test&lt;/em&gt; text&lt;/body&gt;</span></pre>
+  <dl class="fields">
+    <dt>Returns: <a href="genshi.filters.transform.Transformer-class.html" class="link">Transformer</a></dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="end"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">end</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>End current selection, allowing all events to be selected.</p>
+<p>Example:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>html = HTML(<span class="py-string">'&lt;body&gt;Some &lt;em&gt;test&lt;/em&gt; text&lt;/body&gt;'</span>)
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> html | Transformer(<span class="py-string">'//em'</span>).end().trace()
+<span class="py-output">('OUTSIDE', ('START', (QName(u'body'), Attrs()), (None, 1, 0)))</span>
+<span class="py-output">('OUTSIDE', ('TEXT', u'Some ', (None, 1, 6)))</span>
+<span class="py-output">('OUTSIDE', ('START', (QName(u'em'), Attrs()), (None, 1, 11)))</span>
+<span class="py-output">('OUTSIDE', ('TEXT', u'test', (None, 1, 15)))</span>
+<span class="py-output">('OUTSIDE', ('END', QName(u'em'), (None, 1, 19)))</span>
+<span class="py-output">('OUTSIDE', ('TEXT', u' text', (None, 1, 24)))</span>
+<span class="py-output">('OUTSIDE', ('END', QName(u'body'), (None, 1, 29)))</span>
+<span class="py-output">&lt;body&gt;Some &lt;em&gt;test&lt;/em&gt; text&lt;/body&gt;</span></pre>
+  <dl class="fields">
+    <dt>Returns: <a href="genshi.filters.transform.Transformer-class.html" class="link">Transformer</a></dt>
+        <dd>the stream augmented by transformation marks</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="empty"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">empty</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Empty selected elements of all content.</p>
+<p>Example:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>html = HTML(<span class="py-string">'&lt;html&gt;&lt;head&gt;&lt;title&gt;Some Title&lt;/title&gt;&lt;/head&gt;'</span>
+<span class="py-more">... </span>            <span class="py-string">'&lt;body&gt;Some &lt;em&gt;body&lt;/em&gt; text.&lt;/body&gt;&lt;/html&gt;'</span>)
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> html | Transformer(<span class="py-string">'.//em'</span>).empty()
+<span class="py-output">&lt;html&gt;&lt;head&gt;&lt;title&gt;Some Title&lt;/title&gt;&lt;/head&gt;&lt;body&gt;Some &lt;em/&gt;</span>
+<span class="py-output">text.&lt;/body&gt;&lt;/html&gt;</span></pre>
+  <dl class="fields">
+    <dt>Returns: <a href="genshi.filters.transform.Transformer-class.html" class="link">Transformer</a></dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="remove"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">remove</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Remove selection from the stream.</p>
+<p>Example:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>html = HTML(<span class="py-string">'&lt;html&gt;&lt;head&gt;&lt;title&gt;Some Title&lt;/title&gt;&lt;/head&gt;'</span>
+<span class="py-more">... </span>            <span class="py-string">'&lt;body&gt;Some &lt;em&gt;body&lt;/em&gt; text.&lt;/body&gt;&lt;/html&gt;'</span>)
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> html | Transformer(<span class="py-string">'.//em'</span>).remove()
+<span class="py-output">&lt;html&gt;&lt;head&gt;&lt;title&gt;Some Title&lt;/title&gt;&lt;/head&gt;&lt;body&gt;Some</span>
+<span class="py-output">text.&lt;/body&gt;&lt;/html&gt;</span></pre>
+  <dl class="fields">
+    <dt>Returns: <a href="genshi.filters.transform.Transformer-class.html" class="link">Transformer</a></dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="unwrap"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">unwrap</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Remove outermost enclosing elements from selection.</p>
+<p>Example:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>html = HTML(<span class="py-string">'&lt;html&gt;&lt;head&gt;&lt;title&gt;Some Title&lt;/title&gt;&lt;/head&gt;'</span>
+<span class="py-more">... </span>            <span class="py-string">'&lt;body&gt;Some &lt;em&gt;body&lt;/em&gt; text.&lt;/body&gt;&lt;/html&gt;'</span>)
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> html | Transformer(<span class="py-string">'.//em'</span>).unwrap()
+<span class="py-output">&lt;html&gt;&lt;head&gt;&lt;title&gt;Some Title&lt;/title&gt;&lt;/head&gt;&lt;body&gt;Some body</span>
+<span class="py-output">text.&lt;/body&gt;&lt;/html&gt;</span></pre>
+  <dl class="fields">
+    <dt>Returns: <a href="genshi.filters.transform.Transformer-class.html" class="link">Transformer</a></dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="wrap"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">wrap</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">element</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Wrap selection in an element.</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>html = HTML(<span class="py-string">'&lt;html&gt;&lt;head&gt;&lt;title&gt;Some Title&lt;/title&gt;&lt;/head&gt;'</span>
+<span class="py-more">... </span>            <span class="py-string">'&lt;body&gt;Some &lt;em&gt;body&lt;/em&gt; text.&lt;/body&gt;&lt;/html&gt;'</span>)
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> html | Transformer(<span class="py-string">'.//em'</span>).wrap(<span class="py-string">'strong'</span>)
+<span class="py-output">&lt;html&gt;&lt;head&gt;&lt;title&gt;Some Title&lt;/title&gt;&lt;/head&gt;&lt;body&gt;Some</span>
+<span class="py-output">&lt;strong&gt;&lt;em&gt;body&lt;/em&gt;&lt;/strong&gt; text.&lt;/body&gt;&lt;/html&gt;</span></pre>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>element</code></strong> - either a tag name (as string) or an <a href="genshi.builder.Element-class.html" class="link">Element</a> object</li>
+    </ul></dd>
+    <dt>Returns: <a href="genshi.filters.transform.Transformer-class.html" class="link">Transformer</a></dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="replace"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">replace</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">content</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Replace selection with content.</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>html = HTML(<span class="py-string">'&lt;html&gt;&lt;head&gt;&lt;title&gt;Some Title&lt;/title&gt;&lt;/head&gt;'</span>
+<span class="py-more">... </span>            <span class="py-string">'&lt;body&gt;Some &lt;em&gt;body&lt;/em&gt; text.&lt;/body&gt;&lt;/html&gt;'</span>)
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> html | Transformer(<span class="py-string">'.//title/text()'</span>).replace(<span class="py-string">'New Title'</span>)
+<span class="py-output">&lt;html&gt;&lt;head&gt;&lt;title&gt;New Title&lt;/title&gt;&lt;/head&gt;&lt;body&gt;Some &lt;em&gt;body&lt;/em&gt;</span>
+<span class="py-output">text.&lt;/body&gt;&lt;/html&gt;</span></pre>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>content</code></strong> - Either a callable, an iterable of events, or a string
+to insert.</li>
+    </ul></dd>
+    <dt>Returns: <a href="genshi.filters.transform.Transformer-class.html" class="link">Transformer</a></dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="before"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">before</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">content</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Insert content before selection.</p>
+<p>In this example we insert the word 'emphasised' before the &lt;em&gt; opening
+tag:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>html = HTML(<span class="py-string">'&lt;html&gt;&lt;head&gt;&lt;title&gt;Some Title&lt;/title&gt;&lt;/head&gt;'</span>
+<span class="py-more">... </span>            <span class="py-string">'&lt;body&gt;Some &lt;em&gt;body&lt;/em&gt; text.&lt;/body&gt;&lt;/html&gt;'</span>)
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> html | Transformer(<span class="py-string">'.//em'</span>).before(<span class="py-string">'emphasised '</span>)
+<span class="py-output">&lt;html&gt;&lt;head&gt;&lt;title&gt;Some Title&lt;/title&gt;&lt;/head&gt;&lt;body&gt;Some emphasised</span>
+<span class="py-output">&lt;em&gt;body&lt;/em&gt; text.&lt;/body&gt;&lt;/html&gt;</span></pre>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>content</code></strong> - Either a callable, an iterable of events, or a string
+to insert.</li>
+    </ul></dd>
+    <dt>Returns: <a href="genshi.filters.transform.Transformer-class.html" class="link">Transformer</a></dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="after"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">after</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">content</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Insert content after selection.</p>
+<p>Here, we insert some text after the &lt;/em&gt; closing tag:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>html = HTML(<span class="py-string">'&lt;html&gt;&lt;head&gt;&lt;title&gt;Some Title&lt;/title&gt;&lt;/head&gt;'</span>
+<span class="py-more">... </span>            <span class="py-string">'&lt;body&gt;Some &lt;em&gt;body&lt;/em&gt; text.&lt;/body&gt;&lt;/html&gt;'</span>)
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> html | Transformer(<span class="py-string">'.//em'</span>).after(<span class="py-string">' rock'</span>)
+<span class="py-output">&lt;html&gt;&lt;head&gt;&lt;title&gt;Some Title&lt;/title&gt;&lt;/head&gt;&lt;body&gt;Some &lt;em&gt;body&lt;/em&gt;</span>
+<span class="py-output">rock text.&lt;/body&gt;&lt;/html&gt;</span></pre>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>content</code></strong> - Either a callable, an iterable of events, or a string
+to insert.</li>
+    </ul></dd>
+    <dt>Returns: <a href="genshi.filters.transform.Transformer-class.html" class="link">Transformer</a></dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="prepend"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">prepend</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">content</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Insert content after the ENTER event of the selection.</p>
+<p>Inserting some new text at the start of the &lt;body&gt;:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>html = HTML(<span class="py-string">'&lt;html&gt;&lt;head&gt;&lt;title&gt;Some Title&lt;/title&gt;&lt;/head&gt;'</span>
+<span class="py-more">... </span>            <span class="py-string">'&lt;body&gt;Some &lt;em&gt;body&lt;/em&gt; text.&lt;/body&gt;&lt;/html&gt;'</span>)
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> html | Transformer(<span class="py-string">'.//body'</span>).prepend(<span class="py-string">'Some new body text. '</span>)
+<span class="py-output">&lt;html&gt;&lt;head&gt;&lt;title&gt;Some Title&lt;/title&gt;&lt;/head&gt;&lt;body&gt;Some new body text.</span>
+<span class="py-output">Some &lt;em&gt;body&lt;/em&gt; text.&lt;/body&gt;&lt;/html&gt;</span></pre>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>content</code></strong> - Either a callable, an iterable of events, or a string
+to insert.</li>
+    </ul></dd>
+    <dt>Returns: <a href="genshi.filters.transform.Transformer-class.html" class="link">Transformer</a></dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="append"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">append</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">content</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Insert content before the END event of the selection.</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>html = HTML(<span class="py-string">'&lt;html&gt;&lt;head&gt;&lt;title&gt;Some Title&lt;/title&gt;&lt;/head&gt;'</span>
+<span class="py-more">... </span>            <span class="py-string">'&lt;body&gt;Some &lt;em&gt;body&lt;/em&gt; text.&lt;/body&gt;&lt;/html&gt;'</span>)
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> html | Transformer(<span class="py-string">'.//body'</span>).append(<span class="py-string">' Some new body text.'</span>)
+<span class="py-output">&lt;html&gt;&lt;head&gt;&lt;title&gt;Some Title&lt;/title&gt;&lt;/head&gt;&lt;body&gt;Some &lt;em&gt;body&lt;/em&gt;</span>
+<span class="py-output">text. Some new body text.&lt;/body&gt;&lt;/html&gt;</span></pre>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>content</code></strong> - Either a callable, an iterable of events, or a string
+to insert.</li>
+    </ul></dd>
+    <dt>Returns: <a href="genshi.filters.transform.Transformer-class.html" class="link">Transformer</a></dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="attr"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">attr</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">name</span>,
+        <span class="sig-arg">value</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Add, replace or delete an attribute on selected elements.</p>
+<p>If <code class="link">value</code> evaulates to <code class="link">None</code> the attribute will be deleted from the
+element:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>html = HTML(<span class="py-string">'&lt;html&gt;&lt;head&gt;&lt;title&gt;Some Title&lt;/title&gt;&lt;/head&gt;'</span>
+<span class="py-more">... </span>            <span class="py-string">'&lt;body&gt;Some &lt;em class=&quot;before&quot;&gt;body&lt;/em&gt; &lt;em&gt;text&lt;/em&gt;.&lt;/body&gt;'</span>
+<span class="py-more">... </span>            <span class="py-string">'&lt;/html&gt;'</span>)
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> html | Transformer(<span class="py-string">'body/em'</span>).attr(<span class="py-string">'class'</span>, None)
+<span class="py-output">&lt;html&gt;&lt;head&gt;&lt;title&gt;Some Title&lt;/title&gt;&lt;/head&gt;&lt;body&gt;Some &lt;em&gt;body&lt;/em&gt;</span>
+<span class="py-output">&lt;em&gt;text&lt;/em&gt;.&lt;/body&gt;&lt;/html&gt;</span></pre>
+<p>Otherwise the attribute will be set to <code class="link">value</code>:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> html | Transformer(<span class="py-string">'body/em'</span>).attr(<span class="py-string">'class'</span>, <span class="py-string">'emphasis'</span>)
+<span class="py-output">&lt;html&gt;&lt;head&gt;&lt;title&gt;Some Title&lt;/title&gt;&lt;/head&gt;&lt;body&gt;Some &lt;em</span>
+<span class="py-output">class=&quot;emphasis&quot;&gt;body&lt;/em&gt; &lt;em class=&quot;emphasis&quot;&gt;text&lt;/em&gt;.&lt;/body&gt;&lt;/html&gt;</span></pre>
+<p>If <code class="link">value</code> is a callable it will be called with the attribute name and
+the START event for the matching element. Its return value will then
+be used to set the attribute:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">def</span> <span class="py-defname">print_attr</span>(name, event):
+<span class="py-more">... </span>    attrs = event[1][1]
+<span class="py-more">... </span>    <span class="py-keyword">print</span> attrs
+<span class="py-more">... </span>    return attrs.get(name)
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> html | Transformer(<span class="py-string">'body/em'</span>).attr(<span class="py-string">'class'</span>, print_attr)
+<span class="py-output">Attrs([(QName(u'class'), u'before')])</span>
+<span class="py-output">Attrs()</span>
+<span class="py-output">&lt;html&gt;&lt;head&gt;&lt;title&gt;Some Title&lt;/title&gt;&lt;/head&gt;&lt;body&gt;Some &lt;em</span>
+<span class="py-output">class=&quot;before&quot;&gt;body&lt;/em&gt; &lt;em&gt;text&lt;/em&gt;.&lt;/body&gt;&lt;/html&gt;</span></pre>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>name</code></strong> - the name of the attribute</li>
+        <li><strong class="pname"><code>value</code></strong> - the value that should be set for the attribute.</li>
+    </ul></dd>
+    <dt>Returns: <a href="genshi.filters.transform.Transformer-class.html" class="link">Transformer</a></dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="copy"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">copy</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">buffer</span>,
+        <span class="sig-arg">accumulate</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Copy selection into buffer.</p>
+<p>The buffer is replaced by each <em>contiguous</em> selection before being passed
+to the next transformation. If accumulate=True, further selections will
+be appended to the buffer rather than replacing it.</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">from</span> genshi.builder <span class="py-keyword">import</span> tag
+<span class="py-prompt">&gt;&gt;&gt; </span>buffer = StreamBuffer()
+<span class="py-prompt">&gt;&gt;&gt; </span>html = HTML(<span class="py-string">'&lt;html&gt;&lt;head&gt;&lt;title&gt;Some Title&lt;/title&gt;&lt;/head&gt;'</span>
+<span class="py-more">... </span>            <span class="py-string">'&lt;body&gt;Some &lt;em&gt;body&lt;/em&gt; text.&lt;/body&gt;&lt;/html&gt;'</span>)
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> html | Transformer(<span class="py-string">'title/text()'</span>).copy(buffer) \
+<span class="py-more">... </span>    .end().select(<span class="py-string">'body'</span>).prepend(tag.h1(buffer))
+<span class="py-output">&lt;html&gt;&lt;head&gt;&lt;title&gt;Some Title&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;Some</span>
+<span class="py-output">Title&lt;/h1&gt;Some &lt;em&gt;body&lt;/em&gt; text.&lt;/body&gt;&lt;/html&gt;</span></pre>
+<p>This example illustrates that only a single contiguous selection will
+be buffered:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> html | Transformer(<span class="py-string">'head/title/text()'</span>).copy(buffer) \
+<span class="py-more">... </span>    .end().select(<span class="py-string">'body/em'</span>).copy(buffer).end().select(<span class="py-string">'body'</span>) \
+<span class="py-more">... </span>    .prepend(tag.h1(buffer))
+<span class="py-output">&lt;html&gt;&lt;head&gt;&lt;title&gt;Some Title&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;Some</span>
+<span class="py-output">Title&lt;/h1&gt;Some &lt;em&gt;body&lt;/em&gt; text.&lt;/body&gt;&lt;/html&gt;</span>
+<span class="py-output"></span><span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> buffer
+<span class="py-output">&lt;em&gt;body&lt;/em&gt;</span></pre>
+<p>Element attributes can also be copied for later use:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>html = HTML(<span class="py-string">'&lt;html&gt;&lt;head&gt;&lt;title&gt;Some Title&lt;/title&gt;&lt;/head&gt;'</span>
+<span class="py-more">... </span>            <span class="py-string">'&lt;body&gt;&lt;em&gt;Some&lt;/em&gt; &lt;em class=&quot;before&quot;&gt;body&lt;/em&gt;'</span>
+<span class="py-more">... </span>            <span class="py-string">'&lt;em&gt;text&lt;/em&gt;.&lt;/body&gt;&lt;/html&gt;'</span>)
+<span class="py-prompt">&gt;&gt;&gt; </span>buffer = StreamBuffer()
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">def</span> <span class="py-defname">apply_attr</span>(name, entry):
+<span class="py-more">... </span>    return list(buffer)[0][1][1].get(<span class="py-string">'class'</span>)
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> html | Transformer(<span class="py-string">'body/em[@class]/@class'</span>).copy(buffer) \
+<span class="py-more">... </span>    .end().buffer().select(<span class="py-string">'body/em[not(@class)]'</span>) \
+<span class="py-more">... </span>    .attr(<span class="py-string">'class'</span>, apply_attr)
+<span class="py-output">&lt;html&gt;&lt;head&gt;&lt;title&gt;Some Title&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;em</span>
+<span class="py-output">class=&quot;before&quot;&gt;Some&lt;/em&gt; &lt;em class=&quot;before&quot;&gt;body&lt;/em&gt;&lt;em</span>
+<span class="py-output">class=&quot;before&quot;&gt;text&lt;/em&gt;.&lt;/body&gt;&lt;/html&gt;</span></pre>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>buffer</code></strong> - the <a href="genshi.filters.transform.StreamBuffer-class.html" class="link">StreamBuffer</a> in which the selection should be
+stored</li>
+    </ul></dd>
+    <dt>Returns: <a href="genshi.filters.transform.Transformer-class.html" class="link">Transformer</a></dt>
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        Copy (and cut) copy each individual selected object into the
+buffer before passing to the next transform. For example, the
+XPath <tt class="rst-docutils literal"><span class="pre">*|text()</span></tt> will select all elements and text, each
+instance of which will be copied to the buffer individually
+before passing to the next transform. This has implications for
+how <tt class="rst-docutils literal"><span class="pre">StreamBuffer</span></tt> objects can be used, so some
+experimentation may be required.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="cut"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">cut</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">buffer</span>,
+        <span class="sig-arg">accumulate</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Copy selection into buffer and remove the selection from the stream.</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">from</span> genshi.builder <span class="py-keyword">import</span> tag
+<span class="py-prompt">&gt;&gt;&gt; </span>buffer = StreamBuffer()
+<span class="py-prompt">&gt;&gt;&gt; </span>html = HTML(<span class="py-string">'&lt;html&gt;&lt;head&gt;&lt;title&gt;Some Title&lt;/title&gt;&lt;/head&gt;'</span>
+<span class="py-more">... </span>            <span class="py-string">'&lt;body&gt;Some &lt;em&gt;body&lt;/em&gt; text.&lt;/body&gt;&lt;/html&gt;'</span>)
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> html | Transformer(<span class="py-string">'.//em/text()'</span>).cut(buffer) \
+<span class="py-more">... </span>    .end().select(<span class="py-string">'.//em'</span>).after(tag.h1(buffer))
+<span class="py-output">&lt;html&gt;&lt;head&gt;&lt;title&gt;Some Title&lt;/title&gt;&lt;/head&gt;&lt;body&gt;Some</span>
+<span class="py-output">&lt;em/&gt;&lt;h1&gt;body&lt;/h1&gt; text.&lt;/body&gt;&lt;/html&gt;</span></pre>
+<p>Specifying accumulate=True, appends all selected intervals onto the
+buffer. Combining this with the .buffer() operation allows us operate
+on all copied events rather than per-segment. See the documentation on
+buffer() for more information.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>buffer</code></strong> - the <a href="genshi.filters.transform.StreamBuffer-class.html" class="link">StreamBuffer</a> in which the selection should be
+stored</li>
+    </ul></dd>
+    <dt>Returns: <a href="genshi.filters.transform.Transformer-class.html" class="link">Transformer</a></dt>
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        this transformation will buffer the entire input stream
+      </p>
+</div></td></tr></table>
+</div>
+<a name="buffer"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">buffer</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Buffer the entire stream (can consume a considerable amount of
+memory).</p>
+<p>Useful in conjunction with copy(accumulate=True) and
+cut(accumulate=True) to ensure that all marked events in the entire
+stream are copied to the buffer before further transformations are
+applied.</p>
+<p>For example, to move all &lt;note&gt; elements inside a &lt;notes&gt; tag at the
+top of the document:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>doc = HTML(<span class="py-string">'&lt;doc&gt;&lt;notes&gt;&lt;/notes&gt;&lt;body&gt;Some &lt;note&gt;one&lt;/note&gt; '</span>
+<span class="py-more">... </span>           <span class="py-string">'text &lt;note&gt;two&lt;/note&gt;.&lt;/body&gt;&lt;/doc&gt;'</span>)
+<span class="py-prompt">&gt;&gt;&gt; </span>buffer = StreamBuffer()
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> doc | Transformer(<span class="py-string">'body/note'</span>).cut(buffer, accumulate=True) \
+<span class="py-more">... </span>    .end().buffer().select(<span class="py-string">'notes'</span>).prepend(buffer)
+<span class="py-output">&lt;doc&gt;&lt;notes&gt;&lt;note&gt;one&lt;/note&gt;&lt;note&gt;two&lt;/note&gt;&lt;/notes&gt;&lt;body&gt;Some  text</span>
+<span class="py-output">.&lt;/body&gt;&lt;/doc&gt;</span></pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="filter"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">filter</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">filter</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Apply a normal stream filter to the selection. The filter is called
+once for each contiguous block of marked events.</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">from</span> genshi.filters.html <span class="py-keyword">import</span> HTMLSanitizer
+<span class="py-prompt">&gt;&gt;&gt; </span>html = HTML(<span class="py-string">'&lt;html&gt;&lt;body&gt;Some text&lt;script&gt;alert(document.cookie)'</span>
+<span class="py-more">... </span>            <span class="py-string">'&lt;/script&gt; and some more text&lt;/body&gt;&lt;/html&gt;'</span>)
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> html | Transformer(<span class="py-string">'body/*'</span>).filter(HTMLSanitizer())
+<span class="py-output">&lt;html&gt;&lt;body&gt;Some text and some more text&lt;/body&gt;&lt;/html&gt;</span></pre>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>filter</code></strong> - The stream filter to apply.</li>
+    </ul></dd>
+    <dt>Returns: <a href="genshi.filters.transform.Transformer-class.html" class="link">Transformer</a></dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="map"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">map</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">function</span>,
+        <span class="sig-arg">kind</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Applies a function to the <tt class="rst-rst-docutils literal rst-docutils literal"><span class="pre">data</span></tt> element of events of <tt class="rst-rst-docutils literal rst-docutils literal"><span class="pre">kind</span></tt> in
+the selection.</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>html = HTML(<span class="py-string">'&lt;html&gt;&lt;head&gt;&lt;title&gt;Some Title&lt;/title&gt;&lt;/head&gt;'</span>
+<span class="py-more">... </span>              <span class="py-string">'&lt;body&gt;Some &lt;em&gt;body&lt;/em&gt; text.&lt;/body&gt;&lt;/html&gt;'</span>)
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> html | Transformer(<span class="py-string">'head/title'</span>).map(unicode.upper, TEXT)
+<span class="py-output">&lt;html&gt;&lt;head&gt;&lt;title&gt;SOME TITLE&lt;/title&gt;&lt;/head&gt;&lt;body&gt;Some &lt;em&gt;body&lt;/em&gt;</span>
+<span class="py-output">text.&lt;/body&gt;&lt;/html&gt;</span></pre>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>function</code></strong> - the function to apply</li>
+        <li><strong class="pname"><code>kind</code></strong> - the kind of event the function should be applied to</li>
+    </ul></dd>
+    <dt>Returns: <a href="genshi.filters.transform.Transformer-class.html" class="link">Transformer</a></dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="substitute"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">substitute</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">pattern</span>,
+        <span class="sig-arg">replace</span>,
+        <span class="sig-arg">count</span>=<span class="sig-default">1</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Replace text matching a regular expression.</p>
+<p>Refer to the documentation for <tt class="rst-docutils literal"><span class="pre">re.sub()</span></tt> for details.</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>html = HTML(<span class="py-string">'&lt;html&gt;&lt;body&gt;Some text, some more text and '</span>
+<span class="py-more">... </span>            <span class="py-string">'&lt;b&gt;some bold text&lt;/b&gt;\n'</span>
+<span class="py-more">... </span>            <span class="py-string">'&lt;i&gt;some italicised text&lt;/i&gt;&lt;/body&gt;&lt;/html&gt;'</span>)
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> html | Transformer(<span class="py-string">'body/b'</span>).substitute(<span class="py-string">'(?i)some'</span>, <span class="py-string">'SOME'</span>)
+<span class="py-output">&lt;html&gt;&lt;body&gt;Some text, some more text and &lt;b&gt;SOME bold text&lt;/b&gt;</span>
+<span class="py-output">&lt;i&gt;some italicised text&lt;/i&gt;&lt;/body&gt;&lt;/html&gt;</span>
+<span class="py-output"></span><span class="py-prompt">&gt;&gt;&gt; </span>tags = tag.html(tag.body(<span class="py-string">'Some text, some more text and\n'</span>,
+<span class="py-more">... </span>     Markup(<span class="py-string">'&lt;b&gt;some bold text&lt;/b&gt;'</span>)))
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> tags.generate() | Transformer(<span class="py-string">'body'</span>).substitute(
+<span class="py-more">... </span>    <span class="py-string">'(?i)some'</span>, <span class="py-string">'SOME'</span>)
+<span class="py-output">&lt;html&gt;&lt;body&gt;SOME text, some more text and</span>
+<span class="py-output">&lt;b&gt;SOME bold text&lt;/b&gt;&lt;/body&gt;&lt;/html&gt;</span></pre>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>pattern</code></strong> - A regular expression object or string.</li>
+        <li><strong class="pname"><code>replace</code></strong> - Replacement pattern.</li>
+        <li><strong class="pname"><code>count</code></strong> - Number of replacements to make in each text fragment.</li>
+    </ul></dd>
+    <dt>Returns: <a href="genshi.filters.transform.Transformer-class.html" class="link">Transformer</a></dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="trace"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">trace</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">prefix</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">fileobj</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Print events as they pass through the transform.</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>html = HTML(<span class="py-string">'&lt;body&gt;Some &lt;em&gt;test&lt;/em&gt; text&lt;/body&gt;'</span>)
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> html | Transformer(<span class="py-string">'em'</span>).trace()
+<span class="py-output">(None, ('START', (QName(u'body'), Attrs()), (None, 1, 0)))</span>
+<span class="py-output">(None, ('TEXT', u'Some ', (None, 1, 6)))</span>
+<span class="py-output">('ENTER', ('START', (QName(u'em'), Attrs()), (None, 1, 11)))</span>
+<span class="py-output">('INSIDE', ('TEXT', u'test', (None, 1, 15)))</span>
+<span class="py-output">('EXIT', ('END', QName(u'em'), (None, 1, 19)))</span>
+<span class="py-output">(None, ('TEXT', u' text', (None, 1, 24)))</span>
+<span class="py-output">(None, ('END', QName(u'body'), (None, 1, 29)))</span>
+<span class="py-output">&lt;body&gt;Some &lt;em&gt;test&lt;/em&gt; text&lt;/body&gt;</span></pre>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>prefix</code></strong> - a string to prefix each event with in the output</li>
+        <li><strong class="pname"><code>fileobj</code></strong> - the writable file-like object to write to; defaults to
+the standard output stream</li>
+    </ul></dd>
+    <dt>Returns: <a href="genshi.filters.transform.Transformer-class.html" class="link">Transformer</a></dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="genshi-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="../index.html">Documentation Index</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Wed Jul  9 18:16:21 2008
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

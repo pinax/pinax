@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>genshi.template.loader.TemplateLoader</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="genshi-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="../index.html">Documentation Index</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="genshi-module.html">Package&nbsp;genshi</a> ::
+        <a href="genshi.template-module.html">Package&nbsp;template</a> ::
+        <a href="genshi.template.loader-module.html">Module&nbsp;loader</a> ::
+        Class&nbsp;TemplateLoader
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class TemplateLoader</h1><p class="nomargin-top"></p>
+<pre class="base-tree">
+object --+
+         |
+        <strong class="uidshort">TemplateLoader</strong>
+</pre>
+
+<hr />
+<p>Responsible for loading templates from files on the specified search
+path.</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">import</span> tempfile
+<span class="py-prompt">&gt;&gt;&gt; </span>fd, path = tempfile.mkstemp(suffix=<span class="py-string">'.html'</span>, prefix=<span class="py-string">'template'</span>)
+<span class="py-prompt">&gt;&gt;&gt; </span>os.write(fd, <span class="py-string">'&lt;p&gt;$var&lt;/p&gt;'</span>)
+<span class="py-output">11</span>
+<span class="py-output"></span><span class="py-prompt">&gt;&gt;&gt; </span>os.close(fd)</pre>
+<p>The template loader accepts a list of directory paths that are then used
+when searching for template files, in the given order:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>loader = TemplateLoader([os.path.dirname(path)])</pre>
+<p>The <a href="genshi.template.loader.TemplateLoader-class.html#load" class="link">load()</a> method first checks the template cache whether the requested
+template has already been loaded. If not, it attempts to locate the
+template file, and returns the corresponding <a href="genshi.template.base.Template-class.html" class="link">Template</a> object:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">from</span> genshi.template <span class="py-keyword">import</span> MarkupTemplate
+<span class="py-prompt">&gt;&gt;&gt; </span>template = loader.load(os.path.basename(path))
+<span class="py-prompt">&gt;&gt;&gt; </span>isinstance(template, MarkupTemplate)
+<span class="py-output">True</span></pre>
+<p>Template instances are cached: requesting a template with the same name
+results in the same instance being returned:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>loader.load(os.path.basename(path)) <span class="py-keyword">is</span> template
+<span class="py-output">True</span></pre>
+<p>The <a href="genshi.template.loader.TemplateLoader-class.html#auto_reload" class="link">auto_reload</a> option can be used to control whether a template should
+be automatically reloaded when the file it was loaded from has been
+changed. Disable this automatic reloading to improve performance.</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>os.remove(path)</pre>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Instance Methods</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.template.loader.TemplateLoader-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">search_path</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">auto_reload</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">default_encoding</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">max_cache_size</span>=<span class="summary-sig-default">25</span>,
+        <span class="summary-sig-arg">default_class</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">variable_lookup</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">strict</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">allow_exec</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">callback</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Create the template laoder.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.template.loader.TemplateLoader-class.html#load" class="summary-sig-name">load</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">filename</span>,
+        <span class="summary-sig-arg">relative_to</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">cls</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">encoding</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Load the template with the given name.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__str__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Static Methods</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><tt class="rst-docutils literal"><span class="pre">function</span></tt></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.template.loader.TemplateLoader-class.html#directory" class="summary-sig-name">directory</a>(<span class="summary-sig-arg">path</span>)</span><br />
+      Loader factory for loading templates from a local directory.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><tt class="rst-docutils literal"><span class="pre">function</span></tt></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.template.loader.TemplateLoader-class.html#package" class="summary-sig-name">package</a>(<span class="summary-sig-arg">name</span>,
+        <span class="summary-sig-arg">path</span>)</span><br />
+      Loader factory for loading templates from egg package data.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><tt class="rst-docutils literal"><span class="pre">function</span></tt></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.template.loader.TemplateLoader-class.html#prefixed" class="summary-sig-name">prefixed</a>(<span class="summary-sig-arg">**delegates</span>)</span><br />
+      Factory for a load function that delegates to other loaders
+depending on the prefix of the requested template path.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE VARIABLES ==================== -->
+<a name="section-InstanceVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Instance Variables</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="auto_reload"></a><span class="summary-name">auto_reload</span><br />
+      Whether templates should be reloaded when the underlying file is
+changed
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Properties</span></td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Method Details</span></td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">search_path</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">auto_reload</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">default_encoding</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">max_cache_size</span>=<span class="sig-default">25</span>,
+        <span class="sig-arg">default_class</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">variable_lookup</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">strict</code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">allow_exec</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">callback</span>=<span class="sig-default">None</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  Create the template laoder.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>search_path</code></strong> - a list of absolute path names that should be
+searched for template files, or a string containing
+a single absolute path; alternatively, any item on
+the list may be a ''load function'' that is passed
+a filename and returns a file-like object and some
+metadata</li>
+        <li><strong class="pname"><code>auto_reload</code></strong> - whether to check the last modification time of
+template files, and reload them if they have changed</li>
+        <li><strong class="pname"><code>default_encoding</code></strong> - the default encoding to assume when loading
+templates; defaults to UTF-8</li>
+        <li><strong class="pname"><code>max_cache_size</code></strong> - the maximum number of templates to keep in the
+cache</li>
+        <li><strong class="pname"><code>default_class</code></strong> - the default <a href="genshi.template.base.Template-class.html" class="link">Template</a> subclass to use when
+instantiating templates</li>
+        <li><strong class="pname"><code>variable_lookup</code></strong> - the variable lookup mechanism; either &quot;strict&quot;
+(the default), &quot;lenient&quot;, or a custom lookup
+class</li>
+        <li><strong class="pname"><code>allow_exec</code></strong> - whether to allow Python code blocks in templates</li>
+        <li><strong class="pname"><code>callback</code></strong> - (optional) a callback function that is invoked after a
+template was initialized by this loader; the function
+is passed the template object as only argument. This
+callback can be used for example to add any desired
+filters to the template</li>
+    </ul></dd>
+    <dt>Overrides:
+        object.__init__
+    </dt>
+  </dl>
+<div class="fields">      <p><strong>See Also:</strong>
+        <a href="genshi.template.eval.LenientLookup-class.html" class="link">LenientLookup</a>, <a href="genshi.template.eval.StrictLookup-class.html" class="link">StrictLookup</a>
+      </p>
+      <p><strong>Note:</strong>
+        Changed in 0.5: Added the <code class="link">allow_exec</code> argument
+      </p>
+</div></td></tr></table>
+</div>
+<a name="load"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">load</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">filename</span>,
+        <span class="sig-arg">relative_to</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">cls</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">encoding</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Load the template with the given name.</p>
+<p>If the <code class="link">filename</code> parameter is relative, this method searches the
+search path trying to locate a template matching the given name. If the
+file name is an absolute path, the search path is ignored.</p>
+<p>If the requested template is not found, a <a href="genshi.template.loader.TemplateNotFound-class.html" class="link">TemplateNotFound</a> exception
+is raised. Otherwise, a <a href="genshi.template.base.Template-class.html" class="link">Template</a> object is returned that represents
+the parsed template.</p>
+<p>Template instances are cached to avoid having to parse the same
+template file more than once. Thus, subsequent calls of this method
+with the same template file name will return the same <a href="genshi.template.base.Template-class.html" class="link">Template</a>
+object (unless the <tt class="rst-docutils literal"><span class="pre">auto_reload</span></tt> option is enabled and the file was
+changed since the last parse.)</p>
+<p>If the <code class="link">relative_to</code> parameter is provided, the <code class="link">filename</code> is
+interpreted as being relative to that path.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>filename</code></strong> - the relative path of the template file to load</li>
+        <li><strong class="pname"><code>relative_to</code></strong> - the filename of the template from which the new
+template is being loaded, or <tt class="rst-docutils literal"><span class="pre">None</span></tt> if the
+template is being loaded directly</li>
+        <li><strong class="pname"><code>cls</code></strong> - the class of the template object to instantiate</li>
+        <li><strong class="pname"><code>encoding</code></strong> - the encoding of the template to load; defaults to the
+<tt class="rst-docutils literal"><span class="pre">default_encoding</span></tt> of the loader instance</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>the loaded <a href="genshi.template.base.Template-class.html" class="link">Template</a> instance</dd>
+    <dt>Raises:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code><strong class='fraise'><a href="genshi.template.loader.TemplateNotFound-class.html">TemplateNotFound</a></strong></code> - if a template with the given name could not
+be found</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="directory"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">directory</span>(<span class="sig-arg">path</span>)</span>
+    <br /><em class="fname">Static Method</em>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  Loader factory for loading templates from a local directory.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>path</code></strong> - the path to the local directory containing the templates</li>
+    </ul></dd>
+    <dt>Returns: <tt class="rst-rst-docutils literal rst-docutils literal"><span class="pre">function</span></tt></dt>
+        <dd>the loader function to load templates from the given directory</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="package"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">package</span>(<span class="sig-arg">name</span>,
+        <span class="sig-arg">path</span>)</span>
+    <br /><em class="fname">Static Method</em>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  Loader factory for loading templates from egg package data.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>name</code></strong> - the name of the package containing the resources</li>
+        <li><strong class="pname"><code>path</code></strong> - the path inside the package data</li>
+    </ul></dd>
+    <dt>Returns: <tt class="rst-rst-docutils literal rst-docutils literal"><span class="pre">function</span></tt></dt>
+        <dd>the loader function to load templates from the given package</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="prefixed"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">prefixed</span>(<span class="sig-arg">**delegates</span>)</span>
+    <br /><em class="fname">Static Method</em>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Factory for a load function that delegates to other loaders
+depending on the prefix of the requested template path.</p>
+<p>The prefix is stripped from the filename when passing on the load
+request to the delegate.</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>load = prefixed(
+<span class="py-more">... </span>    app1 = <span class="py-keyword">lambda</span> filename: (<span class="py-string">'app1'</span>, filename, None, None),
+<span class="py-more">... </span>    app2 = <span class="py-keyword">lambda</span> filename: (<span class="py-string">'app2'</span>, filename, None, None)
+<span class="py-more">... </span>)
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> load(<span class="py-string">'app1/foo.html'</span>)
+<span class="py-output">('app1', 'app1/foo.html', None, None)</span>
+<span class="py-output"></span><span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> load(<span class="py-string">'app2/bar.html'</span>)
+<span class="py-output">('app2', 'app2/bar.html', None, None)</span></pre>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>delegates</code></strong> - mapping of path prefixes to loader functions</li>
+    </ul></dd>
+    <dt>Returns: <tt class="rst-rst-docutils literal rst-docutils literal"><span class="pre">function</span></tt></dt>
+        <dd>the loader function</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="genshi-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="../index.html">Documentation Index</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Wed Jul  9 18:16:21 2008
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="generator" content="Docutils 0.4: http://docutils.sourceforge.net/">
+<title>Genshi: Genshi Templating Basics</title>
+<link rel="stylesheet" href="common/style/edgewall.css" type="text/css">
+</head>
+<body>
+<div class="document" id="genshi-templating-basics">
+    <div id="navigation">
+      <span class="projinfo">Genshi 0.5.1</span>
+      <a href="index.html">Documentation Index</a>
+    </div>
+<h1 class="title">Genshi Templating Basics</h1>
+<p>Genshi provides a template engine that can be used for generating either
+markup (such as <a class="reference" href="http://www.w3.org/html/">HTML</a> or <a class="reference" href="http://www.w3.org/XML/">XML</a>) or plain text. While both share some of the
+syntax (and much of the underlying implementation) they are essentially
+separate languages.</p>
+<p>This document describes the common parts of the template engine and will be most
+useful as reference to those developing Genshi templates. Templates are XML or
+plain text files that include processing <a class="reference" href="#directives">directives</a> that affect how the
+template is rendered, and template <a class="reference" href="#expressions">expressions</a> that are dynamically substituted
+by variable data.</p>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="auto-toc simple">
+<li><a class="reference" href="#synopsis" id="id5" name="id5">1   Synopsis</a></li>
+<li><a class="reference" href="#python-api" id="id6" name="id6">2   Python API</a></li>
+<li><a class="reference" href="#template-expressions-and-code-blocks" id="id7" name="id7">3   Template Expressions and Code Blocks</a><ul class="auto-toc">
+<li><a class="reference" href="#id1" id="id8" name="id8">3.1   Code Blocks</a></li>
+<li><a class="reference" href="#id2" id="id9" name="id9">3.2   Error Handling</a><ul class="auto-toc">
+<li><a class="reference" href="#lenient-mode" id="id10" name="id10">3.2.1   Lenient Mode</a></li>
+<li><a class="reference" href="#custom-modes" id="id11" name="id11">3.2.2   Custom Modes</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#built-in-functions-types" id="id12" name="id12">3.3   Built-in Functions &amp; Types</a><ul class="auto-toc">
+<li><a class="reference" href="#defined-name" id="id13" name="id13">3.3.1   <tt class="docutils literal"><span class="pre">defined(name)</span></tt></a></li>
+<li><a class="reference" href="#value-of-name-default-none" id="id14" name="id14">3.3.2   <tt class="docutils literal"><span class="pre">value_of(name,</span> <span class="pre">default=None)</span></tt></a></li>
+<li><a class="reference" href="#markup-text" id="id15" name="id15">3.3.3   <tt class="docutils literal"><span class="pre">Markup(text)</span></tt></a></li>
+<li><a class="reference" href="#id3" id="id16" name="id16">3.3.4   <tt class="docutils literal"><span class="pre">Undefined</span></tt></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference" href="#template-directives" id="id17" name="id17">4   Template Directives</a></li>
+</ul>
+</div>
+<div class="section">
+<h1><a id="synopsis" name="synopsis">1   Synopsis</a></h1>
+<p>A Genshi <em>markup template</em> is a well-formed XML document with embedded Python
+used for control flow and variable substitution. Markup templates should be
+used to generate any kind of HTML or XML output, as they provide many advantages
+over simple text-based templates (such as automatic escaping of strings).</p>
+<p>The following illustrates a very basic Genshi markup template:</p>
+<div class="highlight"><pre><span class="cp">&lt;?python</span>
+  <span class="n">title</span> <span class="o">=</span> <span class="s">"A Genshi Template"</span>
+  <span class="n">fruits</span> <span class="o">=</span> <span class="p">[</span><span class="s">"apple"</span><span class="p">,</span> <span class="s">"orange"</span><span class="p">,</span> <span class="s">"kiwi"</span><span class="p">]</span>
+<span class="cp">?&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">xmlns:py=</span><span class="s">"http://genshi.edgewall.org/"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;title</span> <span class="na">py:content=</span><span class="s">"</span><span class="n">title</span><span class="s">"</span><span class="nt">&gt;</span>This is replaced.<span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;p&gt;</span>These are some of my favorite fruits:<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;ul&gt;</span>
+      <span class="nt">&lt;li</span> <span class="na">py:for=</span><span class="s">"</span><span class="n">fruit</span> <span class="ow">in</span> <span class="n">fruits</span><span class="s">"</span><span class="nt">&gt;</span>
+        I like <span class="cp">${</span><span class="n">fruit</span><span class="cp">}</span>s
+      <span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;/ul&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+<p>This example shows:</p>
+<ol class="loweralpha simple">
+<li>a Python code block, using a processing instruction</li>
+<li>the Genshi namespace declaration</li>
+<li>usage of templates directives (<tt class="docutils literal"><span class="pre">py:content</span></tt> and <tt class="docutils literal"><span class="pre">py:for</span></tt>)</li>
+<li>an inline Python expression (<tt class="docutils literal"><span class="pre">${fruit}</span></tt>).</li>
+</ol>
+<p>The template would generate output similar to this:</p>
+<div class="highlight"><pre><span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;title&gt;</span>A Genshi Template<span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;p&gt;</span>These are some of my favorite fruits:<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;ul&gt;</span>
+      <span class="nt">&lt;li&gt;</span>I like apples<span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;li&gt;</span>I like oranges<span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;li&gt;</span>I like kiwis<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;/ul&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+<p>A <em>text template</em> is a simple plain text document that can also contain embedded
+Python code. Text templates can be used to generate simple <em>non-markup</em> text
+formats, such as the body of an plain text email. For example:</p>
+<div class="highlight"><pre><span class="x">Dear </span><span class="nv">$name</span><span class="x">,</span>
+
+<span class="x">These are some of my favorite fruits:</span>
+<span class="cp">#</span><span class="k">for</span> <span class="n">fruit</span> <span class="ow">in</span> <span class="n">fruits</span><span class="x"></span>
+<span class="x"> * </span><span class="nv">$fruit</span><span class="x"></span>
+<span class="cp">#</span><span class="k">end</span><span class="x"></span>
+</pre></div>
+</div>
+<div class="section">
+<h1><a id="python-api" name="python-api">2   Python API</a></h1>
+<p>The Python code required for templating with Genshi is generally based on the
+following pattern:</p>
+<ul class="simple">
+<li>Attain a <tt class="docutils literal"><span class="pre">MarkupTemplate</span></tt> or <tt class="docutils literal"><span class="pre">TextTemplate</span></tt> object from a string or
+file-like object containing the template source. This can either be done
+directly, or through a <tt class="docutils literal"><span class="pre">TemplateLoader</span></tt> instance.</li>
+<li>Call the <tt class="docutils literal"><span class="pre">generate()</span></tt> method of the template, passing any data that should
+be made available to the template as keyword arguments.</li>
+<li>Serialize the resulting stream using its <tt class="docutils literal"><span class="pre">render()</span></tt> method.</li>
+</ul>
+<p>For example:</p>
+<div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">from</span> <span class="nn">genshi.template</span> <span class="k">import</span> <span class="n">MarkupTemplate</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tmpl</span> <span class="o">=</span> <span class="n">MarkupTemplate</span><span class="p">(</span><span class="s">'&lt;h1&gt;Hello, $name!&lt;/h1&gt;'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stream</span> <span class="o">=</span> <span class="n">tmpl</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'world'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">stream</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s">'xhtml'</span><span class="p">)</span>
+<span class="go">&lt;h1&gt;Hello, world!&lt;/h1&gt;</span>
+</pre></div>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">See the <a class="reference" href="streams.html#serialization">Serialization</a> section of the <a class="reference" href="streams.html">Markup Streams</a> page for
+information on configuring template output options.</p>
+</div>
+<p>Using a text template is similar:</p>
+<div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">from</span> <span class="nn">genshi.template</span> <span class="k">import</span> <span class="n">TextTemplate</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tmpl</span> <span class="o">=</span> <span class="n">TextTemplate</span><span class="p">(</span><span class="s">'Hello, $name!'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stream</span> <span class="o">=</span> <span class="n">tmpl</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'world'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">stream</span>
+<span class="go">Hello, world!</span>
+</pre></div>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you want to use text templates, you should consider using the
+<tt class="docutils literal"><span class="pre">NewTextTemplate</span></tt> class instead of simply <tt class="docutils literal"><span class="pre">TextTemplate</span></tt>. See
+the <a class="reference" href="text-templates.html">Text Template Language</a> page.</p>
+</div>
+<p>Using a template loader provides the advantage that “compiled” templates are
+automatically cached, and only parsed again when the template file changes. In
+addition, it enables the use of a <em>template search path</em>, allowing template
+directories to be spread across different file-system locations. Using a
+template loader would generally look as follows:</p>
+<div class="highlight"><pre><span class="k">from</span> <span class="nn">genshi.template</span> <span class="k">import</span> <span class="n">TemplateLoader</span>
+<span class="n">loader</span> <span class="o">=</span> <span class="n">TemplateLoader</span><span class="p">([</span><span class="n">templates_dir1</span><span class="p">,</span> <span class="n">templates_dir2</span><span class="p">])</span>
+<span class="n">tmpl</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s">'test.html'</span><span class="p">)</span>
+<span class="n">stream</span> <span class="o">=</span> <span class="n">tmpl</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s">'Hello, world!'</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">stream</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+</pre></div>
+<p>See the <a class="reference" href="api/index.html">API documentation</a> for details on using Genshi via
+the Python API.</p>
+</div>
+<div class="section">
+<h1><a id="template-expressions-and-code-blocks" name="template-expressions-and-code-blocks"><span id="expressions"></span>3   Template Expressions and Code Blocks</a></h1>
+<p><a class="reference" href="http://www.python.org/">Python</a> expressions can be used in text and directive arguments. An expression
+is substituted with the result of its evaluation against the template data.
+Expressions in text (which includes the values of non-directive attributes) need
+to prefixed with a dollar sign (<tt class="docutils literal"><span class="pre">$</span></tt>) and usually enclosed in curly braces
+(<tt class="docutils literal"><span class="pre">{…}</span></tt>).</p>
+<p>If the expression starts with a letter and contains only letters, digits, dots,
+and underscores, the curly braces may be omitted. In all other cases, the
+braces are required so that the template processor knows where the expression
+ends:</p>
+<div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">from</span> <span class="nn">genshi.template</span> <span class="k">import</span> <span class="n">MarkupTemplate</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tmpl</span> <span class="o">=</span> <span class="n">MarkupTemplate</span><span class="p">(</span><span class="s">'&lt;em&gt;${items[0].capitalize()} item&lt;/em&gt;'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">tmpl</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">items</span><span class="o">=</span><span class="p">[</span><span class="s">'first'</span><span class="p">,</span> <span class="s">'second'</span><span class="p">])</span>
+<span class="go">&lt;em&gt;First item&lt;/em&gt;</span>
+</pre></div>
+<p>Expressions support the full power of Python. In addition, it is possible to
+access items in a dictionary using “dotted notation” (i.e. as if they were
+attributes), and vice-versa (i.e. access attributes as if they were items in a
+dictionary):</p>
+<div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">from</span> <span class="nn">genshi.template</span> <span class="k">import</span> <span class="n">MarkupTemplate</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tmpl</span> <span class="o">=</span> <span class="n">MarkupTemplate</span><span class="p">(</span><span class="s">'&lt;em&gt;${dict.foo}&lt;/em&gt;'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">tmpl</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="nb">dict</span><span class="o">=</span><span class="p">{</span><span class="s">'foo'</span><span class="p">:</span> <span class="s">'bar'</span><span class="p">})</span>
+<span class="go">&lt;em&gt;bar&lt;/em&gt;</span>
+</pre></div>
+<p>Because there are two ways to access either attributes or items, expressions
+do not raise the standard <tt class="docutils literal"><span class="pre">AttributeError</span></tt> or <tt class="docutils literal"><span class="pre">IndexError</span></tt> exceptions, but
+rather an exception of the type <tt class="docutils literal"><span class="pre">UndefinedError</span></tt>. The same kind of error is
+raised when you try to use a top-level variable that is not in the context data.
+See <a class="reference" href="#error-handling">Error Handling</a> below for details on how such errors are handled.</p>
+<div class="section">
+<h2><a id="id1" name="id1"><span id="code-blocks"></span>3.1   Code Blocks</a></h2>
+<p>Templates also support full Python code blocks, using the <tt class="docutils literal"><span class="pre">&lt;?python</span> <span class="pre">?&gt;</span></tt>
+processing instruction in XML templates:</p>
+<div class="highlight"><pre><span class="nt">&lt;div&gt;</span>
+  <span class="cp">&lt;?python</span>
+      <span class="k">from</span> <span class="nn">genshi.builder</span> <span class="k">import</span> <span class="n">tag</span>
+      <span class="k">def</span> <span class="nf">greeting</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+          <span class="k">return</span> <span class="n">tag</span><span class="o">.</span><span class="n">b</span><span class="p">(</span><span class="s">'Hello, </span><span class="si">%s</span><span class="s">!'</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span> <span class="cp">?&gt;</span>
+  <span class="cp">${</span><span class="n">greeting</span><span class="p">(</span><span class="s">'world'</span><span class="p">)</span><span class="cp">}</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+<p>This will produce the following output:</p>
+<div class="highlight"><pre><span class="nt">&lt;div&gt;</span>
+  <span class="nt">&lt;b&gt;</span>Hello, world!<span class="nt">&lt;/b&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+<p>In text templates (although only those using the new syntax introduced in
+Genshi 0.5), code blocks use the special <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">python</span> <span class="pre">%}</span></tt> directive:</p>
+<div class="highlight"><pre><span class="x">{% python</span>
+<span class="x">    from genshi.builder import tag</span>
+<span class="x">    def greeting(name):</span>
+<span class="x">        return 'Hello, %s!' % name</span>
+<span class="x">%}</span>
+<span class="cp">${</span><span class="n">greeting</span><span class="p">(</span><span class="s">'world'</span><span class="p">)</span><span class="cp">}</span><span class="x"></span>
+</pre></div>
+<p>This will produce the following output:</p>
+<pre class="literal-block">
+Hello, world!
+</pre>
+<p>Code blocks can import modules, define classes and functions, and basically do
+anything you can do in normal Python code. What code blocks can <em>not</em> do is to
+produce content that is emitted directly tp the generated output.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">Using the <tt class="docutils literal"><span class="pre">print</span></tt> statement will print to the standard output
+stream, just as it does for other Python code in your application.</p>
+</div>
+<p>Unlike expressions, Python code in <tt class="docutils literal"><span class="pre">&lt;?python</span> <span class="pre">?&gt;</span></tt> processing instructions can
+not use item and attribute access in an interchangeable manner. That means that
+“dotted notation” is always attribute access, and vice-versa.</p>
+<p>The support for Python code blocks in templates is not supposed to encourage
+mixing application code into templates, which is generally considered bad
+design. If you're using many code blocks, that may be a sign that you should
+move such code into separate Python modules.</p>
+<p>If you'd rather not allow the use of Python code blocks in templates, you can
+simply set the <tt class="docutils literal"><span class="pre">allow_exec</span></tt> parameter (available on the <tt class="docutils literal"><span class="pre">Template</span></tt> and the
+<tt class="docutils literal"><span class="pre">TemplateLoader</span></tt> initializers) to <tt class="docutils literal"><span class="pre">False</span></tt>. In that case Genshi will raise
+a syntax error when a <tt class="docutils literal"><span class="pre">&lt;?python</span> <span class="pre">?&gt;</span></tt> processing instruction is encountered.
+But please note that disallowing code blocks in templates does not turn Genshi
+into a sandboxable template engine; there are sufficient ways to do harm even
+using plain expressions.</p>
+<div class="warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Unfortunately, code blocks are severely limited when running
+under Python 2.3: For example, it is not possible to access
+variables defined in outer scopes. If you plan to use code blocks
+extensively, it is strongly recommended that you run Python 2.4
+or later.</p>
+</div>
+</div>
+<div class="section">
+<h2><a id="id2" name="id2"><span id="error-handling"></span>3.2   Error Handling</a></h2>
+<p>By default, Genshi raises an <tt class="docutils literal"><span class="pre">UndefinedError</span></tt> if a template expression
+attempts to access a variable that is not defined:</p>
+<div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">from</span> <span class="nn">genshi.template</span> <span class="k">import</span> <span class="n">MarkupTemplate</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tmpl</span> <span class="o">=</span> <span class="n">MarkupTemplate</span><span class="p">(</span><span class="s">'&lt;p&gt;${doh}&lt;/p&gt;'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tmpl</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s">'xhtml'</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="c">...</span>
+<span class="nc">UndefinedError</span>: <span class="n-Identifier">"doh" not defined</span>
+</pre></div>
+<p>You can change this behavior by setting the variable lookup mode to "lenient".
+In that case, accessing undefined variables returns an <cite>Undefined</cite> object,
+meaning that the expression does not fail immediately. See below for details.</p>
+<p>If you need to check whether a variable exists in the template context, use the
+<a class="reference" href="#defined">defined</a> or the <a class="reference" href="#value-of">value_of</a> function described below. To check for existence of
+attributes on an object, or keys in a dictionary, use the <tt class="docutils literal"><span class="pre">hasattr()</span></tt>,
+<tt class="docutils literal"><span class="pre">getattr()</span></tt> or <tt class="docutils literal"><span class="pre">get()</span></tt> functions, or the <tt class="docutils literal"><span class="pre">in</span></tt> operator, just as you would
+in regular Python code:</p>
+<blockquote>
+<pre class="doctest-block">
+&gt;&gt;&gt; from genshi.template import MarkupTemplate
+&gt;&gt;&gt; tmpl = MarkupTemplate('&lt;p&gt;${defined("doh")}&lt;/p&gt;')
+&gt;&gt;&gt; print tmpl.generate().render('xhtml')
+&lt;p&gt;False&lt;/p&gt;
+</pre>
+</blockquote>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">Lenient error handling was the default in Genshi prior to version 0.5.
+Strict mode was introduced in version 0.4, and became the default in
+0.5. The reason for this change was that the lenient error handling
+was masking actual errors in templates, thereby also making it harder
+to debug some problems.</p>
+</div>
+<div class="section">
+<h3><a id="lenient-mode" name="lenient-mode"><span id="lenient"></span>3.2.1   Lenient Mode</a></h3>
+<p>If you instruct Genshi to use the lenient variable lookup mode, it allows you
+to access variables that are not defined, without raising an <tt class="docutils literal"><span class="pre">UndefinedError</span></tt>.</p>
+<p>This mode can be chosen by passing the <tt class="docutils literal"><span class="pre">lookup='lenient'</span></tt> keyword argument to
+the template initializer, or by passing the <tt class="docutils literal"><span class="pre">variable_lookup='lenient'</span></tt>
+keyword argument to the <tt class="docutils literal"><span class="pre">TemplateLoader</span></tt> initializer:</p>
+<div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">from</span> <span class="nn">genshi.template</span> <span class="k">import</span> <span class="n">MarkupTemplate</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tmpl</span> <span class="o">=</span> <span class="n">MarkupTemplate</span><span class="p">(</span><span class="s">'&lt;p&gt;${doh}&lt;/p&gt;'</span><span class="p">,</span> <span class="n">lookup</span><span class="o">=</span><span class="s">'lenient'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">tmpl</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s">'xhtml'</span><span class="p">)</span>
+<span class="go">&lt;p&gt;&lt;/p&gt;</span>
+</pre></div>
+<p>You <em>will</em> however get an exception if you try to call an undefined variable, or
+do anything else with it, such as accessing its attributes:</p>
+<div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">from</span> <span class="nn">genshi.template</span> <span class="k">import</span> <span class="n">MarkupTemplate</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tmpl</span> <span class="o">=</span> <span class="n">MarkupTemplate</span><span class="p">(</span><span class="s">'&lt;p&gt;${doh.oops}&lt;/p&gt;'</span><span class="p">,</span> <span class="n">lookup</span><span class="o">=</span><span class="s">'lenient'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">tmpl</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s">'xhtml'</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="c">...</span>
+<span class="nc">UndefinedError</span>: <span class="n-Identifier">"doh" not defined</span>
+</pre></div>
+<p>If you need to know whether a variable is defined, you can check its type
+against the <tt class="docutils literal"><span class="pre">Undefined</span></tt> class, for example in a conditional directive:</p>
+<div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">from</span> <span class="nn">genshi.template</span> <span class="k">import</span> <span class="n">MarkupTemplate</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tmpl</span> <span class="o">=</span> <span class="n">MarkupTemplate</span><span class="p">(</span><span class="s">'&lt;p&gt;${type(doh) is not Undefined}&lt;/p&gt;'</span><span class="p">,</span>
+<span class="gp">... </span>                      <span class="n">lookup</span><span class="o">=</span><span class="s">'lenient'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">tmpl</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s">'xhtml'</span><span class="p">)</span>
+<span class="go">&lt;p&gt;False&lt;/p&gt;</span>
+</pre></div>
+<p>Alternatively, the built-in functions <a class="reference" href="#defined">defined</a> or <a class="reference" href="#value-of">value_of</a> can be used in this
+case.</p>
+</div>
+<div class="section">
+<h3><a id="custom-modes" name="custom-modes">3.2.2   Custom Modes</a></h3>
+<p>In addition to the built-in "lenient" and "strict" modes, it is also possible to
+use a custom error handling mode. For example, you could use lenient error
+handling in a production environment, while also logging a warning when an
+undefined variable is referenced.</p>
+<p>See the API documentation of the <tt class="docutils literal"><span class="pre">genshi.template.eval</span></tt> module for details.</p>
+</div>
+</div>
+<div class="section">
+<h2><a id="built-in-functions-types" name="built-in-functions-types">3.3   Built-in Functions &amp; Types</a></h2>
+<p>The following functions and types are available by default in template code, in
+addition to the standard built-ins that are available to all Python code.</p>
+<div class="section">
+<h3><a id="defined-name" name="defined-name"><span id="defined"></span>3.3.1   <tt class="docutils literal"><span class="pre">defined(name)</span></tt></a></h3>
+<p>This function determines whether a variable of the specified name exists in
+the context data, and returns <tt class="docutils literal"><span class="pre">True</span></tt> if it does.</p>
+</div>
+<div class="section">
+<h3><a id="value-of-name-default-none" name="value-of-name-default-none"><span id="value-of"></span>3.3.2   <tt class="docutils literal"><span class="pre">value_of(name,</span> <span class="pre">default=None)</span></tt></a></h3>
+<p>This function returns the value of the variable with the specified name if
+such a variable is defined, and returns the value of the <tt class="docutils literal"><span class="pre">default</span></tt>
+parameter if no such variable is defined.</p>
+</div>
+<div class="section">
+<h3><a id="markup-text" name="markup-text"><span id="markup"></span>3.3.3   <tt class="docutils literal"><span class="pre">Markup(text)</span></tt></a></h3>
+<p>The <tt class="docutils literal"><span class="pre">Markup</span></tt> type marks a given string as being safe for inclusion in markup,
+meaning it will <em>not</em> be escaped in the serialization stage. Use this with care,
+as not escaping a user-provided string may allow malicious users to open your
+web site to cross-site scripting attacks.</p>
+</div>
+<div class="section">
+<h3><a id="id3" name="id3"><span id="undefined"></span>3.3.4   <tt class="docutils literal"><span class="pre">Undefined</span></tt></a></h3>
+<p>The <tt class="docutils literal"><span class="pre">Undefined</span></tt> type can be used to check whether a reference variable is
+defined, as explained in <a class="reference" href="#error-handling">error handling</a>.</p>
+</div>
+</div>
+</div>
+<div class="section">
+<h1><a id="template-directives" name="template-directives"><span id="directives"></span>4   Template Directives</a></h1>
+<p>Directives provide control flow functionality for templates, such as conditions
+or iteration. As the syntax for directives depends on whether you're using
+markup or text templates, refer to the
+<a class="reference" href="xml-templates.html">XML Template Language</a> or
+<a class="reference" href="text-templates.html">Text Template Language</a> pages for information.</p>
+</div>
+    <div id="footer">
+      Visit the Genshi open source project at
+      <a href="http://genshi.edgewall.org/">http://genshi.edgewall.org/</a>
+    </div>
+  </div>
+</body>
+</html>

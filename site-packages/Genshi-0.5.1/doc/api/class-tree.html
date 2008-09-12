@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class Hierarchy</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="genshi-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th bgcolor="#70b0f0" class="navbar-select"
+          >&nbsp;&nbsp;&nbsp;Trees&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="../index.html">Documentation Index</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">&nbsp;</td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+      </table>
+    </td>
+  </tr>
+</table>
+<center><b>
+ [ <a href="module-tree.html">Module Hierarchy</a>
+ | <a href="class-tree.html">Class Hierarchy</a> ]
+</b></center><br />
+<h1 class="epydoc">Class Hierarchy</h1>
+<ul class="nomargin-top">
+    <li> <strong class="uidlink">markupbase.ParserBase</strong>:
+      <em class="summary">Parser base class which provides some common support methods used
+by the SGML/HTML and XHTML parsers.</em>
+    <ul>
+    <li> <strong class="uidlink">HTMLParser.HTMLParser</strong>:
+      <em class="summary">Find tags and other markup and call handler functions.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="genshi.input.HTMLParser-class.html">genshi.input.HTMLParser</a></strong>:
+      <em class="summary">Parser for HTML input based on the Python <a href="genshi.input.HTMLParser-class.html" class="link">HTMLParser</a> module.</em>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink">object</strong>:
+      <em class="summary">The most base type</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="genshi.template.plugin.AbstractTemplateEnginePlugin-class.html">genshi.template.plugin.AbstractTemplateEnginePlugin</a></strong>:
+      <em class="summary">Implementation of the plugin API.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="genshi.template.plugin.MarkupTemplateEnginePlugin-class.html">genshi.template.plugin.MarkupTemplateEnginePlugin</a></strong>:
+      <em class="summary">Implementation of the plugin API for markup templates.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.template.plugin.TextTemplateEnginePlugin-class.html">genshi.template.plugin.TextTemplateEnginePlugin</a></strong>:
+      <em class="summary">Implementation of the plugin API for text templates.</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink">exceptions.BaseException</strong>:
+      <em class="summary">Common base class for all exceptions</em>
+    <ul>
+    <li> <strong class="uidlink">exceptions.Exception</strong>:
+      <em class="summary">Common base class for all non-exit exceptions.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="genshi.input.ParseError-class.html">genshi.input.ParseError</a></strong>:
+      <em class="summary">Exception raised when fatal syntax errors are found in the input being
+parsed.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.path.PathSyntaxError-class.html">genshi.path.PathSyntaxError</a></strong>:
+      <em class="summary">Exception raised when an XPath expression is syntactically incorrect.</em>
+    </li>
+    <li> <strong class="uidlink">exceptions.StandardError</strong>:
+      <em class="summary">Base class for all standard Python exceptions that do not represent
+interpreter exiting.</em>
+    <ul>
+    <li> <strong class="uidlink">exceptions.ValueError</strong>:
+      <em class="summary">Inappropriate argument value (of correct type).</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="genshi.template.plugin.ConfigurationError-class.html">genshi.template.plugin.ConfigurationError</a></strong>:
+      <em class="summary">Exception raised when invalid plugin options are encountered.</em>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.template.base.TemplateError-class.html">genshi.template.base.TemplateError</a></strong>:
+      <em class="summary">Base exception class for errors related to template processing.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="genshi.template.loader.TemplateNotFound-class.html">genshi.template.loader.TemplateNotFound</a></strong>:
+      <em class="summary">Exception raised when a specific template file could not be found.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.template.base.TemplateRuntimeError-class.html">genshi.template.base.TemplateRuntimeError</a></strong>:
+      <em class="summary">Exception raised when an the evaluation of a Python expression in a
+template causes an error.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="genshi.template.eval.UndefinedError-class.html">genshi.template.eval.UndefinedError</a></strong>:
+      <em class="summary">Exception thrown when a template expression attempts to access a variable
+not defined in the context.</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.template.base.TemplateSyntaxError-class.html">genshi.template.base.TemplateSyntaxError</a></strong>:
+      <em class="summary">Exception raised when an expression in a template causes a Python syntax
+error, or the template is not well-formed.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="genshi.template.base.BadDirectiveError-class.html">genshi.template.base.BadDirectiveError</a></strong>:
+      <em class="summary">Exception raised when an unknown directive is encountered when parsing
+a template.</em>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.template.eval.Code-class.html">genshi.template.eval.Code</a></strong>:
+      <em class="summary">Abstract base class for the <a href="genshi.template.eval.Expression-class.html" class="link">Expression</a> and <a href="genshi.template.eval.Suite-class.html" class="link">Suite</a> classes.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="genshi.template.eval.Expression-class.html">genshi.template.eval.Expression</a></strong>:
+      <em class="summary">Evaluates Python expressions used in templates.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.template.eval.Suite-class.html">genshi.template.eval.Suite</a></strong>:
+      <em class="summary">Executes Python statements used in templates.</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.template.base.Context-class.html">genshi.template.base.Context</a></strong>:
+      <em class="summary">Container for template input data.</em>
+    </li>
+    <li> <strong class="uidlink">genshi.template.directives.Directive</strong>:
+      <em class="summary">Abstract base class for template directives.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="genshi.template.directives.AttrsDirective-class.html">genshi.template.directives.AttrsDirective</a></strong>:
+      <em class="summary">Implementation of the <tt class="rst-docutils literal"><span class="pre">py:attrs</span></tt> template directive.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.template.directives.ChooseDirective-class.html">genshi.template.directives.ChooseDirective</a></strong>:
+      <em class="summary">Implementation of the <tt class="rst-docutils literal"><span class="pre">py:choose</span></tt> directive for conditionally selecting
+one of several body elements to display.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.template.directives.ContentDirective-class.html">genshi.template.directives.ContentDirective</a></strong>:
+      <em class="summary">Implementation of the <tt class="rst-docutils literal"><span class="pre">py:content</span></tt> template directive.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.template.directives.DefDirective-class.html">genshi.template.directives.DefDirective</a></strong>:
+      <em class="summary">Implementation of the <tt class="rst-docutils literal"><span class="pre">py:def</span></tt> template directive.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.template.directives.ForDirective-class.html">genshi.template.directives.ForDirective</a></strong>:
+      <em class="summary">Implementation of the <tt class="rst-docutils literal"><span class="pre">py:for</span></tt> template directive for repeating an
+element based on an iterable in the context data.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.template.directives.IfDirective-class.html">genshi.template.directives.IfDirective</a></strong>:
+      <em class="summary">Implementation of the <tt class="rst-docutils literal"><span class="pre">py:if</span></tt> template directive for conditionally
+excluding elements from being output.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.template.directives.MatchDirective-class.html">genshi.template.directives.MatchDirective</a></strong>:
+      <em class="summary">Implementation of the <tt class="rst-docutils literal"><span class="pre">py:match</span></tt> template directive.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.template.directives.OtherwiseDirective-class.html">genshi.template.directives.OtherwiseDirective</a></strong>:
+      <em class="summary">Implementation of the <tt class="rst-docutils literal"><span class="pre">py:otherwise</span></tt> directive for nesting in a parent
+with the <tt class="rst-docutils literal"><span class="pre">py:choose</span></tt> directive.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.template.directives.ReplaceDirective-class.html">genshi.template.directives.ReplaceDirective</a></strong>:
+      <em class="summary">Implementation of the <tt class="rst-docutils literal"><span class="pre">py:replace</span></tt> template directive.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.template.directives.StripDirective-class.html">genshi.template.directives.StripDirective</a></strong>:
+      <em class="summary">Implementation of the <tt class="rst-docutils literal"><span class="pre">py:strip</span></tt> template directive.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.template.directives.WhenDirective-class.html">genshi.template.directives.WhenDirective</a></strong>:
+      <em class="summary">Implementation of the <tt class="rst-docutils literal"><span class="pre">py:when</span></tt> directive for nesting in a parent with
+the <tt class="rst-docutils literal"><span class="pre">py:choose</span></tt> directive.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.template.directives.WithDirective-class.html">genshi.template.directives.WithDirective</a></strong>:
+      <em class="summary">Implementation of the <tt class="rst-docutils literal"><span class="pre">py:with</span></tt> template directive, which allows
+shorthand access to variables and expressions.</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.output.DocType-class.html">genshi.output.DocType</a></strong>:
+      <em class="summary">Defines a number of commonly used DOCTYPE declarations as constants.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.builder.ElementFactory-class.html">genshi.builder.ElementFactory</a></strong>:
+      <em class="summary">Factory for <a href="genshi.builder.Element-class.html" class="link">Element</a> objects.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.builder.Fragment-class.html">genshi.builder.Fragment</a></strong>:
+      <em class="summary">Represents a markup fragment, which is basically just a list of element
+or text nodes.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="genshi.builder.Element-class.html">genshi.builder.Element</a></strong>:
+      <em class="summary">Simple XML output generator based on the builder pattern.</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.filters.html.HTMLFormFiller-class.html">genshi.filters.html.HTMLFormFiller</a></strong>:
+      <em class="summary">A stream filter that can populate HTML forms from a dictionary of values.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.input.HTMLParser-class.html">genshi.input.HTMLParser</a></strong>:
+      <em class="summary">Parser for HTML input based on the Python <a href="genshi.input.HTMLParser-class.html" class="link">HTMLParser</a> module.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.filters.html.HTMLSanitizer-class.html">genshi.filters.html.HTMLSanitizer</a></strong>:
+      <em class="summary">A filter that removes potentially dangerous HTML tags and attributes
+from the stream.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.filters.transform.InjectorTransformation-class.html">genshi.filters.transform.InjectorTransformation</a></strong>:
+      <em class="summary">Abstract base class for transformations that inject content into a
+stream.</em>
+    <ul>
+    </ul>
+    </li>
+    <li> <strong class="uidlink">genshi.template.eval.LookupBase</strong>:
+      <em class="summary">Abstract base class for variable lookup implementations.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="genshi.template.eval.LenientLookup-class.html">genshi.template.eval.LenientLookup</a></strong>:
+      <em class="summary">Default variable lookup mechanism for expressions.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.template.eval.StrictLookup-class.html">genshi.template.eval.StrictLookup</a></strong>:
+      <em class="summary">Strict variable lookup mechanism for expressions.</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.core.Namespace-class.html">genshi.core.Namespace</a></strong>:
+      <em class="summary">Utility class creating and testing elements with a namespace.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.path.Path-class.html">genshi.path.Path</a></strong>:
+      <em class="summary">Implements basic XPath support on streams.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.core.Stream-class.html">genshi.core.Stream</a></strong>:
+      <em class="summary">Represents a stream of markup events.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="genshi.filters.transform.StreamBuffer-class.html">genshi.filters.transform.StreamBuffer</a></strong>:
+      <em class="summary">Stream event buffer used for cut and copy transformations.</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.template.base.Template-class.html">genshi.template.base.Template</a></strong>:
+      <em class="summary">Abstract template base class.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="genshi.template.markup.MarkupTemplate-class.html">genshi.template.markup.MarkupTemplate</a></strong>:
+      <em class="summary">Implementation of the template language for XML-based templates.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.template.text.NewTextTemplate-class.html">genshi.template.text.NewTextTemplate</a></strong>:
+      <em class="summary">Implementation of a simple text-based template engine.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.template.text.OldTextTemplate-class.html">genshi.template.text.OldTextTemplate</a></strong>:
+      <em class="summary">Legacy implementation of the old syntax text-based templates.</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.template.loader.TemplateLoader-class.html">genshi.template.loader.TemplateLoader</a></strong>:
+      <em class="summary">Responsible for loading templates from files on the specified search
+path.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.output.TextSerializer-class.html">genshi.output.TextSerializer</a></strong>:
+      <em class="summary">Produces plain text from an event stream.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.filters.transform.Transformer-class.html">genshi.filters.transform.Transformer</a></strong>:
+      <em class="summary">Stream filter that can apply a variety of different transformations to
+a stream.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.filters.i18n.Translator-class.html">genshi.filters.i18n.Translator</a></strong>:
+      <em class="summary">Can extract and translate localizable strings from markup streams and
+templates.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.template.eval.Undefined-class.html">genshi.template.eval.Undefined</a></strong>:
+      <em class="summary">Represents a reference to an undefined variable.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.input.XMLParser-class.html">genshi.input.XMLParser</a></strong>:
+      <em class="summary">Generator-based XML parser based on roughly equivalent code in
+Kid/ElementTree.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.output.XMLSerializer-class.html">genshi.output.XMLSerializer</a></strong>:
+      <em class="summary">Produces XML text from an event stream.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="genshi.output.XHTMLSerializer-class.html">genshi.output.XHTMLSerializer</a></strong>:
+      <em class="summary">Produces XHTML text from an event stream.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="genshi.output.HTMLSerializer-class.html">genshi.output.HTMLSerializer</a></strong>:
+      <em class="summary">Produces HTML text from an event stream.</em>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink">basestring</strong>:
+      <em class="summary">Type basestring cannot be instantiated; it is the base for str and unicode.</em>
+    <ul>
+    <li> <strong class="uidlink">unicode</strong>:
+      <em class="summary">unicode(string [, encoding[, errors]]) -&gt; object</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="genshi.core.Markup-class.html">genshi.core.Markup</a></strong>:
+      <em class="summary">Marks a string as being safe for inclusion in HTML/XML output without
+needing to be escaped.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.core.QName-class.html">genshi.core.QName</a></strong>:
+      <em class="summary">A qualified element or attribute name.</em>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink">dict</strong>:
+      <em class="summary">dict() -&gt; new empty dictionary.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="genshi.util.LRUCache-class.html">genshi.util.LRUCache</a></strong>:
+      <em class="summary">A dictionary-like object that stores only a certain number of items, and
+discards its least recently used item when full.</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink">tuple</strong>:
+      <em class="summary">tuple() -&gt; an empty tuple
+tuple(sequence) -&gt; tuple initialized from sequence's items</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="genshi.core.Attrs-class.html">genshi.core.Attrs</a></strong>:
+      <em class="summary">Immutable sequence type that stores the attributes of an element.</em>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink">type</strong>:
+      <em class="summary">type(object) -&gt; the object's type
+type(name, bases, dict) -&gt; a new type</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="genshi.template.directives.DirectiveMeta-class.html">genshi.template.directives.DirectiveMeta</a></strong>:
+      <em class="summary">Meta class for template directives.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="genshi.template.base.TemplateMeta-class.html" onclick="show_private();">genshi.template.base.TemplateMeta</a></strong>:
+      <em class="summary">Meta class for templates.</em>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+</ul>
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="genshi-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th bgcolor="#70b0f0" class="navbar-select"
+          >&nbsp;&nbsp;&nbsp;Trees&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="../index.html">Documentation Index</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Wed Jul  9 18:16:20 2008
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

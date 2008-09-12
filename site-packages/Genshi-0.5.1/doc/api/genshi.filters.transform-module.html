@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>genshi.filters.transform</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="genshi-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="../index.html">Documentation Index</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="genshi-module.html">Package&nbsp;genshi</a> ::
+        <a href="genshi.filters-module.html">Package&nbsp;filters</a> ::
+        Module&nbsp;transform
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module transform</h1><p class="nomargin-top"></p>
+<p>A filter for functional-style transformations of markup streams.</p>
+<p>The <a href="genshi.filters.transform.Transformer-class.html" class="link">Transformer</a> filter provides a variety of transformations that can be
+applied to parts of streams that match given XPath expressions. These
+transformations can be chained to achieve results that would be comparitively
+tedious to achieve by writing stream filters by hand. The approach of chaining
+node selection and transformation has been inspired by the <a class="rst-reference" href="http://jquery.com/" target="_top">jQuery</a> Javascript
+library.</p>
+<blockquote>
+</blockquote>
+<p>For example, the following transformation removes the <tt class="rst-docutils literal"><span class="pre">&lt;title&gt;</span></tt> element from
+the <tt class="rst-docutils literal"><span class="pre">&lt;head&gt;</span></tt> of the input document:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">from</span> genshi.builder <span class="py-keyword">import</span> tag
+<span class="py-prompt">&gt;&gt;&gt; </span>html = HTML(<span class="py-string">'''&lt;html&gt;</span>
+<span class="py-more">... </span><span class="py-string"> &lt;head&gt;&lt;title&gt;Some Title&lt;/title&gt;&lt;/head&gt;</span>
+<span class="py-more">... </span><span class="py-string"> &lt;body&gt;</span>
+<span class="py-more">... </span><span class="py-string">   Some &lt;em&gt;body&lt;/em&gt; text.</span>
+<span class="py-more">... </span><span class="py-string"> &lt;/body&gt;</span>
+<span class="py-more">... </span><span class="py-string">&lt;/html&gt;'''</span>)
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> html | Transformer(<span class="py-string">'body/em'</span>).map(unicode.upper, TEXT) \
+<span class="py-more">... </span>                                   .unwrap().wrap(tag.u)
+<span class="py-output">&lt;html&gt;</span>
+<span class="py-output">  &lt;head&gt;&lt;title&gt;Some Title&lt;/title&gt;&lt;/head&gt;</span>
+<span class="py-output">  &lt;body&gt;</span>
+<span class="py-output">    Some &lt;u&gt;BODY&lt;/u&gt; text.</span>
+<span class="py-output">  &lt;/body&gt;</span>
+<span class="py-output">&lt;/html&gt;</span></pre>
+<p>The <tt class="rst-docutils literal"><span class="pre">Transformer</span></tt> support a large number of useful transformations out of the
+box, but custom transformations can be added easily.</p>
+
+<hr />
+<div class="fields">      <p><strong>Since:</strong>
+        version 0.5
+      </p>
+</div><!-- ==================== CLASSES ==================== -->
+<a name="section-Classes"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Classes</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="genshi.filters.transform.Transformer-class.html" class="summary-name">Transformer</a><br />
+      Stream filter that can apply a variety of different transformations to
+a stream.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="genshi.filters.transform.InjectorTransformation-class.html" class="summary-name">InjectorTransformation</a><br />
+      Abstract base class for transformations that inject content into a
+stream.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="genshi.filters.transform.StreamBuffer-class.html" class="summary-name">StreamBuffer</a><br />
+      Stream event buffer used for cut and copy transformations.
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Variables</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="ENTER"></a><span class="summary-name">ENTER</span> = <code title="'ENTER'">'ENTER'</code><br />
+      Stream augmentation mark indicating that a selected element is being
+entered.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="INSIDE"></a><span class="summary-name">INSIDE</span> = <code title="'INSIDE'">'INSIDE'</code><br />
+      Stream augmentation mark indicating that processing is currently inside a
+selected element.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="OUTSIDE"></a><span class="summary-name">OUTSIDE</span> = <code title="'OUTSIDE'">'OUTSIDE'</code><br />
+      Stream augmentation mark indicating that a match occurred outside a selected
+element.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="EXIT"></a><span class="summary-name">EXIT</span> = <code title="'EXIT'">'EXIT'</code><br />
+      Stream augmentation mark indicating that a selected element is being
+exited.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="genshi.filters.transform-module.html#BREAK" class="summary-name">BREAK</a> = <code title="'BREAK'">'BREAK'</code><br />
+      Stream augmentation mark indicating a break between two otherwise contiguous
+blocks of marked events.
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES DETAILS ==================== -->
+<a name="section-VariablesDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Variables Details</span></td>
+</tr>
+</table>
+<a name="BREAK"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">BREAK</h3>
+  <p>Stream augmentation mark indicating a break between two otherwise contiguous
+blocks of marked events.</p>
+<p>This is used primarily by the cut() transform to provide later transforms with
+an opportunity to operate on the cut buffer.</p>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+'BREAK'
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="genshi-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="../index.html">Documentation Index</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Wed Jul  9 18:16:20 2008
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

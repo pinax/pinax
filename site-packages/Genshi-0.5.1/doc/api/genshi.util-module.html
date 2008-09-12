@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>genshi.util</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="genshi-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="../index.html">Documentation Index</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="genshi-module.html">Package&nbsp;genshi</a> ::
+        Module&nbsp;util
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module util</h1><p class="nomargin-top"></p>
+Various utility classes and functions.
+
+<!-- ==================== CLASSES ==================== -->
+<a name="section-Classes"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Classes</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="genshi.util.LRUCache-class.html" class="summary-name">LRUCache</a><br />
+      A dictionary-like object that stores only a certain number of items, and
+discards its least recently used item when full.
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Functions</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.util-module.html#flatten" class="summary-sig-name">flatten</a>(<span class="summary-sig-arg">items</span>)</span><br />
+      Flattens a potentially nested sequence into a flat list.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.util-module.html#plaintext" class="summary-sig-name">plaintext</a>(<span class="summary-sig-arg">text</span>,
+        <span class="summary-sig-arg">keeplinebreaks</span>=<span class="summary-sig-default">True</span>)</span><br />
+      Returns the text as a <code class="link">unicode</code> string with all entities and tags
+removed.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.util-module.html#stripentities" class="summary-sig-name">stripentities</a>(<span class="summary-sig-arg">text</span>,
+        <span class="summary-sig-arg">keepxmlentities</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Return a copy of the given text with any character or numeric entities
+replaced by the equivalent UTF-8 characters.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.util-module.html#striptags" class="summary-sig-name">striptags</a>(<span class="summary-sig-arg">text</span>)</span><br />
+      Return a copy of the text with any XML/HTML tags removed.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Function Details</span></td>
+</tr>
+</table>
+<a name="flatten"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">flatten</span>(<span class="sig-arg">items</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Flattens a potentially nested sequence into a flat list.</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>flatten((1, 2))
+<span class="py-output">[1, 2]</span>
+<span class="py-output"></span><span class="py-prompt">&gt;&gt;&gt; </span>flatten([1, (2, 3), 4])
+<span class="py-output">[1, 2, 3, 4]</span>
+<span class="py-output"></span><span class="py-prompt">&gt;&gt;&gt; </span>flatten([1, (2, [3, 4]), 5])
+<span class="py-output">[1, 2, 3, 4, 5]</span></pre>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>items</code></strong> - the sequence to flatten</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="plaintext"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">plaintext</span>(<span class="sig-arg">text</span>,
+        <span class="sig-arg">keeplinebreaks</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns the text as a <code class="link">unicode</code> string with all entities and tags
+removed.</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>plaintext(<span class="py-string">'&lt;b&gt;1 &amp;lt; 2&lt;/b&gt;'</span>)
+<span class="py-output">u'1 &lt; 2'</span></pre>
+<p>The <code class="link">keeplinebreaks</code> parameter can be set to <tt class="rst-docutils literal"><span class="pre">False</span></tt> to replace any line
+breaks by simple spaces:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>plaintext(<span class="py-string">'''&lt;b&gt;1</span>
+<span class="py-more">... </span><span class="py-string">&amp;lt;</span>
+<span class="py-more">... </span><span class="py-string">2&lt;/b&gt;'''</span>, keeplinebreaks=False)
+<span class="py-output">u'1 &lt; 2'</span></pre>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>text</code></strong> - the text to convert to plain text</li>
+        <li><strong class="pname"><code>keeplinebreaks</code></strong> - whether line breaks in the text should be kept intact</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>the text with tags and entities removed</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="stripentities"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">stripentities</span>(<span class="sig-arg">text</span>,
+        <span class="sig-arg">keepxmlentities</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Return a copy of the given text with any character or numeric entities
+replaced by the equivalent UTF-8 characters.</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>stripentities(<span class="py-string">'1 &amp;lt; 2'</span>)
+<span class="py-output">u'1 &lt; 2'</span>
+<span class="py-output"></span><span class="py-prompt">&gt;&gt;&gt; </span>stripentities(<span class="py-string">'more &amp;hellip;'</span>)
+<span class="py-output">u'more \u2026'</span>
+<span class="py-output"></span><span class="py-prompt">&gt;&gt;&gt; </span>stripentities(<span class="py-string">'&amp;#8230;'</span>)
+<span class="py-output">u'\u2026'</span>
+<span class="py-output"></span><span class="py-prompt">&gt;&gt;&gt; </span>stripentities(<span class="py-string">'&amp;#x2026;'</span>)
+<span class="py-output">u'\u2026'</span></pre>
+<p>If the <code class="link">keepxmlentities</code> parameter is provided and is a truth value, the
+core XML entities (&amp;amp;, &amp;apos;, &amp;gt;, &amp;lt; and &amp;quot;) are left intact.</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>stripentities(<span class="py-string">'1 &amp;lt; 2 &amp;hellip;'</span>, keepxmlentities=True)
+<span class="py-output">u'1 &amp;lt; 2 \u2026'</span></pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="striptags"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">striptags</span>(<span class="sig-arg">text</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Return a copy of the text with any XML/HTML tags removed.</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>striptags(<span class="py-string">'&lt;span&gt;Foo&lt;/span&gt; bar'</span>)
+<span class="py-output">'Foo bar'</span>
+<span class="py-output"></span><span class="py-prompt">&gt;&gt;&gt; </span>striptags(<span class="py-string">'&lt;span class=&quot;bar&quot;&gt;Foo&lt;/span&gt;'</span>)
+<span class="py-output">'Foo'</span>
+<span class="py-output"></span><span class="py-prompt">&gt;&gt;&gt; </span>striptags(<span class="py-string">'Foo&lt;br /&gt;'</span>)
+<span class="py-output">'Foo'</span></pre>
+<p>HTML/XML comments are stripped, too:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>striptags(<span class="py-string">'&lt;!-- &lt;blub&gt;hehe&lt;/blah&gt; --&gt;test'</span>)
+<span class="py-output">'test'</span></pre>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>text</code></strong> - the string to remove tags from</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>the text with tags removed</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="genshi-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="../index.html">Documentation Index</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Wed Jul  9 18:16:20 2008
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

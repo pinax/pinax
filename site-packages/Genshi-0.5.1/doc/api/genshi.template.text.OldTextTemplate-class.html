@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>genshi.template.text.OldTextTemplate</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="genshi-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="../index.html">Documentation Index</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="genshi-module.html">Package&nbsp;genshi</a> ::
+        <a href="genshi.template-module.html">Package&nbsp;template</a> ::
+        <a href="genshi.template.text-module.html">Module&nbsp;text</a> ::
+        Class&nbsp;OldTextTemplate
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class OldTextTemplate</h1><p class="nomargin-top"></p>
+<pre class="base-tree">
+   object --+    
+            |    
+<a href="genshi.template.base.Template-class.html">base.Template</a> --+
+                |
+               <strong class="uidshort">OldTextTemplate</strong>
+</pre>
+
+<hr />
+<p>Legacy implementation of the old syntax text-based templates. This class
+is provided in a transition phase for backwards compatibility. New code
+should use the <a href="genshi.template.text.NewTextTemplate-class.html" class="link">NewTextTemplate</a> class and the improved syntax it provides.</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>tmpl = OldTextTemplate(<span class="py-string">'''Dear $name,</span>
+<span class="py-more">...</span>
+<span class="py-more">... </span><span class="py-string">We have the following items for you:</span>
+<span class="py-more">... </span><span class="py-string">#for item in items</span>
+<span class="py-more">... </span><span class="py-string"> * $item</span>
+<span class="py-more">... </span><span class="py-string">#end</span>
+<span class="py-more">...</span>
+<span class="py-more">... </span><span class="py-string">All the best,</span>
+<span class="py-more">... </span><span class="py-string">Foobar'''</span>)
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> tmpl.generate(name=<span class="py-string">'Joe'</span>, <span class="py-builtin">items</span>=[1, 2, 3]).render()
+<span class="py-output">Dear Joe,</span>
+<span class="py-output">&lt;BLANKLINE&gt;</span>
+<span class="py-output">We have the following items for you:</span>
+<span class="py-output"> * 1</span>
+<span class="py-output"> * 2</span>
+<span class="py-output"> * 3</span>
+<span class="py-output">&lt;BLANKLINE&gt;</span>
+<span class="py-output">All the best,</span>
+<span class="py-output">Foobar</span></pre>
+
+<!-- ==================== NESTED CLASSES ==================== -->
+<a name="section-NestedClasses"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Nested Classes</span></td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="genshi.template.base.Template-class.html">base.Template</a></code></b>:
+      <code><a href="genshi.template.base.TemplateMeta-class.html">__metaclass__</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Instance Methods</span></td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="genshi.template.base.Template-class.html">base.Template</a></code></b>:
+      <code><a href="genshi.template.base.Template-class.html#__getstate__">__getstate__</a></code>,
+      <code><a href="genshi.template.base.Template-class.html#__init__">__init__</a></code>,
+      <code><a href="genshi.template.base.Template-class.html#__repr__">__repr__</a></code>,
+      <code><a href="genshi.template.base.Template-class.html#__setstate__">__setstate__</a></code>,
+      <code><a href="genshi.template.base.Template-class.html#generate">generate</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__setattr__</code>,
+      <code>__str__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Class Variables</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="genshi.template.text.OldTextTemplate-class.html#directives" class="summary-name">directives</a> = <code title="[('def', &lt;class 'genshi.template.directives.DefDirective'&gt;),
+ ('when', &lt;class 'genshi.template.directives.WhenDirective'&gt;),
+ ('otherwise',
+  &lt;class 'genshi.template.directives.OtherwiseDirective'&gt;),
+ ('for', &lt;class 'genshi.template.directives.ForDirective'&gt;),
+ ('if', &lt;class 'genshi.template.directives.IfDirective'&gt;),
+ ('choose', &lt;class 'genshi.template.directives.ChooseDirective'&gt;),
+ ('with', &lt;class 'genshi.template.directives.WithDirective'&gt;)]"><code class="variable-group">[</code><code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">def</code><code class="variable-quote">'</code><code class="variable-op">, </code>&lt;class 'genshi.template.directives.DefDi<code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="serializer"></a><span class="summary-name">serializer</span> = <code title="'text'"><code class="variable-quote">'</code><code class="variable-string">text</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="genshi.template.base.Template-class.html">base.Template</a></code></b>:
+      <code><a href="genshi.template.base.Template-class.html#EXEC">EXEC</a></code>,
+      <code><a href="genshi.template.base.Template-class.html#EXPR">EXPR</a></code>,
+      <code><a href="genshi.template.base.Template-class.html#INCLUDE">INCLUDE</a></code>,
+      <code><a href="genshi.template.base.Template-class.html#SUB">SUB</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Properties</span></td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLE DETAILS ==================== -->
+<a name="section-ClassVariableDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Class Variable Details</span></td>
+</tr>
+</table>
+<a name="directives"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">directives</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">[</code><code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">def</code><code class="variable-quote">'</code><code class="variable-op">, </code>&lt;class 'genshi.template.directives.DefDirective'&gt;<code class="variable-group">)</code><code class="variable-op">,</code>
+ <code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">when</code><code class="variable-quote">'</code><code class="variable-op">, </code>&lt;class 'genshi.template.directives.WhenDirective'&gt;<code class="variable-group">)</code><code class="variable-op">,</code>
+ <code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">otherwise</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+  &lt;class 'genshi.template.directives.OtherwiseDirective'&gt;<code class="variable-group">)</code><code class="variable-op">,</code>
+ <code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">for</code><code class="variable-quote">'</code><code class="variable-op">, </code>&lt;class 'genshi.template.directives.ForDirective'&gt;<code class="variable-group">)</code><code class="variable-op">,</code>
+ <code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">if</code><code class="variable-quote">'</code><code class="variable-op">, </code>&lt;class 'genshi.template.directives.IfDirective'&gt;<code class="variable-group">)</code><code class="variable-op">,</code>
+ <code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">choose</code><code class="variable-quote">'</code><code class="variable-op">, </code>&lt;class 'genshi.template.directives.ChooseDirective'&gt;<code class="variable-group">)</code><code class="variable-op">,</code>
+ <code class="variable-group">(</code><code class="variable-quote">'</code><code class="variable-string">with</code><code class="variable-quote">'</code><code class="variable-op">, </code>&lt;class 'genshi.template.directives.WithDirective'&gt;<code class="variable-group">)</code><code class="variable-group">]</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="genshi-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="../index.html">Documentation Index</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Wed Jul  9 18:16:21 2008
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

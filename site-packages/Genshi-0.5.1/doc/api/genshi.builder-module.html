@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>genshi.builder</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="genshi-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="../index.html">Documentation Index</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="genshi-module.html">Package&nbsp;genshi</a> ::
+        Module&nbsp;builder
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module builder</h1><p class="nomargin-top"></p>
+<p>Support for programmatically generating markup streams from Python code using
+a very simple syntax. The main entry point to this module is the <a href="genshi.builder-module.html#tag" class="link">tag</a> object
+(which is actually an instance of the <tt class="rst-docutils literal"><span class="pre">ElementFactory</span></tt> class). You should
+rarely (if ever) need to directly import and use any of the other classes in
+this module.</p>
+<p>Elements can be created using the <a href="genshi.builder-module.html#tag" class="link">tag</a> object using attribute access. For
+example:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>doc = tag.p(<span class="py-string">'Some text and '</span>, tag.a(<span class="py-string">'a link'</span>, href=<span class="py-string">'http://example.org/'</span>), <span class="py-string">'.'</span>)
+<span class="py-prompt">&gt;&gt;&gt; </span>doc
+<span class="py-output">&lt;Element &quot;p&quot;&gt;</span></pre>
+<p>This produces an <a href="genshi.builder.Element-class.html" class="link">Element</a> instance which can be further modified to add child
+nodes and attributes. This is done by &quot;calling&quot; the element: positional
+arguments are added as child nodes (alternatively, the <a href="genshi.builder.Fragment-class.html#append" class="link">Element.append</a> method
+can be used for that purpose), whereas keywords arguments are added as
+attributes:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>doc(tag.br)
+<span class="py-output">&lt;Element &quot;p&quot;&gt;</span>
+<span class="py-output"></span><span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> doc
+<span class="py-output">&lt;p&gt;Some text and &lt;a href=&quot;http://example.org/&quot;&gt;a link&lt;/a&gt;.&lt;br/&gt;&lt;/p&gt;</span></pre>
+<p>If an attribute name collides with a Python keyword, simply append an underscore
+to the name:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>doc(class_=<span class="py-string">'intro'</span>)
+<span class="py-output">&lt;Element &quot;p&quot;&gt;</span>
+<span class="py-output"></span><span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> doc
+<span class="py-output">&lt;p class=&quot;intro&quot;&gt;Some text and &lt;a href=&quot;http://example.org/&quot;&gt;a link&lt;/a&gt;.&lt;br/&gt;&lt;/p&gt;</span></pre>
+<p>As shown above, an <a href="genshi.builder.Element-class.html" class="link">Element</a> can easily be directly rendered to XML text by
+printing it or using the Python <tt class="rst-docutils literal"><span class="pre">str()</span></tt> function. This is basically a
+shortcut for converting the <a href="genshi.builder.Element-class.html" class="link">Element</a> to a stream and serializing that
+stream:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>stream = doc.generate()
+<span class="py-prompt">&gt;&gt;&gt; </span>stream <span class="py-comment">#doctest: +ELLIPSIS</span>
+<span class="py-output">&lt;genshi.core.Stream object at ...&gt;</span>
+<span class="py-output"></span><span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> stream
+<span class="py-output">&lt;p class=&quot;intro&quot;&gt;Some text and &lt;a href=&quot;http://example.org/&quot;&gt;a link&lt;/a&gt;.&lt;br/&gt;&lt;/p&gt;</span></pre>
+<p>The <a href="genshi.builder-module.html#tag" class="link">tag</a> object also allows creating &quot;fragments&quot;, which are basically lists
+of nodes (elements or text) that don't have a parent element. This can be useful
+for creating snippets of markup that are attached to a parent element later (for
+example in a template). Fragments are created by calling the <a href="genshi.builder-module.html#tag" class="link">tag</a> object, which
+returns an object of type <a href="genshi.builder.Fragment-class.html" class="link">Fragment</a>:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span>fragment = tag(<span class="py-string">'Hello, '</span>, tag.em(<span class="py-string">'world'</span>), <span class="py-string">'!'</span>)
+<span class="py-prompt">&gt;&gt;&gt; </span>fragment
+<span class="py-output">&lt;Fragment&gt;</span>
+<span class="py-output"></span><span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> fragment
+<span class="py-output">Hello, &lt;em&gt;world&lt;/em&gt;!</span></pre>
+
+<!-- ==================== CLASSES ==================== -->
+<a name="section-Classes"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Classes</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="genshi.builder.Fragment-class.html" class="summary-name">Fragment</a><br />
+      Represents a markup fragment, which is basically just a list of element
+or text nodes.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="genshi.builder.Element-class.html" class="summary-name">Element</a><br />
+      Simple XML output generator based on the builder pattern.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="genshi.builder.ElementFactory-class.html" class="summary-name">ElementFactory</a><br />
+      Factory for <a href="genshi.builder.Element-class.html" class="link">Element</a> objects.
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Variables</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="genshi.builder.ElementFactory-class.html" class="link">ElementFactory</a></span>
+    </td><td class="summary">
+        <a name="tag"></a><span class="summary-name">tag</span> = <code title="ElementFactory()">ElementFactory()</code><br />
+      Global <a href="genshi.builder.ElementFactory-class.html" class="link">ElementFactory</a> bound to the default namespace.
+    </td>
+  </tr>
+</table>
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="genshi-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="../index.html">Documentation Index</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Wed Jul  9 18:16:20 2008
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

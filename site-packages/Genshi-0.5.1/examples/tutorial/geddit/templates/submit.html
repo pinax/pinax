@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      xmlns:py="http://genshi.edgewall.org/">
+  <xi:include href="layout.html" />
+  <head>
+    <title>Submit new link</title>
+  </head>
+  <body class="submit">
+    <h1>Submit new link</h1>
+
+    <form action="" method="post">
+      <table summary=""><tbody><tr>
+        <th><label for="username">Your name:</label></th>
+        <td>
+          <input type="text" id="username" name="username" />
+          <span py:if="'username' in errors" class="error">${errors.username}</span>
+        </td>
+      </tr><tr>
+        <th><label for="url">Link URL:</label></th>
+        <td>
+          <input type="text" id="url" name="url" />
+          <span py:if="'url' in errors" class="error">${errors.url}</span>
+        </td>
+      </tr><tr>
+        <th><label for="title">Title:</label></th>
+        <td>
+          <input type="text" name="title" />
+          <span py:if="'title' in errors" class="error">${errors.title}</span>
+        </td>
+      </tr><tr>
+        <td></td>
+        <td>
+          <input type="submit" value="Submit" />
+          <input type="submit" name="cancel" value="Cancel" />
+        </td>
+      </tr></tbody></table>
+    </form>
+
+  </body>
+</html>

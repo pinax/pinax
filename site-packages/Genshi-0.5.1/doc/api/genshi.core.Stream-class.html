@@ -1,0 +1,789 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>genshi.core.Stream</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="genshi-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="../index.html">Documentation Index</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="genshi-module.html">Package&nbsp;genshi</a> ::
+        <a href="genshi.core-module.html">Module&nbsp;core</a> ::
+        Class&nbsp;Stream
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class Stream</h1><p class="nomargin-top"></p>
+<pre class="base-tree">
+object --+
+         |
+        <strong class="uidshort">Stream</strong>
+</pre>
+
+<dl><dt>Known Subclasses:</dt>
+<dd>
+      <ul class="subclass-list">
+<li><a href="genshi.filters.transform.StreamBuffer-class.html">filters.transform.StreamBuffer</a></li>  </ul>
+</dd></dl>
+
+<hr />
+<p>Represents a stream of markup events.</p>
+<p>This class is basically an iterator over the events.</p>
+<p>Stream events are tuples of the form:</p>
+<pre class="rst-literal-block">
+(kind, data, position)
+</pre>
+<p>where <tt class="rst-docutils literal"><span class="pre">kind</span></tt> is the event kind (such as <a href="genshi.core.Stream-class.html#START" class="link">START</a>, <a href="genshi.core.Stream-class.html#END" class="link">END</a>, <a href="genshi.core.Stream-class.html#TEXT" class="link">TEXT</a>, etc),
+<tt class="rst-docutils literal"><span class="pre">data</span></tt> depends on the kind of event, and <tt class="rst-docutils literal"><span class="pre">position</span></tt> is a
+<tt class="rst-docutils literal"><span class="pre">(filename,</span> <span class="pre">line,</span> <span class="pre">offset)</span></tt> tuple that contains the location of the
+original element or text in the input. If the original location is unknown,
+<tt class="rst-docutils literal"><span class="pre">position</span></tt> is <tt class="rst-docutils literal"><span class="pre">(None,</span> <span class="pre">-1,</span> <span class="pre">-1)</span></tt>.</p>
+<p>Also provided are ways to serialize the stream to text. The <a href="genshi.core.Stream-class.html#serialize" class="link">serialize()</a>
+method will return an iterator over generated strings, while <a href="genshi.core.Stream-class.html#render" class="link">render()</a>
+returns the complete generated text at once. Both accept various parameters
+that impact the way the stream is serialized.</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Instance Methods</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.core.Stream-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">events</span>,
+        <span class="summary-sig-arg">serializer</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Initialize the stream with a sequence of markup events.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__iter__"></a><span class="summary-sig-name">__iter__</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="genshi.core.Stream-class.html" class="link">Stream</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.core.Stream-class.html#__or__" class="summary-sig-name">__or__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">function</span>)</span><br />
+      Override the &quot;bitwise or&quot; operator to apply filters or serializers
+to the stream, providing a syntax similar to pipes on Unix shells.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="genshi.core.Stream-class.html" class="link">Stream</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.core.Stream-class.html#filter" class="summary-sig-name">filter</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*filters</span>)</span><br />
+      Apply filters to the stream.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><code class="link">basestring</code></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.core.Stream-class.html#render" class="summary-sig-name">render</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">method</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">encoding</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">utf-8</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">out</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Return a string representation of the stream.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="genshi.core.Stream-class.html" class="link">Stream</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.core.Stream-class.html#select" class="summary-sig-name">select</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">path</span>,
+        <span class="summary-sig-arg">namespaces</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">variables</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Return a new stream that contains the events matching the given
+XPath expression.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><tt class="rst-docutils literal"><span class="pre">iterator</span></tt></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.core.Stream-class.html#serialize" class="summary-sig-name">serialize</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">method</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">xml</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Generate strings corresponding to a specific serialization of the
+stream.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="genshi.core.Stream-class.html#__str__" class="summary-sig-name">__str__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      str(x)</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__unicode__"></a><span class="summary-sig-name">__unicode__</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__html__"></a><span class="summary-sig-name">__html__</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Class Variables</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="START"></a><span class="summary-name">START</span> = <code title="'START'">'START'</code><br />
+      a start tag
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="END"></a><span class="summary-name">END</span> = <code title="'END'">'END'</code><br />
+      an end tag
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="TEXT"></a><span class="summary-name">TEXT</span> = <code title="'TEXT'">'TEXT'</code><br />
+      literal text
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="XML_DECL"></a><span class="summary-name">XML_DECL</span> = <code title="'XML_DECL'">'XML_DECL'</code><br />
+      XML declaration
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DOCTYPE"></a><span class="summary-name">DOCTYPE</span> = <code title="'DOCTYPE'">'DOCTYPE'</code><br />
+      doctype declaration
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="START_NS"></a><span class="summary-name">START_NS</span> = <code title="'START_NS'">'START_NS'</code><br />
+      start namespace mapping
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="END_NS"></a><span class="summary-name">END_NS</span> = <code title="'END_NS'">'END_NS'</code><br />
+      end namespace mapping
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="START_CDATA"></a><span class="summary-name">START_CDATA</span> = <code title="'START_CDATA'">'START_CDATA'</code><br />
+      start CDATA section
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="END_CDATA"></a><span class="summary-name">END_CDATA</span> = <code title="'END_CDATA'">'END_CDATA'</code><br />
+      end CDATA section
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="PI"></a><span class="summary-name">PI</span> = <code title="'PI'">'PI'</code><br />
+      processing instruction
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="COMMENT"></a><span class="summary-name">COMMENT</span> = <code title="'COMMENT'">'COMMENT'</code><br />
+      comment
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE VARIABLES ==================== -->
+<a name="section-InstanceVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Instance Variables</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="events"></a><span class="summary-name">events</span><br />
+      The underlying iterable producing the events
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="serializer"></a><span class="summary-name">serializer</span><br />
+      The default serializion method
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Properties</span></td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Method Details</span></td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">events</span>,
+        <span class="sig-arg">serializer</span>=<span class="sig-default">None</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  Initialize the stream with a sequence of markup events.
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>events</code></strong> - a sequence or iterable providing the events</li>
+        <li><strong class="pname"><code>serializer</code></strong> - the default serialization method to use for this
+stream</li>
+    </ul></dd>
+    <dt>Overrides:
+        object.__init__
+    </dt>
+  </dl>
+<div class="fields">      <p><strong>Note:</strong>
+        Changed in 0.5: added the <a href="genshi.core.Stream-class.html#serializer" class="link">serializer</a> argument
+      </p>
+</div></td></tr></table>
+</div>
+<a name="__or__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__or__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">function</span>)</span>
+    <br /><em class="fname">(Or operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Override the &quot;bitwise or&quot; operator to apply filters or serializers
+to the stream, providing a syntax similar to pipes on Unix shells.</p>
+<p>Assume the following stream produced by the <a href="genshi.input-module.html#HTML" class="link">HTML</a> function:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">from</span> genshi.input <span class="py-keyword">import</span> HTML
+<span class="py-prompt">&gt;&gt;&gt; </span>html = HTML(<span class="py-string">'''&lt;p onclick=&quot;alert('Whoa')&quot;&gt;Hello, world!&lt;/p&gt;'''</span>)
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> html
+<span class="py-output">&lt;p onclick=&quot;alert('Whoa')&quot;&gt;Hello, world!&lt;/p&gt;</span></pre>
+<p>A filter such as the HTML sanitizer can be applied to that stream using
+the pipe notation as follows:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">from</span> genshi.filters <span class="py-keyword">import</span> HTMLSanitizer
+<span class="py-prompt">&gt;&gt;&gt; </span>sanitizer = HTMLSanitizer()
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> html | sanitizer
+<span class="py-output">&lt;p&gt;Hello, world!&lt;/p&gt;</span></pre>
+<p>Filters can be any function that accepts and produces a stream (where
+a stream is anything that iterates over events):</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">def</span> <span class="py-defname">uppercase</span>(stream):
+<span class="py-more">... </span>    <span class="py-keyword">for</span> kind, data, pos <span class="py-keyword">in</span> stream:
+<span class="py-more">... </span>        <span class="py-keyword">if</span> kind <span class="py-keyword">is</span> TEXT:
+<span class="py-more">... </span>            data = data.upper()
+<span class="py-more">... </span>        yield kind, data, pos
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> html | sanitizer | uppercase
+<span class="py-output">&lt;p&gt;HELLO, WORLD!&lt;/p&gt;</span></pre>
+<p>Serializers can also be used with this notation:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">from</span> genshi.output <span class="py-keyword">import</span> TextSerializer
+<span class="py-prompt">&gt;&gt;&gt; </span>output = TextSerializer()
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> html | sanitizer | uppercase | output
+<span class="py-output">HELLO, WORLD!</span></pre>
+<p>Commonly, serializers should be used at the end of the &quot;pipeline&quot;;
+using them somewhere in the middle may produce unexpected results.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>function</code></strong> - the callable object that should be applied as a filter</li>
+    </ul></dd>
+    <dt>Returns: <a href="genshi.core.Stream-class.html" class="link">Stream</a></dt>
+        <dd>the filtered stream</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="filter"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">filter</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">*filters</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Apply filters to the stream.</p>
+<p>This method returns a new stream with the given filters applied. The
+filters must be callables that accept the stream object as parameter,
+and return the filtered stream.</p>
+<p>The call:</p>
+<pre class="rst-literal-block">
+stream.filter(filter1, filter2)
+</pre>
+<p>is equivalent to:</p>
+<pre class="rst-literal-block">
+stream | filter1 | filter2
+</pre>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>filters</code></strong> - one or more callable objects that should be applied as
+filters</li>
+    </ul></dd>
+    <dt>Returns: <a href="genshi.core.Stream-class.html" class="link">Stream</a></dt>
+        <dd>the filtered stream</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="render"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">render</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">method</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">encoding</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">utf-8</code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">out</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Return a string representation of the stream.</p>
+<p>Any additional keyword arguments are passed to the serializer, and thus
+depend on the <code class="link">method</code> parameter value.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>method</code></strong> - determines how the stream is serialized; can be either
+&quot;xml&quot;, &quot;xhtml&quot;, &quot;html&quot;, &quot;text&quot;, or a custom serializer
+class; if <code class="link">None</code>, the default serialization method of
+the stream is used</li>
+        <li><strong class="pname"><code>encoding</code></strong> - how the output string should be encoded; if set to
+<code class="link">None</code>, this method returns a <code class="link">unicode</code> object</li>
+        <li><strong class="pname"><code>out</code></strong> - a file-like object that the output should be written to
+instead of being returned as one big string; note that if
+this is a file or socket (or similar), the <code class="link">encoding</code> must
+not be <code class="link">None</code> (that is, the output must be encoded)</li>
+    </ul></dd>
+    <dt>Returns: <code class="link">basestring</code></dt>
+        <dd>a <code class="link">str</code> or <code class="link">unicode</code> object (depending on the <code class="link">encoding</code>
+parameter), or <code class="link">None</code> if the <code class="link">out</code> parameter is provided</dd>
+  </dl>
+<div class="fields">      <p><strong>See Also:</strong>
+        XMLSerializer, XHTMLSerializer, HTMLSerializer, TextSerializer
+      </p>
+      <p><strong>Note:</strong>
+        Changed in 0.5: added the <code class="link">out</code> parameter
+      </p>
+</div></td></tr></table>
+</div>
+<a name="select"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">select</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">path</span>,
+        <span class="sig-arg">namespaces</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">variables</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Return a new stream that contains the events matching the given
+XPath expression.</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">from</span> genshi <span class="py-keyword">import</span> HTML
+<span class="py-prompt">&gt;&gt;&gt; </span>stream = HTML(<span class="py-string">'&lt;doc&gt;&lt;elem&gt;foo&lt;/elem&gt;&lt;elem&gt;bar&lt;/elem&gt;&lt;/doc&gt;'</span>)
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> stream.select(<span class="py-string">'elem'</span>)
+<span class="py-output">&lt;elem&gt;foo&lt;/elem&gt;&lt;elem&gt;bar&lt;/elem&gt;</span>
+<span class="py-output"></span><span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> stream.select(<span class="py-string">'elem/text()'</span>)
+<span class="py-output">foobar</span></pre>
+<p>Note that the outermost element of the stream becomes the <em>context
+node</em> for the XPath test. That means that the expression &quot;doc&quot; would
+not match anything in the example above, because it only tests against
+child elements of the outermost element:</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> stream.select(<span class="py-string">'doc'</span>)
+<span class="py-output">&lt;BLANKLINE&gt;</span></pre>
+<p>You can use the &quot;.&quot; expression to match the context node itself
+(although that usually makes little sense):</p>
+<pre class="py-doctest">
+<span class="py-prompt">&gt;&gt;&gt; </span><span class="py-keyword">print</span> stream.select(<span class="py-string">'.'</span>)
+<span class="py-output">&lt;doc&gt;&lt;elem&gt;foo&lt;/elem&gt;&lt;elem&gt;bar&lt;/elem&gt;&lt;/doc&gt;</span></pre>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>path</code></strong> - a string containing the XPath expression</li>
+        <li><strong class="pname"><code>namespaces</code></strong> - mapping of namespace prefixes used in the path</li>
+        <li><strong class="pname"><code>variables</code></strong> - mapping of variable names to values</li>
+    </ul></dd>
+    <dt>Returns: <a href="genshi.core.Stream-class.html" class="link">Stream</a></dt>
+        <dd>the selected substream</dd>
+    <dt>Raises:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code><strong class='fraise'><a href="genshi.path.PathSyntaxError-class.html">PathSyntaxError</a></strong></code> - if the given path expression is invalid or not
+supported</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="serialize"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">serialize</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">method</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">xml</code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">**kwargs</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Generate strings corresponding to a specific serialization of the
+stream.</p>
+<p>Unlike the <a href="genshi.core.Stream-class.html#render" class="link">render()</a> method, this method is a generator that returns
+the serialized output incrementally, as opposed to returning a single
+string.</p>
+<p>Any additional keyword arguments are passed to the serializer, and thus
+depend on the <code class="link">method</code> parameter value.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>method</code></strong> - determines how the stream is serialized; can be either
+&quot;xml&quot;, &quot;xhtml&quot;, &quot;html&quot;, &quot;text&quot;, or a custom serializer
+class; if <code class="link">None</code>, the default serialization method of
+the stream is used</li>
+    </ul></dd>
+    <dt>Returns: <tt class="rst-rst-docutils literal rst-docutils literal"><span class="pre">iterator</span></tt></dt>
+        <dd>an iterator over the serialization results (<a href="genshi.core.Markup-class.html" class="link">Markup</a> or
+<code class="link">unicode</code> objects, depending on the serialization method)</dd>
+  </dl>
+<div class="fields">      <p><strong>See Also:</strong>
+        XMLSerializer, XHTMLSerializer, HTMLSerializer, TextSerializer
+      </p>
+</div></td></tr></table>
+</div>
+<a name="__str__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__str__</span>(<span class="sig-arg">self</span>)</span>
+    <br /><em class="fname">(Informal representation operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  str(x)
+  <dl class="fields">
+    <dt>Overrides:
+        object.__str__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="genshi-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="../index.html">Documentation Index</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Wed Jul  9 18:16:20 2008
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

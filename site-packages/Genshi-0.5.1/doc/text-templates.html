@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="generator" content="Docutils 0.4: http://docutils.sourceforge.net/">
+<title>Genshi: Genshi Text Template Language</title>
+<link rel="stylesheet" href="common/style/edgewall.css" type="text/css">
+</head>
+<body>
+<div class="document" id="genshi-text-template-language">
+    <div id="navigation">
+      <span class="projinfo">Genshi 0.5.1</span>
+      <a href="index.html">Documentation Index</a>
+    </div>
+<h1 class="title">Genshi Text Template Language</h1>
+<p>In addition to the XML-based template language, Genshi provides a simple
+text-based template language, intended for basic plain text generation needs.
+The language is similar to the <a class="reference" href="http://www.djangoproject.com/">Django</a> template language.</p>
+<p>This document describes the template language and will be most useful as
+reference to those developing Genshi text templates. Templates are text files of
+some kind that include processing <a class="reference" href="#directives">directives</a> that affect how the template is
+rendered, and template expressions that are dynamically substituted by
+variable data.</p>
+<p>See <a class="reference" href="templates.html">Genshi Templating Basics</a> for general information on
+embedding Python code in templates.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">Actually, Genshi currently has two different syntaxes for text
+templates languages: One implemented by the class <tt class="docutils literal"><span class="pre">OldTextTemplate</span></tt>
+and another implemented by <tt class="docutils literal"><span class="pre">NewTextTemplate</span></tt>. This documentation
+concentrates on the latter, which is planned to completely replace the
+older syntax. The older syntax is briefly described under <a class="reference" href="#legacy">legacy</a>.</p>
+</div>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="auto-toc simple">
+<li><a class="reference" href="#template-directives" id="id8" name="id8">1   Template Directives</a><ul class="auto-toc">
+<li><a class="reference" href="#conditional-sections" id="id9" name="id9">1.1   Conditional Sections</a><ul class="auto-toc">
+<li><a class="reference" href="#id1" id="id10" name="id10">1.1.1   <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">if</span> <span class="pre">%}</span></tt></a></li>
+<li><a class="reference" href="#id2" id="id11" name="id11">1.1.2   <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">choose</span> <span class="pre">%}</span></tt></a></li>
+</ul>
+</li>
+<li><a class="reference" href="#looping" id="id12" name="id12">1.2   Looping</a><ul class="auto-toc">
+<li><a class="reference" href="#id3" id="id13" name="id13">1.2.1   <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">for</span> <span class="pre">%}</span></tt></a></li>
+</ul>
+</li>
+<li><a class="reference" href="#snippet-reuse" id="id14" name="id14">1.3   Snippet Reuse</a><ul class="auto-toc">
+<li><a class="reference" href="#id4" id="id15" name="id15">1.3.1   <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">def</span> <span class="pre">%}</span></tt></a></li>
+<li><a class="reference" href="#id5" id="id16" name="id16">1.3.2   <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">include</span> <span class="pre">%}</span></tt></a></li>
+</ul>
+</li>
+<li><a class="reference" href="#variable-binding" id="id17" name="id17">1.4   Variable Binding</a><ul class="auto-toc">
+<li><a class="reference" href="#id6" id="id18" name="id18">1.4.1   <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">with</span> <span class="pre">%}</span></tt></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference" href="#white-space-and-line-breaks" id="id19" name="id19">2   White-space and Line Breaks</a></li>
+<li><a class="reference" href="#id7" id="id20" name="id20">3   Comments</a></li>
+<li><a class="reference" href="#legacy-text-template-syntax" id="id21" name="id21">4   Legacy Text Template Syntax</a></li>
+</ul>
+</div>
+<div class="section">
+<h1><a id="template-directives" name="template-directives"><span id="directives"></span>1   Template Directives</a></h1>
+<p>Directives are template commands enclosed by <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">...</span> <span class="pre">%}</span></tt> characters. They can
+affect how the template is rendered in a number of ways: Genshi provides
+directives for conditionals and looping, among others.</p>
+<p>Each directive must be terminated using an <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">end</span> <span class="pre">%}</span></tt> marker. You can add
+a string inside the <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">end</span> <span class="pre">%}</span></tt> marker, for example to document which
+directive is being closed, or even the expression associated with  that
+directive. Any text after <tt class="docutils literal"><span class="pre">end</span></tt> inside the delimiters is  ignored,  and
+effectively treated as a comment.</p>
+<p>If you want to include a literal delimiter in the output, you need to escape it
+by prepending a backslash character (<tt class="docutils literal"><span class="pre">\</span></tt>).</p>
+<div class="section">
+<h2><a id="conditional-sections" name="conditional-sections">1.1   Conditional Sections</a></h2>
+<div class="section">
+<h3><a id="id1" name="id1"><span id="if"></span>1.1.1   <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">if</span> <span class="pre">%}</span></tt></a></h3>
+<p>The content is only rendered if the expression evaluates to a truth value:</p>
+<div class="highlight"><pre><span class="x">{% if foo %}</span>
+<span class="x">  </span><span class="cp">${</span><span class="n">bar</span><span class="cp">}</span><span class="x"></span>
+<span class="x">{% end %}</span>
+</pre></div>
+<p>Given the data <tt class="docutils literal"><span class="pre">foo=True</span></tt> and <tt class="docutils literal"><span class="pre">bar='Hello'</span></tt> in the template context, this
+would produce:</p>
+<pre class="literal-block">
+Hello
+</pre>
+</div>
+<div class="section">
+<h3><a id="id2" name="id2"><span id="otherwise"></span><span id="when"></span><span id="choose"></span>1.1.2   <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">choose</span> <span class="pre">%}</span></tt></a></h3>
+<p>The <tt class="docutils literal"><span class="pre">choose</span></tt> directive, in combination with the directives <tt class="docutils literal"><span class="pre">when</span></tt> and
+<tt class="docutils literal"><span class="pre">otherwise</span></tt>, provides advanced contional processing for rendering one of
+several alternatives. The first matching <tt class="docutils literal"><span class="pre">when</span></tt> branch is rendered, or, if
+no <tt class="docutils literal"><span class="pre">when</span></tt> branch matches, the <tt class="docutils literal"><span class="pre">otherwise</span></tt> branch is be rendered.</p>
+<p>If the <tt class="docutils literal"><span class="pre">choose</span></tt> directive has no argument the nested <tt class="docutils literal"><span class="pre">when</span></tt> directives will
+be tested for truth:</p>
+<div class="highlight"><pre><span class="x">The answer is:</span>
+<span class="x">{% choose %}</span>
+<span class="x">  {% when 0 == 1 %}0{% end %}</span>
+<span class="x">  {% when 1 == 1 %}1{% end %}</span>
+<span class="x">  {% otherwise %}2{% end %}</span>
+<span class="x">{% end %}</span>
+</pre></div>
+<p>This would produce the following output:</p>
+<pre class="literal-block">
+The answer is:
+  1
+</pre>
+<p>If the <tt class="docutils literal"><span class="pre">choose</span></tt> does have an argument, the nested <tt class="docutils literal"><span class="pre">when</span></tt> directives will
+be tested for equality to the parent <tt class="docutils literal"><span class="pre">choose</span></tt> value:</p>
+<div class="highlight"><pre><span class="x">The answer is:</span>
+<span class="x">{% choose 1 %}\</span>
+<span class="x">  {% when 0 %}0{% end %}\</span>
+<span class="x">  {% when 1 %}1{% end %}\</span>
+<span class="x">  {% otherwise %}2{% end %}\</span>
+<span class="x">{% end %}</span>
+</pre></div>
+<p>This would produce the following output:</p>
+<pre class="literal-block">
+The answer is:
+    1
+</pre>
+</div>
+</div>
+<div class="section">
+<h2><a id="looping" name="looping">1.2   Looping</a></h2>
+<div class="section">
+<h3><a id="id3" name="id3"><span id="for"></span>1.2.1   <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">for</span> <span class="pre">%}</span></tt></a></h3>
+<p>The content is repeated for every item in an iterable:</p>
+<div class="highlight"><pre><span class="x">Your items:</span>
+<span class="x">{% for item in items %}\</span>
+<span class="x">  * </span><span class="cp">${</span><span class="n">item</span><span class="cp">}</span><span class="x"></span>
+<span class="x">{% end %}</span>
+</pre></div>
+<p>Given <tt class="docutils literal"><span class="pre">items=[1,</span> <span class="pre">2,</span> <span class="pre">3]</span></tt> in the context data, this would produce:</p>
+<pre class="literal-block">
+Your items
+  * 1
+  * 2
+  * 3
+</pre>
+</div>
+</div>
+<div class="section">
+<h2><a id="snippet-reuse" name="snippet-reuse">1.3   Snippet Reuse</a></h2>
+<div class="section">
+<h3><a id="id4" name="id4"><span id="macros"></span><span id="def"></span>1.3.1   <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">def</span> <span class="pre">%}</span></tt></a></h3>
+<p>The <tt class="docutils literal"><span class="pre">def</span></tt> directive can be used to create macros, i.e. snippets of template
+text that have a name and optionally some parameters, and that can be inserted
+in other places:</p>
+<div class="highlight"><pre><span class="x">{% def greeting(name) %}</span>
+<span class="x">  Hello, </span><span class="cp">${</span><span class="n">name</span><span class="cp">}</span><span class="x">!</span>
+<span class="x">{% end %}</span>
+<span class="cp">${</span><span class="n">greeting</span><span class="p">(</span><span class="s">'world'</span><span class="p">)</span><span class="cp">}</span><span class="x"></span>
+<span class="cp">${</span><span class="n">greeting</span><span class="p">(</span><span class="s">'everyone else'</span><span class="p">)</span><span class="cp">}</span><span class="x"></span>
+</pre></div>
+<p>The above would be rendered to:</p>
+<pre class="literal-block">
+Hello, world!
+Hello, everyone else!
+</pre>
+<p>If a macro doesn't require parameters, it can be defined without the
+parenthesis. For example:</p>
+<div class="highlight"><pre><span class="x">{% def greeting %}</span>
+<span class="x">  Hello, world!</span>
+<span class="x">{% end %}</span>
+<span class="cp">${</span><span class="n">greeting</span><span class="p">()</span><span class="cp">}</span><span class="x"></span>
+</pre></div>
+<p>The above would be rendered to:</p>
+<pre class="literal-block">
+Hello, world!
+</pre>
+</div>
+<div class="section">
+<h3><a id="id5" name="id5"><span id="include"></span><span id="includes"></span>1.3.2   <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">include</span> <span class="pre">%}</span></tt></a></h3>
+<p>To reuse common parts of template text across template files, you can include
+other files using the <tt class="docutils literal"><span class="pre">include</span></tt> directive:</p>
+<div class="highlight"><pre><span class="x">{% include base.txt %}</span>
+</pre></div>
+<p>Any content included this way is inserted into the generated output. The
+included template sees the context data as it exists at the point of the
+include. <a class="reference" href="#macros">Macros</a> in the included template are also available to the including
+template after the point it was included.</p>
+<p>Include paths are relative to the filename of the template currently being
+processed. So if the example above was in the file "<tt class="docutils literal"><span class="pre">myapp/mail.txt</span></tt>"
+(relative to the template search path), the include directive would look for
+the included file at "<tt class="docutils literal"><span class="pre">myapp/base.txt</span></tt>". You can also use Unix-style
+relative paths, for example "<tt class="docutils literal"><span class="pre">../base.txt</span></tt>" to look in the parent directory.</p>
+<p>Just like other directives, the argument to the <tt class="docutils literal"><span class="pre">include</span></tt> directive accepts
+any Python expression, so the path to the included template can be determined
+dynamically:</p>
+<div class="highlight"><pre><span class="x">{% include </span><span class="cp">${</span><span class="s">'</span><span class="si">%s</span><span class="s">.txt'</span> <span class="o">%</span> <span class="n">filename</span><span class="cp">}</span><span class="x"> %}</span>
+</pre></div>
+<p>Note that a <tt class="docutils literal"><span class="pre">TemplateNotFound</span></tt> exception is raised if an included file can't
+be found.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">The include directive for text templates was added in Genshi 0.5.</p>
+</div>
+</div>
+</div>
+<div class="section">
+<h2><a id="variable-binding" name="variable-binding">1.4   Variable Binding</a></h2>
+<div class="section">
+<h3><a id="id6" name="id6"><span id="with"></span>1.4.1   <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">with</span> <span class="pre">%}</span></tt></a></h3>
+<p>The <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">with</span> <span class="pre">%}</span></tt> directive lets you assign expressions to variables, which can
+be used to make expressions inside the directive less verbose and more
+efficient. For example, if you need use the expression <tt class="docutils literal"><span class="pre">author.posts</span></tt> more
+than once, and that actually results in a database query, assigning the results
+to a variable using this directive would probably help.</p>
+<p>For example:</p>
+<div class="highlight"><pre><span class="x">Magic numbers!</span>
+<span class="x">{% with y=7; z=x+10 %}</span>
+<span class="x">  </span><span class="nv">$x</span><span class="x"> </span><span class="nv">$y</span><span class="x"> </span><span class="nv">$z</span><span class="x"></span>
+<span class="x">{% end %}</span>
+</pre></div>
+<p>Given <tt class="docutils literal"><span class="pre">x=42</span></tt> in the context data, this would produce:</p>
+<pre class="literal-block">
+Magic numbers!
+  42 7 52
+</pre>
+<p>Note that if a variable of the same name already existed outside of the scope
+of the <tt class="docutils literal"><span class="pre">with</span></tt> directive, it will <strong>not</strong> be overwritten. Instead, it will
+have the same value it had prior to the <tt class="docutils literal"><span class="pre">with</span></tt> assignment. Effectively,
+this means that variables are immutable in Genshi.</p>
+</div>
+</div>
+</div>
+<div class="section">
+<h1><a id="white-space-and-line-breaks" name="white-space-and-line-breaks"><span id="whitespace"></span>2   White-space and Line Breaks</a></h1>
+<p>Note that space or line breaks around directives is never automatically removed.
+Consider the following example:</p>
+<div class="highlight"><pre><span class="x">{% for item in items %}</span>
+<span class="x">  {% if item.visible %}</span>
+<span class="x">    </span><span class="cp">${</span><span class="n">item</span><span class="cp">}</span><span class="x"></span>
+<span class="x">  {% end %}</span>
+<span class="x">{% end %}</span>
+</pre></div>
+<p>This will result in two empty lines above and beneath every item, plus the
+spaces used for indentation. If you want to supress a line break, simply end
+the line with a backslash:</p>
+<div class="highlight"><pre><span class="x">{% for item in items %}\</span>
+<span class="x">  {% if item.visible %}\</span>
+<span class="x">    </span><span class="cp">${</span><span class="n">item</span><span class="cp">}</span><span class="x"></span>
+<span class="x">  {% end %}\</span>
+<span class="x">{% end %}\</span>
+</pre></div>
+<p>Now there would be no empty lines between the items in the output. But you still
+get the spaces used for indentation, and because the line breaks are removed,
+they actually continue and add up between lines. There are numerous ways to
+control white-space in the output while keeping the template readable, such as
+moving the indentation into the delimiters, or moving the end delimiter on the
+next line, and so on.</p>
+</div>
+<div class="section">
+<h1><a id="id7" name="id7"><span id="comments"></span>3   Comments</a></h1>
+<p>Parts in templates can be commented out using the delimiters <tt class="docutils literal"><span class="pre">{#</span> <span class="pre">...</span> <span class="pre">#}</span></tt>.
+Any content in comments are removed from the output.</p>
+<div class="highlight"><pre><span class="x">{# This won't end up in the output #}</span>
+<span class="x">This will.</span>
+</pre></div>
+<p>Just like directive delimiters, these can be escaped by prefixing with a
+backslash.</p>
+<div class="highlight"><pre><span class="x">\{# This *will* end up in the output, including delimiters #}</span>
+<span class="x">This too.</span>
+</pre></div>
+</div>
+<div class="section">
+<h1><a id="legacy-text-template-syntax" name="legacy-text-template-syntax"><span id="legacy"></span>4   Legacy Text Template Syntax</a></h1>
+<p>The syntax for text templates was redesigned in version 0.5 of Genshi to make
+the language more flexible and powerful. The older syntax is based on line
+starting with dollar signs, similar to e.g. <a class="reference" href="http://cheetahtemplate.org/">Cheetah</a> or <a class="reference" href="http://jakarta.apache.org/velocity/">Velocity</a>.</p>
+<p>A simple template using the old syntax looked like this:</p>
+<div class="highlight"><pre><span class="x">Dear </span><span class="nv">$name</span><span class="x">,</span>
+
+<span class="x">We have the following items for you:</span>
+<span class="cp">#</span><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="x"></span>
+<span class="x"> * </span><span class="nv">$item</span><span class="x"></span>
+<span class="cp">#</span><span class="k">end</span><span class="x"></span>
+
+<span class="x">All the best,</span>
+<span class="x">Foobar</span>
+</pre></div>
+<p>Beyond the requirement of putting directives on separate lines prefixed with
+dollar signs, the language itself is very similar to the new one. Except that
+comments are lines that start with two <tt class="docutils literal"><span class="pre">#</span></tt> characters, and a line-break at the
+end of a directive is removed automatically.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you're using this old syntax, it is strongly recommended to
+migrate to the new syntax. Simply replace any references to
+<tt class="docutils literal"><span class="pre">TextTemplate</span></tt> by <tt class="docutils literal"><span class="pre">NewTextTemplate</span></tt> (and also change the
+text templates, of course). On the other hand, if you want to stick
+with the old syntax for a while longer, replace references to
+<tt class="docutils literal"><span class="pre">TextTemplate</span></tt> by <tt class="docutils literal"><span class="pre">OldTextTemplate</span></tt>; while <tt class="docutils literal"><span class="pre">TextTemplate</span></tt> is
+still an alias for the old language at this point, that will change
+in a future release. But also note that the old syntax may be
+dropped entirely in a future release.</p>
+</div>
+</div>
+    <div id="footer">
+      Visit the Genshi open source project at
+      <a href="http://genshi.edgewall.org/">http://genshi.edgewall.org/</a>
+    </div>
+  </div>
+</body>
+</html>

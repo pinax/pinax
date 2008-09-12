@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="generator" content="Docutils 0.4: http://docutils.sourceforge.net/">
+<title>Genshi: Stream Filters</title>
+<link rel="stylesheet" href="common/style/edgewall.css" type="text/css">
+</head>
+<body>
+<div class="document" id="stream-filters">
+    <div id="navigation">
+      <span class="projinfo">Genshi 0.5.1</span>
+      <a href="index.html">Documentation Index</a>
+    </div>
+<h1 class="title">Stream Filters</h1>
+<p><a class="reference" href="streams.html">Markup Streams</a> showed how to write filters and how they are applied to
+markup streams. This page describes the features of the various filters that
+come with Genshi itself.</p>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="auto-toc simple">
+<li><a class="reference" href="#html-form-filler" id="id1" name="id1">1   HTML Form Filler</a></li>
+<li><a class="reference" href="#html-sanitizer" id="id2" name="id2">2   HTML Sanitizer</a></li>
+<li><a class="reference" href="#transformer" id="id3" name="id3">3   Transformer</a></li>
+<li><a class="reference" href="#translator" id="id4" name="id4">4   Translator</a></li>
+</ul>
+</div>
+<div class="section">
+<h1><a id="html-form-filler" name="html-form-filler">1   HTML Form Filler</a></h1>
+<p>The filter <tt class="docutils literal"><span class="pre">genshi.filters.html.HTMLFormFiller</span></tt> can automatically populate an
+HTML form from values provided as a simple dictionary. When using this filter,
+you can basically omit any <tt class="docutils literal"><span class="pre">value</span></tt>, <tt class="docutils literal"><span class="pre">selected</span></tt>, or <tt class="docutils literal"><span class="pre">checked</span></tt> attributes
+from form controls in your templates, and let the filter do all that work for
+you.</p>
+<p><tt class="docutils literal"><span class="pre">HTMLFormFiller</span></tt> takes a dictionary of data to populate the form with, where
+the keys should match the names of form elements, and the values determine the
+values of those controls. For example:</p>
+<div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">from</span> <span class="nn">genshi.filters</span> <span class="k">import</span> <span class="n">HTMLFormFiller</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">from</span> <span class="nn">genshi.template</span> <span class="k">import</span> <span class="n">MarkupTemplate</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">template</span> <span class="o">=</span> <span class="n">MarkupTemplate</span><span class="p">(</span><span class="s">"""&lt;form&gt;</span>
+<span class="gp">... </span><span class="s">  &lt;p&gt;</span>
+<span class="gp">... </span><span class="s">    &lt;label&gt;User name:</span>
+<span class="gp">... </span><span class="s">      &lt;input type="text" name="username" /&gt;</span>
+<span class="gp">... </span><span class="s">    &lt;/label&gt;&lt;br /&gt;</span>
+<span class="gp">... </span><span class="s">    &lt;label&gt;Password:</span>
+<span class="gp">... </span><span class="s">      &lt;input type="password" name="password" /&gt;</span>
+<span class="gp">... </span><span class="s">    &lt;/label&gt;&lt;br /&gt;</span>
+<span class="gp">... </span><span class="s">    &lt;label&gt;</span>
+<span class="gp">... </span><span class="s">      &lt;input type="checkbox" name="remember" /&gt; Remember me</span>
+<span class="gp">... </span><span class="s">    &lt;/label&gt;</span>
+<span class="gp">... </span><span class="s">  &lt;/p&gt;</span>
+<span class="gp">... </span><span class="s">&lt;/form&gt;"""</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">filler</span> <span class="o">=</span> <span class="n">HTMLFormFiller</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s">'john'</span><span class="p">,</span> <span class="n">remember</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">template</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span> <span class="o">|</span> <span class="n">filler</span>
+<span class="go">&lt;form&gt;</span>
+<span class="go">  &lt;p&gt;</span>
+<span class="go">    &lt;label&gt;User name:</span>
+<span class="go">      &lt;input type="text" name="username" value="john"/&gt;</span>
+<span class="go">    &lt;/label&gt;&lt;br/&gt;</span>
+<span class="go">    &lt;label&gt;Password:</span>
+<span class="go">      &lt;input type="password" name="password"/&gt;</span>
+<span class="go">    &lt;/label&gt;&lt;br/&gt;</span>
+<span class="go">    &lt;label&gt;</span>
+<span class="go">      &lt;input type="checkbox" name="remember" checked="checked"/&gt; Remember me</span>
+<span class="go">    &lt;/label&gt;</span>
+<span class="go">  &lt;/p&gt;</span>
+<span class="go">&lt;/form&gt;</span>
+</pre></div>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">This processing is done without in any way reparsing the template
+output. As any stream filter it operates after the template output is
+generated but <em>before</em> that output is actually serialized.</p>
+</div>
+<p>The filter will of course also handle radio buttons as well as <tt class="docutils literal"><span class="pre">&lt;select&gt;</span></tt> and
+<tt class="docutils literal"><span class="pre">&lt;textarea&gt;</span></tt> elements. For radio buttons to be marked as checked, the value in
+the data dictionary needs to match the <tt class="docutils literal"><span class="pre">value</span></tt> attribute of the <tt class="docutils literal"><span class="pre">&lt;input&gt;</span></tt>
+element, or evaluate to a truth value if the element has no such attribute. For
+options in a <tt class="docutils literal"><span class="pre">&lt;select&gt;</span></tt> box to be marked as selected, the value in the data
+dictionary needs to match the <tt class="docutils literal"><span class="pre">value</span></tt> attribute of the <tt class="docutils literal"><span class="pre">&lt;option&gt;</span></tt> element,
+or the text content of the option if it has no <tt class="docutils literal"><span class="pre">value</span></tt> attribute. Password and
+file input fields are not populated, as most browsers would ignore that anyway
+for security reasons.</p>
+<p>You'll want to make sure that the values in the data dictionary have already
+been converted to strings. While the filter may be able to deal with non-string
+data in some cases (such as check boxes), in most cases it will either not
+attempt any conversion or not produce the desired results.</p>
+<p>You can restrict the form filler to operate only on a specific <tt class="docutils literal"><span class="pre">&lt;form&gt;</span></tt> by
+passing either the <tt class="docutils literal"><span class="pre">id</span></tt> or the <tt class="docutils literal"><span class="pre">name</span></tt> keyword argument to the initializer.
+If either of those is specified, the filter will only apply to form tags with
+an attribute matching the specified value.</p>
+</div>
+<div class="section">
+<h1><a id="html-sanitizer" name="html-sanitizer">2   HTML Sanitizer</a></h1>
+<p>The filter <tt class="docutils literal"><span class="pre">genshi.filters.html.HTMLSanitizer</span></tt> filter can be used to clean up
+user-submitted HTML markup, removing potentially dangerous constructs that could
+be used for various kinds of abuse, such as cross-site scripting (XSS) attacks:</p>
+<div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">from</span> <span class="nn">genshi.filters</span> <span class="k">import</span> <span class="n">HTMLSanitizer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">from</span> <span class="nn">genshi.input</span> <span class="k">import</span> <span class="n">HTML</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">html</span> <span class="o">=</span> <span class="n">HTML</span><span class="p">(</span><span class="s">"""&lt;div&gt;</span>
+<span class="gp">... </span><span class="s">  &lt;p&gt;Innocent looking text.&lt;/p&gt;</span>
+<span class="gp">... </span><span class="s">  &lt;script&gt;alert("Danger: " + document.cookie)&lt;/script&gt;</span>
+<span class="gp">... </span><span class="s">&lt;/div&gt;"""</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sanitize</span> <span class="o">=</span> <span class="n">HTMLSanitizer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">html</span> <span class="o">|</span> <span class="n">sanitize</span>
+<span class="go">&lt;div&gt;</span>
+<span class="go">  &lt;p&gt;Innocent looking text.&lt;/p&gt;</span>
+<span class="go">&lt;/div&gt;</span>
+</pre></div>
+<p>In this example, the <tt class="docutils literal"><span class="pre">&lt;script&gt;</span></tt> tag was removed from the output.</p>
+<p>You can determine which tags and attributes should be allowed by initializing
+the filter with corresponding sets. See the API documentation for more
+information.</p>
+<p>Inline <tt class="docutils literal"><span class="pre">style</span></tt> attributes are forbidden by default. If you allow them, the
+filter will still perform sanitization on the contents any encountered inline
+styles: the proprietary <tt class="docutils literal"><span class="pre">expression()</span></tt> function (supported only by Internet
+Explorer) is removed, and any property using an <tt class="docutils literal"><span class="pre">url()</span></tt> which a potentially
+dangerous URL scheme (such as <tt class="docutils literal"><span class="pre">javascript:</span></tt>) are also stripped out:</p>
+<div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">from</span> <span class="nn">genshi.filters</span> <span class="k">import</span> <span class="n">HTMLSanitizer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">from</span> <span class="nn">genshi.input</span> <span class="k">import</span> <span class="n">HTML</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">html</span> <span class="o">=</span> <span class="n">HTML</span><span class="p">(</span><span class="s">"""&lt;div&gt;</span>
+<span class="gp">... </span><span class="s">  &lt;br style="background: url(javascript:alert(document.cookie); color: #000" /&gt;</span>
+<span class="gp">... </span><span class="s">&lt;/div&gt;"""</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sanitize</span> <span class="o">=</span> <span class="n">HTMLSanitizer</span><span class="p">(</span><span class="n">safe_attrs</span><span class="o">=</span><span class="n">HTMLSanitizer</span><span class="o">.</span><span class="n">SAFE_ATTRS</span> <span class="o">|</span> <span class="n">set</span><span class="p">([</span><span class="s">'style'</span><span class="p">]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">html</span> <span class="o">|</span> <span class="n">sanitize</span>
+<span class="go">&lt;div&gt;</span>
+<span class="go">  &lt;br style="color: #000"/&gt;</span>
+<span class="go">&lt;/div&gt;</span>
+</pre></div>
+<div class="warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">You should probably not rely on the <tt class="docutils literal"><span class="pre">style</span></tt> filtering, as
+sanitizing mixed HTML, CSS, and Javascript is very complicated and
+suspect to various browser bugs. If you can somehow get away with
+not allowing inline styles in user-submitted content, that would
+definitely be the safer route to follow.</p>
+</div>
+</div>
+<div class="section">
+<h1><a id="transformer" name="transformer">3   Transformer</a></h1>
+<p>The filter <tt class="docutils literal"><span class="pre">genshi.filters.transform.Transformer</span></tt> provides a convenient way to
+transform or otherwise work with markup event streams. It allows you to specify
+which parts of the stream you're interested in with XPath expressions, and then
+attach a variety of transformations to the parts that match:</p>
+<div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">from</span> <span class="nn">genshi.builder</span> <span class="k">import</span> <span class="n">tag</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">from</span> <span class="nn">genshi.core</span> <span class="k">import</span> <span class="n">TEXT</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">from</span> <span class="nn">genshi.filters</span> <span class="k">import</span> <span class="n">Transformer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">from</span> <span class="nn">genshi.input</span> <span class="k">import</span> <span class="n">HTML</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">html</span> <span class="o">=</span> <span class="n">HTML</span><span class="p">(</span><span class="s">'''&lt;html&gt;</span>
+<span class="gp">... </span><span class="s">  &lt;head&gt;&lt;title&gt;Some Title&lt;/title&gt;&lt;/head&gt;</span>
+<span class="gp">... </span><span class="s">  &lt;body&gt;</span>
+<span class="gp">... </span><span class="s">    Some &lt;em&gt;body&lt;/em&gt; text.</span>
+<span class="gp">... </span><span class="s">  &lt;/body&gt;</span>
+<span class="gp">... </span><span class="s">&lt;/html&gt;'''</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">html</span> <span class="o">|</span> <span class="n">Transformer</span><span class="p">(</span><span class="s">'body/em'</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="nb">unicode</span><span class="o">.</span><span class="n">upper</span><span class="p">,</span> <span class="n">TEXT</span><span class="p">)</span> \
+<span class="gp">... </span>                                   <span class="o">.</span><span class="n">unwrap</span><span class="p">()</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">tag</span><span class="o">.</span><span class="n">u</span><span class="p">)</span><span class="o">.</span><span class="n">end</span><span class="p">()</span> \
+<span class="gp">... </span>                                   <span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s">'body/u'</span><span class="p">)</span> \
+<span class="gp">... </span>                                   <span class="o">.</span><span class="n">prepend</span><span class="p">(</span><span class="s">'underlined '</span><span class="p">)</span>
+<span class="go">&lt;html&gt;</span>
+<span class="go">  &lt;head&gt;&lt;title&gt;Some Title&lt;/title&gt;&lt;/head&gt;</span>
+<span class="go">  &lt;body&gt;</span>
+<span class="go">    Some &lt;u&gt;underlined BODY&lt;/u&gt; text.</span>
+<span class="go">  &lt;/body&gt;</span>
+<span class="go">&lt;/html&gt;</span>
+</pre></div>
+<p>This example sets up a transformation that:</p>
+<blockquote>
+<ol class="arabic simple">
+<li>matches any <cite>&lt;em&gt;</cite> element anywhere in the body,</li>
+<li>uppercases any text nodes in the element,</li>
+<li>strips off the <cite>&lt;em&gt;</cite> start and close tags,</li>
+<li>wraps the content in a <cite>&lt;u&gt;</cite> tag, and</li>
+<li>inserts the text <cite>underlined</cite> inside the <cite>&lt;u&gt;</cite> tag.</li>
+</ol>
+</blockquote>
+<p>A number of commonly useful transformations are available for this filter.
+Please consult the API documentation a complete list.</p>
+<p>In addition, you can also perform custom transformations. For example, the
+following defines a transformation that changes the name of a tag:</p>
+<div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">from</span> <span class="nn">genshi</span> <span class="k">import</span> <span class="n">QName</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">from</span> <span class="nn">genshi.filters.transform</span> <span class="k">import</span> <span class="n">ENTER</span><span class="p">,</span> <span class="n">EXIT</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">RenameTransformation</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="gp">... </span>       <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">QName</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="gp">... </span>   <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stream</span><span class="p">):</span>
+<span class="gp">... </span>       <span class="k">for</span> <span class="n">mark</span><span class="p">,</span> <span class="p">(</span><span class="n">kind</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span> <span class="ow">in</span> <span class="n">stream</span><span class="p">:</span>
+<span class="gp">... </span>           <span class="k">if</span> <span class="n">mark</span> <span class="ow">is</span> <span class="n">ENTER</span><span class="p">:</span>
+<span class="gp">... </span>               <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span>
+<span class="gp">... </span>           <span class="k">elif</span> <span class="n">mark</span> <span class="ow">is</span> <span class="n">EXIT</span><span class="p">:</span>
+<span class="gp">... </span>               <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+<span class="gp">... </span>           <span class="k">yield</span> <span class="n">mark</span><span class="p">,</span> <span class="p">(</span><span class="n">kind</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
+</pre></div>
+<p>A transformation can be any callable object that accepts an augmented event
+stream. In this case we define a class, so that we can initialize it with the
+tag name.</p>
+<p>Custom transformations can be applied using the <cite>apply()</cite> method of a
+transformer instance:</p>
+<div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">xform</span> <span class="o">=</span> <span class="n">Transformer</span><span class="p">(</span><span class="s">'body//em'</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="nb">unicode</span><span class="o">.</span><span class="n">upper</span><span class="p">,</span> <span class="n">TEXT</span><span class="p">)</span> \
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xform</span> <span class="o">=</span> <span class="n">xform</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">RenameTransformation</span><span class="p">(</span><span class="s">'u'</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">html</span> <span class="o">|</span> <span class="n">xform</span>
+<span class="go">&lt;html&gt;</span>
+<span class="go">  &lt;head&gt;&lt;title&gt;Some Title&lt;/title&gt;&lt;/head&gt;</span>
+<span class="go">  &lt;body&gt;</span>
+<span class="go">    Some &lt;u&gt;BODY&lt;/u&gt; text.</span>
+<span class="go">  &lt;/body&gt;</span>
+<span class="go">&lt;/html&gt;</span>
+</pre></div>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">The transformation filter was added in Genshi 0.5.</p>
+</div>
+</div>
+<div class="section">
+<h1><a id="translator" name="translator">4   Translator</a></h1>
+<p>The <tt class="docutils literal"><span class="pre">genshi.filters.i18n.Translator</span></tt> filter implements basic support for
+internationalizing and localizing templates. When used as a filter, it
+translates a configurable set of text nodes and attribute values using a
+<tt class="docutils literal"><span class="pre">gettext</span></tt>-style translation function.</p>
+<p>The <tt class="docutils literal"><span class="pre">Translator</span></tt> class also defines the <tt class="docutils literal"><span class="pre">extract</span></tt> class method, which can
+be used to extract localizable messages from a template.</p>
+<p>Please refer to the API documentation for more information on this filter.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">The translation filter was added in Genshi 0.4.</p>
+</div>
+</div>
+    <div id="footer">
+      Visit the Genshi open source project at
+      <a href="http://genshi.edgewall.org/">http://genshi.edgewall.org/</a>
+    </div>
+  </div>
+</body>
+</html>

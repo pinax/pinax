@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      xmlns:py="http://genshi.edgewall.org/"
+      py:strip="">
+  <xi:include href="sitetemplate.html"><xi:fallback/></xi:include>
+
+  <head py:match="head" py:attrs="select('@*')">
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type"
+          py:replace="''" />
+    <title py:replace="''">Your title goes here</title>
+    <meta py:replace="select('*')" />
+    <style type="text/css">
+      #pageLogin { font-size: 10px; font-family: verdana; text-align: right; }
+    </style>
+  </head>
+
+  <body py:match="body" py:attrs="select('@*')">
+    <div id="pageLogin"
+         py:if="tg.config('identity.on', False) and not value_of('logging_in')"
+         py:choose="">
+      <span py:when="tg.identity.anonymous">
+        <a href="/login">Login</a>
+      </span>
+      <span py:otherwise="">
+        Welcome ${tg.identity.user.display_name}.
+        <a href="/logout">Logout</a>
+      </span>
+    </div>
+    <div py:if="tg_flash" class="flash" py:content="tg_flash"></div>
+    <div py:replace="select('*|text()')" />
+    <p align="center"><img src="/static/images/tg_under_the_hood.png" alt="TurboGears under the hood"/></p>
+  </body>
+
+</html>

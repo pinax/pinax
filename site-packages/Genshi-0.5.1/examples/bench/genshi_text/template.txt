@@ -1,0 +1,28 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+  <title>${escape(title)}</title>
+</head>
+
+<body>
+  {% include header.txt %}
+  {% def greeting(name) %}
+    Hello, ${name}!
+  {% end %}
+
+  <div>${greeting(user)}</div>
+  <div>${greeting("me")}</div>
+  <div>${greeting("world")}</div>
+  
+  <h2>Loop</h2>
+  {% if items %}<ul>
+    {% for idx, item in enumerate(items) %}\
+      <li{% if idx + 1 == len(items) %} class="last"{% end %}>${escape(item)}</li>
+    {% end %}
+  </ul>{% end %}
+  
+  {% include footer.txt %}
+</body>

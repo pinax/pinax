@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="generator" content="Docutils 0.4: http://docutils.sourceforge.net/">
+<title>Genshi: Genshi XML Template Language</title>
+<link rel="stylesheet" href="common/style/edgewall.css" type="text/css">
+</head>
+<body>
+<div class="document" id="genshi-xml-template-language">
+    <div id="navigation">
+      <span class="projinfo">Genshi 0.5.1</span>
+      <a href="index.html">Documentation Index</a>
+    </div>
+<h1 class="title">Genshi XML Template Language</h1>
+<p>Genshi provides a XML-based template language that is heavily inspired by <a class="reference" href="http://kid-templating.org/">Kid</a>,
+which in turn was inspired by a number of existing template languages, namely
+<a class="reference" href="http://www.w3.org/TR/xslt">XSLT</a>, <a class="reference" href="http://www.zope.org/Wikis/DevSite/Projects/ZPT/TAL">TAL</a>, and <a class="reference" href="http://www.php.net/">PHP</a>.</p>
+<p>This document describes the template language and will be most useful as
+reference to those developing Genshi XML templates. Templates are XML files of
+some kind (such as XHTML) that include processing <a class="reference" href="#directives">directives</a> (elements or
+attributes identified by a separate namespace) that affect how the template is
+rendered, and template expressions that are dynamically substituted by
+variable data.</p>
+<p>See <a class="reference" href="templates.html">Genshi Templating Basics</a> for general information on
+embedding Python code in templates.</p>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="auto-toc simple">
+<li><a class="reference" href="#template-directives" id="id12" name="id12">1   Template Directives</a><ul class="auto-toc">
+<li><a class="reference" href="#conditional-sections" id="id13" name="id13">1.1   Conditional Sections</a><ul class="auto-toc">
+<li><a class="reference" href="#id1" id="id14" name="id14">1.1.1   <tt class="docutils literal"><span class="pre">py:if</span></tt></a></li>
+<li><a class="reference" href="#id2" id="id15" name="id15">1.1.2   <tt class="docutils literal"><span class="pre">py:choose</span></tt></a></li>
+</ul>
+</li>
+<li><a class="reference" href="#looping" id="id16" name="id16">1.2   Looping</a><ul class="auto-toc">
+<li><a class="reference" href="#id3" id="id17" name="id17">1.2.1   <tt class="docutils literal"><span class="pre">py:for</span></tt></a></li>
+</ul>
+</li>
+<li><a class="reference" href="#snippet-reuse" id="id18" name="id18">1.3   Snippet Reuse</a><ul class="auto-toc">
+<li><a class="reference" href="#id4" id="id19" name="id19">1.3.1   <tt class="docutils literal"><span class="pre">py:def</span></tt></a></li>
+<li><a class="reference" href="#id5" id="id20" name="id20">1.3.2   <tt class="docutils literal"><span class="pre">py:match</span></tt></a></li>
+</ul>
+</li>
+<li><a class="reference" href="#variable-binding" id="id21" name="id21">1.4   Variable Binding</a><ul class="auto-toc">
+<li><a class="reference" href="#py-with" id="id22" name="id22">1.4.1   <tt class="docutils literal"><span class="pre">py:with</span></tt></a></li>
+</ul>
+</li>
+<li><a class="reference" href="#structure-manipulation" id="id23" name="id23">1.5   Structure Manipulation</a><ul class="auto-toc">
+<li><a class="reference" href="#id6" id="id24" name="id24">1.5.1   <tt class="docutils literal"><span class="pre">py:attrs</span></tt></a></li>
+<li><a class="reference" href="#id7" id="id25" name="id25">1.5.2   <tt class="docutils literal"><span class="pre">py:content</span></tt></a></li>
+<li><a class="reference" href="#id8" id="id26" name="id26">1.5.3   <tt class="docutils literal"><span class="pre">py:replace</span></tt></a></li>
+<li><a class="reference" href="#id9" id="id27" name="id27">1.5.4   <tt class="docutils literal"><span class="pre">py:strip</span></tt></a></li>
+</ul>
+</li>
+<li><a class="reference" href="#processing-order" id="id28" name="id28">1.6   Processing Order</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#id10" id="id29" name="id29">2   Includes</a><ul class="auto-toc">
+<li><a class="reference" href="#dynamic-includes" id="id30" name="id30">2.1   Dynamic Includes</a></li>
+<li><a class="reference" href="#including-text-templates" id="id31" name="id31">2.2   Including Text Templates</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#id11" id="id32" name="id32">3   Comments</a></li>
+</ul>
+</div>
+<div class="section">
+<h1><a id="template-directives" name="template-directives"><span id="directives"></span>1   Template Directives</a></h1>
+<p>Directives are elements and/or attributes in the template that are identified
+by the namespace <tt class="docutils literal"><span class="pre">http://genshi.edgewall.org/</span></tt>. They can affect how the
+template is rendered in a number of ways: Genshi provides directives for
+conditionals and looping, among others.</p>
+<p>To use directives in a template, the namespace must be declared, which is
+usually done on the root element:</p>
+<div class="highlight"><pre><span class="nt">&lt;html</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/1999/xhtml"</span>
+      <span class="na">xmlns:py=</span><span class="s">"http://genshi.edgewall.org/"</span>
+      <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+  ...
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+<p>In this example, the default namespace is set to the XHTML namespace, and the
+namespace for Genshi directives is bound to the prefix “py”.</p>
+<p>All directives can be applied as attributes, and some can also be used as
+elements. The <tt class="docutils literal"><span class="pre">if</span></tt> directives for conditionals, for example, can be used in
+both ways:</p>
+<div class="highlight"><pre><span class="nt">&lt;html</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/1999/xhtml"</span>
+      <span class="na">xmlns:py=</span><span class="s">"http://genshi.edgewall.org/"</span>
+      <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+  ...
+  <span class="nt">&lt;div</span> <span class="na">py:if=</span><span class="s">"</span><span class="n">foo</span><span class="s">"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;p&gt;</span>Bar<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  ...
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+<p>This is basically equivalent to the following:</p>
+<div class="highlight"><pre><span class="nt">&lt;html</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/1999/xhtml"</span>
+      <span class="na">xmlns:py=</span><span class="s">"http://genshi.edgewall.org/"</span>
+      <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+  ...
+  <span class="nt">&lt;py:if</span> <span class="na">test=</span><span class="s">"</span><span class="n">foo</span><span class="s">"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div&gt;</span>
+      <span class="nt">&lt;p&gt;</span>Bar<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/py:if&gt;</span>
+  ...
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+<p>The rationale behind the second form is that directives do not always map
+naturally to elements in the template. In such cases, the <tt class="docutils literal"><span class="pre">py:strip</span></tt>
+directive can be used to strip off the unwanted element, or the directive can
+simply be used as an element.</p>
+<div class="section">
+<h2><a id="conditional-sections" name="conditional-sections">1.1   Conditional Sections</a></h2>
+<div class="section">
+<h3><a id="id1" name="id1"><span id="py-if"></span>1.1.1   <tt class="docutils literal"><span class="pre">py:if</span></tt></a></h3>
+<p>The element and its content is only rendered if the expression evaluates to a
+truth value:</p>
+<div class="highlight"><pre><span class="nt">&lt;div&gt;</span>
+  <span class="nt">&lt;b</span> <span class="na">py:if=</span><span class="s">"</span><span class="n">foo</span><span class="s">"</span><span class="nt">&gt;</span><span class="cp">${</span><span class="n">bar</span><span class="cp">}</span><span class="nt">&lt;/b&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+<p>Given the data <tt class="docutils literal"><span class="pre">foo=True</span></tt> and <tt class="docutils literal"><span class="pre">bar='Hello'</span></tt> in the template context, this
+would produce:</p>
+<div class="highlight"><pre><span class="nt">&lt;div&gt;</span>
+  <span class="nt">&lt;b&gt;</span>Hello<span class="nt">&lt;/b&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+<p>But setting <tt class="docutils literal"><span class="pre">foo=False</span></tt> would result in the following output:</p>
+<div class="highlight"><pre><span class="nt">&lt;div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+<p>This directive can also be used as an element:</p>
+<div class="highlight"><pre><span class="nt">&lt;div&gt;</span>
+  <span class="nt">&lt;py:if</span> <span class="na">test=</span><span class="s">"</span><span class="n">foo</span><span class="s">"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;b&gt;</span><span class="cp">${</span><span class="n">bar</span><span class="cp">}</span><span class="nt">&lt;/b&gt;</span>
+  <span class="nt">&lt;/py:if&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<div class="section">
+<h3><a id="id2" name="id2"><span id="py-otherwise"></span><span id="py-when"></span><span id="py-choose"></span>1.1.2   <tt class="docutils literal"><span class="pre">py:choose</span></tt></a></h3>
+<p>The <tt class="docutils literal"><span class="pre">py:choose</span></tt> directive, in combination with the directives <tt class="docutils literal"><span class="pre">py:when</span></tt>
+and <tt class="docutils literal"><span class="pre">py:otherwise</span></tt> provides advanced conditional processing for rendering one
+of several alternatives. The first matching <tt class="docutils literal"><span class="pre">py:when</span></tt> branch is rendered, or,
+if no <tt class="docutils literal"><span class="pre">py:when</span></tt> branch matches, the <tt class="docutils literal"><span class="pre">py:otherwise</span></tt> branch is rendered.</p>
+<p>If the <tt class="docutils literal"><span class="pre">py:choose</span></tt> directive is empty the nested <tt class="docutils literal"><span class="pre">py:when</span></tt> directives will
+be tested for truth:</p>
+<div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">py:choose=</span><span class="s">""</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;span</span> <span class="na">py:when=</span><span class="s">"</span><span class="mf">0</span> <span class="o">==</span> <span class="mf">1</span><span class="s">"</span><span class="nt">&gt;</span>0<span class="nt">&lt;/span&gt;</span>
+  <span class="nt">&lt;span</span> <span class="na">py:when=</span><span class="s">"</span><span class="mf">1</span> <span class="o">==</span> <span class="mf">1</span><span class="s">"</span><span class="nt">&gt;</span>1<span class="nt">&lt;/span&gt;</span>
+  <span class="nt">&lt;span</span> <span class="na">py:otherwise=</span><span class="s">""</span><span class="nt">&gt;</span>2<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+<p>This would produce the following output:</p>
+<div class="highlight"><pre><span class="nt">&lt;div&gt;</span>
+  <span class="nt">&lt;span&gt;</span>1<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+<p>If the <tt class="docutils literal"><span class="pre">py:choose</span></tt> directive contains an expression the nested <tt class="docutils literal"><span class="pre">py:when</span></tt>
+directives will be tested for equality to the parent <tt class="docutils literal"><span class="pre">py:choose</span></tt> value:</p>
+<div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">py:choose=</span><span class="s">"</span><span class="mf">1</span><span class="s">"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;span</span> <span class="na">py:when=</span><span class="s">"</span><span class="mf">0</span><span class="s">"</span><span class="nt">&gt;</span>0<span class="nt">&lt;/span&gt;</span>
+  <span class="nt">&lt;span</span> <span class="na">py:when=</span><span class="s">"</span><span class="mf">1</span><span class="s">"</span><span class="nt">&gt;</span>1<span class="nt">&lt;/span&gt;</span>
+  <span class="nt">&lt;span</span> <span class="na">py:otherwise=</span><span class="s">""</span><span class="nt">&gt;</span>2<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+<p>This would produce the following output:</p>
+<div class="highlight"><pre><span class="nt">&lt;div&gt;</span>
+  <span class="nt">&lt;span&gt;</span>1<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+<p>These directives can also be used as elements:</p>
+<div class="highlight"><pre><span class="nt">&lt;py:choose</span> <span class="na">test=</span><span class="s">"</span><span class="mf">1</span><span class="s">"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;py:when</span> <span class="na">test=</span><span class="s">"</span><span class="mf">0</span><span class="s">"</span><span class="nt">&gt;</span>0<span class="nt">&lt;/py:when&gt;</span>
+  <span class="nt">&lt;py:when</span> <span class="na">test=</span><span class="s">"</span><span class="mf">1</span><span class="s">"</span><span class="nt">&gt;</span>1<span class="nt">&lt;/py:when&gt;</span>
+  <span class="nt">&lt;py:otherwise&gt;</span>2<span class="nt">&lt;/py:otherwise&gt;</span>
+<span class="nt">&lt;/py:choose&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section">
+<h2><a id="looping" name="looping">1.2   Looping</a></h2>
+<div class="section">
+<h3><a id="id3" name="id3"><span id="py-for"></span>1.2.1   <tt class="docutils literal"><span class="pre">py:for</span></tt></a></h3>
+<p>The element is repeated for every item in an iterable:</p>
+<div class="highlight"><pre><span class="nt">&lt;ul&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">py:for=</span><span class="s">"</span><span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="s">"</span><span class="nt">&gt;</span><span class="cp">${</span><span class="n">item</span><span class="cp">}</span><span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</pre></div>
+<p>Given <tt class="docutils literal"><span class="pre">items=[1,</span> <span class="pre">2,</span> <span class="pre">3]</span></tt> in the context data, this would produce:</p>
+<div class="highlight"><pre><span class="nt">&lt;ul&gt;</span>
+  <span class="nt">&lt;li&gt;</span>1<span class="nt">&lt;/li&gt;&lt;li&gt;</span>2<span class="nt">&lt;/li&gt;&lt;li&gt;</span>3<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</pre></div>
+<p>This directive can also be used as an element:</p>
+<div class="highlight"><pre><span class="nt">&lt;ul&gt;</span>
+  <span class="nt">&lt;py:for</span> <span class="na">each=</span><span class="s">"</span><span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="s">"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;li&gt;</span><span class="cp">${</span><span class="n">item</span><span class="cp">}</span><span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;/py:for&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section">
+<h2><a id="snippet-reuse" name="snippet-reuse">1.3   Snippet Reuse</a></h2>
+<div class="section">
+<h3><a id="id4" name="id4"><span id="macros"></span><span id="py-def"></span>1.3.1   <tt class="docutils literal"><span class="pre">py:def</span></tt></a></h3>
+<p>The <tt class="docutils literal"><span class="pre">py:def</span></tt> directive can be used to create macros, i.e. snippets of
+template code that have a name and optionally some parameters, and that can be
+inserted in other places:</p>
+<div class="highlight"><pre><span class="nt">&lt;div&gt;</span>
+  <span class="nt">&lt;p</span> <span class="na">py:def=</span><span class="s">"</span><span class="n">greeting</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="s">"</span> <span class="na">class=</span><span class="s">"greeting"</span><span class="nt">&gt;</span>
+    Hello, <span class="cp">${</span><span class="n">name</span><span class="cp">}</span>!
+  <span class="nt">&lt;/p&gt;</span>
+  <span class="cp">${</span><span class="n">greeting</span><span class="p">(</span><span class="s">'world'</span><span class="p">)</span><span class="cp">}</span>
+  <span class="cp">${</span><span class="n">greeting</span><span class="p">(</span><span class="s">'everyone else'</span><span class="p">)</span><span class="cp">}</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+<p>The above would be rendered to:</p>
+<div class="highlight"><pre><span class="nt">&lt;div&gt;</span>
+  <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"greeting"</span><span class="nt">&gt;</span>
+    Hello, world!
+  <span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"greeting"</span><span class="nt">&gt;</span>
+    Hello, everyone else!
+  <span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+<p>If a macro doesn't require parameters, it can be defined without the
+parenthesis. For example:</p>
+<div class="highlight"><pre><span class="nt">&lt;div&gt;</span>
+  <span class="nt">&lt;p</span> <span class="na">py:def=</span><span class="s">"</span><span class="n">greeting</span><span class="s">"</span> <span class="na">class=</span><span class="s">"greeting"</span><span class="nt">&gt;</span>
+    Hello, world!
+  <span class="nt">&lt;/p&gt;</span>
+  <span class="cp">${</span><span class="n">greeting</span><span class="p">()</span><span class="cp">}</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+<p>The above would be rendered to:</p>
+<div class="highlight"><pre><span class="nt">&lt;div&gt;</span>
+  <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"greeting"</span><span class="nt">&gt;</span>
+    Hello, world!
+  <span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+<p>This directive can also be used as an element:</p>
+<div class="highlight"><pre><span class="nt">&lt;div&gt;</span>
+  <span class="nt">&lt;py:def</span> <span class="na">function=</span><span class="s">"</span><span class="n">greeting</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="s">"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"greeting"</span><span class="nt">&gt;</span>Hello, <span class="cp">${</span><span class="n">name</span><span class="cp">}</span>!<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/py:def&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<div class="section">
+<h3><a id="id5" name="id5"><span id="py-match"></span><span id="match-templates"></span>1.3.2   <tt class="docutils literal"><span class="pre">py:match</span></tt></a></h3>
+<p>This directive defines a <em>match template</em>: given an XPath expression, it
+replaces any element in the template that matches the expression with its own
+content.</p>
+<p>For example, the match template defined in the following template matches any
+element with the tag name “greeting”:</p>
+<div class="highlight"><pre><span class="nt">&lt;div&gt;</span>
+  <span class="nt">&lt;span</span> <span class="na">py:match=</span><span class="s">"</span><span class="n">greeting</span><span class="s">"</span><span class="nt">&gt;</span>
+    Hello <span class="cp">${</span><span class="n">select</span><span class="p">(</span><span class="s">'@name'</span><span class="p">)</span><span class="cp">}</span>
+  <span class="nt">&lt;/span&gt;</span>
+  <span class="nt">&lt;greeting</span> <span class="na">name=</span><span class="s">"Dude"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+<p>This would result in the following output:</p>
+<div class="highlight"><pre><span class="nt">&lt;div&gt;</span>
+  <span class="nt">&lt;span&gt;</span>
+    Hello Dude
+  <span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+<p>Inside the body of a <tt class="docutils literal"><span class="pre">py:match</span></tt> directive, the <tt class="docutils literal"><span class="pre">select(path)</span></tt> function is
+made available so that parts or all of the original element can be incorporated
+in the output of the match template. See <a class="reference" href="streams.html#using-xpath">Using XPath</a> for more information
+about this function.</p>
+<p>Match templates are applied both to the original markup as well to the
+generated markup. The order in which they are applied depends on the order
+they are declared in the template source: a match template defined after
+another match template is applied to the output generated by the first match
+template. The match templates basically form a pipeline.</p>
+<p>This directive can also be used as an element:</p>
+<div class="highlight"><pre><span class="nt">&lt;div&gt;</span>
+  <span class="nt">&lt;py:match</span> <span class="na">path=</span><span class="s">"</span><span class="n">greeting</span><span class="s">"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;span&gt;</span>Hello <span class="cp">${</span><span class="n">select</span><span class="p">(</span><span class="s">'@name'</span><span class="p">)</span><span class="cp">}</span><span class="nt">&lt;/span&gt;</span>
+  <span class="nt">&lt;/py:match&gt;</span>
+  <span class="nt">&lt;greeting</span> <span class="na">name=</span><span class="s">"Dude"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+<p>When used this way, the <tt class="docutils literal"><span class="pre">py:match</span></tt> directive can also be annotated with a
+couple of optimization hints. For example, the following informs the matching
+engine that the match should only be applied once:</p>
+<div class="highlight"><pre><span class="nt">&lt;py:match</span> <span class="na">path=</span><span class="s">"</span><span class="n">body</span><span class="s">"</span> <span class="na">once=</span><span class="s">"</span><span class="n">true</span><span class="s">"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;body</span> <span class="na">py:attrs=</span><span class="s">"</span><span class="n">select</span><span class="p">(</span><span class="s">'@*'</span><span class="p">)</span><span class="s">"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"header"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/div&gt;</span>
+    <span class="cp">${</span><span class="n">select</span><span class="p">(</span><span class="s">"*|text()"</span><span class="p">)</span><span class="cp">}</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"footer"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/py:match&gt;</span>
+</pre></div>
+<p>The following optimization hints are recognized:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%">
+<col width="15%">
+<col width="64%">
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Attribute</th>
+<th class="head">Default</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal"><span class="pre">buffer</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">true</span></tt></td>
+<td>Whether the matched content should be
+buffered in memory. Buffering can improve
+performance a bit at the cost of needing more
+memory during rendering. Buffering is
+''required'' for match templates that contain
+more than one invocation of the <tt class="docutils literal"><span class="pre">select()</span></tt>
+function. If there is only one call, and the
+matched content can potentially be very long,
+consider disabling buffering to avoid
+excessive memory use.</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">once</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">false</span></tt></td>
+<td>Whether the engine should stop looking for
+more matching elements after the first match.
+Use this on match templates that match
+elements that can only occur once in the
+stream, such as the <tt class="docutils literal"><span class="pre">&lt;head&gt;</span></tt> or <tt class="docutils literal"><span class="pre">&lt;body&gt;</span></tt>
+elements in an HTML template, or elements
+with a specific ID.</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">recursive</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">true</span></tt></td>
+<td>Whether the match template should be applied
+to its own output. Note that <tt class="docutils literal"><span class="pre">once</span></tt> implies
+non-recursive behavior, so this attribute
+only needs to be set for match templates that
+don't also have <tt class="docutils literal"><span class="pre">once</span></tt> set.</td>
+</tr>
+</tbody>
+</table>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <tt class="docutils literal"><span class="pre">py:match</span></tt> optimization hints were added in the 0.5 release. In
+earlier versions, the attributes have no effect.</p>
+</div>
+</div>
+</div>
+<div class="section">
+<h2><a id="variable-binding" name="variable-binding">1.4   Variable Binding</a></h2>
+<div class="section">
+<h3><a id="py-with" name="py-with"><span id="with"></span>1.4.1   <tt class="docutils literal"><span class="pre">py:with</span></tt></a></h3>
+<p>The <tt class="docutils literal"><span class="pre">py:with</span></tt> directive lets you assign expressions to variables, which can
+be used to make expressions inside the directive less verbose and more
+efficient. For example, if you need use the expression <tt class="docutils literal"><span class="pre">author.posts</span></tt> more
+than once, and that actually results in a database query, assigning the results
+to a variable using this directive would probably help.</p>
+<p>For example:</p>
+<div class="highlight"><pre><span class="nt">&lt;div&gt;</span>
+  <span class="nt">&lt;span</span> <span class="na">py:with=</span><span class="s">"</span><span class="n">y</span><span class="o">=</span><span class="mf">7</span><span class="p">;</span> <span class="n">z</span><span class="o">=</span><span class="n">x</span><span class="o">+</span><span class="mf">10</span><span class="s">"</span><span class="nt">&gt;</span><span class="nv">$x</span> <span class="nv">$y</span> <span class="nv">$z</span><span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+<p>Given <tt class="docutils literal"><span class="pre">x=42</span></tt> in the context data, this would produce:</p>
+<div class="highlight"><pre><span class="nt">&lt;div&gt;</span>
+  <span class="nt">&lt;span&gt;</span>42 7 52<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+<p>This directive can also be used as an element:</p>
+<div class="highlight"><pre><span class="nt">&lt;div&gt;</span>
+  <span class="nt">&lt;py:with</span> <span class="na">vars=</span><span class="s">"</span><span class="n">y</span><span class="o">=</span><span class="mf">7</span><span class="p">;</span> <span class="n">z</span><span class="o">=</span><span class="n">x</span><span class="o">+</span><span class="mf">10</span><span class="s">"</span><span class="nt">&gt;</span><span class="nv">$x</span> <span class="nv">$y</span> <span class="nv">$z</span><span class="nt">&lt;/py:with&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+<p>Note that if a variable of the same name already existed outside of the scope
+of the <tt class="docutils literal"><span class="pre">py:with</span></tt> directive, it will <strong>not</strong> be overwritten. Instead, it
+will have the same value it had prior to the <tt class="docutils literal"><span class="pre">py:with</span></tt> assignment.
+Effectively, this means that variables are immutable in Genshi.</p>
+</div>
+</div>
+<div class="section">
+<h2><a id="structure-manipulation" name="structure-manipulation">1.5   Structure Manipulation</a></h2>
+<div class="section">
+<h3><a id="id6" name="id6"><span id="py-attrs"></span>1.5.1   <tt class="docutils literal"><span class="pre">py:attrs</span></tt></a></h3>
+<p>This directive adds, modifies or removes attributes from the element:</p>
+<div class="highlight"><pre><span class="nt">&lt;ul&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">py:attrs=</span><span class="s">"</span><span class="n">foo</span><span class="s">"</span><span class="nt">&gt;</span>Bar<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</pre></div>
+<p>Given <tt class="docutils literal"><span class="pre">foo={'class':</span> <span class="pre">'collapse'}</span></tt> in the template context, this would
+produce:</p>
+<div class="highlight"><pre><span class="nt">&lt;ul&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"collapse"</span><span class="nt">&gt;</span>Bar<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</pre></div>
+<p>Attributes with the value <tt class="docutils literal"><span class="pre">None</span></tt> are omitted, so given <tt class="docutils literal"><span class="pre">foo={'class':</span> <span class="pre">None}</span></tt>
+in the context for the same template this would produce:</p>
+<div class="highlight"><pre><span class="nt">&lt;ul&gt;</span>
+  <span class="nt">&lt;li&gt;</span>Bar<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</pre></div>
+<p>This directive can only be used as an attribute.</p>
+</div>
+<div class="section">
+<h3><a id="id7" name="id7"><span id="py-content"></span>1.5.2   <tt class="docutils literal"><span class="pre">py:content</span></tt></a></h3>
+<p>This directive replaces any nested content with the result of evaluating the
+expression:</p>
+<div class="highlight"><pre><span class="nt">&lt;ul&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">py:content=</span><span class="s">"</span><span class="n">bar</span><span class="s">"</span><span class="nt">&gt;</span>Hello<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</pre></div>
+<p>Given <tt class="docutils literal"><span class="pre">bar='Bye'</span></tt> in the context data, this would produce:</p>
+<div class="highlight"><pre><span class="nt">&lt;ul&gt;</span>
+  <span class="nt">&lt;li&gt;</span>Bye<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</pre></div>
+<p>This directive can only be used as an attribute.</p>
+</div>
+<div class="section">
+<h3><a id="id8" name="id8"><span id="py-replace"></span>1.5.3   <tt class="docutils literal"><span class="pre">py:replace</span></tt></a></h3>
+<p>This directive replaces the element itself with the result of evaluating the
+expression:</p>
+<div class="highlight"><pre><span class="nt">&lt;div&gt;</span>
+  <span class="nt">&lt;span</span> <span class="na">py:replace=</span><span class="s">"</span><span class="n">bar</span><span class="s">"</span><span class="nt">&gt;</span>Hello<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+<p>Given <tt class="docutils literal"><span class="pre">bar='Bye'</span></tt> in the context data, this would produce:</p>
+<div class="highlight"><pre><span class="nt">&lt;div&gt;</span>
+  Bye
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+<p>This directive can also be used as an element (since version 0.5):</p>
+<div class="highlight"><pre><span class="nt">&lt;div&gt;</span>
+  <span class="nt">&lt;py:replace</span> <span class="na">value=</span><span class="s">"</span><span class="n">title</span><span class="s">"</span><span class="nt">&gt;</span>Placeholder<span class="nt">&lt;/py:replace&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<div class="section">
+<h3><a id="id9" name="id9"><span id="py-strip"></span>1.5.4   <tt class="docutils literal"><span class="pre">py:strip</span></tt></a></h3>
+<p>This directive conditionally strips the top-level element from the output. When
+the value of the <tt class="docutils literal"><span class="pre">py:strip</span></tt> attribute evaluates to <tt class="docutils literal"><span class="pre">True</span></tt>, the element is
+stripped from the output:</p>
+<div class="highlight"><pre><span class="nt">&lt;div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">py:strip=</span><span class="s">"</span><span class="bp">True</span><span class="s">"</span><span class="nt">&gt;&lt;b&gt;</span>foo<span class="nt">&lt;/b&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+<p>This would be rendered as:</p>
+<div class="highlight"><pre><span class="nt">&lt;div&gt;</span>
+  <span class="nt">&lt;b&gt;</span>foo<span class="nt">&lt;/b&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+<p>As a shorthand, if the value of the <tt class="docutils literal"><span class="pre">py:strip</span></tt> attribute is empty, that has
+the same effect as using a truth value (i.e. the element is stripped).</p>
+</div>
+</div>
+<div class="section">
+<h2><a id="processing-order" name="processing-order"><span id="order"></span>1.6   Processing Order</a></h2>
+<p>It is possible to attach multiple directives to a single element, although not
+all combinations make sense. When multiple directives are encountered, they are
+processed in the following order:</p>
+<ol class="arabic simple">
+<li><a class="reference" href="#py-def">py:def</a></li>
+<li><a class="reference" href="#py-match">py:match</a></li>
+<li><a class="reference" href="#py-when">py:when</a></li>
+<li><a class="reference" href="#py-otherwise">py:otherwise</a></li>
+<li><a class="reference" href="#py-for">py:for</a></li>
+<li><a class="reference" href="#py-if">py:if</a></li>
+<li><a class="reference" href="#py-choose">py:choose</a></li>
+<li><a class="reference" href="#py-with">py:with</a></li>
+<li><a class="reference" href="#py-replace">py:replace</a></li>
+<li><a class="reference" href="#py-content">py:content</a></li>
+<li><a class="reference" href="#py-attrs">py:attrs</a></li>
+<li><a class="reference" href="#py-strip">py:strip</a></li>
+</ol>
+</div>
+</div>
+<div class="section">
+<h1><a id="id10" name="id10"><span id="includes"></span>2   Includes</a></h1>
+<p>To reuse common snippets of template code, you can include other files using
+<a class="reference" href="http://www.w3.org/TR/xinclude/">XInclude</a>.</p>
+<p>For this, you need to declare the XInclude namespace (commonly bound to the
+prefix “xi”) and use the <tt class="docutils literal"><span class="pre">&lt;xi:include&gt;</span></tt> element where you want the external
+file to be pulled in:</p>
+<div class="highlight"><pre><span class="nt">&lt;html</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/1999/xhtml"</span>
+      <span class="na">xmlns:py=</span><span class="s">"http://genshi.edgewall.org/"</span>
+      <span class="na">xmlns:xi=</span><span class="s">"http://www.w3.org/2001/XInclude"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;xi:include</span> <span class="na">href=</span><span class="s">"base.html"</span> <span class="nt">/&gt;</span>
+  ...
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+<p>Include paths are relative to the filename of the template currently being
+processed. So if the example above was in the file "<tt class="docutils literal"><span class="pre">myapp/index.html</span></tt>"
+(relative to the template search path), the XInclude processor would look for
+the included file at "<tt class="docutils literal"><span class="pre">myapp/base.html</span></tt>". You can also use Unix-style
+relative paths, for example "<tt class="docutils literal"><span class="pre">../base.html</span></tt>" to look in the parent directory.</p>
+<p>Any content included this way is inserted into the generated output instead of
+the <tt class="docutils literal"><span class="pre">&lt;xi:include&gt;</span></tt> element. The included template sees the same context data.
+<a class="reference" href="#match-templates">Match templates</a> and <a class="reference" href="#macros">macros</a> in the included template are also available to
+the including template after the point it was included.</p>
+<p>By default, an error will be raised if an included file is not found. If that's
+not what you want, you can specify fallback content that should be used if the
+include fails. For example, to to make the include above fail silently, you'd
+write:</p>
+<div class="highlight"><pre><span class="nt">&lt;xi:include</span> <span class="na">href=</span><span class="s">"base.html"</span><span class="nt">&gt;&lt;xi:fallback</span> <span class="nt">/&gt;&lt;/xi:include&gt;</span>
+</pre></div>
+<p>See the <a class="reference" href="http://www.w3.org/TR/xinclude/">XInclude specification</a> for more about fallback content. Note though
+that Genshi currently only supports a small subset of XInclude.</p>
+<div class="section">
+<h2><a id="dynamic-includes" name="dynamic-includes">2.1   Dynamic Includes</a></h2>
+<p>Incudes in Genshi are fully dynamic: Just like normal attributes, the <cite>href</cite>
+attribute accepts expressions, and <a class="reference" href="#directives">directives</a> can be used on the
+<tt class="docutils literal"><span class="pre">&lt;xi:include</span> <span class="pre">/&gt;</span></tt> element just as on any other element, meaning you can do
+things like conditional includes:</p>
+<div class="highlight"><pre><span class="nt">&lt;xi:include</span> <span class="na">href=</span><span class="s">"</span><span class="cp">${</span><span class="n">name</span><span class="cp">}</span><span class="s">.html"</span> <span class="na">py:if=</span><span class="s">"</span><span class="ow">not</span> <span class="n">in_popup</span><span class="s">"</span>
+            <span class="na">py:for=</span><span class="s">"</span><span class="n">name</span> <span class="ow">in</span> <span class="p">(</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">)</span><span class="s">"</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<div class="section">
+<h2><a id="including-text-templates" name="including-text-templates">2.2   Including Text Templates</a></h2>
+<p>The <tt class="docutils literal"><span class="pre">parse</span></tt> attribute of the <tt class="docutils literal"><span class="pre">&lt;xi:include&gt;</span></tt> element can be used to specify
+whether the included template is an XML template or a text template (using the
+new syntax added in Genshi 0.5):</p>
+<div class="highlight"><pre><span class="nt">&lt;xi:include</span> <span class="na">href=</span><span class="s">"myscript.js"</span> <span class="na">parse=</span><span class="s">"text"</span> <span class="nt">/&gt;</span>
+</pre></div>
+<p>This example would load the <tt class="docutils literal"><span class="pre">myscript.js</span></tt> file as a <tt class="docutils literal"><span class="pre">NewTextTemplate</span></tt>. See
+<a class="reference" href="text-templates.html">text templates</a> for details on the syntax of text templates.</p>
+</div>
+</div>
+<div class="section">
+<h1><a id="id11" name="id11"><span id="comments"></span>3   Comments</a></h1>
+<p>Normal XML/HTML comment syntax can be used in templates:</p>
+<div class="highlight"><pre><span class="c">&lt;!-- this is a comment --&gt;</span>
+</pre></div>
+<p>However, such comments get passed through the processing pipeline and are by
+default included in the final output. If that's not desired, prefix the comment
+text with an exclamation mark:</p>
+<div class="highlight"><pre><span class="c">&lt;!-- !this is a comment too, but one that will be stripped from the output --&gt;</span>
+</pre></div>
+<p>Note that it does not matter whether there's whitespace before or after the
+exclamation mark, so the above could also be written as follows:</p>
+<div class="highlight"><pre><span class="c">&lt;!--! this is a comment too, but one that will be stripped from the output --&gt;</span>
+</pre></div>
+</div>
+    <div id="footer">
+      Visit the Genshi open source project at
+      <a href="http://genshi.edgewall.org/">http://genshi.edgewall.org/</a>
+    </div>
+  </div>
+</body>
+</html>

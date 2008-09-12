@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="generator" content="Docutils 0.4: http://docutils.sourceforge.net/">
+<title>Genshi: Using the Templating Plugin</title>
+<link rel="stylesheet" href="common/style/edgewall.css" type="text/css">
+</head>
+<body>
+<div class="document" id="using-the-templating-plugin">
+    <div id="navigation">
+      <span class="projinfo">Genshi 0.5.1</span>
+      <a href="index.html">Documentation Index</a>
+    </div>
+<h1 class="title">Using the Templating Plugin</h1>
+<p>While you can easily use Genshi templating through the APIs provided directly
+by Genshi, in some situations you may want to use Genshi through the template
+engine plugin API. Note though that this considerably limits the power and
+flexibility of Genshi templates (for example, there's no good way to use filters
+such as Genshi's <a class="reference" href="filters.html&gt;#html-form-filler">HTMLFormFiller</a> when the plugin
+API is sitting between your code and Genshi).</p>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="auto-toc simple">
+<li><a class="reference" href="#introduction" id="id2" name="id2">1   Introduction</a></li>
+<li><a class="reference" href="#usage" id="id3" name="id3">2   Usage</a><ul class="auto-toc">
+<li><a class="reference" href="#template-paths" id="id4" name="id4">2.1   Template Paths</a></li>
+<li><a class="reference" href="#extra-implicit-objects" id="id5" name="id5">2.2   Extra Implicit Objects</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#id1" id="id6" name="id6">3   Configuration Options</a><ul class="auto-toc">
+<li><a class="reference" href="#genshi-allow-exec" id="id7" name="id7">3.1   <tt class="docutils literal"><span class="pre">genshi.allow_exec</span></tt></a></li>
+<li><a class="reference" href="#genshi-auto-reload" id="id8" name="id8">3.2   <tt class="docutils literal"><span class="pre">genshi.auto_reload</span></tt></a></li>
+<li><a class="reference" href="#genshi-default-doctype" id="id9" name="id9">3.3   <tt class="docutils literal"><span class="pre">genshi.default_doctype</span></tt></a></li>
+<li><a class="reference" href="#genshi-default-encoding" id="id10" name="id10">3.4   <tt class="docutils literal"><span class="pre">genshi.default_encoding</span></tt></a></li>
+<li><a class="reference" href="#genshi-default-format" id="id11" name="id11">3.5   <tt class="docutils literal"><span class="pre">genshi.default_format</span></tt></a></li>
+<li><a class="reference" href="#genshi-loader-callback" id="id12" name="id12">3.6   <tt class="docutils literal"><span class="pre">genshi.loader_callback</span></tt></a></li>
+<li><a class="reference" href="#genshi-lookup-errors" id="id13" name="id13">3.7   <tt class="docutils literal"><span class="pre">genshi.lookup_errors</span></tt></a></li>
+<li><a class="reference" href="#genshi-max-cache-size" id="id14" name="id14">3.8   <tt class="docutils literal"><span class="pre">genshi.max_cache_size</span></tt></a></li>
+<li><a class="reference" href="#genshi-new-text-syntax" id="id15" name="id15">3.9   <tt class="docutils literal"><span class="pre">genshi.new_text_syntax</span></tt></a></li>
+<li><a class="reference" href="#genshi-search-path" id="id16" name="id16">3.10   <tt class="docutils literal"><span class="pre">genshi.search_path</span></tt></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section">
+<h1><a id="introduction" name="introduction">1   Introduction</a></h1>
+<p>Some Python web frameworks support a variety of different templating engines
+through the <a class="reference" href="http://docs.turbogears.org/1.0/TemplatePlugins">Template Engine Plugin API</a>, which was first developed by the
+<a class="reference" href="http://projects.dowski.com/projects/buffet">Buffet</a> and <a class="reference" href="http://www.turbogears.org/">TurboGears</a> projects.</p>
+<p>Genshi supports this API out of the box, so you can use it in frameworks like
+TurboGears or <a class="reference" href="http://pylonshq.com/">Pylons</a> without installing any additional packages. A small
+example TurboGears application is included in the <tt class="docutils literal"><span class="pre">examples</span></tt> directory of
+source distributions of Genshi.</p>
+</div>
+<div class="section">
+<h1><a id="usage" name="usage">2   Usage</a></h1>
+<p>The way you use Genshi through the plugin API depends very much on the framework
+you're using. In general, the approach will look something like the following:</p>
+<ol class="arabic simple">
+<li>Configure Genshi as the default (or an additional) template engine</li>
+<li>Optionally specify Genshi-specific <a class="reference" href="#configuration-options">configuration options</a></li>
+<li>For any given <em>view</em> or <em>controller</em> (or whatever those are called in your
+framework of choice), specify the name of the template to use and which data
+should be made available to it.</li>
+</ol>
+<p>For point 1, you'll have to specify the <em>name</em> of the template engine plugin.
+For Genshi, this is <strong>"genshi"</strong>. However, because Genshi supports both markup
+and text templates, it also provides two separate plugins, namely
+<strong>"genshi-markup"</strong> and <strong>"genshi-text"</strong> (the "genshi" name is just an
+alias for "genshi-markup").</p>
+<p>Usually, you can choose a default template engine, but also use a different
+engine on a per-request basis. So to use markup templates in general, but a text
+template in a specific controller, you'd configure "genshi" as the default
+template engine, and specify "genshi-text" for the controllers that should use
+text templates. How exactly this works depends on the framework in use.</p>
+<p>When rendering a specific template in a controller (point 3 above), you may also
+be able to pass additional options to the plugin. This includes the <tt class="docutils literal"><span class="pre">format</span></tt>
+keyword argument, which Genshi will use to override the configured default
+serialization method. In combination with specifying the "genshi-text" engine
+name as explained above, you would use this to specify the "text" serialization
+method when you want to use a text template. Or you'd specify "xml" for the
+format when you want to produce an Atom feed or other XML content.</p>
+<div class="section">
+<h2><a id="template-paths" name="template-paths">2.1   Template Paths</a></h2>
+<p>How you specify template paths depends on whether you have a <a class="reference" href="#search-path">search path</a> set
+up or not. The search path is a list of directories that Genshi should load
+templates from. Now when you request a template using a relative path such as
+<tt class="docutils literal"><span class="pre">mytmpl.html</span></tt> or <tt class="docutils literal"><span class="pre">foo/mytmpl.html</span></tt>, Genshi will look for that file in the
+directories on the search path.</p>
+<p>For mostly historical reasons, the Genshi template engine plugin uses a
+different approach when you <strong>haven't</strong> configured the template search path:
+you now load templates using <em>dotted notation</em>, for example <tt class="docutils literal"><span class="pre">mytmpl</span></tt> or
+<tt class="docutils literal"><span class="pre">foo.mytmpl</span></tt>.  Note how you've lost the ability to explicitly specify the
+file extension: you now have to use <tt class="docutils literal"><span class="pre">.html</span></tt> for markup templates, and
+<tt class="docutils literal"><span class="pre">.txt</span></tt> for text templates.</p>
+<p>Using the search path is recommended for a number of reasons: First, it's
+the native Genshi model and is thus more robust and better supported.
+Second, a search path gives you much more flexibility for organizing your
+application templates. And as noted above, you aren't forced to use hardcoded
+filename extensions for your template files.</p>
+</div>
+<div class="section">
+<h2><a id="extra-implicit-objects" name="extra-implicit-objects">2.2   Extra Implicit Objects</a></h2>
+<p>The "genshi-markup" template engine plugin adds some extra functions that are
+made available to all templates implicitly, namely:</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">HTML(string)</span></tt></dt>
+<dd>Parses the given string as HTML and returns a markup stream.</dd>
+<dt><tt class="docutils literal"><span class="pre">XML(string)</span></tt></dt>
+<dd>Parses the given string as XML and returns a markup stream.</dd>
+<dt><tt class="docutils literal"><span class="pre">ET(tree)</span></tt></dt>
+<dd>Adapts the given <a class="reference" href="http://effbot.org/zone/element-index.htm">ElementTree</a> object to a markup stream.</dd>
+</dl>
+<p>The framework may make additional objects available by default. Consult the
+documentation of your framework for more information.</p>
+</div>
+</div>
+<div class="section">
+<h1><a id="id1" name="id1"><span id="configuration-options"></span>3   Configuration Options</a></h1>
+<p>The plugin API allows plugins to be configured using a dictionary of strings.
+The following is a list of configuration options that Genshi supports. These may
+or may not be made available by your framework. TurboGears 1.0, for example,
+only passes a fixed set of options to all plugins.</p>
+<div class="section">
+<h2><a id="genshi-allow-exec" name="genshi-allow-exec">3.1   <tt class="docutils literal"><span class="pre">genshi.allow_exec</span></tt></a></h2>
+<p>Whether the Python code blocks should be permitted in templates. Specify "yes"
+to allow code blocks (which is the default), or "no" otherwise. Please note
+that disallowing code blocks in templates does not turn Genshi into a
+sandboxable template engine; there are sufficient ways to do harm even using
+plain expressions.</p>
+</div>
+<div class="section">
+<h2><a id="genshi-auto-reload" name="genshi-auto-reload">3.2   <tt class="docutils literal"><span class="pre">genshi.auto_reload</span></tt></a></h2>
+<p>Whether the template loader should check the last modification time of template
+files, and automatically reload them if they have been changed. Specify "yes"
+to enable this reloading (which is the default), or "no" to turn it off.</p>
+<p>You probably want to disable reloading in a production environment to improve
+performance of both templating loading and the processing of includes. But
+remember that you'll then have to manually restart the server process anytime
+the templates are updated.</p>
+</div>
+<div class="section">
+<h2><a id="genshi-default-doctype" name="genshi-default-doctype">3.3   <tt class="docutils literal"><span class="pre">genshi.default_doctype</span></tt></a></h2>
+<p>The default <tt class="docutils literal"><span class="pre">DOCTYPE</span></tt> declaration to use in generated markup. Valid values
+are:</p>
+<dl class="docutils">
+<dt><strong>html-strict</strong> (or just <strong>html</strong>)</dt>
+<dd>HTML 4.01 Strict</dd>
+<dt><strong>html-transitional</strong></dt>
+<dd>HTML 4.01 Transitional</dd>
+<dt><strong>xhtml-strict</strong> (or just <strong>xhtml</strong>)</dt>
+<dd>XHTML 1.0 Strict</dd>
+<dt><strong>xhtml-transitional</strong></dt>
+<dd>XHTML 1.0 Transitional</dd>
+<dt><strong>html5</strong></dt>
+<dd>HTML5 (as <a class="reference" href="http://www.whatwg.org/specs/web-apps/current-work/">proposed</a> by the WHAT-WG)</dd>
+</dl>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">While using the Genshi API directly allows you to specify document
+types not in that list, the <em>dictionary-of-strings</em> based
+configuration utilized by the plugin API unfortunately limits your
+choices to those listed above.</p>
+</div>
+<p>The default behavior is to not do any prepending/replacing of a <tt class="docutils literal"><span class="pre">DOCTYPE</span></tt>, but
+rather pass through those defined in the templates (if any). If this option is
+set, however, any <tt class="docutils literal"><span class="pre">DOCTYPE</span></tt> declarations in the templates are replaced by the
+specified document type.</p>
+<p>Note that with (X)HTML, the presence and choice of the <tt class="docutils literal"><span class="pre">DOCTYPE</span></tt> can have a
+more or less dramatic impact on how modern browsers render pages that use CSS
+style sheets. In particular, browsers may switch to <em>quirks rendering mode</em> for
+certain document types, or when the <tt class="docutils literal"><span class="pre">DOCTYPE</span></tt> declaration is missing
+completely.</p>
+<p>For more information on the choice of the appropriate <tt class="docutils literal"><span class="pre">DOCTYPE</span></tt>, see:</p>
+<ul class="simple">
+<li><a class="reference" href="http://www.w3.org/QA/2002/04/valid-dtd-list.html">Recommended DTDs to use in your Web document</a></li>
+<li><a class="reference" href="http://htmlhelp.com/tools/validator/doctype.html">Choosing a DOCTYPE</a></li>
+</ul>
+</div>
+<div class="section">
+<h2><a id="genshi-default-encoding" name="genshi-default-encoding">3.4   <tt class="docutils literal"><span class="pre">genshi.default_encoding</span></tt></a></h2>
+<p>The default output encoding to use when serializing a template. By default,
+Genshi uses UTF-8. If you need to, you can choose a different charset by
+specifying this option, although that rarely makes sense.</p>
+<p>As Genshi is not in control over what HTTP headers are being sent together with
+the template output, make sure that you (or the framework you're using)
+specify the chosen encoding as part of the outgoing <tt class="docutils literal"><span class="pre">Content-Type</span></tt> header.
+For example:</p>
+<pre class="literal-block">
+Content-Type: text/html; charset=utf-8
+</pre>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">Browsers commonly use ISO-8859-1 by default for <tt class="docutils literal"><span class="pre">text/html</span></tt>, so even
+if you use Genshi's default UTF-8 encoding, you'll have to let the
+browser know about that explicitly</p>
+</div>
+</div>
+<div class="section">
+<h2><a id="genshi-default-format" name="genshi-default-format">3.5   <tt class="docutils literal"><span class="pre">genshi.default_format</span></tt></a></h2>
+<p>Determines the default serialization method to use. Valid options are:</p>
+<dl class="docutils">
+<dt><strong>xml</strong></dt>
+<dd>Serialization to XML</dd>
+<dt><strong>xhtml</strong></dt>
+<dd>Serialization to XHTML in a way that should be compatible with HTML (i.e. the
+result can be sent using the <tt class="docutils literal"><span class="pre">text/html</span></tt> MIME type, but can also be handled
+by XML parsers if you're careful).</dd>
+<dt><strong>html</strong></dt>
+<dd>Serialization to HTML</dd>
+<dt><strong>text</strong></dt>
+<dd>Plain text serialization</dd>
+</dl>
+<p>See <a class="reference" href="http://webkit.org/blog/?p=68">Understanding HTML, XML and XHTML</a> for an excellent description of the
+subtle differences between the three different markup serialization options. As
+a general recommendation, if you don't have a special requirement to produce
+well-formed XML, you should probably use the <strong>html</strong> option for your web sites.</p>
+</div>
+<div class="section">
+<h2><a id="genshi-loader-callback" name="genshi-loader-callback">3.6   <tt class="docutils literal"><span class="pre">genshi.loader_callback</span></tt></a></h2>
+<p>The callback function that should be invoked whenever the template loader loads
+a new template.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">Unlike the other options, this option can <strong>not</strong> be passed as
+a string value, but rather must be a reference to the actual function.
+That effectively means it can not be set from (non-Python)
+configuration files.</p>
+</div>
+</div>
+<div class="section">
+<h2><a id="genshi-lookup-errors" name="genshi-lookup-errors">3.7   <tt class="docutils literal"><span class="pre">genshi.lookup_errors</span></tt></a></h2>
+<p>The error handling style to use in template expressions. Can be either
+<strong>lenient</strong> (the default) or <strong>strict</strong>. See the <a class="reference" href="templates.html#template-expressions-and-code-blocks">Error Handling</a> section for
+detailled information on the differences between these two modes.</p>
+</div>
+<div class="section">
+<h2><a id="genshi-max-cache-size" name="genshi-max-cache-size">3.8   <tt class="docutils literal"><span class="pre">genshi.max_cache_size</span></tt></a></h2>
+<p>The maximum number of templates that the template loader will cache in memory.
+The default value is <strong>25</strong>. You may want to choose a higher value if your web
+site uses a larger number of templates, and you have enough memory to spare.</p>
+</div>
+<div class="section">
+<h2><a id="genshi-new-text-syntax" name="genshi-new-text-syntax">3.9   <tt class="docutils literal"><span class="pre">genshi.new_text_syntax</span></tt></a></h2>
+<p>Whether the new syntax for text templates should be used. Specify "yes" to
+enable the new syntax, or "no" to use the old syntax.</p>
+<p>In the version of Genshi, the default is to use the old syntax for
+backwards-compatibility, but that will change in a future release.</p>
+</div>
+<div class="section">
+<h2><a id="genshi-search-path" name="genshi-search-path"><span id="search-path"></span>3.10   <tt class="docutils literal"><span class="pre">genshi.search_path</span></tt></a></h2>
+<p>A colon-separated list of file-system path names that the template loader should
+use to search for templates.</p>
+</div>
+</div>
+    <div id="footer">
+      Visit the Genshi open source project at
+      <a href="http://genshi.edgewall.org/">http://genshi.edgewall.org/</a>
+    </div>
+  </div>
+</body>
+</html>

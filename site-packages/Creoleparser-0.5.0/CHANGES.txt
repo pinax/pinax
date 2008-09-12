@@ -1,0 +1,81 @@
+Version 0.5.0 (May 31 2008)
+-----------------------------
+
+ * special syntax introduced for macros spanning block level markup 
+ * macros returning Croele can contain other macros (issue 6)
+ * macros refactored, pre-processing no longer used, more robust
+ * fixed bug with macros that output unicode strings (issue 4)
+ * macro names can now include capitals and periods (issue 5)
+ * added support for custom space characters for interwiki
+   links (interwiki_links_space_chars) 
+ * api changed for default interwiki links space character, the
+   wiki_links_space_char is used instead of an underscore. (issue 3)
+
+Version 0.4.0 (March 24 2008)
+-----------------------------
+
+ * added support for custom urls for interwiki links (interwiki_links_funcs)
+ * user supplied uri sanitation added
+ * a macro on a line by itself will no longer be <p>aragraphed 
+
+Version 0.3.3 (Dec 16 2007)
+---------------------------
+
+ * changed api slightly for wiki_links_class_func (see source)
+ * added suport for custom urls for wiki links (wiki_links_path_func)
+ * added support for macros with bodies (<<macro arg_string>>the body<</macro>>)
+ * removed use of global element_store and thread.local()
+
+Version 0.3.2 (Nov 28 2007)
+---------------------------
+
+ * line breaks (\\) can now be escaped with a tilde
+ * added macro support (<<macro arg_sring>>)
+ * added support for adding a class attribute to
+   wiki links (e.g., if the page doesn't exist).
+
+Version 0.3.1 (Nov 16 2007)
+---------------------------
+
+ * super (^^), subscript (,,), and underline (__) support added
+ * definition lists supported (;)
+ * ftp://xxx no longer cause italics
+ * links refactored
+ * removed store_id_seq in favor of id()
+ * made element_store thread.local()
+
+Version 0.3 (Nov 10 2007)
+-------------------------
+
+ * text2xhtml has no_wiki_monospace=True and use_additions=True
+ * creole_to_xhtml is now pure Creole 1.0 (use_additions=False)
+ * removed need for any pre_escaping, much more robust now
+ * big refactoring of inline wiki markup processing
+
+Version 0.2.1 (Nov 6 2007)
+--------------------------
+
+ * links can include mark-up
+ * creole_to_xhtml has no_wiki_monospace=True and use_additions=True
+ * fixed bug with bad links
+ * removed lone line break as an element (it wasn't valid xhtml)
+ * stopped inserting \n's after <br />'s
+ * wiki_links_space_char option added to dialects.Creole10
+ * added inline_no_wiki_monospace option to dialects.Creole10 
+ * refactored core.pre_escape()
+ * CHANGES.txt, LISCENCE.txt, and INSTALL.txt added to distribution
+ * added use_additions option to dialects.Creole10
+ * implemented monospace (##) (for use_additions option only) 
+
+
+Version 0.2 (Oct 26 2007)
+-------------------------
+
+ * module split into separate files to create the creoleparser package
+ * other refactoring
+
+
+Version 0.1, 0.1.1, 0.1.2 (Oct 2007)
+------------------------------------
+
+ * First public releases

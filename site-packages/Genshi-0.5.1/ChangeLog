@@ -1,0 +1,426 @@
+Version 0.5.1
+http://svn.edgewall.org/repos/genshi/tags/0.5.1/
+(Jul 9 2008, from branches/stable/0.5.x)
+
+ * Fix problem with nested match templates not being applied when buffering
+   on the outer `py:match` is disabled. Thanks to Erik Bray for reporting the
+   problem and providing a test case!
+ * Fix problem in `Translator` filter that would cause the translation of
+   text nodes to fail if the translation function returned an object that was
+   not directly a string, but rather something like an instance of the
+   `LazyProxy` class in Babel (ticket #145).
+ * Fix problem with match templates incorrectly being applied multiple times.
+ * Includes from templates loaded via an absolute path now include the correct
+   file in nested directories as long if no search path has been configured
+   (ticket #240).
+ * Unbuffered match templates could result in parts of the matched content
+   being included in the output if the match template didn't actually consume
+   it via one or more calls to the `select()` function (ticket #243).
+
+
+Version 0.5
+http://svn.edgewall.org/repos/genshi/tags/0.5.0/
+(Jun 9 2008, from branches/stable/0.5.x)
+
+ * Added #include directive for text templates (ticket #115).
+ * Added new markup transformation filter contributed by Alec Thomas. This
+   provides gorgeous jQuery-inspired stream transformation capabilities based
+   on XPath expressions.
+ * When using HTML or XHTML serialization, the `xml:lang` attribute is
+   automatically translated to the `lang` attribute which HTML user agents
+   understand.
+ * Added support for the XPath 2 `matches()` function in XPath expressions,
+   which allow matching against regular expressions.
+ * Support for Python code blocks in templates can now be disabled
+   (ticket #123).
+ * Includes are now processed when the template is parsed if possible, but
+   only if the template loader is not set to do automatic reloading. Included
+   templates are basically inlined into the including template, which can
+   speed up rendering of that template a bit.
+ * Added new syntax for text templates, which is more powerful and flexible
+   with respect to white-space and line breaks. It also supports Python code
+   blocks. The old syntax is still available and the default for now, but in a
+   future release the new syntax will become the default, and some time after
+   that the old syntax will be removed.
+ * Added support for passing optimization hints to `<py:match>` directives,
+   which can speed up match templates in many cases, for example when a match
+   template should only be applied once to a stream, or when it should not be
+   applied recursively.
+ * Text templates now default to rendering as plain text; it is no longer
+   necessary to explicitly specify the "text" method to the `render()` or
+   `serialize()` method of the generated markup stream.
+ * XInclude elements in markup templates now support the `parse` attribute;
+   when set to "xml" (the default), the include is processed as before, but
+   when set to "text", the included template is parsed as a text template using
+   the new syntax (ticket #101).
+ * Python code blocks inside match templates are now executed (ticket #155).
+ * The template engine plugin no longer adds the `default_doctype` when the
+   `fragment` parameter is `True`.
+ * The `striptags` function now also removes HTML/XML-style comments (ticket
+   #150).
+ * The `py:replace` directive can now also be used as an element, with an
+   attribute named `value` (ticket #144).
+ * The `TextSerializer` class no longer strips all markup in text by default,
+   so that it is still possible to use the Genshi `escape` function even with
+   text templates. The old behavior is available via the `strip_markup` option
+   of the serializer (ticket #146).
+ * Assigning to a variable named `data` in a Python code block no longer
+   breaks context lookup.
+ * The `Stream.render` now accepts an optional `out` parameter that can be
+   used to pass in a writable file-like object to use for assembling the
+   output, instead of building a big string and returning it.
+ * The XHTML serializer now strips `xml:space` attributes as they are only
+   allowed on very few tags.
+ * Match templates are now applied in a more controlled fashion: in the order
+   they are declared in the template source, all match templates up to (and
+   including) the matching template itself are applied to the matched content,
+   whereas the match templates declared after the matching template are only
+   applied to the generated content (ticket #186).
+ * The `TemplateLoader` class now provides an `_instantiate()` method that can
+   be overridden by subclasses to implement advanced template instantiation
+   logic (ticket #204).
+ * The search path of the `TemplateLoader` class can now contain ''load
+   functions'' in addition to path strings. A load function is passed the
+   name of the requested template file, and should return a file-like object
+   and some metadata. New load functions are supplied for loading from egg
+   package data, and loading from different loaders depending on the path
+   prefix of the requested filename (ticket #182).
+ * Match templates can now be processed without keeping the complete matched
+   content in memory, which could cause excessive memory use on long pages.
+   The buffering can be disabled using the new `buffer` optimization hint on
+   the `<py:match>` directive.
+ * Improve error reporting when accessing an attribute in a Python expression
+   raises an `AttributeError` (ticket #191).
+ * The `Markup` class now supports mappings for right hand of the `%` (modulo)
+   operator in the same way the Python string classes do, except that the
+   substituted values are escape. Also, the special constructor which took
+   positional arguments that would be substituted was removed. Thus the
+   `Markup` class now supports the same arguments as that of its `unicode`
+   base class (ticket #211).
+ * The `Template` class and its subclasses, as well as the interpolation API,
+   now take an `filepath` parameter instead of `basedir` (ticket #207).
+ * The `XHTMLSerializer` now has a `drop_xml_decl` option that defaults to
+   `True`. Setting it to `False` will cause any XML decl in the serialized
+   stream to be included in the output as it would for XML serialization.
+ * Add support for a protocol that would allow interoperability of different
+   Python packages that generate and/or consume markup, based on the special
+   `__html__()` method (ticket #202).
+
+
+Version 0.4.4
+http://svn.edgewall.org/repos/genshi/tags/0.4.4/
+(Aug 14, 2007, from branches/stable/0.4.x)
+
+ * Fixed augmented assignment to local variables in Python code blocks.
+ * Fixed handling of nested function and class definitions in Python code
+   blocks.
+ * Includes were not raising `TemplateNotFound` exceptions even when no
+   fallback has been specified. That has been corrected.
+ * The template loader now raises a `TemplateNotFound` error when a previously
+   cached template is removed or renamed, where it previously was passing up
+   an `OSError`.
+ * The Genshi I18n filter can be configured to only extract messages found in
+   `gettext` function calls, ignoring any text nodes and attribute values
+   (ticket #138).
+
+
+Version 0.4.3
+http://svn.edgewall.org/repos/genshi/tags/0.4.3/
+(Jul 17 2007, from branches/stable/0.4.x)
+
+ * The I18n filter no longer extracts or translates literal strings in
+   attribute values that also contain expressions.
+ * Added `loader_callback` option to plugin interface, which allows specifying
+   a callback function that the template loader should invoke whenever a new
+   template is loaded (ticket #130). Note that the value for this option can
+   not be specified as a string, only as an actual function object, which means
+   it is not available for use through configuration files.
+ * The I18n filter now extracts messages from gettext functions even inside
+   ignored tags (ticket #132).
+ * The HTML sanitizer now strips any CSS comments in style attributes, which
+   could previously be used to hide malicious property values.
+ * The HTML sanitizer now also removes any HTML comments encountered, as those
+   may be used to hide malicious payloads targetting a certain "innovative"
+   browser that goes and interprets the content of specially prepared comments.
+ * Attribute access in template expressions no longer silently ignores
+   exceptions other than `AttributeError` raised in the attribute accessor.
+
+
+Version 0.4.2
+http://svn.edgewall.org/repos/genshi/tags/0.4.2/
+(Jun 20 2007, from branches/stable/0.4.x)
+
+ * The `doctype` parameter of the markup serializers now also accepts the "name"
+   of the doctype as string, in addition to the `(name, pubid, sysid)` tuple.
+ * The I18n filter was not replacing the original attributes with the
+   translation, but instead adding a second attribute with the same name.
+ * `TextTemplate` can now handle unicode source (ticket #125).
+ * A `<?python ?>` processing instruction containing trailing whitespace no
+   longer causes a syntax error (ticket #127).
+ * The I18n filter now skips the content of elements that have an `xml:lang`
+   attribute with a fixed string value. Basically, `xml:lang` can now be used
+   as a flag to mark specific sections as not needing localization.
+ * Added plugin for message extraction via Babel (http://babel.edgewall.org/).
+
+
+Version 0.4.1
+http://svn.edgewall.org/repos/genshi/tags/0.4.1/
+(May 21 2007, from branches/stable/0.4.x)
+
+ * Fix incorrect reference to translation function in the I18N filter.
+ * The `ET()` function now correctly handles attributes with a namespace.
+ * XML declarations are now processed internally, as well as written to the
+   output when XML serialization is used (ticket #111).
+ * Added the functions `encode()` and `get_serializer()` to the `genshi.output`
+   module, which provide a lower-level API to the functionality previously only
+   available through `Stream.render()` and `Stream.serialize()`.
+ * The `DocType` class now has a `get(name)` function that returns a `DOCTYPE`
+   tuple for a given string.
+ * Added frameset variants to the `DocType` constants for HTML 4.01 and XHTML
+   1.0.
+ * Improved I18n extraction for pluralizable messages: for any translation
+   function with multiple string arguments (such as ``ngettext``), a single
+   item with a tuple of strings is yielded, instead an item for each string
+   argument.
+ * The `HTMLFormFiller` stream filter no longer alters form elements for which
+   the data element contains no corresponding item.
+ * Code in `<?python ?>` processing instructions no longer gets the special
+   treatment as Python code in template expressions, i.e. item and attribute
+   access are no longer interchangeable (which was broken in a number of ways
+   anyway, see ticket #113). This change does not affect expressions.
+ * Numerous fixes for the execution of Python code in `<?python ?>` processing
+   instructions (tickets #113 and #114).
+ * The `py:def` (and `#def`) directive now supports "star args" (i.e. `*args`
+   and `**kwargs`) in the function declaration (ticket #116).
+
+
+Version 0.4
+http://svn.edgewall.org/repos/genshi/tags/0.4.0/
+(Apr 16 2007, from branches/stable/0.4.x)
+
+ * New example applications for CherryPy and web.py.
+ * The template loader now uses a LRU cache to limit the number of cached
+   templates to a configurable maximum. Also, a race condition in the template
+   loader was fixed by adding locking.
+ * A new filter (genshi.filters.HTMLFormFiller) was added, which can populate 
+   HTML forms based on a dictionary of values.
+ * The set of permitted tag and attribute names for the HTMLSanitizer can now
+   be configured per instance.
+ * The template engine plugin now supports a range of options for
+   configuration, for example to set the default serialization method, the
+   default output encoding, or the default DOCTYPE.
+ * The ElementTree adaptation function `ET()` has moved into the `genshi.input`
+   module.
+ * Allow `when` directives to omit the test expression as long as the
+   associated choose directive does have one. In that case, the when branch is
+   followed if the expression of the choose directive evaluates to a truth
+   value.
+ * Unsuccessful attribute or item lookups now return `Undefined` objects for
+   nicer error messages.
+ * Split up the `genshi.template` module into multiple modules inside the new
+   `genshi.template` package.
+ * Results of expression evaluation are no longer implicitly called if they
+   are callable.
+ * Instances of the `genshi.core.Attrs` class are now immutable (they are
+   subclasses of `tuple` instead of `list`).
+ * `MarkupTemplate`s can now be instantiated from markup streams, in addition
+   to strings and file-like objects (ticket #69).
+ * Improve handling of incorrectly nested tags in the HTML parser.
+ * Template includes can now be nested inside fallback content.
+ * Expressions can now contain dict literals (ticket #37).
+ * It is now possible to have one or more escaped dollar signs in front of a 
+   full expression (ticket #92).
+ * The `Markup` class is now available by default in template expressions
+   (ticket #67).
+ * The handling of namespace declarations in XML/XHTML output has been improved.
+ * The `Attrs` class no longer automatically wraps all attribute names in
+   `QName` objects. This is now the responsibility of whoever is instantiating
+   `Attrs` objects (for example, stream filters and generators).
+ * Python code blocks are now supported using the `<?python ?>` processing
+   instruction (ticket #84).
+ * The way errors in template expressions are handled can now be configured. The
+   option `LenientLookup` provides the same forgiving mode used in previous
+   Genshi versions, while `StrictLookup` raises exceptions when undefined
+   variables or members are accessed. The lenient mode is still the default in
+   this version, but that may change in the future. (ticket #88)
+ * If a variable is not necessarily defined at the top level of the template
+   data, the new built-in functions `defined(key)` and `value_of(key, default)`
+   can be used so that the template also works in strict lookup mode. These
+   functions were previously only available when using Genshi via the template
+   engine plugin (for compatibility with Kid).
+ * `style` attributes are no longer allowed by the `HTMLSanitizer` by default.
+   If they are explicitly added to the set of safe attributes, any unicode
+   escapes in the attribute value are now handled properly.
+ * Namespace declarations on conditional elements (for example using a `py:if`
+   directive`) are no longer moved to the following element when the element
+   originally carrying the declaration is removed from the stream (ticket #107).
+ * Added basic built-in support for internationalizing templates by providing
+   a new `Translator` class that can both extract localizable strings from a
+   stream, and replace those strings with their localizations at render time.
+   The code for this was largely taken from previous work done by Matt Good
+   and David Fraser.
+
+
+Version 0.3.6
+http://svn.edgewall.org/repos/genshi/tags/0.3.6/
+(Dec 11 2006, from branches/stable/0.3.x)
+
+ * The builder API now accepts streams as children of elements and fragments.
+
+
+Version 0.3.5
+http://svn.edgewall.org/repos/genshi/tags/0.3.5/
+(Nov 22 2006, from branches/stable/0.3.x)
+
+ * Fix XPath traversal in match templates. Previously, `div/p` would be treated 
+   the same as `div//p`, i.e. it would match all descendants and not just the
+   immediate children.
+ * Preserve whitespace in HTML `<pre>` elements also when they contain child
+   elements.
+ * Match templates no longer match their own output (ticket #77).
+ * Blank lines before directives in text templates are now preserved as
+   expected (ticket #62).
+
+
+Version 0.3.4
+http://svn.edgewall.org/repos/genshi/tags/0.3.4/
+(Nov 2 2006, from branches/stable/0.3.x)
+
+ * The encoding of HTML and XML files, as well as markup and text templates,
+   can now be specified. Also, the encoding specified in XML declarations is
+   now respected unless an expiclit encoding is requested.
+ * Expressions used as arguments for `py:with`, `py:def`, and `py:for`
+   directives can now contain non-ASCII strings.
+
+
+Version 0.3.3
+http://svn.edgewall.org/repos/genshi/tags/0.3.3/
+(Oct 16 2006, from branches/stable/0.3.x)
+
+ * Fixed bug introduced in 0.3.2 that broke the parsing of templates which
+   declare the same namespace more than once in a nested fashion.
+ * Fixed the parsing of HTML entity references inside attribute values, both
+   in the `XMLParser` and the `HTMLParser` classes.
+ * Some changes to usage of absolute vs. relative template paths to ensure that
+   the filenamed-keyed cache employed by the TemplateLoader doesn't mix up
+   templates with the same name, but from different subdirectories.
+
+
+Version 0.3.2
+http://svn.edgewall.org/repos/genshi/tags/0.3.2/
+(Oct 12 2006, from branches/stable/0.3.x)
+
+ * Exceptions from templates now contain the absolute path to the template file
+   when a search path is used. This enables tracebacks to display the line in
+   question.
+ * The template engine plugin now provides three different types: "genshi" and
+   "genshi-markup" map to markup templates, while "genshi-text" maps to text
+   templates.
+ * Fixed the namespace context used by XPath patterns in py:match templates.
+   The were erroneously using the namespace context of the elements being
+   matched, where they should rather use the context in which they were
+   defined.
+ * The contents of `<script>` and `<style>` elements are no longer escaped when
+   serializing to HTML but declaring the XHTML namespace in the template.
+ * Improved error message raised when using the `py:for` directive on an object
+   that is not iterable (ticket #60).
+ * Fixed the XPath function `starts-with()` which was always returning true
+   (ticket #61).
+
+
+Version 0.3.1
+http://svn.edgewall.org/repos/genshi/tags/0.3.1/
+(Sep 22 2006, from branches/stable/0.3.x)
+
+ * Includes and user-defined filters were not getting the correct context data
+   when used inside a match template (ticket #56).
+ * XPath patterns using the union operator (`|`) were returning only partial
+   results in some cases.
+
+
+Version 0.3
+http://svn.edgewall.org/repos/genshi/tags/0.3.0/
+(Sep 17 2006, from branches/stable/0.3.x)
+
+ * The project name was changed from "Markup" to "Genshi". See UPGRADE.txt
+   for upgrade instructions.
+ * Expression evaluation now differentiates between undefined variables and
+   variables that are defined but set to `None`. This also means that local
+   variables can override built-ins even if the local variable are set to
+   `None` (ticket #36).
+ * The plugin implementation now makes more functions available for use inside
+   templates: XML(), HTML(), defined(), and value-of(). These are mostly for
+   migration from Kid.
+ * The parsing of `py:with` directives has been improved: you can now assign
+   to multiple names, and semicolons inside string literals are treated as
+   expected.
+ * Generator expressions can now be used in template expressions (ticket #16).
+ * Added serialization to plain text (ticket #41).
+ * Calling functions from template expressions with *args and/or **kwargs
+   now works correctly (ticket #42).
+ * The `TemplateLoader` class and the `Template` instances that it manages are
+   now thread-safe, as they no longer keep any state related to the current
+   processing context.
+ * Stream filters and serializers can now be applied using the "pipe" (bitwise
+   or) operator "|".
+ * The execution of named template functions (`py:def`) no longer silently
+   swallows TypeError exceptions (ticket #44).
+ * The XML Parser now correctly handles unicode input (ticket #43).
+ * HTML entities can now be used in templates without having to declare an HTML
+   document type.
+ * Error reporting on undefined entities has been fixed.
+ * Fix traversal of substreams by XPath expressions. For example, the path
+   '*/*' no longer matches non-immediate child elements, and '@*' no longer
+   matches the attributes of descendants.
+ * Fixes for `py:match` which would get confused when it should be applied
+   to multiple elements (ticket #49).
+ * Using namespace prefixes in XPath expressions is now supported.
+ * Expressions now correctly handle slices (ticket #51).
+ * A simple text-based template language is now included for generating
+   plain text output (ticket #47).
+
+
+Version 0.2
+http://svn.edgewall.org/repos/genshi/tags/0.2.0/
+(Aug 22 2006, from branches/stable/0.2.x)
+
+ * XPath syntax errors now contain position info (ticket #20).
+ * Errors in expression evaluation now contain the correct line number in the
+   template (ticket #22).
+ * <script> and <style> element contents are no longer escaped when using HTML
+   serialization (ticket #24).
+ * In some cases expressions in templates did not get interpolated (ticket
+   #26).
+ * CDATA sections are now passed through the pipeline and serialized correctly.
+   That allows using <script> or <style> elements in XHTML output that is still
+   compatible with HTML user agents.
+ * The XHTML serializer now correctly handles elements in foreign namespaces
+   (such as SVG or MathML).
+ * Fixed relative includes in templates on Windows (ticket #27).
+ * Output can be encoded using legacy codecs such as ISO-8859-1. Any character
+   not representable in the chosen encoding gets replaced by the corresponding
+   XML character reference.
+ * String literals in XPath expressions that contain spaces are now parsed
+   as expected.
+ * Added support for the XPath functions boolean(), ceiling(), concat(),
+   contains(), false(), floor(), normalize-space(), number(), round(),
+   starts-with(), string-length(), substring(), substring-after(),
+   substring-before(), translate(), and true().
+ * Non-ASCII characters in expressions should now be handled correctly (ticket
+   #29).
+ * Default values for arguments of template functions now also work with
+   constants and complex expressions (they only worked for string or number
+   literals before).
+ * XPath expressions in now support XPath variables ($var) in predicates
+   (ticket #31).
+ * Expressions in templates can now span multiple lines if they are enclosed
+   in curly braces.
+ * py:def macros can now be invoked from within expressions inside attribute
+   values (ticket #34).
+
+
+Version 0.1
+http://svn.edgewall.org/repos/genshi/tags/0.1.0/
+(Aug 3 2006, from branches/stable/0.1.x)
+
+ * First public release

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      xmlns:py="http://genshi.edgewall.org/">
+  <xi:include href="layout.html" />
+  <head>
+    <title>${link.title}</title>
+    <link rel="alternate" type="application/atom+xml" title="Geddit: ${link.title}"
+          href="${url('/feed/%s/' % link.id)}" />
+    <script type="text/javascript">
+      function loadCommentForm(a) {
+        $.get("${url('/comment/%s/' % link.id)}", {}, function(html) {
+          var form = a.hide().parent().after(html).next();
+          function closeForm() {
+            form.slideUp("fast", function() { a.fadeIn(); form.remove() });
+            return false;
+          }
+          function initForm() {
+            form.find("input[@name='cancel']").click(closeForm);
+            form.submit(function() {
+              var data = form.find("input[@type='text'], textarea").serialize();
+              $.post("${url('/comment/%s/' % link.id)}", data, function(html) {
+                var elem = $(html).get(0);
+                if (/form/i.test(elem.tagName)) {
+                  form.after(elem).remove();
+                  form = $(elem);
+                  initForm();
+                } else {
+                  if ($("ul.comments").length == 0) {
+                    a.parent().before('<ul class="comments"></ul>');
+                  }
+                  $("ul.comments").append($(elem));
+                  closeForm();
+                }
+              });
+              return false;
+            });
+          }
+          initForm();
+        });
+      }
+      $(document).ready(function() {
+        $("a.action").click(function() {
+          loadCommentForm($(this));
+          return false;
+        });
+      });
+    </script>
+  </head>
+  <body class="info">
+    <h1>${link.title}</h1>
+    <a href="${link.url}">${link.url}</a><br />
+    posted by ${link.username} at ${link.time.strftime('%x %X')}<br />
+
+    <ul py:if="link.comments" class="comments">
+      <xi:include href="_comment.html"
+          py:for="num, comment in enumerate(link.comments)" />
+    </ul>
+
+    <p><a class="action" href="${url('/comment/%s/' % link.id)}">Add comment</a></p>
+  </body>
+</html>

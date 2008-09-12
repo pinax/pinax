@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="generator" content="Docutils 0.4: http://docutils.sourceforge.net/">
+<title>Genshi: Markup Streams</title>
+<link rel="stylesheet" href="common/style/edgewall.css" type="text/css">
+</head>
+<body>
+<div class="document" id="markup-streams">
+    <div id="navigation">
+      <span class="projinfo">Genshi 0.5.1</span>
+      <a href="index.html">Documentation Index</a>
+    </div>
+<h1 class="title">Markup Streams</h1>
+<p>A stream is the common representation of markup as a <em>stream of events</em>.</p>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="auto-toc simple">
+<li><a class="reference" href="#basics" id="id3" name="id3">1   Basics</a></li>
+<li><a class="reference" href="#filtering" id="id4" name="id4">2   Filtering</a></li>
+<li><a class="reference" href="#serialization" id="id5" name="id5">3   Serialization</a><ul class="auto-toc">
+<li><a class="reference" href="#id1" id="id6" name="id6">3.1   Serialization Methods</a></li>
+<li><a class="reference" href="#serialization-options" id="id7" name="id7">3.2   Serialization Options</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#using-xpath" id="id8" name="id8">4   Using XPath</a></li>
+<li><a class="reference" href="#id2" id="id9" name="id9">5   Event Kinds</a><ul class="auto-toc">
+<li><a class="reference" href="#start" id="id10" name="id10">5.1   START</a></li>
+<li><a class="reference" href="#end" id="id11" name="id11">5.2   END</a></li>
+<li><a class="reference" href="#text" id="id12" name="id12">5.3   TEXT</a></li>
+<li><a class="reference" href="#start-ns" id="id13" name="id13">5.4   START_NS</a></li>
+<li><a class="reference" href="#end-ns" id="id14" name="id14">5.5   END_NS</a></li>
+<li><a class="reference" href="#doctype" id="id15" name="id15">5.6   DOCTYPE</a></li>
+<li><a class="reference" href="#comment" id="id16" name="id16">5.7   COMMENT</a></li>
+<li><a class="reference" href="#pi" id="id17" name="id17">5.8   PI</a></li>
+<li><a class="reference" href="#start-cdata" id="id18" name="id18">5.9   START_CDATA</a></li>
+<li><a class="reference" href="#end-cdata" id="id19" name="id19">5.10   END_CDATA</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section">
+<h1><a id="basics" name="basics">1   Basics</a></h1>
+<p>A stream can be attained in a number of ways. It can be:</p>
+<ul class="simple">
+<li>the result of parsing XML or HTML text, or</li>
+<li>the result of selecting a subset of another stream using XPath, or</li>
+<li>programmatically generated.</li>
+</ul>
+<p>For example, the functions <tt class="docutils literal"><span class="pre">XML()</span></tt> and <tt class="docutils literal"><span class="pre">HTML()</span></tt> can be used to convert
+literal XML or HTML text to a markup stream:</p>
+<div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">from</span> <span class="nn">genshi</span> <span class="k">import</span> <span class="n">XML</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stream</span> <span class="o">=</span> <span class="n">XML</span><span class="p">(</span><span class="s">'&lt;p class="intro"&gt;Some text and '</span>
+<span class="gp">... </span>             <span class="s">'&lt;a href="http://example.org/"&gt;a link&lt;/a&gt;.'</span>
+<span class="gp">... </span>             <span class="s">'&lt;br/&gt;&lt;/p&gt;'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stream</span>
+<span class="go">&lt;genshi.core.Stream object at ...&gt;</span>
+</pre></div>
+<p>The stream is the result of parsing the text into events. Each event is a tuple
+of the form <tt class="docutils literal"><span class="pre">(kind,</span> <span class="pre">data,</span> <span class="pre">pos)</span></tt>, where:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">kind</span></tt> defines what kind of event it is (such as the start of an element,
+text, a comment, etc).</li>
+<li><tt class="docutils literal"><span class="pre">data</span></tt> is the actual data associated with the event. How this looks depends
+on the event kind (see  <a class="reference" href="#event-kinds">event kinds</a>)</li>
+<li><tt class="docutils literal"><span class="pre">pos</span></tt> is a <tt class="docutils literal"><span class="pre">(filename,</span> <span class="pre">lineno,</span> <span class="pre">column)</span></tt> tuple that describes where the
+event “comes from”.</li>
+</ul>
+<div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">kind</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">pos</span> <span class="ow">in</span> <span class="n">stream</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">print</span> <span class="n">kind</span><span class="p">,</span> <span class="sb">`data`</span><span class="p">,</span> <span class="n">pos</span>
+<span class="gp">...</span>
+<span class="go">START (QName(u'p'), Attrs([(QName(u'class'), u'intro')])) (None, 1, 0)</span>
+<span class="go">TEXT u'Some text and ' (None, 1, 17)</span>
+<span class="go">START (QName(u'a'), Attrs([(QName(u'href'), u'http://example.org/')])) (None, 1, 31)</span>
+<span class="go">TEXT u'a link' (None, 1, 61)</span>
+<span class="go">END QName(u'a') (None, 1, 67)</span>
+<span class="go">TEXT u'.' (None, 1, 71)</span>
+<span class="go">START (QName(u'br'), Attrs()) (None, 1, 72)</span>
+<span class="go">END QName(u'br') (None, 1, 77)</span>
+<span class="go">END QName(u'p') (None, 1, 77)</span>
+</pre></div>
+</div>
+<div class="section">
+<h1><a id="filtering" name="filtering">2   Filtering</a></h1>
+<p>One important feature of markup streams is that you can apply <em>filters</em> to the
+stream, either filters that come with Genshi, or your own custom filters.</p>
+<p>A filter is simply a callable that accepts the stream as parameter, and returns
+the filtered stream:</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">noop</span><span class="p">(</span><span class="n">stream</span><span class="p">):</span>
+    <span class="sd">"""A filter that doesn't actually do anything with the stream."""</span>
+    <span class="k">for</span> <span class="n">kind</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">pos</span> <span class="ow">in</span> <span class="n">stream</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">kind</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">pos</span>
+</pre></div>
+<p>Filters can be applied in a number of ways. The simplest is to just call the
+filter directly:</p>
+<div class="highlight"><pre><span class="n">stream</span> <span class="o">=</span> <span class="n">noop</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span>
+</pre></div>
+<p>The <tt class="docutils literal"><span class="pre">Stream</span></tt> class also provides a <tt class="docutils literal"><span class="pre">filter()</span></tt> method, which takes an
+arbitrary number of filter callables and applies them all:</p>
+<div class="highlight"><pre><span class="n">stream</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">noop</span><span class="p">)</span>
+</pre></div>
+<p>Finally, filters can also be applied using the <em>bitwise or</em> operator (<tt class="docutils literal"><span class="pre">|</span></tt>),
+which allows a syntax similar to pipes on Unix shells:</p>
+<div class="highlight"><pre><span class="n">stream</span> <span class="o">=</span> <span class="n">stream</span> <span class="o">|</span> <span class="n">noop</span>
+</pre></div>
+<p>One example of a filter included with Genshi is the <tt class="docutils literal"><span class="pre">HTMLSanitizer</span></tt> in
+<tt class="docutils literal"><span class="pre">genshi.filters</span></tt>. It processes a stream of HTML markup, and strips out any
+potentially dangerous constructs, such as Javascript event handlers.
+<tt class="docutils literal"><span class="pre">HTMLSanitizer</span></tt> is not a function, but rather a class that implements
+<tt class="docutils literal"><span class="pre">__call__</span></tt>, which means instances of the class are callable:</p>
+<div class="highlight"><pre><span class="n">stream</span> <span class="o">=</span> <span class="n">stream</span> <span class="o">|</span> <span class="n">HTMLSanitizer</span><span class="p">()</span>
+</pre></div>
+<p>Both the <tt class="docutils literal"><span class="pre">filter()</span></tt> method and the pipe operator allow easy chaining of
+filters:</p>
+<div class="highlight"><pre><span class="k">from</span> <span class="nn">genshi.filters</span> <span class="k">import</span> <span class="n">HTMLSanitizer</span>
+<span class="n">stream</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">noop</span><span class="p">,</span> <span class="n">HTMLSanitizer</span><span class="p">())</span>
+</pre></div>
+<p>That is equivalent to:</p>
+<div class="highlight"><pre><span class="n">stream</span> <span class="o">=</span> <span class="n">stream</span> <span class="o">|</span> <span class="n">noop</span> <span class="o">|</span> <span class="n">HTMLSanitizer</span><span class="p">()</span>
+</pre></div>
+<p>For more information about the built-in filters, see <a class="reference" href="filters.html">Stream Filters</a>.</p>
+</div>
+<div class="section">
+<h1><a id="serialization" name="serialization">3   Serialization</a></h1>
+<p>Serialization means producing some kind of textual output from a stream of
+events, which you'll need when you want to transmit or store the results of
+generating or otherwise processing markup.</p>
+<p>The <tt class="docutils literal"><span class="pre">Stream</span></tt> class provides two methods for serialization: <tt class="docutils literal"><span class="pre">serialize()</span></tt>
+and <tt class="docutils literal"><span class="pre">render()</span></tt>. The former is a generator that yields chunks of <tt class="docutils literal"><span class="pre">Markup</span></tt>
+objects (which are basically unicode strings that are considered safe for
+output on the web). The latter returns a single string, by default UTF-8
+encoded.</p>
+<p>Here's the output from <tt class="docutils literal"><span class="pre">serialize()</span></tt>:</p>
+<div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">output</span> <span class="ow">in</span> <span class="n">stream</span><span class="o">.</span><span class="n">serialize</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="k">print</span> <span class="sb">`output`</span>
+<span class="gp">...</span>
+<span class="go">&lt;Markup u'&lt;p class="intro"&gt;'&gt;</span>
+<span class="go">&lt;Markup u'Some text and '&gt;</span>
+<span class="go">&lt;Markup u'&lt;a href="http://example.org/"&gt;'&gt;</span>
+<span class="go">&lt;Markup u'a link'&gt;</span>
+<span class="go">&lt;Markup u'&lt;/a&gt;'&gt;</span>
+<span class="go">&lt;Markup u'.'&gt;</span>
+<span class="go">&lt;Markup u'&lt;br/&gt;'&gt;</span>
+<span class="go">&lt;Markup u'&lt;/p&gt;'&gt;</span>
+</pre></div>
+<p>And here's the output from <tt class="docutils literal"><span class="pre">render()</span></tt>:</p>
+<div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">stream</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+<span class="go">&lt;p class="intro"&gt;Some text and &lt;a href="http://example.org/"&gt;a link&lt;/a&gt;.&lt;br/&gt;&lt;/p&gt;</span>
+</pre></div>
+<p>Both methods can be passed a <tt class="docutils literal"><span class="pre">method</span></tt> parameter that determines how exactly
+the events are serialized to text. This parameter can be either a string or a
+custom serializer class:</p>
+<div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">stream</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s">'html'</span><span class="p">)</span>
+<span class="go">&lt;p class="intro"&gt;Some text and &lt;a href="http://example.org/"&gt;a link&lt;/a&gt;.&lt;br&gt;&lt;/p&gt;</span>
+</pre></div>
+<p>Note how the <cite>&lt;br&gt;</cite> element isn't closed, which is the right thing to do for
+HTML. See  <a class="reference" href="#serialization-methods">serialization methods</a> for more details.</p>
+<p>In addition, the <tt class="docutils literal"><span class="pre">render()</span></tt> method takes an <tt class="docutils literal"><span class="pre">encoding</span></tt> parameter, which
+defaults to “UTF-8”. If set to <tt class="docutils literal"><span class="pre">None</span></tt>, the result will be a unicode string.</p>
+<p>The different serializer classes in <tt class="docutils literal"><span class="pre">genshi.output</span></tt> can also be used
+directly:</p>
+<div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">from</span> <span class="nn">genshi.filters</span> <span class="k">import</span> <span class="n">HTMLSanitizer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">from</span> <span class="nn">genshi.output</span> <span class="k">import</span> <span class="n">TextSerializer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">TextSerializer</span><span class="p">()(</span><span class="n">HTMLSanitizer</span><span class="p">()(</span><span class="n">stream</span><span class="p">)))</span>
+<span class="go">Some text and a link.</span>
+</pre></div>
+<p>The pipe operator allows a nicer syntax:</p>
+<div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">stream</span> <span class="o">|</span> <span class="n">HTMLSanitizer</span><span class="p">()</span> <span class="o">|</span> <span class="n">TextSerializer</span><span class="p">()</span>
+<span class="go">Some text and a link.</span>
+</pre></div>
+<div class="section">
+<h2><a id="id1" name="id1"><span id="serialization-methods"></span>3.1   Serialization Methods</a></h2>
+<p>Genshi supports the use of different serialization methods to use for creating
+a text representation of a markup stream.</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">xml</span></tt></dt>
+<dd>The <tt class="docutils literal"><span class="pre">XMLSerializer</span></tt> is the default serialization method and results in
+proper XML output including namespace support, the XML declaration, CDATA
+sections, and so on. It is not generally not suitable for serving HTML or
+XHTML web pages (unless you want to use true XHTML 1.1), for which the
+<tt class="docutils literal"><span class="pre">xhtml</span></tt> and <tt class="docutils literal"><span class="pre">html</span></tt> serializers described below should be preferred.</dd>
+<dt><tt class="docutils literal"><span class="pre">xhtml</span></tt></dt>
+<dd><p class="first">The <tt class="docutils literal"><span class="pre">XHTMLSerializer</span></tt> is a specialization of the generic <tt class="docutils literal"><span class="pre">XMLSerializer</span></tt>
+that understands the pecularities of producing XML-compliant output that can
+also be parsed without problems by the HTML parsers found in modern web
+browsers. Thus, the output by this serializer should be usable whether sent
+as "text/html" or "application/xhtml+html" (although there are a lot of
+subtle issues to pay attention to when switching between the two, in
+particular with respect to differences in the DOM and CSS).</p>
+<p>For example, instead of rendering a script tag as <tt class="docutils literal"><span class="pre">&lt;script/&gt;</span></tt> (which
+confuses the HTML parser in many browsers), it will produce
+<tt class="docutils literal"><span class="pre">&lt;script&gt;&lt;/script&gt;</span></tt>. Also, it will normalize any boolean attributes values
+that are minimized in HTML, so that for example <tt class="docutils literal"><span class="pre">&lt;hr</span> <span class="pre">noshade="1"/&gt;</span></tt>
+becomes <tt class="docutils literal"><span class="pre">&lt;hr</span> <span class="pre">noshade="noshade"</span> <span class="pre">/&gt;</span></tt>.</p>
+<p class="last">This serializer supports the use of namespaces for compound documents, for
+example to use inline SVG inside an XHTML document.</p>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">html</span></tt></dt>
+<dd>The <tt class="docutils literal"><span class="pre">HTMLSerializer</span></tt> produces proper HTML markup. The main differences
+compared to <tt class="docutils literal"><span class="pre">xhtml</span></tt> serialization are that boolean attributes are
+minimized, empty tags are not self-closing (so it's <tt class="docutils literal"><span class="pre">&lt;br&gt;</span></tt> instead of
+<tt class="docutils literal"><span class="pre">&lt;br</span> <span class="pre">/&gt;</span></tt>), and that the contents of <tt class="docutils literal"><span class="pre">&lt;script&gt;</span></tt> and <tt class="docutils literal"><span class="pre">&lt;style&gt;</span></tt> elements
+are not escaped.</dd>
+<dt><tt class="docutils literal"><span class="pre">text</span></tt></dt>
+<dd>The <tt class="docutils literal"><span class="pre">TextSerializer</span></tt> produces plain text from markup streams. This is
+useful primarily for <a class="reference" href="text-templates.html">text templates</a>, but can also be used to produce
+plain text output from markup templates or other sources.</dd>
+</dl>
+</div>
+<div class="section">
+<h2><a id="serialization-options" name="serialization-options">3.2   Serialization Options</a></h2>
+<p>Both <tt class="docutils literal"><span class="pre">serialize()</span></tt> and <tt class="docutils literal"><span class="pre">render()</span></tt> support additional keyword arguments that
+are passed through to the initializer of the serializer class. The following
+options are supported by the built-in serializers:</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">strip_whitespace</span></tt></dt>
+<dd><p class="first">Whether the serializer should remove trailing spaces and empty lines.
+Defaults to <tt class="docutils literal"><span class="pre">True</span></tt>.</p>
+<p class="last">(This option is not available for serialization to plain text.)</p>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">doctype</span></tt></dt>
+<dd><p class="first">A <tt class="docutils literal"><span class="pre">(name,</span> <span class="pre">pubid,</span> <span class="pre">sysid)</span></tt> tuple defining the name, publid identifier, and
+system identifier of a <tt class="docutils literal"><span class="pre">DOCTYPE</span></tt> declaration to prepend to the generated
+output. If provided, this declaration will override any <tt class="docutils literal"><span class="pre">DOCTYPE</span></tt>
+declaration in the stream.</p>
+<p>The parameter can also be specified as a string to refer to commonly used
+doctypes:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="40%">
+<col width="60%">
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Shorthand</th>
+<th class="head">DOCTYPE</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal"><span class="pre">html</span></tt> or
+<tt class="docutils literal"><span class="pre">html-strict</span></tt></td>
+<td>HTML 4.01 Strict</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">html-transitional</span></tt></td>
+<td>HTML 4.01 Transitional</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">html-frameset</span></tt></td>
+<td>HTML 4.01 Frameset</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">html5</span></tt></td>
+<td>DOCTYPE proposed for the work-in-progress
+HTML5 standard</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">xhtml</span></tt> or
+<tt class="docutils literal"><span class="pre">xhtml-strict</span></tt></td>
+<td>XHTML 1.0 Strict</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">xhtml-transitional</span></tt></td>
+<td>XHTML 1.0 Transitional</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">xhtml-frameset</span></tt></td>
+<td>XHTML 1.0 Frameset</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">xhtml11</span></tt></td>
+<td>XHTML 1.1</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">svg</span></tt> or <tt class="docutils literal"><span class="pre">svg-full</span></tt></td>
+<td>SVG 1.1</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">svg-basic</span></tt></td>
+<td>SVG 1.1 Basic</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">svg-tiny</span></tt></td>
+<td>SVG 1.1 Tiny</td>
+</tr>
+</tbody>
+</table>
+<p class="last">(This option is not available for serialization to plain text.)</p>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">namespace_prefixes</span></tt></dt>
+<dd><p class="first">The namespace prefixes to use for namespace that are not bound to a prefix
+in the stream itself.</p>
+<p class="last">(This option is not available for serialization to HTML or plain text.)</p>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">drop_xml_decl</span></tt></dt>
+<dd><p class="first">Whether to remove the XML declaration (the <tt class="docutils literal"><span class="pre">&lt;?xml</span> <span class="pre">?&gt;</span></tt> part at the
+beginning of a document) when serializing. This defaults to <tt class="docutils literal"><span class="pre">True</span></tt> as an
+XML declaration throws some older browsers into "Quirks" rendering mode.</p>
+<p class="last">(This option is only available for serialization to XHTML.)</p>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">strip_markup</span></tt></dt>
+<dd><p class="first">Whether the text serializer should detect and remove any tags or entity
+encoded characters in the text.</p>
+<p class="last">(This option is only available for serialization to plain text.)</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section">
+<h1><a id="using-xpath" name="using-xpath">4   Using XPath</a></h1>
+<p>XPath can be used to extract a specific subset of the stream via the
+<tt class="docutils literal"><span class="pre">select()</span></tt> method:</p>
+<div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">substream</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s">'a'</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">substream</span>
+<span class="go">&lt;genshi.core.Stream object at ...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">substream</span>
+<span class="go">&lt;a href="http://example.org/"&gt;a link&lt;/a&gt;</span>
+</pre></div>
+<p>Often, streams cannot be reused: in the above example, the sub-stream is based
+on a generator. Once it has been serialized, it will have been fully consumed,
+and cannot be rendered again. To work around this, you can wrap such a stream
+in a <tt class="docutils literal"><span class="pre">list</span></tt>:</p>
+<div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">from</span> <span class="nn">genshi</span> <span class="k">import</span> <span class="n">Stream</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">substream</span> <span class="o">=</span> <span class="n">Stream</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">stream</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s">'a'</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">substream</span>
+<span class="go">&lt;genshi.core.Stream object at ...&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">substream</span>
+<span class="go">&lt;a href="http://example.org/"&gt;a link&lt;/a&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">substream</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s">'@href'</span><span class="p">)</span>
+<span class="go">http://example.org/</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">substream</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s">'text()'</span><span class="p">)</span>
+<span class="go">a link</span>
+</pre></div>
+<p>See <a class="reference" href="xpath.html">Using XPath in Genshi</a> for more information about the XPath support in
+Genshi.</p>
+</div>
+<div class="section">
+<h1><a id="id2" name="id2"><span id="event-kinds"></span>5   Event Kinds</a></h1>
+<p>Every event in a stream is of one of several <em>kinds</em>, which also determines
+what the <tt class="docutils literal"><span class="pre">data</span></tt> item of the event tuple looks like. The different kinds of
+events are documented below.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <tt class="docutils literal"><span class="pre">data</span></tt> item is generally immutable. If the data is to be
+modified when processing a stream, it must be replaced by a new tuple.
+Effectively, this means the entire event tuple is immutable.</p>
+</div>
+<div class="section">
+<h2><a id="start" name="start">5.1   START</a></h2>
+<p>The opening tag of an element.</p>
+<p>For this kind of event, the <tt class="docutils literal"><span class="pre">data</span></tt> item is a tuple of the form
+<tt class="docutils literal"><span class="pre">(tagname,</span> <span class="pre">attrs)</span></tt>, where <tt class="docutils literal"><span class="pre">tagname</span></tt> is a <tt class="docutils literal"><span class="pre">QName</span></tt> instance describing the
+qualified name of the tag, and <tt class="docutils literal"><span class="pre">attrs</span></tt> is an <tt class="docutils literal"><span class="pre">Attrs</span></tt> instance containing
+the attribute names and values associated with the tag (excluding namespace
+declarations):</p>
+<div class="highlight"><pre><span class="n">START</span><span class="p">,</span> <span class="p">(</span><span class="n">QName</span><span class="p">(</span><span class="s">u'p'</span><span class="p">),</span> <span class="n">Attrs</span><span class="p">([(</span><span class="n">QName</span><span class="p">(</span><span class="s">u'class'</span><span class="p">),</span> <span class="s">u'intro'</span><span class="p">)])),</span> <span class="n">pos</span>
+</pre></div>
+</div>
+<div class="section">
+<h2><a id="end" name="end">5.2   END</a></h2>
+<p>The closing tag of an element.</p>
+<p>The <tt class="docutils literal"><span class="pre">data</span></tt> item of end events consists of just a <tt class="docutils literal"><span class="pre">QName</span></tt> instance
+describing the qualified name of the tag:</p>
+<div class="highlight"><pre><span class="n">END</span><span class="p">,</span> <span class="n">QName</span><span class="p">(</span><span class="s">u'p'</span><span class="p">),</span> <span class="n">pos</span>
+</pre></div>
+</div>
+<div class="section">
+<h2><a id="text" name="text">5.3   TEXT</a></h2>
+<p>Character data outside of elements and comments.</p>
+<p>For text events, the <tt class="docutils literal"><span class="pre">data</span></tt> item should be a unicode object:</p>
+<div class="highlight"><pre><span class="n">TEXT</span><span class="p">,</span> <span class="s">u'Hello, world!'</span><span class="p">,</span> <span class="n">pos</span>
+</pre></div>
+</div>
+<div class="section">
+<h2><a id="start-ns" name="start-ns">5.4   START_NS</a></h2>
+<p>The start of a namespace mapping, binding a namespace prefix to a URI.</p>
+<p>The <tt class="docutils literal"><span class="pre">data</span></tt> item of this kind of event is a tuple of the form
+<tt class="docutils literal"><span class="pre">(prefix,</span> <span class="pre">uri)</span></tt>, where <tt class="docutils literal"><span class="pre">prefix</span></tt> is the namespace prefix and <tt class="docutils literal"><span class="pre">uri</span></tt> is the
+full URI to which the prefix is bound. Both should be unicode objects. If the
+namespace is not bound to any prefix, the <tt class="docutils literal"><span class="pre">prefix</span></tt> item is an empty string:</p>
+<div class="highlight"><pre><span class="n">START_NS</span><span class="p">,</span> <span class="p">(</span><span class="s">u'svg'</span><span class="p">,</span> <span class="s">u'http://www.w3.org/2000/svg'</span><span class="p">),</span> <span class="n">pos</span>
+</pre></div>
+</div>
+<div class="section">
+<h2><a id="end-ns" name="end-ns">5.5   END_NS</a></h2>
+<p>The end of a namespace mapping.</p>
+<p>The <tt class="docutils literal"><span class="pre">data</span></tt> item of such events consists of only the namespace prefix (a
+unicode object):</p>
+<div class="highlight"><pre><span class="n">END_NS</span><span class="p">,</span> <span class="s">u'svg'</span><span class="p">,</span> <span class="n">pos</span>
+</pre></div>
+</div>
+<div class="section">
+<h2><a id="doctype" name="doctype">5.6   DOCTYPE</a></h2>
+<p>A document type declaration.</p>
+<p>For this type of event, the <tt class="docutils literal"><span class="pre">data</span></tt> item is a tuple of the form
+<tt class="docutils literal"><span class="pre">(name,</span> <span class="pre">pubid,</span> <span class="pre">sysid)</span></tt>, where <tt class="docutils literal"><span class="pre">name</span></tt> is the name of the root element,
+<tt class="docutils literal"><span class="pre">pubid</span></tt> is the public identifier of the DTD (or <tt class="docutils literal"><span class="pre">None</span></tt>), and <tt class="docutils literal"><span class="pre">sysid</span></tt> is
+the system identifier of the DTD (or <tt class="docutils literal"><span class="pre">None</span></tt>):</p>
+<div class="highlight"><pre><span class="n">DOCTYPE</span><span class="p">,</span> <span class="p">(</span><span class="s">u'html'</span><span class="p">,</span> <span class="s">u'-//W3C//DTD XHTML 1.0 Transitional//EN'</span><span class="p">,</span> \
+          <span class="s">u'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'</span><span class="p">),</span> <span class="n">pos</span>
+</pre></div>
+</div>
+<div class="section">
+<h2><a id="comment" name="comment">5.7   COMMENT</a></h2>
+<p>A comment.</p>
+<p>For such events, the <tt class="docutils literal"><span class="pre">data</span></tt> item is a unicode object containing all character
+data between the comment delimiters:</p>
+<div class="highlight"><pre><span class="n">COMMENT</span><span class="p">,</span> <span class="s">u'Commented out'</span><span class="p">,</span> <span class="n">pos</span>
+</pre></div>
+</div>
+<div class="section">
+<h2><a id="pi" name="pi">5.8   PI</a></h2>
+<p>A processing instruction.</p>
+<p>The <tt class="docutils literal"><span class="pre">data</span></tt> item is a tuple of the form <tt class="docutils literal"><span class="pre">(target,</span> <span class="pre">data)</span></tt> for processing
+instructions, where <tt class="docutils literal"><span class="pre">target</span></tt> is the target of the PI (used to identify the
+application by which the instruction should be processed), and <tt class="docutils literal"><span class="pre">data</span></tt> is text
+following the target (excluding the terminating question mark):</p>
+<div class="highlight"><pre><span class="n">PI</span><span class="p">,</span> <span class="p">(</span><span class="s">u'php'</span><span class="p">,</span> <span class="s">u'echo "Yo" '</span><span class="p">),</span> <span class="n">pos</span>
+</pre></div>
+</div>
+<div class="section">
+<h2><a id="start-cdata" name="start-cdata">5.9   START_CDATA</a></h2>
+<p>Marks the beginning of a <tt class="docutils literal"><span class="pre">CDATA</span></tt> section.</p>
+<p>The <tt class="docutils literal"><span class="pre">data</span></tt> item for such events is always <tt class="docutils literal"><span class="pre">None</span></tt>:</p>
+<div class="highlight"><pre><span class="n">START_CDATA</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">pos</span>
+</pre></div>
+</div>
+<div class="section">
+<h2><a id="end-cdata" name="end-cdata">5.10   END_CDATA</a></h2>
+<p>Marks the end of a <tt class="docutils literal"><span class="pre">CDATA</span></tt> section.</p>
+<p>The <tt class="docutils literal"><span class="pre">data</span></tt> item for such events is always <tt class="docutils literal"><span class="pre">None</span></tt>:</p>
+<div class="highlight"><pre><span class="n">END_CDATA</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">pos</span>
+</pre></div>
+</div>
+</div>
+    <div id="footer">
+      Visit the Genshi open source project at
+      <a href="http://genshi.edgewall.org/">http://genshi.edgewall.org/</a>
+    </div>
+  </div>
+</body>
+</html>
