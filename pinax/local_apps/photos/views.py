@@ -67,7 +67,7 @@ def details(request, id):
     p = []
     if projects:
         for project in projects:
-            photoproject = Project.objects.get(pk=tribe.id)
+            photoproject = Project.objects.get(pk=project.id)
             if photoproject.photos.filter(photo=photo).count():
                 p.append({"name":project.name, "slug":project.slug, "id":project.id, "has_photo":True})
             else:
