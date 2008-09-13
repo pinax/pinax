@@ -93,3 +93,7 @@ ALTER TABLE blog_post ALTER author_id SET NOT NULL;
 
 ## model change to oembed
 ALTER TABLE oembed_storedoembed ALTER COLUMN match TYPE text;
+
+## add on_site to Notice in notification
+
+ALTER TABLE notification_notice ADD COLUMN on_site BOOLEAN NOT NULL DEFAULT 't';
