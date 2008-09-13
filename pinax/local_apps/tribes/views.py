@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -48,9 +48,11 @@ def tribes(request):
                 tribe.save()
                 if notification:
                     # @@@ might be worth having a shortcut for sending to all users
-                    notification.send(User.objects.all(), "tribes_new_tribe", {"tribe": tribe})
+                    notification.queue(User.objects.all(), "tribes_new_tribe", {"tribe": tribe})
                     if friends: # @@@ might be worth having a shortcut for sending to all friends
-                        notification.send((x['friend'] for x in Friendship.objects.friends_for_user(tribe.creator)), "tribes_friend_tribe", {"tribe": tribe})
+                        notification.queue((x['friend'] for x in Friendship.objects.friends_for_user(tribe.creator)), "tribes_friend_tribe", {"tribe": tribe})
+                #return render_to_response("base.html", {
+                #}, context_instance=RequestContext(request))
                 return HttpResponseRedirect(tribe.get_absolute_url())
         else:
             tribe_form = TribeForm()
