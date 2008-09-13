@@ -12,12 +12,12 @@ class ProjectForm(forms.ModelForm):
         error_message = _("This value must contain only letters, numbers and underscores."))
             
     def clean_slug(self):
-        if Project.objects.filter(slug=self.cleaned_data["slug"]).count() > 0:
+        if Project.objects.filter(slug__iexact=self.cleaned_data["slug"]).count() > 0:
             raise forms.ValidationError(_("A project already exists with that slug."))
         return self.cleaned_data["slug"]
     
     def clean_name(self):
-        if Project.objects.filter(name=self.cleaned_data["name"]).count() > 0:
+        if Project.objects.filter(name__iexact=self.cleaned_data["name"]).count() > 0:
             raise forms.ValidationError(_("A project already exists with that name."))
         return self.cleaned_data["name"]
     
@@ -31,7 +31,7 @@ class ProjectForm(forms.ModelForm):
 class ProjectUpdateForm(forms.ModelForm):
     
     def clean_name(self):
-        if Project.objects.filter(name=self.cleaned_data["name"]).count() > 0:
+        if Project.objects.filter(name__iexact=self.cleaned_data["name"]).count() > 0:
             if self.cleaned_data["name"] == self.instance.name:
                 pass # same instance
             else:

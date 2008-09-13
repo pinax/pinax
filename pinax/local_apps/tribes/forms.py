@@ -13,12 +13,12 @@ class TribeForm(forms.ModelForm):
         reserved_slugs = ["your_tribes"]
         if self.cleaned_data["slug"] in reserved_slugs:
             raise forms.ValidationError(_("The slug you've chosen is reserved for internal use."))
-        if Tribe.objects.filter(slug=self.cleaned_data["slug"]).count() > 0:
+        if Tribe.objects.filter(slug__iexact=self.cleaned_data["slug"]).count() > 0:
             raise forms.ValidationError(_("A tribe already exists with that slug."))
         return self.cleaned_data["slug"]
     
     def clean_name(self):
-        if Tribe.objects.filter(name=self.cleaned_data["name"]).count() > 0:
+        if Tribe.objects.filter(name__iexact=self.cleaned_data["name"]).count() > 0:
             raise forms.ValidationError(_("A tribe already exists with that name."))
         return self.cleaned_data["name"]
     
@@ -32,7 +32,7 @@ class TribeForm(forms.ModelForm):
 class TribeUpdateForm(forms.ModelForm):
     
     def clean_name(self):
-        if Tribe.objects.filter(name=self.cleaned_data["name"]).count() > 0:
+        if Tribe.objects.filter(name__iexact=self.cleaned_data["name"]).count() > 0:
             if self.cleaned_data["name"] == self.instance.name:
                 pass # same instance
             else:
