@@ -15,7 +15,7 @@ class TribeForm(forms.ModelForm):
             raise forms.ValidationError(_("The slug you've chosen is reserved for internal use."))
         if Tribe.objects.filter(slug__iexact=self.cleaned_data["slug"]).count() > 0:
             raise forms.ValidationError(_("A tribe already exists with that slug."))
-        return self.cleaned_data["slug"]
+        return self.cleaned_data["slug"].lower()
     
     def clean_name(self):
         if Tribe.objects.filter(name__iexact=self.cleaned_data["name"]).count() > 0:
