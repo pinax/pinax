@@ -74,11 +74,6 @@ def details(request, id):
                 p.append({"name":project.name, "slug":project.slug, "id":project.id, "has_photo":False})
 
 
-    # @@@ is there a better way?
-    # TODO: redo this exif routine
-    photo_path = os.path.join(settings.MEDIA_ROOT, "photologue/photos", photo.image_filename())
-    f = open(photo_path, 'rb')
-    exif = EXIF.process_file(f)
     title = photo.title
     host = "http://%s" % get_host(request)
     if photo.member == request.user:
@@ -154,7 +149,6 @@ def details(request, id):
     return render_to_response("photos/details.html", {
                       "host": host, 
                       "photo": photo,
-                      "exif": exif,
                       "is_me": is_me, 
                       "other_user": other_user, 
                       "projects": p,
