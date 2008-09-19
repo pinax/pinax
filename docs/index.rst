@@ -30,6 +30,7 @@ Documentation for Individual Apps
    external/emailconfirmation/index
    external/timezones/index
    external/threadedcomments/index
+   external/ajax-validation/usage
 
 Indices and tables
 ==================
