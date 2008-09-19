@@ -29,7 +29,7 @@ extensions = []
 templates_path = ['.templates']
 
 # The suffix of source filenames.
-source_suffix = '.rst'
+source_suffix = '.txt'
 
 # The master toctree document.
 master_doc = 'index'
@@ -42,9 +42,9 @@ copyright = '2008, James Tauber and Pinax Team'
 # other places throughout the built documents.
 #
 # The short X.Y version.
-version = 'dev'
+version = '0.1'
 # The full version, including alpha/beta/rc tags.
-release = 'dev'
+release = '0.1dev'
 
 # There are two options for replacing |today|: either, you set today to some
 # non-false value, then it is used:
