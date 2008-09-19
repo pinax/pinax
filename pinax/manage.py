@@ -5,7 +5,8 @@ import sys
 path = addsitedir(abspath(join(dirname(__file__), '../external_libs')), set())
 if path: sys.path = list(path) + sys.path
 sys.path.insert(0, abspath(join(dirname(__file__), '../external_apps')))
-sys.path.insert(0, abspath(join(dirname(__file__), 'local_apps')))
+sys.path.insert(0, abspath(join(dirname(__file__), '../local_apps')))
+sys.path.insert(0, abspath(join(dirname(__file__), '../core_apps')))
 
 from django.core.management import execute_manager
 try:

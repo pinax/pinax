@@ -19,8 +19,16 @@ on freenode.
 
 DIRECTORY STRUCTURE
 
-pinax/          contains a django project and local django apps
-external_apps/  contains svn:externals to load all external django apps
+pinax/          contains a django project and templates
+external_apps/  contains external re-usable apps brought in via svn:externals
+local_apps/     contains re-usable apps that aren't yet externalized
+core_apps/      contains non re-usable apps specific to pinax site
 external_libs/  contains external libraries
 
 The photologue app requires PIL which is not included in external_libs
+
+There is some path manipulation in manage.py to get this all to work. You'll
+need to do something similar in your wsgi or mod_python configuration.
+
+Note that if you already have an external app or external lib on the path,
+you don't need to use the one we provide.
