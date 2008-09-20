@@ -1,2 +1,2 @@
 {% load i18n %}{% url profile_detail username=post.author.username as author_url %}
-{% blocktrans with post.author as post_author %}<a href="{{ author_url }}">{{ post_author }}</a> has posted to their blog.{% endblocktrans %}
+{% blocktrans with post.author as post_author and post.get_absolute_url as post_url and post.title as post_title %}<a href="{{ author_url }}">{{ post_author }}</a> has posted <a href="{{ post_url }}">{{ post_title }}</a> to their blog.{% endblocktrans %}
