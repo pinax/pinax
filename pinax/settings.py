@@ -140,6 +140,7 @@ INSTALLED_APPS = (
     'arcade',
     'games',
     'locations',
+    'flag',
     
     # internal (for now)
     'analytics',

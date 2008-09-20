@@ -9,6 +9,7 @@
 {% load restructuredtext %}
 {% load comments_tag %}
 {% load photo_tags %}
+{% load flagtags %}
 
 {% block head_title %}{% blocktrans %}Photo Details{% endblocktrans %}{% endblock %}
 
@@ -32,7 +33,8 @@
             <p>{{ photo.caption }}</p>
         </div>
         
-        
+        <h3>Flag this photo</h3>
+        {% flag photo request.user.id %} 
         
         <h3>Comments on This Photo:</h3>
         {% comments photo %}
