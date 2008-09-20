@@ -1,2 +1,47 @@
 Installation
 ============
+
+Pinax has not yet had its first formal release so the code is only available via Subversion:
+
+    svn checkout http://django-hotclub.googlecode.com/svn/trunk/ django-hotclub
+
+(The term *django-hotclub* refers to the reusable Django app project that spawned Pinax.)
+
+Pinax takes a batteries-included approach so that checkout (which includes a lot of svn:externals for third-party apps and libraries used) will almost work out of the box. The one exception is the `Python Imaging Library` (PIL) which you will have to provide yourself if you want photo support.
+
+Note that if you already have an external app or external library on the path,
+you don't need to use the one we provide.
+
+Once the checkout is complete, you should be able to cd into pinax/ and run ./manage.py syncdb and ./manage.py runserver to get
+running immediately.
+
+Directory Structure
+-------------------
+
++---------------------+---------------------------------------------------------------+
+| ``pinax/``          | contains a django project and templates                       |
++---------------------+---------------------------------------------------------------+
+| ``external_apps/``  | contains external re-usable apps brought in via svn:externals |
++---------------------+---------------------------------------------------------------+
+| ``local_apps/``     | contains re-usable apps that aren't yet externalized          |
++---------------------+---------------------------------------------------------------+
+| ``core_apps/``      | contains non re-usable apps specific to pinax site            |
++---------------------+---------------------------------------------------------------+
+| ``external_libs/``  | contains external libraries                                   |
++---------------------+---------------------------------------------------------------+
+
+
+There is some path manipulation in manage.py to get this all to work. You'll
+need to do something similar in your wsgi or mod_python configuration. See `Deployment` for more details.
+
+
+See also
+--------
+
+- `Pinax Setup and Deployment`_ by Greg Newman
+- `Getting Started With Pinax`_ by Eric Holscher
+
+
+.. _`Python Imaging Library`: http://www.pythonware.com/products/pil/
+.. _`Pinax Setup and Deployment`: http://www.20seven.org/journal/2008/09/pinax-setup-and-deploy.html
+.. _`Getting Started With Pinax`: http://ericholscher.com/blog/2008/sep/18/getting-started-pinax/

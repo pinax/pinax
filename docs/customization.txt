@@ -1,2 +1,45 @@
 Customization
 =============
+
+As more sites are built using Pinax, more best practices will emerge, but for now what we recommend is:
+
+- copy the ``pinax/`` project directory
+- make any necessary changes to your manage.py, .wsgi, etc to reflect this new directory
+- make necessary changes to the ``settings.py`` and ``urls.py`` files there
+- develop your custom apps there
+- develop your own templates there
+
+Settings You Will (Probably) Want To Override
+---------------------------------------------
+
+- ``DEBUG``
+- ``TEMPLATE_DEBUG``
+- ``LOGGING_OUTPUT_ENABLED``
+- ``ADMINS``
+- ``MANAGERS``
+- ``DATABASE_ENGINE``
+- ``DATABASE_NAME``
+- ``DATABASE_USER``
+- ``DATABASE_PASSWORD``
+- ``DATABASE_HOST``
+- ``DATABASE_PORT``
+- ``TIME_ZONE``
+- ``SECRET_KEY``
+- ``DEFAULT_FROM_EMAIL``
+- ``SERVER_EMAIL``
+- ``MAILER_PAUSE_SEND``
+- ``SEND_BROKEN_LINK_EMAILS``
+- ``EMAIL_HOST``
+- ``EMAIL_PORT``
+- ``EMAIL_HOST_USER``
+- ``EMAIL_HOST_PASSWORD``
+- ``EMAIL_SUBJECT_PREFIX``
+- ``EMAIL_DEBUG``
+- ``CONTACT_EMAIL``
+- ``URCHIN_ID``
+- ``BBAUTH_APP_ID``
+- ``BBAUTH_SHARED_SECRET``
+- ``SITE_NAME``
+
+All but ``MAILER_PAUSE_SEND``, ``CONTACT_EMAIL``, ``URCHIN_ID``, ``BBAUTH_APP_ID``, ``BBAUTH_SHARED_SECRET`` and ``SITE_NAME``
+are just the standard Django settings.

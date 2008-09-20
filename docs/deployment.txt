@@ -1,2 +1,55 @@
 Deployment
 ==========
+
+In short: 
+
+- create a ``localsettings.py`` alongside ``settings.py`` for your host-specific settings (like database connection, email, etc)
+- if you are using WSGI, create a ``.wsgi`` file that does the necessary path manipulation 
+- mod_python instructions coming...
+- set up ``cron`` job for mailer and asynchronous notifications
+
+Sample WSGI File
+----------------
+
+::
+    
+    import sys
+    sys.stdout = sys.stderr
+    import os
+    from os.path import abspath, dirname, join
+    from site import addsitedir
+    path = addsitedir(abspath(join(dirname(__file__), 'django-hotclub', 'external_libs')), set())
+    if path: sys.path = list(path) + sys.path
+    
+    sys.path.insert(0, abspath(join(dirname(__file__), 'django-hotclub', 'external_apps')))
+    sys.path.insert(0, abspath(join(dirname(__file__), 'django-hotclub', 'local_apps')))
+    sys.path.insert(0, abspath(join(dirname(__file__), 'django-hotclub', 'core_apps')))
+    sys.path.insert(0, abspath(join(dirname(__file__), 'django-hotclub')))
+    
+    from django.core.handlers.wsgi import WSGIHandler
+    
+    os.environ['DJANGO_SETTINGS_MODULE'] = 'pinax.settings'
+    
+    application = WSGIHandler()
+
+Sample cronjob
+--------------
+
+See documentation for django-mailer and django-notification for more information on this:
+
+::
+    
+    * * * * * (cd /path/to/pinax; /usr/local/bin/python2.5 manage.py send_mail >> /path/to/pinax/cron_mail.log 2>&1)
+    * * * * * (cd /path/to/pinax ; /usr/local/bin/python2.5 manage.py emit_notices >> /path/to/pinax/emit_notices.log 2>&1)
+    
+    0,20,40 * * * * (cd /path/to/pinax; /usr/local/bin/python2.5 manage.py retry_deferred >> /path/to/pinax/cron_mail_deferred.log 2>&1)
+
+
+See also
+--------
+
+- `Pinax Setup and Deployment`_ by Greg Newman
+- `Getting Started With Pinax`_ by Eric Holscher
+
+.. _`Pinax Setup and Deployment`: http://www.20seven.org/journal/2008/09/pinax-setup-and-deploy.html
+.. _`Getting Started With Pinax`: http://ericholscher.com/blog/2008/sep/18/getting-started-pinax/
