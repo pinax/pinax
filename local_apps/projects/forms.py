@@ -92,7 +92,7 @@ class AddUserForm(forms.Form):
         except User.DoesNotExist:
             raise forms.ValidationError(_("There is no user with this username."))
             
-        if ProjectMember.objects.filter(project=project, user=user).count() > 0:
+        if ProjectMember.objects.filter(project=self.project, user=user).count() > 0:
             raise forms.ValidationError(_("User is already a member of this project."))
         
         return self.cleaned_data['recipient']
