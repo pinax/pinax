@@ -29,6 +29,8 @@
         {% endfor %}
     {% endif %}
 
-    <p>Start a <a href="{% wikiurl edit group new_article %}">NewArticle</a>.</p>
+    {% if allow_write %}
+        <p>Start a <a href="{% wikiurl edit group new_article %}">NewArticle</a>.</p>
+    {% endif %}
 
 {% endblock %}

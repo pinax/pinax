@@ -43,13 +43,14 @@
                                 {% trans "Current Revision" %}
                             {% else %}
                                 <input name="revision" type="radio"
+                                       {% if not allow_write %}disabled="disabled"{% endif %}
                                        value="{{ change.revision }}">
                             {% endif %}
                         </td>
                     </tr>
              {% endfor %}
            </table>
-           <input type="submit" value="{% trans "Revert" %}">
+           <input type="submit" value="{% trans "Revert" %}" {% if not allow_write %}disabled="disabled"{% endif %}>
          </form>
     {% else %}
         <p>{% trans "No changes in this article" %}</p>
