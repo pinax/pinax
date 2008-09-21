@@ -9,6 +9,6 @@
         {% if user.is_authenticated %}
             <li><a href="{% url your_tribes %} ">{% trans "Your Tribes" %}</a></li>
         {% endif %}
-        <li><a href="{% url tribes_list %} ">{% trans "All Tribes" %}</a></li>
+        <li><a href="{% url tribe_thing_list url_prefix="" %}">{% trans "All Tribes" %}</a></li>
     </ul>
 {% endblock %}

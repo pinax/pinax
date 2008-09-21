@@ -141,6 +141,7 @@ INSTALLED_APPS = (
     'games',
     'locations',
     'flag',
+    'things',
     
     # internal (for now)
     'analytics',
