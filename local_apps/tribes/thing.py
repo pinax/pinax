@@ -25,5 +25,4 @@ class TribeThing(things.ModelThing):
             'column_name': qn(m2m_field.m2m_column_name()),
             'self_table': qn(self.model._meta.db_table),
         }
-        print SQL
         return self.model._default_manager.extra(select={'member_count': SQL})
