@@ -6,23 +6,20 @@ class TribeThing(things.ModelThing):
         verbose_name_desc='Newest', url_asc='oldest', url_desc='newest', 
         field_url='date')
     name = things.OrderField()
-    member_count = things.OrderField(verbose_name_asc='Smallest', 
-        verbose_name_desc='Largest', url_asc='smallest', url_desc='largest',
-        field_url='size')
+    members = things.OrderCountField(
+        verbose_name_asc='Least Members', 
+        verbose_name_desc='Most Members', 
+        url_asc='last-members', 
+        url_desc='most-members', 
+        field_url='members'
+    )
+    topics = things.OrderCountField(
+        verbose_name_asc='Least Topics', 
+        verbose_name_desc='Most Topics', 
+        url_asc='last-topics', 
+        url_desc='most-topics', 
+        field_url='topics'
+    )
     search = ('name', 'description')
     template_dir = 'tribes'
     list_template_name = 'tribes.html'
-    
-    def get_query_set(self, m2m_name='members'):
-        m2m_field = self.model._meta.get_field(m2m_name)
-        qn = connection.ops.quote_name
-        SQL = """
-        SELECT COUNT(*) 
-        FROM %(m2m_table)s 
-        WHERE %(m2m_table)s.%(column_name)s = %(self_table)s.id
-        """ % {
-            'm2m_table': qn(m2m_field.m2m_db_table()),
-            'column_name': qn(m2m_field.m2m_column_name()),
-            'self_table': qn(self.model._meta.db_table),
-        }
-        return self.model._default_manager.extra(select={'member_count': SQL})
