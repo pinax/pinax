@@ -70,7 +70,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.doc.XViewMiddleware',
     'djangologging.middleware.LoggingMiddleware',
     'pagination.middleware.PaginationMiddleware',
-    'things.middleware.SortOrderMiddleware',
+    'things_app.middleware.SortOrderMiddleware',
     'crashlog.CrashLogMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
 )
@@ -151,7 +151,7 @@ INSTALLED_APPS = (
     'tribes',
     'projects',
     'core',
-    'things',
+    'things_app',
     'photos',
     'tag_app',
     
