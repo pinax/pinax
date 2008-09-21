@@ -10,3 +10,5 @@ class TribeThing(things.ModelThing):
         verbose_name_desc='Smallest', url_asc='largest', url_desc='smallest',
         field_url='size')
     search = ('name', 'description')
+    template_dir = 'tribes'
+    list_template_name = 'tribes.html'

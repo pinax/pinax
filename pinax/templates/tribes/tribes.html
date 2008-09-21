@@ -13,11 +13,11 @@
     <h1>{% trans "Tribes" %}</h1>
     
     <p>{% trans "A <b>tribe</b> is a group of people with some common interest." %}</p>
-    
     {% if user.is_authenticated %}
         <p><a href="#" onclick="$('#tribe_form').toggle(); return false;">{% trans "Start your own tribe" %}</a></p>
         
-        <form id="tribe_form" method="POST" action="" style="display: none;">
+        <form id="tribe_form" method="POST" action="{% url tribes_list %}" style="display: none;">
+            {% get_tribe_form as tribe_form %}
             <table>
                 {{ tribe_form }}
                 <tr><td></td><td><input type="hidden" name="action" value="create" /><input type="submit" value="{% trans 'create' %}"/></td></tr>
@@ -28,50 +28,38 @@
         {% url acct_login as login_url %}
         <p>{% blocktrans %}<a href="{{ signup_url }}">Sign up</a> and <a href="{{ login_url }}">log in </a> to create your own tribe or join an existing one.{% endblocktrans %}</p>
     {% endif %}
-    
-    {% if tribes %}
-        
-        <p>Order by:
-            {% ifequal order_by "size" %}
-                <a href="?order_by=name">name</a>
-                or
-                <b>size</b>
-                or
-                <a href="?order_by=date">date created</a>
-                
-                {% order tribes by members %}
-                {% autopaginate tribes 10 %}
-            {% else %}
-                {% ifequal order_by "date" %}
-                    <a href="?order_by=name">name</a>
-                    or
-                    <a href="?order_by=size">size</a>
-                    or
-                    <b>date created</b>
-                    
-                    {% order tribes by -created %}
-                    {% autopaginate tribes 10 %}
+    {% if search_enabled %}
+        <form method="GET" action="">
+            <input type="text" name="search" value="{{ terms }}" />
+            <input type="submit" value="Search" />
+        </form>
+    {% endif %}
+    <p>Order by:
+        {% for f in fields %}
+            {% ifequal f field %}
+                {% if descending %}
+                    <a href="{{ f.full_url_asc }}">{{ f.verbose_name_asc }}</a> or 
+                    <b>{{ f.verbose_name_desc }}</b>
                 {% else %}
-                    <b>name</b>
-                    or
-                    <a href="?order_by=size">size</a>
-                    or
-                    <a href="?order_by=date">date created</a>
-                    
-                    {% order tribes by name %}
-                    {% autopaginate tribes 10 %}
-                {% endifequal %}
+                    <b>{{ f.verbose_name_asc }}</b> or 
+                    <a href="{{ f.full_url_desc }}">{{ f.verbose_name_desc }}</a>
+                {% endif %}
+            {% else %}
+                <a href="{{ f.full_url_asc }}">{{ f.verbose_name_asc }}</a> or 
+                <a href="{{ f.full_url_desc }}">{{ f.verbose_name_desc }}</a> 
             {% endifequal %}
-        </p>
-        
+            {% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </p>
+    
+    {% autopaginate objects 10 %}
+    {% if objects %}
         <dl>
-        {% for tribe in tribes %}
+        {% for tribe in objects %}
             {% show_tribe tribe %}
         {% endfor %}
         </dl>
-        
         {% paginate %}
-        
     {% endif %}
     
 {% endblock %}
