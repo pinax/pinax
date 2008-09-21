@@ -1,0 +1,31 @@
+{% extends "projects/base.html" %}
+
+{% load i18n %}
+{% load humanize %}
+{% load pagination_tags %}
+{% load project_tags %}
+
+{% block head_title %}{% blocktrans %}Create Project{% endblocktrans %}{% endblock %}
+
+{% block body %}
+    <p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time.</p>
+    
+    
+    <h1>{% trans "Create Project" %}</h1>
+    
+    <p>A <b>project</b> is a place to manage a group of people working on a common set of tasks. It is similar to a tribe in providing a wiki and threaded discussion but is invitation only and adds issue tracking.</p>
+    
+    {% if user.is_authenticated %}
+        <form id="project_form" method="POST" action="{% url project_create %}">
+            <table>
+                {{ project_form }}
+                <tr><td></td><td><input type="hidden" name="action" value="create" /><input type="submit" value="{% trans 'create' %}"/></td></tr>
+            </table>
+        </form>
+    {% else %}
+        {% url acct_signup as signup_url %}
+        {% url acct_login as login_url %}
+        <p>{% blocktrans %}<a href="{{ signup_url }}">Sign up</a> and <a href="{{ login_url }}">log in </a> to create your own project or join an existing one.{% endblocktrans %}</p>
+    {% endif %}
+    
+{% endblock %}

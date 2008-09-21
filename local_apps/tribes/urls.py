@@ -11,7 +11,7 @@ wiki_args = {'group_slug_field': 'slug',
 
 
 urlpatterns = tt.urls(url_prefix='', name_prefix='tribe_thing') + patterns('',
-    url(r'^$', 'tribes.views.tribes', name="tribes_list"),
+    url(r'^create/$', 'tribes.views.create', name="tribe_create"),
     url(r'^your_tribes/$', 'tribes.views.your_tribes', name="your_tribes"),
     url(r'^tribe/(\w+)/$', 'tribes.views.tribe', name="tribe_detail"),
 

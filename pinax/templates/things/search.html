@@ -1,0 +1,6 @@
+{% if search_enabled %}
+    <form method="GET" action="">
+        <input type="text" name="search" value="{{ terms }}" />
+        <input type="submit" value="Search" />
+    </form>
+{% endif %}

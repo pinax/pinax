@@ -1,0 +1,17 @@
+<p>Order by:
+    {% for f in fields %}
+        {% ifequal f field %}
+            {% if descending %}
+                <a href="{{ f.full_url_asc }}">{{ f.verbose_name_asc }}</a> or 
+                <b>{{ f.verbose_name_desc }}</b>
+            {% else %}
+                <b>{{ f.verbose_name_asc }}</b> or 
+                <a href="{{ f.full_url_desc }}">{{ f.verbose_name_desc }}</a>
+            {% endif %}
+        {% else %}
+            <a href="{{ f.full_url_asc }}">{{ f.verbose_name_asc }}</a> or 
+            <a href="{{ f.full_url_desc }}">{{ f.verbose_name_desc }}</a> 
+        {% endifequal %}
+        {% if not forloop.last %}, {% endif %}
+    {% endfor %}
+</p>

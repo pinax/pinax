@@ -36,7 +36,7 @@ except ImportError:
 from zwitschern.models import TweetInstance
 
 
-def tribes(request):
+def create(request):
     if request.user.is_authenticated() and request.method == "POST":
         if request.POST["action"] == "create":
             tribe_form = TribeForm(request.POST)
@@ -59,12 +59,8 @@ def tribes(request):
     else:
         tribe_form = TribeForm()
     
-    order_by = request.GET.get("order_by")
-    
-    return render_to_response("tribes/tribes.html", {
+    return render_to_response("tribes/create.html", {
         "tribe_form": tribe_form,
-        "tribes": Tribe.objects.all(),
-        "order_by": order_by,
     }, context_instance=RequestContext(request))
 
 def your_tribes(request):

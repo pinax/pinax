@@ -1,5 +1,6 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
+from django.http import HttpResponseRedirect
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -34,7 +35,7 @@ except ImportError:
 # from zwitschern.models import TweetInstance
 
 
-def projects(request):
+def create(request):
     if request.user.is_authenticated() and request.method == "POST":
         if request.POST["action"] == "create":
             project_form = ProjectForm(request.POST)
@@ -46,14 +47,14 @@ def projects(request):
                 project.members.add(project_member)
                 project_member.save()
                 project_form = ProjectForm()
+                return HttpResponseRedirect(project.get_absolute_url())
         else:
             project_form = ProjectForm()
     else:
         project_form = ProjectForm()
 
-    return render_to_response("projects/projects.html", {
+    return render_to_response("projects/create.html", {
         "project_form": project_form,
-        "projects": Project.objects.all().order_by("-created"),
     }, context_instance=RequestContext(request))
 
 @login_required
