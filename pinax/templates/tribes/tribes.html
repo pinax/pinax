@@ -43,11 +43,3 @@
     {% endif %}
     
 {% endblock %}
-
-{% block extra_body %}
-    <script>
-        {% if tribe_form.errors %}
-            $('#tribe_form').show();
-        {% endif %}
-    </script>
-{% endblock %}

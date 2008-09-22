@@ -54,11 +54,3 @@
     {% endif %}
     
 {% endblock %}
-
-{% block extra_body %}
-    <script>
-        {% if project_form.errors %}
-            $('#project_form').show();
-        {% endif %}
-    </script>
-{% endblock %}

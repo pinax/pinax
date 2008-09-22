@@ -16,7 +16,7 @@ class ProjectThing(things.ModelThing):
     topics = things.OrderCountField(
         verbose_name_asc='Least Topics', 
         verbose_name_desc='Most Topics', 
-        url_asc='last-topics', 
+        url_asc='least-topics', 
         url_desc='most-topics', 
         field_url='topics'
     )
