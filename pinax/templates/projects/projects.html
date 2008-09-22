@@ -37,16 +37,11 @@
         {% display_ordering %}
         {% autopaginate objects %}
     
-        {% regroup objects by created.date as projects_by_created %}
-    
-        {% for date in projects_by_created %}
-            <h2 class="creation_date">{{ date.grouper|naturalday:_("MONTH_DAY_FORMAT")|capfirst }}</h2>
-            <dl>
-                {% for project in date.list %}
-                    {% show_project project %}
-                {% endfor %}
-            </dl>
-        {% endfor %}
+        <dl>
+            {% for project in objects %}
+                {% show_project project %}
+            {% endfor %}
+        </dl>
     
         {% paginate %}
     {% else %}
