@@ -1,12 +1,16 @@
+.. _ref-deployment:
+
 Deployment
 ==========
 
 In short: 
 
-- create a ``localsettings.py`` alongside ``settings.py`` for your host-specific settings (like database connection, email, etc)
-- if you are using WSGI, create a ``.wsgi`` file that does the necessary path manipulation 
+- Create a ``localsettings.py`` alongside ``settings.py`` for your
+  host-specific settings (like database connection, email, etc).
+- If you are using WSGI, create a ``.wsgi`` file that does the necessary
+  path manipulation.
 - mod_python instructions coming...
-- set up ``cron`` job for mailer and asynchronous notifications
+- Set up ``cron`` job for mailer and asynchronous notifications.
 
 Sample WSGI File
 ----------------
@@ -19,7 +23,8 @@ Sample WSGI File
     from os.path import abspath, dirname, join
     from site import addsitedir
     path = addsitedir(abspath(join(dirname(__file__), 'django-hotclub', 'external_libs')), set())
-    if path: sys.path = list(path) + sys.path
+    if path:
+        sys.path = list(path) + sys.path
     
     sys.path.insert(0, abspath(join(dirname(__file__), 'django-hotclub', 'external_apps')))
     sys.path.insert(0, abspath(join(dirname(__file__), 'django-hotclub', 'local_apps')))
@@ -35,9 +40,8 @@ Sample WSGI File
 Sample cronjob
 --------------
 
-See documentation for django-mailer and django-notification for more information on this:
-
-::
+See documentation for django-mailer and django-notification for more
+information on this::
     
     * * * * * (cd /path/to/pinax; /usr/local/bin/python2.5 manage.py send_mail >> /path/to/pinax/cron_mail.log 2>&1)
     * * * * * (cd /path/to/pinax ; /usr/local/bin/python2.5 manage.py emit_notices >> /path/to/pinax/emit_notices.log 2>&1)

@@ -1,19 +1,25 @@
 Installation
 ============
 
-Pinax has not yet had its first formal release so the code is only available via Subversion:
+Pinax has not yet had its first formal release so the code is only available
+via Subversion::
 
     svn checkout http://django-hotclub.googlecode.com/svn/trunk/ django-hotclub
 
-(The term *django-hotclub* refers to the reusable Django app project that spawned Pinax.)
+(The term *django-hotclub* refers to the reusable Django app project that
+spawned Pinax.)
 
-Pinax takes a batteries-included approach so that checkout (which includes a lot of svn:externals for third-party apps and libraries used) will almost work out of the box. The one exception is the `Python Imaging Library` (PIL) which you will have to provide yourself if you want photo support.
+Pinax takes a batteries-included approach so that checkout (which includes
+a lot of svn:externals for third-party apps and libraries used) will almost
+work out of the box. The one exception is the `Python Imaging Library` (PIL)
+which you will have to provide yourself if you want photo support.
 
 Note that if you already have an external app or external library on the path,
 you don't need to use the one we provide.
 
-Once the checkout is complete, you should be able to cd into pinax/ and run ./manage.py syncdb and ./manage.py runserver to get
-running immediately.
+Once the checkout is complete, you should be able to cd into pinax/ and run
+``./manage.py syncdb`` and ``./manage.py runserver`` to get running
+immediately.
 
 Directory Structure
 -------------------
@@ -32,7 +38,8 @@ Directory Structure
 
 
 There is some path manipulation in manage.py to get this all to work. You'll
-need to do something similar in your wsgi or mod_python configuration. See `Deployment` for more details.
+need to do something similar in your wsgi or mod_python configuration. See
+:ref:`ref-deployment` for more details.
 
 
 See also
