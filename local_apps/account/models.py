@@ -54,11 +54,9 @@ def update_other_services(user, **kwargs):
         info.value = value
         info.save()
 
-def create_account(sender, instance=None, **kwdargs):
+def create_account(sender, instance=None, **kwargs):
     if instance is None:
         return
     account, created = Account.objects.get_or_create(user=instance)
-    if created:
-        account.save()
 
 post_save.connect(create_account, sender=User)
