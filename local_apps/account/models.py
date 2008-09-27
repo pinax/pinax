@@ -32,12 +32,27 @@ class OtherServiceInfo(models.Model):
         return u"%s for %s" % (self.key, self.user)
 
 def other_service(user, key, default_value=""):
+    """
+    retrieve the other service info for given key for the given user.
+    
+    return default_value ("") if no value.
+    """
     try:
         value = OtherServiceInfo.objects.get(user=user, key=key).value
     except OtherServiceInfo.DoesNotExist:
         value = default_value
     return value
 
+def update_other_services(user, **kwargs):
+    """
+    update the other service info for the given user using the given keyword args.
+    
+    e.g. update_other_services(user, twitter_user=..., twitter_password=...)
+    """
+    for key, value in kwargs.items():
+        info, created = OtherServiceInfo.objects.get_or_create(user=user, key=key)
+        info.value = value
+        info.save()
 
 def create_account(sender, instance=None, **kwdargs):
     if instance is None:
