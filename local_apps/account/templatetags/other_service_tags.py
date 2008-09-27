@@ -1,7 +1,7 @@
 import re
 
 from django import template
-from account.models import OtherServiceInfo
+from account.models import other_service
 
 register = template.Library()
 
@@ -14,10 +14,7 @@ class OtherServiceNode(template.Node):
     def render(self, context):
         user = self.user.resolve(context)
         key = self.key
-        try:
-            value = OtherServiceInfo.objects.get(user=user, key=key).value
-        except OtherServiceInfo.DoesNotExist:
-            value = ''
+        value = other_service(user, key)
                     
         if self.asvar:
             context[self.asvar] = value

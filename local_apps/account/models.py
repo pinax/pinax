@@ -31,6 +31,13 @@ class OtherServiceInfo(models.Model):
     def __unicode__(self):
         return u"%s for %s" % (self.key, self.user)
 
+def other_service(user, key, default_value=""):
+    try:
+        value = OtherServiceInfo.objects.get(user=user, key=key).value
+    except OtherServiceInfo.DoesNotExist:
+        value = default_value
+    return value
+
 
 def create_account(sender, instance=None, **kwdargs):
     if instance is None:
