@@ -7,14 +7,19 @@ import pownce
 
 from django.conf import settings
 
+from account.models import other_service
+
 def pownce_account_raw(username, password):
+    # @@@ what is this hard coded key doing here!?!
     return pownce.Api(username, password, 'li6yw8q8ivv8ga9zda28iio4z652377y')
 
 def pownce_account_for_user(user):
-    profile = user.get_profile()
-    if profile.pownce_user and profile.pownce_password:
-        pownce_password = get_pownce_password(settings.SECRET_KEY,profile.pownce_password, decode=True)
-        return pownce_account_raw(profile.pownce_user, pownce_password)
+    pownce_user = other_service(user, "pownce_user")
+    pownce_password = other_service(user, "pownce_password")
+    
+    if pownce_user and pownce_password:
+        pownce_password = get_pownce_password(settings.SECRET_KEY, pownce_password, decode=True)
+        return pownce_account_raw(pownce_user, pownce_password)
 
 def pownce_verify_credentials(account):
     try:
