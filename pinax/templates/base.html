@@ -1,5 +1,4 @@
 {% load i18n %}
-{% load tag_helper %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}" xml:lang="{{ LANGUAGE_CODE }}" lang="{{ LANGUAGE_CODE }}">
     <head>
@@ -10,8 +9,7 @@
                 zoom: 1; /* trigger hasLayout */
             }
         </style><![endif]-->
-        {% css_tag "base" %}
-        {% if LANGUAGE_BIDI %}
+        <link rel="stylesheet" href="/site_media/base.css?743" />        {% if LANGUAGE_BIDI %}
         <style type="text/css" media="screen">
             div.right_panel {
                 float: left; /* hotfix for sidebar */
