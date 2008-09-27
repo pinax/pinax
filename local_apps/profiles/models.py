@@ -30,9 +30,9 @@ class Profile(models.Model):
         verbose_name = _('profile')
         verbose_name_plural = _('profiles')
 
-def create_profile(sender, instance=None, **kwdargs):
-    if instance is None: return
+def create_profile(sender, instance=None, **kwargs):
+    if instance is None:
+        return
     profile, created = Profile.objects.get_or_create(user=instance)
-    if created: profile.save()
 
 post_save.connect(create_profile, sender=User)

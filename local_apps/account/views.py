@@ -1,19 +1,15 @@
 
 from django.shortcuts import render_to_response
-from django.http import HttpResponseRedirect, HttpResponse, HttpResponseForbidden
+from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.template import RequestContext
-from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 
 from forms import SignupForm, AddEmailForm, LoginForm, ChangePasswordForm, ResetPasswordForm, ChangeTimezoneForm, ChangeLanguageForm, TwitterForm, PownceForm
 from emailconfirmation.models import EmailAddress, EmailConfirmation
-from friends.models import Friendship
-from profiles.models import Profile
 
 
 def login(request):
@@ -135,8 +131,6 @@ def language_change(request):
         "form": form,
     }, context_instance=RequestContext(request))
 
-from gravatar.templatetags.gravatar import gravatar
-
 @login_required
 def other_services(request):
     from zwitschern.utils import twitter_verify_credentials
@@ -147,27 +141,27 @@ def other_services(request):
     pownce_authorized = False
     if request.method == "POST":
         twitter_form = TwitterForm(request.user, request.POST)
-		
+
         if request.POST['actionType'] == 'saveTwitter':
-	        if twitter_form.is_valid():
-	            from zwitschern.utils import twitter_account_raw
-	            twitter_account = twitter_account_raw(request.POST['username'], request.POST['password'])
-	            twitter_authorized = twitter_verify_credentials(twitter_account)
-	            if not twitter_authorized:
-	                request.user.message_set.create(message="Twitter authentication failed")
-	            else:
-	                twitter_form.save()
+            if twitter_form.is_valid():
+                from zwitschern.utils import twitter_account_raw
+                twitter_account = twitter_account_raw(request.POST['username'], request.POST['password'])
+                twitter_authorized = twitter_verify_credentials(twitter_account)
+                if not twitter_authorized:
+                    request.user.message_set.create(message="Twitter authentication failed")
+                else:
+                    twitter_form.save()
                 
         if request.POST['actionType'] == 'savePownce':
-	        pownce_form = PownceForm(request.user, request.POST)     
-	        if pownce_form.is_valid():
-				from zwitschern.pownce_utils import pownce_account_raw
-				pownce_account = pownce_account_raw(request.POST['usernamep'], request.POST['passwordp'])
-				pownce_authorized = pownce_verify_credentials(pownce_account)
-				if not pownce_authorized:
-					request.user.message_set.create(message="Pownce authentication failed")
-				else:
-					pownce_form.save()
+            pownce_form = PownceForm(request.user, request.POST)     
+            if pownce_form.is_valid():
+                from zwitschern.pownce_utils import pownce_account_raw
+                pownce_account = pownce_account_raw(request.POST['usernamep'], request.POST['passwordp'])
+                pownce_authorized = pownce_verify_credentials(pownce_account)
+                if not pownce_authorized:
+                    request.user.message_set.create(message="Pownce authentication failed")
+                else:
+                    pownce_form.save()
     else:
         from zwitschern.utils import twitter_account_for_user
         from zwitschern.pownce_utils import pownce_account_for_user
@@ -183,26 +177,3 @@ def other_services(request):
         "pownce_form": pownce_form,
         "pownce_authorized":pownce_authorized,
     }, context_instance=RequestContext(request))    
-
-def username_autocomplete(request):
-    if request.user.is_authenticated():
-        q = request.GET.get("q")
-        friends = Friendship.objects.friends_for_user(request.user)
-        content = []
-        for friendship in friends:
-            if friendship["friend"].username.lower().startswith(q):
-                try:
-                    profile = friendship["friend"].get_profile()
-                    entry = "%s,,%s,,%s" % (
-                        gravatar(friendship["friend"], 40),
-                        friendship["friend"].username,
-                        profile.location
-                    )
-                except Profile.DoesNotExist:
-                    pass
-                content.append(entry)
-        response = HttpResponse("\n".join(content))
-    else:
-        response = HttpResponseForbidden()
-    setattr(response, "djangologging.suppress_output", True)
-    return response

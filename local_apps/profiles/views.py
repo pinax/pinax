@@ -1,6 +1,7 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.contrib.auth.models import User
+from django.http import HttpResponse, HttpResponseForbidden
 
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import ugettext
@@ -13,6 +14,8 @@ from zwitschern.models import Following
 
 from profiles.models import Profile
 from profiles.forms import ProfileForm
+
+from gravatar.templatetags.gravatar import gravatar
 
 try:
     from notification import models as notification
@@ -116,3 +119,26 @@ def profile(request, username):
         "previous_invitations_to": previous_invitations_to,
         "previous_invitations_from": previous_invitations_from,
     }, context_instance=RequestContext(request))
+
+def username_autocomplete(request):
+    if request.user.is_authenticated():
+        q = request.GET.get("q")
+        friends = Friendship.objects.friends_for_user(request.user)
+        content = []
+        for friendship in friends:
+            if friendship["friend"].username.lower().startswith(q):
+                try:
+                    profile = friendship["friend"].get_profile()
+                    entry = "%s,,%s,,%s" % (
+                        gravatar(friendship["friend"], 40),
+                        friendship["friend"].username,
+                        profile.location
+                    )
+                except Profile.DoesNotExist:
+                    pass
+                content.append(entry)
+        response = HttpResponse("\n".join(content))
+    else:
+        response = HttpResponseForbidden()
+    setattr(response, "djangologging.suppress_output", True)
+    return response

@@ -18,7 +18,6 @@ from django.contrib.auth.models import User
 
 from emailconfirmation.models import EmailAddress
 from friends.models import JoinInvitation
-from profiles.models import Profile
 from account.models import Account
 
 from timezones.forms import TimeZoneField
@@ -109,17 +108,12 @@ class SignupForm(forms.Form):
                 if email:
                     new_user.message_set.create(message=ugettext(u"Confirmation email sent to %(email)s") % {'email': email})
                     EmailAddress.objects.add_email(new_user, email)
-            profile, is_new = Profile.objects.get_or_create(user=new_user)
-            if is_new: profile.save()
             return username, password # required for authenticate()
         else:
             new_user = User.objects.create_user(username, "", password)
             if email:
                 new_user.message_set.create(message=ugettext(u"Confirmation email sent to %(email)s") % {'email': email})
                 EmailAddress.objects.add_email(new_user, email)
-            # profile app may have user post_save signal for user integrity, so a profile may already exist
-            profile, is_new = Profile.objects.get_or_create(user=new_user)
-            if is_new: profile.save()
             return username, password # required for authenticate()
 
 
@@ -128,15 +122,6 @@ class UserForm(forms.Form):
     def __init__(self, user=None, *args, **kwargs):
         self.user = user
         super(UserForm, self).__init__(*args, **kwargs)
-
-class ProfileForm(UserForm):
-
-    def __init__(self, *args, **kwargs):
-        super(ProfileForm, self).__init__(*args, **kwargs)
-        try:
-            self.profile = self.user.get_profile()
-        except Profile.DoesNotExist:
-            self.profile = Profile(user=self.user)
 
 class AccountForm(UserForm):
 
