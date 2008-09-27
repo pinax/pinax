@@ -24,4 +24,6 @@
         <p>{% trans 'Not following anyone.' %}</p>
     {% endif %}
     
+    {% url tweet_followers other_user.username as tweet_followers_url %}
+    <p>{% blocktrans %}Also see <a href="{{ tweet_followers_url }}">who is following</a> {{ other_user }}.{% endblocktrans %}
 {% endblock %}
