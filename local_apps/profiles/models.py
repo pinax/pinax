@@ -22,10 +22,14 @@ class Profile(models.Model):
     pownce_user = models.CharField(_('Pownce Username'), max_length=50, blank=True)
     pownce_password = models.CharField(_('Pownce Password'), max_length=50, blank=True)
     language = models.CharField(_('language'), max_length=10, choices=settings.LANGUAGES, default=settings.LANGUAGE_CODE)
-    
+
     def __unicode__(self):
         return self.user.username
-    
+
+    def get_absolute_url(self):
+        return ('profile_detail', None, {'username': self.user.username})
+    get_absolute_url = models.permalink(get_absolute_url)
+
     class Meta:
         verbose_name = _('profile')
         verbose_name_plural = _('profiles')
