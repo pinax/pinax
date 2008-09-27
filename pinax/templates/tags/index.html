@@ -4,9 +4,16 @@
 {% load threadedcommentstags %}
 
 {% load tribe_tags %}
+{% load gravatar %}
 {% load project_tags %}
 {% load blog_tags %}
 {% load wiki %}
+{% load voting_tags %} 
+{% load extra_voting_tags %}
+
+{% load in_filter %}
+{% load extra_tagging_tags %}
+
 
 {% block head_title %}{% blocktrans %}Tags{% endblocktrans %}{% endblock %}
 
@@ -30,6 +37,34 @@
     {% else %}
         No photos matching tag.
     {% endif %}
+
+    {% if bookmarktags %}
+        {% scores_for_objects bookmarktags as score_dict %}
+
+        <h1>All Bookmarks Matching <i>{{ tag }}</i></h1>
+        <table class="bookmarks" width="100%">
+            {% for bookmark in bookmarktags %}
+                <tr class="{% cycle odd,even %}">
+                    <td class="meta">
+                        <div class="avatar">{% gravatar bookmark.bookmark.adder 40 %}</div>
+                        <div class="details"><a href="{% url profiles.views.profile bookmark.bookmark.adder.username %}">{{ bookmark.bookmark.adder }}</a></div>
+                        {{ bookmark.bookmark.added|date }}
+                    </td>
+                    
+                    <td>
+                        <h2><a href="{{ bookmark.bookmark.url }}">{{ bookmark.bookmark.description }}</a></h2>
+                        <div class="url">{% if bookmark.bookmark.get_favicon_url %}<img src="{{ bookmark.bookmark.get_favicon_url }}" width="16" height="16" /> {% endif %}{{ bookmark.bookmark.url }}</div>
+                        <div class="body">{{ bookmark.bookmark.note|linebreaks }}</div>
+                        <div class="tags">{% show_tag_counts bookmark.bookmark.all_tags_with_counts %}</div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+
+    {% else %}
+        No bookmarks matching tag.
+    {% endif %}
+
 
     <h1>{% trans "All Blog Posts Matching " %}<i>"{{ tag }}"</i></h1>
 
@@ -85,4 +120,29 @@
     </table>
 
 
+{% endblock %}
+
+
+{% block extra_body %}
+    <script>
+        function vote(bookmark_id, direction) {
+            $.post(bookmark_id + '/' + direction + 'vote/', function(data) {
+                var jsonResult = eval('(' + data + ')');
+                var new_score = jsonResult.score.score;
+                $('#bookmark_' + bookmark_id + '_score').text(new_score + ' point' + (new_score == 1 ? '': 's'));
+            });
+            if (direction == 'up') {
+                $('#up_' + bookmark_id).replaceWith('<a id="up_' + bookmark_id + '" href="#" onclick="return false;"><img src="/site_media/up_mod.png"/>');
+                $('#down_' + bookmark_id).replaceWith('<a id="down_' + bookmark_id + '" href="#" onclick="vote(' + bookmark_id + ', \'clear\'); return false;"><img src="/site_media/down_grey.png"/>');
+            }
+            else if (direction == 'down') {
+                $('#up_' + bookmark_id).replaceWith('<a id="up_' + bookmark_id + '" href="#" onclick="vote(' + bookmark_id + ', \'clear\'); return false;"><img src="/site_media/up_grey.png"/>');
+                $('#down_' + bookmark_id).replaceWith('<a id="down_' + bookmark_id + '" href="#" onclick="return false;"><img src="/site_media/down_mod.png"/>');
+            }
+            else { // clear
+                $('#up_' + bookmark_id).replaceWith('<a id="up_' + bookmark_id + '" href="#" onclick="vote(' + bookmark_id + ', \'up\'); return false;"><img src="/site_media/up_grey.png"/>');
+                $('#down_' + bookmark_id).replaceWith('<a id="down_' + bookmark_id + '" href="#" onclick="vote(' + bookmark_id + ', \'down\'); return false;"><img src="/site_media/down_grey.png"/>');
+            }
+        }
+    </script>
 {% endblock %}
