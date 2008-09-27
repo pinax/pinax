@@ -19,8 +19,9 @@ def generate():
             defaults=dict(
                 name = user.get_full_name(),
                 about = capfirst(words(8, common=False)) + '.',
-                blogrss = random.choice(RSS_FEEDS),
-                timezone = random.choice(TIMEZONE_CHOICES)[0],
+# @@@ need to move these to account fixtures
+#                blogrss = random.choice(RSS_FEEDS),
+#                timezone = random.choice(TIMEZONE_CHOICES)[0],
             ),
         )
         print "Created User Profile: %s" % (profile,)

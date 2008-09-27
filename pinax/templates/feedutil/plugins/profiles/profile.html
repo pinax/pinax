@@ -1,10 +1,12 @@
 {% load feedutil %}
+{% load other_service_tags %}
 {% load i18n %}
 
-{% if owner.get_profile.blogrss %}
+{% other_service owner 'blogrss' as blogrss %}
+{% if blogrss %}
     <div class="feed-entries">
         <h2>{% trans "Recent Blog Posts" %}</h2>
         
-        {% feed owner.get_profile.blogrss 5 %}
+        {% feed blogrss 5 %}
     </div>
 {% endif %}
