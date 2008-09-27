@@ -23,10 +23,13 @@
         {% if other_user.get_profile.website %}<p><b>{% trans "Website" %}</b>: <a href="{{ other_user.get_profile.website }}">{{ other_user.get_profile.website }}</a></p>{% endif %}
     </div>
     
-    <p><b>{% trans "Followers" %}</b>: {{ other_user.followers.count }}
-    <b>{% trans "Following" %}</b>: {{ other_user.followed.count }}</p>
     
     {% if user.is_authenticated %}
+        <p>
+            <a href="{% url tweet_followers other_user %}">{% trans "Followers" %}</a>: {{ other_user.followers.count }}
+            <a href="{% url tweet_following other_user %}">{% trans "Following" %}</a>: {{ other_user.followed.count }}
+        </p>
+        
         {% if is_me %}
             <p><a href="#" onclick="$('#profile_form').toggle(); return false;">{% trans "Edit profile" %}</a></p>
             

@@ -2,6 +2,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 
 from zwitschern.utils import twitter_account_for_user, twitter_verify_credentials
@@ -64,3 +65,27 @@ def single(request, id, template_name="zwitschern/single.html"):
     return render_to_response(template_name, {
         "tweet": tweet,
     }, context_instance=RequestContext(request))
+
+
+def _follow_list(request, username, template_name):
+    # the only difference between followers/following views is template
+    # this function captures the similarity
+    
+    other_user = get_object_or_404(User, username=username)
+    
+    return render_to_response(template_name, {
+        "other_user": other_user,
+    }, context_instance=RequestContext(request))
+
+def followers(request, username, template_name="zwitschern/followers.html"):
+    """
+    a list of users following the given user.
+    """
+    return _follow_list(request, username, template_name)
+    
+    
+def following(request, username, template_name="zwitschern/following.html"):
+    """
+    a list of users the given user is following.
+    """
+    return _follow_list(request, username, template_name)

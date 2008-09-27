@@ -1,0 +1,28 @@
+{% extends "zwitschern/base.html" %}
+
+{% load i18n %}
+{% load gravatar_tags %}
+
+{% block head_title %}{% blocktrans %}Followers of {{ other_user }}{% endblocktrans %}{% endblock %}
+
+{% block body %}
+    <h1>{% blocktrans %}Followers of {{ other_user }}{% endblocktrans %}</h1>
+    
+    {% url profiles.views.profile other_user.username as other_user_url %}
+    
+    <p>{% blocktrans %}Followers of <a href="{{ other_user_url }}">{{ other_user }}</a>'s tweets:{% endblocktrans %}</p>
+    
+    {% if other_user.followers.all %}
+        {% for following in other_user.followers.all %}
+            {# @@@ this is common code from all profiles list -- refactor #}
+            <div class="profile clearfix">
+                {# @@@ factor out style into css file #}
+                <div style="float: left;">{% gravatar following.follower 40 %}</div>
+                <div style="padding: 5px; margin-left: 50px;"><a href="{% url profiles.views.profile following.follower.username %}">{{ following.follower }}</a></div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>{% trans 'No followers.' %}</p>
+    {% endif %}
+    
+{% endblock %}
