@@ -7,7 +7,6 @@
 {% load gravatar %}
 {% load threadedcommentstags %}
 {% load pagination_tags %}
-{% load captureas_tag %}
 {% load extra_tagging_tags %}
 {% load tribe_tags %}
 
@@ -107,7 +106,7 @@
                 </table>
                 <p><a href="{% wikiurl list tribe %}">{% trans "more..." %}</a></p>
             {% else %}
-                {% captureas wiki_url %}{% wikiurl list tribe %}{% endcaptureas %}
+                {% wikiurl list tribe as wiki_url %}
                 <p>
                     {% blocktrans %}
                         None yet. Go to the <a href="{{ wiki_url }}", title="wiki">wiki</a> to start a new article.

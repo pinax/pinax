@@ -7,7 +7,6 @@
 {% load wikiurl %}
 {% load threadedcommentstags %}
 {% load pagination_tags %}
-{% load captureas_tag %}
 {% load shorttimesince_tag %}
 {% load extra_tagging_tags %}
 {% load project_tags %}
@@ -128,8 +127,9 @@
                     {% endfor %}
                 </table>
                 <p><a href="{% wikiurl list project %}">more...</a></p>
+                {{ wiki_project_url }}
             {% else %}
-                {% captureas wiki_url %}{% wikiurl list project %}{% endcaptureas %}
+                {% wikiurl list project as wiki_url %}
                 <p>
                     {% blocktrans %}
                         None yet. Go to the <a href="{{ wiki_url }}", title="wiki">wiki</a> to start a new article.
