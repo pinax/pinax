@@ -11,7 +11,7 @@
         <fieldset>
             <legend>{% trans "Write a Blog Post" %}</legend>
 
-            <form method="POST" action="">
+            <form method="POST" action="" id="blog_form">
                 <table align="center">
                     <tr><td colspan="2">{{ blog_form.non_field_errors }}</td></tr>
                     {% for field in blog_form %}
