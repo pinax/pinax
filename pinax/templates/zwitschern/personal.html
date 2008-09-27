@@ -13,7 +13,7 @@
 {% block body %}
     <h1>{% trans "Tweets" %}</h1>
     
-    <form method="POST" action="{% url zwitschern.views.personal %}">
+    <form method="POST" action="{% url tweets_you_follow %}">
         <p>{% trans "What are you doing?" %}</p>
         {{ form.as_p }}
         {% if twitter_authorized %}
