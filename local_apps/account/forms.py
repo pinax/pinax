@@ -19,6 +19,7 @@ from django.contrib.auth.models import User
 from emailconfirmation.models import EmailAddress
 from friends.models import JoinInvitation
 from profiles.models import Profile
+from account.models import Account
 
 from timezones.forms import TimeZoneField
 
@@ -137,6 +138,15 @@ class ProfileForm(UserForm):
         except Profile.DoesNotExist:
             self.profile = Profile(user=self.user)
 
+class AccountForm(UserForm):
+
+    def __init__(self, *args, **kwargs):
+        super(AccountForm, self).__init__(*args, **kwargs)
+        try:
+            self.account = Account.objects.get(user=self.user)
+        except Account.DoesNotExist:
+            self.account = Account(user=self.user)
+
 
 class AddEmailForm(UserForm):
 
@@ -199,30 +209,30 @@ class ResetPasswordForm(forms.Form):
             send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user.email])
         return self.cleaned_data["email"]
 
-class ChangeTimezoneForm(ProfileForm):
+class ChangeTimezoneForm(AccountForm):
 
     timezone = TimeZoneField(label=_("Timezone"), required=True)
 
     def __init__(self, *args, **kwargs):
         super(ChangeTimezoneForm, self).__init__(*args, **kwargs)
-        self.initial.update({"timezone": self.profile.timezone})
+        self.initial.update({"timezone": self.account.timezone})
 
     def save(self):
-        self.profile.timezone = self.cleaned_data["timezone"]
-        self.profile.save()
+        self.account.timezone = self.cleaned_data["timezone"]
+        self.account.save()
         self.user.message_set.create(message=ugettext(u"Timezone successfully updated."))
 
-class ChangeLanguageForm(ProfileForm):
+class ChangeLanguageForm(AccountForm):
 
     language = forms.ChoiceField(label=_("Language"), required=True, choices=settings.LANGUAGES)
 
     def __init__(self, *args, **kwargs):
         super(ChangeLanguageForm, self).__init__(*args, **kwargs)
-        self.initial.update({"language": self.profile.language})
+        self.initial.update({"language": self.account.language})
 
     def save(self):
-        self.profile.language = self.cleaned_data["language"]
-        self.profile.save()
+        self.account.language = self.cleaned_data["language"]
+        self.account.save()
         self.user.message_set.create(message=ugettext(u"Language successfully updated."))
 
 

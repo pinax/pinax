@@ -1,14 +1,12 @@
 from django.utils.cache import patch_vary_headers
 from django.utils import translation
-
-from django.contrib.auth.models import SiteProfileNotAvailable
-from profiles.models import Profile
+from account.models import Account
 
 class LocaleMiddleware(object):
     """
     This is a very simple middleware that parses a request
     and decides what translation object to install in the current
-    thread context depending on the user's profile. This allows pages
+    thread context depending on the user's account. This allows pages
     to be dynamically translated to the language the user desires
     (if the language is available, of course). 
     """
@@ -16,9 +14,9 @@ class LocaleMiddleware(object):
     def get_language_for_user(self, request):
         if request.user.is_authenticated():
             try:
-                profile = request.user.get_profile()
-                return profile.language
-            except (SiteProfileNotAvailable, Profile.DoesNotExist):
+                account = Account.objects.get(user=request.user)
+                return account.language
+            except (Account.DoesNotExist, Account.MultipleObjectsReturned):
                 pass
         return translation.get_language_from_request(request)
 

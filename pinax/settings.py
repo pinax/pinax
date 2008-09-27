@@ -66,7 +66,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django_openidconsumer.middleware.OpenIDMiddleware',
-    'profiles.middleware.LocaleMiddleware',
+    'account.middleware.LocaleMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'djangologging.middleware.LoggingMiddleware',
     'pagination.middleware.PaginationMiddleware',
