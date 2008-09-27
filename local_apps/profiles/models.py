@@ -13,18 +13,19 @@ class Profile(models.Model):
     about = models.TextField(_('about'), null=True, blank=True)
     location = models.CharField(_('location'), max_length=40, null=True, blank=True)
     website = models.URLField(_('website'), null=True, blank=True, verify_exists=False)
+    
+    # @@@ the following are all deprecated -  see account/models.py
     blogrss = models.URLField(_('blog rss/atom'), null=True, blank=True, verify_exists=False)
     timezone = TimeZoneField(_('timezone'))
     twitter_user = models.CharField(_('Twitter Username'), max_length=50, blank=True)
     twitter_password = models.CharField(_('Twitter Password'), max_length=50, blank=True)
     pownce_user = models.CharField(_('Pownce Username'), max_length=50, blank=True)
     pownce_password = models.CharField(_('Pownce Password'), max_length=50, blank=True)
-   # enable_lifestream = models.BooleanField(_('Enable LifeStream'))
     language = models.CharField(_('language'), max_length=10, choices=settings.LANGUAGES, default=settings.LANGUAGE_CODE)
-
+    
     def __unicode__(self):
         return self.user.username
-
+    
     class Meta:
         verbose_name = _('profile')
         verbose_name_plural = _('profiles')
