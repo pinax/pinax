@@ -22,6 +22,5 @@ urlpatterns = tt.urls(url_prefix='', name_prefix='tribe_thing') + patterns('',
     url(r'^topic/(\d+)/$', 'tribes.views.topic', name="tribe_topic"),
 
     # wiki
-    url(r'^tribe/(?P<group_slug>\w+)/wiki/', include('wiki.urls'),
-        kwargs=wiki_args),
+    url(r'^tribe/(?P<group_slug>\w+)/wiki/', include('wiki.urls'), kwargs=wiki_args),
 )
