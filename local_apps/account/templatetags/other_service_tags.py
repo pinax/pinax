@@ -23,9 +23,9 @@ class OtherServiceNode(template.Node):
             return value
 
 
-@register.tag
-def other_service(parser, token):
-    bits = token.contents.split(' ')
+@register.tag(name='other_service')
+def other_service_tag(parser, token):
+    bits = token.split_contents()
     if len(bits) == 3: # {% other_service user key %}
         user = parser.compile_filter(bits[1])
         key = bits[2]
