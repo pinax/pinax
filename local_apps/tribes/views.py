@@ -121,17 +121,21 @@ def tribe(request, slug):
 def topics(request, slug):
     tribe = get_object_or_404(Tribe, slug=slug)
 
-    if request.user.is_authenticated() and request.method == "POST" and request.user in tribe.members.all():
-        topic_form = TopicForm(request.POST)
-        if topic_form.is_valid():
-            topic = topic_form.save(commit=False)
-            topic.tribe = tribe
-            topic.creator = request.user
-            topic.save()
-            request.user.message_set.create(message="You have started the topic %s" % topic.title)
-            if notification:
-                notification.send(tribe.members.all(), "tribes_new_topic", {"topic": topic})
-            topic_form = TopicForm() # @@@ is this the right way to reset it?
+    if request.user.is_authenticated() and request.method == "POST":
+        if request.user in tribe.members.all():
+            topic_form = TopicForm(request.POST)
+            if topic_form.is_valid():
+                topic = topic_form.save(commit=False)
+                topic.tribe = tribe
+                topic.creator = request.user
+                topic.save()
+                request.user.message_set.create(message="You have started the topic %s" % topic.title)
+                if notification:
+                    notification.send(tribe.members.all(), "tribes_new_topic", {"topic": topic})
+                topic_form = TopicForm() # @@@ is this the right way to reset it?
+        else:
+            request.user.message_set.create(message="You are not a member and so cannot start a new topic")
+            topic_form = TopicForm()
     else:
         topic_form = TopicForm()
 
