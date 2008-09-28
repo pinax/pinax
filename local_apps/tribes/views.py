@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponseForbidden
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -120,28 +120,36 @@ def tribe(request, slug):
 
 def topics(request, slug):
     tribe = get_object_or_404(Tribe, slug=slug)
-
-    if request.user.is_authenticated() and request.method == "POST":
-        if request.user in tribe.members.all():
-            topic_form = TopicForm(request.POST)
-            if topic_form.is_valid():
-                topic = topic_form.save(commit=False)
-                topic.tribe = tribe
-                topic.creator = request.user
-                topic.save()
-                request.user.message_set.create(message="You have started the topic %s" % topic.title)
-                if notification:
-                    notification.send(tribe.members.all(), "tribes_new_topic", {"topic": topic})
-                topic_form = TopicForm() # @@@ is this the right way to reset it?
+    
+    are_member = False
+    if request.user.is_authenticated():
+        are_member = request.user in tribe.members.all()
+    
+    if request.method == "POST":
+        if request.user.is_authenticated():
+            if are_member:
+                topic_form = TopicForm(request.POST)
+                if topic_form.is_valid():
+                    topic = topic_form.save(commit=False)
+                    topic.tribe = tribe
+                    topic.creator = request.user
+                    topic.save()
+                    request.user.message_set.create(message="You have started the topic %s" % topic.title)
+                    if notification:
+                        notification.send(tribe.members.all(), "tribes_new_topic", {"topic": topic})
+                    topic_form = TopicForm() # @@@ is this the right way to reset it?
+            else:
+                request.user.message_set.create(message="You are not a member and so cannot start a new topic")
+                topic_form = TopicForm()
         else:
-            request.user.message_set.create(message="You are not a member and so cannot start a new topic")
-            topic_form = TopicForm()
+            return HttpResponseForbidden()
     else:
         topic_form = TopicForm()
 
     return render_to_response("tribes/topics.html", {
         "tribe": tribe,
         "topic_form": topic_form,
+        "are_member": are_member,
     }, context_instance=RequestContext(request))
 
 def topic(request, id, edit=False):

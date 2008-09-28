@@ -17,6 +17,7 @@
     
     {% paginate %}
     
+    {% if are_member %}
     <h2>{% trans "New Topic" %}</h2>
     
     <form action="{% url tribe_topics tribe.slug %}" method="POST">
@@ -26,5 +27,6 @@
         </table>
         <input type="hidden" name="next" value="{{ request.path }}" />
     </form>
+    {% endif %}
     
 {% endblock %}
