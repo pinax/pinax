@@ -97,6 +97,13 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "core.context_processors.site_name",
     "messages.context_processors.inbox",
     "friends_app.context_processors.invitations",
+    "core.context_processors.combined_inbox_count",
+)
+
+COMBINED_INBOX_COUNT_SOURCES = (
+    "messages.context_processors.inbox",
+    "friends_app.context_processors.invitations",
+    "notification.context_processors.notification",
 )
 
 INSTALLED_APPS = (
