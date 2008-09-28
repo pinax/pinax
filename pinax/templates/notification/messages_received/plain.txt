@@ -1,4 +1,6 @@
-{% load i18n %}{% blocktrans with message.sender as message_sender and message.body as message_body and message.get_absolute_url as message_url %}{{ message_sender }} replied:
+{% load i18n %}{% blocktrans with message.sender as message_sender and message.body as message_body and message.get_absolute_url as message_url %}{{ message_sender }} has sent you a message:
+
+{{ message }}
 
 {{ message_body }}
 
