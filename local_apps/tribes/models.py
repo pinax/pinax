@@ -2,7 +2,6 @@ from datetime import datetime
 
 from django.db import models
 from django.db.models import signals
-from django.utils.html import escape
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes import generic
 
@@ -10,7 +9,6 @@ from django.contrib.contenttypes import generic
 from django.contrib.auth.models import User
 
 from tagging.fields import TagField
-from tagging.models import Tag
 from photos.models import Pool
 
 try:
@@ -43,9 +41,9 @@ class Tribe(models.Model):
     def __unicode__(self):
         return self.name
     
-    @models.permalink
     def get_absolute_url(self):
         return ("tribe_detail", [self.slug])
+    get_absolute_url = models.permalink(get_absolute_url)
 
 
 class Topic(models.Model):
@@ -66,9 +64,9 @@ class Topic(models.Model):
     def __unicode__(self):
         return self.title
 
-    @models.permalink
     def get_absolute_url(self):
         return ("tribe_topic", [self.pk])
+    get_absolute_url = models.permalink(get_absolute_url)
     
     class Meta:
         ordering = ('-modified', )
