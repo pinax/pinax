@@ -8,5 +8,13 @@
 
 {% block body %}
     <p><a href="{% url project_topics topic.project.slug %}">&larr; {% trans "Back to Topic List for Project " %} {{ topic.project }}</a></p>
+
+
+    <h2>Discussion Topic: {{ topic.title}}</h2>
+    
+    <div class="topic-body">
+        {{ topic.body }}
+    </div>
+
     {% comments topic %}
 {% endblock %}
