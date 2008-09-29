@@ -188,7 +188,7 @@ class ResetPasswordForm(forms.Form):
                 "user": user,
                 "new_password": new_password,
             })
-            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user.email])
+            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user.email], priority="high")
         return self.cleaned_data["email"]
 
 class ChangeTimezoneForm(AccountForm):
