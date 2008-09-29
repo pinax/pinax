@@ -147,8 +147,8 @@ INSTALLED_APPS = (
     'arcade',
     'games',
     'locations',
-    'flag',
     'things',
+    'flag',
     
     # internal (for now)
     'analytics',
@@ -226,6 +226,10 @@ BEHIND_PROXY = False
 ARCADE_STORAGE_MODULE = 'arcade.storage.file'
 ARCADE_STORAGE_PATH = os.path.join(MEDIA_ROOT, 'data', 'game_files')
 ARCADE_STATIC_URL = "/site_media/data/game_files/"
+
+FORCE_LOWERCASE_TAGS = True
+
+WIKI_REQUIRES_LOGIN = True
 
 try:
     from localsettings import *
