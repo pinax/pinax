@@ -7,11 +7,8 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as _, ugettext
 from django.utils.encoding import smart_unicode
 
-# favour django-mailer but fall back to django.core.mail
-try:
-    from mailer import send_mail
-except ImportError:
-    from django.core.mail import send_mail
+from core.utils import get_send_mail
+send_mail = get_send_mail()
 
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
