@@ -2,6 +2,15 @@ from django import template
 from django_openidauth.models import UserOpenID
 from django.utils.safestring import mark_safe
 
+try:
+    any
+except NameError:
+    def any(seq):
+        for x in seq:
+            if x:
+                return True
+        return False
+
 register = template.Library()
 
 def openid_icon(openid, user):
