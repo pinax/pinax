@@ -11,24 +11,39 @@ class Command(NoArgsCommand):
             from profiles.models import Profile
         except ImportError:
             raise CommandError("The profile app could not be imported.")
-
+        
         for user in User.objects.all():
             profile = Profile.objects.get(user=user)
             account, created = Account.objects.get_or_create(user=user)
-
+            
             if created:
                 account.timezone = profile.timezone
                 account.language = account.language
                 account.save()
                 print "created account for %s" % user
-
-                if profile.blogrss:
-                    OtherServiceInfo(user=user, key="blogrss", value=profile.blogrss).save()
-                if profile.twitter_user:
-                    OtherServiceInfo(user=user, key="twitter_user", value=profile.twitter_user).save()
-                if profile.twitter_password:
-                    OtherServiceInfo(user=user, key="twitter_password", value=profile.twitter_password).save()
-                if profile.pownce_user:
-                    OtherServiceInfo(user=user, key="pownce_user", value=profile.pownce_user).save()
-                if profile.pownce_password:
-                    OtherServiceInfo(user=user, key="pownce_password", value=profile.pownce_password).save()
+            
+            if profile.blogrss:
+                info, created = OtherServiceInfo.objects.get_or_create(user=user, key="blogrss")
+                info.value = profile.blogrss
+                info.save()
+                print "copied over blogrss for %s" % user
+            if profile.twitter_user:
+                info, created = OtherServiceInfo.objects.get_or_create(user=user, key="twitter_user")
+                info.value = profile.twitter_user
+                info.save()
+                print "copied over twitter_user for %s" % user
+            if profile.twitter_password:
+                info, created = OtherServiceInfo.objects.get_or_create(user=user, key="twitter_password")
+                info.value = profile.twitter_password
+                info.save()
+                print "copied over twitter_password for %s" % user
+            if profile.pownce_user:
+                info, created = OtherServiceInfo.objects.get_or_create(user=user, key="pownce_user")
+                info.value = profile.pownce_user
+                info.save()
+                print "copied over pownce_user for %s" % user
+            if profile.pownce_password:
+                info, created = OtherServiceInfo.objects.get_or_create(user=user, key="pownce_password")
+                info.value = profile.pownce_password
+                info.save()
+                print "copied over pownce_password for %s" % user
