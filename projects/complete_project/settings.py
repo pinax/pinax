@@ -75,7 +75,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.transaction.TransactionMiddleware',
 )
 
-ROOT_URLCONF = 'pinax.urls'
+ROOT_URLCONF = 'complete_project.urls'
 
 import os.path
 
