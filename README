@@ -19,11 +19,17 @@ on freenode.
 
 DIRECTORY STRUCTURE
 
-pinax/          contains a django project and templates
-external_apps/  contains external re-usable apps brought in via svn:externals
-local_apps/     contains re-usable apps that aren't yet externalized
-core_apps/      contains non re-usable apps specific to pinax site
-external_libs/  contains external libraries
+projects/
+    complete_project/   contains a complete sample project and templates
+    basic_project/      a more basic starter project (still to come)
+apps/
+    external_apps/      contains external re-usable apps via svn:externals
+    local_apps/         contains re-usable apps that aren't yet externalized
+    core_apps/          contains non re-usable apps specific to sample project
+libs/
+    external_libs/      contains external libraries
+docs/                   documentation (using rst and sphinx; in progress)
+fixtures/               test fixtures (in progress)
 
 The photologue app requires PIL which is not included in external_libs
 
@@ -35,5 +41,5 @@ you don't need to use the one we provide.
 
 
 With the exception of photos, things should just work out of the box. You can
-cd into pinax/ and run ./manage.py syncdb and ./manage.py runserver to get
-running immediately.
+cd into projects/complete_project/ and run ./manage.py syncdb and
+./manage.py runserver to get running immediately.
