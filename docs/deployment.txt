@@ -22,18 +22,19 @@ Sample WSGI File
     import os
     from os.path import abspath, dirname, join
     from site import addsitedir
-    path = addsitedir(abspath(join(dirname(__file__), 'django-hotclub', 'external_libs')), set())
+    path = addsitedir(abspath(join(dirname(__file__), 'django-hotclub', 'libs', 'external_libs')), set())
     if path:
         sys.path = list(path) + sys.path
     
-    sys.path.insert(0, abspath(join(dirname(__file__), 'django-hotclub', 'external_apps')))
-    sys.path.insert(0, abspath(join(dirname(__file__), 'django-hotclub', 'local_apps')))
-    sys.path.insert(0, abspath(join(dirname(__file__), 'django-hotclub', 'core_apps')))
-    sys.path.insert(0, abspath(join(dirname(__file__), 'django-hotclub')))
+    sys.path.insert(0, abspath(join(dirname(__file__), 'django-hotclub', 'apps', 'external_apps')))
+    sys.path.insert(0, abspath(join(dirname(__file__), 'django-hotclub', 'apps', 'local_apps')))
+    sys.path.insert(0, abspath(join(dirname(__file__), 'django-hotclub', 'apps', 'core_apps')))
+    
+    sys.path.insert(0, abspath(join(dirname(__file__), 'django-hotclub', 'projects')))
     
     from django.core.handlers.wsgi import WSGIHandler
     
-    os.environ['DJANGO_SETTINGS_MODULE'] = 'pinax.settings'
+    os.environ['DJANGO_SETTINGS_MODULE'] = 'your_project.settings'
     
     application = WSGIHandler()
 
