@@ -91,3 +91,22 @@ def contacts(request):
         "bbauth_token": request.session.get('bbauth_token'),
         "authsub_token": request.session.get('authsub_token'),
     }, context_instance=RequestContext(request))
+
+
+@login_required
+def friends_objects(request, template_name, friends_objects_function):
+    """
+    Display friends' objects.
+    
+    This view takes a template name and a function. The function should
+    take an iterator over users and return an iterator over objects
+    belonging to those users. This iterator over objects is then passed
+    to the template of the given name as ``object_list``.
+    """
+    
+    friends = friend_set_for(request.user)
+    object_list = friends_objects_function(friends)
+    
+    return render_to_response(template_name, {
+        "object_list": object_list,
+    }, context_instance=RequestContext(request))
