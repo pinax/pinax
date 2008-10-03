@@ -94,7 +94,7 @@ def contacts(request):
 
 
 @login_required
-def friends_objects(request, template_name, friends_objects_function):
+def friends_objects(request, template_name, friends_objects_function, extra_context={}):
     """
     Display friends' objects.
     
@@ -102,11 +102,18 @@ def friends_objects(request, template_name, friends_objects_function):
     take an iterator over users and return an iterator over objects
     belonging to those users. This iterator over objects is then passed
     to the template of the given name as ``object_list``.
+    
+    The template is also passed variable defined in ``extra_context``
+    which should be a dictionary of variable names to functions taking a
+    request object and returning the value for that variable.
     """
     
     friends = friend_set_for(request.user)
-    object_list = friends_objects_function(friends)
     
-    return render_to_response(template_name, {
-        "object_list": object_list,
-    }, context_instance=RequestContext(request))
+    dictionary = {
+        "object_list": friends_objects_function(friends),
+    }
+    for name, func in extra_context.items():
+        dictionary[name] = func(request)
+    
+    return render_to_response(template_name, dictionary, context_instance=RequestContext(request))
