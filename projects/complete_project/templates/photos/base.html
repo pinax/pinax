@@ -9,6 +9,7 @@
         <ul>
             <li><a href="{% url photos %} ">{% trans "Latest Photos" %}</a></li>
             <li><a href="{% url photos_yours %}">{% trans "Your Photos" %}</a></li>
+            <li><a href="{% url friends_photos %}">{% trans "Friends' Photos" %}</a></li>
             <li><a href="{% url photo_upload %}">{% trans "Upload a Photo" %}</a></li>
         </ul>
     {% else %}

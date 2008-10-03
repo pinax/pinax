@@ -7,6 +7,7 @@
 {% block subnav %}
     {% if user.is_authenticated %}
         <ul>
+            <li><a href="{% url friends_blogs %} ">{% trans "Friends' Blogs" %}</a></li>
             <li><a href="{% url blog_list_all %} ">{% trans "All Blogs" %}</a></li>
             <li><a href="{% url blog_list_yours %}">{% trans "Your Posts" %}</a></li>
             <li><a href="{% url blog_new %}">{% trans "Write a Blog Post" %}</a></li>

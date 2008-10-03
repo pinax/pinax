@@ -1,0 +1,36 @@
+{% extends "photos/base.html" %}
+
+{% load i18n %}
+{% load humanize %}
+{% load pagination_tags %}
+{% load tagging_tags %}
+{% load wiki %}
+{% load markup %}
+{% load switchcase %}
+{% load restructuredtext %}
+{% load threadedcommentstags %}
+
+{% block head_title %}{% blocktrans %}Friends' Photos{% endblocktrans %}{% endblock %}
+
+{% block body %}
+    
+    <h1>{% blocktrans %}Friends' Photos{% endblocktrans %}</h1>
+    
+    {% if object_list %}
+        {% autopaginate object_list 24 %}
+        <div class="thumb-row clearfix">
+            {% for photo in object_list %}
+                <div class="gallery-photo-thumb">
+                    <a href="details/{{ photo.id }}/"><img src="{{ photo.get_thumbnail_url }}" alt="{{ photo.title }}"/></a><br />
+                    from <a href="{% url profiles.views.profile photo.member.username %}">{{ photo.member.username }}</a><br />
+                    <img src="/site_media/comment.png" border="0" class="noborder" align="absmiddle" /><a href="details/{{ photo.id }}/#photocomments">{% get_comment_count for photo as commentcount %} {{ commentcount }} Comments</a><br />
+                    Viewed {{ photo.view_count }} times
+                </div>
+            {% endfor %}
+        </div>
+        {% paginate %}
+    {% else %}
+        <p>No photos were found.</p>
+    {% endif %}
+    
+{% endblock %}

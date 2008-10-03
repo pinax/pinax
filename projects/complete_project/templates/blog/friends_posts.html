@@ -1,0 +1,28 @@
+{% extends "blog/base.html" %}
+
+{% load i18n %}
+{% load pagination_tags %}
+{% load blog_tags %}
+
+{% block head_title %}{% blocktrans %}Friends' Blogs{% endblocktrans %}{% endblock %}
+
+{% block body %}
+    
+    <h1>{% blocktrans %}Friends' Blogs{% endblocktrans %}</h1>
+    
+    {% if object_list %}
+        <p class="helptext">{% trans "These are blog posts from your friends:" %}</p>
+        
+        {% autopaginate object_list %}
+            
+            {% for blog_post in object_list %}
+                {% show_blog_post blog_post %}
+            {% endfor %}
+            
+        {% paginate %}
+        
+    {% else %}
+        No blog posts yet.
+    {% endif %}
+    
+{% endblock %}

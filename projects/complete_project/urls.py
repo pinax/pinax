@@ -62,6 +62,46 @@ urlpatterns = patterns('',
     (r'^feeds/bookmarks/(.*)/?$', 'django.contrib.syndication.views.feed', bookmarks_feed_dict),
 )
 
+## @@@ for now, we'll use friends_app to glue this stuff together
+
+from photos.models import Photos
+
+friends_photos_kwargs = {
+    "template_name": "photos/friends_photos.html",
+    "friends_objects_function": lambda users: Photos.objects.filter(member__in=users),
+}
+
+from blog.models import Post
+
+friends_blogs_kwargs = {
+    "template_name": "blog/friends_posts.html",
+    "friends_objects_function": lambda users: Post.objects.filter(author__in=users),
+}
+
+from zwitschern.models import Tweet
+
+friends_tweets_kwargs = {
+    "template_name": "zwitschern/friends_tweets.html",
+    "friends_objects_function": lambda users: Tweet.objects.filter(sender__in=users),
+}
+
+from bookmarks.models import Bookmark
+
+friends_bookmarks_kwargs = {
+    "template_name": "bookmarks/friends_bookmarks.html",
+    "friends_objects_function": lambda users: Bookmark.objects.filter(saved_instances__user__in=users),
+    "extra_context": {
+        "user_bookmarks": lambda request: Bookmark.objects.filter(saved_instances__user=request.user),
+    },
+}
+
+urlpatterns += patterns('',
+    url('^photos/friends_photos/$', 'friends_app.views.friends_objects', kwargs=friends_photos_kwargs, name="friends_photos"),
+    url('^blog/friends_blogs/$', 'friends_app.views.friends_objects', kwargs=friends_blogs_kwargs, name="friends_blogs"),
+    url('^tweets/friends_tweets/$', 'friends_app.views.friends_objects', kwargs=friends_tweets_kwargs, name="friends_tweets"),
+    url('^bookmarks/friends_bookmarks/$', 'friends_app.views.friends_objects', kwargs=friends_bookmarks_kwargs, name="friends_bookmarks"),
+)
+
 if settings.DEBUG:
     urlpatterns += patterns('',
         (r'^site_media/(?P<path>.*)$', 'django.views.static.serve',
