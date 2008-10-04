@@ -1,0 +1,13 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+
+{% block subnav %}
+    <ul>
+        <li><a href="{% url tweets_you_follow %}">{% trans "Tweets You Follow" %}</a></li>
+        <li><a href="{% url friends_tweets %}">{% trans "Friends' Tweets" %}</a></li>
+        <li><a href="{% url all_tweets %}">{% trans "All Tweets" %}</a></li>
+        <li><a href="{% url tweet_followers request.user %}">{% trans "Your Followers" %}</a></li>
+        <li><a href="{% url tweet_following request.user %}">{% trans "Who You Are Following" %}</a></li>
+    </ul>
+{% endblock %}

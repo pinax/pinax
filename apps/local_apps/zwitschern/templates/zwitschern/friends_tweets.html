@@ -1,0 +1,25 @@
+{% extends "zwitschern/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% blocktrans %}Friends' Tweets{% endblocktrans %}{% endblock %}
+
+{% block body %}
+    <h2>{% trans "Friends' Tweets" %}</h2>
+
+    <p>{% trans "These are tweets from your friends:" %}</p>
+
+    {% if object_list %}
+        {% for tweet in object_list %}
+            <div class="tweet" id="t{{ tweet.id }}">
+                <a name="tweet-{{ tweet.id }}"></a>
+                <p><a href="{{ tweet.sender.get_profile.get_absolute_url }}"><b>{{ tweet.sender }}</b></a>
+                {{ tweet.html|safe|urlize }}</p>
+                <span class="timesince">{% blocktrans with tweet.sent|timesince as tweet_age %}{{ tweet_age }} ago{% endblocktrans %}</span>
+                <a class="reply" href="{% url tweets_you_follow %}?reply={{ tweet.sender }}">{% trans "reply" %}</a>
+             </div>
+        {% endfor %}
+    {% else %}
+        <p>{% blocktrans %}No tweets yet.{% endblocktrans %}</p>
+    {% endif %}
+{% endblock %}

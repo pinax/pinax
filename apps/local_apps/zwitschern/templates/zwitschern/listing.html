@@ -1,0 +1,19 @@
+{% load i18n %}
+
+{% if tweets %}
+    {% for tweet in tweets %}
+        <div class="tweet" id="t{{ tweet.id }}">
+            {% if prefix_sender %}<a href="{{ tweet.sender.get_profile.get_absolute_url }}"><b>{{ tweet.sender }}</b></a>{% endif %}
+            {{ tweet.html|safe|urlize }}
+            <span class="timesince">{% blocktrans with tweet.sent|timesince as tweet_age %}{{ tweet_age }} ago{% endblocktrans %}</span>
+            <a class="reply" href="{% url tweets_you_follow %}?reply={{ tweet.sender }}">{% trans "reply" %}</a>
+         </div>
+    {% endfor %}
+{% else %}
+    {% if are_mine %}
+        {% url tweets_you_follow as tweets_url %}
+        <p>{% blocktrans %}You haven't posted any <a href="{{ tweets_url }}">tweets</a> yet.{% endblocktrans %}</p>
+    {% else %}
+        <p>{% blocktrans %}There are currently no tweets to be listed.{% endblocktrans %}</p>
+    {% endif %}
+{% endif %}

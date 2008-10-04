@@ -1,0 +1,79 @@
+{% extends "zwitschern/base.html" %}
+
+{% load i18n %}
+{% load zwitschern %}
+
+{% block head_title %}{% blocktrans %}Tweets{% endblocktrans %}{% endblock %}
+
+{% block extra_head %}
+    <link rel="alternate" type="application/atom+xml" title="Tweets Feed for User {{ user.username|capfirst }}" href="/feeds/tweets/only/{{ user.username }}/" />
+    <link rel="alternate" type="application/atom+xml" title="Tweets Feed for User {{ user.username|capfirst }} and friends" href="/feeds/tweets/with_friends/{{ user.username }}/" />
+{% endblock %}
+
+{% block body %}
+    <h1>{% trans "Tweets" %}</h1>
+    
+    <form method="POST" action="{% url tweets_you_follow %}">
+        <p>{% trans "What are you doing?" %}</p>
+        {{ form.as_p }}
+        {% if twitter_authorized %}
+        <h2>{% trans "You have authorized a twitter account." %}</h2>
+        <input name="pub2twitter" type="checkbox" id="pub2twitter" value="yes" />
+        <label for="pub2twitter">{% trans "Publish to Twitter?" %}</label>
+        {% endif %}
+        
+        {% if pownce_authorized %}
+        <h2>{% trans "You have authorized a pownce account." %}</h2>
+        <input name="pub2pownce" type="checkbox" id="pub2pownce" value="yes" />
+        <label for="pub2pownce">{% trans "Publish to Pownce?" %}</label>
+        {% endif %}
+        
+        <p>
+            <span id="chars_left"></span> {% trans "chars left." %}
+            <input type="submit" value="{% trans "post" %}">
+        </p>
+    </form>
+
+    <p>{% blocktrans with user.followed.count as follow_count and user.followed.count|pluralize:_("person,people") as follow_name %}
+        These are tweets from the {{ follow_count }} {{ follow_name }} you are following (plus your own){% endblocktrans %}:
+    </p>
+    
+    {% tweet_listing tweets 1 0 %}
+    
+{% endblock %}
+
+{% block extra_body %}
+    <script>
+        $(document).ready(function() {
+            function update_chars_left() {
+                var max_len = 140;
+                var textarea = $('#new_tweet')[0];
+                var tweet_len = textarea.value.length;
+                if (tweet_len >= max_len) {
+                    textarea.value = textarea.value.substring(0, max_len); // truncate
+                    $('#chars_left').html("0");
+                } else {
+                    $('#chars_left').html(max_len - tweet_len);
+                }
+            }
+            $('#new_tweet').keyup(function() {
+                update_chars_left();
+            });
+            update_chars_left();
+            $('#new_tweet').focus();
+            {% if reply %}
+            var offset = {{ reply|length }} + 2;
+            var textarea = $('#new_tweet')[0];
+            if (textarea.setSelectionRange) { // Safari, Firefox
+                textarea.setSelectionRange(offset, offset);
+            } else if (textarea.createTextRange) { // IE
+                var range = textarea.createTextRange();
+                range.collapse(true);
+                range.moveEnd('character', offset);
+                range.moveStart('character', offset);
+                range.select();
+            }
+            {% endif %}
+        });
+    </script>
+{% endblock %}

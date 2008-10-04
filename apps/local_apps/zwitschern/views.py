@@ -11,15 +11,14 @@ from zwitschern.pownce_utils import pownce_account_for_user, pownce_verify_crede
 from zwitschern.models import Tweet, TweetInstance
 from zwitschern.forms import TweetForm
 
-@login_required
 def personal(request, form_class=TweetForm,
-    template_name="zwitschern/personal.html", success_url=None):
+        template_name="zwitschern/personal.html", success_url=None):
     """
     just the tweets the current user is following
     """
     twitter_account = twitter_account_for_user(request.user)
     pownce_account  = pownce_account_for_user(request.user)
-    
+
     if request.method == "POST":
         form = form_class(request.user, request.POST)
         if form.is_valid():
@@ -46,6 +45,7 @@ def personal(request, form_class=TweetForm,
         "twitter_authorized": twitter_verify_credentials(twitter_account),
         "pownce_authorized": pownce_verify_credentials(pownce_account),
     }, context_instance=RequestContext(request))
+personal = login_required(personal)
     
 def public(request, template_name="zwitschern/public.html"):
     """
@@ -82,8 +82,8 @@ def followers(request, username, template_name="zwitschern/followers.html"):
     a list of users following the given user.
     """
     return _follow_list(request, username, template_name)
-    
-    
+
+
 def following(request, username, template_name="zwitschern/following.html"):
     """
     a list of users the given user is following.

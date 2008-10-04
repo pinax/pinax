@@ -1,0 +1,25 @@
+{% extends "zwitschern/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% blocktrans %}Followers of {{ other_user }}{% endblocktrans %}{% endblock %}
+
+{% block body %}
+    <h1>{% blocktrans %}Followers of {{ other_user }}{% endblocktrans %}</h1>
+ 
+    <p>{% blocktrans with other_user.get_profile.get_absolute_url as other_user_url %}Followers of <a href="{{ other_user_url }}">{{ other_user }}</a>'s tweets:{% endblocktrans %}</p>
+
+    {% if other_user.followers.all %}
+        {% for following in other_user.followers.all %}
+            {# @@@ this is common code from all profiles list -- refactor #}
+            <div class="profile clearfix">
+                <div><a href="{{ following.follower.get_profile.get_absolute_url }}">{{ following.follower }}</a></div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>{% trans 'No followers.' %}</p>
+    {% endif %}
+    
+    {% url tweet_following other_user.username as tweet_following_url %}
+    <p>{% blocktrans %}Also see <a href="{{ tweet_following_url }}">who {{ other_user }} is following</a>.{% endblocktrans %}
+{% endblock %}

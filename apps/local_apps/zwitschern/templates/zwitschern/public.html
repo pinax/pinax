@@ -1,0 +1,19 @@
+{% extends "zwitschern/base.html" %}
+
+{% load i18n %}
+{% load zwitschern %}
+
+{% block head_title %}{% blocktrans %}Public Tweets{% endblocktrans %}{% endblock %}
+
+{% block extra_head %}
+    {# @@@ use url tag #}
+    <link rel="alternate" type="application/atom+xml" title="Tweets Feed for all users" href="/feeds/tweets/all/" />
+{% endblock %}
+
+{% block body %}
+    <h1>{% trans "All Tweets" %}</h1>
+    
+    <p>{% trans "These are tweets from everyone:" %}</p>
+    
+    {% tweet_listing tweets 1 0 %}
+{% endblock %}

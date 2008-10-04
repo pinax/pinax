@@ -49,11 +49,18 @@ class Tweet(models.Model):
     sender = models.ForeignKey(User, related_name="sent_tweets", verbose_name=_('sender'))
     sent = models.DateTimeField(_('sent'), default=datetime.now)
     
+    def __unicode__(self):
+        return self.text
+    
     def html(self):
         return format_tweet(self.text)
     
+    def get_absolute_url(self):
+        return ("single_tweet", [self.id])
+    get_absolute_url = models.permalink(get_absolute_url)
+
     class Meta:
-        ordering = ('-sent', )
+        ordering = ('-sent',)
 
 
 class TweetInstanceManager(models.Manager):

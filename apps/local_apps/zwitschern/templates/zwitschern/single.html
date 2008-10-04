@@ -1,0 +1,23 @@
+{% extends "zwitschern/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% blocktrans %}Single Tweet{% endblocktrans %}{% endblock %}
+
+{% block body %}
+    <h1>{% trans "Single Tweet" %}</h1>
+    
+    <p>
+    {% blocktrans with tweet.sender.username as tweet_sender %}
+        Here is a single tweet from {{ tweet_sender }}:
+    {% endblocktrans %}
+    </p>
+
+    <div class="tweet" id="t{{ tweet.id }}">
+        <a href="{{ tweet.sender.get_profile.get_absolute_url }}"><b>{{ tweet.sender }}</b></a>
+        {{ tweet.html|safe|urlize }}
+        <span class="timesince">{{ tweet.sent|timesince }} ago</span>
+        <a class="reply" href="{% url tweets_you_follow %}?reply={{ tweet.sender }}">reply</a>
+    </div>
+
+{% endblock %}
