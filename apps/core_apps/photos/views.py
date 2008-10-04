@@ -167,6 +167,8 @@ def memberphotos(request, username):
 @login_required
 def edit(request, id):
     photo = get_object_or_404(Photos, id=id)
+    photo_url = photo.get_display_url()
+
 
     if request.method == "POST":
         if photo.member != request.user:
@@ -189,6 +191,7 @@ def edit(request, id):
     return render_to_response("photos/edit.html", {
         "photo_form": photo_form,
         "photo": photo,
+        "photo_url": photo_url,
     }, context_instance=RequestContext(request))
 
 @login_required
