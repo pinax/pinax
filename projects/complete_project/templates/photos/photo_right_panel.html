@@ -39,6 +39,9 @@
             <label>Delete Photo</label> <input type="image" src="/site_media/delete.png" border="0" title="{% trans "Delete Photo" %}" />
                         <input type="hidden" name="action" value="delete"/>
         </form>
+
+        <a href="{% url photo_edit photo.id %}">Edit Photo</a>
+
     {% endif %}
 
 </div>

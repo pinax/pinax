@@ -165,6 +165,33 @@ def memberphotos(request, username):
     return render_to_response("photos/memberphotos.html", {"photos": photos}, context_instance=RequestContext(request))
 
 @login_required
+def edit(request, id):
+    photo = get_object_or_404(Photos, id=id)
+
+    if request.method == "POST":
+        if photo.member != request.user:
+            request.user.message_set.create(message="You can't edit photos that aren't yours")
+            return HttpResponseRedirect(reverse('details', args=(photo.id,)))
+        if request.POST["action"] == "update":
+            photo_form = PhotoEditForm(request.user, request.POST, instance=photo)
+            if photo_form.is_valid():
+                photoobj = photo_form.save(commit=False)
+                photoobj.save()
+                request.user.message_set.create(message=_("Successfully updated photo '%s'") % photo.title)
+                                
+                return HttpResponseRedirect(reverse('details', args=(photo.id,)))
+        else:
+            photo_form = PhotoEditForm(instance=photo)
+
+    else:
+        photo_form = PhotoEditForm(instance=photo)
+
+    return render_to_response("photos/edit.html", {
+        "photo_form": photo_form,
+        "photo": photo,
+    }, context_instance=RequestContext(request))
+
+@login_required
 def destroy(request, id):
     photo = Photos.objects.get(pk=id)
     user = request.user

@@ -17,4 +17,6 @@ urlpatterns = patterns('',
     url(r'^member/(?P<username>[\w]+)/$', 'photos.views.memberphotos', name='photos_member'),
     #destory photo
     url(r'^destroy/(\d+)/$', 'photos.views.destroy', name='photo_destroy'),
+    #edit photo
+    url(r'^edit/(\d+)/$', 'photos.views.edit', name='photo_edit'),
 )
