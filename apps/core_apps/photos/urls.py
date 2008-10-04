@@ -1,14 +1,10 @@
 from django.conf.urls.defaults import *
 
-from photos import views, models
-from photos.forms import *
-
-
 urlpatterns = patterns('',    
     # all photos or latest photos
     url(r'^$', 'photos.views.photos', name="photos"),
     # a photos details
-    url(r'^details/(?P<id>\d+)/$', 'photos.views.details', name="details"),
+    url(r'^details/(?P<id>\d+)/$', 'photos.views.details', name="photo_details"),
     # upload photos
     url(r'^upload/$', 'photos.views.upload', name="photo_upload"),
     # your photos

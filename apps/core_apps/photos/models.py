@@ -15,7 +15,9 @@ PUBLISH_CHOICES = (
 )
 
 class PhotoSets(models.Model):
-    """docstring for phototribes"""
+    """
+    A set of photos
+    """
     name = models.CharField(_('name'), max_length=200)
     description = models.TextField(_('description'))
     publish_type = models.IntegerField(_('publish_type'), choices=PUBLISH_CHOICES, default=1)
@@ -26,7 +28,9 @@ class PhotoSets(models.Model):
         verbose_name_plural = _('photo sets')
 
 class Photos(ImageModel):
-    """docstring for MemberPhotos"""
+    """
+    A photo with its details
+    """
     SAFETY_LEVEL = (
         (1, _('Safe')),
         (2, _('Not Safe')),
@@ -43,6 +47,10 @@ class Photos(ImageModel):
 
     def __unicode__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return ("photo_details", [self.pk])
+    get_absolute_url = models.permalink(get_absolute_url)
 
 class Pool(models.Model):
     """

@@ -54,7 +54,7 @@
     {% if tribes %}
         <h2>Add photo to tribe</h2>
         {% for tribe in tribes %}
-            <form action="{% url details photo.id %}" method="POST">
+            <form action="{{ photo.get_absolute_url }}" method="POST">
                 <input type="hidden" name="tribe" value="{{ tribe.id }}"/>
             {% if tribe.has_photo %}
                 <input type="hidden" name="action" value="removefromtribe"/>
@@ -72,7 +72,7 @@
     {% if projects %}
         <h2>Add photo to project</h2>
         {% for project in projects %}
-            <form action="{% url details photo.id %}" method="POST">
+            <form action="{{ photo.get_absolute_url }}" method="POST">
                 <input type="hidden" name="project" value="{{ project.id }}"/>
             {% if project.has_photo %}
                 <input type="hidden" name="action" value="removefromproject"/>

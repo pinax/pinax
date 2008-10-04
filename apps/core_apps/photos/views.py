@@ -26,7 +26,7 @@ def upload(request, form_class=PhotoUploadForm,
                 photo.member = request.user
                 photo.save()
                 request.user.message_set.create(message=_("Successfully uploaded photo '%s'") % photo.title)
-                return HttpResponseRedirect(reverse('details', args=(photo.id,)))
+                return HttpResponseRedirect(reverse('photo_details', args=(photo.id,)))
 
     return render_to_response(template_name, {
         "photo_form": photo_form,
@@ -102,7 +102,7 @@ def details(request, id, template_name="photos/details.html"):
                 # TODO: this applies to pinax in general. dont use ugettext_lazy here. its usage is fragile.
                 request.user.message_set.create(message=_("Did not add photo '%s' to project because it already exists.") % title)
 
-            return HttpResponseRedirect(reverse('details', args=(photo.id,)))
+            return HttpResponseRedirect(reverse('photo_details', args=(photo.id,)))
         
         if request.method == "POST":
             if request.POST["action"] == "addtotribe":
@@ -115,7 +115,7 @@ def details(request, id, template_name="photos/details.html"):
                     # TODO: this applies to pinax in general. dont use ugettext_lazy here. its usage is fragile.
                     request.user.message_set.create(message=_("Did not add photo '%s' to tribe because it already exists.") % title)
 
-                return HttpResponseRedirect(reverse('details', args=(photo.id,)))
+                return HttpResponseRedirect(reverse('photo_details', args=(photo.id,)))
 
             if request.POST["action"] == "removefromtribe":
                 tribeid = request.POST["tribe"]
@@ -127,7 +127,7 @@ def details(request, id, template_name="photos/details.html"):
                     # TODO: this applies to pinax in general. dont use ugettext_lazy here. its usage is fragile.
                     request.user.message_set.create(message=_("Did not remove photo '%s' from tribe.") % title)
 
-                return HttpResponseRedirect(reverse('details', args=(photo.id,)))
+                return HttpResponseRedirect(reverse('photo_details', args=(photo.id,)))
 
             if request.POST["action"] == "addtoproject":
                 projectid = request.POST["project"]
@@ -139,7 +139,7 @@ def details(request, id, template_name="photos/details.html"):
                     # TODO: this applies to pinax in general. dont use ugettext_lazy here. its usage is fragile.
                     request.user.message_set.create(message=_("Did not add photo '%s' to project because it already exists.") % title)
 
-                return HttpResponseRedirect(reverse('details', args=(photo.id,)))
+                return HttpResponseRedirect(reverse('photo_details', args=(photo.id,)))
 
             if request.POST["action"] == "removefromproject":
                 projectid = request.POST["project"]
@@ -151,7 +151,7 @@ def details(request, id, template_name="photos/details.html"):
                     # TODO: this applies to pinax in general. dont use ugettext_lazy here. its usage is fragile.
                     request.user.message_set.create(message=_("Did not remove photo '%s' from project.") % title)
 
-                return HttpResponseRedirect(reverse('details', args=(photo.id,)))
+                return HttpResponseRedirect(reverse('photo_details', args=(photo.id,)))
 
     return render_to_response(template_name, {
         "host": host, 
@@ -183,7 +183,7 @@ def edit(request, id, form_class=PhotoEditForm,
     if request.method == "POST":
         if photo.member != request.user:
             request.user.message_set.create(message="You can't edit photos that aren't yours")
-            return HttpResponseRedirect(reverse('details', args=(photo.id,)))
+            return HttpResponseRedirect(reverse('photo_details', args=(photo.id,)))
         if request.POST["action"] == "update":
             photo_form = form_class(request.user, request.POST, instance=photo)
             if photo_form.is_valid():
@@ -191,7 +191,7 @@ def edit(request, id, form_class=PhotoEditForm,
                 photoobj.save()
                 request.user.message_set.create(message=_("Successfully updated photo '%s'") % photo.title)
                                 
-                return HttpResponseRedirect(reverse('details', args=(photo.id,)))
+                return HttpResponseRedirect(reverse('photo_details', args=(photo.id,)))
         else:
             photo_form = form_class(instance=photo)
 
