@@ -4,7 +4,6 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
-from django.db.models import permalink
 
 from tagging.fields import TagField
 from tagging.models import Tag
@@ -57,7 +56,6 @@ class Post(models.Model):
     def __unicode__(self):
         return self.title
 
-    @permalink
     def get_absolute_url(self):
         return ('blog_post', None, {
             'username': self.author.username,
@@ -65,6 +63,7 @@ class Post(models.Model):
             'month': "%02d" % self.publish.month,
             'slug': self.slug
     })
+    get_absolute_url = models.permalink(get_absolute_url)
 
     def save(self, force_insert=False, force_update=False):
         self.updated_at = datetime.now()

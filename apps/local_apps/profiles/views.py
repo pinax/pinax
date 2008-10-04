@@ -22,12 +22,12 @@ try:
 except ImportError:
     notification = None
 
-def profiles(request):
-    return render_to_response("profiles/profiles.html", {
+def profiles(request, template_name="profiles/profiles.html"):
+    return render_to_response(template_name, {
         "users": User.objects.all().order_by("-date_joined"),
     }, context_instance=RequestContext(request))
 
-def profile(request, username):
+def profile(request, username, template_name="profiles/profile.html"):
     other_user = get_object_or_404(User, username=username)
     if request.user.is_authenticated():
         is_friend = Friendship.objects.are_friends(request.user, other_user)
@@ -106,9 +106,8 @@ def profile(request, username):
             profile_form = ProfileForm(instance=other_user.get_profile())
     else:
         profile_form = None
-        
-    
-    return render_to_response("profiles/profile.html", {
+
+    return render_to_response(template_name, {
         "profile_form": profile_form,
         "is_me": is_me,
         "is_friend": is_friend,

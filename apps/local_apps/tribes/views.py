@@ -36,10 +36,10 @@ except ImportError:
 from zwitschern.models import TweetInstance
 
 
-def create(request):
+def create(request, form_class=TribeForm, template_name="tribes/create.html"):
     if request.user.is_authenticated() and request.method == "POST":
         if request.POST["action"] == "create":
-            tribe_form = TribeForm(request.POST)
+            tribe_form = form_class(request.POST)
             if tribe_form.is_valid():
                 tribe = tribe_form.save(commit=False)
                 tribe.creator = request.user
@@ -55,31 +55,32 @@ def create(request):
                 #}, context_instance=RequestContext(request))
                 return HttpResponseRedirect(tribe.get_absolute_url())
         else:
-            tribe_form = TribeForm()
+            tribe_form = form_class()
     else:
-        tribe_form = TribeForm()
+        tribe_form = form_class()
     
-    return render_to_response("tribes/create.html", {
+    return render_to_response(template_name, {
         "tribe_form": tribe_form,
     }, context_instance=RequestContext(request))
 
-def your_tribes(request):
-    return render_to_response("tribes/your_tribes.html", {
+def your_tribes(request, template_name="tribes/your_tribes.html"):
+    return render_to_response(template_name, {
         "tribes": Tribe.objects.filter(members=request.user).order_by("name"),
     }, context_instance=RequestContext(request))
 your_tribes = login_required(your_tribes)
 
-def tribe(request, slug):
+def tribe(request, slug, form_class=TribeUpdateForm,
+        template_name="tribes/tribe.html"):
     tribe = get_object_or_404(Tribe, slug=slug)
     photos = tribe.photos.all()
     
     if request.user.is_authenticated() and request.method == "POST":
         if request.POST["action"] == "update" and request.user == tribe.creator:
-            tribe_form = TribeUpdateForm(request.POST, instance=tribe)
+            tribe_form = form_class(request.POST, instance=tribe)
             if tribe_form.is_valid():
                 tribe = tribe_form.save()
         else:
-            tribe_form = TribeUpdateForm(instance=tribe)
+            tribe_form = form_class(instance=tribe)
         if request.POST["action"] == "join":
             tribe.members.add(request.user)
             request.user.message_set.create(message="You have joined the tribe %s" % tribe.name)
@@ -94,7 +95,7 @@ def tribe(request, slug):
             if notification:
                 pass # @@@
     else:
-        tribe_form = TribeUpdateForm(instance=tribe)
+        tribe_form = form_class(instance=tribe)
     
     topics = tribe.topics.all()[:5]
     articles = Article.objects.filter(
@@ -107,7 +108,7 @@ def tribe(request, slug):
     
     are_member = request.user in tribe.members.all()
     
-    return render_to_response("tribes/tribe.html", {
+    return render_to_response(template_name, {
         "tribe_form": tribe_form,
         "tribe": tribe,
         "photos": photos,
@@ -118,7 +119,8 @@ def tribe(request, slug):
         "are_member": are_member,
     }, context_instance=RequestContext(request))
 
-def topics(request, slug):
+def topics(request, slug, form_class=TopicForm,
+        template_name="tribes/topics.html"):
     tribe = get_object_or_404(Tribe, slug=slug)
     
     are_member = False
@@ -128,7 +130,7 @@ def topics(request, slug):
     if request.method == "POST":
         if request.user.is_authenticated():
             if are_member:
-                topic_form = TopicForm(request.POST)
+                topic_form = form_class(request.POST)
                 if topic_form.is_valid():
                     topic = topic_form.save(commit=False)
                     topic.tribe = tribe
@@ -137,29 +139,29 @@ def topics(request, slug):
                     request.user.message_set.create(message="You have started the topic %s" % topic.title)
                     if notification:
                         notification.send(tribe.members.all(), "tribes_new_topic", {"topic": topic})
-                    topic_form = TopicForm() # @@@ is this the right way to reset it?
+                    topic_form = form_class() # @@@ is this the right way to reset it?
             else:
                 request.user.message_set.create(message="You are not a member and so cannot start a new topic")
-                topic_form = TopicForm()
+                topic_form = form_class()
         else:
             return HttpResponseForbidden()
     else:
-        topic_form = TopicForm()
+        topic_form = form_class()
 
-    return render_to_response("tribes/topics.html", {
+    return render_to_response(template_name, {
         "tribe": tribe,
         "topic_form": topic_form,
         "are_member": are_member,
     }, context_instance=RequestContext(request))
 
-def topic(request, id, edit=False):
+def topic(request, id, edit=False, template_name="tribes/topic.html"):
     topic = get_object_or_404(Topic, id=id)
     if request.method == "POST" and edit == True and \
         (request.user == topic.creator or request.user == topic.tribe.creator):
         topic.body = request.POST["body"]
         topic.save()
         return HttpResponseRedirect(reverse('tribe_topic', args=[topic.id]))
-    return render_to_response("tribes/topic.html", {
+    return render_to_response(template_name, {
         'topic': topic,
         'edit': edit,
     }, context_instance=RequestContext(request))

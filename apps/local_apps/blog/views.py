@@ -23,34 +23,34 @@ try:
 except ImportError:
     friends = False
 
-def blogs(request, username=None):
+def blogs(request, username=None, template_name="blog/blogs.html"):
     blogs = Post.objects.filter(status=2).order_by("-publish")
     if username is not None:
         user = get_object_or_404(User, username=username.lower())
         blogs = blogs.filter(author=user)
-    return render_to_response("blog/blogs.html", {"blogs": blogs}, context_instance=RequestContext(request))
+    return render_to_response(template_name, {
+        "blogs": blogs,
+    }, context_instance=RequestContext(request))
 
-def post(request, username, year, month, slug):
+def post(request, username, year, month, slug,
+         template_name="blog/post.html"):
     post = Post.objects.filter(slug=slug, publish__year=int(year), publish__month=int(month)).filter(author__username=username)
     if not post:
         raise Http404
-    
+
     if post[0].status == 1 and post[0].author != request.user:
         raise Http404
-    
-    return render_to_response("blog/post.html", {
+
+    return render_to_response(template_name, {
         "post": post[0],
     }, context_instance=RequestContext(request))
 
-@login_required
-def your_posts(request):
-    user = request.user
-    blogs = Post.objects.filter(author=user)
+def your_posts(request, template_name="blog/your_posts.html"):
+    return render_to_response(template_name, {
+        "blogs": Post.objects.filter(author=request.user),
+    }, context_instance=RequestContext(request))
+your_posts = login_required(your_posts)
 
-    return render_to_response("blog/your_posts.html", {"blogs": blogs}, context_instance=RequestContext(request))
-
-
-@login_required
 def destroy(request, id):
     post = Post.objects.get(pk=id)
     user = request.user
@@ -67,14 +67,12 @@ def destroy(request, id):
         return HttpResponseRedirect(reverse("blog_list_yours"))
 
     return render_to_response(context_instance=RequestContext(request))
+destroy = login_required(destroy)
 
-
-
-@login_required
-def new(request):
+def new(request, form_class=BlogForm, template_name="blog/new.html"):
     if request.method == "POST":
         if request.POST["action"] == "create":
-            blog_form = BlogForm(request.user, request.POST)
+            blog_form = form_class(request.user, request.POST)
             if blog_form.is_valid():
                 blog = blog_form.save(commit=False)
                 blog.author = request.user
@@ -92,16 +90,16 @@ def new(request):
                 
                 return HttpResponseRedirect(reverse("blog_list_yours"))
         else:
-            blog_form = BlogForm()
+            blog_form = form_class()
     else:
-        blog_form = BlogForm()
+        blog_form = form_class()
 
-    return render_to_response("blog/new.html", {
+    return render_to_response(template_name, {
         "blog_form": blog_form
     }, context_instance=RequestContext(request))
+new = login_required(new)
 
-@login_required
-def edit(request, id):
+def edit(request, id, form_class=BlogForm, template_name="blog/edit.html"):
     post = get_object_or_404(Post, id=id)
 
     if request.method == "POST":
@@ -109,7 +107,7 @@ def edit(request, id):
             request.user.message_set.create(message="You can't edit posts that aren't yours")
             return HttpResponseRedirect(reverse("blog_list_yours"))
         if request.POST["action"] == "update":
-            blog_form = BlogForm(request.user, request.POST, instance=post)
+            blog_form = form_class(request.user, request.POST, instance=post)
             if blog_form.is_valid():
                 blog = blog_form.save(commit=False)
                 blog.save()
@@ -121,12 +119,12 @@ def edit(request, id):
                 
                 return HttpResponseRedirect(reverse("blog_list_yours"))
         else:
-            blog_form = BlogForm(instance=post)
-
+            blog_form = form_class(instance=post)
     else:
-        blog_form = BlogForm(instance=post)
+        blog_form = form_class(instance=post)
 
-    return render_to_response("blog/edit.html", {
+    return render_to_response(template_name, {
         "blog_form": blog_form,
         "post": post,
     }, context_instance=RequestContext(request))
+edit = login_required(edit)

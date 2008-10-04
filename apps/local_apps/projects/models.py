@@ -53,9 +53,9 @@ class Project(models.Model):
     def __unicode__(self):
         return self.name
     
-    @models.permalink
     def get_absolute_url(self):
         return ("project_detail", [self.slug])
+    get_absolute_url = models.permalink(get_absolute_url)
 
 
 class ProjectMember(models.Model):
@@ -85,9 +85,9 @@ class Topic(models.Model):
     def __unicode__(self):
         return self.title
     
-    @models.permalink
     def get_absolute_url(self):
         return ("project_topic", [self.pk])
+    get_absolute_url = models.permalink(get_absolute_url)
     
     class Meta:
         ordering = ('-modified', )
@@ -126,9 +126,10 @@ class Task(models.Model):
         self.modified = datetime.now()
         super(Task, self).save(force_insert, force_update)
     
-    @models.permalink
     def get_absolute_url(self):
         return ("project_task", [self.pk])
+    get_absolute_url = models.permalink(get_absolute_url)
+    
 
 from threadedcomments.models import ThreadedComment
 def new_comment(sender, instance, **kwargs):
