@@ -1,16 +1,17 @@
+{% load things_tags %}
 <p>Order by:
     {% for f in fields %}
         {% ifequal f field %}
             {% if descending %}
-                <a href="{{ f.full_url_asc }}">{{ f.verbose_name_asc }} &uarr;</a>
+                <a href="{{ f.full_url_asc }}{% persist_getvars request %}">{{ f.verbose_name_asc }} &uarr;</a>
             {% else %}
-                <a href="{{ f.full_url_desc }}">{{ f.verbose_name_desc }} &darr;</a>
+                <a href="{{ f.full_url_desc }}{% persist_getvars request %}">{{ f.verbose_name_desc }} &darr;</a>
             {% endif %}
         {% else %}
             {% if f.default_sort_descending %}
-                <a href="{{ f.full_url_desc }}">{{ f.verbose_name_desc }}</a>
+                <a href="{{ f.full_url_desc }}{% persist_getvars request %}">{{ f.verbose_name_desc }}</a>
             {% else %}
-                <a href="{{ f.full_url_asc }}">{{ f.verbose_name_asc }}</a>
+                <a href="{{ f.full_url_asc }}{% persist_getvars request %}">{{ f.verbose_name_asc }}</a>
             {% endif %}
         {% endifequal %}
     {% endfor %}
