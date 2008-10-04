@@ -24,7 +24,9 @@ def login(request, form_class=LoginForm, template_name="account/login.html"):
     }, context_instance=RequestContext(request))
 
 def signup(request, form_class=SignupForm,
-        template_name="account/signup.html", success_url=reverse("what_next")):
+        template_name="account/signup.html", success_url=None):
+    if success_url is None:
+        success_url = reverse("what_next")
     if request.method == "POST":
         form = form_class(request.POST)
         if form.is_valid():
