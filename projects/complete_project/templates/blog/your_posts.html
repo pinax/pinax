@@ -1,7 +1,7 @@
 {% extends "blog/base.html" %}
 
 {% load i18n %}
-{% load wiki %}
+{% load blog %}
 {% load markup %}
 {% load switchcase %}
 {% load tagging_tags %}
@@ -31,12 +31,12 @@
                         {% with post.tease|truncatewords:"50" as body %}
                             {% if post.markup %}
                                 {% switch post.markup %}
-                                    {% case 'rst' %}{{ body|restructuredtext|wikiwords|safe }}{% endcase %}
-                                    {% case 'mrk' %}{{ body|force_escape|markdown|wikiwords }}{% endcase %}
-                                    {% case 'txl' %}{{ body|force_escape|textile|wikiwords }}{% endcase %}
+                                    {% case 'rst' %}{{ body|restructuredtext|safe }}{% endcase %}
+                                    {% case 'mrk' %}{{ body|force_escape|markdown }}{% endcase %}
+                                    {% case 'txl' %}{{ body|force_escape|textile }}{% endcase %}
                                 {% endswitch %}
                             {% else %}
-                                {{ body|force_escape|wikiwords|linebreaks|safe }}
+                                {{ body|force_escape|linebreaks|safe }}
                             {% endif %}
                         {% endwith %}
                     </td>
