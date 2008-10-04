@@ -27,7 +27,7 @@
         <a href="#" onclick="$('#embed-code').toggle(); return false;">{% trans "Get Embed Code" %}</a>
              <div id="embed-code" style="display: none;">
                 <textarea>
-                    <a href="{{ host }}/photos/details/{{ photo.id }}"><img src="{{ host }}/{{ photo.get_display_url }}" alt="{{ photo.title }}"/></a>
+                    <a href="{{ host }}/photos/details/{{ photo.id }}"><img src="{{ host }}/{{ photo_url }}" alt="{{ photo.title }}"/></a>
                 </textarea>
             </div>
         </div>

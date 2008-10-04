@@ -52,6 +52,7 @@ def details(request, id):
     tribes = Tribe.objects.filter(members=request.user)
     projects = Project.objects.filter(members__user=request.user)
     photo = get_object_or_404(Photos, id=id)
+    photo_url = photo.get_display_url()
     
     # Build a list of tribes and the photos from the pool
     t = []
@@ -149,6 +150,7 @@ def details(request, id):
     return render_to_response("photos/details.html", {
                       "host": host, 
                       "photo": photo,
+                      "photo_url": photo_url,
                       "is_me": is_me, 
                       "other_user": other_user, 
                       "projects": p,
