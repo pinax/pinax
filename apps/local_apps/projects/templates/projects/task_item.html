@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load extra_tagging_tags %}
 {% load gravatar %}
 {% load shorttimesince_tag %}
@@ -7,28 +8,28 @@
     <div class="task-meta">
         {% if task.assignee %}
             <div class="avatar">{% gravatar task.assignee 40 %}</div>
-            <div class="details"><b>Assignee</b>: <a href="{% url profiles.views.profile task.assignee.username %}">{{ task.assignee }}</a></div>
+            <div class="details"><b>{% trans "Assignee" %}</b>: <a href="{{ task.assignee.get_profile.get_absolute_url }}">{{ task.assignee }}</a></div>
         {% else %}
-            <span class="warning">Unassigned</span>
+            <span class="warning">{% trans "Unassigned" %}</span>
         {% endif %}
-        <div><b>State</b>: {{ task.get_state_display }}</div>
-        <div><b>Creator</b>: <a href="{% url profiles.views.profile task.creator.username %}">{{ task.creator }}</a></div>
-        <div><b>Created</b>: {{ task.created|date }}</div>
-        <div><b>Modified</b>: {{ task.modified|shorttimesince }} ago</div>
+        <div><b>{% trans "State" %}</b>: {{ task.get_state_display }}</div>
+        <div><b>{% trans "Creator" %}</b>: <a href="{{ task.creator.get_profile.get_absolute_url }}">{{ task.creator }}</a></div>
+        <div><b>{% trans "Created" %}</b>: {{ task.created|date }}</div>
+        <div><b>{% trans "Modified" %}</b>: {{ task.modified|shorttimesince }} ago</div>
     </div>
     <div class="bulk">
-        <h2 class="task_{{ task.get_state_display }}"><a href="{% url project_task task.id %}">{{ task.summary }}</a></h2>
+        <h2 class="task_{{ task.get_state_display }}"><a href="{{ task.get_absolute_url }}">{{ task.summary }}</a></h2>
         <div class="body">{{ task.detail|urlize|linebreaks }}</div>
         <div class="task-meta2">
             {% get_comment_count for task as comment_count %}
             {% if comment_count %}
                 {{ comment_count }} comment{{ comment_count|pluralize }};
             {% endif %}
-            <b>Status</b>: 
+            <b>{% trans "Status" %}</b>: 
             {% if task.status %}
                 {{ task.status }}
             {% else %}
-                none
+                {% trans "none" %}
             {% endif %}
         </div>
         <p>{% show_tags_for task %}</p>
