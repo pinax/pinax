@@ -1,14 +1,11 @@
 from django.db import models
-from django.conf import settings
 from django.contrib.auth.models import User
 from photologue.models import *
 from datetime import datetime
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 
-
 from tagging.fields import TagField
-from tagging.models import Tag
 
 from django.utils.translation import ugettext_lazy as _
 
@@ -46,7 +43,6 @@ class Photos(ImageModel):
 
     def __unicode__(self):
         return self.title
-    
 
 class Pool(models.Model):
     """

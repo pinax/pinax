@@ -11,11 +11,10 @@ from friends_app.forms import ImportVCardForm
 from account.forms import SignupForm
 from friends.importer import import_yahoo, import_google
 
-
 # @@@ if made more generic these could be moved to django-friends proper
 
-@login_required
-def friends(request):
+def friends(request, form_class=JoinRequestForm,
+        template_name="friends_app/invitations.html"):
     if request.method == "POST":
         if request.POST["action"] == "accept":
             invitation_id = request.POST["invitation"]
@@ -26,51 +25,52 @@ def friends(request):
                     request.user.message_set.create(message=_("Accepted friendship request from %(from_user)s") % {'from_user': invitation.from_user})
             except FriendshipInvitation.DoesNotExist:
                 pass
-            join_request_form = JoinRequestForm()
+            join_request_form = form_class()
         elif request.POST["action"] == "invite": # invite to join
-            join_request_form = JoinRequestForm(request.POST)
+            join_request_form = form_class(request.POST)
             if join_request_form.is_valid():
                 join_request_form.save(request.user)
-                join_request_form = JoinRequestForm() # @@@
+                join_request_form = form_class() # @@@
     else:
-        join_request_form = JoinRequestForm()
+        join_request_form = form_class()
     
     invites_received = request.user.invitations_to.all().order_by("-sent")
     invites_sent = request.user.invitations_from.all().order_by("-sent")
     joins_sent = request.user.join_from.all().order_by("-sent")
     
-    return render_to_response("friends_app/invitations.html", {
+    return render_to_response(template_name, {
         "join_request_form": join_request_form,
         "invites_received": invites_received,
         "invites_sent": invites_sent,
         "joins_sent": joins_sent,
     }, context_instance=RequestContext(request))
+friends = login_required(friends)
 
-
-def accept_join(request, confirmation_key):
+def accept_join(request, confirmation_key, form_class=SignupForm,
+        template_name="account/signup.html"):
     join_invitation = get_object_or_404(JoinInvitation, confirmation_key = confirmation_key.lower())
     if request.user.is_authenticated():
         return render_to_response("account/signup.html", {
             "contact_email": settings.CONTACT_EMAIL,
         }, context_instance=RequestContext(request))
     else:
-        form = SignupForm(initial={"email": join_invitation.contact.email, "confirmation_key": join_invitation.confirmation_key })
-        return render_to_response("account/signup.html", {
+        form = form_class(initial={"email": join_invitation.contact.email, "confirmation_key": join_invitation.confirmation_key })
+        return render_to_response(template_name, {
             "form": form,
             "contact_email": settings.CONTACT_EMAIL,
         }, context_instance=RequestContext(request))
 
-@login_required
-def contacts(request):
+def contacts(request, form_class=ImportVCardForm,
+        template_name="friends_app/contacts.html"):
     if request.method == "POST":
         if request.POST["action"] == "upload_vcard":
-            import_vcard_form = ImportVCardForm(request.POST, request.FILES)
+            import_vcard_form = form_class(request.POST, request.FILES)
             if import_vcard_form.is_valid():
                 imported, total = import_vcard_form.save(request.user)
                 request.user.message_set.create(message=_("%(total)s vCards found, %(imported)s contacts imported.") % {'imported': imported, 'total': total})
                 import_vcard_form = ImportVCardForm()
         else:
-            import_vcard_form = ImportVCardForm()
+            import_vcard_form = form_class()
             if request.POST["action"] == "import_yahoo":
                 bbauth_token = request.session.get('bbauth_token')
                 del request.session['bbauth_token']
@@ -84,16 +84,15 @@ def contacts(request):
                     imported, total = import_google(authsub_token, request.user)
                     request.user.message_set.create(message=_("%(total)s people with email found, %(imported)s contacts imported.") % {'imported': imported, 'total': total})
     else:
-        import_vcard_form = ImportVCardForm()
+        import_vcard_form = form_class()
     
-    return render_to_response("friends_app/contacts.html", {
+    return render_to_response(template_name, {
         "import_vcard_form": import_vcard_form,
         "bbauth_token": request.session.get('bbauth_token'),
         "authsub_token": request.session.get('authsub_token'),
     }, context_instance=RequestContext(request))
+contacts = login_required(contacts)
 
-
-@login_required
 def friends_objects(request, template_name, friends_objects_function, extra_context={}):
     """
     Display friends' objects.
@@ -117,3 +116,4 @@ def friends_objects(request, template_name, friends_objects_function, extra_cont
         dictionary[name] = func(request)
     
     return render_to_response(template_name, dictionary, context_instance=RequestContext(request))
+friends_objects = login_required(friends_objects)

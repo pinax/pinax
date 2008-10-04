@@ -3,7 +3,8 @@ from arcade.models import Game, ArcadeCategory
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 
-def game_list(request, sort="most-played", category=None):
+def game_list(request, sort="most-played", category=None,
+        template_name='games/game_list.html'):
     cats = ArcadeCategory.objects.all()
     cats = [(c, c.game_set.filter(downloaded=True).count()) for c in cats]
     games = Game.objects.filter(downloaded=True)
@@ -16,30 +17,24 @@ def game_list(request, sort="most-played", category=None):
         games = games.order_by('name')
     elif sort == 'newest':
         games = games.order_by('-created')
-    context = {
+    return render_to_response(template_name, {
         'games': games,
         'sort': sort,
         'category': category,
         'categories': cats,
-    }
-    return render_to_response('games/game_list.html',
-        context, context_instance=RequestContext(request))
+    }, context_instance=RequestContext(request))
 
-def categories(request):
+def categories(request, template_name='games/category_list.html'):
     cats = ArcadeCategory.objects.all()
     cats = [(c, c.game_set.filter(downloaded=True).count()) for c in cats]
-    context = {
+    return render_to_response(template_name, {
         'categories': cats,
-    }
-    return render_to_response('games/category_list.html',
-        context, context_instance=RequestContext(request))
+    }, context_instance=RequestContext(request))
 
-def game_detail(request, slug=''):
+def game_detail(request, slug='', template_name='games/game_detail.html'):
     game = get_object_or_404(Game, slug=slug.lower())
     if request.META.get('HTTP_REFERER', '') != request.path:
         game.add_play()
-    context = {
+    return render_to_response(template_name, {
         'game': game,
-    }
-    return render_to_response('games/game_detail.html',
-        context, context_instance=RequestContext(request))
+    }, context_instance=RequestContext(request))

@@ -1,28 +1,26 @@
 from django.shortcuts import render_to_response, get_object_or_404
-from django.http import HttpResponseRedirect, Http404, get_host
+from django.http import HttpResponseRedirect, get_host
 from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from django.views.generic import date_based
-from django.conf import settings
-from photologue.utils import EXIF
+
 from photologue.models import *
+from photos.models import Photos
+from photos.forms import PhotoUploadForm, PhotoEditForm
+from projects.models import Project
+from tribes.models import Tribe
 
-from photos.models import *
-from photos.forms import *
-from projects.models import *
-from tribes.models import *
-import datetime
-
-@login_required
-def upload(request):
-    """upload form for photos"""
-    photo_form = PhotoUploadForm()
+def upload(request, form_class=PhotoUploadForm,
+        template_name="photos/upload.html"):
+    """
+    upload form for photos
+    """
+    photo_form = form_class()
     if request.method == 'POST':
         if request.POST["action"] == "upload":
-            photo_form = PhotoUploadForm(request.user, request.POST, request.FILES)
+            photo_form = form_class(request.user, request.POST, request.FILES)
             if photo_form.is_valid():
                 photo = photo_form.save(commit=False)
                 photo.member = request.user
@@ -30,24 +28,35 @@ def upload(request):
                 request.user.message_set.create(message=_("Successfully uploaded photo '%s'") % photo.title)
                 return HttpResponseRedirect(reverse('details', args=(photo.id,)))
 
-    return render_to_response("photos/upload.html", {"photo_form": photo_form}, context_instance=RequestContext(request))
+    return render_to_response(template_name, {
+        "photo_form": photo_form,
+    }, context_instance=RequestContext(request))
+upload = login_required(upload)
 
-@login_required
-def yourphotos(request):
-    '''photos for the currently authenticated user'''
-    user = request.user
-    photos = Photos.objects.filter(member=user).order_by("-date_added")
-    return render_to_response("photos/yourphotos.html", {"photos": photos}, context_instance=RequestContext(request))
+def yourphotos(request, template_name="photos/yourphotos.html"):
+    """
+    photos for the currently authenticated user
+    """
+    photos = Photos.objects.filter(member=request.user).order_by("-date_added")
+    return render_to_response(template_name, {
+        "photos": photos,
+    }, context_instance=RequestContext(request))
+yourphotos = login_required(yourphotos)
 
-@login_required    
-def photos(request):
-    '''latest photos'''
+def photos(request, template_name="photos/latest.html"):
+    """
+    latest photos
+    """
     photos = Photos.objects.filter(is_public=True).order_by("-date_added")
-    return render_to_response("photos/latest.html", {"photos": photos}, context_instance=RequestContext(request))
+    return render_to_response(template_name, {
+        "photos": photos,
+    }, context_instance=RequestContext(request))
+photos = login_required(photos)
 
-@login_required
-def details(request, id):
-    '''show the photo details'''
+def details(request, id, template_name="photos/details.html"):
+    """
+    show the photo details
+    """
     other_user = get_object_or_404(User, username=request.user.username)
     tribes = Tribe.objects.filter(members=request.user)
     projects = Project.objects.filter(members__user=request.user)
@@ -82,7 +91,7 @@ def details(request, id):
     else:
         is_me = False
     # TODO: check for authorized user and catch errors
-    if photo.member == request.user:
+    if is_me:
         if request.method == "POST" and request.POST["action"] == "add_to_project":
             projectid = request.POST["project"]
             myproject = Project.objects.get(pk=projectid)
@@ -144,38 +153,39 @@ def details(request, id):
 
                 return HttpResponseRedirect(reverse('details', args=(photo.id,)))
 
+    return render_to_response(template_name, {
+        "host": host, 
+        "photo": photo,
+        "photo_url": photo_url,
+        "is_me": is_me, 
+        "other_user": other_user, 
+        "projects": p,
+        "tribes": t,
+    }, context_instance=RequestContext(request))
+details = login_required(details)
 
-
-
-    return render_to_response("photos/details.html", {
-                      "host": host, 
-                      "photo": photo,
-                      "photo_url": photo_url,
-                      "is_me": is_me, 
-                      "other_user": other_user, 
-                      "projects": p,
-                      "tribes": t
-                      }, context_instance=RequestContext(request))
-    
-@login_required
-def memberphotos(request, username):
-    '''Get the members photos and display them'''
+def memberphotos(request, username, template_name="photos/memberphotos.html"):
+    """
+    Get the members photos and display them
+    """
     user = get_object_or_404(User, username=username)
-    photos = Photos.objects.filter(member__username=username,is_public=True).order_by("-date_added")
-    return render_to_response("photos/memberphotos.html", {"photos": photos}, context_instance=RequestContext(request))
+    photos = Photos.objects.filter(member__username=username, is_public=True).order_by("-date_added")
+    return render_to_response(template_name, {
+        "photos": photos,
+    }, context_instance=RequestContext(request))
+memberphotos = login_required(memberphotos)
 
-@login_required
-def edit(request, id):
+def edit(request, id, form_class=PhotoEditForm,
+        template_name="photos/edit.html"):
     photo = get_object_or_404(Photos, id=id)
     photo_url = photo.get_display_url()
-
 
     if request.method == "POST":
         if photo.member != request.user:
             request.user.message_set.create(message="You can't edit photos that aren't yours")
             return HttpResponseRedirect(reverse('details', args=(photo.id,)))
         if request.POST["action"] == "update":
-            photo_form = PhotoEditForm(request.user, request.POST, instance=photo)
+            photo_form = form_class(request.user, request.POST, instance=photo)
             if photo_form.is_valid():
                 photoobj = photo_form.save(commit=False)
                 photoobj.save()
@@ -183,29 +193,27 @@ def edit(request, id):
                                 
                 return HttpResponseRedirect(reverse('details', args=(photo.id,)))
         else:
-            photo_form = PhotoEditForm(instance=photo)
+            photo_form = form_class(instance=photo)
 
     else:
-        photo_form = PhotoEditForm(instance=photo)
+        photo_form = form_class(instance=photo)
 
-    return render_to_response("photos/edit.html", {
+    return render_to_response(template_name, {
         "photo_form": photo_form,
         "photo": photo,
         "photo_url": photo_url,
     }, context_instance=RequestContext(request))
+edit = login_required(edit)
 
-@login_required
 def destroy(request, id):
     photo = Photos.objects.get(pk=id)
-    user = request.user
     title = photo.title
     if photo.member != request.user:
-            request.user.message_set.create(message="You can't delete photos that aren't yours")
-            return HttpResponseRedirect(reverse("photos_yours"))
+        request.user.message_set.create(message="You can't delete photos that aren't yours")
+        return HttpResponseRedirect(reverse("photos_yours"))
 
     if request.method == "POST" and request.POST["action"] == "delete":
         photo.delete()
         request.user.message_set.create(message=_("Successfully deleted photo '%s'") % title)
-        return HttpResponseRedirect(reverse("photos_yours"))
-    else:
-        return HttpResponseRedirect(reverse("photos_yours"))
+    return HttpResponseRedirect(reverse("photos_yours"))
+destroy = login_required(destroy)
