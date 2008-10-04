@@ -1,0 +1,14 @@
+{% load blog %}
+{% load markup %}
+{% load switchcase %}
+{% load restructuredtext %}
+{% load creole %}
+
+{% switch markup %}
+    {% case 'crl' %} {{ content|creole|safe }} {% endcase %}
+    {% case 'rst' %} {{ content|restructuredtext|safe }} {% endcase %}
+    {% case 'mrk' %} {{ content|force_escape|markdown }} {% endcase %}
+    {% case 'txl' %} {{ content|force_escape|textile }} {% endcase %}
+    {% case '' %} {{ content|force_escape|linebreaks|safe }} {% endcase %}
+{% endswitch %}
+
