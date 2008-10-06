@@ -6,11 +6,9 @@
 {% block head_title %}{% blocktrans %}Games{% endblocktrans %} : {% blocktrans %}Categories{% endblocktrans %}{% endblock %}
 
 {% block body %}
-    {% autopaginate categories %}
     <ul>
-    {% for category, game_count in categories %}
-        <li><a href="{% url games_category category.slug %}">{{ category.name }} ({{ game_count }} {% trans "Game" %}{{ game_count|pluralize }})</a></li>
+    {% for group in groups %}
+        <li><a href="{{ group.url }}">{{ group.name }} ({{ group.queryset.count }} {% trans "Game" %}{{ group.queryset.count|pluralize }})</a></li>
     {% endfor %}
     </ul>
-    {% paginate %}
 {% endblock %}

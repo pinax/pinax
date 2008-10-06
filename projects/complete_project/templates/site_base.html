@@ -42,7 +42,7 @@
             <tr>
                 <td class="tab rtab_profile"><div><a href="{% url profiles.views.profile user %}">{% trans "Profile" %}</a></div></td>
                 <td class="tab rtab_photos"><div><a href="{% url photos.views.photos %}">{% trans "Photos" %}</a></div></td>
-                <td class="tab rtab_games"><div><a href="{% url games_index %}">{% trans "Games" %}</a></div></td>
+                <td class="tab rtab_games"><div><a href="{% url games_list "all/" %}">{% trans "Games" %}</a></div></td>
                 <td class="tab rtab_blogs"><div><a href="{% url blog.views.blogs %}">{% trans "Blogs" %}</a></div></td>
                 <td class="tab rtab_projects"><div><a href="{% url project_thing_list "" %}">{% trans "Projects" %}</a></div></td>
                 <td class="tab rtab_tribes"><div><a href="{% url tribe_thing_list "" %}">{% trans "Tribes" %}</a></div></td>

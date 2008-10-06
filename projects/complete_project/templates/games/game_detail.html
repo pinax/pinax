@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load comments_tag %}
+{% load things_tags %}
 
 {% block head_title %}{% blocktrans %}Game{% endblocktrans %} : {{ game.name }}{% endblock %}
 
@@ -10,7 +11,7 @@
     <p><b>{% trans "By" %}:</b> {{ game.author }}</p>
     <p>
         <b>{% trans "Categories" %}:</b> 
-        {% for cat in game.categories.all %}<a href="{% url games_category cat.slug %}">{{ cat.name }}</a> {% endfor %}
+        {% for cat in game.categories.all %}<a href="{% urlslash games_list cat.slug %}">{{ cat.name }}</a> {% endfor %}
     </p>
     <embed src="{{ game.get_swf_url }}" width="{{ game.width }}" height="{{ game.height }}"></embed>
     <p><b>Description:</b> {{ game.description }}</p>

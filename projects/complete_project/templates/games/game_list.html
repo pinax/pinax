@@ -2,51 +2,22 @@
 
 {% load i18n %}
 {% load pagination_tags %}
+{% load things_tags %}
 
 {% block head_title %}{% blocktrans %}Games{% endblocktrans %}{% endblock %}
 
 {% block body %}
-    {% if category %}
-        <h1>{% trans "Games for Category" %}: {{ category.name }}</h1>
-    {% else %}
+    {% ifequal group_name "All" %}
         <h1>{% trans "All Games" %}</h1>
-    {% endif %}
-    <p>{% trans "Sort by:" %}
-        {% ifequal sort "most-played" %}
-            <b>{% trans "Most Played" %}</b>
-        {% else %}
-            {% if category %}
-                <a href="{% url games_category_list category.slug,"most-played" %}">{% trans "Most Played" %}</a>
-            {% else %}
-                <a href="{% url games_list "most-played" %}">{% trans "Most Played" %}</a>
-            {% endif %}
-        {% endifequal %}
-        {% trans "or" %}
-        {% ifequal sort "newest" %}
-            <b>{% trans "Newest" %}</b>
-        {% else %}
-            {% if category %}
-                <a href="{% url games_category_list category.slug,"newest" %}">{% trans "Newest" %}</a>
-            {% else %}
-                <a href="{% url games_list "newest" %}">{% trans "Newest" %}</a>
-            {% endif %}
-        {% endifequal %}
-        {% trans "or" %}
-        {% ifequal sort "alphabetical" %}
-            <b>{% trans "Alphabetical" %}</b>
-        {% else %}
-            {% if category %}
-                <a href="{% url games_category_list category.slug,"alphabetical" %}">{% trans "Alphabetical" %}</a>
-            {% else %}
-                <a href="{% url games_list "alphabetical" %}">{% trans "Alphabetical" %}</a>
-            {% endif %}
-        {% endifequal%}
-    </p>
-    {% autopaginate games 24 %}
-    {% for game in games %}
+    {% else %}
+        <h1>{% trans "Games for Category" %}: {{ group_name }}</h1>
+    {% endifequal %}
+    {% autopaginate objects 24 %}
+    {% display_ordering %}
+    {% for game in objects %}
         <div class="game_item">
-            <a href="{% url games_detail game.slug %}" title="{{ game.name }}: {{ game.description }}"><img src="{{ game.get_thumbnail_url }}" /></a>
-            <span class="game_name"><b><a href="{% url games_detail game.slug %}">{{ game.name }}</a></b></span>
+            <a href="{{ game.get_absolute_url }}" title="{{ game.name }}: {{ game.description }}"><img src="{{ game.get_thumbnail_url }}" /></a>
+            <span class="game_name"><b><a href="{{ game.get_absolute_url }}">{{ game.name }}</a></b></span>
             <span class="game_plays">{{ game.game_plays }} Plays</span>
         </div>
     {% endfor %}
