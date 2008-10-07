@@ -25,8 +25,8 @@ def tags(request, tag, template_name='tags/index.html'):
     project_topic_tags = TaggedItem.objects.get_by_model(ProjectTopic, tag).filter(project__deleted=False)
     project_task_tags = TaggedItem.objects.get_by_model(Task, tag).filter(project__deleted=False)
     
-    tribe_tags = TaggedItem.objects.get_by_model(Tribe, tag)
-    tribe_topic_tags = TaggedItem.objects.get_by_model(TribeTopic, tag)
+    tribe_tags = TaggedItem.objects.get_by_model(Tribe, tag).filter(deleted=False)
+    tribe_topic_tags = TaggedItem.objects.get_by_model(TribeTopic, tag).filter(tribe__deleted=False)
     
     # @@@ TODO: tribe_wiki_article_tags and project_wiki_article_tags
     wiki_article_tags = TaggedItem.objects.get_by_model(WikiArticle, tag)

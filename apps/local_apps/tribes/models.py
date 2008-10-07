@@ -30,6 +30,8 @@ class Tribe(models.Model):
     description = models.TextField(_('description'))
     members = models.ManyToManyField(User, verbose_name=_('members'))
     
+    deleted = models.BooleanField(_('deleted'), default=False)
+    
     tags = TagField()
     
     photos = generic.GenericRelation(Pool)

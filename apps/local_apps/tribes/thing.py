@@ -1,7 +1,7 @@
 import things
 from django.db import connection
 
-class TribeThing(things.ModelThing):
+class TribeThing(things.Thing):
     created = things.OrderField(
         verbose_name_asc='Age', 
         verbose_name_desc='Age', 

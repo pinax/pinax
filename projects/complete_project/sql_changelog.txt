@@ -99,6 +99,7 @@ ALTER TABLE oembed_storedoembed ALTER COLUMN match TYPE text;
 ALTER TABLE notification_notice ADD COLUMN on_site BOOLEAN NOT NULL DEFAULT 't';
 
 
-## add 'deleted' column to project
+## add 'deleted' column to project and tribe
 
 ALTER TABLE projects_project ADD COLUMN "deleted" bool NOT NULL default False;
+ALTER TABLE tribes_tribe ADD COLUMN "deleted" bool NOT NULL default False;

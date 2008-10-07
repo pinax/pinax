@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
-from django.http import HttpResponseRedirect, HttpResponse, HttpResponseForbidden
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponseForbidden, Http404
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -65,13 +65,17 @@ def create(request, form_class=TribeForm, template_name="tribes/create.html"):
 
 def your_tribes(request, template_name="tribes/your_tribes.html"):
     return render_to_response(template_name, {
-        "tribes": Tribe.objects.filter(members=request.user).order_by("name"),
+        "tribes": Tribe.objects.filter(deleted=False, members=request.user).order_by("name"),
     }, context_instance=RequestContext(request))
 your_tribes = login_required(your_tribes)
 
 def tribe(request, slug, form_class=TribeUpdateForm,
         template_name="tribes/tribe.html"):
     tribe = get_object_or_404(Tribe, slug=slug)
+    
+    if tribe.deleted:
+        raise Http404
+    
     photos = tribe.photos.all()
     
     if request.user.is_authenticated() and request.method == "POST":
@@ -123,6 +127,9 @@ def topics(request, slug, form_class=TopicForm,
         template_name="tribes/topics.html"):
     tribe = get_object_or_404(Tribe, slug=slug)
     
+    if tribe.deleted:
+        raise Http404
+    
     are_member = False
     if request.user.is_authenticated():
         are_member = request.user in tribe.members.all()
@@ -147,7 +154,7 @@ def topics(request, slug, form_class=TopicForm,
             return HttpResponseForbidden()
     else:
         topic_form = form_class()
-
+    
     return render_to_response(template_name, {
         "tribe": tribe,
         "topic_form": topic_form,
@@ -156,6 +163,10 @@ def topics(request, slug, form_class=TopicForm,
 
 def topic(request, id, edit=False, template_name="tribes/topic.html"):
     topic = get_object_or_404(Topic, id=id)
+    
+    if topic.tribe.deleted:
+        raise Http404
+    
     if request.method == "POST" and edit == True and \
         (request.user == topic.creator or request.user == topic.tribe.creator):
         topic.body = request.POST["body"]
@@ -168,10 +179,14 @@ def topic(request, id, edit=False, template_name="tribes/topic.html"):
 
 def topic_delete(request, pk):
     topic = Topic.objects.get(pk=pk)
+    
+    if topic.tribe.deleted:
+        raise Http404
+    
     if request.method == "POST" and (request.user == topic.creator or \
         request.user == topic.tribe.creator): 
         if forums:
             ThreadedComment.objects.all_for_object(topic).delete()
         topic.delete()
-
+    
     return HttpResponseRedirect(request.POST["next"])
