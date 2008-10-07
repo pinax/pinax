@@ -9,7 +9,7 @@ pt = ProjectThing(Project.objects.filter(deleted=False))
 
 wiki_args = {
     'group_slug_field': 'slug',
-    'group_qs': Project.objects.all(),
+    'group_qs': Project.objects.filter(deleted=False),
     'is_member': (lambda user, group: group.has_member(user)),
     'is_private': (lambda group: group.private),
 }
