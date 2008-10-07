@@ -33,6 +33,8 @@ class Project(models.Model):
     
     member_users = models.ManyToManyField(User, through="ProjectMember", verbose_name=_('members'))
     
+    deleted = models.BooleanField(_('deleted'), default=False)
+    
     # private means only members can see the project
     private = models.BooleanField(_('private'), default=False)
     

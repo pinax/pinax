@@ -1,6 +1,6 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -60,14 +60,18 @@ def create(request, form_class=ProjectForm,
 
 def your_projects(request, template_name="projects/your_projects.html"):
     return render_to_response(template_name, {
-        "projects": Project.objects.filter(members__user=request.user).order_by("name"),
+        "projects": Project.objects.filter(deleted=False, members__user=request.user).order_by("name"),
     }, context_instance=RequestContext(request))
 your_projects = login_required(your_projects)
 
 def project(request, slug, template_name="projects/project.html"):
     project = get_object_or_404(Project, slug=slug)
+    
+    if project.deleted:
+        raise Http404
+    
     photos = project.photos.all()
-
+    
     if request.user.is_authenticated() and request.method == "POST" and request.user == project.creator:
         if request.POST["action"] == "update":
             adduser_form = AddUserForm(project=project)
@@ -86,14 +90,14 @@ def project(request, slug, template_name="projects/project.html"):
     else:
         adduser_form = AddUserForm(project=project)
         project_form = ProjectUpdateForm(instance=project)
-
+    
     topics = project.topics.all()[:5]
     articles = Article.objects.filter(
         content_type=get_ct(project),
         object_id=project.id).order_by('-last_update')
     total_articles = articles.count()
     articles = articles[:5]
-
+    
     total_tasks = project.tasks.count()
     tasks = project.tasks.order_by("-modified")[:10]
 
@@ -117,8 +121,12 @@ def project(request, slug, template_name="projects/project.html"):
 def topics(request, slug, form_class=TopicForm,
         template_name="projects/topics.html"):
     project = get_object_or_404(Project, slug=slug)
+    
+    if project.deleted:
+        raise Http404
+    
     is_member = project.has_member(request.user)
-
+    
     if request.method == "POST":
         if is_member:
             topic_form = form_class(request.POST)
@@ -145,6 +153,10 @@ def topics(request, slug, form_class=TopicForm,
 
 def topic(request, id, template_name="projects/topic.html"):
     topic = get_object_or_404(Topic, id=id)
+    
+    if topic.project.deleted:
+        raise Http404
+    
     return render_to_response(template_name, {
         'topic': topic,
     }, context_instance=RequestContext(request))
@@ -152,6 +164,10 @@ def topic(request, id, template_name="projects/topic.html"):
 def tasks(request, slug, form_class=TaskForm,
         template_name="projects/tasks.html"):
     project = get_object_or_404(Project, slug=slug)
+    
+    if project.deleted:
+        raise Http404
+    
     is_member = project.has_member(request.user)
     
     if request.user.is_authenticated() and request.method == "POST":
@@ -171,10 +187,10 @@ def tasks(request, slug, form_class=TaskForm,
             task_form = form_class(project=project)
     else:
         task_form = form_class(project=project)
-
+    
     group_by = request.GET.get("group_by")
     tasks = project.tasks.all()
-
+    
     return render_to_response(template_name, {
         "project": project,
         "tasks": tasks,
@@ -186,6 +202,10 @@ def tasks(request, slug, form_class=TaskForm,
 def task(request, id, template_name="projects/task.html"):
     task = get_object_or_404(Task, id=id)
     project = task.project
+    
+    if project.deleted:
+        raise Http404
+    
     is_member = project.has_member(request.user)
     
     if is_member and request.method == "POST":
@@ -229,7 +249,7 @@ def task(request, id, template_name="projects/task.html"):
     else:
         assign_form = AssignForm(project, instance=task)
         status_form = StatusForm(instance=task)
-
+    
     return render_to_response(template_name, {
         "task": task,
         "is_member": is_member,
@@ -239,7 +259,7 @@ def task(request, id, template_name="projects/task.html"):
 
 def user_tasks(request, username, template_name="projects/user_tasks.html"):
     other_user = get_object_or_404(User, username=username)
-    tasks = other_user.assigned_project_tasks.order_by("state")
+    tasks = other_user.assigned_project_tasks.filter(project__deleted=False).order_by("state")
 
     return render_to_response(template_name, {
         "tasks": tasks,
@@ -250,6 +270,9 @@ user_tasks = login_required(user_tasks)
 def members_status(request, slug, form_class=AwayForm,
         template_name="projects/members_status.html"):
     project = get_object_or_404(Project, slug=slug)
+    
+    if project.deleted:
+        raise Http404
     
     is_member = project.has_member(request.user)
     try:
@@ -267,13 +290,13 @@ def members_status(request, slug, form_class=AwayForm,
         elif request.POST["action"] == "set_back":
             project_member.away = False
             project_member.save()
-
+    
     if away_form is None:
         away_form = form_class()
-
+    
     active_members = project.members.filter(away=False)
     away_members = project.members.filter(away=True).order_by('away_since')
-
+    
     return render_to_response(template_name, {
         "project": project,
         "is_member": is_member,

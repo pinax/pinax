@@ -20,9 +20,10 @@ def tags(request, tag, template_name='tags/index.html'):
     
     phototags = TaggedItem.objects.get_by_model(Photos, tag)
     bookmarktags = TaggedItem.objects.get_by_model(BookmarkInstance, tag)
-    project_tags = TaggedItem.objects.get_by_model(Project, tag)
-    project_topic_tags = TaggedItem.objects.get_by_model(ProjectTopic, tag)
-    project_task_tags = TaggedItem.objects.get_by_model(Task, tag)
+    
+    project_tags = TaggedItem.objects.get_by_model(Project, tag).filter(deleted=False)
+    project_topic_tags = TaggedItem.objects.get_by_model(ProjectTopic, tag).filter(project__deleted=False)
+    project_task_tags = TaggedItem.objects.get_by_model(Task, tag).filter(project__deleted=False)
     
     tribe_tags = TaggedItem.objects.get_by_model(Tribe, tag)
     tribe_topic_tags = TaggedItem.objects.get_by_model(TribeTopic, tag)

@@ -97,3 +97,8 @@ ALTER TABLE oembed_storedoembed ALTER COLUMN match TYPE text;
 ## add on_site to Notice in notification
 
 ALTER TABLE notification_notice ADD COLUMN on_site BOOLEAN NOT NULL DEFAULT 't';
+
+
+## add 'deleted' column to project
+
+ALTER TABLE projects_project ADD COLUMN "deleted" bool NOT NULL default False;

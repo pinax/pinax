@@ -1,7 +1,7 @@
 import things
 from django.db import connection
 
-class ProjectThing(things.ModelThing):
+class ProjectThing(things.Thing):
     created = things.OrderField(
         verbose_name_asc='Age', 
         verbose_name_desc='Age', 
