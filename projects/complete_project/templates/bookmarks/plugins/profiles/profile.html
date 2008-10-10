@@ -4,7 +4,7 @@
 
 {% if owner.saved_bookmarks.all %}
     <table class="bookmarks narrow">
-        {% for bookmark_instance in owner.saved_bookmarks.all %}
+        {% for bookmark_instance in owner.saved_bookmarks.all.select_related %}
             <tr class="{% cycle odd,even %}">
                 <td class="meta">
                     {{ bookmark_instance.saved|date }}
