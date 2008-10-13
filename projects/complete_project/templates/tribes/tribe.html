@@ -57,6 +57,16 @@
                     <tr><td></td><td><input type="hidden" name="action" value="update" /><input type="submit" value="{% trans 'update' %}"/></td></tr>
                 </table>
             </form>
+            
+            {% ifequal tribe.members.all.count 1 %}
+                <p><img src="/site_media/delete.png" /> <a href="#" onclick="$('#delete_tribe_form').toggle(); return false;">{% trans "Delete tribe" %}</a><p>
+                 <form class="delete_form" id="delete_tribe_form" action="{% url tribe_delete tribe.slug %}" method="POST" style="display: none;">
+                     <input type="submit" value="{% trans "Delete Tribe" %}" /> (all content will be removed)
+                </form>
+            {% else %}
+                <p>You are not the only member of the tribe so you can't delete the tribe.</p>
+            {% endifequal %}
+            
         {% endifequal %}
 
         {% if user.is_authenticated %}
