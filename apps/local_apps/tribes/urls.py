@@ -17,6 +17,7 @@ urlpatterns = \
         url(r'^create/$', 'tribes.views.create', name="tribe_create"),
         url(r'^your_tribes/$', 'tribes.views.your_tribes', name="your_tribes"),
         url(r'^tribe/(\w+)/$', 'tribes.views.tribe', name="tribe_detail"),
+        url(r'^tribe/(\w+)/delete/$', 'tribes.views.delete', name="tribe_delete"),
         
         # topics
         url(r'^tribe/(\w+)/topics/$', 'tribes.views.topics', name="tribe_topics"),

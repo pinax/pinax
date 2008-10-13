@@ -63,6 +63,22 @@ def create(request, form_class=TribeForm, template_name="tribes/create.html"):
         "tribe_form": tribe_form,
     }, context_instance=RequestContext(request))
 
+
+def delete(request, slug, redirect_url=None):
+    tribe = get_object_or_404(Tribe, slug=slug)
+    if not redirect_url:
+        redirect_url = "/tribes/" # @@@ can't use reverse("tribes") -- what is URL name using things?
+    
+    # @@@ eventually, we'll remove restriction that tribe.creator can't leave tribe but we'll still require tribe.members.all().count() == 1
+    if request.user.is_authenticated() and request.method == "POST" and request.user == tribe.creator and tribe.members.all().count() == 1:
+        tribe.deleted = True
+        tribe.save()
+        request.user.message_set.create(message="Tribe %s deleted." % tribe)
+        # @@@ no notification as the deleter must be the only member
+    
+    return HttpResponseRedirect(redirect_url)
+
+
 def your_tribes(request, template_name="tribes/your_tribes.html"):
     return render_to_response(template_name, {
         "tribes": Tribe.objects.filter(deleted=False, members=request.user).order_by("name"),
