@@ -48,9 +48,9 @@ def create(request, form_class=TribeForm, template_name="tribes/create.html"):
                 tribe.save()
                 if notification:
                     # @@@ might be worth having a shortcut for sending to all users
-                    notification.queue(User.objects.all(), "tribes_new_tribe", {"tribe": tribe})
+                    notification.send(User.objects.all(), "tribes_new_tribe", {"tribe": tribe}, queue=True)
                     if friends: # @@@ might be worth having a shortcut for sending to all friends
-                        notification.queue((x['friend'] for x in Friendship.objects.friends_for_user(tribe.creator)), "tribes_friend_tribe", {"tribe": tribe})
+                        notification.send((x['friend'] for x in Friendship.objects.friends_for_user(tribe.creator)), "tribes_friend_tribe", {"tribe": tribe})
                 #return render_to_response("base.html", {
                 #}, context_instance=RequestContext(request))
                 return HttpResponseRedirect(tribe.get_absolute_url())
