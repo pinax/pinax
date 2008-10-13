@@ -30,6 +30,11 @@
                             <div class="body">{{ bookmark_instance.note|linebreaks }}</div>
                         {% endif %}
                         <div class="url">{% if bookmark_instance.bookmark.get_favicon_url %}<img src="{{ bookmark_instance.bookmark.get_favicon_url }}" height="16" width="16"/> {% endif %}{{ bookmark_instance.bookmark.url }}</div>
+                        <form method="POST" action="{% url delete_bookmark_instance bookmark_instance.id %}">
+                            <input type="submit" value="{% trans "Delete Bookmark" %}" />
+                            <input type="hidden" name="next" value="{{ request.path }}" />
+                        </form>
+                        
                     </td>
                 </tr>
             {% endfor %}
