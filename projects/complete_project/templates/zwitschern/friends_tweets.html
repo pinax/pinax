@@ -11,9 +11,10 @@
     
     <p>{% trans "These are tweets from your friends:" %}</p>
     
-    {% autopaginate object_list %}
-    
     {% if object_list %}
+        
+        {% autopaginate object_list %}
+        
         {% for tweet in object_list %}
             <div class="tweet" id="t{{ tweet.id }}">
                 <a name="tweet-{{ tweet.id }}"></a>
