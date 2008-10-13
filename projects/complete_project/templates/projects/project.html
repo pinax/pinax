@@ -59,6 +59,7 @@
                     <tr><td></td><td><input type="hidden" name="action" value="update" /><input type="submit" value="{% trans 'update' %}"/></td></tr>
                 </table>
             </form>
+            
         {% endifequal %}
 
         {% if user.is_authenticated %}
@@ -72,6 +73,10 @@
                                 {{ adduser_form }}
                                 <tr><td></td><td><input type="hidden" name="action" value="add" /><input type="submit" value="{% trans 'add' %}"/></td></tr>
                             </table>
+                        </form>
+                        <p><img src="/site_media/delete.png" /> <a href="#" onclick="$('#delete_project_form').toggle(); return false;">{% trans "Delete project" %}</a><p>
+                         <form class="delete_form" id="delete_project_form" action="{% url project_delete project.slug %}" method="POST" style="display: none;">
+                             <input type="submit" value="{% trans "Delete Project" %}" /> (all content will be removed)
                         </form>
                     {% else %}
                         <p>You are member of this project.</p>
