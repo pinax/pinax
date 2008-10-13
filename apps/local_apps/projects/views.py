@@ -2,6 +2,8 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, Http404
 
+from django.core.urlresolvers import reverse
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
@@ -57,6 +59,22 @@ def create(request, form_class=ProjectForm,
     return render_to_response(template_name, {
         "project_form": project_form,
     }, context_instance=RequestContext(request))
+
+
+def delete(request, slug, redirect_url=None):
+    project = get_object_or_404(Project, slug=slug)
+    if not redirect_url:
+        redirect_url = "/projects/" # @@@ can't use reverse("projects") -- what is URL name using things?
+    
+    if request.user.is_authenticated() and request.method == "POST" and request.user == project.creator:
+        project.deleted = True
+        project.save()
+        request.user.message_set.create(message="Project %s deleted." % project)
+        if notification:
+            notification.send(project.member_users.all(), "projects_deleted", {"project": project})
+    
+    return HttpResponseRedirect(redirect_url)
+
 
 def your_projects(request, template_name="projects/your_projects.html"):
     return render_to_response(template_name, {

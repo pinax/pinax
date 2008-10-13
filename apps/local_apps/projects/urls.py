@@ -20,6 +20,7 @@ urlpatterns = \
         url(r'^create/$', 'projects.views.create', name="project_create"),
         url(r'^your_projects/$', 'projects.views.your_projects', name="your_projects"),
         url(r'^project/(\w+)/$', 'projects.views.project', name="project_detail"),
+        url(r'^project/(\w+)/delete/$', 'projects.views.delete', name="project_delete"),
         url(r'^project/(\w+)/members_status/$', 'projects.views.members_status', name="project_members_status"),
         
         # topics
