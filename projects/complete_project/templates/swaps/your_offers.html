@@ -13,8 +13,6 @@
 {% block head_title %}{% blocktrans %}Your Offers{% endblocktrans %}{% endblock %}
 
 {% block body %}
-    <p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time.</p>
-    
     <h1>{% trans "Your Offers" %}</h1>
     
     
@@ -40,10 +38,15 @@
 						<td>{{ offer.want|urlize }}</td>
 						<td>{{ offer.get_state_display }}</td>
 						<td>
-							{%if offer.swapped_by %}
+							{% if offer.swapped_by %}
 								<a href="{{ offer.swapped_by.get_absolute_url }}">{{ offer.swapped_by }}</a>
 							{% else %}
-								&nbsp;
+                                &nbsp;
+                                {% if offer.proposed_swap %}
+									<a href="{{ offer.proposed_swap.get_absolute_url }}">{{ offer.proposed_swap }}</a>
+								{% else %}
+									&nbsp;
+								{% endif %}
 							{% endif %}
 						</td>
 					</tr>

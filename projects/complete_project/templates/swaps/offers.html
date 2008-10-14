@@ -13,8 +13,44 @@
 {% block head_title %}{% blocktrans %}All Open Offers{% endblocktrans %}{% endblock %}
 
 {% block body %}
-    <p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time.</p>
-    
+
+    <a href="" id="what-toggle">Toggle What is this?</a>
+	<div id="swaps-what" style="display: none; font-size: 90%; " >	
+		<p>
+			A much simpler version of <a href="http://www.swaptree.com" target="_blank" >SwapTree</a>.
+		</p>
+		<p>
+			Trade anything for anything with any member of this social network.
+		</p>
+	</div>
+	<a href="" id="how-toggle">Toggle How does this work?</a>
+	<div id="swaps-how" style="display: none; font-size: 90%; " >	
+		<p>
+			Make an offer (of anything you are willing to give), ask for something you want to take in exchange.  
+			Could be books, CDs, DVDs, games, work, gear, money - anything.
+		</p>
+		<p>
+			Maybe somebody will propose a swap of something of theirs for your offer.  
+			If so, the proposed swap goes into your <b>Proposed to you</b> page and their <b>Proposed by you</b> page.
+		</p>
+		<p>
+			Your offer remains on the <b>Open offers</b> page so you may get other proposals, until you finally accept a swap.  
+			(Their offer is not open; it is bound to their proposal unless you accept the proposed swap, or they cancel their proposal.)
+		</p>
+		<p>
+			You can either accept or reject their proposal.  
+			Or you can discuss it in swap comments, and maybe get them to sweeten their offer.
+		</p>
+		<p>
+			If you accept the proposal, the swap goes into the <b>Accepted swaps</b> page of both participants.  
+			It is up to the participants to deliver on their promises.
+		</p>
+		<p>
+			If you reject the proposal, the swap goes into the <b>Dead swaps</b> page of both participants, 
+			and both offers are returned to the <b>Open offers</b> page.
+		</p>
+	</div>
+
     <h1>{% trans "All Open Offers" %}</h1>
     
     
@@ -62,4 +98,22 @@
         No open offers.
     {% endif %}
     
+{% endblock %}
+
+{% block extra_body %}
+    <script>
+		$(document).ready(function(){
+
+			$('a#what-toggle').click(function() {
+				$('#swaps-what').toggle(400);
+				return false;
+			  });
+
+			$('a#how-toggle').click(function() {
+				$('#swaps-how').toggle(400);
+				return false;
+			  });
+
+		 });
+    </script>
 {% endblock %}

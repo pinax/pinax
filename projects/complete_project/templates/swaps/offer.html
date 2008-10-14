@@ -10,8 +10,6 @@
 
 
 {% block body %}
-    <p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time.</p>
-    
     <div class="blog-post">
         <h2>{{ offer.short_description }}</h2>
         <div class="blog-meta"><p>Offered by: <a href="{% url profiles.views.profile offer.offerer.username %}">{{ offer.offerer.username }}</a> on {{ offer.offered_time|date }}</p></div>
@@ -32,10 +30,21 @@
             {% endfor %}</p>
 			{% if offer.is_changeable %}
 				{% ifequal offer.offerer request.user %}
-					<form action="{% url offer_edit offer.id %}" method="GET">
+					<form style="display: inline;" action="{% url offer_edit offer.id %}" method="GET">
 						<input type="hidden" name="returnto" value="offer_list_yours" />
 						<input type="submit" value="{% trans "Edit Offer" %}" />
-					</form>
+                    </form>
+                    {% if offer.is_deletable %}
+						<form style="display: inline;" action="{% url offer_delete offer.id %}" method="POST">
+							<input type="submit" value="{% trans "Delete Offer" %}" />
+						</form>
+					{% else %}
+						{% if offer.is_cancelable %}
+							<form style="display: inline;" action="{% url offer_cancel offer.id %}" method="POST">
+								<input type="submit" value="{% trans "Cancel Offer" %}" />
+							</form>
+						{% endif %}
+					{% endif %}
 				{% endifequal %}
 			{% endif %}
         </div>
