@@ -5,6 +5,7 @@ from django.utils.encoding import smart_str
 from os.path import abspath
 from os.path import dirname as dn
 from django.utils.version import get_svn_revision
+from django.db.models.loading import get_app
 register = template.Library()
 
 
@@ -27,7 +28,7 @@ def svn_app_version(appname=None, fail_silently=bool(not settings.DEBUG)):
             version = 'SVN-None'
         else:
             try:
-                module = __import__(appname,{},{},[''])
+                module = get_app(appname)
             except:
                 if not fail_silently: raise
                 version = 'SVN-Error'
