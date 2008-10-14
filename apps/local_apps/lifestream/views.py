@@ -12,7 +12,6 @@ import zlib
 import base64
 from zwitschern.utils import twitter_account_for_user, twitter_verify_credentials
 from zwitschern.pownce_utils import pownce_account_for_user, pownce_verify_credentials
-from settings import SECRET_KEY
 
 # from django.contrib.auth.models import User
 
