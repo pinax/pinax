@@ -5,14 +5,14 @@ class GameThing(things.Thing):
     game_plays = things.OrderField(
         verbose_name_asc='Play Count',
         verbose_name_desc='Play Count',
-        url_asc='most-played',
-        url_desc='least-played'
+        url_asc='least-played',
+        url_desc='most-played',
     )
     created = things.OrderField(
         verbose_name_asc='Date Added',
         verbose_name_desc='Date Added',
-        url_asc='newest',
-        url_desc='oldest'
+        url_asc='oldest',
+        url_desc='newest'
     )
     name = things.OrderField(
         verbose_name_asc='Alphabetical',
