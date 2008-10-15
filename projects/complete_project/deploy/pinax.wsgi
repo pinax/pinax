@@ -19,9 +19,7 @@ sys.path.insert(0, abspath(join(dirname(__file__), "../../../apps/external_apps"
 sys.path.insert(0, abspath(join(dirname(__file__), "../../../apps/local_apps")))
 sys.path.insert(0, abspath(join(dirname(__file__), "../../../apps/core_apps")))
 
-# emulate manage.py path hacking.
 sys.path.insert(0, abspath(join(dirname(__file__), "../../")))
-sys.path.insert(0, abspath(join(dirname(__file__), "../")))
 
 from django.core.handlers.wsgi import WSGIHandler
 
