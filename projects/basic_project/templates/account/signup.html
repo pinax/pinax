@@ -1,0 +1,48 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block body %}
+    <div class="clearfix padtop">
+        <div id="basic-form">
+        <fieldset>
+            <legend>{% trans "Sign Up" %}</legend>
+            
+            {% if user.is_authenticated %}
+                <p>{% trans "You are already logged in." %}</p>
+            {% else %}
+                <p>{% trans "Already have an account?" %} <a href="{% url acct_login %}">{% trans "Log In" %}</a>!</p>
+                
+                <form class="signupform" id="signup_form" method="post" action="{% url acct_signup %}">
+                    <table width="300px">
+                        {{ form.as_table }}
+                        <tr><td></td><td><input type="submit" value="{% trans "Sign Up &raquo;" %}" class="button" /></td></tr>
+                    </table>
+                </form>
+                
+                {% url terms as terms_url %}
+                {% url privacy as privacy_url %}
+                <div class="right-form">
+                    <p>{% blocktrans %}By clicking "Sign Up", you are indicating that you have read and agree to the <a href="{{ terms_url }}">Terms of Use</a> and <a href="{{ privacy_url }}">Privacy Policy</a>.{% endblocktrans %}</p>
+                    
+                    <p>{% blocktrans %}If you have any trouble creating your account, contact us at <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>.{% endblocktrans %}</p>
+                    
+                    <p>If you have OpenID, <a href="{% url acct_login %}">log in</a> using that to begin using this site with OpenID right away.</p></div>
+            {% endif %}
+        </fieldset>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_body %}
+    {% load jquery_validation %}
+    {% include_validation %}
+    <script type="text/javascript">
+        $(function(){
+            $('#signup_form').validate('{% url signup_form_validate %}', {type: 'table', fields: ['username'], dom: $('#id_username'), event: 'change'});
+            $("#id_username").focus();
+        });
+    </script>
+{% endblock %}

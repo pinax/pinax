@@ -1,0 +1,28 @@
+{% extends "basic_profiles/base.html" %}
+
+{% load i18n %}
+{% load pagination_tags %}
+{% load humanize %}
+
+{% block head_title %}{% blocktrans %}All Profiles{% endblocktrans %}{% endblock %}
+
+{% block body %}
+    <h1>{% trans "Profiles" %}</h1>
+    
+    {% autopaginate users %}
+    
+    {% regroup users by date_joined.date as users_by_date_joined %}
+    
+    {% for date in users_by_date_joined %}
+        <h2 class="join_date">{{ date.grouper|naturalday:_("MONTH_DAY_FORMAT")|capfirst }}</h2>
+        
+        {% for user in date.list %}
+            <div class="profile clearfix">
+                {# @@@ factor out style into css file #}
+                <div style="padding: 5px; margin-left: 50px;"><a href="{% url profile_detail user.username %}">{{ user }}</a></div>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    
+    {% paginate %}
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "What Next?" %}{% endblock %}
+
+{% block body %}
+    <h1>{% trans "What Next?" %}</h1>
+    
+    {% if user.is_authenticated %}
+        <p>Here are some things to do to get started with this site:</p>
+        
+        <dl class="what_next">
+            <dt><a href="{% url acct_email %}">verify an email address</a></dt>
+            <dd>so you can receive notifications, reset your password and so people can find you more easily.</dd>
+            
+            <dt><a href="{% url profile_detail user %}">fill out your profile</a></dt>
+            <dd>to tell the world a little about yourself.</dd>
+{% comment %}
+            <dt><a href="http://gravatar.com/" target="gravatar">add a gravatar</a></dt>
+            <dd>so people can see what you look like.</dd>
+            <dt><a href="{% url profiles.views.profiles %}">connect with friends</a></dt>
+            <dd>so you can follow what they're up to.</dd>
+            <dt><a href="{% url friends_app.views.friends %}">invite more people to the site</a></dt>
+            <dd>so more people can share in the fun.</dd>
+{% endcomment %}
+        </dl>
+        {% else %}
+            {% url acct_signup as signup_url %}
+            {% url acct_login as login_url %}
+            
+            <p class="what_next">{% blocktrans %}Start by <a href="{{ signup_url }}">signing up</a> and <a href="{{ login_url }}">logging in</a>.{% endblocktrans %}</p>
+        {% endif %}
+{% endblock %}

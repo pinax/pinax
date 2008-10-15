@@ -1,0 +1,18 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Timezone" %}{% endblock %}
+
+{% block body %}
+    <h1>{% trans "Timezone" %}</h1>
+    
+    <p>{% trans "Pinax can localize all times into your preferred timezone. Change your timezone below." %}</p>
+    
+    <form method="POST" action="">
+        <table>
+            {{ form }}
+            <tr><td></td><td><input type="submit" value="{% trans "Change my timezone" %}" /></td></tr>
+        </table>
+    </form>
+{% endblock %}

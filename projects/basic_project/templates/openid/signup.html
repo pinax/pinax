@@ -1,0 +1,24 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Sign Up with OpenID" %}{% endblock %}
+
+{% block body %}
+    <h1>{% trans "Sign Up with OpenID" %}</h1>
+    
+    {% if form.errors %}
+        <p class="error">{% trans "Please correct the errors below:" %}</p>
+    {% endif %}
+    
+    <form class="signup" method="post" action="">
+        <table>
+            {{ form.as_table }}
+            <tr><td></td><td><input type="submit" value="{% trans "Sign Up &raquo;" %}" /></td></tr>
+        </table>
+    </form>
+    
+    <p>{% blocktrans %}Already have an account? <a href="/account/login/?next=/openid/associations/">Login here</a> to associate your OpenID with your existing account.{% endblocktrans %}</p>
+    <p>{% blocktrans %}By clicking "Sign Up", you are indicating that you have read and agree to the <a href="/about/terms">Terms of Use</a> and <a href="/about/privacy">Privacy Policy</a>.{% endblocktrans %}</p>
+    <p>{% blocktrans %}If you have any trouble creating your account, contact us at <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>.{% endblocktrans %}</p>
+{% endblock %}

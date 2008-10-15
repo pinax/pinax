@@ -1,0 +1,95 @@
+{% extends "basic_profiles/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% blocktrans %}Profile for {{ other_user }}{% endblocktrans %}{% endblock %}
+
+{% block body %}
+    
+    <div class="right_panel">
+        {% include "basic_profiles/profile_right_panel.html" %}
+    </div>
+    
+    <h1>{% blocktrans %}Profile for {{ other_user }}{% endblocktrans %}</h1>
+    
+    <div class="profile_info">
+        {% if other_user.get_profile.name %}<p><b>{% trans "Name" %}</b>: {{ other_user.get_profile.name }}</p>{% endif %}
+        {% if other_user.get_profile.about %}<p><b>{% trans "About" %}</b>: {{ other_user.get_profile.about }}</p>{% endif %}
+        {% if other_user.get_profile.location%}<p><b>{% trans "Location" %}</b>: {{ other_user.get_profile.location }}</p>{% endif %}
+        {% if other_user.get_profile.website %}<p><b>{% trans "Website" %}</b>: <a href="{{ other_user.get_profile.website }}">{{ other_user.get_profile.website }}</a></p>{% endif %}
+    </div>
+    
+    
+    {% if user.is_authenticated %}
+        {% if is_me %}
+            <p><a href="#" onclick="$('#profile_form').toggle(); return false;">{% trans "Edit profile" %}</a></p>
+            
+            <form id="profile_form" method="POST" action="" style="display: none;">
+                <table>
+                    {{ profile_form }}
+                    <tr><td></td><td><input type="hidden" name="action" value="update" /><input type="submit" value="{% trans "update" %}"/></td></tr>
+                </table>
+            </form>
+        {% else %}
+            {% comment %}
+            {% if is_friend %}
+                <p>{% blocktrans %}You are friends with {{ other_user }}.{% endblocktrans %} <a href="{% url messages_compose %}{{ other_user }}/">{% trans "Send a message" %}</a>.</p>
+            {% else %}
+                {% if previous_invitations_from %}
+                    <p>{% blocktrans %}{{ other_user }} has requested friendship.{% endblocktrans %}</p>
+                    {% for invitation in previous_invitations_from %}
+                        <div class="friendship_request">
+                            <p>From <a href="{% url profiles.views.profile invitation.from_user.username %}">{{ invitation.from_user }}</a> ({{ invitation.sent }}):</p>
+                            <p class="invitation_message">{{ invitation.message }}</p>
+                            <form method="post" action="">
+                                <input type="hidden" name="invitation" value="{{ invitation.id }}"/>
+                                <input type="hidden" name="action" value="accept"/>
+                                <input type="submit" value="{% trans 'accept' %}" />
+                            </form>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    {% if previous_invitations_to %}
+                        <p>{% trans "Friendship request sent." %}</p>
+                    {% else %}
+                        <h2>{% trans "Add As Friend" %}</h2>
+                        <form method="POST" action="">
+                            <table>
+                                {{ invite_form.as_table }}
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <input type="hidden" name="action" value="invite" />
+                                        <input type="submit" value="{% trans "invite" %}"/>
+                                        {% blocktrans %}{{ other_user }} to be a friend.{%  endblocktrans %}
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    {% endif %} {# previous_invitations_to #}
+                {% endif %} {# previous_invitations_from #}
+            {% endif %} {# is_friend #}
+            {% endcomment %}
+        {% endif %} {# is me #}
+        
+        
+    {% else %} {# not user.is_authenticated #}
+        {% comment %}
+        {% url acct_signup as signup_url %}
+        {% url acct_login as login_url %}
+        <p>{% blocktrans %}<a href="{{ signup_url }}">Sign up</a> and <a href="{{ login_url }}">log in </a> to add this person as a friend and see their tweets and blog posts.{% endblocktrans %}</p>
+        {% endcomment %}
+    {% endif %}
+
+{% endblock %}
+
+{% block extra_body %}
+    <script type="text/javascript">
+        $().ready(function() {
+            {% if profile_form.errors %}
+                $('#profile_form').show();
+            {% endif %}
+        });
+    </script>
+{% endblock %}
+

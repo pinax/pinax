@@ -1,0 +1,58 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Login" %}{% endblock %}
+
+{% block body %}
+    <div class="clearfix padtop">
+    <div id="basic-form" class="left-form">
+    <fieldset>
+        <legend>{% trans "Log In" %}</legend>
+        
+        {% if user.is_authenticated %}
+            <p><span class="warning">{% trans "Note" %}</span>: {% blocktrans %}you are already logged in as {{ user }}.{% endblocktrans %}</p>
+        {% else %}
+            {% url account.views.signup as signup_url %}
+            <p>{% blocktrans %}Don't have an account? <a href="{{ signup_url }}">Sign up</a>!{% endblocktrans %}</p>
+        {% endif %}
+        
+        <form class="login" method="POST" action="">
+            <table>
+                <tr><td colspan="2">{{ form.non_field_errors }}</td></tr>
+                {% for field in form %}
+                    {% if field.errors %}<tr><td colspan="2">{{ field.errors }}</td></tr>{% endif %}
+                    <tr><td width="100px">{{ field.label_tag }}</td><td>{{ field }}</td></tr>
+                    {% if field.help_text %}<tr><td colspan="2"><span>{{ field.help_text }}</span></td></tr>{% endif %}
+                {% endfor %}
+                <tr><td></td><td><input type="submit" value="{% trans "Log in &raquo;" %}" class="button" /></td></tr>
+            </table>
+            <a href="{% url account.views.password_reset %}">{% trans "Forgot password?" %}</a>
+        </form>
+        </fieldset>
+    </div>
+    
+    
+    {% if not openid %}
+    <div id="basic-form" class="right-form">
+        <fieldset>
+        <legend>{% trans "Or sign in with your OpenID" %}</legend>
+        <form class="login" action="{% url django_openidconsumer.views.begin %}" method="POST">
+            <table>
+                <tr><td width="150px"><img src="/site_media/openid-icon.png" /> {% trans "OpenID Identifier" %}: </td><td><input class="openid" type="text" name="openid_url"></td></tr>
+                <tr><td></td><td><input type="submit" value="{% trans "Log in &raquo;" %}" class="button" /></td></tr>
+            </table>
+            <p>Not OpenID enabled?  <a href="http://openid.net/get/" target="_blank">Get started now.</a></p>
+        </form>
+        </fieldset>
+        <p>{% blocktrans %}If you have any trouble logging in to your account, contact us at <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>.{% endblocktrans %}</p>
+    </div>
+    {% endif %}
+    </div>
+{% endblock %}
+
+{% block extra_body %}
+<script>
+    $("#id_username").focus();
+</script>
+{% endblock %}
