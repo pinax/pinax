@@ -8,7 +8,6 @@ from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from django.contrib.auth.models import User
 from emailconfirmation.models import EmailAddress
-from profiles.models import Profile
 
 from django_openidauth.models import associate_openid
 
@@ -32,8 +31,6 @@ class RegistrationFormOpenID(forms.Form):
         email = self.cleaned_data["email"]
         new_user = User.objects.create_user(username, "", "!")
         
-        profile, created = Profile.objects.get_or_create(user=new_user)
-        if created: profile.save()
         if email:
             new_user.message_set.create(message="Confirmation email sent to %s" % email)
             EmailAddress.objects.add_email(new_user, email)
