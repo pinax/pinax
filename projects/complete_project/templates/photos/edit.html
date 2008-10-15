@@ -1,0 +1,55 @@
+{% extends "photos/base.html" %}
+
+{% load i18n %}
+{% load humanize %}
+{% load tagging_tags %}
+{% load wiki %}
+{% load markup %}
+{% load switchcase %}
+{% load restructuredtext %}
+{% load comments_tag %}
+{% load photo_tags %}
+{% load flagtags %}
+
+{% block head_title %}{% blocktrans %}Editing Photo Details{% endblocktrans %}{% endblock %}
+
+{% block body %}
+    <p><span class="warning">Note</span>: this is an <b>experimental</b> feature that is subject to massive change at any time.</p>
+    
+    <div class="right_panel">
+        {% include "photos/photo_right_panel.html" %}
+    </div>
+    
+    <h1>{% trans "Photo Details" %}</h1>
+    
+    <div class="gallery-photo">
+        <img src="{{ photo_url }}" alt="{{ photo.title }}"/>
+    </div>
+
+    <div id="basic-form">
+        <fieldset>
+            <legend>{% trans "Editing Photo" %}</legend>
+
+        {% ifequal photo.member request.user %}
+            <form method="POST" action="">
+                <table align="center">
+                    <tr><td colspan="2">{{ photo_form.non_field_errors }}</td></tr>
+                    {% for field in photo_form %}
+                        {% if field.errors %}<tr><td></td><td>{{ field.errors }}</td></tr>{% endif %}
+                            <td width="150px" valign="top">{{ field.label_tag }}
+                            </td>
+                            <td>{{ field }}</td></tr>
+                        {% if field.help_text %}<tr><td colspan="2"><span>{{ field.help_text }}</span></td></tr>{% endif %}
+                    {% endfor %}
+                    <tr><td></td><td><input type="hidden" name="action" value="update" /><input type="submit" value="update" class="button"/></td></tr>
+                </table>
+            </form>
+        {% else %}
+            <p>You are not the author of this photo.</p>
+        {% endifequal %}
+        </fieldset>
+    </div>
+
+    
+{% endblock %}
+
