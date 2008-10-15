@@ -17,24 +17,29 @@ Sample WSGI File
 
 ::
     
-    import sys
-    sys.stdout = sys.stderr
     import os
+    import sys
+    
+    # redirect sys.stdout to sys.stderr for bad libraries like geopy that uses
+    # print statements for optional import exceptions.
+    sys.stdout = sys.stderr
+    
     from os.path import abspath, dirname, join
     from site import addsitedir
-    path = addsitedir(abspath(join(dirname(__file__), 'django-hotclub', 'libs', 'external_libs')), set())
+    
+    path = addsitedir(abspath(join(dirname(__file__), "pinax", "libs", "external_libs")), set())
     if path:
         sys.path = list(path) + sys.path
+        
+    sys.path.insert(0, abspath(join(dirname(__file__), "pinax", "apps", "external_apps")))
+    sys.path.insert(0, abspath(join(dirname(__file__), "pinax", "apps", "local_apps")))
+    sys.path.insert(0, abspath(join(dirname(__file__), "pinax", "apps", "core_apps")))
     
-    sys.path.insert(0, abspath(join(dirname(__file__), 'django-hotclub', 'apps', 'external_apps')))
-    sys.path.insert(0, abspath(join(dirname(__file__), 'django-hotclub', 'apps', 'local_apps')))
-    sys.path.insert(0, abspath(join(dirname(__file__), 'django-hotclub', 'apps', 'core_apps')))
-    
-    sys.path.insert(0, abspath(join(dirname(__file__), 'django-hotclub', 'projects')))
+    sys.path.insert(0, abspath(join(dirname(__file__), "pinax", "projects")))
     
     from django.core.handlers.wsgi import WSGIHandler
     
-    os.environ['DJANGO_SETTINGS_MODULE'] = 'your_project.settings'
+    os.environ["DJANGO_SETTINGS_MODULE"] = "complete_project.settings"
     
     application = WSGIHandler()
 
