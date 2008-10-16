@@ -250,7 +250,7 @@ class PownceForm(UserForm):
         
     def save(self):
         from zwitschern.pownce_utils import get_pownce_password
-        update_other_service(self.user,
+        update_other_services(self.user,
             pownce_user = self.cleaned_data['usernamep'],
             pownce_password = get_pownce_password(settings.SECRET_KEY, self.cleaned_data['passwordp']),
         )
