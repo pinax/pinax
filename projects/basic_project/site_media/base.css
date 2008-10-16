@@ -1,7 +1,6 @@
 body {
     background-color: #FFF;
     margin: 0;
-    position: relative;
 }
 html, body {
     height: 100%;
@@ -30,9 +29,6 @@ td {
     margin: 0;
     border: 0;
     padding: 0;
-}
-div {
-    position: relative;
 }
 #body {
     clear: both;
@@ -65,9 +61,31 @@ div {
 h1 {
     margin: 0;
 }
+form th {
+    text-align : left;
+}
+form.signup input[type="submit"], form.login input[type="submit"] {
+    margin: 20px 0;
+    font-size: 14pt;
+}
+input[type="text"], input[type="password"], textarea {
+    padding: 3px;
+    margin: 3px;
+    border: solid 1px #C6C6C6;
+    border-bottom: solid 1px #E3E3E3;
+    color: #666;
+    font-size: 12pt;
+    background: #F3F3F3 url('/site_media/form-shadow.png') left top repeat-x;
+}
+.clearboth {
+    clear: both;
+}
+
+
 #tabhead {
     background: #035 url('/site_media/heading.png') left top repeat-x;
     border-bottom: 1px solid #000; /* tab border */
+    position: relative;
 }
 #tabhead .logo {
     height: 80px;
@@ -90,73 +108,8 @@ h1 {
 #tabhead .login a:hover {
     color: #FFF; /* login bar link hover colour */
 }
-#tabhead .tabs {
-    position: absolute;
-    bottom: -1px; /* must be same thickness as tab border */
-    left: 210px; /* based on width and padding of logo */
-}
-#tabhead .tabs td {
-    vertical-align: bottom;
-    padding-right: 0; /* space between tabs */
-    padding-bottom: 1px; /* must be same thickness as tab border */
-}
-#tabhead .tab a, #tabhead .tab a:visited {
-    color: #444; /* unselected tab text colour */
-    font-weight: bold;
-    text-decoration: none;
-}
-#tabhead .tab a:hover {
-    color: #666; /* unselected tab text hover colour */
-}
-#tabhead .tab div {
-    background-color: #DDD; /* unselected tab colour */
-    padding: 0;
-    padding-bottom: 4px;
-    padding-top: 5px;
-    margin: 0 1px; /* to compensate for border */
-}
-#tabhead .tab div a {
-    padding: 5px 12px;
-}
-#tabhead .right_tab {
-    position: absolute;
-    right: 15px;
-    bottom: -1px; /* must be same thickness as tab border */
-}
-#tabhead .right_tab td {
-    vertical-align: bottom;
-    padding-right: 0; /* space between tabs */
-    padding-bottom: 1px; /* must be same thickness as tab border */
-}
 
-form th {
-    text-align : left;
-}
-form.signup input[type="submit"], form.login input[type="submit"] {
-    margin: 20px 0;
-    font-size: 14pt;
-}
-input[type="text"], input[type="password"], textarea {
-    padding: 3px;
-    margin: 3px;
-    border: solid 1px #C6C6C6;
-    border-bottom: solid 1px #E3E3E3;
-    color: #666;
-    font-size: 12pt;
-    background: #F3F3F3 url('/site_media/form-shadow.png') left top repeat-x;
-}
-/*
-input[type="submit"] {
-    background-color: #FFF0F5;
-    border: 1px solid #FF0000;
-    cursor: pointer;
-    color: #FF0000;
-    text-decoration: underline;
-}
-*/
-.clearboth {
-    clear: both;
-}
+
 
 ul.errorlist {
     margin: 0;
@@ -194,35 +147,6 @@ ul#messages li a {
 table.email_list td {
     padding: 5px 10px;
 }
-table.invitation_list {
-    width: 500px;
-}
-table.invitation_list td {
-    padding: 5px 10px;
-}
-table.contact_list {
-    width: 500px;
-}
-table.contact_list td {
-    padding: 5px 10px;
-}
-.friendship_request {
-    padding: 5px;
-    background: #DEF;
-    border: 1px solid #9BC;
-}
-.friendship_request p {
-    padding: 0;
-    margin: 0;
-}
-.friendship_request form {
-    padding: 0;
-    margin: 0;
-}
-.friendship_request p.invitation_message {
-    font-size: 12pt;
-    margin: 5px;
-}
 .warning {
     color: red;
     font-weight: bold;
@@ -240,8 +164,6 @@ div.unseen_notice {
     border-bottom: 1px solid #CCC;
 }
 h2.notice_date,
-h2.join_date,
-h2.creation_date
 {
     font-size: 12pt;
     color: #666;
@@ -269,38 +191,6 @@ span.notice_type_description {
 
 div.profile_info p {
     margin: 0;
-}
-ul.avatar_choices,ul.avatar_choices ul {
-    margin-left: 0px;
-    padding-left: 0px;
-}
-ul.avatar_choices li {
-    display: inline;
-    list-style-type: none;
-}
-.invitation_5, .invitation_7 {
-    color: green;
-    font-weight: bold;
-}
-.invitation_2 {
-    color: gray;
-}
-table.messages {
-    width: 100%;
-}
-
-table.messages tbody tr {
-    border-bottom: 1px solid #ccc;
-}
-
-table.messages tr th, table.messages tr td {
-    text-align: left;
-    padding: 5px;
-}
-
-table.messages tr th {
-    font-weight:bold;
-    border-bottom: 1px solid #999;
 }
 
 #subnav {
@@ -334,78 +224,13 @@ table.messages tr th {
     background: #9BC;
 }
 
-dl.message-headers {
-    border-top:1px solid #CCC;
-    border-bottom:1px solid #CCC;
-    padding: 5px 0;
-    width: 100%;
-    font-family: Arial, sans-serif;
-}
-
-dl.message-headers dt {
-    width: 70px;
-    text-align: right;
-    float: left;
-    padding-right: 10px;
-    font-weight: bold;
-    color: #444;
-}
-dl.message-header dd {
-    float: left;
-}
 div.right_panel {
     margin-top: 20px;
     width: 200px;
     float: right;
     z-index: 999;
 }
-div.friends {
-    background: #DEF;
-    padding: 8px;
-    margin-bottom: 20px;
-}
-div.friends h2 {
-    margin: 0 0 5px 0;
-    padding: 0;
-}
-div.friends .avatar {
-    padding: 0;
-    text-align: center;
-}
-div.friends .details {
-    text-align: center;
-    overflow: hidden;
-    width: 60px;
-    margin: 0 0 12px 0;
-}
-div.tribes {
-    background: #DEF;
-    padding: 8px;
-    margin-bottom: 20px;
-}
-div.tribes h2 {
-    margin: 0 0 5px 0;
-    padding: 0;
-}
-div.members {
-    background: #DEF;
-    padding: 8px;
-    margin-bottom: 20px;
-}
-div.members h2 {
-    margin: 0 0 5px 0;
-    padding: 0;
-}
-div.members .avatar {
-    padding: 0;
-    text-align: center;
-}
-div.members .details {
-    text-align: center;
-    overflow: hidden;
-    width: 60px;
-    margin: 0 0 12px 0;
-}
+
 div.notice_settings {
     background: #DEF;
     padding: 8px;
@@ -414,23 +239,6 @@ div.notice_settings {
 div.notice_settings h2 {
     margin: 0 0 5px 0;
     padding: 0;
-}
-div.tweet {
-    width: 500px;
-    margin: 0;
-    padding: 5px;
-    border-bottom: 1px solid #CCC;
-    font-size: 12pt;
-}
-div.tweet .timesince {
-    color: #999;
-    font-size: 80%;
-}
-span#chars_left {
-    font-size: 16pt;
-}
-div.tweet .reply {
-    font-size: 80%;
 }
 
 #locale_switcher {
@@ -491,66 +299,6 @@ div.tweet .reply {
     color: white;
 }
 
-/* topics */
-table.topic, table.topics {
-    width: 100%;
-}
-table.topic td, table.topics td {
-    vertical-align: top;
-    padding: 5px 20px 5px 5px;
-}
-table.topic td h1, table.topics td h2 {
-    margin: 0;
-    padding: 0;
-}
-.responses .even, .topics .even {
-    background-color: #FAFAFA;
-}
-.responses .odd, .topics .odd {
-    background-color: #F3F3F3;
-}
-.responses {
-    margin-left: 0px;
-    padding-left: 0px;
-}
-.responses li { 
-    list-style-type: none; 
-}
-td.meta {
-    width: 100px;
-    margin: 4px;
-}
-div.meta {
-    float: left;
-    width: 100px;
-    margin: 4px;
-    padding: 4px;
-}
-div.bulk {
-    margin-left: 120px;
-    padding: 4px;
-}
-.hidden { display: none; }
-.thread-0 { margin-left: 0px; }
-.thread-1 { margin-left: 20px; }
-.thread-2 { margin-left: 40px; }
-.thread-3 { margin-left: 60px; }
-.thread-4 { margin-left: 80px; }
-.thread-5 { margin-left: 100px; }
-.thread-6 { margin-left: 120px; }
-.thread-7 { margin-left: 140px; }
-.thread-8 { margin-left: 160px; }
-
-table.topics .created {
-    color: #999;
-    font-size: 90%;
-}
-table.topics .comment_stats {
-    color: #999;
-    border-top: 1px solid #CCC;
-    font-size: 90%;
-}
-
 
 /* pagination */
 .pagination {
@@ -596,44 +344,6 @@ table.topics .comment_stats {
 * html .clearfix { height: 1%; }
 /* end hide from ie5-mac */
 
-/* feedutil */
-.feed-entry-summary {
-    font-style: italic;
-}
-.feed-entries {
-    width: 500px;
-}
-
-/* bookmarks */
-table.narrow {
-    width: 500px;
-}
-table.bookmarks td {
-    vertical-align: top;
-    padding: 5px;
-}
-table.bookmarks td h2 {
-    margin: 0;
-    padding: 0;
-}
-table.bookmarks td.vote {
-    width: 80px;
-    text-align: center;
-    vertical-align: middle;
-}
-.bookmarks .even {
-    background-color: #FAFAFA;
-}
-.bookmarks .odd {
-    background-color: #F3F3F3;
-}
-div.url {
-    color: #666;
-    font-size: 90%;
-    font-style: italic;
-}
-
-
 
 dl.what_next {
     margin: 2em;
@@ -648,167 +358,7 @@ dl.what_next dd {
 p.what_next {
     font-size: 120%;
 }
-/* blogs */
-.blog-post h2 {
-    margin: 10px 0 0 0;
-    font-style: italic;
-}
-.blog-post-tease {
-    width: 500px;
-    float: left;
-}
-.blog-post-meta {
-    width: 200px;
-    float: left;
-    margin-left: 30px;
-}
-.blog-post-meta img { 
-    border: 1px solid #666;
-}
-.blog-list tr.odd {
-    background-color: #f3f3f3;
-}
-.blog-list td {
-    vertical-align: top;
-    padding: 3px 3px 15px 3px;
-}
-.blog-list td p {
-    padding: 0;
-    margin: 0;
-}
 
-.blog-post-meta img.noborder {
-    border: 0;
-}
-
-/* projects */
-.project_stats {
-    color: #999;
-    border-top: 1px solid #CCC;
-    font-size: 90%;
-}
-
-
-/* tasks */
-
-.tasks .even {
-    background-color: #FAFAFA;
-}
-.tasks .odd {
-    background-color: #F3F3F3;
-}
-table.task td, table.tasks td {
-    vertical-align: top;
-    padding: 5px 20px 5px 5px;
-}
-table.task, table.tasks {
-    width: 100%;
-}
-
-div.task-meta {
-    float: left;
-    width: 150px;
-    margin: 4px;
-    padding: 4px;
-    font-size: 80%;
-}
-
-div.task div.bulk h2 {
-    margin: 0;
-}
-div.task-meta2 {
-    color: #666;
-    margin-top: 1em;
-    font-size: 90%;
-}
-
-div.task-meta2 b {
-    color: #000;
-}
-
-tr.task_resolved td a, tr.task_closed td a {
-    text-decoration: line-through;
-}
-
-h2.task_resolved, h2.task_closed {
-    text-decoration: line-through;
-}
-
-/* PHOTOS **************************************/
-.thumb-row {
-    margin: 20px 0;
-    padding: 20px 0;
-}
-.gallery-photo-thumb {
-    width: 100px; 
-    margin: 10px 10px 20px 0;
-    float: left;
-    text-align: center;
-}
-
-.photo-right-profile, .photo-right-tools {
-    background: #DEF;
-    padding: 8px;
-    margin-bottom: 20px;
-}
-
-.photo-profile-details {
-    font-size: 0.9em;
-}
-
-.photo-avatar {
-    float: left;
-    margin-right: 10px;
-}
-
-.photo-avatar img {
-    border: 1px solid #666;
-}
-
-.photo-right-tools ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.photo-right-tools ul li {
-    background: #fff;
-    padding: 2px 4px;
-    margin: 2px 0;
-}
-
-.photo-right-tools li a {
-    text-decoration: none;
-}
-
-.photo-right-tools li:hover {
-    background: #DDDDDD;
-}
-
-.photo-profile-details h2 {
-    margin: 0;
-    padding: 0;
-    font-size: 1.1em;
-}
-
-.photo-right-tools h2 {
-    margin: 0 0 5px 0;
-    padding: 0;
-}
-
-#embed-code textarea {
-    width: 150px;
-    font-size: 0.8em;
-}
-div.embed {
-    margin: 10px 0;
-    font-style: none;
-}
-
-.photo-right-tools form {
-    margin: 0;
-    padding: 0;
-}
 /* FORMS **********************************/
 
 /* ----------- basic-sm ----------- */
@@ -818,53 +368,53 @@ div.embed {
     margin-top: 15px;
 }
 #basic-form hr {
-	border-top:solid 4px #DEDEDE;
+    border-top:solid 4px #DEDEDE;
 }
 #basic-form p{
-	color:#666666;
-	border-bottom:solid 1px #dedede;
-	padding-bottom: 5px;
+    color:#666666;
+    border-bottom:solid 1px #dedede;
+    padding-bottom: 5px;
 }
 #basic-form label{
-	display:block;
-	font-weight:bold;
+    display:block;
+    font-weight:bold;
 }
 #basic-form td {
-	padding: 2px;
+    padding: 2px;
 }
 #basic-form td.rightd {
-	padding-right: 70px;
+    padding-right: 70px;
 }
 #basic-form span{
-	color: #aaa;
-	font-style: italic;
-	width:300px;
+    color: #aaa;
+    font-style: italic;
+    width:300px;
 }
 #basic-form input, #basic-form select{
-	float:left;
-	margin:2px 0 2px 10px;
-	font-size: 11px;
+    float:left;
+    margin:2px 0 2px 10px;
+    font-size: 11px;
 }
 
 #basic-form textarea{
-	float:left;
-	margin:2px 0 2px 10px;
-	font-size: 11px;
+    float:left;
+    margin:2px 0 2px 10px;
+    font-size: 11px;
 }
 
 #basic-form .button{ 
-	clear:both;
-	width:125px;
-	height:31px;
-	text-align:center;
-	line-height:20px;
-	color:#FFFFFF;
-	font-size:11px;
-	font-weight:bold;
-	border: 0 transparent;
-	background: url(button.png) no-repeat;
-	margin-top: 20px;
-	cursor: pointer;
+    clear:both;
+    width:125px;
+    height:31px;
+    text-align:center;
+    line-height:20px;
+    color:#FFFFFF;
+    font-size:11px;
+    font-weight:bold;
+    border: 0 transparent;
+    background: url(button.png) no-repeat;
+    margin-top: 20px;
+    cursor: pointer;
 }
 
 /* Fieldsets */
@@ -890,20 +440,4 @@ legend { padding: 0 .4em; font-weight: bold; font-size: 1.2em; }
 
 .signupform {
     float: left;
-}
-.game_item {
-    float: left;
-    text-align: center;
-    width: 125px;
-    height: 160px;
-}
-.game_item {
-    z-index: 10;
-}
-.game_item span {
-    display: block;
-}
-.game_item a {
-    color: inherit;
-    text-decoration: none;
 }
