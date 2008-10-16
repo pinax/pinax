@@ -7,6 +7,7 @@ class GameThing(things.Thing):
         verbose_name_desc='Play Count',
         url_asc='least-played',
         url_desc='most-played',
+        default_order_field=things.DESCENDING,
     )
     created = things.OrderField(
         verbose_name_asc='Date Added',
