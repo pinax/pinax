@@ -40,6 +40,15 @@ There is some path manipulation in manage.py to get this all to work. You'll
 need to do something similar in your wsgi or mod_python configuration. See
 :ref:`ref-deployment` for more details.
 
+Note To Windows Users
+---------------------
+
+You have to make one small change for Pinax to work on Windows due to the
+lack of symbolic links.
+
+Go to the ``libs/external_libs/gdata.py-1.0.13`` directory and move
+``src/atom`` to ``atom`` and ``src/gdata`` to ``gdata`` (i.e. move
+them both up one folder)
 
 See also
 --------
