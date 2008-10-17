@@ -1,4 +1,123 @@
 Dependencies
 ============
 
-This will document what apps use what other apps and what external libs.
+This documents what apps use what other apps and what external libs.
+
+account
+    uses apps core, django_openidauth, emailconfirmation, friends, profiles, timezones, zwitschern
+
+ajax_validation
+    uses library simplejson
+
+announcements
+    uses app notification
+    and library atomformat
+
+arcade
+    uses app tagging
+    and library simplejson
+
+authsub
+    uses library gdata
+
+avatar
+    uses library PIL
+
+basic_profiles
+    uses app notification
+
+bbauth
+    uses library ybrowserauth
+
+blog
+    uses apps friends, notification, tagging, threadedcomments
+    and library atomformat
+
+bookmarks
+    uses apps tagging, voting
+    and library atomformat
+
+core
+    uses apps blog, bookmarks, mailer, tribes, zwitschern
+
+django_extensions
+    uses a wide range of libraries depends on command
+
+django_openidauth
+    uses apps django_openidconsumer, emailconfirmation
+
+django_openidconsumer
+    uses libraries openid, yadis
+
+djangologging
+    uses library pygments
+
+emailconfirmation
+    uses app mailer
+
+feedutil
+    uses library feedparser
+
+friends
+    uses apps emailconfirmation, mailer, notification
+    and libraries gdata, simplejson, vobject, ybrowserauth
+
+friends_app
+    uses apps account, friends, notification
+
+games
+    uses apps arcade, things
+
+lifestream
+    uses app zwitschern
+    uses libraries pownce, twitter
+
+locations
+    uses apps friends, notification
+    uses library geopy
+
+messages
+    uses app mailer
+
+notification
+    uses app mailer
+    and library atomformat
+
+oembed
+    uses library simplejson
+
+photologue
+    uses app tagging
+    and library PIL
+
+photos
+    uses apps photologue, projects, tagging, tribes
+
+profiles
+    uses apps account, app_plugins, feedutil, friends, gravatar, notification, photos, timezones, zwitschern
+
+projects
+    uses apps friends, notification, photos, tagging, things, threadedcomments, wiki
+
+swaps
+    uses apps notification, tagging, threadedcomments
+
+tag_app
+    uses apps blog, bookmarks, photos, projects, tagging, tribes, wiki
+
+things_app
+    uses app voting
+
+timezones
+    uses library pytz
+
+tribes
+    uses apps friends, notification, photos, tagging, things, threadedcomments, wiki, zwitschern
+
+wiki
+    uses apps notification, tagging
+    and libraries atomformat, creoleparser, diff_match_patch, docutils
+
+zwitschern
+    uses apps account, notification, tribes
+    and libraries atomformat, pownce, twitter
