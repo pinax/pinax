@@ -1,5 +1,5 @@
 from django.conf import settings
-from core.utils import inbox_count_sources
+from misc.utils import inbox_count_sources
 
 def contact_email(request):
     return {'contact_email': getattr(settings, 'CONTACT_EMAIL', '')}

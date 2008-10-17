@@ -64,8 +64,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "notification.context_processors.notification",
     "announcements.context_processors.site_wide_announcements",
     "account.context_processors.openid",
-    "core.context_processors.contact_email",
-    # "core.context_processors.site_name",
+    "misc.context_processors.contact_email",
+    # "misc.context_processors.site_name",
 )
 
 INSTALLED_APPS = (
@@ -90,7 +90,7 @@ INSTALLED_APPS = (
     # internal (for now)
     'basic_profiles',
     'account',
-    'core',
+    'misc',
     
     'django.contrib.admin',
 

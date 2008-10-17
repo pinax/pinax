@@ -7,7 +7,7 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as _, ugettext
 from django.utils.encoding import smart_unicode
 
-from core.utils import get_send_mail
+from misc.utils import get_send_mail
 send_mail = get_send_mail()
 
 from django.contrib.auth import authenticate, login

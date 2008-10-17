@@ -4,7 +4,7 @@ Dependencies
 This documents what apps use what other apps and what external libs.
 
 account
-    uses apps core, django_openidauth, emailconfirmation, friends, profiles, timezones, zwitschern
+    uses apps misc, django_openidauth, emailconfirmation, friends, profiles, timezones, zwitschern
 
 ajax_validation
     uses library simplejson
@@ -37,8 +37,8 @@ bookmarks
     uses apps tagging, voting
     and library atomformat
 
-core
-    uses apps blog, bookmarks, mailer, tribes, zwitschern
+misc
+    uses apps blog, bookmarks, mailer, tribes, zwitschern, voting
 
 django_extensions
     uses a wide range of libraries depends on command
@@ -104,9 +104,6 @@ swaps
 
 tag_app
     uses apps blog, bookmarks, photos, projects, tagging, tribes, wiki
-
-things_app
-    uses app voting
 
 timezones
     uses library pytz

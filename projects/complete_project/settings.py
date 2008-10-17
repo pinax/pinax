@@ -70,7 +70,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.doc.XViewMiddleware',
     'djangologging.middleware.LoggingMiddleware',
     'pagination.middleware.PaginationMiddleware',
-    'things_app.middleware.SortOrderMiddleware',
+    'misc.middleware.SortOrderMiddleware',
     'crashlog.CrashLogMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
 )
@@ -93,11 +93,11 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "notification.context_processors.notification",
     "announcements.context_processors.site_wide_announcements",
     "account.context_processors.openid",
-    "core.context_processors.contact_email",
-    "core.context_processors.site_name",
+    "misc.context_processors.contact_email",
+    "misc.context_processors.site_name",
     "messages.context_processors.inbox",
     "friends_app.context_processors.invitations",
-    "core.context_processors.combined_inbox_count",
+    "misc.context_processors.combined_inbox_count",
 )
 
 COMBINED_INBOX_COUNT_SOURCES = (
@@ -158,8 +158,7 @@ INSTALLED_APPS = (
     'account',
     'tribes',
     'projects',
-    'core',
-    'things_app',
+    'misc',
     'photos',
     'tag_app',
     
