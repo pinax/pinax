@@ -43,16 +43,34 @@ Sample WSGI File
     
     application = WSGIHandler()
 
-Sample cronjob
---------------
 
-See documentation for django-mailer and django-notification for more
-information on this::
+Sending Mail and Notices
+------------------------
+
+Both mail messages and (some) notifications are queued for asynchronous
+delivery. To actually deliver them you need to run
+
+    ./manage.py send_mail
+    
+and
+
+    ./manage.py emit_notices
+    
+on a frequent, regular basis.
+
+Because failed mail will be deferred, you need an additional, less
+frequency run of
+
+    ./manage.py retry_deferred
+    
+We recommend setting up cron jobs similar to the following:
     
     * * * * * (cd /path/to/pinax; /usr/local/bin/python2.5 manage.py send_mail >> /path/to/pinax/cron_mail.log 2>&1)
     * * * * * (cd /path/to/pinax ; /usr/local/bin/python2.5 manage.py emit_notices >> /path/to/pinax/emit_notices.log 2>&1)
     
     0,20,40 * * * * (cd /path/to/pinax; /usr/local/bin/python2.5 manage.py retry_deferred >> /path/to/pinax/cron_mail_deferred.log 2>&1)
+
+This runs `send_mail` and `emit_notices` every minute and `retry_deferred` every 20 minutes.
 
 
 See also
