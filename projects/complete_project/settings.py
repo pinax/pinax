@@ -146,7 +146,6 @@ INSTALLED_APPS = (
 #    'avatar',
     'arcade',
     'games',
-    'locations',
     'things',
     'flag',
     
@@ -154,7 +153,6 @@ INSTALLED_APPS = (
     'analytics',
     'profiles',
     'zwitschern',
-    'lifestream',
     'account',
     'tribes',
     'projects',
