@@ -1,15 +1,15 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-from projects.models import *
+from projects.models import Project, Topic, Task, ProjectMember
 
 # @@@ this is based on Tribes -- can we re-use anything?
 
 class ProjectForm(forms.ModelForm):
     
-    slug = forms.RegexField(max_length=20, regex=r'^\w+$',
-        help_text = _("a short version of the name consisting only of letters, numbers and underscores."),
-        error_message = _("This value must contain only letters, numbers and underscores."))
+    slug = forms.SlugField(max_length=20,
+        help_text = _("a short version of the name consisting only of letters, numbers, underscores or hyphens."),
+        error_message = _("This value must contain only letters, numbers, underscores and hyphens."))
             
     def clean_slug(self):
         if Project.objects.filter(slug__iexact=self.cleaned_data["slug"]).count() > 0:

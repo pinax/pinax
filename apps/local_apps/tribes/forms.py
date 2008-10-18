@@ -1,13 +1,13 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-from tribes.models import *
+from tribes.models import Tribe, Topic
 
 class TribeForm(forms.ModelForm):
     
-    slug = forms.RegexField(max_length=20, regex=r'^\w+$',
-        help_text = _("a short version of the name consisting only of letters, numbers and underscores."),
-        error_message = _("This value must contain only letters, numbers and underscores."))
+    slug = forms.SlugField(max_length=20,
+        help_text = _("a short version of the name consisting only of letters, numbers, underscores and hyphens."),
+        error_message = _("This value must contain only letters, numbers, underscores and hyphens."))
             
     def clean_slug(self):
         reserved_slugs = ["your_tribes"]
