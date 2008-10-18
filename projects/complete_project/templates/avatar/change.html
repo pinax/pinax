@@ -8,8 +8,8 @@
 {% block body %}
     <h1>{% trans "Avatar" %}</h1>
     <h3>{% trans "Here is your current avatar:" %}</h3>
-	{% avatar user 80 %}
-	{% if not avatars %}
+  {% avatar user 80 %}
+  {% if not avatars %}
         <h3>You do not yet have an avatar for this site.  Please upload one by using the form below.</h3>
     {% else %}
         <h3>Select a different avatar:</h3>

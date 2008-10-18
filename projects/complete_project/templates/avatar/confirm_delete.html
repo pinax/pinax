@@ -6,7 +6,7 @@
 
 {% block body %}
     <h1>{% trans "Avatar" %}</h1>
-	{% if not avatars %}
+  {% if not avatars %}
         <h3>You have no avatars to delete.  Please <a href="{% url avatar_change %}">upload one</a> now.</h3>
     {% else %}
         <h3>Select which avatars to delete:</h3>

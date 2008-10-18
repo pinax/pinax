@@ -21,26 +21,26 @@
         
         {% autopaginate swaps %}
 
-			<table class="tasks" >
-				<tr>
-					<th>Accepted Time</th>
-					<th>Proposing Offer</th>
-					<th>Offered By</th>
-					<th>Responding Offer</th>
-					<th>Offered By</th>
-					<th>State</th>
-				</tr>
-				{% for swap in swaps %}
-					<tr class="{% cycle odd,even %}">
-						<td><a href="{{ swap.get_absolute_url }}">{{ swap.accepted_time|shorttimesince }}</a></td>
-						<td>{{ swap.proposing_offer }}</td>
-						<td>{{ swap.proposing_offer.offerer }}</td>
-						<td>{{ swap.responding_offer }}</td>
-						<td>{{ swap.responding_offer.offerer }}</td>
-						<td>{{ swap.get_state_display }}</td>
-					</tr>
-				{% endfor %}
-			</table>
+      <table class="tasks" >
+        <tr>
+          <th>Accepted Time</th>
+          <th>Proposing Offer</th>
+          <th>Offered By</th>
+          <th>Responding Offer</th>
+          <th>Offered By</th>
+          <th>State</th>
+        </tr>
+        {% for swap in swaps %}
+          <tr class="{% cycle odd,even %}">
+            <td><a href="{{ swap.get_absolute_url }}">{{ swap.accepted_time|shorttimesince }}</a></td>
+            <td>{{ swap.proposing_offer }}</td>
+            <td>{{ swap.proposing_offer.offerer }}</td>
+            <td>{{ swap.responding_offer }}</td>
+            <td>{{ swap.responding_offer.offerer }}</td>
+            <td>{{ swap.get_state_display }}</td>
+          </tr>
+        {% endfor %}
+      </table>
 
         {% paginate %}
 
