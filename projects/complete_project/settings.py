@@ -144,8 +144,6 @@ INSTALLED_APPS = (
     'ajax_validation',
     'photologue',
 #    'avatar',
-    'arcade',
-    'games',
     'things',
     'flag',
     

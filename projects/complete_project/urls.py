@@ -51,7 +51,6 @@ urlpatterns = patterns('',
     (r'^admin/(.*)', admin.site.root),
     (r'^photos/', include('photos.urls')),
     #(r'^avatar/', include('avatar.urls')),
-    (r'^games/', include('games.urls')),
     (r'^swaps/', include('swaps.urls')),
     (r'^flag/', include('flag.urls')),
     
