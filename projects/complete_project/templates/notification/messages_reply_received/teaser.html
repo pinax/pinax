@@ -1,2 +1,0 @@
-{% load i18n %}{% url profile_detail username=message.sender.username as sender_url %}
-{% blocktrans with message.get_absolute_url as message_url and message.sender as message_sender and message.parent_msg as message_parent_msg %}<a href="{{ sender_url }}">{{ message_sender }}</a> has sent you a reply to <a href="{{ message_url }}">{{ message_parent_msg }}</a>.{% endblocktrans %}
