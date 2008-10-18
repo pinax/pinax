@@ -42,7 +42,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django_openidconsumer.middleware.OpenIDMiddleware',
     'account.middleware.LocaleMiddleware',
-#    'django.middleware.doc.XViewMiddleware',
+    'django.middleware.doc.XViewMiddleware',
     'pagination.middleware.PaginationMiddleware',
 )
 
