@@ -8,7 +8,7 @@ from django.utils.translation import ugettext
 
 from friends.forms import InviteFriendForm
 from friends.models import FriendshipInvitation, Friendship
-from photos.models import Photos
+from photos.models import Image
 
 from zwitschern.models import Following
 

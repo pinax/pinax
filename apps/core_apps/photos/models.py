@@ -14,7 +14,7 @@ PUBLISH_CHOICES = (
     (2, _('Private')),
 )
 
-class PhotoSets(models.Model):
+class PhotoSet(models.Model):
     """
     A set of photos
     """
@@ -27,7 +27,7 @@ class PhotoSets(models.Model):
         verbose_name = _('photo set')
         verbose_name_plural = _('photo sets')
 
-class Photos(ImageModel):
+class Image(ImageModel):
     """
     A photo with its details
     """
@@ -42,7 +42,7 @@ class Photos(ImageModel):
     is_public = models.BooleanField(_('is public'), default=True, help_text=_('Public photographs will be displayed in the default views.'))
     member = models.ForeignKey(User, related_name="added_photos", blank=True, null=True)
     safetylevel = models.IntegerField(_('safetylevel'), choices=SAFETY_LEVEL, default=1)
-    photoset = models.ManyToManyField(PhotoSets, verbose_name=_('photo set'))
+    photoset = models.ManyToManyField(PhotoSet, verbose_name=_('photo set'))
     tags = TagField()
 
     def __unicode__(self):
@@ -57,7 +57,7 @@ class Pool(models.Model):
     model for a photo to be applied to an object
     """
 
-    photo           = models.ForeignKey(Photos)
+    photo           = models.ForeignKey(Image)
     content_type    = models.ForeignKey(ContentType)
     object_id       = models.PositiveIntegerField()
     content_object  = generic.GenericForeignKey()

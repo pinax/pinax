@@ -3,7 +3,7 @@ from django.template import RequestContext
 
 from blog.models import Post
 from tagging.models import Tag, TaggedItem
-from photos.models import Photos
+from photos.models import Image
 from bookmarks.models import BookmarkInstance
 from projects.models import Project, Task
 from projects.models import Topic as ProjectTopic
@@ -18,7 +18,7 @@ def tags(request, tag, template_name='tags/index.html'):
     
     alltags = TaggedItem.objects.get_by_model(Post, tag).filter(status=2)
     
-    phototags = TaggedItem.objects.get_by_model(Photos, tag)
+    phototags = TaggedItem.objects.get_by_model(Image, tag)
     bookmarktags = TaggedItem.objects.get_by_model(BookmarkInstance, tag)
     
     project_tags = TaggedItem.objects.get_by_model(Project, tag).filter(deleted=False)
