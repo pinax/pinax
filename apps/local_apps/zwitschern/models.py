@@ -121,6 +121,9 @@ def tweet(user, text, tweet=None):
             recipients.add(reply_recipient)
         except User.DoesNotExist:
             pass # oh well
+        else:
+            if notification:
+                notification.send([reply_recipient], "tweet_reply_received", {'tweet': tweet,})
     
     # if contains #tribe sent it to that tribe too (the tribe itself, not the members)
     for tribe in tribe_ref_re.findall(text):
@@ -132,9 +135,6 @@ def tweet(user, text, tweet=None):
     # now send to all the recipients
     for recipient in recipients:
         tweet_instance = TweetInstance.objects.create(text=text, sender=user, recipient=recipient, sent=tweet.sent)
-    if match:
-        if notification:
-            notification.send([reply_recipient], "tweet_reply_received", {'tweet': tweet,})
 
 
 class FollowingManager(models.Manager):
