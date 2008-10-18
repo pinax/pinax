@@ -14,18 +14,18 @@ intranets, learning management, software project management and more.
 
 If you have any questions about the Pinax project, please contact
 James Tauber <jtauber@jtauber.com> or join us on the #pinax IRC channel
-on freenode.
+on freenode or the pinax-users mailing list on Google Groups.
 
 
 DIRECTORY STRUCTURE
 
 projects/
-    complete_project/   contains a complete sample project and templates
-    basic_project/      a more basic starter project (still to come)
+    complete_project/   a complete sample project and templates
+    basic_project/      a more basic starter project
 apps/
-    external_apps/      contains external re-usable apps via svn:externals
-    local_apps/         contains re-usable apps that aren't yet externalized
-    core_apps/          contains non re-usable apps specific to sample project
+    external_apps/      external re-usable apps via svn:externals
+    local_apps/         re-usable apps that aren't yet externalized
+    core_apps/          non re-usable apps specific to sample project(s)
 libs/
     external_libs/      contains external libraries
 docs/                   documentation (using rst and sphinx; in progress)
@@ -41,5 +41,5 @@ you don't need to use the one we provide.
 
 
 With the exception of photos, things should just work out of the box. You can
-cd into projects/complete_project/ and run ./manage.py syncdb and
-./manage.py runserver to get running immediately.
+cd into projects/complete_project/ or projects/basic_project/ and
+run ./manage.py syncdb and ./manage.py runserver to get running immediately.
