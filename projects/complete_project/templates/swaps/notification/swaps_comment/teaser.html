@@ -1,0 +1,2 @@
+{% load i18n %}{% url profile_detail username=commenter.username as user_url %}
+{% blocktrans with swap.get_absolute_url as swap_url %}<a href="{{ user_url }}">{{ commenter }}</a> has commented on the swap '<a href="{{ swap_url }}">{{ swap }}</a>' in which your offer is involved.{% endblocktrans %}

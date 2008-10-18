@@ -1,0 +1,5 @@
+{% load i18n %}{% blocktrans with comment.comment as swap_comment and swap.get_absolute_url as swap_url %}{{ commenter }} has commented on the swap  {{ swap }} in which your offer is involved:
+
+{{ swap_comment }}
+
+http://{{ current_site }}{{ swap_url }}{% endblocktrans %}

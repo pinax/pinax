@@ -1,0 +1,4 @@
+{% load i18n %}{% blocktrans with losing_swap.get_absolute_url as losing_swap_url and winning_swap.get_absolute_url as winning_swap_url %}
+One of your offers was involved in a swap  <a href="{{ losing_swap_url }}">{{ losing_swap }}</a> 
+that lost a conflict to another swap <a href="{{ winning_swap_url }}">{{ winning_swap }}</a>.
+{% endblocktrans %}
