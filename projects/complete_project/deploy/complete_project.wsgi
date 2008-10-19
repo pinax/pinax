@@ -1,5 +1,5 @@
-# pinax.wsgi is configured to live in projects/complete_project/deploy. If you
-# move this file you need to reconfigure the paths below.
+# complete_project.wsgi is configured to live in projects/complete_project/deploy.
+# If you move this file you need to reconfigure the paths below.
 
 import os
 import sys
