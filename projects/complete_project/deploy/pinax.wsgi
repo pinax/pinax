@@ -11,13 +11,15 @@ sys.stdout = sys.stderr
 from os.path import abspath, dirname, join
 from site import addsitedir
 
-path = addsitedir(abspath(join(dirname(__file__), "../../../libs/external_libs")), set())
+PINAX_ROOT = abspath(join(dirname(__file__), "../../../"))
+
+path = addsitedir(join(PINAX_ROOT, "libs/external_libs"), set())
 if path:
     sys.path = list(path) + sys.path
 
-sys.path.insert(0, abspath(join(dirname(__file__), "../../../apps/external_apps")))
-sys.path.insert(0, abspath(join(dirname(__file__), "../../../apps/local_apps")))
-sys.path.insert(0, abspath(join(dirname(__file__), "../../../apps/core_apps")))
+sys.path.insert(0, join(PINAX_ROOT, "apps/external_apps"))
+sys.path.insert(0, join(PINAX_ROOT, "apps/local_apps"))
+sys.path.insert(0, join(PINAX_ROOT, "apps/core_apps"))
 
 sys.path.insert(0, abspath(join(dirname(__file__), "../../")))
 

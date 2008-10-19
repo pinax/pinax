@@ -1,4 +1,4 @@
-# basic_project.wsgi is configured to live in projects/complete_project/deploy.
+# basic_project.wsgi is configured to live in projects/basic_project/deploy.
 # If you move this file you need to reconfigure the paths below.
 
 import os
@@ -11,17 +11,17 @@ sys.stdout = sys.stderr
 from os.path import abspath, dirname, join
 from site import addsitedir
 
-path = addsitedir(abspath(join(dirname(__file__), "../../../libs/external_libs")), set())
+PINAX_ROOT = abspath(join(dirname(__file__), "../../../"))
+
+path = addsitedir(join(PINAX_ROOT, "libs/external_libs"), set())
 if path:
     sys.path = list(path) + sys.path
 
-sys.path.insert(0, abspath(join(dirname(__file__), "../../../apps/external_apps")))
-sys.path.insert(0, abspath(join(dirname(__file__), "../../../apps/local_apps")))
-sys.path.insert(0, abspath(join(dirname(__file__), "../../../apps/core_apps")))
+sys.path.insert(0, join(PINAX_ROOT, "apps/external_apps"))
+sys.path.insert(0, join(PINAX_ROOT, "apps/local_apps"))
+sys.path.insert(0, join(PINAX_ROOT, "apps/core_apps"))
 
-# emulate manage.py path hacking.
 sys.path.insert(0, abspath(join(dirname(__file__), "../../")))
-sys.path.insert(0, abspath(join(dirname(__file__), "../")))
 
 from django.core.handlers.wsgi import WSGIHandler
 
