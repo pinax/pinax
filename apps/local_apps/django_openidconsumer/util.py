@@ -6,7 +6,7 @@ from yadis import xri
 import time, base64, md5
 
 from django.conf import settings
-from models import Association, Nonce
+from django_openidconsumer.models import Association, Nonce
 
 class OpenID:
     def __init__(self, openid, issued, attrs=None, sreg=None):

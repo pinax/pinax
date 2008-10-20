@@ -1,16 +1,15 @@
 from django.http import HttpResponse, HttpResponseRedirect, get_host
 from django.shortcuts import render_to_response as render
-from django.template import RequestContext
 from django.conf import settings
 
-import md5, re, time, urllib
+import re, urllib
 from openid.consumer.consumer import Consumer, \
     SUCCESS, CANCEL, FAILURE, SETUP_NEEDED
 from openid.consumer.discover import DiscoveryFailure
 from yadis import xri
 
-from util import OpenID, DjangoOpenIDStore, from_openid_response
-from middleware import OpenIDMiddleware
+from django_openidconsumer.util import DjangoOpenIDStore, from_openid_response
+from django_openidconsumer.middleware import OpenIDMiddleware
 
 from django.utils.html import escape
 
