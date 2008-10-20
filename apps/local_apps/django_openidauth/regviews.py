@@ -73,26 +73,3 @@ def register(request, success_url='/accounts/register/complete/',
 
     return render_to_response(template_name, { 'form': form },
                               context_instance=RequestContext(request))
-
-def demo_delete_me_asap(request):
-    import django.forms
-
-    class UserProfileForm(forms.Form):
-        name = forms.CharField(max_length=100)
-        email = forms.EmailField()
-        bio = forms.CharField(widget=forms.Textarea)
-        dob = forms.DateField(required=False)
-        receive_newsletter = forms.BooleanField(required=False)
-        def clean_email(self):
-            from django.forms.util import ValidationError
-            if self.cleaned_data['email'].split('@')[1] == 'hotmail.com':
-                raise ValidationError, "No hotmail.com emails, please."
-
-    if request.method == 'POST':
-        form = UserProfileForm(request.POST)
-        if form.is_valid():
-            # ... save the user's profile
-            return HttpResponseRedirect('/profile/saved/')
-    else:
-        form = UserProfileForm()
-    return render_to_response('profile.html', {'form': form})

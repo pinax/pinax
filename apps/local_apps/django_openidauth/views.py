@@ -6,10 +6,10 @@ from django.utils.html import escape
 from django.conf import settings
 from django.template import RequestContext
 
-from models import UserOpenID, associate_openid, unassociate_openid
+from django_openidauth.models import UserOpenID, associate_openid, unassociate_openid
 from django_openidconsumer import views as consumer_views
 
-import time, md5, datetime
+import time, md5
 
 def _make_hash(hash_type, user, openid):
     return md5.new('%s:%d:%s:%s' % (
