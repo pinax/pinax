@@ -7,15 +7,15 @@ In short:
 
 - Create a ``local_settings.py`` alongside ``settings.py`` for your
   host-specific settings (like database connection, email, etc).
-- If you are using WSGI, create a ``.wsgi`` file that does the necessary
-  path manipulation.
-- mod_python instructions coming...
+- Configure mod_wsgi or mod_python.
 - Set up ``cron`` job for mailer and asynchronous notifications.
 
-Sample WSGI File
-----------------
+Using mod_wsgi
+--------------
 
-::
+If you are using mod_wsgi, which we recommend, you will need to give it a
+WSGI file. Here is a sample WSGI file that correctly sets up your ``sys.path``
+to use all of the correct components::
     
     import os
     import sys
@@ -43,6 +43,19 @@ Sample WSGI File
     
     application = WSGIHandler()
 
+Using mod_python
+----------------
+
+If mod_python is your flavor we have provided the correct hooks for you to
+use Pinax. Here is a sample Apache config that you can use::
+
+    <Location "/">
+        SetHandler python-program
+        PythonHandler complete_project.deploy.modpython
+        SetEnv DJANGO_SETTINGS_MODULE complete_project.settings
+        PythonDebug On
+        PythonPath "['/path/to/pinax/projects'] + sys.path"
+    </Location>
 
 Sending Mail and Notices
 ------------------------
