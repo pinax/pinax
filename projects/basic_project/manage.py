@@ -11,7 +11,6 @@ if path:
     sys.path = list(path) + sys.path
 sys.path.insert(0, join(PINAX_ROOT, "apps/external_apps"))
 sys.path.insert(0, join(PINAX_ROOT, "apps/local_apps"))
-sys.path.insert(0, join(PINAX_ROOT, "apps/core_apps"))
 
 from django.core.management import execute_manager
 
