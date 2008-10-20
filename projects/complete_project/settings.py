@@ -227,8 +227,10 @@ FORCE_LOWERCASE_TAGS = True
 
 WIKI_REQUIRES_LOGIN = True
 
+# local_settings.py can be used to override environment-specific settings
+# like database and email that differ between development and production.
 try:
-    from localsettings import *
+    from local_settings import *
 except ImportError:
     pass
 

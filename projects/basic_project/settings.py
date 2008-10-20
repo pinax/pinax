@@ -135,6 +135,6 @@ SITE_NAME = "Pinax"
 LOGIN_URL = "/account/login"
 
 try:
-    from localsettings import *
+    from local_settings import *
 except ImportError:
     pass
