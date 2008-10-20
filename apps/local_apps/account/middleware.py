@@ -16,7 +16,7 @@ class LocaleMiddleware(object):
             try:
                 account = Account.objects.get(user=request.user)
                 return account.language
-            except (Account.DoesNotExist, Account.MultipleObjectsReturned):
+            except Account.DoesNotExist:
                 pass
         return translation.get_language_from_request(request)
 
