@@ -133,6 +133,7 @@ EMAIL_DEBUG = DEBUG
 CONTACT_EMAIL = "feedback@example.com"
 SITE_NAME = "Pinax"
 LOGIN_URL = "/account/login"
+LOGIN_REDIRECT_URLNAME = "what_next"
 
 # local_settings.py can be used to override environment-specific settings
 # like database and email that differ between development and production.

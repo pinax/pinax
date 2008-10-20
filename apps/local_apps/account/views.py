@@ -1,4 +1,5 @@
 
+from django.conf import settings
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate
@@ -12,8 +13,13 @@ from account.forms import SignupForm, AddEmailForm, LoginForm, ChangePasswordFor
 from emailconfirmation.models import EmailAddress, EmailConfirmation
 
 def login(request, form_class=LoginForm, template_name="account/login.html"):
-    redirect_to = request.REQUEST.get("next", reverse("what_next"))
     if request.method == "POST":
+        default_redirect_to = getattr(settings, "LOGIN_REDIRECT_URLNAME", None)
+        if default_redirect_to:
+            default_redirect_to = reverse(default_redirect_to)
+        else:
+            default_redirect_to = settings.LOGIN_REDIRECT_URL
+        redirect_to = request.REQUEST.get("next", default_redirect_to)
         form = form_class(request.POST)
         if form.login(request):
             return HttpResponseRedirect(redirect_to)

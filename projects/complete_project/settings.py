@@ -175,6 +175,7 @@ EMAIL_DEBUG = DEBUG
 CONTACT_EMAIL = "feedback@example.com"
 SITE_NAME = "Pinax"
 LOGIN_URL = "/account/login"
+LOGIN_REDIRECT_URLNAME = "what_next"
 
 LOGGING_OUTPUT_ENABLED = True
 LOGGING_SHOW_METRICS = True
