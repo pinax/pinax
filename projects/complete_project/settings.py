@@ -93,6 +93,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "notification.context_processors.notification",
     "announcements.context_processors.site_wide_announcements",
     "account.context_processors.openid",
+    "account.context_processors.account",
     "misc.context_processors.contact_email",
     "misc.context_processors.site_name",
     "messages.context_processors.inbox",

@@ -13,7 +13,7 @@
         <dt>{% trans "Subject" %}:</dt>
         <dd><strong>{{ message.subject }}</strong></dd>
         <dt>{% trans "Date" %}:</dt>
-        <dd>{{ message.sent_at|localtime:user.get_profile.timezone|date:_("DATETIME_FORMAT")}}</dd>
+        <dd>{{ message.sent_at|localtime:account.timezone|date:_("DATETIME_FORMAT")}}</dd>
         <dt>{% trans "Recipient" %}:</dt>
         <dd>{{ message.recipient }}</dd>
     </dl>

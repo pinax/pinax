@@ -20,7 +20,7 @@
                         <a href="{{ message.get_absolute_url }}">{% if message.subject.strip %}{{ message.subject }}{% else %}(none){% endif %}</a>
                         {% if message.replied %}</em>{% endif %}
                         {% if message.new %}</strong>{% endif %}</td>
-                    <td>{{ message.sent_at|localtime:user.get_profile.timezone|date:_("DATETIME_FORMAT") }}</td>
+                    <td>{{ message.sent_at|localtime:account.timezone|date:_("DATETIME_FORMAT") }}</td>
                     <td><a href="{% url messages_delete message.id %}">{% trans "delete" %}</a></td>
                 </tr>
             {% endfor %}
