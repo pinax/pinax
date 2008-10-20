@@ -2,7 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User, AnonymousUser
 from django.db.models.signals import post_save
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import get_language_from_request, ugettext_lazy as _
 
 from timezones.fields import TimeZoneField
 
@@ -65,7 +65,10 @@ class AnonymousAccount(object):
     def __init__(self, request=None):
         self.user = AnonymousUser()
         self.timezone = settings.TIME_ZONE
-        self.language = "en"
-    
+        if request is not None:
+            self.language = get_language_from_request(request)
+        else:
+            self.language = settings.LANGUAGE_CODE
+
     def __unicode__(self):
         return "AnnonymousAccount"
