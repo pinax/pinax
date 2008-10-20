@@ -5,12 +5,14 @@ from os.path import abspath, dirname, join
 from site import addsitedir
 
 PINAX_ROOT = abspath(join(dirname(__file__), "../../"))
+PROJECT_ROOT = abspath(dirname(__file__))
 
 path = addsitedir(join(PINAX_ROOT, "libs/external_libs"), set())
 if path:
     sys.path = list(path) + sys.path
 sys.path.insert(0, join(PINAX_ROOT, "apps/external_apps"))
 sys.path.insert(0, join(PINAX_ROOT, "apps/local_apps"))
+sys.path.insert(0, join(PROJECT_ROOT, "apps"))
 
 from django.core.management import execute_manager
 
