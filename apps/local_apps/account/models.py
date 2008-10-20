@@ -71,4 +71,4 @@ class AnonymousAccount(object):
             self.language = settings.LANGUAGE_CODE
 
     def __unicode__(self):
-        return "AnnonymousAccount"
+        return "AnonymousAccount"
