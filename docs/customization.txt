@@ -20,6 +20,7 @@ now what we recommend is:
 
 .. _ref-project:
 
+
 Choosing a Project
 ------------------
 
@@ -38,6 +39,7 @@ complete_project
     enabled by default.  It provides all tabs available, etc.  From here you can
     remove applications that you do not want to use, and add your own 
     applications as well.
+
 
 Settings You Will (Probably) Want To Override
 ---------------------------------------------
@@ -74,6 +76,19 @@ Settings You Will (Probably) Want To Override
 All but ``MAILER_PAUSE_SEND``, ``CONTACT_EMAIL``, ``URCHIN_ID``,
 ``BBAUTH_APP_ID``, ``BBAUTH_SHARED_SECRET`` and ``SITE_NAME`` are just the
 standard Django settings.
+
+
+``base.html`` versus ``site_base.html``
+---------------------------------------
+
+In the sample projects, ``templates/base.html`` is intended for overall page structure
+whereas ``templates/site_base.html`` is intended for adding site-specific content that
+is to be found on all pages (things like logo, navigation or footers).
+
+If you are writing a theme to be used across multiple sites, you should modify
+``base.html``, not ``site_base.html``. If you want to keep a particular theme
+but modify content for a specific site, you should modify ``site_base.html``.
+
 
 Adding Tabs
 -----------
