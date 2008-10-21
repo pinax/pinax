@@ -1,0 +1,14 @@
+{% extends "things/base.html" %}
+{% load things_tags %}
+
+{% block main_content %}
+    <p>Order By:</p>
+    {% display_search %}
+    {% display_ordering %}
+    {% if group_name %}<p>{{ group_name }}</p>{% endif %}
+    <ul>
+        {% for item in objects %}
+            <li><a href="{% item_url url_prefix name_prefix item %}">{{ item }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

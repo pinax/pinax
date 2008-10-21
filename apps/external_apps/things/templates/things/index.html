@@ -1,0 +1,9 @@
+{% extends "things/base.html" %}
+
+{% block main_content %}
+    <ul>
+        {% for model_dict in models %}
+            <li><a href="{{ model_dict.url }}">{{ model_dict.model_thing.opts.verbose_name_plural }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

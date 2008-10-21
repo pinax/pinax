@@ -1,0 +1,54 @@
+{% extends "swaps/base.html" %}
+
+{% load i18n %}
+{% load pagination_tags %}
+{% load shorttimesince_tag %}
+
+{% block head_title %}{% blocktrans %}Your dead Swaps{% endblocktrans %}{% endblock %}
+
+{% block body %}
+    
+    <h1>{% trans "Your dead Swaps" %}</h1>
+    
+    
+    {% if swaps %}
+
+        
+        {% autopaginate swaps %}
+
+			<table class="tasks" >
+				<tr>
+					<th>Time of death</th>
+					<th>Proposing Offer</th>
+					<th>Offered By</th>
+					<th>Responding Offer</th>
+					<th>Offered By</th>
+					<th>State</th>
+					<th>Conflict</th>
+				</tr>
+				{% for swap in swaps %}
+					<tr class="{% cycle odd,even %}">
+						<td><a href="{{ swap.get_absolute_url }}">{{ swap.killed_time|shorttimesince }}</a></td>
+						<td>{{ swap.proposing_offer }}</td>
+						<td>{{ swap.proposing_offer.offerer }}</td>
+						<td>{{ swap.responding_offer }}</td>
+						<td>{{ swap.responding_offer.offerer }}</td>
+						<td>{{ swap.get_state_display }}</td>
+						<td>
+							{%if swap.conflicted_by %}
+								<a href="{{ swap.conflicted_by.get_absolute_url }}">{{ swap.conflicted_by }}</a>
+							{% else %}
+								&nbsp;
+							{% endif %}
+						</td>
+					</tr>
+				{% endfor %}
+			</table>
+
+        {% paginate %}
+
+    {% else %}
+        No dead swaps yet.
+    {% endif %}
+    
+{% endblock %}

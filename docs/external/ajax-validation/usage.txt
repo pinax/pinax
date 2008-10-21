@@ -1,0 +1,53 @@
+=====
+Usage
+=====
+
+To use, Ajax Validation requires only that you add a URL(one per form), and some javascript to any page with the form.
+
+For example, if you had the following form::
+    
+    from django import forms
+    
+    class ContactForm(forms.Form):
+        name = forms.CharField(label='Your Name')
+        email = forms.EmailField(label='Your Email')
+        message = forms.CharField(label='Your Message', widget=forms.Textarea)
+
+
+You would need to add the following url to your urls.py(you also need to import the form class)::
+
+    (r'^SOME/URL/$', 'ajax_validation.views.validate', {'form_class': ContactForm}, 'contact_form_validate')
+
+
+The URL can take any arguments(named, or unamed), and you can also provide a 
+callback function, this function is given request, \*args, and \*\*kwargs and 
+should return a dictionary which is passed to the form constructor.
+
+And then in the template in which you are displaying the form, you should add::
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+    {% load jquery_validation %}
+    {% include_validation %}
+    <script type="text/javascript">
+        $(function()    {
+            $('#form').validate('{% url contact_form_validate %}', {type: 'ul', fields: ['email'], dom: $('#id_email'), event: 'keyup'});
+            $('#form').validate('{% url contact_form_validate %}', {type: 'ul'});
+        });
+    </script>
+
+As you can see, you need to have jQuery for this to work(here it is being loaded
+from google).  In the javascript you use jQuery's selectors to select where the 
+form is, and the validate method takes 5 parameters, all optional, first is the 
+URL of the validation, here we reverse the URL we set up earlier.  The second 
+parameter is a dictionary, it is optional and should either provide type(ul, 
+table, or p), this is the type of renderer you used for django's forms(form.as_p, 
+etc.), the default is table if nothing is provided.  It can also take a callback 
+option which is a function that recieves data, which is the JSON representation 
+of any errors, and form, which is the jquery object that you provided.  Finally, 
+it takes fields, which is a list of the fields that should be validated, it will 
+not display errors that aren't in that list of fields.  The last 2 options are 
+dom and event, these allow you to choose when the validation will occur, dom 
+should be a jQuery object(i.e.: $('#my_field')), and event should be a jQuery 
+event(listed `here`_).
+
+.. _here: http://docs.jquery.com/Events/bind#overview

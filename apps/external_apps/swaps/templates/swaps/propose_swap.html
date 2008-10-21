@@ -1,0 +1,39 @@
+{% extends "swaps/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% blocktrans %}Propose a Swap{% endblocktrans %}{% endblock %}
+
+{% block body %}
+    
+    <h1>{% trans "Propose a Swap" %}</h1>
+    
+    <form id="proposal_form" method="POST" action="">
+		<div>
+			<h3>For: {{ offer.short_description }}</h3>
+			<p>
+				Offer: {{ offer.offering }}
+			</p>
+			<p>
+				Want: {{ offer.want|urlize }}
+			</p>
+			<p>
+				Offered by: {{ offer.offerer }}
+			</p>
+		</div>
+		<div>
+			<h3>
+				Swap for one of your existing offers:
+				{{ swap_form.proposing_offer }}
+			</h3>
+		</div>
+        <div>
+			<h3>Or make a new offer:</h3>
+			<table>
+				{{ offer_form }}
+			</table>
+        </div>
+		<p><input type="submit" value="propose"/></p>
+    </form>
+
+{% endblock %}

@@ -1,0 +1,58 @@
+
+=====
+Usage
+=====
+
+django-mailer is asynchronous so in addition to putting mail on the queue you
+need to periodically tell it to clear the queue and actually send the mail.
+
+The latter is done via a command extension.
+
+Putting Mail On The Queue
+=========================
+
+Because django-mailer currently uses the same function signature as django's
+core mail support you can do the following in your code::
+
+    # favour django-mailer but fall back to django.core.mail
+    try:
+        from mailer import send_mail
+    except ImportError:
+        from django.core.mail import send_mail
+
+and then just call send_mail like you normally would in django::
+
+    send_mail(subject, message_body, settings.DEFAULT_FROM_EMAIL, recipients)
+
+You can have Django use the mailer for crash e-mails if you add the following
+to your settings.py file::
+
+    MAILER_FOR_CRASH_EMAILS = True
+
+This can help when you have a large number of crashes occurring, as the
+default mail_admins will bring the site to a crawl posting the mail messages
+to the SMTP server. It will also give you a chance to purge excessive crash
+e-mails before they are sent.
+
+Clear Queue With Command Extensions
+===================================
+
+With mailer in your INSTALLED_APPS, there will be two new manage.py commands
+you can run:
+
+ * ``send_mail`` will clear the current message queue. If there are any
+   failures, they will be marked deferred and will not be attempted again by
+   ``send_mail``.
+
+ * ``retry_deferred`` will move any deferred mail back into the normal queue
+   (so it will be attempted again on the next ``send_mail``).
+
+You may want to set these up via cron to run regularly::
+
+    * * * * * (cd $PINAX; /usr/local/bin/python2.5 manage.py send_mail >> $PINAX/cron_mail.log 2>&1)
+    0,20,40 * * * * (cd $PINAX; /usr/local/bin/python2.5 manage.py retry_deferred >> $PINAX/cron_mail_deferred.log 2>&1)
+
+This attempts to send mail every minute with a retry on failure every 20 minutes.
+
+``manage.py send_mail`` uses a lock file in case clearing the queue takes
+longer than the interval between calling ``manage.py send_mail``.

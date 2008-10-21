@@ -1,0 +1,3 @@
+{% load i18n %}{% url profile_detail username=creator.username as creator_url %}
+{% blocktrans with swap.get_absolute_url as swap_url %}<a href="{{ creator_url }}">{{ creator }}</a> has changed their responding offer {{ responding_offer }} to your proposed '<a href="{{ swap_url }}">swap</a>' for {{ proposing_offer }}.
+{% endblocktrans %}

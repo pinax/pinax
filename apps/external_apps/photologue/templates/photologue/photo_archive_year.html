@@ -1,0 +1,14 @@
+{% extends "photologue/root.html" %}
+
+{% block title %}Galleries for {{ year }}{% endblock %}
+
+{% block content %}
+
+<h1>Photos for {{ year }}</h1>
+<ul>
+{% for date in date_list %}
+<li><a href="{{ date|date:"M"|lower }}/">{{ date|date:"F" }}</a></li>
+{% endfor %}
+</ul>
+
+{% endblock %}

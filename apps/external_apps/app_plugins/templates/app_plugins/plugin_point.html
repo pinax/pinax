@@ -1,0 +1,7 @@
+{% load app_plugins %}{% if app_plugin_plugins %}
+{% for plugin in app_plugin_plugins %}
+{% app_plugin plugin.app app_plugin_point plugin=plugin user=app_plugin_user args=app_plugin_args ext=app_plugin_ext %}
+{% endfor %}{% else %}
+{% for app in app_plugin_apps %}
+{% app_plugin app app_plugin_point user=app_plugin_user args=app_plugin_args ext=app_plugin_ext %}
+{% endfor %}{% endif %}

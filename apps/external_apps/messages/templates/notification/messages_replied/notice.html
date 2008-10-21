@@ -1,0 +1,2 @@
+{% load i18n %}
+{% blocktrans with message.parent_msg.get_absolute_url as message_url and message.parent_msg as message_parent_msg and message.recipient as message_recipient %}You have replied to <a href="{{ message_url }}">{{ message_parent_msg }}</a> from {{ message_recipient }}.{% endblocktrans %}

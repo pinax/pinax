@@ -1,0 +1,40 @@
+Installing django-oembed
+========================
+
+Thanks for downloading django-oembed!
+
+To install it, first use subversion to check out the source code::
+
+    svn checkout http://django-oembed.googlecode.com/svn/trunk/ django-oembed
+
+Now, link the included ``oembed`` directory to your pythonpath.  On Debian 
+variants, it would look something like this::
+
+    sudo ln -s `pwd`/django-oembed/oembed /usr/lib/python2.5/site-packages/
+
+To use it with a Django installation, first place 'oembed' in the INSTALLED_APPS
+tuple of your settings.py file like so::
+    
+    INSTALLED_APPS = (
+        # ...
+        'oembed',
+    )
+
+Then syncdb, and here is sample usage in a template::
+
+    {% load oembed_tags %}
+    {% oembed %}
+        {% for link in links %}{{ link.href }}{% endfor %}
+    {% endoembed %}
+    
+In the previous example, any link.href would be replaced with an OEmbed-fetched
+embed.
+
+The templatetag takes one optional second argument, which you can figure out by
+looking at this usage::
+    
+    {% oembed 320x240 %}
+
+Note that this application requires Python 2.3 or later, and Django later than
+0.96. You can obtain Python from http://www.python.org/ and Django from 
+http://www.djangoproject.com/.

@@ -1,0 +1,35 @@
+Usage
+=====
+
+First you must add it to your INSTALLED_APPS::
+
+    INSTALLED_APPS = (
+        ....
+        'oembed',
+    )
+
+Then in your template, include the oembed tags::
+
+    {% load oembed_tags %}
+
+Then, surround something with the oembed tag. It will search for oembed-able links and replace them with the proper embed::
+
+    {% oembed %}
+    There is this great video at http://www.viddler.com/explore/SYSTM/videos/49/
+    {% endoembed %}
+
+Will result in::
+
+    There is this great video at <object 
+    classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="320" 
+    height="222" id="viddlerplayer-e5cb3aac"><param name="movie" 
+    value="http://www.viddler.com/player/e5cb3aac/" /><param 
+    name="allowScriptAccess" value="always" /><param name="allowFullScreen" 
+    value="true" /><embed src="http://www.viddler.com/player/e5cb3aac/" 
+    width="320" height="222" type="application/x-shockwave-flash" 
+    allowScriptAccess="always" allowFullScreen="true" 
+    name="viddlerplayer-e5cb3aac" ></embed></object>
+
+There is an optional width and height parameter, that can be invoked thusly::
+
+    {% oembed 320x240 %}...{% endoembed %}

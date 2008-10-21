@@ -1,0 +1,20 @@
+{% extends "photologue/root.html" %}
+
+{% block title %}Photos for {{ day|date }}{% endblock %}
+
+{% block content %}
+
+<h1>Photos for {{ day|date }}</h1>
+
+{% if object_list %}
+    {% for photo in object_list %}
+    <div class="gallery-photo">
+        <a href="{{ photo.get_absolute_url }}"><img src="{{ photo.get_thumbnail_url }}" alt="{{ photo.title }}"/></a>
+    </div>
+    {% endfor %}
+{% else %}
+<p>No photos were found.</p>
+{% endif %}
+<p><a href="{% url pl-photo-list 1 %}">View all photographs</a></p>
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "avatar/base.html" %}
+{% load avatar_tags %}
+
+{% block content %}
+    <p>Your current avatar: </p>
+    {% avatar user %}
+    {% if not avatars %}
+        <p>You do not yet have an avatar.  Please upload one now.</p>
+    {% else %}
+        <form method="POST" action="">
+            <ul>
+                {{ primary_avatar_form.as_ul }}
+            </ul>
+            <input type="submit" value="Choose new Default" />
+        </form>
+    {% endif %}
+    <form enctype="multipart/form-data" method="POST" action="">
+        <input type="file" name="avatar" value="Avatar Image" />
+        <input type="submit" value="Upload New Image" />
+    </form>
+{% endblock %}

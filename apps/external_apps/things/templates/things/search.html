@@ -1,0 +1,10 @@
+{% load things_tags %}
+{% if search_enabled %}
+    <form method="GET" action="">
+        <input type="text" name="search" value="{{ terms }}" />
+        <input type="submit" value="Search" />
+        {% if terms %}
+            <a href="{% clear_search_url request %}">Clear Search Terms</a>
+        {% endif %}
+    </form>
+{% endif %}

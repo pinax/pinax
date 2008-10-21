@@ -1,0 +1,47 @@
+{% extends "swaps/base.html" %}
+
+{% load i18n %}
+{% load pagination_tags %}
+{% load shorttimesince_tag %}
+
+{% block head_title %}{% blocktrans %}Swaps proposed by you{% endblocktrans %}{% endblock %}
+
+{% block body %}
+    
+    <h1>{% trans "Swaps proposed by you" %}</h1>  
+    
+    {% if swaps %}
+    
+        {% autopaginate swaps %}
+
+			<table class="tasks" >
+				<tr>
+					<th>Proposal Time</th>
+					<th>Your Offer</th>
+					<th>Responding Offer</th>
+					<th>Offered By</th>
+					<th>State</th>
+				</tr>
+				{% for swap in swaps %}
+					<tr class="{% cycle odd,even %}">
+						<td><a href="{{ swap.get_absolute_url }}">{{ swap.proposed_time|shorttimesince }}</a></td>
+						<td>{{ swap.proposing_offer }}</td>
+						<td>{{ swap.responding_offer }}</td>
+						<td>{{ swap.responding_offer.offerer }}</td>
+						<td>{{ swap.get_state_display }}</td>
+						<td>
+							<form action="{% url cancel_swap swap.id %}" method="POST">
+								<input type="submit" value="{% trans "Cancel" %}" />
+							</form>
+						</td>
+					</tr>
+				{% endfor %}
+			</table>
+
+        {% paginate %}
+
+    {% else %}
+        No proposed swaps.
+    {% endif %}
+    
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "photologue/root.html" %}
+
+{% block title %}Latest Photos{% endblock %}
+
+{% block content %}
+
+<h1>Latest Photos</h1>
+
+{% if latest %}
+    {% for photo in latest %}
+    <div class="gallery-photo">
+        <a href="{{ photo.get_absolute_url }}"><img src="{{ photo.get_thumbnail_url }}" alt="{{ photo.title }}"/></a>
+    </div>
+    {% endfor %}
+{% else %}
+<p>No photos were found.</p>
+{% endif %}
+<p><a href="{% url pl-photo-list 1 %}">View all photographs</a></p>
+
+{% endblock %}

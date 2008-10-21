@@ -1,0 +1,56 @@
+{% extends "swaps/base.html" %}
+
+{% load i18n %}
+{% load pagination_tags %}
+{% load shorttimesince_tag %}
+
+{% block head_title %}{% blocktrans %}Your Offers{% endblocktrans %}{% endblock %}
+
+{% block body %}
+    
+    <h1>{% trans "Your Offers" %}</h1>
+    
+    
+    {% if offers %}
+
+        
+        {% autopaginate offers %}
+
+			<table class="tasks" >
+				<tr>
+					<th>Description</th>
+					<th>Offer Time</th>
+					<th>Offering</th>
+					<th>Want</th>
+					<th>State</th>
+					<th>Swap</th>
+				</tr>
+				{% for offer in offers %}
+					<tr class="{% cycle odd,even %}">
+						<td><a href="{{ offer.get_absolute_url }}">{{ offer.short_description }}</a></td>
+						<td>{{ offer.offered_time|shorttimesince }}</td>
+						<td>{{ offer.offering|urlize }}</td>
+						<td>{{ offer.want|urlize }}</td>
+						<td>{{ offer.get_state_display }}</td>
+						<td>
+							{% if offer.swapped_by %}
+								<a href="{{ offer.swapped_by.get_absolute_url }}">{{ offer.swapped_by }}</a>
+							{% else %}
+								{% if offer.proposed_swap %}
+									<a href="{{ offer.proposed_swap.get_absolute_url }}">{{ offer.proposed_swap }}</a>
+								{% else %}
+									&nbsp;
+								{% endif %}
+							{% endif %}
+						</td>
+					</tr>
+				{% endfor %}
+			</table>
+
+        {% paginate %}
+
+    {% else %}
+        No offers yet.
+    {% endif %}
+    
+{% endblock %}

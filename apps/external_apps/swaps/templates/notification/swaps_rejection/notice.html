@@ -1,0 +1,3 @@
+{% load i18n %}{% url profile_detail username=creator.username as creator_url %}
+{% blocktrans with swap.get_absolute_url as swap_url %}<a href="{{ creator_url }}">{{ creator }}</a> has rejected your proposed '<a href="{{ swap_url }}">swap</a>' of {{ proposing_offer }} for {{ responding_offer }}.
+{% endblocktrans %}

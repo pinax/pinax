@@ -1,0 +1,60 @@
+{% extends "swaps/base.html" %}
+
+{% load i18n %}
+{% load tagging_tags %}
+{% load comments_tag %}
+
+{% block head_title %}{% blocktrans %}Swap{% endblocktrans %} : {{ swap }}{% endblock %}
+
+
+{% block body %}
+
+	<h1>{{ swap.get_state_display }} {% blocktrans %}Swap{% endblocktrans %}</h1>
+
+    <h2>Proposing Offer:</h2>
+    <div class="blog-post">
+        <h3>{{ swap.proposing_offer.short_description }}</h3>
+        <div class="blog-meta"><p>Offered by: <a href="{% url profiles.views.profile swap.proposing_offer.offerer.username %}">{{ swap.proposing_offer.offerer.username }}</a> on {{ swap.proposing_offer.offered_time|date }}</p></div>
+        <p>
+			Offering: {{ swap.proposing_offer.offering|urlize }}
+		</p>
+		<p>
+			Want: {{ swap.proposing_offer.want|urlize }}
+		</p>
+		<div>
+			{% ifequal swap.state "1" %}
+				{% ifequal swap.proposing_offer.offerer request.user %}
+					<form action="{% url offer_edit swap.proposing_offer.id %}" method="GET">
+						<input type="hidden" name="returnto" value="proposed_by_you" />
+						<input type="submit" value="{% trans "Edit Offer" %}" />
+					</form>
+			    {% endifequal %}
+            {% endifequal %}
+		</div>
+
+    </div>
+    <h2>Responding Offer:</h2>
+    <div class="blog-post">
+        <h3>{{ swap.responding_offer.short_description }}</h3>
+        <div class="blog-meta"><p>Offered by: <a href="{% url profiles.views.profile swap.responding_offer.offerer.username %}">{{ swap.responding_offer.offerer.username }}</a> on {{ swap.responding_offer.offered_time|date }}</p></div>
+        <p>
+			Offering: {{ swap.responding_offer.offering|urlize }}
+		</p>
+		<p>
+			Want: {{ swap.responding_offer.want|urlize }}
+		</p>
+		<div>
+			{% ifequal swap.state "1" %}
+				{% ifequal swap.responding_offer.offerer request.user %}
+					<form action="{% url offer_edit swap.responding_offer.id %}" method="GET">
+						<input type="hidden" name="returnto" value="proposed_to_you" />
+						<input type="submit" value="{% trans "Edit Offer" %}" />
+					</form>
+			    {% endifequal %}
+            {% endifequal %}
+		</div>
+    </div>
+
+    <h2>Discussion of this Swap:</h2>
+    {% comments swap %}
+{% endblock %}

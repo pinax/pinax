@@ -1,0 +1,2 @@
+{% load i18n %}
+{% blocktrans with message.get_absolute_url as message_url and message.sender as message_sender and message.parent_msg as message_parent_msg %}{{ message_sender }} has sent you a reply to {{ message_parent_msg }}.{% endblocktrans %}

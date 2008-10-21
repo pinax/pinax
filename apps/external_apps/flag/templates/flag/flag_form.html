@@ -1,0 +1,16 @@
+{% load flagtags %}
+
+{% block content %}
+    <form method="POST" action="{% url flag %}">
+        <table>
+            <tr><td><textarea id="id_comment" rows="10" cols="40" name="comment"></textarea></td></tr>
+            <tr>
+                <td><input type="hidden" name="object_id" value="{{ object_id }}" />
+                    <input type="hidden" name="content_type" value="{{ content_type }}" />
+                    <input type="hidden" name="creator_field" value="{{ creator_field }}" />
+                    <input type="hidden" name="next" value="{{ request.path }}" />
+                    <input type="submit" value="Submit Flag" /></td>
+            </tr>
+        </table>
+    </form>
+{% endblock %}

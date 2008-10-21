@@ -1,0 +1,7 @@
+{% load things_tags %}
+<ul>
+    {% for field in fields %}
+        <li><a href="{{ field.full_url_asc }}{% persist_getvars request %}">{{ field.verbose_name_asc }}</a></li>
+        <li><a href="{{ field.full_url_desc }}{% persist_getvars request %}">{{ field.verbose_name_desc }}</a></li>
+    {% endfor %}
+</ul>

@@ -1,0 +1,2 @@
+{% load i18n %} 
+{% blocktrans with message.get_absolute_url as message_url and message.recipient as message_recipient %}You have sent the message <a href="{{ message_url }}">{{ message }}</a> to {{ message_recipient }}.{% endblocktrans %}

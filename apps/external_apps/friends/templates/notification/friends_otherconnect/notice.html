@@ -1,0 +1,2 @@
+{% load i18n %}{% url profile_detail username=invitation.from_user.username as from_user_url %}{% url profile_detail username=to_user.username as to_user_url %}
+{% blocktrans with invitation.from_user as invitation_from_user %}<a href="{{ from_user_url }}">{{ invitation_from_user }}</a> and <a href="{{ to_user_url }}">{{ to_user }}</a> are now friends.{% endblocktrans %}
