@@ -19,7 +19,10 @@ def login(request, form_class=LoginForm, template_name="account/login.html"):
             default_redirect_to = reverse(default_redirect_to)
         else:
             default_redirect_to = settings.LOGIN_REDIRECT_URL
-        redirect_to = request.REQUEST.get("next", default_redirect_to)
+        redirect_to = request.REQUEST.get("next")
+        # light security check -- make sure redirect_to isn't garabage.
+        if not redirect_to or "://" in redirect_to or " " in redirect_to:
+            redirect_to = default_redirect_to
         form = form_class(request.POST)
         if form.login(request):
             return HttpResponseRedirect(redirect_to)
