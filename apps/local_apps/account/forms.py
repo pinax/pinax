@@ -14,7 +14,6 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 
 from emailconfirmation.models import EmailAddress
-from friends.models import JoinInvitation
 from account.models import Account
 
 from timezones.forms import TimeZoneField
@@ -82,6 +81,7 @@ class SignupForm(forms.Form):
         email = self.cleaned_data["email"]
         password = self.cleaned_data["password1"]
         if self.cleaned_data["confirmation_key"]:
+            from friends.models import JoinInvitation # @@@ temporary fix for issue 93
             try:
                 join_invitation = JoinInvitation.objects.get(confirmation_key = self.cleaned_data["confirmation_key"])
                 confirmed = True
