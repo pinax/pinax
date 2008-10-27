@@ -1,6 +1,12 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
+from django.contrib.auth.models import User
+try:
+    from notification import models as notification
+except ImportError:
+    notification = None
+
 from projects.models import Project, Topic, Task, ProjectMember
 
 # @@@ this is based on Tribes -- can we re-use anything?
