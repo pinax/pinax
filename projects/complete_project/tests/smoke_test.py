@@ -9,9 +9,6 @@ def run():
     
     pages = [
         '/',
-        '/apps/',
-        '/sites/',
-        '/team/',
         '/about/',
         '/profiles/',
         '/blog/',
@@ -30,6 +27,11 @@ def run():
     for page in pages:
         print page, 
         try:
-            print c.get(page).status_code
+            x = c.get(page)
+            if x.status_code in [301, 302]:
+                print x.status_code, "=>", x["Location"]
+            else:
+                print x.status_code
+                
         except Exception, e:
             print e
