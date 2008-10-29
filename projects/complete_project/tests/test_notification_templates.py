@@ -2,8 +2,8 @@ from notification.models import NoticeType, get_formatted_messages
 
 FORMATS = [
     'short.txt',
-    'plain.txt',
-    'teaser.html',
+    'full.txt',
+    'notice.html',
     'full.html',
 ]
 
@@ -12,9 +12,15 @@ class MockDict:
         return True
     
     def __getitem__(self, key):
-        return "[%s]" % key
+        return "{{%s}}" % key
     
     def __setitem__(self, key, value):
+        pass
+    
+    def update(self, e, **f):
+        pass
+        
+    def pop(self):
         pass
 
 MOCK_CONTEXT = MockDict()
@@ -25,9 +31,12 @@ def run():
         label = notice_type.label
         print "-" * 72
         print "testing %s..." % label
-        messages = get_formatted_messages(FORMATS, label, MOCK_CONTEXT)
+        try:
+            messages = get_formatted_messages(FORMATS, label, MOCK_CONTEXT)
+        except Exception, e:
+            print e
         for format in FORMATS:
             print "%s:" % format
-            print messages[format.split(".")[0]]
+            print messages[format]
         print
     
