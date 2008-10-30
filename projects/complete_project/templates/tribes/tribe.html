@@ -170,21 +170,17 @@
 
 {% block extra_body %}
     <script type="text/javascript">
-        function scrollTo(selector) {
-            var targetOffset = $(selector).offset().top;
-            $('html,body').animate({scrollTop: targetOffset}, 500);
-        }
         $(document).ready(function() {
             $('#edit-tribe').hide();
             $('#edit-tribe-toggle').click(function() {
                 $('#edit-tribe').slideToggle();
-                scrollTo('#edit-tribe');
+                $('#edit-tribe').autoscroll();
                 return false;
             });
-            {% if comment_error %}
-            $('#edit-tribe').show();
-            scrollTo('.comment_error');
-            {% endif %}
+            if ($('#edit-tribe ul.errorlist').length) {
+                $('#edit-tribe').show();
+                $('#edit-tribe ul.errorlist').autoscroll();
+            }
         });
     </script>
     
