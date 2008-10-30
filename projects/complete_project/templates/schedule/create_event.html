@@ -1,10 +1,14 @@
 {% extends "site_base.html" %}
 
 {% block body %}
-<form action="" method="post">
-    <ul>
-        {{ form.as_ul }}
-    </ul>
-    <input type="submit">
-</form>
+    
+    <h1>Create Event</h1>
+    
+    <form action="" method="post">
+        <table>
+            {{ form }}
+            <tr><td></td><td><input type="submit" /></td></tr>
+        </table>
+    </form>
+    
 {% endblock %}
