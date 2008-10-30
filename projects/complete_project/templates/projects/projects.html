@@ -15,15 +15,17 @@
     <p>A <b>project</b> is a place to manage a group of people working on a common set of tasks. It is similar to a tribe in providing a wiki and threaded discussion but is invitation only and adds issue tracking.</p>
     
     {% if user.is_authenticated %}
-        <p><a href="#" onclick="$('#project_form').toggle(); return false;">{% trans "Start your own project" %}</a></p>
-        
-        <form id="project_form" method="POST" action="{% url project_create %}" style="display: none;">
-            {% get_project_form as project_form %}
-            <table>
-                {{ project_form }}
-                <tr><td></td><td><input type="hidden" name="action" value="create" /><input type="submit" value="{% trans 'create' %}"/></td></tr>
-            </table>
-        </form>
+        <div class="form-toggle">
+            <p><span id="start-project-toggle">{% trans "Start your own project" %}</span></p>
+            
+            <form id="start-project" method="POST" action="{% url project_create %}" style="display: none;">
+                {% get_project_form as project_form %}
+                <table>
+                    {{ project_form }}
+                    <tr><td></td><td><input type="hidden" name="action" value="create" /><input type="submit" value="{% trans 'create' %}"/></td></tr>
+                </table>
+            </form>
+        </div>
     {% else %}
         {% url acct_signup as signup_url %}
         {% url acct_login as login_url %}
@@ -34,16 +36,34 @@
         {% display_search %}
         {% display_ordering %}
         {% autopaginate objects %}
-    
+        
         <dl>
             {% for project in objects %}
                 {% show_project project %}
             {% endfor %}
         </dl>
-    
+        
         {% paginate %}
     {% else %}
         <p>No projects have been created yet.</p>
     {% endif %}
     
 {% endblock %}
+
+{% block extra_body %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#start-project').hide();
+            $('#start-project-toggle').click(function() {
+                $('#start-project').slideToggle();
+                $('#start-project').autoscroll();
+                return false;
+            });
+            if ($('#start-project ul.errorlist').length) {
+                $('#start-project').show();
+                $('#start-project ul.errorlist').autoscroll();
+            }
+        });
+    </script>
+{% endblock %}
+
