@@ -1,0 +1,43 @@
+Index: schedule/admin.py
+===================================================================
+--- schedule/admin.py	(revision 0)
++++ schedule/admin.py	(revision 0)
+@@ -0,0 +1,5 @@
++from django.contrib import admin
++
++from schedule.models import Event, Calendar, CalendarRelation
++
++admin.site.register([Event, Calendar, CalendarRelation])
+Index: schedule/views.py
+===================================================================
+--- schedule/views.py	(revision 28)
++++ schedule/views.py	(working copy)
+@@ -93,4 +93,4 @@
+     if '://' in next:
+         return None
+     return next
+-    
+\ No newline at end of file
++    
+Index: schedule/periods.py
+===================================================================
+--- schedule/periods.py	(revision 28)
++++ schedule/periods.py	(working copy)
+@@ -55,7 +55,7 @@
+     and day periods within the date.
+     """
+     def __init__(self, events, date=datetime.datetime.now()):
+-        start, end = _get_month_range(date)
++        start, end = self._get_month_range(date)
+         super(Month, self).__init__(events, start, end)
+     
+     def get_weeks(self):
+@@ -84,7 +84,7 @@
+     def next_month(self):
+         return self.end
+         
+-    def _get_month_range(month):
++    def _get_month_range(self, month):
+         if isinstance(month, datetime.date) or isinstance(month, datetime.datetime):
+             year = month.year
+             month = month.month
