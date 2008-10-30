@@ -9,6 +9,7 @@
 {% load pagination_tags %}
 {% load extra_tagging_tags %}
 {% load tribe_tags %}
+{% load scheduletags %}
 
 {% block head_title %}{{ tribe.name }}{% endblock %}
 
@@ -127,24 +128,23 @@
             <h2>{% trans "Tweets" %}</h2>
 
             {% tweet_listing tweets 1 0 %}
-            {% load scheduletags %}
+            
+            <h2>{% trans "Upcoming Events" %}</h2>
             {% get_calendar_for_object tribe as calendar %}
-            <h2>{% trans "Recent Events" %}</h2>
-            {% if calendar.get_recent_events %}
+            {% if calendar.get_upcoming_events %}
                 <table class="topics">
-                    {% for event in calendar.get_recent_events %}
+                    {% for event in calendar.get_upcoming_events %}
                         <tr class="odd">
-                            <td>
-                                {{ event }}
-                            </td>
+                            <td>{{ event.title }}</td>
+                            <td>{{ event.start }}-{{ event.end }}</td>
                         </tr>
                     {% endfor %}
                 </table>
             {% else %}
-                There are no recent events.
+                There are no upcoming events.
             {% endif %}
             <p>
-                <a href="{{ calendar.get_absolute_url }}">edit...</a>
+                <a href="{{ calendar.get_absolute_url }}">calendar...</a>
             </p>
 
 
