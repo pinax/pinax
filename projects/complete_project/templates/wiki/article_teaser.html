@@ -1,10 +1,10 @@
 
 {% load wiki %}
-{% load gravatar %}
+{% load avatar_tags %}
 
 <tr class="{% cycle odd,even %}">
     <td class="meta">
-        <div class="avatar">{% gravatar article.latest_changeset.editor 40 %}</div>
+        <div class="avatar">{% avatar article.latest_changeset.editor 40 %}</div>
         <div class="details">
             <a href="{% url profiles.views.profile article.latest_changeset.editor.username %}">
                 {{ article.latest_changeset.editor }}

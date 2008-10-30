@@ -2,7 +2,7 @@
 
 {% load i18n %}
 {% load pagination_tags %}
-{% load gravatar %}
+{% load avatar_tags %}
 {% load humanize %}
 
 {% block head_title %}{% blocktrans %}All Profiles{% endblocktrans %}{% endblock %}
@@ -20,7 +20,7 @@
         {% for user in date.list %}
             <div class="profile clearfix">
                 {# @@@ factor out style into css file #}
-                <div style="float: left;">{% gravatar user 40 %}</div>
+                <div style="float: left;">{% avatar user 40 %}</div>
                 <div style="padding: 5px; margin-left: 50px;"><a href="{% url profiles.views.profile user.username %}">{{ user }}</a></div>
             </div>
         {% endfor %}

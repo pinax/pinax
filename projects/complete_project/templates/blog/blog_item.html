@@ -1,0 +1,45 @@
+{% load switchcase %}
+{% load restructuredtext %}
+{% load wiki %}
+{% load markup %}
+{% load avatar_tags %}
+{% load extra_tagging_tags %}
+
+<div class="blog-post clearfix">
+    <h2><a href="{{ blog_post.get_absolute_url }}">{{ blog_post.title }}</a></h2>
+    <div class="blog-post-tease">
+        {% if blog_post.tease %}
+             {% with blog_post.tease as body %}
+                {% if blog_post.markup %}
+                    {% switch blog_post.markup %}
+                        {% case 'rst' %} {{ body|restructuredtext|wikiwords|safe }} {% endcase %}
+                        {% case 'mrk' %} {{ body|force_escape|markdown|wikiwords }} {% endcase %}
+                        {% case 'txl' %} {{ body|force_escape|textile|wikiwords }} {% endcase %}
+                    {% endswitch %}
+                {% else %}
+                    {{ body|force_escape|wikiwords|linebreaks|safe }}
+                {% endif %}
+            {% endwith %}
+        {% else %}
+            {% with blog_post.body|truncatewords:"150" as body %}
+                {% if blog_post.markup %}
+                    {% switch blog_post.markup %}
+                        {% case 'rst' %} {{ body|restructuredtext|wikiwords|safe }} {% endcase %}
+                        {% case 'mrk' %} {{ body|force_escape|markdown|wikiwords }} {% endcase %}
+                        {% case 'txl' %} {{ body|force_escape|textile|wikiwords }} {% endcase %}
+                    {% endswitch %}
+                {% else %}
+                    {{ body|force_escape|wikiwords|linebreaks|safe }}
+                {% endif %}
+            {% endwith %}
+        {% endif %}
+    </div>
+    <div class="blog-post-meta">
+        {% avatar blog_post.author 40 %}
+        <p><b>Posted:</b><br />
+            <a href="{% url profiles.views.profile blog_post.author.username %}">{{ blog_post.author.username }}</a> on {{ blog_post.publish|date }}</p>
+        <div class="blog-tags">
+            <p>{% show_tags_for blog_post %}</p>
+        </div>
+    </div>
+</div>

@@ -2,7 +2,7 @@
 
 {% load i18n %}
 {% load pagination_tags %}
-{% load gravatar_tags %}
+{% load avatar_tags %}
 {% load extra_tagging_tags %}
 
 {% block head_title %}{% blocktrans %}Your Bookmarks{% endblocktrans %}{% endblock %}
@@ -17,7 +17,7 @@
             {% for bookmark_instance in bookmark_instances %}
                 <tr class="{% cycle odd,even %}">
                     <td class="meta">
-                        <div class="avatar">{% gravatar bookmark_instance.bookmark.adder 40 %}</div>
+                        <div class="avatar">{% avatar bookmark_instance.bookmark.adder 40 %}</div>
                         <div class="date">{{ bookmark_instance.bookmark.added|date }}</div>
                         <div class="details"><a href="{% url profiles.views.profile bookmark_instance.bookmark.adder.username %}">{{ bookmark_instance.bookmark.adder }}</a></div>
                     </td>

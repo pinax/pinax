@@ -4,7 +4,7 @@
 {% load threadedcommentstags %}
 
 {% load tribe_tags %}
-{% load gravatar %}
+{% load avatar_tags %}
 {% load project_tags %}
 {% load blog_tags %}
 {% load wiki %}
@@ -44,7 +44,7 @@
             {% for bookmark in bookmarktags %}
                 <tr class="{% cycle odd,even %}">
                     <td class="meta">
-                        <div class="avatar">{% gravatar bookmark.bookmark.adder 40 %}</div>
+                        <div class="avatar">{% avatar bookmark.bookmark.adder 40 %}</div>
                         <div class="details"><a href="{% url profiles.views.profile bookmark.bookmark.adder.username %}">{{ bookmark.bookmark.adder }}</a></div>
                         {{ bookmark.bookmark.added|date }}
                     </td>

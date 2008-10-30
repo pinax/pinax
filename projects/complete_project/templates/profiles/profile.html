@@ -1,7 +1,7 @@
 {% extends "profiles/base.html" %}
 
 {% load i18n %}
-{% load gravatar %}
+{% load avatar_tags %}
 {% load app_plugins %}
 
 {% block head_title %}{% blocktrans %}Profile for {{ other_user }}{% endblocktrans %}{% endblock %}
@@ -12,7 +12,10 @@
         {% include "profiles/profile_right_panel.html" %}
     </div>
     
-    {% gravatar other_user 80 %}
+    <div id="profile_avatar">
+        <div>{% avatar other_user 80 %}</div>
+        <a href="{% url avatar_change %}" id="avatar_replace">(replace)</a>
+    </div>
     
     <h1>{% blocktrans %}Profile for {{ other_user }}{% endblocktrans %}</h1>
     

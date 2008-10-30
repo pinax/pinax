@@ -1,7 +1,7 @@
 {% extends "zwitschern/base.html" %}
 
 {% load i18n %}
-{% load gravatar_tags %}
+{% load avatar_tags %}
 
 {% block head_title %}{% blocktrans %}Followers of {{ other_user }}{% endblocktrans %}{% endblock %}
 
@@ -17,7 +17,7 @@
             {# @@@ this is common code from all profiles list -- refactor #}
             <div class="profile clearfix">
                 {# @@@ factor out style into css file #}
-                <div style="float: left;">{% gravatar following.follower 40 %}</div>
+                <div style="float: left;">{% avatar following.follower 40 %}</div>
                 <div style="padding: 5px; margin-left: 50px;"><a href="{% url profiles.views.profile following.follower.username %}">{{ following.follower }}</a></div>
             </div>
         {% endfor %}

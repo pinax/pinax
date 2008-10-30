@@ -15,7 +15,8 @@ from zwitschern.models import Following
 from profiles.models import Profile
 from profiles.forms import ProfileForm
 
-from gravatar.templatetags.gravatar import gravatar
+from avatar.templatetags.avatar_tags import avatar
+#from gravatar.templatetags.gravatar import gravatar as avatar
 
 try:
     from notification import models as notification
@@ -129,7 +130,7 @@ def username_autocomplete(request):
                 try:
                     profile = friendship["friend"].get_profile()
                     entry = "%s,,%s,,%s" % (
-                        gravatar(friendship["friend"], 40),
+                        avatar(friendship["friend"], 40),
                         friendship["friend"].username,
                         profile.location
                     )

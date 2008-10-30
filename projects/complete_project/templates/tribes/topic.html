@@ -3,7 +3,7 @@
 {% load i18n %}
 {% load extra_tagging_tags %}
 {% load threadedcommentstags %}
-{% load gravatar %}
+{% load avatar_tags %}
 {% load comments_tag %}
 
 {% block head_title %}{{ topic.title }}{% endblock %}
@@ -14,7 +14,7 @@
     <ul class="responses">
         <li class="odd thread-0 clearfix">
             <div class="meta">
-                <div class="avatar">{% gravatar topic.creator 40 %}</div>
+                <div class="avatar">{% avatar topic.creator 40 %}</div>
                 <div class="details"><a href="{% url profiles.views.profile topic.creator.username %}">{{ topic.creator }}</a></div>
                 {{ topic.created|date }}
             </div>
