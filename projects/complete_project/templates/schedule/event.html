@@ -1,0 +1,6 @@
+{% extends "site_base.html" %}
+{% block body %}
+<h1>{{event.title}}</h1>
+<p>from {{event.start|date:"D M, Y"}} {{event.start|time:"h:i a"}} to {{event.end|date:"D M, Y"}} {{event.end|time:"h:i a"}}</p>
+<p>{{event.description}}</p>  
+{% endblock %}

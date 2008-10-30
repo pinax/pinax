@@ -1,0 +1,33 @@
+{% extends "site_base.html" %}
+{% block body %}
+    <a href={{calendar.add_event_url}}>Add event</a>
+    <h1>{{month.name}} {{month.year}}</h1>
+    <table style="border: black solid 1px">
+    {% for week in month.get_weeks %}
+        <tr>
+        {% for day in week.get_days %}
+             <td style="border: black solid 1px; 
+                        min-width: 125px; 
+                        width: 125px; 
+                        height: 125px; 
+                        min-height: 125px;
+                        vertical-align: top;
+                        padding-left: 10px
+                        ">
+                 <h2>{{day.start.day}}</h2>
+                 <ul>
+                    {% for event_partial in day.get_events %}
+                        <li><a href="{{event_partial.event.get_absolute_url}}">
+                            {{ event_partial.event.title }}</a>
+                                {% ifequal event_partial.class 0 %}(Starts){% endifequal %}
+                                {% ifequal event_partial.class 2 %}(Contiues){% endifequal %}
+                                {% ifequal event_partial.class 3 %}(Ends){% endifequal %}
+                        </li>
+                    {% endfor %}
+                </ul>                                                    
+             </td>
+        {% endfor %}
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}
