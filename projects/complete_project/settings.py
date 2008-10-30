@@ -147,6 +147,7 @@ INSTALLED_APPS = (
 #    'avatar',
     'things',
     'flag',
+    'schedule',
     
     # internal (for now)
     'analytics',

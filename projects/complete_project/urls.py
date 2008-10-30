@@ -50,6 +50,7 @@ urlpatterns = patterns('',
     #(r'^avatar/', include('avatar.urls')),
     (r'^swaps/', include('swaps.urls')),
     (r'^flag/', include('flag.urls')),
+    (r'^schedule/', include('schedule.urls')),
     
     (r'^feeds/tweets/(.*)/$', 'django.contrib.syndication.views.feed', tweets_feed_dict),
     (r'^feeds/posts/(.*)/$', 'django.contrib.syndication.views.feed', blogs_feed_dict),

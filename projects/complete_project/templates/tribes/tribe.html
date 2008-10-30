@@ -127,6 +127,25 @@
             <h2>{% trans "Tweets" %}</h2>
 
             {% tweet_listing tweets 1 0 %}
+            {% load scheduletags %}
+            {% get_calendar_for_object tribe as calendar %}
+            <h2>{% trans "Recent Events" %}</h2>
+            {% if calendar.get_recent_events %}
+                <table class="topics">
+                    {% for event in calendar.get_recent_events %}
+                        <tr class="odd">
+                            <td>
+                                {{ event }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                There are no recent events.
+            {% endif %}
+            <p>
+                <a href="{{ calendar.get_absolute_url }}">edit...</a>
+            </p>
 
 
             {% if photos %}
