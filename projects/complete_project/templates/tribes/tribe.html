@@ -49,14 +49,16 @@
         <p>{{ tribe.description }}</p>
 
         {% ifequal user tribe.creator %}
-            <p><a href="#" onclick="$('#tribe_form').toggle(); return false;">{% trans "Edit details" %}</a></p>
-
-            <form id="tribe_form" method="POST" action="" style="display: none;">
-                <table>
-                    {{ tribe_form }}
-                    <tr><td></td><td><input type="hidden" name="action" value="update" /><input type="submit" value="{% trans 'update' %}"/></td></tr>
-                </table>
-            </form>
+            <div class="form-toggle">
+                <p><span id="edit-tribe-toggle">{% trans "Edit details" %}</span></p>
+                
+                <form id="edit-tribe" method="POST" action="">
+                    <table>
+                        {{ tribe_form }}
+                        <tr><td></td><td><input type="hidden" name="action" value="update" /><input type="submit" value="{% trans 'update' %}"/></td></tr>
+                    </table>
+                </form>
+            </div>
             
             {% ifequal tribe.members.all.count 1 %}
                 <p><img src="/site_media/delete.png" /> <a href="#" onclick="$('#delete_tribe_form').toggle(); return false;">{% trans "Delete tribe" %}</a><p>
@@ -167,9 +169,23 @@
 {% endblock %}
 
 {% block extra_body %}
-    <script>
-        {% if tribe_form.errors %}
-            $('#tribe_form').show();
-        {% endif %}
+    <script type="text/javascript">
+        function scrollTo(selector) {
+            var targetOffset = $(selector).offset().top;
+            $('html,body').animate({scrollTop: targetOffset}, 500);
+        }
+        $(document).ready(function() {
+            $('#edit-tribe').hide();
+            $('#edit-tribe-toggle').click(function() {
+                $('#edit-tribe').slideToggle();
+                scrollTo('#edit-tribe');
+                return false;
+            });
+            {% if comment_error %}
+            $('#edit-tribe').show();
+            scrollTo('.comment_error');
+            {% endif %}
+        });
     </script>
+    
 {% endblock %}
