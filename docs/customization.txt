@@ -9,12 +9,10 @@ now what we recommend is:
 - Choose which :ref:`project <ref-project>` you would like to use as a starting 
   point.
 - Copy that project into a directory outside of the subversion checkout.
-- Make any necessary changes to your ``manage.py``, ``deployment/*.wsgi`` etc 
-  in that copied project directory to reflect the location of your Pinax 
-  checkout.  The most important variable to change in those files is 
-  ``PINAX_ROOT``.
 - Make necessary changes to the ``settings.py`` and ``urls.py`` files in your
   copied directory.
+- Ensure ``PINAX_ROOT`` is setup correctly in your settings. It should point
+  to where Pinax lives on your filesystem.
 - Change the domain and display name of the Site in the admin interface. 
 - Develop your custom apps under your new project or anywhere on Python path.
 - Develop your own templates under your new project.
@@ -45,6 +43,7 @@ complete_project
 Settings You Will (Probably) Want To Override
 ---------------------------------------------
 
+- ``PINAX_ROOT``
 - ``DEBUG``
 - ``TEMPLATE_DEBUG``
 - ``LOGGING_OUTPUT_ENABLED``

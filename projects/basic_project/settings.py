@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
 # Django settings for basic pinax project.
 
+import os.path
+
+PINAX_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"))
+PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -38,8 +43,6 @@ USE_I18N = True
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
 
-import os.path
-
 MEDIA_ROOT = os.path.join(os.path.dirname(__file__), "site_media")
 
 # URL that handles the media served from MEDIA_ROOT.
@@ -71,8 +74,6 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'basic_project.urls'
-
-import os.path
 
 TEMPLATE_DIRS = (
     os.path.join(os.path.dirname(__file__), "templates"),

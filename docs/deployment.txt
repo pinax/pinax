@@ -7,6 +7,8 @@ In short:
 
 - Create a ``local_settings.py`` alongside ``settings.py`` for your
   host-specific settings (like database connection, email, etc).
+- Ensure ``PINAX_ROOT`` is setup correctly in your settings. It should point
+  to where Pinax lives on your filesystem.
 - Configure mod_wsgi or mod_python.
 - Set up ``cron`` job for mailer and asynchronous notifications.
 
@@ -19,28 +21,28 @@ to use all of the correct components::
     
     import os
     import sys
-    
+
     # redirect sys.stdout to sys.stderr for bad libraries like geopy that uses
     # print statements for optional import exceptions.
     sys.stdout = sys.stderr
-    
+
     from os.path import abspath, dirname, join
     from site import addsitedir
-    
-    path = addsitedir(abspath(join(dirname(__file__), "pinax", "libs", "external_libs")), set())
+
+    sys.path.insert(0, abspath(join(dirname(__file__), "../../")))
+
+    from django.conf import settings
+    os.environ["DJANGO_SETTINGS_MODULE"] = "basic_project.settings"
+
+    path = addsitedir(join(settings.PINAX_ROOT, "libs/external_libs"), set())
     if path:
         sys.path = list(path) + sys.path
-        
-    sys.path.insert(0, abspath(join(dirname(__file__), "pinax", "apps", "external_apps")))
-    sys.path.insert(0, abspath(join(dirname(__file__), "pinax", "apps", "local_apps")))
-    sys.path.insert(0, abspath(join(dirname(__file__), "pinax", "apps", "core_apps")))
-    
-    sys.path.insert(0, abspath(join(dirname(__file__), "pinax", "projects")))
-    
+
+    sys.path.insert(0, join(settings.PINAX_ROOT, "apps/external_apps"))
+    sys.path.insert(0, join(settings.PINAX_ROOT, "apps/local_apps"))
+    sys.path.insert(0, join(settings.PROJECT_ROOT, "apps"))
+
     from django.core.handlers.wsgi import WSGIHandler
-    
-    os.environ["DJANGO_SETTINGS_MODULE"] = "complete_project.settings"
-    
     application = WSGIHandler()
 
 Using mod_python
