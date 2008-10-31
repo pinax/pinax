@@ -15,10 +15,10 @@
 
 {% block extra_body %}
     {{ block.super }}
-    <script type="text/javascript" src="/site_media/jquery.bgiframe.js"></script>
-    <script type="text/javascript" src="/site_media/jquery.dimensions.js"></script>
-    <script type="text/javascript" src="/site_media/jquery.ajaxQueue.js"></script>
-    <script type="text/javascript" src="/site_media/jquery.autocomplete.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}jquery.bgiframe.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}jquery.dimensions.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}jquery.ajaxQueue.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}jquery.autocomplete.js"></script>
     <script type="text/javascript">
         $().ready(function() {
             $("#id_recipient").autocomplete("{% url profile_username_autocomplete %}", {

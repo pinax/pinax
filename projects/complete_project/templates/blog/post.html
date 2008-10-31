@@ -20,7 +20,7 @@
         <h2>{{ post.title }}</h2>
         <div class="blog-meta"><p>Posted by: <a href="{% url profiles.views.profile post.author.username %}">{{ post.author.username }}</a> on {{ post.publish|date }}</p></div>
         <div class="blog-tags">
-            <p><img src="/site_media/comment.png" border="0" class="noborder" align="absmiddle" />
+            <p><img src="{{ MEDIA_URL }}comment.png" border="0" class="noborder" align="absmiddle" />
             {% tags_for_object post as tags %}
             {% for tag in tags %}
                 <a href="/tags/{{ tag }}">{{ tag }}</a>
