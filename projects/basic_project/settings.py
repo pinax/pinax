@@ -118,6 +118,8 @@ INSTALLED_APPS = (
     'account',
     'misc',
     
+    'about',
+    
     'django.contrib.admin',
 
 )
