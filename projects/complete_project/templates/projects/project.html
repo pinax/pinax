@@ -50,14 +50,16 @@
         <p>{{ project.description }}</p>
 
         {% ifequal user project.creator %}
-            <p><a href="#" onclick="$('#project_form').toggle(); return false;">{% trans "Edit details" %}</a></p>
-
-            <form id="project_form" method="POST" action="" style="display: none;">
-                <table>
-                    {{ project_form }}
-                    <tr><td></td><td><input type="hidden" name="action" value="update" /><input type="submit" value="{% trans 'update' %}"/></td></tr>
-                </table>
-            </form>
+            
+            <div class="form-toggle">
+                <p><span id="edit-project-toggle">{% trans "Edit details" %}</span></p>
+                <form id="edit-project" method="POST" action="">
+                    <table>
+                        {{ project_form }}
+                        <tr><td></td><td><input type="hidden" name="action" value="update" /><input type="submit" value="{% trans 'update' %}"/></td></tr>
+                    </table>
+                </form>
+            </div>
             
         {% endifequal %}
 
@@ -66,13 +68,17 @@
                 {% if are_member %}
                     {% ifequal user project.creator %}
                         <p>You are the creator of this project.</p>
-                        <p><a href="#" onclick="$('#adduser_form').toggle(); return false;">{% trans "Add new member" %}</a></p>
-                        <form id="adduser_form" method="POST" action="" style="display: none;">
-                            <table>
-                                {{ adduser_form }}
-                                <tr><td></td><td><input type="hidden" name="action" value="add" /><input type="submit" value="{% trans 'add' %}"/></td></tr>
-                            </table>
-                        </form>
+                        
+                        <div class="form-toggle">
+                            <p><span id="add-member-toggle">{% trans "Add new member" %}</a></p>
+                            <form id="add-member" method="POST" action="">
+                                <table>
+                                    {{ adduser_form }}
+                                    <tr><td></td><td><input type="hidden" name="action" value="add" /><input type="submit" value="{% trans 'add' %}"/></td></tr>
+                                </table>
+                            </form>
+                        </div>
+                        
                         <p><img src="/site_media/delete.png" /> <a href="#" onclick="$('#delete_project_form').toggle(); return false;">{% trans "Delete project" %}</a><p>
                          <form class="delete_form" id="delete_project_form" action="{% url project_delete project.slug %}" method="POST" style="display: none;">
                              <input type="submit" value="{% trans "Delete Project" %}" /> (all content will be removed)
@@ -170,7 +176,7 @@
     <script type="text/javascript" src="/site_media/jquery.ajaxQueue.js"></script>
     <script type="text/javascript" src="/site_media/jquery.autocomplete.js"></script>
     <script type="text/javascript">
-        $().ready(function() {
+        $(document).ready(function() {
             $("#id_recipient").autocomplete("{% url profile_username_autocomplete %}", {
                 formatItem: function(data, i, n, value) {
                     values = value.split(",,");
@@ -182,12 +188,26 @@
                 // TODO: improve highlighting to only affect username.
                 highlight: false,
             });
-            {% if project_form.errors %}
-                $('#project_form').show();
-            {% endif %}
-            {% if adduser_form.errors %}
-                $('#adduser_form').show();
-            {% endif %}
+            $('#edit-project').hide();
+            $('#edit-project-toggle').click(function() {
+                $('#edit-project').slideToggle();
+                $('#edit-project').autoscroll();
+                return false;
+            });
+            if ($('#edit-project ul.errorlist').length) {
+                $('#edit-project').show();
+                $('#edit-project ul.errorlist').autoscroll();
+            }
+            $('#add-member').hide();
+            $('#add-member-toggle').click(function() {
+                $('#add-member').slideToggle();
+                $('#add-member').autoscroll();
+                return false;
+            });
+            if ($('#add-member ul.errorlist').length) {
+                $('#add-member').show();
+                $('#add-member ul.errorlist').autoscroll();
+            }
         });
     </script>
 {% endblock %}

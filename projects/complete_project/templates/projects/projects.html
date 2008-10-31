@@ -18,7 +18,7 @@
         <div class="form-toggle">
             <p><span id="start-project-toggle">{% trans "Start your own project" %}</span></p>
             
-            <form id="start-project" method="POST" action="{% url project_create %}" style="display: none;">
+            <form id="start-project" method="POST" action="{% url project_create %}">
                 {% get_project_form as project_form %}
                 <table>
                     {{ project_form }}
