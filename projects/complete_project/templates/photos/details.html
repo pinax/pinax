@@ -32,8 +32,12 @@
             <p>{{ photo.caption }}</p>
         </div>
         
-        <h3>Flag this photo</h3>
-        {% flag photo request.user.id %} 
+        <div class="form-toggle">
+            <p><span id="flag-toggle"><img src="{{MEDIA_URL}}flag_red.png" />{% trans "Flag as inappropriate" %}</span></p>
+             <div id="flag-form" style="display: none;">
+                {% flag photo request.user.id %}
+             </div>
+        </div>
         
         <h3>Comments on This Photo:</h3>
         {% comments photo %}
@@ -41,4 +45,23 @@
     <p>No photos were found.</p>
     {% endif %}
     
+{% endblock %}
+
+
+{% block extra_body %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#flag-form').hide();
+            $('#flag-toggle').click(function() {
+                $('#flag-form').slideToggle();
+                $('#flag-form').autoscroll();
+                return false;
+            });
+            if ($('#flag-form ul.errorlist').length) {
+                $('#flag-form').show();
+                $('#flag-form ul.errorlist').autoscroll();
+            }
+            
+        });
+    </script>
 {% endblock %}
