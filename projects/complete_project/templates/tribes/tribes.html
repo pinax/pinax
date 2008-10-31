@@ -15,15 +15,16 @@
     
     <p>{% trans "A <b>tribe</b> is a group of people with some common interest." %}</p>
     {% if user.is_authenticated %}
-        <p><a href="#" onclick="$('#tribe_form').toggle(); return false;">{% trans "Start your own tribe" %}</a></p>
-        
-        <form id="tribe_form" method="POST" action="{% url tribe_create %}" style="display: none;">
-            {% get_tribe_form as tribe_form %}
-            <table>
-                {{ tribe_form }}
-                <tr><td></td><td><input type="hidden" name="action" value="create" /><input type="submit" value="{% trans 'create' %}"/></td></tr>
-            </table>
-        </form>
+        <div class="form-toggle">
+            <p><span id="start-tribe-toggle">{% trans "Start your own tribe" %}</a></p>
+            <form id="start-tribe" method="POST" action="{% url tribe_create %}">
+                {% get_tribe_form as tribe_form %}
+                <table>
+                    {{ tribe_form }}
+                    <tr><td></td><td><input type="hidden" name="action" value="create" /><input type="submit" value="{% trans 'create' %}"/></td></tr>
+                </table>
+            </form>
+        </div>
     {% else %}
         {% url acct_signup as signup_url %}
         {% url acct_login as login_url %}
@@ -42,4 +43,21 @@
         {% paginate %}
     {% endif %}
     
+{% endblock %}
+
+{% block extra_body %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#start-tribe').hide();
+            $('#start-tribe-toggle').click(function() {
+                $('#start-tribe').slideToggle();
+                $('#start-tribe').autoscroll();
+                return false;
+            });
+            if ($('#start-tribe ul.errorlist').length) {
+                $('#start-tribe').show();
+                $('#start-tribe ul.errorlist').autoscroll();
+            }
+        });
+    </script>
 {% endblock %}
