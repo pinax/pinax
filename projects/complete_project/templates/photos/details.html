@@ -19,6 +19,7 @@
         {% include "photos/photo_right_panel.html" %}
     </div>
     
+    <div class="left_panel">
     <h1>{% trans "Photo Details" %}</h1>
     
     {% if photo %}
@@ -44,6 +45,7 @@
     {% else %}
     <p>No photos were found.</p>
     {% endif %}
+    </div>
     
 {% endblock %}
 
