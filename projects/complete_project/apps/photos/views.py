@@ -19,7 +19,7 @@ def upload(request, form_class=PhotoUploadForm,
     """
     photo_form = form_class()
     if request.method == 'POST':
-        if request.POST["action"] == "upload":
+        if request.POST.get("action") == "upload":
             photo_form = form_class(request.user, request.POST, request.FILES)
             if photo_form.is_valid():
                 photo = photo_form.save(commit=False)
