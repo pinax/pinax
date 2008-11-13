@@ -149,11 +149,11 @@ INSTALLED_APPS = (
     'things',
     'flag',
     'schedule',
+    'microblogging',
     
     # internal (for now)
     'analytics',
     'profiles',
-    'zwitschern',
     'account',
     'tribes',
     'projects',

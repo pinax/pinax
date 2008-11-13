@@ -1,2 +1,0 @@
-{% load i18n %}{% url profile_detail username=tweet.sender.username as profile_url %}
-{% blocktrans with tweet.sender as tweet_sender and tweet.get_absolute_url as reply_url %}<a href="{{ profile_url }}">{{ tweet_sender }}</a> sent you a <a href="{{ reply_url }}">tweet reply</a>.{% endblocktrans %}
