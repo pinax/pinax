@@ -232,7 +232,7 @@ class TwitterForm(UserForm):
         self.initial.update({"username": other_service(self.user, "twitter_user")})
 
     def save(self):
-        from zwitschern.utils import get_twitter_password
+        from microblogging.utils import get_twitter_password
         update_other_services(self.user,
             twitter_user = self.cleaned_data['username'],
             twitter_password = get_twitter_password(settings.SECRET_KEY, self.cleaned_data['password']),
@@ -249,7 +249,7 @@ class PownceForm(UserForm):
         self.initial.update({"usernamep": other_service(self.user, "pownce_user")})
         
     def save(self):
-        from zwitschern.pownce_utils import get_pownce_password
+        from microblogging.pownce_utils import get_pownce_password
         update_other_services(self.user,
             pownce_user = self.cleaned_data['usernamep'],
             pownce_password = get_pownce_password(settings.SECRET_KEY, self.cleaned_data['passwordp']),

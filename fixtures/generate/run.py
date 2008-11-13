@@ -22,7 +22,7 @@ settings.DATABASE_NAME = ':memory:'
 from django.core.management.commands.dumpdata import Command as DumpdataCommand
 from django.core.management.commands.syncdb import Command as SyncDBCommand
 
-FIXTURES_TO_GENERATE = ('auth', 'profiles', 'friends', 'zwitschern')
+FIXTURES_TO_GENERATE = ('auth', 'profiles', 'friends', 'microblogging')
 
 def main():
     SyncDBCommand().handle_noargs(interactive=False)

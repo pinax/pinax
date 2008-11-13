@@ -5,7 +5,7 @@ from django.contrib import admin
 
 import os.path
 
-from zwitschern.feeds import TweetFeedAll, TweetFeedUser, TweetFeedUserWithFriends
+from microblogging.feeds import TweetFeedAll, TweetFeedUser, TweetFeedUserWithFriends
 tweets_feed_dict = {"feed_dict": {
     'all': TweetFeedAll,
     'only': TweetFeedUser,
@@ -73,10 +73,10 @@ friends_blogs_kwargs = {
     "friends_objects_function": lambda users: Post.objects.filter(author__in=users),
 }
 
-from zwitschern.models import Tweet
+from microblogging.models import Tweet
 
 friends_tweets_kwargs = {
-    "template_name": "zwitschern/friends_tweets.html",
+    "template_name": "microblogging/friends_tweets.html",
     "friends_objects_function": lambda users: Tweet.objects.filter(sender__in=users),
 }
 

@@ -147,8 +147,8 @@ def language_change(request, form_class=ChangeLanguageForm,
 language_change = login_required(language_change)
 
 def other_services(request, template_name="account/other_services.html"):
-    from zwitschern.utils import twitter_verify_credentials
-    from zwitschern.pownce_utils import pownce_verify_credentials
+    from microblogging.utils import twitter_verify_credentials
+    from microblogging.pownce_utils import pownce_verify_credentials
     twitter_form = TwitterForm(request.user)
     pownce_form = PownceForm(request.user)
     twitter_authorized = False
@@ -158,7 +158,7 @@ def other_services(request, template_name="account/other_services.html"):
 
         if request.POST['actionType'] == 'saveTwitter':
             if twitter_form.is_valid():
-                from zwitschern.utils import twitter_account_raw
+                from microblogging.utils import twitter_account_raw
                 twitter_account = twitter_account_raw(request.POST['username'], request.POST['password'])
                 twitter_authorized = twitter_verify_credentials(twitter_account)
                 if not twitter_authorized:
@@ -169,7 +169,7 @@ def other_services(request, template_name="account/other_services.html"):
         if request.POST['actionType'] == 'savePownce':
             pownce_form = PownceForm(request.user, request.POST)     
             if pownce_form.is_valid():
-                from zwitschern.pownce_utils import pownce_account_raw
+                from microblogging.pownce_utils import pownce_account_raw
                 pownce_account = pownce_account_raw(request.POST['usernamep'], request.POST['passwordp'])
                 pownce_authorized = pownce_verify_credentials(pownce_account)
                 if not pownce_authorized:
@@ -177,8 +177,8 @@ def other_services(request, template_name="account/other_services.html"):
                 else:
                     pownce_form.save()
     else:
-        from zwitschern.utils import twitter_account_for_user
-        from zwitschern.pownce_utils import pownce_account_for_user
+        from microblogging.utils import twitter_account_for_user
+        from microblogging.pownce_utils import pownce_account_for_user
         twitter_account = twitter_account_for_user(request.user)
         pownce_account  = pownce_account_for_user(request.user)
         twitter_authorized = twitter_verify_credentials(twitter_account)

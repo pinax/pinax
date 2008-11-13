@@ -306,7 +306,7 @@ msgstr "mis à jour à"
 msgid "Post Content Markup"
 msgstr "Marquage du Contenu de la Note"
 
-#: blog/models.py:53 templates/zwitschern/personal.html:25
+#: blog/models.py:53 templates/microblogging/personal.html:25
 msgid "post"
 msgstr "article"
 
@@ -2490,9 +2490,9 @@ msgid "Tribes"
 msgstr "Tribus"
 
 #: templates/site_base.html:48 templates/projects/project.html:159
-#: templates/tribes/tribe.html:141 templates/zwitschern/personal.html:6
-#: templates/zwitschern/personal.html:14
-#: templates/zwitschern/plugins/profiles/profile.html:4
+#: templates/tribes/tribe.html:141 templates/microblogging/personal.html:6
+#: templates/microblogging/personal.html:14
+#: templates/microblogging/plugins/profiles/profile.html:4
 msgid "Tweets"
 msgstr "Gazouillis"
 
@@ -3846,50 +3846,50 @@ msgstr "Wiki pour Tribu"
 msgid "No wiki articles yet."
 msgstr "Pas encore d'articles wiki."
 
-#: templates/zwitschern/base.html:9
+#: templates/microblogging/base.html:9
 msgid "Tweets You Follow"
 msgstr "Gazouillis que vous suivez"
 
-#: templates/zwitschern/base.html:10 templates/zwitschern/public.html:14
+#: templates/microblogging/base.html:10 templates/microblogging/public.html:14
 msgid "All Tweets"
 msgstr "Tout les Gazouillis"
 
-#: templates/zwitschern/listing.html:13
+#: templates/microblogging/listing.html:13
 #, python-format
 msgid "%(tweet_age)s ago"
 msgstr "il y a %(tweet_age)s "
 
-#: templates/zwitschern/listing.html:14
+#: templates/microblogging/listing.html:14
 msgid "reply"
 msgstr "répondre"
 
-#: templates/zwitschern/listing.html:20
+#: templates/microblogging/listing.html:20
 #, python-format
 msgid "You haven't posted any <a href=\"%(tweets_url)s\">tweets</a> yet."
 msgstr ""
 "Vous n'avez encore posté aucun <a href=\"%(tweets_url)s\">gazouillis</a>."
 
-#: templates/zwitschern/listing.html:22
+#: templates/microblogging/listing.html:22
 msgid "There are currently no tweets to be listed."
 msgstr "Il n'y a actuellement aucun gazouillis à lister."
 
-#: templates/zwitschern/personal.html:17
+#: templates/microblogging/personal.html:17
 msgid "What are you doing?"
 msgstr "Que faites vous ?"
 
-#: templates/zwitschern/personal.html:20
+#: templates/microblogging/personal.html:20
 msgid "You have authorized a twitter accout."
 msgstr "Vous avez autorisé un compte Twitter."
 
-#: templates/zwitschern/personal.html:24
+#: templates/microblogging/personal.html:24
 msgid "chars left."
 msgstr "caractères restant."
 
-#: templates/zwitschern/personal.html:30
+#: templates/microblogging/personal.html:30
 msgid "person,people"
 msgstr "personne,personnes"
 
-#: templates/zwitschern/personal.html:30
+#: templates/microblogging/personal.html:30
 #, python-format
 msgid ""
 "\n"
@@ -3900,15 +3900,15 @@ msgstr ""
 "        Voici les gazouillis des %(follow_count)s %(follow_name)s que vous "
 "suivez (plus les vôtres)"
 
-#: templates/zwitschern/public.html:6
+#: templates/microblogging/public.html:6
 msgid "Public Tweets"
 msgstr "Gazouillis Publics"
 
-#: templates/zwitschern/public.html:16
+#: templates/microblogging/public.html:16
 msgid "These are tweets from everyone:"
 msgstr "Voici les gazouillis de tout le monde:"
 
-#: templates/zwitschern/single.html:6 templates/zwitschern/single.html.py:9
+#: templates/microblogging/single.html:6 templates/microblogging/single.html.py:9
 msgid "Single Tweet"
 msgstr "Gazouillis Unique"
 
@@ -4286,35 +4286,35 @@ msgstr "Changements récents"
 msgid "Article by title"
 msgstr "Article par titre"
 
-#: zwitschern/management.py:9
+#: microblogging/management.py:9
 msgid "New Tweet Follower"
 msgstr "Nouveau Suiveur de Gazouillis"
 
-#: zwitschern/management.py:9
+#: microblogging/management.py:9
 msgid "someone has started following your tweets"
 msgstr "quelqu'un a commencé à suivre vos gazouillis"
 
-#: zwitschern/models.py:43 zwitschern/models.py:68
+#: microblogging/models.py:43 microblogging/models.py:68
 msgid "text"
 msgstr "texte"
 
-#: zwitschern/models.py:44 zwitschern/models.py:69
+#: microblogging/models.py:44 microblogging/models.py:69
 msgid "sender"
 msgstr "expéditeur"
 
-#: zwitschern/models.py:45 zwitschern/models.py:70
+#: microblogging/models.py:45 microblogging/models.py:70
 msgid "sent"
 msgstr "envoyé"
 
-#: zwitschern/models.py:147
+#: microblogging/models.py:147
 msgid "follower"
 msgstr "suiveur"
 
-#: zwitschern/models.py:148
+#: microblogging/models.py:148
 msgid "followed"
 msgstr "suivi"
 
-#: zwitschern/templates/notification/tweet_follow/teaser.html:2
+#: microblogging/templates/notification/tweet_follow/teaser.html:2
 #, python-format
 msgid "<a href=\"%(profile_url)s\">%(user)s</a> is now following your tweets."
 msgstr ""

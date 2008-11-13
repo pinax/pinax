@@ -1,4 +1,4 @@
-from zwitschern.models import Tweet
+from microblogging.models import Tweet
 from tribes.models import Tribe
 from django.contrib.auth.models import User
 from bookmarks.models import Bookmark

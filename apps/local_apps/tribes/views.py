@@ -33,7 +33,7 @@ try:
 except ImportError:
     wiki = False
 
-from zwitschern.models import TweetInstance
+from microblogging.models import TweetInstance
 
 from schedule.models import Calendar, CalendarRelation
 
