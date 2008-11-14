@@ -4,7 +4,7 @@ Dependencies
 This documents what apps use what other apps and what external libs.
 
 account
-    uses apps misc, django_openidauth, emailconfirmation, friends, profiles, timezones, microblogging
+    uses apps misc, emailconfirmation, friends, profiles, timezones, microblogging
 
 ajax_validation
     uses library simplejson
@@ -39,10 +39,7 @@ misc
 django_extensions
     uses a wide range of libraries depends on command
 
-django_openidauth
-    uses apps django_openidconsumer, emailconfirmation
-
-django_openidconsumer
+django_openid
     uses libraries openid, yadis
 
 djangologging
