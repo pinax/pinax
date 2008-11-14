@@ -3,6 +3,8 @@ from django.conf import settings
 from django.views.generic.simple import direct_to_template
 from django.contrib import admin
 
+from account.openid_consumer import PinaxConsumer
+
 import os.path
 
 from microblogging.feeds import TweetFeedAll, TweetFeedUser, TweetFeedUserWithFriends
@@ -28,7 +30,7 @@ urlpatterns = patterns('',
     
     (r'^about/', include('about.urls')),
     (r'^account/', include('account.urls')),
-    (r'^openid/', include('account.openid_urls')),
+    (r'^openid/(.*)', PinaxConsumer()),
     (r'^bbauth/', include('bbauth.urls')),
     (r'^authsub/', include('authsub.urls')),
     (r'^profiles/', include('profiles.urls')),

@@ -68,7 +68,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django_openidconsumer.middleware.OpenIDMiddleware',
+    'django_openid.consumer.SessionConsumer',
     'account.middleware.LocaleMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'djangologging.middleware.LoggingMiddleware',
@@ -119,6 +119,7 @@ INSTALLED_APPS = (
     
     # external
     'notification', # must be first
+    'django_openid',
     'emailconfirmation',
     'django_extensions',
     'robots',
@@ -127,8 +128,6 @@ INSTALLED_APPS = (
     'mailer',
     'messages',
     'announcements',
-    'django_openidconsumer',
-    'django_openidauth',
     'oembed',
     'djangodblog',
     'pagination',

@@ -1,7 +1,7 @@
 
 from django.conf import settings
 from django.shortcuts import render_to_response
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.template import RequestContext
@@ -9,7 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 
-from account.forms import SignupForm, AddEmailForm, LoginForm, ChangePasswordForm, ResetPasswordForm, ChangeTimezoneForm, ChangeLanguageForm, TwitterForm, PownceForm
+from account.forms import SignupForm, AddEmailForm, LoginForm, ChangePasswordForm, SetPasswordForm, ResetPasswordForm, ChangeTimezoneForm, ChangeLanguageForm, TwitterForm, PownceForm
 from emailconfirmation.models import EmailAddress, EmailConfirmation
 
 def login(request, form_class=LoginForm, template_name="account/login.html"):
@@ -89,6 +89,8 @@ email = login_required(email)
 
 def password_change(request, form_class=ChangePasswordForm,
         template_name="account/password_change.html"):
+    if not request.user.password:
+        return HttpResponseRedirect(reverse("acct_passwd_set"))
     if request.method == "POST":
         password_change_form = form_class(request.user, request.POST)
         if password_change_form.is_valid():
@@ -100,6 +102,34 @@ def password_change(request, form_class=ChangePasswordForm,
         "password_change_form": password_change_form,
     }, context_instance=RequestContext(request))
 password_change = login_required(password_change)
+
+def password_set(request, form_class=SetPasswordForm,
+        template_name="account/password_set.html"):
+    if request.user.password:
+        return HttpResponseRedirect(reverse("acct_passwd"))
+    if request.method == "POST":
+        password_set_form = form_class(request.user, request.POST)
+        if password_set_form.is_valid():
+            password_set_form.save()
+            return HttpResponseRedirect(reverse("acct_passwd"))
+    else:
+        password_set_form = form_class(request.user)
+    return render_to_response(template_name, {
+        "password_set_form": password_set_form,
+    }, context_instance=RequestContext(request))
+password_set = login_required(password_set)
+
+def password_delete(request, template_name="account/password_delete.html"):
+    # prevent this view when openids is not present or it is empty.
+    if not request.user.password or (not hasattr(request, "openids") or not getattr(request, "openids", None)):
+        return HttpResponseForbidden()
+    if request.method == "POST":
+        request.user.password = u""
+        request.user.save()
+        return HttpResponseRedirect(reverse("acct_passwd_delete_done"))
+    return render_to_response(template_name, {
+    }, context_instance=RequestContext(request))
+password_delete = login_required(password_delete)
 
 def password_reset(request, form_class=ResetPasswordForm,
         template_name="account/password_reset.html",

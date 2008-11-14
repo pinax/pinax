@@ -1,0 +1,44 @@
+Index: django_openid/provider.py
+===================================================================
+--- django_openid/provider.py	(revision 57)
++++ django_openid/provider.py	(working copy)
+@@ -1,6 +1,7 @@
+ from django.conf import settings
+ from django.http import HttpResponse, HttpResponseRedirect, Http404
+ from django.shortcuts import render_to_response
++from django.template import RequestContext
+ from openid.server.server import Server
+ from openid.extensions import sreg
+ from django_openid.models import DjangoOpenIDStore
+@@ -28,7 +29,8 @@
+     def render(self, request, template, context=None):
+         context = context or {}
+         context['base_template'] = self.base_template
+-        return render_to_response(template, context)
++        return render_to_response(template, context,
++            context_instance=RequestContext(request))
+     
+     def get_server(self, request):
+         return Server(DjangoOpenIDStore())
+Index: django_openid/consumer.py
+===================================================================
+--- django_openid/consumer.py	(revision 57)
++++ django_openid/consumer.py	(working copy)
+@@ -13,6 +13,7 @@
+ from django.conf import settings
+ from django.http import HttpResponse, HttpResponseRedirect, Http404
+ from django.shortcuts import render_to_response
++from django.template import RequestContext
+ from openid.consumer import consumer
+ from openid.consumer.discover import DiscoveryFailure
+ from openid.yadis import xri
+@@ -108,7 +109,8 @@
+     def render(self, request, template, context=None):
+         context = context or {}
+         context['base_template'] = self.base_template
+-        return render_to_response(template, context)
++        return render_to_response(template, context,
++            context_instance=RequestContext(request))
+     
+     def __call__(self, request, rest_of_url=''):
+         if not request.path.endswith('/'):

@@ -3,6 +3,8 @@ from django.conf import settings
 
 from django.views.generic.simple import direct_to_template
 
+from account.openid_consumer import PinaxConsumer
+
 from django.contrib import admin
 admin.autodiscover()
 
@@ -13,7 +15,7 @@ urlpatterns = patterns('',
     
     (r'^about/', include('about.urls')),
     (r'^account/', include('account.urls')),
-    (r'^openid/', include('account.openid_urls')),
+    (r'^openid/(.*)', PinaxConsumer()),
     (r'^profiles/', include('basic_profiles.urls')),
     (r'^notices/', include('notification.urls')),
     (r'^announcements/', include('announcements.urls')),

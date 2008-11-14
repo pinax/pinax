@@ -169,6 +169,22 @@ class ChangePasswordForm(UserForm):
         self.user.message_set.create(message=ugettext(u"Password successfully changed."))
 
 
+class SetPasswordForm(UserForm):
+    
+    password1 = forms.CharField(label=_("Password"), widget=forms.PasswordInput(render_value=False))
+    password2 = forms.CharField(label=_("Password (again)"), widget=forms.PasswordInput(render_value=False))
+    
+    def clean_password2(self):
+        if "password1" in self.cleaned_data and "password2" in self.cleaned_data:
+            if self.cleaned_data["password1"] != self.cleaned_data["password2"]:
+                raise forms.ValidationError(_("You must type the same password each time."))
+        return self.cleaned_data["password2"]
+    
+    def save(self):
+        self.user.set_password(self.cleaned_data["password1"])
+        self.user.save()
+        self.user.message_set.create(message=ugettext(u"Password successfully set."))
+
 class ResetPasswordForm(forms.Form):
 
     email = forms.EmailField(label=_("Email"), required=True, widget=forms.TextInput(attrs={'size':'30'}))

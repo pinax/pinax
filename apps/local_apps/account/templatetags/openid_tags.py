@@ -1,6 +1,8 @@
+
 from django import template
-from django_openidauth.models import UserOpenID
 from django.utils.safestring import mark_safe
+
+from django_openid.models import UserOpenidAssociation
 
 try:
     any
@@ -15,7 +17,7 @@ register = template.Library()
 
 def openid_icon(openid, user):
     oid = u'%s' % openid
-    matches = [u.openid == oid for u in UserOpenID.objects.filter(user=user)]
+    matches = [u.openid == oid for u in UserOpenidAssociation.objects.filter(user=user)]
     if any(matches):
         return mark_safe(u'<img src="/site_media/openid-icon.png" alt="Logged in with OpenID" />')
     else:

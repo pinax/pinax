@@ -37,7 +37,7 @@
     <div id="basic-form" class="right-form">
         <fieldset>
         <legend>{% trans "Or sign in with your OpenID" %}</legend>
-        <form class="login" action="{% url django_openidconsumer.views.begin %}" method="POST">
+        <form class="login" action="/openid/register/" method="POST">
             <table>
                 <tr><td width="150px"><img src="{{ MEDIA_URL }}openid-icon.png" /> {% trans "OpenID Identifier" %}: </td><td><input class="openid" type="text" name="openid_url"></td></tr>
                 <tr><td></td><td><input type="submit" value="{% trans "Log in &raquo;" %}" class="button" /></td></tr>

@@ -67,7 +67,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django_openidconsumer.middleware.OpenIDMiddleware',
+    'django_openid.consumer.SessionConsumer',
     'account.middleware.LocaleMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'pagination.middleware.PaginationMiddleware',
@@ -104,11 +104,10 @@ INSTALLED_APPS = (
     
     # external
     'notification', # must be first
+    'django_openid',
     'emailconfirmation',
     'mailer',
     'announcements',
-    'django_openidconsumer',
-    'django_openidauth',
     'pagination',
     'timezones',
     'ajax_validation',
