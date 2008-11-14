@@ -114,6 +114,36 @@ class SignupForm(forms.Form):
             return username, password # required for authenticate()
 
 
+class OpenIDSignupForm(forms.Form):
+    username = forms.CharField(label="Username", max_length=30, widget=forms.TextInput())
+    email = forms.EmailField(label="Email (optional)", required=False, widget=forms.TextInput())
+    
+    def __init__(self, *args, **kwargs):
+        # TODO: do something with these?
+        openid = kwargs.pop("openid")
+        reserved_usernames = kwargs.pop("reserved_usernames")
+        super(OpenIDSignupForm, self).__init__(*args, **kwargs)
+    
+    def clean_username(self):
+        if not alnum_re.search(self.cleaned_data["username"]):
+            raise forms.ValidationError(u"Usernames can only contain letters, numbers and underscores.")
+        try:
+            user = User.objects.get(username__exact=self.cleaned_data["username"])
+        except User.DoesNotExist:
+            return self.cleaned_data["username"]
+        raise forms.ValidationError(u"This username is already taken. Please choose another.")
+
+    def save(self):
+        username = self.cleaned_data["username"]
+        email = self.cleaned_data["email"]
+        new_user = User.objects.create_user(username, "", "!")
+
+        if email:
+            new_user.message_set.create(message="Confirmation email sent to %s" % email)
+            EmailAddress.objects.add_email(new_user, email)
+        return new_user
+
+
 class UserForm(forms.Form):
 
     def __init__(self, user=None, *args, **kwargs):
