@@ -132,7 +132,7 @@
             {% tweet_listing tweets 1 0 %}
             
             <h2>{% trans "Upcoming Events" %}</h2>
-            {% get_calendar_for_object tribe as calendar %}
+            {% get_calendar tribe as calendar %}
             {% if calendar.get_upcoming_events %}
                 <table class="topics">
                     {% for event in calendar.get_upcoming_events %}
