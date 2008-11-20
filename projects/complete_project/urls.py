@@ -99,7 +99,7 @@ urlpatterns += patterns('',
     url('^bookmarks/friends_bookmarks/$', 'friends_app.views.friends_objects', kwargs=friends_bookmarks_kwargs, name="friends_bookmarks"),
 )
 
-if settings.DEBUG:
+if settings.SERVE_MEDIA:
     urlpatterns += patterns('',
         (r'^site_media/(?P<path>.*)$', 'django.views.static.serve',
             {'document_root': os.path.join(os.path.dirname(__file__), "site_media")}),

@@ -23,7 +23,7 @@ urlpatterns = patterns('',
     (r'^admin/(.*)', admin.site.root),
 )
 
-if settings.DEBUG:
+if settings.SERVE_MEDIA:
     urlpatterns += patterns('',
         (r'^site_media/(?P<path>.*)$', 'django.views.static.serve',
             {'document_root': os.path.join(os.path.dirname(__file__), "site_media")}),
