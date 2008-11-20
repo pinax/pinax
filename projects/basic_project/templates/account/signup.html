@@ -28,8 +28,8 @@
                     <p>{% blocktrans %}By clicking "Sign Up", you are indicating that you have read and agree to the <a href="{{ terms_url }}">Terms of Use</a> and <a href="{{ privacy_url }}">Privacy Policy</a>.{% endblocktrans %}</p>
                     
                     <p>{% blocktrans %}If you have any trouble creating your account, contact us at <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>.{% endblocktrans %}</p>
-                    
-                    <p>If you have OpenID, <a href="{% url acct_login %}">log in</a> using that to begin using this site with OpenID right away.</p></div>
+                    {% url acct_login as acct_login_url %}
+                    <p>{% blocktrans %}If you have OpenID, <a href="{{ acct_login_url }}">log in</a> using that to begin using this site with OpenID right away.{% endblocktrans %}</p></div>
             {% endif %}
         </fieldset>
         </div>
