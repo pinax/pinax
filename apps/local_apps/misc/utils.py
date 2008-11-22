@@ -1,4 +1,6 @@
+
 from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
 
 _inbox_count_sources = None
 
