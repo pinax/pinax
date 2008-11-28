@@ -152,6 +152,7 @@ INSTALLED_APPS = (
     'flag',
     'schedule',
     'microblogging',
+    'locations',
     
     # internal (for now)
     'analytics',
@@ -227,6 +228,10 @@ BEHIND_PROXY = False
 FORCE_LOWERCASE_TAGS = True
 
 WIKI_REQUIRES_LOGIN = True
+
+# Uncomment this line after signing up for a Yahoo Maps API key at the
+# following URL: https://developer.yahoo.com/wsregapp/
+# YAHOO_MAPS_API_KEY = ''
 
 # local_settings.py can be used to override environment-specific settings
 # like database and email that differ between development and production.

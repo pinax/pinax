@@ -140,7 +140,8 @@ h1 {
 #tweets_tab .rtab_tweets,
 #bookmarks_tab .rtab_bookmarks,
 #wiki_tab .rtab_wiki,
-#inbox_tab .rtab_inbox
+#inbox_tab .rtab_inbox,
+#locations_tab .rtab_locations
 {
     bottom: -1px !important;
     padding-bottom: 0 !important;
@@ -158,7 +159,8 @@ h1 {
 #tweets_tab .rtab_tweets a,
 #bookmarks_tab .rtab_bookmarks a,
 #wiki_tab .rtab_wiki a,
-#inbox_tab .rtab_inbox a
+#inbox_tab .rtab_inbox a,
+#locations_tab .rtab_locations a
 {
     color: #000 !important; /* selected tab text colour */
 }
@@ -175,7 +177,8 @@ h1 {
 #tweets_tab .rtab_tweets div,
 #bookmarks_tab .rtab_bookmarks div,
 #wiki_tab .rtab_wiki div,
-#inbox_tab .rtab_inbox div
+#inbox_tab .rtab_inbox div,
+#locations_tab .rtab_locations div
 {
     margin: 0;
     background-color: #DEF !important; /* selected tab colour */
@@ -987,4 +990,12 @@ legend { padding: 0 .4em; font-weight: bold; font-size: 1.2em; }
 }
 
 .form-toggle input[type="submit"] {
+}
+
+/* locations */
+div#ymap {
+    width: 350px;
+    height: 200px;
+    float: right;
+    border: 1px solid gray; 
 }

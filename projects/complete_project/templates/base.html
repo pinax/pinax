@@ -59,10 +59,10 @@
         <div id="footer">{% block footer %}{% endblock %}</div>
         
         <script src="{{ MEDIA_URL }}jquery.js" type="text/javascript"></script>
-        <script src="{{ MEDIA_URL }}base.js" type="text/javascript"></script>
         {% load analytics %}
         {% urchin %}
         {% block extra_body %}
         {% endblock %}
+        <script src="{{ MEDIA_URL }}base.js" type="text/javascript"></script>
     </body>
 </html>
