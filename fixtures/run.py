@@ -26,13 +26,13 @@ sys.path.insert(0, join(settings.PINAX_ROOT, "apps/external_apps"))
 sys.path.insert(0, join(settings.PINAX_ROOT, "apps/local_apps"))
 sys.path.insert(0, join(settings.PROJECT_ROOT, "apps"))
 
-
 settings.DATABASE_ENGINE = 'sqlite3'
 settings.DATABASE_NAME = ':memory:'
 
 from django.core.management.commands.dumpdata import Command as DumpdataCommand
 
-FIXTURES_TO_GENERATE = ('auth', 'profiles', 'friends', 'microblogging')
+FIXTURES_TO_GENERATE = ('auth', 'profiles', 'friends', 'microblogging',
+    'account')
 
 def main():
     call_command('syncdb')
