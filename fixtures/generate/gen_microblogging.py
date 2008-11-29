@@ -1,8 +1,10 @@
 import random
-from microblogging.models import tweet
+
 from django.contrib.auth.models import User
 from django.contrib.webdesign.lorem_ipsum import words
 from django.template.defaultfilters import capfirst
+
+from microblogging.models import tweet
 from timezones.forms import TIMEZONE_CHOICES
 
 OEMBED_CONTENT = [

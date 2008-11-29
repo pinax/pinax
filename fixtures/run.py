@@ -28,20 +28,51 @@ sys.path.insert(0, join(settings.PROJECT_ROOT, "apps"))
 
 settings.DATABASE_ENGINE = 'sqlite3'
 settings.DATABASE_NAME = ':memory:'
+settings.NOTIFICATION_QUEUE_ALL = True
 
 from django.core.management.commands.dumpdata import Command as DumpdataCommand
 
-FIXTURES_TO_GENERATE = ('auth', 'profiles', 'friends', 'microblogging',
-    'account')
+# These are in a specific order.  Please make sure to know what you are doing
+# before rearranging them.
+POSSIBLE_FIXTURES = (
+    'auth',
+    'notification',
+    'profiles',
+    'account',
+    'friends',
+    'microblogging',
+)
+
+POST_GEN_MODULES = (
+    'send_notifications',
+)
 
 def main():
+    fixtures = sys.argv[1:]
+    if fixtures:
+        for fixture in fixtures:
+            if fixture not in POSSIBLE_FIXTURES:
+                print "%s not a possible fixture to generate." % (fixture,)
+                print "The possibilities are: %s" % (', '.join(
+                    POSSIBLE_FIXTURES),)
+                sys.exit(1)
+    else:
+        fixtures = POSSIBLE_FIXTURES
+    print "Generating fixtures for %s" % (', '.join(fixtures),)
     call_command('syncdb')
-    for module_name in FIXTURES_TO_GENERATE:
+    for module_name in fixtures:
         full_module_name = 'generate.gen_%s' % (module_name,)
         mod = __import__(full_module_name)
         for comp in full_module_name.split('.')[1:]:
             mod = getattr(mod, comp)
         mod.generate()
+    for module_name in POST_GEN_MODULES:
+        full_module_name = 'generate.%s' % (module_name,)
+        mod = __import__(full_module_name)
+        for comp in full_module_name.split('.')[1:]:
+            mod = getattr(mod, comp)
+        mod.generate()
+    for module_name in fixtures:
         path = abspath('%s.json' % module_name)
         fixture_file = open(path, 'w')
         fixture_file.write(DumpdataCommand().handle(module_name))

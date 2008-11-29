@@ -1,6 +1,9 @@
 import random
+
 from django.contrib.auth.models import User
-from friends.models import Friendship
+from django.contrib.webdesign.lorem_ipsum import words
+
+from friends.models import Friendship, FriendshipInvitation
 
 def generate():
     num_users = User.objects.all().count()
@@ -9,8 +12,16 @@ def generate():
         num = random.randint(0, num_users - 1)
         friends = User.objects.exclude(id__in=pre_friend_ids).order_by('?')[:num]
         for friend in friends:
-            Friendship.objects.create(from_user = user, to_user = friend)
-        print "Created Friendship Between %s and %s" % (user, ", ".join(map(unicode, friends)))
+            num_words = random.randint(1, 100)
+            message = words(num_words, common=False)
+            ji = FriendshipInvitation.objects.create(
+                from_user=user,
+                to_user=friend,
+                message=message,
+                status='2'
+            )
+            ji.accept()
+        print "Created Friendship Between %s and %d others." % (user, len(friends))
 
 if __name__ == "__main__":
     generate()
