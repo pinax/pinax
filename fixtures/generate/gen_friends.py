@@ -1,6 +1,6 @@
 import random
 from django.contrib.auth.models import User
-from apps.friends.models import Friendship
+from friends.models import Friendship
 
 def generate():
     num_users = User.objects.all().count()
