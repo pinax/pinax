@@ -19,18 +19,18 @@ urlpatterns = \
     patterns('',
         url(r'^create/$', 'projects.views.create', name="project_create"),
         url(r'^your_projects/$', 'projects.views.your_projects', name="your_projects"),
-        url(r'^project/([\w_-]+)/$', 'projects.views.project', name="project_detail"),
-        url(r'^project/([\w_-]+)/delete/$', 'projects.views.delete', name="project_delete"),
-        url(r'^project/([\w_-]+)/members_status/$', 'projects.views.members_status', name="project_members_status"),
+        url(r'^project/([-\w]+)/$', 'projects.views.project', name="project_detail"),
+        url(r'^project/([-\w]+)/delete/$', 'projects.views.delete', name="project_delete"),
+        url(r'^project/([-\w]+)/members_status/$', 'projects.views.members_status', name="project_members_status"),
         
         # topics
-        url(r'^project/([\w_-]+)/topics/$', 'projects.views.topics', name="project_topics"),
+        url(r'^project/([-\w]+)/topics/$', 'projects.views.topics', name="project_topics"),
         url(r'^topic/(\d+)/$', 'projects.views.topic', name="project_topic"),
         
         # tasks
-        url(r'^project/([\w_-]+)/tasks/$', 'projects.views.tasks', name="project_tasks"),
+        url(r'^project/([-\w]+)/tasks/$', 'projects.views.tasks', name="project_tasks"),
         url(r'^task/(\d+)/$', 'projects.views.task', name="project_task"),
-        url(r'^tasks/([\w_-]+)/$', 'projects.views.user_tasks', name="project_user_tasks"),
+        url(r'^tasks/([-\w]+)/$', 'projects.views.user_tasks', name="project_user_tasks"),
         
         # wiki
         url(r'^project/(?P<group_slug>\w+)/wiki/', include('wiki.urls'), kwargs=wiki_args),
