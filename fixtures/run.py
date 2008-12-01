@@ -41,6 +41,7 @@ POSSIBLE_FIXTURES = (
     'account',
     'friends',
     'microblogging',
+    'announcements',
 )
 
 POST_GEN_MODULES = (

@@ -8,7 +8,7 @@ except ImportError:
     import pickle
 
 def generate():
-    print "Sending 10% of notifications"
+    print "Sending 10% of the stored notifications"
     num = NoticeQueueBatch.objects.count()
     users = dict([(str(u.id), u) for u in User.objects.all()])
     print "Unpickling batch data"
@@ -19,6 +19,7 @@ def generate():
     )
     print "Unpickled batch data"
     NoticeQueueBatch.objects.all().delete()
+    i = 0
     for i, args in enumerate(batches):
         arg_list = list(args)
         arg_list[0] = [users[str(arg_list[0])]]
