@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.webdesign.lorem_ipsum import words
 from django.template.defaultfilters import capfirst
 
-from microblogging.models import tweet
+from microblogging.models import Tweet
 from timezones.forms import TIMEZONE_CHOICES
 
 OEMBED_CONTENT = [
@@ -22,7 +22,10 @@ def generate():
             split_num = random.randint(0, len(content) - 1)
             content = capfirst('%s %s %s' % (content[:split_num], oembed, 
                 content[split_num:]))[:139] + '.'
-            tweet(user, content)
+            Tweet.objects.create(
+                sender=user,
+                text=content
+            )
         print "Created %s Tweets from User: %s" % (num_tweets, user)
 
 if __name__ == "__main__":
