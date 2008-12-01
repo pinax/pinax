@@ -16,11 +16,11 @@ urlpatterns = \
     patterns('',
         url(r'^create/$', 'tribes.views.create', name="tribe_create"),
         url(r'^your_tribes/$', 'tribes.views.your_tribes', name="your_tribes"),
-        url(r'^tribe/(\w+)/$', 'tribes.views.tribe', name="tribe_detail"),
-        url(r'^tribe/(\w+)/delete/$', 'tribes.views.delete', name="tribe_delete"),
+        url(r'^tribe/([\w_-]+)/$', 'tribes.views.tribe', name="tribe_detail"),
+        url(r'^tribe/([\w_-]+)/delete/$', 'tribes.views.delete', name="tribe_delete"),
         
         # topics
-        url(r'^tribe/(\w+)/topics/$', 'tribes.views.topics', name="tribe_topics"),
+        url(r'^tribe/([\w_-]+)/topics/$', 'tribes.views.topics', name="tribe_topics"),
         url(r'^topic/(\d+)/edit/$', 'tribes.views.topic', kwargs={"edit": True}, name="tribe_topic_edit"),
         url(r'^topic/(\d+)/delete/$', 'tribes.views.topic_delete', name="tribe_topic_delete"),
         url(r'^topic/(\d+)/$', 'tribes.views.topic', name="tribe_topic"),
