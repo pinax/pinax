@@ -4,7 +4,7 @@
 <h2>{% trans "Tweets" %}</h2>
 
 {% if viewer.is_authenticated and is_owner %}
-    {% tweet_listing viewer.sent_tweets.all 0 is_owner %}
+    {% sent_tweet_listing viewer 0 is_owner %}
 {% else %}
-    {% tweet_listing owner.sent_tweets.all 0 is_owner %}
+    {% sent_tweet_listing owner 0 is_owner %}
 {% endif %}

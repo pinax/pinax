@@ -12,13 +12,13 @@
     
     <p>{% blocktrans %}Followers of <a href="{{ other_user_url }}">{{ other_user }}</a>'s tweets:{% endblocktrans %}</p>
     
-    {% if other_user.followers.all %}
-        {% for following in other_user.followers.all %}
+    {% if follow_list %}
+        {% for following_user in follow_list %}
             {# @@@ this is common code from all profiles list -- refactor #}
             <div class="profile clearfix">
                 {# @@@ factor out style into css file #}
-                <div style="float: left;">{% avatar following.follower 40 %}</div>
-                <div style="padding: 5px; margin-left: 50px;"><a href="{% url profiles.views.profile following.follower.username %}">{{ following.follower }}</a></div>
+                <div style="float: left;">{% avatar following_user 40 %}</div>
+                <div style="padding: 5px; margin-left: 50px;"><a href="{% url profiles.views.profile following_user.username %}">{{ following_user }}</a></div>
             </div>
         {% endfor %}
     {% else %}
