@@ -45,6 +45,17 @@ def generate():
             password='sha1$58ab4$c80250ca3c0e27ab651ab1f76411ce1418742d25' #password=123
         )
         print "Created User %s" % unicode(u)
+    u = User.objects.create(
+        username='admin',
+        first_name='Admin',
+        last_name='Admin',
+        is_active=True,
+        is_superuser=True,
+        is_staff=True,
+        email='admin@example.com',
+        password='sha1$58ab4$c80250ca3c0e27ab651ab1f76411ce1418742d25' #password=123
+    )
+    print "Created Admin User"
 
 if __name__ == "__main__":
     generate()
