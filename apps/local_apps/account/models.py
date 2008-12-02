@@ -19,7 +19,7 @@ class Account(models.Model):
 
 class OtherServiceInfo(models.Model):
     
-    # eg blogrss, twitter_user, twitter_password, pownce_user, pownce_password
+    # eg blogrss, twitter_user, twitter_password
     
     user = models.ForeignKey(User, verbose_name=_('user'))
     key = models.CharField(_('Other Service Info Key'), max_length=50)
