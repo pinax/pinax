@@ -9,7 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 
-from account.forms import SignupForm, AddEmailForm, LoginForm, ChangePasswordForm, ResetPasswordForm, ChangeTimezoneForm, ChangeLanguageForm, TwitterForm, PownceForm
+from account.forms import SignupForm, AddEmailForm, LoginForm, ChangePasswordForm, ResetPasswordForm, ChangeTimezoneForm, ChangeLanguageForm, TwitterForm
 from emailconfirmation.models import EmailAddress, EmailConfirmation
 
 def login(request, form_class=LoginForm, template_name="account/login.html"):
@@ -148,11 +148,8 @@ language_change = login_required(language_change)
 
 def other_services(request, template_name="account/other_services.html"):
     from zwitschern.utils import twitter_verify_credentials
-    from zwitschern.pownce_utils import pownce_verify_credentials
     twitter_form = TwitterForm(request.user)
-    pownce_form = PownceForm(request.user)
     twitter_authorized = False
-    pownce_authorized = False
     if request.method == "POST":
         twitter_form = TwitterForm(request.user, request.POST)
 
@@ -165,30 +162,13 @@ def other_services(request, template_name="account/other_services.html"):
                     request.user.message_set.create(message="Twitter authentication failed")
                 else:
                     twitter_form.save()
-                
-        if request.POST['actionType'] == 'savePownce':
-            pownce_form = PownceForm(request.user, request.POST)     
-            if pownce_form.is_valid():
-                from zwitschern.pownce_utils import pownce_account_raw
-                pownce_account = pownce_account_raw(request.POST['usernamep'], request.POST['passwordp'])
-                pownce_authorized = pownce_verify_credentials(pownce_account)
-                if not pownce_authorized:
-                    request.user.message_set.create(message="Pownce authentication failed")
-                else:
-                    pownce_form.save()
     else:
         from zwitschern.utils import twitter_account_for_user
-        from zwitschern.pownce_utils import pownce_account_for_user
         twitter_account = twitter_account_for_user(request.user)
-        pownce_account  = pownce_account_for_user(request.user)
         twitter_authorized = twitter_verify_credentials(twitter_account)
-        pownce_authorized = pownce_verify_credentials(pownce_account)
         twitter_form = TwitterForm(request.user)
-        pownce_form = PownceForm(request.user)
     return render_to_response(template_name, {
         "twitter_form": twitter_form,
         "twitter_authorized": twitter_authorized,
-        "pownce_form": pownce_form,
-        "pownce_authorized":pownce_authorized,
     }, context_instance=RequestContext(request))
 other_services = login_required(other_services)

@@ -6,7 +6,6 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 
 from zwitschern.utils import twitter_account_for_user, twitter_verify_credentials
-from zwitschern.pownce_utils import pownce_account_for_user, pownce_verify_credentials
 
 from zwitschern.models import Tweet, TweetInstance
 from zwitschern.forms import TweetForm
@@ -17,7 +16,6 @@ def personal(request, form_class=TweetForm,
     just the tweets the current user is following
     """
     twitter_account = twitter_account_for_user(request.user)
-    pownce_account  = pownce_account_for_user(request.user)
 
     if request.method == "POST":
         form = form_class(request.user, request.POST)
@@ -26,8 +24,6 @@ def personal(request, form_class=TweetForm,
             form.save()
             if request.POST.get("pub2twitter", False):
                 twitter_account.PostUpdate(text)
-            if request.POST.get("pub2pownce", False):
-                pownce_account.post_message('all', text)
             if success_url is None:
                 success_url = reverse('zwitschern.views.personal')
             return HttpResponseRedirect(success_url)
@@ -43,7 +39,6 @@ def personal(request, form_class=TweetForm,
         "reply": reply,
         "tweets": tweets,
         "twitter_authorized": twitter_verify_credentials(twitter_account),
-        "pownce_authorized": pownce_verify_credentials(pownce_account),
     }, context_instance=RequestContext(request))
 personal = login_required(personal)
     
