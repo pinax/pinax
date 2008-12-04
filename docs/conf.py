@@ -41,10 +41,11 @@ copyright = '2008, James Tauber and Pinax Team'
 # The default replacements for |version| and |release|, also used in various
 # other places throughout the built documents.
 #
-# The short X.Y version.
-version = '0.5'
+
 # The full version, including alpha/beta/rc tags.
-release = '0.5.1dev'
+release = open(os.path.join('..', 'VERSION')).read()
+# The short X.Y version.
+version = release[:release.index('.', 2)]
 
 # There are two options for replacing |today|: either, you set today to some
 # non-false value, then it is used:
