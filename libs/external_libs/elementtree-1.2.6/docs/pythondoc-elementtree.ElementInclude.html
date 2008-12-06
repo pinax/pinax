@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html>
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=us-ascii' />
+<title>The elementtree.ElementInclude Module</title>
+<link rel='stylesheet' href='effbot.css' type='text/css' />
+</head>
+<body>
+<h1>The elementtree.ElementInclude Module</h1>
+<p>Limited XInclude support for the ElementTree package.</p>
+<h2>Module Contents</h2>
+<dl>
+<dt><a id='elementtree.ElementInclude.default_loader-function' name='elementtree.ElementInclude.default_loader-function'><b>default_loader(href, parse, encoding=None)</b></a> [<a href='#elementtree.ElementInclude.default_loader-function'>#</a>]</dt>
+<dd>
+<p>Default loader.  This loader reads an included resource from disk.</p>
+<dl>
+<dt><i>href</i></dt>
+<dd>
+Resource reference.</dd>
+<dt><i>parse</i></dt>
+<dd>
+Parse mode.  Either &quot;xml&quot; or &quot;text&quot;.</dd>
+<dt><i>encoding</i></dt>
+<dd>
+Optional text encoding.</dd>
+<dt>Returns:</dt>
+<dd>
+The expanded resource.  If the parse mode is &quot;xml&quot;, this
+   is an ElementTree instance.  If the parse mode is &quot;text&quot;, this
+   is a Unicode string.  If the loader fails, it can return None
+   or raise an IOError exception.</dd>
+<dt>Raises <b>IOError</b>:</dt><dd>
+If the loader fails to load the resource.</dd>
+</dl><br />
+</dd>
+<dt><b>FatalIncludeError</b> (class)  [<a href='#elementtree.ElementInclude.FatalIncludeError-class'>#</a>]</dt>
+<dd>
+<p>Fatal include error.</p>
+<p>For more information about this class, see <a href='#elementtree.ElementInclude.FatalIncludeError-class'><i>The FatalIncludeError Class</i></a>.</p>
+</dd>
+<dt><a id='elementtree.ElementInclude.include-function' name='elementtree.ElementInclude.include-function'><b>include(elem, loader=None)</b></a> [<a href='#elementtree.ElementInclude.include-function'>#</a>]</dt>
+<dd>
+<p>Expand XInclude directives.</p>
+<dl>
+<dt><i>elem</i></dt>
+<dd>
+Root element.</dd>
+<dt><i>loader</i></dt>
+<dd>
+Optional resource loader.  If omitted, it defaults
+    to <a class="link" href="#elementtree.ElementInclude.default_loader-function"><b>default_loader</b></a>.  If given, it should be a callable
+    that implements the same interface as <b>default_loader</b>.
+</dd>
+<dt>Raises <b>FatalIncludeError</b>:</dt><dd>
+If the function fails to include a given
+    resource, or if the tree contains malformed XInclude elements.</dd>
+<dt>Raises <b>IOError</b>:</dt><dd>
+If the function fails to load a given resource.</dd>
+</dl><br />
+</dd>
+</dl>
+<h2><a id='elementtree.ElementInclude.FatalIncludeError-class' name='elementtree.ElementInclude.FatalIncludeError-class'>The FatalIncludeError Class</a></h2>
+<dl>
+<dt><b>FatalIncludeError</b> (class)  [<a href='#elementtree.ElementInclude.FatalIncludeError-class'>#</a>]</dt>
+<dd>
+<p>Fatal include error.</p>
+</dd>
+</dl>
+</body></html>

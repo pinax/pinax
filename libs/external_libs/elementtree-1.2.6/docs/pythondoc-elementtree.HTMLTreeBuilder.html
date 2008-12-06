@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html>
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=us-ascii' />
+<title>The elementtree.HTMLTreeBuilder Module</title>
+<link rel='stylesheet' href='effbot.css' type='text/css' />
+</head>
+<body>
+<h1>The elementtree.HTMLTreeBuilder Module</h1>
+<p>Tools to build element trees from HTML files.</p>
+<h2>Module Contents</h2>
+<dl>
+<dt><b>HTMLTreeBuilder(builder=None, encoding=None)</b> (class) [<a href='#elementtree.HTMLTreeBuilder.HTMLTreeBuilder-class'>#</a>]</dt>
+<dd>
+<p>ElementTree builder for HTML source code.</p>
+<dl>
+<dt><i>builder=</i></dt>
+<dd>
+Optional builder object.  If omitted, the parser
+    uses the standard <b>elementtree</b> builder.
+</dd>
+<dt><i>encoding=</i></dt>
+<dd>
+Optional character encoding, if known.  If omitted,
+    the parser looks for META tags inside the document.  If no tags
+    are found, the parser defaults to ISO-8859-1.  Note that if your
+    document uses a non-ASCII compatible encoding, you must decode
+    the document before parsing.</dd>
+</dl><br />
+<p>For more information about this class, see <a href='#elementtree.HTMLTreeBuilder.HTMLTreeBuilder-class'><i>The HTMLTreeBuilder Class</i></a>.</p>
+</dd>
+<dt><a id='elementtree.HTMLTreeBuilder.parse-function' name='elementtree.HTMLTreeBuilder.parse-function'><b>parse(source, encoding=None)</b></a> [<a href='#elementtree.HTMLTreeBuilder.parse-function'>#</a>]</dt>
+<dd>
+<p>Parse an HTML document or document fragment.</p>
+<dl>
+<dt><i>source</i></dt>
+<dd>
+A filename or file object containing HTML data.</dd>
+<dt><i>encoding</i></dt>
+<dd>
+Optional character encoding, if known.  If omitted,
+    the parser looks for META tags inside the document.  If no tags
+    are found, the parser defaults to ISO-8859-1.</dd>
+<dt>Returns:</dt>
+<dd>
+An ElementTree instance</dd>
+</dl><br />
+</dd>
+<dt><a id='elementtree.HTMLTreeBuilder.TreeBuilder-variable' name='elementtree.HTMLTreeBuilder.TreeBuilder-variable'><b>TreeBuilder</b></a> (variable) [<a href='#elementtree.HTMLTreeBuilder.TreeBuilder-variable'>#</a>]</dt>
+<dd>
+<p>An alias for the <b>HTMLTreeBuilder</b> class.
+</p></dd>
+</dl>
+<h2><a id='elementtree.HTMLTreeBuilder.HTMLTreeBuilder-class' name='elementtree.HTMLTreeBuilder.HTMLTreeBuilder-class'>The HTMLTreeBuilder Class</a></h2>
+<dl>
+<dt><b>HTMLTreeBuilder(builder=None, encoding=None)</b> (class) [<a href='#elementtree.HTMLTreeBuilder.HTMLTreeBuilder-class'>#</a>]</dt>
+<dd>
+<p>ElementTree builder for HTML source code.  This builder converts an
+HTML document or fragment to an ElementTree.
+</p><p>
+The parser is relatively picky, and requires balanced tags for most
+elements.  However, elements belonging to the following group are
+automatically closed: P, LI, TR, TH, and TD.  In addition, the
+parser automatically inserts end tags immediately after the start
+tag, and ignores any end tags for the following group: IMG, HR,
+META, and LINK.
+
+</p><dl>
+<dt><i>builder=</i></dt>
+<dd>
+Optional builder object.  If omitted, the parser
+    uses the standard <b>elementtree</b> builder.
+</dd>
+<dt><i>encoding=</i></dt>
+<dd>
+Optional character encoding, if known.  If omitted,
+    the parser looks for META tags inside the document.  If no tags
+    are found, the parser defaults to ISO-8859-1.  Note that if your
+    document uses a non-ASCII compatible encoding, you must decode
+    the document before parsing.</dd>
+</dl><br />
+</dd>
+<dt><a id='elementtree.HTMLTreeBuilder.HTMLTreeBuilder.close-method' name='elementtree.HTMLTreeBuilder.HTMLTreeBuilder.close-method'><b>close()</b></a> [<a href='#elementtree.HTMLTreeBuilder.HTMLTreeBuilder.close-method'>#</a>]</dt>
+<dd>
+<p>Flushes parser buffers, and return the root element.</p>
+<dl>
+<dt>Returns:</dt>
+<dd>
+An Element instance.</dd>
+</dl><br />
+</dd>
+<dt><a id='elementtree.HTMLTreeBuilder.HTMLTreeBuilder.handle_charref-method' name='elementtree.HTMLTreeBuilder.HTMLTreeBuilder.handle_charref-method'><b>handle_charref(char)</b></a> [<a href='#elementtree.HTMLTreeBuilder.HTMLTreeBuilder.handle_charref-method'>#</a>]</dt>
+<dd>
+<p>(Internal) Handles character references.</p>
+</dd>
+<dt><a id='elementtree.HTMLTreeBuilder.HTMLTreeBuilder.handle_data-method' name='elementtree.HTMLTreeBuilder.HTMLTreeBuilder.handle_data-method'><b>handle_data(data)</b></a> [<a href='#elementtree.HTMLTreeBuilder.HTMLTreeBuilder.handle_data-method'>#</a>]</dt>
+<dd>
+<p>(Internal) Handles character data.</p>
+</dd>
+<dt><a id='elementtree.HTMLTreeBuilder.HTMLTreeBuilder.handle_endtag-method' name='elementtree.HTMLTreeBuilder.HTMLTreeBuilder.handle_endtag-method'><b>handle_endtag(tag)</b></a> [<a href='#elementtree.HTMLTreeBuilder.HTMLTreeBuilder.handle_endtag-method'>#</a>]</dt>
+<dd>
+<p>(Internal) Handles end tags.</p>
+</dd>
+<dt><a id='elementtree.HTMLTreeBuilder.HTMLTreeBuilder.handle_entityref-method' name='elementtree.HTMLTreeBuilder.HTMLTreeBuilder.handle_entityref-method'><b>handle_entityref(name)</b></a> [<a href='#elementtree.HTMLTreeBuilder.HTMLTreeBuilder.handle_entityref-method'>#</a>]</dt>
+<dd>
+<p>(Internal) Handles entity references.</p>
+</dd>
+<dt><a id='elementtree.HTMLTreeBuilder.HTMLTreeBuilder.handle_starttag-method' name='elementtree.HTMLTreeBuilder.HTMLTreeBuilder.handle_starttag-method'><b>handle_starttag(tag, attrs)</b></a> [<a href='#elementtree.HTMLTreeBuilder.HTMLTreeBuilder.handle_starttag-method'>#</a>]</dt>
+<dd>
+<p>(Internal) Handles start tags.</p>
+</dd>
+<dt><a id='elementtree.HTMLTreeBuilder.HTMLTreeBuilder.unknown_entityref-method' name='elementtree.HTMLTreeBuilder.HTMLTreeBuilder.unknown_entityref-method'><b>unknown_entityref(name)</b></a> [<a href='#elementtree.HTMLTreeBuilder.HTMLTreeBuilder.unknown_entityref-method'>#</a>]</dt>
+<dd>
+<p>(Hook) Handles unknown entity references.  The default action
+is to ignore unknown entities.</p>
+</dd>
+</dl>
+</body></html>
