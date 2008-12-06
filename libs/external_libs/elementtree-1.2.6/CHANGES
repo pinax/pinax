@@ -1,0 +1,210 @@
+The ElementTree Library
+$Id: CHANGES 2326 2005-03-17 07:45:21Z fredrik $
+
+*** Changes from release 1.1 to 1.2 ***
+
+(1.2.6 released)
+
+- Fixed handling of entities defined in internal DTD's (reported
+  by Greg Wilson).
+
+- Fixed serialization under non-standard default encodings (but
+  using non-standard default encodings is still a lousy idea ;-)
+
+(1.2.5 released)
+
+- Added 'iterparse' implementation.  This is similar to 'parse', but
+  returns a stream of events while it builds the tree.  By default,
+  the parser only returns "end" events (for completed elements):
+
+	for event, elem in iterparse(source):
+	    ...
+
+  To get other events, use the "events" option to pass in a tuple
+  containing the events you want:
+
+	for event, elem in iterparse(source, events=(...)):
+	    ...
+
+  The event tuple can contain one or more of:
+
+  "start"
+    generated for start tags, after the element has been created
+    (but before the current element has been fully populated)
+  "end"
+    generated for end tags, after all element children has been
+    created.
+  "start-ns"
+    generated when a new namespace scope is opened.  for this event,
+    the elem value is a (prefix, url) tuple.
+  "end-ns"
+    generated when the current namespace scope is closed.  elem
+    is None.
+
+  Events arrive asynchronously; the tree is usually more complete
+  than the events indicate, but this is nothing you can rely on.
+
+  The iterable itself contains context information.  In the current
+  release, the only public context attribute is "root", which is set
+  to the root element when parsing is finished.  To access the con-
+  text, assign the iterable to a variable before looping over it:
+
+	context = iterparse(source)
+	for event, elem in context:
+	    ...
+	root = context.root
+
+(1.2.4 released)
+
+- Fixed another FancyTreeBuilder bug on Python 2.3.
+
+(1.2.3 released)
+
+- Fixed the FancyTreeBuilder class, which was broken in 1.2.1
+  and 1.2.2 (broken for some Python versions, at least).
+
+(1.2.2 released)
+
+- Fixed some ASCII/Unicode issues in the HTML parser.  You can now
+  use the parser on documents that mixes encoded 8-bit data with
+  character references outside the ASCII range. (backported from 1.3)
+
+(1.2.1 released)
+
+- Changed XMLTreeBuilder to take advantage of new expat features, if
+  present.  This speeds up parsing quite a bit. (backported from 1.3)
+
+(1.2c1 released; 1.2 final released)
+
+- Added 'docs' directory, with PythonDoc documentation for the
+  ElementTree library.  See docs/index.html for an overview.
+
+(1.2b4 released)
+
+- Fixed encoding of Unicode element names and attribute names
+  (reported by Ken Rimey).
+
+(1.2b3 released)
+
+- Added default argument to 'findtext'.  Note that 'findtext' now
+  always returns an empty string if a matching element is found, but
+  has no text content.  None is only returned if no element is found,
+  and no default value is specified.
+
+- Make sure 'dump' adds a trailing linefeed.
+
+(1.2b2 released)
+
+- Added optional tree builder argument to the HTMLTreeBuilder class.
+
+(1.2b1 released)
+
+- Added XMLID() helper.  This is similar to XML(), but returns both
+  the root element and a dictionary mapping ID attributes to elements.
+
+- Added simple SgmlopXMLTreeBuilder module.  This is a very fast
+  parser, but it doesn't yet support namespaces.  To use this parser,
+  you need the sgmlop driver:
+
+      http://effbot.org/zone/sgmlop-index.htm
+
+- Fixed exception in test suite; the TidyHTMLTreeBuilder class
+  now raises a RuntimeError exception if the _elementidy module
+  is not available.
+
+(1.2a5 released)
+
+- Fixed problem that could result in repeated use of the same
+  namespace prefix in the same element (!).
+
+- Fixed import error in ElementInclude, when using the default
+  loader (Gustavo Niemeyer).
+
+(1.2a4 released)
+
+- Fixed exception when .//tag fails to find matching elements
+  (reported by Mike Kent) (@XMLTOOLKIT28)
+
+- Fall back on pre-1.2 find/findtext/findall behaviour if the
+  ElementPath module is not installed.  If you don't need path
+  support, you can simply copy the ElementTree module to your
+  own project.
+
+(1.2a3 released)
+
+- Added experimental support for XInclude-style preprocessing.  The
+  ElementInclude module expands xi:include elements, using a custom
+  resolver.  The current release ignores xi:fallback elements.
+
+- Fixed typo in ElementTree.findtext (reported by Thomas Dartsch)
+  (@XMLTOOLKIT25)
+
+- Fixed parsing of periods in element names (reported by Brian
+  Vicente) (@XMLTOOLKIT27)
+
+(1.2a2 released)
+
+- Fixed serialization of elements and attributes in the XML default
+  namespace (http://www.w3.org/XML/1998/namespace).  Added "rdf" to
+  the set of "well-known" namespace prefixes.
+
+- Added 'makeelement' factory method.  Added 'target' argument to
+  XMLTreeBuilder class.
+
+(1.2a1 released)
+
+- Added support for a very limited subset of the abbreviated XPath
+  syntax.  The following location paths are supported:
+
+	tag -- select all subelements with the given tag
+	. -- select this element
+	* -- select all subelements
+	// (empty path) -- select all subelements, on all levels
+
+  Examples:
+
+	p -- select all p subelements
+	.//a -- select all a sublements, at all sublevels
+	*/img -- select all img grandchildren
+	ul/li -- select all li elements that are children of ul elements
+	.//ul/li -- same, but select elements anywhere in the subtree
+
+  Absolute paths (paths starting with a slash) can only be used on
+  ElementTree instances.  To use // on an Element instance, add a
+  leading period (.).
+
+*** Changes from release 1.0 to 1.1 ***
+
+(1.1 final released)
+
+- Added 'fromstring' and 'tostring' helpers.  The 'XML' function is
+  an alias for 'fromstring', and provides a convenient way to add XML
+  literals to source code:
+
+	from elementtree.ElementTree import XML
+
+	element = XML('<element>content</element>')
+
+- Moved XMLTreeBuilder functionality into the ElementTree module.  If
+  all you need is basic XML support, you can simply copy the ElementTree
+  module to your own project.
+
+- Added SimpleXMLWriter module.
+
+(1.1b2 released)
+
+- Changed default encoding to US-ASCII.  Use tree.write(file, "utf-8")
+  to get the old behaviour.  If the tree contains text that cannot be
+  encoded using the given encoding, the writer uses numerical entities
+  for all non-ASCII characters in that text segment.
+
+(1.1b1 released)
+
+- Map tags and attribute names having the same value to the same
+  object.  This saves space when reading large XML trees, and also
+  gives a small speedup (less than 10%).
+
+- Added benchmark script.  This script takes a filename argument, and
+  loads the given file into memory using the XML and SimpleXML tree
+  builders.  For each parser, it reports the document size and the
+  time needed to parse the document.

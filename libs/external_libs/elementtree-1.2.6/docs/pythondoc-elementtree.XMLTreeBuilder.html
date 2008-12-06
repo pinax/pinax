@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html>
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=us-ascii' />
+<title>The elementtree.XMLTreeBuilder Module</title>
+<link rel='stylesheet' href='effbot.css' type='text/css' />
+</head>
+<body>
+<h1>The elementtree.XMLTreeBuilder Module</h1>
+<p>Tools to build element trees from XML files.</p>
+<h2>Module Contents</h2>
+<dl>
+<dt><b>FancyTreeBuilder(html=0)</b> (class) [<a href='#elementtree.XMLTreeBuilder.FancyTreeBuilder-class'>#</a>]</dt>
+<dd>
+<p>(experimental) An alternate builder that supports manipulation of
+new elements.</p>
+<p>For more information about this class, see <a href='#elementtree.XMLTreeBuilder.FancyTreeBuilder-class'><i>The FancyTreeBuilder Class</i></a>.</p>
+</dd>
+<dt><b>TreeBuilder</b> (class)  [<a href='#elementtree.XMLTreeBuilder.TreeBuilder-class'>#</a>]</dt>
+<dd>
+<p>(obsolete) ElementTree builder for XML source data, based on the
+expat parser.</p>
+<p>For more information about this class, see <a href='#elementtree.XMLTreeBuilder.TreeBuilder-class'><i>The TreeBuilder Class</i></a>.</p>
+</dd>
+</dl>
+<h2><a id='elementtree.XMLTreeBuilder.FancyTreeBuilder-class' name='elementtree.XMLTreeBuilder.FancyTreeBuilder-class'>The FancyTreeBuilder Class</a></h2>
+<dl>
+<dt><b>FancyTreeBuilder(html=0)</b> (class) [<a href='#elementtree.XMLTreeBuilder.FancyTreeBuilder-class'>#</a>]</dt>
+<dd>
+<p>(experimental) An alternate builder that supports manipulation of
+new elements.</p>
+</dd>
+<dt><a id='elementtree.XMLTreeBuilder.FancyTreeBuilder.end-method' name='elementtree.XMLTreeBuilder.FancyTreeBuilder.end-method'><b>end(element)</b></a> [<a href='#elementtree.XMLTreeBuilder.FancyTreeBuilder.end-method'>#</a>]</dt>
+<dd>
+<p>Hook method that's called when a new element has been closed.
+May access the <b>namespaces</b> attribute.
+
+</p><dl>
+<dt><i>element</i></dt>
+<dd>
+The new element.</dd>
+</dl><br />
+</dd>
+<dt><a id='elementtree.XMLTreeBuilder.FancyTreeBuilder.start-method' name='elementtree.XMLTreeBuilder.FancyTreeBuilder.start-method'><b>start(element)</b></a> [<a href='#elementtree.XMLTreeBuilder.FancyTreeBuilder.start-method'>#</a>]</dt>
+<dd>
+<p>Hook method that's called when a new element has been opened.
+May access the <b>namespaces</b> attribute.
+
+</p><dl>
+<dt><i>element</i></dt>
+<dd>
+The new element.  The tag name and attributes are,
+    set, but it has no children, and the text and tail attributes
+    are still empty.</dd>
+</dl><br />
+</dd>
+</dl>
+<h2><a id='elementtree.XMLTreeBuilder.TreeBuilder-class' name='elementtree.XMLTreeBuilder.TreeBuilder-class'>The TreeBuilder Class</a></h2>
+<dl>
+<dt><b>TreeBuilder</b> (class)  [<a href='#elementtree.XMLTreeBuilder.TreeBuilder-class'>#</a>]</dt>
+<dd>
+<p>(obsolete) ElementTree builder for XML source data, based on the
+<b>expat</b> parser.
+</p><p>
+This class is an alias for ElementTree.XMLTreeBuilder.  New code
+should use that version instead.
+
+</p></dd>
+</dl>
+</body></html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html>
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=us-ascii' />
+<title>The elementtree.SimpleXMLWriter Module</title>
+<link rel='stylesheet' href='effbot.css' type='text/css' />
+</head>
+<body>
+<h1>The elementtree.SimpleXMLWriter Module</h1>
+<p>Tools to write XML files, without having to deal with encoding
+issues, well-formedness, etc.
+</p><p>
+The current version does not provide built-in support for
+namespaces. To create files using namespaces, you have to provide
+"xmlns" attributes and explicitly add prefixes to tags and
+attributes.
+
+<h3>Patterns</h3>
+
+The following example generates a small XHTML document.
+<pre>
+
+from elementtree.SimpleXMLWriter import XMLWriter
+import sys
+
+w = XMLWriter(sys.stdout)
+
+html = w.start("html")
+
+w.start("head")
+w.element("title", "my document")
+w.element("meta", name="generator", value="my application 1.0")
+w.end()
+
+w.start("body")
+w.element("h1", "this is a heading")
+w.element("p", "this is a paragraph")
+
+w.start("p")
+w.data("this is ")
+w.element("b", "bold")
+w.data(" and ")
+w.element("i", "italic")
+w.data(".")
+w.end("p")
+
+w.close(html)
+</pre>
+</p><h2>Module Contents</h2>
+<dl>
+<dt><b>XMLWriter(file, encoding=&quot;us-ascii&quot;)</b> (class) [<a href='#elementtree.SimpleXMLWriter.XMLWriter-class'>#</a>]</dt>
+<dd>
+<p>XML writer class.</p>
+<dl>
+<dt><i>file</i></dt>
+<dd>
+A file or file-like object.  This object must implement
+   a <b>write</b> method that takes an 8-bit string.
+</dd>
+<dt><i>encoding</i></dt>
+<dd>
+Optional encoding.</dd>
+</dl><br />
+<p>For more information about this class, see <a href='#elementtree.SimpleXMLWriter.XMLWriter-class'><i>The XMLWriter Class</i></a>.</p>
+</dd>
+</dl>
+<h2><a id='elementtree.SimpleXMLWriter.XMLWriter-class' name='elementtree.SimpleXMLWriter.XMLWriter-class'>The XMLWriter Class</a></h2>
+<dl>
+<dt><b>XMLWriter(file, encoding=&quot;us-ascii&quot;)</b> (class) [<a href='#elementtree.SimpleXMLWriter.XMLWriter-class'>#</a>]</dt>
+<dd>
+<p>XML writer class.</p>
+<dl>
+<dt><i>file</i></dt>
+<dd>
+A file or file-like object.  This object must implement
+   a <b>write</b> method that takes an 8-bit string.
+</dd>
+<dt><i>encoding</i></dt>
+<dd>
+Optional encoding.</dd>
+</dl><br />
+</dd>
+<dt><a id='elementtree.SimpleXMLWriter.XMLWriter.close-method' name='elementtree.SimpleXMLWriter.XMLWriter.close-method'><b>close(id)</b></a> [<a href='#elementtree.SimpleXMLWriter.XMLWriter.close-method'>#</a>]</dt>
+<dd>
+<p>Closes open elements, up to (and including) the element identified
+by the given identifier.</p>
+<dl>
+<dt><i>id</i></dt>
+<dd>
+Element identifier, as returned by the <b>start</b> method.
+</dd>
+</dl><br />
+</dd>
+<dt><a id='elementtree.SimpleXMLWriter.XMLWriter.comment-method' name='elementtree.SimpleXMLWriter.XMLWriter.comment-method'><b>comment(comment)</b></a> [<a href='#elementtree.SimpleXMLWriter.XMLWriter.comment-method'>#</a>]</dt>
+<dd>
+<p>Adds a comment to the output stream.</p>
+<dl>
+<dt><i>comment</i></dt>
+<dd>
+Comment text, as an 8-bit string or Unicode string.</dd>
+</dl><br />
+</dd>
+<dt><a id='elementtree.SimpleXMLWriter.XMLWriter.data-method' name='elementtree.SimpleXMLWriter.XMLWriter.data-method'><b>data(text)</b></a> [<a href='#elementtree.SimpleXMLWriter.XMLWriter.data-method'>#</a>]</dt>
+<dd>
+<p>Adds character data to the output stream.</p>
+<dl>
+<dt><i>text</i></dt>
+<dd>
+Character data, as an 8-bit string or Unicode string.</dd>
+</dl><br />
+</dd>
+<dt><a id='elementtree.SimpleXMLWriter.XMLWriter.declaration-method' name='elementtree.SimpleXMLWriter.XMLWriter.declaration-method'><b>declaration()</b></a> [<a href='#elementtree.SimpleXMLWriter.XMLWriter.declaration-method'>#</a>]</dt>
+<dd>
+<p>Writes an XML declaration.</p>
+</dd>
+<dt><a id='elementtree.SimpleXMLWriter.XMLWriter.element-method' name='elementtree.SimpleXMLWriter.XMLWriter.element-method'><b>element(tag, text=None, attrib={}, **extra)</b></a> [<a href='#elementtree.SimpleXMLWriter.XMLWriter.element-method'>#</a>]</dt>
+<dd>
+<p>Adds an entire element.  This is the same as calling <b>start</b>,
+<b>data</b>, and <b>end</b> in sequence. The <b>text</b> argument
+can be omitted.
+</p></dd>
+<dt><a id='elementtree.SimpleXMLWriter.XMLWriter.end-method' name='elementtree.SimpleXMLWriter.XMLWriter.end-method'><b>end(tag=None)</b></a> [<a href='#elementtree.SimpleXMLWriter.XMLWriter.end-method'>#</a>]</dt>
+<dd>
+<p>Closes the current element (opened by the most recent call to
+<b>start</b>).
+
+</p><dl>
+<dt><i>tag</i></dt>
+<dd>
+Element tag.  If given, the tag must match the start
+   tag.  If omitted, the current element is closed.</dd>
+</dl><br />
+</dd>
+<dt><a id='elementtree.SimpleXMLWriter.XMLWriter.flush-method' name='elementtree.SimpleXMLWriter.XMLWriter.flush-method'><b>flush()</b></a> [<a href='#elementtree.SimpleXMLWriter.XMLWriter.flush-method'>#</a>]</dt>
+<dd>
+<p>Flushes the output stream.</p>
+</dd>
+<dt><a id='elementtree.SimpleXMLWriter.XMLWriter.start-method' name='elementtree.SimpleXMLWriter.XMLWriter.start-method'><b>start(tag, attrib={}, **extra)</b></a> [<a href='#elementtree.SimpleXMLWriter.XMLWriter.start-method'>#</a>]</dt>
+<dd>
+<p>Opens a new element.  Attributes can be given as keyword
+arguments, or as a string/string dictionary. You can pass in
+8-bit strings or Unicode strings; the former are assumed to use
+the encoding passed to the constructor.  The method returns an
+opaque identifier that can be passed to the <b>close</b> method,
+to close all open elements up to and including this one.
+
+</p><dl>
+<dt><i>tag</i></dt>
+<dd>
+Element tag.</dd>
+<dt><i>attrib</i></dt>
+<dd>
+Attribute dictionary.  Alternatively, attributes
+   can be given as keyword arguments.</dd>
+<dt>Returns:</dt>
+<dd>
+An element identifier.</dd>
+</dl><br />
+</dd>
+</dl>
+</body></html>
