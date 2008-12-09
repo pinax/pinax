@@ -1,0 +1,68 @@
+{% load i18n %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}" xml:lang="{{ LANGUAGE_CODE }}" lang="{{ LANGUAGE_CODE }}">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title>{% if site_name %}{{ site_name }} : {% endif %}{% block head_title %}{% endblock %}</title>
+        <!--[if IE]><style>
+            div {
+                zoom: 1; /* trigger hasLayout */
+            }
+        </style><![endif]-->
+        <link rel="stylesheet" href="{{ MEDIA_URL }}base.css" />
+        <link rel="stylesheet" href="{{ MEDIA_URL }}tabs.css" />
+        {% if LANGUAGE_BIDI %}
+        <style type="text/css" media="screen">
+            div.right_panel {
+                float: left; /* hotfix for sidebar */
+            }
+        </style>
+        {% endif %}
+        {% block extra_head %}
+        {% endblock %}
+    </head>
+    
+    <body>
+        {% if site_wide_announcements %}
+            <div id="site_wide_announcements">
+                <ul>
+                    {% for announcement in site_wide_announcements %}
+                    <li>
+                        <a href="{{ announcement.get_absolute_url }}">{{ announcement }}</a> -
+                        <a href="{% url announcement_hide announcement.pk %}?next={{ request.path }}">{% trans "Hide announcement" %}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        
+        <div id="tabhead">
+            <div class="logo" dir="ltr">{% block logo_link_image %}{% endblock %}</div>
+            <div class="login">{% block login %}{% endblock %}{% block locale_switcher %}{% endblock %}<div style="text-align: right;"></div></div>
+            <div class="tabs" {% block tab_id %}{% endblock %}>{% block tabs %}{% endblock %}</div>
+            <div class="right_tab" {% block rtab_id %}{% endblock %}>{% block right_tab %}{% endblock %}</div>
+        </div>
+        <div id="subnav" class="clearfix">{% block subnav %}&nbsp;{% endblock %}</div>
+        
+        <div id="body">
+            {% if messages %}
+                <ul id="messages">
+                    {% for message in messages %}
+                    <li id="message_{{ forloop.counter }}"><a href="#" onclick="$('#message_{{ forloop.counter }}').fadeOut(); return false;"><small>{% trans "clear" %}</small></a> {{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            
+            {% block body %}
+            {% endblock %}
+            
+        </div>
+        
+        <div id="footer">{% block footer %}{% endblock %}</div>
+        
+        <script src="{{ MEDIA_URL }}jquery.js" type="text/javascript"></script>
+        
+        {% block extra_body %}
+        {% endblock %}
+    </body>
+</html>

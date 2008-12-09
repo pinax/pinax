@@ -1,0 +1,47 @@
+{% extends "basic_profiles/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% blocktrans %}Profile for {{ other_user }}{% endblocktrans %}{% endblock %}
+
+{% block body %}
+    
+    <div class="right_panel">
+        {% include "basic_profiles/profile_right_panel.html" %}
+    </div>
+    
+    <h1>{% blocktrans %}Profile for {{ other_user }}{% endblocktrans %}</h1>
+    
+    <div class="profile_info">
+        {% if other_user.get_profile.name %}<p><b>{% trans "Name" %}</b>: {{ other_user.get_profile.name }}</p>{% endif %}
+        {% if other_user.get_profile.about %}<p><b>{% trans "About" %}</b>: {{ other_user.get_profile.about }}</p>{% endif %}
+        {% if other_user.get_profile.location%}<p><b>{% trans "Location" %}</b>: {{ other_user.get_profile.location }}</p>{% endif %}
+        {% if other_user.get_profile.website %}<p><b>{% trans "Website" %}</b>: <a href="{{ other_user.get_profile.website }}">{{ other_user.get_profile.website }}</a></p>{% endif %}
+    </div>
+    
+    
+    {% if user.is_authenticated %}
+        {% if is_me %}
+            <p><a href="#" onclick="$('#profile_form').toggle(); return false;">{% trans "Edit profile" %}</a></p>
+            
+            <form id="profile_form" method="POST" action="" style="display: none;">
+                <table>
+                    {{ profile_form }}
+                    <tr><td></td><td><input type="hidden" name="action" value="update" /><input type="submit" value="{% trans "update" %}"/></td></tr>
+                </table>
+            </form>
+        {% endif %}
+    {% endif %}
+
+{% endblock %}
+
+{% block extra_body %}
+    <script type="text/javascript">
+        $().ready(function() {
+            {% if profile_form.errors %}
+                $('#profile_form').show();
+            {% endif %}
+        });
+    </script>
+{% endblock %}
+
