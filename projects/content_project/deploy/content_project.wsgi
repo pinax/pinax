@@ -1,4 +1,4 @@
-# basic_project.wsgi is configured to live in projects/basic_project/deploy.
+# content_project.wsgi is configured to live in projects/content_project/deploy.
 
 import os
 import sys
