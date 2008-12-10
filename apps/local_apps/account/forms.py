@@ -36,7 +36,7 @@ class LoginForm(forms.Form):
             if user.is_active:
                 self.user = user
             else:
-                raise forms.ValdidationError(_("This account is currently inactive."))
+                raise forms.ValidationError(_("This account is currently inactive."))
         else:
             raise forms.ValidationError(_("The username and/or password you specified are not correct."))
         return self.cleaned_data
