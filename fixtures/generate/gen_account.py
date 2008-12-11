@@ -5,7 +5,7 @@ from django.template.defaultfilters import capfirst
 from django.conf import settings
 
 from account.models import Account, update_other_services
-from timezones.forms import TIMEZONE_CHOICES
+from timezones.forms import COMMON_TIMEZONE_CHOICES
 
 RSS_FEEDS = (
     'http://www.scripting.com/rss.xml',
