@@ -5,7 +5,6 @@ from django.contrib.webdesign.lorem_ipsum import words
 from django.template.defaultfilters import capfirst
 
 from microblogging.models import Tweet
-from timezones.forms import TIMEZONE_CHOICES
 
 OEMBED_CONTENT = [
     'http://www.youtube.com/watch?v=_RyodnisVvU&feature=rec-fresh',
