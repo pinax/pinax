@@ -32,7 +32,7 @@ random.shuffle(surnames)
 
 def generate():
     for name, surname in zip(names, surnames):
-        username = '%s.%s' % (name.lower(), surname.lower())
+        username = '%s_%s' % (name.lower(), surname.lower())
         u = User.objects.create(
             username=username,
             first_name=name,
