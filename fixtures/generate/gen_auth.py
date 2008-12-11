@@ -1,5 +1,4 @@
 import random
-from timezones.forms import TIMEZONE_CHOICES
 from django.contrib.auth.models import User
 
 names = """Jacob Emily Michael Emma Joshua Madison Ethan Isabella Matthew Ava 
