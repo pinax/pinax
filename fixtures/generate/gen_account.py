@@ -21,7 +21,7 @@ def generate():
     for user in User.objects.all():
         account, created = Account.objects.get_or_create(user = user,
             defaults=dict(
-                timezone = random.choice(TIMEZONE_CHOICES)[0],
+                timezone = random.choice(COMMON_TIMEZONE_CHOICES)[0],
                 language = random.choice(settings.LANGUAGES)[0],
             ),
         )
