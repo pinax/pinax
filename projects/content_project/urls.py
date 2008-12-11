@@ -1,14 +1,10 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
 
-from django.views.generic.simple import direct_to_template
-
 from account.openid_consumer import PinaxConsumer
 
 from django.contrib import admin
 admin.autodiscover()
-
-import os
 
 urlpatterns = patterns('',
     (r'^account/', include('account.urls')),
