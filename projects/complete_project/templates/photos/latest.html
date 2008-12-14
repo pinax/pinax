@@ -26,7 +26,6 @@
             <img src="{{ MEDIA_URL }}comment.png" border="0" class="noborder" align="absmiddle" /><a href="{% url photo_details photo.id %}/#photocomments">{% get_comment_count for photo as commentcount %} {{ commentcount }} Comments</a><br />
             {% blocktrans with photo.view_count as view_count %}Viewed {{ view_count }} times{% endblocktrans %}
         </div>
-        {% endwith %}
         {% endfor %}
         </div>
         {% paginate %}
