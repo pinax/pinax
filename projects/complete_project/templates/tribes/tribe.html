@@ -66,7 +66,7 @@
                      <input type="submit" value="{% trans "Delete Tribe" %}" /> (all content will be removed)
                 </form>
             {% else %}
-                <p>You are not the only member of the tribe so you can't delete the tribe.</p>
+                <p>{% trans "You are not the only member of the tribe so you can't delete the tribe." %}</p>
             {% endifequal %}
             
         {% endifequal %}
@@ -79,7 +79,7 @@
                             <p>{% trans "You are the creator of this tribe so can't leave (yet)." %}</p>
                         {% else %}
                             <input type="hidden" name="action" value="leave" />
-                            <input type="submit" value="{% trans 'leave' %}"/>
+                            <input type="submit" value="{% trans "leave" %}"/>
                         {% endifequal %}
                     {% else %}
                         <input type="hidden" name="action" value="join" />
@@ -143,20 +143,20 @@
                     {% endfor %}
                 </table>
             {% else %}
-                There are no upcoming events.
+                {% trans "There are no upcoming events." %}
             {% endif %}
             <p>
-                <a href="{{ calendar.get_absolute_url }}">calendar...</a>
+                <a href="{{ calendar.get_absolute_url }}">{% trans "calendar..." %}</a>
             </p>
 
 
             {% if photos %}
-                <h2>Tribe Photo Pool</h2>
+                <h2>{% trans "Tribe Photo Pool" %}</h2>
                 <div class="thumb-row clearfix">
                     {% for photo in photos %}
                     <div class="gallery-photo-thumb">
                         <a href="/photos/details/{{ photo.photo.id }}/"><img src="{{ photo.photo.get_thumbnail_url }}" alt="{{ photo.photo.title }}"/></a><br />
-                        <img src="{{ MEDIA_URL }}comment.png" border="0" class="noborder" align="absmiddle" /><a href="/photos/details/{{ photo.photo.id }}/">{% get_comment_count for photo as commentcount %} {{ commentcount }} Comments</a>
+                        <img src="{{ MEDIA_URL }}comment.png" border="0" class="noborder" align="absmiddle" /><a href="/photos/details/{{ photo.photo.id }}/">{% get_comment_count for photo as commentcount %} {% blocktrans %}{{ commentcount }} Comments {% endblocktrans %}</a>
                    </div>
                    {% endfor %}
                </div>

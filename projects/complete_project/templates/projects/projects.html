@@ -9,15 +9,15 @@
 {% block head_title %}{% blocktrans %}Projects{% endblocktrans %}{% endblock %}
 
 {% block body %}
-    
+
     <h1>{% trans "Projects" %}</h1>
-    
-    <p>A <b>project</b> is a place to manage a group of people working on a common set of tasks. It is similar to a tribe in providing a wiki and threaded discussion but is invitation only and adds issue tracking.</p>
-    
+
+    <p>{% blocktrans %}A <b>project</b> is a place to manage a group of people working on a common set of tasks. It is similar to a tribe in providing a wiki and threaded discussion but is invitation only and adds issue tracking.{% endblocktrans %}</p>
+
     {% if user.is_authenticated %}
         <div class="form-toggle">
             <p><span id="start-project-toggle">{% trans "Start your own project" %}</span></p>
-            
+
             <form id="start-project" method="POST" action="{% url project_create %}">
                 {% get_project_form as project_form %}
                 <table>

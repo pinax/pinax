@@ -1,5 +1,6 @@
 {% load things_tags %}
-<p>Order by:
+{% load i18n %}
+<p>{% trans "Order by:" %}
     {% for f in fields %}
         {% ifequal f field %}
             {% if descending %}

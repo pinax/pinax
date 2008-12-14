@@ -47,11 +47,11 @@
     {% if article.id and can_observe %}
         {% if is_observing %}
             <form action="{% wikiurl stop_observing group article %}" method="post">
-                <input type="submit" value="Stop Observing Article">
+                <input type="submit" value="{% trans "Stop Observing Article" %}">
             </form>
         {% else %}
             <form action="{% wikiurl observe group article %}" method="post">
-                <input type="submit" value="Observe Article">
+                <input type="submit" value="{% trans "Observe Article" %}">
             </form>
         {% endif %}
     {% endif %}

@@ -19,12 +19,13 @@
             </ul>
             <input type="submit" value="Choose new Default" />
         </form>
-        <p>Don&rsquo;t like these avatars? You can <a href="{% url avatar_delete %}">choose which ones to delete</a>.</p>
+        {% url avatar_delete as avatar_delete_url %}
+        <p>{% blocktrans %}Don&rsquo;t like these avatars? You can <a href="{{ avatar_delete_url }}">choose which ones to delete</a>.{% endblocktrans %}</p>
     {% endif %}
-    <h3>Upload an Avatar:</h3>
+    <h3>{% trans "Upload an Avatar:" %}</h3>
     <form enctype="multipart/form-data" method="POST" action="">
-        <input type="file" name="avatar" value="Avatar Image" />
-        <input type="submit" value="Upload New Image" />
+        <input type="file" name="avatar" value="{% trans "Avatar Image" %}" />
+        <input type="submit" value="{% trans "Upload New Image" %}" />
     </form>
 {% endblock %}
 
