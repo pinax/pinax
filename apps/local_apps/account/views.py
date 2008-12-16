@@ -18,7 +18,7 @@ from emailconfirmation.models import EmailAddress, EmailConfirmation
 def login(request, form_class=LoginForm,
         template_name="account/login.html", success_url=None):
     if success_url is None:
-        success_url = get_default_redirect()
+        success_url = get_default_redirect(request)
     if request.method == "POST":
         form = form_class(request.POST)
         if form.login(request):
@@ -32,7 +32,7 @@ def login(request, form_class=LoginForm,
 def signup(request, form_class=SignupForm,
         template_name="account/signup.html", success_url=None):
     if success_url is None:
-        success_url = get_default_redirect()
+        success_url = get_default_redirect(request)
     if request.method == "POST":
         form = form_class(request.POST)
         if form.is_valid():
