@@ -9,23 +9,20 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 
-from account.forms import SignupForm, AddEmailForm, LoginForm, ChangePasswordForm, SetPasswordForm, ResetPasswordForm, ChangeTimezoneForm, ChangeLanguageForm, TwitterForm
+from account.utils import get_default_redirect
+from account.forms import SignupForm, AddEmailForm, LoginForm, \
+    ChangePasswordForm, SetPasswordForm, ResetPasswordForm, \
+    ChangeTimezoneForm, ChangeLanguageForm, TwitterForm
 from emailconfirmation.models import EmailAddress, EmailConfirmation
 
-def login(request, form_class=LoginForm, template_name="account/login.html"):
+def login(request, form_class=LoginForm,
+        template_name="account/login.html", success_url=None):
+    if success_url is None:
+        success_url = get_default_redirect()
     if request.method == "POST":
-        default_redirect_to = getattr(settings, "LOGIN_REDIRECT_URLNAME", None)
-        if default_redirect_to:
-            default_redirect_to = reverse(default_redirect_to)
-        else:
-            default_redirect_to = settings.LOGIN_REDIRECT_URL
-        redirect_to = request.REQUEST.get("next")
-        # light security check -- make sure redirect_to isn't garabage.
-        if not redirect_to or "://" in redirect_to or " " in redirect_to:
-            redirect_to = default_redirect_to
         form = form_class(request.POST)
         if form.login(request):
-            return HttpResponseRedirect(redirect_to)
+            return HttpResponseRedirect(success_url)
     else:
         form = form_class()
     return render_to_response(template_name, {
@@ -35,14 +32,17 @@ def login(request, form_class=LoginForm, template_name="account/login.html"):
 def signup(request, form_class=SignupForm,
         template_name="account/signup.html", success_url=None):
     if success_url is None:
-        success_url = reverse("what_next")
+        success_url = get_default_redirect()
     if request.method == "POST":
         form = form_class(request.POST)
         if form.is_valid():
             username, password = form.save()
             user = authenticate(username=username, password=password)
             auth_login(request, user)
-            request.user.message_set.create(message=_("Successfully logged in as %(username)s.") % {'username': user.username})
+            request.user.message_set.create(
+                message=_("Successfully logged in as %(username)s.") % {
+                'username': user.username
+            })
             return HttpResponseRedirect(success_url)
     else:
         form = form_class()
@@ -63,22 +63,33 @@ def email(request, form_class=AddEmailForm,
             if request.POST["action"] == "send":
                 email = request.POST["email"]
                 try:
-                    email_address = EmailAddress.objects.get(user=request.user, email=email)
-                    request.user.message_set.create(message="Confirmation email sent to %s" % email)
+                    email_address = EmailAddress.objects.get(
+                        user=request.user,
+                        email=email,
+                    )
+                    request.user.message_set.create(
+                        message="Confirmation email sent to %s" % email)
                     EmailConfirmation.objects.send_confirmation(email_address)
                 except EmailAddress.DoesNotExist:
                     pass
             elif request.POST["action"] == "remove":
                 email = request.POST["email"]
                 try:
-                    email_address = EmailAddress.objects.get(user=request.user, email=email)
+                    email_address = EmailAddress.objects.get(
+                        user=request.user,
+                        email=email
+                    )
                     email_address.delete()
-                    request.user.message_set.create(message="Removed email address %s" % email)
+                    request.user.message_set.create(
+                        message="Removed email address %s" % email)
                 except EmailAddress.DoesNotExist:
                     pass
             elif request.POST["action"] == "primary":
                 email = request.POST["email"]
-                email_address = EmailAddress.objects.get(user=request.user, email=email)
+                email_address = EmailAddress.objects.get(
+                    user=request.user,
+                    email=email,
+                )
                 email_address.set_as_primary()
     else:
         add_email_form = form_class()
@@ -121,7 +132,9 @@ password_set = login_required(password_set)
 
 def password_delete(request, template_name="account/password_delete.html"):
     # prevent this view when openids is not present or it is empty.
-    if not request.user.password or (not hasattr(request, "openids") or not getattr(request, "openids", None)):
+    if not request.user.password or \
+        (not hasattr(request, "openids") or \
+            not getattr(request, "openids", None)):
         return HttpResponseForbidden()
     if request.method == "POST":
         request.user.password = u""
@@ -186,10 +199,13 @@ def other_services(request, template_name="account/other_services.html"):
         if request.POST['actionType'] == 'saveTwitter':
             if twitter_form.is_valid():
                 from microblogging.utils import twitter_account_raw
-                twitter_account = twitter_account_raw(request.POST['username'], request.POST['password'])
-                twitter_authorized = twitter_verify_credentials(twitter_account)
+                twitter_account = twitter_account_raw(
+                    request.POST['username'], request.POST['password'])
+                twitter_authorized = twitter_verify_credentials(
+                    twitter_account)
                 if not twitter_authorized:
-                    request.user.message_set.create(message="Twitter authentication failed")
+                    request.user.message_set.create(
+                        message="Twitter authentication failed")
                 else:
                     twitter_form.save()
     else:
