@@ -11,6 +11,17 @@ a lot of svn:externals for third-party apps and libraries used) will almost
 work out of the box. The one exception is the `Python Imaging Library`_ (PIL)
 which you will have to provide yourself if you want photo support.
 
+.. note::
+    
+    We link up external apps using svn:externals and most of them are hosted
+    with Google Code. It is common to see::
+    
+        Fetching external item into 'apps/external_apps/django_extensions'
+        svn: PROPFIND request failed on '/svn/trunk/django_extensions'
+        svn: PROPFIND of '/svn/trunk/django_extensions': 502 Bad Gateway (http://django-command-extensions.googlecode.com)
+    
+    You should be able to ignore it and try the checkout or update again.
+
 Note that if you already have an external app or external library on the path,
 you don't need to use the one we provide.
 
