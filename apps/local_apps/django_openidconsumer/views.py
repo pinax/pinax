@@ -105,8 +105,7 @@ def complete(request, on_success=None, on_failure=None):
     query_dict = dict([
         (k.encode('utf8'), v.encode('utf8')) for k, v in request.GET.items()
     ])
-    # HACK: Are these request.METAs always available?
-    url = request.META['wsgi.url_scheme'] + '://'+request.META['HTTP_HOST']+request.path
+    url = request.build_absolute_uri()
     openid_response = consumer.complete(query_dict, url)
     
     if openid_response.status == SUCCESS:
