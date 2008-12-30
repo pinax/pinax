@@ -1,6 +1,7 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponseRedirect, get_host
 from django.template import RequestContext
+from django.http import Http404
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
@@ -58,6 +59,9 @@ def details(request, id, template_name="photos/details.html"):
     show the photo details
     """
     photo = get_object_or_404(Image, id=id)
+    # @@@: test
+    if not photo.is_public and request.user != photo.member:
+        raise Http404
     photo_url = photo.get_display_url()
     
     tribes = []
