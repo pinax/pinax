@@ -1,0 +1,47 @@
+.. _ref-current-release-notes:
+
+0.5.1
+=====
+
+The 0.5.1 release brings various bug fixes and more stability to Pinax. We have fixed some
+bugs and improved the documentation. This release should be backward compatible, except
+where noted.
+
+
+Python 2.4 support
+------------------
+
+0.5.1 brings Python 2.4 compatibility. There are still many distributions out there that
+have Python 2.4 as the default Python version.
+
+
+Removal of Pownce support
+-------------------------
+
+Pownce closed their doors on December 15, 2008 after being bought by Six Apart. There is no
+longer any reason we should support Pownce.
+
+You may need to remove some Pownce bits from your templates if you forked from the
+``complete_project`` locally.
+
+
+Various bug-fixes
+-----------------
+
+* r1292_ Fixed a bug in django_openidconsumer that prevented login on some deployments
+* r1288_ Removed an import that was never used in ``profiles/views.py``.
+* r1283_ `Issue #131`_ Added a missing datetime import in ``apps/local_apps/projects/forms.py``.
+* r1266_ Fixed a typo of ``ValidationError`` in ``apps/local_apps/account/forms.py``.
+* r1215_ `Issue #119`_ Added a missing import in ``apps/local_apps/misc/utils.py``.
+* r1193_ Added the about app to the basic_project ``INSTALLED_APPS`` list.
+
+
+.. _r1292: http://code.pinaxproject.com/codebases/codebase/pinax/changesets/1292/
+.. _r1288: http://code.pinaxproject.com/codebases/codebase/pinax/changesets/1288/
+.. _r1283: http://code.pinaxproject.com/codebases/codebase/pinax/changesets/1283/
+.. _r1266: http://code.pinaxproject.com/codebases/codebase/pinax/changesets/1266/
+.. _r1215: http://code.pinaxproject.com/codebases/codebase/pinax/changesets/1215/
+.. _r1193: http://code.pinaxproject.com/codebases/codebase/pinax/changesets/1193/
+
+.. _`Issue #131`: http://code.google.com/p/django-hotclub/issues/detail?id=131
+.. _`Issue #119`: http://code.google.com/p/django-hotclub/issues/detail?id=119
