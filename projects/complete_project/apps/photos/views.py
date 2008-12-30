@@ -57,32 +57,47 @@ def details(request, id, template_name="photos/details.html"):
     """
     show the photo details
     """
-    other_user = get_object_or_404(User, username=request.user.username)
-    tribes = Tribe.objects.filter(members=request.user)
-    projects = Project.objects.filter(members__user=request.user)
     photo = get_object_or_404(Image, id=id)
     photo_url = photo.get_display_url()
     
+    tribes = []
+    projects = []
+    
     # Build a list of tribes and the photos from the pool
-    t = []
-    if tribes:
-        for tribe in tribes:
-            phototribe = Tribe.objects.get(pk=tribe.id)
-            if phototribe.photos.filter(photo=photo).count():
-                t.append({"name":tribe.name, "slug":tribe.slug, "id":tribe.id, "has_photo":True})
-            else:
-                t.append({"name":tribe.name, "slug":tribe.slug, "id":tribe.id, "has_photo":False})
+    for tribe in Tribe.objects.filter(members=request.user):
+        phototribe = Tribe.objects.get(pk=tribe.id)
+        if phototribe.photos.filter(photo=photo).count():
+            tribes.append({
+                "name": tribe.name,
+                "slug": tribe.slug,
+                "id": tribe.id,
+                "has_photo": True,
+            })
+        else:
+            tribes.append({
+                "name": tribe.name,
+                "slug": tribe.slug,
+                "id": tribe.id,
+                "has_photo": False,
+            })
 
     # Build a list of projects and the photos from the pool
-    p = []
-    if projects:
-        for project in projects:
-            photoproject = Project.objects.get(pk=project.id)
-            if photoproject.photos.filter(photo=photo).count():
-                p.append({"name":project.name, "slug":project.slug, "id":project.id, "has_photo":True})
-            else:
-                p.append({"name":project.name, "slug":project.slug, "id":project.id, "has_photo":False})
-
+    for project in Project.objects.filter(members__user=request.user):
+        photoproject = Project.objects.get(pk=project.id)
+        if photoproject.photos.filter(photo=photo).count():
+            projects.append({
+                "name": project.name,
+                "slug": project.slug,
+                "id": project.id,
+                "has_photo": True,
+            })
+        else:
+            projects.append({
+                "name": project.name,
+                "slug": project.slug,
+                "id": project.id,
+                "has_photo": False,
+            })
 
     title = photo.title
     host = "http://%s" % get_host(request)
@@ -157,10 +172,9 @@ def details(request, id, template_name="photos/details.html"):
         "host": host, 
         "photo": photo,
         "photo_url": photo_url,
-        "is_me": is_me, 
-        "other_user": other_user, 
-        "projects": p,
-        "tribes": t,
+        "is_me": is_me,
+        "projects": projects,
+        "tribes": tribes,
     }, context_instance=RequestContext(request))
 details = login_required(details)
 
