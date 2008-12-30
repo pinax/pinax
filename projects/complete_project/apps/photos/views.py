@@ -1,6 +1,7 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponseRedirect, get_host
 from django.template import RequestContext
+from django.db.models import Q
 from django.http import Http404
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
@@ -48,7 +49,10 @@ def photos(request, template_name="photos/latest.html"):
     """
     latest photos
     """
-    photos = Image.objects.filter(is_public=True).order_by("-date_added")
+    photos = Image.objects.filter(
+        Q(is_public=True) |
+        Q(is_public=False, member=request.user)
+    ).order_by("-date_added")
     return render_to_response(template_name, {
         "photos": photos,
     }, context_instance=RequestContext(request))
