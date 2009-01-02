@@ -59,6 +59,15 @@ use Pinax. Here is a sample Apache config that you can use::
         PythonPath "['/path/to/pinax/projects'] + sys.path"
     </Location>
 
+.. note::
+
+    It is important to note that you should pay careful attension to the
+    value of ``PythonHandler`` above. It is *not* using
+    ``django.core.handlers.modpython``. It is using a mod_python handler
+    located in your project's ``deploy/`` directory. The reason why we have
+    our own mod_python handler is because we need to setup the Pinax
+    environment otherwise you will see failing imports.
+
 Sending Mail and Notices
 ------------------------
 
