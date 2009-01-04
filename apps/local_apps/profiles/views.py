@@ -2,6 +2,8 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseForbidden
+from django.core.exceptions import ImproperlyConfigured
+from django.db.models import get_app
 
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import ugettext
@@ -18,8 +20,8 @@ from avatar.templatetags.avatar_tags import avatar
 #from gravatar.templatetags.gravatar import gravatar as avatar
 
 try:
-    from notification import models as notification
-except ImportError:
+    notification = get_app('notification')
+except ImproperlyConfigured:
     notification = None
 
 def profiles(request, template_name="profiles/profiles.html"):

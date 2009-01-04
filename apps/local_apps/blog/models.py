@@ -11,7 +11,7 @@ from tagging.models import Tag
 
 try:
     notification = models.get_app('notification')
-except ImportError:
+except ImproperlyConfigured:
     notification = None
 
 try:

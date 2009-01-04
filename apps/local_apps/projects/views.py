@@ -1,9 +1,9 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, Http404
-
+from django.core.exceptions import ImproperlyConfigured
+from django.db.models import get_app
 from django.core.urlresolvers import reverse
-
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
@@ -11,8 +11,8 @@ from projects.models import Project
 from projects.forms import *
 
 try:
-    from notification import models as notification
-except ImportError:
+    notification = get_app('notification')
+except ImproperlyConfigured:
     notification = None
 
 try:

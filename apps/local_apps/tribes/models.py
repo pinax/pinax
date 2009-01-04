@@ -1,10 +1,9 @@
 from datetime import datetime
 
 from django.db import models
-from django.db.models import signals
+from django.core.exceptions import ImproperlyConfigured
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes import generic
-
 
 from django.contrib.auth.models import User
 
@@ -12,8 +11,8 @@ from tagging.fields import TagField
 from photos.models import Pool
 
 try:
-    from notification import models as notification
-except ImportError:
+    notification = models.get_app('notification')
+except ImproperlyConfigured:
     notification = None
 
 from wiki.views import get_articles_for_object
@@ -82,4 +81,4 @@ def new_comment(sender, instance, **kwargs):
         topic.save()
         if notification:
             notification.send([topic.creator], "tribes_topic_response", {"user": instance.user, "topic": topic})
-signals.post_save.connect(new_comment, sender=ThreadedComment)
+models.signals.post_save.connect(new_comment, sender=ThreadedComment)
