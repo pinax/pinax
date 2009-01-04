@@ -2,12 +2,12 @@ from datetime import datetime
 
 from django import forms
 from django.core.exceptions import ImproperlyConfigured
+from django.db.models import get_app
 from django.utils.translation import ugettext_lazy as _
-
 from django.contrib.auth.models import User
 
 try:
-    notification = models.get_app('notification')
+    notification = get_app('notification')
 except ImproperlyConfigured:
     notification = None
 

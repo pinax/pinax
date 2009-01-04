@@ -1,17 +1,10 @@
 from django import forms
-
 from django.contrib.auth.models import User
 
 from friends.models import *
 from friends.importer import import_vcards
 
-try:
-    from notification import models as notification
-except ImportError:
-    notification = None
-
 # @@@ move to django-friends when ready
-
 
 class ImportVCardForm(forms.Form):
     
