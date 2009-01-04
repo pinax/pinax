@@ -4,15 +4,13 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
+from django.core.exceptions import ImproperlyConfigured
 
 from tagging.fields import TagField
 from tagging.models import Tag
 
-from django.contrib.auth.models import User
-
 try:
-    from notification import models as notification
-    from django.db.models import signals
+    notification = models.get_app('notification')
 except ImportError:
     notification = None
 
@@ -75,5 +73,6 @@ def new_comment(sender, instance, **kwargs):
     if isinstance(instance.content_object, Post):
         post = instance.content_object
         if notification:
-            notification.send([post.author], "blog_post_comment", {"user": instance.user, "post": post, "comment": instance})
-signals.post_save.connect(new_comment, sender=ThreadedComment)
+            notification.send([post.author], "blog_post_comment",
+                {"user": instance.user, "post": post, "comment": instance})
+models.signals.post_save.connect(new_comment, sender=ThreadedComment)
