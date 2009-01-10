@@ -69,7 +69,7 @@ def update_settings(pinax_root, path, old_name, new_name):
     settings_file.close()
 
 def rename_deploy_files(path, old_name, new_name):
-    for deploy_file in glob.glob(old_name + '*'):
+    for deploy_file in glob.glob(os.path.join(path, old_name) + '*'):
         shutil.move(deploy_file, deploy_file.replace(old_name, new_name))
 
 def main(pinax_root, project_name, destination, verbose=True):
