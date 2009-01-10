@@ -17,17 +17,46 @@ def get_projects_dir(pinax_root):
 def get_projects(pinax_root):
     return glob.glob(os.path.join(get_projects_dir(pinax_root), '*'))
 
-def ignore_copytree(directory, contents):
-    ignored_contents = []
-    for content in contents:
-        ignore_content = False
+def copytree(src, dst, symlinks=False):
+    """
+    Backported from the Python 2.6 source tree, then modified for this script's
+    purposes.
+    """
+    names = os.listdir(src)
+
+    os.makedirs(dst)
+    errors = []
+    for name in names:
+        ignore = False
         for pattern in EXCLUDED_PATTERNS:
-            if pattern in os.path.join(directory, content):
-                ignore_content = True
-                break
-        if ignore_content:
-            ignored_contents.append(content)
-    return (directory, ignored_contents)
+            if pattern in os.path.join(src, name):
+                ignore = True
+        if ignore:
+            continue
+        srcname = os.path.join(src, name)
+        dstname = os.path.join(dst, name)
+        try:
+            if symlinks and os.path.islink(srcname):
+                linkto = os.readlink(srcname)
+                os.symlink(linkto, dstname)
+            elif os.path.isdir(srcname):
+                copytree(srcname, dstname, symlinks)
+            else:
+                shutil.copy2(srcname, dstname)
+        except (IOError, os.error), why:
+            errors.append((srcname, dstname, str(why)))
+        except shutil.Error, err:
+            errors.extend(err.args[0])
+    try:
+        shutil.copystat(src, dst)
+    except OSError, why:
+        if shutil.WindowsError is not None and isinstance(why,
+            shutil.WindowsError):
+            pass
+        else:
+            errors.extend((src, dst, str(why)))
+    if errors:
+        raise shutil.Error, errors
 
 def update_settings(pinax_root, path, old_name, new_name):
     settings_file = open(path, 'r')
@@ -58,7 +87,7 @@ def main(pinax_root, project_name, destination, verbose=True):
         source = project_name
     if verbose:
         print "Copying your project to its new location"
-    shutil.copytree(source, destination, ignore=ignore_copytree)
+    copytree(source, destination)
     if verbose:
         print "Updating settings.py for your new project"
     update_settings(pinax_root, os.path.join(destination, 'settings.py'),
