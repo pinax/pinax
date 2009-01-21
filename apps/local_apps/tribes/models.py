@@ -1,18 +1,18 @@
 from datetime import datetime
 
 from django.db import models
-from django.core.exceptions import ImproperlyConfigured
+from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes import generic
-
 from django.contrib.auth.models import User
 
 from tagging.fields import TagField
 from photos.models import Pool
 
-try:
-    notification = models.get_app('notification')
-except ImproperlyConfigured:
+
+if "notification" in settings.INSTALLED_APPS:
+    from notification import models as notification
+else:
     notification = None
 
 from wiki.views import get_articles_for_object

@@ -1,10 +1,10 @@
-from django.db.models import signals, get_app
-from django.core.exceptions import ImproperlyConfigured
+from django.conf import settings
+from django.db.models import signals
 from django.utils.translation import ugettext_noop as _
 
-try:
-    notification = get_app('notification')
-    
+if "notification" in settings.INSTALLED_APPS:
+    from notification import models as notification
+
     def create_notice_types(app, created_models, verbosity, **kwargs):
         notification.create_notice_type("projects_new_member", _("New Project Member"), _("a project you are a member of has a new member"), default=1)
         notification.create_notice_type("projects_added_as_member", _("Added to Project"), _("you have been added to a project"), default=2)
@@ -21,5 +21,5 @@ try:
         notification.create_notice_type("projects_task_status", _("Change to Project Task"), _("there has been a status update to a task in a project you're a member of"), default=2)
         
     signals.post_syncdb.connect(create_notice_types, sender=notification)
-except ImproperlyConfigured:
+else:
     print "Skipping creation of NoticeTypes as notification app not found"

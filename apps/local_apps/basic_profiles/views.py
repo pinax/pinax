@@ -1,9 +1,8 @@
+from django.conf import settings
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseForbidden
-from django.core.exceptions import ImproperlyConfigured
-from django.db.models import get_app
 
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import ugettext
@@ -17,9 +16,9 @@ from basic_profiles.forms import ProfileForm
 # # used by friend autocompletion
 # from gravatar.templatetags.gravatar import gravatar
 
-try:
-    notification = get_app('notification')
-except ImproperlyConfigured:
+if "notification" in settings.INSTALLED_APPS:
+    from notification import models as notification
+else:
     notification = None
 
 def profiles(request, template_name="basic_profiles/profiles.html"):

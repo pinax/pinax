@@ -8,17 +8,14 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.views.generic import date_based
 from django.conf import settings
-from django.core.exceptions import ImproperlyConfigured
-from django.db.models import get_app
 
 from blog.models import Post
 from blog.forms import *
 
-try:
-    notification = get_app('notification')
-except ImproperlyConfigured:
+if "notification" in settings.INSTALLED_APPS:
+    from notification import models as notification
+else:
     notification = None
-
 try:
     from friends.models import Friendship
     friends = True

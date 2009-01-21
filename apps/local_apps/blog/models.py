@@ -4,14 +4,13 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
-from django.core.exceptions import ImproperlyConfigured
 
 from tagging.fields import TagField
 from tagging.models import Tag
 
-try:
-    notification = models.get_app('notification')
-except ImproperlyConfigured:
+if "notification" in settings.INSTALLED_APPS:
+    from notification import models as notification
+else:
     notification = None
 
 try:

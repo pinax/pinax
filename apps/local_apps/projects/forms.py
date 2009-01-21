@@ -1,14 +1,13 @@
 from datetime import datetime
 
 from django import forms
-from django.core.exceptions import ImproperlyConfigured
-from django.db.models import get_app
+from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 
-try:
-    notification = get_app('notification')
-except ImproperlyConfigured:
+if "notification" in settings.INSTALLED_APPS:
+    from notification import models as notification
+else:
     notification = None
 
 from projects.models import Project, Topic, Task, ProjectMember
