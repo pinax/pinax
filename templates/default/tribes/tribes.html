@@ -30,13 +30,56 @@
         {% url acct_login as login_url %}
         <p>{% blocktrans %}<a href="{{ signup_url }}">Sign up</a> and <a href="{{ login_url }}">log in </a> to create your own tribe or join an existing one.{% endblocktrans %}</p>
     {% endif %}
-    {% display_search %}
-    {% display_ordering %}
     
-    {% autopaginate objects 10 %}
-    {% if objects %}
+    <form method="GET" action="">
+        <input type="text" name="search" value="{{ search_terms }}" />
+        <input type="submit" value="Search" />
+        {% if search_terms %}
+            <a href="{% clear_search_url request %}">Clear Search Terms</a>
+        {% endif %}
+    </form>
+    {% autopaginate tribes 10 %}
+    {% if tribes %}
+        <p>{% trans "Order by:" %}
+            {% ifequal order 'most_topics' %}
+                <a href="{% url tribe_list_least_topics %}{% persist_getvars request %}">{% trans "Topics" %} &uarr;</a>
+            {% else %}
+                {% ifequal order 'least_topics' %}
+                    <a href="{% url tribe_list_most_topics %}{% persist_getvars request %}">{% trans "Topics" %} &darr;</a>
+                {% else %}
+                    <a href="{% url tribe_list_most_topics %}{% persist_getvars request %}">{% trans "Topics" %}</a>
+                {% endifequal %}
+            {% endifequal %}
+            {% ifequal order 'most_members' %}
+                <a href="{% url tribe_list_least_members %}{% persist_getvars request %}">{% trans "Members" %} &uarr;</a>
+            {% else %}
+                {% ifequal order 'least_members' %}
+                    <a href="{% url tribe_list_most_members %}{% persist_getvars request %}">{% trans "Members" %} &darr;</a>
+                {% else %}
+                    <a href="{% url tribe_list_most_members %}{% persist_getvars request %}">{% trans "Members" %}</a>
+                {% endifequal %}
+            {% endifequal %}
+            {% ifequal order 'name_descending' %}
+                <a href="{% url tribe_list_name_ascending %}{% persist_getvars request %}">{% trans "Name" %} &uarr;</a>
+            {% else %}
+                {% ifequal order 'name_ascending' %}
+                    <a href="{% url tribe_list_name_descending %}{% persist_getvars request %}">{% trans "Name" %} &darr;</a>
+                {% else %}
+                    <a href="{% url tribe_list_name_ascending %}{% persist_getvars request %}">{% trans "Name" %}</a>
+                {% endifequal %}
+            {% endifequal %}
+            {% ifequal order 'date_newest' %}
+                <a href="{% url tribe_list_date_oldest %}{% persist_getvars request %}">{% trans "Date" %} &uarr;</a>
+            {% else %}
+                {% ifequal order 'date_oldest' %}
+                    <a href="{% url tribe_list_date_newest %}{% persist_getvars request %}">{% trans "Date" %} &darr;</a>
+                {% else %}
+                    <a href="{% url tribe_list_date_oldest %}{% persist_getvars request %}">{% trans "Date" %}</a>
+                {% endifequal %}
+            {% endifequal %}
+        </p>
         <dl>
-        {% for tribe in objects %}
+        {% for tribe in tribes %}
             {% show_tribe tribe %}
         {% endfor %}
         </dl>

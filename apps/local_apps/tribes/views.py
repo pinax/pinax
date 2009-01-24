@@ -35,6 +35,17 @@ from tribes.models import Tribe
 from tribes.forms import *
 from microblogging.models import TweetInstance
 
+TOPIC_COUNT_SQL = """
+SELECT COUNT(*)
+FROM tribes_topic
+WHERE tribes_topic.tribe_id = tribes_tribe.id
+"""
+MEMBER_COUNT_SQL = """
+SELECT COUNT(*)
+FROM tribes_tribe_members
+WHERE tribes_tribe_members.tribe_id = tribes_tribe.id
+"""
+
 from schedule.models import Calendar, CalendarRelation
 
 def create(request, form_class=TribeForm, template_name="tribes/create.html"):
@@ -69,6 +80,42 @@ def create(request, form_class=TribeForm, template_name="tribes/create.html"):
         "tribe_form": tribe_form,
     }, context_instance=RequestContext(request))
 
+def tribes(request, template_name="tribes/tribes.html", order=None):
+    tribes = Tribe.objects.filter(deleted=False)
+    search_terms = request.GET.get('search', '')
+    if search_terms:
+        tribes = (tribes.filter(name__icontains=search_terms) |
+            tribes.filter(description__icontains=search_terms))
+    if order == 'least_topics':
+        tribes = tribes.extra(select={'topic_count': TOPIC_COUNT_SQL})
+        tribes = tribes.order_by('topic_count')
+    elif order == 'most_topics':
+        tribes = tribes.extra(select={'topic_count': TOPIC_COUNT_SQL})
+        tribes = tribes.order_by('-topic_count')
+    elif order == 'least_members':
+        tribes = tribes.extra(select={'member_count': MEMBER_COUNT_SQL})
+        tribes = tribes.order_by('member_count')
+    elif order == 'most_members':
+        tribes = tribes.extra(select={'member_count': MEMBER_COUNT_SQL})
+        tribes = tribes.order_by('-member_count')
+    elif order == 'name_ascending':
+        tribes = tribes.order_by('name')
+    elif order == 'name_descending':
+        tribes = tribes.order_by('-name')
+    elif order == 'date_oldest':
+        tribes = tribes.order_by('-created')
+    elif order == 'date_newest':
+        tribes = tribes.order_by('created')
+    context = {
+        'tribes': tribes,
+        'search_terms': search_terms,
+        'order': order,
+    }
+    return render_to_response(
+        template_name,
+        context,
+        context_instance=RequestContext(request)
+    )
 
 def delete(request, slug, redirect_url=None):
     tribe = get_object_or_404(Tribe, slug=slug)

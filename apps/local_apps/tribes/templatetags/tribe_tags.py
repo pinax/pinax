@@ -11,6 +11,23 @@ def show_tribe(tribe):
     return {"tribe": tribe}
 register.inclusion_tag("tribes/tribe_item.html")(show_tribe)
 
+def clear_search_url(request):
+    getvars = request.GET.copy()
+    if 'search' in getvars:
+        del getvars['search']
+    if len(getvars.keys()) > 0:
+        return "%s?%s" % (request.path, getvars.urlencode())
+    else:
+        return request.path
+register.simple_tag(clear_search_url)
+
+def persist_getvars(request):
+    getvars = request.GET.copy()
+    if len(getvars.keys()) > 0:
+        return "?%s" % getvars.urlencode()
+    return ''
+register.simple_tag(persist_getvars)
+
 def do_get_tribe_form(parser, token):
     try:
         tag_name, as_, context_name = token.split_contents()
