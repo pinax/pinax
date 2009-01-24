@@ -3,7 +3,7 @@
 
 import os.path
 
-PINAX_ROOT = '/Users/jtauber/Projects/PINAX/pinax/trunk'
+PINAX_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"))
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
 DEBUG = True
