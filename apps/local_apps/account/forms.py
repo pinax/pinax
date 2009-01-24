@@ -119,8 +119,9 @@ class OpenIDSignupForm(forms.Form):
     email = forms.EmailField(label="Email (optional)", required=False, widget=forms.TextInput())
     
     def __init__(self, *args, **kwargs):
-        # TODO: do something with these?
-        openid = kwargs.pop("openid")
+        # Remember provided (validated!) OpenID to attach it to the new user later.
+        self.openid = kwargs.pop("openid")
+        # TODO: do something with this?
         reserved_usernames = kwargs.pop("reserved_usernames")
         super(OpenIDSignupForm, self).__init__(*args, **kwargs)
     
@@ -141,6 +142,10 @@ class OpenIDSignupForm(forms.Form):
         if email:
             new_user.message_set.create(message="Confirmation email sent to %s" % email)
             EmailAddress.objects.add_email(new_user, email)
+
+        if self.openid:
+            # Associate openid with the new account.
+            new_user.openids.create(openid = self.openid)
         return new_user
 
 
