@@ -9,7 +9,9 @@
                 zoom: 1; /* trigger hasLayout */
             }
         </style><![endif]-->
-        <link rel="stylesheet" href="{{ MEDIA_URL }}base.css?743" />        {% if LANGUAGE_BIDI %}
+        <link rel="stylesheet" href="{{ MEDIA_URL }}base.css" />
+        <link rel="stylesheet" href="{{ MEDIA_URL }}tabs.css" />
+        {% if LANGUAGE_BIDI %}
         <style type="text/css" media="screen">
             div.right_panel {
                 float: left; /* hotfix for sidebar */
