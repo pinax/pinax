@@ -73,7 +73,7 @@ def create(request, form_class=ProjectForm,
 def delete(request, slug, redirect_url=None):
     project = get_object_or_404(Project, slug=slug)
     if not redirect_url:
-        redirect_url = "/projects/" # @@@ can't use reverse("projects") -- what is URL name using things?
+        redirect_url = reverse('project_list')
     
     if request.user.is_authenticated() and request.method == "POST" and request.user == project.creator:
         project.deleted = True

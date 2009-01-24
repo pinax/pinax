@@ -120,7 +120,7 @@ def tribes(request, template_name="tribes/tribes.html", order=None):
 def delete(request, slug, redirect_url=None):
     tribe = get_object_or_404(Tribe, slug=slug)
     if not redirect_url:
-        redirect_url = "/tribes/" # @@@ can't use reverse("tribes") -- what is URL name using things?
+        redirect_url = reverse('tribe_list')
     
     # @@@ eventually, we'll remove restriction that tribe.creator can't leave tribe but we'll still require tribe.members.all().count() == 1
     if request.user.is_authenticated() and request.method == "POST" and request.user == tribe.creator and tribe.members.all().count() == 1:

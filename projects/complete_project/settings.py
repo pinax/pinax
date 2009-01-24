@@ -149,7 +149,6 @@ INSTALLED_APPS = (
     'ajax_validation',
     'photologue',
     'avatar',
-    'things',
     'flag',
     'schedule',
     'microblogging',
