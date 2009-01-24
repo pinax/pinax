@@ -46,7 +46,7 @@
                 </div>
             {% else %}
                 <div>
-                    <form method="POST" action="">
+                    <form method="POST" action="{% url toggle_follow other_user %}">
                         {% if is_following %}
                             <input type="hidden" name="action" value="unfollow" /><input type="submit" value="{% trans "unfollow" %}"/>
                         {% else %}

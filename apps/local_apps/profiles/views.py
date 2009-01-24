@@ -44,21 +44,6 @@ def profile(request, username, template_name="profiles/profile.html"):
         is_me = False
         is_following = False
     
-    if request.user.is_authenticated() and request.method == "POST" and not is_me:
-        
-        # @@@ some of this should go in microblogging itself
-        
-        if request.POST["action"] == "follow":
-            Following.objects.follow(request.user, other_user)
-            is_following = True
-            request.user.message_set.create(message=_("You are now following %(other_user)s") % {'other_user': other_user})
-            if notification:
-                notification.send([other_user], "tweet_follow", {"user": request.user})
-        elif request.POST["action"] == "unfollow":
-            Following.objects.unfollow(request.user, other_user)
-            is_following = False
-            request.user.message_set.create(message=_("You have stopped following %(other_user)s") % {'other_user': other_user})
-    
     if is_friend:
         invite_form = None
         previous_invitations_to = None
