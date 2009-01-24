@@ -85,6 +85,7 @@ ROOT_URLCONF = 'complete_project.urls'
 
 TEMPLATE_DIRS = (
     os.path.join(os.path.dirname(__file__), "templates"),
+    os.path.join(PINAX_ROOT, "templates", "default"),
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (

@@ -1,0 +1,12 @@
+This directory contains sets of common templates that can be shared
+between projects. This way, only those templates that differ between
+projects need to be specified in the project's own templates directory.
+
+The settings.py in your project should add the desired templates
+directory (only 'default' for now) to TEMPLATE_DIRS after the entry
+for your project-specific templates. e.g.
+
+    TEMPLATE_DIRS = (
+        os.path.join(os.path.dirname(__file__), "templates"),
+        os.path.join(PINAX_ROOT, "templates", "default"),
+    )
