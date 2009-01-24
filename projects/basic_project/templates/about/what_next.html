@@ -16,14 +16,6 @@
             
             <dt><a href="{% url profile_detail user %}">fill out your profile</a></dt>
             <dd>to tell the world a little about yourself.</dd>
-{% comment %}
-            <dt><a href="http://gravatar.com/" target="gravatar">add a gravatar</a></dt>
-            <dd>so people can see what you look like.</dd>
-            <dt><a href="{% url profiles.views.profiles %}">connect with friends</a></dt>
-            <dd>so you can follow what they're up to.</dd>
-            <dt><a href="{% url friends_app.views.friends %}">invite more people to the site</a></dt>
-            <dd>so more people can share in the fun.</dd>
-{% endcomment %}
         </dl>
         {% else %}
             {% url acct_signup as signup_url %}
