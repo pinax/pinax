@@ -39,7 +39,7 @@
     {% if user.is_authenticated %}
         <table>
             <tr>
-                <td class="tab rtab_profile"><div><a href="{% url profiles.views.profile user %}">{% trans "Profile" %}</a></div></td>
+                <td class="tab rtab_profile"><div><a href="{% url profile_detail user %}">{% trans "Profile" %}</a></div></td>
                 <td class="tab rtab_photos"><div><a href="{% url photos.views.photos %}">{% trans "Photos" %}</a></div></td>
                 <td class="tab rtab_blogs"><div><a href="{% url blog.views.blogs %}">{% trans "Blogs" %}</a></div></td>
                 <td class="tab rtab_projects"><div><a href="{% url project_thing_list "" %}">{% trans "Projects" %}</a></div></td>
@@ -57,10 +57,10 @@
 {% block footer %}
 <div class="legal">
     {% trans "&copy; 2008 &lt;your company here&gt;" %}
-    - <a href="{% url about %}">{% trans "About Pinax" %}</a>
-    - <a href="http://jtauber.com/pinax/">{% trans "Pinax Blog" %}</a>
+    - <a href="{% url about %}">{% trans "About" %}</a>
     - <a href="{% url terms %}">{% trans "Terms of Service" %}</a>
     - <a href="{% url privacy %}">{% trans "Privacy Policy" %}</a>
+    - <a href="{% url dmca %}">{% trans "DMCA Notice" %}</a>
     - Version: {% svn_app_version %}
     - Django: {% svn_app_version "django" %}
 </div>
