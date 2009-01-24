@@ -38,6 +38,7 @@
             <a href="{% clear_search_url request %}">Clear Search Terms</a>
         {% endif %}
     </form>
+    {% autopaginate projects %}
     {% if projects %}
         <p>{% trans "Order by:" %}
             {% ifequal order 'most_topics' %}
@@ -77,7 +78,6 @@
                 {% endifequal %}
             {% endifequal %}
         </p>
-        {% autopaginate projects %}
         
         <dl>
             {% for project in projects %}
