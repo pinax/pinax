@@ -1,0 +1,54 @@
+{% extends "bookmarks/base.html" %}
+
+{% load avatar_tags %}
+{% load pagination_tags %}
+{% load in_filter %}
+{% load extra_tagging_tags %}
+
+{% block head_title %}All Bookmarks{% endblock %}
+
+{% block extra_head %}
+    <link rel="alternate" type="application/atom+xml" title="Bookmarks Feed" href="/feeds/bookmarks/" />
+{% endblock %}
+
+{% block body %}
+    <h1>All Bookmarks</h1>
+    
+    {% if bookmarks %}
+        <p>These are bookmarks from everyone:</p>
+        
+        {% autopaginate bookmarks %}
+        
+        <table class="bookmarks">
+            {% for bookmark in bookmarks %}
+                <tr class="{% cycle odd,even %}">
+                    <td class="meta">
+                        <div class="avatar">{% avatar bookmark.adder 40 %}</div>
+                        <div class="details"><a href="{% url profile_detail bookmark.adder.username %}">{{ bookmark.adder }}</a></div>
+                        {{ bookmark.added|date }}
+                    </td>
+                    <td>
+                        <h2><a href="{{ bookmark.url }}">{{ bookmark.description }}</a></h2>
+                        <div class="url">{% if bookmark.get_favicon_url %}<img src="{{ bookmark.get_favicon_url }}" width="16" height="16" /> {% endif %}{{ bookmark.url }}</div>
+                        <div class="body">{{ bookmark.note|linebreaks }}</div>
+                        <div class="save">
+                            Saved {{ bookmark.saved_instances.count }} time{{ bookmark.saved_instances.count|pluralize }}
+                            {% if bookmark|in_list:user_bookmarks %}
+                                (including by you)
+                            {% else %}
+                                (<a href="{% url bookmarks.views.add %}?url={{ bookmark.url }};description={{ bookmark.description }}">save</a>)
+                            {% endif %}
+                        </div>
+                        <div class="tags">{% show_tag_counts bookmark.all_tags_with_counts %}</div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        
+        {% paginate %}
+        
+    {% else %}
+        <p>No bookmarks yet.</p>
+    {% endif %}
+    
+{% endblock %}

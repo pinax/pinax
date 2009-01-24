@@ -1,0 +1,6 @@
+{% load i18n %}
+{% if group %}
+{% blocktrans %}{{ user }} has marked task '{{ task }}' in '{{ group }}' as {{ new_state }}.{% endblocktrans %}
+{% else %}
+{% blocktrans %}{{ user }} has marked task '{{ task }}' as {{ new_state }}.{% endblocktrans %}
+{% endif %}

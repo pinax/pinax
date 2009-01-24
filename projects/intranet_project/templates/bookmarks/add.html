@@ -1,0 +1,16 @@
+{% extends "bookmarks/base.html" %}
+
+{% block head_title %}Add Bookmark{% endblock %}
+
+{% block body %}
+    <h1>Add Bookmark</h1>
+    
+    <p>You can drag this '<a href="{{ bookmarklet }}">Add to {{ site_name }} Bookmarks</a>' link to your bookmark bar to post the pages you visit!</p>
+    
+    <form method="POST" action="">
+        <table>
+            {{ bookmark_form }}
+            <tr><td></td><td><input type="submit" value="add bookmark"></td></tr>
+        </table>
+    </form>
+{% endblock %}

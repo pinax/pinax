@@ -1,0 +1,70 @@
+{% extends "tasks/base.html" %}
+
+{% load i18n %}
+{% load pagination_tags %}
+{% load order_by %}
+{% load humanize %}
+{% load tasks_tags %}
+
+{#}{% block head_title %}Tasks for {{ project.name }}{% endblock %}#}
+{% block head_title %}Tasks{% endblock %}
+
+{% block body %}
+    {#<h1>{% trans "Tasks for Project" %} <a href="@@@">{{ group.name }}</a></h1> #}
+    <h1>Tasks</h1>
+    
+    <p>Group by:
+        {% ifequal group_by "state" %}
+            <a href="?group_by=modified">last modified</a>
+            or
+            <b>state</b>
+            or
+            <a href="?group_by=assignee">assignee</a>
+            
+            {% order tasks by state %}
+            {% autopaginate tasks 10 %}
+            {% regroup tasks by get_state_display as grouped_tasks %}
+        {% else %}
+            {% ifequal group_by "assignee" %}
+                <a href="?group_by=modified">last modified</a>
+                or
+                <a href="?group_by=state">state</a>
+                or
+                <b>assignee</b>
+                
+                {% order tasks by assignee %}
+                {% autopaginate tasks 10 %}
+                {% regroup tasks by assignee as grouped_tasks %}
+            {% else %}
+                <b>last modified</b>
+                or
+                <a href="?group_by=state">state</a>
+                or
+                <a href="?group_by=assignee">assignee</a>
+                
+                {% order tasks by -modified %}
+                {% autopaginate tasks 10 %}
+                {% regroup tasks by modified.date as grouped_tasks %}
+            {% endifequal %}
+        {% endifequal %}
+    </p>
+    
+    {% for section in grouped_tasks %}
+        {% ifequal group_by "state" %}
+            <h2 class="join_date">{{ section.grouper }}</h2>
+        {% else %}
+            {% ifequal group_by "assignee" %}
+                <h2 class="join_date">{{ section.grouper }}</h2>
+            {% else %}
+                <h2 class="join_date">{{ section.grouper|naturalday:_("MONTH_DAY_FORMAT")|capfirst }}</h2>
+            {% endifequal %}
+        {% endifequal %}
+        
+        {% for task in section.list %}
+            {% show_task task %}
+        {% endfor %}
+    {% endfor %}
+    
+    {% paginate %}
+    
+{% endblock %}

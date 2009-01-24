@@ -1,0 +1,8 @@
+{% load tagging_tags %}
+{% tags_for_object obj as tags %}
+{% if tags %}
+    <img src="/site_media/tags.png" border="0" class="noborder" align="absmiddle" />
+    {% for tag in tags %}
+        <a href="/tags/{{ tag }}">{{ tag }}</a>
+    {% endfor %}
+{% endif %}

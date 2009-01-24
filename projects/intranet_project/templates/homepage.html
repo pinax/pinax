@@ -1,0 +1,20 @@
+{% extends "site_base.html" %}
+
+{% block head_title %}Homepage{% endblock %}
+
+{% block body %}
+    <p>Welcome to the <b>Intranet</b>. Lots more to come&mdash;we're just building stuff as the need and time arise.</p>
+    <dl class="what_next">
+        <dt><a href="{% url profile_detail user %}">Profile</a></dt>
+        <dd>to tell the company a little about yourself.</dd>
+        
+        <dt><a href="{% url task_list %}">Tasks</a></dt>
+        <dd>to track things that need to be done and who's doing them.</dd>
+        
+        <dt><a href="{% url bookmarks.views.bookmarks %}">Bookmarks</a></dt>
+        <dd>to post links of relevance to the company.</dd>
+        
+        <dt><a href="{% url notification.views.notices %}">Notices</a></dt>
+        <dd>to configure and view notices.</dd>
+    </dl>
+{% endblock %}

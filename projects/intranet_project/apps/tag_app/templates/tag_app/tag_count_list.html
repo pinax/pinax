@@ -1,0 +1,6 @@
+{% if tag_counts %}
+    <img src="/site_media/tags.png" border="0" class="noborder" align="absmiddle" />
+    {% for tag in tag_counts %}
+        <a href="/tags/{{ tag.name }}">{{ tag.name }}</a> ({{ tag.count }})
+    {% endfor %}
+{% endif %}
