@@ -15,7 +15,9 @@
     <div class="left_panel">
         <div id="profile_avatar">
             <div>{% avatar other_user 80 %}</div>
+            {% if is_me %}
             <a href="{% url avatar_change %}" id="avatar_replace">(replace)</a>
+            {% endif %}
         </div>
     
         <h1>{% blocktrans %}Profile for {{ other_user }}{% endblocktrans %}</h1>
