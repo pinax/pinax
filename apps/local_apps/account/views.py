@@ -1,15 +1,17 @@
 
 from django.conf import settings
 from django.shortcuts import render_to_response
-from django.http import HttpResponseRedirect, HttpResponseForbidden
+from django.http import HttpResponseRedirect, HttpResponseForbidden, Http404
+from django.db.models import Q
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.template import RequestContext
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext, ugettext_lazy as _
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 
 from account.utils import get_default_redirect
+from account.models import OtherServiceInfo
 from account.forms import SignupForm, AddEmailForm, LoginForm, \
     ChangePasswordForm, SetPasswordForm, ResetPasswordForm, \
     ChangeTimezoneForm, ChangeLanguageForm, TwitterForm
@@ -218,3 +220,12 @@ def other_services(request, template_name="account/other_services.html"):
         "twitter_authorized": twitter_authorized,
     }, context_instance=RequestContext(request))
 other_services = login_required(other_services)
+
+def other_services_remove(request):
+    # TODO: this is a bit coupled.
+    OtherServiceInfo.objects.filter(user=request.user).filter(
+        Q(key="twitter_user") | Q(key="twitter_password")
+    ).delete()
+    request.user.message_set.create(message=ugettext(u"Removed twitter account information successfully."))
+    return HttpResponseRedirect(reverse("acct_other_services"))
+other_services_remove = login_required(other_services_remove)
