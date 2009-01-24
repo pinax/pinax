@@ -3,10 +3,6 @@ from django.conf.urls.defaults import *
 from projects.models import Project
 from wiki import models as wiki_models
 
-from projects.thing import ProjectThing
-# @@@ should qs really be here?
-pt = ProjectThing(Project.objects.filter(deleted=False))
-
 wiki_args = {
     'group_slug_field': 'slug',
     'group_qs': Project.objects.filter(deleted=False),
@@ -15,10 +11,29 @@ wiki_args = {
 }
 
 urlpatterns = \
-    pt.urls(url_prefix='', name_prefix='project_thing') + \
     patterns('',
         url(r'^create/$', 'projects.views.create', name="project_create"),
         url(r'^your_projects/$', 'projects.views.your_projects', name="your_projects"),
+        
+        url(r'^$', 'projects.views.projects', name="project_list"),
+        url(r'^order/topics/least-topics/$', 'projects.views.projects',
+            {'order': 'least_topics'}, name="project_list_least_topics"),
+        url(r'^order/topics/most-topics/$', 'projects.views.projects',
+            {'order': 'most_topics'}, name="project_list_most_topics"),
+        url(r'^order/members/least-members/$', 'projects.views.projects',
+            {'order': 'least_members'}, name="project_list_least_members"),
+        url(r'^order/members/most-members/$', 'projects.views.projects',
+            {'order': 'most_members'}, name="project_list_most_members"),
+        url(r'^order/name/ascending/$', 'projects.views.projects',
+            {'order': 'name_ascending'}, name="project_list_name_ascending"),
+        url(r'^order/name/descending/$', 'projects.views.projects',
+            {'order': 'name_descending'}, name="project_list_name_descending"),
+        url(r'^order/date/oldest/$', 'projects.views.projects',
+            {'order': 'date_oldest'}, name="project_list_date_oldest"),
+        url(r'^order/date/newest/$', 'projects.views.projects',
+            {'order': 'date_newest'}, name="project_list_date_newest"),
+        
+        # project-specific
         url(r'^project/([-\w]+)/$', 'projects.views.project', name="project_detail"),
         url(r'^project/([-\w]+)/delete/$', 'projects.views.delete', name="project_delete"),
         url(r'^project/([-\w]+)/members_status/$', 'projects.views.members_status', name="project_members_status"),

@@ -35,6 +35,16 @@ except ImportError:
 
 # from microblogging.models import TweetInstance
 
+TOPIC_COUNT_SQL = """
+SELECT COUNT(*)
+FROM projects_topic
+WHERE projects_topic.project_id = projects_project.id
+"""
+MEMBER_COUNT_SQL = """
+SELECT COUNT(*)
+FROM projects_projectmember
+WHERE projects_projectmember.project_id = projects_project.id
+"""
 
 def create(request, form_class=ProjectForm,
         template_name="projects/create.html"):
@@ -74,6 +84,42 @@ def delete(request, slug, redirect_url=None):
     
     return HttpResponseRedirect(redirect_url)
 
+def projects(request, template_name="projects/projects.html", order=None):
+    projects = Project.objects.filter(deleted=False)
+    search_terms = request.GET.get('search', '')
+    if search_terms:
+        projects = (projects.filter(name__icontains=search_terms) |
+            projects.filter(description__icontains=search_terms))
+    if order == 'least_topics':
+        projects = projects.extra(select={'topic_count': TOPIC_COUNT_SQL})
+        projects = projects.order_by('topic_count')
+    elif order == 'most_topics':
+        projects = projects.extra(select={'topic_count': TOPIC_COUNT_SQL})
+        projects = projects.order_by('-topic_count')
+    elif order == 'least_members':
+        projects = projects.extra(select={'member_count': MEMBER_COUNT_SQL})
+        projects = projects.order_by('member_count')
+    elif order == 'most_members':
+        projects = projects.extra(select={'member_count': MEMBER_COUNT_SQL})
+        projects = projects.order_by('-member_count')
+    elif order == 'name_ascending':
+        projects = projects.order_by('name')
+    elif order == 'name_descending':
+        projects = projects.order_by('-name')
+    elif order == 'date_oldest':
+        projects = projects.order_by('-created')
+    elif order == 'date_newest':
+        projects = projects.order_by('created')
+    context = {
+        'projects': projects,
+        'search_terms': search_terms,
+        'order': order,
+    }
+    return render_to_response(
+        template_name,
+        context,
+        context_instance=RequestContext(request)
+    )
 
 def your_projects(request, template_name="projects/your_projects.html"):
     return render_to_response(template_name, {
