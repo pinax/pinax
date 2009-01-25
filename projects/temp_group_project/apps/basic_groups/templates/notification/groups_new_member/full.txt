@@ -1,0 +1,4 @@
+{% load i18n %}{% blocktrans with group.get_absolute_url as group_url %}{{ user }} has joined the group {{ group }}.
+
+http://{{ current_site }}{{ group_url }}
+{% endblocktrans %}

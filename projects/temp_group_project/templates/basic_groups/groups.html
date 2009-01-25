@@ -1,0 +1,72 @@
+{% extends "basic_groups/base.html" %}
+
+{% load i18n %}
+{% load humanize %}
+{% load pagination_tags %}
+{% load order_by %}
+{% load extra_tagging_tags %}
+{% load group_tags %}
+
+{% block head_title %}{% blocktrans %}Groups{% endblocktrans %}{% endblock %}
+
+{% block body %}
+    <h1>{% trans "Groups" %}</h1>
+    
+    <p>{% trans "This is just a basic group example with no extra content items." %}</p>
+    {% if user.is_authenticated %}
+        <p><a href="{% url group_create %}">Create</a> your own group.</p>
+    {% else %}
+        {% url acct_signup as signup_url %}
+        {% url acct_login as login_url %}
+        <p>{% blocktrans %}<a href="{{ signup_url }}">Sign up</a> and <a href="{{ login_url }}">log in </a> to create your own group or join an existing one.{% endblocktrans %}</p>
+    {% endif %}
+    
+    <form method="GET" action="">
+        <input type="text" name="search" value="{{ search_terms }}" />
+        <input type="submit" value="Search" />
+        {% if search_terms %}
+            <a href="{% clear_search_url request %}">Clear Search Terms</a>
+        {% endif %}
+    </form>
+    {% autopaginate groups 10 %}
+    {% if groups %}
+        <p>{% trans "Order by:" %}
+            {% ifequal order 'most_members' %}
+                <a href='{% url group_list_order "least_members" %}{% persist_getvars request %}'>{% trans "Members" %} &uarr;</a>
+            {% else %}
+                {% ifequal order 'least_members' %}
+                    <a href='{% url group_list_order "most_members" %}{% persist_getvars request %}'>{% trans "Members" %} &darr;</a>
+                {% else %}
+                    <a href='{% url group_list_order "most_members" %}{% persist_getvars request %}'>{% trans "Members" %}</a>
+                {% endifequal %}
+            {% endifequal %}
+            {% ifequal order 'name_descending' %}
+                <a href='{% url group_list_order "name_ascending" %}{% persist_getvars request %}'>{% trans "Name" %} &uarr;</a>
+            {% else %}
+                {% ifequal order 'name_ascending' %}
+                    <a href='{% url group_list_order "name_descending" %}{% persist_getvars request %}'>{% trans "Name" %} &darr;</a>
+                {% else %}
+                    <a href='{% url group_list_order "name_ascending" %}{% persist_getvars request %}'>{% trans "Name" %}</a>
+                {% endifequal %}
+            {% endifequal %}
+            {% ifequal order 'date_newest' %}
+                <a href='{% url group_list_order "date_oldest" %}{% persist_getvars request %}'>{% trans "Date" %} &uarr;</a>
+            {% else %}
+                {% ifequal order 'date_oldest' %}
+                    <a href='{% url group_list_order "date_newest" %}{% persist_getvars request %}'>{% trans "Date" %} &darr;</a>
+                {% else %}
+                    <a href='{% url group_list_order "date_oldest" %}{% persist_getvars request %}'>{% trans "Date" %}</a>
+                {% endifequal %}
+            {% endifequal %}
+        </p>
+        <dl>
+        {% for group in groups %}
+            {% show_group group %}
+        {% endfor %}
+        </dl>
+        {% paginate %}
+    {% else %}
+        <p>There are no groups yet.</p>
+    {% endif %}
+    
+{% endblock %}
