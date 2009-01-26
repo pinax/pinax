@@ -6,6 +6,9 @@ import os.path
 PINAX_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"))
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
+# tells Pinax to use the default theme
+PINAX_THEME = 'default'
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -50,12 +53,12 @@ MEDIA_ROOT = os.path.join(os.path.dirname(__file__), "site_media")
 
 # URL that handles the media served from MEDIA_ROOT.
 # Example: "http://media.lawrence.com"
-MEDIA_URL = '/site_media/'
+MEDIA_URL = '/media/'
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/media/'
+ADMIN_MEDIA_PREFIX = '/media/admin/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'bk-e2zv3humar79nm=j*bwc=-ymeit(8a20whp3goq4dh71t)s'
@@ -122,7 +125,7 @@ INSTALLED_APPS = (
     'misc',
     
     'about',
-    
+    'locations',
     'django.contrib.admin',
 
 )
