@@ -6,6 +6,9 @@ import os.path
 PINAX_ROOT = '/Users/jtauber/Projects/PINAX/pinax/trunk'
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
+# tells Pinax to use the default theme
+PINAX_THEME = 'default'
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -80,7 +83,7 @@ ROOT_URLCONF = 'temp_group_project.urls'
 
 TEMPLATE_DIRS = (
     os.path.join(os.path.dirname(__file__), "templates"),
-    os.path.join(PINAX_ROOT, "templates", "default"),
+    os.path.join(PINAX_ROOT, "templates", PINAX_THEME),
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
