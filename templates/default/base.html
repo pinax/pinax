@@ -61,6 +61,8 @@
         <div id="footer">{% block footer %}{% endblock %}</div>
         
         <script src="{{ MEDIA_URL }}jquery.js" type="text/javascript"></script>
-        {% block extra_body_base %}{% endblock %}
+        {% block extra_body_base %}
+            {% block extra_body %}{% endblock %}
+        {% endblock %}
     </body>
 </html>
