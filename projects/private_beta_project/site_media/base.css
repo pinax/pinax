@@ -1,0 +1,443 @@
+body {
+    background-color: #FFF;
+    margin: 0;
+}
+html, body {
+    height: 100%;
+}
+body {
+    color: #333;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 10pt;
+}
+a, a:visited {
+    color: #13C;
+}
+img {
+    border: 0;
+}
+dt {
+    font-weight: bold;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 0;
+    font-size: inherit;
+}
+td {
+    margin: 0;
+    border: 0;
+    padding: 0;
+}
+#body {
+    clear: both;
+    margin: 0 auto;
+    padding: 10px;
+    width: 800px;
+}
+#footer {
+    color: #999; /* footer text colour */
+    margin: 50px auto;
+    padding: 10px;
+    clear: both;
+    width: 800px;
+}
+#footer a, #footer a:visited {
+    color: #444; /* footer link colour */
+}
+#footer a:hover {
+    color: #777; /* footer link hover colour */
+}
+#site_wide_announcements {
+    background: yellow;
+    padding: 10px;
+    text-align: center;
+}
+#site_wide_announcements ul {
+    padding: 0;
+    margin: 0;
+}
+h1 {
+    margin: 0;
+}
+form th {
+    text-align : left;
+}
+form.signup input[type="submit"], form.login input[type="submit"] {
+    margin: 20px 0;
+    font-size: 14pt;
+}
+input[type="text"], input[type="password"], textarea {
+    padding: 3px;
+    margin: 3px;
+    border: solid 1px #C6C6C6;
+    border-bottom: solid 1px #E3E3E3;
+    color: #666;
+    font-size: 12pt;
+    background: #F3F3F3 url('form-shadow.png') left top repeat-x;
+}
+.clearboth {
+    clear: both;
+}
+
+
+#tabhead {
+    background: #035 url('heading.png') left top repeat-x;
+    border-bottom: 1px solid #000; /* tab border */
+    position: relative;
+}
+#tabhead .logo {
+    height: 80px;
+    padding-left: 5px;
+    padding-top: 0;
+}
+#tabhead .logo img {
+    width: 190px;
+    height: 79px;
+}
+#tabhead .login {
+    position: absolute;
+    top: 6px;
+    right: 15px;
+    color: #DEF; /* login bar text colour */
+}
+#tabhead .login a, #tabhead .login a:visited {
+    color: #DEF; /* login bar link colour */
+}
+#tabhead .login a:hover {
+    color: #FFF; /* login bar link hover colour */
+}
+
+
+
+ul.errorlist {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    color: red;
+}
+ul#messages {
+    margin: 0 0 10px 0;
+    padding: 0;
+    list-style: none;
+}
+ul#messages li {
+    padding: 5px 10px;
+    background: #EFD;
+    margin: 3px;
+    border: 1px solid #BC9;
+}
+ul#messages li a {
+    float: right;
+    color: #693;
+}
+.verified {
+    color: green;
+}
+.remove {
+    color: red;
+}
+.unverified {
+    color: gray;
+}
+.primary {
+    font-weight: bold;
+}
+table.email_list td {
+    padding: 5px 10px;
+}
+.warning {
+    color: red;
+    font-weight: bold;
+}
+
+div.notice {
+    margin: 0;
+    padding: 5px;
+    border-bottom: 1px solid #CCC;
+}
+div.unseen_notice {
+    margin: 0;
+    padding: 5px;
+    background: #DFC;
+    border-bottom: 1px solid #CCC;
+}
+h2.notice_date,
+{
+    font-size: 12pt;
+    color: #666;
+    border-bottom: 1px solid #999;
+}
+span.notice_type {
+    color: #666;
+}
+span.notice_message {
+}
+span.notice_time {
+    color: #999;
+    font-size: 90%;
+}
+table.notice_settings td {
+    line-height: 90%;
+    padding: 5px 10px;
+    
+}
+span.notice_type_description {
+    color: #666;
+    font-size: 80%;
+    font-style: italic;
+}
+
+div.profile_info p {
+    margin: 0;
+}
+
+#subnav {
+    margin: 0;
+    padding: 0;
+    background: #DEF; /* tab colour */
+    border-bottom: 1px solid #9BC;
+}
+
+#subnav ul {
+    float: right;
+    margin: 0 20px;
+    padding: 0;
+}
+
+#subnav ul li {
+    display: inline;
+    list-style-type: none;
+}
+
+#subnav ul a:link, #subnav ul a:visited {
+    float: left;
+    font-weight: bold;
+    text-decoration: none;
+    color: #444;
+    padding: 4px 20px;
+}
+
+#subnav ul a:hover {
+    color: #FFF;
+    background: #9BC;
+}
+
+div.right_panel {
+    margin-top: 20px;
+    width: 200px;
+    float: right;
+    z-index: 999;
+}
+
+div.notice_settings {
+    background: #DEF;
+    padding: 8px;
+    margin: 20px 0;
+}
+div.notice_settings h2 {
+    margin: 0 0 5px 0;
+    padding: 0;
+}
+
+#locale_switcher {
+    display:inline;
+}
+
+.ac_results {
+    padding: 0px;
+    border: 1px solid black;
+    background-color: white;
+    overflow: hidden;
+    z-index: 99999;
+}
+
+.ac_results ul {
+    width: 100%;
+    list-style-position: outside;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.ac_results li {
+    margin: 0px;
+    padding: 2px 5px;
+    cursor: default;
+    display: block;
+    /* 
+    if width will be 100% horizontal scrollbar will apear 
+    when scroll mode will be used
+    */
+    /*width: 100%;*/
+    font: menu;
+    font-size: 12px;
+    /* 
+    it is very important, if line-height not setted or setted 
+    in relative units scroll will be broken in firefox
+    */
+    line-height: 16px;
+    overflow: hidden;
+}
+
+.ac_results li img {
+    float: left;
+    margin: 5px;
+}
+
+.ac_loading {
+    background: white url('indicator.gif') right center no-repeat;
+}
+
+.ac_odd {
+    background-color: #eee;
+}
+
+.ac_over {
+    background-color: #0A246A;
+    color: white;
+}
+
+
+/* pagination */
+.pagination {
+    margin: 10px 0;
+}
+.pagination .disabled {
+    padding: 3px;
+    color: #999;
+    border: 1px solid #CCC;
+}
+.pagination .current {
+    padding: 3px;
+    color: #FFF;
+    border: 1px solid #9BC;
+    background: #9BC;
+}
+.pagination a {
+    padding: 3px;
+    text-decoration: none;
+    border: 1px solid #9BC;
+    color: #444;
+    background: #DEF;
+}
+
+/* reference:
+ *   http://www.positioniseverything.net/easyclearing.html
+ *   http://www.zeldman.com/2006/10/27/ie7fixes1/
+ *      comment by michael on 10/28/2006
+ */
+.clearfix {
+    min-height: 1%;
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+/* hides from ie5-mac \*/
+* html .clearfix { height: 1%; }
+/* end hide from ie5-mac */
+
+
+dl.what_next {
+    margin: 2em;
+}
+dl.what_next dt {
+    font-size: 120%;
+}
+dl.what_next dd {
+    margin: 0 0 1em 0;
+    font-style: italic;
+}
+p.what_next {
+    font-size: 120%;
+}
+
+/* FORMS **********************************/
+
+/* ----------- basic-sm ----------- */
+
+#basic-form .underlineme {
+    border-bottom: 4px solid #DEDEDE;
+    margin-top: 15px;
+}
+#basic-form hr {
+    border-top:solid 4px #DEDEDE;
+}
+#basic-form p{
+    color:#666666;
+    border-bottom:solid 1px #dedede;
+    padding-bottom: 5px;
+}
+#basic-form label{
+    display:block;
+    font-weight:bold;
+}
+#basic-form td {
+    padding: 2px;
+}
+#basic-form td.rightd {
+    padding-right: 70px;
+}
+#basic-form span{
+    color: #aaa;
+    font-style: italic;
+    width:300px;
+}
+#basic-form input, #basic-form select{
+    float:left;
+    margin:2px 0 2px 10px;
+    font-size: 11px;
+}
+
+#basic-form textarea{
+    float:left;
+    margin:2px 0 2px 10px;
+    font-size: 11px;
+}
+
+#basic-form .button{ 
+    clear:both;
+    width:125px;
+    height:31px;
+    text-align:center;
+    line-height:20px;
+    color:#FFFFFF;
+    font-size:11px;
+    font-weight:bold;
+    border: 0 transparent;
+    background: url(button.png) no-repeat;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+/* Fieldsets */
+fieldset { padding: 20px; margin: 0 0 1.5em 0; border: 2px solid #ddd; }
+legend { padding: 0 .4em; font-weight: bold; font-size: 1.2em; }
+
+.left-form {
+    width: 360px;
+    float: left;
+    margin-right: 60px;
+}
+
+.right-form {
+    width: 360px;
+    float: right;
+}
+.right-form p {
+    line-height: 21px;
+}
+.padtop {
+    margin-top: 20px;
+}
+
+.signupform {
+    float: left;
+}
