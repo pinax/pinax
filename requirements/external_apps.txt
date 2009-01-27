@@ -1,3 +1,4 @@
+# Get all requirements formerly known as "external_libs" explicitely
 -r libs.txt
 
 # Already released apps
@@ -10,14 +11,17 @@ django-notification
 django-pagination
 django-dbtemplates
 django-robots
+django-messages
 http://django-photologue.googlecode.com/files/photologue-2.1.zip
 
 # Apps that we install by passing the svn path to easy_install (meh)
 http://django-tagging.googlecode.com/svn/trunk/
-http://django-voting.googlecode.com/svn/trunk
-http://django-timezones.googlecode.com/svn/trunk
-http://django-command-extensions.googlecode.com/svn/trunk
-http://django-db-log.googlecode.com/svn/trunk
+http://django-voting.googlecode.com/svn/trunk/
+http://django-timezones.googlecode.com/svn/trunk/
+http://django-command-extensions.googlecode.com/svn/trunk/
+http://django-db-log.googlecode.com/svn/trunk/
+http://django-page-cms.googlecode.com/svn/trunk/
+http://django-mptt.googlecode.com/svn/trunk/
 
 # Do editable checkouts (yay!)
 -e bzr+http://bazaar.launchpad.net/%7Edjango-wikiapp/django-wikiapp/main/#egg=django-wikiapp
@@ -27,20 +31,13 @@ http://django-db-log.googlecode.com/svn/trunk
 -e svn+http://django-friends.googlecode.com/svn/trunk#egg=django-friends
 -e svn+http://django-gravatar.googlecode.com/svn/trunk/#egg=django-gravatar
 -e svn+http://django-mailer.googlecode.com/svn/trunk/#egg=django-mailer
--e svn+http://django-messages.googlecode.com/svn/trunk/#egg=django-messages
--e svn+http://django-mptt.googlecode.com/svn/trunk/#egg=django-mptt
 -e svn+http://django-oembed.googlecode.com/svn/trunk/#egg=django-oembed
--e svn+http://django-page-cms.googlecode.com/svn/trunk/#egg=django-page-cms
 -e svn+http://django-schedule.googlecode.com/svn/trunk#egg=django-schedule
 -e svn+http://django-threadedcomments.googlecode.com/svn/trunk#egg=django-threadedcomments
 -e svn+http://django-locations.googlecode.com/svn/trunk#egg=django-locations
 -e svn+http://django-uni-form.googlecode.com/svn/trunk#egg=django-uni-form
--e git://github.com/brosner/django-openid.git#egg=django-openid
 -e svn+http://django-swaps.googlecode.com/svn/trunk#egg=django-swaps
 -e svn+http://django-app-plugins.googlecode.com/svn/trunk#egg=django-app-plugins
-
-
-# Check those and consider forking:
-
-# django-feedutil (setup.py missing, handed in)
-# django-logging (setup.py missing, handed in)
+-e git://github.com/brosner/django-openid.git#egg=django-openid
+-e git://github.com/robhudson/django-debug-toolbar.git#egg=django-debug-toolbar
+-e git://github.com/jezdez/django-feedutil.git#egg=django-feedutil
