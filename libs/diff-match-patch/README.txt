@@ -30,4 +30,4 @@ Demos: (in JavaScript)
 
 **** NOTE ****
 
-Pinax only only contains the Python version of diff-match-patch.
+Pinax only contains the Python version of diff-match-patch.
