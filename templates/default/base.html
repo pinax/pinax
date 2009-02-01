@@ -18,7 +18,8 @@
             }
         </style>
         {% endif %}
-        {% block extra_head %}
+        {% block extra_head_base %}
+            {% block extra_head %}{% endblock %}
         {% endblock %}
     </head>
     
