@@ -61,7 +61,7 @@
             </div>
             
             {% ifequal tribe.members.all.count 1 %}
-                <p><img src="{{ MEDIA_URL }}delete.png" /> <a href="#" onclick="$('#delete_tribe_form').toggle(); return false;">{% trans "Delete tribe" %}</a><p>
+                <p><img src="{{ MEDIA_URL }}pinax/images/silk/icons/delete.png" /> <a href="#" onclick="$('#delete_tribe_form').toggle(); return false;">{% trans "Delete tribe" %}</a><p>
                  <form class="delete_form" id="delete_tribe_form" action="{% url tribe_delete tribe.slug %}" method="POST" style="display: none;">
                      <input type="submit" value="{% trans "Delete Tribe" %}" /> (all content will be removed)
                 </form>
@@ -156,7 +156,7 @@
                     {% for photo in photos %}
                     <div class="gallery-photo-thumb">
                         <a href="/photos/details/{{ photo.photo.id }}/"><img src="{{ photo.photo.get_thumbnail_url }}" alt="{{ photo.photo.title }}"/></a><br />
-                        <img src="{{ MEDIA_URL }}comment.png" border="0" class="noborder" align="absmiddle" /><a href="/photos/details/{{ photo.photo.id }}/">{% get_comment_count for photo as commentcount %} {% blocktrans %}{{ commentcount }} Comments {% endblocktrans %}</a>
+                        <img src="{{ MEDIA_URL }}pinax/images/silk/icons/comment.png" border="0" class="noborder" align="absmiddle" /><a href="/photos/details/{{ photo.photo.id }}/">{% get_comment_count for photo as commentcount %} {% blocktrans %}{{ commentcount }} Comments {% endblocktrans %}</a>
                    </div>
                    {% endfor %}
                </div>

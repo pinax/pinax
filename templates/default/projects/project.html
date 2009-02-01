@@ -79,7 +79,7 @@
                             </form>
                         </div>
                         
-                        <p><img src="{{ MEDIA_URL }}delete.png" /> <a href="#" onclick="$('#delete_project_form').toggle(); return false;">{% trans "Delete project" %}</a><p>
+                        <p><img src="{{ MEDIA_URL }}pinax/images/silk/icons/delete.png" /> <a href="#" onclick="$('#delete_project_form').toggle(); return false;">{% trans "Delete project" %}</a><p>
                          <form class="delete_form" id="delete_project_form" action="{% url project_delete project.slug %}" method="POST" style="display: none;">
                              <input type="submit" value="{% trans "Delete Project" %}" /> (all content will be removed)
                         </form>
@@ -152,7 +152,7 @@
                     {% for photo in photos %}
                     <div class="gallery-photo-thumb">
                         <a href="/photos/details/{{ photo.photo.id }}/"><img src="{{ photo.photo.get_thumbnail_url }}" alt="{{ photo.photo.title }}"/></a><br />
-                        <img src="{{ MEDIA_URL }}comment.png" border="0" class="noborder" align="absmiddle" /><a href="/photos/details/{{ photo.photo.id }}/">{% get_comment_count for photo.photo as commentcount %} {{ commentcount }} Comments</a>
+                        <img src="{{ MEDIA_URL }}pinax/images/silk/icons/comment.png" border="0" class="noborder" align="absmiddle" /><a href="/photos/details/{{ photo.photo.id }}/">{% get_comment_count for photo.photo as commentcount %} {{ commentcount }} Comments</a>
                    </div>
                    {% endfor %}
                </div>

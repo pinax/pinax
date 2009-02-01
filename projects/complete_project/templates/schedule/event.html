@@ -6,8 +6,8 @@
 	{% if back_url %}
 	<a href="{{ back_url }}"><img border="0" src="{{ MEDIA_URL }}left_mod.png" alt="{% trans "Back" %}"></a> &nbsp;
 	{% endif %}
-	<a href="{% url s_edit_event event.id %}"><img border="0" src="{{ MEDIA_URL }}pencil.png" alt="{% trans "Change" %}"></a> &nbsp;
-	<a href="{% url s_delete_event event.id %}"><img border="0" src="{{ MEDIA_URL }}delete.png" alt="{% trans "Delete" %}"></a>
+	<a href="{% url s_edit_event event.id %}"><img border="0" src="{{ MEDIA_URL }}pinax/images/silk/icons/pencil.png" alt="{% trans "Change" %}"></a> &nbsp;
+	<a href="{% url s_delete_event event.id %}"><img border="0" src="{{ MEDIA_URL }}pinax/images/silk/icons/delete.png" alt="{% trans "Delete" %}"></a>
 </div>
 <h2 align="center">{{event.title}}</h2>
 <table align="center">
