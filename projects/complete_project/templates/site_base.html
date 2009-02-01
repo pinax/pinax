@@ -5,6 +5,11 @@
 {% load svn_app_version %}
 {% load analytics %}
 
+{% block extra_head_base %}
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/site_tabs.css" />
+    {% block extra_head %}{% endblock %}
+{% endblock %}
+
 {% block login %}
     {% if user.is_authenticated %}
         {% openid_icon openid user %}<b>{{ user }}</b> | <a href="{% url acct_email %}">{% trans "Account" %}</a> | {% if user.is_staff %}<a href="/admin/">{% trans "Admin" %}</a> | {% endif %}<a href="/openid/logout/?next={% url acct_logout %}">{% trans "Logout" %}</a>
