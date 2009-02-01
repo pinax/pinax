@@ -184,10 +184,6 @@ SITE_NAME = "Pinax"
 LOGIN_URL = "/account/login"
 LOGIN_REDIRECT_URLNAME = "what_next"
 
-LOGGING_OUTPUT_ENABLED = True
-LOGGING_SHOW_METRICS = True
-LOGGING_LOG_SQL = True
-
 INTERNAL_IPS = (
     '127.0.0.1',
 )
