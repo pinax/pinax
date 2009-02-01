@@ -24,10 +24,6 @@ urlpatterns = patterns('',
 )
 
 if settings.SERVE_MEDIA:
-    #urlpatterns += patterns('',
-    #    (r'^site_media/(?P<path>.*)$', 'django.views.static.serve',
-    #        {'document_root': os.path.join(os.path.dirname(__file__), "site_media")}),
-    #)
     # Enable this once we moved all the media
     urlpatterns += patterns('',
      (r'^site_media/(?P<path>.*)$', 'misc.views.serve'))
