@@ -125,7 +125,6 @@ INSTALLED_APPS = (
     'misc',
     
     'about',
-    'locations',
     'django.contrib.admin',
 
 )
