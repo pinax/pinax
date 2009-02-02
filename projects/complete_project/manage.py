@@ -2,7 +2,6 @@
 import sys
 
 from os.path import abspath, dirname, join
-from site import addsitedir
 
 from django.conf import settings
 from django.core.management import setup_environ, execute_from_command_line
