@@ -63,7 +63,7 @@
                         {% dict_entry_for_item bookmark from vote_dict as vote %}
                         {% dict_entry_for_item bookmark from score_dict as score %}
                         {% if user.is_authenticated %}
-                            <a id="up_{{ bookmark.id }}" href="#" onclick="vote({{ bookmark.id }}, '{% if vote and vote.is_downvote %}clear{% else %}up{% endif %}'); return false;"><img src="{{ MEDIA_URL }}up_{% if vote and vote.is_upvote %}mod{% else %}grey{% endif %}.png"/></a><br />
+                            <a id="up_{{ bookmark.id }}" href="#" onclick="vote({{ bookmark.id }}, '{% if vote and vote.is_downvote %}clear{% else %}up{% endif %}'); return false;"><img src="{{ MEDIA_URL }}bookmarks/img/up_{% if vote and vote.is_upvote %}mod{% else %}grey{% endif %}.png"/></a><br />
                         {% endif %}
                         <span id="bookmark_{{ bookmark.id }}_score">
                             {{ score.score|default:0 }} point{{ score.score|default:0|pluralize }}
