@@ -24,6 +24,6 @@ urlpatterns = patterns('',
 )
 
 if settings.SERVE_MEDIA:
-    # Enable this once we moved all the media
-    urlpatterns += patterns('',
-     (r'^site_media/(?P<path>.*)$', 'misc.views.serve'))
+    urlpatterns += patterns('', 
+        (r'^site_media/(?P<path>.*)$', 'misc.views.serve')
+    )
