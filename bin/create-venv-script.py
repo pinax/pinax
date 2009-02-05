@@ -59,7 +59,7 @@ def after_install(options, home_dir):
         logger.indent -= 2
     logger.notify('Run "%s install --requirement %s" to install the external apps and libraries used in all Pinax projects.'
                   % (join(home_dir, 'bin', 'pip'),
-                     join(pinax_dir, 'requirements', 'external_apps.txt'))
+                     join(pinax_dir, 'requirements', 'external_apps.txt')))
 
 def fs_ensure_dir(dir):
     if not os.path.exists(dir):
