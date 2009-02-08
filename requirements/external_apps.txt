@@ -12,8 +12,10 @@ django-pagination
 django-robots
 django-messages
 http://django-photologue.googlecode.com/files/photologue-2.1.zip
+django-wikiapp==0.1.1
 
-# Apps that we install by passing the svn path to easy_install (meh)
+# Apps that are installed "directly" non-editable because they lack a
+# setuptools setup.py, are not released on pypi or don't have a recent release
 http://django-tagging.googlecode.com/svn/trunk/
 http://django-voting.googlecode.com/svn/trunk/
 http://django-timezones.googlecode.com/svn/trunk/
@@ -23,7 +25,6 @@ http://django-page-cms.googlecode.com/svn/trunk/
 http://django-mptt.googlecode.com/svn/trunk/
 
 # Do editable checkouts (yay!)
--e bzr+http://bazaar.launchpad.net/%7Edjango-wikiapp/django-wikiapp/main/#egg=django-wikiapp
 -e svn+http://django-bookmarks.googlecode.com/svn/trunk#egg=django-bookmarks
 -e svn+http://django-email-confirmation.googlecode.com/svn/trunk#egg=django-email-confirmation
 -e svn+http://django-flag.googlecode.com/svn/trunk#egg=django-flag
