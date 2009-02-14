@@ -125,6 +125,7 @@ INSTALLED_APPS = (
     'account',
     'misc',
     'waitinglist',
+    'signup_codes',
     
     'about',
     

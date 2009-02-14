@@ -25,9 +25,16 @@ def homepage(request):
         "form": form,
     })
 
+if settings.ACCOUNT_OPEN_SIGNUP:
+    signup_view = "basic_signup.views.signup"
+else:
+    signup_view = "signup_codes.views.signup"
+
 urlpatterns = patterns('',
     url(r'^$', homepage, name="home"),
     url(r'^success/$', direct_to_template, {"template": "waitinglist/success.html"}, name="waitinglist_sucess"),
+    
+    url(r'^account/signup/$', signup_view, name="acct_signup"),
     
     (r'^about/', include('about.urls')),
     (r'^account/', include('account.urls')),

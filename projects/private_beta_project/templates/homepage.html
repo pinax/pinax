@@ -15,4 +15,13 @@
     <input type="submit" value="Sign up" />
 </form>
 
+<p>- or -</p>
+
+<p>You can use a sign-up code to sign-up with the site right now.</p>
+
+<form method="GET" action="{% url acct_signup %}">
+    <input type="text" name="code" />
+    <input type="submit" value="Sign up" />
+</form>
+
 {% endblock %}
