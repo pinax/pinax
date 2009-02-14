@@ -1,6 +1,7 @@
 {% extends "projects/base.html" %}
 
 {% load i18n %}
+{% load uni_form %}
 {% load pagination_tags %}
 {% load order_by %}
 {% load humanize %}
@@ -68,12 +69,16 @@
     {% if is_member %}
         <h2>New Task</h2>
         
-        <form action="{% url project_tasks project.slug %}" method="POST">
-            <table>
-                {{ task_form }}
-                <tr><td></td><td><input type="hidden" name="action" value="add_task" /><input type="submit" value="{% trans 'add task' %}"/></td></tr>
-            </table>
+        <form class="uniForm" method="POST" action="">
+            <fieldset class="inlineLabels">
+                {{ task_form|as_uni_form }}
+                <div class="form_block">
+                    <input type="hidden" name="action" value="add_task" />
+                    <input type="submit" value="{% trans "add task" %}"/>
+                </div>
+            </fieldset>
         </form>
+        
     {% endif %}
     
 {% endblock %}
