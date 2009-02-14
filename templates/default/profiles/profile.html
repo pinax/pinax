@@ -19,23 +19,23 @@
             <a href="{% url avatar_change %}" id="avatar_replace">(replace)</a>
             {% endif %}
         </div>
-    
+        
         <h1>{% blocktrans %}Profile for {{ other_user }}{% endblocktrans %}</h1>
-    
+        
         <div class="profile_info">
             {% if other_user.get_profile.name %}<p><b>{% trans "Name" %}</b>: {{ other_user.get_profile.name }}</p>{% endif %}
             {% if other_user.get_profile.about %}<p><b>{% trans "About" %}</b>: {{ other_user.get_profile.about }}</p>{% endif %}
             {% if other_user.get_profile.location%}<p><b>{% trans "Location" %}</b>: {{ other_user.get_profile.location }}</p>{% endif %}
             {% if other_user.get_profile.website %}<p><b>{% trans "Website" %}</b>: <a href="{{ other_user.get_profile.website }}">{{ other_user.get_profile.website }}</a></p>{% endif %}
         </div>
-    
-    
+        
+        
         {% if user.is_authenticated %}
             <p>
                 <a href="{% url tweet_followers other_user %}">{% trans "Followers" %}</a>: {{ other_user.followers.count }}
                 <a href="{% url tweet_following other_user %}">{% trans "Following" %}</a>: {{ other_user.followed.count }}
             </p>
-        
+            
             {% if is_me %}
                 <div class="form-toggle">
                     <p><span id="edit-profile-toggle">{% trans "Edit profile" %}</span></p>
@@ -56,7 +56,7 @@
                         {% endif %}
                     </form>
                 </div>
-            
+                
                 {% if is_friend %}
                     <p>{% blocktrans %}You are friends with {{ other_user }}.{% endblocktrans %} <a href="{% url messages_compose %}{{ other_user }}/">{% trans "Send a message" %}</a>.</p>
                 {% else %}
@@ -94,12 +94,11 @@
                         {% endif %} {# previous_invitations_to #}
                     {% endif %} {# previous_invitations_from #}
                 {% endif %} {# is_friend #}
-        
+                
             {% endif %} {# is me #}
-        
-        
+            
             {% plugin_point "profiles.profile" user=other_user owner=other_user viewer=user %}
-    
+            
         {% else %} {# not user.is_authenticated #}
             {% url acct_signup as signup_url %}
             {% url acct_login as login_url %}
