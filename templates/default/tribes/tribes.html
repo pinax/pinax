@@ -1,6 +1,7 @@
 {% extends "tribes/base.html" %}
 
 {% load i18n %}
+{% load uni_form %}
 {% load humanize %}
 {% load pagination_tags %}
 {% load order_by %}
@@ -16,12 +17,15 @@
     {% if user.is_authenticated %}
         <div class="form-toggle">
             <p><span id="start-tribe-toggle">{% trans "Start your own tribe" %}</a></p>
-            <form id="start-tribe" method="POST" action="{% url tribe_create %}">
-                {% get_tribe_form as tribe_form %}
-                <table>
-                    {{ tribe_form }}
-                    <tr><td></td><td><input type="hidden" name="action" value="create" /><input type="submit" value="{% trans 'create' %}"/></td></tr>
-                </table>
+            <form class="uniForm" id="start-tribe" method="POST" action="">
+                <fieldset class="inlineLabels">
+                    {% get_tribe_form as tribe_form %}
+                    {{ tribe_form|as_uni_form }}
+                    <div class="form_block">
+                        <input type="hidden" name="action" value="create" />
+                        <input type="submit" value="{% trans "create" %}"/>
+                    </div>
+                </fieldset>
             </form>
         </div>
     {% else %}
@@ -92,13 +96,13 @@
         $(document).ready(function() {
             $('#start-tribe').hide();
             $('#start-tribe-toggle').click(function() {
-                $('#start-tribe').slideToggle();
+                $('#start-tribe').toggle();
                 $('#start-tribe').autoscroll();
                 return false;
             });
-            if ($('#start-tribe ul.errorlist').length) {
+            if ($('#start-tribe .error').length) {
                 $('#start-tribe').show();
-                $('#start-tribe ul.errorlist').autoscroll();
+                $('#start-tribe .error').autoscroll();
             }
         });
     </script>

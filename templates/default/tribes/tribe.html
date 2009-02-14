@@ -2,6 +2,7 @@
 
 {% load microblogging_tags %}
 {% load i18n %}
+{% load uni_form %}
 {% load wiki %}
 {% load wikiurl %}
 {% load avatar_tags %}
@@ -14,7 +15,7 @@
 {% block head_title %}{{ tribe.name }}{% endblock %}
 
 {% block body %}
-
+    
     {% if user.is_authenticated %}
         <div class="right_panel">
             <div class="members">
@@ -33,11 +34,11 @@
             </div>
         </div>
     {% endif %}
-
+    
     <div style="width: 550px;">
-
+        
         <h1>{% trans "Tribe" %} {{ tribe.name }}</h1>
-
+        
         <p>
             {% trans "Slug:" %} <tt>{{ tribe.slug }}</tt><br />
             {% trans "Creator:" %} <a href="{% url profiles.views.profile tribe.creator.username %}">{{ tribe.creator }}</a><br />
@@ -45,18 +46,21 @@
             <br />
             {% show_tags_for tribe %}
         </p>
-
+        
         <p>{{ tribe.description }}</p>
-
+        
         {% ifequal user tribe.creator %}
             <div class="form-toggle">
                 <p><span id="edit-tribe-toggle">{% trans "Edit details" %}</span></p>
                 
-                <form id="edit-tribe" method="POST" action="">
-                    <table>
-                        {{ tribe_form }}
-                        <tr><td></td><td><input type="hidden" name="action" value="update" /><input type="submit" value="{% trans 'update' %}"/></td></tr>
-                    </table>
+                <form class="uniForm" id="edit-tribe" method="POST" action="">
+                    <fieldset class="inlineLabels">
+                        {{ tribe_form|as_uni_form }}
+                        <div class="form_block">
+                            <input type="hidden" name="action" value="update" />
+                            <input type="submit" value="{% trans "updated" %}"/>
+                        </div>
+                    </fieldset>
                 </form>
             </div>
             
@@ -70,7 +74,7 @@
             {% endifequal %}
             
         {% endifequal %}
-
+        
         {% if user.is_authenticated %}
             <div>
                 <form method="POST" action="">
@@ -92,11 +96,11 @@
             {% url acct_login as login_url %}
             <p>{% blocktrans %}<a href="{{ signup_url }}">Sign up</a> and <a href="{{ login_url }}">log in </a> to join this tribe.{% endblocktrans %}</p>
         {% endif %}
-
-
+        
+        
         {% if user.is_authenticated %}
             <h2>{% trans "Discussion Topics" %}{% if tribe.topics.all.count %} ({{ tribe.topics.all.count }}){% endif %}</h2>
-
+            
             {% if topics %}
                 {% for topic in topics %}
                     {% show_tribe_topic topic %}
@@ -106,10 +110,10 @@
                 {% url tribe_topics tribe.slug as new_tribe_url %}
                 <p>{% blocktrans %}None yet. <a href="{{ new_tribe_url }}">Start one...</a>{% endblocktrans %}</p>
             {% endif %}
-
-
+            
+            
             <h2>{% trans "Wiki Articles" %}{% if total_articles %} ({{ total_articles }}){% endif %}</h2>
-
+            
             {% if articles %}
                 <table class="topics">
                     {% for article in articles %}
@@ -125,10 +129,10 @@
                     {% endblocktrans %}
                 </p>
             {% endif %}
-
-
+            
+            
             <h2>{% trans "Tweets" %}</h2>
-
+            
             {% tweet_listing tweets 1 0 %}
             
             <h2>{% trans "Upcoming Events" %}</h2>
@@ -148,8 +152,8 @@
             <p>
                 <a href="{{ calendar.get_absolute_url }}">{% trans "calendar..." %}</a>
             </p>
-
-
+            
+            
             {% if photos %}
                 <h2>{% trans "Tribe Photo Pool" %}</h2>
                 <div class="thumb-row clearfix">
@@ -161,8 +165,8 @@
                    {% endfor %}
                </div>
             {% endif %}
-
-
+            
+            
         {% endif %}
     </div>
 
@@ -173,13 +177,13 @@
         $(document).ready(function() {
             $('#edit-tribe').hide();
             $('#edit-tribe-toggle').click(function() {
-                $('#edit-tribe').slideToggle();
+                $('#edit-tribe').toggle();
                 $('#edit-tribe').autoscroll();
                 return false;
             });
-            if ($('#edit-tribe ul.errorlist').length) {
+            if ($('#edit-tribe .error').length) {
                 $('#edit-tribe').show();
-                $('#edit-tribe ul.errorlist').autoscroll();
+                $('#edit-tribe .error').autoscroll();
             }
         });
     </script>

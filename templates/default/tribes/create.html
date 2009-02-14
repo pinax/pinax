@@ -1,6 +1,7 @@
 {% extends "tribes/base.html" %}
 
 {% load i18n %}
+{% load uni_form %}
 {% load humanize %}
 {% load pagination_tags %}
 {% load order_by %}
@@ -14,11 +15,14 @@
     
     <p>{% trans "A <b>tribe</b> is a group of people with some common interest." %}</p>
     {% if user.is_authenticated %}
-        <form id="tribe_form" method="POST" action="{% url tribe_create %}">
-            <table>
-                {{ tribe_form }}
-                <tr><td></td><td><input type="hidden" name="action" value="create" /><input type="submit" value="{% trans 'create' %}"/></td></tr>
-            </table>
+        <form class="uniForm" id="tribe_form" method="POST" action="">
+            <fieldset class="inlineLabels">
+                {{ tribe_form|as_uni_form }}
+                <div class="form_block">
+                    <input type="hidden" name="action" value="create" />
+                    <input type="submit" value="{% trans 'create' %}"/>
+                </div>
+            </fieldset>
         </form>
     {% else %}
         {% url acct_signup as signup_url %}
