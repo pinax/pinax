@@ -2,6 +2,7 @@
 
 {% load microblogging_tags %}
 {% load i18n %}
+{% load uni_form %}
 {% load avatar_tags %}
 {% load wiki %}
 {% load wikiurl %}
@@ -14,7 +15,7 @@
 {% block head_title %}{{ project.name }}{% endblock %}
 
 {% block body %}
-
+    
     {% if user.is_authenticated %}
         <div class="right_panel">
             <div class="members">
@@ -34,11 +35,11 @@
             <p><a href="{% url project_members_status project.slug %}">Members' Status</a></p>
         </div>
     {% endif %}
-
+    
     <div style="width: 550px;">
-
+        
         <h1>{% trans "Project" %} {{ project.name }}</h1>
-
+        
         <p>
             Slug: <tt>{{ project.slug }}</tt><br />
             Creator: <a href="{% url profiles.views.profile project.creator.username %}">{{ project.creator }}</a><br />
@@ -46,23 +47,26 @@
             <br />
             {% show_tags_for project %}
         </p>
-
+        
         <p>{{ project.description }}</p>
-
+        
         {% ifequal user project.creator %}
             
             <div class="form-toggle">
                 <p><span id="edit-project-toggle">{% trans "Edit details" %}</span></p>
-                <form id="edit-project" method="POST" action="">
-                    <table>
-                        {{ project_form }}
-                        <tr><td></td><td><input type="hidden" name="action" value="update" /><input type="submit" value="{% trans 'update' %}"/></td></tr>
-                    </table>
+                <form class="uniForm" id="edit-project" method="POST" action="">
+                    <fieldset class="inlineLabels">
+                        {{ project_form|as_uni_form }}
+                        <div class="form_block">
+                            <input type="hidden" name="action" value="update" />
+                            <input type="submit" value="{% trans "updated" %}"/>
+                        </div>
+                    </fieldset>
                 </form>
             </div>
             
         {% endifequal %}
-
+        
         {% if user.is_authenticated %}
             <div>
                 {% if are_member %}
@@ -71,11 +75,14 @@
                         
                         <div class="form-toggle">
                             <p><span id="add-member-toggle">{% trans "Add new member" %}</a></p>
-                            <form id="add-member" method="POST" action="">
-                                <table>
-                                    {{ adduser_form }}
-                                    <tr><td></td><td><input type="hidden" name="action" value="add" /><input type="submit" value="{% trans 'add' %}"/></td></tr>
-                                </table>
+                            <form class="uniForm" id="add-member" method="POST" action="">
+                                <fieldset class="inlineLabels">
+                                    {{ adduser_form|as_uni_form }}
+                                    <div class="form_block">
+                                        <input type="hidden" name="action" value="add" />
+                                        <input type="submit" value="{% trans "add" %}"/>
+                                    </div>
+                                </fieldset>
                             </form>
                         </div>
                         
@@ -91,13 +98,13 @@
                 {% endif %}
             </div>
         {% endif %}
-
+        
         {% if user.is_authenticated %}
-
+            
             <h2>Tasks{% if total_tasks %} ({{ total_tasks }}){% endif %}</h2>
-
+            
             <p><a href="{% url project_tasks project.slug %}" method="Post">view more details or add task...</a></p>
-
+            
             <table class="tasks">
                 {% for task in tasks %}
                     <tr class="task_{{ task.get_state_display }} {% cycle odd,even %}">
@@ -114,22 +121,22 @@
                     </tr>
                 {% endfor %}
             </table>
-
+            
             <h2>Discussion Topics{% if project.topics.all.count %} ({{ project.topics.all.count }}){% endif %}</h2>
-
+            
             {% if topics %}
                 <p><a href="{% url project_topics project.slug %}">view more details or start new topic...</a></p>
-
+                
                 {% for topic in topics %}
                     {% show_project_topic topic %}
                 {% endfor %}
             {% else %}
                 <p>None yet. <a href="{% url project_topics project.slug %}">Start one...</a></p>
             {% endif %}
-
-
+            
+            
             <h2>Wiki Articles{% if total_articles %} ({{ total_articles }}){% endif %}</h2>
-
+            
             {% if articles %}
                 <table class="topics">
                     {% for article in articles %}
@@ -145,7 +152,7 @@
                     {% endblocktrans %}
                 </p>
             {% endif %}
-
+            
             {% if photos %}
                 <h2>Project Photo Pool</h2>
                 <div class="thumb-row clearfix">
@@ -157,20 +164,19 @@
                    {% endfor %}
                </div>
             {% endif %}
-
+            
             {% comment %}
                 <h2>{% trans "Tweets" %}</h2>
-
+                
                 {% tweet_listing tweets 1 0 %}
             {% endcomment %}
-
+            
         {% endif %}
     </div>
 
 {% endblock %}
 
 {% block extra_body %}
-    {{ block.super }}
     <script type="text/javascript" src="{{ MEDIA_URL }}jquery.bgiframe.js"></script>
     <script type="text/javascript" src="{{ MEDIA_URL }}jquery.dimensions.js"></script>
     <script type="text/javascript" src="{{ MEDIA_URL }}jquery.ajaxQueue.js"></script>
@@ -190,23 +196,23 @@
             });
             $('#edit-project').hide();
             $('#edit-project-toggle').click(function() {
-                $('#edit-project').slideToggle();
+                $('#edit-project').toggle();
                 $('#edit-project').autoscroll();
                 return false;
             });
-            if ($('#edit-project ul.errorlist').length) {
+            if ($('#edit-project .error').length) {
                 $('#edit-project').show();
-                $('#edit-project ul.errorlist').autoscroll();
+                $('#edit-project .error').autoscroll();
             }
             $('#add-member').hide();
             $('#add-member-toggle').click(function() {
-                $('#add-member').slideToggle();
+                $('#add-member').toggle();
                 $('#add-member').autoscroll();
                 return false;
             });
-            if ($('#add-member ul.errorlist').length) {
+            if ($('#add-member .error').length) {
                 $('#add-member').show();
-                $('#add-member ul.errorlist').autoscroll();
+                $('#add-member .error').autoscroll();
             }
         });
     </script>
