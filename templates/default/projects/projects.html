@@ -4,6 +4,7 @@
 {% load humanize %}
 {% load pagination_tags %}
 {% load project_tags %}
+{% load uni_form %}
 
 {% block head_title %}{% blocktrans %}Projects{% endblocktrans %}{% endblock %}
 
@@ -16,14 +17,18 @@
     {% if user.is_authenticated %}
         <div class="form-toggle">
             <p><span id="start-project-toggle">{% trans "Start your own project" %}</span></p>
-
-            <form id="start-project" method="POST" action="{% url project_create %}">
-                {% get_project_form as project_form %}
-                <table>
-                    {{ project_form }}
-                    <tr><td></td><td><input type="hidden" name="action" value="create" /><input type="submit" value="{% trans 'create' %}"/></td></tr>
-                </table>
+            
+            <form id="start-project" method="POST" action="{% url project_create %}" class="uniForm">
+                <fieldset class="inlineLabels">
+                    {% get_project_form as project_form %}
+                    {{ project_form|as_uni_form }} 
+                    <div class="form_block">    
+                        <input type="hidden" name="action" value="create" />
+                        <input type="submit" value="{% trans 'create' %}"/>
+                    </div>
+                </fieldset>
             </form>
+            
         </div>
     {% else %}
         {% url acct_signup as signup_url %}

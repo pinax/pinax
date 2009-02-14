@@ -1,6 +1,7 @@
 {% extends "site_base.html" %}
 
 {% load i18n %}
+{% load uni_form %}
 
 {% block head_title %}{% trans "Login" %}{% endblock %}
 
@@ -14,21 +15,30 @@
         <p>{% blocktrans %}Don't have an account? <a href="{{ signup_url }}">Sign up</a>!{% endblocktrans %}</p>
     {% endif %}
     
-    <form class="login" method="POST" action="">
-        <table>
-            {{ form.as_table }}
-            <tr><td></td><td><a href="{% url acct_passwd_reset %}">{% trans "Forgot password?" %}</a></td></tr>
-            <tr><td></td><td><input type="submit" value="{% trans "Log in &raquo;" %}" /></td></tr>
-        </table>
+    <form class="login uniForm" method="POST" action="">
+        <fieldset class="inlineLabels">
+            <div class="form_block">
+                <a href="{% url acct_passwd_reset %}">{% trans "Forgot password?" %}</a>
+            </div>            
+            {{ form|as_uni_form }}
+            <div class="form_block">
+                <input type="submit" value="{% trans "Log in &raquo;" %}" />
+            </div>
+        </fieldset>
     </form>
     
     {% if not openid %}
         <p>{% trans "Or sign in with your OpenID" %}:</p>
-        <form class="login" action="/openid/register/" method="POST">
-            <table>
-                <tr><th>{% trans "OpenID Identifier" %}: </th><td><input class="openid" type="text" name="openid_url"></td></tr>
-                <tr><td></td><td><input type="submit" value="{% trans "Log in &raquo;" %}" /></td></tr>
-            </table>
+        <form class="login uniForm" action="/openid/register/" method="POST">
+            <fieldset class="inlineLabels">
+                <div class="ctrlHolder">
+                    <label for="id_username">* OpenID Identifier</label>
+                    <input class="openid" type="text" name="openid_url">
+                </div>
+                <div class="form_block">
+                    <input type="submit" value="{% trans "Log in &raquo;" %}" />
+                </div>
+            </fieldset>
         </form>
     {% endif %}
     <p>{% blocktrans %}If you have any trouble logging in to your account, contact us at <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>.{% endblocktrans %}</p>

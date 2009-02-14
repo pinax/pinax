@@ -155,6 +155,7 @@ INSTALLED_APPS = (
     'schedule',
     'microblogging',
     'locations',
+    'uni_form',
     
     # internal (for now)
     'analytics',

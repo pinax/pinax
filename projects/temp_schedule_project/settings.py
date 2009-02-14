@@ -119,6 +119,7 @@ INSTALLED_APPS = (
     'timezones',
     'ajax_validation',
     'schedule',
+    'uni_form',
     
     # internal (for now)
     'basic_profiles',

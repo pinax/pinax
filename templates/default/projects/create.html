@@ -4,6 +4,7 @@
 {% load humanize %}
 {% load pagination_tags %}
 {% load project_tags %}
+{% load uni_form %}
 
 {% block head_title %}{% blocktrans %}Create Project{% endblocktrans %}{% endblock %}
 
@@ -14,11 +15,14 @@
     <p>{% blocktrans %}A <b>project</b> is a place to manage a group of people working on a common set of tasks. It is similar to a tribe in providing a wiki and threaded discussion but is invitation only and adds issue tracking.{% endblocktrans %}</p>
 
     {% if user.is_authenticated %}
-        <form id="project_form" method="POST" action="{% url project_create %}">
-            <table>
-                {{ project_form }}
-                <tr><td></td><td><input type="hidden" name="action" value="create" /><input type="submit" value="{% trans 'create' %}"/></td></tr>
-            </table>
+        <form id="project_form" method="POST" action="{% url project_create %}" class="uniForm">
+            <fieldset class="inlineLabels">
+                {{ project_form|as_uni_form }}
+                <div class="form_block">
+                    <input type="hidden" name="action" value="create" />
+                    <input type="submit" value="{% trans 'create' %}"/>
+                </div>
+            </fieldset>
         </form>
     {% else %}
         {% url acct_signup as signup_url %}

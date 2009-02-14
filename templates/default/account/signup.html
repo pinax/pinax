@@ -1,6 +1,7 @@
 {% extends "site_base.html" %}
 
 {% load i18n %}
+{% load uni_form %}
 
 {% block head_title %}{% trans "Signup" %}{% endblock %}
 
@@ -12,11 +13,13 @@
     {% else %}
         <p>{% trans "Already have an account?" %} <a href="{% url acct_login %}">{% trans "Log In" %}</a>!</p>
         
-        <form class="signup" id="signup_form" method="post" action="{% url acct_signup %}">
-            <table>
-                {{ form.as_table }}
-                <tr><td></td><td><input type="submit" value="{% trans "Sign Up &raquo;" %}" /></td></tr>
-            </table>
+        <form class="signup uniForm" id="signup_form" method="post" action="{% url acct_signup %}">
+            <fieldset class="inlineLabels">
+                {{ form|as_uni_form }}
+                <div  class="form_blick">
+                    <input type="submit" value="{% trans "Sign Up &raquo;" %}" />
+                </div>
+            </fieldset>
         </form>
         
         {% url terms as terms_url %}

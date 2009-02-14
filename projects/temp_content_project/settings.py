@@ -122,6 +122,7 @@ INSTALLED_APPS = (
     'tagging',
     'mptt',
     'pages',
+    'uni_form',
     
     # internal (for now)
     'basic_profiles',

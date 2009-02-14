@@ -125,6 +125,7 @@ INSTALLED_APPS = (
     'tagging',
     'threadedcomments',
     'wiki',
+    'uni_form',
     
     # internal (for now)
     'basic_profiles',
