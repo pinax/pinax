@@ -32,8 +32,8 @@
         
         {% if user.is_authenticated %}
             <p>
-                <a href="{% url tweet_followers other_user %}">{% trans "Followers" %}</a>: {{ other_user.followers.count }}
-                <a href="{% url tweet_following other_user %}">{% trans "Following" %}</a>: {{ other_user.followed.count }}
+                <a href="{% url tweet_followers other_user %}">{% trans "Followers" %}</a>: {{ other_user.followers.count|default:"0" }}
+                <a href="{% url tweet_following other_user %}">{% trans "Following" %}</a>: {{ other_user.followed.count|default:"0" }}
             </p>
             
             {% if is_me %}
