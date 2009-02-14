@@ -3,6 +3,7 @@
 {% load i18n %}
 {% load avatar_tags %}
 {% load app_plugins %}
+{% load uni_form %}
 
 {% block head_title %}{% blocktrans %}Profile for {{ other_user }}{% endblocktrans %}{% endblock %}
 
@@ -29,7 +30,6 @@
             {% if other_user.get_profile.website %}<p><b>{% trans "Website" %}</b>: <a href="{{ other_user.get_profile.website }}">{{ other_user.get_profile.website }}</a></p>{% endif %}
         </div>
         
-        
         {% if user.is_authenticated %}
             <p>
                 <a href="{% url tweet_followers other_user %}">{% trans "Followers" %}</a>: {{ other_user.followers.count }}
@@ -38,13 +38,17 @@
             
             {% if is_me %}
                 <div class="form-toggle">
-                    <p><span id="edit-profile-toggle">{% trans "Edit profile" %}</span></p>
-                    <form id="edit-profile" method="POST" action="" style="display: none;">
-                        <table>
-                            {{ profile_form }}
-                            <tr><td></td><td><input type="hidden" name="action" value="update" /><input type="submit" value="{% trans "update" %}"/></td></tr>
-                        </table>
-                    </form>
+                <p><span id="edit-profile-toggle">{% trans "Edit profile" %}</span></p>
+                
+                <form class="uniForm" id="edit-profile" method="POST" action="" style="display: none;">
+                    <fieldset class="inlineLabels">  
+                        {{ profile_form|as_uni_form }}
+                        <div class="form_block">
+                        <input type="hidden" name="action" value="update" />
+                        <input type="submit" value="{% trans "update" %}"/>
+                        </div>
+                    </fieldset>
+                </form>
                 </div>
             {% else %}
                 <div>
@@ -112,7 +116,7 @@
         $(document).ready(function() {
             $('#edit-profile').hide();
             $('#edit-profile-toggle').click(function() {
-                $('#edit-profile').slideToggle();
+                $('#edit-profile').toggle();
                 $('#edit-profile').autoscroll();
                 return false;
             });
