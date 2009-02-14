@@ -1,36 +1,23 @@
 {% extends "blog/base.html" %}
 
 {% load i18n %}
+{% load uni_form %}
 
 {% block head_title %}{% blocktrans %}Write a Blog Post{% endblocktrans %}{% endblock %}
 
 {% block body %}
-
-    <div id="basic-form">
-        <fieldset>
-            <legend>{% trans "Write a Blog Post" %}</legend>
-
-            <form method="POST" action="" id="blog_form">
-                <table align="center">
-                    <tr><td colspan="2">{{ blog_form.non_field_errors }}</td></tr>
-                    {% for field in blog_form %}
-                        {% if field.errors %}<tr><td></td><td>{{ field.errors }}</td></tr>{% endif %}
-                        {% ifequal field.name "tease" %}<tr style="display: none;" id="teaser">{% else %}<tr>{% endifequal %}
-                            <td width="150px" valign="top">{{ field.label_tag }}
-                                    {% ifequal field.name "body" %}
-                                    <a href="#" onclick="$('#teaser').toggle(); return false;">{% trans "Teaser" %}</a>
-                                    {% endifequal %}
-                            </td>
-                            <td>{{ field }}</td></tr>
-                        {% if field.help_text %}<tr><td colspan="2"><span>{{ field.help_text }}</span></td></tr>{% endif %}
-                    {% endfor %}
-                    <tr><td></td><td><input type="hidden" name="action" value="create" /><input type="submit" value="create" class="button"/></td></tr>
-                </table>
-            </form>
-            </legend>
+    
+    {# @@@ not sure how to bring back teaser toggle with uni_form #}
+    <form class="uniForm" id="edit-profile" method="POST" action="">
+        <fieldset class="inlineLabels">
+            {{ blog_form|as_uni_form }}
+            <div class="form_block">
+            <input type="hidden" name="action" value="create" />
+            <input type="submit" value="{% trans "create" %}"/>
+            </div>
         </fieldset>
-    </div>
-
+    </form>
+    
 {% endblock %}
 
 {% block extra_body %}
