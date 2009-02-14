@@ -14,6 +14,8 @@ from django.utils.http import http_date
 from django.views.static import was_modified_since, directory_index
 from django.conf import settings
 
+SITE_MEDIA_ROOT = getattr(settings, 'MEDIA_ROOT',
+    os.path.join(settings.PROJECT_ROOT, 'site_media'))
 PINAX_MEDIA_ROOT = os.path.join(settings.PINAX_ROOT, 'media', settings.PINAX_THEME)
 PROJECT_MEDIA_ROOT = os.path.join(settings.PROJECT_ROOT, 'media')
 PINAX_APP_MEDIA_DIRS = ('media', 'static', 'site_media')
@@ -32,7 +34,7 @@ def get_media_path(path):
     """
     app_labels = settings.INSTALLED_APPS
     short_app_labels = [label.split('.')[-1] for label in app_labels]
-    for location in (PROJECT_MEDIA_ROOT, PINAX_MEDIA_ROOT):
+    for location in (SITE_MEDIA_ROOT, PROJECT_MEDIA_ROOT, PINAX_MEDIA_ROOT):
         media = os.path.join(location, path)
         if os.path.exists(media):
             return media
