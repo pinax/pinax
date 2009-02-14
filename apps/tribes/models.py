@@ -9,7 +9,6 @@ from django.contrib.auth.models import User
 from tagging.fields import TagField
 from photos.models import Pool
 
-
 if "notification" in settings.INSTALLED_APPS:
     from notification import models as notification
 else:
