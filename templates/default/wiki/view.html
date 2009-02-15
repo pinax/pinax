@@ -44,6 +44,7 @@
 
     {% show_tags_for article %}
 
+    {# @@@ this should be done via inclusion tag provided by notification #}
     {% if article.id and can_observe %}
         {% if is_observing %}
             <form action="{% wikiurl stop_observing group article %}" method="post">
