@@ -8,7 +8,7 @@
     {% if user.is_authenticated %}
         <ul>
             <li><a href="{% url profile_detail user.username %} ">{% trans "Your Profile" %}</a></li>
-            <li><a href="{% url profiles.views.profiles %} ">{% trans "All Profiles" %}</a></li>
+            <li><a href="{% url profile_list %} ">{% trans "All Profiles" %}</a></li>
         </ul>
     {% else %}
         &nbsp;

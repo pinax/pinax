@@ -39,8 +39,8 @@
                 <td class="tab rtab_profile"><div><a href="{% url profile_detail user %}">{% trans "Profile" %}</a></div></td>
                 <td class="tab rtab_tasks"><div><a href="{% url task_list %}">{% trans "Tasks" %}</a></div></td>
                 <td class="tab rtab_wiki"><div><a href="{% url wiki_index %}">{% trans "Wiki" %}</a></div></td>
-                <td class="tab rtab_bookmarks"><div><a href="{% url bookmarks.views.bookmarks %}">{% trans "Bookmarks" %}</a></div></td>
-                <td class="tab rtab_notices"><div><a href="{% url notification.views.notices %}">{% trans "Notices" %}{% if notice_unseen_count %} ({{ notice_unseen_count }}){% endif %}</a></div></td>
+                <td class="tab rtab_bookmarks"><div><a href="{% url all_bookmarks %}">{% trans "Bookmarks" %}</a></div></td>
+                <td class="tab rtab_notices"><div><a href="{% url notification_notices %}">{% trans "Notices" %}{% if notice_unseen_count %} ({{ notice_unseen_count }}){% endif %}</a></div></td>
             </tr>
         </table>
     {% endif %}

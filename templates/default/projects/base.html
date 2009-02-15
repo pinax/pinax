@@ -7,7 +7,7 @@
 {% block subnav %}
     {% if user.is_authenticated %}
         <ul>
-            <li><a href="{% url projects.views.user_tasks user.username %}">{% trans "Your Tasks" %}</a></li>
+            <li><a href="{% url project_user_tasks user.username %}">{% trans "Your Tasks" %}</a></li>
             <li><a href="{% url your_projects %} ">{% trans "Your Projects" %}</a></li>
             <li><a href="{% url project_list %}">{% trans "All Projects" %}</a></li>
         </ul>

@@ -66,8 +66,8 @@ logged in:
             <table>
                 <tr>
                     <td class="tab rtab_profile"><div><a href="{% url profile_detail user %}">Profile</a></div></td>
-                    <td class="tab rtab_blogs"><div><a href="{% url blog.views.blogs %}">Blogs</a></div></td>
-                    <td class="tab rtab_bookmarks"><div><a href="{% url bookmarks.views.bookmarks %}">Bookmarks</a></div></td>
+                    <td class="tab rtab_blogs"><div><a href="{% url blog_list_user %}">Blogs</a></div></td>
+                    <td class="tab rtab_bookmarks"><div><a href="{% url all_bookmarks %}">Bookmarks</a></div></td>
                 </tr>
             </table>
         {% endif %}

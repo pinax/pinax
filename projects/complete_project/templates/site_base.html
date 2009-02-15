@@ -45,13 +45,13 @@
         <table>
             <tr>
                 <td class="tab rtab_profile"><div><a href="{% url profile_detail user %}">{% trans "Profile" %}</a></div></td>
-                <td class="tab rtab_photos"><div><a href="{% url photos.views.photos %}">{% trans "Photos" %}</a></div></td>
-                <td class="tab rtab_blogs"><div><a href="{% url blog.views.blogs %}">{% trans "Blogs" %}</a></div></td>
+                <td class="tab rtab_photos"><div><a href="{% url photos %}">{% trans "Photos" %}</a></div></td>
+                <td class="tab rtab_blogs"><div><a href="{% url blog_list_user %}">{% trans "Blogs" %}</a></div></td>
                 <td class="tab rtab_projects"><div><a href="{% url project_list %}">{% trans "Projects" %}</a></div></td>
                 <td class="tab rtab_tribes"><div><a href="{% url tribe_list %}">{% trans "Tribes" %}</a></div></td>
                 <td class="tab rtab_tweets"><div><a href="{% url tweets_you_follow %}">{% trans "Tweets" %}</a></div></td>
-                <td class="tab rtab_bookmarks"><div><a href="{% url bookmarks.views.bookmarks %}">{% trans "Bookmarks" %}</a></div></td>
-                <td class="tab rtab_swaps"><div><a href="{% url swaps.views.offers %}">{% trans "Swaps" %}</a></div></td>
+                <td class="tab rtab_bookmarks"><div><a href="{% url all_bookmarks %}">{% trans "Bookmarks" %}</a></div></td>
+                <td class="tab rtab_swaps"><div><a href="{% url offer_list_all %}">{% trans "Swaps" %}</a></div></td>
                 <td class="tab rtab_locations"><div><a href="{% url loc_yours %}">{% trans "Locations" %}</a></div></td>
                 <td class="tab rtab_inbox"><div><a href="{% url messages_inbox %}">{% trans "Inbox" %} ({{ combined_inbox_count }})</a></div></td>
             </tr>

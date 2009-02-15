@@ -6,7 +6,7 @@
         <h2>{% trans "Your Tribes" %}</h2>
         {% if other_user.tribe_set.all %}
             {% for tribe in other_user.tribe_set.all %}
-                <a href="{% url tribes.views.tribe tribe.slug %}">{{ tribe.name }}</a>
+                <a href="{% url tribe_detail tribe.slug %}">{{ tribe.name }}</a>
             {% endfor %}
         {% else %}
             {% url tribe_thing_list "" as tribe_url %}
@@ -38,7 +38,7 @@
         <h2>{% blocktrans %}{{ other_user }}'s Tribes{% endblocktrans %}</h2>
         {% if other_user.tribe_set.all %}
             {% for tribe in other_user.tribe_set.all %}
-                <a href="{% url tribes.views.tribe tribe.slug %}">{{ tribe.name }}</a>
+                <a href="{% url tribe_detail tribe.slug %}">{{ tribe.name }}</a>
             {% endfor %}
         {% else %}
             <p>{% blocktrans %}Not yet a member of any tribes.{% endblocktrans %}</p>

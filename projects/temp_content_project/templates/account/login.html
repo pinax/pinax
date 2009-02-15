@@ -13,7 +13,7 @@
         {% if user.is_authenticated %}
             <p><span class="warning">{% trans "Note" %}</span>: {% blocktrans %}you are already logged in as {{ user }}.{% endblocktrans %}</p>
         {% else %}
-            {% url account.views.signup as signup_url %}
+            {% url acct_signup as signup_url %}
             <p>{% blocktrans %}Don't have an account? <a href="{{ signup_url }}">Sign up</a>!{% endblocktrans %}</p>
         {% endif %}
         
@@ -27,7 +27,7 @@
                 {% endfor %}
                 <tr><td></td><td><input type="submit" value="{% trans "Log in &raquo;" %}" class="button" /></td></tr>
             </table>
-            <a href="{% url account.views.password_reset %}">{% trans "Forgot password?" %}</a>
+            <a href="{% url acct_passwd_reset %}">{% trans "Forgot password?" %}</a>
         </form>
         </fieldset>
     </div>

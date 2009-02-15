@@ -21,7 +21,7 @@
         <table>
             <tr>
                 <td class="tab rtab_profile"><div><a href="{% url profile_detail user %}">{% trans "Profile" %}</a></div></td>
-                <td class="tab rtab_notices"><div><a href="{% url notification.views.notices %}">{% trans "Notices" %}{% if notice_unseen_count %} ({{ notice_unseen_count }}){% endif %}</a></div></td>
+                <td class="tab rtab_notices"><div><a href="{% url notification_notices %}">{% trans "Notices" %}{% if notice_unseen_count %} ({{ notice_unseen_count }}){% endif %}</a></div></td>
             </tr>
         </table>
     {% endif %}

@@ -11,7 +11,7 @@
     {% if user.is_authenticated %}
         <p><span class="warning">{% trans "Note" %}</span>: {% blocktrans %}you are already logged in as {{ user }}.{% endblocktrans %}</p>
     {% else %}
-        {% url account.views.signup as signup_url %}
+        {% url acct_signup as signup_url %}
         <p>{% blocktrans %}Don't have an account? <a href="{{ signup_url }}">Sign up</a>!{% endblocktrans %}</p>
     {% endif %}
     
@@ -29,6 +29,7 @@
     
     {% if not openid %}
         <p>{% trans "Or sign in with your OpenID" %}:</p>
+        {# @@@ why isn't this just does as a form object ? #}
         <form class="login uniForm" action="/openid/register/" method="POST">
             <fieldset class="inlineLabels">
                 <div class="ctrlHolder">

@@ -36,7 +36,7 @@
                             {% if bookmark|in_list:user_bookmarks %}
                                 (including by you)
                             {% else %}
-                                (<a href="{% url bookmarks.views.add %}?url={{ bookmark.url }};description={{ bookmark.description }}">save</a>)
+                                (<a href="{% url add_bookmark %}?url={{ bookmark.url }};description={{ bookmark.description }}">save</a>)
                             {% endif %}
                         </div>
                         <div class="tags">{% show_tag_counts bookmark.all_tags_with_counts %}</div>

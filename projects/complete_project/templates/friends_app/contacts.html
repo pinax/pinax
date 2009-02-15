@@ -33,7 +33,7 @@
     {% else %}
         <p>
             This will be a two step process. First you must
-            <a href="{% url authsub.views.login %}">authenticate with Google</a>.
+            <a href="{% url authsub_login %}">authenticate with Google</a>.
             Once you have agreed to let Pinax have access to your Google Contacts, you will be taken back here and
             an "Import Google Contacts" button will appear here.
         </p>
@@ -49,7 +49,7 @@
     {% else %}
         <p>
             This will be a two step process. First you must
-            <a href="{% url bbauth.views.login %}">authenticate with Yahoo</a>.
+            <a href="{% url bbauth_login %}">authenticate with Yahoo</a>.
             Once you have agreed to let Pinax have access to your Yahoo Address Book, you will be taken back here and
             an "Import Yahoo Address Book" button will appear here.
         </p>
