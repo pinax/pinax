@@ -84,19 +84,15 @@
                             <p>{% trans "Friendship request sent." %}</p>
                         {% else %}
                             <h2>{% trans "Add As Friend" %}</h2>
-                            {# @@@ make uni-form #}
-                            <form method="POST" action="">
-                                <table>
-                                    {{ invite_form.as_table }}
-                                    <tr>
-                                        <td></td>
-                                        <td>
-                                            <input type="hidden" name="action" value="invite" />
-                                            <input type="submit" value="{% trans "invite" %}"/>
-                                            {% blocktrans %}{{ other_user }} to be a friend.{%  endblocktrans %}
-                                        </td>
-                                    </tr>
-                                </table>
+                            <form class="uniForm" method="POST" action="">
+                                <fieldset class="inlineLabels">  
+                                    {{ invite_form|as_uni_form }}
+                                    <div class="form_block">
+                                        <input type="hidden" name="action" value="invite" />
+                                        <input type="submit" value="{% trans "invite" %}"/>
+                                        {% blocktrans %}{{ other_user }} to be a friend.{%  endblocktrans %}
+                                    </div>
+                                </fieldset>
                             </form>
                         {% endif %} {# previous_invitations_to #}
                     {% endif %} {# previous_invitations_from #}
