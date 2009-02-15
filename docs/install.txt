@@ -1,74 +1,116 @@
 Installation
 ============
 
-Pinax has not yet had its first formal release so the code is only available
-via Subversion::
+The sample projects in Pinax depend on a lot of external apps and libraries. 
+Since we `moved to distutils/setuptools`_ we are able to manage those 
+dependecies by using useful tools `virtualenv`_ and `pip`_.
 
-    svn checkout http://svn.pinaxproject.com/pinax/trunk/ pinax
+One exciting feature of pip for example is the ability to install Python 
+packages like the external apps directly from various version control systems.
+The development version of Pinax relies on some apps that are hosted that way.
+So please make sure you have the latest versions installed of: Subversion_,
+Git_, Mercurial_ and Bazaar_.
 
-Pinax takes a batteries-included approach so that checkout (which includes
-a lot of svn:externals for third-party apps and libraries used) will almost
-work out of the box. The one exception is the `Python Imaging Library`_ (PIL)
+To make it easier to start with developing your own Pinax based project we 
+provide a `virtualenv bootstrap script`_. It creates a virtualenv with the 
+necessary Pinax Subversion checkout and installs pip_ and Django_ inside the
+environment. This allows you to keep your whole project inside one directory
+and doesn't spoil the global site-packages directory with all the dependencies. 
+
+First download the virtualenv bootstrap script::
+
+    curl -o pinax-boot.py http://svn.pinaxproject.com/pinax/trunk/bin/pinax-boot.py
+
+or open ``http://svn.pinaxproject.com/pinax/trunk/bin/pinax-boot.py`` in your
+browser and save it on your hard disk.
+
+Then run the script, e.g. to create a environment called ``pinax-env``::
+
+    python pinax-boot.py pinax-env
+
+After that you need to `activate the new environment`_ so your shell session
+knows which Python interpreter and site-packages directory to use. If you use
+bash you can simply run this in the environment root directory::
+
+    source bin/activate
+
+You are now able to install the required external apps and libraries by using
+pip::
+
+    pip install --requirement src/pinax/requirements/external_apps.txt
+
+We will however provide `requirements files`_ for each sample project soon so
+you don't have to install the apps and libraries used in all Pinax sample
+projects.
+
+In case you want to update the development version of Pinax you have to update
+both Pinax and the apps separately. The Pinax code is updated by running in
+the ``src/pinax`` directory::
+
+    svn update
+
+To update the apps and libraries run again inside the environment root
+directory::
+
+    pip install --requirement src/pinax/requirements/external_apps.txt
+
+The one exception is the `Python Imaging Library`_ (PIL)
 which you will have to provide yourself if you want photo support.
 
 .. note::
     
-    We link up external apps using svn:externals and most of them are hosted
-    with Google Code. It is common to see::
+    Some of the external apps are still link hosted with Google Code. It is
+    common to see::
     
         Fetching external item into 'apps/external_apps/django_extensions'
         svn: PROPFIND request failed on '/svn/trunk/django_extensions'
         svn: PROPFIND of '/svn/trunk/django_extensions': 502 Bad Gateway (http://django-command-extensions.googlecode.com)
     
-    You should be able to ignore it and try the checkout or update again.
+    You should be able to ignore it and try the installation, checkout or
+    update again.
 
-Note that if you already have an external app or external library on the path,
-you don't need to use the one we provide.
+Note that if you want to use another external app or external library,
+you don't need to use the `requirement file we provide`_. Don't hesitate to write
+your own or install it directly with pip inside your environment.
 
-Once the checkout is complete, you should be able to cd into
+Once the installation is complete, you should be able to cd into
 ``projects/complete_project/`` or ``projects/basic_project/`` and run 
 ``./manage.py syncdb`` and ``./manage.py runserver`` to get running immediately.
 
 These are just sample projects, however. You will likely want to create your
 own project and :ref:`customize <ref-customization>` it.
 
+.. _`moved to distutils/setuptools`: http://code.google.com/p/django-hotclub/wiki/MovingToDistutils
+.. _virtualenv: http://pypi.python.org/pypi/virtualenv
+.. _pip: http://pypi.python.org/pypi/pip
+.. _activate the new environment: http://pypi.python.org/pypi/virtualenv#activate-script
+.. _virtualenv bootstrap script: http://pypi.python.org/pypi/virtualenv#creating-your-own-bootstrap-scripts
+.. _Subversion: http://subversion.tigris.org/
+.. _Git: http://git-scm.com/
+.. _Mercurial: http://www.selenic.com/mercurial/
+.. _Bazaar: http://bazaar-vcs.org/
+.. _requirements files: http://pip.openplans.org/requirement-format.html
+.. _requirement file we provide: http://svn.pinaxproject.com/pinax/trunk/requirements/external_apps.txt
+.. _Django: http://www.djangoproject.com/
 
 Directory Structure
 -------------------
 
-::
-
-  projects/
-    complete_project/   contains a complete sample project and templates
-    basic_project/      a more basic starter project
-  apps/                 contains re-usable apps that aren't yet externalized
-  libs/
-    external_libs/      contains external libraries
-  docs/                 documentation (using rst and sphinx; in progress)
-  fixtures/             test fixtures (in progress)
-
+=======================   ====================================================
+Directory                 Content
+=======================   ====================================================
+``apps/``                 contains re-usable apps that aren't yet externalized
+``docs/``                 documentation (using rst and sphinx; in progress)
+``fixtures/``             test fixtures (in progress)
+``libs/``                 contains local libraries
+``media/``                common media files
+``projects/``             contains a sample projects
+``requirements/``         pip requirement files (in progress)
+``templates/``            common templates
+=======================   ====================================================
 
 There is some path manipulation in manage.py to get this all to work. You'll
 need to do something similar in your wsgi or mod_python configuration. See
 :ref:`ref-deployment` for more details.
 
-Note To Windows Users
----------------------
-
-You have to make one small change for Pinax to work on Windows due to the
-lack of symbolic links.
-
-Go to the ``libs/external_libs/gdata.py-1.0.13`` directory and move
-``src/atom`` to ``atom`` and ``src/gdata`` to ``gdata`` (i.e. move
-them both up one folder)
-
-See also
---------
-
-- `Pinax Setup and Deployment`_ by Greg Newman
-- `Getting Started With Pinax`_ by Eric Holscher
-
-
 .. _`Python Imaging Library`: http://www.pythonware.com/products/pil/
-.. _`Pinax Setup and Deployment`: http://www.20seven.org/journal/2008/09/pinax-setup-and-deploy.html
-.. _`Getting Started With Pinax`: http://ericholscher.com/blog/2008/sep/18/getting-started-pinax/
