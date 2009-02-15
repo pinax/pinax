@@ -20,15 +20,13 @@
         <h2>{{ post.title }}</h2>
         <div class="blog-meta"><p>Posted by: <a href="{% url profiles.views.profile post.author.username %}">{{ post.author.username }}</a> on {{ post.publish|date }}</p></div>
         <div class="blog-tags">
-            <p><img src="{{ MEDIA_URL }}pinax/images/silk/icons/comment.png" border="0" class="noborder" align="absmiddle" />
+            <p><img src="{{ MEDIA_URL }}pinax/images/silk/icons/tag_blue.png" border="0" class="noborder" align="absmiddle" />
             {% tags_for_object post as tags %}
             {% for tag in tags %}
                 <a href="/tags/{{ tag }}">{{ tag }}</a>
             {% endfor %}</p>
             {% ifequal post.author request.user %}
-                <form action="{% url blog_edit post.id %}" method="GET">
-                        <input type="submit" value="{% trans "Edit Post" %}" />
-                </form>
+                <a href="{% url blog_edit post.id %}">Edit Post</a>
             {% endifequal %}
         </div>
         
