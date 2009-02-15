@@ -1,17 +1,21 @@
 {% extends "swaps/base.html" %}
 
 {% load i18n %}
+{% load uni_form %}
 
 {% block head_title %}{% blocktrans %}Add a new Offer{% endblocktrans %}{% endblock %}
 
 {% block body %}
     <h1>{% trans "Add a new Offer" %}</h1>
     
-    <form id="offer_form" method="POST" action="">
-        <table>
-            {{ offer_form }}
-            <tr><td></td><td><input type="hidden" name="action" value="create" /><input type="submit" value="create"/></td></tr>
-        </table>
+    <form class="uniForm" id="offer_form" method="POST" action="">
+        <fieldset class="inlineLabels">
+            {{ offer_form|as_uni_form }}
+            <div class="form_block">
+                <input type="hidden" name="action" value="create" />
+                <input type="submit" value="{% trans "create" %}"/>
+            </div>
+        </fieldset>
     </form>
-
+    
 {% endblock %}

@@ -1,11 +1,7 @@
 {% extends "swaps/base.html" %}
 
 {% load i18n %}
-{% load wiki %}
-{% load markup %}
-{% load switchcase %}
-{% load tagging_tags %}
-{% load restructuredtext %}
+{% load uni_form %}
 
 {% block head_title %}{% blocktrans %}Editing Offer{% endblocktrans %}{% endblock %}
 
@@ -14,11 +10,14 @@
     
     {% ifequal offer.offerer request.user %}
         <div>
-            <form id="offer_form" method="POST" action="">
-                <table>
-                    {{ offer_form }}
-                    <tr><td></td><td><input type="hidden" name="action" value="update" /><input type="submit" value="{% trans "update" %}"/></td></tr>
-                </table>
+            <form class="uniForm" id="offer_form" method="POST" action="">
+                <fieldset class="inlineLabels">
+                    {{ offer_form|as_uni_form }}
+                    <div class="form_block">
+                        <input type="hidden" name="action" value="update" />
+                        <input type="submit" value="{% trans "update" %}"/>
+                    </div>
+                </fieldset>
             </form>
         </div>
     {% else %}
