@@ -993,9 +993,16 @@ def after_install(options, home_dir):
                         show_stdout=False)
     finally:
         logger.indent -= 2
-    logger.notify('Run "%s install --requirement %s" to install the external apps and libraries used in all Pinax projects.'
-                  % (join(home_dir, 'bin', 'pip'),
-                     join(pinax_dir, 'requirements', 'external_apps.txt')))
+    logger.notify('Now activate the newly created virtualenv by running: ')
+    logger.indent += 2
+    logger.notify('source %s (Linux/Unix/Mac OS) or activate.bat in the bin directory (Windows)'
+                  % join(home_dir, 'bin', 'activate'))
+    logger.indent -= 2
+    logger.notify('Then install the external apps and libraries used in all Pinax projects by running: ')
+    logger.indent += 2
+    logger.notify('pip install --requirement %s'
+                  % join(pinax_dir, 'requirements', 'external_apps.txt'))
+    logger.indent -= 2
 
 def fs_ensure_dir(dir):
     if not os.path.exists(dir):
