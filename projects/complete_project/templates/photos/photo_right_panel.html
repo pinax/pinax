@@ -6,7 +6,7 @@
     <div class="photo-avatar">{% avatar photo.member.username 50 %}</div>
     <div class="photo-profile-details">
         <h2>Taken By</h2>
-        <a href="{% url profiles.views.profile photo.member.username %}" title="{{ photo.member.username }}">{{ photo.member.username }}</a><br />
+        <a href="{% url profile_detail photo.member.username %}" title="{{ photo.member.username }}">{{ photo.member.username }}</a><br />
         {{ photo.date_taken|date }}<br />
         Viewed {{ photo.view_count }} times
     

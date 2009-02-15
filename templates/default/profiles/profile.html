@@ -70,7 +70,7 @@
                         <p>{% blocktrans %}{{ other_user }} has requested friendship.{% endblocktrans %}</p>
                         {% for invitation in previous_invitations_from %}
                             <div class="friendship_request">
-                                <p>From <a href="{% url profiles.views.profile invitation.from_user.username %}">{{ invitation.from_user }}</a> ({{ invitation.sent }}):</p>
+                                <p>From <a href="{% url profile_detail invitation.from_user.username %}">{{ invitation.from_user }}</a> ({{ invitation.sent }}):</p>
                                 <p class="invitation_message">{{ invitation.message }}</p>
                                 <form method="post" action="">
                                     <input type="hidden" name="invitation" value="{{ invitation.id }}"/>

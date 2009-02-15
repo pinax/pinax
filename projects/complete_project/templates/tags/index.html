@@ -25,7 +25,7 @@
         {% for photo in phototags %}
                 <div class="gallery-photo-thumb">
                     <a href="/photos/details/{{ photo.id }}/"><img src="{{ photo.get_thumbnail_url }}" alt="{{ photo.title }}"/></a><br />
-                    from <a href="{% url profiles.views.profile photo.member.username %}">{{ photo.member.username }}</a><br />
+                    from <a href="{% url profile_detail photo.member.username %}">{{ photo.member.username }}</a><br />
                     <img src="{{ MEDIA_URL }}pinax/images/silk/icons/comment.png" border="0" class="noborder" align="absmiddle" /><a href="/photos/details/{{ photo.id }}/">{% get_comment_count for photo as commentcount %} {{ commentcount }} Comments</a>
                     <br />
                     Viewed {{ photo.view_count }} Times
@@ -45,7 +45,7 @@
                 <tr class="{% cycle odd,even %}">
                     <td class="meta">
                         <div class="avatar">{% avatar bookmark.bookmark.adder 40 %}</div>
-                        <div class="details"><a href="{% url profiles.views.profile bookmark.bookmark.adder.username %}">{{ bookmark.bookmark.adder }}</a></div>
+                        <div class="details"><a href="{% url profile_detail bookmark.bookmark.adder.username %}">{{ bookmark.bookmark.adder }}</a></div>
                         {{ bookmark.bookmark.added|date }}
                     </td>
                     

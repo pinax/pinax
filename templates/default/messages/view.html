@@ -9,7 +9,7 @@
     
     <dl class="message-headers">
         <dt>{% trans "Sender" %}:</dt>
-        <dd><a href="{% url profiles.views.profile message.sender %}">{{ message.sender }}</a></dd>
+        <dd><a href="{% url profile_detail message.sender %}">{{ message.sender }}</a></dd>
         <dt>{% trans "Subject" %}:</dt>
         <dd><strong>{{ message.subject }}</strong></dd>
         <dt>{% trans "Date" %}:</dt>

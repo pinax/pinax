@@ -55,7 +55,7 @@
                     <td class="meta">
                         <div class="avatar">{% avatar bookmark.adder 40 %}</div>
                         <div class="date">{{ bookmark.added|date }}</div>
-                        <div class="details"><a href="{% url profiles.views.profile bookmark.adder.username %}">{{ bookmark.adder }}</a></div>
+                        <div class="details"><a href="{% url profile_detail bookmark.adder.username %}">{{ bookmark.adder }}</a></div>
                     </td>
                     <td class="vote">
                         {% dict_entry_for_item bookmark from vote_dict as vote %}

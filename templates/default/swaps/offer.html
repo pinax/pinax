@@ -14,7 +14,7 @@
         <h2>{{ offer.short_description }}</h2>
         <div class="blog-meta">
             <p>
-                Offered by: <a href="{% url profiles.views.profile offer.offerer.username %}">{{ offer.offerer.username }}</a>
+                Offered by: <a href="{% url profile_detail offer.offerer.username %}">{{ offer.offerer.username }}</a>
                 on {{ offer.offered_time|date }}
             </p>
         </div>

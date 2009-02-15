@@ -32,7 +32,7 @@
                             {% if change.is_anonymous_change %}
                                 {{ change.editor_ip }}
                             {% else %}
-                                <a href="{% url profiles.views.profile change.editor.username %}">{{ change.editor }}</a>
+                                <a href="{% url profile_detail change.editor.username %}">{{ change.editor }}</a>
                             {% endif %}
                         </td>
                         <td>

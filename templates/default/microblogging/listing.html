@@ -7,7 +7,7 @@
 {% if tweets %}
     {% for tweet in tweets %}
         <div class="tweet" id="t{{ tweet.id }}">
-            {% if prefix_sender %}<a href="{% url profiles.views.profile tweet.sender %}"><b>{{ tweet.sender }}</b></a>{% endif %}
+            {% if prefix_sender %}<a href="{% url profile_detail tweet.sender %}"><b>{{ tweet.sender }}</b></a>{% endif %}
             {{ tweet.html|safe|oembed|urlize }}
             <span class="timesince">{% blocktrans with tweet.sent|timesince as tweet_age %}{{ tweet_age }} ago{% endblocktrans %}</span>
             <a class="reply" href="{% url tweets_you_follow %}?reply={{ tweet.sender }}">{% trans "reply" %}</a>

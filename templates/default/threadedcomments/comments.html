@@ -12,7 +12,7 @@
         <li class="{% cycle even,odd %} thread-{{ response.depth }} clearfix">
             <div class="meta">
                 <div class="avatar">{% avatar response.user 40 %}</div>
-                <div class="details"><a href="{% url profiles.views.profile response.user.username %}">{{ response.user     }}</a></div>
+                <div class="details"><a href="{% url profile_detail response.user.username %}">{{ response.user     }}</a></div>
                 {{ response.date_submitted|date }}
             </div>
             <div class="bulk">

@@ -72,7 +72,7 @@
                     <td class="meta">
                         {% avatar offer.offerer 40 %}
                         <p>
-                            <b>Offered by:</b><br /><a href="{% url profiles.views.profile offer.offerer.username %}">{{ offer.offerer.username }}</a>
+                            <b>Offered by:</b><br /><a href="{% url profile_detail offer.offerer.username %}">{{ offer.offerer.username }}</a>
                             on {{ offer.offered_time|date }}
                         </p>
                         {# @@@ I've seen this multiple places -- should be inclusion tag #}

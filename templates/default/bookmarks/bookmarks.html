@@ -56,7 +56,7 @@
                 <tr class="{% cycle odd,even %}">
                     <td class="meta">
                         <div class="avatar">{% avatar bookmark.adder 40 %}</div>
-                        <div class="details"><a href="{% url profiles.views.profile bookmark.adder.username %}">{{ bookmark.adder }}</a></div>
+                        <div class="details"><a href="{% url profile_detail bookmark.adder.username %}">{{ bookmark.adder }}</a></div>
                         {{ bookmark.added|date }}
                     </td>
                     <td class="vote">

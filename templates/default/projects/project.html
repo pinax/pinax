@@ -25,7 +25,7 @@
                         {% if forloop.counter0|divisibleby:"3" %}<tr>{% endif %}
                         <td class="{% if member.away %}away{% else %}active{% endif %}-member">
                             <div class="avatar">{% avatar member.user 40 %}</div>
-                            <div class="details"><a href="{% url profiles.views.profile member.user.username %}" title="{{ member.user.username }}">{{ member.user.username }}</a></div>
+                            <div class="details"><a href="{% url profile_detail member.user.username %}" title="{{ member.user.username }}">{{ member.user.username }}</a></div>
                         </td>
                         {% if forloop.counter0|add:"1"|divisibleby:"3" %}</tr>{% endif %}
                     {% endfor %}
@@ -42,7 +42,7 @@
         
         <p>
             Slug: <tt>{{ project.slug }}</tt><br />
-            Creator: <a href="{% url profiles.views.profile project.creator.username %}">{{ project.creator }}</a><br />
+            Creator: <a href="{% url profile_detail project.creator.username %}">{{ project.creator }}</a><br />
             Created: {{ project.created|date }}
             <br />
             {% show_tags_for project %}
@@ -94,7 +94,7 @@
                         <p>You are member of this project.</p>
                     {% endifequal %}
                 {% else %}
-                    <p>It is up to the creator of this project (<a href="{% url profiles.views.profile project.creator.username %}">{{ project.creator }}</a>) to add you.</p>
+                    <p>It is up to the creator of this project (<a href="{% url profile_detail project.creator.username %}">{{ project.creator }}</a>) to add you.</p>
                 {% endif %}
             </div>
         {% endif %}

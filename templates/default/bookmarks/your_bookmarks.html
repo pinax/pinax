@@ -19,7 +19,7 @@
                     <td class="meta">
                         <div class="avatar">{% avatar bookmark_instance.bookmark.adder 40 %}</div>
                         <div class="date">{{ bookmark_instance.bookmark.added|date }}</div>
-                        <div class="details"><a href="{% url profiles.views.profile bookmark_instance.bookmark.adder.username %}">{{ bookmark_instance.bookmark.adder }}</a></div>
+                        <div class="details"><a href="{% url profile_detail bookmark_instance.bookmark.adder.username %}">{{ bookmark_instance.bookmark.adder }}</a></div>
                     </td>
                     <td>
                         <h2><a href="{{ bookmark_instance.bookmark.url }}">{{ bookmark_instance.description }}</a></h2>
