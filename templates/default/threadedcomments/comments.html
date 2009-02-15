@@ -1,9 +1,12 @@
 {% load threadedcommentstags %}
 {% load i18n %}
+{% load uni_form %}
 {% load pagination_tags %}
 {% load avatar_tags %}
+
 {% get_threaded_comment_tree for object as responses %}
 {% autopaginate responses %}
+
 <ul class="responses">
     {% for response in responses %}
         <li class="{% cycle even,odd %} thread-{{ response.depth }} clearfix">
@@ -30,7 +33,9 @@
         </li>
     {% endfor %}
 </ul>
+
 {% paginate %}
+
 {% if user.is_authenticated %}
     <form class="uniForm" method="POST" action="{% get_comment_url object %}">
         <fieldset class="inlineLabels">
