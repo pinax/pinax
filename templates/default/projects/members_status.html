@@ -2,6 +2,7 @@
 
 {% load shorttimesince_tag %}
 {% load i18n %}
+{% load uni_form %}
 
 {% block head_title %}{{ project.name }} Members' Status{% endblock %}
 
@@ -11,22 +12,28 @@
         {% if not project_member.away %}
             <h2>{% trans 'Set Away' %}</h2>
             
-            <form action="{% url project_members_status project.slug %}" method="POST">
-                <table>
-                    {{ away_form }}
-                    <tr><td></td><td><input type="hidden" name="action" value="set_away" /><input type="submit" value="{% trans 'set away' %}"/></td></tr>
-                </table>
+            <form class="uniForm" method="POST" action="{% url project_members_status project.slug %}">
+                <fieldset class="inlineLabels">
+                    {{ away_form|as_uni_form }}
+                    <div class="form_block">
+                        <input type="hidden" name="action" value="set_away" />
+                        <input type="submit" value="{% trans 'set away' %}"/>
+                    </div>
+                </fieldset>
             </form>
         {% else %}
             <h2>{% trans 'Set Back' %}</h2>
-            <form action="{% url project_members_status project.slug %}" method="POST">
-                <table>
-                    <tr><td></td><td><input type="hidden" name="action" value="set_back" /><input type="submit" value="{% trans 'set back' %}"/></td></tr>
-                </table>
+            <form class="uniForm" method="POST" action="{% url project_members_status project.slug %}">
+                <fieldset class="inlineLabels">
+                    <div class="form_block">
+                        <input type="hidden" name="action" value="set_back" />
+                        <input type="submit" value="{% trans 'set back' %}"/>
+                    </div>
+                </fieldset>
             </form>
         {% endif %}
     {% endif %}
-
+    
     {% if away_members %}
         <h2>Away Members</h2>
         <table class="status-table away">
