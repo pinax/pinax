@@ -17,7 +17,7 @@
     {% if user.is_authenticated %}
         <div class="form-toggle">
             <p><span id="start-tribe-toggle">{% trans "Start your own tribe" %}</a></p>
-            <form class="uniForm" id="start-tribe" method="POST" action="">
+            <form class="uniForm" id="start-tribe" method="POST" action="{% url tribe_create %}">
                 <fieldset class="inlineLabels">
                     {% get_tribe_form as tribe_form %}
                     {{ tribe_form|as_uni_form }}
