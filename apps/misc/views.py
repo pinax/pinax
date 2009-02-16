@@ -25,12 +25,15 @@ def get_media_path(path):
     Traverses the following locations to find a requested media file in the
     given order and return the absolute file path:
 
-    1. Current project, <project>/media/<app>/<path>
-    2. Pinax, pinax/media/<theme>/<path>
-    3. Installed apps:
+    1. The site media path, e.g. for user-contributed files:
+        <project>/site_media/<path>
+    2. Current project:
+        <project>/media/<app>/<path>
+    3. Pinax' themes:
+        pinax/media/<theme>/<path>
+    4. Installed apps:
         a) <app>/media|static|site_media/<app>/<path>
-        a) <app>/media|static|site_media/<path>
-
+        b) <app>/media|static|site_media/<path>
     """
     app_labels = settings.INSTALLED_APPS
     short_app_labels = [label.split('.')[-1] for label in app_labels]
@@ -94,7 +97,6 @@ def serve(request, path, show_indexes=False):
             return directory_index(newpath, fullpath)
         raise Http404, "Directory indexes are not allowed here."
     # Respect the If-Modified-Since header.
-    print fullpath
     statobj = os.stat(fullpath)
     if not was_modified_since(request.META.get('HTTP_IF_MODIFIED_SINCE'),
                               statobj[stat.ST_MTIME], statobj[stat.ST_SIZE]):
