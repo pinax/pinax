@@ -33,7 +33,7 @@ def signup(request, form_class=SignupForm,
             if not settings.ACCOUNT_OPEN_SIGNUP:
                 # if account signup is not open we want to fail when there is
                 # no sign up code or what was provided failed.
-                return render_to_response("signup_code/failure.html", {
+                return render_to_response("signup_codes/failure.html", {
                     "code": code,
                 }, context_instance=RequestContext(request))
             else:
