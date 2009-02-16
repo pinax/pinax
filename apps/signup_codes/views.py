@@ -1,5 +1,13 @@
 
+from django.conf import settings
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+from django.http import HttpResponseRedirect
+
 from account.forms import SignupForm
+from account.utils import get_default_redirect
+from signup_codes.models import check_signup_code
+
 
 def signup(request, form_class=SignupForm,
         template_name="account/signup.html", success_url=None):
@@ -25,7 +33,7 @@ def signup(request, form_class=SignupForm,
             if not settings.ACCOUNT_OPEN_SIGNUP:
                 # if account signup is not open we want to fail when there is
                 # no sign up code or what was provided failed.
-                return render_to_reponse("signup_code/failure.html", {
+                return render_to_response("signup_code/failure.html", {
                     "code": code,
                 }, context_instance=RequestContext(request))
             else:
