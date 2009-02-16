@@ -1,0 +1,23 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Incorrect Code" %}{% endblock %}
+
+{% block body %}
+    <h1>{% trans "Incorrect Code" %}</h1>
+    
+    {% if code %}
+    <p>{% blocktrans %}The code <b>{{ code }}</b> is incorrect.{% endblocktrans %}</p>
+    {% else %}
+    <p>{% blocktrans %}You must specify a code.{% endblocktrans %}</p>
+    {% endif %}
+    
+    <p>{% trans "try again:" %}</p>
+    
+    <form action="">
+        <input type="text" name="code" />
+        <input type="submit" value="Submit" />
+    </form>
+    
+{% endblock %}
