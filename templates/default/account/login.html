@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load uni_form %}
+{% load ifsetting_tag %}
 
 {% block head_title %}{% trans "Login" %}{% endblock %}
 
@@ -11,8 +12,10 @@
     {% if user.is_authenticated %}
         <p><span class="warning">{% trans "Note" %}</span>: {% blocktrans %}you are already logged in as {{ user }}.{% endblocktrans %}</p>
     {% else %}
+        {% ifsetting ACCOUNT_OPEN_SIGNUP %}
         {% url acct_signup as signup_url %}
         <p>{% blocktrans %}Don't have an account? <a href="{{ signup_url }}">Sign up</a>!{% endblocktrans %}</p>
+        {% endifsetting %}
     {% endif %}
     
     <form class="login uniForm" method="POST" action="">
