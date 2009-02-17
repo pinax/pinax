@@ -1,5 +1,5 @@
 from django.contrib import admin
-from tribes.models import Tribe, Topic
+from temp_tribes.models import Tribe, Topic
 
 class TribeAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug', 'creator', 'created', 'deleted')  

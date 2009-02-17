@@ -1,5 +1,5 @@
 from django.contrib import admin
-from projects.models import Project, Topic, Task
+from temp_projects.models import Project, Topic, Task
 
 class ProjectAdmin(admin.ModelAdmin):
     list_display = ('name', 'creator', 'created', 'private', 'deleted')

@@ -7,7 +7,7 @@ from django.contrib.contenttypes import generic
 from django.contrib.auth.models import User
 
 from tagging.fields import TagField
-from photos.models import Pool
+# @@@ from photos.models import Pool
 
 if "notification" in settings.INSTALLED_APPS:
     from notification import models as notification
@@ -23,7 +23,7 @@ class Tribe(models.Model):
     
     slug = models.SlugField(_('slug'), unique=True)
     name = models.CharField(_('name'), max_length=80, unique=True)
-    creator = models.ForeignKey(User, related_name="created_groups", verbose_name=_('creator'))
+    creator = models.ForeignKey(User, related_name="created_tribes", verbose_name=_('creator'))
     created = models.DateTimeField(_('created'), default=datetime.now)
     description = models.TextField(_('description'))
     members = models.ManyToManyField(User, verbose_name=_('members'))
@@ -32,7 +32,7 @@ class Tribe(models.Model):
     
     tags = TagField()
     
-    photos = generic.GenericRelation(Pool)
+    # @@@ photos = generic.GenericRelation(Pool)
     
     # @@@ this might be better as a filter provided by wikiapp
     def wiki_articles(self):

@@ -10,7 +10,7 @@ if "notification" in settings.INSTALLED_APPS:
 else:
     notification = None
 
-from projects.models import Project, Topic, Task, ProjectMember
+from temp_projects.models import Project, Topic, Task, ProjectMember
 
 # @@@ this is based on Tribes -- can we re-use anything?
 

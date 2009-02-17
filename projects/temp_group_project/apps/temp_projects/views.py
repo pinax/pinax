@@ -6,8 +6,8 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
-from projects.models import Project
-from projects.forms import *
+from temp_projects.models import Project
+from temp_projects.forms import *
 
 if "notification" in settings.INSTALLED_APPS:
     from notification import models as notification
@@ -133,7 +133,7 @@ def project(request, slug, template_name="projects/project.html"):
     if project.deleted:
         raise Http404
     
-    photos = project.photos.all()
+    # @@@ photos = project.photos.all()
     
     if request.user.is_authenticated() and request.method == "POST" and request.user == project.creator:
         if request.POST["action"] == "update":
@@ -172,7 +172,7 @@ def project(request, slug, template_name="projects/project.html"):
         "project_form": project_form,
         "adduser_form": adduser_form,
         "project": project,
-        "photos": photos,
+        # @@@ "photos": photos,
         "topics": topics,
         "articles": articles,
         "total_tasks": total_tasks,

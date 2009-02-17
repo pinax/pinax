@@ -1,5 +1,5 @@
 from django import template
-from tribes.forms import TribeForm
+from temp_tribes.forms import TribeForm
 
 register = template.Library()
 

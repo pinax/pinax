@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-from tribes.models import Tribe, Topic
+from temp_tribes.models import Tribe, Topic
 
 class TribeForm(forms.ModelForm):
     

@@ -125,8 +125,11 @@ INSTALLED_APPS = (
     'basic_profiles',
     'account',
     'misc',
-    'basic_groups',
     'tag_app',
+    
+    'basic_groups',
+    'temp_projects',
+    'temp_tribes',
     
     'about',
     

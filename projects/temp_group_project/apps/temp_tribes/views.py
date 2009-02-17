@@ -31,19 +31,19 @@ try:
 except ImportError:
     wiki = False
 
-from tribes.models import Tribe
-from tribes.forms import *
+from temp_tribes.models import Tribe
+from temp_tribes.forms import *
 from microblogging.models import TweetInstance
 
 TOPIC_COUNT_SQL = """
 SELECT COUNT(*)
-FROM tribes_topic
-WHERE tribes_topic.tribe_id = tribes_tribe.id
+FROM temp_tribes_topic
+WHERE temp_tribes_topic.tribe_id = temp_tribes_tribe.id
 """
 MEMBER_COUNT_SQL = """
 SELECT COUNT(*)
-FROM tribes_tribe_members
-WHERE tribes_tribe_members.tribe_id = tribes_tribe.id
+FROM temp_tribes_tribe_members
+WHERE temp_tribes_tribe_members.tribe_id = temp_tribes_tribe.id
 """
 
 from schedule.models import Calendar, CalendarRelation
@@ -145,7 +145,7 @@ def tribe(request, slug, form_class=TribeUpdateForm,
     if tribe.deleted:
         raise Http404
     
-    photos = tribe.photos.all()
+    # @@@ photos = tribe.photos.all()
     
     if request.user.is_authenticated() and request.method == "POST":
         if request.POST["action"] == "update" and request.user == tribe.creator:
@@ -184,7 +184,7 @@ def tribe(request, slug, form_class=TribeUpdateForm,
     return render_to_response(template_name, {
         "tribe_form": tribe_form,
         "tribe": tribe,
-        "photos": photos,
+        # @@@ "photos": photos,
         "topics": topics,
         "articles": articles,
         "tweets": tweets,
