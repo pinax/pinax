@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Django settings for basic pinax project.
+# Django settings for temporary group project.
 
 import os.path
 
