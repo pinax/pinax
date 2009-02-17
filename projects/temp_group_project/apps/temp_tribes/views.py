@@ -33,7 +33,8 @@ except ImportError:
 
 from temp_tribes.models import Tribe
 from temp_tribes.forms import *
-from microblogging.models import TweetInstance
+
+# @@@ from microblogging.models import TweetInstance
 
 TOPIC_COUNT_SQL = """
 SELECT COUNT(*)
@@ -177,7 +178,7 @@ def tribe(request, slug, form_class=TribeUpdateForm,
     total_articles = articles.count()
     articles = articles[:5]
     
-    tweets = TweetInstance.objects.tweets_for(tribe).order_by("-sent")
+    # @@@ tweets = TweetInstance.objects.tweets_for(tribe).order_by("-sent")
     
     are_member = request.user in tribe.members.all()
     
@@ -187,7 +188,7 @@ def tribe(request, slug, form_class=TribeUpdateForm,
         # @@@ "photos": photos,
         "topics": topics,
         "articles": articles,
-        "tweets": tweets,
+        # @@@ "tweets": tweets,
         "total_articles": total_articles,
         "are_member": are_member,
     }, context_instance=RequestContext(request))

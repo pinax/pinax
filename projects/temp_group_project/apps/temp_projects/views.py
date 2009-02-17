@@ -37,13 +37,13 @@ except ImportError:
 
 TOPIC_COUNT_SQL = """
 SELECT COUNT(*)
-FROM projects_topic
-WHERE projects_topic.project_id = projects_project.id
+FROM temp_projects_topic
+WHERE temp_projects_topic.project_id = temp_projects_project.id
 """
 MEMBER_COUNT_SQL = """
 SELECT COUNT(*)
-FROM projects_projectmember
-WHERE projects_projectmember.project_id = projects_project.id
+FROM temp_projects_projectmember
+WHERE temp_projects_projectmember.project_id = temp_projects_project.id
 """
 
 def create(request, form_class=ProjectForm,
