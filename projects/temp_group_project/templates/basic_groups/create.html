@@ -6,6 +6,7 @@
 {% load order_by %}
 {% load extra_tagging_tags %}
 {% load group_tags %}
+{% load uni_form %}
 
 {% block head_title %}{% blocktrans %}Create Group{% endblocktrans %}{% endblock %}
 
@@ -14,11 +15,14 @@
     
     <p>{% trans "This is just a basic group example with no extra content items." %}</p>
     {% if user.is_authenticated %}
-        <form id="group_form" method="POST" action="{% url group_create %}">
-            <table>
-                {{ group_form }}
-                <tr><td></td><td><input type="hidden" name="action" value="create" /><input type="submit" value="{% trans 'create' %}"/></td></tr>
-            </table>
+        <form id="group_form" method="POST" action="{% url group_create %}" class="uniForm">
+            <fieldset class="inlineLabels">
+                {{ group_form|as_uni_form }}
+                <div class="form_block">
+                    <input type="hidden" name="action" value="create" />
+                    <input type="submit" value="{% trans 'create' %}"/>
+                </div>
+            </fieldset>
         </form>
     {% else %}
         {% url acct_signup as signup_url %}

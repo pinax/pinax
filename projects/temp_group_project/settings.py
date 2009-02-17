@@ -120,6 +120,9 @@ INSTALLED_APPS = (
     'ajax_validation',
     'tagging',
     'uni_form',
+    'wiki',
+    'avatar',
+    'threadedcomments',
     
     # internal (for now)
     'basic_profiles',
