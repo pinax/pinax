@@ -104,26 +104,3 @@ def profile(request, username, template_name="profiles/profile.html"):
         "previous_invitations_to": previous_invitations_to,
         "previous_invitations_from": previous_invitations_from,
     }, context_instance=RequestContext(request))
-
-def username_autocomplete(request):
-    if request.user.is_authenticated():
-        q = request.GET.get("q")
-        friends = Friendship.objects.friends_for_user(request.user)
-        content = []
-        for friendship in friends:
-            if friendship["friend"].username.lower().startswith(q):
-                try:
-                    profile = friendship["friend"].get_profile()
-                    entry = "%s,,%s,,%s" % (
-                        avatar(friendship["friend"], 40),
-                        friendship["friend"].username,
-                        profile.location
-                    )
-                except Profile.DoesNotExist:
-                    pass
-                content.append(entry)
-        response = HttpResponse("\n".join(content))
-    else:
-        response = HttpResponseForbidden()
-    setattr(response, "djangologging.suppress_output", True)
-    return response
