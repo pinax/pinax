@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-from temp_tribes.models import Tribe, Topic
+from temp_tribes.models import Tribe
 
 class TribeForm(forms.ModelForm):
     
@@ -42,10 +42,3 @@ class TribeUpdateForm(forms.ModelForm):
     class Meta:
         model = Tribe
         fields = ('name', 'description', 'tags')
-
-
-class TopicForm(forms.ModelForm):
-    
-    class Meta:
-        model = Topic
-        fields = ('title', 'body', 'tags')

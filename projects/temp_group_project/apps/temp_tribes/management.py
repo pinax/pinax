@@ -12,6 +12,7 @@ if "notification" in settings.INSTALLED_APPS:
         notification.create_notice_type("tribes_new_tribe", _("New Tribe Created"), _("a new tribe has been created"), default=1)
         notification.create_notice_type("tribes_friend_tribe", _("Friend Created Tribe"), _("a friend has created a new tribe"), default=1)
         
+        # @@@ not sure how threaded_discussion is going to find out about these
         notification.create_notice_type("tribes_new_topic", _("New Topic Started"), _("a new topic has started in a tribe you're a member of"), default=2)
         notification.create_notice_type("tribes_topic_response", _("Response To Your Topic"), _("someone has responded on a topic you started"), default=2)
     

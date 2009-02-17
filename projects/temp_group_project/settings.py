@@ -130,6 +130,8 @@ INSTALLED_APPS = (
     'misc',
     'tag_app',
     
+    'topics',
+    
     'basic_groups',
     'temp_projects',
     'temp_tribes',

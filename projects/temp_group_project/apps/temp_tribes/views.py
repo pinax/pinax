@@ -12,30 +12,23 @@ if "notification" in settings.INSTALLED_APPS:
 else:
     notification = None
 
-try:
+if "friends" in settings.INSTALLED_APPS:
     from friends.models import Friendship
     friends = True
-except ImportError:
+else:
     friends = False
 
-try:
-    from threadedcomments.models import ThreadedComment
-    forums = True
-except ImportError:
-    forums = False
+from threadedcomments.models import ThreadedComment
 
-try:
-    from wiki.models import Article
-    from wiki.views import get_ct
-    wiki = True
-except ImportError:
-    wiki = False
+from wiki.models import Article
+from wiki.views import get_ct
 
 from temp_tribes.models import Tribe
 from temp_tribes.forms import *
 
 # @@@ from microblogging.models import TweetInstance
 
+# @@@ this needs to be rewritten
 TOPIC_COUNT_SQL = """
 SELECT COUNT(*)
 FROM temp_tribes_topic
@@ -172,6 +165,7 @@ def tribe(request, slug, form_class=TribeUpdateForm,
         tribe_form = form_class(instance=tribe)
     
     topics = tribe.topics.all()[:5]
+    # @@@ could make a GR
     articles = Article.objects.filter(
         content_type=get_ct(tribe),
         object_id=tribe.id).order_by('-last_update')
@@ -192,71 +186,3 @@ def tribe(request, slug, form_class=TribeUpdateForm,
         "total_articles": total_articles,
         "are_member": are_member,
     }, context_instance=RequestContext(request))
-
-def topics(request, slug, form_class=TopicForm,
-        template_name="tribes/topics.html"):
-    tribe = get_object_or_404(Tribe, slug=slug)
-    
-    if tribe.deleted:
-        raise Http404
-    
-    are_member = False
-    if request.user.is_authenticated():
-        are_member = request.user in tribe.members.all()
-    
-    if request.method == "POST":
-        if request.user.is_authenticated():
-            if are_member:
-                topic_form = form_class(request.POST)
-                if topic_form.is_valid():
-                    topic = topic_form.save(commit=False)
-                    topic.tribe = tribe
-                    topic.creator = request.user
-                    topic.save()
-                    request.user.message_set.create(message="You have started the topic %s" % topic.title)
-                    if notification:
-                        notification.send(tribe.members.all(), "tribes_new_topic", {"topic": topic})
-                    topic_form = form_class() # @@@ is this the right way to reset it?
-            else:
-                request.user.message_set.create(message="You are not a member and so cannot start a new topic")
-                topic_form = form_class()
-        else:
-            return HttpResponseForbidden()
-    else:
-        topic_form = form_class()
-    
-    return render_to_response(template_name, {
-        "tribe": tribe,
-        "topic_form": topic_form,
-        "are_member": are_member,
-    }, context_instance=RequestContext(request))
-
-def topic(request, id, edit=False, template_name="tribes/topic.html"):
-    topic = get_object_or_404(Topic, id=id)
-    
-    if topic.tribe.deleted:
-        raise Http404
-    
-    if request.method == "POST" and edit == True and \
-        (request.user == topic.creator or request.user == topic.tribe.creator):
-        topic.body = request.POST["body"]
-        topic.save()
-        return HttpResponseRedirect(reverse('tribe_topic', args=[topic.id]))
-    return render_to_response(template_name, {
-        'topic': topic,
-        'edit': edit,
-    }, context_instance=RequestContext(request))
-
-def topic_delete(request, pk):
-    topic = Topic.objects.get(pk=pk)
-    
-    if topic.tribe.deleted:
-        raise Http404
-    
-    if request.method == "POST" and (request.user == topic.creator or \
-        request.user == topic.tribe.creator): 
-        if forums:
-            ThreadedComment.objects.all_for_object(topic).delete()
-        topic.delete()
-    
-    return HttpResponseRedirect(request.POST["next"])
