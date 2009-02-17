@@ -1,0 +1,4 @@
+{% load i18n %}{% blocktrans with topic.creator as topic_creator and topic.tribe as topic_tribe and topic.get_absolute_url as topic_url %}{{ topic_creator }} has started a topic '{{ topic }}' in tribe {{ topic_tribe }}.
+
+http://{{ current_site }}{{ topic_url }}
+{% endblocktrans %}

@@ -1,0 +1,37 @@
+{% load i18n %}
+{% load extra_tagging_tags %}
+{% load gravatar %}
+{% load shorttimesince_tag %}
+{% load threadedcommentstags %}
+
+<div class="task clearfix">
+    <div class="task-meta">
+        {% if task.assignee %}
+            <div class="avatar">{% gravatar task.assignee 40 %}</div>
+            <div class="details"><b>{% trans "Assignee" %}</b>: <a href="{{ task.assignee.get_profile.get_absolute_url }}">{{ task.assignee }}</a></div>
+        {% else %}
+            <span class="warning">{% trans "Unassigned" %}</span>
+        {% endif %}
+        <div><b>{% trans "State" %}</b>: {{ task.get_state_display }}</div>
+        <div><b>{% trans "Creator" %}</b>: <a href="{{ task.creator.get_profile.get_absolute_url }}">{{ task.creator }}</a></div>
+        <div><b>{% trans "Created" %}</b>: {{ task.created|date }}</div>
+        <div><b>{% trans "Modified" %}</b>: {{ task.modified|shorttimesince }} ago</div>
+    </div>
+    <div class="bulk">
+        <h2 class="task_{{ task.get_state_display }}"><a href="{{ task.get_absolute_url }}">{{ task.summary }}</a></h2>
+        <div class="body">{{ task.detail|urlize|linebreaks }}</div>
+        <div class="task-meta2">
+            {% get_comment_count for task as comment_count %}
+            {% if comment_count %}
+                {{ comment_count }} comment{{ comment_count|pluralize }};
+            {% endif %}
+            <b>{% trans "Status" %}</b>: 
+            {% if task.status %}
+                {{ task.status }}
+            {% else %}
+                {% trans "none" %}
+            {% endif %}
+        </div>
+        <p>{% show_tags_for task %}</p>
+    </div>
+</div>

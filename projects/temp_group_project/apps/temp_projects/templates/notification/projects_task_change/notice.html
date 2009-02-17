@@ -1,0 +1,2 @@
+{% load i18n %}{% url profile_detail username=user.username as user_url as user_url %}
+{% blocktrans with task.get_absolute_url as task_url and project.get_absolute_url as project_url %}<a href="{{ user_url }}">{{ user }}</a> has marked task '<a href="{{ task_url }}">{{ task }}</a>' in project <a href="{{ project_url }}">{{ project }}</a> as {{ new_state }}.{% endblocktrans %}

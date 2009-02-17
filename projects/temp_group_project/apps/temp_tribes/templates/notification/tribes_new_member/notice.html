@@ -1,0 +1,2 @@
+{% load i18n %}{% url profile_detail username=user.username as user_url %}
+{% blocktrans with tribe.get_absolute_url as tribe_url %}<a href="{{ user_url }}">{{ user }}</a> has joined the tribe <a href="{{ tribe_url }}">{{ tribe }}</a>.{% endblocktrans %}

@@ -1,0 +1,4 @@
+{% load i18n %}{% blocktrans with tribe.creator as tribe_creator and tribe.get_absolute_url as tribe_url %}{{ tribe_creator }} has created a new tribe {{ tribe }}.
+
+http://{{ current_site }}{{ tribe_url }}
+{% endblocktrans %}

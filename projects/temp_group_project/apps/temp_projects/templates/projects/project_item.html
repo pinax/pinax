@@ -1,0 +1,15 @@
+{% load i18n %}
+{% load extra_tagging_tags %}
+
+<dt>{{ project.name }} (<a href="{{ project.get_absolute_url }}">{{ project.slug }}</a>)</dt>
+<dd>
+    {{ project.description }}
+    <div class="project_stats">
+        {% trans "Members:" %} <b>{{ project.members.count }}</b>
+        {% trans "Tasks:" %} <b>{{ project.tasks.count }}</b>
+        {% trans "Topics:" %} <b>{{ project.topics.count }}</b>
+        {% trans "Wiki Pages:" %} <b>{{ project.wiki_articles.count }}</b>
+        <br />
+        {% show_tags_for project %}
+    </div>
+</dd>

@@ -1,0 +1,2 @@
+{% load i18n %}{% url profile_detail username=tribe.creator.username as user_url %}
+{% blocktrans with tribe.creator as tribe_creator and tribe.get_absolute_url as tribe_url %}<a href="{{ user_url }}">{{ tribe_creator }}</a> has created a new tribe <a href="{{ tribe_url }}">{{ tribe }}</a>.{% endblocktrans %}
