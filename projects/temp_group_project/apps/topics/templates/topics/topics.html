@@ -3,17 +3,16 @@
 {% load i18n %}
 {% load uni_form %}
 {% load pagination_tags %}
-{% load tribe_tags %}
 
-{% block head_title %}{% blocktrans with tribe.name as tribe_name %}Topics for {{ tribe_name }}{% endblocktrans %}{% endblock %}
+{% block head_title %}{% blocktrans with group.name as group_name %}Topics for {{ group_name }}{% endblocktrans %}{% endblock %}
 
 {% block body %}
-    <h1>{% trans "Discussion Topics for Tribe" %} <a href="{% url tribe_detail tribe.slug %}">{{ tribe.name }}</a></h1>
+    <h1>{% trans "Discussion Topics for Group" %} <a href="{{ group.get_absolute_url }}">{{ group.name }}</a></h1>
     
-    {% autopaginate tribe.topics.all %}
+    {% autopaginate group.topics.all %}
     
-    {% for topic in tribe.topics.all %}
-        {% show_tribe_topic topic %}
+    {% for topic in group.topics.all %}
+        {% include "topics/topic_item.html" %}
     {% endfor %}
     
     {% paginate %}
@@ -21,7 +20,7 @@
     {% if are_member %}
         <h2>{% trans "New Topic" %}</h2>
         
-        <form class="uniForm" id="tribe_form" method="POST" action="">
+        <form class="uniForm" method="POST" action="">
             <fieldset class="inlineLabels">
                 {{ topic_form|as_uni_form }}
                 <div class="form_block">

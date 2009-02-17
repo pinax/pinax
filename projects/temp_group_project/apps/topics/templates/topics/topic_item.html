@@ -1,16 +1,16 @@
 {% load i18n %}
-{% load gravatar %}
+{% load avatar_tags %}
 {% load threadedcommentstags %}
 {% load extra_tagging_tags %}
 
 <div class="topic clearfix">
     <div class="task-meta">
-        <div class="avatar">{% gravatar topic.creator 40 %}</div>
+        <div class="avatar">{% avatar topic.creator 40 %}</div>
         <div class="details"><a href="{{ topic.creator.get_profile.get_absolute_url }}">{{ topic.creator }}</a></div>
         <div class="created">{{ topic.created|date }}</div>
     </div>
     <div class="bulk">
-        <h2><a href="{{ topic.get_absolute_url }}">{{ topic.title }}</a></h2>
+        <h2><a href="{% url topic_detail %}">{{ topic.title }}</a></h2>
         <div class="body">{{ topic.body|urlize|linebreaks }}</div>
         {% get_comment_count for topic as comment_count %}
         {% if comment_count %}
