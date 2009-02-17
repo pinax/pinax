@@ -13,6 +13,7 @@ class SignupCode(models.Model):
     max_uses = models.PositiveIntegerField(default=0)
     expiry = models.DateTimeField(null=True, blank=True)
     inviter = models.ForeignKey(User, null=True, blank=True)
+    email = models.EmailField(blank=True)
     notes = models.TextField()
     created = models.DateTimeField(default=datetime.now, editable=False)
     
