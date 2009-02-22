@@ -3,26 +3,27 @@ Installation
 
 The sample projects in Pinax depend on a lot of external apps and libraries. 
 Since we `moved to distutils/setuptools`_ we are able to manage those 
-dependecies by using useful tools `virtualenv`_ and `pip`_.
+dependecies by using useful tools `virtualenv`_, `pip`_ and `buildout`_.
 
 One exciting feature of pip for example is the ability to install Python 
 packages like the external apps directly from various version control systems.
 The development version of Pinax relies on some apps that are hosted that way.
 So please make sure you have the latest versions installed of: Subversion_,
-Git_, Mercurial_ and Bazaar_.
+Git_, Mercurial_ and Bazaar_. If you prefer to use buildout you can use the
+provided buildout.cfg, which uses `gp.recipe.pip`_ internally.
 
 To make it easier to start with developing your own Pinax based project we 
 provide a `virtualenv bootstrap script`_. It creates a virtualenv with the 
 necessary Pinax Subversion checkout and installs pip_ and Django_ inside the
 environment. This allows you to keep your whole project inside one directory
-and doesn't spoil the global site-packages directory with all the dependencies. 
+and doesn't spoil the global site-packages directory with all the dependencies.
 
-First download the virtualenv bootstrap script::
+First download the virtualenv bootstrap script (*nix)::
 
-    curl -o pinax-boot.py http://svn.pinaxproject.com/pinax/trunk/bin/pinax-boot.py
+    curl -o pinax-boot.py http://svn.pinaxproject.com/pinax/trunk/scripts/pinax-boot.py
 
-or open ``http://svn.pinaxproject.com/pinax/trunk/bin/pinax-boot.py`` in your
-browser and save it on your hard disk.
+or open ``http://svn.pinaxproject.com/pinax/trunk/scripts/pinax-boot.py`` in
+your browser and save it on your hard disk.
 
 Then run the script, e.g. to create a environment called ``pinax-env``::
 
@@ -34,8 +35,38 @@ bash you can simply run this in the environment root directory::
 
     source bin/activate
 
-You are now able to install the required external apps and libraries by using
-pip::
+You are now able to install the required external apps and libraries by either
+using pip or buildout, whatever you prefer.
+
+The one exception is the `Python Imaging Library`_ (PIL)
+which you will have to provide yourself if you want photo support.
+
+.. note::
+    
+    Some of the external apps are still link hosted with Google Code. It is
+    common to see::
+    
+        Fetching external item into 'apps/external_apps/django_extensions'
+        svn: PROPFIND request failed on '/svn/trunk/django_extensions'
+        svn: PROPFIND of '/svn/trunk/django_extensions': 502 Bad Gateway (http://django-command-extensions.googlecode.com)
+    
+    You should be able to ignore it and try the installation, checkout or
+    update again.
+
+Using ``pip``
+-------------
+
+``pip`` allows you to install the required Python packages by passing a simple
+text file containing a list of requirement strings, e.g. django-wikiapp==0.1.2.
+Please don't hesitate to read about the requirement files in
+`pip's documentation`_. We currently provide two requirement files:
+
+* ``requirements/libs.txt`` - Libraries and non-Django packages
+* ``requirements/external_apps.txt`` - External reusable Django apps
+
+Note that the latter automatically includes the libraries. You should think of
+it as a starting point for your own requirement files. For example here's
+how you start the installation of every requirement::
 
     pip install --requirement src/pinax/requirements/external_apps.txt
 
@@ -54,28 +85,50 @@ directory::
 
     pip install --requirement src/pinax/requirements/external_apps.txt
 
-The one exception is the `Python Imaging Library`_ (PIL)
-which you will have to provide yourself if you want photo support.
-
-.. note::
-    
-    Some of the external apps are still link hosted with Google Code. It is
-    common to see::
-    
-        Fetching external item into 'apps/external_apps/django_extensions'
-        svn: PROPFIND request failed on '/svn/trunk/django_extensions'
-        svn: PROPFIND of '/svn/trunk/django_extensions': 502 Bad Gateway (http://django-command-extensions.googlecode.com)
-    
-    You should be able to ignore it and try the installation, checkout or
-    update again.
-
 Note that if you want to use another external app or external library,
-you don't need to use the `requirement file we provide`_. Don't hesitate to write
-your own or install it directly with pip inside your environment.
+you don't need to use the `requirement file we provide`_. Don't hesitate to
+write your own or install it directly with pip inside your environment.
+
+Using ``buildout``
+------------------
+
+``buildout`` enables you to go a bit further in the way you handle
+requirements by abstracting the different deployment scenarios with
+so-called `recipes`_. Pinax for example uses a `pip recipe`_ to make sure
+every requirement is installed properly. But you can easily integrate it with
+your current buildouts.
+
+To get started with buildout you first need to install buildout in the
+virtualenv we created with the virtualenv bootstrap script::
+
+    pip install buildout
+
+After that you'll have a new executable inside your ``bin`` (*nix) or
+``Script`` directory (Windows) which you'll use with a buildout config file
+we provide.
+
+This file needs to be downloaded from the Pinax SVN and saved in the
+virtualenv root directory. So please make sure you are in the directory that
+contains the following directories (among others): ``bin``, ``build`` and
+``src`` and run (on *nux)::
+
+    curl -o buildout.cfg http://svn.pinaxproject.com/pinax/trunk/buildout/buildout.cfg
+
+or open ``http://svn.pinaxproject.com/pinax/trunk/buildout/buildout.cfg`` in
+your browser and save it on your hard disk in the virtualenv root directory.
+
+Then all you need to do is to run the buildout command inside the virtualenv
+root directory. You can update the buildout and the packages it contains
+by running buildout again.
+
+What's next?
+------------
 
 Once the installation is complete, you should be able to cd into
-``projects/complete_project/`` or ``projects/basic_project/`` and run 
-``./manage.py syncdb`` and ``./manage.py runserver`` to get running immediately.
+``src/pinax/projects/complete_project/`` or
+``src/pinax/projects/basic_project/`` and run 
+``./manage.py syncdb`` and ``./manage.py runserver`` to get running
+immediately.
 
 These are just sample projects, however. You will likely want to create your
 own project and :ref:`customize <ref-customization>` it.
@@ -92,6 +145,11 @@ own project and :ref:`customize <ref-customization>` it.
 .. _requirements files: http://pip.openplans.org/requirement-format.html
 .. _requirement file we provide: http://svn.pinaxproject.com/pinax/trunk/requirements/external_apps.txt
 .. _Django: http://www.djangoproject.com/
+.. _buildout: http://pypi.python.org/pypi/zc.buildout
+.. _gp.recipe.pip: http://pypi.python.org/pypi/gp.recipe.pip
+.. _`pip's documentation`: http://pip.openplans.org/
+.. _recipes: http://pypi.python.org/pypi/zc.buildout#id1
+.. _`pip recipe`: http://pypi.python.org/pypi/gp.recipe.pip
 
 Directory Structure
 -------------------
