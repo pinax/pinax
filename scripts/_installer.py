@@ -1,20 +1,6 @@
-"""
-Call this like ``python pinax/bin/create-venv-script.py``
-it will refresh the pinax-boot.py script
-"""
 import os
-import subprocess   
-import re
 
-here = os.path.dirname(os.path.abspath(__file__))
-script_name = os.path.join(here, 'pinax-boot.py')
-
-import virtualenv
-
-EXTRA_TEXT = """
 PINAX_SVN_LOCATION = 'http://svn.pinaxproject.com/pinax/trunk'
-
-import shutil
 
 def extend_parser(parser):
     parser.add_option(
@@ -22,7 +8,8 @@ def extend_parser(parser):
         metavar='DIR_OR_URL',
         dest='pinax_svn',
         default=PINAX_SVN_LOCATION,
-        help='Location of a svn directory or URL to use for the installation of Pinax')
+        help='Location of a svn directory or URL to use for the installation of Pinax'
+    )
 
 def adjust_options(options, args):
     if not args:
@@ -82,24 +69,3 @@ def filter_python_develop(line):
         if line.startswith(prefix):
             return Logger.DEBUG
     return Logger.NOTIFY
-"""
-
-def main():
-    text = virtualenv.create_bootstrap_script(EXTRA_TEXT)
-    if os.path.exists(script_name):
-        f = open(script_name)
-        cur_text = f.read()
-        f.close()
-    else:
-        cur_text = ''
-    print 'Updating %s' % script_name
-    if cur_text == 'text':
-        print 'No update'
-    else:
-        print 'Script changed; updating...'
-        f = open(script_name, 'w')
-        f.write(text)
-        f.close()
-
-if __name__ == '__main__':
-    main()

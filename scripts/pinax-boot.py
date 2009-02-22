@@ -947,10 +947,9 @@ def create_bootstrap_script(extra_text, python_version=''):
                + content)
     return content.replace('##EXT' 'END##', extra_text)
 
+import os
 
 PINAX_SVN_LOCATION = 'http://svn.pinaxproject.com/pinax/trunk'
-
-import shutil
 
 def extend_parser(parser):
     parser.add_option(
@@ -958,7 +957,8 @@ def extend_parser(parser):
         metavar='DIR_OR_URL',
         dest='pinax_svn',
         default=PINAX_SVN_LOCATION,
-        help='Location of a svn directory or URL to use for the installation of Pinax')
+        help='Location of a svn directory or URL to use for the installation of Pinax'
+    )
 
 def adjust_options(options, args):
     if not args:
