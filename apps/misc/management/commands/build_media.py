@@ -106,8 +106,6 @@ class Command(BaseCommand):
             else:
                 app, source = first_source
             print "\nSelected %r provided by %r." % (destination, app)
-            # Move in site_media/<app_label>/<file>
-            destination = os.path.join(app.split('.')[-1], destination)
             self.process_file(source, destination, media_root, **options)
 
     def handle_override(self, app, location, **options):
@@ -169,7 +167,8 @@ class Command(BaseCommand):
                 # but if not, we'll find out when copying or linking anyway.
                 pass
             else:
-                os.lchown(destination_dir, uid, gid)
+                if None not in (uid, gid):
+                    os.lchown(destination_dir, uid, gid)
         if link:
             success = self.link_file(source, destination, interactive, dry_run)
         else:
