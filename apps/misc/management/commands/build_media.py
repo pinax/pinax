@@ -90,6 +90,11 @@ class Command(BaseCommand):
             if interactive and other_sources:
                 first_app = first_source[0]
                 app_sources = dict(sources)
+                for (app, source) in sources:
+                    if destination.startswith(app):
+                        first_app = app
+                        first_source = (app, source)
+                        break
                 print "\nThe file %r is provided by multiple apps:" % destination
                 print "\n".join(["    %s" % app for (app, source) in sources])
                 message = "Enter the app that should provide this file [%s]: " % first_app
