@@ -14,7 +14,7 @@ class SignupCode(models.Model):
     expiry = models.DateTimeField(null=True, blank=True)
     inviter = models.ForeignKey(User, null=True, blank=True)
     email = models.EmailField(blank=True)
-    notes = models.TextField()
+    notes = models.TextField(blank=True)
     created = models.DateTimeField(default=datetime.now, editable=False)
     
     # calculated
