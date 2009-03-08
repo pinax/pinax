@@ -18,7 +18,7 @@ class SignupCode(models.Model):
     created = models.DateTimeField(default=datetime.now, editable=False)
     
     # calculated
-    use_count = models.PositiveIntegerField(editable=False)
+    use_count = models.PositiveIntegerField(editable=False, default=0)
     
     def calculate_use_count(self):
         self.use_count = self.signupcoderesult_set.count()
