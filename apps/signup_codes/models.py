@@ -24,6 +24,15 @@ class SignupCode(models.Model):
         self.use_count = self.signupcoderesult_set.count()
         self.save()
     
+    def use(self, user):
+        """
+        Add a SignupCode result attached to the given user.
+        """
+        result = SignupCodeResult()
+        result.signup_code = self
+        result.user = user
+        result.save()
+    
 
 class SignupCodeResult(models.Model):
     """
