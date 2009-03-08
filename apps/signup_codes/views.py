@@ -3,6 +3,9 @@ from django.conf import settings
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
+from django.contrib.auth import authenticate
+from django.contrib.auth import login as auth_login
+from django.utils.translation import ugettext
 
 from account.forms import SignupForm
 from account.utils import get_default_redirect
@@ -20,7 +23,7 @@ def signup(request, form_class=SignupForm,
             user = authenticate(username=username, password=password)
             auth_login(request, user)
             request.user.message_set.create(
-                message=_("Successfully logged in as %(username)s.") % {
+                message=ugettext("Successfully logged in as %(username)s.") % {
                 'username': user.username
             })
             return HttpResponseRedirect(success_url)
