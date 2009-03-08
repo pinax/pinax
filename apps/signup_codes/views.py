@@ -7,9 +7,9 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.utils.translation import ugettext
 
-from account.forms import SignupForm
 from account.utils import get_default_redirect
 from signup_codes.models import check_signup_code
+from signup_codes.forms import SignupForm
 
 
 def signup(request, form_class=SignupForm,
@@ -21,6 +21,10 @@ def signup(request, form_class=SignupForm,
         if form.is_valid():
             username, password = form.save()
             user = authenticate(username=username, password=password)
+            
+            signup_code = form.cleaned_data["signup_code"]
+            signup_code.use(user)
+            
             auth_login(request, user)
             request.user.message_set.create(
                 message=ugettext("Successfully logged in as %(username)s.") % {
