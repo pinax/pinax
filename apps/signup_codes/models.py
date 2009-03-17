@@ -58,7 +58,7 @@ def check_signup_code(code):
             return False
         else:
             # check max uses
-            if signup_code.max_uses and signup_code.max_uses < signup_code.max_uses + 1:
+            if signup_code.max_uses and signup_code.max_uses < signup_code.use_count + 1:
                 return False
             else:
                 if signup_code.expiry and datetime.now() > signup_code.expiry:
