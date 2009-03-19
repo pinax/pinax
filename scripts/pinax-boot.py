@@ -975,7 +975,7 @@ def after_install(options, home_dir):
         logger.info('Using existing svn checkout at %s' % pinax_svn)
     else:
         pinax_dir = join(src_dir, 'pinax')
-        logger.notify('Installing Pinax from %s to %s' % (pinax_svn, pinax_dir))
+        logger.notify('Fetching Pinax from %s to %s' % (pinax_svn, pinax_dir))
         fs_ensure_dir(src_dir)
         call_subprocess(['svn', 'checkout', '--quiet', pinax_svn, pinax_dir],
                         show_stdout=True)
@@ -989,6 +989,10 @@ def after_install(options, home_dir):
         logger.notify('Installing Django 1.0.2')
         call_subprocess([os.path.abspath(join(home_dir, 'bin', 'pip')), 'install', 'Django', '--quiet'],
                         cwd=os.path.abspath(pinax_dir),
+                        filter_stdout=filter_python_develop,
+                        show_stdout=False)
+        logger.notify('Installing Pinax')
+        call_subprocess([os.path.abspath(join(home_dir, 'bin', 'pip')), 'install', '-e', '%s/' % pinax_dir, '--quiet'],
                         filter_stdout=filter_python_develop,
                         show_stdout=False)
     finally:
