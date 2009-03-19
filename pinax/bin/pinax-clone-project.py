@@ -133,10 +133,11 @@ if __name__ == "__main__":
     (options, args) = parser.parse_args()
     
     if options.list_projects:
+        pinax_root = get_pinax_root(options.pinax_root)
         print "Available Projects"
         print "------------------"
-        sys.path.insert(0, get_projects_dir(options.pinax_root))
-        for project in map(os.path.basename, get_projects(options.pinax_root)):
+        sys.path.insert(0, get_projects_dir(pinax_root))
+        for project in map(os.path.basename, get_projects(pinax_root)):
             print "%s:" % (project,)
             about = getattr(__import__(project), '__about__', '')
             for line in about.strip().splitlines():
