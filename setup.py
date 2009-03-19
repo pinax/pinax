@@ -14,6 +14,11 @@ setup(
     include_package_data=True, # include package data under svn source control
     setup_requires=['setuptools_git'],
     zip_safe=False,
+    entry_points={
+        'console_scripts': [
+            'pinax-clone-project = pinax.conf.clone_project:entry_point',
+        ],
+    },
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
