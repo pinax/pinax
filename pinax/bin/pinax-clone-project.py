@@ -26,7 +26,11 @@ def get_projects_dir(pinax_root):
 
 
 def get_projects(pinax_root):
-    return glob.glob(os.path.join(get_projects_dir(pinax_root), '*'))
+    projects = []
+    for item in glob.glob(os.path.join(get_projects_dir(pinax_root), '*')):
+        if os.path.isdir(item):
+            projects.append(item)
+    return projects
 
 
 def copytree(src, dst, symlinks=False):
