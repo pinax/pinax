@@ -7,15 +7,27 @@ import sys
 import shutil
 import re
 
+import pinax
+
+
 EXCLUDED_PATTERNS = ('.svn',)
-DEFAULT_PINAX_ROOT = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
+DEFAULT_PINAX_ROOT = None # fallback to the normal PINAX_ROOT in settings.py.
 PINAX_ROOT_RE = re.compile(r'PINAX_ROOT\s*=.*$', re.M)
+
+
+def get_pinax_root(default_pinax_root):
+    if default_pinax_root is None:
+        return os.path.abspath(os.path.dirname(pinax.__file__))
+    return default_pinax_root
+
 
 def get_projects_dir(pinax_root):
     return os.path.join(pinax_root, 'projects')
 
+
 def get_projects(pinax_root):
     return glob.glob(os.path.join(get_projects_dir(pinax_root), '*'))
+
 
 def copytree(src, dst, symlinks=False):
     """
@@ -58,26 +70,31 @@ def copytree(src, dst, symlinks=False):
     if errors:
         raise shutil.Error, errors
 
+
 def update_settings(pinax_root, path, old_name, new_name):
     settings_file = open(path, 'r')
     settings = settings_file.read()
     settings_file.close()
     settings = settings.replace(old_name, new_name)
-    settings = PINAX_ROOT_RE.sub("PINAX_ROOT = '%s'" % (pinax_root,), settings)
+    if pinax_root is not None:
+        settings = PINAX_ROOT_RE.sub("PINAX_ROOT = '%s'" % (pinax_root,), settings)
     settings_file = open(path, 'w')
     settings_file.write(settings)
     settings_file.close()
+
 
 def rename_deploy_files(path, old_name, new_name):
     for deploy_file in glob.glob(os.path.join(path, old_name) + '*'):
         shutil.move(deploy_file, deploy_file.replace(old_name, new_name))
 
-def main(pinax_root, project_name, destination, verbose=True):
+
+def main(default_pinax_root, project_name, destination, verbose=True):
     if os.path.exists(destination):
         print "Files already exist at this path: %s" % (destination,)
         sys.exit(1)
     user_project_name = os.path.basename(destination)
-    if project_name in map(os.path.basename, get_projects(options.pinax_root)):
+    pinax_root = get_pinax_root(default_pinax_root)
+    if project_name in map(os.path.basename, get_projects(pinax_root)):
         source = os.path.join(get_projects_dir(pinax_root), project_name)
     else:
         if not os.path.exists(project_name):
@@ -90,7 +107,7 @@ def main(pinax_root, project_name, destination, verbose=True):
     copytree(source, destination)
     if verbose:
         print "Updating settings.py for your new project"
-    update_settings(pinax_root, os.path.join(destination, 'settings.py'),
+    update_settings(default_pinax_root, os.path.join(destination, 'settings.py'),
         project_name, user_project_name)
     if verbose:
         print "Renaming your deployment files"
@@ -98,6 +115,7 @@ def main(pinax_root, project_name, destination, verbose=True):
         user_project_name)
     if verbose:
         print "Finished cloning your project, now you may enjoy Pinax!"
+
 
 if __name__ == "__main__":
     usage = ("Usage: %prog [options] PROJECT_NAME DESTINATION\n\n(Note that " +
