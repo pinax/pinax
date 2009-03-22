@@ -2,6 +2,19 @@ import os
 
 PINAX_SVN_LOCATION = 'http://svn.pinaxproject.com/pinax/trunk'
 
+try:
+    import pip
+except ImportError:
+    pass
+else:
+    import sys
+    from pkg_resources import get_distribution, parse_version
+    version = get_distribution('pip').version
+    if parse_version(version) < parse_version('0.3.1'):
+        print 'ERROR: this script requires pip 0.3.1 or greater.'
+        print 'Please upgrade your pip %s to create a Pinax virtualenv.' % version
+        sys.exit(101)
+
 def extend_parser(parser):
     parser.add_option(
         '--svn',
