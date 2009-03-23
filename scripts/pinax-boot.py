@@ -967,6 +967,7 @@ def create_bootstrap_script(extra_text, python_version=''):
     return content.replace('##EXT' 'END##', extra_text)
 
 import os
+import sys
 
 PINAX_SVN_LOCATION = 'http://svn.pinaxproject.com/pinax/trunk'
 
@@ -975,7 +976,6 @@ try:
 except ImportError:
     pass
 else:
-    import sys
     from pkg_resources import get_distribution, parse_version
     version = get_distribution('pip').version
     if parse_version(version) < parse_version('0.3.1'):
@@ -999,29 +999,34 @@ def adjust_options(options, args):
 def after_install(options, home_dir):
     base_dir = os.path.dirname(home_dir)
     src_dir = join(home_dir, 'src')
-    pip = join(home_dir, 'bin', 'pip')
-    easy_install = join(home_dir, 'bin', 'easy_install')
+    if sys.platform == 'win32':
+        bin_dir = join(home_dir, 'Scripts')
+    else:
+        bin_dir = join(home_dir, 'bin')
     pinax_svn = options.pinax_svn
     if os.path.exists(pinax_svn):
-        # A directory
+        # A directory was given as a source for bootstrapping
         pinax_dir = os.path.abspath(pinax_svn)
         logger.notify('Using existing Pinax at %s' % pinax_svn)
     else:
+        # Go and checkout Pinax
         pinax_dir = join(src_dir, 'pinax')
         logger.notify('Fetching Pinax from %s to %s' % (pinax_svn, pinax_dir))
-        fs_ensure_dir(src_dir)
+        if not os.path.exists(src_dir):
+            logger.info('Creating directory %s' % src_dir)
+            os.makedirs(src_dir)
         call_subprocess(['svn', 'checkout', '--quiet', pinax_svn, pinax_dir],
                         show_stdout=True)
     logger.indent += 2
     try:
         logger.notify('Installing pip')
-        call_subprocess([easy_install, '--quiet', 'pip'],
+        call_subprocess([join(bin_dir, 'easy_install'), '--quiet', 'pip'],
                         filter_stdout=filter_lines, show_stdout=False)
         logger.notify('Installing Django 1.0.2')
-        call_subprocess([pip, 'install', 'Django', '--quiet'],
+        call_subprocess([join(bin_dir, 'pip'), 'install', 'Django', '--quiet'],
                         filter_stdout=filter_lines, show_stdout=False)
         logger.notify('Installing Pinax')
-        call_subprocess([pip, 'install', '-e', pinax_dir, '--quiet'],
+        call_subprocess([join(bin_dir, 'pip'), 'install', '-e', pinax_dir, '--quiet'],
                         filter_stdout=filter_lines, show_stdout=False)
     finally:
         logger.indent -= 2
@@ -1032,11 +1037,6 @@ def after_install(options, home_dir):
                   "or '\\bin\\activate.bat' on Windows")
     logger.indent -= 2
     logger.notify('Pinax environment created successfully.')
-
-def fs_ensure_dir(dir):
-    if not os.path.exists(dir):
-        logger.info('Creating directory %s' % dir)
-        os.makedirs(dir)
 
 def filter_lines(line):
     if not line.strip():
