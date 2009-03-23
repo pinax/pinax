@@ -1030,10 +1030,10 @@ def after_install(options, home_dir):
                         filter_stdout=filter_lines, show_stdout=False)
     finally:
         logger.indent -= 2
-    logger.notify('Now activate the newly created virtualenv by running in %s: '
+    logger.notify("Now activate the newly created virtualenv by running in '%s': "
                   % home_dir)
     logger.indent += 2
-    logger.notify("'source /bin/activate' on Linux/Unix/Mac OS "
+    logger.notify("'source bin/activate' on Linux/Unix/Mac OS "
                   "or '\\bin\\activate.bat' on Windows")
     logger.indent -= 2
     logger.notify('Pinax environment created successfully.')
