@@ -35,10 +35,20 @@
         {# @@@ why isn't this just does as a form object ? #}
         <form class="login uniForm" action="/openid/register/" method="POST">
             <fieldset class="inlineLabels">
-                <div class="ctrlHolder">
-                    <label for="id_username">* OpenID Identifier</label>
-                    <input class="openid" type="text" name="openid_url">
-                </div>
+                {% if url_required %}
+                    <div class="ctrlHolder error">
+                        <p class="errorField">
+                            <strong>This field is required.</strong>
+                        </p>       
+                        <label for="id_username">* OpenID Identifier</label>
+                        <input class="openid" type="text" name="openid_url" />
+                    </div>
+                {% else %}
+                    <div class="ctrlHolder">
+                        <label for="id_username">* OpenID Identifier</label>
+                        <input class="openid" type="text" name="openid_url" />
+                    </div>
+                {% endif %}
                 <div class="form_block">
                     <input type="submit" value="{% trans "Log in &raquo;" %}" />
                 </div>

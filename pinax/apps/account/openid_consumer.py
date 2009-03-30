@@ -28,3 +28,14 @@ class PinaxConsumer(RegistrationConsumer):
         context['base_template'] = self.base_template
         return render_to_response(template, context,
             context_instance=RequestContext(request))
+    
+    def do_register(self, request, *args, **kwargs):
+        """
+        A small wrapper around django_openid's implementation of registration
+        that redirects back to a certain URL if there's no openid_url in the
+        POST body.
+        """
+        if not request.POST.get('openid_url'):
+            print 'ASDFASDFASDFASDF'
+            return HttpResponseRedirect(reverse('acct_login_url_required'))
+        return super(PinaxConsumer, self).do_register(request, *args, **kwargs)
