@@ -129,7 +129,7 @@ class OpenIDSignupForm(forms.Form):
         if not alnum_re.search(self.cleaned_data["username"]):
             raise forms.ValidationError(u"Usernames can only contain letters, numbers and underscores.")
         try:
-            user = User.objects.get(username__exact=self.cleaned_data["username"])
+            user = User.objects.get(username__iexact=self.cleaned_data["username"])
         except User.DoesNotExist:
             return self.cleaned_data["username"]
         raise forms.ValidationError(u"This username is already taken. Please choose another.")
