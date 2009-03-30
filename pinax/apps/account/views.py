@@ -1,4 +1,3 @@
-
 from django.conf import settings
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect, HttpResponseForbidden, Http404
@@ -9,6 +8,7 @@ from django.template import RequestContext
 from django.utils.translation import ugettext, ugettext_lazy as _
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
+from django.db import models
 
 from account.utils import get_default_redirect
 from account.models import OtherServiceInfo
@@ -17,13 +17,24 @@ from account.forms import SignupForm, AddEmailForm, LoginForm, \
     ChangeTimezoneForm, ChangeLanguageForm, TwitterForm
 from emailconfirmation.models import EmailAddress, EmailConfirmation
 
+association_model = models.get_model('django_openid', 'Association')
+if association_model is not None:
+    from django_openid.models import UserOpenidAssociation
+
 def login(request, form_class=LoginForm,
-        template_name="account/login.html", success_url=None):
+        template_name="account/login.html", success_url=None,
+        associate_openid=False, openid_success_url=None):
     if success_url is None:
         success_url = get_default_redirect(request)
     if request.method == "POST":
         form = form_class(request.POST)
         if form.login(request):
+            if associate_openid and association_model is not None:
+                for openid in request.session.get('openids', []):
+                    assoc, created = UserOpenidAssociation.objects.get_or_create(
+                        user=form.user, openid=openid.openid
+                    )
+                success_url = openid_success_url or success_url
             return HttpResponseRedirect(success_url)
     else:
         form = form_class()

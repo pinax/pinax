@@ -3,14 +3,16 @@
 {% load i18n %}
 {% load uni_form %}
 
-{% block head_title %}{% trans "Sign Up with OpenID" %}{% endblock %}
+{% block head_title %}{% trans "Choose a Username" %}{% endblock %}
 
 {% block body %}
-    <h1>{% trans "Sign Up with OpenID" %}</h1>
+    <h1>{% trans "Choose a Username" %}</h1>
     
     {% if form.errors %}
         <p class="error">{% trans "Please correct the errors below:" %}</p>
     {% endif %}
+    
+    <p>{% blocktrans %}Now that you have logged in with your OpenID, we need you to choose a username for this site.{% endblocktrans %}</p>
     
     <form class="uniForm signup" id="edit-profile" method="POST" action="">
         <fieldset class="inlineLabels">
@@ -21,7 +23,10 @@
         </fieldset>
     </form>
     
-    <p>{% blocktrans %}Already have an account? <a href="/account/login/?next=/openid/associations/">Login here</a> to associate your OpenID with your existing account.{% endblocktrans %}</p>
-    <p>{% blocktrans %}By clicking "Sign Up", you are indicating that you have read and agree to the <a href="/about/terms">Terms of Use</a> and <a href="/about/privacy">Privacy Policy</a>.{% endblocktrans %}</p>
+    {% url acct_login_openid as acct_login_openid_url %}
+    {% url terms as terms_url %}
+    {% url privacy as privacy_url %}
+    <p>{% blocktrans %}<strong>Already have an account?</strong> <a href="{{ acct_login_openid_url }}">Login here</a> to associate your OpenID with your existing account.{% endblocktrans %}</p>
+    <p>{% blocktrans %}By clicking &quot;Sign Up&quot;, you are indicating that you have read and agree to the <a href="{{ terms_url }}">Terms of Use</a> and <a href="{{ privacy_url }}">Privacy Policy</a>.{% endblocktrans %}</p>
     <p>{% blocktrans %}If you have any trouble creating your account, contact us at <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>.{% endblocktrans %}</p>
 {% endblock %}
