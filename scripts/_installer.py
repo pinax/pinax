@@ -1,7 +1,7 @@
 import os
 import sys
 
-PINAX_GIT_LOCATION = 'git://github.com/jezdez/pinax.git'
+PINAX_GIT_LOCATION = 'git://github.com/pinax/pinax.git'
 
 try:
     import pip
