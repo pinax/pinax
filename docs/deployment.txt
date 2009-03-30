@@ -52,8 +52,8 @@ use Pinax. Here is a sample Apache config that you can use::
 
     <Location "/">
         SetHandler python-program
-        PythonHandler complete_project.deploy.modpython
-        SetEnv DJANGO_SETTINGS_MODULE complete_project.settings
+        PythonHandler social_project.deploy.modpython
+        SetEnv DJANGO_SETTINGS_MODULE social_project.settings
         PythonDebug On
         PythonPath "['/path/to/pinax/projects'] + sys.path"
     </Location>

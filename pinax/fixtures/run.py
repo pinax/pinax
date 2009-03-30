@@ -5,7 +5,7 @@ import sys
 from os.path import abspath, join
 from site import addsitedir
 
-sys.path.insert(0, abspath('../projects/complete_project'))
+sys.path.insert(0, abspath('../projects/social_project'))
 
 from django.conf import settings
 from django.core.management import setup_environ, call_command
