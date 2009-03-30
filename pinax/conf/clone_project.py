@@ -6,13 +6,15 @@ import optparse
 import sys
 import shutil
 import re
-
+import random
 import pinax
 
 
 EXCLUDED_PATTERNS = ('.svn',)
 DEFAULT_PINAX_ROOT = None # fallback to the normal PINAX_ROOT in settings.py.
 PINAX_ROOT_RE = re.compile(r'PINAX_ROOT\s*=.*$', re.M)
+SECRET_KEY_RE = re.compile(r'SECRET_KEY\s*=.*$', re.M)
+CHARS = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)'
 
 
 def get_pinax_root(default_pinax_root):
@@ -81,7 +83,11 @@ def update_settings(pinax_root, path, old_name, new_name):
     settings_file.close()
     settings = settings.replace(old_name, new_name)
     if pinax_root is not None:
-        settings = PINAX_ROOT_RE.sub("PINAX_ROOT = '%s'" % (pinax_root,), settings)
+        settings = PINAX_ROOT_RE.sub("PINAX_ROOT = '%s'" % (pinax_root,),
+            settings)
+    new_secret_key = ''.join([random.choice(CHARS) for i in xrange(50)])
+    settings = SECRET_KEY_RE.sub("SECRET_KEY = '%s'" % (new_secret_key,),
+        settings)
     settings_file = open(path, 'w')
     settings_file.write(settings)
     settings_file.close()
