@@ -969,7 +969,7 @@ def create_bootstrap_script(extra_text, python_version=''):
 import os
 import sys
 
-PINAX_SVN_LOCATION = 'http://svn.pinaxproject.com/pinax/trunk'
+PINAX_GIT_LOCATION = 'git://github.com/jezdez/pinax.git'
 
 try:
     import pip
@@ -985,11 +985,11 @@ else:
 
 def extend_parser(parser):
     parser.add_option(
-        '--svn',
+        '--git',
         metavar='DIR_OR_URL',
-        dest='pinax_svn',
-        default=PINAX_SVN_LOCATION,
-        help='Location of a svn directory or URL to use for the installation of Pinax'
+        dest='pinax_git',
+        default=PINAX_GIT_LOCATION,
+        help='Location of a Git URL to use for the installation of Pinax'
     )
 
 def adjust_options(options, args):
@@ -1003,19 +1003,19 @@ def after_install(options, home_dir):
         bin_dir = join(home_dir, 'Scripts')
     else:
         bin_dir = join(home_dir, 'bin')
-    pinax_svn = options.pinax_svn
-    if os.path.exists(pinax_svn):
+    pinax_git = options.pinax_git
+    if os.path.exists(pinax_git):
         # A directory was given as a source for bootstrapping
-        pinax_dir = os.path.abspath(pinax_svn)
-        logger.notify('Using existing Pinax at %s' % pinax_svn)
+        pinax_dir = os.path.abspath(pinax_git)
+        logger.notify('Using existing Pinax at %s' % pinax_git)
     else:
         # Go and checkout Pinax
         pinax_dir = join(src_dir, 'pinax')
-        logger.notify('Fetching Pinax from %s to %s' % (pinax_svn, pinax_dir))
+        logger.notify('Fetching Pinax from %s to %s' % (pinax_git, pinax_dir))
         if not os.path.exists(src_dir):
             logger.info('Creating directory %s' % src_dir)
             os.makedirs(src_dir)
-        call_subprocess(['svn', 'checkout', '--quiet', pinax_svn, pinax_dir],
+        call_subprocess(['git', 'clone', '--quiet', pinax_git, pinax_dir],
                         show_stdout=True)
     logger.indent += 2
     try:

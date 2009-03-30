@@ -14,15 +14,15 @@ provided buildout.cfg, which uses `gp.recipe.pip`_ internally.
 
 To make it easier to start with developing your own Pinax based project we 
 provide a `virtualenv bootstrap script`_. It creates a virtualenv with the 
-necessary Pinax Subversion checkout and installs pip_ and Django_ inside the
+necessary Pinax Git clone and installs pip_ and Django_ inside the
 environment. This allows you to keep your whole project inside one directory
 and doesn't spoil the global site-packages directory with all the dependencies.
 
 First download the virtualenv bootstrap script (Linux)::
 
-    curl -o pinax-boot.py http://svn.pinaxproject.com/pinax/trunk/scripts/pinax-boot.py
+    curl -o pinax-boot.py http://github.com/pinax/pinax/raw/master/scripts/pinax-boot.py
 
-or open ``http://svn.pinaxproject.com/pinax/trunk/scripts/pinax-boot.py`` in
+or open ``http://github.com/pinax/pinax/raw/master/scripts/pinax-boot.py`` in
 your browser and save it on your hard disk.
 
 Then run the script, e.g. to create a environment called ``pinax-env``::
@@ -78,7 +78,7 @@ In case you want to update the development version of Pinax you have to update
 both Pinax and the apps separately. The Pinax code is updated by running in
 the ``src/pinax`` directory::
 
-    svn update
+    git pull
 
 To update the apps and libraries run again inside the environment root
 directory::
@@ -107,14 +107,14 @@ After that you'll have a new executable inside your ``bin`` (Linux) or
 ``Script`` directory (Windows) which you'll use with a buildout config file
 we provide.
 
-This file needs to be downloaded from the Pinax SVN and saved in the
+This file needs to be downloaded from the Pinax repository and saved in the
 virtualenv root directory. So please make sure you are in the directory that
 contains the following directories (among others): ``bin``, ``build`` and
 ``src`` and run (on Linux)::
 
-    curl -o buildout.cfg http://svn.pinaxproject.com/pinax/trunk/buildout.cfg
+    curl -o buildout.cfg http://github.com/pinax/pinax/raw/master/buildout.cfg
 
-or open ``http://svn.pinaxproject.com/pinax/trunk/buildout.cfg`` in
+or open ``http://github.com/pinax/pinax/raw/master/buildout.cfg`` in
 your browser and save it on your hard disk in the virtualenv root directory.
 
 Then all you need to do is to run the buildout command inside the virtualenv
@@ -143,7 +143,7 @@ own project and :ref:`customize <ref-customization>` it.
 .. _Mercurial: http://www.selenic.com/mercurial/
 .. _Bazaar: http://bazaar-vcs.org/
 .. _requirements files: http://pip.openplans.org/requirement-format.html
-.. _requirement file we provide: http://svn.pinaxproject.com/pinax/trunk/requirements/external_apps.txt
+.. _requirement file we provide: http://github.com/pinax/pinax/raw/master/requirements/external_apps.txt
 .. _Django: http://www.djangoproject.com/
 .. _buildout: http://pypi.python.org/pypi/zc.buildout
 .. _gp.recipe.pip: http://pypi.python.org/pypi/gp.recipe.pip
