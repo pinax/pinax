@@ -26,7 +26,7 @@ def login(request, form_class=LoginForm,
         associate_openid=False, openid_success_url=None, url_required=False):
     if success_url is None:
         success_url = get_default_redirect(request)
-    if request.method == "POST":
+    if request.method == "POST" and not url_required:
         form = form_class(request.POST)
         if form.login(request):
             if associate_openid and association_model is not None:
