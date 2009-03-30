@@ -1,35 +1,18 @@
 {% extends "photos/base.html" %}
 
 {% load i18n %}
-{% load humanize %}
-{% load pagination_tags %}
-{% load tagging_tags %}
-{% load wiki %}
-{% load markup %}
-{% load switchcase %}
-{% load restructuredtext %}
-{% load threadedcommentstags %}
+{% load uni_form %}
 
 {% block head_title %}{% blocktrans %}Latest Photos{% endblocktrans %}{% endblock %}
 
 {% block body %}
-    
-    <div id="basic-form">
-        <fieldset>
-            <legend>{% trans "Upload Photos" %}</legend>
-
-            <form enctype="multipart/form-data"  action="" method="POST" id="photo_form">
-                <table>
-                <tr><td colspan="2">{{ photo_form.non_field_errors }}</td></tr>
-                {% for field in photo_form %}
-                    {% if field.errors %}<tr><td></td><td>{{ field.errors }}</td></tr>{% endif %}
-                    <tr><td width="100px" valign="top">{{ field.label_tag }}</td><td>{{ field }}</td></tr>
-                    {% if field.help_text %}<tr><td colspan="2"><span>{{ field.help_text }}</span></td></tr>{% endif %}
-                {% endfor %}
-                <tr><td width="150px"></td><td><input type="hidden" name="action" value="upload" /><input type="submit" value="upload" class="button" /></td></tr>
-                </table>
-            </form>
+    <form class="uniForm" id="edit-profile" method="POST" enctype="multipart/form-data" action="">
+        <fieldset class="inlineLabels">
+            {{ photo_form|as_uni_form }}
+            <div class="form_block">
+                <input type="hidden" name="action" value="upload" />
+                <input type="submit" value="{% trans "Upload" %}" class="button" />
+            </div>
         </fieldset>
-    </div>
-
+    </form>
 {% endblock %}
