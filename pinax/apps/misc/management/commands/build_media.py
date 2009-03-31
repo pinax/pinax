@@ -39,8 +39,8 @@ class Command(BaseCommand):
 
     def handle(self, *app_labels, **options):
         if not app_labels:
-            app_labels = settings.INSTALLED_APPS
-        short_app_labels = [label.split('.')[-1] for label in app_labels]
+            app_labels = list(settings.INSTALLED_APPS)
+        short_app_labels = [label.split('.')[-1] for label in app_labels] + ['pinax']
         interactive = options.get('interactive', False)
         dry_run = options.get('dry_run', False)
         exclude = options.get('exclude')
@@ -56,20 +56,27 @@ class Command(BaseCommand):
         # the file and the file's absolute path.  The list will have a length
         # greater than 1 if multiple apps provide a media file with the same
         # relative path.
+
         media_files = {}
         for app in app_labels:
             if app not in self.ignore_apps:
                 for rel_path, abs_path in self.handle_app(app, **options):
                     media_files.setdefault(rel_path, []).append((app, abs_path))
 
-        for location in (pinax_media_root, project_media_root):
-            if not os.path.isdir(location):
-                continue
+        if os.path.isdir(pinax_media_root):
             app_labels = []
-            app_labels[:] = self.filter_names(os.listdir(location), exclude=exclude)
+            app_labels[:] = self.filter_names(os.listdir(pinax_media_root), exclude=exclude)
             for app in app_labels:
                 if app in short_app_labels and app not in self.ignore_apps:
-                    for rel_path, abs_path in self.handle_override(app, location, **options):
+                    for rel_path, abs_path in self.handle_pinax(app, pinax_media_root, **options):
+                        media_files.setdefault(rel_path, []).append((app, abs_path))
+
+        if os.path.isdir(project_media_root):
+            app_labels = []
+            app_labels[:] = self.filter_names(os.listdir(project_media_root), exclude=exclude)
+            for app in app_labels:
+                if app not in self.ignore_apps:
+                    for rel_path, abs_path in self.handle_project(app, project_media_root, **options):
                         media_files.setdefault(rel_path, []).append((app, abs_path))
 
         # Forget the unused versions of a media file
@@ -113,13 +120,13 @@ class Command(BaseCommand):
             print "\nSelected %r provided by %r." % (destination, app)
             self.process_file(source, destination, media_root, **options)
 
-    def handle_override(self, app, location, **options):
+    def handle_pinax(self, app, location, **options):
         media_dirs = options.get('media_dirs')
         exclude = options.get('exclude')
         for media_dir in media_dirs:
             app_media = os.path.join(location, app)
             if os.path.isdir(app_media):
-                prefix_length = len(app_media) + len(os.sep)
+                prefix_length = len(location) + len(os.sep)
                 for root, dirs, files in os.walk(app_media):
                     # Filter `dirs` and `files` based on the exclusion pattern.
                     dirs[:] = self.filter_names(dirs, exclude=exclude)
@@ -129,12 +136,26 @@ class Command(BaseCommand):
                         relative_path = absolute_path[prefix_length:]
                         yield (relative_path, absolute_path)
 
+    def handle_project(self, app, location, **options):
+        media_dirs = options.get('media_dirs')
+        exclude = options.get('exclude')
+        for media_dir in media_dirs:
+            prefix_length = len(location) + len(os.sep)
+            for root, dirs, files in os.walk(location):
+                # Filter `dirs` and `files` based on the exclusion pattern.
+                dirs[:] = self.filter_names(dirs, exclude=exclude)
+                files[:] = self.filter_names(files, exclude=exclude)
+                for filename in files:
+                    absolute_path = os.path.join(root, filename)
+                    relative_path = absolute_path[prefix_length:]
+                    yield (relative_path, absolute_path)
+
     def handle_app(self, app, **options):
         if isinstance(app, basestring):
             app = __import__(app, {}, {}, [''])
+        app_root = os.path.dirname(app.__file__)
         media_dirs = options.get('media_dirs')
         exclude = options.get('exclude')
-        app_root = os.path.dirname(app.__file__)
         for media_dir in media_dirs:
             app_media = os.path.join(app_root, media_dir)
             if os.path.isdir(app_media):
