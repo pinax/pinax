@@ -1,46 +1,46 @@
 Installation
 ============
-
-The sample projects in Pinax depend on a lot of external apps and libraries. 
-Since we `moved to distutils/setuptools`_ we are able to manage those 
+ 
+The sample projects in Pinax depend on a lot of external apps and libraries.
+Since we `moved to distutils/setuptools`_ we are able to manage those
 dependecies by using useful tools `virtualenv`_, `pip`_ and `buildout`_.
-
-One exciting feature of pip for example is the ability to install Python 
+ 
+One exciting feature of pip for example is the ability to install Python
 packages like the external apps directly from various version control systems.
 The development version of Pinax relies on some apps that are hosted that way.
 So please make sure you have the latest versions installed of: Subversion_,
 Git_, Mercurial_ and Bazaar_. If you prefer to use buildout you can use the
 provided buildout.cfg, which uses `gp.recipe.pip`_ internally.
-
-To make it easier to start with developing your own Pinax based project we 
-provide a `virtualenv bootstrap script`_. It creates a virtualenv with the 
+ 
+To make it easier to start with developing your own Pinax based project we
+provide a `virtualenv bootstrap script`_. It creates a virtualenv with the
 necessary Pinax Git clone and installs pip_ and Django_ inside the
 environment. This allows you to keep your whole project inside one directory
 and doesn't spoil the global site-packages directory with all the dependencies.
-
+ 
 First download the virtualenv bootstrap script (Linux)::
-
+ 
     curl -o pinax-boot.py http://github.com/pinax/pinax/raw/master/scripts/pinax-boot.py
-
+ 
 or open ``http://github.com/pinax/pinax/raw/master/scripts/pinax-boot.py`` in
 your browser and save it on your hard disk.
-
+ 
 Then run the script, e.g. to create a environment called ``pinax-env``::
-
+ 
     python pinax-boot.py pinax-env
-
+ 
 After that you need to `activate the new environment`_ so your shell session
 knows which Python interpreter and site-packages directory to use. If you use
 bash you can simply run this in the environment root directory::
-
+ 
     source bin/activate
-
+ 
 You are now able to install the required external apps and libraries by either
 using pip or buildout, whatever you prefer.
-
+ 
 The one exception is the `Python Imaging Library`_ (PIL)
 which you will have to provide yourself if you want photo support.
-
+ 
 .. note::
     
     Some of the external apps are still link hosted with Google Code. It is
@@ -52,88 +52,111 @@ which you will have to provide yourself if you want photo support.
     
     You should be able to ignore it and try the installation, checkout or
     update again.
-
+ 
 Using ``pip``
 -------------
-
+ 
 ``pip`` allows you to install the required Python packages by passing a simple
 text file containing a list of requirement strings, e.g. django-wikiapp==0.1.2.
 Please don't hesitate to read about the requirement files in
 `pip's documentation`_. We currently provide two requirement files:
-
+ 
 * ``requirements/libs.txt`` - Libraries and non-Django packages
 * ``requirements/external_apps.txt`` - External reusable Django apps
-
+ 
 Note that the latter automatically includes the libraries. You should think of
 it as a starting point for your own requirement files. For example here's
 how you start the installation of every requirement::
-
+ 
     pip install --requirement src/pinax/requirements/external_apps.txt
-
+ 
 We will however provide `requirements files`_ for each sample project soon so
 you don't have to install the apps and libraries used in all Pinax sample
 projects.
-
+ 
 In case you want to update the development version of Pinax you have to update
 both Pinax and the apps separately. The Pinax code is updated by running in
 the ``src/pinax`` directory::
-
+ 
     git pull
-
+ 
 To update the apps and libraries run again inside the environment root
 directory::
-
+ 
     pip install --requirement src/pinax/requirements/external_apps.txt
-
+ 
 Note that if you want to use another external app or external library,
 you don't need to use the `requirement file we provide`_. Don't hesitate to
 write your own or install it directly with pip inside your environment.
-
+ 
 Using ``buildout``
 ------------------
-
+ 
 ``buildout`` enables you to go a bit further in the way you handle
 requirements by abstracting the different deployment scenarios with
 so-called `recipes`_. Pinax for example uses a `pip recipe`_ to make sure
 every requirement is installed properly. But you can easily integrate it with
 your current buildouts.
-
+ 
 To get started with buildout you first need to install buildout in the
 virtualenv we created with the virtualenv bootstrap script::
-
+ 
     pip install zc.buildout
-
+ 
 After that you'll have a new executable inside your ``bin`` (Linux) or
 ``Script`` directory (Windows) which you'll use with a buildout config file
 we provide.
-
+ 
 This file needs to be downloaded from the Pinax repository and saved in the
 virtualenv root directory. So please make sure you are in the directory that
 contains the following directories (among others): ``bin``, ``build`` and
 ``src`` and run (on Linux)::
-
+ 
     curl -o buildout.cfg http://github.com/pinax/pinax/raw/master/buildout.cfg
-
+ 
 or open ``http://github.com/pinax/pinax/raw/master/buildout.cfg`` in
 your browser and save it on your hard disk in the virtualenv root directory.
-
+ 
 Then all you need to do is to run the buildout command inside the virtualenv
 root directory. You can update the buildout and the packages it contains
 by running buildout again.
-
+ 
 What's next?
 ------------
-
+ 
 Once the installation is complete, you should be able to cd into
-``src/pinax/projects/social_project/`` or
-``src/pinax/projects/basic_project/`` and run 
+``src/pinax/pinax/projects/social_project/`` or
+``src/pinax/pinax/projects/basic_project/`` and run
 ``./manage.py syncdb`` and ``./manage.py runserver`` to get running
 immediately.
-
+ 
 These are just sample projects, however. You will likely want to create your
-own project and :ref:`customize <ref-customization>` it.
+own project and `customize <ref-customization>`_ it.
+ 
 
-.. _`moved to distutils/setuptools`: http://code.google.com/p/django-hotclub/wiki/MovingToDistutils
+ 
+Directory Structure
+-------------------
+ 
+======================= ====================================================
+Directory Content
+======================= ====================================================
+``apps/``               contains re-usable apps that aren't yet externalized
+``docs/``               documentation (using rst and sphinx; in progress)
+``fixtures/``           test fixtures (in progress)
+``libs/``               contains local libraries
+``media/``              common media files
+``projects/``           contains a sample projects
+``requirements/``       pip requirement files (in progress)
+``templates/``          common templates
+======================= ====================================================
+ 
+There is some path manipulation in manage.py to get this all to work. You'll
+need to do something similar in your wsgi or mod_python configuration. See
+`ref-deployment`_ for more details.
+ 
+.. _`Python Imaging Library`: http://www.pythonware.com/products/pil/
+.. _`moved to distutils/setuptools`: http://pinaxproject.com/docs/trunk/install.html
 .. _virtualenv: http://pypi.python.org/pypi/virtualenv
 .. _pip: http://pypi.python.org/pypi/pip
 .. _activate the new environment: http://pypi.python.org/pypi/virtualenv#activate-script
@@ -150,25 +173,5 @@ own project and :ref:`customize <ref-customization>` it.
 .. _`pip's documentation`: http://pip.openplans.org/
 .. _recipes: http://pypi.python.org/pypi/zc.buildout#id1
 .. _`pip recipe`: http://pypi.python.org/pypi/gp.recipe.pip
-
-Directory Structure
--------------------
-
-=======================   ====================================================
-Directory                 Content
-=======================   ====================================================
-``apps/``                 contains re-usable apps that aren't yet externalized
-``docs/``                 documentation (using rst and sphinx; in progress)
-``fixtures/``             test fixtures (in progress)
-``libs/``                 contains local libraries
-``media/``                common media files
-``projects/``             contains a sample projects
-``requirements/``         pip requirement files (in progress)
-``templates/``            common templates
-=======================   ====================================================
-
-There is some path manipulation in manage.py to get this all to work. You'll
-need to do something similar in your wsgi or mod_python configuration. See
-:ref:`ref-deployment` for more details.
-
-.. _`Python Imaging Library`: http://www.pythonware.com/products/pil/
+.. _`ref-deployment`: http://code.pinaxproject.com
+.. _`customize <ref-customization>`: http://code.pinaxproject.com
