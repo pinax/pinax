@@ -9,7 +9,7 @@ from django_openid.registration import RegistrationConsumer
 
 from account.forms import OpenIDSignupForm
 from account.utils import get_default_redirect
-from account.views import login
+from account.views import login as account_login
 
 class PinaxConsumer(RegistrationConsumer):
     
@@ -36,6 +36,8 @@ class PinaxConsumer(RegistrationConsumer):
         that redirects back to a certain URL if there's no openid_url in the
         POST body.
         """
-        if not request.POST.get('openid_url'):
-            return login(request, url_required=True)
+        openid_url = request.POST.get('openid_url')
+        openids = request.session.get('openids')
+        if not openid_url and not openids:
+            return account_login(request, url_required=True)
         return super(PinaxConsumer, self).do_register(request, *args, **kwargs)
