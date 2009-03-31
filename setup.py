@@ -16,7 +16,7 @@ setup(
     zip_safe=False,
     entry_points={
         'console_scripts': [
-            'pinax-clone-project = pinax.conf.clone_project:entry_point',
+            'pinax-admin = pinax.core.management:execute_from_command_line',
         ],
     },
     classifiers=[

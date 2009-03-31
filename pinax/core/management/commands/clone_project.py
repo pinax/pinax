@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import glob
 import os
 import optparse
@@ -9,13 +7,14 @@ import re
 import random
 import pinax
 
+from optparse import make_option
+from django.core.management.base import BaseCommand
 
 EXCLUDED_PATTERNS = ('.svn',)
 DEFAULT_PINAX_ROOT = None # fallback to the normal PINAX_ROOT in settings.py.
 PINAX_ROOT_RE = re.compile(r'PINAX_ROOT\s*=.*$', re.M)
 SECRET_KEY_RE = re.compile(r'SECRET_KEY\s*=.*$', re.M)
 CHARS = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)'
-
 
 def get_pinax_root(default_pinax_root):
     if default_pinax_root is None:
@@ -127,38 +126,41 @@ def main(default_pinax_root, project_name, destination, verbose=True):
         print "Finished cloning your project, now you may enjoy Pinax!"
 
 
-def entry_point():
-    usage = ("Usage: %prog [options] PROJECT_NAME DESTINATION\n\n(Note that " +
-        "PROJECT_NAME may be a path to a project template of your own)")
-    parser = optparse.OptionParser(usage=usage)
-    parser.add_option('-r', '--pinax-root', dest='pinax_root',
-        default=DEFAULT_PINAX_ROOT,
-        help='the directory that can be used ')
-    parser.add_option('-l', '--list-projects', dest='list_projects',
-        action='store_true',
-        help='lists the projects that are available on this system')
-    parser.add_option('-v', '--verbose', dest='verbose',
-        action='store_false', default=True,
-        help='enables verbose output')
-    (options, args) = parser.parse_args()
-    
-    if options.list_projects:
-        pinax_root = get_pinax_root(options.pinax_root)
-        print "Available Projects"
-        print "------------------"
-        sys.path.insert(0, get_projects_dir(pinax_root))
-        for project in map(os.path.basename, get_projects(pinax_root)):
-            print "%s:" % (project,)
-            about = getattr(__import__(project), '__about__', '')
-            for line in about.strip().splitlines():
-                print '    %s' % (line,)
-            print ''
-        sys.exit(0)
+class Command(BaseCommand):
+    help = "Clones a Pinax project to begin development on a new site"
+    args = ("PROJECT_NAME DESTINATION (Note that PROJECT_NAME may" +
+        " be a path to a project template of your own)")
 
-    if len(args) < 2:
-        parser.print_usage()
-        sys.exit(1)
-    
-    main(options.pinax_root, args[0], args[1], verbose=options.verbose)
-    return 0
-    
+    option_list = BaseCommand.option_list + (
+        make_option('-r', '--pinax-root', dest='pinax_root',
+            default=DEFAULT_PINAX_ROOT,
+            help='the directory that can be used '),
+        make_option('-l', '--list-projects', dest='list_projects',
+            action='store_true',
+            help='lists the projects that are available on this system'),
+        make_option('-b', '--verbose', dest='verbose',
+            action='store_false', default=True,
+            help='enables verbose output'),
+    )
+
+    def handle(self, *args, **options):
+        if options.get('list_projects'):
+            pinax_root = get_pinax_root(options.get('pinax_root'))
+            print "Available Projects"
+            print "------------------"
+            sys.path.insert(0, get_projects_dir(pinax_root))
+            for project in map(os.path.basename, get_projects(pinax_root)):
+                print "%s:" % (project,)
+                about = getattr(__import__(project), '__about__', '')
+                for line in about.strip().splitlines():
+                    print '    %s' % (line,)
+                print ''
+            sys.exit(0)
+
+        if len(args) < 2:
+            parser.print_usage()
+            sys.exit(1)
+
+        main(options.get('pinax_root'), args[0], args[1],
+            verbose=options.get('verbose'))
+        return 0
