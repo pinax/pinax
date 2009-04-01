@@ -5,9 +5,7 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes import generic
 from django.contrib.auth.models import User
-
-from tagging.fields import TagField # @@@ see below
-
+from django.contrib.contenttypes.models import ContentType
 
 class BasicGroup(models.Model):
     """
@@ -20,14 +18,23 @@ class BasicGroup(models.Model):
     created = models.DateTimeField(_('created'), default=datetime.now)
     description = models.TextField(_('description'))
     members = models.ManyToManyField(User, verbose_name=_('members')) # @@@ plan to break this out
-    
-    deleted = models.BooleanField(_('deleted'), default=False) # @@@ should this be supported on basic group and if so, in this manner?
-    
-    tags = TagField() # @@@ should tags be optional?
-    
+            
     def __unicode__(self):
         return self.name
     
     @models.permalink
     def get_absolute_url(self):
         return ("group_detail", [self.slug])
+    
+    def get_url_kwargs(self):
+        return {'group_slug': self.slug}
+    
+    def user_is_member(self, user):
+        return user in self.members.all()
+    
+    def get_related_objects(self, model):
+        related_objects = model._default_manager.filter(
+            object_id=self.id,
+            content_type=ContentType.objects.get_for_model(self)
+        )
+        return related_objects

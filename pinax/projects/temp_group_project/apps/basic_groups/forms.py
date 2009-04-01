@@ -26,7 +26,7 @@ class BasicGroupForm(forms.ModelForm):
     
     class Meta:
         model = BasicGroup
-        fields = ('name', 'slug', 'description', 'tags') # @@@ how should we handle making tags optional? should they be optional?
+        fields = ('name', 'slug', 'description')
 
 
 # @@@ is this the right approach, to have two forms where creation and update fields differ?
@@ -43,4 +43,4 @@ class BasicGroupUpdateForm(forms.ModelForm):
     
     class Meta:
         model = BasicGroup
-        fields = ('name', 'description', 'tags') # @@@ how should we handle making tags optional? should they be optional?
+        fields = ('name', 'description')

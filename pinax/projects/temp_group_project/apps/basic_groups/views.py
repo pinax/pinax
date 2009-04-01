@@ -16,15 +16,10 @@ from basic_groups.models import BasicGroup
 from basic_groups.forms import BasicGroupForm, BasicGroupUpdateForm
 
 
-MEMBER_COUNT_SQL = """
-SELECT COUNT(*)
-FROM basic_groups_basicgroup_members
-WHERE basic_groups_basicgroup_members.basicgroup_id = basic_groups_basicgroup_members.id
-"""
-
+@login_required
 def create(request, form_class=BasicGroupForm, template_name="basic_groups/create.html"):
     
-    if request.user.is_authenticated() and request.method == "POST":
+    if request.method == "POST":
         if request.POST["action"] == "create": # @@@ why bother?
             group_form = form_class(request.POST)
             if group_form.is_valid():
@@ -47,46 +42,23 @@ def create(request, form_class=BasicGroupForm, template_name="basic_groups/creat
     }, context_instance=RequestContext(request))
 
 
-def groups(request, template_name="basic_groups/groups.html", order=None):
+def groups(request, template_name="basic_groups/groups.html"):
     
-    groups = BasicGroup.objects.filter(deleted=False)
-    search_terms = request.GET.get('search', '')
-    
-    if search_terms:
-        groups = (groups.filter(name__icontains=search_terms) |
-            groups.filter(description__icontains=search_terms))
-    
-    if order == 'least_members':
-        groups = groups.extra(select={'member_count': MEMBER_COUNT_SQL})
-        groups = groups.order_by('member_count')
-    elif order == 'most_members':
-        groups = groups.extra(select={'member_count': MEMBER_COUNT_SQL})
-        groups = groups.order_by('-member_count')
-    elif order == 'name_ascending':
-        groups = groups.order_by('name')
-    elif order == 'name_descending':
-        groups = groups.order_by('-name')
-    elif order == 'date_oldest':
-        groups = groups.order_by('-created')
-    elif order == 'date_newest':
-        groups = groups.order_by('created')
+    groups = BasicGroup.objects.filter()
     
     return render_to_response(template_name, {
         'groups': groups,
-        'search_terms': search_terms,
-        'order': order,
     }, context_instance=RequestContext(request))
 
 
-def delete(request, slug, redirect_url=None):
-    group = get_object_or_404(BasicGroup, slug=slug)
+def delete(request, group_slug=None, redirect_url=None):
+    group = get_object_or_404(BasicGroup, slug=group_slug)
     if not redirect_url:
         redirect_url = reverse('group_list')
     
     # @@@ eventually, we'll remove restriction that group.creator can't leave group but we'll still require group.members.all().count() == 1
     if request.user.is_authenticated() and request.method == "POST" and request.user == group.creator and group.members.all().count() == 1:
-        group.deleted = True
-        group.save()
+        group.delete()
         request.user.message_set.create(message="Group %s deleted." % group)
         # no notification required as the deleter must be the only member
     
@@ -96,15 +68,12 @@ def delete(request, slug, redirect_url=None):
 @login_required
 def your_groups(request, template_name="basic_groups/your_groups.html"):
     return render_to_response(template_name, {
-        "groups": BasicGroup.objects.filter(deleted=False, members=request.user).order_by("name"),
+        "groups": BasicGroup.objects.filter(members=request.user).order_by("name"),
     }, context_instance=RequestContext(request))
 
 
-def group(request, slug, form_class=BasicGroupUpdateForm, template_name="basic_groups/group.html"):
-    group = get_object_or_404(BasicGroup, slug=slug)
-    
-    if group.deleted:
-        raise Http404
+def group(request, group_slug=None, form_class=BasicGroupUpdateForm, template_name="basic_groups/group.html"):
+    group = get_object_or_404(BasicGroup, slug=group_slug)
     
     if request.user.is_authenticated() and request.method == "POST":
         if request.POST["action"] == "update" and request.user == group.creator:
