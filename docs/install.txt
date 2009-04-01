@@ -50,14 +50,11 @@ or::
 
   (venv)$  easy_install -i http://dist.serverzen.com/pypi/simple PILwoTk
 
-Of course you'll a C compiler, and JPEG libz librarys PIL epends upon.
-If you don't have those in standard locations you can install them
-from:
-
-  http://freshmeat.net/projects/libjpeg/
+Of course you'll need a C compiler, and `libjpeg`_ `libz`_ libraries
+upon which PIL depends.
 
 On GNU/Linux you may be able to RPM or yum install libjpeg-devel to
-automate this.
+automate this. If not, compiling from source isn't that hard.
 
 
  
@@ -195,3 +192,6 @@ need to do something similar in your wsgi or mod_python configuration. See
 .. _`pip recipe`: http://pypi.python.org/pypi/gp.recipe.pip
 .. _`ref-deployment`: http://code.pinaxproject.com
 .. _`customize <ref-customization>`: http://code.pinaxproject.com
+.. _`libjpeg`: http://freshmeat.net/projects/libjpeg/
+.. _`libz`: http://www.zlib.net/
+
