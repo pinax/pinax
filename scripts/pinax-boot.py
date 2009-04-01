@@ -971,6 +971,20 @@ import sys
 
 PINAX_GIT_LOCATION = 'git://github.com/pinax/pinax.git'
 
+if sys.platform == 'win32':
+    GIT_CMD = 'git.cmd'
+    extra = {'shell': True}
+else:
+    GIT_CMD = 'git'
+    extra = {}
+
+try:
+    subprocess.call([GIT_CMD], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+except Exception, e:
+    print 'ERROR: this script requires Git. %s' % e
+    print 'Please install Git to create a Pinax virtualenv.'
+    sys.exit(101)
+
 try:
     import pip
 except ImportError:
@@ -985,11 +999,11 @@ else:
 
 def extend_parser(parser):
     parser.add_option(
-        '--repository',
+        '-r', '--repository',
         metavar='DIR_OR_URL',
         dest='pinax_git',
         default=PINAX_GIT_LOCATION,
-        help='Location of a Git URL to use for the installation of Pinax'
+        help='Location of a Git repository to use for the installation of Pinax'
     )
 
 def adjust_options(options, args):
