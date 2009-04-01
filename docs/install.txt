@@ -40,7 +40,23 @@ using pip or buildout, whatever you prefer.
  
 The one exception is the `Python Imaging Library`_ (PIL)
 which you will have to provide yourself if you want photo support.
- 
+
+From within your activated virtual environment, these command have
+worked for some users; it installed tweaked versions::
+
+  (venv)$ pip install  http://dist.repoze.org/PIL-1.1.6.tar.gz
+
+or::
+
+  (venv)$  easy_install -i http://dist.serverzen.com/pypi/simple PILwoTk
+
+Of course you'll need a C compiler, and `libjpeg`_ `libz`_ libraries
+upon which PIL depends.
+
+On GNU/Linux you may be able to RPM or yum install libjpeg-devel to
+automate this. If not, compiling from source isn't that hard.
+
+
 .. note::
     
     Some of the external apps are still link hosted with Google Code. It is
@@ -175,3 +191,5 @@ need to do something similar in your wsgi or mod_python configuration. See
 .. _`pip recipe`: http://pypi.python.org/pypi/gp.recipe.pip
 .. _`ref-deployment`: http://pinaxproject.com/docs/trunk/deployment.html
 .. _`customize <ref-customization>`: http://pinaxproject.com/docs/trunk/customization.html
+.. _`libjpeg`: http://freshmeat.net/projects/libjpeg/
+.. _`libz`: http://www.zlib.net/
