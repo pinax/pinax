@@ -1,0 +1,45 @@
+====================================
+ Developer Code Repository Workflow
+====================================
+
+There is a different "workflow" for developers with Commit privilege
+and those without.  
+
+
+Developers with Commit Privileges
+=================================
+
+[TBD]
+
+
+Developers without Commit Privileges
+====================================
+
+Login to http://github.com and search for Pinax or go directly here::
+
+  http://github.com/pinax/pinax/tree/master
+
+Use the 'fork' button to fork the Pinax tree to your area. This
+invokes a "Hardcore Forking Action".
+
+Grab the "Your Clone" URL from the page, using the Flash button if you
+have Flash. It gives you something like this::
+
+  git@github.com:yourusername/pinax.git
+
+Clone this to your computer: in the current pinax-boot installation,
+cd to src/ and then::
+
+  git clone git@github.com:yourusername/pinax.git
+
+Do your development in src/pinax, test, later, rinse, repeat. When
+you're satisfied with your changes, ``git commit`` them to your local
+repository copy and send it back up to your fork on Github::
+
+  git push
+
+When you're ready for the committers to review your changes for
+acceptance, go to your fork on Github (e.g.,
+``http://github.com/yourusername/pinax/tree/master``) then hit the "pull
+request" button to notify the committers.
+
