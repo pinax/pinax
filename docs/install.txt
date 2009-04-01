@@ -39,7 +39,27 @@ You are now able to install the required external apps and libraries by either
 using pip or buildout, whatever you prefer.
  
 The one exception is the `Python Imaging Library`_ (PIL)
+
 which you will have to provide yourself if you want photo support.
+From within your activated virtual environment, these command have
+worked for some users; it installed tweaked versions::
+
+  (venv)$ pip install  http://dist.repoze.org/PIL-1.1.6.tar.gz
+
+or::
+
+  (venv)$  easy_install -i http://dist.serverzen.com/pypi/simple PILwoTk
+
+Of course you'll a C compiler, and JPEG libz librarys PIL epends upon.
+If you don't have those in standard locations you can install them
+from:
+
+  http://freshmeat.net/projects/libjpeg/
+
+On GNU/Linux you may be able to RPM or yum install libjpeg-devel to
+automate this.
+
+
  
 .. note::
     
