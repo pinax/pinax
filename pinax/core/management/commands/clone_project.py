@@ -138,7 +138,7 @@ class Command(BaseCommand):
             make_option('-r', '--pinax-root', dest='pinax_root',
                 default=DEFAULT_PINAX_ROOT,
                 action='store_true',                
-                help='the directory that can be used '),
+                help='the directory that can be used '),               
             make_option('-b', '--verbose', dest='verbose',
                 action='store_false', default=True,
                 help='enables verbose output'),
@@ -165,10 +165,11 @@ class Command(BaseCommand):
             sys.exit(0)
 
         if options.get('pinax_root'):
-            print "Pinax Root"
-            print "----------"            
-            print get_pinax_root(None)
+            print "Pinax Project Root"
+            print "------------------"            
+            print get_pinax_root(None) + '/projects'
             sys.exit(0)
+            
 
         ################################################################
         # If the user fails to supply enough arguments then we
