@@ -6,6 +6,7 @@ from django.utils.html import escape
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes import generic
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
 
 from tagging.fields import TagField
 from tagging.models import Tag
@@ -58,6 +59,19 @@ class Project(models.Model):
     def get_absolute_url(self):
         return ("project_detail", [self.slug])
     get_absolute_url = models.permalink(get_absolute_url)
+    
+    def get_url_kwargs(self):
+        return {'group_slug': self.slug}
+    
+    def user_is_member(self, user):
+        return user in self.members.all()
+    
+    def get_related_objects(self, model):
+        related_objects = model._default_manager.filter(
+            object_id=self.id,
+            content_type=ContentType.objects.get_for_model(self)
+        )
+        return related_objects
 
 
 class ProjectMember(models.Model):

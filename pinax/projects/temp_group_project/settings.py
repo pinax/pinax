@@ -133,8 +133,6 @@ INSTALLED_APPS = (
     'topics',
     
     'basic_groups',
-    'temp_projects',
-    'temp_tribes',
     
     'about',
     
