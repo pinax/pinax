@@ -137,8 +137,21 @@ If you are writing a theme to be used across multiple sites, you should modify
 ``base.html``, not ``site_base.html``. If you want to keep a particular theme
 but modify content for a specific site, you should modify ``site_base.html``.
 
+Changing Avatar/Gravatar defaults
+-----------------------------------
+
+By default Pinax assigns to users the Gravatar_ icon and uses the Gravatar icon
+system. If you want your own personal site avatar default, simply go to the 
+``settings.py`` in your project root and add these two lines of code::
+
+    # avatar controls
+    AVATAR_DEFAULT_URL =  MEDIA_URL + '<our_custom_avatar.jpg>'
+    AVATAR_GRAVATAR_BACKUP = False
+
 
 Adding Tabs
 -----------
 
 See :ref:`ref-tabs`
+
+.. _`Gravatar`: http://gravatar.com/
