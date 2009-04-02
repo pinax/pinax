@@ -160,6 +160,7 @@ INSTALLED_APPS = (
     # internal (for now)
     'analytics',
     'profiles',
+    'staticfiles',
     'account',
     'tribes',
     'projects',
