@@ -132,26 +132,7 @@
             {% comment %}
             <h2>{% trans "Tweets" %}</h2>
             
-            {% tweet_listing tweets 1 0 %}
-            
-            <h2>{% trans "Upcoming Events" %}</h2>
-            {% get_calendar tribe as calendar %}
-            {% if calendar.get_upcoming_events %}
-                <table class="topics">
-                    {% for event in calendar.get_upcoming_events %}
-                        <tr class="odd">
-                            <td>{{ event.title }}</td>
-                            <td>{{ event.start }}-{{ event.end }}</td>
-                        </tr>
-                    {% endfor %}
-                </table>
-            {% else %}
-                {% trans "There are no upcoming events." %}
-            {% endif %}
-            <p>
-                <a href="{{ calendar.get_absolute_url }}">{% trans "calendar..." %}</a>
-            </p>
-            
+            {% tweet_listing tweets 1 0 %}            
             
             {% if photos %}
                 <h2>{% trans "Tribe Photo Pool" %}</h2>

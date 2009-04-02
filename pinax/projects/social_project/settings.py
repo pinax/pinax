@@ -153,7 +153,6 @@ INSTALLED_APPS = (
     'photologue',
     'avatar',
     'flag',
-    'schedule',
     'microblogging',
     'locations',
     'uni_form',

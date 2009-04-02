@@ -40,7 +40,6 @@ FROM temp_tribes_tribe_members
 WHERE temp_tribes_tribe_members.tribe_id = temp_tribes_tribe.id
 """
 
-# @@@ from schedule.models import Calendar, CalendarRelation
 
 def create(request, form_class=TribeForm, template_name="tribes/create.html"):
     if request.user.is_authenticated() and request.method == "POST":
@@ -52,11 +51,6 @@ def create(request, form_class=TribeForm, template_name="tribes/create.html"):
                 tribe.save()
                 tribe.members.add(request.user)
                 tribe.save()
-                # @@@ this is just temporary to give tribes a single calendar -- will revisit during whole
-                # tribe/project merge effort
-                # @@@ calendar = Calendar(name = "%s Calendar" % tribe.name)
-                # @@@ calendar.save()
-                # @@@ CalendarRelation.objects.create_relation(calendar, tribe, distinction="default", inheritable=True)
                 if notification:
                     # @@@ might be worth having a shortcut for sending to all users
                     notification.send(User.objects.all(), "tribes_new_tribe", {"tribe": tribe}, queue=True)
