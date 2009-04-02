@@ -1,4 +1,4 @@
-{% extends "tribes/base.html" %}
+{% extends "topics/base.html" %}
 
 {% load i18n %}
 {% load uni_form %}
@@ -9,15 +9,15 @@
 {% block body %}
     <h1>{% trans "Discussion Topics for Group" %} <a href="{{ group.get_absolute_url }}">{{ group.name }}</a></h1>
     
-    {% autopaginate group.topics.all %}
+    {% autopaginate topics %}
     
-    {% for topic in group.topics.all %}
+    {% for topic in topics %}
         {% include "topics/topic_item.html" %}
     {% endfor %}
     
     {% paginate %}
     
-    {% if are_member %}
+    {% if is_member %}
         <h2>{% trans "New Topic" %}</h2>
         
         <form class="uniForm" method="POST" action="">

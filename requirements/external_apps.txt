@@ -1,13 +1,20 @@
 # Get all requirements formerly known as "external_libs" explicitly
 -r libs.txt
 
+# Need this for python2.4
+# pysqlite
+
 # Already released apps
 django-ajax-validation
 django-announcements
 django-avatar
 django-dbtemplates
 django-microblogging
-django-notification
+
+# published 1.2 has a 'finally' syntax error, jezdez fixed trunk:
+#django-notification
+http://django-notification.googlecode.com/svn/trunk/
+
 django-pagination
 django-robots
 django-messages
@@ -28,6 +35,7 @@ django-wikiapp
 django-flag
 django-debug-toolbar
 django-db-log
+=======
 
 # packages we create for release::
 http://django-tagging.googlecode.com/svn/trunk/

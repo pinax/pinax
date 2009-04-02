@@ -7,6 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 
 from tagging.fields import TagField
 
@@ -39,8 +40,8 @@ class Topic(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return ("tribe_topic", [self.pk])
-    get_absolute_url = models.permalink(get_absolute_url)
+        kwargs = self.group.get_url_kwargs()
+        return reverse("topic_detail", args=[self.pk], kwargs=kwargs)
     
     class Meta:
         ordering = ('-modified', )

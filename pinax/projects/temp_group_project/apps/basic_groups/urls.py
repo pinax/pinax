@@ -1,14 +1,21 @@
 from django.conf.urls.defaults import *
 
-urlpatterns = \
-    patterns('',
+from basic_groups.models import BasicGroup
+
+from topics.views import ContentApp
+
+include_kwargs = {
+    'app': ContentApp(BasicGroup, 'topics'),
+}
+
+urlpatterns = patterns('',
         url(r'^create/$', 'basic_groups.views.create', name="group_create"),
         url(r'^your_groups/$', 'basic_groups.views.your_groups', name="your_groups"),
         
         url(r'^$', 'basic_groups.views.groups', name="group_list"), 
-        url(r'^order/(?P<order>\w+)/$', 'basic_groups.views.groups', name="group_list_order"),
         
         # group-specific
-        url(r'^group/([-\w]+)/$', 'basic_groups.views.group', name="group_detail"),
-        url(r'^group/([-\w]+)/delete/$', 'basic_groups.views.delete', name="group_delete"),
+        url(r'^group/(?P<group_slug>[-\w]+)/$', 'basic_groups.views.group', name="group_detail"),
+        url(r'^group/(?P<group_slug>[-\w]+)/delete/$', 'basic_groups.views.delete', name="group_delete"),
+        url(r'^group/(?P<group_slug>[-\w]+)/topics/', include('topics.urls'), kwargs=include_kwargs),
     )
