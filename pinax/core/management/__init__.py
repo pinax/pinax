@@ -78,8 +78,9 @@ class ManagementUtility(object):
         """
         Returns the script's main help text, as a string.
         """
-        usage = ['', "Type '%s help <subcommand>' for help on a specific" + 
-            " subcommand." % self.prog_name, '']
+        usage = ['',
+                "Type '%s help <subcommand>' for help on a specific subcommand."
+                 % self.prog_name, '']
         usage.append('Available subcommands:')
         commands = get_commands().keys()
         commands.sort()
