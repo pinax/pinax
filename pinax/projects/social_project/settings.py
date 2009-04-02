@@ -143,7 +143,6 @@ INSTALLED_APPS = (
     'wiki',
     'swaps',
     'timezones',
-    'feedutil',
     'app_plugins',
     'voting',
     'tagging',
