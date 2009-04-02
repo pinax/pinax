@@ -19,6 +19,7 @@ urlpatterns = patterns('',
     (r'^profiles/', include('basic_profiles.urls')),
     (r'^notices/', include('notification.urls')),
     (r'^announcements/', include('announcements.urls')),
+    (r'^comments/', include('threadedcomments.urls')),
     
     (r'^groups/', include('basic_groups.urls')),
     (r'^tribes/', include('temp_tribes.urls')),

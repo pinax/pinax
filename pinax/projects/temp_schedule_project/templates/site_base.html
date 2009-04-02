@@ -2,6 +2,13 @@
 
 {% load i18n %}
 {% load openid_tags %}
+
+{% block extra_head_base %}
+    <link rel="stylesheet" href="{{ MEDIA_URL }}pinax/css/topics.css" />
+    <script type="text/javascript" src="{{ MEDIA_URL }}pinax/js/topics.js"></script>
+    {% block extra_head %}{% endblock %}
+{% endblock %}
+
 {% block login %}
     {% if user.is_authenticated %}
         {% openid_icon openid user %}<b>{{ user }}</b> | <a href="{% url acct_email %}">{% trans "Account" %}</a> | {% if user.is_staff %}<a href="/admin/">{% trans "Admin" %}</a> | {% endif %}<a href="/openid/logout/?next={% url acct_logout %}">{% trans "Logout" %}</a>
