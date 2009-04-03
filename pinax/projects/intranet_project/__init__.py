@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 __about__ = """
-This is mostly just a test project at the moment, but is derived from a
-project designed for intranet use.
+This project features applications, settings and tools for running Pinax in
+an intranet. You will likely want to customize things to fit your specific
+needs.
 """
