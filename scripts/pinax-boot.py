@@ -1040,7 +1040,7 @@ def after_install(options, home_dir):
         call_subprocess(['pip', '-E', home_dir, 'install', 'Django', '--quiet'],
                         filter_stdout=filter_lines, show_stdout=False)
         logger.notify('Installing Pinax')
-        call_subprocess(['pip', 'install', '-e', pinax_dir, '--quiet'],
+        call_subprocess(['pip', '-E', home_dir, 'install', '-e', pinax_dir, '--quiet'],
                         filter_stdout=filter_lines, show_stdout=False)
     finally:
         logger.indent -= 2
