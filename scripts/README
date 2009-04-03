@@ -1,0 +1,18 @@
+This is a directory for a bunch of script for release and development
+bootstrapping.
+
+create-venv-script.py
+  Creates a virtualenv bootstrap script pinax-boot.py with the content of
+  _installer.py.
+
+_installer.py
+  Contains the installation mechanism for boostrapping the development version.
+
+pinax-boot.py
+  Is a full virtualenv.py and include _installer.py.
+
+downloader.py
+  Parses the requirements in requirements/external_apps.txt and downloads the
+  source distribution of the packages mentioned, if possible. Will return a
+  list of other distributions that are only available as source code and
+  should be packaged up manually and moved to download/.
