@@ -79,7 +79,7 @@ class ManagementUtility(object):
         Returns the script's main help text, as a string.
         """
         usage = ['',
-                "Type '%s help <subcommand>' for help on a specific subcommand."
+                "Type '%s --help <subcommand>' for help on a specific subcommand."
                  % self.prog_name, '']
         usage.append('Available subcommands:')
         commands = get_commands().keys()
@@ -122,7 +122,7 @@ class ManagementUtility(object):
         try:
             subcommand = self.argv[1]
         except IndexError:
-            sys.stderr.write("Type '%s help' for usage.\n" % self.prog_name)
+            sys.stderr.write("Type '%s --help' for usage.\n" % self.prog_name)
             sys.exit(1)
         
         if self.argv[1:] == ['--version']:
