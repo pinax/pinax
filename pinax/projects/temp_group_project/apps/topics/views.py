@@ -7,7 +7,6 @@ from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.template.loader import select_template
-from django.contrib.contenttypes.models import ContentType
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -22,25 +21,10 @@ from threadedcomments.models import ThreadedComment
 from topics.forms import TopicForm
 from topics.models import Topic
 
-class ContentApp(object):
-    def __init__(self, group_model, content_app_name):
-        self.group_model = group_model
-        self.content_app_name = content_app_name
-    
-    def render(self, template_name, context, context_instance=None):
-        ctype = ContentType.objects.get_for_model(self.group_model)
-        return render_to_response([
-            '%s/%s/%s' % (ctype.app_label, self.content_app_name, template_name),
-            '%s/%s' % (self.content_app_name, template_name),
-        ], context, context_instance=context_instance)
-    
-    def get_group(self, slug):
-        return self.group_model._default_manager.get(slug=slug)
-
-def topics(request, group_slug=None, form_class=TopicForm, template_name="topics.html", app=None):
+def topics(request, group_slug=None, form_class=TopicForm, template_name="topics.html", bridge=None):
 
     try:
-        group = app.get_group(group_slug)
+        group = bridge.get_group(group_slug)
     except ObjectDoesNotExist:
         raise Http404
 
@@ -68,7 +52,7 @@ def topics(request, group_slug=None, form_class=TopicForm, template_name="topics
 
     topics = group.get_related_objects(Topic)
 
-    return app.render(template_name, {
+    return bridge.render(template_name, {
         "group": group,
         "topic_form": topic_form,
         "is_member": is_member,
@@ -76,26 +60,26 @@ def topics(request, group_slug=None, form_class=TopicForm, template_name="topics
     }, context_instance=RequestContext(request))
 
 
-def topic(request, topic_id, edit=False, template_name="topic.html", app=None):
+def topic(request, topic_id, edit=False, template_name="topic.html", bridge=None):
     topic = get_object_or_404(Topic, id=topic_id)
 
-    if request.method == "POST" and edit == True and \
-        (request.user == topic.creator or request.user == topic.group.creator):
+    if (request.method == "POST" and edit == True and 
+        (request.user == topic.creator or request.user == topic.group.creator)):
         topic.body = request.POST["body"]
         topic.save()
         return HttpResponseRedirect(topic.get_absolute_url())
 
-    return app.render(template_name, {
+    return bridge.render(template_name, {
         'topic': topic,
         'edit': edit,
     }, context_instance=RequestContext(request))
 
 
-def topic_delete(request, pk, app=None):
+def topic_delete(request, pk, bridge=None):
     topic = Topic.objects.get(pk=pk)
 
-    if request.method == "POST" and (request.user == topic.creator or \
-        request.user == topic.group.creator): 
+    if (request.method == "POST" and (request.user == topic.creator or
+        request.user == topic.group.creator)): 
         if forums:
             ThreadedComment.objects.all_for_object(topic).delete()
         topic.delete()

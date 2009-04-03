@@ -1,0 +1,14 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+
+{% block rtab_id %}id="tribes_tab"{% endblock %}
+
+{% block subnav %}
+    <ul>
+        {% if user.is_authenticated %}
+            <li><a href="{% url your_tribes %} ">{% trans "Your Tribes" %}</a></li>
+        {% endif %}
+        <li><a href="{% url tribe_list %}">{% trans "All Tribes" %}</a></li>
+    </ul>
+{% endblock %}

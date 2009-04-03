@@ -2,10 +2,10 @@ from django.conf.urls.defaults import *
 
 from basic_groups.models import BasicGroup
 
-from topics.views import ContentApp
+from groups_ng.bridge import ContentBridge
 
 include_kwargs = {
-    'app': ContentApp(BasicGroup, 'topics'),
+    'bridge': ContentBridge(BasicGroup, 'topics'),
 }
 
 urlpatterns = patterns('',

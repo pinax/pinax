@@ -10,7 +10,7 @@
         <div class="created">{{ topic.created|date }}</div>
     </div>
     <div class="bulk">
-        <h2><a href="{% url topic_detail %}">{{ topic.title }}</a></h2>
+        <h2><a href="{{ topic.get_absolute_url }}">{{ topic.title }}</a></h2>
         <div class="body">{{ topic.body|urlize|linebreaks }}</div>
         {% get_comment_count for topic as comment_count %}
         {% if comment_count %}
