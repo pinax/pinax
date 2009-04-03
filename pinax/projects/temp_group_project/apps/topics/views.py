@@ -63,8 +63,8 @@ def topics(request, group_slug=None, form_class=TopicForm, template_name="topics
 def topic(request, topic_id, edit=False, template_name="topic.html", bridge=None):
     topic = get_object_or_404(Topic, id=topic_id)
 
-    if request.method == "POST" and edit == True and \
-        (request.user == topic.creator or request.user == topic.group.creator):
+    if (request.method == "POST" and edit == True and 
+        (request.user == topic.creator or request.user == topic.group.creator)):
         topic.body = request.POST["body"]
         topic.save()
         return HttpResponseRedirect(topic.get_absolute_url())
@@ -78,8 +78,8 @@ def topic(request, topic_id, edit=False, template_name="topic.html", bridge=None
 def topic_delete(request, pk, bridge=None):
     topic = Topic.objects.get(pk=pk)
 
-    if request.method == "POST" and (request.user == topic.creator or \
-        request.user == topic.group.creator): 
+    if (request.method == "POST" and (request.user == topic.creator or
+        request.user == topic.group.creator)): 
         if forums:
             ThreadedComment.objects.all_for_object(topic).delete()
         topic.delete()

@@ -5,9 +5,12 @@ from django.db import models
 
 from groups_ng.base import Group
 
-class BasicGroup(Group):
-    members = models.ManyToManyField(User, related_name='basic_groups',
+class Tribe(Group):
+    members = models.ManyToManyField(User, related_name='tribes',
         verbose_name=_('members'))
 
     def get_absolute_url(self):
-        return reverse('group_detail', args=[self.slug])
+        return reverse('tribe_detail', args=[self.slug])
+    
+    def get_url_kwargs(self):
+        return {'group_slug': self.slug}

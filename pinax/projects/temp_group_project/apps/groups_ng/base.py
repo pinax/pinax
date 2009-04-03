@@ -12,9 +12,10 @@ class Group(models.Model):
     
     slug = models.SlugField(_('slug'), unique=True)
     name = models.CharField(_('name'), max_length=80, unique=True)
-    creator = models.ForeignKey(User, related_name="created_groups", verbose_name=_('creator'))
+    creator = models.ForeignKey(User, verbose_name=_('creator'))
     created = models.DateTimeField(_('created'), default=datetime.datetime.now)
     description = models.TextField(_('description'))
+    # Subclass must provide members field or replace user_is_member()
 
     def __unicode__(self):
         return self.name

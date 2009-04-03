@@ -18,7 +18,6 @@ from basic_groups.forms import BasicGroupForm, BasicGroupUpdateForm
 
 @login_required
 def create(request, form_class=BasicGroupForm, template_name="basic_groups/create.html"):
-    
     if request.method == "POST":
         if request.POST["action"] == "create": # @@@ why bother?
             group_form = form_class(request.POST)
