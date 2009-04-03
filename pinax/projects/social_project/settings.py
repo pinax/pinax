@@ -143,7 +143,6 @@ INSTALLED_APPS = (
     'wiki',
     'swaps',
     'timezones',
-    'feedutil',
     'app_plugins',
     'voting',
     'tagging',
@@ -153,7 +152,6 @@ INSTALLED_APPS = (
     'photologue',
     'avatar',
     'flag',
-    'schedule',
     'microblogging',
     'locations',
     'uni_form',
@@ -161,6 +159,7 @@ INSTALLED_APPS = (
     # internal (for now)
     'analytics',
     'profiles',
+    'staticfiles',
     'account',
     'tribes',
     'projects',

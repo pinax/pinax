@@ -67,12 +67,12 @@ Please also refer to the help of the build_media management command by running::
 Serving static files during development
 =========================================
 
-Pinax provides the static file serving view misc.views.serve to handle the app
+Pinax provides the static file serving view staticfiles.views.serve to handle the app
 and theme media. Make sure your projects' urls.py contains the following
 snippet below the rest of the url configuration::
 
     from django.conf import settings
     if settings.SERVE_MEDIA:
         urlpatterns += patterns('', 
-            (r'^site_media/(?P<path>.*)$', 'misc.views.serve')
+            (r'^site_media/(?P<path>.*)$', 'staticfiles.views.serve')
         )

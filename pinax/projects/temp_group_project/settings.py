@@ -128,6 +128,7 @@ INSTALLED_APPS = (
     
     # internal (for now)
     'basic_profiles',
+    'staticfiles',
     'account',
     'misc',
     'tag_app',

@@ -1,9 +1,6 @@
 # Get all requirements formerly known as "external_libs" explicitly
 -r libs.txt
 
-# Need this for python2.4
-# pysqlite
-
 # Already released apps
 django-ajax-validation
 django-announcements
@@ -11,44 +8,34 @@ django-avatar
 django-dbtemplates
 django-microblogging
 
-# published 1.2 has a 'finally' syntax error, jezdez fixed trunk:
-#django-notification
-http://django-notification.googlecode.com/svn/trunk/
-
+django-notification
 django-pagination
 django-robots
 django-messages
 django-threadedcomments
+django-extensions
+django-uni-form
+django-timezones
+django-page-cms
+django-bookmarks
+django-email-confirmation
+django-gravatar
+django-mailer
+django-friends
+django-locations
+django-oembed
+django-swaps
+django-wikiapp
+django-flag
+django-debug-toolbar
+django-db-log
 
-# Seems to have moved to github, so get it from there.
-#django-extensions
--e git://github.com/django-extensions/django-extensions.git#egg=django-extensions
-
-http://django-photologue.googlecode.com/files/photologue-2.1.zip
-django-wikiapp==0.1.2
-
-# Apps that are installed "directly" non-editable because they lack a
-# setuptools setup.py, are not released on pypi or don't have a recent release
+# packages we create for release::
 http://django-tagging.googlecode.com/svn/trunk/
 http://django-voting.googlecode.com/svn/trunk/
-http://django-timezones.googlecode.com/svn/trunk/
-http://django-db-log.googlecode.com/svn/trunk/
-http://django-page-cms.googlecode.com/svn/trunk/
 http://django-mptt.googlecode.com/svn/trunk/
 
-# Do editable checkouts (yay!)
--e svn+http://django-bookmarks.googlecode.com/svn/trunk#egg=django-bookmarks
--e svn+http://django-email-confirmation.googlecode.com/svn/trunk#egg=django-email-confirmation
--e svn+http://django-flag.googlecode.com/svn/trunk#egg=django-flag
--e svn+http://django-friends.googlecode.com/svn/trunk#egg=django-friends
--e svn+http://django-gravatar.googlecode.com/svn/trunk#egg=django-gravatar
--e svn+http://django-mailer.googlecode.com/svn/trunk#egg=django-mailer
--e svn+http://django-oembed.googlecode.com/svn/trunk#egg=django-oembed
--e svn+http://django-schedule.googlecode.com/svn/trunk#egg=django-schedule
--e svn+http://django-locations.googlecode.com/svn/trunk#egg=django-locations
--e svn+http://django-uni-form.googlecode.com/svn/trunk#egg=django-uni-form
--e svn+http://django-swaps.googlecode.com/svn/trunk#egg=django-swaps
--e svn+http://django-app-plugins.googlecode.com/svn/trunk#egg=django-app-plugins
+http://django-photologue.googlecode.com/files/photologue-2.1.zip
+
 -e git://github.com/brosner/django-openid.git#egg=django-openid
--e git://github.com/robhudson/django-debug-toolbar.git#egg=django-debug-toolbar
--e git://github.com/jezdez/django-feedutil.git#egg=django-feedutil
+-e svn+http://django-app-plugins.googlecode.com/svn/trunk#egg=django-app-plugins

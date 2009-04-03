@@ -25,5 +25,5 @@ urlpatterns = patterns('',
 
 if settings.SERVE_MEDIA:
     urlpatterns += patterns('', 
-        (r'^site_media/(?P<path>.*)$', 'misc.views.serve')
+        (r'^site_media/(?P<path>.*)$', 'staticfiles.views.serve')
     )
