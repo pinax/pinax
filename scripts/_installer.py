@@ -69,10 +69,10 @@ def after_install(options, home_dir):
         call_subprocess([join(bin_dir, 'easy_install'), '--quiet', 'pip'],
                         filter_stdout=filter_lines, show_stdout=False)
         logger.notify('Installing Django 1.0.2')
-        call_subprocess(['pip', '-E', pinax_dir, 'install', 'Django', '--quiet'],
+        call_subprocess(['pip', '-E', home_dir, 'install', 'Django', '--quiet'],
                         filter_stdout=filter_lines, show_stdout=False)
         logger.notify('Installing Pinax')
-        call_subprocess(['pip', 'install', '-E', pinax_dir, '--quiet'],
+        call_subprocess(['pip', 'install', '-e', pinax_dir, '--quiet'],
                         filter_stdout=filter_lines, show_stdout=False)
     finally:
         logger.indent -= 2
