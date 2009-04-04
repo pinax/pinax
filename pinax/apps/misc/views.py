@@ -1,6 +1,5 @@
 from django.http import HttpResponse
 from django.conf import settings
-from pinax.apps.media_handling.views import serve
 
 # @@@ these can be cleaned up a lot, made more generic and with better queries
 
