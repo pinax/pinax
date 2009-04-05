@@ -23,6 +23,9 @@ urlpatterns = patterns('',
     
     url(r'^confirm_email/(\w+)/$', 'emailconfirmation.views.confirm_email', name="acct_confirm_email"),
 
+    # Setting the permanent password after getting a key by email
+    url(r'^password_reset_key/$', 'account.views.password_reset_from_key', name="acct_passwd_reset_key"),    
+
     # ajax validation
     (r'^validate/$', 'ajax_validation.views.validate', {'form_class': SignupForm}, 'signup_form_validate'),
 )

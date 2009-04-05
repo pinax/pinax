@@ -3,6 +3,7 @@ from django.conf import settings
 from django.contrib.auth.models import User, AnonymousUser
 from django.db.models.signals import post_save
 from django.utils.translation import get_language_from_request, ugettext_lazy as _
+from datetime import datetime
 
 from timezones.fields import TimeZoneField
 
@@ -72,3 +73,15 @@ class AnonymousAccount(object):
 
     def __unicode__(self):
         return "AnonymousAccount"
+
+
+class PasswordReset(models.Model):
+
+    user = models.ForeignKey(User, verbose_name=_('user'))
+
+    temp_key = models.CharField(_('temp_key'), max_length=100)
+    timestamp = models.DateTimeField(_('timestamp'), default=datetime.now)
+    reset = models.BooleanField(_('reset yet?'), default=False)
+
+    def __unicode__(self):
+        return 'temp_key for ' + self.user.username

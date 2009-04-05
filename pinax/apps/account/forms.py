@@ -18,6 +18,9 @@ from account.models import Account
 
 from timezones.forms import TimeZoneField
 
+from account.models import PasswordReset
+
+
 alnum_re = re.compile(r'^\w+$')
 
 class LoginForm(forms.Form):
@@ -230,17 +233,66 @@ class ResetPasswordForm(forms.Form):
         return self.cleaned_data["email"]
 
     def save(self):
+
+        print User.objects.filter(email__iexact=self.cleaned_data["email"])
+        print self.cleaned_data["email"]
         for user in User.objects.filter(email__iexact=self.cleaned_data["email"]):
+            
+        
+            # make a random password so this account can't be accessed.
             new_password = User.objects.make_random_password()
             user.set_password(new_password)
             user.save()
-            subject = _("Password reset")
-            message = render_to_string("account/password_reset_message.txt", {
-                "user": user,
-                "new_password": new_password,
+        
+            # Make the temp key by generating another random password.
+            temp_key = User.objects.make_random_password()
+            
+            # save it to the password reset model
+            password_reset = PasswordReset(user=user,temp_key=temp_key)
+            password_reset.save()
+            
+            #send the password reset email
+            subject = _("Password reset email sent")
+            message = render_to_string("account/password_reset_key_message.txt", {
+                "user": user,        
+                "temp_key": temp_key
             })
             send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user.email], priority="high")
         return self.cleaned_data["email"]
+        
+class ResetPasswordKeyForm(forms.Form):
+    
+    temp_key = forms.CharField(label=_("Temporary Password"), widget=forms.PasswordInput(render_value=False))
+    password1 = forms.CharField(label=_("New Password"), widget=forms.PasswordInput(render_value=False))
+    password2 = forms.CharField(label=_("New Password (again)"), widget=forms.PasswordInput(render_value=False))
+
+    def clean_temp_key(self):
+        if not PasswordReset.objects.filter(temp_key__exact=self.cleaned_data.get("temp_key"),reset__exact=False).count() == 1:
+            raise forms.ValidationError(_("Please type your temporary password."))
+        return self.cleaned_data["temp_key"]
+
+    def clean_password2(self):
+        if "password1" in self.cleaned_data and "password2" in self.cleaned_data:
+            if self.cleaned_data["password1"] != self.cleaned_data["password2"]:
+                raise forms.ValidationError(_("You must type the same password each time."))
+        return self.cleaned_data["password2"]
+
+    def save(self):
+        # get the password_reset object
+        password_reset = PasswordReset.objects.get(temp_key__exact=self.cleaned_data.get("temp_key"))
+        
+        # now set the new user password
+        user = User.objects.get(passwordreset__exact=password_reset)
+        user.set_password(self.cleaned_data['password1'])
+        user.save()
+        user.message_set.create(message=ugettext(u"Password successfully changed."))
+        
+        # change all the password reset records to this person to be true.
+        #R8kmfcTycq
+        for password_reset in PasswordReset.objects.filter(user=user):
+            password_reset.reset = True
+            password_reset.save()
+            
 
 class ChangeTimezoneForm(AccountForm):
 

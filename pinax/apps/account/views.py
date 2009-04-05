@@ -14,7 +14,7 @@ from account.utils import get_default_redirect
 from account.models import OtherServiceInfo
 from account.forms import SignupForm, AddEmailForm, LoginForm, \
     ChangePasswordForm, SetPasswordForm, ResetPasswordForm, \
-    ChangeTimezoneForm, ChangeLanguageForm, TwitterForm
+    ChangeTimezoneForm, ChangeLanguageForm, TwitterForm, ResetPasswordKeyForm
 from emailconfirmation.models import EmailAddress, EmailConfirmation
 
 association_model = models.get_model('django_openid', 'Association')
@@ -174,6 +174,24 @@ def password_reset(request, form_class=ResetPasswordForm,
     return render_to_response(template_name, {
         "password_reset_form": password_reset_form,
     }, context_instance=RequestContext(request))
+    
+def password_reset_from_key(request,
+        form_class=ResetPasswordKeyForm,
+        template_name="account/password_reset_from_key.html"):
+        
+    if request.method == "GET":
+        password_reset_key_form = form_class()
+        
+    if request.method == "POST":
+        password_reset_key_form = form_class(request.POST)
+        if password_reset_key_form.is_valid():
+            password_reset_key_form.save()
+            password_reset_key_form = None 
+    
+    return render_to_response(template_name, {
+        "form": password_reset_key_form,
+    }, context_instance=RequestContext(request))
+    
 
 def timezone_change(request, form_class=ChangeTimezoneForm,
         template_name="account/timezone_change.html"):
