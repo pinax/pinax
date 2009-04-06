@@ -56,8 +56,10 @@ today_fmt = '%B %d, %Y'
 #unused_docs = []
 
 # List of directories, relative to source directories, that shouldn't be searched
-# for source files.
-#exclude_dirs = []
+# for source files recursively.
+exclude_trees = [
+    "external/repos",
+]
 
 # The reST default role (used for this markup: `text`) to use for all documents.
 #default_role = None

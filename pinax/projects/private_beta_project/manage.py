@@ -3,6 +3,12 @@ import sys
 
 from os.path import abspath, dirname, join
 
+try:
+    import pinax
+except ImportError:
+    sys.stderr.write("Error: Can't import Pinax. Make sure you have it installed or use pinax-boot.py to properly create a virtual environment.")
+    sys.exit(1)
+
 from django.conf import settings
 from django.core.management import setup_environ, execute_from_command_line
 
