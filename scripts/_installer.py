@@ -27,6 +27,11 @@ def resolve_command(cmd, default_paths=[]):
             if os.path.exists(os.path.join(path, cmd)):
                 cmd = os.path.join(path, cmd)
                 break
+    if sys.platform == 'win32':
+        # get the stupid short name on windows to prevent dying because of
+        # spaces in the command name
+        import win32api
+        cmd = win32api.GetShortPathName(cmd)
     if not os.path.exists(cmd):
         print "ERROR: this script requires %s." % cmd
         print "Please install it to create a Pinax virtualenv."
