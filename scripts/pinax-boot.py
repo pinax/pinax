@@ -984,8 +984,10 @@ else:
     EASY_INSTALL_CMD = 'easy_install'
     extra = {}
 
-def windows_path(path):
+def winpath(path):
     if sys.platform == 'win32':
+        if not os.path.exists(path):
+            os.makedirs(path)
         import win32api
         # get the stupid short name on Windows to prevent dying
         # because of spaces in the command name
@@ -1003,7 +1005,7 @@ def resolve_command(cmd, default_paths=[]):
             if os.path.exists(os.path.join(path, cmd)):
                 cmd = os.path.join(path, cmd)
                 break
-    cmd = windows_path(cmd)
+    cmd = winpath(cmd)
     if not os.path.exists(cmd):
         print "ERROR: this script requires %s." % cmd
         print "Please install it to create a Pinax virtualenv."
@@ -1036,17 +1038,17 @@ def adjust_options(options, args):
         return # caller will raise error
 
 def after_install(options, home_dir):
-    home_dir = windows_path(home_dir)
+    home_dir = winpath(os.path.abspath(home_dir))
     base_dir = os.path.dirname(home_dir)
     src_dir = join(home_dir, 'src')
     bin_dir = join(home_dir, BIN_DIR)
-    pinax_source = options.pinax_source
+    pinax_source = winpath(options.pinax_source)
     if os.path.exists(pinax_source):
         # A directory was given as a source for bootstrapping
         pinax_dir = os.path.abspath(pinax_source)
         logger.notify('Using existing Pinax at %s' % pinax_source)
     else:
-        # Go and checkout Pinax
+        # Go and get Pinax
         pinax_dir = join(src_dir, 'pinax')
         logger.notify('Fetching Pinax from %s to %s' % (pinax_source, pinax_dir))
         if not os.path.exists(src_dir):
@@ -1060,11 +1062,11 @@ def after_install(options, home_dir):
         logger.notify('Installing pip')
         easy_install = resolve_command(EASY_INSTALL_CMD, bin_dir)
         call_subprocess([easy_install, '--quiet', '--always-copy', 'pip'],
-                        filter_stdout=filter_lines, show_stdout=False)
+                       filter_stdout=filter_lines, show_stdout=False)
         pip = resolve_command(PIP_CMD, bin_dir)
         logger.notify('Installing Django')
         call_subprocess([pip, '--environment', home_dir, 'install', 'Django', '--quiet'],
-                        filter_stdout=filter_lines, show_stdout=False)
+                       filter_stdout=filter_lines, show_stdout=False)
         logger.notify('Installing Pinax')
         call_subprocess([pip, '--environment', home_dir, 'install', '--editable', pinax_dir, '--quiet'],
                         filter_stdout=filter_lines, show_stdout=False)
