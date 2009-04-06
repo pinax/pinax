@@ -74,10 +74,10 @@ def after_install(options, home_dir):
     base_dir = os.path.dirname(home_dir)
     src_dir = join(home_dir, 'src')
     bin_dir = join(home_dir, BIN_DIR)
-    pinax_source = winpath(options.pinax_source)
+    pinax_source = options.pinax_source
     if os.path.exists(pinax_source):
         # A directory was given as a source for bootstrapping
-        pinax_dir = os.path.abspath(pinax_source)
+        pinax_dir = winpath(os.path.abspath(pinax_source))
         logger.notify('Using existing Pinax at %s' % pinax_source)
     else:
         # Go and get Pinax
