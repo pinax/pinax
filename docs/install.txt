@@ -2,8 +2,8 @@ Installation
 ============
  
 The sample projects in Pinax depend on a lot of external apps and libraries.
-Since we `moved to distutils/setuptools`_ we are able to manage those
-dependecies by using useful tools `virtualenv`_, `pip`_ and `buildout`_.
+Since we moved to distutils/setuptools we are able to manage those
+dependencies by using useful tools `virtualenv`_, `pip`_ and `buildout`_.
  
 One exciting feature of pip for example is the ability to install Python
 packages like the external apps directly from various version control systems.
@@ -146,32 +146,32 @@ Once the installation is complete, you should be able to cd into
 immediately.
  
 These are just sample projects, however. You will likely want to create your
-own project and `customize <ref-customization>`_ it.
+own project and :doc:`customize <customization>` it.
  
 
  
 Directory Structure
 -------------------
- 
+
 ======================= ====================================================
-Directory Content
-======================= ====================================================
-``apps/``               contains re-usable apps that aren't yet externalized
 ``docs/``               documentation (using rst and sphinx; in progress)
-``fixtures/``           test fixtures (in progress)
-``libs/``               contains local libraries
-``media/``              common media files
-``projects/``           contains a sample projects
-``requirements/``       pip requirement files (in progress)
-``templates/``          common templates
+``pinax/``              pinax package itself
+``pinax/apps/``           re-usable apps that aren't yet externalized
+``pinax/core/``           core management command for project creation
+``pinax/fixtures/``       test fixtures (in progress)
+``pinax/media/``          shared media (images, css, javscript)
+``pinax/projects/``       sample and starter projects
+``pinax/templates/``      shared templates
+``requirements/``       pip requirements files for externals apps and libs
+``scripts/``            scripts for bootstrapping dev and building release
 ======================= ====================================================
- 
+
+
 There is some path manipulation in manage.py to get this all to work. You'll
 need to do something similar in your wsgi or mod_python configuration. See
-`ref-deployment`_ for more details.
+:doc:`deployment` for more details.
  
 .. _`Python Imaging Library`: http://www.pythonware.com/products/pil/
-.. _`moved to distutils/setuptools`: http://pinaxproject.com/docs/trunk/install.html
 .. _virtualenv: http://pypi.python.org/pypi/virtualenv
 .. _pip: http://pypi.python.org/pypi/pip
 .. _activate the new environment: http://pypi.python.org/pypi/virtualenv#activate-script
@@ -188,7 +188,5 @@ need to do something similar in your wsgi or mod_python configuration. See
 .. _`pip's documentation`: http://pip.openplans.org/
 .. _recipes: http://pypi.python.org/pypi/zc.buildout#id1
 .. _`pip recipe`: http://pypi.python.org/pypi/gp.recipe.pip
-.. _`ref-deployment`: http://pinaxproject.com/docs/trunk/deployment.html
-.. _`customize <ref-customization>`: http://pinaxproject.com/docs/trunk/customization.html
 .. _`libjpeg`: http://freshmeat.net/projects/libjpeg/
 .. _`libz`: http://www.zlib.net/
