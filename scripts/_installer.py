@@ -35,9 +35,9 @@ def resolve_command(cmd, default_paths=[]):
             paths.insert(0, default_paths)
         for path in paths:
             if os.path.exists(os.path.join(path, cmd)):
+                path = winpath(path)
                 cmd = os.path.join(path, cmd)
                 break
-    cmd = winpath(cmd)
     if not os.path.exists(cmd):
         print "ERROR: this script requires %s." % cmd
         print "Please install it to create a Pinax virtualenv."
