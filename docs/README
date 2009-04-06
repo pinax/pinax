@@ -1,0 +1,33 @@
+
+Building documentation
+======================
+
+To build the documentation (from root of source tree)::
+
+    cd docs/
+    bash build_docs.sh
+
+This will create ``external/repos`` where it will checkout external
+repositories. It will create symlinks in ``external/`` pointing to the docs
+directories. This allows Sphinx to properly reference external documentation.
+
+Running ``build_docs.sh`` more than once is okay. It cleans up any previous
+runs.
+
+@@@ Don't do full checkouts on each run of ``build_docs.sh``.
+
+
+Building documentation on pinaxproject.com
+==========================================
+
+This section only applies to individuals wanting to build documentation on
+pinaxproject.com. To build the documentation (assuming working directory is
+``/home/pinax``)::
+
+    cd docs_build/pinax-master
+    git pull
+    cd docs/
+    bash build_docs.sh
+
+While ``build_docs.sh`` is running the online documentation goes down. Ideally
+we build in support to show a page indicating the rebuild while running.
