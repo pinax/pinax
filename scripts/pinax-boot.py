@@ -984,6 +984,14 @@ else:
     EASY_INSTALL_CMD = 'easy_install'
     extra = {}
 
+def windows_path(path):
+    if sys.platform == 'win32':
+        import win32api
+        # get the stupid short name on Windows to prevent dying
+        # because of spaces in the command name
+        return win32api.GetShortPathName(path)
+    return path
+
 def resolve_command(cmd, default_paths=[]):
     # searches the current $PATH for the given executable and returns the
     # full path, borrowed from virtualenv.
@@ -995,11 +1003,7 @@ def resolve_command(cmd, default_paths=[]):
             if os.path.exists(os.path.join(path, cmd)):
                 cmd = os.path.join(path, cmd)
                 break
-    if sys.platform == 'win32':
-        # get the stupid short name on windows to prevent dying because of
-        # spaces in the command name
-        import win32api
-        cmd = win32api.GetShortPathName(cmd)
+    cmd = windows_path(cmd)
     if not os.path.exists(cmd):
         print "ERROR: this script requires %s." % cmd
         print "Please install it to create a Pinax virtualenv."
@@ -1032,6 +1036,7 @@ def adjust_options(options, args):
         return # caller will raise error
 
 def after_install(options, home_dir):
+    home_dir = windows_path(home_dir)
     base_dir = os.path.dirname(home_dir)
     src_dir = join(home_dir, 'src')
     bin_dir = join(home_dir, BIN_DIR)
@@ -1069,7 +1074,7 @@ def after_install(options, home_dir):
                   % home_dir)
     logger.indent += 2
     logger.notify("'source bin/activate' on Linux/Unix/Mac OS "
-                  "or '\\\\Scripts\\\\activate.bat' on Windows")
+                  "or '.\\Scripts\\activate.bat' on Windows")
     logger.indent -= 2
     logger.notify('Pinax environment created successfully.')
 
