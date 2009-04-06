@@ -1056,7 +1056,7 @@ def after_install(options, home_dir):
                   % home_dir)
     logger.indent += 2
     logger.notify("'source bin/activate' on Linux/Unix/Mac OS "
-                  "or '\\bin\\activate.bat' on Windows")
+                  "or '\\Scripts\\activate.bat' on Windows")
     logger.indent -= 2
     logger.notify('Pinax environment created successfully.')
 
