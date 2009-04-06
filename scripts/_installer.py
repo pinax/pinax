@@ -3,19 +3,27 @@ import sys
 
 PINAX_GIT_LOCATION = 'git://github.com/pinax/pinax.git'
 
+def resolve_executable(exe):
+    # searches the current $PATH for the given executable and returns the
+    # full path, borrowed from virtualenv.
+    if os.path.abspath(exe) != exe:
+        for path in os.environ.get('PATH', '').split(os.pathsep):
+            if os.path.exists(os.path.join(path, exe)):
+                exe = os.path.join(path, exe)
+                break
+    if not os.path.exists(exe):
+        print "ERROR: this script requires %s." % exe
+        print "Please install it to create a Pinax virtualenv."
+        sys.exit(3)
+    return exe
+
 if sys.platform == 'win32':
     GIT_CMD = 'git.cmd'
     extra = {'shell': True}
 else:
     GIT_CMD = 'git'
     extra = {}
-
-try:
-    subprocess.call([GIT_CMD], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-except Exception, e:
-    print 'ERROR: this script requires Git. %s' % e
-    print 'Please install Git to create a Pinax virtualenv.'
-    sys.exit(101)
+GIT_CMD = resolve_executable(GIT_CMD)
 
 try:
     import pip
