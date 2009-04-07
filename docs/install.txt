@@ -31,7 +31,8 @@ Then run the script, e.g. to create a environment called ``pinax-env``::
  
 After that you need to `activate the new environment`_ so your shell session
 knows which Python interpreter and site-packages directory to use. If you use
-bash you can simply run this in the environment root directory::
+bash you can simply run this in the environment root directory (make sure
+you change your current working directory first, e.g. ``cd pinax-env``)::
  
     source bin/activate
  
@@ -90,8 +91,10 @@ you don't have to install the apps and libraries used in all Pinax sample
 projects.
  
 In case you want to update the development version of Pinax you have to update
-both Pinax and the apps separately. The Pinax code is updated by running in
-the ``src/pinax`` directory::
+both Pinax and the apps separately. The Pinax code is located in the
+directory ``src/pinax`` inside your virtualenv (e.g. ``pinax-env``). You can
+update it by first changing your working directory with
+``cd pinax-env/src/pinax`` and then running::
  
     git pull
  
