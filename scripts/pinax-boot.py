@@ -1099,7 +1099,7 @@ def after_install(options, home_dir):
         # get file: reqirements/0.7.0beta1/requirements.txt
         release_dir = join(requirements_dir, options.release)
         call_subprocess([pip, 'install', '--upgrade',
-                '--requirement', os.path.abspath(join(release_dir, 'requirements.txt')),
+                '--requirement', os.path.abspath(join(release_dir, 'fat.txt')),
                 '--environment', home_dir], show_stdout=True, cwd=release_dir)
     else:
         # For developers and other crazy trunk lovers
