@@ -26,7 +26,7 @@ def main():
     if not os.path.exists(download_dir):
         os.makedirs(download_dir)
 
-    release_reqs = os.path.join(download_dir, 'requirements.txt')
+    release_reqs = os.path.join(download_dir, 'release.txt')
     if not os.path.exists(release_reqs):
         parser.error("%s could not be found. Please make sure you created the file before." % release_reqs)
 
