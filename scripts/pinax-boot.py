@@ -1062,17 +1062,19 @@ def adjust_options(options, args):
     if not args:
         return # caller will raise error
 
-def install_pip(easy_install, requirements_dir, bin_dir):
+def install_base(packages, easy_install, requirements_dir):
     """
     Installs pip from the bundled tarball if existing
     """
-    pip_src = join(requirements_dir, 'base', 'pip-0.3.1.tar.gz')
-    if not os.path.exists(pip_src):
-        pip_src = 'pip'
-    call_subprocess([easy_install, '--quiet', '--always-copy', pip_src],
-                    filter_stdout=filter_lines, show_stdout=False)
-    logger.notify('Installing pip.............done.')
-    return resolve_command(PIP_CMD, bin_dir)
+    for pkg in packages:
+        distname, filename = pkg
+        src = join(requirements_dir, 'base', filename)
+        if not os.path.exists(src):
+            # get it from the pypi
+            src = distname
+        call_subprocess([easy_install, '--quiet', '--always-copy', src],
+                        filter_stdout=filter_lines, show_stdout=False)
+        logger.notify('Installing %s.............done.' % distname)
 
 def after_install(options, home_dir):
     this_dir = os.path.dirname(__file__)
@@ -1084,8 +1086,13 @@ def after_install(options, home_dir):
     python = resolve_command(PYTHON_CMD, bin_dir)
     easy_install = resolve_command(EASY_INSTALL_CMD, bin_dir)
 
-    # pip is required in any case
-    pip = install_pip(easy_install, requirements_dir, bin_dir)
+    # pip and setuptools-git is required in any case
+    install_base([('setuptools-git', 'setuptools_git-0.3.3.tar.gz'),
+                  ('pip', 'pip-0.3.1.tar.gz')],
+                  easy_install, requirements_dir)
+
+    # resolve path to pip
+    pip = resolve_command(PIP_CMD, bin_dir)
 
     if options.release:
         # Use the bundled requirements file and packages if possible
