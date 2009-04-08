@@ -86,7 +86,7 @@ def adjust_options(options, args):
     """
     if options.release:
         requirements = join(os.path.dirname(__file__), '..', 'requirements',
-            options.release, 'requirements.txt')
+            options.release, 'release.txt')
         if not os.path.exists(requirements):
             print "ERROR: no bundled requirements were found for the given version."
             print "Please make sure you entered the right version string."
@@ -130,9 +130,25 @@ def after_install(options, home_dir):
         # Use the bundled requirements file and packages if possible
         # get file: reqirements/0.7.0beta1/requirements.txt
         release_dir = join(requirements_dir, options.release)
-        call_subprocess([pip, 'install', '--upgrade',
-                '--requirement', os.path.abspath(join(release_dir, 'fat.txt')),
-                '--environment', home_dir], show_stdout=True, cwd=release_dir)
+        # call_subprocess([pip, 'install', '--upgrade',
+        #         '--requirement', os.path.abspath(join(release_dir, 'fat.txt')),
+        #         '--environment', home_dir], show_stdout=True, cwd=release_dir)
+        # Use easy_install for now, as long as pip can't be run on Windows
+        fat_requirements_file = os.path.abspath(join(release_dir, 'fat.txt'))
+        f = open(fat_requirements_file)
+        fat_requirements = f.read()
+        f.close()
+        for line_number, line in enumerate(fat_requirements.splitlines()):
+            line_number += 1
+            line = line.strip()
+            if not line or line.startswith('#'):
+                continue
+            fat_requirement = join(release_dir, line)
+            if os.path.exists(fat_requirement):
+                call_subprocess([easy_install, '--quiet', '--always-copy',
+                                fat_requirement], filter_stdout=filter_lines,
+                                show_stdout=False)
+                logger.notify('Unpacking/installing %s.............done.' % line)
     else:
         # For developers and other crazy trunk lovers
         source = options.pinax_source
