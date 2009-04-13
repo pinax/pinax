@@ -100,14 +100,17 @@
         {% if user.is_authenticated %}
             <h2>{% trans "Discussion Topics" %}{% if tribe.topics.all.count %} ({{ tribe.topics.all.count }}){% endif %}</h2>
             
-            {% if topics %}
-                {% for topic in topics %}
-                    {% show_topic topic %}
-                {% endfor %}
-                <p><a href="{% url tribe_topics tribe.slug %}">{% trans "more..." %}</a></p>
-            {% else %}
-                <p>{% blocktrans %}None yet. <a href="{{ new_topic_url }}">Start one...</a>{% endblocktrans %}</p>
-            {% endif %}
+            {% get_topics_for_group tribe as topic_queryset %}
+            {% with topic_queryset|slice:":5" as topics %}
+                {% if topics %}
+                    {% for topic in topics|slice:":5" %}
+                        {% show_topic topic %}
+                    {% endfor %}
+                    <p><a href="{% url topic_list group_slug=tribe.slug %}">{% trans "more..." %}</a></p>
+                {% else %}
+                    <p>{% blocktrans %}None yet. <a href="{{ new_topic_url }}">Start one...</a>{% endblocktrans %}</p>
+                {% endif %}
+            {% endwith %}
             
 {% comment %}
             <h2>{% trans "Wiki Articles" %}{% if total_articles %} ({{ total_articles }}){% endif %}</h2>

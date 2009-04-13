@@ -60,8 +60,13 @@ def topics(request, group_slug=None, form_class=TopicForm, template_name="topics
     }, context_instance=RequestContext(request))
 
 
-def topic(request, topic_id, edit=False, template_name="topic.html", bridge=None):
+def topic(request, topic_id, group_slug=None, edit=False, template_name="topic.html", bridge=None):
     topic = get_object_or_404(Topic, id=topic_id)
+
+    try:
+        group = bridge.get_group(group_slug)
+    except ObjectDoesNotExist:
+        raise Http404
 
     if (request.method == "POST" and edit == True and 
         (request.user == topic.creator or request.user == topic.group.creator)):
@@ -72,16 +77,16 @@ def topic(request, topic_id, edit=False, template_name="topic.html", bridge=None
     return bridge.render(template_name, {
         'topic': topic,
         'edit': edit,
+        'group': group,
     }, context_instance=RequestContext(request))
 
 
-def topic_delete(request, pk, bridge=None):
-    topic = Topic.objects.get(pk=pk)
+def topic_delete(request, topic_id, group_slug=None, bridge=None):
+    topic = Topic.objects.get(pk=topic_id)
 
     if (request.method == "POST" and (request.user == topic.creator or
         request.user == topic.group.creator)): 
-        if forums:
-            ThreadedComment.objects.all_for_object(topic).delete()
+        ThreadedComment.objects.all_for_object(topic).delete()
         topic.delete()
 
     return HttpResponseRedirect(request.POST["next"])

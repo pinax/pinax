@@ -23,9 +23,9 @@ class TribeFormNode(template.Node):
 register.tag('get_tribe_form', do_get_tribe_form)
 
 
-@register.inclusion_tag("newtribes/tribe_item.html")
-def show_tribe(tribe):
-    return {"tribe": tribe}
+@register.inclusion_tag("newtribes/tribe_item.html", takes_context=True)
+def show_tribe(context, tribe):
+    return {'tribe': tribe, 'request': context['request']}
 
 # @@@ should move these next two as they aren't particularly tribe-specific
 

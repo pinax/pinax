@@ -77,6 +77,7 @@ MIDDLEWARE_CLASSES = (
     'account.middleware.LocaleMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'pagination.middleware.PaginationMiddleware',
+    'django_sorting.middleware.SortingMiddleware',
 )
 
 ROOT_URLCONF = 'temp_group_project.urls'
@@ -125,6 +126,7 @@ INSTALLED_APPS = (
     'threadedcomments',
     'newtribes',
     'gravatar',
+    'django_sorting',
     
     # internal (for now)
     'basic_profiles',

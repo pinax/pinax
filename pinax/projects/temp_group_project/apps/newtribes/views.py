@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
+from django.utils.datastructures import SortedDict
 
 from django.conf import settings
 
@@ -19,13 +20,14 @@ from newtribes.forms import TribeForm, TribeUpdateForm
 TOPIC_COUNT_SQL = """
 SELECT COUNT(*)
 FROM topics_topic
-WHERE topics_topic.object_id = tribes_tribe.id AND
-    topics_content_type_id = %s
+WHERE
+    topics_topic.object_id = newtribes_tribe.id AND
+    topics_topic.content_type_id = %s
 """
 MEMBER_COUNT_SQL = """
 SELECT COUNT(*)
-FROM tribes_tribe_members
-WHERE tribes_tribe_members.tribe_id = tribes_tribe.id
+FROM newtribes_tribe_members
+WHERE newtribes_tribe_members.tribe_id = newtribes_tribe.id
 """
 
 @login_required
@@ -54,9 +56,21 @@ def tribes(request, template_name="newtribes/tribes.html"):
     ctype = ContentType.objects.get_for_model(Tribe)
     
     tribes = Tribe.objects.all()
+    search_terms = request.GET.get('search', '')
+    if search_terms:
+        tribes = (tribes.filter(name__icontains=search_terms) |
+            tribes.filter(description__icontains=search_terms))
+    
+    content_type = ContentType.objects.get_for_model(Tribe)
+    
+    tribes = tribes.extra(select=SortedDict([
+        ('member_count', MEMBER_COUNT_SQL),
+        ('topic_count', TOPIC_COUNT_SQL),
+    ]), select_params=(content_type.id,))
     
     return render_to_response(template_name, {
         'tribes': tribes,
+        'search_terms': search_terms,
     }, context_instance=RequestContext(request))
 
 

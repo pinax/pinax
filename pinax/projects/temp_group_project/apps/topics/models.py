@@ -41,7 +41,8 @@ class Topic(models.Model):
 
     def get_absolute_url(self):
         kwargs = self.group.get_url_kwargs()
-        return reverse("topic_detail", args=[self.pk], kwargs=kwargs)
+        kwargs['topic_id'] = self.pk
+        return reverse("topic_detail", kwargs=kwargs)
     
     class Meta:
         ordering = ('-modified', )

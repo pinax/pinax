@@ -5,8 +5,6 @@
 
 {% block extra_head_base %}
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/site_tabs.css" />
-    <link rel="stylesheet" href="{{ MEDIA_URL }}pinax/css/topics.css" />
-    <script type="text/javascript" src="{{ MEDIA_URL }}pinax/js/topics.js"></script>
     {% block extra_head %}{% endblock %}
 {% endblock %}
 
@@ -44,4 +42,9 @@
     - <a href="{% url privacy %}">{% trans "Privacy Policy" %}</a>
     - <a href="{% url dmca %}">{% trans "DMCA Notice" %}</a>
 </div>
+{% endblock %}
+
+{% block extra_body_base %}
+    <script src="{{ MEDIA_URL }}base.js" type="text/javascript"></script>
+    {% block extra_body %}{% endblock %}
 {% endblock %}

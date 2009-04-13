@@ -7,6 +7,7 @@
 {% load order_by %}
 {% load extra_tagging_tags %}
 {% load newtribes_tags %}
+{% load sorting_tags %}
 
 {% block head_title %}{% blocktrans %}Tribes{% endblocktrans %}{% endblock %}
 
@@ -41,12 +42,18 @@
             <a href="{% clear_search_url request %}">Clear Search Terms</a>
         {% endif %}
     </form>
+    {% autosort tribes %}
     {% autopaginate tribes 10 %}
     {% if tribes %}
+        <p>{% trans "Order by:" %}
+            {% anchor topic_count Topics %}
+            {% anchor member_count Members %}
+            {% anchor name Name %}
+            {% anchor created Date %}
+        </p>
         <dl>
         {% for tribe in tribes %}
-            {{ tribe }}
-            {% comment %}{% show_tribe tribe %}{% endcomment %}
+            {% show_tribe tribe %}
         {% endfor %}
         </dl>
         {% paginate %}
