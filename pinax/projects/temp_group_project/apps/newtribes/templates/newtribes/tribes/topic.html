@@ -24,11 +24,11 @@
                 <div class="body">{{ topic.body|urlize|linebreaks }}</div>
                 <p>{% show_tags_for topic %}</p>
                 {% ifequal user topic.creator %}
-                <form class="uniForm" method="POST" action="{% url tc_comment_delete topic.id %}">
+                <form class="uniForm" method="POST" action="{{ request.path }}delete/">
                     <fieldset class="inlineLabels">
                         <div class="form_block">
                             <input type="submit" value="{% trans "Delete Topic" %}" />
-                            <input type="hidden" name="next" value="{{ topic.get_absolute_url }}" />
+                            <input type="hidden" name="next" value="{% url topic_list group_slug=group.slug %}" />
                         </div>
                     </fieldset>
                 </form>

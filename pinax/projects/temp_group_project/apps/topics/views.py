@@ -81,13 +81,12 @@ def topic(request, topic_id, group_slug=None, edit=False, template_name="topic.h
     }, context_instance=RequestContext(request))
 
 
-def topic_delete(request, topic_id, bridge=None):
+def topic_delete(request, topic_id, group_slug=None, bridge=None):
     topic = Topic.objects.get(pk=topic_id)
 
     if (request.method == "POST" and (request.user == topic.creator or
         request.user == topic.group.creator)): 
-        if forums:
-            ThreadedComment.objects.all_for_object(topic).delete()
+        ThreadedComment.objects.all_for_object(topic).delete()
         topic.delete()
 
     return HttpResponseRedirect(request.POST["next"])
