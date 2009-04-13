@@ -15,8 +15,9 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     setup_requires=['setuptools_git'],
+    # Ignore the tarballs we built our own in a source distribution
     exclude_package_data={
-        '': ['requirements/%s/*.tar.gz' % version],
+        'requirements': ['%s/*.tar.gz' % version],
     },
     zip_safe=False,
     entry_points={
