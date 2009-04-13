@@ -1,8 +1,10 @@
 from setuptools import setup, find_packages
 
+version = __import__('pinax').__version__
+
 setup(
     name='Pinax',
-    version=__import__('pinax').__version__,
+    version=version,
     description='Pinax is an open-source collection of re-usable apps for the Django Web Framework',
     long_description=open('docs/intro.txt').read(),
     author='James Tauber',
@@ -11,8 +13,11 @@ setup(
     maintainer_email='jannis@leidel.info',
     url='http://pinaxproject.com/',
     packages=find_packages(),
-    include_package_data=True, # include package data under svn source control
+    include_package_data=True,
     setup_requires=['setuptools_git'],
+    exclude_package_data={
+        '': ['requirements/%s/*.tar.gz' % version],
+    },
     zip_safe=False,
     entry_points={
         'console_scripts': [
