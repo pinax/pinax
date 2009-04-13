@@ -89,7 +89,8 @@ def update_settings(pinax_root, path, old_name, new_name):
     settings = SECRET_KEY_RE.sub("SECRET_KEY = '%s'" % (new_secret_key,),
         settings)
     new_root_urlconf = '%s.urls' % new_name
-    settings = ROOT_URLCONF_RE.sub("ROOT_URLCONF = '%s'" % new_root_urlconf)
+    settings = ROOT_URLCONF_RE.sub("ROOT_URLCONF = '%s'" % new_root_urlconf,
+        settings)
     settings_file = open(path, 'w')
     settings_file.write(settings)
     settings_file.close()
