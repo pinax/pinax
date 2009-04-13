@@ -45,8 +45,7 @@
     {% if tribes %}
         <dl>
         {% for tribe in tribes %}
-            {{ tribe }}
-            {% comment %}{% show_tribe tribe %}{% endcomment %}
+            {% show_tribe tribe %}
         {% endfor %}
         </dl>
         {% paginate %}
