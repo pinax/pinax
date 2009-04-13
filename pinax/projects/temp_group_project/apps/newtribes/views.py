@@ -70,6 +70,7 @@ def tribes(request, template_name="newtribes/tribes.html"):
     
     return render_to_response(template_name, {
         'tribes': tribes,
+        'search_terms': search_terms,
     }, context_instance=RequestContext(request))
 
 
