@@ -1,20 +1,21 @@
-Pinax should be run in a virtualenv containing pip, Django and Pinax
-itself. We have done all this work for you. Once you have downloaded the
-release tarball, cd yourself into the extracted directory. Lets create a
-virtual environment that you will install everything into::
+Pinax should be run in a virtual environment containing pip, Django and Pinax
+itself. We have provided a script that will create this virtual environment
+for you. Once you have downloaded the release tarball, cd yourself into the
+extracted directory. Let's create a virtual environment that you will install
+everything into::
 
     python scripts/pinax-boot.py --release 0.7beta1 ../pinax-env
     cd ../
     source ./pinax-env/bin/activate
 
 Note that we have told you to create the new environment in the directory
-above the tarball directory. We encourage you create the environment where
+above the tarball directory. We encourage you create the environment anywhere
 you like.
 
 If you use virtualenvwrapper (we highly encourage you do), you can easily
 replace ../ with your WORKON_HOME.
 
-Your next step is to create a Pinax project. Lets first check what is
+Your next step is to create a Pinax project. Let's first check what is
 available::
 
     pinax-admin clone_project -l
@@ -25,11 +26,11 @@ of. For the purpose of testing Pinax, lets start with the social_project::
     pinax-admin clone_project social_project mysite
 
 This will create a new Pinax project called 'mysite' in your current working
-directory. Lastly, lets get it running::
+directory. Lastly, let's get it running::
 
     cd mysite/
     python manage.py syncdb
     python manage.py runserver
 
-Point your browswer at http://localhost:8000/ and you should see the Pinax
-homepage!
+Point your browser at http://localhost:8000/ and you should see the Pinax
+default homepage!
