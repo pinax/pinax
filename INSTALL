@@ -1,0 +1,11 @@
+Pinax should be run in a virtualenv containing pip, Django and Pinax
+itself.
+
+To install all required external apps and libraries, activate the
+virtualenv and run
+
+    pip install --requirement requirements/external_apps.txt
+
+You should then be able to cd into a sample project under projects and
+run ./manage.py syncdb and ./manage.py runserver to get running
+immediately.
