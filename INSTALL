@@ -4,9 +4,10 @@ for you. Once you have downloaded the release tarball, cd into the extracted
 directory. Let's create a virtual environment that you will install everything
 into::
 
-    python scripts/pinax-boot.py --release 0.7beta1 ../pinax-env
-    cd ../
-    source ./pinax-env/bin/activate
+    $ python scripts/pinax-boot.py --release 0.7beta1 ../pinax-env
+    $ cd ../
+    $ source ./pinax-env/bin/activate
+    (pinax-env)$
 
 Note that we have told you to create the new environment in the directory
 above the tarball directory. We encourage you create the environment anywhere
@@ -19,19 +20,19 @@ to activate your environment.
 Your next step is to create a Pinax project. Let's first check what is
 available::
 
-    pinax-admin clone_project -l
+    (pinax-env)$ pinax-admin clone_project -l
 
 This will show you a list of project that you can base your new project off
 of. For the purpose of testing Pinax, lets start with the social_project::
 
-    pinax-admin clone_project social_project mysite
+    (pinax-env)$ pinax-admin clone_project social_project mysite
 
 This will create a new Pinax project called 'mysite' in your current working
 directory. Lastly, let's get it running::
 
-    cd mysite/
-    python manage.py syncdb
-    python manage.py runserver
+    (pinax-env)$ cd mysite/
+    (pinax-env)$ python manage.py syncdb
+    (pinax-env)$ python manage.py runserver
 
 Point your browser at http://localhost:8000/ and you should see the Pinax
 default homepage!
