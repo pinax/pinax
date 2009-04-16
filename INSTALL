@@ -1,0 +1,77 @@
+Pinax should be run in a virtual environment containing pip, Django and Pinax
+itself.
+
+We have two different approaches to installing Pinax. The best approach is to
+download our stable release and follow the "Released tarball instructions".
+The benefit to this approach is that it requires absolutely no Internet
+connection once you have downloaded the tarball.
+
+The alternative approach is to start from the development version. You can
+take this approach by following the "Development instructions". This means
+you will be working with the bleeding edge of our code. We can not gurantee
+any stability.
+
+Released tarball instructions
+=============================
+
+We have provided a script that will create a virtual environment for you.
+Once you have downloaded the release tarball, cd into the extracted directory.
+Let's create a virtual environment that you will install everything into::
+
+    $ python scripts/pinax-boot.py --release 0.7beta1 ../pinax-env
+    $ cd ../
+    $ source ./pinax-env/bin/activate
+    (pinax-env)$
+
+Note that we have told you to create the new environment in the directory
+above the tarball directory. We encourage you create the environment anywhere
+you like.
+
+If you use virtualenvwrapper (we highly encourage you do), you can easily
+replace ../ with your WORKON_HOME. This gives you regular access to workon
+to activate your environment.
+
+You can skip the "Development instructions" section and begin reading the
+"Common to both approaches" section.
+
+Development instructions
+========================
+
+Download the latest pinax-boot.py script (you can put this anywhere, we will
+assume current working directory)::
+
+    $ curl -O http://github.com/pinax/pinax/raw/master/scripts/pinax-boot.py
+
+Create a virtual environment with the downloaded script::
+
+    $ python pinax-boot.py ./pinax-env
+    $ source ./pinax-env/bin/activate
+    (pinax-env)$
+
+The last step to pull down the external apps and libraries. To do this run::
+
+    (pinax-env)$ cd ./pinax-env/
+    (pinax-env)$ pip install --requirement src/pinax/requirements/external_apps.txt
+
+Common to both approaches
+=========================
+
+Your next step is to create a Pinax project. Let's first check what is
+available::
+
+    (pinax-env)$ pinax-admin clone_project -l
+
+This will show you a list of project that you can base your new project off
+of. For the purpose of testing Pinax, let's start with the social_project::
+
+    (pinax-env)$ pinax-admin clone_project social_project mysite
+
+This will create a new Pinax project called 'mysite' in your current working
+directory. Lastly, let's get it running::
+
+    (pinax-env)$ cd mysite/
+    (pinax-env)$ python manage.py syncdb
+    (pinax-env)$ python manage.py runserver
+
+Point your browser at http://localhost:8000/ and you should see the Pinax
+default homepage!
