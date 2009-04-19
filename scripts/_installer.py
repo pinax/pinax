@@ -146,7 +146,8 @@ def after_install(options, home_dir):
             fat_requirement = join(release_dir, line)
             if os.path.exists(fat_requirement):
                 call_subprocess([easy_install, '--quiet', '--always-copy',
-                                fat_requirement], filter_stdout=filter_lines,
+                                '--always-unzip', fat_requirement],
+                                filter_stdout=filter_lines,
                                 show_stdout=False)
                 logger.notify('Unpacking/installing %s.............done.' % line)
     else:
