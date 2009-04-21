@@ -146,8 +146,7 @@ def after_install(options, home_dir):
                   "or '.\\Scripts\\activate.bat' on Windows")
     logger.indent -= 2
     logger.notify('Pinax environment created successfully.')
-    if not options.release:
-        logger.notify('Please follow the documentation to install all the requirements (e.g. Django).')
+    logger.notify('Please follow the documentation to install all the requirements (e.g. Django).')
 
 
 def filter_lines(line):
