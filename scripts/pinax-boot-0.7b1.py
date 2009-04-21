@@ -969,8 +969,6 @@ def create_bootstrap_script(extra_text, python_version=''):
 import os
 import sys
 
-PINAX_GIT_LOCATION = 'git://github.com/pinax/pinax.git'
-
 if sys.platform == 'win32':
     BIN_DIR = 'Scripts'
     GIT_CMD = 'git.cmd'
@@ -1030,23 +1028,33 @@ else:
         print 'Please upgrade your pip %s to create a Pinax virtualenv.' % version
         sys.exit(101)
 
-def extend_parser(parser):
-    parser.add_option("-s", "--source",
-        metavar="DIR_OR_URL", dest="pinax_source", default=PINAX_GIT_LOCATION,
-        help="Location of the Pinax source to use for the installation")
-
 def adjust_options(options, args):
     """
     You can change options here, or change the args (if you accept
     different kinds of arguments, be sure you modify ``args`` so it is
     only ``[DEST_DIR]``).
     """
+    parent_dir = join(os.path.dirname(__file__), '..')
+    requirements = join(parent_dir, 'requirements',
+        options.release, 'release.txt')
+    if not os.path.exists(requirements):
+        print "ERROR: no bundled requirements were found for the given version."
+        print "Please make sure you entered the right version string."
+        sys.exit(101)
+    version_file = join(parent_dir, 'VERSION')
+    if os.path.exists(version_file):
+        f = open(version_file)
+        version = f.read()
+        f.close()
+        version = "".join(version.splitlines())
+        if version:
+            options.release = version
     if not args:
         return # caller will raise error
 
 def install_base(packages, easy_install, requirements_dir):
     """
-    Installs given packages from the bundled tarball if existing
+    Installs pip from the bundled tarball if existing
     """
     for pkg in packages:
         distname, filename = pkg
@@ -1073,30 +1081,32 @@ def after_install(options, home_dir):
                   ('pip', 'pip-0.3.1.tar.gz')],
                   easy_install, requirements_dir)
 
-    # For developers and other crazy trunk lovers
-    source = options.pinax_source
-    if os.path.exists(source):
-        # A directory was given as a source for bootstrapping
-        pinax_dir = winpath(os.path.abspath(source))
-        logger.notify('Using existing Pinax at %s' % source)
-    else:
-        # Go and get Pinax
-        pinax_dir = join(src_dir, 'pinax')
-        logger.notify('Fetching Pinax from %s to %s' % (source, pinax_dir))
-        if not os.path.exists(src_dir):
-            logger.info('Creating directory %s' % src_dir)
-            os.makedirs(src_dir)
-        git = resolve_command(GIT_CMD)
-        call_subprocess([git, 'clone', '--quiet', source, pinax_dir],
-                        show_stdout=True)
-    logger.indent += 2
-    try:
-        logger.notify('Installing Pinax')
-        call_subprocess([python, 'setup.py', 'develop', '--quiet'],
-                        filter_stdout=filter_lines, show_stdout=False,
-                        cwd=pinax_dir)
-    finally:
-        logger.indent -= 2
+    # resolve path to pip
+    pip = resolve_command(PIP_CMD, bin_dir)
+
+    # Use the bundled requirements file and packages if possible
+    # get file: reqirements/0.7.0beta1/requirements.txt
+    release_dir = join(requirements_dir, options.release)
+    # call_subprocess([pip, 'install', '--upgrade',
+    #         '--requirement', os.path.abspath(join(release_dir, 'fat.txt')),
+    #         '--environment', home_dir], show_stdout=True, cwd=release_dir)
+    # Use easy_install for now, as long as pip can't be run on Windows
+    fat_requirements_file = os.path.abspath(join(release_dir, 'fat.txt'))
+    f = open(fat_requirements_file)
+    fat_requirements = f.read()
+    f.close()
+    for line_number, line in enumerate(fat_requirements.splitlines()):
+        line_number += 1
+        line = line.strip()
+        if not line or line.startswith('#'):
+            continue
+        fat_requirement = join(release_dir, line)
+        if os.path.exists(fat_requirement):
+            call_subprocess([easy_install, '--quiet', '--always-copy',
+                            '--always-unzip', fat_requirement],
+                            filter_stdout=filter_lines,
+                            show_stdout=False)
+            logger.notify('Unpacking/installing %s.............done.' % line)
     logger.notify("Please activate the newly created virtualenv by running in '%s': "
                   % home_dir)
     logger.indent += 2
