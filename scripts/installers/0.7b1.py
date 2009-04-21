@@ -120,22 +120,22 @@ def after_install(options, home_dir):
     # get file: reqirements/0.7.0beta1/requirements.txt
     release_dir = join(requirements_dir, options.release)
     # call_subprocess([pip, 'install', '--upgrade',
-    #         '--requirement', os.path.abspath(join(release_dir, 'fat.txt')),
+    #         '--requirement', os.path.abspath(join(release_dir, 'full.txt')),
     #         '--environment', home_dir], show_stdout=True, cwd=release_dir)
     # Use easy_install for now, as long as pip can't be run on Windows
-    fat_requirements_file = os.path.abspath(join(release_dir, 'fat.txt'))
-    f = open(fat_requirements_file)
-    fat_requirements = f.read()
+    full_requirements_file = os.path.abspath(join(release_dir, 'full.txt'))
+    f = open(full_requirements_file)
+    full_requirements = f.read()
     f.close()
-    for line_number, line in enumerate(fat_requirements.splitlines()):
+    for line_number, line in enumerate(full_requirements.splitlines()):
         line_number += 1
         line = line.strip()
         if not line or line.startswith('#'):
             continue
-        fat_requirement = join(release_dir, line)
-        if os.path.exists(fat_requirement):
+        full_requirement = join(release_dir, line)
+        if os.path.exists(full_requirement):
             call_subprocess([easy_install, '--quiet', '--always-copy',
-                            '--always-unzip', fat_requirement],
+                            '--always-unzip', full_requirement],
                             filter_stdout=filter_lines,
                             show_stdout=False)
             logger.notify('Unpacking/installing %s.............done.' % line)
