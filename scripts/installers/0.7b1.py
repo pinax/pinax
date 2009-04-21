@@ -16,6 +16,9 @@ else:
     EASY_INSTALL_CMD = 'easy_install'
     extra = {}
 
+# in case the VERSION file already moved on
+VERSION = "0.7b1"
+
 def winpath(path):
     if sys.platform == 'win32':
         if not os.path.exists(path):
@@ -60,30 +63,6 @@ else:
         print 'Please upgrade your pip %s to create a Pinax virtualenv.' % version
         sys.exit(101)
 
-def adjust_options(options, args):
-    """
-    You can change options here, or change the args (if you accept
-    different kinds of arguments, be sure you modify ``args`` so it is
-    only ``[DEST_DIR]``).
-    """
-    parent_dir = join(os.path.dirname(__file__), '..')
-    requirements = join(parent_dir, 'requirements',
-        options.release, 'release.txt')
-    if not os.path.exists(requirements):
-        print "ERROR: no bundled requirements were found for the given version."
-        print "Please make sure you entered the right version string."
-        sys.exit(101)
-    version_file = join(parent_dir, 'VERSION')
-    if os.path.exists(version_file):
-        f = open(version_file)
-        version = f.read()
-        f.close()
-        version = "".join(version.splitlines())
-        if version:
-            options.release = version
-    if not args:
-        return # caller will raise error
-
 def install_base(packages, easy_install, requirements_dir):
     """
     Installs pip from the bundled tarball if existing
@@ -104,7 +83,9 @@ def after_install(options, home_dir):
     base_dir = os.path.dirname(home_dir)
     src_dir = join(home_dir, 'src')
     bin_dir = join(home_dir, BIN_DIR)
-    requirements_dir = join(this_dir, '..', 'requirements')
+    parent_dir = join(parent_dir, '..')
+    requirements_dir = join(parent_dir, 'requirements')
+
     python = resolve_command(PYTHON_CMD, bin_dir)
     easy_install = resolve_command(EASY_INSTALL_CMD, bin_dir)
 
@@ -117,13 +98,17 @@ def after_install(options, home_dir):
     pip = resolve_command(PIP_CMD, bin_dir)
 
     # Use the bundled requirements file and packages if possible
-    # get file: reqirements/0.7.0beta1/requirements.txt
-    release_dir = join(requirements_dir, options.release)
+    # get file: reqirements/0.7.0beta1/full.txt
+    release_dir = join(requirements_dir, VERSION)
     # call_subprocess([pip, 'install', '--upgrade',
     #         '--requirement', os.path.abspath(join(release_dir, 'full.txt')),
     #         '--environment', home_dir], show_stdout=True, cwd=release_dir)
     # Use easy_install for now, as long as pip can't be run on Windows
-    full_requirements_file = os.path.abspath(join(release_dir, 'full.txt'))
+    full_requirements_file = os.path.abspath(join(requirements_dir, 'full.txt'))
+    if not os.path.exists(full_requirements_file):
+        print "ERROR: no bundled requirements were found for version %s." % VERSION
+        sys.exit(101)
+
     f = open(full_requirements_file)
     full_requirements = f.read()
     f.close()
