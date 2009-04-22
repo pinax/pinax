@@ -21,17 +21,18 @@ def main():
     (options, args) = parser.parse_args()
 
     here = dirname(abspath(__file__))
-    installer_template = join(here, 'installers', 'dev.py')
-    script_name = join(here, 'pinax-boot.py')
+    if not options.release:
+        parser.error("required --release option not given")
 
-    if options.release:
-        installer_template = join(here, 'installers', '%s.py' % options.release) # installers/0.7b1.py
-        if not exists(installer_template):
-            parser.error("template for release %s could not be found" % options.release)
+    installer_template = join(here, 'installers', '%s.py' % options.release) # installers/0.7b1.py
+    if not exists(installer_template):
+        parser.error("template for release %s could not be found" % options.release)
+    if options.release == "dev":
+        script_name = join(here, 'pinax-boot.py')
+    else:
         script_name = join(here, 'pinax-boot-%s.py' % options.release) # pinax-boot-0.7b1.py
 
-    if options.verbose:
-        print "Using as template: %s" % installer_template
+    print "Using as template: %s" % installer_template
 
     extra_text = open(installer_template).read()
     text = virtualenv.create_bootstrap_script(extra_text)
@@ -42,8 +43,7 @@ def main():
     else:
         cur_text = ''
 
-    if options.verbose:
-        print 'Updating %s' % script_name
+    print 'Updating %s' % script_name
 
     if cur_text == text:
         print 'No update'
