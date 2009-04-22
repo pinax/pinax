@@ -24,8 +24,21 @@ else:
     notification = None
 
 def profiles(request, template_name="profiles/profiles.html"):
+    users = User.objects.all().order_by("-date_joined")
+    search_terms = request.GET.get('search', '')
+    order = request.GET.get('order')
+    if not order:
+        order = 'date'
+    if search_terms:
+        users = users.filter(username__icontains=search_terms)
+    if order == 'date':
+        users = users.order_by("-date_joined")
+    elif order == 'name':
+        users = users.order_by("username")
     return render_to_response(template_name, {
-        "users": User.objects.all().order_by("-date_joined"),
+        'users':users,
+        'order' : order,
+        'search_terms' : search_terms
     }, context_instance=RequestContext(request))
 
 def profile(request, username, template_name="profiles/profile.html"):
