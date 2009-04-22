@@ -3,26 +3,51 @@
 {% load i18n %}
 {% load pagination_tags %}
 {% load humanize %}
+{% load basic_profile_tags%}
 
 {% block head_title %}{% blocktrans %}All Profiles{% endblocktrans %}{% endblock %}
 
 {% block body %}
     <h1>{% trans "Profiles" %}</h1>
-    
-    {% autopaginate users %}
-    
-    {% regroup users by date_joined.date as users_by_date_joined %}
-    
-    {% for date in users_by_date_joined %}
-        <h2 class="join_date">{{ date.grouper|naturalday:_("MONTH_DAY_FORMAT")|capfirst }}</h2>
+
+    <form method="GET" action="">
+        <input type="text" name="search" value="{{ search_terms }}" />
+        <input type="submit" value="Search" />
+        {% if search_terms %}
+            <a href="{% clear_search_url request %}">Clear Search Terms</a>
+        {% endif %}
+    </form>
+
+    {% if users %}
+        <p>{% trans "Order by:" %}
+            {% ifequal order 'date' %}
+                <a href="{% url profile_list %}?order=name">{% trans "Name" %} &uarr;</a>
+            {% else %}
+                <a href="{% url profile_list %}?order=date">{% trans "Date" %} &darr;</a>
+            {% endifequal %}
+        </p>
+
+        {% autopaginate users%}
         
-        {% for user in date.list %}
-            <div class="profile clearfix">
-                {# @@@ factor out style into css file #}
-                <div style="padding: 5px; margin-left: 50px;"><a href="{% url profile_detail user.username %}">{{ user }}</a></div>
-            </div>
-        {% endfor %}
-    {% endfor %}
-    
-    {% paginate %}
+        {% ifequal order 'date'  %}
+            {% regroup users by date_joined.date as users_by_date_joined %}
+
+            {% for date in users_by_date_joined %}
+                <h2 class="join_date">{{ date.grouper|naturalday:_("MONTH_DAY_FORMAT")|capfirst }}</h2>
+
+                {% for user in date.list %}
+                    {% show_profile user %}
+                {% endfor %}
+            {% endfor %}
+        {% else %}
+            {% for user in users %}
+                {% show_profile user %}
+            {% endfor %}
+        {% endifequal %}    
+        
+        {% paginate %}
+        
+       {% else %}
+           <p>No profile were found.</p>
+      {% endif %}
 {% endblock %}
