@@ -972,14 +972,12 @@ import sys
 if sys.platform == 'win32':
     BIN_DIR = 'Scripts'
     GIT_CMD = 'git.cmd'
-    PYTHON_CMD = 'python.exe'
     PIP_CMD = 'pip.exe'
     EASY_INSTALL_CMD = 'easy_install.exe'
     extra = {'shell': True}
 else:
     BIN_DIR = 'bin'
     GIT_CMD = 'git'
-    PYTHON_CMD = 'python'
     PIP_CMD = 'pip'
     EASY_INSTALL_CMD = 'easy_install'
     extra = {}
@@ -1054,7 +1052,7 @@ def after_install(options, home_dir):
     parent_dir = join(parent_dir, '..')
     requirements_dir = join(parent_dir, 'requirements')
 
-    python = resolve_command(PYTHON_CMD, bin_dir)
+    python = resolve_command(expected_exe, bin_dir)
     easy_install = resolve_command(EASY_INSTALL_CMD, bin_dir)
 
     # pip and setuptools-git is required in any case
