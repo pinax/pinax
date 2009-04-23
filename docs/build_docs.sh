@@ -6,19 +6,32 @@ rm -rf external/repos
 mkdir -p external/repos
 cd external/repos
 
-git clone git://github.com/pinax/django-email-confirmation.git
-git clone git://github.com/brosner/django-timezones.git
-git clone git://github.com/ericflo/django-threadedcomments.git
-git clone git://github.com/alex/django-ajax-validation.git
-git clone git://github.com/pinax/django-flag.git
-git clone git://github.com/ericflo/django-pagination.git
-git clone git://github.com/ericflo/django-oembed.git
-git clone git://github.com/brosner/django-notification.git
-git clone git://github.com/pinax/django-mailer.git
-git clone git://github.com/jezdez/django-dbtemplates.git
-git clone git://github.com/jezdez/django-robots.git
-git clone git://github.com/pinax/django-announcements.git
-svn checkout http://django-messages.googlecode.com/svn/trunk/ django-messages
+echo "cloning django-email-confirmation"
+git clone -q git://github.com/pinax/django-email-confirmation.git
+echo "cloning django-timezones"
+git clone -q git://github.com/brosner/django-timezones.git
+echo "cloning django-threadedcomments"
+git clone -q git://github.com/ericflo/django-threadedcomments.git
+echo "cloning django-ajax-validation"
+git clone -q git://github.com/alex/django-ajax-validation.git
+echo "cloning django-flag"
+git clone -q git://github.com/pinax/django-flag.git
+echo "cloning django-pagination"
+git clone -q git://github.com/ericflo/django-pagination.git
+echo "cloning django-oembed"
+git clone -q git://github.com/ericflo/django-oembed.git
+echo "cloning django-notification"
+git clone -q git://github.com/brosner/django-notification.git
+echo "cloning django-mailer"
+git clone -q git://github.com/pinax/django-mailer.git
+echo "cloning django-dbtemplates"
+git clone -q git://github.com/jezdez/django-dbtemplates.git
+echo "cloning django-robots"
+git clone -q git://github.com/jezdez/django-robots.git
+echo "cloning django-announcements"
+git clone -q git://github.com/pinax/django-announcements.git
+echo "checking out django-messages"
+svn checkout --quiet http://django-messages.googlecode.com/svn/trunk/ django-messages
 
 cd ../
 ln -s repos/django-email-confirmation/docs emailconfirmation
