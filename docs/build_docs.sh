@@ -1,13 +1,12 @@
 #!/bin/bash
 
-rm -rf .build
 rm -rf external/repos
 
 mkdir -p external/repos
 cd external/repos
 
 echo "cloning django-email-confirmation"
-git clone -q git://github.com/pinax/django-email-confirmation.git
+git clone -q git://github.com/jezdez/django-email-confirmation.git
 echo "cloning django-timezones"
 git clone -q git://github.com/brosner/django-timezones.git
 echo "cloning django-threadedcomments"
@@ -49,4 +48,5 @@ ln -s repos/django-announcements/docs announcements
 ln -s repos/django-messages/docs messages
 
 cd ../
+rm -rf .build
 make html
