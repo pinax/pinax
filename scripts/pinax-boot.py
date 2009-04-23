@@ -970,6 +970,7 @@ import os
 import sys
 
 PINAX_GIT_LOCATION = 'git://github.com/pinax/pinax.git'
+PINAX_PYPI = 'http://pypi.pinaxproject.com'
 
 if sys.platform == 'win32':
     BIN_DIR = 'Scripts'
@@ -1032,6 +1033,11 @@ def extend_parser(parser):
     parser.add_option("-s", "--source",
         metavar="DIR_OR_URL", dest="pinax_source", default=PINAX_GIT_LOCATION,
         help="Location of the Pinax source to use for the installation")
+    parser.add_option("-r", "--release",
+        metavar="RELEASE_VERSION", dest="release", default=None,
+        help="Release version of Pinax to bootstrap")
+    parser.add_option("-d", "--development",
+                      action="store_true", dest="development")
 
 def adjust_options(options, args):
     """
@@ -1039,22 +1045,41 @@ def adjust_options(options, args):
     different kinds of arguments, be sure you modify ``args`` so it is
     only ``[DEST_DIR]``).
     """
+    if options.release and options.development:
+        print "ERROR: please use --development without providing a --release version."
+        sys.exit(101)
     if not args:
         return # caller will raise error
 
-def install_base(packages, easy_install, requirements_dir):
+def install_base(easy_install, requirements_dir, packages):
     """
-    Installs given packages from the bundled tarball if existing
+    Installs pip from the bundled tarball if existing
     """
     for pkg in packages:
-        distname, filename = pkg
+        filename = packages[pkg]
         src = join(requirements_dir, 'base', filename)
         if not os.path.exists(src):
             # get it from the pypi
-            src = distname
+            src = pkg
         call_subprocess([easy_install, '--quiet', '--always-copy', src],
                         filter_stdout=filter_lines, show_stdout=False)
-        logger.notify('Installing %s.............done.' % distname)
+        logger.notify('Installing %s' % pkg)
+
+def release_files_exist(release_dir, requirements_file):
+    f = open(requirements_file)
+    requirements = f.read()
+    f.close()
+    requirements = requirements.splitlines()
+    full_requirements = []
+    for no, line in enumerate(requirements):
+        line = line.strip()
+        if not line or line.startswith('#'):
+            continue
+        requirement = join(release_dir, line)
+        if not os.path.exists(requirement):
+            return False
+        full_requirements.append(requirement)
+    return full_requirements
 
 def after_install(options, home_dir):
     this_dir = os.path.dirname(__file__)
@@ -1062,46 +1087,100 @@ def after_install(options, home_dir):
     base_dir = os.path.dirname(home_dir)
     src_dir = join(home_dir, 'src')
     bin_dir = join(home_dir, BIN_DIR)
-    requirements_dir = join(this_dir, '..', 'requirements')
+    parent_dir = join(this_dir, '..')
+    requirements_dir = join(parent_dir, 'requirements')
+
     python = resolve_command(expected_exe, bin_dir)
     easy_install = resolve_command(EASY_INSTALL_CMD, bin_dir)
 
     # pip and setuptools-git is required in any case
-    install_base([('setuptools-git', 'setuptools_git-0.3.3.tar.gz'),
-                  ('pip', 'pip-0.3.1.tar.gz')],
-                  easy_install, requirements_dir)
+    install_base(easy_install, requirements_dir, {
+        'setuptools-git': 'setuptools_git-0.3.3.tar.gz',
+        'pip': 'pip-0.3.1.tar.gz',
+    })
+    # resolve path to pip
+    pip = resolve_command(PIP_CMD, bin_dir)
 
-    # For developers and other crazy trunk lovers
-    source = options.pinax_source
-    if os.path.exists(source):
-        # A directory was given as a source for bootstrapping
-        pinax_dir = winpath(os.path.abspath(source))
-        logger.notify('Using existing Pinax at %s' % source)
-    else:
-        # Go and get Pinax
-        pinax_dir = join(src_dir, 'pinax')
-        logger.notify('Fetching Pinax from %s to %s' % (source, pinax_dir))
-        if not os.path.exists(src_dir):
-            logger.info('Creating directory %s' % src_dir)
-            os.makedirs(src_dir)
-        git = resolve_command(GIT_CMD)
-        call_subprocess([git, 'clone', '--quiet', source, pinax_dir],
-                        show_stdout=True)
-    logger.indent += 2
-    try:
-        logger.notify('Installing Pinax')
-        call_subprocess([python, 'setup.py', 'develop', '--quiet'],
-                        filter_stdout=filter_lines, show_stdout=False,
-                        cwd=pinax_dir)
-    finally:
+    version_file = join(parent_dir, 'VERSION')
+    if os.path.exists(version_file) and not options.release:
+        f = open(version_file)
+        version = f.read()
+        f.close()
+        version = "".join(version.splitlines())
+        if version:
+            options.release = version
+
+    if options.development:
+        # For developers and other crazy trunk lovers
+        source = options.pinax_source
+        if os.path.exists(source):
+            # A directory was given as a source for bootstrapping
+            pinax_dir = winpath(os.path.abspath(source))
+            logger.notify('Using existing Pinax at %s' % source)
+        else:
+            # Go and get Pinax
+            pinax_dir = join(src_dir, 'pinax')
+            logger.notify('Fetching Pinax from %s to %s' % (source, pinax_dir))
+            if not os.path.exists(src_dir):
+                logger.info('Creating directory %s' % src_dir)
+                os.makedirs(src_dir)
+            git = resolve_command(GIT_CMD)
+            call_subprocess([git, 'clone', '--quiet', source, pinax_dir],
+                            show_stdout=True)
+        logger.indent += 2
+        try:
+            logger.notify('Installing Pinax')
+            call_subprocess([python, 'setup.py', 'develop', '--quiet'],
+                            filter_stdout=filter_lines, show_stdout=False,
+                            cwd=pinax_dir)
+        finally:
+            logger.indent -= 2
+    elif options.release:
+        release_dir = join(requirements_dir, options.release)
+        # We use easy_install for now, as long as pip can't be run on Windows
+        # call_subprocess([pip, 'install', '--upgrade',
+        #         '--requirement', os.path.abspath(join(release_dir, 'full.txt')),
+        #         '--environment', home_dir], show_stdout=True, cwd=release_dir)
+        requirements_file = os.path.abspath(join(release_dir, 'full.txt'))
+        if not os.path.exists(requirements_file):
+            print "ERROR: no requirements were found for version %s." % options.release
+            sys.exit(101)
+
+        # check if this is a full release with bundled packages
+        requirements = release_files_exist(release_dir, requirements_file)
+        # get the packages from the PyPI, requires internet connection
+        if not requirements:
+            logger.notify('Retrieving packages from PyPI.')
+            requirements_file = os.path.abspath(join(release_dir, 'release.txt'))
+            if not os.path.exists(requirements_file):
+                print "ERROR: no requirements were found for version %s." % options.release
+                sys.exit(101)
+            f = open(requirements_file)
+            requirements = f.read()
+            f.close()
+            requirements = requirements.splitlines()
+
+        for no, line in enumerate(requirements):
+            line = line.strip()
+            if not line or line.startswith('#'):
+                continue
+            logger.notify('Installing %s' % line)
+            call_subprocess([easy_install, '--quiet', '--always-copy',
+                            '--always-unzip', '--find-links', PINAX_PYPI, line],
+                            filter_stdout=filter_lines, show_stdout=False)
+
+        logger.notify("Please activate the newly created virtualenv by running in '%s': "
+                      % home_dir)
+        logger.indent += 2
+        logger.notify("'source bin/activate' on Linux/Unix/Mac OS "
+                      "or '.\\Scripts\\activate.bat' on Windows")
         logger.indent -= 2
-    logger.notify("Please activate the newly created virtualenv by running in '%s': "
-                  % home_dir)
-    logger.indent += 2
-    logger.notify("'source bin/activate' on Linux/Unix/Mac OS "
-                  "or '.\\Scripts\\activate.bat' on Windows")
-    logger.indent -= 2
-    logger.notify('Pinax environment created successfully.')
+        logger.notify('Pinax environment created successfully.')
+        logger.notify('Please follow the documentation to install all the requirements (e.g. Django).')
+    else:
+        logger.notify("Please make sure a version '%s': "
+                      % home_dir)
+
 
 def filter_lines(line):
     if not line.strip():
