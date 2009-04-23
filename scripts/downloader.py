@@ -36,7 +36,8 @@ def main():
     logger = pip.Logger([(level, sys.stdout), (pip.Logger.DEBUG, complete_log.append)])
     pip.logger = logger
 
-    finder = pip.PackageFinder(find_links=[], index_urls=[pip.pypi_url])
+    finder = pip.PackageFinder(
+        find_links=['http://pypi.pinaxproject.com'], index_urls=[pip.pypi_url])
 
     req_set = pip.RequirementSet(build_dir=download_dir, src_dir=download_dir)
     unmet_requirements= []
