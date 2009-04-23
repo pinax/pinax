@@ -1,33 +1,41 @@
-{% extends "photos/base.html" %}
+{% extends "blog/base.html" %}
 
 {% load i18n %}
-{% load uni_form %}
+{% load wiki %}
+{% load markup %}
+{% load switchcase %}
+{% load tagging_tags %}
+{% load restructuredtext %}
 
-{% block head_title %}{% blocktrans %}Editing Photo Details{% endblocktrans %}{% endblock %}
+{% block head_title %}{% blocktrans %}Editing Post{% endblocktrans %}{% endblock %}
 
 {% block body %}
-    <div class="right_panel">
-        {% include "photos/photo_right_panel.html" %}
-    </div>
-    
-    <h1>{% trans "Photo Details" %}</h1>
-    
-    <div class="gallery-photo">
-        <img src="{{ photo_url }}" alt="{{ photo.title }}"/>
-    </div>
 
-    {% ifequal photo.member request.user %}
-        <form class="uniForm" id="edit-profile" method="POST" enctype="multipart/form-data" action="">
-            <fieldset class="inlineLabels">
-                {{ photo_form|as_uni_form }}
-                <div class="form_block">
-                    <input type="hidden" name="action" value="update" />
-                    <input type="submit" value="{% trans "Update" %}" class="button" />
-                </div>
-            </fieldset>
-        </form>
-    {% else %}
-        <p>You are not the author of this photo.</p>
-    {% endifequal %}
+    <div id="basic-form">
+        <fieldset>
+            <legend>{% trans "Editing Post" %}</legend>
+
+        {% ifequal post.author request.user %}
+            <form method="POST" action="">
+                <table align="center">
+                    <tr><td colspan="2">{{ blog_form.non_field_errors }}</td></tr>
+                    {% for field in blog_form %}
+                        {% if field.errors %}<tr><td></td><td>{{ field.errors }}</td></tr>{% endif %}
+                        {% ifequal field.name "tease" %}<tr style="display: none;" id="teaser">{% else %}<tr>{% endifequal %}
+                            <td width="150px" valign="top">{{ field.label_tag }}
+                                    {% ifequal field.name "body" %}
+                                    <a href="#" onclick="$('#teaser').toggle(); return false;">{% trans "Teaser" %}</a>
+                                    {% endifequal %}
+                            </td>
+                            <td>{{ field }}</td></tr>
+                        {% if field.help_text %}<tr><td colspan="2"><span>{{ field.help_text }}</span></td></tr>{% endif %}
+                    {% endfor %}
+                    <tr><td></td><td><input type="hidden" name="action" value="update" /><input type="submit" value="update" class="button"/></td></tr>
+                </table>
+            </form>
+        {% else %}
+            <p>You are not the author of this post.</p>
+        {% endifequal %}
+        </fieldset>
+    </div>
 {% endblock %}
-
