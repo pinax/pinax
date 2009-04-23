@@ -7,7 +7,7 @@ mkdir -p external/repos
 cd external/repos
 
 echo "cloning django-email-confirmation"
-git clone -q git://github.com/pinax/django-email-confirmation.git
+git clone -q git://github.com/jezdez/django-email-confirmation.git
 echo "cloning django-timezones"
 git clone -q git://github.com/brosner/django-timezones.git
 echo "cloning django-threadedcomments"
