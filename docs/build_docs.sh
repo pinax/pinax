@@ -1,6 +1,5 @@
 #!/bin/bash
 
-rm -rf .build
 rm -rf external/repos
 
 mkdir -p external/repos
@@ -49,4 +48,5 @@ ln -s repos/django-announcements/docs announcements
 ln -s repos/django-messages/docs messages
 
 cd ../
+rm -rf .build
 make html
