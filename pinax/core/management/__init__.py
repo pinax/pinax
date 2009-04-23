@@ -95,7 +95,7 @@ class ManagementUtility(object):
         """
         commands = get_commands()
         if subcommand not in commands:
-            sys.stderr.write('Unknown command: %r\nType %s help for usage.\n' %
+            sys.stderr.write('Unknown command: %r\nType %s --help for usage.\n' %
                 (subcommand, self.prog_name))
             sys.exit(1)
         package_name = commands[subcommand]
