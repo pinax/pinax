@@ -69,7 +69,8 @@ def extend_parser(parser):
         metavar="RELEASE_VERSION", dest="release", default=None,
         help="Release version of Pinax to bootstrap")
     parser.add_option("-d", "--development",
-                      action="store_true", dest="development")
+        action="store_true", dest="development",
+        help="Setup development environment")
 
 def adjust_options(options, args):
     """
@@ -143,6 +144,7 @@ def after_install(options, home_dir):
             options.release = version
 
     if options.development:
+        logger.notify('Going to setup a Pinax development environment.')
         # For developers and other crazy trunk lovers
         source = options.pinax_source
         if os.path.exists(source):
@@ -168,6 +170,7 @@ def after_install(options, home_dir):
         finally:
             logger.indent -= 2
     elif options.release:
+        logger.notify('Going to install a full Pinax %s release.' % options.release)
         release_dir = join(requirements_dir, options.release)
         # We use easy_install for now, as long as pip can't be run on Windows
         # call_subprocess([pip, 'install', '--upgrade',
