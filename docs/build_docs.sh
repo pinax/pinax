@@ -13,7 +13,7 @@ git clone git://github.com/alex/django-ajax-validation.git
 git clone git://github.com/pinax/django-flag.git
 git clone git://github.com/ericflo/django-pagination.git
 git clone git://github.com/ericflo/django-oembed.git
-git clone git://github.com/pinax/django-notification.git
+git clone git://github.com/brosner/django-notification.git
 git clone git://github.com/pinax/django-mailer.git
 git clone git://github.com/jezdez/django-dbtemplates.git
 git clone git://github.com/jezdez/django-robots.git
