@@ -6,24 +6,15 @@ Customization
 As more sites are built using Pinax, more best practices will emerge, but for
 now what we recommend is:
 
-- Always work off a stable release. The most current release is 0.7b
-- Select and copy your project:
-    * The manual method:
-        - Choose which :ref:`project <ref-project>` you would like to use as a starting 
-          point.
-        - Copy that project into the ``pinax/projects`` directory.
-    * The automated method:
-        - Utilize the pinax-admin :ref:`clone_project <cloneproject>` utility.
+- Always work off a stable release. The most current release is 0.7beta2.
+- Use the pinax-admin :ref:`clone_project <customization-cloneproject>` command.
 - Make necessary changes to the ``settings.py`` and ``urls.py`` files in your
   copied directory.
-- Ensure ``PINAX_ROOT`` is setup correctly in your settings. It should point
-  to where Pinax lives on your filesystem.
 - Change the domain and display name of the Site in the admin interface. 
 - Develop your custom apps under your new project or anywhere on Python path.
 - Develop your own templates under your new project.
 
 .. _ref-project:
-
 
 Choosing a Project
 ------------------
@@ -57,34 +48,21 @@ temp_group_project
     This project is a temporary project for implementing the new group-related
     apps.
     
-.. _ref-cloneproject:
+.. _customization-cloneproject:
 
 pinax-admin clone_project
 --------------------------
 
-Pinax provides you with pinax-admin, a command line utility. With pinax-admin
-you can quickly generate a cloned project. For example, if you wanted to clone
-the basic_project you could simply do the following.
+Pinax provides you with ``pinax-admin``, a command line utility. With
+``pinax-admin`` you can quickly generate a cloned project. For example, if you
+wanted to clone the basic_project you could simply do the following::
 
-1. First we get the pinax project directory::
-
-    (venv)$ pinax-admin clone_project -r
-    </path/to/the/pinax/projects/>
-
-2. We go to that directory::
-
-    (venv)$ cd </path/to/the/pinax/projects/>
-
-3. Now we create the new project::
-
-    (venv)$ pinax-admin clone_project basic_project my_new_project
-
+    (pinax-env)$ pinax-admin clone_project basic_project mysite
 
 
 Settings You Will (Probably) Want To Override
 ---------------------------------------------
 
-- ``PINAX_ROOT``
 - ``PINAX_THEME``
 - ``DEBUG``
 - ``TEMPLATE_DEBUG``
@@ -115,9 +93,9 @@ Settings You Will (Probably) Want To Override
 - ``BBAUTH_SHARED_SECRET``
 - ``SITE_NAME``
 
-All but ``MAILER_PAUSE_SEND``, ``CONTACT_EMAIL``, ``URCHIN_ID``,
-``BBAUTH_APP_ID``, ``BBAUTH_SHARED_SECRET`` and ``SITE_NAME`` are just the
-standard Django settings.
+All but ``PINAX_THEME``, ``MAILER_PAUSE_SEND``, ``CONTACT_EMAIL``,
+``URCHIN_ID``, ``BBAUTH_APP_ID``, ``BBAUTH_SHARED_SECRET`` and ``SITE_NAME``
+are just the standard Django settings.
 
 
 ``base.html`` versus ``site_base.html``

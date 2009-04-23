@@ -96,9 +96,16 @@ def update_settings(pinax_root, path, old_name, new_name):
     settings_file.close()
 
 
-def rename_deploy_files(path, old_name, new_name):
-    for deploy_file in glob.glob(os.path.join(path, old_name) + '*'):
-        shutil.move(deploy_file, deploy_file.replace(old_name, new_name))
+def update_rename_deploy_files(path, old_name, new_name):
+    for deploy_file in glob.glob(os.path.join(path, "pinax") + '*'):
+        df = open(deploy_file, 'r')
+        deploy_settings = df.read()
+        df.close()
+        deploy_settings = deploy_settings.replace(old_name, new_name)
+        df = open(deploy_file, 'w')
+        df.write(deploy_settings)
+        df.close()
+        shutil.move(deploy_file, deploy_file.replace("pinax", new_name))
 
 
 def main(default_pinax_root, project_name, destination, verbose=True):
@@ -123,8 +130,8 @@ def main(default_pinax_root, project_name, destination, verbose=True):
     update_settings(default_pinax_root, os.path.join(destination, 'settings.py'),
         project_name, user_project_name)
     if verbose:
-        print "Renaming your deployment files"
-    rename_deploy_files(os.path.join(destination, 'deploy'), project_name,
+        print "Renaming and updating your deployment files"
+    update_rename_deploy_files(os.path.join(destination, 'deploy'), project_name,
         user_project_name)
     if verbose:
         print "Finished cloning your project, now you may enjoy Pinax!"
