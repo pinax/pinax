@@ -103,7 +103,7 @@ def release_files_exist(release_dir, requirements_file):
     requirements = f.read()
     f.close()
     requirements = requirements.splitlines()
-    full_requirements, missing_requirements = [], []
+    available_requirements, missing_requirements = [], []
     result = True
     for no, line in enumerate(requirements):
         line = line.strip()
@@ -114,9 +114,9 @@ def release_files_exist(release_dir, requirements_file):
             result = False
             missing_requirements.append(requirement)
         else:
-            full_requirements.append(requirement)
+            available_requirements.append(requirement)
     if result:
-        return True, full_requirements
+        return True, available_requirements
     else:
         return False, missing_requirements
 
