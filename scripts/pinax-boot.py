@@ -1072,15 +1072,16 @@ def release_files_exist(release_dir, requirements_file):
     f.close()
     requirements = requirements.splitlines()
     full_requirements = []
+    result = True
     for no, line in enumerate(requirements):
         line = line.strip()
         if not line or line.startswith('#'):
             continue
         requirement = join(release_dir, line)
         if not os.path.exists(requirement):
-            return False
+            result = False
         full_requirements.append(requirement)
-    return full_requirements
+    return result, full_requirements
 
 def after_install(options, home_dir):
     this_dir = os.path.dirname(__file__)
@@ -1138,6 +1139,7 @@ def after_install(options, home_dir):
         finally:
             logger.indent -= 2
     elif options.release:
+        # release should *never* touch the Internet.
         logger.notify('Going to install a full Pinax %s release.' % options.release)
         release_dir = join(requirements_dir, options.release)
         # We use easy_install for now, as long as pip can't be run on Windows
@@ -1150,19 +1152,14 @@ def after_install(options, home_dir):
             sys.exit(101)
 
         # check if this is a full release with bundled packages
-        requirements = release_files_exist(release_dir, requirements_file)
+        result, requirements = release_files_exist(release_dir, requirements_file)
         # get the packages from the PyPI, requires internet connection
-        if not requirements:
-            logger.notify('Retrieving packages from PyPI.')
-            requirements_file = os.path.abspath(join(release_dir, 'release.txt'))
-            if not os.path.exists(requirements_file):
-                print "ERROR: no requirements were found for version %s." % options.release
-                sys.exit(101)
-            f = open(requirements_file)
-            requirements = f.read()
-            f.close()
-            requirements = requirements.splitlines()
-
+        if not result:
+            print "This release does not have all the required requirements:"
+            for line in requirements:
+                print "    %s" % os.path.basename(line)
+            sys.exit(101)
+            
         for no, line in enumerate(requirements):
             line = line.strip()
             if not line or line.startswith('#'):
