@@ -175,6 +175,7 @@ def after_install(options, home_dir):
                             cwd=pinax_dir)
         finally:
             logger.indent -= 2
+        logger.notify('Please follow the documentation to install all the requirements (e.g. Django).')
     elif options.release:
         # release should *never* touch the Internet.
         logger.notify('Going to install a full Pinax %s release.' % options.release)
@@ -213,7 +214,6 @@ def after_install(options, home_dir):
                       "or '.\\Scripts\\activate.bat' on Windows")
         logger.indent -= 2
         logger.notify('Pinax environment created successfully.')
-        logger.notify('Please follow the documentation to install all the requirements (e.g. Django).')
     else:
         logger.notify("Please make sure a version '%s': "
                       % home_dir)
