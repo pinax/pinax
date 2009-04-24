@@ -103,7 +103,7 @@ def release_files_exist(release_dir, requirements_file):
     requirements = f.read()
     f.close()
     requirements = requirements.splitlines()
-    full_requirements = []
+    full_requirements, missing_requirements = [], []
     result = True
     for no, line in enumerate(requirements):
         line = line.strip()
@@ -112,8 +112,13 @@ def release_files_exist(release_dir, requirements_file):
         requirement = join(release_dir, line)
         if not os.path.exists(requirement):
             result = False
-        full_requirements.append(requirement)
-    return result, full_requirements
+            missing_requirements.append(requirement)
+        else:
+            full_requirements.append(requirement)
+    if result:
+        return True, full_requirements
+    else:
+        return False, missing_requirements
 
 def after_install(options, home_dir):
     this_dir = os.path.dirname(__file__)
