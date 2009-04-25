@@ -154,13 +154,17 @@ def after_install(options, home_dir):
         else:
             # Go and get Pinax
             pinax_dir = join(src_dir, 'pinax')
-            logger.notify('Fetching Pinax from %s to %s' % (source, pinax_dir))
             if not os.path.exists(src_dir):
                 logger.info('Creating directory %s' % src_dir)
                 os.makedirs(src_dir)
             git = resolve_command(GIT_CMD)
-            call_subprocess([git, 'clone', '--quiet', source, pinax_dir],
-                            show_stdout=True)
+            if os.path.exists(join(pinax_dir, '.git')):
+                logger.notify('Found Pinax in %s. Updating' % pinax_dir)
+                call_subprocess([git, 'pull'], show_stdout=True, cwd=pinax_dir)
+            else:
+                logger.notify('Fetching Pinax from %s to %s' % (source, pinax_dir))
+                call_subprocess([git, 'clone', '--quiet', source, pinax_dir],
+                                show_stdout=True)
         logger.indent += 2
         try:
             logger.notify('Installing Pinax')
