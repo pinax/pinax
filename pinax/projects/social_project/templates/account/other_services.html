@@ -7,7 +7,7 @@
 {% block body %}
 
 <h1>{% trans "Other Services" %}</h1>
-<h3><a href="#" onclick="$('#TwitterForm').toggle();">{% trans "Twitter" %}</a></h3>
+<h3><a id="twitterform-toggle" href="#">{% trans "Twitter" %}</a></h3>
 <form  action="" method="POST" name="TwitterForm" id="TwitterForm">
   {% if twitter_authorized %}
   <p style="background:#C8E8FB">
@@ -31,6 +31,12 @@
       {% load jquery_validation %}
       {% include_validation %}
   <script type="text/javascript">
-       <!-- nothing here -->
+       $(document).ready(function() {
+           $('#TwitterForm').hide();
+           $('#twitterform-toggle').click(function() {
+               $('#TwitterForm').toggle();
+               return false;
+           });
+       });
       </script>
       {% endblock %}</p>

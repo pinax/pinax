@@ -65,5 +65,13 @@
             }
             
         });
+        
+        $(document).ready(function() {
+            $('#embed-code').hide();
+            $('#embed-code-toggle').click(function() {
+                $('#embed-code').toggle();
+                return false;
+            })
+        });
     </script>
 {% endblock %}

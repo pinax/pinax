@@ -31,3 +31,14 @@
     {% endif %}
     
 {% endblock %}
+
+{% block extra_body %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+                if ($('#project_form .error').length) {
+                    $('#project_form').show();
+                    $('#project_form').autoscroll();
+            }
+        });
+    </script>
+{% endblock %}
