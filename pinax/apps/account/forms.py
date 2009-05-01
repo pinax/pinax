@@ -243,14 +243,14 @@ class ResetPasswordForm(forms.Form):
             temp_key = User.objects.make_random_password()
             
             # save it to the password reset model
-            password_reset = PasswordReset(user=user,temp_key=temp_key)
+            password_reset = PasswordReset(user=user, temp_key=temp_key)
             password_reset.save()
             
             #send the password reset email
             subject = _("Password reset email sent")
             message = render_to_string("account/password_reset_key_message.txt", {
                 "user": user,        
-                "temp_key": temp_key
+                "temp_key": temp_key,
             })
             send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user.email], priority="high")
         return self.cleaned_data["email"]
