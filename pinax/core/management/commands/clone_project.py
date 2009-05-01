@@ -105,7 +105,10 @@ def update_rename_deploy_files(path, old_name, new_name):
         df = open(deploy_file, 'w')
         df.write(deploy_settings)
         df.close()
-        shutil.move(deploy_file, deploy_file.replace("pinax", new_name))
+        deploy_filepath = os.path.dirname(deploy_file)
+        deploy_filename = os.path.basename(deploy_file)
+        new_deploy_file = os.path.join(deploy_filepath, deploy_filename.replace("pinax", new_name))
+        shutil.move(deploy_file, new_deploy_file)
 
 
 def main(default_pinax_root, project_name, destination, verbose=True):
