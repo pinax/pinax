@@ -233,12 +233,7 @@ class ResetPasswordForm(forms.Form):
         return self.cleaned_data["email"]
 
     def save(self):
-
-        print User.objects.filter(email__iexact=self.cleaned_data["email"])
-        print self.cleaned_data["email"]
         for user in User.objects.filter(email__iexact=self.cleaned_data["email"]):
-            
-        
             # make a random password so this account can't be accessed.
             new_password = User.objects.make_random_password()
             user.set_password(new_password)
