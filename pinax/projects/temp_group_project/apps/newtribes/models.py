@@ -6,9 +6,9 @@ from django.db import models
 from groups_ng.base import Group
 
 class Tribe(Group):
-    members = models.ManyToManyField(User, related_name='tribes',
-        verbose_name=_('members'))
-
+    
+    members = models.ManyToManyField(User, related_name='tribes', verbose_name=_('members'))
+    
     def get_absolute_url(self):
         return reverse('tribe_detail', kwargs={'group_slug': self.slug})
     
