@@ -12,9 +12,6 @@ class BasicGroupForm(forms.ModelForm):
         error_message = _("This value must contain only letters, numbers, underscores and hyphens."))
             
     def clean_slug(self):
-        reserved_slugs = ["your_groups"] # @@@ remove need for this
-        if self.cleaned_data["slug"] in reserved_slugs:
-            raise forms.ValidationError(_("The slug you've chosen is reserved for internal use."))
         if BasicGroup.objects.filter(slug__iexact=self.cleaned_data["slug"]).count() > 0:
             raise forms.ValidationError(_("A group already exists with that slug."))
         return self.cleaned_data["slug"].lower()
