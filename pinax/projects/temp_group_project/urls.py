@@ -23,6 +23,7 @@ urlpatterns = patterns('',
     
     (r'^groups/', include('basic_groups.urls')),
     (r'^newtribes/', include('newtribes.urls')),
+    (r'^newprojects/', include('newprojects.urls')),
     #(r'^tribes/', include('tribes_ng.urls')),
     #(r'^projects/', include('temp_projects.urls')),
     
