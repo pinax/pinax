@@ -99,5 +99,19 @@ Let's assume the scripts you create from above are stored in
 This runs ``send_mail`` and ``emit_notices`` every minute and
 ``retry_deferred`` every 20 minutes.
 
+Media files
+-----------
+
+Pinax makes it very easy to combine all your applications' media files into
+one single location (see :ref:`ref-media` for details). Serving them more or
+less comes down again to how you do it with Django itself.
+
+There is an example on how to serve those files with the development server in
+:ref:`ref-media-devel`.
+
+In a production environment you, too, have to merge those files before you can
+serve them. Regarding actually serving those files then, see `Django's
+deployment documentation`_ for details.
 
 .. _`WSGIDaemonProcess`: http://code.google.com/p/modwsgi/wiki/ConfigurationDirectives#WSGIDaemonProcess
+.. _django's deployment documentation: http://docs.djangoproject.com/en/dev/howto/deployment/

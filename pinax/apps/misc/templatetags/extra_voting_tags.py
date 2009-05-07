@@ -31,8 +31,8 @@ class OrderByVotesNode(template.Node):
                 SELECT coalesce(SUM(vote), 0 ) 
                 FROM %s
                 WHERE content_type_id = %s
-                AND object_id = %s."id"
-            """ % (qn(Vote._meta.db_table), ctype.id, qn(model._meta.db_table))},
+                AND object_id = %s.%s
+            """ % (qn(Vote._meta.db_table), ctype.id, qn(model._meta.db_table), qn(model._meta.pk.attname))},
             order_by=['-score'])
         context[key] = by_score
         return u""
@@ -55,7 +55,8 @@ class OrderByRedditNode(template.Node):
         votes = Vote.objects.get_scores_in_bulk(values)
         ratings = []
         for obj in values:
-            age = (getattr(obj, self.date_var) - datetime(2005, 12, 8, 7, 46, 43)).seconds
+            age_timedelta = getattr(obj, self.date_var) - datetime(2005, 12, 8, 7, 46, 43)
+            age = (age_timedelta.days * 86400) + age_timedelta.seconds
             try:
                 obj_votes = votes[obj.id]['score']
             except KeyError:
