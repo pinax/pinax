@@ -31,8 +31,8 @@ class OrderByVotesNode(template.Node):
                 SELECT coalesce(SUM(vote), 0 ) 
                 FROM %s
                 WHERE content_type_id = %s
-                AND object_id = %s."id"
-            """ % (qn(Vote._meta.db_table), ctype.id, qn(model._meta.db_table))},
+                AND object_id = %s.%s
+            """ % (qn(Vote._meta.db_table), ctype.id, qn(model._meta.db_table), qn(model._meta.pk.attname))},
             order_by=['-score'])
         context[key] = by_score
         return u""
