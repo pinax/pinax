@@ -4,8 +4,8 @@
 import os.path
 import pinax
 
-PINAX_ROOT = os.path.abspath(os.path.dirname(pinax.__file__))
-PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+PINAX_ROOT = os.path.realpath(os.path.dirname(pinax.__file__))
+PROJECT_ROOT = os.path.realpath(os.path.dirname(__file__))
 
 # tells Pinax to use the default theme
 PINAX_THEME = 'default'
@@ -50,7 +50,7 @@ USE_I18N = True
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
 
-MEDIA_ROOT = os.path.join(os.path.dirname(__file__), "site_media")
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, "site_media")
 
 # URL that handles the media served from MEDIA_ROOT.
 # Example: "http://media.lawrence.com"
@@ -87,7 +87,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'social_project.urls'
 
 TEMPLATE_DIRS = (
-    os.path.join(os.path.dirname(__file__), "templates"),
+    os.path.join(PROJECT_ROOT, "templates"),
     os.path.join(PINAX_ROOT, "templates", PINAX_THEME),
 )
 
@@ -205,7 +205,6 @@ LANGUAGES = (
 # URCHIN_ID = "ua-..."
 
 CACHE_BACKEND = "locmem:///?max_entries=3000"
-FEEDUTIL_SUMMARY_LEN = 60*7 # 7 hours
 
 class NullStream(object):
     def write(*args, **kw):
