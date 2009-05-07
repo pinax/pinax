@@ -24,13 +24,13 @@
                         {% ifequal field.name "tease" %}<tr style="display: none;" id="teaser">{% else %}<tr>{% endifequal %}
                             <td width="150px" valign="top">{{ field.label_tag }}
                                     {% ifequal field.name "body" %}
-                                    <a href="#" onclick="$('#teaser').toggle(); return false;">{% trans "Teaser" %}</a>
+                                    <a id="teaser-toggle" href="#">{% trans "Teaser" %}</a>
                                     {% endifequal %}
                             </td>
                             <td>{{ field }}</td></tr>
                         {% if field.help_text %}<tr><td colspan="2"><span>{{ field.help_text }}</span></td></tr>{% endif %}
                     {% endfor %}
-                    <tr><td></td><td><input type="hidden" name="action" value="update" /><input type="submit" value="update" class="button"/></td></tr>
+                    <tr><td></td><td><input type="hidden" name="action" value="update" /><input type="submit" value="update" /></td></tr>
                 </table>
             </form>
         {% else %}
@@ -38,4 +38,17 @@
         {% endifequal %}
         </fieldset>
     </div>
+{% endblock %}
+
+{% block extra_body %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#teaser").hide();
+            $("#teaser-toggle").click(function() {
+               $("#teaser").toggle();
+               $("#teaser").autoscroll();
+               return false;
+            });
+        });
+    </script>
 {% endblock %}

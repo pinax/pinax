@@ -14,7 +14,6 @@ setup(
     url='http://pinaxproject.com/',
     packages=find_packages(),
     include_package_data=True,
-    setup_requires=['setuptools_git'],
     # Ignore the tarballs we built our own in a source distribution
     exclude_package_data={
         'requirements': ['%s/*.tar.gz' % version],
@@ -24,6 +23,9 @@ setup(
         'console_scripts': [
             'pinax-admin = pinax.core.management:execute_from_command_line',
         ],
+        'setuptools.file_finders': [
+            'dummy = file_finder:dummylsfiles',
+        ],
     },
     classifiers=[
         'Development Status :: 4 - Beta',
@@ -31,8 +33,8 @@ setup(
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
-        'Programming Language :: Python',
         'Framework :: Django',
+        'Programming Language :: Python',
         'Programming Language :: Python :: 2.4',
         'Programming Language :: JavaScript',
     ],

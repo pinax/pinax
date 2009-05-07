@@ -219,8 +219,9 @@ def after_install(options, home_dir):
         logger.indent -= 2
         logger.notify('Pinax environment created successfully.')
     else:
-        logger.notify("Please make sure a version '%s': "
-                      % home_dir)
+        logger.notify("Cannot locate a VERSION file for release. You are "
+            "likely not running from a release tarball. Perhaps you meant to "
+            "use --development")
 
 
 def filter_lines(line):

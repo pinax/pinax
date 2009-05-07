@@ -95,7 +95,7 @@
                       {% if field.errors %}<tr><td colspan="2">{{ field.errors }}</td></tr>{% endif %}
                       <tr><td width="100px">{{ field.label_tag }}</td><td>{{ field }}</td></tr>
                   {% endfor %}
-                  <tr><td></td><td><input type="submit" value="Log in &raquo;" class="button" /></td></tr>
+                  <tr><td></td><td><input type="submit" value="Log in &raquo;" /></td></tr>
                   <tr><td></td><td><a href="{% url acct_passwd_reset %}">Forgot password?</a></td></tr>
               </table>
           </form>
