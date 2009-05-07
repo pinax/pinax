@@ -122,10 +122,13 @@ class OpenIDSignupForm(forms.Form):
     email = forms.EmailField(label="Email (optional)", required=False, widget=forms.TextInput())
     
     def __init__(self, *args, **kwargs):
+        # @@@ this method needs to be compared to django-openid's form.
+        
         # Remember provided (validated!) OpenID to attach it to the new user later.
         self.openid = kwargs.pop("openid")
         # TODO: do something with this?
         reserved_usernames = kwargs.pop("reserved_usernames")
+        no_duplicate_emails = kwargs.pop("no_duplicate_emails")
         super(OpenIDSignupForm, self).__init__(*args, **kwargs)
     
     def clean_username(self):
@@ -233,12 +236,7 @@ class ResetPasswordForm(forms.Form):
         return self.cleaned_data["email"]
 
     def save(self):
-
-        print User.objects.filter(email__iexact=self.cleaned_data["email"])
-        print self.cleaned_data["email"]
         for user in User.objects.filter(email__iexact=self.cleaned_data["email"]):
-            
-        
             # make a random password so this account can't be accessed.
             new_password = User.objects.make_random_password()
             user.set_password(new_password)
@@ -248,14 +246,14 @@ class ResetPasswordForm(forms.Form):
             temp_key = User.objects.make_random_password()
             
             # save it to the password reset model
-            password_reset = PasswordReset(user=user,temp_key=temp_key)
+            password_reset = PasswordReset(user=user, temp_key=temp_key)
             password_reset.save()
             
             #send the password reset email
             subject = _("Password reset email sent")
             message = render_to_string("account/password_reset_key_message.txt", {
                 "user": user,        
-                "temp_key": temp_key
+                "temp_key": temp_key,
             })
             send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user.email], priority="high")
         return self.cleaned_data["email"]
