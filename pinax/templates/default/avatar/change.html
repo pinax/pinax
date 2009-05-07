@@ -11,8 +11,10 @@
   {% avatar user 80 %}
   {% if not avatars %}
         <h3>Your avatar is currently the one found on <a href="http://www.gravatar.com/">Gravatar</a>, but you can upload a custom avatar just for this site!  To do so, simply use the form below.</h3>
+        <p>( Custom avatars will not show up unless you have a <a href="{% url acct_email%}">confirmed email address</a>. )</p>
     {% else %}
         <h3>Select a different avatar:</h3>
+        <p>( Custom avatars will not show up unless you have a <a href="{% url acct_email%}">confirmed email address</a>. )</p>
         <form method="POST" action="">
             <ul class="avatar_choices">
                 {{ primary_avatar_form.choice }}
