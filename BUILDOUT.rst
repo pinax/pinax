@@ -2,11 +2,12 @@
  BUILDOUT
 ==========
 
-NOTES
-=====
+POTENTIAL TOOLS
+===============
 
 * z3c.recipe.eggbasket : Install eggs from a tarball and create that egg.
 * collective.recipe.omelette :	Creates a unified directory structure of all namespace packages, symlinking to the actual contents, in order to ease navigation.
+* buildout.eggtractor is a buildout extension that scans the src directory or a list of directories I give for eggs and picks them up automatically. So no more editing of the buildout's configuration file.
 
 BLAH
 ====
