@@ -9,6 +9,25 @@ POTENTIAL TOOLS
 * collective.recipe.omelette :	Creates a unified directory structure of all namespace packages, symlinking to the actual contents, in order to ease navigation.
 * buildout.eggtractor is a buildout extension that scans the src directory or a list of directories I give for eggs and picks them up automatically. So no more editing of the buildout's configuration file.
 
+BUGS/MISFEATURES
+================
+
+* Had to manually change settings.py::
+
+    ROOT_URLCONF = 'social_site.urls'
+
+  to::
+
+    ROOT_URLCONF = 'mysite.urls'
+
+* Locations tab fails: needs YAHOO_API_KEY
+
+* I'm doing this within Pinax git repo code. I really should do this
+  as a separate thing which goes and gets pinax itself.
+
+* bin/test doesn't work
+
+
 BLAH
 ====
 
