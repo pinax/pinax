@@ -54,5 +54,5 @@ class ProjectsTest(TestCase):
         response = self.client.get("/newprojects/project/test/")
         self.assertEqual(Project.objects.get(slug="test").creator.username, "tester")
         self.assertEqual(len(Project.objects.get(slug="test").members.all()), 1)
-        self.assertEqual(Project.objects.get(slug="test").members.all()[0].username, "tester")
+        self.assertEqual(Project.objects.get(slug="test").members.all()[0].user.username, "tester")
         self.assertEqual(response.context[0]["is_member"], True)

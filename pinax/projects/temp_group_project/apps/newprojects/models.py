@@ -17,6 +17,12 @@ class Project(Group):
     def get_absolute_url(self):
         return reverse('project_detail', kwargs={'group_slug': self.slug})
     
+    def user_is_member(self, user):
+        if ProjectMember.objects.filter(project=self, user=user).count() > 0: # @@@ is there a better way?
+            return True
+        else:
+            return False
+    
     def get_url_kwargs(self):
         return {'group_slug': self.slug}
 

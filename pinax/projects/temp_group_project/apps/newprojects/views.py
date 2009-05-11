@@ -15,7 +15,7 @@ if "notification" in settings.INSTALLED_APPS:
 else:
     notification = None
 
-from newprojects.models import Project
+from newprojects.models import Project, ProjectMember
 from newprojects.forms import ProjectForm, ProjectUpdateForm
 
 TOPIC_COUNT_SQL = """
@@ -39,8 +39,9 @@ def create(request, form_class=ProjectForm, template_name="newprojects/create.ht
         project = project_form.save(commit=False)
         project.creator = request.user
         project.save()
-        project.members.add(request.user)
-        project.save()
+        project_member = ProjectMember(project=project, user=request.user)
+        project.members.add(project_member)
+        project_member.save()
         if notification:
             # @@@ might be worth having a shortcut for sending to all users
             notification.send(User.objects.all(), "projects_new_project",
@@ -107,7 +108,9 @@ def project(request, group_slug=None, form_class=ProjectUpdateForm,
     if action == 'update' and project_form.is_valid():
         project = project_form.save()
     elif action == 'join':
-        project.members.add(request.user)
+        project_member = ProjectMember(project=project, user=request.user)
+        project.members.add(project_member)
+        project_member.save()
         request.user.message_set.create(
             message=_("You have joined the project %s") % (project.name,))
         if notification:
@@ -119,7 +122,7 @@ def project(request, group_slug=None, form_class=ProjectUpdateForm,
         if notification:
             pass # @@@ no notification on departure yet
     
-    if request.user.is_authenticated():
+    if not request.user.is_authenticated():
         is_member = False
     else:
         is_member = project.user_is_member(request.user)
