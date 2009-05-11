@@ -14,6 +14,7 @@
     <ul>
         {% if user.is_authenticated %}
             <li><a href="{% url your_tribes %} ">{% trans "Your Tribes" %}</a></li>
+            <li><a href="{% url tribe_create %}">{% trans "Create a Tribe" %}</a></li>
         {% endif %}
         <li><a href="{% url tribe_list %}">{% trans "All Tribes" %}</a></li>
     </ul>
