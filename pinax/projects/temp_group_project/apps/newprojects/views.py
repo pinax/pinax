@@ -27,8 +27,8 @@ WHERE
 """
 MEMBER_COUNT_SQL = """
 SELECT COUNT(*)
-FROM newprojects_project_members
-WHERE newprojects_project_members.project_id = newprojects_project.id
+FROM newprojects_projectmember
+WHERE newprojects_projectmember.project_id = newprojects_project.id
 """
 
 @login_required
