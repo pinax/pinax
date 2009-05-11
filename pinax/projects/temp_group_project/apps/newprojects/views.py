@@ -54,9 +54,8 @@ def create(request, form_class=ProjectForm, template_name="newprojects/create.ht
 
 def projects(request, template_name="newprojects/projects.html"):
     
-    ctype = ContentType.objects.get_for_model(Project)
-    
     projects = Project.objects.all()
+    
     search_terms = request.GET.get('search', '')
     if search_terms:
         projects = (projects.filter(name__icontains=search_terms) |

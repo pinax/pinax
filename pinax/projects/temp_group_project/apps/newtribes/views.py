@@ -53,9 +53,8 @@ def create(request, form_class=TribeForm, template_name="newtribes/create.html")
 
 def tribes(request, template_name="newtribes/tribes.html"):
     
-    ctype = ContentType.objects.get_for_model(Tribe)
-    
     tribes = Tribe.objects.all()
+    
     search_terms = request.GET.get('search', '')
     if search_terms:
         tribes = (tribes.filter(name__icontains=search_terms) |
