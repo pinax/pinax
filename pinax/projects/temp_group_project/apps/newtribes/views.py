@@ -119,7 +119,7 @@ def tribe(request, group_slug=None, form_class=TribeUpdateForm,
         if notification:
             pass # @@@ no notification on departure yet
     
-    if request.user.is_authenticated():
+    if not request.user.is_authenticated():
         is_member = False
     else:
         is_member = tribe.user_is_member(request.user)
