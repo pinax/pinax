@@ -40,7 +40,6 @@ class ProjectsTest(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response["location"], "http://testserver/newprojects/project/test/")
         self.assertEqual(Project.objects.get(slug="test").creator.username, "tester")
-        self.assertEqual(Project.objects.get(slug="test").members.all()[0].username, "tester")
     
     def test_auth_creator_membership(self):
         """is membership for creator correct?"""
@@ -54,5 +53,6 @@ class ProjectsTest(TestCase):
         })
         response = self.client.get("/newprojects/project/test/")
         self.assertEqual(Project.objects.get(slug="test").creator.username, "tester")
+        self.assertEqual(len(Project.objects.get(slug="test").members.all()), 1)
         self.assertEqual(Project.objects.get(slug="test").members.all()[0].username, "tester")
         self.assertEqual(response.context[0]["is_member"], True)
