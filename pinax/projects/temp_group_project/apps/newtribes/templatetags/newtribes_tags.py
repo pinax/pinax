@@ -3,25 +3,6 @@ from newtribes.forms import TribeForm
 
 register = template.Library()
 
-def do_get_tribe_form(parser, token):
-    try:
-        tag_name, _, context_name = token.split_contents()
-    except ValueError:
-        tagname = token.contents.split()[0]
-        raise (template.TemplateSyntaxError,
-                ("%(tagname)r tag syntax is as follows: "
-                    "{%% %(tagname)r as VARIABLE %%}" % {'tagname': tagname}))
-    return TribeFormNode(context_name)
-
-class TribeFormNode(template.Node):
-    def __init__(self, context_name):
-        self.context_name = context_name
-    def render(self, context):
-        context[self.context_name] = TribeForm()
-        return ''
-
-register.tag('get_tribe_form', do_get_tribe_form)
-
 
 @register.inclusion_tag("newtribes/tribe_item.html", takes_context=True)
 def show_tribe(context, tribe):
