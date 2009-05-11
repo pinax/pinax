@@ -1,58 +1,58 @@
 from django.test import TestCase
 
-from newtribes.models import Tribe
+from newprojects.models import Project
 
-class TribesTest(TestCase):
-    fixtures = ["newtribes_auth.json"]
+class ProjectsTest(TestCase):
+    fixtures = ["newprojects_auth.json"]
     
     def test_unauth_create_get(self):
         """can an unauth'd user get to page?"""
         
-        response = self.client.get("/newtribes/create/")
+        response = self.client.get("/newprojects/create/")
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response["location"], "http://testserver/account/login?next=/newtribes/create/")
+        self.assertEqual(response["location"], "http://testserver/account/login?next=/newprojects/create/")
     
     def test_auth_create_get(self):
         """can an auth'd user get to page?"""
         
         logged_in = self.client.login(username="tester", password="tester")
         self.assertTrue(logged_in)
-        response = self.client.get("/newtribes/create/")
+        response = self.client.get("/newprojects/create/")
         self.assertEqual(response.status_code, 200)
     
     def test_unauth_create_post(self):
-        """can an unauth'd user post to create a new tribe?"""
+        """can an unauth'd user post to create a new project?"""
         
-        response = self.client.post("/newtribes/create/")
+        response = self.client.post("/newprojects/create/")
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response["location"], "http://testserver/account/login?next=/newtribes/create/")
+        self.assertEqual(response["location"], "http://testserver/account/login?next=/newprojects/create/")
     
     def test_auth_create_post(self):
-        """can an auth'd user post to create a new tribe?"""
+        """can an auth'd user post to create a new project?"""
         
         logged_in = self.client.login(username="tester", password="tester")
         self.assertTrue(logged_in)
-        response = self.client.post("/newtribes/create/", {
+        response = self.client.post("/newprojects/create/", {
             "slug": "test",
-            "name": "Test Tribe",
-            "description": "A test tribe.",
+            "name": "Test Project",
+            "description": "A test project.",
         })
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response["location"], "http://testserver/newtribes/tribe/test/")
-        self.assertEqual(Tribe.objects.get(slug="test").creator.username, "tester")
-        self.assertEqual(Tribe.objects.get(slug="test").members.all()[0].username, "tester")
+        self.assertEqual(response["location"], "http://testserver/newprojects/project/test/")
+        self.assertEqual(Project.objects.get(slug="test").creator.username, "tester")
+        self.assertEqual(Project.objects.get(slug="test").members.all()[0].username, "tester")
     
     def test_auth_creator_membership(self):
         """is membership for creator correct?"""
         
         logged_in = self.client.login(username="tester", password="tester")
         self.assertTrue(logged_in)
-        response = self.client.post("/newtribes/create/", {
+        response = self.client.post("/newprojects/create/", {
             "slug": "test",
-            "name": "Test Tribe",
-            "description": "A test tribe.",
+            "name": "Test Project",
+            "description": "A test project.",
         })
-        response = self.client.get("/newtribes/tribe/test/")
-        self.assertEqual(Tribe.objects.get(slug="test").creator.username, "tester")
-        self.assertEqual(Tribe.objects.get(slug="test").members.all()[0].username, "tester")
+        response = self.client.get("/newprojects/project/test/")
+        self.assertEqual(Project.objects.get(slug="test").creator.username, "tester")
+        self.assertEqual(Project.objects.get(slug="test").members.all()[0].username, "tester")
         self.assertEqual(response.context[0]["is_member"], True)
