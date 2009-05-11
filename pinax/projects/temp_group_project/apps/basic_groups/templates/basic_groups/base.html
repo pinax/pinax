@@ -4,6 +4,10 @@
 
 {% block rtab_id %}id="groups_tab"{% endblock %}
 
+{% block extra_head %}
+<link rel="stylesheet" href="{{ MEDIA_URL }}basic_groups/css/basic_groups.css" />
+{% endblock %}
+
 {% block subnav %}
     <ul>
         {% if user.is_authenticated %}
