@@ -10,6 +10,8 @@ if sys.platform == 'win32':
     PIP_CMD = 'pip.exe'
     EASY_INSTALL_CMD = 'easy_install.exe'
     extra = {'shell': True}
+    if not expected_exe.endswith('.exe'):
+        expected_exe = '%s.exe' % expected_exe
 else:
     BIN_DIR = 'bin'
     GIT_CMD = 'git'
