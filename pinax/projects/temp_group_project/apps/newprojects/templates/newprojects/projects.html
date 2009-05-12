@@ -16,19 +16,7 @@
     
     <p>{% trans "A <b>project</b> is a group of people working on a common set of tasks." %}</p>
     {% if user.is_authenticated %}
-        <div class="form-toggle">
-            <p><span id="start-project-toggle">{% trans "Start your own project" %}</a></p>
-            <form class="uniForm" id="start-project" method="POST" action="{% url project_create %}">
-                <fieldset class="inlineLabels">
-                    {% get_project_form as project_form %}
-                    {{ project_form|as_uni_form }}
-                    <div class="form_block">
-                        <input type="hidden" name="action" value="create" />
-                        <input type="submit" value="{% trans "create" %}"/>
-                    </div>
-                </fieldset>
-            </form>
-        </div>
+        <p><a href="{% url project_create %}">Create</a> your own project.</p>
     {% else %}
         {% url acct_signup as signup_url %}
         {% url acct_login as login_url %}
@@ -59,21 +47,4 @@
         {% paginate %}
     {% endif %}
     
-{% endblock %}
-
-{% block extra_body %}
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#start-project').hide();
-            $('#start-project-toggle').click(function() {
-                $('#start-project').toggle();
-                $('#start-project').autoscroll();
-                return false;
-            });
-            if ($('#start-project .error').length) {
-                $('#start-project').show();
-                $('#start-project .error').autoscroll();
-            }
-        });
-    </script>
 {% endblock %}

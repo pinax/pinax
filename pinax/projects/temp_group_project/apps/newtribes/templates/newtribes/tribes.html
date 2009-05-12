@@ -16,19 +16,7 @@
     
     <p>{% trans "A <b>tribe</b> is a group of people with some common interest." %}</p>
     {% if user.is_authenticated %}
-        <div class="form-toggle">
-            <p><span id="start-tribe-toggle">{% trans "Start your own tribe" %}</a></p>
-            <form class="uniForm" id="start-tribe" method="POST" action="{% url tribe_create %}">
-                <fieldset class="inlineLabels">
-                    {% get_tribe_form as tribe_form %}
-                    {{ tribe_form|as_uni_form }}
-                    <div class="form_block">
-                        <input type="hidden" name="action" value="create" />
-                        <input type="submit" value="{% trans "create" %}"/>
-                    </div>
-                </fieldset>
-            </form>
-        </div>
+        <p><a href="{% url tribe_create %}">Create</a> your own tribe.</p>
     {% else %}
         {% url acct_signup as signup_url %}
         {% url acct_login as login_url %}
@@ -59,21 +47,4 @@
         {% paginate %}
     {% endif %}
     
-{% endblock %}
-
-{% block extra_body %}
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#start-tribe').hide();
-            $('#start-tribe-toggle').click(function() {
-                $('#start-tribe').toggle();
-                $('#start-tribe').autoscroll();
-                return false;
-            });
-            if ($('#start-tribe .error').length) {
-                $('#start-tribe').show();
-                $('#start-tribe .error').autoscroll();
-            }
-        });
-    </script>
 {% endblock %}

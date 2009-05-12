@@ -14,6 +14,7 @@
     <ul>
         {% if user.is_authenticated %}
             <li><a href="{% url your_projects %} ">{% trans "Your Projects" %}</a></li>
+            <li><a href="{% url project_create %}">{% trans "Create a Project" %}</a></li>
         {% endif %}
         <li><a href="{% url project_list %}">{% trans "All Projects" %}</a></li>
     </ul>

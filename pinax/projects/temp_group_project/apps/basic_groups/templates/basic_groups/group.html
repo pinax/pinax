@@ -68,7 +68,7 @@
         {% if user.is_authenticated %}
             <div>
                 <form method="POST" action="">
-                    {% if are_member %}
+                    {% if is_member %}
                         {% ifequal user group.creator %}
                             <p>{% trans "You are the creator of this group so can't leave (yet)." %}</p>
                         {% else %}
