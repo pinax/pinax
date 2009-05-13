@@ -13,6 +13,7 @@ send_mail = get_send_mail()
 
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
+from django.contrib.sites.models import Site
 
 from emailconfirmation.models import EmailAddress
 from account.models import Account
@@ -248,11 +249,15 @@ class ResetPasswordForm(forms.Form):
             password_reset = PasswordReset(user=user, temp_key=temp_key)
             password_reset.save()
             
+            current_site = Site.objects.get_current()
+            domain = unicode(current_site.domain)
+            
             #send the password reset email
             subject = _("Password reset email sent")
             message = render_to_string("account/password_reset_key_message.txt", {
                 "user": user,        
                 "temp_key": temp_key,
+                "domain": domain,
             })
             send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user.email], priority="high")
         return self.cleaned_data["email"]
