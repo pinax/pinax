@@ -175,7 +175,7 @@ def password_reset(request, form_class=ResetPasswordForm,
         "password_reset_form": password_reset_form,
     }, context_instance=RequestContext(request))
     
-def password_reset_from_key(request, form_class=ResetPasswordKeyForm,
+def password_reset_from_key(request, key, form_class=ResetPasswordKeyForm,
         template_name="account/password_reset_from_key.html"):
     if request.method == "POST":
         password_reset_key_form = form_class(request.POST)
@@ -183,7 +183,7 @@ def password_reset_from_key(request, form_class=ResetPasswordKeyForm,
             password_reset_key_form.save()
             password_reset_key_form = None
     else:
-        password_reset_key_form = form_class()
+        password_reset_key_form = form_class(initial={"temp_key": key})
     
     return render_to_response(template_name, {
         "form": password_reset_key_form,

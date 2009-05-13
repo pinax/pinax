@@ -6,12 +6,14 @@ from django.template.loader import render_to_string
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _, ugettext
 from django.utils.encoding import smart_unicode
+from django.utils.hashcompat import sha_constructor
 
 from misc.utils import get_send_mail
 send_mail = get_send_mail()
 
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
+from django.contrib.sites.models import Site
 
 from emailconfirmation.models import EmailAddress
 from account.models import Account
@@ -237,37 +239,40 @@ class ResetPasswordForm(forms.Form):
 
     def save(self):
         for user in User.objects.filter(email__iexact=self.cleaned_data["email"]):
-            # make a random password so this account can't be accessed.
-            new_password = User.objects.make_random_password()
-            user.set_password(new_password)
-            user.save()
-        
-            # Make the temp key by generating another random password.
-            temp_key = User.objects.make_random_password()
+            temp_key = sha_constructor("%s%s%s" % (
+                settings.SECRET_KEY,
+                user.email,
+                settings.SECRET_KEY,
+            )).hexdigest()
             
             # save it to the password reset model
             password_reset = PasswordReset(user=user, temp_key=temp_key)
             password_reset.save()
+            
+            current_site = Site.objects.get_current()
+            domain = unicode(current_site.domain)
             
             #send the password reset email
             subject = _("Password reset email sent")
             message = render_to_string("account/password_reset_key_message.txt", {
                 "user": user,        
                 "temp_key": temp_key,
+                "domain": domain,
             })
             send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user.email], priority="high")
         return self.cleaned_data["email"]
         
 class ResetPasswordKeyForm(forms.Form):
     
-    temp_key = forms.CharField(label=_("Temporary Password"), widget=forms.PasswordInput(render_value=False))
     password1 = forms.CharField(label=_("New Password"), widget=forms.PasswordInput(render_value=False))
     password2 = forms.CharField(label=_("New Password (again)"), widget=forms.PasswordInput(render_value=False))
+    temp_key = forms.CharField(widget=forms.HiddenInput)
 
     def clean_temp_key(self):
-        if not PasswordReset.objects.filter(temp_key__exact=self.cleaned_data.get("temp_key"),reset__exact=False).count() == 1:
-            raise forms.ValidationError(_("Please type your temporary password."))
-        return self.cleaned_data["temp_key"]
+        temp_key = self.cleaned_data.get("temp_key")
+        if not PasswordReset.objects.filter(temp_key=temp_key, reset=False).count() == 1:
+            raise forms.ValidationError(_("Temporary key is invalid."))
+        return temp_key
 
     def clean_password2(self):
         if "password1" in self.cleaned_data and "password2" in self.cleaned_data:
@@ -277,16 +282,16 @@ class ResetPasswordKeyForm(forms.Form):
 
     def save(self):
         # get the password_reset object
-        password_reset = PasswordReset.objects.get(temp_key__exact=self.cleaned_data.get("temp_key"))
+        temp_key = self.cleaned_data.get("temp_key")
+        password_reset = PasswordReset.objects.get(temp_key__exact=temp_key)
         
         # now set the new user password
         user = User.objects.get(passwordreset__exact=password_reset)
-        user.set_password(self.cleaned_data['password1'])
+        user.set_password(self.cleaned_data["password1"])
         user.save()
         user.message_set.create(message=ugettext(u"Password successfully changed."))
         
         # change all the password reset records to this person to be true.
-        #R8kmfcTycq
         for password_reset in PasswordReset.objects.filter(user=user):
             password_reset.reset = True
             password_reset.save()

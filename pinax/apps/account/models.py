@@ -84,4 +84,4 @@ class PasswordReset(models.Model):
     reset = models.BooleanField(_('reset yet?'), default=False)
 
     def __unicode__(self):
-        return 'temp_key for ' + self.user.username
+        return "%s (key=%s, reset=%r)" % (self.user.username, self.temp_key, self.reset)
