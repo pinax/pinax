@@ -11,7 +11,7 @@ import os
 from os.path import join
 
 # do not include /build/ dir, *.egg-info dir and py[co] files
-EXCLUDE = re.compile(r'(^build|[^/]+\.egg-info|.*.py[co]$)')
+EXCLUDE = re.compile(r'(^build|^\.hg|^\.DS_Store|^\.git|[^/]+\.egg-info|.*.py[co]$)')
 
 def walk(top):
     files = []
