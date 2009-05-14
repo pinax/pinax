@@ -1122,7 +1122,7 @@ def after_install(options, home_dir):
             os.path.exists('/usr/lib/python2.6/dist-packages')):
         jaunty_path_fix = join(lib_dir, 'site-packages', 'jaunty-fix.pth')
         f = open(jaunty_path_fix, 'wb')
-        f.write('/usr/lib/python2.6/dist-packages/\n')
+        f.write('/usr/lib/python2.6/dist-packages\n/var/lib/python-support/python2.6')
         f.close()
 
     if options.development:
