@@ -48,7 +48,7 @@ class AuthenticatedMiddleware(object):
         self.exemptions = [
             r"^%s" % settings.MEDIA_URL,
             r"^%s$" % login_url,
-        ]
+        ] + getattr(settings, "AUTHENTICATED_EXEMPT_URLS", [])
     
     def process_request(self, request):
         for exemption in self.exemptions:
