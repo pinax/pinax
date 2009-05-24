@@ -3,7 +3,7 @@ from django.conf import settings
 
 from django.views.generic.simple import direct_to_template
 
-from intranet_account.openid_consumer import PinaxConsumer
+from account.openid_consumer import PinaxConsumer
 
 from django.contrib import admin
 admin.autodiscover()
@@ -15,7 +15,7 @@ from wiki import models as wiki_models
 urlpatterns = patterns('',
     url(r'^$', direct_to_template, {"template": "homepage.html"}, name="home"),
     
-    (r'^account/', include('intranet_account.urls')),
+    (r'^account/', include('account.urls')),
     (r'^openid/(.*)', PinaxConsumer()),
     (r'^profiles/', include('basic_profiles.urls')),
     (r'^notices/', include('notification.urls')),

@@ -75,8 +75,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django_openid.consumer.SessionConsumer',
-    'intranet_account.middleware.LocaleMiddleware',
-    'intranet_account.middleware.AuthenticatedMiddleware',
+    'account.middleware.LocaleMiddleware',
+    'account.middleware.AuthenticatedMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'pagination.middleware.PaginationMiddleware',
 )
@@ -97,8 +97,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     
     "notification.context_processors.notification",
     "announcements.context_processors.site_wide_announcements",
-    "intranet_account.context_processors.openid",
-    "intranet_account.context_processors.account",
+    "account.context_processors.openid",
+    "account.context_processors.account",
     "misc.context_processors.contact_email",
     "misc.context_processors.site_name",
 )
@@ -130,7 +130,7 @@ INSTALLED_APPS = (
     
     # internal (for now)
     'basic_profiles',
-    'intranet_account',
+    'account',
     'misc',
     #'pastebin',
     #'quickbar',
@@ -148,7 +148,7 @@ ABSOLUTE_URL_OVERRIDES = {
 }
 
 AUTH_PROFILE_MODULE = 'basic_profiles.Profile'
-NOTIFICATION_LANGUAGE_MODULE = 'intranet_account.Account'
+NOTIFICATION_LANGUAGE_MODULE = 'account.Account'
 
 EMAIL_CONFIRMATION_DAYS = 2
 EMAIL_DEBUG = DEBUG
