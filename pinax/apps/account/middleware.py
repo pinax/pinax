@@ -1,3 +1,5 @@
+import re
+
 from django.utils.cache import patch_vary_headers
 from django.utils import translation
 from django.utils.http import urlquote
@@ -43,10 +45,15 @@ class AuthenticatedMiddleware(object):
             login_url = settings.LOGIN_URL
         self.redirect_field_name = redirect_field_name
         self.login_url = login_url
+        self.exemptions = [
+            r"^%s" % settings.MEDIA_URL,
+            r"^%s$" % login_url,
+        ]
     
     def process_request(self, request):
-        if request.path.startswith(settings.MEDIA_URL) or request.path == self.login_url:
-            return None
+        for exemption in self.exemptions:
+            if re.match(exemption, request.path):
+                return None
         if not request.user.is_authenticated():
             path = urlquote(request.get_full_path())
             tup = (self.login_url, self.redirect_field_name, path)
