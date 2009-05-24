@@ -6,6 +6,8 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.utils.translation import ugettext
 
+from django.contrib.admin.views.decorators import staff_member_required
+
 from account.utils import get_default_redirect
 from signup_codes.models import check_signup_code
 from signup_codes.forms import SignupForm, InviteUserForm
@@ -49,6 +51,7 @@ def signup(request, form_class=SignupForm,
     }, context_instance=RequestContext(request))
 
 
+@staff_member_required
 def admin_invite_user(request, form_class=InviteUserForm,
         template_name="signup_codes/admin_invite_user.html"):
     """
