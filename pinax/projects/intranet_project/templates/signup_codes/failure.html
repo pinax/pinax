@@ -1,0 +1,12 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Incorrect Code" %}{% endblock %}
+
+{% block body %}
+    <h1>{% trans "Incorrect Code" %}</h1>
+    
+    <p>{% blocktrans %}You have provided an invalid code for signup.{% endblocktrans %}</p>
+        
+{% endblock %}

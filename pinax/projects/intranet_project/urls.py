@@ -15,6 +15,9 @@ from wiki import models as wiki_models
 urlpatterns = patterns('',
     url(r'^$', direct_to_template, {"template": "homepage.html"}, name="home"),
     
+    url(r'^admin/invite_user/$', 'signup_codes.views.admin_invite_user', name="admin_invite_user"),
+    url(r'^account/signup/$', "signup_codes.views.signup", name="acct_signup"),
+    
     (r'^account/', include('account.urls')),
     (r'^openid/(.*)', PinaxConsumer()),
     (r'^profiles/', include('basic_profiles.urls')),

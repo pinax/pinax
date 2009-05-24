@@ -131,6 +131,7 @@ INSTALLED_APPS = (
     # internal (for now)
     'basic_profiles',
     'account',
+    'signup_codes',
     'misc',
     #'pastebin',
     #'quickbar',
@@ -156,6 +157,12 @@ CONTACT_EMAIL = "feedback@example.com"
 SITE_NAME = "Pinax"
 LOGIN_URL = "/account/login/"
 LOGIN_REDIRECT_URLNAME = "home"
+
+ACCOUNT_OPEN_SIGNUP = False
+
+AUTHENTICATED_EXEMPT_URLS = [
+    r"^/account/signup/$",
+]
 
 # local_settings.py can be used to override environment-specific settings
 # like database and email that differ between development and production.
