@@ -5,6 +5,7 @@ PINAX_GIT_LOCATION = 'git://github.com/pinax/pinax.git'
 PINAX_PYPI = 'http://pypi.pinaxproject.com'
 PINAX_MUST_HAVES = {
     'setuptools-git': 'setuptools_git-0.3.3.tar.gz',
+    'setuptools-dummy': 'setuptools_dummy-0.0.3.tar.gz',
     'pip': 'pip-0.3.1.tar.gz',
 }
 
