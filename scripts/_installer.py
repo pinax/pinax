@@ -178,7 +178,7 @@ def after_install(options, home_dir):
                 call_subprocess([git, 'pull'], show_stdout=True, cwd=pinax_dir)
             else:
                 logger.notify('Fetching Pinax from %s to %s' % (source, pinax_dir))
-                call_subprocess([git, 'clone', '--quiet', source, pinax_dir],
+                call_subprocess([git, 'clone', source, pinax_dir],
                                 show_stdout=True)
         logger.indent += 2
         try:
