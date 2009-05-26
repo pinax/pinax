@@ -24,7 +24,7 @@ setup(
     },
     zip_safe=False,
     setup_requires=[
-        'setuptools_git',
+        'setuptools_dummy',
     ],
     entry_points={
         'console_scripts': [
