@@ -973,6 +973,7 @@ PINAX_GIT_LOCATION = 'git://github.com/pinax/pinax.git'
 PINAX_PYPI = 'http://pypi.pinaxproject.com'
 PINAX_MUST_HAVES = {
     'setuptools-git': 'setuptools_git-0.3.3.tar.gz',
+    'setuptools-dummy': 'setuptools_dummy-0.0.3.tar.gz',
     'pip': 'pip-0.3.1.tar.gz',
 }
 
@@ -1103,8 +1104,8 @@ def after_install(options, home_dir):
 
     # pip and setuptools-git is required in any case
     requirements_dir = join(parent_dir, 'requirements')
-    if os.path.exists(requirements_dir):
-        install_base(easy_install, requirements_dir, PINAX_MUST_HAVES)
+    install_base(easy_install, requirements_dir, PINAX_MUST_HAVES)
+
     # resolve path to pip
     pip = resolve_command(PIP_CMD, bin_dir)
 
@@ -1145,7 +1146,7 @@ def after_install(options, home_dir):
                 call_subprocess([git, 'pull'], show_stdout=True, cwd=pinax_dir)
             else:
                 logger.notify('Fetching Pinax from %s to %s' % (source, pinax_dir))
-                call_subprocess([git, 'clone', '--quiet', source, pinax_dir],
+                call_subprocess([git, 'clone', source, pinax_dir],
                                 show_stdout=True)
         logger.indent += 2
         try:
