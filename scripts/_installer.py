@@ -136,8 +136,8 @@ def after_install(options, home_dir):
 
     # pip and setuptools-git is required in any case
     requirements_dir = join(parent_dir, 'requirements')
-    if os.path.exists(requirements_dir):
-        install_base(easy_install, requirements_dir, PINAX_MUST_HAVES)
+    install_base(easy_install, requirements_dir, PINAX_MUST_HAVES)
+
     # resolve path to pip
     pip = resolve_command(PIP_CMD, bin_dir)
 
