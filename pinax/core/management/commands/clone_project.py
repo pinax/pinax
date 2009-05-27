@@ -15,6 +15,7 @@ DEFAULT_PINAX_ROOT = None # fallback to the normal PINAX_ROOT in settings.py.
 PINAX_ROOT_RE = re.compile(r'PINAX_ROOT\s*=.*$', re.M)
 SECRET_KEY_RE = re.compile(r'SECRET_KEY\s*=.*$', re.M)
 ROOT_URLCONF_RE = re.compile(r'ROOT_URLCONF\s*=.*$', re.M)
+VIRTUALENV_BASE_RE = re.compile(r'VIRTUALENV_BASE\s*=.*$', re.M)
 CHARS = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)'
 
 def get_pinax_root(default_pinax_root):
@@ -109,6 +110,15 @@ def update_rename_deploy_files(path, old_name, new_name):
         deploy_filename = os.path.basename(deploy_file)
         new_deploy_file = os.path.join(deploy_filepath, deploy_filename.replace("pinax", new_name))
         shutil.move(deploy_file, new_deploy_file)
+    # fix modpython.py
+    modpython_file = open(os.path.join(path, "modpython.py"), "rb")
+    modpython = modpython_file.read()
+    modpython_file.close()
+    virtualenv_base = os.environ.get("VIRTUAL_ENV", "")
+    modpython = VIRTUALENV_BASE_RE.sub('VIRTUALENV_BASE = "%s"' % virtualenv_base, modpython)
+    modpython_file = open(os.path.join(path, "modpython.py"), "wb")
+    modpython_file.write(modpython)
+    modpython_file.close()
 
 
 def main(default_pinax_root, project_name, destination, verbose=True):
