@@ -1,0 +1,3 @@
+{% load i18n %}
+{% url profile_detail username=nudger.username as user_url %}
+{% blocktrans with task.get_absolute_url as task_url %}<a href="{{ user_url }}">{{ nudger }}</a> has nudged you on task '<a href="{{ task_url }}">{{ task }}</a>'.{% endblocktrans %}
