@@ -101,26 +101,30 @@ def tribe(request, group_slug=None, form_class=TribeUpdateForm,
     
     tribe_form = form_class(request.POST or None, instance=tribe)
     
+    if not request.user.is_authenticated():
+        is_member = False
+    else:
+        is_member = tribe.user_is_member(request.user)
+    
     action = request.POST.get('action')
     if action == 'update' and tribe_form.is_valid():
         tribe = tribe_form.save()
     elif action == 'join':
-        tribe.members.add(request.user)
-        request.user.message_set.create(
-            message=_("You have joined the tribe %(tribe_name)s") % {"tribe_name": tribe.name})
-        if notification:
-            notification.send([tribe.creator], "tribes_created_new_member", {"user": request.user, "tribe": tribe})
-            notification.send(tribe.members.all(), "tribes_new_member", {"user": request.user, "tribe": tribe})
+        if is_member:
+            tribe.members.add(request.user)
+            request.user.message_set.create(
+                message=_("You have joined the tribe %(tribe_name)s") % {"tribe_name": tribe.name})
+            if notification:
+                notification.send([tribe.creator], "tribes_created_new_member", {"user": request.user, "tribe": tribe})
+                notification.send(tribe.members.all(), "tribes_new_member", {"user": request.user, "tribe": tribe})
+        else:
+            request.user.message_set.create(
+                message=_("You have already joined tribe %(tribe_name)s") % {"tribe_name": tribe.name})
     elif action == 'leave':
         tribe.members.remove(request.user)
         request.user.message_set.create(message="You have left the tribe %(tribe_name)s" % {"tribe_name": tribe.name})
         if notification:
             pass # @@@ no notification on departure yet
-    
-    if not request.user.is_authenticated():
-        is_member = False
-    else:
-        is_member = tribe.user_is_member(request.user)
     
     # TODO: Shouldn't have to do this in the view. Should write new "groupurl" templatetag :(
     new_topic_url = reverse('topic_list', kwargs=tribe.get_url_kwargs())
