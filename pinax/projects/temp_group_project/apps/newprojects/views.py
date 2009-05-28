@@ -119,12 +119,12 @@ def project(request, group_slug=None, form_class=ProjectUpdateForm,
             project_member.save()
             request.user.message_set.create(
                 message=_("You have joined the project %(project_name)s") % {"project_name": project.name})
+            if notification:
+                notification.send([project.creator], "projects_created_new_member", {"user": request.user, "project": project})
+                notification.send(project.member_users.all(), "projects_new_member", {"user": request.user, "project": project})
         else:
             request.user.message_set.create(
                 message=_("You are already a member of project %(project_name)s") % {"project_name": project.name})
-        if notification:
-            notification.send([project.creator], "projects_created_new_member", {"user": request.user, "project": project})
-            notification.send(project.member_users.all(), "projects_new_member", {"user": request.user, "project": project})
     elif action == 'leave':
         project.members.remove(request.user)
         request.user.message_set.create(message="You have left the project %(project_name)s" % {"project_name": project.name})
