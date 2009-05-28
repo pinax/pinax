@@ -84,8 +84,7 @@ def delete(request, group_slug=None, redirect_url=None):
     if (request.user.is_authenticated() and request.method == "POST" and
             request.user == project.creator and project.members.all().count() == 1):
         project.delete()
-        request.user.message_set.create(message=_("Project %s deleted.") % (
-            project,))
+        request.user.message_set.create(message=_("Project %(project_name)s deleted.") % {"project_name": project.name})
         # no notification required as the deleter must be the only member
     
     return HttpResponseRedirect(redirect_url)
@@ -119,16 +118,16 @@ def project(request, group_slug=None, form_class=ProjectUpdateForm,
             project.members.add(project_member)
             project_member.save()
             request.user.message_set.create(
-                message=_("You have joined the project %s") % (project.name,))
+                message=_("You have joined the project %(project_name)s") % {"project_name": project.name})
         else:
             request.user.message_set.create(
-                message=_("You are already a member of project %s") % (project.name,))
+                message=_("You are already a member of project %(project_name)s") % {"project_name": project.name})
         if notification:
             notification.send([project.creator], "projects_created_new_member", {"user": request.user, "project": project})
             notification.send(project.member_users.all(), "projects_new_member", {"user": request.user, "project": project})
     elif action == 'leave':
         project.members.remove(request.user)
-        request.user.message_set.create(message="You have left the project %s" % project.name)
+        request.user.message_set.create(message="You have left the project %(project_name)s" % {"project_name": project.name})
         if notification:
             pass # @@@ no notification on departure yet
     

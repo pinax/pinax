@@ -82,8 +82,7 @@ def delete(request, group_slug=None, redirect_url=None):
     if (request.user.is_authenticated() and request.method == "POST" and
             request.user == tribe.creator and tribe.members.all().count() == 1):
         tribe.delete()
-        request.user.message_set.create(message=_("Tribe %s deleted.") % (
-            tribe,))
+        request.user.message_set.create(message=_("Tribe %(tribe_name)s deleted.") % {"tribe_name": tribe.name})
         # no notification required as the deleter must be the only member
     
     return HttpResponseRedirect(redirect_url)
@@ -114,7 +113,7 @@ def tribe(request, group_slug=None, form_class=TribeUpdateForm,
             notification.send(tribe.members.all(), "tribes_new_member", {"user": request.user, "tribe": tribe})
     elif action == 'leave':
         tribe.members.remove(request.user)
-        request.user.message_set.create(message="You have left the tribe %s" % tribe.name)
+        request.user.message_set.create(message="You have left the tribe %(tribe_name)s" % {"tribe_name": tribe.name})
         if notification:
             pass # @@@ no notification on departure yet
     
