@@ -2,8 +2,9 @@
 # Django settings for temporary group project.
 
 import os.path
+import pinax
 
-PINAX_ROOT = os.path.join(os.path.dirname(__file__), "../..")
+PINAX_ROOT = os.path.realpath(os.path.dirname(pinax.__file__))
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
 # tells Pinax to use the default theme
