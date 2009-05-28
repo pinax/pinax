@@ -107,7 +107,7 @@ def tribe(request, group_slug=None, form_class=TribeUpdateForm,
     elif action == 'join':
         tribe.members.add(request.user)
         request.user.message_set.create(
-            message=_("You have joined the tribe %s") % (tribe.name,))
+            message=_("You have joined the tribe %(tribe_name)s") % {"tribe_name": tribe.name})
         if notification:
             notification.send([tribe.creator], "tribes_created_new_member", {"user": request.user, "tribe": tribe})
             notification.send(tribe.members.all(), "tribes_new_member", {"user": request.user, "tribe": tribe})
