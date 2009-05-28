@@ -28,8 +28,11 @@ def topics(request, group_slug=None, form_class=TopicForm, template_name="topics
         group = bridge.get_group(group_slug)
     except ObjectDoesNotExist:
         raise Http404
-
-    is_member = request.user.is_authenticated() and group.user_is_member(request.user) or False
+    
+    if not request.user.is_authenticated():
+        is_member = False
+    else:
+        is_member = group.user_is_member(request.user)
 
     if request.method == "POST":
         if request.user.is_authenticated():
