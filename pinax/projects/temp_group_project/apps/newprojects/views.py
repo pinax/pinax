@@ -104,15 +104,25 @@ def project(request, group_slug=None, form_class=ProjectUpdateForm,
     
     project_form = form_class(request.POST or None, instance=project)
     
+    if not request.user.is_authenticated():
+        is_member = False
+    else:
+        is_member = project.user_is_member(request.user)
+    
     action = request.POST.get('action')
     if action == 'update' and project_form.is_valid():
         project = project_form.save()
     elif action == 'join':
-        project_member = ProjectMember(project=project, user=request.user)
-        project.members.add(project_member)
-        project_member.save()
-        request.user.message_set.create(
-            message=_("You have joined the project %s") % (project.name,))
+        # @@@ should move to a method on the Project model?
+        if not is_member:
+            project_member = ProjectMember(project=project, user=request.user)
+            project.members.add(project_member)
+            project_member.save()
+            request.user.message_set.create(
+                message=_("You have joined the project %s") % (project.name,))
+        else:
+            request.user.message_set.create(
+                message=_("You are already a member of project %s") % (project.name,))
         if notification:
             notification.send([project.creator], "projects_created_new_member", {"user": request.user, "project": project})
             notification.send(project.member_users.all(), "projects_new_member", {"user": request.user, "project": project})
@@ -121,11 +131,6 @@ def project(request, group_slug=None, form_class=ProjectUpdateForm,
         request.user.message_set.create(message="You have left the project %s" % project.name)
         if notification:
             pass # @@@ no notification on departure yet
-    
-    if not request.user.is_authenticated():
-        is_member = False
-    else:
-        is_member = project.user_is_member(request.user)
     
     # TODO: Shouldn't have to do this in the view. Should write new "groupurl" templatetag :(
     new_topic_url = reverse('topic_list', kwargs=project.get_url_kwargs())
