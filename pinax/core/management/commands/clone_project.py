@@ -155,17 +155,17 @@ class Command(BaseCommand):
     args = "<original_project> <new_project_name>"
         
     clone_project_options = (
-            make_option('-l', '--list-projects', dest='list_projects',
-                action='store_true',
-                help='lists the projects that are available on this system'),
-            make_option('-r', '--pinax-root', dest='pinax_root',
-                default=DEFAULT_PINAX_ROOT,
-                action='store_true',                
-                help='the directory that can be used '),               
-            make_option('-b', '--verbose', dest='verbose',
-                action='store_false', default=True,
-                help='enables verbose output'),
-        )
+        make_option('-l', '--list-projects', dest='list_projects',
+            action = 'store_true',
+            help = 'lists the projects that are available on this system'),
+        make_option('-r', '--pinax-root', dest='pinax_root',
+            default = DEFAULT_PINAX_ROOT,
+            action = 'store_true',
+            help = 'where Pinax lives on your system (defaults to Pinax in your virtual environment)'),
+        make_option('-b', '--verbose', dest='verbose',
+            action = 'store_false', default=True,
+            help = 'enables verbose output'),
+    )
         
     option_list = BaseCommand.option_list + clone_project_options
     
@@ -184,16 +184,11 @@ class Command(BaseCommand):
                 about = getattr(__import__(project), '__about__', '')
                 for line in about.strip().splitlines():
                     print '    %s' % (line,)
-                print ''
-            sys.exit(0)
-
-        if options.get('pinax_root'):
-            print "Pinax Project Root"
-            print "------------------"            
-            print get_pinax_root(None) + '/projects'
+                print
             sys.exit(0)
 
         main(options.get('pinax_root'), args[0], args[1],
-            verbose=options.get('verbose'))          
+            verbose = options.get('verbose')
+        )
         return 0
         
