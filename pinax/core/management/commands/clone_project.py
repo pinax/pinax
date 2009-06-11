@@ -151,9 +151,8 @@ def main(default_pinax_root, project_name, destination, verbose=True):
 
 
 class Command(BaseCommand):
-    help = "Clones a Pinax project to begin development on a new site"
-    args = ("PROJECT_NAME DESTINATION (Note that PROJECT_NAME may" +
-        " be a path to a project template of your own)")
+    help = "Clones a Pinax starter project to <new_project_name> (which can be a path)."
+    args = "<original_project> <new_project_name>"
         
     clone_project_options = (
             make_option('-l', '--list-projects', dest='list_projects',
@@ -193,43 +192,8 @@ class Command(BaseCommand):
             print "------------------"            
             print get_pinax_root(None) + '/projects'
             sys.exit(0)
-            
-
-        ################################################################
-        # If the user fails to supply enough arguments then we
-        # give them help
-        ################################################################
-        if len(args) < 2:
-            self.print_help()
-            sys.exit(0)
-            
-        #####################################
-        # if the user wants help we give it
-        #####################################
-        if options.get('help'):
-            self.print_help()
-            sys.exit(0)        
 
         main(options.get('pinax_root'), args[0], args[1],
             verbose=options.get('verbose'))          
         return 0
-        
-    def print_help(self):
-        
-        # adding because of weird BaseCommand.option_list issue
-        self.clone_project_options +=  (
-                make_option('-h', '--help', dest='verbose',
-                    action='store_false', default=True,
-                    help='print this message'),    
-            )        
-
-        print 'Usage: pinax-admin clone_project [options] <original_project> <new_project_name>\n'
-        print 'Options:'
-        for option in self.clone_project_options:
-            help_stmt = '  ' + ', '.join(option._short_opts) + '/'
-            help_stmt += ', '.join(option._long_opts)
-            help_stmt +=  ' ' * (20 - len(help_stmt))
-            help_stmt += option.help
-            print help_stmt
-        return None
         
