@@ -134,7 +134,7 @@ class ManagementUtility(object):
                 sys.exit(1)
         elif self.argv[1:] == ['--version']:
             pass
-        elif self.argv[1:] == ['--help']:
+        elif self.argv[1:] in [['--help'], ['-h']]:
             parser.print_lax_help()
             sys.stderr.write(self.main_help_text() + '\n')
         else:
