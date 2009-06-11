@@ -171,8 +171,6 @@ class Command(BaseCommand):
     
     
     def handle(self, *args, **options):
-        """ I handle the various options supplied by the user of clone_project
-        """
         
         if options.get('list_projects'):
             pinax_root = get_pinax_root(options.get('pinax_root'))
