@@ -171,6 +171,10 @@ class Command(BaseCommand):
     
     
     def handle(self, *args, **options):
+        """
+        Handle clone_project options and run main to perform clone_project
+        operations.
+        """
         
         if options.get('list_projects'):
             pinax_root = get_pinax_root(options.get('pinax_root'))
