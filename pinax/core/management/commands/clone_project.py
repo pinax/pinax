@@ -180,10 +180,10 @@ class Command(BaseCommand):
             print "------------------"
             sys.path.insert(0, get_projects_dir(pinax_root))
             for project in map(os.path.basename, get_projects(pinax_root)):
-                print "%s:" % (project,)
+                print "%s:" % project
                 about = getattr(__import__(project), '__about__', '')
                 for line in about.strip().splitlines():
-                    print '    %s' % (line,)
+                    print '    %s' % line
                 print
             sys.exit(0)
 
