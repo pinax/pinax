@@ -35,6 +35,9 @@ def winpath(path):
 def resolve_command(cmd, default_paths=[]):
     # searches the current $PATH for the given executable and returns the
     # full path, borrowed from virtualenv.
+    if sys.platform == 'win32' and cmd == 'python':
+        # path lookups on Windows need .exe
+        cmd = 'python.exe'
     if os.path.realpath(cmd) != cmd:
         paths = os.environ.get('PATH', '').split(os.pathsep)
         if default_paths:
