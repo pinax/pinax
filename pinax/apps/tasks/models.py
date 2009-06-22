@@ -155,8 +155,11 @@ class Task(models.Model):
         return choices
     
     @models.permalink
-    def get_absolute_url(self):
-        return ("task_detail", [self.pk])
+    def get_absolute_url(self, group=None):
+        include_kwargs = {"id": self.pk}
+        if group:
+            include_kwargs.update(group.get_url_kwargs())
+        return ("task_detail", [], include_kwargs)
 
 
 from threadedcomments.models import ThreadedComment

@@ -15,22 +15,27 @@ import re
 register = template.Library()
 task_contenttype = ContentType.objects.get(app_label='tasks', model='task')
 
-@register.inclusion_tag("tasks/task_item.html")
-def show_task(task, nudge):
+@register.inclusion_tag("tasks/task_item.html", takes_context=True)
+def show_task(context, task, nudge):
     
     return {
         "nudge": nudge,
         "task": task,
         "MEDIA_URL": settings.MEDIA_URL,
+        "group": context["group"],
     }
 
 @register.simple_tag
-def focus_url(field, value):
+def focus_url(field, value, group=None):
+    include_kwargs = {}
+    if group:
+        include_kwargs.update(group.get_url_kwargs())
     if field is None:
         field = "modified"
     if field == "assignee" and value == None:
         value = "unassigned"
-    return reverse("task_focus", args=[field, value])
+    include_kwargs.update({"field": field, "value": value})
+    return reverse("task_focus", kwargs=include_kwargs)
 
 @register.inclusion_tag("tasks/tag_list.html")
 def task_tags(obj):
