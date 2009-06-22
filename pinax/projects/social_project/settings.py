@@ -79,6 +79,7 @@ MIDDLEWARE_CLASSES = (
     'account.middleware.LocaleMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'pagination.middleware.PaginationMiddleware',
+    'django_sorting.middleware.SortingMiddleware',
     'misc.middleware.SortOrderMiddleware',
     'djangodblog.middleware.DBLogMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
@@ -155,6 +156,7 @@ INSTALLED_APPS = (
     'microblogging',
     'locations',
     'uni_form',
+    'django_sorting',
     
     # internal (for now)
     'analytics',
