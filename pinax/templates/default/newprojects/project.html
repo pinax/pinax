@@ -9,6 +9,7 @@
 {% load pagination_tags %}
 {% load extra_tagging_tags %}
 {% load newprojects_tags %}
+{% load group_tags %}
 {% load topics_tags %}
 
 {% block head_title %}{{ project.name }}{% endblock %}
@@ -106,7 +107,7 @@
                     {% for topic in topics|slice:":5" %}
                         {% show_topic topic %}
                     {% endfor %}
-                    <p><a href="{% url topic_list group_slug=project.slug %}">{% trans "more..." %}</a></p>
+                    <p><a href="{% groupurl topic_list project %}">{% trans "more..." %}</a></p>
                 {% else %}
                     <p>{% blocktrans %}None yet. <a href="{{ new_topic_url }}">Start one...</a>{% endblocktrans %}</p>
                 {% endif %}

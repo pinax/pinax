@@ -169,6 +169,7 @@ INSTALLED_APPS = (
     'photos',
     'tag_app',
     'topics',
+    'groups',
     
     'django.contrib.admin',
 

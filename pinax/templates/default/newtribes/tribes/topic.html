@@ -6,11 +6,12 @@
 {% load pagination_tags %}
 {% load comments_tag %}
 {% load avatar_tags %}
+{% load group_tags %}
 
 {% block head_title %}{% trans "Topic" %} : {{ topic.title }}{% endblock %}
 
 {% block body %}
-    <p><a href="{% url topic_list group_slug=group.slug %}">&larr; {% trans "Back to Topic List for Tribe " %} {{ group.title }}</a></p>
+    <p><a href="{% groupurl topic_list group %}">&larr; {% trans "Back to Topic List for Tribe " %} {{ group.title }}</a></p>
     
     <ul class="responses">
         <li class="odd thread-0 clearfix">
@@ -28,7 +29,7 @@
                     <fieldset class="inlineLabels">
                         <div class="form_block">
                             <input type="submit" value="{% trans "Delete Topic" %}" />
-                            <input type="hidden" name="next" value="{% url topic_list group_slug=group.slug %}" />
+                            <input type="hidden" name="next" value="{% groupurl topic_list group %}" />
                         </div>
                     </fieldset>
                 </form>
