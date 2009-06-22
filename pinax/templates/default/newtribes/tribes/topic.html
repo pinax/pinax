@@ -5,7 +5,7 @@
 {% load extra_tagging_tags %}
 {% load pagination_tags %}
 {% load comments_tag %}
-{% load gravatar_tags %}
+{% load avatar_tags %}
 
 {% block head_title %}{% trans "Topic" %} : {{ topic.title }}{% endblock %}
 
@@ -15,7 +15,7 @@
     <ul class="responses">
         <li class="odd thread-0 clearfix">
             <div class="meta">
-                <div class="avatar">{% gravatar topic.creator 40 %}</div>
+                <div class="avatar">{% avatar topic.creator 40 %}</div>
                 <div class="details"><a href="{% url profile_detail topic.creator.username %}">{{ topic.creator }}</a></div>
                 {{ topic.created|date }}
             </div>
