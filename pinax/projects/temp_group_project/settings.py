@@ -136,6 +136,7 @@ INSTALLED_APPS = (
     'account',
     'misc',
     'tag_app',
+    'groups',
     
     'topics',
     
