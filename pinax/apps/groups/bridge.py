@@ -8,10 +8,6 @@ class ContentBridge(object):
     
     def render(self, template_name, context, context_instance=None):
         ctype = ContentType.objects.get_for_model(self.group_model)
-        print [
-            '%s/%s/%s' % (ctype.app_label, self.content_app_name, template_name),
-            '%s/%s' % (self.content_app_name, template_name),
-        ]
         return render_to_response([
             '%s/%s/%s' % (ctype.app_label, self.content_app_name, template_name),
             '%s/%s' % (self.content_app_name, template_name),
