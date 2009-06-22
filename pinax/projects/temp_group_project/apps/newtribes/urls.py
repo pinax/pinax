@@ -2,7 +2,7 @@ from django.conf.urls.defaults import *
 
 from newtribes.models import Tribe
 
-from groups_ng.bridge import ContentBridge
+from groups.bridge import ContentBridge
 
 include_kwargs = {
     'bridge': ContentBridge(Tribe, 'tribes'),

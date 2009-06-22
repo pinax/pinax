@@ -3,7 +3,7 @@ from django.contrib.auth.models import  User
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
 
-from groups_ng.base import Group
+from groups.base import Group
 
 class BasicGroup(Group):
     
