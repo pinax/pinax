@@ -26,3 +26,20 @@ def persist_getvars(request):
     if len(getvars.keys()) > 0:
         return "?%s" % getvars.urlencode()
     return ''
+
+
+class ProjectFormNode(template.Node):
+    def __init__(self, context_name):
+        self.context_name = context_name
+    def render(self, context):
+        context[self.context_name] = ProjectForm()
+        return ''
+
+@register.tag
+def get_project_form(parser, token):
+    try:
+        tag_name, as_, context_name = token.split_contents()
+    except ValueError:
+        tagname = token.contents.split()[0]
+        raise template.TemplateSyntaxError, "%(tagname)r tag syntax is as follows: {%% %(tagname)r as VARIABLE %%}" % locals()
+    return ProjectFormNode(context_name)
