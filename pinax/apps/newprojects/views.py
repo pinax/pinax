@@ -16,7 +16,7 @@ else:
     notification = None
 
 from newprojects.models import Project, ProjectMember
-from newprojects.forms import ProjectForm, ProjectUpdateForm
+from newprojects.forms import ProjectForm, ProjectUpdateForm, AddUserForm
 
 TOPIC_COUNT_SQL = """
 SELECT COUNT(*)
@@ -97,45 +97,37 @@ def your_projects(request, template_name="newprojects/your_projects.html"):
     }, context_instance=RequestContext(request))
 
 
-def project(request, group_slug=None, form_class=ProjectUpdateForm,
+def project(request, group_slug=None, form_class=ProjectUpdateForm, adduser_form_class=AddUserForm,
         template_name="newprojects/project.html"):
     project = get_object_or_404(Project, slug=group_slug)
-    
-    project_form = form_class(request.POST or None, instance=project)
     
     if not request.user.is_authenticated():
         is_member = False
     else:
         is_member = project.user_is_member(request.user)
     
-    action = request.POST.get('action')
-    if action == 'update' and project_form.is_valid():
-        project = project_form.save()
-    elif action == 'join':
-        # @@@ should move to a method on the Project model?
-        if not is_member:
-            project_member = ProjectMember(project=project, user=request.user)
-            project.members.add(project_member)
-            project_member.save()
-            request.user.message_set.create(
-                message=_("You have joined the project %(project_name)s") % {"project_name": project.name})
-            if notification:
-                notification.send([project.creator], "projects_created_new_member", {"user": request.user, "project": project})
-                notification.send(project.member_users.all(), "projects_new_member", {"user": request.user, "project": project})
-        else:
-            request.user.message_set.create(
-                message=_("You are already a member of project %(project_name)s") % {"project_name": project.name})
-    elif action == 'leave':
-        project.members.remove(request.user)
-        request.user.message_set.create(message="You have left the project %(project_name)s" % {"project_name": project.name})
-        if notification:
-            pass # @@@ no notification on departure yet
+    action = request.POST.get("action")
+    if request.user == project.creator and action == "update":
+        project_form = form_class(request.POST, instance=project)
+        if project_form.is_valid():
+            project = project_form.save()
+    else:
+        project_form = form_class(instance=project)
+    if request.user == project.creator and action == "add":
+        adduser_form = adduser_form_class(request.POST, project=project)
+        if adduser_form.is_valid():
+            adduser_form.save(request.user)
+            adduser_form = adduser_form_class(project=project) # clear form
+    else:
+        adduser_form = adduser_form_class(project=project)
     
     # TODO: Shouldn't have to do this in the view. Should write new "groupurl" templatetag :(
     new_topic_url = reverse('topic_list', kwargs=project.get_url_kwargs())
     
+    print project_form._errors
     return render_to_response(template_name, {
         "project_form": project_form,
+        "adduser_form": adduser_form,
         "project": project,
         "is_member": is_member,
         "new_topic_url": new_topic_url,
