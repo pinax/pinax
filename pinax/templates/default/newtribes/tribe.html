@@ -109,6 +109,7 @@
                     {% endfor %}
                     <p><a href="{% groupurl topic_list tribe %}">{% trans "more..." %}</a></p>
                 {% else %}
+                    {% groupurl topic_list tribe as new_topic_url %}
                     <p>{% blocktrans %}None yet. <a href="{{ new_topic_url }}">Start one...</a>{% endblocktrans %}</p>
                 {% endif %}
             {% endwith %}

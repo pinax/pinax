@@ -4,9 +4,8 @@ from newprojects.models import Project
 
 from groups.bridge import ContentBridge
 
-include_kwargs = {
-    'bridge': ContentBridge(Project, 'projects'),
-}
+
+bridge = ContentBridge(Project, 'projects')
 
 urlpatterns = patterns('newprojects.views',
     url(r'^$', 'projects', name="project_list"), 
@@ -15,5 +14,6 @@ urlpatterns = patterns('newprojects.views',
     # project-specific
     url(r'^project/(?P<group_slug>[-\w]+)/$', 'project', name="project_detail"),
     url(r'^project/(?P<group_slug>[-\w]+)/delete/$', 'delete', name="project_delete"),
-    url(r'^project/(?P<group_slug>[-\w]+)/topics/', include('topics.urls'), kwargs=include_kwargs),
 )
+
+urlpatterns += bridge.include_urls('topics.urls', r'^project/(?P<group_slug>[-\w]+)/topics/')

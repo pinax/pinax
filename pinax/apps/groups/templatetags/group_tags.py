@@ -28,12 +28,18 @@ class GroupURLNode(template.Node):
         if group is not None:
             kwargs.update(group.get_url_kwargs())
         
+        url = ""
+        prefix = group.content_bride.content_app_name
+        
         try:
-            url = reverse(self.view_name, args=args, kwargs=kwargs)
+            url = reverse("%s_%s" % (prefix, self.view_name), args=args, kwargs=kwargs)
         except NoReverseMatch:
-            # @@@ look at the other import Django does
-            if self.asvar is None:
-                raise
+            try:
+                url = reverse(self.view_name, args=args, kwargs=kwargs)
+            except NoReverseMatch:
+                # @@@ look at the other import Django does
+                if self.asvar is None:
+                    raise
         
         if self.asvar:
             context[self.asvar] = url

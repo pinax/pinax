@@ -121,13 +121,9 @@ def project(request, group_slug=None, form_class=ProjectUpdateForm, adduser_form
     else:
         adduser_form = adduser_form_class(project=project)
     
-    # TODO: Shouldn't have to do this in the view. Should write new "groupurl" templatetag :(
-    new_topic_url = reverse('topic_list', kwargs=project.get_url_kwargs())
-    
     return render_to_response(template_name, {
         "project_form": project_form,
         "adduser_form": adduser_form,
         "project": project,
         "is_member": is_member,
-        "new_topic_url": new_topic_url,
     }, context_instance=RequestContext(request))

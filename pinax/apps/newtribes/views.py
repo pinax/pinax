@@ -126,12 +126,8 @@ def tribe(request, group_slug=None, form_class=TribeUpdateForm,
         if notification:
             pass # @@@ no notification on departure yet
     
-    # TODO: Shouldn't have to do this in the view. Should write new "groupurl" templatetag :(
-    new_topic_url = reverse('topic_list', kwargs=tribe.get_url_kwargs())
-    
     return render_to_response(template_name, {
         "tribe_form": tribe_form,
         "tribe": tribe,
         "is_member": is_member,
-        "new_topic_url": new_topic_url,
     }, context_instance=RequestContext(request))
