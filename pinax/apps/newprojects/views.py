@@ -124,7 +124,6 @@ def project(request, group_slug=None, form_class=ProjectUpdateForm, adduser_form
     # TODO: Shouldn't have to do this in the view. Should write new "groupurl" templatetag :(
     new_topic_url = reverse('topic_list', kwargs=project.get_url_kwargs())
     
-    print project_form._errors
     return render_to_response(template_name, {
         "project_form": project_form,
         "adduser_form": adduser_form,
