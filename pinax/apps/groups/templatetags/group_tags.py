@@ -15,7 +15,7 @@ class GroupURLNode(template.Node):
     
     def render(self, context):
         group = self.group.resolve(context)
-        bridge = group.content_bride
+        bridge = group.content_bridge
         
         kwargs = {}
         for k, v in self.kwargs.items():

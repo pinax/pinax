@@ -15,7 +15,7 @@ class ContentBridge(object):
         # attach the bridge to the model itself. we need to access it when
         # using groupurl to get the correct prefix for URLs for the given
         # group.
-        self.group_model.content_bride = self
+        self.group_model.content_bridge = self
     
     def include_urls(self, module_name, url_prefix, kwargs=None):
         if kwargs is None:
