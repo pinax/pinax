@@ -1,10 +1,10 @@
 from django import template
-from tribes.forms import TribeForm
+from newtribes.forms import TribeForm
 
 register = template.Library()
 
 
-@register.inclusion_tag("tribes/tribe_item.html", takes_context=True)
+@register.inclusion_tag("newtribes/tribe_item.html", takes_context=True)
 def show_tribe(context, tribe):
     return {'tribe': tribe, 'request': context['request']}
 

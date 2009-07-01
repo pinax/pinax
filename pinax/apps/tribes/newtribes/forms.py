@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-from tribes.models import Tribe
+from newtribes.models import Tribe
 
 # @@@ we should have auto slugs, even if suggested and overrideable
 

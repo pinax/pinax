@@ -3,7 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from django.contrib.auth.models import User
 
-from projects.models import Project, ProjectMember
+from newprojects.models import Project, ProjectMember
 
 # @@@ we should have auto slugs, even if suggested and overrideable
 

@@ -125,8 +125,8 @@ INSTALLED_APPS = (
     'wiki',
     'avatar',
     'threadedcomments',
-    'tribes',
-    'projects',
+    'newtribes',
+    'newprojects',
     'gravatar',
     'django_sorting',
     
