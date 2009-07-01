@@ -25,9 +25,9 @@ try:
     MARKUP_CHOICES = settings.WIKI_MARKUP_CHOICES  # reuse this for now; taken from wiki
 except AttributeError:
     MARKUP_CHOICES = (
-        ('rst', _(u'reStructuredText')),
-        ('txl', _(u'Textile')),
-        ('mrk', _(u'Markdown')),
+        ('restructuredtext', _(u'reStructuredText')),
+        ('textile', _(u'Textile')),
+        ('markdown', _(u'Markdown')),
     )
 
 # import task workflow methods
