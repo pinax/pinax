@@ -10,34 +10,23 @@ class GroupURLNode(template.Node):
     def __init__(self, view_name, group, args, kwargs, asvar):
         self.view_name = view_name
         self.group = group
-        self.args = args
         self.kwargs = kwargs
         self.asvar = asvar
     
     def render(self, context):
         group = self.group.resolve(context)
-        
-        args = []
-        for arg in self.args:
-            args.append(arg.resolve(context))
+        bridge = group.content_bride
         
         kwargs = {}
         for k, v in self.kwargs.items():
             kwargs[smart_str(k, "ascii")] = v.resolve(context)
         
-        if group is not None:
-            kwargs.update(group.get_url_kwargs())
-        
-        url = ""
-        prefix = group.content_bride.content_app_name
-        
         try:
-            url = reverse("%s_%s" % (prefix, self.view_name), args=args, kwargs=kwargs)
+            url = bridge.reverse(self.view_name, group, kwargs=kwargs)
         except NoReverseMatch:
             try:
-                url = reverse(self.view_name, args=args, kwargs=kwargs)
+                url = reverse(self.view_name, kwargs=kwargs)
             except NoReverseMatch:
-                # @@@ look at the other import Django does
                 if self.asvar is None:
                     raise
         
@@ -76,4 +65,4 @@ def groupurl(parser, token):
                     elif arg:
                         args.append(parser.compile_filter(arg))
     
-    return GroupURLNode(view_name, group, args, kwargs, asvar)
+    return GroupURLNode(view_name, group, [], kwargs, asvar)

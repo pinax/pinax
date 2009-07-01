@@ -2,7 +2,7 @@ import sys
 
 from django.shortcuts import render_to_response
 from django.conf.urls.defaults import patterns, url as urlpattern
-from django.core.urlresolvers import RegexURLPattern, RegexURLResolver
+from django.core.urlresolvers import RegexURLPattern, RegexURLResolver, reverse as dreverse
 
 from django.contrib.contenttypes.models import ContentType
 
@@ -55,6 +55,18 @@ class ContentBridge(object):
                 # final_urls.append(urlpattern(regex, [urlconf_name], extra_kwargs))
 
         return patterns("", *final_urls)
+    
+    def reverse(self, view_name, group, kwargs=None):
+        if kwargs is None:
+            kwargs = {}
+        
+        prefix = self.content_app_name
+        final_kwargs = {}
+        
+        final_kwargs.update(group.get_url_kwargs())
+        final_kwargs.update(kwargs)
+        
+        return dreverse("%s_%s" % (prefix, view_name), kwargs=final_kwargs)
     
     def render(self, template_name, context, context_instance=None):
         ctype = ContentType.objects.get_for_model(self.group_model)
