@@ -120,6 +120,7 @@ INSTALLED_APPS = (
     'timezones',
     'ajax_validation',
     'uni_form',
+    'attachments',
     
     # internal (for now)
     'basic_profiles',
