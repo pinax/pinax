@@ -5,11 +5,8 @@
 {% load shorttimesince_tag %}
 {% load threadedcommentstags %}
 {% load markup %}
-{# The following tags are loaded from the wiki app until there is a separate markup solution. #}
-{% load wiki %}
-{% load switchcase %}
-{% load restructuredtext %}
-{% load creole %}
+{% load generic_markup_fix %}
+{% load generic_markup %}
 {% load group_tags %}
 
 <div class="task clearfix">
@@ -55,13 +52,7 @@
     <div class="bulk">
         <h2 class="task_{{ task.get_state_display }}">#{{ task.id }}: <a href="{{ task.get_absolute_url }}">{{ task.summary }}</a></h2>
         <div class="body">
-            {% switch task.markup %}
-                {% case 'crl' %} {{ task.detail|creole|safe }} {% endcase %}
-                {% case 'rst' %} {{ task.detail|restructuredtext|safe }} {% endcase %}
-                {% case 'mrk' %} {{ task.detail|force_escape|markdown }} {% endcase %}
-                {% case 'txl' %} {{ task.detail|force_escape|textile }} {% endcase %}
-                {% case '' %} {{ task.detail|urlize|linebreaks|safe }} {% endcase %}
-            {% endswitch %}
+            {{ task.detail|apply_markup:task.markup }}
         </div>
         <div class="task-meta2">
             {% get_comment_count for task as comment_count %}
