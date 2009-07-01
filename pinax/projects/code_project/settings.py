@@ -120,6 +120,7 @@ INSTALLED_APPS = (
     'pagination',
     'timezones',
     'avatar',
+    'threadedcomments',
     'ajax_validation',
     'uni_form',
     'django_sorting',
