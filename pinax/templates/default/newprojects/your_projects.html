@@ -1,0 +1,25 @@
+{% extends "newprojects/base.html" %}
+
+{% load i18n %}
+{% load pagination_tags %}
+{% load newprojects_tags %}
+
+{% block head_title %}{% trans "Your Projects" %}{% endblock %}
+
+{% block body %}
+    
+    <h1>{% trans "Your Projects" %}</h1>
+    
+    <p>{% trans "These are the projects you participate in." %}</p>
+        
+    {% autopaginate projects %}
+    
+    <dl>
+        {% for project in projects %}
+            {% show_project project %}
+        {% endfor %}
+    </dl>
+    
+    {% paginate %}
+    
+{% endblock %}

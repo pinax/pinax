@@ -1,0 +1,44 @@
+{% extends "tribes/base.html" %}
+
+{% load i18n %}
+{% load extra_tagging_tags %}
+{% load threadedcommentstags %}
+{% load avatar_tags %}
+{% load comments_tag %}
+
+{% block head_title %}{{ topic.title }}{% endblock %}
+
+{% block body %}
+    <p><a href="{% url tribe_topics topic.tribe.slug %}">&larr; {% trans "Back to Topic List for Tribe " %} {{ topic.tribe }}</a></p>
+    
+    <ul class="responses">
+        <li class="odd thread-0 clearfix">
+            <div class="meta">
+                <div class="avatar">{% avatar topic.creator 40 %}</div>
+                <div class="details"><a href="{% url profile_detail topic.creator.username %}">{{ topic.creator }}</a></div>
+                {{ topic.created|date }}
+            </div>
+            <div class="bulk">
+                <h1>{{ topic.title }}</h1>
+                <div class="body">{{ topic.body|urlize|linebreaks }}</div>
+                <p>{% show_tags_for topic %}</p>
+                {% ifequal user topic.creator %}
+                <form method="POST" action="{% url tc_comment_delete topic.id %}">
+                    <input type="submit" value="{% trans "Delete Topic" %}" />
+                    <input type="hidden" name="next" value="{% url tribe_topics topic.tribe.slug %}" />
+                </form>
+                {% if not edit %}<p><a href="{{ request.path }}edit/">Edit Topic</a></p>{% endif %}
+                {% endifequal %}
+            </div>
+        </li>
+        {% if edit %}
+            </ul>
+            <h2>Edit {{ topic.name }}</h2>
+            <form method="post" action="{{ request.path }}">
+                <textarea id="id_body" rows="10" cols="40" name="body">{{ topic.body }}</textarea>
+                <input type="submit" name="edit" value="Edit!" />
+            </form>
+        {% else %}
+            {% comments topic %}
+    {% endif %}
+{% endblock %}

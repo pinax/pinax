@@ -1,0 +1,6 @@
+{% load i18n %}{% blocktrans with comment.comment as task_comment and task.get_absolute_url as task_url %}{{ user }} has commented on task '{{ task }}' in project {{ project }}:
+
+{{ task_comment }}
+
+http://{{ current_site }}{{ task_url }}
+{% endblocktrans %}

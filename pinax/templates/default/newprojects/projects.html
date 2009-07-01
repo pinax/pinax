@@ -1,0 +1,50 @@
+{% extends "newprojects/base.html" %}
+
+{% load i18n %}
+{% load uni_form %}
+{% load humanize %}
+{% load pagination_tags %}
+{% load order_by %}
+{% load extra_tagging_tags %}
+{% load newprojects_tags %}
+{% load sorting_tags %}
+
+{% block head_title %}{% blocktrans %}Projects{% endblocktrans %}{% endblock %}
+
+{% block body %}
+    <h1>{% trans "Projects" %}</h1>
+    
+    <p>{% trans "A <b>project</b> is a group of people working on a common set of tasks." %}</p>
+    {% if user.is_authenticated %}
+        <p><a href="{% url project_create %}">Create</a> your own project.</p>
+    {% else %}
+        {% url acct_signup as signup_url %}
+        {% url acct_login as login_url %}
+        <p>{% blocktrans %}<a href="{{ signup_url }}">Sign up</a> and <a href="{{ login_url }}">log in </a> to create your own project or join an existing one.{% endblocktrans %}</p>
+    {% endif %}
+    
+    <form method="GET" action="">
+        <input type="text" name="search" value="{{ search_terms }}" />
+        <input type="submit" value="Search" />
+        {% if search_terms %}
+            <a href="{% clear_search_url request %}">Clear Search Terms</a>
+        {% endif %}
+    </form>
+    {% autosort projects %}
+    {% autopaginate projects 10 %}
+    {% if projects %}
+        <p>{% trans "Order by:" %}
+            {% anchor topic_count Topics %}
+            {% anchor member_count Members %}
+            {% anchor name Name %}
+            {% anchor created Date %}
+        </p>
+        <dl>
+        {% for project in projects %}
+            {% show_project project %}
+        {% endfor %}
+        </dl>
+        {% paginate %}
+    {% endif %}
+    
+{% endblock %}

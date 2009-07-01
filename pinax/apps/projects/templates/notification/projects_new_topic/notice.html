@@ -1,0 +1,2 @@
+{% load i18n %}{% url profile_detail username=creator.username as creator_url %}
+{% blocktrans with topic.get_absolute_url as topic_url and project.get_absolute_url as project_url %}<a href="{{ creator_url }}">{{ creator }}</a> has started a topic '<a href="{{ topic_url }}">{{ topic }}</a>' in project <a href="{{ project_url }}">{{ project }}</a>.{% endblocktrans %}

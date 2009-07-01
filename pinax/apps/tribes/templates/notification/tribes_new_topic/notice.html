@@ -1,0 +1,2 @@
+{% load i18n %}{% url profile_detail username=topic.creator.username as user_url %}
+{% blocktrans with topic.creator as topic_creator and topic.get_absolute_url as topic_url and topic.tribe.get_absolute_url as tribe_url and topic.tribe as topic_tribe %}<a href="{{ user_url }}">{{ topic_creator }}</a> has started a topic '<a href="{{ topic_url }}">{{ topic }}</a>' in tribe <a href="{{ tribe_url }}">{{ topic_tribe }}</a>.{% endblocktrans %}

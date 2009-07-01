@@ -1,0 +1,3 @@
+{% load i18n %}{% blocktrans with task.get_absolute_url as task_url %}{{ creator }} has added a task '{{ task }}' in project {{ project }}.
+
+http://{{ current_site }}{{ task_url }}{% endblocktrans %}

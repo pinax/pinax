@@ -1,0 +1,2 @@
+{% load i18n %}{% url profile_detail username=creator.username as creator_url %}
+{% blocktrans with task.get_absolute_url as task_url and project.get_absolute_url as project_url %}<a href="{{ creator_url }}">{{ creator }}</a> has added a task '<a href="{{ task_url }}">{{ task }}</a>' in project '<a href="{{ project_url }}">{{ project }}</a>'.{% endblocktrans %}

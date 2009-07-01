@@ -1,0 +1,4 @@
+{% load i18n %}{% blocktrans with tribe.get_absolute_url as tribe_url %}{{ user }} has joined the tribe {{ tribe }}.
+
+http://{{ current_site }}{{ tribe_url }}
+{% endblocktrans %}

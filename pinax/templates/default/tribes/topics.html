@@ -1,0 +1,35 @@
+{% extends "tribes/base.html" %}
+
+{% load i18n %}
+{% load uni_form %}
+{% load pagination_tags %}
+{% load tribe_tags %}
+
+{% block head_title %}{% blocktrans with tribe.name as tribe_name %}Topics for {{ tribe_name }}{% endblocktrans %}{% endblock %}
+
+{% block body %}
+    <h1>{% trans "Discussion Topics for Tribe" %} <a href="{% url tribe_detail tribe.slug %}">{{ tribe.name }}</a></h1>
+    
+    {% autopaginate tribe.topics.all %}
+    
+    {% for topic in tribe.topics.all %}
+        {% show_tribe_topic topic %}
+    {% endfor %}
+    
+    {% paginate %}
+    
+    {% if are_member %}
+        <h2>{% trans "New Topic" %}</h2>
+        
+        <form class="uniForm" id="tribe_form" method="POST" action="">
+            <fieldset class="inlineLabels">
+                {{ topic_form|as_uni_form }}
+                <div class="form_block">
+                    <input type="hidden" name="next" value="{{ request.path }}" />
+                    <input type="submit" value="{% trans "Create New Topic" %}" /></td>
+                </div>
+            </fieldset>
+        </form>
+    {% endif %}
+    
+{% endblock %}

@@ -1,0 +1,3 @@
+{% load i18n %}{% blocktrans with topic.get_absolute_url as topic_url %}{{ creator }} has started a topic '{{ topic }}' in project {{ project }}.
+
+http://{{ current_site }}{{ topic_url }}{% endblocktrans %}

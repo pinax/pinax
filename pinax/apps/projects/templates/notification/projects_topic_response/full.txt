@@ -1,0 +1,6 @@
+{% load i18n %}{% blocktrans with comment.comment as topic_comment and topic.get_absolute_url as topic_url %}{{ user }} has responded to your topic '{{ topic }}':
+
+{{ topic_comment }}
+
+http://{{ current_site }}{{ topic_url }}
+{% endblocktrans %}

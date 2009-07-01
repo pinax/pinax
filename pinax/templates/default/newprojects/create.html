@@ -1,0 +1,33 @@
+{% extends "newprojects/base.html" %}
+
+{% load i18n %}
+{% load uni_form %}
+{% load humanize %}
+{% load pagination_tags %}
+{% load order_by %}
+{% load extra_tagging_tags %}
+{% load newprojects_tags %}
+
+{% block head_title %}{% blocktrans %}Create Project{% endblocktrans %}{% endblock %}
+
+{% block body %}
+    <h1>{% trans "Create Project" %}</h1>
+    
+    <p>{% trans "A <b>project</b> is a group of people working together on a common set of tasks." %}</p>
+    {% if user.is_authenticated %}
+        <form class="uniForm" id="project_form" method="POST" action="">
+            <fieldset class="inlineLabels">
+                {{ project_form|as_uni_form }}
+                <div class="form_block">
+                    <input type="hidden" name="action" value="create" />
+                    <input type="submit" value="{% trans 'create' %}"/>
+                </div>
+            </fieldset>
+        </form>
+    {% else %}
+        {% url acct_signup as signup_url %}
+        {% url acct_login as login_url %}
+        <p>{% blocktrans %}<a href="{{ signup_url }}">Sign up</a> and <a href="{{ login_url }}">log in </a> to create your own project or join an existing one.{% endblocktrans %}</p>
+    {% endif %}
+    
+{% endblock %}

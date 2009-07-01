@@ -1,0 +1,13 @@
+{% load i18n %}
+{% load extra_tagging_tags %}
+
+<dt>{{ tribe.name }} (<a href="{{ tribe.get_absolute_url }}">{{ tribe.slug }}</a>)</dt>
+<dd>{{ tribe.description }}
+    <div class="project_stats">
+        {% trans "Members:" %} <b>{{ tribe.members.count }}</b>
+        {% trans "Topics:" %} <b>{{ tribe.topics.count }}</b>
+        {% trans "Wiki Pages:" %} <b>{{ tribe.wiki_articles.count }}</b>
+        <br />
+        {% show_tags_for tribe %}
+    </div>
+</dd>
