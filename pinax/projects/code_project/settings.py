@@ -133,6 +133,7 @@ INSTALLED_APPS = (
     'misc',
     'about',
     'tag_app',
+    'groups',
     'projects',
     'tasks',
     'topics',
