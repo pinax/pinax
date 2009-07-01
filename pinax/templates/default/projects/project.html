@@ -1,16 +1,16 @@
-{% extends "projects/base.html" %}
+{% extends "newprojects/base.html" %}
 
-{% load microblogging_tags %}
 {% load i18n %}
 {% load uni_form %}
-{% load avatar_tags %}
 {% load wiki %}
 {% load wikiurl %}
+{% load avatar_tags %}
 {% load threadedcommentstags %}
 {% load pagination_tags %}
-{% load shorttimesince_tag %}
 {% load extra_tagging_tags %}
 {% load newprojects_tags %}
+{% load group_tags %}
+{% load topics_tags %}
 
 {% block head_title %}{{ project.name }}{% endblock %}
 
@@ -23,7 +23,7 @@
                 <table width="100%">
                     {% for member in project.members.all %}
                         {% if forloop.counter0|divisibleby:"3" %}<tr>{% endif %}
-                        <td class="{% if member.away %}away{% else %}active{% endif %}-member">
+                        <td>
                             <div class="avatar">{% avatar member.user 40 %}</div>
                             <div class="details"><a href="{% url profile_detail member.user.username %}" title="{{ member.user.username }}">{{ member.user.username }}</a></div>
                         </td>
@@ -32,7 +32,6 @@
                     {% if project.members.all|length|divisibleby:"3" %}{% else %}</tr>{% endif %}
                 </table>
             </div>
-            <p><a href="{% url project_members_status project.slug %}">Members' Status</a></p>
         </div>
     {% endif %}
     
@@ -41,9 +40,9 @@
         <h1>{% trans "Project" %} {{ project.name }}</h1>
         
         <p>
-            Slug: <tt>{{ project.slug }}</tt><br />
-            Creator: <a href="{% url profile_detail project.creator.username %}">{{ project.creator }}</a><br />
-            Created: {{ project.created|date }}
+            {% trans "Slug:" %} <tt>{{ project.slug }}</tt><br />
+            {% trans "Creator:" %} <a href="{% url profile_detail project.creator.username %}">{{ project.creator }}</a><br />
+            {% trans "Created:" %} {{ project.created|date }}
             <br />
             {% show_tags_for project %}
         </p>
@@ -51,9 +50,9 @@
         <p>{{ project.description }}</p>
         
         {% ifequal user project.creator %}
-            
             <div class="form-toggle">
                 <p><span id="edit-project-toggle">{% trans "Edit details" %}</span></p>
+                
                 <form class="uniForm" id="edit-project" method="POST" action="">
                     <fieldset class="inlineLabels">
                         {{ project_form|as_uni_form }}
@@ -69,12 +68,13 @@
         
         {% if user.is_authenticated %}
             <div>
-                {% if are_member %}
+                {% if is_member %}
                     {% ifequal user project.creator %}
                         <p>You are the creator of this project.</p>
                         
                         <div class="form-toggle">
                             <p><span id="add-member-toggle">{% trans "Add new member" %}</a></p>
+                            
                             <form class="uniForm" id="add-member" method="POST" action="">
                                 <fieldset class="inlineLabels">
                                     {{ adduser_form|as_uni_form }}
@@ -100,42 +100,23 @@
         {% endif %}
         
         {% if user.is_authenticated %}
+            <h2>{% trans "Discussion Topics" %}{% if project.topics.all.count %} ({{ project.topics.all.count }}){% endif %}</h2>
             
-            <h2>Tasks{% if total_tasks %} ({{ total_tasks }}){% endif %}</h2>
+            {% get_topics_for_group project as topic_queryset %}
+            {% with topic_queryset|slice:":5" as topics %}
+                {% if topics %}
+                    {% for topic in topics|slice:":5" %}
+                        {% show_topic topic %}
+                    {% endfor %}
+                    <p><a href="{% groupurl topic_list project %}">{% trans "more..." %}</a></p>
+                {% else %}
+                    {% groupurl topic_list project as new_topic_url %}
+                    <p>{% blocktrans %}None yet. <a href="{{ new_topic_url }}">Start one...</a>{% endblocktrans %}</p>
+                {% endif %}
+            {% endwith %}
             
-            <p><a href="{% url project_tasks project.slug %}" method="Post">view more details or add task...</a></p>
-            
-            <table class="tasks">
-                {% for task in tasks %}
-                    <tr class="task_{{ task.get_state_display }} {% cycle odd,even %}">
-                        <td><a href="{% url project_task task.id %}">{{ task.summary }}</a></td>
-                        <td>{{ task.modified|shorttimesince }} ago</td>
-                        <td>
-                            {% if task.assignee %}
-                                {{ task.assignee }}
-                            {% else %}
-                                <span class="warning">unassigned</span>
-                            {% endif %}
-                        </td>
-                        <td>{{ task.status }}</td>
-                    </tr>
-                {% endfor %}
-            </table>
-            
-            <h2>Discussion Topics{% if project.topics.all.count %} ({{ project.topics.all.count }}){% endif %}</h2>
-            
-            {% if topics %}
-                <p><a href="{% url project_topics project.slug %}">view more details or start new topic...</a></p>
-                
-                {% for topic in topics %}
-                    {% show_project_topic topic %}
-                {% endfor %}
-            {% else %}
-                <p>None yet. <a href="{% url project_topics project.slug %}">Start one...</a></p>
-            {% endif %}
-            
-            
-            <h2>Wiki Articles{% if total_articles %} ({{ total_articles }}){% endif %}</h2>
+{% comment %}
+            <h2>{% trans "Wiki Articles" %}{% if total_articles %} ({{ total_articles }}){% endif %}</h2>
             
             {% if articles %}
                 <table class="topics">
@@ -143,7 +124,7 @@
                         {% show_teaser article %}
                     {% endfor %}
                 </table>
-                <p><a href="{% wikiurl list project %}">more...</a></p>
+                <p><a href="{% wikiurl list project %}">{% trans "more..." %}</a></p>
             {% else %}
                 {% wikiurl list project as wiki_url %}
                 <p>
@@ -152,24 +133,19 @@
                     {% endblocktrans %}
                 </p>
             {% endif %}
-            
+                        
             {% if photos %}
-                <h2>Project Photo Pool</h2>
+                <h2>{% trans "Project Photo Pool" %}</h2>
                 <div class="thumb-row clearfix">
                     {% for photo in photos %}
                     <div class="gallery-photo-thumb">
                         <a href="/photos/details/{{ photo.photo.id }}/"><img src="{{ photo.photo.get_thumbnail_url }}" alt="{{ photo.photo.title }}"/></a><br />
-                        <img src="{{ MEDIA_URL }}pinax/images/silk/icons/comment.png" border="0" class="noborder" align="absmiddle" /><a href="/photos/details/{{ photo.photo.id }}/">{% get_comment_count for photo.photo as commentcount %} {{ commentcount }} Comments</a>
+                        <img src="{{ MEDIA_URL }}pinax/images/silk/icons/comment.png" border="0" class="noborder" align="absmiddle" /><a href="/photos/details/{{ photo.photo.id }}/">{% get_comment_count for photo as commentcount %} {% blocktrans %}{{ commentcount }} Comments {% endblocktrans %}</a>
                    </div>
                    {% endfor %}
                </div>
             {% endif %}
-            
-            {% comment %}
-                <h2>{% trans "Tweets" %}</h2>
-                
-                {% tweet_listing tweets 1 0 %}
-            {% endcomment %}
+{% endcomment %} 
             
         {% endif %}
     </div>
@@ -177,23 +153,8 @@
 {% endblock %}
 
 {% block extra_body %}
-    <script type="text/javascript" src="{{ MEDIA_URL }}jquery.bgiframe.js"></script>
-    <script type="text/javascript" src="{{ MEDIA_URL }}jquery.dimensions.js"></script>
-    <script type="text/javascript" src="{{ MEDIA_URL }}jquery.ajaxQueue.js"></script>
-    <script type="text/javascript" src="{{ MEDIA_URL }}jquery.autocomplete.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $("#id_recipient").autocomplete("{% url profile_username_autocomplete %}", {
-                formatItem: function(data, i, n, value) {
-                    values = value.split(",,");
-                    return values[0] + values[1] + "<br />" + values[2];
-                },
-                formatResult: function(data, value) {
-                    return value.split(",,")[1];
-                },
-                // TODO: improve highlighting to only affect username.
-                highlight: false,
-            });
             $('#edit-project').hide();
             $('#edit-project-toggle').click(function() {
                 $('#edit-project').toggle();
@@ -216,4 +177,5 @@
             }
         });
     </script>
+    
 {% endblock %}
