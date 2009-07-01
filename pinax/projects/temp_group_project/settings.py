@@ -126,7 +126,7 @@ INSTALLED_APPS = (
     'avatar',
     'threadedcomments',
     'newtribes',
-    'newprojects',
+    'projects',
     'gravatar',
     'django_sorting',
     
