@@ -15,24 +15,24 @@ if "notification" in settings.INSTALLED_APPS:
 else:
     notification = None
 
-from newprojects.models import Project, ProjectMember
-from newprojects.forms import ProjectForm, ProjectUpdateForm, AddUserForm
+from projects.models import Project, ProjectMember
+from projects.forms import ProjectForm, ProjectUpdateForm, AddUserForm
 
 TOPIC_COUNT_SQL = """
 SELECT COUNT(*)
 FROM topics_topic
 WHERE
-    topics_topic.object_id = newprojects_project.id AND
+    topics_topic.object_id = projects_project.id AND
     topics_topic.content_type_id = %s
 """
 MEMBER_COUNT_SQL = """
 SELECT COUNT(*)
-FROM newprojects_projectmember
-WHERE newprojects_projectmember.project_id = newprojects_project.id
+FROM projects_projectmember
+WHERE projects_projectmember.project_id = projects_project.id
 """
 
 @login_required
-def create(request, form_class=ProjectForm, template_name="newprojects/create.html"):
+def create(request, form_class=ProjectForm, template_name="projects/create.html"):
     project_form = form_class(request.POST or None)
     
     if project_form.is_valid():
@@ -53,7 +53,7 @@ def create(request, form_class=ProjectForm, template_name="newprojects/create.ht
     }, context_instance=RequestContext(request))
 
 
-def projects(request, template_name="newprojects/projects.html"):
+def projects(request, template_name="projects/projects.html"):
     
     projects = Project.objects.all()
     
@@ -91,14 +91,14 @@ def delete(request, group_slug=None, redirect_url=None):
 
 
 @login_required
-def your_projects(request, template_name="newprojects/your_projects.html"):
+def your_projects(request, template_name="projects/your_projects.html"):
     return render_to_response(template_name, {
         "projects": Project.objects.filter(members=request.user).order_by("name"),
     }, context_instance=RequestContext(request))
 
 
 def project(request, group_slug=None, form_class=ProjectUpdateForm, adduser_form_class=AddUserForm,
-        template_name="newprojects/project.html"):
+        template_name="projects/project.html"):
     project = get_object_or_404(Project, slug=group_slug)
     
     if not request.user.is_authenticated():

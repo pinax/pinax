@@ -1,13 +1,13 @@
 from django.conf.urls.defaults import *
 
-from newtribes.models import Tribe
+from tribes.models import Tribe
 
 from groups.bridge import ContentBridge
 
 
 bridge = ContentBridge(Tribe, 'tribes')
 
-urlpatterns = patterns('newtribes.views',
+urlpatterns = patterns('tribes.views',
     url(r'^$', 'tribes', name="tribe_list"), 
     url(r'^create/$', 'create', name="tribe_create"),
     url(r'^your_tribes/$', 'your_tribes', name="your_tribes"),

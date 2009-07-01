@@ -1,9 +1,9 @@
 from django import template
-from newprojects.forms import ProjectForm
+from projects.forms import ProjectForm
 
 register = template.Library()
 
-@register.inclusion_tag("newprojects/project_item.html", takes_context=True)
+@register.inclusion_tag("projects/project_item.html", takes_context=True)
 def show_project(context, project):
     return {'project': project, 'request': context['request']}
 

@@ -1,5 +1,5 @@
 from microblogging.models import Tweet
-from newtribes.models import Tribe
+from tribes.models import Tribe
 from django.contrib.auth.models import User
 from bookmarks.models import Bookmark
 from blog.models import Post
