@@ -5,6 +5,7 @@
 
 {% block extra_head_base %}
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/site_tabs.css" />
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/tasks.css" />
     {% block extra_head %}{% endblock %}
 {% endblock %}
 
@@ -38,6 +39,10 @@
             </tr>
         </table>
     {% endif %}
+{% endblock %}
+
+{% block extra_body_base %}
+    <script src="{{ MEDIA_URL }}js/tasks.js" type="text/javascript"></script>
 {% endblock %}
 
 {% block footer %}
