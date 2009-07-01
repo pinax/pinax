@@ -121,7 +121,7 @@
                                     <span class="warning">unassigned</span>
                                 {% endif %}
                             </td>
-                            <td>{% task_tags item %}</td>
+                            <td>{% task_tags item group %}</td>
                             <td>{{ item.status }}</td>
                         </tr>
                     {% endfor %}
@@ -161,7 +161,7 @@
                                     <span class="warning">unassigned</span>
                                 {% endif %}
                             </td>
-                            <td>{% task_tags task %}</td>
+                            <td>{% task_tags task group %}</td>
                             <td>{{ task.status }}</td>
                         </tr>
                     {% endfor %}

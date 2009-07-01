@@ -4,9 +4,10 @@ from django.conf import settings
 register = Library()
 
 @register.inclusion_tag("tag_app/tag_list.html")
-def show_tags_for(obj):
+def show_tags_for(obj, group=None):
     return {
         "obj": obj,
+        "group": group,
         "MEDIA_URL": settings.MEDIA_URL,
     }
 

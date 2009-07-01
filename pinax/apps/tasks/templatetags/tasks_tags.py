@@ -27,21 +27,22 @@ def show_task(context, task, nudge):
 
 @register.simple_tag
 def focus_url(field, value, group=None):
-    include_kwargs = {}
-    if group:
-        include_kwargs.update(group.get_url_kwargs())
     if field is None:
         field = "modified"
     if field == "assignee" and value == None:
         value = "unassigned"
-    include_kwargs.update({"field": field, "value": value})
-    return reverse("task_focus", kwargs=include_kwargs)
+    kwargs = {"field": field, "value": value}
+    if group is None:
+        return reverse("task_focus", kwargs=kwargs)
+    else:
+        return group.content_bridge.reverse("task_focus", group, kwargs=kwargs)
 
 @register.inclusion_tag("tasks/tag_list.html")
-def task_tags(obj):
+def task_tags(obj, group=None):
     taglist = parse_tag_input(obj.tags)
     return {
         "tags": taglist,
+        "group": group,
     }
 
 class TasksForTagNode(template.Node):

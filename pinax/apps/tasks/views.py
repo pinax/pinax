@@ -101,10 +101,6 @@ def add_task(request, group_slug=None, secret_id=None, form_class=TaskForm, temp
         is_member = False
     else:
         is_member = group.user_is_member(request.user)
-    
-    include_kwargs = {}
-    if group:
-        include_kwargs.update(group.get_url_kwargs())
 
     # If we got an ID for a snippet in url, collect some initial values
     # But only if we could import the Snippet Model so
@@ -157,8 +153,8 @@ def add_task(request, group_slug=None, secret_id=None, form_class=TaskForm, temp
                     notify_list = notify_list.exclude(id__exact=request.user.id)
                     notification.send(notify_list, "tasks_new", {"creator": request.user, "task": task, "group": group})
                 if request.POST.has_key('add-another-task'):
-                    return HttpResponseRedirect(reverse("task_add", kwargs=include_kwargs))
-                return HttpResponseRedirect(reverse("task_list", kwargs=include_kwargs))
+                    return HttpResponseRedirect(bridge.reverse("task_add", group))
+                return HttpResponseRedirect(bridge.reverse("task_list", group))
     else:
         task_form = form_class(group=group, initial=initial)
 
@@ -304,10 +300,6 @@ def user_tasks(request, username, group_slug=None, template_name="tasks/user_tas
         other_user = get_object_or_404(group.member_users.all(), username=username)
     else:
         other_user = get_object_or_404(User, username=username)
-    
-    include_kwargs = {}
-    if group:
-        include_kwargs.update(group.get_url_kwargs())
         
     assigned_tasks = other_user.assigned_tasks.all().order_by("state", "-modified") # @@@ filter(project__deleted=False)
     created_tasks = other_user.created_tasks.all().order_by("state", "-modified") # @@@ filter(project__deleted=False)
@@ -315,7 +307,7 @@ def user_tasks(request, username, group_slug=None, template_name="tasks/user_tas
     # get the list of your tasks that have been nudged
     nudged_tasks = [x for x in other_user.assigned_tasks.all().order_by('-modified') if x.task_nudge.all()]
 
-    url = reverse("tasks_mini_list", kwargs=include_kwargs)
+    url = bridge.reverse("tasks_mini_list", group)
     
     bookmarklet = """javascript:(
             function() {
