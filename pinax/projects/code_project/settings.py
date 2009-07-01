@@ -134,6 +134,7 @@ INSTALLED_APPS = (
     'misc',
     'about',
     'tag_app',
+    'tagging_utils',
     'groups',
     'projects',
     'tasks',
