@@ -2,8 +2,6 @@
 
 {% load i18n %}
 {% load uni_form %}
-{% load wiki %}
-{% load wikiurl %}
 {% load avatar_tags %}
 {% load threadedcommentstags %}
 {% load pagination_tags %}
@@ -116,6 +114,8 @@
             {% endwith %}
             
 {% comment %}
+{% load wiki %}
+{% load wikiurl %}
             <h2>{% trans "Wiki Articles" %}{% if total_articles %} ({{ total_articles }}){% endif %}</h2>
             
             {% if articles %}
