@@ -110,6 +110,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.humanize',
+    'django.contrib.markup',
+    'django.contrib.admin',
     
     # external
     'notification', # must be first
@@ -139,8 +141,6 @@ INSTALLED_APPS = (
     'projects',
     'tasks',
     'topics',
-    
-    'django.contrib.admin',
 
 )
 
