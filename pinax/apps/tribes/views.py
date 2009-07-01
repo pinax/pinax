@@ -14,24 +14,24 @@ if "notification" in settings.INSTALLED_APPS:
 else:
     notification = None
 
-from newtribes.models import Tribe
-from newtribes.forms import TribeForm, TribeUpdateForm
+from tribes.models import Tribe
+from tribes.forms import TribeForm, TribeUpdateForm
 
 TOPIC_COUNT_SQL = """
 SELECT COUNT(*)
 FROM topics_topic
 WHERE
-    topics_topic.object_id = newtribes_tribe.id AND
+    topics_topic.object_id = tribes_tribe.id AND
     topics_topic.content_type_id = %s
 """
 MEMBER_COUNT_SQL = """
 SELECT COUNT(*)
-FROM newtribes_tribe_members
-WHERE newtribes_tribe_members.tribe_id = newtribes_tribe.id
+FROM tribes_tribe_members
+WHERE tribes_tribe_members.tribe_id = tribes_tribe.id
 """
 
 @login_required
-def create(request, form_class=TribeForm, template_name="newtribes/create.html"):
+def create(request, form_class=TribeForm, template_name="tribes/create.html"):
     tribe_form = form_class(request.POST or None)
     
     if tribe_form.is_valid():
@@ -51,7 +51,7 @@ def create(request, form_class=TribeForm, template_name="newtribes/create.html")
     }, context_instance=RequestContext(request))
 
 
-def tribes(request, template_name="newtribes/tribes.html"):
+def tribes(request, template_name="tribes/tribes.html"):
     
     tribes = Tribe.objects.all()
     
@@ -89,14 +89,14 @@ def delete(request, group_slug=None, redirect_url=None):
 
 
 @login_required
-def your_tribes(request, template_name="newtribes/your_tribes.html"):
+def your_tribes(request, template_name="tribes/your_tribes.html"):
     return render_to_response(template_name, {
         "tribes": Tribe.objects.filter(members=request.user).order_by("name"),
     }, context_instance=RequestContext(request))
 
 
 def tribe(request, group_slug=None, form_class=TribeUpdateForm,
-        template_name="newtribes/tribe.html"):
+        template_name="tribes/tribe.html"):
     tribe = get_object_or_404(Tribe, slug=group_slug)
     
     tribe_form = form_class(request.POST or None, instance=tribe)
