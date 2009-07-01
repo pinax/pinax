@@ -12,7 +12,7 @@ from photologue.models import *
 from photos.models import Image
 from photos.forms import PhotoUploadForm, PhotoEditForm
 from projects.models import Project
-from newtribes.models import Tribe
+from tribes.models import Tribe
 
 def upload(request, form_class=PhotoUploadForm,
         template_name="photos/upload.html"):
