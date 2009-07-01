@@ -119,6 +119,7 @@ INSTALLED_APPS = (
     'announcements',
     'pagination',
     'timezones',
+    'avatar',
     'ajax_validation',
     'uni_form',
     'django_sorting',
