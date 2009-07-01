@@ -128,9 +128,11 @@ INSTALLED_APPS = (
     'account',
     'misc',
     'about',
-    'django.contrib.admin',
+    'tag_app',
     'projects',
     'tasks',
+    
+    'django.contrib.admin',
 
 )
 
