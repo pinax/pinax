@@ -122,6 +122,7 @@ INSTALLED_APPS = (
     'avatar',
     'threadedcomments',
     'ajax_validation',
+    'tagging',
     'uni_form',
     'django_sorting',
     'attachments',
