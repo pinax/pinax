@@ -40,9 +40,9 @@ class Topic(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        kwargs = self.group.get_url_kwargs()
-        kwargs['topic_id'] = self.pk
-        return reverse("topic_detail", kwargs=kwargs)
+        kwargs = {"topic_id": self.pk}
+        # @@@ no group attached?
+        return self.group.content_bridge.reverse("topic_detail", self.group, kwargs=kwargs)
     
     class Meta:
         ordering = ('-modified', )
