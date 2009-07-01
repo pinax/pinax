@@ -33,6 +33,7 @@
         <table>
             <tr>
                 <td class="tab rtab_profile"><div><a href="{% url profile_detail user %}">{% trans "Profile" %}</a></div></td>
+                <td class="tab rtab_projects"><div><a href="{% url project_list %}">{% trans "Projects" %}</a></div></td>
                 <td class="tab rtab_notices"><div><a href="{% url notification_notices %}">{% trans "Notices" %}{% if notice_unseen_count %} ({{ notice_unseen_count }}){% endif %}</a></div></td>
             </tr>
         </table>
