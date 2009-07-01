@@ -133,6 +133,7 @@ INSTALLED_APPS = (
     'tag_app',
     'projects',
     'tasks',
+    'topics',
     
     'django.contrib.admin',
 
