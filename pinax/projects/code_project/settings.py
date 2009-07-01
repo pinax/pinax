@@ -78,6 +78,7 @@ MIDDLEWARE_CLASSES = (
     'account.middleware.LocaleMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'pagination.middleware.PaginationMiddleware',
+    'django_sorting.middleware.SortingMiddleware',
 )
 
 ROOT_URLCONF = 'code_project.urls'
@@ -120,6 +121,7 @@ INSTALLED_APPS = (
     'timezones',
     'ajax_validation',
     'uni_form',
+    'django_sorting',
     'attachments',
     
     # internal (for now)
