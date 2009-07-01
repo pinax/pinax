@@ -164,7 +164,6 @@ INSTALLED_APPS = (
     'staticfiles',
     'account',
     'tribes',
-    'projects',
     'misc',
     'photos',
     'tag_app',
