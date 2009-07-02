@@ -1,0 +1,156 @@
+
+=============
+Group support
+=============
+
+Group support in Pinax allows you to define any type of group. Pinax comes
+bundled with two types of groups:
+
+ * tribes — used in social_project
+ * projects — used in code_project
+
+A group app can have any content object associated with it. Pinax includes
+several apps that are group aware:
+
+ * tasks
+ * photos
+ * wiki
+ * topics
+
+The idea is a group aware app has the ability to work without or with a group
+association. This is done using a nullable generic foreign key. The groups
+app provides much of the glue to allow Pinax to support content object for
+groups.
+
+Writing your own group aware domain objects
+===========================================
+
+If you want to write your own domain object that is group aware start an app
+for it. Follow the guidelines below and you'll be all set.
+
+Models
+------
+
+Let's look at a basic model that stores data for a blog::
+
+    class Blog(models.Model):
+        
+        name = models.CharField(max_length=140)
+
+To enable group support for this minimal domain object add in a nullable
+generic foreign key::
+
+    from django.db import models
+    
+    from django.contrib.contenttypes import generic
+    from django.contrib.contenttypes.models import ContentType
+    
+    
+    class Blog(models.Model):
+        
+        name = models.CharField(max_length=140)
+        
+        object_id = models.IntegerField(null=True)
+        content_type = models.ForeignKey(ContentType, null=True)
+        group = generic.GenericForeignKey("object_id", "content_type")
+
+We use a nullable generic foreign key to enable it to be optional and we don't
+know what group model it will point to.
+
+Views
+-----
+
+The views you write for your app need to be aware there may be a group
+association. This is to ensure you properly work with the right subset of
+data from your models.
+
+Let's take a look at a view that would be a bit naive::
+
+    def blog_list(request):
+        
+        blogs = Blog.objects.all()
+        
+        return render_to_response("blog/blog_list.html", {
+            "blogs": blogs,
+        }, context_instance=RequestContext(request))
+
+Assuming ``Blog`` is the first model presented above this will work fine.
+However, once you introduce the generic foriegn key you will potentially be
+selecting objects that don't belong.
+
+To deal with situation we introduced a ``ContentBridge`` object. This object
+is passed to your view from the layer above. Let's see how to work with it::
+
+    def blog_list(request, bridge=None):
+        
+        ...
+        
+        return render_to_response("blog/blog_list.html", {
+            "blogs": blogs,
+        }, context_instance=RequestContext(request))
+
+URLs
+----
+
+The ``urls.py`` file of your app will not need anything special. Most of that
+is handled by Pinax. However, URL reversal needs to be group aware. We have
+some helpers to help you work with this easily.
+
+Let's say you have the following ``urls.py``:
+
+    from django.conf.urls.defaults import *
+    
+    
+    urlpatterns = patterns("",
+        url(r"^blogs/$", "blog.views.blog_list", name="blog_list"),
+        url(r"^blog/(?P<slug>[-\w]+)/$", "blog.views.blog_detail", name="blog_detail"),
+    )
+
+To ensure URLs to ``blog_list`` are correctly generated you will need to use
+``reverse`` located on the ``ContentBridge`` object::
+
+    def some_view_with_redirect(request, bridge=None):
+        ...
+        return HttpResponseRedirect(bridge.reverse("blog_list", group))
+
+The ``reverse`` method work almost identical to Django's ``reverse``. It is
+essentially a wrapper. To reverse the ``blog_detail`` URL::
+
+    blog = Blog.objects.get(pk=1)
+    bridge.reverse("blog_detail", group, kwargs={"slug": blog.slug})
+
+.. note::
+
+    You should be aware that *only* ``kwargs`` work with the bridge ``reverse``.
+    This is significant because URLs with ``args`` mapping will fail reversal.
+    The reason behind this is because Django does not allow mixing of ``args``
+    and ``kwargs`` when performing URL reversal.
+
+There are some cases when you don't have easy access to the ``ContentBridge``.
+You may only have access to a domain object instance. You can get access to
+the ``ContentBridge`` from the instance. For example::
+
+    blog = Blog.objects.get(pk=1)
+    blog.content_bridge.reverse(...)
+
+URL reversal in templates
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In Django you may be familiar with the ``{% url %}`` templatetag. This is
+basically a wrapper around ``reverse``. We provide a similar tag, but works
+with our ``ContentBridge.reverse``. Here is how you might use it::
+
+    {% load group_tags %}
+    
+    <a href="{% groupurl blog_detail group slug=blog.slug %}">{{ blog.name }}</a>
+
+The ``{% groupurl %}`` templatetag will fall back to normal Django URL reversal
+if the value of the passed in ``group`` is ``None``. This enables the ability
+to work with no group association.
+
+
+Writing your own group app
+==========================
+
+Hooking up content objects
+--------------------------
