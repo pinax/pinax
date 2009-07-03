@@ -80,13 +80,45 @@ selecting objects that don't belong.
 To deal with situation we introduced a ``ContentBridge`` object. This object
 is passed to your view from the layer above. Let's see how to work with it::
 
-    def blog_list(request, bridge=None):
+    from django.http import Http404
+    from django.template import RequestContext
+    from django.shortcuts import render_to_response
+    
+    
+    def blog_list(request, group_slug=None, bridge=None):
         
-        ...
+        if bridge is not None:
+            try:
+                group = bridge.get_group(group_slug)
+            except ObjectDoesNotExist:
+                raise Http404
+        else:
+            group = None
+        
+        if group:
+            blogs = group.get_related_objects(Blog)
+        else:
+            blogs = Blog.objects.all()
         
         return render_to_response("blog/blog_list.html", {
+            "group": group,
             "blogs": blogs,
         }, context_instance=RequestContext(request))
+
+Pretty straight-foward code to handle both group and no group association.
+If you are writing an app that can guarantee group association you can
+definitely make it simpler.
+
+Checking for user membership
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In many cases you might want to check if the logged in user has membership
+in the group. To do this::
+
+    if not request.user.is_authenticated():
+        is_member = False
+    else:
+        is_member = group.user_is_member(request.user)
 
 URLs
 ----
