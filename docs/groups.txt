@@ -17,10 +17,9 @@ several apps that are group aware:
  * wiki
  * topics
 
-The idea is a group aware app has the ability to work without or with a group
-association. This is done using a nullable generic foreign key. The groups
-app provides much of the glue to allow Pinax to support content object for
-groups.
+The idea is a group aware app has the ability to work with or without a group
+association. This is done using a nullable generic foreign key. Pinax comes
+with an app to do much of the work to make this all happen.
 
 Writing your own group aware domain objects
 ===========================================
@@ -96,7 +95,7 @@ The ``urls.py`` file of your app will not need anything special. Most of that
 is handled by Pinax. However, URL reversal needs to be group aware. We have
 some helpers to help you work with this easily.
 
-Let's say you have the following ``urls.py``:
+Let's say you have the following ``urls.py``::
 
     from django.conf.urls.defaults import *
     
@@ -121,7 +120,7 @@ essentially a wrapper. To reverse the ``blog_detail`` URL::
 
 .. note::
 
-    You should be aware that *only* ``kwargs`` work with the bridge ``reverse``.
+    You should be aware that **only** ``kwargs`` work with the bridge ``reverse``.
     This is significant because URLs with ``args`` mapping will fail reversal.
     The reason behind this is because Django does not allow mixing of ``args``
     and ``kwargs`` when performing URL reversal.
