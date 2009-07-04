@@ -1,0 +1,7 @@
+{% load i18n %}
+{% url profile_detail username=user.username as user_url %}{% url profile_detail username=assignee.username as assignee_url %}
+{% if group %}
+{% blocktrans with task.get_absolute_url as task_url and group.get_absolute_url as group_url %}<a href="{{ user_url }}">{{ user }}</a> has assigned task '<a href="{{ task_url }}">{{ task }}</a>' in '<a href="{{ group_url }}">{{ group }}</a>' to <a href="{{ assignee_url }}">{{ assignee }}</a>.{% endblocktrans %}
+{% else %}
+{% blocktrans with task.get_absolute_url as task_url %}<a href="{{ user_url }}">{{ user }}</a> has assigned task '<a href="{{ task_url }}">{{ task }}</a>' to <a href="{{ assignee_url }}">{{ assignee }}</a>.{% endblocktrans %}
+{% endif %}

@@ -3,15 +3,20 @@ import sys
 
 PINAX_GIT_LOCATION = 'git://github.com/pinax/pinax.git'
 PINAX_PYPI = 'http://pypi.pinaxproject.com'
+PINAX_MUST_HAVES = {
+    'setuptools-git': 'setuptools_git-0.3.3.tar.gz',
+    'setuptools-dummy': 'setuptools_dummy-0.0.3.tar.gz',
+    'pip': 'pip-0.4.tar.gz',
+}
 
 if sys.platform == 'win32':
-    BIN_DIR = 'Scripts'
     GIT_CMD = 'git.cmd'
     PIP_CMD = 'pip.exe'
     EASY_INSTALL_CMD = 'easy_install.exe'
     extra = {'shell': True}
+    if not expected_exe.endswith('.exe'):
+        expected_exe = '%s.exe' % expected_exe
 else:
-    BIN_DIR = 'bin'
     GIT_CMD = 'git'
     PIP_CMD = 'pip'
     EASY_INSTALL_CMD = 'easy_install'
@@ -30,7 +35,10 @@ def winpath(path):
 def resolve_command(cmd, default_paths=[]):
     # searches the current $PATH for the given executable and returns the
     # full path, borrowed from virtualenv.
-    if os.path.abspath(cmd) != cmd:
+    if sys.platform == 'win32' and cmd == 'python':
+        # path lookups on Windows need .exe
+        cmd = 'python.exe'
+    if os.path.realpath(cmd) != cmd:
         paths = os.environ.get('PATH', '').split(os.pathsep)
         if default_paths:
             paths.insert(0, default_paths)
@@ -43,7 +51,7 @@ def resolve_command(cmd, default_paths=[]):
         print "ERROR: this script requires %s." % cmd
         print "Please install it to create a Pinax virtualenv."
         sys.exit(3)
-    return cmd
+    return os.path.realpath(cmd)
 
 try:
     import pip
@@ -122,21 +130,17 @@ def release_files_exist(release_dir, requirements_file):
 
 def after_install(options, home_dir):
     this_dir = os.path.dirname(__file__)
-    home_dir = winpath(os.path.abspath(home_dir))
-    base_dir = os.path.dirname(home_dir)
+    home_dir, lib_dir, inc_dir, bin_dir = path_locations(home_dir)
     src_dir = join(home_dir, 'src')
-    bin_dir = join(home_dir, BIN_DIR)
     parent_dir = join(this_dir, '..')
-    requirements_dir = join(parent_dir, 'requirements')
 
     python = resolve_command(expected_exe, bin_dir)
     easy_install = resolve_command(EASY_INSTALL_CMD, bin_dir)
 
     # pip and setuptools-git is required in any case
-    install_base(easy_install, requirements_dir, {
-        'setuptools-git': 'setuptools_git-0.3.3.tar.gz',
-        'pip': 'pip-0.3.1.tar.gz',
-    })
+    requirements_dir = join(parent_dir, 'requirements')
+    install_base(easy_install, requirements_dir, PINAX_MUST_HAVES)
+
     # resolve path to pip
     pip = resolve_command(PIP_CMD, bin_dir)
 
@@ -149,13 +153,21 @@ def after_install(options, home_dir):
         if version:
             options.release = version
 
+    # FIXME we really should get that fixed in virtualenv upstream for Jaunty
+    if (not options.no_site_packages and
+            os.path.exists('/usr/lib/python2.6/dist-packages')):
+        jaunty_path_fix = join(lib_dir, 'site-packages', 'jaunty-fix.pth')
+        f = open(jaunty_path_fix, 'wb')
+        f.write('/usr/lib/python2.6/dist-packages\n/var/lib/python-support/python2.6')
+        f.close()
+
     if options.development:
         logger.notify('Going to setup a Pinax development environment.')
         # For developers and other crazy trunk lovers
         source = options.pinax_source
         if os.path.exists(source):
             # A directory was given as a source for bootstrapping
-            pinax_dir = winpath(os.path.abspath(source))
+            pinax_dir = winpath(os.path.realpath(source))
             logger.notify('Using existing Pinax at %s' % source)
         else:
             # Go and get Pinax
@@ -169,7 +181,7 @@ def after_install(options, home_dir):
                 call_subprocess([git, 'pull'], show_stdout=True, cwd=pinax_dir)
             else:
                 logger.notify('Fetching Pinax from %s to %s' % (source, pinax_dir))
-                call_subprocess([git, 'clone', '--quiet', source, pinax_dir],
+                call_subprocess([git, 'clone', source, pinax_dir],
                                 show_stdout=True)
         logger.indent += 2
         try:
@@ -188,7 +200,7 @@ def after_install(options, home_dir):
         # call_subprocess([pip, 'install', '--upgrade',
         #         '--requirement', os.path.abspath(join(release_dir, 'full.txt')),
         #         '--environment', home_dir], show_stdout=True, cwd=release_dir)
-        requirements_file = os.path.abspath(join(release_dir, 'full.txt'))
+        requirements_file = os.path.realpath(join(release_dir, 'full.txt'))
         if not os.path.exists(requirements_file):
             print "ERROR: no requirements were found for version %s." % options.release
             sys.exit(101)

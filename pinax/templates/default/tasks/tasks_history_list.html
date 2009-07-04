@@ -1,0 +1,83 @@
+{% extends "tasks/base.html" %}
+
+{% load i18n %}
+{% load shorttimesince_tag %}
+{% load tasks_tags %}
+{% load pagination_tags %}
+{% load group_tags %}
+
+{% block head_title %}Tasks History{% endblock %}
+
+{% block body %}
+    <h1>History for all Tasks</h1>
+    <p>This page shows all changes on all tasks.</p>
+    {% autopaginate task_history  50 %}
+    {% paginate %}
+    <table class="task_list">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Modifier</th>
+                <th>Modified</th>
+                <th>Summary</th>
+                <th>Assignee</th>
+                <th>Tags</th>
+                <th>State</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for change in task_history %}
+            <!-- {% cycle odd,even as rowcolor %} -->
+            <tr class="{{ rowcolor }}" style="padding-bottom:10px">
+                <td><a href="{% groupurl task_detail group id=change.task.id %}">{{ change.task.id }}</a></td>
+                <td>
+                    {% if change.owner %}
+                        <a href="{% groupurl tasks_for_user group username=change.owner %}">{{ change.owner }}</a>
+                    {% endif %}
+                    {% if change.nudger %}
+                        <a href="{% groupurl tasks_for_user group username=change.nudger %}">{{ change.nudger }}</a>
+                    {% endif %}
+                </td>
+                <td>{{ change.modified|shorttimesince }}</td>
+                <td>
+                    {{ change.summary }}
+                    {% if change.nudger %} nudged {% endif %}
+                </td>
+                <td>
+                    {% if change.nudger %}
+                        nudged
+                    {% else %}
+                        {% if change.assignee %}
+                            <a href="{% groupurl tasks_for_user group username=change.assignee %}">{{ change.assignee }}</a>
+                        {% else %}
+                            <span class="warning">unassigned</span>
+                        {% endif %}
+                    {% endif %}
+                </td>
+                <td>{% task_tags change group %}</td>
+                <td>
+                    {{ change.get_state_display }}
+                    {% if change.get_resolution_display %}
+                        <br /><em>{{ change.get_resolution_display }}</em>
+                    {% endif %}
+                </td>
+            </tr>
+            {% if change.status %}
+                <tr class="{{ rowcolor }}">
+                    <td><strong>Status</strong></td>
+                    <td colspan="6">{{ change.status }}</td>
+                </tr>
+            {% endif %}
+            {% if change.comment %}
+                <tr class="{{ rowcolor }}">
+                    <td><strong>Comment</strong></td>
+                    <td colspan="6">
+                        {{ change.comment|striptags|urlize }}
+                    </td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+    {% paginate %}
+{% endblock %}

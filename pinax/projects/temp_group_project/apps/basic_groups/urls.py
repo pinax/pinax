@@ -2,7 +2,7 @@ from django.conf.urls.defaults import *
 
 from basic_groups.models import BasicGroup
 
-from groups_ng.bridge import ContentBridge
+from groups.bridge import ContentBridge
 
 include_kwargs = {
     'bridge': ContentBridge(BasicGroup, 'topics'),

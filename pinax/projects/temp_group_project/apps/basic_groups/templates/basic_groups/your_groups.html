@@ -1,0 +1,31 @@
+{% extends "basic_groups/base.html" %}
+
+{% load i18n %}
+{% load pagination_tags %}
+{% load group_tags %}
+{% load basic_group_tags %}
+
+{% block head_title %}{% trans "Your Groups" %}{% endblock %}
+
+{% block body %}
+    
+    <h1>{% trans "Your Groups" %}</h1>
+    
+    {% if groups %}
+        <p>{% trans "These are the groups you participate in." %}</p>
+        
+        {% autopaginate groups %}
+        
+        <dl>
+            {% for group in groups %}
+                {% show_group group %}
+            {% endfor %}
+        </dl>
+        
+        {% paginate %}
+        
+    {% else %}
+        <p>You are not a member of any groups yet.</p>
+    {% endif %}
+    
+{% endblock %}

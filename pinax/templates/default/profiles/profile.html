@@ -4,6 +4,7 @@
 {% load avatar_tags %}
 {% load app_plugins %}
 {% load uni_form %}
+{% load microblogging_tags %}
 
 {% block head_title %}{% blocktrans %}Profile for {{ other_user }}{% endblocktrans %}{% endblock %}
 
@@ -37,8 +38,8 @@
         
             {% if user.is_authenticated %}
                 <p>
-                    <a href="{% url tweet_followers other_user %}">{% trans "Followers" %}</a>: {{ other_user.followers.count|default:"0" }}
-                    <a href="{% url tweet_following other_user %}">{% trans "Following" %}</a>: {{ other_user.followed.count|default:"0" }}
+                    <a href="{% url tweet_followers other_user %}">{% trans "Followers" %}</a>: {% follower_count other_user %}
+                    <a href="{% url tweet_following other_user %}">{% trans "Following" %}</a>: {% following_count other_user %}
                 </p>
                 
                 {% if is_me %}

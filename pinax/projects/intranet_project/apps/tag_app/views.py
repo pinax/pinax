@@ -8,8 +8,8 @@ from bookmarks.models import BookmarkInstance
 from projects.models import Project, Task
 from projects.models import Topic as ProjectTopic
 
-from tribes.models import Tribe
-from tribes.models import Topic as TribeTopic
+# from tribes.models import Tribe
+# from tribes.models import Topic as TribeTopic
 
 from wiki.models import Article as WikiArticle
 
@@ -25,8 +25,8 @@ def tags(request, tag, template_name='tags/index.html'):
     project_topic_tags = TaggedItem.objects.get_by_model(ProjectTopic, tag).filter(project__deleted=False)
     project_task_tags = TaggedItem.objects.get_by_model(Task, tag).filter(project__deleted=False)
     
-    tribe_tags = TaggedItem.objects.get_by_model(Tribe, tag).filter(deleted=False)
-    tribe_topic_tags = TaggedItem.objects.get_by_model(TribeTopic, tag).filter(tribe__deleted=False)
+    # tribe_tags = TaggedItem.objects.get_by_model(Tribe, tag).filter(deleted=False)
+    # tribe_topic_tags = TaggedItem.objects.get_by_model(TribeTopic, tag).filter(tribe__deleted=False)
     
     # @@@ TODO: tribe_wiki_article_tags and project_wiki_article_tags
     wiki_article_tags = TaggedItem.objects.get_by_model(WikiArticle, tag)
@@ -39,7 +39,7 @@ def tags(request, tag, template_name='tags/index.html'):
         'project_tags': project_tags,
         'project_topic_tags': project_topic_tags,
         'project_task_tags': project_task_tags,
-        'tribe_tags': tribe_tags,
-        'tribe_topic_tags': tribe_topic_tags,
+        #'tribe_tags': tribe_tags,
+        #'tribe_topic_tags': tribe_topic_tags,
         'wiki_article_tags': wiki_article_tags,
     }, context_instance=RequestContext(request))

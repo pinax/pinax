@@ -20,6 +20,9 @@ class SignupCode(models.Model):
     # calculated
     use_count = models.PositiveIntegerField(editable=False, default=0)
     
+    def __unicode__(self):
+        return self.code
+    
     def calculate_use_count(self):
         self.use_count = self.signupcoderesult_set.count()
         self.save()

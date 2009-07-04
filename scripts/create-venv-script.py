@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """
 Call this like ``python pinax/bin/create-venv-script.py``
 it will refresh the pinax-boot.py script

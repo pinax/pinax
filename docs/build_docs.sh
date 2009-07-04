@@ -22,7 +22,7 @@ git clone -q git://github.com/ericflo/django-oembed.git
 echo "cloning django-notification"
 git clone -q git://github.com/brosner/django-notification.git
 echo "cloning django-mailer"
-git clone -q git://github.com/pinax/django-mailer.git
+git clone -q git://github.com/jtauber/django-mailer.git
 echo "cloning django-dbtemplates"
 git clone -q git://github.com/jezdez/django-dbtemplates.git
 echo "cloning django-robots"

@@ -6,7 +6,7 @@
 {% load pagination_tags %}
 {% load order_by %}
 {% load extra_tagging_tags %}
-{% load tribe_tags %}
+{% load tribes_tags %}
 
 {% block head_title %}{% blocktrans %}Create Tribe{% endblocktrans %}{% endblock %}
 
@@ -30,15 +30,4 @@
         <p>{% blocktrans %}<a href="{{ signup_url }}">Sign up</a> and <a href="{{ login_url }}">log in </a> to create your own tribe or join an existing one.{% endblocktrans %}</p>
     {% endif %}
     
-{% endblock %}
-
-{% block extra_body %}
-    <script type="text/javascript">
-        $(document).ready(function() {
-                if ($('#tribe_form .error').length) {
-                    $('#tribe_form').show();
-                    $('#tribe_form .error').autoscroll();
-            }
-        });
-    </script>
 {% endblock %}

@@ -1,0 +1,16 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+
+{% block breadcrumbs %}<div class="breadcrumbs"><a href="../">{% trans "Home" %}</a> &rsaquo; Invite user</div>{% endblock %}
+
+{% block content %}
+<div id="content-main">
+    <p>{% blocktrans %}Invite a user given an e-mail address. The user will be e-mailed a signup code to create their account on this website.{% endblocktrans %}</p>
+    <form method="POST" action="">
+    <div>
+        {{ form.as_p }}
+        <input type="submit" value="Send signup code" />
+    </div>
+    </form>
+</div>
+{% endblock %}

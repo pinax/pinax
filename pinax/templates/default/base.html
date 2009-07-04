@@ -44,8 +44,9 @@
             <div class="tabs" {% block tab_id %}{% endblock %}>{% block tabs %}{% endblock %}</div>
             <div class="right_tab" {% block rtab_id %}{% endblock %}>{% block right_tab %}{% endblock %}</div>
         </div>
-        <div id="subnav" class="clearfix">{% block subnav %}&nbsp;{% endblock %}</div>
+        <div id="subnav" class="clearfix">{% block subnav_base %}{% block subnav %}&nbsp;{% endblock %}{% endblock %}</div>
         
+        {% block body_outer %}
         <div id="body">
             {% if messages %}
                 <ul id="messages">
@@ -59,6 +60,7 @@
             {% endblock %}
             
         </div>
+        {% endblock %}
         
         <div id="footer">{% block footer %}{% endblock %}</div>
         

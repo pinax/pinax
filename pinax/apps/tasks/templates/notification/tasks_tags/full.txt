@@ -1,0 +1,14 @@
+{% load i18n %}
+{% if group %}
+{% blocktrans with task.tags as task_tags %}{{ user }} has updated the tags of task '{{ task }}' in '{{ group }}' to '{{ task_tags }}'.{% endblocktrans %}
+{% else %}
+{% blocktrans with task.tags as task_tags %}{{ user }} has updated the tags of task '{{ task }}' to '{{ task_tags }}'.{% endblocktrans %}
+{% endif %}
+
+
+Task details:
+{{ task.detail }}
+
+{% blocktrans with task.tags as task_tags %}Tags: {{ task_tags }}{% endblocktrans %}
+
+Link: http://{{ current_site }}{{ task.get_absolute_url }}

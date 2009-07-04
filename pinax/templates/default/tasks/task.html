@@ -1,0 +1,87 @@
+{% extends "tasks/base.html" %}
+
+{% load i18n %}
+{% load tasks_tags %}
+{% load comments_tag %}
+{% load uni_form %}
+{% load attachments_tags %}
+{% load group_tags %}
+
+{% block head_title %}{{ task.summary }}{% endblock %}
+
+{% block body %}
+    {#<p><a href="{% url project_tasks task.project.slug %}">&larr; {% trans "Back to Task List for Project " %} {{ task.project }}</a></p>#}
+
+    <p><a href="{% groupurl task_list group %}">&larr; {% trans "Back to Task List" %}</a></p>
+
+    {% show_task task nudge %}
+
+    {% if is_member %}
+        <h2>{% trans "Edit" %}</h2>
+        <form method="POST" action="" id="task_form" class="uniForm">
+            {{ form.media }}
+            {{ form|as_uni_form }}
+
+            <div class="form_block">
+                <input type="submit" value="{% trans "Update Task" %}" />
+            </div>
+
+        </form>
+    {% endif %}
+
+    {% get_attachments_for task as "attachments" %}
+    {% if attachments %}
+    <h2>{% trans "Attachments" %}</h2>
+
+    <ul>
+    {% for attachment in attachments %}
+        <li>
+            <img src="{{ MEDIA_URL }}pinax/images/silk/icons/attach.png" alt="" class="inline-icon"/>
+            <a href="{{ attachment.attachment_file.url }}">{{ attachment.filename }}</a>
+            - <span class="lighter">{{ attachment.created|date:_("DATETIME_FORMAT") }}</span>
+            {% attachment_delete_link attachment %}
+        </li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% attachment_form task %}
+
+    <h2>{% trans "Comment" %}</h2>
+    {% comments task %}
+{% endblock %}
+
+{% block extra_body %}
+<script type="text/javascript">
+    $().ready(function() {
+
+        $('#id_assignee').after(' <a href="#" onclick="$(\'#id_assignee\').val({{ user.id }}); return false;">{% trans "assign to me" %}</a>');
+
+        // We disable the the resolution by default
+        // when the page loads. Unless, of course,
+        // the ticket is already in the resolved state (state==2)
+        $('#id_resolution').attr("disabled", true);
+        var state_value = $('#id_state')[0].value;
+        if  (state_value == "2" || state_value == "3") {
+            $('#id_resolution').attr("disabled", false);
+        }
+    });
+
+    $('#id_state').change(function(){
+        // We enable the resolution field when the
+        // the state is resolved (state==2)
+        var state_value = $('#id_state')[0].value;
+        if (state_value == "2" || state_value == "3") {
+            $('#id_resolution').attr("disabled", false);
+        } else {
+            $('#id_resolution').attr("disabled", true);
+        };
+    });
+
+    $('#nudge-history-target').hide();
+    $('#nudge-history').click(function() {
+        $('#nudge-history-target').toggle();
+    });
+
+</script>
+{% endblock %}

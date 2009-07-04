@@ -1,4 +1,3 @@
-
 from django.conf import settings
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -7,9 +6,11 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.utils.translation import ugettext
 
+from django.contrib.admin.views.decorators import staff_member_required
+
 from account.utils import get_default_redirect
 from signup_codes.models import check_signup_code
-from signup_codes.forms import SignupForm
+from signup_codes.forms import SignupForm, InviteUserForm
 
 
 def signup(request, form_class=SignupForm,
@@ -46,5 +47,23 @@ def signup(request, form_class=SignupForm,
             else:
                 form = form_class()
     return render_to_response(template_name, {
+        "form": form,
+    }, context_instance=RequestContext(request))
+
+
+@staff_member_required
+def admin_invite_user(request, form_class=InviteUserForm,
+        template_name="signup_codes/admin_invite_user.html"):
+    """
+    This view, by default, works inside the Django admin.
+    """
+    if request.method == "POST":
+        form = form_class(request.POST)
+        if form.is_valid():
+            form.send_signup_code()
+    else:
+        form = form_class()
+    return render_to_response(template_name, {
+        "title": "Invite user",
         "form": form,
     }, context_instance=RequestContext(request))

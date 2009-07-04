@@ -1,0 +1,83 @@
+{% extends "tasks/base.html" %}
+
+{% load i18n %}
+{% load shorttimesince_tag %}
+{% load order_by %}
+{% load humanize %}
+{% load tasks_tags %}
+{% load tagging_tags %}
+{% load group_tags %}
+
+
+{% block head_title %}Tasks History{% endblock %}
+
+{% block body %}
+
+    <h1>History for Task 
+        <a href="{% groupurl task_detail group id=task.id %}">#{{ task.id }}: {{ task.summary }}</a>
+    </h1>
+
+    
+    {{ task.detail|linebreaks|urlize }}
+    <table class="task_list">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Modifier</th>                
+                <th>Modified</th>                
+                <th>Summary</th>
+                <th>Assignee</th>
+                <th>Tags</th>
+                <th>State</th>                
+                <th>Status</th>
+                <th>Comment</th>                
+            </tr>
+        </thead>
+        <tbody> 
+            {% for change in task_history %}   
+                <tr class="{% cycle odd,even %}">
+                <td>{{ forloop.revcounter }}</td> 
+                <td>
+                    {% if change.owner %}
+                        <a href="{% groupurl tasks_for_user group username=change.owner %}">{{ change.owner }}</a>
+                    {% endif %}
+                    {% if change.nudger %}
+                        <a href="{% groupurl tasks_for_user group username=change.nudger %}">{{ change.nudger }}</a>
+                    {% endif %}
+                </td>
+                <td>{{ change.modified|shorttimesince }}</td>                
+                <td>{{ change.summary }}
+                    {% if change.nudger %} nudged {% endif %}
+                </td>
+                <td>
+                    {% if change.nudger %}
+                    {% else %}
+                        {% if change.assignee %}
+                            <a href="{% groupurl tasks_for_user group username=change.assignee %}">{{ change.assignee }}</a>
+                        {% else %}
+                            <span class="warning">unassigned</span>
+                        {% endif %}                    
+                    {% endif %}
+                </td>
+                <td>{% task_tags change group %}</td>
+                <td>{{ change.humanized_state }}
+                    {% if change.humanized_resolution %}
+                        <br />{{ change.humanized_resolution }}
+                    {% endif %}
+                </td>                                              
+                <td>{{ change.status }}</td>
+                <td>
+                    {% if change.nudger %}
+                        nudged
+                    {% endif %}
+                    
+                    {% if change.comment %}
+                        {{ change.comment|linebreaks|urlize }}
+                    {% endif %}
+                </td>                                                                                        
+                </tr>                
+            {% endfor %}
+
+        </tbody> 
+    </table>
+{% endblock %}

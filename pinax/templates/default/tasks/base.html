@@ -1,0 +1,19 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load group_tags %}
+
+{% block rtab_id %}id="tasks_tab"{% endblock %}
+
+{% block subnav %}
+    {% if user.is_authenticated %}
+        <ul>
+            <li><a href="{% groupurl task_add group %}">{% trans "Add Task" %}</a></li>
+            <li><a href="{% groupurl tasks_for_user group username=user.username %}">{% trans "Your Tasks" %}</a></li>
+            <li><a href="{% groupurl task_list group %}">{% trans "All Tasks" %}</a></li>
+            <li><a href="{% groupurl tasks_history_list group %}">{% trans "Tasks History" %}</a></li>
+        </ul>
+    {% else %}
+        &nbsp;
+    {% endif %}
+{% endblock %}

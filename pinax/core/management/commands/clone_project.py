@@ -15,6 +15,7 @@ DEFAULT_PINAX_ROOT = None # fallback to the normal PINAX_ROOT in settings.py.
 PINAX_ROOT_RE = re.compile(r'PINAX_ROOT\s*=.*$', re.M)
 SECRET_KEY_RE = re.compile(r'SECRET_KEY\s*=.*$', re.M)
 ROOT_URLCONF_RE = re.compile(r'ROOT_URLCONF\s*=.*$', re.M)
+VIRTUALENV_BASE_RE = re.compile(r'VIRTUALENV_BASE\s*=.*$', re.M)
 CHARS = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)'
 
 def get_pinax_root(default_pinax_root):
@@ -109,6 +110,15 @@ def update_rename_deploy_files(path, old_name, new_name):
         deploy_filename = os.path.basename(deploy_file)
         new_deploy_file = os.path.join(deploy_filepath, deploy_filename.replace("pinax", new_name))
         shutil.move(deploy_file, new_deploy_file)
+    # fix modpython.py
+    modpython_file = open(os.path.join(path, "modpython.py"), "rb")
+    modpython = modpython_file.read()
+    modpython_file.close()
+    virtualenv_base = os.environ.get("VIRTUAL_ENV", "")
+    modpython = VIRTUALENV_BASE_RE.sub('VIRTUALENV_BASE = "%s"' % virtualenv_base, modpython)
+    modpython_file = open(os.path.join(path, "modpython.py"), "wb")
+    modpython_file.write(modpython)
+    modpython_file.close()
 
 
 def main(default_pinax_root, project_name, destination, verbose=True):
@@ -141,28 +151,29 @@ def main(default_pinax_root, project_name, destination, verbose=True):
 
 
 class Command(BaseCommand):
-    help = "Clones a Pinax project to begin development on a new site"
-    args = ("PROJECT_NAME DESTINATION (Note that PROJECT_NAME may" +
-        " be a path to a project template of your own)")
+    help = "Clones a Pinax starter project to <new_project_name> (which can be a path)."
+    args = "<original_project> <new_project_name>"
         
     clone_project_options = (
-            make_option('-l', '--list-projects', dest='list_projects',
-                action='store_true',
-                help='lists the projects that are available on this system'),
-            make_option('-r', '--pinax-root', dest='pinax_root',
-                default=DEFAULT_PINAX_ROOT,
-                action='store_true',                
-                help='the directory that can be used '),               
-            make_option('-b', '--verbose', dest='verbose',
-                action='store_false', default=True,
-                help='enables verbose output'),
-        )
+        make_option('-l', '--list-projects', dest='list_projects',
+            action = 'store_true',
+            help = 'lists the projects that are available on this system'),
+        make_option('-r', '--pinax-root', dest='pinax_root',
+            default = DEFAULT_PINAX_ROOT,
+            action = 'store_true',
+            help = 'where Pinax lives on your system (defaults to Pinax in your virtual environment)'),
+        make_option('-b', '--verbose', dest='verbose',
+            action = 'store_false', default=True,
+            help = 'enables verbose output'),
+    )
         
     option_list = BaseCommand.option_list + clone_project_options
     
     
     def handle(self, *args, **options):
-        """ I handle the various options supplied by the user of clone_project
+        """
+        Handle clone_project options and run main to perform clone_project
+        operations.
         """
         
         if options.get('list_projects'):
@@ -171,55 +182,15 @@ class Command(BaseCommand):
             print "------------------"
             sys.path.insert(0, get_projects_dir(pinax_root))
             for project in map(os.path.basename, get_projects(pinax_root)):
-                print "%s:" % (project,)
+                print "%s:" % project
                 about = getattr(__import__(project), '__about__', '')
                 for line in about.strip().splitlines():
-                    print '    %s' % (line,)
-                print ''
+                    print '    %s' % line
+                print
             sys.exit(0)
-
-        if options.get('pinax_root'):
-            print "Pinax Project Root"
-            print "------------------"            
-            print get_pinax_root(None) + '/projects'
-            sys.exit(0)
-            
-
-        ################################################################
-        # If the user fails to supply enough arguments then we
-        # give them help
-        ################################################################
-        if len(args) < 2:
-            self.print_help()
-            sys.exit(0)
-            
-        #####################################
-        # if the user wants help we give it
-        #####################################
-        if options.get('help'):
-            self.print_help()
-            sys.exit(0)        
 
         main(options.get('pinax_root'), args[0], args[1],
-            verbose=options.get('verbose'))          
+            verbose = options.get('verbose')
+        )
         return 0
-        
-    def print_help(self):
-        
-        # adding because of weird BaseCommand.option_list issue
-        self.clone_project_options +=  (
-                make_option('-h', '--help', dest='verbose',
-                    action='store_false', default=True,
-                    help='print this message'),    
-            )        
-
-        print 'Usage: pinax-admin clone_project [options] <original_project> <new_project_name>\n'
-        print 'Options:'
-        for option in self.clone_project_options:
-            help_stmt = '  ' + ', '.join(option._short_opts) + '/'
-            help_stmt += ', '.join(option._long_opts)
-            help_stmt +=  ' ' * (20 - len(help_stmt))
-            help_stmt += option.help
-            print help_stmt
-        return None
         

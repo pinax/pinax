@@ -1,0 +1,34 @@
+{% extends "basic_groups/base.html" %}
+
+{% load i18n %}
+{% load uni_form %}
+{% load humanize %}
+{% load pagination_tags %}
+{% load order_by %}
+{% load extra_tagging_tags %}
+{% load group_tags %}
+{% load basic_group_tags %}
+
+{% block head_title %}{% blocktrans %}Create Group{% endblocktrans %}{% endblock %}
+
+{% block body %}
+    <h1>{% trans "Create Group" %}</h1>
+    
+    <p>{% trans "This is just a basic group example with no extra content items." %}</p>
+    {% if user.is_authenticated %}
+        <form id="group_form" method="POST" action="{% url group_create %}" class="uniForm">
+            <fieldset class="inlineLabels">
+                {{ group_form|as_uni_form }}
+                <div class="form_block">
+                    <input type="hidden" name="action" value="create" />
+                    <input type="submit" value="{% trans 'create' %}"/>
+                </div>
+            </fieldset>
+        </form>
+    {% else %}
+        {% url acct_signup as signup_url %}
+        {% url acct_login as login_url %}
+        <p>{% blocktrans %}<a href="{{ signup_url }}">Sign up</a> and <a href="{{ login_url }}">log in </a> to create your own group or join an existing one.{% endblocktrans %}</p>
+    {% endif %}
+    
+{% endblock %}

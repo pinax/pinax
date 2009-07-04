@@ -1,7 +1,9 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-from tribes.models import Tribe, Topic
+from tribes.models import Tribe
+
+# @@@ we should have auto slugs, even if suggested and overrideable
 
 class TribeForm(forms.ModelForm):
     
@@ -10,9 +12,6 @@ class TribeForm(forms.ModelForm):
         error_message = _("This value must contain only letters, numbers, underscores and hyphens."))
             
     def clean_slug(self):
-        reserved_slugs = ["your_tribes"]
-        if self.cleaned_data["slug"] in reserved_slugs:
-            raise forms.ValidationError(_("The slug you've chosen is reserved for internal use."))
         if Tribe.objects.filter(slug__iexact=self.cleaned_data["slug"]).count() > 0:
             raise forms.ValidationError(_("A tribe already exists with that slug."))
         return self.cleaned_data["slug"].lower()
@@ -24,7 +23,7 @@ class TribeForm(forms.ModelForm):
     
     class Meta:
         model = Tribe
-        fields = ('name', 'slug', 'description', 'tags')
+        fields = ('name', 'slug', 'description')
 
 
 # @@@ is this the right approach, to have two forms where creation and update fields differ?
@@ -41,11 +40,4 @@ class TribeUpdateForm(forms.ModelForm):
     
     class Meta:
         model = Tribe
-        fields = ('name', 'description', 'tags')
-
-
-class TopicForm(forms.ModelForm):
-    
-    class Meta:
-        model = Topic
-        fields = ('title', 'body', 'tags')
+        fields = ('name', 'description')

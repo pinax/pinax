@@ -79,7 +79,7 @@ class ManagementUtility(object):
         Returns the script's main help text, as a string.
         """
         usage = ['',
-                "Type '%s --help <subcommand>' for help on a specific subcommand."
+                "Type '%s help <subcommand>' for help on a specific subcommand."
                  % self.prog_name, '']
         usage.append('Available subcommands:')
         commands = get_commands().keys()
@@ -95,7 +95,7 @@ class ManagementUtility(object):
         """
         commands = get_commands()
         if subcommand not in commands:
-            sys.stderr.write('Unknown command: %r\nType %s --help for usage.\n' %
+            sys.stderr.write('Unknown command: %r\nType %s help for usage.\n' %
                 (subcommand, self.prog_name))
             sys.exit(1)
         package_name = commands[subcommand]
@@ -122,12 +122,19 @@ class ManagementUtility(object):
         try:
             subcommand = self.argv[1]
         except IndexError:
-            sys.stderr.write("Type '%s --help' for usage.\n" % self.prog_name)
+            sys.stderr.write("Type '%s help' for usage.\n" % self.prog_name)
             sys.exit(1)
         
-        if self.argv[1:] == ['--version']:
+        if subcommand == 'help':
+            if len(args) > 2:
+                self.fetch_command(args[2]).print_help(self.prog_name, args[2])
+            else:
+                parser.print_lax_help()
+                sys.stderr.write(self.main_help_text() + '\n')
+                sys.exit(1)
+        elif self.argv[1:] == ['--version']:
             pass
-        elif self.argv[1:] == ['--help']:
+        elif self.argv[1:] in [['--help'], ['-h']]:
             parser.print_lax_help()
             sys.stderr.write(self.main_help_text() + '\n')
         else:

@@ -1,6 +1,14 @@
+import re
+
 from django.utils.cache import patch_vary_headers
 from django.utils import translation
+from django.utils.http import urlquote
+from django.contrib.auth import REDIRECT_FIELD_NAME
+from django.conf import settings
+from django.http import HttpResponseRedirect
+
 from account.models import Account
+
 
 class LocaleMiddleware(object):
     """
@@ -29,3 +37,24 @@ class LocaleMiddleware(object):
         response['Content-Language'] = translation.get_language()
         translation.deactivate()
         return response
+
+
+class AuthenticatedMiddleware(object):
+    def __init__(self, login_url=None, redirect_field_name=REDIRECT_FIELD_NAME):
+        if login_url is None:
+            login_url = settings.LOGIN_URL
+        self.redirect_field_name = redirect_field_name
+        self.login_url = login_url
+        self.exemptions = [
+            r"^%s" % settings.MEDIA_URL,
+            r"^%s$" % login_url,
+        ] + getattr(settings, "AUTHENTICATED_EXEMPT_URLS", [])
+    
+    def process_request(self, request):
+        for exemption in self.exemptions:
+            if re.match(exemption, request.path):
+                return None
+        if not request.user.is_authenticated():
+            path = urlquote(request.get_full_path())
+            tup = (self.login_url, self.redirect_field_name, path)
+            return HttpResponseRedirect("%s?%s=%s" % tup)

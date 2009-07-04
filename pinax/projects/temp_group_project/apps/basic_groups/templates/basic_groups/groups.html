@@ -1,0 +1,37 @@
+{% extends "basic_groups/base.html" %}
+
+{% load i18n %}
+{% load humanize %}
+{% load pagination_tags %}
+{% load order_by %}
+{% load extra_tagging_tags %}
+{% load group_tags %}
+{% load basic_group_tags %}
+
+{% block head_title %}{% blocktrans %}Groups{% endblocktrans %}{% endblock %}
+
+{% block body %}
+    <h1>{% trans "Groups" %}</h1>
+    
+    <p>{% trans "This is just a basic group example with no extra content items." %}</p>
+    {% if user.is_authenticated %}
+        <p><a href="{% url group_create %}">Create</a> your own group.</p>
+    {% else %}
+        {% url acct_signup as signup_url %}
+        {% url acct_login as login_url %}
+        <p>{% blocktrans %}<a href="{{ signup_url }}">Sign up</a> and <a href="{{ login_url }}">log in </a> to create your own group or join an existing one.{% endblocktrans %}</p>
+    {% endif %}
+    
+    {% autopaginate groups 10 %}
+    {% if groups %}
+        <dl>
+        {% for group in groups %}
+            {% show_group group %}
+        {% endfor %}
+        </dl>
+        {% paginate %}
+    {% else %}
+        <p>There are no groups yet.</p>
+    {% endif %}
+    
+{% endblock %}

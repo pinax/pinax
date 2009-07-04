@@ -1,12 +1,16 @@
+import os
 from setuptools import setup, find_packages
 
-version = __import__('pinax').__version__
+VERSION = __import__('pinax').__version__
+
+def read(fname):
+    return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 setup(
     name='Pinax',
-    version=version,
+    version=VERSION,
     description='Pinax is an open-source collection of re-usable apps for the Django Web Framework',
-    long_description=open('docs/intro.txt').read(),
+    long_description=read('docs/intro.txt'),
     author='James Tauber',
     author_email='jtauber@jtauber.com',
     maintainer='Jannis Leidel',
@@ -16,15 +20,15 @@ setup(
     include_package_data=True,
     # Ignore the tarballs we built our own in a source distribution
     exclude_package_data={
-        'requirements': ['%s/*.tar.gz' % version],
+        'requirements': ['%s/*.tar.gz' % VERSION],
     },
     zip_safe=False,
+    setup_requires=[
+        'setuptools_dummy',
+    ],
     entry_points={
         'console_scripts': [
             'pinax-admin = pinax.core.management:execute_from_command_line',
-        ],
-        'setuptools.file_finders': [
-            'dummy = file_finder:dummylsfiles',
         ],
     },
     classifiers=[

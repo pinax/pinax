@@ -10,5 +10,5 @@
      {% if user.get_profile.name %}<b>{% trans "Name" %}</b>: {{ user.get_profile.name }}{% endif %}<br />
      {% if user.get_profile.about %}<b>{% trans "About" %}</b>: {{ user.get_profile.about }}{% endif %}<br />
      {% if user.get_profile.location%}<b>{% trans "Location" %}</b>: {{ user.get_profile.location }}{% endif %}<br />
-     {% if user.get_profile.website %}<b>{% trans "Website" %}</b>: <a href="{{ other_user.get_profile.website }}">{{ user.get_profile.website }}</a>{% endif %}
+     {% if user.get_profile.website %}<b>{% trans "Website" %}</b>: <a href="{{ user.get_profile.website }}">{{ user.get_profile.website }}</a>{% endif %}
 </div>
