@@ -47,7 +47,7 @@ class Group(models.Model):
     
     def get_related_objects(self, model):
         queryset = _get_queryset(model)
-        related_objects = queryset._default_manager.filter(
+        related_objects = queryset.filter(
             object_id = self.id,
             content_type = ContentType.objects.get_for_model(self)
         )
