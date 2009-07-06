@@ -10,7 +10,7 @@
 
     {% wiki_title group %}
 
-    <h2><a href="{% groupurl article group title=article.title %}">{{ article.title }}</a></h2>
+    <h2><a href="{% groupurl wiki_article group title=article.title %}">{{ article.title }}</a></h2>
 
     {% if changeset.old_title %}
         <h3>{{ changeset.old_title }}</h3>
