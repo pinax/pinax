@@ -5,6 +5,24 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.models import User
 
+
+def _get_queryset(klass):
+    """
+    Returns a QuerySet from a Model, Manager, or QuerySet. Created to make
+    get_object_or_404 and get_list_or_404 more DRY.
+    
+    Pulled from django.shortcuts
+    """
+    
+    if isinstance(klass, QuerySet):
+        return klass
+    elif isinstance(klass, Manager):
+        manager = klass
+    else:
+        manager = klass._default_manager
+    return manager.all()
+
+
 class Group(models.Model):
     """
     a group is a group of users with a common interest
@@ -27,9 +45,10 @@ class Group(models.Model):
         return user in self.members.all()
     
     def get_related_objects(self, model):
-        related_objects = model._default_manager.filter(
-            object_id=self.id,
-            content_type=ContentType.objects.get_for_model(self)
+        queryset = _get_queryset(model)
+        related_objects = queryset._default_manager.filter(
+            object_id = self.id,
+            content_type = ContentType.objects.get_for_model(self)
         )
         return related_objects
     
