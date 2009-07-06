@@ -18,4 +18,3 @@ urlpatterns = patterns('projects.views',
 
 urlpatterns += bridge.include_urls('topics.urls', r'^project/(?P<group_slug>[-\w]+)/topics/')
 urlpatterns += bridge.include_urls('tasks.urls', r'^project/(?P<group_slug>[-\w]+)/tasks/')
-urlpatterns += bridge.include_urls('wiki.urls', r'^project/(?P<group_slug>[-\w]+)/wiki/')
