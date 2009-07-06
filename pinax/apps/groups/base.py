@@ -1,6 +1,7 @@
 import datetime
 
 from django.db import models
+from django.db.models.query import QuerySet
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.models import User
@@ -16,7 +17,7 @@ def _get_queryset(klass):
     
     if isinstance(klass, QuerySet):
         return klass
-    elif isinstance(klass, Manager):
+    elif isinstance(klass, models.Manager):
         manager = klass
     else:
         manager = klass._default_manager
