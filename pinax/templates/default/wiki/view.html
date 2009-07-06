@@ -3,6 +3,7 @@
 {% load i18n %}
 {% load wiki_tags %}
 {% load group_tags %}
+{% load markup_tags %}
 {% load extra_tagging_tags %}
 
 
@@ -39,8 +40,8 @@
             <a href="{% groupurl wiki_edit group title=article.title %}" {% trans ">Create it now</a>?" %}
         </p>
     {% endif %}
-
-    {% render_content article %}
+    
+    {{ article.content|apply_markup:article.markup }}
 
     {% show_tags_for article %}
 
