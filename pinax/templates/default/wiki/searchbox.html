@@ -1,10 +1,10 @@
 {% load i18n %}
-{% load wikiurl %}
+{% load group_tags %}
 {% load uni_form %}
 
 {% if search_form %}
     <div id="searchbox">
-        <form class="uniForm" method="post" action="{% wikiurl search group %}">
+        <form class="uniForm" method="post" action="{% groupurl wiki_search group %}">
             <fieldset class="inlineLabels">
                 {{ search_form|as_uni_form }}
                 <div class="form_block">    

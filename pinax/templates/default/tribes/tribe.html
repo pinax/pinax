@@ -3,7 +3,6 @@
 {% load i18n %}
 {% load uni_form %}
 {% load wiki_tags %}
-{% load wikiurl %}
 {% load avatar_tags %}
 {% load threadedcommentstags %}
 {% load pagination_tags %}
@@ -123,9 +122,9 @@
                         {% show_teaser article %}
                     {% endfor %}
                 </table>
-                <p><a href="{% wikiurl list tribe %}">{% trans "more..." %}</a></p>
+                <p><a href="{% groupurl wiki_list tribe %}">{% trans "more..." %}</a></p>
             {% else %}
-                {% wikiurl list tribe as wiki_url %}
+                {% groupurl wiki_list tribe as wiki_url %}
                 <p>
                     {% blocktrans %}
                         None yet. Go to the <a href="{{ wiki_url }}" title="wiki">wiki</a> to start a new article.
