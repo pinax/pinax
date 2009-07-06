@@ -9,6 +9,7 @@
 {% load projects_tags %}
 {% load group_tags %}
 {% load topics_tags %}
+{% load wiki_tags %}
 
 {% block head_title %}{{ project.name }}{% endblock %}
 
@@ -113,8 +114,6 @@
                 {% endif %}
             {% endwith %}
             
-{% comment %}
-{% load wiki_tags %}
             <h2>{% trans "Wiki Articles" %}{% if total_articles %} ({{ total_articles }}){% endif %}</h2>
             
             {% if articles %}
@@ -132,7 +131,7 @@
                     {% endblocktrans %}
                 </p>
             {% endif %}
-                        
+{% comment %}
             {% if photos %}
                 <h2>{% trans "Project Photo Pool" %}</h2>
                 <div class="thumb-row clearfix">
