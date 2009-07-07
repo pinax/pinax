@@ -45,12 +45,20 @@ class Group(models.Model):
     def user_is_member(self, user):
         return user in self.members.all()
     
-    def get_related_objects(self, model):
+    def get_related_objects(self, model, join=None):
         queryset = _get_queryset(model)
-        related_objects = queryset.filter(
-            object_id = self.id,
-            content_type = ContentType.objects.get_for_model(self)
-        )
+        content_type = ContentType.objects.get_for_model(self)
+        if join:
+            lookup_kwargs = {
+                "%s__object_id" % join: self.id,
+                "%s__content_type" % join: content_type,
+            }
+        else:
+            lookup_kwargs = {
+                "object_id": self.id,
+                "content_type": content_type,
+            }
+        related_objects = queryset.filter(**lookup_kwargs)
         return related_objects
     
     def associate(self, instance, commit=True):
