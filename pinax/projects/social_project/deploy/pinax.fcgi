@@ -1,4 +1,4 @@
-# social_project.fcgi is configured to live in projects/social_project/deploy.
+# pinax.fcgi is configured to live in projects/social_project/deploy.
 
 import os
 import sys

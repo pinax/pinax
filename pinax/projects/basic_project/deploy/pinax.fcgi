@@ -1,4 +1,4 @@
-# basic_project.fcgi is configured to live in projects/basic_project/deploy.
+# pinax.fcgi is configured to live in projects/basic_project/deploy.
 
 import os
 import sys

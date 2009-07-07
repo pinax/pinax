@@ -1,4 +1,4 @@
-# social_project.wsgi is configured to live in projects/social_project/deploy.
+# pinax.wsgi is configured to live in projects/social_project/deploy.
 
 import os
 import sys
