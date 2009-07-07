@@ -53,5 +53,12 @@ class Group(models.Model):
         )
         return related_objects
     
+    def associate(self, instance, commit=True):
+        instance.object_id = self.id
+        instance.content_type = ContentType.objects.get_for_model(instance)
+        if commit:
+            instance.save()
+        return instance
+    
     class Meta(object):
         abstract = True
