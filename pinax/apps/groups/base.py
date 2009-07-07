@@ -63,7 +63,7 @@ class Group(models.Model):
     
     def associate(self, instance, commit=True):
         instance.object_id = self.id
-        instance.content_type = ContentType.objects.get_for_model(instance)
+        instance.content_type = ContentType.objects.get_for_model(self)
         if commit:
             instance.save()
         return instance
