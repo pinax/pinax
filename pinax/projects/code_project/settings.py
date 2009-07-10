@@ -126,6 +126,7 @@ INSTALLED_APPS = (
     'ajax_validation',
     'tagging',
     'uni_form',
+    'wiki',
     'django_sorting',
     'attachments',
     'django_markup',
