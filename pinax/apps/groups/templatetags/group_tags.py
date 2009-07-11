@@ -14,22 +14,27 @@ class GroupURLNode(template.Node):
         self.asvar = asvar
     
     def render(self, context):
+        url = ""
         group = self.group.resolve(context)
-        bridge = group.content_bridge
         
         kwargs = {}
         for k, v in self.kwargs.items():
             kwargs[smart_str(k, "ascii")] = v.resolve(context)
         
-        try:
-            url = bridge.reverse(self.view_name, group, kwargs=kwargs)
-        except NoReverseMatch:
+        if group:
+            bridge = group.content_bridge
+            try:
+                url = bridge.reverse(self.view_name, group, kwargs=kwargs)
+            except NoReverseMatch:
+                if self.asvar is None:
+                    raise
+        else:
             try:
                 url = reverse(self.view_name, kwargs=kwargs)
             except NoReverseMatch:
                 if self.asvar is None:
                     raise
-        
+                
         if self.asvar:
             context[self.asvar] = url
             return ""
