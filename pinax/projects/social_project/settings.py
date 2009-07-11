@@ -163,6 +163,7 @@ INSTALLED_APPS = (
     'profiles',
     'staticfiles',
     'account',
+    'signup_codes',
     'tribes',
     'misc',
     'photos',

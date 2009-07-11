@@ -25,8 +25,16 @@ bookmarks_feed_dict = {"feed_dict": { '': BookmarkFeed }}
 admin.autodiscover()
 
 
+if settings.ACCOUNT_OPEN_SIGNUP:
+    signup_view = "account.views.signup"
+else:
+    signup_view = "signup_codes.views.signup"
+
+
 urlpatterns = patterns('',
     url(r'^$', direct_to_template, {"template": "homepage.html"}, name="home"),
+    
+    url(r'^account/signup/$', signup_view, name="acct_signup"),
     
     (r'^about/', include('about.urls')),
     (r'^account/', include('account.urls')),

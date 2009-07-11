@@ -134,6 +134,7 @@ INSTALLED_APPS = (
     'basic_profiles',
     'staticfiles',
     'account',
+    'signup_codes',
     'misc',
     'tag_app',
     'groups',
