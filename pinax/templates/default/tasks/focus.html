@@ -96,7 +96,7 @@
                     {% for item in tagtasks %}
                         <tr class="task_{{ item.get_state_display }} {% cycle odd,even %}">
                             <td>{{ item.object.id }}</td>
-                            <td><a href="{% groupurl task_detail group item.id %}">{{ item.summary }}</a></td>
+                            <td><a href="{% groupurl task_detail group id=item.id %}">{{ item.summary }}</a></td>
                             <td style="white-space: nowrap">{{ item.modified|shorttimesince }} ago</td>
                             <td>
                                 {% if item.assignee %}
@@ -134,7 +134,7 @@
                     {% for task in section.list %}
                         <tr class="task_{{ task.get_state_display }} {% cycle odd,even %}">
                             <td>{{ task.id }}</td>
-                            <td><a href="{% groupurl task_detail group task.id %}">{{ task.summary }}</a></td>
+                            <td><a href="{% groupurl task_detail group id=task.id %}">{{ task.summary }}</a></td>
                             <td style="white-space: nowrap">{{ task.modified|shorttimesince }} ago</td>
                             <td>
                                 {% if task.assignee %}
