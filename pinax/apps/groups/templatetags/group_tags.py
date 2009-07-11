@@ -7,7 +7,7 @@ register = template.Library()
 
 
 class GroupURLNode(template.Node):
-    def __init__(self, view_name, group, args, kwargs, asvar):
+    def __init__(self, view_name, group, kwargs, asvar):
         self.view_name = view_name
         self.group = group
         self.kwargs = kwargs
@@ -40,9 +40,10 @@ class GroupURLNode(template.Node):
 @register.tag
 def groupurl(parser, token):
     bits = token.contents.split()
+    tag_name = bits[0]
     if len(bits) < 3:
         raise template.TemplateSyntaxError("'%s' takes at least two arguments"
-            " (path to a view and a group)" % bits[0])
+            " (path to a view and a group)" % tag_name)
     
     view_name = bits[1]
     group = parser.compile_filter(bits[2])
@@ -63,6 +64,6 @@ def groupurl(parser, token):
                         k = k.strip()
                         kwargs[k] = parser.compile_filter(v)
                     elif arg:
-                        args.append(parser.compile_filter(arg))
+                        raise template.TemplateSyntaxError("'%s' does not support non-kwargs arguments." % tag_name)
     
-    return GroupURLNode(view_name, group, [], kwargs, asvar)
+    return GroupURLNode(view_name, group, kwargs, asvar)
