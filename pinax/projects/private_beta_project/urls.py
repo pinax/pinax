@@ -25,7 +25,7 @@ def homepage(request):
     })
 
 if settings.ACCOUNT_OPEN_SIGNUP:
-    signup_view = "basic_signup.views.signup"
+    signup_view = "account.views.signup"
 else:
     signup_view = "signup_codes.views.signup"
 
