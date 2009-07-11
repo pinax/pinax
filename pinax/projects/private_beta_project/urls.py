@@ -11,7 +11,6 @@ from waitinglist.forms import WaitingListEntryForm
 from django.contrib import admin
 admin.autodiscover()
 
-import os
 
 def homepage(request):
     if request.method == "POST":
