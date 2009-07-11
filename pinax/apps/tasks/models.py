@@ -57,7 +57,7 @@ class Task(models.Model):
     
     summary = models.CharField(_('summary'), max_length=100)
     detail = models.TextField(_('detail'), blank=True)
-    markup = models.CharField(_(u'Detail Markup'), max_length=3,
+    markup = models.CharField(_(u'Detail Markup'), max_length=20,
         choices=MARKUP_CHOICES, blank=True)
     creator = models.ForeignKey(User, related_name="created_tasks", verbose_name=_('creator'))
     created = models.DateTimeField(_('created'), default=datetime.now)
