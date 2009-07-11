@@ -196,15 +196,15 @@ INTERNAL_IPS = (
 
 ugettext = lambda s: s
 LANGUAGES = (
-  ('en', u'English'),
-  ('de', u'Deutsch'),
-  ('es', u'Español'),
-  ('fr', u'Français'),
-  ('sv', u'Svenska'),
-  ('pt-br', u'Português brasileiro'),
-  ('he', u'עברית'),
-  ('ar', u'العربية'),
-  ('it', u'Italiano'),
+    ('en', u'English'),
+    ('de', u'Deutsch'),
+    ('es', u'Español'),
+    ('fr', u'Français'),
+    ('sv', u'Svenska'),
+    ('pt-br', u'Português brasileiro'),
+    ('he', u'עברית'),
+    ('ar', u'العربية'),
+    ('it', u'Italiano'),
 )
 
 # URCHIN_ID = "ua-..."
@@ -212,16 +212,18 @@ LANGUAGES = (
 CACHE_BACKEND = "locmem:///?max_entries=3000"
 
 class NullStream(object):
-    def write(*args, **kw):
+    def write(*args, **kwargs):
         pass
     writeline = write
     writelines = write
 
-RESTRUCTUREDTEXT_FILTER_SETTINGS = { 'cloak_email_addresses': True,
-                                     'file_insertion_enabled': False,
-                                     'raw_enabled': False,
-                                     'warning_stream': NullStream(),
-                                     'strip_comments': True,}
+RESTRUCTUREDTEXT_FILTER_SETTINGS = {
+    'cloak_email_addresses': True,
+    'file_insertion_enabled': False,
+    'raw_enabled': False,
+    'warning_stream': NullStream(),
+    'strip_comments': True,
+}
 
 # if Django is running behind a proxy, we need to do things like use
 # HTTP_X_FORWARDED_FOR instead of REMOTE_ADDR. This setting is used
@@ -242,4 +244,3 @@ try:
     from local_settings import *
 except ImportError:
     pass
-
