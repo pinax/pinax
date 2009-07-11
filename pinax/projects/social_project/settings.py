@@ -209,8 +209,6 @@ LANGUAGES = (
 
 # URCHIN_ID = "ua-..."
 
-CACHE_BACKEND = "locmem:///?max_entries=3000"
-
 class NullStream(object):
     def write(*args, **kwargs):
         pass
