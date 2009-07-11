@@ -27,8 +27,15 @@
             <dt><a href="{% url profile_list %}">connect with friends</a></dt>
             <dd>so you can follow what they're up to.</dd>
             
-            <dt><a href="{% url invitations %}">invite more people to the site</a></dt>
-            <dd>so more people can share in the fun.</dd>
+            {% ifsetting ACCOUNT_OPEN_SIGNUP %}
+                <dt><a href="{% url invitations %}">invite more people to the site</a></dt>
+                <dd>so more people can share in the fun.</dd>
+            {% else %}
+                {% if user.is_staff %}
+                    <dt><a href="{% url admin_invite_user %}">invite more people to the site</a> [admin only]</dt>
+                    <dd>so more people can share in the fun.</dd>
+                {% endif %}
+            {% endifsetting %}
         </dl>
         {% else %}
             {% url acct_login as login_url %}

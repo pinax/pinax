@@ -33,6 +33,7 @@ urlpatterns = patterns('',
     url(r'^$', homepage, name="home"),
     url(r'^success/$', direct_to_template, {"template": "waitinglist/success.html"}, name="waitinglist_sucess"),
     
+    url(r'^admin/invite_user/$', 'signup_codes.views.admin_invite_user', name="admin_invite_user"),
     url(r'^account/signup/$', signup_view, name="acct_signup"),
     
     (r'^about/', include('about.urls')),
