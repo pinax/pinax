@@ -67,6 +67,6 @@ def admin_invite_user(request, form_class=InviteUserForm,
     else:
         form = form_class()
     return render_to_response(template_name, {
-        "title": "Invite user",
+        "title": ugettext("Invite user"),
         "form": form,
     }, context_instance=RequestContext(request))
