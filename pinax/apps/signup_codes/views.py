@@ -61,6 +61,7 @@ def admin_invite_user(request, form_class=InviteUserForm,
         form = form_class(request.POST)
         if form.is_valid():
             form.send_signup_code()
+            form = form_class() # reset
     else:
         form = form_class()
     return render_to_response(template_name, {
