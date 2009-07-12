@@ -23,7 +23,9 @@ if "notification" in settings.INSTALLED_APPS:
 else:
     notification = None
 
-def profiles(request, template_name="profiles/profiles.html"):
+def profiles(request, template_name="profiles/profiles.html", extra_context=None):
+    if extra_context is None:
+        extra_context = {}
     users = User.objects.all().order_by("-date_joined")
     search_terms = request.GET.get('search', '')
     order = request.GET.get('order')
@@ -35,13 +37,15 @@ def profiles(request, template_name="profiles/profiles.html"):
         users = users.order_by("-date_joined")
     elif order == 'name':
         users = users.order_by("username")
-    return render_to_response(template_name, {
-        'users':users,
-        'order' : order,
-        'search_terms' : search_terms
-    }, context_instance=RequestContext(request))
+    return render_to_response(template_name, dict({
+        'users': users,
+        'order': order,
+        'search_terms': search_terms,
+    }, **extra_context), context_instance=RequestContext(request))
 
-def profile(request, username, template_name="profiles/profile.html"):
+def profile(request, username, template_name="profiles/profile.html", extra_context=None):
+    if extra_context is None:
+        extra_context = {}
     other_user = get_object_or_404(User, username=username)
     if request.user.is_authenticated():
         is_friend = Friendship.objects.are_friends(request.user, other_user)
@@ -106,7 +110,7 @@ def profile(request, username, template_name="profiles/profile.html"):
     else:
         profile_form = None
 
-    return render_to_response(template_name, {
+    return render_to_response(template_name, dict({
         "profile_form": profile_form,
         "is_me": is_me,
         "is_friend": is_friend,
@@ -116,4 +120,4 @@ def profile(request, username, template_name="profiles/profile.html"):
         "invite_form": invite_form,
         "previous_invitations_to": previous_invitations_to,
         "previous_invitations_from": previous_invitations_from,
-    }, context_instance=RequestContext(request))
+    }, **extra_context), context_instance=RequestContext(request))
