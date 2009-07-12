@@ -116,6 +116,10 @@
             
             <h2>{% trans "Wiki Articles" %}{% if total_articles %} ({{ total_articles }}){% endif %}</h2>
             
+            {% groupurl wiki_list project as wiki_url %}
+            <p>More here soon but, in the meantime, here's a link to <a href="{{ wiki_url }}"> start a new article</a>.</p>
+            
+            {% comment %}
             {% if articles %}
                 <table class="topics">
                     {% for article in articles %}
@@ -131,6 +135,13 @@
                     {% endblocktrans %}
                 </p>
             {% endif %}
+            {% endcomment %}
+            
+            <h2>{% trans "Tasks" %}</h2>
+            
+            {% groupurl task_list project as tasks_url %}
+            <p>More here soon but, in the meantime, here's a link to the <a href="{{ tasks_url }}">task list</a>.</p>
+            
 {% comment %}
             {% if photos %}
                 <h2>{% trans "Project Photo Pool" %}</h2>
