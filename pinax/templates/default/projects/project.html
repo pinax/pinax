@@ -116,8 +116,8 @@
             
             <h2>{% trans "Wiki Articles" %}{% if total_articles %} ({{ total_articles }}){% endif %}</h2>
             
-            {% groupurl wakawaka_index project as wiki_url %}
-            <p>More here soon but, in the meantime, here's a link to the <a href="{{ wiki_url }}">wiki home page</a>.</p>
+            {% groupurl wiki_list project as wiki_url %}
+            <p>More here soon but, in the meantime, here's a link to <a href="{{ wiki_url }}"> start a new article</a>.</p>
             
             {% comment %}
             {% if articles %}
