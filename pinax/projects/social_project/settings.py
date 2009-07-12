@@ -157,6 +157,7 @@ INSTALLED_APPS = (
     'locations',
     'uni_form',
     'django_sorting',
+    'django_markup',
     
     # internal (for now)
     'analytics',

@@ -1,8 +1,5 @@
 {% load i18n %}
-{% load switchcase %}
-{% load restructuredtext %}
-{% load wiki_tags %}
-{% load markup %}
+{% load markup_tags %}
 {% load avatar_tags %}
 {% load extra_tagging_tags %}
 
@@ -11,27 +8,11 @@
     <div class="blog-post-tease">
         {% if blog_post.tease %}
              {% with blog_post.tease as body %}
-                {% if blog_post.markup %}
-                    {% switch blog_post.markup %}
-                        {% case 'rst' %} {{ body|restructuredtext|wikiwords|safe }} {% endcase %}
-                        {% case 'mrk' %} {{ body|force_escape|markdown|wikiwords }} {% endcase %}
-                        {% case 'txl' %} {{ body|force_escape|textile|wikiwords }} {% endcase %}
-                    {% endswitch %}
-                {% else %}
-                    {{ body|force_escape|wikiwords|linebreaks|safe }}
-                {% endif %}
+                {{ body|apply_markup:blog_post.markup }}
             {% endwith %}
         {% else %}
             {% with blog_post.body|truncatewords:"150" as body %}
-                {% if blog_post.markup %}
-                    {% switch blog_post.markup %}
-                        {% case 'rst' %} {{ body|restructuredtext|wikiwords|safe }} {% endcase %}
-                        {% case 'mrk' %} {{ body|force_escape|markdown|wikiwords }} {% endcase %}
-                        {% case 'txl' %} {{ body|force_escape|textile|wikiwords }} {% endcase %}
-                    {% endswitch %}
-                {% else %}
-                    {{ body|force_escape|wikiwords|linebreaks|safe }}
-                {% endif %}
+                {{ body|apply_markup:blog_post.markup }}
             {% endwith %}
         {% endif %}
     </div>
