@@ -3,14 +3,14 @@ from setuptools import setup, find_packages
 
 VERSION = __import__('pinax').__version__
 
-def read(fname):
-    return open(os.path.join(os.path.dirname(__file__), fname)).read()
+def read(*path):
+    return open(os.path.join(os.path.abspath(__file__), *path)).read()
 
 setup(
     name='Pinax',
     version=VERSION,
     description='Pinax is an open-source collection of re-usable apps for the Django Web Framework',
-    long_description=read('docs/intro.txt'),
+    long_description=read('docs', 'intro.txt'),
     author='James Tauber',
     author_email='jtauber@jtauber.com',
     maintainer='Jannis Leidel',

@@ -14,6 +14,9 @@ take this approach by following the :ref:`install-development-instructions`. Thi
 you will be working with the bleeding edge of our code. We can not gurantee
 any stability.
 
+Alternatively, if you prefer or use `Buildout`_ see the
+:ref:`buildout instructions <ref-buildout>` for details.
+
 .. _install-released-tarball-instructions:
 
 Released tarball instructions
@@ -71,9 +74,6 @@ The last step to pull down the external apps and libraries. To do this run::
 
     (pinax-env)$ cd ./pinax-env/
     (pinax-env)$ pip install --requirement src/pinax/requirements/external_apps.txt
-
-Alternatively, if you prefer or use buildout you can use our ``buildout.cfg``
-found at http://github.com/pinax/pinax/raw/master/buildout.cfg.
 
 .. _install-common-to-both-approaches:
 
@@ -140,3 +140,4 @@ check out the :doc:`deployment <deployment>` documentation.
 .. _`Python Imaging Library`: http://www.pythonware.com/products/pil/
 .. _`libjpeg`: http://freshmeat.net/projects/libjpeg/
 .. _`libz`: http://www.zlib.net/
+.. _`Buildout`: http://pypi.python.org/pypi/zc.buildout
