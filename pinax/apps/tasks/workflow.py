@@ -31,6 +31,8 @@ def is_creator(task, user):
 def is_task_manager(task, user):
     if not user or user.is_anonymous():
         return False
+    if user.is_superuser:
+        return True
     if Group.objects.filter(name__exact=TASK_MANAGER).filter(user=user):
         return True
     return False
