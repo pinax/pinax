@@ -1,5 +1,5 @@
 # Taken from Django 1.1 without permission (gotta love BSD license!)
-# They from Python 2.7 *with* permission from/by the original author.
+# They took from Python 2.7 *with* permission from/by the original author.
 import sys
 
 def _resolve_name(name, package, level):
