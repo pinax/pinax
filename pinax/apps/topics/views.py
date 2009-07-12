@@ -54,7 +54,7 @@ def topics(request, group_slug=None, form_class=TopicForm, template_name="topics
         topic_form = form_class()
 
 
-    topics = group.get_related_objects(Topic)
+    topics = group.content_objects(Topic)
 
     return bridge.render(template_name, {
         "group": group,

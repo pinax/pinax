@@ -58,7 +58,7 @@ def tasks(request, group_slug=None, template_name="tasks/task_list.html", bridge
     group_by = request.GET.get("group_by")
     
     if group:
-        tasks = group.get_related_objects(Task)
+        tasks = group.content_objects(Task)
     else:
         tasks = Task.objects.filter(object_id=None)
 
@@ -174,7 +174,7 @@ def nudge(request, id, group_slug=None, bridge=None):
         raise Http404
     
     if group:
-        tasks = group.get_related_objects(Task)
+        tasks = group.content_objects(Task)
     else:
         tasks = Task.objects.filter(object_id=None)
     
@@ -215,7 +215,7 @@ def task(request, id, group_slug=None, template_name="tasks/task.html", bridge=N
         raise Http404
     
     if group:
-        tasks = group.get_related_objects(Task)
+        tasks = group.content_objects(Task)
     else:
         tasks = Task.objects.filter(object_id=None)
     
@@ -347,7 +347,7 @@ def focus(request, field, value, group_slug=None, template_name="tasks/focus.htm
     group_by = request.GET.get("group_by")
 
     if group:
-        tasks = group.get_related_objects(Task)
+        tasks = group.content_objects(Task)
     else:
         tasks = Task.objects.filter(object_id=None)
 
@@ -404,7 +404,7 @@ def tasks_history_list(request, group_slug=None, template_name="tasks/tasks_hist
         is_member = group.user_is_member(request.user)
 
     if group:
-        tasks = group.get_related_objects(TaskHistory)
+        tasks = group.content_objects(TaskHistory)
     else:
         tasks = TaskHistory.objects.filter(object_id=None)
     tasks = tasks.order_by("-modified")
@@ -423,7 +423,7 @@ def tasks_history(request, id, group_slug=None, template_name="tasks/task_histor
         raise Http404
     
     if group:
-        tasks = group.get_related_objects(Task)
+        tasks = group.content_objects(Task)
     else:
         tasks = Task.objects.filter(object_id=None)
     

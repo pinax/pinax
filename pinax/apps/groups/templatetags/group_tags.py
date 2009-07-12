@@ -53,7 +53,7 @@ class ContentObjectsNode(template.Node):
         group = self.group_var.resolve(context)
         app_name, model_name = self.model_name_var.resolve(context).split(".")
         model = get_model(app_name, model_name)
-        context[self.context_var] = group.get_related_objects(model)
+        context[self.context_var] = group.content_objects(model)
         return ""
 
 

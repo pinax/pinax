@@ -1,4 +1,5 @@
 import datetime
+import warnings
 
 from django.db import models
 from django.db.models.query import QuerySet
@@ -45,7 +46,7 @@ class Group(models.Model):
     def user_is_member(self, user):
         return user in self.members.all()
     
-    def get_related_objects(self, model, join=None):
+    def content_objects(self, model, join=None):
         queryset = _get_queryset(model)
         content_type = ContentType.objects.get_for_model(self)
         if join:
@@ -58,8 +59,12 @@ class Group(models.Model):
                 "object_id": self.id,
                 "content_type": content_type,
             }
-        related_objects = queryset.filter(**lookup_kwargs)
-        return related_objects
+        content_objects = queryset.filter(**lookup_kwargs)
+        return content_objects
+    
+    def get_related_objects(self, *args, **kwargs):
+        warnings.warn("get_related_objects has been deprecated in favor of content_objects", DeprecationWarning)
+        return self.content_objects(*args, **kwargs)
     
     def associate(self, instance, commit=True):
         instance.object_id = self.id

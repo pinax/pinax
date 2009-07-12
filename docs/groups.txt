@@ -96,7 +96,7 @@ is passed to your view from the layer above. Let's see how to work with it::
             group = None
         
         if group:
-            blogs = group.get_related_objects(Blog)
+            blogs = group.content_objects(Blog)
         else:
             blogs = Blog.objects.all()
         
