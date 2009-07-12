@@ -8,7 +8,7 @@ import random
 import pinax
 
 from optparse import make_option
-from django.core.management.base import BaseCommand
+from django.core.management.base import BaseCommand, CommandError
 
 EXCLUDED_PATTERNS = ('.svn',)
 DEFAULT_PINAX_ROOT = None # fallback to the normal PINAX_ROOT in settings.py.
@@ -42,7 +42,7 @@ def copytree(src, dst, symlinks=False):
     purposes.
     """
     names = os.listdir(src)
-
+    
     os.makedirs(dst)
     errors = []
     for name in names:
@@ -118,9 +118,19 @@ def update_rename_deploy_files(path, old_name, new_name):
 
 
 def main(default_pinax_root, project_name, destination, verbose=True):
+    
+    try:
+        # check to see if the destination copies an existing module name
+        __import__(destination)
+    except ImportError:
+        # The module does not exist so we let Pinax create it as a project
+        pass
+    else:
+        # The module exists so we raise a CommandError and exit
+        raise CommandError("'%s' conflicts with the name of an existing Python module and cannot be used as a project name. Please try another name." % destination)
+    
     if os.path.exists(destination):
-        print "Files already exist at this path: %s" % (destination,)
-        sys.exit(1)
+        raise CommandError("Files already exist at this path: %s" % (destination,))
     user_project_name = os.path.basename(destination)
     pinax_root = get_pinax_root(default_pinax_root)
     if project_name in map(os.path.basename, get_projects(pinax_root)):
@@ -149,7 +159,7 @@ def main(default_pinax_root, project_name, destination, verbose=True):
 class Command(BaseCommand):
     help = "Clones a Pinax starter project to <new_project_name> (which can be a path)."
     args = "<original_project> <new_project_name>"
-        
+    
     clone_project_options = (
         make_option('-l', '--list-projects', dest='list_projects',
             action = 'store_true',
@@ -162,7 +172,7 @@ class Command(BaseCommand):
             action = 'store_false', default=True,
             help = 'enables verbose output'),
     )
-        
+    
     option_list = BaseCommand.option_list + clone_project_options
     
     
@@ -184,9 +194,8 @@ class Command(BaseCommand):
                     print '    %s' % line
                 print
             sys.exit(0)
-
+        
         main(options.get('pinax_root'), args[0], args[1],
             verbose = options.get('verbose')
         )
         return 0
-        
