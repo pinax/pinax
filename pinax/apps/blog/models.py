@@ -13,14 +13,6 @@ if "notification" in settings.INSTALLED_APPS:
 else:
     notification = None
 
-try:
-    markup_choices = settings.WIKI_MARKUP_CHOICES  # reuse this for now; taken from wiki
-except AttributeError:
-    markup_choices = (
-        ('rst', _(u'reStructuredText')),
-        ('txl', _(u'Textile')),
-        ('mrk', _(u'Markdown')),
-    )
 
 class Post(models.Model):
     """Post model."""
@@ -39,8 +31,8 @@ class Post(models.Model):
     publish         = models.DateTimeField(_('publish'), default=datetime.now)
     created_at      = models.DateTimeField(_('created at'), default=datetime.now)
     updated_at      = models.DateTimeField(_('updated at'))
-    markup          = models.CharField(_(u"Post Content Markup"), max_length=3,
-                              choices=markup_choices,
+    markup          = models.CharField(_(u"Post Content Markup"), max_length=20,
+                              choices=settings.MARKUP_CHOICES,
                               null=True, blank=True)
     tags            = TagField()
     

@@ -23,17 +23,8 @@ if "notification" in settings.INSTALLED_APPS:
 else:
     notification = None
 
-try:
-    MARKUP_CHOICES = settings.WIKI_MARKUP_CHOICES  # reuse this for now; taken from wiki
-except AttributeError:
-    MARKUP_CHOICES = (
-        ('restructuredtext', _(u'reStructuredText')),
-        ('textile', _(u'Textile')),
-        ('markdown', _(u'Markdown')),
-    )
-
-
 workflow = import_module(getattr(settings, "TASKS_WORKFLOW_MODULE", "tasks.workflow"))
+
 
 
 class Task(models.Model):
@@ -54,7 +45,7 @@ class Task(models.Model):
     summary = models.CharField(_('summary'), max_length=100)
     detail = models.TextField(_('detail'), blank=True)
     markup = models.CharField(_(u'Detail Markup'), max_length=20,
-        choices=MARKUP_CHOICES, blank=True)
+        choices=settings.MARKUP_CHOICES, blank=True)
     creator = models.ForeignKey(User, related_name="created_tasks", verbose_name=_('creator'))
     created = models.DateTimeField(_('created'), default=datetime.now)
     modified = models.DateTimeField(_('modified'), default=datetime.now) # task modified when commented on or when various fields changed
@@ -197,7 +188,7 @@ class TaskHistory(models.Model):
     summary = models.CharField(_('summary'), max_length=100)
     detail = models.TextField(_('detail'), blank=True)
     markup = models.CharField(_(u'Detail Markup'), max_length=3,
-        choices=MARKUP_CHOICES, blank=True)
+        choices=settings.MARKUP_CHOICES, blank=True)
     creator = models.ForeignKey(User, related_name="history_created_tasks", verbose_name=_('creator'))
     created = models.DateTimeField(_('created'), default=datetime.now)
     modified = models.DateTimeField(_('modified'), default=datetime.now) # task modified when commented on or when various fields changed

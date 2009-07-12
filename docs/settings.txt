@@ -249,11 +249,11 @@ embedded into your website to allow Google Analytics to track your traffic.
 
 .. _ref-settings-wiki-markup-choices:
 
-WIKI_MARKUP_CHOICES
--------------------
+MARKUP_CHOICES
+--------------
 
-:Applications: ``pinax.apps.blog``
-:Default: ``(('rst', _(u'reStructuredText')), ('txl', _(u'Textile')), ('mrk', _(u'Markdown')),)``
+:Applications: ``pinax.apps.blog``, ``pinax.apps.tasks``
+:Default: ``(('restructuredtext', u'reStructuredText'), ('textile', u'Textile'), ('markdown', u'Markdown'), ('creole', u'Creole'),)``
 
 The actual origin of this setting is `django-wikiapp`_ which is one of the
 external applications Pinax integrates. ``pinax.apps.blog`` uses it to
