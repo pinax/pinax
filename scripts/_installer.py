@@ -22,6 +22,13 @@ else:
     EASY_INSTALL_CMD = 'easy_install'
     extra = {}
 
+# Bailing if "~/.pydistutils.cfg" exists
+pydistutils = os.path.expanduser('~/.pydistutils.cfg')
+if os.path.exists(pydistutils):
+    print "ERROR: Please make sure you remove any previous custom paths from"
+    print "your %s file." % pydistutils
+    sys.exit(3)
+
 def winpath(path):
     if sys.platform == 'win32':
         if not os.path.exists(path):
