@@ -151,6 +151,7 @@ ABSOLUTE_URL_OVERRIDES = {
     "auth.user": lambda o: "/profiles/%s/" % o.username,
 }
 
+MARKUP_FILTER_FALLBACK = 'none'
 MARKUP_CHOICES = (
     ('restructuredtext', u'reStructuredText'),
     ('textile', u'Textile'),
