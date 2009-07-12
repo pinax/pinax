@@ -20,6 +20,8 @@ from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.contrib.contenttypes.models import ContentType
 
+from pinax.utils.importlib import import_module
+
 from tagging.models import Tag
 from django.utils.translation import ugettext
 
@@ -33,11 +35,7 @@ from tasks.models import (Task, TaskHistory, Nudge)
 
 from tasks.forms import TaskForm, EditTaskForm, SearchTaskForm
 
-from tasks.workflow import (REVERSE_STATE_CHOICES, STATE_ID_LIST, STATE_CHOICES,
-                            RESOLUTION_CHOICES, STATE_CHOICES_DICT,
-                            RESOLUTION_CHOICES_DICT)
-
-from tasks.workflow import export_state_transitions as ext
+workflow = import_module(getattr(settings, "TASKS_WORKFLOW_MODULE", "tasks.workflow"))
 
 try:
     notification = get_app('notification')
@@ -68,16 +66,16 @@ def tasks(request, group_slug=None, template_name="tasks/task_list.html", bridge
     hide_state  = request.GET.get("hide_state")
     if hide_state:
         for exclude in hide_state.split(','):
-            if exclude in STATE_ID_LIST:
+            if exclude in workflow.STATE_ID_LIST:
                 tasks = tasks.exclude(state__exact=exclude)
 
-            state = REVERSE_STATE_CHOICES.get(exclude, None)
+            state = workflow.REVERSE_STATE_CHOICES.get(exclude, None)
             if state:
                 tasks = tasks.exclude(state__exact=state)
 
 
     state_displays = []
-    for state in STATE_CHOICES:
+    for state in workflow.STATE_CHOICES:
         state_displays.append(dict(id=state[0], description=state[1]))
 
     return render_to_response(template_name, {
@@ -362,7 +360,7 @@ def focus(request, field, value, group_slug=None, template_name="tasks/focus.htm
         except:
             tasks = Task.objects.none() # @@@ or throw 404?
     elif field == "state":
-        tasks = qs.filter(state=Task.REVERSE_STATE_CHOICES[value])
+        tasks = qs.filter(state=workflow.REVERSE_STATE_CHOICES[value])
     elif field == "assignee":
         if value == "unassigned": # @@@ this means can't have a username 'unassigned':
             tasks = qs.filter(assignee__isnull=True)
@@ -441,8 +439,8 @@ def tasks_history(request, id, group_slug=None, template_name="tasks/task_histor
 
 
     for change in task_history:
-        change.humanized_state = STATE_CHOICES_DICT.get(change.state, None)
-        change.humanized_resolution = RESOLUTION_CHOICES_DICT.get(change.resolution, None)
+        change.humanized_state = workflow.STATE_CHOICES_DICT.get(change.state, None)
+        change.humanized_resolution = workflow.RESOLUTION_CHOICES_DICT.get(change.resolution, None)
 
 
     return render_to_response(template_name, {
@@ -453,5 +451,5 @@ def tasks_history(request, id, group_slug=None, template_name="tasks/task_histor
     }, context_instance=RequestContext(request))
 
 def export_state_transitions(request):
-    export = ext()
+    export = workflow.export_state_transitions()
     return HttpResponse(export,mimetype='text/csv')
