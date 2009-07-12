@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 VERSION = __import__('pinax').__version__
 
 def read(*path):
-    return open(os.path.join(os.path.abspath(__file__), *path)).read()
+    return open(os.path.join(os.path.abspath(os.path.dirname(__file__)), *path)).read()
 
 setup(
     name='Pinax',
