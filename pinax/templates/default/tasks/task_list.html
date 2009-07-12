@@ -18,18 +18,14 @@
     {% if state_displays %}
         <p class="filter">Filter out: 
         {% for state_display in state_displays %}
-                {% ifequal hide_state state_display.id %}
-                    <b>{{ state_display.description }}</b>
-                {% else %}
-                    <a href="?{% if group_by%}group_by={{ group_by }}&{% endif %}hide_state={{ state_display.id }}">                
-                        {{ state_display.description }}                
-                    </a>
-                {% endifequal %}
-            </a>
-            {% if forloop.last %}
+            {% ifequal hide_state state_display.id %}
+                <b>{{ state_display.description }}</b>
             {% else %}
-             or
-            {% endif %}
+                <a href="?{% if group_by%}group_by={{ group_by }}&{% endif %}hide_state={{ state_display.id }}">
+                    {{ state_display.description }}
+                </a>
+            {% endifequal %}
+            {% if forloop.last %}{% else %}or{% endif %}
         {% endfor %}
         </p>
     {% endif %}
