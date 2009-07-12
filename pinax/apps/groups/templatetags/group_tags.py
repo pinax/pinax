@@ -1,6 +1,7 @@
 from django import template
 from django.utils.encoding import smart_str
 from django.core.urlresolvers import reverse, NoReverseMatch
+from django.db.models import get_model
 
 
 register = template.Library()
@@ -42,6 +43,20 @@ class GroupURLNode(template.Node):
             return url
 
 
+class ContentObjectsNode(template.Node):
+    def __init__(self, group_var, model_name_var, context_var):
+        self.group_var = template.Variable(group_var)
+        self.model_name_var = template.Variable(model_name_var)
+        self.context_var = context_var
+    
+    def render(self, context):
+        group = self.group_var.resolve(context)
+        app_name, model_name = self.model_name_var.resolve(context).split(".")
+        model = get_model(app_name, model_name)
+        context[self.context_var] = group.get_related_objects(model)
+        return ""
+
+
 @register.tag
 def groupurl(parser, token):
     bits = token.contents.split()
@@ -72,3 +87,14 @@ def groupurl(parser, token):
                         raise template.TemplateSyntaxError("'%s' does not support non-kwargs arguments." % tag_name)
     
     return GroupURLNode(view_name, group, kwargs, asvar)
+
+
+@register.tag
+def content_objects(parser, token):
+    """
+        {% content_objects group "tasks.Task" as tasks %}
+    """
+    bits = token.split_contents()
+    if len(bits) != 5:
+        raise template.TemplateSyntaxError("'%s' requires five arguments." % bits[0])
+    return ContentObjectsNode(bits[1], bits[2], bits[4])
