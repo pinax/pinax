@@ -83,6 +83,7 @@ is passed to your view from the layer above. Let's see how to work with it::
     from django.http import Http404
     from django.template import RequestContext
     from django.shortcuts import render_to_response
+    from django.core.exceptions import ObjectDoesNotExist
     
     
     def blog_list(request, group_slug=None, bridge=None):
