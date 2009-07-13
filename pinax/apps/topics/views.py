@@ -9,7 +9,6 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.template.loader import select_template
 from django.utils.translation import ugettext_lazy as _ # @@@ really should be ugettext
 
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
 if "notification" in settings.INSTALLED_APPS:

@@ -44,12 +44,13 @@ def post(request, username, year, month, slug,
         "post": post[0],
     }, context_instance=RequestContext(request))
 
+@login_required
 def your_posts(request, template_name="blog/your_posts.html"):
     return render_to_response(template_name, {
         "blogs": Post.objects.filter(author=request.user),
     }, context_instance=RequestContext(request))
-your_posts = login_required(your_posts)
 
+@login_required
 def destroy(request, id):
     post = Post.objects.get(pk=id)
     user = request.user
@@ -66,8 +67,8 @@ def destroy(request, id):
         return HttpResponseRedirect(reverse("blog_list_yours"))
 
     return render_to_response(context_instance=RequestContext(request))
-destroy = login_required(destroy)
 
+@login_required
 def new(request, form_class=BlogForm, template_name="blog/new.html"):
     if request.method == "POST":
         if request.POST["action"] == "create":
@@ -96,8 +97,8 @@ def new(request, form_class=BlogForm, template_name="blog/new.html"):
     return render_to_response(template_name, {
         "blog_form": blog_form
     }, context_instance=RequestContext(request))
-new = login_required(new)
 
+@login_required
 def edit(request, id, form_class=BlogForm, template_name="blog/edit.html"):
     post = get_object_or_404(Post, id=id)
 
@@ -126,4 +127,3 @@ def edit(request, id, form_class=BlogForm, template_name="blog/edit.html"):
         "blog_form": blog_form,
         "post": post,
     }, context_instance=RequestContext(request))
-edit = login_required(edit)
