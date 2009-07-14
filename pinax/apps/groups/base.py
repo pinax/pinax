@@ -4,6 +4,7 @@ import warnings
 from django.db import models
 from django.db.models.query import QuerySet
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.models import User
 
@@ -75,3 +76,19 @@ class Group(models.Model):
     
     class Meta(object):
         abstract = True
+
+
+class GroupScopedId(models.Model):
+    """
+    a model to store scoped IDs for tasks (specific to a group)
+    """
+    
+    content_type = models.ForeignKey(ContentType, null=True, blank=True)
+    object_id = models.IntegerField(null=True, blank=True)
+    group = generic.GenericForeignKey()
+    
+    scoped_number = models.IntegerField()
+    
+    class Meta:
+        abstract = True
+        unique_together = (("content_type", "object_id", "scoped_number"),)
