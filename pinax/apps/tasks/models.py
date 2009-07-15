@@ -85,6 +85,8 @@ class Task(models.Model):
         th = TaskHistory()
         th.task = self
         
+        self.group.associate(th, commit=False)
+        
         # save the simple fields
         
         for field in self.fields:
