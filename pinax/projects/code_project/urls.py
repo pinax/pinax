@@ -31,7 +31,7 @@ urlpatterns = patterns('',
     (r'^announcements/', include('announcements.urls')),
     (r'^tagging_utils/', include('tagging_utils.urls')),
     (r'^attachments/', include('attachments.urls')),
-    (r'projects/', include('projects.urls')),
+    (r'^projects/', include('projects.urls')),
     
     (r'^admin/(.*)', admin.site.root),
 )
