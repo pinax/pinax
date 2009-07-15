@@ -75,6 +75,9 @@ class ContentBridge(object):
             '%s/%s' % (self.content_app_name, template_name),
         ], context, context_instance=context_instance)
     
+    def group_base_template(self, template_name="content_base.html"):
+        return "%s/%s" % (self.content_app_name, template_name)
+    
     def get_group(self, slug):
         return self.group_model._default_manager.get(slug=slug)
         
