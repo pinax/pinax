@@ -48,9 +48,6 @@ djangologging
 emailconfirmation
     uses app mailer
 
-feedutil
-    uses library feedparser
-
 friends
     uses apps emailconfirmation, mailer, notification
     and libraries gdata, simplejson, vobject, ybrowserauth
@@ -76,7 +73,7 @@ photos
     uses apps photologue, projects, tagging, tribes
 
 profiles
-    uses apps account, app_plugins, feedutil, friends, gravatar, notification, photos, timezones, microblogging
+    uses apps account, app_plugins, friends, gravatar, notification, photos, timezones, microblogging
 
 projects
     uses apps friends, notification, photos, tagging, things, threadedcomments, wiki
