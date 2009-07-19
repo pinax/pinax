@@ -4,10 +4,16 @@ import sys
 PINAX_GIT_LOCATION = 'git://github.com/pinax/pinax.git'
 PINAX_PYPI = 'http://pypi.pinaxproject.com'
 PINAX_MUST_HAVES = {
-    'setuptools-git': 'setuptools_git-0.3.3.tar.gz',
-    'setuptools-dummy': 'setuptools_dummy-0.0.3.tar.gz',
-    'pip': 'pip-0.4.tar.gz',
+    'setuptools-git': ('0.3.3', 'setuptools_git-0.3.3.tar.gz'),
+    'setuptools-dummy': ('0.0.3', 'setuptools_dummy-0.0.3.tar.gz'),
+    'django': ('1.0.2-final', 'Django-1.0.2-final.tar.gz'),
+    'pip': ('0.4', 'pip-0.4.tar.gz'),
 }
+
+DJANGO_VERSIONS = (
+    '1.0.2-final',
+#    '1.1-beta-1',
+)
 
 if sys.platform == 'win32':
     GIT_CMD = 'git.cmd'
@@ -86,6 +92,9 @@ def extend_parser(parser):
     parser.add_option("-d", "--development",
         action="store_true", dest="development",
         help="Setup development environment")
+    parser.add_option("--django-version",
+        metavar="DJANGO_VERSION", dest="django_version", default=None,
+        help="The version of Django to be installed, e.g. --django-version=1.1 will install Django 1.1. The default is 1.0.2.")
 
 def adjust_options(options, args):
     """
@@ -96,6 +105,13 @@ def adjust_options(options, args):
     if options.release and options.development:
         print "ERROR: please use --development without providing a --release version."
         sys.exit(101)
+    if options.django_version:
+        if options.django_version not in DJANGO_VERSIONS:
+            print "ERROR: this Django version is not supported."
+            print "Use one of those: %s" % ", ".join(DJANGO_VERSIONS)
+            sys.exit(101)
+        django_tarball = 'Django-%s.tar.gz' % options.django_version
+        PINAX_MUST_HAVES['django'] = (options.django_version, django_tarball)
     if not args:
         return # caller will raise error
 
@@ -104,14 +120,15 @@ def install_base(easy_install, requirements_dir, packages):
     Installs pip from the bundled tarball if existing
     """
     for pkg in packages:
-        filename = packages[pkg]
+        version, filename = packages[pkg]
         src = join(requirements_dir, 'base', filename)
         if not os.path.exists(src):
-            # get it from the pypi
-            src = pkg
-        call_subprocess([easy_install, '--quiet', '--always-copy', src],
+            # get it from the PyPI
+            src = '%s==%s' % (pkg, version)
+        logger.notify('Installing %s %s' % (pkg, version))
+        call_subprocess([easy_install, '--quiet', '--always-copy',
+                        '--always-unzip', '--find-links', PINAX_PYPI, src],
                         filter_stdout=filter_lines, show_stdout=False)
-        logger.notify('Installing %s' % pkg)
 
 def release_files_exist(release_dir, requirements_file):
     f = open(requirements_file)
@@ -198,7 +215,7 @@ def after_install(options, home_dir):
                             cwd=pinax_dir)
         finally:
             logger.indent -= 2
-        logger.notify('Please follow the documentation to install all the requirements (e.g. Django).')
+        logger.notify('Please follow the documentation to continue.')
     elif options.release:
         # release should *never* touch the Internet.
         logger.notify('Going to install a full Pinax %s release.' % options.release)
