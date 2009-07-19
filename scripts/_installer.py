@@ -15,6 +15,11 @@ DJANGO_VERSIONS = (
 #    '1.1-beta-1',
 )
 
+JAUNTY_FIX = """/usr/lib/python2.6/dist-packages
+/var/lib/python-support/python2.6
+/usr/local/lib/python2.6/dist-packages
+"""
+
 if sys.platform == 'win32':
     GIT_CMD = 'git.cmd'
     PIP_CMD = 'pip.exe'
@@ -182,7 +187,7 @@ def after_install(options, home_dir):
             os.path.exists('/usr/lib/python2.6/dist-packages')):
         jaunty_path_fix = join(lib_dir, 'site-packages', 'jaunty-fix.pth')
         f = open(jaunty_path_fix, 'wb')
-        f.write('/usr/lib/python2.6/dist-packages\n/var/lib/python-support/python2.6')
+        f.write(JAUNTY_FIX)
         f.close()
 
     if options.development:
