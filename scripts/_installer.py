@@ -4,7 +4,7 @@ import sys
 PINAX_GIT_LOCATION = 'git://github.com/pinax/pinax.git'
 PINAX_PYPI = 'http://pypi.pinaxproject.com'
 PINAX_MUST_HAVES = {
-    'setuptools-git': ('0.3.3', 'setuptools_git-0.3.3.tar.gz'),
+    'setuptools-git': ('0.3.4', 'setuptools_git-0.3.4.tar.gz'),
     'setuptools-dummy': ('0.0.3', 'setuptools_dummy-0.0.3.tar.gz'),
     'django': ('1.0.2-final', 'Django-1.0.2-final.tar.gz'),
     'pip': ('0.4', 'pip-0.4.tar.gz'),
@@ -14,6 +14,11 @@ DJANGO_VERSIONS = (
     '1.0.2-final',
 #    '1.1-beta-1',
 )
+
+JAUNTY_FIX = """/usr/lib/python2.6/dist-packages
+/var/lib/python-support/python2.6
+/usr/local/lib/python2.6/dist-packages
+"""
 
 if sys.platform == 'win32':
     GIT_CMD = 'git.cmd'
@@ -182,7 +187,7 @@ def after_install(options, home_dir):
             os.path.exists('/usr/lib/python2.6/dist-packages')):
         jaunty_path_fix = join(lib_dir, 'site-packages', 'jaunty-fix.pth')
         f = open(jaunty_path_fix, 'wb')
-        f.write('/usr/lib/python2.6/dist-packages\n/var/lib/python-support/python2.6')
+        f.write(JAUNTY_FIX)
         f.close()
 
     if options.development:
