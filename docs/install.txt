@@ -70,10 +70,18 @@ Create a virtual environment with the downloaded script::
     $ source ./pinax-env/bin/activate
     (pinax-env)$
 
-The last step to pull down the external apps and libraries. To do this run::
+The last step deals with the external apps and libraries you want to use
+while developing your project. To do this choose **one** of these options:
 
-    (pinax-env)$ cd ./pinax-env/
+* *All* dependencies (external_apps and libs) used in all sample projects::
+
+    (pinax-env)$ cd pinax-env/
     (pinax-env)$ pip install --requirement src/pinax/requirements/external_apps.txt
+
+* *Only* the dependencies of one of the sample projects, e.g. the social_project::
+
+    (pinax-env)$ cd pinax-env/src/pinax/projects/
+    (pinax-env)$ pip install --requirement social_project/requirements.txt
 
 .. _install-common-to-both-approaches:
 
@@ -115,7 +123,13 @@ of. For the purpose of testing Pinax, let's start with the social_project::
     (pinax-env)$ pinax-admin clone_project social_project mysite
 
 This will create a new Pinax project called 'mysite' in your current working
-directory. Lastly, let's get it running::
+directory. As every other Pinax project you will get a `requirements file`_
+that defines the package dependencies of your cloned project. You can modify
+it or just go ahead and use it to install the packages::
+
+    (pinax-env)$ pip install --requirement mysite/requirements.txt
+
+Lastly, let's get it running::
 
     (pinax-env)$ cd mysite/
     (pinax-env)$ python manage.py syncdb
@@ -141,3 +155,4 @@ check out the :doc:`deployment <deployment>` documentation.
 .. _`libjpeg`: http://freshmeat.net/projects/libjpeg/
 .. _`libz`: http://www.zlib.net/
 .. _`Buildout`: http://pypi.python.org/pypi/zc.buildout
+.. _`requirements file`: http://pip.openplans.org/requirement-format.html
