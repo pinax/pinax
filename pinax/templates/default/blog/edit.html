@@ -1,54 +1,32 @@
 {% extends "blog/base.html" %}
 
 {% load i18n %}
-{% load wiki_tags %}
-{% load markup %}
-{% load switchcase %}
-{% load tagging_tags %}
-{% load restructuredtext %}
+{% load uni_form %}
 
 {% block head_title %}{% blocktrans %}Editing Post{% endblocktrans %}{% endblock %}
 
 {% block body %}
-
-    <div id="basic-form">
-        <fieldset>
-            <legend>{% trans "Editing Post" %}</legend>
-
-        {% ifequal post.author request.user %}
-            <form method="POST" action="">
-                <table align="center">
-                    <tr><td colspan="2">{{ blog_form.non_field_errors }}</td></tr>
-                    {% for field in blog_form %}
-                        {% if field.errors %}<tr><td></td><td>{{ field.errors }}</td></tr>{% endif %}
-                        {% ifequal field.name "tease" %}<tr style="display: none;" id="teaser">{% else %}<tr>{% endifequal %}
-                            <td width="150px" valign="top">{{ field.label_tag }}
-                                    {% ifequal field.name "body" %}
-                                    <a id="teaser-toggle" href="#">{% trans "Teaser" %}</a>
-                                    {% endifequal %}
-                            </td>
-                            <td>{{ field }}</td></tr>
-                        {% if field.help_text %}<tr><td colspan="2"><span>{{ field.help_text }}</span></td></tr>{% endif %}
-                    {% endfor %}
-                    <tr><td></td><td><input type="hidden" name="action" value="update" /><input type="submit" value="update" /></td></tr>
-                </table>
-            </form>
-        {% else %}
-            <p>You are not the author of this post.</p>
-        {% endifequal %}
+    {% ifequal post.author request.user %}
+    <form class="uniForm" id="edit-profile" method="POST" action="">
+        <fieldset class="inlineLabels">
+            {{ blog_form|as_uni_form }}
+            <div class="form_block">
+            <input type="hidden" name="action" value="update" />
+            <input type="submit" value="{% trans "Update" %}"/>
+            </div>
         </fieldset>
-    </div>
+    </form>
+    {% else %}
+    <p>{% trans "You are not the author of this post" %}</p>
+    {% endifequal %}
 {% endblock %}
 
 {% block extra_body %}
+    {% load jquery_validation %}
+    {% include_validation %}
     <script type="text/javascript">
-        $(document).ready(function() {
-            $("#teaser").hide();
-            $("#teaser-toggle").click(function() {
-               $("#teaser").toggle();
-               $("#teaser").autoscroll();
-               return false;
-            });
+        $(function(){
+            $('#blog_form').validate('{% url blog_form_validate %}', {type: 'table'});
         });
     </script>
 {% endblock %}
