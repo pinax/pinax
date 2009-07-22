@@ -73,69 +73,7 @@ def details(request, id, template_name="photos/details.html"):
         is_me = True
     else:
         is_me = False
-    # TODO: check for authorized user and catch errors
-    if is_me:
-        if request.method == "POST" and request.POST["action"] == "add_to_project":
-            projectid = request.POST["project"]
-            myproject = Project.objects.get(pk=projectid)
-            if not myproject.photos.filter(photo=photo).count():
-                myproject.photos.create(photo=photo)
-                request.user.message_set.create(message=_("Successfully add photo '%s' to project") % title)
-            else:
-                # TODO: this applies to pinax in general. dont use ugettext_lazy here. its usage is fragile.
-                request.user.message_set.create(message=_("Did not add photo '%s' to project because it already exists.") % title)
-
-            return HttpResponseRedirect(reverse('photo_details', args=(photo.id,)))
-        
-        if request.method == "POST":
-            if request.POST["action"] == "addtotribe":
-                tribeid = request.POST["tribe"]
-                mytribe = Tribe.objects.get(pk=tribeid)
-                if not mytribe.photos.filter(photo=photo).count():
-                    mytribe.photos.create(photo=photo)
-                    request.user.message_set.create(message=_("Successfully add photo '%s' to tribe") % title)
-                else:
-                    # TODO: this applies to pinax in general. dont use ugettext_lazy here. its usage is fragile.
-                    request.user.message_set.create(message=_("Did not add photo '%s' to tribe because it already exists.") % title)
-
-                return HttpResponseRedirect(reverse('photo_details', args=(photo.id,)))
-
-            if request.POST["action"] == "removefromtribe":
-                tribeid = request.POST["tribe"]
-                mytribe = Tribe.objects.get(pk=tribeid)
-                if mytribe.photos.filter(photo=photo).count():
-                    mytribe.photos.filter(photo=photo).delete()
-                    request.user.message_set.create(message=_("Successfully removed photo '%s' from tribe") % title)
-                else:
-                    # TODO: this applies to pinax in general. dont use ugettext_lazy here. its usage is fragile.
-                    request.user.message_set.create(message=_("Did not remove photo '%s' from tribe.") % title)
-
-                return HttpResponseRedirect(reverse('photo_details', args=(photo.id,)))
-
-            if request.POST["action"] == "addtoproject":
-                projectid = request.POST["project"]
-                myproject = Project.objects.get(pk=projectid)
-                if not myproject.photos.filter(photo=photo).count():
-                    myproject.photos.create(photo=photo)
-                    request.user.message_set.create(message=_("Successfully add photo '%s' to project") % title)
-                else:
-                    # TODO: this applies to pinax in general. dont use ugettext_lazy here. its usage is fragile.
-                    request.user.message_set.create(message=_("Did not add photo '%s' to project because it already exists.") % title)
-
-                return HttpResponseRedirect(reverse('photo_details', args=(photo.id,)))
-
-            if request.POST["action"] == "removefromproject":
-                projectid = request.POST["project"]
-                myproject = Project.objects.get(pk=projectid)
-                if myproject.photos.filter(photo=photo).count():
-                    myproject.photos.filter(photo=photo).delete()
-                    request.user.message_set.create(message=_("Successfully removed photo '%s' from project") % title)
-                else:
-                    # TODO: this applies to pinax in general. dont use ugettext_lazy here. its usage is fragile.
-                    request.user.message_set.create(message=_("Did not remove photo '%s' from project.") % title)
-
-                return HttpResponseRedirect(reverse('photo_details', args=(photo.id,)))
-
+    
     return render_to_response(template_name, {
         "host": host, 
         "photo": photo,
