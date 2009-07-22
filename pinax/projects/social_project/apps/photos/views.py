@@ -11,8 +11,7 @@ from django.contrib.auth.decorators import login_required
 from photologue.models import *
 from photos.models import Image
 from photos.forms import PhotoUploadForm, PhotoEditForm
-from projects.models import Project
-from tribes.models import Tribe
+
 
 def upload(request, form_class=PhotoUploadForm,
         template_name="photos/upload.html"):
@@ -68,45 +67,6 @@ def details(request, id, template_name="photos/details.html"):
         raise Http404
     photo_url = photo.get_display_url()
     
-    tribes = []
-    projects = []
-    
-    # Build a list of tribes and the photos from the pool
-    for tribe in Tribe.objects.filter(members=request.user):
-        phototribe = Tribe.objects.get(pk=tribe.id)
-        if phototribe.photos.filter(photo=photo).count():
-            tribes.append({
-                "name": tribe.name,
-                "slug": tribe.slug,
-                "id": tribe.id,
-                "has_photo": True,
-            })
-        else:
-            tribes.append({
-                "name": tribe.name,
-                "slug": tribe.slug,
-                "id": tribe.id,
-                "has_photo": False,
-            })
-
-    # Build a list of projects and the photos from the pool
-    for project in Project.objects.filter(members__user=request.user):
-        photoproject = Project.objects.get(pk=project.id)
-        if photoproject.photos.filter(photo=photo).count():
-            projects.append({
-                "name": project.name,
-                "slug": project.slug,
-                "id": project.id,
-                "has_photo": True,
-            })
-        else:
-            projects.append({
-                "name": project.name,
-                "slug": project.slug,
-                "id": project.id,
-                "has_photo": False,
-            })
-
     title = photo.title
     host = "http://%s" % get_host(request)
     if photo.member == request.user:
@@ -181,8 +141,6 @@ def details(request, id, template_name="photos/details.html"):
         "photo": photo,
         "photo_url": photo_url,
         "is_me": is_me,
-        "projects": projects,
-        "tribes": tribes,
     }, context_instance=RequestContext(request))
 details = login_required(details)
 
