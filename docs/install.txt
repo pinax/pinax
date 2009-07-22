@@ -129,13 +129,7 @@ of. For the purpose of testing Pinax, let's start with the social_project::
     (pinax-env)$ pinax-admin clone_project social_project mysite
 
 This will create a new Pinax project called 'mysite' in your current working
-directory. As every other Pinax project you will get a `requirements file`_
-that defines the package dependencies of your cloned project. You can modify
-it or just go ahead and use it to install the packages::
-
-    (pinax-env)$ pip install --requirement mysite/requirements.txt
-
-Lastly, let's get it running::
+directory. Lastly, let's get it running::
 
     (pinax-env)$ cd mysite/
     (pinax-env)$ python manage.py syncdb
@@ -159,4 +153,3 @@ check out the :doc:`deployment <deployment>` documentation.
 .. _`libjpeg`: http://freshmeat.net/projects/libjpeg/
 .. _`libz`: http://www.zlib.net/
 .. _`Buildout`: http://pypi.python.org/pypi/zc.buildout
-.. _`requirements file`: http://pip.openplans.org/requirement-format.html
