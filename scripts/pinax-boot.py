@@ -1067,7 +1067,7 @@ def extend_parser(parser):
         help="Setup development environment")
     parser.add_option("--django-version",
         metavar="DJANGO_VERSION", dest="django_version", default=None,
-        help="The version of Django to be installed, e.g. --django-version=1.1 will install Django 1.1. The default is 1.0.2.")
+        help="The version of Django to be installed, e.g. --django-version=1.0.2-final will install Django 1.0.2-final. The default is 1.0.2-final.")
 
 def adjust_options(options, args):
     """
