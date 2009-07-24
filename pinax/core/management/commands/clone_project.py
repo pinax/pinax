@@ -182,6 +182,11 @@ class Command(BaseCommand):
         operations.
         """
         
+        if not args:
+            # note: --help prints full path to pinax-admin
+            self.print_help("pinax-admin", "clone_project")
+            sys.exit(0)
+        
         if options.get('list_projects'):
             pinax_root = get_pinax_root(options.get('pinax_root'))
             print "Available Projects"
