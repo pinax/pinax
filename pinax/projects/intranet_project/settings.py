@@ -168,6 +168,7 @@ LOGIN_URL = "/account/login/"
 LOGIN_REDIRECT_URLNAME = "home"
 
 ACCOUNT_OPEN_SIGNUP = False
+ACCOUNT_REQUIRED_EMAIL = False
 
 AUTHENTICATED_EXEMPT_URLS = [
     r"^/account/signup/$",

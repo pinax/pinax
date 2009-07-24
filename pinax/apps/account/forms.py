@@ -63,7 +63,20 @@ class SignupForm(forms.Form):
     username = forms.CharField(label=_("Username"), max_length=30, widget=forms.TextInput())
     password1 = forms.CharField(label=_("Password"), widget=forms.PasswordInput(render_value=False))
     password2 = forms.CharField(label=_("Password (again)"), widget=forms.PasswordInput(render_value=False))
-    email = forms.EmailField(label=_("Email (optional)"), required=False, widget=forms.TextInput())
+    
+    if settings.ACCOUNT_REQUIRED_EMAIL:
+        email = forms.EmailField(
+            label = _("Email"),
+            required = True,
+            widget = forms.TextInput()
+        )
+    else:
+        email = forms.EmailField(
+            label = _("Email (optional)"),
+            required = False,
+            widget = forms.TextInput()
+        )
+    
     confirmation_key = forms.CharField(max_length=40, required=False, widget=forms.HiddenInput())
 
     def clean_username(self):
@@ -121,7 +134,19 @@ class SignupForm(forms.Form):
 
 class OpenIDSignupForm(forms.Form):
     username = forms.CharField(label="Username", max_length=30, widget=forms.TextInput())
-    email = forms.EmailField(label="Email (optional)", required=False, widget=forms.TextInput())
+    
+    if settings.ACCOUNT_REQUIRED_EMAIL:
+        email = forms.EmailField(
+            label = _("Email"),
+            required = True,
+            widget = forms.TextInput()
+        )
+    else:
+        email = forms.EmailField(
+            label = _("Email (optional)"),
+            required = False,
+            widget = forms.TextInput()
+        )
     
     def __init__(self, *args, **kwargs):
         # @@@ this method needs to be compared to django-openid's form.
