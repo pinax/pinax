@@ -3,9 +3,8 @@
 {% load i18n %}
 {% load threadedcommentstags %}
 
-{% load tribe_tags %}
+{% load tribes_tags %}
 {% load avatar_tags %}
-{% load project_tags %}
 {% load blog_tags %}
 {% load wiki_tags %}
 {% load voting_tags %} 
@@ -74,27 +73,7 @@
     {% else %}
         No blog posts matching tag.
     {% endif %}
-
-    <h1>{% blocktrans %}All Projects Matching <i>{{ tag }}</i>{% endblocktrans %}</h1>
-
-    <dl>
-        {% for project in project_tags %}
-            {% show_project project %}
-        {% endfor %}
-    </dl>
-
-    <h1>{% blocktrans %}All Project Topics Matching <i>{{ tag }}</i>{% endblocktrans %}</h1>
-
-    {% for topic in project_topic_tags %}
-        {% show_project_topic topic %}
-    {% endfor %}
-
-    <h1>{% blocktrans %}All Project Tasks Matching <i>{{ tag }}</i>{% endblocktrans %}</h1>
-
-    {% for task in project_task_tags %}
-        {% show_task task %}
-    {% endfor %}
-
+    
     <h1>{% blocktrans %}All Tribes Matching <i>{{ tag }}</i>{% endblocktrans %}</h1>
 
     <dl>
@@ -102,12 +81,14 @@
             {% show_tribe tribe %}
         {% endfor %}
     </dl>
-
+    
+    {% comment %}
     <h1>{% blocktrans %}All Tribe Topics Matching <i>{{ tag }}</i>{% endblocktrans %}</h1>
 
     {% for topic in tribe_topic_tags %}
         {% show_tribe_topic topic %}
     {% endfor %}
+    {% endcomment %}
 
     <h1>{% blocktrans %}All Wiki Articles Matching <i>{{ tag }}</i>{% endblocktrans %}</h1>
 
