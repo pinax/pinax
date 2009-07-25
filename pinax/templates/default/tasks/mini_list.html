@@ -48,7 +48,7 @@
                         {% for task in section.list %}
                             <tr class="task_{{ task.get_state_display }} {% cycle odd,even %}">
                                 <td>{{ task.id }}</td>
-                                <td><a href="{% groupurl task_detail group task.id %}" target="_blank">{{ task.summary }}</a></td>
+                                <td><a href="{% groupurl task_detail group id=task.id %}" target="_blank">{{ task.summary }}</a></td>
                             </tr>
                         {% endfor %}
                     </tbody>
