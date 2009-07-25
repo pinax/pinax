@@ -59,7 +59,7 @@ def tasks(request, group_slug=None, template_name="tasks/task_list.html", bridge
         if group:
             is_member = group.user_is_member(request.user)
         else:
-            is_member = False
+            is_member = True
 
     group_by = request.GET.get("group_by")
     
@@ -110,7 +110,7 @@ def add_task(request, group_slug=None, secret_id=None, form_class=TaskForm, temp
         if group:
             is_member = group.user_is_member(request.user)
         else:
-            is_member = False
+            is_member = True
 
     # If we got an ID for a snippet in url, collect some initial values
     # But only if we could import the Snippet Model so
@@ -251,7 +251,7 @@ def task(request, id, group_slug=None, template_name="tasks/task.html", bridge=N
         if group:
             is_member = group.user_is_member(request.user)
         else:
-            is_member = False
+            is_member = True
 
     if is_member and request.method == "POST":
         form = EditTaskForm(request.user, request.POST, instance=task)
@@ -372,7 +372,7 @@ def focus(request, field, value, group_slug=None, template_name="tasks/focus.htm
         if group:
             is_member = group.user_is_member(request.user)
         else:
-            is_member = False
+            is_member = True
 
     group_by = request.GET.get("group_by")
 
@@ -437,7 +437,7 @@ def tasks_history_list(request, group_slug=None, template_name="tasks/tasks_hist
         if group:
             is_member = group.user_is_member(request.user)
         else:
-            is_member = False
+            is_member = True
 
     if group:
         tasks = group.content_objects(TaskHistory)
