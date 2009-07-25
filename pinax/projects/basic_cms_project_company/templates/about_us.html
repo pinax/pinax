@@ -1,0 +1,12 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load generic_flatblocks %}
+
+{% block head_title %}{% trans "About Us" %}{% endblock %}
+
+{% block tab_id %}id="about_us_tab"{% endblock %}
+
+{% block body %}
+    {% gblock "about_us_content" for "gblocks.TitleTextAndImage" %}
+{% endblock %}
