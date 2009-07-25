@@ -123,6 +123,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.humanize',
     'django.contrib.markup',
+    'pinax.core',
     
     # external
     'notification', # must be first
