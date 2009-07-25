@@ -332,7 +332,7 @@ def user_tasks(request, username, group_slug=None, template_name="tasks/user_tas
     if group:
         url = bridge.reverse("tasks_mini_list", group)
     else:
-        url = reverse("tasks_mini_lisk")
+        url = reverse("tasks_mini_list")
     
     bookmarklet = """javascript:(
             function() {
