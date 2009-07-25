@@ -5,7 +5,7 @@ import sys
 from os.path import abspath, dirname, join
 from site import addsitedir
 
-VIRTUALENV_BASE = "/Users/martin/Workspace/pinax-env"
+VIRTUALENV_BASE = ""
 if not VIRTUALENV_BASE:
     raise Exception("VIRTUALENV_BASE is not set correctly.")
 
