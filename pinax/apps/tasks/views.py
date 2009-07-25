@@ -163,8 +163,16 @@ def add_task(request, group_slug=None, secret_id=None, form_class=TaskForm, temp
                     notify_list = notify_list.exclude(id__exact=request.user.id)
                     notification.send(notify_list, "tasks_new", {"creator": request.user, "task": task, "group": group})
                 if request.POST.has_key('add-another-task'):
-                    return HttpResponseRedirect(bridge.reverse("task_add", group))
-                return HttpResponseRedirect(bridge.reverse("task_list", group))
+                    if group:
+                        redirect_to = bridge.reverse("task_add", group)
+                    else:
+                        redirect_to = reverse("task_add")
+                    return HttpResponseRedirect(redirect_to)
+                if group:
+                    redirect_to = bridge.reverse("task_list", group)
+                else:
+                    redirect_to = reverse("task_list")
+                return HttpResponseRedirect(redirect_to)
     else:
         task_form = form_class(group=group, initial=initial)
 
