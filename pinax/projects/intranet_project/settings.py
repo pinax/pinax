@@ -135,6 +135,7 @@ INSTALLED_APPS = (
     'signup_codes',
     'groups',
     'misc',
+    'tagging_utils',
     #'pastebin',
     #'quickbar',
     'tasks',
