@@ -45,15 +45,21 @@ except ImproperlyConfigured:
 
 def tasks(request, group_slug=None, template_name="tasks/task_list.html", bridge=None):
     
-    try:
-        group = bridge.get_group(group_slug)
-    except ObjectDoesNotExist:
-        raise Http404
+    if bridge:
+        try:
+            group = bridge.get_group(group_slug)
+        except ObjectDoesNotExist:
+            raise Http404
+    else:
+        group = None
     
     if not request.user.is_authenticated():
         is_member = False
     else:
-        is_member = group.user_is_member(request.user)
+        if group:
+            is_member = group.user_is_member(request.user)
+        else:
+            is_member = False
 
     group_by = request.GET.get("group_by")
     
@@ -90,15 +96,21 @@ def tasks(request, group_slug=None, template_name="tasks/task_list.html", bridge
 
 def add_task(request, group_slug=None, secret_id=None, form_class=TaskForm, template_name="tasks/add.html", bridge=None):
     
-    try:
-        group = bridge.get_group(group_slug)
-    except ObjectDoesNotExist:
-        raise Http404
+    if bridge:
+        try:
+            group = bridge.get_group(group_slug)
+        except ObjectDoesNotExist:
+            raise Http404
+    else:
+        group = None
     
     if not request.user.is_authenticated():
         is_member = False
     else:
-        is_member = group.user_is_member(request.user)
+        if group:
+            is_member = group.user_is_member(request.user)
+        else:
+            is_member = False
 
     # If we got an ID for a snippet in url, collect some initial values
     # But only if we could import the Snippet Model so
@@ -168,10 +180,13 @@ def add_task(request, group_slug=None, secret_id=None, form_class=TaskForm, temp
 def nudge(request, id, group_slug=None, bridge=None):
     """ Called when a user nudges a ticket """
     
-    try:
-        group = bridge.get_group(group_slug)
-    except ObjectDoesNotExist:
-        raise Http404
+    if bridge:
+        try:
+            group = bridge.get_group(group_slug)
+        except ObjectDoesNotExist:
+            raise Http404
+    else:
+        group = None
     
     if group:
         tasks = group.content_objects(Task)
@@ -209,10 +224,13 @@ def nudge(request, id, group_slug=None, bridge=None):
 
 def task(request, id, group_slug=None, template_name="tasks/task.html", bridge=None):
     
-    try:
-        group = bridge.get_group(group_slug)
-    except ObjectDoesNotExist:
-        raise Http404
+    if bridge:
+        try:
+            group = bridge.get_group(group_slug)
+        except ObjectDoesNotExist:
+            raise Http404
+    else:
+        group = None
     
     if group:
         tasks = group.content_objects(Task)
@@ -230,7 +248,10 @@ def task(request, id, group_slug=None, template_name="tasks/task.html", bridge=N
     if not request.user.is_authenticated():
         is_member = False
     else:
-        is_member = group.user_is_member(request.user)
+        if group:
+            is_member = group.user_is_member(request.user)
+        else:
+            is_member = False
 
     if is_member and request.method == "POST":
         form = EditTaskForm(request.user, request.POST, instance=task)
@@ -289,10 +310,13 @@ def task(request, id, group_slug=None, template_name="tasks/task.html", bridge=N
 @login_required
 def user_tasks(request, username, group_slug=None, template_name="tasks/user_tasks.html", bridge=None):
     
-    try:
-        group = bridge.get_group(group_slug)
-    except ObjectDoesNotExist:
-        raise Http404
+    if bridge:
+        try:
+            group = bridge.get_group(group_slug)
+        except ObjectDoesNotExist:
+            raise Http404
+    else:
+        group = None
     
     if group:
         other_user = get_object_or_404(group.member_users.all(), username=username)
@@ -334,15 +358,21 @@ def mini_list(request, group_slug=None, template_name="tasks/mini_list.html", br
 
 def focus(request, field, value, group_slug=None, template_name="tasks/focus.html", bridge=None):
     
-    try:
-        group = bridge.get_group(group_slug)
-    except ObjectDoesNotExist:
-        raise Http404
+    if bridge:
+        try:
+            group = bridge.get_group(group_slug)
+        except ObjectDoesNotExist:
+            raise Http404
+    else:
+        group = None
     
     if not request.user.is_authenticated():
         is_member = False
     else:
-        is_member = group.user_is_member(request.user)
+        if group:
+            is_member = group.user_is_member(request.user)
+        else:
+            is_member = False
 
     group_by = request.GET.get("group_by")
 
@@ -393,15 +423,21 @@ def focus(request, field, value, group_slug=None, template_name="tasks/focus.htm
 
 def tasks_history_list(request, group_slug=None, template_name="tasks/tasks_history_list.html", bridge=None):
     
-    try:
-        group = bridge.get_group(group_slug)
-    except ObjectDoesNotExist:
-        raise Http404
+    if bridge:
+        try:
+            group = bridge.get_group(group_slug)
+        except ObjectDoesNotExist:
+            raise Http404
+    else:
+        group = None
     
     if not request.user.is_authenticated():
         is_member = False
     else:
-        is_member = group.user_is_member(request.user)
+        if group:
+            is_member = group.user_is_member(request.user)
+        else:
+            is_member = False
 
     if group:
         tasks = group.content_objects(TaskHistory)
@@ -417,10 +453,13 @@ def tasks_history_list(request, group_slug=None, template_name="tasks/tasks_hist
 
 def tasks_history(request, id, group_slug=None, template_name="tasks/task_history.html", bridge=None):
     
-    try:
-        group = bridge.get_group(group_slug)
-    except ObjectDoesNotExist:
-        raise Http404
+    if bridge:
+        try:
+            group = bridge.get_group(group_slug)
+        except ObjectDoesNotExist:
+            raise Http404
+    else:
+        group = None
     
     if group:
         tasks = group.content_objects(Task)
