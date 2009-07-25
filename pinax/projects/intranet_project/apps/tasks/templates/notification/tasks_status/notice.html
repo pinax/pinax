@@ -1,7 +1,0 @@
-{% load i18n %}
-{% url profile_detail username=user.username as user_url %}
-{% if group %}
-{% blocktrans with task.get_absolute_url as task_url and group.get_absolute_url as group_url and task.status as task_status %}<a href="{{ user_url }}">{{ user }}</a> has updated the status of task '<a href="{{ task_url }}">{{ task }}</a>' in '<a href="{{ group_url }}">{{ group }}</a>' to '{{ task_status }}'.{% endblocktrans %}
-{% else %}
-{% blocktrans with task.get_absolute_url as task_url and task.status as task_status %}<a href="{{ user_url }}">{{ user }}</a> has updated the status of task '<a href="{{ task_url }}">{{ task }}</a>' to '{{ task_status }}'.{% endblocktrans %}
-{% endif %}

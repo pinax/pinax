@@ -1,6 +1,0 @@
-{% load i18n %}
-{% if group %}
-{% blocktrans with task.tags as task_tags %}{{ user }} has updated the tags of task '{{ task }}' in '{{ group }}' to '{{ task_tags }}'.{% endblocktrans %}
-{% else %}
-{% blocktrans with task.tags as task_tags %}{{ user }} has updated the tags of task '{{ task }}' to '{{ task_tags }}'.{% endblocktrans %}
-{% endif %}

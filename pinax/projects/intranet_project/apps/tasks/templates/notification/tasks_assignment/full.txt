@@ -1,6 +1,0 @@
-{% load i18n %}
-{% if group %}
-{% blocktrans %}{{ user }} has assigned task '{{ task }}' in '{{ group }}' to {{ assignee }}.{% endblocktrans %}
-{% else %}
-{% blocktrans %}{{ user }} has assigned task '{{ task }}' to {{ assignee }}.{% endblocktrans %}
-{% endif %}

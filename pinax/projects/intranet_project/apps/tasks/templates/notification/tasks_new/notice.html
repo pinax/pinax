@@ -1,6 +1,0 @@
-{% load i18n %}{% url profile_detail username=creator.username as creator_url %}
-{% if group %}
-{% blocktrans with task.get_absolute_url as task_url and group.get_absolute_url as group_url %}<a href="{{ creator_url }}">{{ creator }}</a> has added a task '<a href="{{ task_url }}">{{ task }}</a>' in '<a href="{{ group_url }}">{{ project }}</a>'.{% endblocktrans %}
-{% else %}
-{% blocktrans with task.get_absolute_url as task_url %}<a href="{{ creator_url }}">{{ creator }}</a> has added a task '<a href="{{ task_url }}">{{ task }}</a>'.{% endblocktrans %}
-{% endif %}

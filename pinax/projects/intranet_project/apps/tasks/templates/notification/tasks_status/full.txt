@@ -1,6 +1,0 @@
-{% load i18n %}
-{% if group %}
-{% blocktrans with task.status as task_status %}{{ user }} has updated the status of task '{{ task }}' in '{{ group }}' to '{{ task.status }}'.{% endblocktrans %}
-{% else %}
-{% blocktrans with task.status as task_status %}{{ user }} has updated the status of task '{{ task }}' to '{{ task_status }}'.{% endblocktrans %}
-{% endif %}
