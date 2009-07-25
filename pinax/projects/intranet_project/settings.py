@@ -127,11 +127,13 @@ INSTALLED_APPS = (
     'threadedcomments',
     'wiki',
     'uni_form',
+    'django_markup',
     
     # internal (for now)
     'basic_profiles',
     'account',
     'signup_codes',
+    'groups',
     'misc',
     #'pastebin',
     #'quickbar',
