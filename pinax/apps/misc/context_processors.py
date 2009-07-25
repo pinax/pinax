@@ -1,11 +1,4 @@
-from django.conf import settings
 from misc.utils import inbox_count_sources
-
-def contact_email(request):
-    return {'contact_email': getattr(settings, 'CONTACT_EMAIL', '')}
-
-def site_name(request):
-    return {'site_name': getattr(settings, 'SITE_NAME', '')}
 
 def combined_inbox_count(request):
     """
