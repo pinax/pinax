@@ -1,0 +1,16 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load generic_flatblocks %}
+
+{% block head_title %}{% trans "Rooms" %}{% endblock %}
+
+{% block tab_id %}id="rooms_tab"{% endblock %}
+
+{% block body %}
+    {% gblock "rooms_content" for "gblocks.TitleAndText" %} 
+    
+    {% gblock "rooms_image1" for "gblocks.Image" with "gblocks/image/imagelist.html" %}
+    {% gblock "rooms_image2" for "gblocks.Image" with "gblocks/image/imagelist.html" %}
+    {% gblock "rooms_image3" for "gblocks.Image" with "gblocks/image/imagelist.html" %}
+{% endblock %}

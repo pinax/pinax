@@ -1,0 +1,7 @@
+{% load thumbnail %}
+{% load frontendadmin_tags %}
+<div id="content-image" style="
+    background-image: url({% thumbnail object.image 650x330 crop %});
+    height: 330px; width: 100%;">
+    {% frontendadmin_change object "Change image" %}
+</div>

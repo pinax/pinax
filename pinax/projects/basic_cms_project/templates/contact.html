@@ -1,0 +1,12 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load generic_flatblocks %}
+
+{% block head_title %}{% gblock "contact_title" for "gblocks.Title" %}{% endblock %}
+
+{% block tab_id %}id="contact_tab"{% endblock %}
+
+{% block body %}
+    {% gblock "contact_content" for "gblocks.TitleTextAndImage" %}        
+{% endblock %}
