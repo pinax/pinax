@@ -68,7 +68,6 @@ SECRET_KEY = 'bk-e2zv3humar79nm=j*bwc=-ymeit(8a20whp3goq4dh71t)s'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.load_template_source',
     'django.template.loaders.app_directories.load_template_source',
-    'dbtemplates.loader.load_template_source',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -131,7 +130,6 @@ INSTALLED_APPS = (
     'emailconfirmation',
     'django_extensions',
     'robots',
-    'dbtemplates',
     'friends',
     'mailer',
     'messages',

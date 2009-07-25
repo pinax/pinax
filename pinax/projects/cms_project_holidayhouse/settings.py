@@ -68,6 +68,7 @@ SECRET_KEY = 'd$0x+40-omi^!k%h^9$p!b+jb^f48+nd4)49u*3+3moiednw2o'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.load_template_source',
     'django.template.loaders.app_directories.load_template_source',
+    'dbtemplates.loader.load_template_source',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -120,6 +121,7 @@ INSTALLED_APPS = (
     'timezones',
     'ajax_validation',
     'uni_form',
+    'dbtemplates',
     
     # internal (for now)
     'basic_profiles',
