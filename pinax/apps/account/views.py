@@ -51,13 +51,18 @@ def signup(request, form_class=SignupForm,
         form = form_class(request.POST)
         if form.is_valid():
             username, password = form.save()
-            user = authenticate(username=username, password=password)
-            auth_login(request, user)
-            request.user.message_set.create(
-                message=_("Successfully logged in as %(username)s.") % {
-                'username': user.username
-            })
-            return HttpResponseRedirect(success_url)
+            if settings.ACCOUNT_EMAIL_VERIFICATION:
+                return render_to_response("account/verification_sent.html", {
+                    "email": form.cleaned_data["email"],
+                }, context_instance=RequestContext(request))
+            else:
+                user = authenticate(username=username, password=password)
+                auth_login(request, user)
+                request.user.message_set.create(
+                    message=_("Successfully logged in as %(username)s.") % {
+                    'username': user.username
+                })
+                return HttpResponseRedirect(success_url)
     else:
         form = form_class()
     return render_to_response(template_name, {
