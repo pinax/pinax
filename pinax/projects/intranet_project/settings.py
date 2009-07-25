@@ -128,6 +128,7 @@ INSTALLED_APPS = (
     'wiki',
     'uni_form',
     'django_markup',
+    'attachments',
     
     # internal (for now)
     'basic_profiles',
