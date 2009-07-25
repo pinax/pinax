@@ -1,4 +1,3 @@
-
 import re
 
 from django import forms
@@ -64,7 +63,7 @@ class SignupForm(forms.Form):
     password1 = forms.CharField(label=_("Password"), widget=forms.PasswordInput(render_value=False))
     password2 = forms.CharField(label=_("Password (again)"), widget=forms.PasswordInput(render_value=False))
     
-    if settings.ACCOUNT_REQUIRED_EMAIL:
+    if settings.ACCOUNT_REQUIRED_EMAIL or settings.ACCOUNT_EMAIL_VERIFICATION:
         email = forms.EmailField(
             label = _("Email"),
             required = True,
@@ -98,6 +97,7 @@ class SignupForm(forms.Form):
         username = self.cleaned_data["username"]
         email = self.cleaned_data["email"]
         password = self.cleaned_data["password1"]
+        
         if self.cleaned_data["confirmation_key"]:
             from friends.models import JoinInvitation # @@@ temporary fix for issue 93
             try:
@@ -123,19 +123,23 @@ class SignupForm(forms.Form):
                 if email:
                     new_user.message_set.create(message=ugettext(u"Confirmation email sent to %(email)s") % {'email': email})
                     EmailAddress.objects.add_email(new_user, email)
-            return username, password # required for authenticate()
         else:
             new_user = User.objects.create_user(username, "", password)
             if email:
                 new_user.message_set.create(message=ugettext(u"Confirmation email sent to %(email)s") % {'email': email})
                 EmailAddress.objects.add_email(new_user, email)
-            return username, password # required for authenticate()
+        
+        if settings.ACCOUNT_EMAIL_VERIFICATION:
+            new_user.is_active = False
+            new_user.save()
+                
+        return username, password # required for authenticate()
 
 
 class OpenIDSignupForm(forms.Form):
     username = forms.CharField(label="Username", max_length=30, widget=forms.TextInput())
     
-    if settings.ACCOUNT_REQUIRED_EMAIL:
+    if settings.ACCOUNT_REQUIRED_EMAIL or settings.ACCOUNT_EMAIL_VERIFICATION:
         email = forms.EmailField(
             label = _("Email"),
             required = True,

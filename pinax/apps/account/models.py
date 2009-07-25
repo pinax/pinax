@@ -1,11 +1,15 @@
+from datetime import datetime
+
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User, AnonymousUser
 from django.db.models.signals import post_save
 from django.utils.translation import get_language_from_request, ugettext_lazy as _
-from datetime import datetime
+
+from emailconfirmation.models import EmailConfirmation
 
 from timezones.fields import TimeZoneField
+from emailconfirmation.signals import email_confirmed
 
 class Account(models.Model):
     
@@ -85,3 +89,11 @@ class PasswordReset(models.Model):
 
     def __unicode__(self):
         return "%s (key=%s, reset=%r)" % (self.user.username, self.temp_key, self.reset)
+
+
+def mark_user_active(sender, instance=None, **kwargs):
+    user = kwargs.get("email_address").user
+    user.is_active = True
+    user.save()
+
+email_confirmed.connect(mark_user_active, sender=EmailConfirmation)
