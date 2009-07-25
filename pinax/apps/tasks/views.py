@@ -329,7 +329,10 @@ def user_tasks(request, username, group_slug=None, template_name="tasks/user_tas
     # get the list of your tasks that have been nudged
     nudged_tasks = [x for x in other_user.assigned_tasks.all().order_by('-modified') if x.task_nudge.all()]
 
-    url = bridge.reverse("tasks_mini_list", group)
+    if group:
+        url = bridge.reverse("tasks_mini_list", group)
+    else:
+        url = reverse("tasks_mini_lisk")
     
     bookmarklet = """javascript:(
             function() {
