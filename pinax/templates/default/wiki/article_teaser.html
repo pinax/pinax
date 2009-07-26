@@ -1,6 +1,7 @@
 
 {% load wiki_tags %}
 {% load avatar_tags %}
+{% load markup_tags %}
 
 <tr class="{% cycle odd,even %}">
     <td class="meta">
@@ -14,6 +15,6 @@
     </td>
     <td>
         <h2><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h2>
-        <div class="body">{% render_content article 'summary' %}</div>
+        <div class="body">{{ article.summary|apply_markup:article.markup }}</div>
     </td>
 </tr>
