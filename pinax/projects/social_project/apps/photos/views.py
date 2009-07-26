@@ -230,7 +230,7 @@ def edit(request, id, form_class=PhotoEditForm,
     }, context_instance=RequestContext(request))
 
 @login_required
-def destroy(request, id):
+def destroy(request, id, group_slug=None, bridge=None):
     
     if bridge:
         try:
