@@ -82,7 +82,7 @@ MIDDLEWARE_CLASSES = (
     'pinax.middleware.security.HideSensistiveFieldsMiddleware',
 )
 
-ROOT_URLCONF = 'basic_cms_project_company.urls'
+ROOT_URLCONF = 'cms_project_company.urls'
 
 TEMPLATE_DIRS = (
     os.path.join(os.path.dirname(__file__), "templates"),
