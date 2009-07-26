@@ -65,6 +65,16 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
         invite_form = None
         previous_invitations_to = None
         previous_invitations_from = None
+        if request.method == "POST":
+            if request.POST["action"] == "remove":
+                Friendship.objects.filter(to_user=request.user, from_user=other_user).delete()
+                request.user.message_set.create(message=_("You have removed %(from_user)s from friends") % {'from_user': other_user})
+                is_friend = False
+                invite_form = InviteFriendForm(request.user, {
+                    'to_user': username,
+                    'message': ugettext("Let's be friends!"),
+                })
+
     else:
         if request.user.is_authenticated() and request.method == "POST":
             if request.POST["action"] == "invite":
