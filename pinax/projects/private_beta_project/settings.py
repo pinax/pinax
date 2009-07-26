@@ -128,7 +128,6 @@ INSTALLED_APPS = (
     'basic_profiles',
     'staticfiles',
     'account',
-    'misc',
     'waitinglist',
     'signup_codes',
     

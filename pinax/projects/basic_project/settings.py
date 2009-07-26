@@ -129,7 +129,6 @@ INSTALLED_APPS = (
     'staticfiles',
     'account',
     'signup_codes',
-    'misc',
     'about',
     'django.contrib.admin',
 

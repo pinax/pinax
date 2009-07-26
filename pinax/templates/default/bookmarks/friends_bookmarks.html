@@ -7,6 +7,7 @@
 {% load extra_voting_tags %}
 {% load in_filter %}
 {% load extra_tagging_tags %}
+{% load sorting_tags %}
 
 {% block head_title %}{% blocktrans %}Friends' Bookmarks{% endblocktrans %}{% endblock %}
 
@@ -16,28 +17,31 @@
     <h1>{% trans "Friends' Bookmarks" %}</h1>
     
     {% if object_list %}
+        {# ## FIXME this should probably be done in djanog-sorting #}
+        {% with request.field|cut:"-" as sort_order %}
+
         <p class="helptext">{% trans "These are bookmarks from your friends:" %}</p>
         
         <p>{% trans "Sort by:" %}
-            {% ifequal request.REQUEST.sort_order "points" %}
-                <a href="?sort_order=hotness">{% trans "reddit-like hotness" %}</a>
+            {% ifequal sort_order "points" %}
+                {% anchor "hotness" "reddit-like hotness" %}
                 {% trans "or" %}
                 <b>{% trans "total points" %}</b>
                 {% trans "or" %}
-                <a href="?sort_order=date">{% trans "date added" %}</a>
-                {% order_by_votes object_list %}
+                {% anchor "date" "date added" %}
+                {% order_by_votes object_list request.direction %}
             {% else %}
-                {% ifequal request.REQUEST.sort_order "hotness" %}
+                {% ifequal sort_order "hotness" %}
                     <b>{% trans "reddit-like hotness" %}</b>
                     {% trans "or" %}
-                    <a href="?sort_order=points">{% trans "total points" %}</a>
+                    {% anchor "points" "total points" %}
                     {% trans "or" %}
-                    <a href="?sort_order=date">{% trans "date added" %}</a>
-                    {% order_by_reddit object_list added %}
+                    {% anchor "date" "date added" %}
+                    {% order_by_reddit object_list added request.direction %}
                 {% else %}
-                    <a href="?sort_order=hotness">{% trans "reddit-like hotness" %}</a>
+                    {% anchor "hotness" "reddit-like hotness" %}
                     {% trans "or" %}
-                    <a href="?sort_order=points">{% trans "total points" %}</a>
+                    {% anchor "points" "total points" %}
                     {% trans "or" %}
                     <b>{% trans "date added" %}</b>
                 {% endifequal %}
@@ -94,6 +98,7 @@
         
         {% paginate %}
         
+    {% endwith %}
     {% else %}
         <p>{% trans "No bookmarks yet." %}</p>
     {% endif %}

@@ -138,7 +138,6 @@ INSTALLED_APPS = (
     'staticfiles',
     'account',
     'signup_codes',
-    'misc',
     'tag_app',
     'groups',
     

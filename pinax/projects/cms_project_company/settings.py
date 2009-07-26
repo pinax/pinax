@@ -130,7 +130,6 @@ INSTALLED_APPS = (
     'basic_profiles',
     'staticfiles',
     'account',
-    'misc',
     'django.contrib.admin',
     
     # project specific
