@@ -111,7 +111,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.humanize',
-    'pinax.core',
+    'pinax.templatetags',
     
     # external
     'notification', # must be first
