@@ -79,6 +79,7 @@ MIDDLEWARE_CLASSES = (
     'account.middleware.LocaleMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'pagination.middleware.PaginationMiddleware',
+    'pinax.middleware.security.HideSensistiveFieldsMiddleware',
 )
 
 ROOT_URLCONF = 'basic_cms_project.urls'

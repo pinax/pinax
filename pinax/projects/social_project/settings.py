@@ -81,6 +81,7 @@ MIDDLEWARE_CLASSES = (
     'django_sorting.middleware.SortingMiddleware',
     'misc.middleware.SortOrderMiddleware',
     'djangodblog.middleware.DBLogMiddleware',
+    'pinax.middleware.security.HideSensistiveFieldsMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
 )
 

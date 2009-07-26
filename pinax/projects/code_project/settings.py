@@ -79,6 +79,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.doc.XViewMiddleware',
     'pagination.middleware.PaginationMiddleware',
     'django_sorting.middleware.SortingMiddleware',
+    'pinax.middleware.security.HideSensistiveFieldsMiddleware',
 )
 
 ROOT_URLCONF = 'code_project.urls'

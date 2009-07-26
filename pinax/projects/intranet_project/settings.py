@@ -79,6 +79,7 @@ MIDDLEWARE_CLASSES = (
     'account.middleware.AuthenticatedMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'pagination.middleware.PaginationMiddleware',
+    'pinax.middleware.security.HideSensistiveFieldsMiddleware',
 )
 
 ROOT_URLCONF = 'intranet_project.urls'
