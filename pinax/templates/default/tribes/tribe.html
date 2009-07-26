@@ -113,8 +113,8 @@
                 {% endif %}
             {% endwith %}
             
-{% comment %}
-            <h2>{% trans "Wiki Articles" %}{% if total_articles %} ({{ total_articles }}){% endif %}</h2>
+            {% content_objects tribe "wiki.Article" as articles %}
+            <h2>{% trans "Wiki Articles" %}{% if articles %} ({{ articles|length }}){% endif %}</h2>
             
             {% if articles %}
                 <table class="topics">
@@ -132,7 +132,31 @@
                 </p>
             {% endif %}
             
+            {# the queryset returned here can be expensive since there is no select_related for photo join #}
+            {% content_objects tribe "photos.Pool" as photos %}
             
+            <h2>{% trans "Tribe Photo Pool" %}</h2>
+            
+            {% if photos %}
+                <div class="thumb-row clearfix">
+                    {% for photo in photos %}
+                    <div class="gallery-photo-thumb">
+                        <a href="{% groupurl photo_details tribe id=photo.photo.id %}"><img src="{{ photo.photo.get_thumbnail_url }}" alt="{{ photo.photo.title }}"/></a><br />
+                        <img src="{{ MEDIA_URL }}pinax/images/silk/icons/comment.png" border="0" class="noborder" align="absmiddle" /><a href="/photos/details/{{ photo.photo.id }}/">{% get_comment_count for photo as commentcount %} {% blocktrans %}{{ commentcount }} Comments {% endblocktrans %}</a>
+                   </div>
+                   {% endfor %}
+               </div>
+            {% else %}
+                <p>
+                    {% groupurl photo_upload tribe as photo_upload_url %}
+                    {% blocktrans %}
+                        There are no photos associated to this tribe. You can <a href="{{ photo_upload_url }}">add a photo</a>.</a>
+                    {% endblocktrans %}
+                </p>
+            {% endif %}
+            
+            
+{% comment %}
             <h2>{% trans "Tweets" %}</h2>
             
             {% tweet_listing tweets 1 0 %}
@@ -154,19 +178,6 @@
             <p>
                 <a href="{{ calendar.get_absolute_url }}">{% trans "calendar..." %}</a>
             </p>
-            
-            
-            {% if photos %}
-                <h2>{% trans "Tribe Photo Pool" %}</h2>
-                <div class="thumb-row clearfix">
-                    {% for photo in photos %}
-                    <div class="gallery-photo-thumb">
-                        <a href="/photos/details/{{ photo.photo.id }}/"><img src="{{ photo.photo.get_thumbnail_url }}" alt="{{ photo.photo.title }}"/></a><br />
-                        <img src="{{ MEDIA_URL }}pinax/images/silk/icons/comment.png" border="0" class="noborder" align="absmiddle" /><a href="/photos/details/{{ photo.photo.id }}/">{% get_comment_count for photo as commentcount %} {% blocktrans %}{{ commentcount }} Comments {% endblocktrans %}</a>
-                   </div>
-                   {% endfor %}
-               </div>
-            {% endif %}
 {% endcomment %} 
             
         {% endif %}

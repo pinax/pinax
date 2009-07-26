@@ -18,3 +18,4 @@ urlpatterns = patterns('tribes.views',
 
 urlpatterns += bridge.include_urls('topics.urls', r'^tribe/(?P<group_slug>[-\w]+)/topics/')
 urlpatterns += bridge.include_urls('wiki.urls', r'^tribe/(?P<group_slug>[-\w]+)/wiki/')
+urlpatterns += bridge.include_urls('photos.urls', r'^tribe/(?P<group_slug>[-\w]+)/photos/')

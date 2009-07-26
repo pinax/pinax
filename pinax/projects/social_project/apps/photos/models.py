@@ -1,9 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
-from photologue.models import *
 from datetime import datetime
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
+
+from photologue.models import *
 
 from tagging.fields import TagField
 
@@ -52,16 +53,17 @@ class Image(ImageModel):
         return ("photo_details", [self.pk])
     get_absolute_url = models.permalink(get_absolute_url)
 
+
 class Pool(models.Model):
     """
     model for a photo to be applied to an object
     """
 
-    photo           = models.ForeignKey(Image)
-    content_type    = models.ForeignKey(ContentType)
-    object_id       = models.PositiveIntegerField()
-    content_object  = generic.GenericForeignKey()
-    created_at      = models.DateTimeField(_('created_at'), default=datetime.now)
+    photo = models.ForeignKey(Image)
+    content_type = models.ForeignKey(ContentType)
+    object_id = models.PositiveIntegerField()
+    content_object = generic.GenericForeignKey()
+    created_at = models.DateTimeField(_('created_at'), default=datetime.now)
 
     class Meta:
         # Enforce unique associations per object

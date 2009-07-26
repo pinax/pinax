@@ -1,6 +1,7 @@
 {% load i18n %}
 {% load avatar_tags %}
 {% load tagging_tags %}
+{% load group_tags %}
 
 <div class="photo-right-profile clearfix">
     <div class="photo-avatar">{% avatar photo.member.username 50 %}</div>
@@ -35,12 +36,12 @@
     {% endif %}
     
     {% if is_me %}
-        <form action="{% url photo_destroy photo.id %}" method="POST">
+        <form action="{% groupurl photo_destroy group id=photo.id %}" method="POST">
             <label>Delete Photo</label> <input type="image" src="{{ MEDIA_URL }}pinax/images/silk/icons/delete.png" border="0" title="{% trans "Delete Photo" %}" />
                         <input type="hidden" name="action" value="delete"/>
         </form>
 
-        <a href="{% url photo_edit photo.id %}">Edit Photo</a>
+        <a href="{% groupurl photo_edit group id=photo.id %}">Edit Photo</a>
 
     {% endif %}
 
