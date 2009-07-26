@@ -76,8 +76,8 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
                     'to_user': username,
                     'message': ugettext("Let's be friends!"),
                 })
+                invitation_id = request.POST["invitation"]
                 if request.POST["action"] == "accept": # @@@ perhaps the form should just post to friends and be redirected here
-                    invitation_id = request.POST["invitation"]
                     try:
                         invitation = FriendshipInvitation.objects.get(id=invitation_id)
                         if invitation.to_user == request.user:
@@ -87,13 +87,22 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
                             other_friends = Friendship.objects.friends_for_user(other_user)
                     except FriendshipInvitation.DoesNotExist:
                         pass
+                elif request.POST["action"] == "decline":
+                    try:
+                        invitation = FriendshipInvitation.objects.get(id=invitation_id)
+                        if invitation.to_user == request.user:
+                            invitation.decline()
+                            request.user.message_set.create(message=_("You have declined the friendship request from %(from_user)s") % {'from_user': invitation.from_user})
+                            other_friends = Friendship.objects.friends_for_user(other_user)
+                    except FriendshipInvitation.DoesNotExist:
+                        pass
         else:
             invite_form = InviteFriendForm(request.user, {
                 'to_user': username,
                 'message': ugettext("Let's be friends!"),
             })
-    previous_invitations_to = FriendshipInvitation.objects.filter(to_user=other_user, from_user=request.user).exclude(status=8)
-    previous_invitations_from = FriendshipInvitation.objects.filter(to_user=request.user, from_user=other_user).exclude(status=8)
+    previous_invitations_to = FriendshipInvitation.objects.filter(to_user=other_user, from_user=request.user).exclude(status=8).exclude(status=6)
+    previous_invitations_from = FriendshipInvitation.objects.filter(to_user=request.user, from_user=other_user).exclude(status=8).exclude(status=6)
     
     if is_me:
         if request.method == "POST":

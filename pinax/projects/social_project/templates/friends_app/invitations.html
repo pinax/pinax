@@ -54,6 +54,11 @@
                                 <input type="hidden" name="action" value="accept"/>
                                 <input type="submit" value="{% trans 'accept' %}" />
                             </form>
+                            <form method="post" action="">
+                                <input type="hidden" name="invitation" value="{{ invitation.id }}"/>
+                                <input type="hidden" name="action" value="decline"/>
+                                <input type="submit" value="{% trans 'decline' %}" />
+                            </form>
                         </td>
                     </tr>
                 {% else %}
