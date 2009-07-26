@@ -134,7 +134,6 @@ INSTALLED_APPS = (
     
     # project specific
     'sorl.thumbnail',
-    'contact_form',
     'frontendadmin',
     'attachments',
     'django_generic_flatblocks',
