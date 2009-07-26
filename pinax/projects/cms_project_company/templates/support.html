@@ -1,0 +1,29 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load generic_flatblocks %}
+{% load attachments_tags %}
+
+{% block head_title %}{% trans "Support" %}{% endblock %}
+
+{% block tab_id %}id="support_tab"{% endblock %}
+
+{% block body %}
+    {% gblock "support_content" for "gblocks.TitleAndText" %} 
+    
+    <h2>Manuals</h2>
+    
+    {% gblock "support_content" for "gblocks.TitleAndText" into "content_obj" %}
+    {% get_attachments_for content_obj as "attachment_list" %}
+    
+    {% if attachment_list %}
+    <ul>
+    {% for att in attachment_list %}
+        <li><a href="{{ att.attachment_file.url }}">{{ att.filename }}</a> {% attachment_delete_link att %}</li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+    
+    {% attachment_form content_obj %}
+
+{% endblock %}

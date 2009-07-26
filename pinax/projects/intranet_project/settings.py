@@ -79,6 +79,7 @@ MIDDLEWARE_CLASSES = (
     'account.middleware.AuthenticatedMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'pagination.middleware.PaginationMiddleware',
+    'pinax.middleware.security.HideSensistiveFieldsMiddleware',
 )
 
 ROOT_URLCONF = 'intranet_project.urls'
@@ -95,12 +96,13 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.media",
     "django.core.context_processors.request",
     
+    "pinax.core.context_processors.contact_email",
+    "pinax.core.context_processors.site_name",
+    
     "notification.context_processors.notification",
     "announcements.context_processors.site_wide_announcements",
     "account.context_processors.openid",
     "account.context_processors.account",
-    "misc.context_processors.contact_email",
-    "misc.context_processors.site_name",
 )
 
 INSTALLED_APPS = (
@@ -111,6 +113,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.humanize',
     'django.contrib.markup',
+    'pinax.templatetags',
     
     # external
     'notification', # must be first
@@ -135,7 +138,6 @@ INSTALLED_APPS = (
     'account',
     'signup_codes',
     'groups',
-    'misc',
     'tagging_utils',
     #'pastebin',
     #'quickbar',

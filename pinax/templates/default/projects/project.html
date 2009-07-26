@@ -114,19 +114,16 @@
                 {% endif %}
             {% endwith %}
             
-            <h2>{% trans "Wiki Articles" %}{% if total_articles %} ({{ total_articles }}){% endif %}</h2>
+            {% content_objects project "wiki.Article" as articles %}
+            <h2>{% trans "Wiki Articles" %}{% if articles %} ({{ articles|length }}){% endif %}</h2>
             
-            {% groupurl wiki_list project as wiki_url %}
-            <p>More here soon but, in the meantime, here's a link to <a href="{{ wiki_url }}"> start a new article</a>.</p>
-            
-            {% comment %}
             {% if articles %}
                 <table class="topics">
                     {% for article in articles %}
                         {% show_teaser article %}
                     {% endfor %}
                 </table>
-                <p><a href="{% groupurl wiki_list project %}">{% trans "more..." %}</a></p>
+                <p><a href="{% groupurl wiki_list tribe %}">{% trans "more..." %}</a></p>
             {% else %}
                 {% groupurl wiki_list project as wiki_url %}
                 <p>
@@ -135,27 +132,12 @@
                     {% endblocktrans %}
                 </p>
             {% endif %}
-            {% endcomment %}
             
             <h2>{% trans "Tasks" %}</h2>
             
             {% groupurl task_list project as tasks_url %}
             <p>More here soon but, in the meantime, here's a link to the <a href="{{ tasks_url }}">task list</a>.</p>
-            
-{% comment %}
-            {% if photos %}
-                <h2>{% trans "Project Photo Pool" %}</h2>
-                <div class="thumb-row clearfix">
-                    {% for photo in photos %}
-                    <div class="gallery-photo-thumb">
-                        <a href="/photos/details/{{ photo.photo.id }}/"><img src="{{ photo.photo.get_thumbnail_url }}" alt="{{ photo.photo.title }}"/></a><br />
-                        <img src="{{ MEDIA_URL }}pinax/images/silk/icons/comment.png" border="0" class="noborder" align="absmiddle" /><a href="/photos/details/{{ photo.photo.id }}/">{% get_comment_count for photo as commentcount %} {% blocktrans %}{{ commentcount }} Comments {% endblocktrans %}</a>
-                   </div>
-                   {% endfor %}
-               </div>
-            {% endif %}
-{% endcomment %} 
-            
+                        
         {% endif %}
     </div>
 

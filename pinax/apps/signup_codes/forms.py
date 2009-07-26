@@ -8,7 +8,7 @@ from django.utils.translation import ugettext_lazy as _, ugettext
 
 from django.contrib.sites.models import Site
 
-from misc.utils import get_send_mail
+from pinax.core.utils import get_send_mail
 send_mail = get_send_mail()
 
 from account.forms import SignupForm as BaseSignupForm

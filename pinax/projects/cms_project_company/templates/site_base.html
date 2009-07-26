@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load openid_tags %}
+{% load generic_flatblocks %}
+
+{% block extra_head_base %}
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/site_tabs.css" />
+    {% block extra_head %}{% endblock %}
+{% endblock %}
+
+{% block website_title %}
+    {% gblock "website_header" for "gblocks.Title" with "gblocks/title/website.html" %}
+{% endblock %}
+
+{% block login %}
+    {% if user.is_authenticated %}
+       <a class="tab_logout" href="/openid/logout/?next={% url acct_logout %}"><span>{% trans "Logout" %}</span></a>
+       <a class="tab_account" href="{% url acct_email %}"><span>{% trans "Account" %}</span></a>
+    {% else %}
+        <a class="tab_login" href="{% url acct_login %}"><span>{% trans "Login" %}</span></a>
+    {% endif %}
+{% endblock %}
+
+{% block tabs %}
+    {% spaceless %}
+    <a class="tab_home" href="{% url home %}">{% trans "Home" %}</a>
+    <a class="tab_products" href="{% url products %}">{% trans "Products" %}</a>
+    <a class="tab_support" href="{% url support %}">{% trans "Support" %}</a>
+    <a class="tab_about_us" href="{% url about_us %}">{% trans "About Us" %}</a>
+    {% endspaceless %}
+{% endblock %}
+
+{% block content_image %}
+    {% gblock "website_image" for "gblocks.image" with "gblocks/image/content_image.html" %}
+{% endblock %}
+
+{% block footer %}
+    {% gblock "website_footer" for "gblocks.Text" %}
+{% endblock %}
+
+{% block extra_body %}
+<script type="text/javascript">
+$(document).ready(function(){
+    $('a.frontendadmin_edit').hover(
+        function(){$(this).parent().css('outline', '4px solid #E9B007')},
+        function(){$(this).parent().css('outline', '')}
+    );
+    
+    $('a.frontendadmin_edit').click(function(){
+            $(this).parent().css('outline', '');
+            $(this).parent().load(this.href);
+            return false;
+    });
+    
+    $('a.frontendadmin_delete').hover(
+        function(){$(this).parent().css('outline', '4px solid #E9B007')},
+        function(){$(this).parent().css('outline', '')}
+    );
+});
+</script>
+{% endblock %}

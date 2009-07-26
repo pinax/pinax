@@ -1,0 +1,12 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load generic_flatblocks %}
+
+{% block head_title %}{% trans "Suppliers of Cool Stuff" %}{% endblock %}
+
+{% block tab_id %}id="home_tab"{% endblock %}
+
+{% block body %}
+    {% gblock "homepage_content" for "gblocks.TitleTextAndImage" %}
+{% endblock %}

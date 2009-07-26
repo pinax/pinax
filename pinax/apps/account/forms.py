@@ -7,7 +7,7 @@ from django.utils.translation import ugettext_lazy as _, ugettext
 from django.utils.encoding import smart_unicode
 from django.utils.hashcompat import sha_constructor
 
-from misc.utils import get_send_mail
+from pinax.core.utils import get_send_mail
 send_mail = get_send_mail()
 
 from django.contrib.auth import authenticate, login
