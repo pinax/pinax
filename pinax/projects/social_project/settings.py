@@ -141,6 +141,7 @@ INSTALLED_APPS = (
     'pagination',
 #    'gravatar',
     'threadedcomments',
+    'threadedcomments_extras',
     'wiki',
     'swaps',
     'timezones',
