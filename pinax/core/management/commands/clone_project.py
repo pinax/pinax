@@ -182,11 +182,6 @@ class Command(BaseCommand):
         operations.
         """
         
-        if not args:
-            # note: --help prints full path to pinax-admin
-            self.print_help("pinax-admin", "clone_project")
-            sys.exit(0)
-        
         if options.get('list_projects'):
             pinax_root = get_pinax_root(options.get('pinax_root'))
             print "Available Projects"
@@ -198,6 +193,11 @@ class Command(BaseCommand):
                 for line in about.strip().splitlines():
                     print '    %s' % line
                 print
+            sys.exit(0)
+        
+        if not args:
+            # note: --help prints full path to pinax-admin
+            self.print_help("pinax-admin", "clone_project")
             sys.exit(0)
         
         main(options.get('pinax_root'), args[0], args[1],
