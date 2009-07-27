@@ -30,7 +30,7 @@
             <div id="nudge-history-target">
                 <ol>
                 {% for item in nudge.history %}
-                     <li><a href="{% groupurl tasks_for_user group id=item.nudger %}">{{ item.nudger }}</a>
+                     <li><a href="{% groupurl tasks_for_user group username=item.nudger %}">{{ item.nudger }}</a>
                     {{ item.modified|shorttimesince }}</li>
                 {% endfor %}
                 </ol>
