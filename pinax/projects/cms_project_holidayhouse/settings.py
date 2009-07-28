@@ -142,6 +142,10 @@ INSTALLED_APPS = (
 
 )
 
+FIXTURE_DIRS = [
+    os.path.join(PROJECT_ROOT, "fixtures"),
+]
+
 ABSOLUTE_URL_OVERRIDES = {
     "auth.user": lambda o: "/profiles/%s/" % o.username,
 }
@@ -159,6 +163,10 @@ CONTACT_EMAIL = "feedback@example.com"
 SITE_NAME = "Pinax"
 LOGIN_URL = "/account/login"
 LOGIN_REDIRECT_URLNAME = "home"
+
+SERIALIZATION_MODULES = {
+    "jsonfk": "pinax.core.serializers.jsonfk",
+}
 
 # local_settings.py can be used to override environment-specific settings
 # like database and email that differ between development and production.
