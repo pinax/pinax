@@ -32,8 +32,6 @@ urlpatterns = patterns('',
     (r'^groups/', include('basic_groups.urls')),
     (r'^tribes/', include('tribes.urls')),
     (r'^projects/', include('projects.urls')),
-    #(r'^tribes/', include('tribes_ng.urls')),
-    #(r'^projects/', include('temp_projects.urls')),
     
     (r'^admin/(.*)', admin.site.root),
 )
