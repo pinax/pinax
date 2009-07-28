@@ -24,7 +24,7 @@
         {% endblock %}
     </head>
     
-    <body>
+    <body class="{% block body_class %}{% endblock %}">
         {% if site_wide_announcements %}
             <div id="site_wide_announcements">
                 <ul>
@@ -41,8 +41,8 @@
         <div id="tabhead">
             <div class="logo" dir="ltr">{% block logo_link_image %}{% endblock %}</div>
             <div class="login">{% block login %}{% endblock %}{% block locale_switcher %}{% endblock %}<div style="text-align: right;"></div></div>
-            <div class="tabs" {% block tab_id %}{% endblock %}>{% block tabs %}{% endblock %}</div>
-            <div class="right_tab" {% block rtab_id %}{% endblock %}>{% block right_tab %}{% endblock %}</div>
+            <div id="left_tabs" >{% block left_tabs %}{% endblock %}</div>
+            <div id="right_tabs" >{% block right_tabs %}{% endblock %}</div>
         </div>
         <div id="subnav" class="clearfix">{% block subnav_base %}{% block subnav %}&nbsp;{% endblock %}{% endblock %}</div>
         

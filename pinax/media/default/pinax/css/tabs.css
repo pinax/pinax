@@ -1,40 +1,34 @@
 /* GENERAL TAB STYLING */
 
-#tabhead .tabs {
+#left_tabs {
     position: absolute;
     bottom: -1px; /* must be same thickness as tab border */
     left: 210px; /* based on width and padding of logo */
 }
-#tabhead .tabs td {
-    vertical-align: bottom;
-    padding-right: 0; /* space between tabs */
-    padding-bottom: 1px; /* must be same thickness as tab border */
-}
-#tabhead .tab a, #tabhead .tab a:visited {
-    color: #444; /* unselected tab text colour */
-    font-weight: bold;
-    text-decoration: none;
-}
-#tabhead .tab a:hover {
-    color: #666; /* unselected tab text hover colour */
-}
-#tabhead .tab div {
-    background-color: #DDD; /* unselected tab colour */
-    padding: 0;
-    padding-bottom: 4px;
-    padding-top: 5px;
-    margin: 0 1px; /* to compensate for border */
-}
-#tabhead .tab div a {
-    padding: 5px 12px;
-}
-#tabhead .right_tab {
+#right_tabs {
     position: absolute;
     right: 15px;
     bottom: -1px; /* must be same thickness as tab border */
 }
-#tabhead .right_tab td {
-    vertical-align: bottom;
-    padding-right: 0; /* space between tabs */
-    padding-bottom: 1px; /* must be same thickness as tab border */
+
+ul.tabs a, ul.tabs a:visited {
+    color: #444; /* unselected tab text colour */
+    font-weight: bold;
+    text-decoration: none;
+}
+ul.tabs a:hover {
+    color: #666; /* unselected tab text hover colour */
+}
+ul.tabs li {
+    list-style-type: none;
+    display: inline;
+    background-color: #DDD; /* unselected tab colour */
+    padding: 5px 0 4px;
+    margin: 0 1px; /* to compensate for border */
+}
+ul.tabs li a {
+    padding: 5px 12px;
+}
+ul.tabs {
+    margin: 0 0 5px;
 }

@@ -7,74 +7,74 @@ You can completely control the look and feel of your Pinax-based site
 via the templates, so if you don't like the way the tabs are done, you
 can always do it a completely different way.
 
-But this is how tab navigation is done in the sample projects.
+But this is how tab navigation is done in most of the sample projects.
 
 Quick Start
 -----------
 
 Here is how to add a new tab for your app ``myapp``:
 
- 1. In ``site_base.html`` add a new ``td`` in the ``tabs`` or ``right_tab`` block.
-    Make sure that ``td`` is in a class specific to that tab, e.g. ``rtab_myapp``
+ 1. In ``site_base.html`` add a new ``li`` in the ``right_tabs`` block.
+    Make sure that ``li`` has and ``id`` specific to that to that tab,
+    e.g. ``tab_myapp``
 
  2. Create a ``myapps/base.html`` template that all pages under that tab will
-    extend. Make sure it defines a block ``tab_id`` or ``rtab_id``
-    (depending on whether it's a left or right tab) with content
-    ``id="myapp_tab"``
+    extend. Make sure it defines a block ``body_class`` with content
+    ``myapp``
     
- 3. edit the CSS file (``base.css`` or ``tabs.css`` if it exists) and at the
+ 3. edit the CSS file (``site_tabs.css`` if it exists) and at the
     appropriate points add the selectors:
     
-    * ``#myapp_tab .rtab_myapp``
-    * ``#myapp_tab .rtab_myapp a``
-    * ``#myapp_tab .rtab_myapp div``
+    * ``body.myapp #tab_myapp``
+    * ``body.myapp #tab_myapp a``
 
 
 Details
 -------
 
-``base.html`` has the following:
+The global ``base.html`` (under ``pinax/templates/default/``) has the following:
 
 ::
+    ...
+    <body class="{% block body_class %}{% endblock %}">
     
+    ...
     <div id="tabhead">
-        <div class="tabs" {% block tab_id %}{% endblock %}>{% block tabs %}{% endblock %}</div>
-        <div class="right_tab" {% block rtab_id %}{% endblock %}>{% block right_tab %}{% endblock %}</div>
+        ...
+        <div id="left_tabs" >{% block left_tabs %}{% endblock %}</div>
+        <div id="right_tabs" >{% block right_tabs %}{% endblock %}</div>
     </div>
-    <div id="subnav" class="clearfix">{% block subnav %}&nbsp;{% endblock %}</div>
+    <div id="subnav" class="clearfix">{% block subnav_base %}{% block subnav %}&nbsp;{% endblock %}{% endblock %}</div>
 
 Note that this defines five blocks:
 
- * ``tab_id``
- * ``tabs``
- * ``rtab_id``
- * ``right_tab``
+ * ``body_class``
+ * ``left_tabs``
+ * ``right_tabs``
  * ``subnav``
  
 You shouldn't normally need to change this at all for your site unless
 you want to make a change like move where the subnav goes.
 
-``site_base.html`` then override the ``tabs`` and ``right_tab``
-blocks with the actual site-wide tabs. For example, here is a
-``right_tab`` with three tabs defined that only show when the user is
+``site_base.html`` in your project's templates then overrides the ``left_tabs``
+and or ``right_tabs`` blocks with the actual site-wide tabs. For example, here is a
+``right_tabs`` with three tabs defined that only show when the user is
 logged in:
 
 ::
     
-    {% block right_tab %}
+    {% block right_tabs %}
         {% if user.is_authenticated %}
-            <table>
-                <tr>
-                    <td class="tab rtab_profile"><div><a href="{% url profile_detail user %}">Profile</a></div></td>
-                    <td class="tab rtab_blogs"><div><a href="{% url blog_list_user %}">Blogs</a></div></td>
-                    <td class="tab rtab_bookmarks"><div><a href="{% url all_bookmarks %}">Bookmarks</a></div></td>
-                </tr>
-            </table>
+            <ul class="tabs">{% spaceless %}
+                <li id="tab_profile"><a href="{% url profile_detail user %}">Profile</a></li>
+                <li id="tab_blogs"><a href="{% url blog_list_user %}">Blogs</a></li>
+                <li id="tab_bookmarks"><a href="{% url all_bookmarks %}">Bookmarks</a></li>
+            {% endspaceless %}</ul>
         {% endif %}
     {% endblock %}
 
-Note that each ``td`` is put in the class ``tab`` as well as a class
-specific to the tab, e.g. ``rtab_bookmarks`` for the bookmarks tab.
+Note that each ``li`` is given an ``id`` specific to the tab, e.g. ``tab_bookmarks``
+for the bookmarks tab.
 
 Now, any page under the bookmarks tab extends the template
 ``bookmarks/base.html`` which looks something like this:
@@ -83,7 +83,7 @@ Now, any page under the bookmarks tab extends the template
     
     {% extends "site_base.html" %}
     
-    {% block rtab_id %}id="bookmarks_tab"{% endblock %}
+    {% block body_class %}bookmarks{% endblock %}
     
     {% block subnav %}
         <ul>
@@ -96,45 +96,33 @@ Now, any page under the bookmarks tab extends the template
 Notice that this bookmarks-specific base template defines the ``subnav``
 block which provides the subnav for all bookmarks pages.
 
-It also defines the ``rtab_id`` block we saw used by the site-wide ``base.html``.
-This adds ``id="bookmarks_tab"`` to the ``div`` in the site-wide ``base.html``
-template responsible for the right tab. A left tab would define ``tab_id``
-similarly instead.
+It also defines the ``body_class`` block we saw used by the global ``base.html``.
 
-Now all that remains is the CSS that ties the ``div`` in ``base.html``
-with ``id="bookmarks_tab``" to the ``td`` in ``site_base.html`` that has is
-in class ``rtab_bookmarks``.
+Now all that remains is the CSS that ties the ``body`` in ``base.html``
+with ``class="bookmarks``" to the ``li`` in ``site_base.html`` that has
+``id="tab_bookmarks"``.
 
-This is done in CSS. It could be done in ``base.css`` like social_project
-does it or in a separate ``tabs.css`` like in basic_project (as long as the
-relevant pages all load that CSS)
-
+This is done in CSS.
 ::
     
-    #profile_tab .rtab_profile,
-    #blogs_tab .rtab_blogs,
-    #bookmarks_tab .rtab_bookmarks
+    /* SITE-SPECIFIC TAB STYLING */
+    
+    body.profile #tab_profile a,
+    body.blogs #tab_blogs a,
+    body.bookmarks #tab_bookmarks a
     {
-        bottom: -1px !important;
-        padding-bottom: 0 !important;
+        color: #000; /* selected tab text colour */
     }
-    #profile_tab .rtab_profile a,
-    #blogs_tab .rtab_blogs a,
-    #bookmarks_tab .rtab_bookmarks a
+    body.profile #tab_profile,
+    body.blogs #tab_blogs,
+    body.bookmarks #tab_bookmarks
     {
-        color: #000 !important; /* selected tab text colour */
-    }
-    #profile_tab .rtab_profile div,
-    #blogs_tab .rtab_blogs div,
-    #bookmarks_tab .rtab_bookmarks div
-    {
-        margin: 0;
-        background-color: #DEF !important; /* selected tab colour */
-        border-left: 1px solid #000 !important; /* tab border */
-        border-top: 1px solid #000 !important; /* tab border */
-        border-right: 1px solid #000 !important; /* tab border */
-        padding-bottom: 5px; /* 1px more than unselected padding-bottom */
+        margin: 0; /* to compensate for border */
+        padding: 5px 0 5px;
+        background-color: #DEF; /* selected tab colour */
+        border-left: 1px solid #000; /* tab border */
+        border-top: 1px solid #000; /* tab border */
+        border-right: 1px solid #000; /* tab border */
     }
 
-Notice that the selector ``#bookmarks_tab .rtab_bookmarks`` appears three
-times, once by itself, once with an ``a`` and once with a ``div``.
+Notice that the selector ``body.bookmarks #tab_bookmarks`` appears twice.
