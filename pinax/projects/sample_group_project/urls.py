@@ -31,6 +31,7 @@ urlpatterns = patterns('',
     (r'^announcements/', include('announcements.urls')),
     (r'^tagging_utils/', include('tagging_utils.urls')),
     (r'^comments/', include('threadedcomments.urls')),
+    (r'^attachments/', include('attachments.urls')),
     
     (r'^groups/', include('basic_groups.urls')),
     (r'^tribes/', include('tribes.urls')),

@@ -133,6 +133,8 @@ INSTALLED_APPS = (
     'gravatar',
     'django_sorting',
     'photologue',
+    'attachments',
+    'django_markup',
     
     # internal (for now)
     'basic_profiles',
