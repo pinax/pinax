@@ -62,7 +62,7 @@ MEDIA_URL = '/site_media/'
 ADMIN_MEDIA_PREFIX = '/media/'
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'bk-e2zv3humar79nm=j*bwc=-ymeit(8a20whp3goq4dh71t)s'
+SECRET_KEY = ''
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -154,6 +154,7 @@ AUTH_PROFILE_MODULE = 'basic_profiles.Profile'
 NOTIFICATION_LANGUAGE_MODULE = 'account.Account'
 
 ACCOUNT_OPEN_SIGNUP = False
+ACCOUNT_REQUIRED_EMAIL = False
 ACCOUNT_EMAIL_VERIFICATION = False
 
 EMAIL_CONFIRMATION_DAYS = 2

@@ -1,0 +1,19 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+
+{% block body_class %}groups{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{{ MEDIA_URL }}basic_groups/css/basic_groups.css" />
+{% endblock %}
+
+{% block subnav %}
+    <ul>
+        {% if user.is_authenticated %}
+            <li><a href="{% url group_create %}">{% trans "Create a Group" %}</a></li>
+            <li><a href="{% url your_groups %} ">{% trans "Your Groups" %}</a></li>
+        {% endif %}
+        <li><a href="{% url group_list %}">{% trans "All Groups" %}</a></li>
+    </ul>
+{% endblock %}

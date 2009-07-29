@@ -1,61 +1,31 @@
 /* SITE-SPECIFIC TAB STYLING */
 
-
-/* selected tabs */
-#home_tab .tab_home,
-#apps_tab .tab_apps,
-#sites_tab .tab_sites,
-#team_tab .tab_team,
-#profile_tab .rtab_profile,
-#blogs_tab .rtab_blogs,
-#swaps_tab .rtab_swaps,
-#photos_tab .rtab_photos,
-#tribes_tab .rtab_tribes,
-#tweets_tab .rtab_tweets,
-#bookmarks_tab .rtab_bookmarks,
-#wiki_tab .rtab_wiki,
-#inbox_tab .rtab_inbox,
-#locations_tab .rtab_locations
+body.profile #tab_profile a,
+body.blogs #tab_blogs a,
+body.swaps #tab_swaps a,
+body.photos #tab_photos a,
+body.tribes #tab_tribes a,
+body.tweets #tab_tweets a,
+body.bookmarks #tab_bookmarks a,
+body.locations #tab_locations a,
+body.inbox #tab_inbox a
 {
-    bottom: -1px !important;
-    padding-bottom: 0 !important;
+    color: #000; /* selected tab text colour */
 }
-#home_tab .tab_home a,
-#apps_tab .tab_apps a,
-#sites_tab .tab_sites a,
-#team_tab .tab_team a,
-#profile_tab .rtab_profile a,
-#blogs_tab .rtab_blogs a,
-#swaps_tab .rtab_swaps a,
-#photos_tab .rtab_photos a,
-#tribes_tab .rtab_tribes a,
-#tweets_tab .rtab_tweets a,
-#bookmarks_tab .rtab_bookmarks a,
-#wiki_tab .rtab_wiki a,
-#inbox_tab .rtab_inbox a,
-#locations_tab .rtab_locations a
+body.profile #tab_profile,
+body.blogs #tab_blogs,
+body.swaps #tab_swaps,
+body.photos #tab_photos,
+body.tribes #tab_tribes,
+body.tweets #tab_tweets,
+body.bookmarks #tab_bookmarks,
+body.locations #tab_locations,
+body.inbox #tab_inbox
 {
-    color: #000 !important; /* selected tab text colour */
-}
-#home_tab .tab_home div,
-#apps_tab .tab_apps div,
-#sites_tab .tab_sites div,
-#team_tab .tab_team div,
-#profile_tab .rtab_profile div,
-#blogs_tab .rtab_blogs div,
-#swaps_tab .rtab_swaps div,
-#photos_tab .rtab_photos div,
-#tribes_tab .rtab_tribes div,
-#tweets_tab .rtab_tweets div,
-#bookmarks_tab .rtab_bookmarks div,
-#wiki_tab .rtab_wiki div,
-#inbox_tab .rtab_inbox div,
-#locations_tab .rtab_locations div
-{
-    margin: 0;
-    background-color: #DEF !important; /* selected tab colour */
-    border-left: 1px solid #000 !important; /* tab border */
-    border-top: 1px solid #000 !important; /* tab border */
-    border-right: 1px solid #000 !important; /* tab border */
-    padding-bottom: 5px; /* 1px more than unselected padding-bottom */
+    margin: 0; /* to compensate for border */
+    padding: 5px 0 5px;
+    background-color: #DEF; /* selected tab colour */
+    border-left: 1px solid #000; /* tab border */
+    border-top: 1px solid #000; /* tab border */
+    border-right: 1px solid #000; /* tab border */
 }

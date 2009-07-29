@@ -8,14 +8,30 @@
 {% block tab_id %}id="home_tab"{% endblock %}
 
 {% block body %}
-    {% blocktrans %}
-        <p><b>Pinax</b> is a <a href="http://djangoproject.com/">Django</a> project intended to provide a starting point for websites. By integrating numerous reusable Django apps to take care of the things that many sites have in common, it lets you focus on what makes your site different.</p>
-        
-        <p>This site is a complete running example of Pinax with most of the features included.</p>
-        
-        <p>For more information about Pinax, see <a href="http://pinaxproject.com/">http://pinaxproject.com/</a>.
-    {% endblocktrans %}
+    <h1>{% trans "Welcome to Pinax" %}</h1>
     
+    <p>
+        {% blocktrans %}
+        <b>Pinax</b> is a <a href="http://djangoproject.com/">Django</a>
+        project intended to provide a starting point for websites. By
+        integrating numerous reusable Django apps to take care of the
+        things that many sites have in common, it lets you focus on what
+        makes your site different.
+        {% endblocktrans %}
+    </p>
+    
+    <p>
+        {% blocktrans %}
+        For more information about Pinax, see
+        <a href="http://pinaxproject.com/">http://pinaxproject.com/</a>.
+        {% endblocktrans %}
+    </p>
+    
+    <h2>{% trans "About this project" %}</h2>
+    
+    {{ about_text|linebreaks }}
+    
+    <hr />
     {% if user.is_authenticated %}
         {% url what_next as what_next_url %}
         <p class="what_next">{% blocktrans %}Wondering <a href="{{ what_next_url }}">What Next</a>?{% endblocktrans %}</p>
@@ -27,8 +43,6 @@
         {% else %}
             <p>{% blocktrans %}You can <a href="{{ login_url }}">Log in</a> to try out the site.{% endblocktrans %}</p>
         {% endifsetting %}
-        
-        <p><b>{% blocktrans %}At this stage, there is openid support, email verification, password management, site announcements, user-to-user messaging, friend invitation (both internal and external to the site), a basic twitter clone, interest groups (called tribes), threaded discussions, wikis, blogging, bookmarks, contact import (from vCard, Google or Yahoo), photo management and a notification framework.{% endblocktrans %}</b></p>
     {% endif %}
     
 {% endblock %}

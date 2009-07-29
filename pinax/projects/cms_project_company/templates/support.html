@@ -18,10 +18,12 @@
     
     {% if attachment_list %}
     <ul>
-    {% for att in attachment_list %}
-        <li><a href="{{ att.attachment_file.url }}">{{ att.filename }}</a> {% attachment_delete_link att %}</li>
-    {% endfor %}
+        {% for att in attachment_list %}
+            <li><a href="{{ att.attachment_file.url }}">{{ att.filename }}</a> {% attachment_delete_link att %}</li>
+        {% endfor %}
     </ul>
+    {% else %}
+        <p>No manuals available.</p>
     {% endif %}
     
     {% attachment_form content_obj %}

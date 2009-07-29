@@ -62,7 +62,7 @@ MEDIA_URL = '/site_media/'
 ADMIN_MEDIA_PREFIX = '/media/admin/'
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'd$0x+40-omi^!k%h^9$p!b+jb^f48+nd4)49u*3+3moiednw2o'
+SECRET_KEY = ''
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -142,14 +142,29 @@ INSTALLED_APPS = (
 
 )
 
+FIXTURE_DIRS = [
+    os.path.join(PROJECT_ROOT, "fixtures"),
+]
+
 ABSOLUTE_URL_OVERRIDES = {
     "auth.user": lambda o: "/profiles/%s/" % o.username,
 }
 
+MARKUP_FILTER_FALLBACK = 'none'
+MARKUP_CHOICES = (
+    ('restructuredtext', u'reStructuredText'),
+    ('textile', u'Textile'),
+    ('markdown', u'Markdown'),
+    ('creole', u'Creole'),
+)
+WIKI_MARKUP_CHOICES = MARKUP_CHOICES
+
 AUTH_PROFILE_MODULE = 'basic_profiles.Profile'
 NOTIFICATION_LANGUAGE_MODULE = 'account.Account'
 
-ACCOUNT_OPEN_SIGNUP = True
+# ACCOUNT_OPEN_SIGNUP is not used by this project, but it acts as if it was
+# set to False
+ACCOUNT_OPEN_SIGNUP = False
 ACCOUNT_REQUIRED_EMAIL = False
 ACCOUNT_EMAIL_VERIFICATION = False
 
@@ -157,8 +172,12 @@ EMAIL_CONFIRMATION_DAYS = 2
 EMAIL_DEBUG = DEBUG
 CONTACT_EMAIL = "feedback@example.com"
 SITE_NAME = "Acme, Inc."
-LOGIN_URL = "/account/login"
+LOGIN_URL = "/account/login/"
 LOGIN_REDIRECT_URLNAME = "home"
+
+SERIALIZATION_MODULES = {
+    "jsonfk": "pinax.core.serializers.jsonfk",
+}
 
 # local_settings.py can be used to override environment-specific settings
 # like database and email that differ between development and production.

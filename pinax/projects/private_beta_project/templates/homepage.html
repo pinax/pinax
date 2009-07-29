@@ -7,21 +7,48 @@
 {% block tab_id %}id="home_tab"{% endblock %}
 
 {% block body %}
-
-<p>We are currently in active development. If you would like to receive a beta code for this please give us your e-mail address below</p>
-
-<form method="POST" action="">
-    {{ form.as_p }}
-    <input type="submit" value="Sign up" />
-</form>
-
-<p>- or -</p>
-
-<p>You can use a sign-up code to sign-up with the site right now.</p>
-
-<form method="GET" action="{% url acct_signup %}">
-    <input type="text" name="code" />
-    <input type="submit" value="Sign up" />
-</form>
-
+    <h1>{% trans "Welcome to Pinax" %}</h1>
+    
+    <p>
+        {% blocktrans %}
+        <b>Pinax</b> is a <a href="http://djangoproject.com/">Django</a>
+        project intended to provide a starting point for websites. By
+        integrating numerous reusable Django apps to take care of the
+        things that many sites have in common, it lets you focus on what
+        makes your site different.
+        {% endblocktrans %}
+    </p>
+    
+    <p>
+        {% blocktrans %}
+        For more information about Pinax, see
+        <a href="http://pinaxproject.com/">http://pinaxproject.com/</a>.
+        {% endblocktrans %}
+    </p>
+    
+    <h2>{% trans "About this project" %}</h2>
+    
+    {{ about_text|linebreaks }}
+    
+    <hr />
+    
+    <p>
+        We are currently in active development. If you would like to receive a
+        beta code for this please give us your e-mail address below
+    </p>
+    
+    <form method="POST" action="">
+        {{ form.as_p }}
+        <input type="submit" value="Sign up" />
+    </form>
+    
+    <p>- or -</p>
+    
+    <p>You can use a sign-up code to sign-up with the site right now.</p>
+    
+    <form method="GET" action="{% url acct_signup %}">
+        <input type="text" name="code" />
+        <input type="submit" value="Sign up" />
+    </form>
+    
 {% endblock %}

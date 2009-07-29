@@ -1,0 +1,19 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load group_tags %}
+
+{% block body_class %}photos{% endblock %}
+
+{% block subnav %}
+    {% if user.is_authenticated %}
+        <ul>
+            <li><a href="{% groupurl photos group %} ">{% trans "Latest Photos" %}</a></li>
+            <li><a href="{% groupurl photos_yours group %}">{% trans "Your Photos" %}</a></li>
+            <li><a href="{% url friends_photos %}">{% trans "Friends' Photos" %}</a></li>
+            <li><a href="{% groupurl photo_upload group %}">{% trans "Upload a Photo" %}</a></li>
+        </ul>
+    {% else %}
+        &nbsp;
+    {% endif %}
+{% endblock %}

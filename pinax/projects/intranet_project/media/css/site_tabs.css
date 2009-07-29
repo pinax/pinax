@@ -1,41 +1,23 @@
 /* SITE-SPECIFIC TAB STYLING */
 
-#home_tab .tab_home,
-#profile_tab .rtab_profile,
-#wiki_tab .rtab_wiki,
-#tasks_tab .rtab_tasks,
-#pastebin_tab .rtab_pastebin,
-#documents_tab .rtab_documents,
-#bookmarks_tab .rtab_bookmarks,
-#notices_tab .rtab_notices
+body.profile #tab_profile a,
+body.wiki #tab_wiki a,
+body.tasks #tab_tasks a,
+body.bookmarks #tab_bookmarks a,
+body.notices #tab_notices a
 {
-    bottom: -1px !important;
-    padding-bottom: 0 !important;
+    color: #000; /* selected tab text colour */
 }
-#home_tab .tab_home a,
-#profile_tab .rtab_profile a,
-#wiki_tab .rtab_wiki a,
-#tasks_tab .rtab_tasks a,
-#pastebin_tab .rtab_pastebin a,
-#documents_tab .rtab_documents a,
-#bookmarks_tab .rtab_bookmarks a,
-#notices_tab .rtab_notices a
+body.profile #tab_profile,
+body.wiki #tab_wiki,
+body.tasks #tab_tasks,
+body.bookmarks #tab_bookmarks,
+body.notices #tab_notices
 {
-    color: #000 !important; /* selected tab text colour */
-}
-#home_tab .tab_home div,
-#profile_tab .rtab_profile div,
-#wiki_tab .rtab_wiki div,
-#tasks_tab .rtab_tasks div,
-#pastebin_tab .rtab_pastebin div,
-#documents_tab .rtab_documents div,
-#bookmarks_tab .rtab_bookmarks div,
-#notices_tab .rtab_notices div
-{
-    margin: 0;
-    background-color: #DEF !important; /* selected tab colour */
-    border-left: 1px solid #000 !important; /* tab border */
-    border-top: 1px solid #000 !important; /* tab border */
-    border-right: 1px solid #000 !important; /* tab border */
-    padding-bottom: 5px; /* 1px more than unselected padding-bottom */
+    margin: 0; /* to compensate for border */
+    padding: 5px 0 5px;
+    background-color: #DEF; /* selected tab colour */
+    border-left: 1px solid #000; /* tab border */
+    border-top: 1px solid #000; /* tab border */
+    border-right: 1px solid #000; /* tab border */
 }

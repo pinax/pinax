@@ -5,13 +5,16 @@ from django.core.urlresolvers import reverse
 
 from django.views.generic.simple import direct_to_template
 
-from account.openid_consumer import PinaxConsumer
-from waitinglist.forms import WaitingListEntryForm
-
 from django.contrib import admin
 admin.autodiscover()
 
+from account.openid_consumer import PinaxConsumer
+from waitinglist.forms import WaitingListEntryForm
 
+import private_beta_project as project
+
+
+# @@@ turn into template tag
 def homepage(request):
     if request.method == "POST":
         form = WaitingListEntryForm(request.POST)
@@ -22,12 +25,15 @@ def homepage(request):
         form = WaitingListEntryForm()
     return direct_to_template(request, "homepage.html", {
         "form": form,
+        "about_text": project.__about__,
     })
+
 
 if settings.ACCOUNT_OPEN_SIGNUP:
     signup_view = "account.views.signup"
 else:
     signup_view = "signup_codes.views.signup"
+
 
 urlpatterns = patterns('',
     url(r'^$', homepage, name="home"),

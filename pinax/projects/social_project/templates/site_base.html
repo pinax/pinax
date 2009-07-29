@@ -34,31 +34,19 @@
 
 {% block logo_link_image %}<a href="{% url home %}"><img src="{{ MEDIA_URL }}pinax/images/logo.png" alt="Pinax"/></a>{% endblock %}
 
-{% block tabs %}
-{% comment %}
-    <table>
-        <tr>
-            <td class="tab tab_home"><div><a href="{% url home %}">{% trans "Home" %}</a></div></td>
-        </tr>
-    </table>
-{% endcomment %}
-{% endblock %}
-
-{% block right_tab %}
+{% block right_tabs %}
     {% if user.is_authenticated %}
-        <table>
-            <tr>
-                <td class="tab rtab_profile"><div><a href="{% url profile_detail user %}">{% trans "Profile" %}</a></div></td>
-                <td class="tab rtab_photos"><div><a href="{% url photos %}">{% trans "Photos" %}</a></div></td>
-                <td class="tab rtab_blogs"><div><a href="{% url blog_list_all %}">{% trans "Blogs" %}</a></div></td>
-                <td class="tab rtab_tribes"><div><a href="{% url tribe_list %}">{% trans "Tribes" %}</a></div></td>
-                <td class="tab rtab_tweets"><div><a href="{% url tweets_you_follow %}">{% trans "Tweets" %}</a></div></td>
-                <td class="tab rtab_bookmarks"><div><a href="{% url all_bookmarks %}">{% trans "Bookmarks" %}</a></div></td>
-                <td class="tab rtab_swaps"><div><a href="{% url offer_list_all %}">{% trans "Swaps" %}</a></div></td>
-                <td class="tab rtab_locations"><div><a href="{% url loc_yours %}">{% trans "Locations" %}</a></div></td>
-                <td class="tab rtab_inbox"><div><a href="{% url messages_inbox %}">{% trans "Inbox" %} ({{ combined_inbox_count }})</a></div></td>
-            </tr>
-        </table>
+        <ul class="tabs">{% spaceless %}
+            <li id="tab_profile"><a href="{% url profile_detail user %}">{% trans "Profile" %}</a></li>
+            <li id="tab_photos"><a href="{% url photos %}">{% trans "Photos" %}</a></li>
+            <li id="tab_blogs"><a href="{% url blog_list_all %}">{% trans "Blogs" %}</a></li>
+            <li id="tab_tribes"><a href="{% url tribe_list %}">{% trans "Tribes" %}</a></li>
+            <li id="tab_tweets"><a href="{% url tweets_you_follow %}">{% trans "Tweets" %}</a></li>
+            <li id="tab_bookmarks"><a href="{% url all_bookmarks %}">{% trans "Bookmarks" %}</a></li>
+            <li id="tab_swaps"><a href="{% url offer_list_all %}">{% trans "Swaps" %}</a></li>
+            <li id="tab_locations"><a href="{% url loc_yours %}">{% trans "Locations" %}</a></li>
+            <li id="tab_inbox"><a href="{% url messages_inbox %}">{% trans "Inbox" %} ({{ combined_inbox_count }})</a></li>
+        {% endspaceless %}</ul>
     {% endif %}
 {% endblock %}
 

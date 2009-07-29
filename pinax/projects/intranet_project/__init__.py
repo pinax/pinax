@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
 __about__ = """
-This project features applications, settings and tools for running Pinax in
-an intranet. You will likely want to customize things to fit your specific
-needs.
+This project demonstrates a closed site requiring an invitation to join and
+not exposing any information publicly. It provides a top-level task tracking
+system, wiki and bookmarks. It is intended to be the starting point of sites
+like intranets.
 """
