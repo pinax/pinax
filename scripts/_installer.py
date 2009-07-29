@@ -6,13 +6,13 @@ PINAX_PYPI = 'http://pypi.pinaxproject.com'
 PINAX_MUST_HAVES = {
     'setuptools-git': ('0.3.4', 'setuptools_git-0.3.4.tar.gz'),
     'setuptools-dummy': ('0.0.3', 'setuptools_dummy-0.0.3.tar.gz'),
-    'django': ('1.0.2-final', 'Django-1.0.2-final.tar.gz'),
+    'Django': ('1.0.3', 'Django-1.0.3.tar.gz'),
     'pip': ('0.4', 'pip-0.4.tar.gz'),
 }
 
 DJANGO_VERSIONS = (
-    '1.0.2-final',
-#    '1.1-beta-1',
+    '1.0.3',
+#    '1.1',
 )
 
 JAUNTY_FIX = """/usr/lib/python2.6/dist-packages
@@ -99,7 +99,7 @@ def extend_parser(parser):
         help="Setup development environment")
     parser.add_option("--django-version",
         metavar="DJANGO_VERSION", dest="django_version", default=None,
-        help="The version of Django to be installed, e.g. --django-version=1.0.2-final will install Django 1.0.2-final. The default is 1.0.2-final.")
+        help="The version of Django to be installed, e.g. --django-version=1.0.3 will install Django 1.0.3. The default is 1.0.3.")
 
 def adjust_options(options, args):
     """
