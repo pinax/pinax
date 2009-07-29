@@ -140,9 +140,11 @@ INSTALLED_APPS = (
     'account',
     'signup_codes',
     'tag_app',
+    'tagging_utils',
     'groups',
     
     'topics',
+    'tasks',
     'photos',
     
     'basic_groups',
