@@ -10,15 +10,10 @@ admin.autodiscover()
 
 from account.openid_consumer import PinaxConsumer
 
-import intranet_project as project
-
 
 urlpatterns = patterns('',
     url(r'^$', direct_to_template, {
         "template": "homepage.html",
-        "extra_context": {
-            "about_text": project.__about__,
-        },
     }, name="home"),
     
     url(r'^admin/invite_user/$', 'signup_codes.views.admin_invite_user', name="admin_invite_user"),

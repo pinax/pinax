@@ -29,7 +29,14 @@
     
     <h2>{% trans "About this project" %}</h2>
     
-    {{ about_text|linebreaks }}
+    <p>
+        {% blocktrans %}
+        This project demonstrates group functionality with a barebones group
+        containing no extra content apps as well as two additional group types,
+        tribes and projects, which show different membership approaches and
+        content apps.
+        {% endblocktrans %}
+    </p>
     
     <hr />
     {% if user.is_authenticated %}

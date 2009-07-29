@@ -8,8 +8,6 @@ admin.autodiscover()
 
 from account.openid_consumer import PinaxConsumer
 
-import sample_group_project as project
-
 
 if settings.ACCOUNT_OPEN_SIGNUP:
     signup_view = "account.views.signup"
@@ -20,9 +18,6 @@ else:
 urlpatterns = patterns('',
     url(r'^$', direct_to_template, {
         "template": "homepage.html",
-        "extra_context": {
-            "about_text": project.__about__,
-        },
     }, name="home"),
     
     url(r'^admin/invite_user/$', 'signup_codes.views.admin_invite_user', name="admin_invite_user"),
@@ -34,7 +29,9 @@ urlpatterns = patterns('',
     (r'^profiles/', include('basic_profiles.urls')),
     (r'^notices/', include('notification.urls')),
     (r'^announcements/', include('announcements.urls')),
+    (r'^tagging_utils/', include('tagging_utils.urls')),
     (r'^comments/', include('threadedcomments.urls')),
+    (r'^attachments/', include('attachments.urls')),
     
     (r'^groups/', include('basic_groups.urls')),
     (r'^tribes/', include('tribes.urls')),

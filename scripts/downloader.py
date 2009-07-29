@@ -16,7 +16,7 @@ def main():
     parser = OptionParser(usage)
     (options, args) = parser.parse_args()
     if len(args) != 1:
-        parser.error("Please provide a release version, e.g. 0.7.0beta1")
+        parser.error("Please provide a release version, e.g. 0.7.0beta3")
     release = args[0]
 
     scripts_dir = os.path.dirname(__file__)

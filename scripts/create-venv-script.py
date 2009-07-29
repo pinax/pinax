@@ -27,10 +27,10 @@ def main():
     installer = join(here, '_installer.py') # _installer.py
 
     if options.release:
-        release_installer = join(here, 'installers', '%s.py' % options.release) # installers/0.7b1.py
+        release_installer = join(here, 'installers', '%s.py' % options.release) # installers/<version>.py
         if exists(release_installer):
             installer = release_installer
-            script_name = join(here, 'pinax-boot-%s.py' % options.release) # pinax-boot-0.7b1.py
+            script_name = join(here, 'pinax-boot-%s.py' % options.release) # pinax-boot-<version>.py
 
     print "Using as template: %s" % installer
 
