@@ -141,6 +141,7 @@ INSTALLED_APPS = (
     'signup_codes',
     'tag_app',
     'tagging_utils',
+    'threadedcomments_extras',
     'groups',
     
     'topics',
