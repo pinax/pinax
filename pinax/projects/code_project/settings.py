@@ -142,6 +142,7 @@ INSTALLED_APPS = (
     'about',
     'tag_app',
     'tagging_utils',
+    'threadedcomments_extras',
     'groups',
     'projects',
     'tasks',
