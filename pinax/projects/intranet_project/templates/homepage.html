@@ -1,5 +1,7 @@
 {% extends "site_base.html" %}
 
+{% load i18n %}
+
 {% block head_title %}Homepage{% endblock %}
 
 {% block body %}
@@ -24,7 +26,14 @@
     
     <h2>{% trans "About this project" %}</h2>
     
-    {{ about_text|linebreaks }}
+    <p>
+        {% blocktrans %}
+        This project demonstrates a closed site requiring an invitation to
+        join and not exposing any information publicly. It provides a
+        top-level task tracking system, wiki and bookmarks. It is intended
+        to be the starting point of sites like intranets.
+        {% endblocktrans %}
+    </p>
     
     <hr />
     <dl class="what_next">

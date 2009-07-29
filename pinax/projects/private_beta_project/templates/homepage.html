@@ -28,7 +28,13 @@
     
     <h2>{% trans "About this project" %}</h2>
     
-    {{ about_text|linebreaks }}
+    <p>
+        {% blocktrans %}
+        This project demonstrates the use of a waiting list and signup
+        codes for sites in private beta. Otherwise it is the same as
+        basic_project.
+        {% endblocktrans %}
+    </p>
     
     <hr />
     
