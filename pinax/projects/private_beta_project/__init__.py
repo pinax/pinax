@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
 __about__ = """
-This project is built on basic_project to provide applications and settings
-suited for a site that is in a private beta mode.
+This project demonstrates the use of a waiting list and signup codes for
+sites in private beta. Otherwise it is the same as basic_project.
 """

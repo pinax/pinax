@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
 __about__ = """
-This project comes with applications that make up a social network. It was
-originally called 'complete_project' which was fully-featured, with
-everything that Pinax provides.
+This project demonstrates a social networking site. It provides profiles,
+friends, photos, blogs, tribes, wikis, tweets, bookmarks, swaps,
+locations and user-to-user messaging.
+
+In 0.5 this was called "complete_project".
 """
