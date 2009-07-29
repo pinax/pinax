@@ -1,28 +1,30 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
 from django.views.generic.simple import direct_to_template
+
 from django.contrib import admin
+admin.autodiscover()
 
 from account.openid_consumer import PinaxConsumer
-
+from blog.feeds import BlogFeedAll, BlogFeedUser
+from bookmarks.feeds import BookmarkFeed
 from microblogging.feeds import TweetFeedAll, TweetFeedUser, TweetFeedUserWithFriends
+
+import social_project as project
+
+
 tweets_feed_dict = {"feed_dict": {
     'all': TweetFeedAll,
     'only': TweetFeedUser,
     'with_friends': TweetFeedUserWithFriends,
 }}
 
-from blog.feeds import BlogFeedAll, BlogFeedUser
 blogs_feed_dict = {"feed_dict": {
     'all': BlogFeedAll,
     'only': BlogFeedUser,
 }}
 
-from bookmarks.feeds import BookmarkFeed
 bookmarks_feed_dict = {"feed_dict": { '': BookmarkFeed }}
-
-
-admin.autodiscover()
 
 
 if settings.ACCOUNT_OPEN_SIGNUP:
@@ -32,7 +34,12 @@ else:
 
 
 urlpatterns = patterns('',
-    url(r'^$', direct_to_template, {"template": "homepage.html"}, name="home"),
+    url(r'^$', direct_to_template, {
+        "template": "homepage.html",
+        "extra_context": {
+            "about_text": project.__about__,
+        },
+    }, name="home"),
     
     url(r'^admin/invite_user/$', 'signup_codes.views.admin_invite_user', name="admin_invite_user"),
     url(r'^account/signup/$', signup_view, name="acct_signup"),
