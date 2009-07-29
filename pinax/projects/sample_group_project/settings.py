@@ -132,6 +132,7 @@ INSTALLED_APPS = (
     'projects',
     'gravatar',
     'django_sorting',
+    'photologue',
     
     # internal (for now)
     'basic_profiles',
@@ -142,6 +143,7 @@ INSTALLED_APPS = (
     'groups',
     
     'topics',
+    'photos',
     
     'basic_groups',
     
