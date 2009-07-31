@@ -1129,7 +1129,7 @@ def release_files_exist(release_dir, requirements_file):
         line = line.strip()
         if not line or line.startswith('#'):
             continue
-        requirement = join(release_dir, line)
+        requirement = os.path.normpath(join(release_dir, line))
         if not os.path.exists(requirement):
             result = False
             missing_requirements.append(requirement)
