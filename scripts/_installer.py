@@ -142,7 +142,7 @@ def install_base(easy_install, requirements_dir, packages):
             # get it from the PyPI
             src = '%s==%s' % (pkg, version)
         logger.notify('Installing %s %s' % (pkg, version))
-        call_subprocess([easy_install, '--quiet', '--always-copy',
+        call_subprocess([easy_install, '--quiet',
                         '--always-unzip', '--find-links', PINAX_PYPI, src],
                         filter_stdout=filter_lines, show_stdout=False)
 
