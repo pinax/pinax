@@ -70,12 +70,16 @@ def resolve_command(cmd, path=None, pathext=None):
     for _dir in path:
         f = os.path.join(_dir, cmd)
         for ext in pathext:
+            # try without extension first
+            if os.path.isfile(f):
+                return os.path.realpath(f)
+            # then including the extension
             fext = f + ext
             if os.path.isfile(fext):
-                return os.path.normpath(fext)
+                return os.path.realpath(fext)
     # last resort: just try the searched for path
     if searched_for_path:
-        cmd = os.path.join(searched_for_path, cmd)
+        cmd = os.path.join(os.path.realpath(searched_for_path), cmd)
     if not os.path.exists(cmd):
         print "ERROR: this script requires %s." % cmd
         print "Please verify it exists because it couldn't be found."
