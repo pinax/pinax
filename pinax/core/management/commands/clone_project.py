@@ -35,6 +35,10 @@ def get_projects(pinax_root):
             projects.append(item)
     return projects
 
+try:
+    WindowsError
+except NameError:
+    WindowsError = None
 
 def copytree(src, dst, symlinks=False):
     """
@@ -69,8 +73,7 @@ def copytree(src, dst, symlinks=False):
     try:
         shutil.copystat(src, dst)
     except OSError, why:
-        if shutil.WindowsError is not None and isinstance(why,
-            shutil.WindowsError):
+        if WindowsError is not None and isinstance(why, WindowsError):
             pass
         else:
             errors.extend((src, dst, str(why)))
