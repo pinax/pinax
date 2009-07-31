@@ -1114,7 +1114,7 @@ def install_base(easy_install, requirements_dir, packages):
             # get it from the PyPI
             src = '%s==%s' % (pkg, version)
         logger.notify('Installing %s %s' % (pkg, version))
-        call_subprocess([easy_install, '--quiet',
+        call_subprocess([easy_install, '--quiet', '--always-copy',
                         '--always-unzip', '--find-links', PINAX_PYPI, src],
                         filter_stdout=filter_lines, show_stdout=False)
 
@@ -1231,7 +1231,7 @@ def after_install(options, home_dir):
             if not line or line.startswith('#'):
                 continue
             logger.notify('Installing %s' % line)
-            call_subprocess([easy_install, '--quiet', '--always-copy',
+            call_subprocess([easy_install, '--quiet',
                             '--always-unzip', '--find-links', PINAX_PYPI, line],
                             filter_stdout=filter_lines, show_stdout=False)
 
