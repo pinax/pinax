@@ -48,5 +48,5 @@ ln -s repos/django-announcements/docs announcements
 ln -s repos/django-messages/docs messages
 
 cd ../
-rm -rf .build
+rm -rf _build
 make html
