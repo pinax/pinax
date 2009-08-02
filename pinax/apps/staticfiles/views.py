@@ -98,13 +98,12 @@ def serve(request, path, show_indexes=False):
         raise Http404, "Directory indexes are not allowed here."
     # Respect the If-Modified-Since header.
     statobj = os.stat(fullpath)
+    mimetype = mimetypes.guess_type(fullpath)[0] or 'application/octet-stream'
     if not was_modified_since(request.META.get('HTTP_IF_MODIFIED_SINCE'),
                               statobj[stat.ST_MTIME], statobj[stat.ST_SIZE]):
-        return HttpResponseNotModified()
-    mimetype = mimetypes.guess_type(fullpath)[0] or 'application/octet-stream'
+        return HttpResponseNotModified(mimetype=mimetype)
     contents = open(fullpath, 'rb').read()
     response = HttpResponse(contents, mimetype=mimetype)
     response["Last-Modified"] = http_date(statobj[stat.ST_MTIME])
     response["Content-Length"] = len(contents)
     return response
-
