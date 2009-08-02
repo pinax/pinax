@@ -88,7 +88,9 @@ def email(request, form_class=AddEmailForm,
                         email=email,
                     )
                     request.user.message_set.create(
-                        message="Confirmation email sent to %s" % email)
+                        message=_("Confirmation email sent to %(email)s") % {
+                            'email': email,
+                        })
                     EmailConfirmation.objects.send_confirmation(email_address)
                 except EmailAddress.DoesNotExist:
                     pass
@@ -101,7 +103,9 @@ def email(request, form_class=AddEmailForm,
                     )
                     email_address.delete()
                     request.user.message_set.create(
-                        message="Removed email address %s" % email)
+                        message=_("Removed email address %(email)s") % {
+                            'email': email,
+                        })
                 except EmailAddress.DoesNotExist:
                     pass
             elif request.POST["action"] == "primary":
@@ -239,7 +243,7 @@ def other_services(request, template_name="account/other_services.html"):
                     twitter_account)
                 if not twitter_authorized:
                     request.user.message_set.create(
-                        message="Twitter authentication failed")
+                        message=ugettext("Twitter authentication failed"))
                 else:
                     twitter_form.save()
     else:
@@ -258,5 +262,5 @@ def other_services_remove(request):
     OtherServiceInfo.objects.filter(user=request.user).filter(
         Q(key="twitter_user") | Q(key="twitter_password")
     ).delete()
-    request.user.message_set.create(message=ugettext(u"Removed twitter account information successfully."))
+    request.user.message_set.create(message=ugettext("Removed twitter account information successfully."))
     return HttpResponseRedirect(reverse("acct_other_services"))
