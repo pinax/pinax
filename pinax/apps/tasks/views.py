@@ -344,12 +344,21 @@ def user_tasks(request, username, group_slug=None, template_name="tasks/user_tas
     else:
         other_user = get_object_or_404(User, username=username)
         group_base = None
-        
-    assigned_tasks = other_user.assigned_tasks.all().order_by("state", "-modified") # @@@ filter(project__deleted=False)
-    created_tasks = other_user.created_tasks.all().order_by("state", "-modified") # @@@ filter(project__deleted=False)
     
-    # get the list of your tasks that have been nudged
-    nudged_tasks = [x for x in other_user.assigned_tasks.all().order_by('-modified') if x.task_nudge.all()]
+    assigned_tasks = other_user.assigned_tasks.all()
+    created_tasks = other_user.created_tasks.all()
+    
+    if group:
+        assigned_tasks = group.content_objects(assigned_tasks)        
+        created_tasks = group.content_objects(created_tasks)
+    
+    assigned_tasks = assigned_tasks.order_by("state", "-modified") # @@@ filter(project__deleted=False)
+    created_tasks = created_tasks.order_by("state", "-modified") # @@@ filter(project__deleted=False)
+    
+    nudged_tasks = assigned_tasks.extra(
+        tables = ["tasks_nudge"],
+        where = ["tasks_nudge.id = tasks_task.id"],
+    )
     
     if group:
         url = bridge.reverse("tasks_mini_list", group)
