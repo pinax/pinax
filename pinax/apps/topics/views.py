@@ -32,7 +32,12 @@ def topics(request, group_slug=None, form_class=TopicForm, template_name="topics
         is_member = False
     else:
         is_member = group.user_is_member(request.user)
-
+    
+    if group:
+        group_base = bridge.group_base_template()
+    else:
+        group_base = None
+    
     if request.method == "POST":
         if request.user.is_authenticated():
             if is_member:
@@ -51,45 +56,52 @@ def topics(request, group_slug=None, form_class=TopicForm, template_name="topics
             return HttpResponseForbidden()
     else:
         topic_form = form_class()
-
-
+    
+    
     topics = group.content_objects(Topic)
-
+    
     return bridge.render(template_name, {
         "group": group,
         "topic_form": topic_form,
         "is_member": is_member,
         "topics": topics,
+        "group_base": group_base,
     }, context_instance=RequestContext(request))
 
 
 def topic(request, topic_id, group_slug=None, edit=False, template_name="topic.html", bridge=None):
     topic = get_object_or_404(Topic, id=topic_id)
-
+    
     try:
         group = bridge.get_group(group_slug)
     except ObjectDoesNotExist:
         raise Http404
-
+    
     if (request.method == "POST" and edit == True and 
         (request.user == topic.creator or request.user == topic.group.creator)):
         topic.body = request.POST["body"]
         topic.save()
         return HttpResponseRedirect(topic.get_absolute_url())
-
+    
+    if group:
+        group_base = bridge.group_base_template()
+    else:
+        group_base = None
+    
     return bridge.render(template_name, {
         'topic': topic,
         'edit': edit,
         'group': group,
+        "group_base": group_base,
     }, context_instance=RequestContext(request))
 
 
 def topic_delete(request, topic_id, group_slug=None, bridge=None):
     topic = Topic.objects.get(pk=topic_id)
-
+    
     if (request.method == "POST" and (request.user == topic.creator or
         request.user == topic.group.creator)): 
         ThreadedComment.objects.all_for_object(topic).delete()
         topic.delete()
-
+    
     return HttpResponseRedirect(request.POST["next"])
