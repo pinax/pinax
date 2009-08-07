@@ -5,6 +5,7 @@ from datetime import datetime
 from django.db import models
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
+from django.core.urlresolvers import reverse
 from django.utils.html import escape
 from django.utils.translation import ugettext_lazy as _
 
