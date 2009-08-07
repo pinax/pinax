@@ -41,7 +41,7 @@
         </p>
     {% endif %}
     
-    {{ article.content|apply_markup:article.markup }}
+    {{ article.content|apply_markup:article.markup|wiki_links }}
 
     {% show_tags_for article %}
 
