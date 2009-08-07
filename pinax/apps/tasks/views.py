@@ -423,18 +423,18 @@ def focus(request, field, value, group_slug=None, template_name="tasks/focus.htm
             # @@@ this seems hackish and brittle but I couldn't work out another way
             year, month, day = value.split("-")
             # have to int month and day in case zero-padded
-            tasks = qs.filter(modified__year=int(year), modified__month=int(month), modified__day=int(day))
+            tasks = tasks.filter(modified__year=int(year), modified__month=int(month), modified__day=int(day))
         except:
             tasks = Task.objects.none() # @@@ or throw 404?
     elif field == "state":
-        tasks = qs.filter(state=workflow.REVERSE_STATE_CHOICES[value])
+        tasks = tasks.filter(state=workflow.REVERSE_STATE_CHOICES[value])
     elif field == "assignee":
         if value == "unassigned": # @@@ this means can't have a username 'unassigned':
-            tasks = qs.filter(assignee__isnull=True)
+            tasks = tasks.filter(assignee__isnull=True)
         else:
             try:
                 assignee = User.objects.get(username=value)
-                tasks = qs.filter(assignee=assignee)
+                tasks = tasks.filter(assignee=assignee)
             except User.DoesNotExist:
                 tasks = Task.objects.none() # @@@ or throw 404?
     elif field == "tag":
@@ -445,8 +445,6 @@ def focus(request, field, value, group_slug=None, template_name="tasks/focus.htm
             # @@@ still need to filter on group if group not None
         except Tag.DoesNotExist:
             tasks = Task.objects.none() # @@@ or throw 404?
-    else:
-        tasks = qs
     
     return render_to_response(template_name, {
         "group": group,
