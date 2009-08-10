@@ -86,7 +86,7 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
                     'to_user': username,
                     'message': ugettext("Let's be friends!"),
                 })
-                invitation_id = request.POST["invitation"]
+                invitation_id = request.POST.get("invitation", None)
                 if request.POST["action"] == "accept": # @@@ perhaps the form should just post to friends and be redirected here
                     try:
                         invitation = FriendshipInvitation.objects.get(id=invitation_id)
