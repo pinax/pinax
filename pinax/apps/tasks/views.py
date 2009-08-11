@@ -70,6 +70,8 @@ def tasks(request, group_slug=None, template_name="tasks/task_list.html", bridge
         tasks = Task.objects.filter(object_id=None)
         group_base = None
     
+    tasks = tasks.select_related("assignee")
+    
     # exclude states
     hide_state  = request.GET.get("hide_state")
     if hide_state:
