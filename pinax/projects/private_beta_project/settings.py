@@ -76,6 +76,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django_openid.consumer.SessionConsumer',
     'account.middleware.LocaleMiddleware',
+    'account.middleware.AuthenticatedMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'pagination.middleware.PaginationMiddleware',
     'pinax.middleware.security.HideSensistiveFieldsMiddleware',
@@ -163,6 +164,13 @@ CONTACT_EMAIL = "feedback@example.com"
 SITE_NAME = "Pinax"
 LOGIN_URL = "/account/login/"
 LOGIN_REDIRECT_URLNAME = "what_next"
+
+AUTHENTICATED_EXEMPT_URLS = [
+    r"^/$",
+    r"^/success/$",
+    r"^/account/signup/$",
+    r"^/account/password_reset/",
+]
 
 # local_settings.py can be used to override environment-specific settings
 # like database and email that differ between development and production.
