@@ -169,7 +169,7 @@ AUTHENTICATED_EXEMPT_URLS = [
     r"^/$",
     r"^/success/$",
     r"^/account/signup/$",
-    r"^/account/password_reset/",
+    r"^/account/password_reset",
     r"^/account/confirm_email",
 ]
 
