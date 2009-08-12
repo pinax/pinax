@@ -30,6 +30,15 @@
         </p>
     {% endif %}
     
+    <form action="" method="GET">
+        {{ task_filter.form.as_p }}
+        <input type="submit" />
+    </form>
+    
+    {% for task in tasks %}
+        {{ task }}<br />
+    {% endfor %}
+            
     <p>Group by:
         {% ifequal group_by "state" %}
             <a href="?group_by=modified&hide_state={{ hide_state }}">last modified</a>

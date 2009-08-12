@@ -31,8 +31,8 @@ if 'dpaste' in getattr(settings, 'INSTALLED_APPS', []):
 else:
     Snippet = False
 
-from tasks.models import (Task, TaskHistory, Nudge)
-
+from tasks.models import Task, TaskHistory, Nudge
+from tasks.filters import TaskFilter
 from tasks.forms import TaskForm, EditTaskForm, SearchTaskForm
 
 workflow = import_module(getattr(settings, "TASKS_WORKFLOW_MODULE", "tasks.workflow"))
@@ -83,6 +83,7 @@ def tasks(request, group_slug=None, template_name="tasks/task_list.html", bridge
             if state:
                 tasks = tasks.exclude(state__exact=state)
     
+    task_filter = TaskFilter(request.GET, queryset=tasks)
     
     state_displays = []
     for state in workflow.STATE_CHOICES:
@@ -90,12 +91,13 @@ def tasks(request, group_slug=None, template_name="tasks/task_list.html", bridge
     
     return render_to_response(template_name, {
         "group": group,
-        "tasks": tasks,
         "group_by": group_by,
         "is_member": is_member,
         "hide_state": hide_state,
         "state_displays": state_displays,
         "group_base": group_base,
+        "task_filter": task_filter,
+        "tasks": task_filter.qs,
     }, context_instance=RequestContext(request))
 
 
