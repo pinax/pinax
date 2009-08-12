@@ -21,17 +21,23 @@ from threadedcomments.models import ThreadedComment
 from topics.forms import TopicForm
 from topics.models import Topic
 
-def topics(request, group_slug=None, form_class=TopicForm, template_name="topics.html", bridge=None):
-
-    try:
-        group = bridge.get_group(group_slug)
-    except ObjectDoesNotExist:
-        raise Http404
+def topics(request, group_slug=None, form_class=TopicForm, template_name="topics/topics.html", bridge=None):
+    
+    if bridge:
+        try:
+            group = bridge.get_group(group_slug)
+        except ObjectDoesNotExist:
+            raise Http404
+    else:
+        group = None
     
     if not request.user.is_authenticated():
         is_member = False
     else:
-        is_member = group.user_is_member(request.user)
+        if group:
+            is_member = group.user_is_member(request.user)
+        else:
+            is_member = True
     
     if group:
         group_base = bridge.group_base_template()
@@ -57,10 +63,12 @@ def topics(request, group_slug=None, form_class=TopicForm, template_name="topics
     else:
         topic_form = form_class()
     
+    if group:
+        topics = group.content_objects(Topic)
+    else:
+        topics = Topic.objects.all()
     
-    topics = group.content_objects(Topic)
-    
-    return bridge.render(template_name, {
+    return render_to_response(template_name, {
         "group": group,
         "topic_form": topic_form,
         "is_member": is_member,
@@ -69,13 +77,22 @@ def topics(request, group_slug=None, form_class=TopicForm, template_name="topics
     }, context_instance=RequestContext(request))
 
 
-def topic(request, topic_id, group_slug=None, edit=False, template_name="topic.html", bridge=None):
-    topic = get_object_or_404(Topic, id=topic_id)
+def topic(request, topic_id, group_slug=None, edit=False, template_name="topics/topic.html", bridge=None):
     
-    try:
-        group = bridge.get_group(group_slug)
-    except ObjectDoesNotExist:
-        raise Http404
+    if bridge:
+        try:
+            group = bridge.get_group(group_slug)
+        except ObjectDoesNotExist:
+            raise Http404
+    else:
+        group = None
+    
+    if group:
+        topics = group.content_objects(Topic)
+    else:
+        topics = Topic.objects.all()
+    
+    topic = get_object_or_404(topics, id=topic_id)
     
     if (request.method == "POST" and edit == True and 
         (request.user == topic.creator or request.user == topic.group.creator)):
@@ -88,16 +105,30 @@ def topic(request, topic_id, group_slug=None, edit=False, template_name="topic.h
     else:
         group_base = None
     
-    return bridge.render(template_name, {
-        'topic': topic,
-        'edit': edit,
-        'group': group,
+    return render_to_response(template_name, {
+        "topic": topic,
+        "edit": edit,
+        "group": group,
         "group_base": group_base,
     }, context_instance=RequestContext(request))
 
 
 def topic_delete(request, topic_id, group_slug=None, bridge=None):
-    topic = Topic.objects.get(pk=topic_id)
+    
+    if bridge:
+        try:
+            group = bridge.get_group(group_slug)
+        except ObjectDoesNotExist:
+            raise Http404
+    else:
+        group = None
+    
+    if group:
+        topics = group.content_objects(Topic)
+    else:
+        topics = Topic.objects.all()
+    
+    topic = get_object_or_404(topics, id=topic_id)
     
     if (request.method == "POST" and (request.user == topic.creator or
         request.user == topic.group.creator)): 

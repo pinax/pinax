@@ -1,0 +1,54 @@
+{% extends "topics/base.html" %}
+
+{% load i18n %}
+{% load uni_form %}
+{% load extra_tagging_tags %}
+{% load pagination_tags %}
+{% load comments_tag %}
+{% load avatar_tags %}
+{% load group_tags %}
+
+{% block head_title %}{% trans "Topic" %} : {{ topic.title }}{% endblock %}
+
+{% block body %}
+    <p><a href="{% groupurl topic_list group %}">&larr; {% trans "Back to Topic List" %}</a></p>
+    
+    <ul class="responses">
+        <li class="odd thread-0 clearfix">
+            <div class="meta">
+                <div class="avatar">{% avatar topic.creator 40 %}</div>
+                <div class="details"><a href="{% url profile_detail topic.creator.username %}">{{ topic.creator }}</a></div>
+                {{ topic.created|date }}
+            </div>
+            <div class="bulk">
+                <h1>{{ topic.title }}</h1>
+                <div class="body">{{ topic.body|urlize|linebreaks }}</div>
+                <p>{% show_tags_for topic %}</p>
+                {% ifequal user topic.creator %}
+                <form class="uniForm" method="POST" action="{{ request.path }}delete/">
+                    <fieldset class="inlineLabels">
+                        <div class="form_block">
+                            <input type="submit" value="{% trans "Delete Topic" %}" />
+                            <input type="hidden" name="next" value="{% groupurl topic_list group %}" />
+                        </div>
+                    </fieldset>
+                </form>
+                {% if not edit %}<p><a href="{{ request.path }}edit/">Edit Topic</a></p>{% endif %}
+                {% endifequal %}
+            </div>
+        </li>
+    </ul>
+    {% if edit %}
+        <h2>Edit</h2>
+        <form class="uniForm" method="post" action="{{ request.path }}">
+            <fieldset class="inlineLabels">
+                <div class="form_block">
+                    <textarea id="id_body" name="body">{{ topic.body }}</textarea>
+                    <input type="submit" name="edit" value="Edit!" />
+                </div>
+            </fieldset>
+        </form>
+    {% else %}
+        {% comments topic %}
+    {% endif %}
+{% endblock %}

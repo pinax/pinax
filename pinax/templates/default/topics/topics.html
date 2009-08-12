@@ -4,10 +4,23 @@
 {% load uni_form %}
 {% load pagination_tags %}
 
-{% block head_title %}{% blocktrans with group.name as group_name %}Topics for {{ group_name }}{% endblocktrans %}{% endblock %}
+{% block head_title %}{% spaceless %}
+{% if group %}
+    {% blocktrans with group.name as group_name %}Discussion Topics for {{ group_name }}{% endblocktrans %}
+{% else %}
+    {% trans "Discussion Topics" %}
+{% endif %}
+{% endspaceless %}{% endblock %}
 
 {% block body %}
-    <h1>{% trans "Discussion Topics for Group" %} <a href="{{ group.get_absolute_url }}">{{ group.name }}</a></h1>
+    <h1>{% spaceless %}
+    {% if group %}
+        {% blocktrans with group.get_absolute_url as group_url and group.name as group_name %}Topics for <a href="{{ group_url }}">{{ group_name }}</a>{% endblocktrans %}
+        {% trans "Topics for" %} <a href="{{ group.get_absolute_url }}">{{ group.name }}</a>
+    {% else %}
+        {% trans "Topics" %}
+    {% endif %}
+    {% endspaceless %}</h1>
     
     {% autopaginate topics %}
     
