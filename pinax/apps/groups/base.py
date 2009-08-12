@@ -63,10 +63,6 @@ class Group(models.Model):
         content_objects = queryset.filter(**lookup_kwargs)
         return content_objects
     
-    def get_related_objects(self, *args, **kwargs):
-        warnings.warn("get_related_objects has been deprecated in favor of content_objects", DeprecationWarning)
-        return self.content_objects(*args, **kwargs)
-    
     def associate(self, instance, commit=True):
         instance.object_id = self.id
         instance.content_type = ContentType.objects.get_for_model(self)
