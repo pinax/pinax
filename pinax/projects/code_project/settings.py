@@ -133,6 +133,7 @@ INSTALLED_APPS = (
     'django_sorting',
     'attachments',
     'django_markup',
+    'filter',
     
     # internal (for now)
     'basic_profiles',

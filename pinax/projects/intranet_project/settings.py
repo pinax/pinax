@@ -132,6 +132,7 @@ INSTALLED_APPS = (
     'uni_form',
     'django_markup',
     'attachments',
+    'filter',
     
     # internal (for now)
     'basic_profiles',
