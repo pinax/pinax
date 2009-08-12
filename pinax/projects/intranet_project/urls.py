@@ -28,6 +28,7 @@ urlpatterns = patterns('',
     (r'^attachments/', include('attachments.urls')),
     (r'^bookmarks/', include('bookmarks.urls')),
     (r'^tasks/', include('tasks.urls')),
+    (r'^topics/', include('topics.urls')),
     (r'^comments/', include('threadedcomments.urls')),
     (r'^wiki/', include('wiki.urls')),
     

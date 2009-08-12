@@ -28,6 +28,7 @@
     {% if user.is_authenticated %}
         <ul class="tabs">{% spaceless %}
             <li id="tab_profile"><a href="{% url profile_detail user %}">{% trans "Profile" %}</a></li>
+            <li id="tab_topics"><a href="{% url topic_list %}">{% trans "Topics" %}</a></li>
             <li id="tab_tasks"><a href="{% url task_list %}">{% trans "Tasks" %}</a></li>
             <li id="tab_wiki"><a href="{% url wiki_index %}">{% trans "Wiki" %}</a></li>
             <li id="tab_bookmarks"><a href="{% url all_bookmarks %}">{% trans "Bookmarks" %}</a></li>
