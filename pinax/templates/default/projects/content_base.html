@@ -1,0 +1,18 @@
+{% extends "projects/base.html" %}
+
+{% load group_tags %}
+
+{% block subnav_base %}
+    <div class="clearfix" style="border-bottom: 1px solid #9BC;">
+        <ul>
+            <li><a href="{% url project_detail group.slug %}">{{ group }}</a></li>
+            <li><a href="{% groupurl topic_list group %}">Topics</a></li>
+            <li><a href="{% groupurl wiki_list group %}">Wiki</a></li>
+            <li><a href="{% groupurl task_list group %}">Tasks</a></li>
+        </ul>
+    </div>
+    <div class="clearfix">
+        {% block subnav %}
+        {% endblock %}
+    </div>
+{% endblock %}
