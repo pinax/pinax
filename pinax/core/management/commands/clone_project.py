@@ -203,7 +203,15 @@ class Command(BaseCommand):
             self.print_help("pinax-admin", "clone_project")
             sys.exit(0)
         
-        main(options.get('pinax_root'), args[0], args[1],
+        try:
+            destination = args[1]
+        except IndexError:
+            sys.stderr.write("You must provide a destination path for the cloned project.\n\n")
+            # note: --help prints full path to pinax-admin
+            self.print_help("pinax-admin", "clone_project")
+            sys.exit(0)
+        
+        main(options.get('pinax_root'), args[0], destination,
             verbose = options.get('verbose')
         )
         return 0
