@@ -181,6 +181,8 @@ ACCOUNT_EMAIL_VERIFICATION = False
 
 AUTHENTICATED_EXEMPT_URLS = [
     r"^/account/signup/$",
+    r"^/account/password_reset",
+    r"^/account/confirm_email",
 ]
 
 # local_settings.py can be used to override environment-specific settings
