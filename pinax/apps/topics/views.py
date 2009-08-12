@@ -51,7 +51,7 @@ def topics(request, group_slug=None, form_class=TopicForm, template_name="topics
                 if topic_form.is_valid():
                     topic = topic_form.save(commit=False)
                     if group:
-                        group.associate(topic)
+                        group.associate(topic, commit=False)
                     topic.creator = request.user
                     topic.save()
                     request.user.message_set.create(message=_("You have started the topic %(topic_title)s") % {"topic_title": topic.title})
