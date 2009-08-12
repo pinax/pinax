@@ -2,7 +2,10 @@ import os
 import sys
 
 PINAX_GIT_LOCATION = 'git://github.com/pinax/pinax.git'
-PINAX_PYPI = 'http://pypi.pinaxproject.com'
+PINAX_PYPI_MIRRORS = [
+    'http://pypi.pinaxproject.com',
+    'http://pypi2.pinaxproject.com',
+]
 PINAX_MUST_HAVES = {
     'setuptools-git': ('0.3.4', 'setuptools_git-0.3.4.tar.gz'),
     'setuptools-dummy': ('0.0.3', 'setuptools_dummy-0.0.3.tar.gz'),
@@ -146,9 +149,17 @@ def install_base(easy_install, requirements_dir, packages):
             # get it from the PyPI
             src = '%s==%s' % (pkg, version)
         logger.notify('Installing %s %s' % (pkg, version))
-        call_subprocess([easy_install, '--quiet', '--always-copy',
-                        '--always-unzip', '--find-links', PINAX_PYPI, src],
-                        filter_stdout=filter_lines, show_stdout=False)
+        find_links = []
+        for mirror in PINAX_PYPI_MIRRORS:
+            find_links.extend(['--find-links', mirror])
+        call_subprocess([
+            easy_install,
+            '--quiet',
+            '--always-copy',
+            '--always-unzip',
+        ] + find_links + [
+            src,
+        ], filter_stdout=filter_lines, show_stdout=False)
 
 def release_files_exist(release_dir, requirements_file):
     f = open(requirements_file)
@@ -263,9 +274,12 @@ def after_install(options, home_dir):
             if not line or line.startswith('#'):
                 continue
             logger.notify('Installing %s' % line)
-            call_subprocess([easy_install, '--quiet',
-                            '--always-unzip', '--find-links', PINAX_PYPI, line],
-                            filter_stdout=filter_lines, show_stdout=False)
+            call_subprocess([
+                easy_install,
+                '--quiet',
+                '--always-unzip',
+                line
+            ], filter_stdout=filter_lines, show_stdout=False)
 
         logger.notify("Please activate the newly created virtualenv by running in '%s': "
                       % home_dir)
