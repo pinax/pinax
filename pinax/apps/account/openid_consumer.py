@@ -13,6 +13,10 @@ from account.views import login as account_login
 
 class PinaxConsumer(RegistrationConsumer):
     
+    # Pinax does its own e-mail confirmation handling, but django-openid
+    # wants to do its own handling of this so we turn it off in all cases
+    confirm_email_addresses = False
+    
     def on_registration_complete(self, request):
         return HttpResponseRedirect(get_default_redirect(request))
     
