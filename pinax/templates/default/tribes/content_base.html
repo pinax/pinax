@@ -1,0 +1,17 @@
+{% extends "tribes/base.html" %}
+
+{% load group_tags %}
+
+{% block subnav_base %}
+    <div class="clearfix" style="border-bottom: 1px solid #9BC;">
+        <ul>
+            <li><a href="{% url tribe_detail group.slug %}">{{ group }}</a></li>
+            <li><a href="{% groupurl topic_list group %}">Topics</a></li>
+            <li><a href="{% groupurl wiki_list group %}">Wiki</a></li>
+        </ul>
+    </div>
+    <div class="clearfix" style="background: #F0F7FF;">
+        {% block subnav %}
+        {% endblock %}
+    </div>
+{% endblock %}
