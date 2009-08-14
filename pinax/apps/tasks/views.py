@@ -72,7 +72,17 @@ def tasks(request, group_slug=None, template_name="tasks/task_list.html", bridge
     
     tasks = tasks.select_related("assignee")
     
-    task_filter = TaskFilter(request.GET, queryset=tasks)
+    # default filtering
+    state_keys = dict(workflow.STATE_CHOICES).keys()
+    default_states = set(state_keys).difference(
+        # don't show these states
+        set(["2", "3"])
+    )
+    
+    filter_data = {"state": list(default_states)}
+    filter_data.update(request.GET)
+    
+    task_filter = TaskFilter(filter_data, queryset=tasks)
     
     return render_to_response(template_name, {
         "group": group,
