@@ -1,6 +1,6 @@
 from django import forms
 
-import filter as filters
+import django_filters as filters
 
 from tasks.models import Task
 
