@@ -22,6 +22,9 @@
                 <li><input type="submit" value="filter"/></li>
             </ul>
         </div>
+        {% if group_by %}
+            <input type="hidden" name="group_by" value="{{ group_by }}" />
+        {% endif %}
     </form>
             
     <p>Group by:
