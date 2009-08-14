@@ -99,7 +99,7 @@ def topic(request, topic_id, group_slug=None, edit=False, template_name="topics/
         (request.user == topic.creator or request.user == topic.group.creator)):
         topic.body = request.POST["body"]
         topic.save()
-        return HttpResponseRedirect(topic.get_absolute_url())
+        return HttpResponseRedirect(topic.get_absolute_url(group))
     
     if group:
         group_base = bridge.group_base_template()

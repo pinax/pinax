@@ -2,6 +2,7 @@
 {% load avatar_tags %}
 {% load threadedcommentstags %}
 {% load extra_tagging_tags %}
+{% load group_tags %}
 
 <div class="topic clearfix">
     <div class="task-meta">
@@ -10,7 +11,7 @@
         <div class="created">{{ topic.created|date }}</div>
     </div>
     <div class="bulk">
-        <h2><a href="{{ topic.get_absolute_url }}">{{ topic.title }}</a></h2>
+        <h2><a href="{% groupurl topic_detail group topic_id=topic.id %}">{{ topic.title }}</a></h2>
         <div class="body">{{ topic.body|urlize|linebreaks }}</div>
         {% get_comment_count for topic as comment_count %}
         {% if comment_count %}
