@@ -16,8 +16,12 @@
     <h1>Tasks</h1>
     
     <form action="" method="GET">
-        {{ task_filter.form.as_p }}
-        <input type="submit" />
+        <div class="task_filter">
+            <ul>
+                {{ task_filter.form.as_ul }}
+                <li><input type="submit" value="filter"/></li>
+            </ul>
+        </div>
     </form>
             
     <p>Group by:
