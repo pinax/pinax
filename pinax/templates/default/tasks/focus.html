@@ -19,6 +19,17 @@
     {#<h1>{% trans "Tasks for Project" %} <a href="@@@">{{ group.name }}</a></h1> #}
     <h1>Tasks with {{ field }} = {{ value }}</h1>
     
+    {% if task_filter %}
+        <form action="" method="GET">
+            <div class="task_filter">
+                <ul>
+                    {{ task_filter.form.as_ul }}
+                    <li><input type="submit" value="filter"/></li>
+                </ul>
+            </div>
+        </form>
+    {% endif %}
+    
     <p>Group by:
         {% ifequal group_by "state" %}
             <a href="?group_by=modified">last modified</a>

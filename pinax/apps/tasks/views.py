@@ -444,6 +444,22 @@ def focus(request, field, value, group_slug=None, template_name="tasks/focus.htm
         tasks = Task.objects.filter(object_id=None)
         group_base = None
     
+    # default filtering
+    state_keys = dict(workflow.STATE_CHOICES).keys()
+    default_states = set(state_keys).difference(
+        # don't show these states
+        set(["2", "3"])
+    )
+    
+    # have to store for each prefix because initial data isn't support on the
+    # FilterSet
+    filter_data = {
+        "state": list(default_states),
+    }
+    filter_data.update(request.GET)
+    
+    task_filter = TaskFilter(filter_data, queryset=tasks)
+    
     if field == "modified":
         try:
             # @@@ this seems hackish and brittle but I couldn't work out another way
@@ -453,6 +469,7 @@ def focus(request, field, value, group_slug=None, template_name="tasks/focus.htm
         except:
             tasks = Task.objects.none() # @@@ or throw 404?
     elif field == "state":
+        task_filter = None # prevent task filtering
         tasks = tasks.filter(state=workflow.REVERSE_STATE_CHOICES[value])
     elif field == "assignee":
         if value == "unassigned": # @@@ this means can't have a username 'unassigned':
@@ -472,8 +489,13 @@ def focus(request, field, value, group_slug=None, template_name="tasks/focus.htm
         except Tag.DoesNotExist:
             tasks = Task.objects.none() # @@@ or throw 404?
     
+    if task_filter is not None:
+        # Django will not merge queries that are both not distinct or distinct
+        tasks = tasks.distinct() & task_filter.qs
+    
     return render_to_response(template_name, {
         "group": group,
+        "task_filter": task_filter,
         "tasks": tasks,
         "field": field,
         "value": value,
