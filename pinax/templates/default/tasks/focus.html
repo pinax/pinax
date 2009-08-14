@@ -35,46 +35,46 @@
     
     <p>Group by:
         {% ifequal group_by "state" %}
-            <a href="?group_by=modified">last modified</a>
+            <a href="?{% if gbqs %}{{ gbqs }}&{% endif %}group_by=modified">last modified</a>
             or
             <b>state</b>
             or
-            <a href="?group_by=assignee">assignee</a>
+            <a href="?{% if gbqs %}{{ gbqs }}&{% endif %}group_by=assignee">assignee</a>
             or
-            <a href="?group_by=tag">tag</a>
+            <a href="?{% if gbqs %}{{ gbqs }}&{% endif %}group_by=tag">tag</a>
             
             {% order tasks by state %}
             {% regroup tasks by get_state_display as grouped_tasks %}
         {% else %}
             {% ifequal group_by "assignee" %}
-                <a href="?group_by=modified">last modified</a>
+                <a href="?{% if gbqs %}{{ gbqs }}&{% endif %}group_by=modified">last modified</a>
                 or
-                <a href="?group_by=state">state</a>
+                <a href="?{% if gbqs %}{{ gbqs }}&{% endif %}group_by=state">state</a>
                 or
                 <b>assignee</b>
                 or
-                <a href="?group_by=tag">tag</a>
+                <a href="?{% if gbqs %}{{ gbqs }}&{% endif %}group_by=tag">tag</a>
                 
                 {% order tasks by assignee %}
                 {% regroup tasks by assignee as grouped_tasks %}
             {% else %}
                 {% ifequal group_by "tag" %}
-                    <a href="?group_by=modified">last modified</a>
+                    <a href="?{% if gbqs %}{{ gbqs }}&{% endif %}group_by=modified">last modified</a>
                     or
-                    <a href="?group_by=state">state</a>
+                    <a href="?{% if gbqs %}{{ gbqs }}&{% endif %}group_by=state">state</a>
                     or
-                    <a href="?group_by=assignee">assignee</a>
+                    <a href="?{% if gbqs %}{{ gbqs }}&{% endif %}group_by=assignee">assignee</a>
                     or
                     <b>tag</b>
                     {# do no manipulation here as we'll special case below #}
                 {% else %}
                     <b>last modified</b>
                     or
-                    <a href="?group_by=state">state</a>
+                    <a href="?{% if gbqs %}{{ gbqs }}&{% endif %}group_by=state">state</a>
                     or
-                    <a href="?group_by=assignee">assignee</a>
+                    <a href="?{% if gbqs %}{{ gbqs }}&{% endif %}group_by=assignee">assignee</a>
                     or
-                    <a href="?group_by=tag">tag</a>
+                    <a href="?{% if gbqs %}{{ gbqs }}&{% endif %}group_by=tag">tag</a>
                     
                     {% order tasks by -modified %}
                     {% regroup tasks by modified.date as grouped_tasks %}
