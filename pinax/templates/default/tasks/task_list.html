@@ -15,72 +15,53 @@
     {#<h1>{% trans "Tasks for Project" %} <a href="@@@">{{ group.name }}</a></h1> #}
     <h1>Tasks</h1>
     
-    {% if state_displays %}
-        <p class="filter">Filter out: 
-        {% for state_display in state_displays %}
-            {% ifequal hide_state state_display.id %}
-                <b>{{ state_display.description }}</b>
-            {% else %}
-                <a href="?{% if group_by%}group_by={{ group_by }}&{% endif %}hide_state={{ state_display.id }}">
-                    {{ state_display.description }}
-                </a>
-            {% endifequal %}
-            {% if forloop.last %}{% else %}or{% endif %}
-        {% endfor %}
-        </p>
-    {% endif %}
-    
     <form action="" method="GET">
         {{ task_filter.form.as_p }}
         <input type="submit" />
     </form>
-    
-    {% for task in tasks %}
-        {{ task }}<br />
-    {% endfor %}
             
     <p>Group by:
         {% ifequal group_by "state" %}
-            <a href="?group_by=modified&hide_state={{ hide_state }}">last modified</a>
+            <a href="?group_by=modified">last modified</a>
             or
             <b>state</b>
             or
-            <a href="?group_by=assignee&hide_state={{ hide_state }}">assignee</a>
+            <a href="?group_by=assignee">assignee</a>
             or
-            <a href="?group_by=tag&hide_state={{ hide_state }}">tag</a>
+            <a href="?group_by=tag">tag</a>
             
             {% order tasks by state %}
             {% regroup tasks by get_state_display as grouped_tasks %}
         {% else %}
             {% ifequal group_by "assignee" %}
-                <a href="?group_by=modified&hide_state={{ hide_state }}">last modified</a>
+                <a href="?group_by=modified">last modified</a>
                 or
-                <a href="?group_by=state&hide_state={{ hide_state }}">state</a>
+                <a href="?group_by=state">state</a>
                 or
                 <b>assignee</b>
                 or
-                <a href="?group_by=tag&hide_state={{ hide_state }}">tag</a>
+                <a href="?group_by=tag">tag</a>
                 
                 {% order tasks by assignee %}
                 {% regroup tasks by assignee as grouped_tasks %}
             {% else %}
                 {% ifequal group_by "tag" %}
-                    <a href="?group_by=modified&hide_state={{ hide_state }}">last modified</a>
+                    <a href="?group_by=modified">last modified</a>
                     or
-                    <a href="?group_by=state&hide_state={{ hide_state }}">state</a>
+                    <a href="?group_by=state">state</a>
                     or
-                    <a href="?group_by=assignee&hide_state={{ hide_state }}">assignee</a>
+                    <a href="?group_by=assignee">assignee</a>
                     or
                     <b>tag</b>
                     {# do no manipulation here as we'll special case below #}
                 {% else %}
                     <b>last modified</b>
                     or
-                    <a href="?group_by=state&hide_state={{ hide_state }}">state</a>
+                    <a href="?group_by=state">state</a>
                     or
-                    <a href="?group_by=assignee&hide_state={{ hide_state }}">assignee</a>
+                    <a href="?group_by=assignee">assignee</a>
                     or
-                    <a href="?group_by=tag&hide_state={{ hide_state }}">tag</a>
+                    <a href="?group_by=tag">tag</a>
                     
                     {% order tasks by -modified %}
                     {% regroup tasks by modified.date as grouped_tasks %}

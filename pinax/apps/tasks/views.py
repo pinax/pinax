@@ -72,29 +72,12 @@ def tasks(request, group_slug=None, template_name="tasks/task_list.html", bridge
     
     tasks = tasks.select_related("assignee")
     
-    # exclude states
-    hide_state  = request.GET.get("hide_state")
-    if hide_state:
-        for exclude in hide_state.split(','):
-            if exclude in workflow.STATE_ID_LIST:
-                tasks = tasks.exclude(state__exact=exclude)
-                
-            state = workflow.REVERSE_STATE_CHOICES.get(exclude, None)
-            if state:
-                tasks = tasks.exclude(state__exact=state)
-    
     task_filter = TaskFilter(request.GET, queryset=tasks)
-    
-    state_displays = []
-    for state in workflow.STATE_CHOICES:
-        state_displays.append(dict(id=state[0], description=state[1]))
     
     return render_to_response(template_name, {
         "group": group,
         "group_by": group_by,
         "is_member": is_member,
-        "hide_state": hide_state,
-        "state_displays": state_displays,
         "group_base": group_base,
         "task_filter": task_filter,
         "tasks": task_filter.qs,
