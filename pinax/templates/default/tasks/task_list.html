@@ -90,7 +90,7 @@
         {% ifequal group_by "tag" %}
             {% tags_for_model tasks.Task as task_tags %}
             {% for section in task_tags %}
-                {% tasks_for_tag section as tagtasks %}
+                {% tasks_for_tag section as tagtasks in tasks %}
                 <tbody><tr class="task_grouping">
                     <td colspan="6">
                         <span class="focus"><a href="{% focus_url group_by section group %}">focus</a></span>
