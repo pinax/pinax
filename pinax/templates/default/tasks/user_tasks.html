@@ -17,6 +17,17 @@
     <h2>Nudged Tasks</h2>
     
     {% if nudged_tasks %}
+        
+        <form action="" method="GET">
+            <div class="task_filter">
+                <ul>
+                    {{ nudged_filter.form.as_ul }}
+                    <li><input type="submit" value="filter"/></li>
+                </ul>
+            </div>
+        </form>
+        
+        
         {% regroup nudged_tasks by get_state_display as grouped_tasks %}
         
         <table class="task_list">
@@ -59,6 +70,16 @@
     <h2>Assigned Tasks</h2>
     
     {% if assigned_tasks %}
+        
+        <form action="" method="GET">
+            <div class="task_filter">
+                <ul>
+                    {{ assigned_filter.form.as_ul }}
+                    <li><input type="submit" value="filter"/></li>
+                </ul>
+            </div>
+        </form>
+        
         {% regroup assigned_tasks by get_state_display as grouped_tasks %}
         
         <table class="task_list">
@@ -101,6 +122,16 @@
     <h2>Created Tasks</h2>
     
     {% if created_tasks %}
+        
+        <form action="" method="GET">
+            <div class="task_filter">
+                <ul>
+                    {{ created_filter.form.as_ul }}
+                    <li><input type="submit" value="filter"/></li>
+                </ul>
+            </div>
+        </form>
+        
         {% regroup created_tasks by get_state_display as grouped_tasks %}
         
         <table class="task_list">
