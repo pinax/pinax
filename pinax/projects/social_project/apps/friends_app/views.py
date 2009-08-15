@@ -16,7 +16,7 @@ from friends.importer import import_yahoo, import_google
 def friends(request, form_class=JoinRequestForm,
         template_name="friends_app/invitations.html"):
     if request.method == "POST":
-        invitation_id = request.POST["invitation"]
+        invitation_id = request.POST.get("invitation", None)
         if request.POST["action"] == "accept":
             try:
                 invitation = FriendshipInvitation.objects.get(id=invitation_id)
