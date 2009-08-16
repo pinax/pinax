@@ -10,7 +10,13 @@ class PhotoUploadForm(forms.ModelForm):
         model = Image
         exclude = ('member','photoset','title_slug','effect','crop_from')
         
-    def __init__(self, user=None, *args, **kwargs):
+    def clean_image(self):
+		if '#' in self.cleaned_data['image'].name:
+			raise forms.ValidationError(
+				_("Image filename contains an invalid character: \'#\'. Please remove the character and try again."))
+		return self.cleaned_data['image']
+
+	def __init__(self, user=None, *args, **kwargs):
         self.user = user
         super(PhotoUploadForm, self).__init__(*args, **kwargs)
 
