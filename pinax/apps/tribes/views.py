@@ -130,5 +130,6 @@ def tribe(request, group_slug=None, form_class=TribeUpdateForm,
     return render_to_response(template_name, {
         "tribe_form": tribe_form,
         "tribe": tribe,
+        "group": tribe, # @@@ this should be the only context var for the tribe
         "is_member": is_member,
     }, context_instance=RequestContext(request))

@@ -16,7 +16,7 @@ from friends.importer import import_yahoo, import_google
 def friends(request, form_class=JoinRequestForm,
         template_name="friends_app/invitations.html"):
     if request.method == "POST":
-        invitation_id = request.POST["invitation"]
+        invitation_id = request.POST.get("invitation", None)
         if request.POST["action"] == "accept":
             try:
                 invitation = FriendshipInvitation.objects.get(id=invitation_id)
@@ -43,8 +43,8 @@ def friends(request, form_class=JoinRequestForm,
     else:
         join_request_form = form_class()
     
-    invites_received = request.user.invitations_to.all().order_by("-sent").exclude(status=8).exclude(status=6)
-    invites_sent = request.user.invitations_from.all().order_by("-sent").exclude(status=8).exclude(status=6)
+    invites_received = request.user.invitations_to.invitations().order_by("-sent")
+    invites_sent = request.user.invitations_from.invitations().order_by("-sent")
     joins_sent = request.user.join_from.all().order_by("-sent")
     
     return render_to_response(template_name, {

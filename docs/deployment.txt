@@ -49,12 +49,14 @@ sample Apache config that you can use::
 
 .. note::
 
-    It is important to note that you should pay careful attension to the
+    It is important to note that you should pay careful attention to the
     value of ``PythonHandler`` above. It is *not* using
     ``django.core.handlers.modpython``. It is using a mod_python handler
     located in your project's ``deploy/`` directory. The reason why we have
     our own mod_python handler is because we need to setup the Pinax
     environment otherwise you will see failing imports.
+
+.. _ref-sending-mail-and-notices:
 
 Sending Mail and Notices
 ------------------------
@@ -71,7 +73,7 @@ and::
 on a frequent, regular basis.
 
 Because failed mail will be deferred, you need an additional, less
-frequency run of::
+frequenc, run of::
     
     python manage.py retry_deferred
     

@@ -5,9 +5,12 @@ from topics.models import Topic
 
 register = template.Library()
 
-def show_topic(topic):
-    return {"topic": topic}
-register.inclusion_tag("topics/topic_item.html")(show_topic)
+def show_topic(context, topic):
+    return {
+        "topic": topic,
+        "group": context.get("group"),
+    }
+register.inclusion_tag("topics/topic_item.html", takes_context=True)(show_topic)
 
 class TopicsForGroupNode(template.Node):
     def __init__(self, group_name, context_name):

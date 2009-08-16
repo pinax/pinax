@@ -84,10 +84,28 @@ wanted to clone the basic_project you could simply do the following::
     (pinax-env)$ pinax-admin clone_project basic_project mysite
 
 
-Settings You Will (Probably) Want To Override
+Settings You Will (Possibly) Want To Override
 ---------------------------------------------
 
+Pinax-specific:
+
 - ``PINAX_THEME``
+- ``CONTACT_EMAIL``
+- ``URCHIN_ID``
+- ``BBAUTH_APP_ID``
+- ``BBAUTH_SHARED_SECRET``
+- ``SITE_NAME``
+- ``MAILER_PAUSE_SEND``
+- ``SERVE_MEDIA``
+- ``ACCOUNT_OPEN_SIGNUP``
+- ``ACCOUNT_REQUIRED_EMAIL``
+- ``ACCOUNT_EMAIL_VERIFICATION``
+- ``EMAIL_CONFIRMATION_DAYS``
+- ``LOGIN_REDIRECT_URLNAME``
+
+
+General to Django:
+
 - ``DEBUG``
 - ``TEMPLATE_DEBUG``
 - ``LOGGING_OUTPUT_ENABLED``
@@ -98,28 +116,16 @@ Settings You Will (Probably) Want To Override
 - ``DATABASE_USER``
 - ``DATABASE_PASSWORD``
 - ``DATABASE_HOST``
-- ``DATABASE_PORT``
 - ``TIME_ZONE``
 - ``SECRET_KEY``
 - ``DEFAULT_FROM_EMAIL``
 - ``SERVER_EMAIL``
-- ``MAILER_PAUSE_SEND``
 - ``SEND_BROKEN_LINK_EMAILS``
 - ``EMAIL_HOST``
-- ``EMAIL_PORT``
 - ``EMAIL_HOST_USER``
 - ``EMAIL_HOST_PASSWORD``
 - ``EMAIL_SUBJECT_PREFIX``
-- ``EMAIL_DEBUG``
-- ``CONTACT_EMAIL``
-- ``URCHIN_ID``
-- ``BBAUTH_APP_ID``
-- ``BBAUTH_SHARED_SECRET``
-- ``SITE_NAME``
-
-All but ``PINAX_THEME``, ``MAILER_PAUSE_SEND``, ``CONTACT_EMAIL``,
-``URCHIN_ID``, ``BBAUTH_APP_ID``, ``BBAUTH_SHARED_SECRET`` and ``SITE_NAME``
-are just the standard Django settings.
+- ``LOGIN_URL``
 
 
 ``base.html`` versus ``site_base.html``
