@@ -36,7 +36,7 @@ def get_media_path(path, all=False):
     installed_apps = settings.INSTALLED_APPS
     app_labels = [label.split('.')[-1] for label in installed_apps]
     for app in installed_apps:
-        app_mod = __import__(app, {}, {}, [''])
+        app_mod = import_module(app)
         app_root = os.path.dirname(app_mod.__file__)
         for media_dir in MEDIA_DIRNAMES:
             media = os.path.join(app_root, media_dir, path)
