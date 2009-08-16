@@ -3,59 +3,18 @@ Views and functions for serving static files. These are only to be used
 during development, and SHOULD NOT be used in a production setting.
 """
 
-import mimetypes
 import os
-import posixpath
 import stat
 import urllib
+import mimetypes
+import posixpath
 
-from django.http import Http404, HttpResponse, HttpResponseRedirect, HttpResponseNotModified
+from django.conf import settings
 from django.utils.http import http_date
 from django.views.static import was_modified_since, directory_index
-from django.conf import settings
-
-SITE_MEDIA_ROOT = getattr(settings, 'MEDIA_ROOT',
-    os.path.join(settings.PROJECT_ROOT, 'site_media'))
-PINAX_MEDIA_ROOT = os.path.join(settings.PINAX_ROOT, 'media', settings.PINAX_THEME)
-PROJECT_MEDIA_ROOT = os.path.join(settings.PROJECT_ROOT, 'media')
-PINAX_APP_MEDIA_DIRS = ('media', 'static', 'site_media')
-
-def get_media_path(path):
-    """
-    Traverses the following locations to find a requested media file in the
-    given order and return the absolute file path:
-
-    1. The site media path, e.g. for user-contributed files:
-        <project>/site_media/<path>
-    2. Current project:
-        <project>/media/<app>/<path>
-    3. Pinax' themes:
-        pinax/media/<theme>/<path>
-    4. Installed apps:
-        a) <app>/media|static|site_media/<app>/<path>
-        b) <app>/media|static|site_media/<path>
-    """
-    app_labels = settings.INSTALLED_APPS
-    short_app_labels = [label.split('.')[-1] for label in app_labels]
-    for location in (SITE_MEDIA_ROOT, PROJECT_MEDIA_ROOT, PINAX_MEDIA_ROOT):
-        media = os.path.join(location, path)
-        if os.path.exists(media):
-            return media
-    for app in settings.INSTALLED_APPS:
-        app = __import__(app, {}, {}, [''])
-        app_root = os.path.dirname(app.__file__)
-        for media_dir in PINAX_APP_MEDIA_DIRS:
-            media = os.path.join(app_root, media_dir, path)
-            if os.path.exists(media):
-                return media
-            splitted_path = path.split('/', 1)
-            if len(splitted_path) > 1:
-                app, newpath = splitted_path
-                if app in short_app_labels:
-                    media = os.path.join(app_root, media_dir, newpath)
-                    if os.path.exists(media):
-                        return media
-    return None
+from django.http import Http404, HttpResponse, HttpResponseRedirect, \
+    HttpResponseNotModified
+from staticfiles.utils import get_media_path
 
 def serve(request, path, show_indexes=False):
     """

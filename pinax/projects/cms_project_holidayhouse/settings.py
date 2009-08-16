@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Django settings for basic pinax project.
+# Django settings for holidayhouse cms project.
 
 import os.path
 import pinax
@@ -178,6 +178,11 @@ LOGIN_REDIRECT_URLNAME = "home"
 SERIALIZATION_MODULES = {
     "jsonfk": "pinax.core.serializers.jsonfk",
 }
+
+STATICFILES_EXTRA_MEDIA = (
+    ('pinax', os.path.join(PINAX_ROOT, 'media', PINAX_THEME)),
+    ('cms_project_holidayhouse', os.path.join(PROJECT_ROOT, 'media')),
+)
 
 # local_settings.py can be used to override environment-specific settings
 # like database and email that differ between development and production.

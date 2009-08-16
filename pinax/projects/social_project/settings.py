@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Django settings for complete pinax project.
+# Django settings for social pinax project.
 
 import os.path
 import pinax
@@ -241,6 +241,11 @@ WIKI_REQUIRES_LOGIN = True
 # Uncomment this line after signing up for a Yahoo Maps API key at the
 # following URL: https://developer.yahoo.com/wsregapp/
 # YAHOO_MAPS_API_KEY = ''
+
+STATICFILES_EXTRA_MEDIA = (
+    ('pinax', os.path.join(PINAX_ROOT, 'media', PINAX_THEME)),
+    ('social_project', os.path.join(PROJECT_ROOT, 'media')),
+)
 
 # local_settings.py can be used to override environment-specific settings
 # like database and email that differ between development and production.

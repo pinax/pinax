@@ -1,55 +1,106 @@
-from django.core.management.base import BaseCommand, CommandError
-from django.conf import settings
-from optparse import make_option
 import os
 import sys
 import glob
 import shutil
+from optparse import make_option
+
+from django.conf import settings
+from django.db.models import get_apps
+from django.utils.text import get_text_list
+from django.core.management.base import BaseCommand, CommandError, AppCommand
+
+from staticfiles.utils import import_module
+
 try:
     set
 except NameError:
     from sets import Set as set # Python 2.3 fallback
 
-# Based on the collectmedia management command by Brian Beck (exogen)
-# http://blog.brianbeck.com/post/50940622/collectmedia
+MEDIA_DIRNAMES = getattr(settings, 'STATICFILES_MEDIA_DIRNAMES', ['media'])
+EXTRA_MEDIA = getattr(settings, 'STATICFILES_EXTRA_MEDIA', ())
+PREPEND_LABEL_APPS = getattr(
+    settings, 'STATICFILES_PREPEND_LABEL_APPS', ('django.contrib.admin',))
 
-class Command(BaseCommand):
-    media_dirs = ['media']
-    ignore_apps = ['django.contrib.admin']
+class Command(AppCommand):
+    """
+    Command that allows to copy or symlink media files from different
+    locations to the settings.MEDIA_ROOT.
+
+    Based on the collectmedia management command by Brian Beck:
+    http://blog.brianbeck.com/post/50940622/collectmedia
+    """
+    media_files = {}
+    media_dirs = MEDIA_DIRNAMES
+    media_root = settings.MEDIA_ROOT
     exclude = ['CVS', '.*', '*~']
-    option_list = BaseCommand.option_list + (
-        make_option('--media-root', default=settings.MEDIA_ROOT, dest='media_root', metavar='DIR',
+    option_list = AppCommand.option_list + (
+        make_option('-i', '--interactive', action='store_true', dest='interactive',
+            help="Run in interactive mode, asking before modifying files and selecting from multiple sources."),
+        make_option('-a', '--all', action='store_true', dest='all',
+            help="Traverse all installed apps."),
+        make_option('--media-root', default=media_root, dest='media_root', metavar='DIR',
             help="Specifies the root directory in which to collect media files."),
-        make_option('-n', '--dry-run', action='store_true', dest='dry_run',
-            help="Do everything except modify the filesystem."),
-        make_option('-d', '--dir', action='append', default=media_dirs, dest='media_dirs', metavar='NAME',
+        make_option('-m', '--media-dir', action='append', default=media_dirs, dest='media_dirs', metavar='DIR',
             help="Specifies the name of the media directory to look for in each app."),
         make_option('-e', '--exclude', action='append', default=exclude, dest='exclude', metavar='PATTERNS',
             help="A space-delimited list of glob-style patterns to ignore. Use multiple times to add more."),
+        make_option('-n', '--dry-run', action='store_true', dest='dry_run',
+            help="Do everything except modify the filesystem."),
         make_option('-l', '--link', action='store_true', dest='link',
             help="Create a symbolic link to each file instead of copying."),
-        make_option('-i', '--interactive', action='store_true', dest='interactive',
-            help="Ask before modifying files and selecting from multiple sources."),
-        make_option('-t', '--theme', default=settings.PINAX_THEME, dest='theme', metavar='DIR',
-            help="Use this Pinax theme as a the basis."
-        )
     )
-    help = 'Collect media files from installed apps, Pinax and project in a single media directory.'
-    args = '[appname ...]'
+    help = 'Collect media files of apps, Pinax and the project in a single media directory.'
+    args = '[appname appname ...]'
 
     def handle(self, *app_labels, **options):
-        if not app_labels:
-            app_labels = list(settings.INSTALLED_APPS)
-        short_app_labels = [label.split('.')[-1] for label in app_labels] + ['pinax']
-        interactive = options.get('interactive', False)
-        dry_run = options.get('dry_run', False)
-        exclude = options.get('exclude')
-        theme = options.get('theme', settings.PINAX_THEME)
-        media_root = options.get('media_root', settings.MEDIA_ROOT)
-        pinax_media_root = os.path.join(settings.PINAX_ROOT, 'media', theme)
-        project_media_root = os.path.join(settings.PROJECT_ROOT, 'media')
-        if dry_run:
+        media_root = os.path.normpath(
+            options.get('media_root', settings.MEDIA_ROOT))
+
+        if not os.path.isdir(media_root):
+            raise CommandError(
+                'Designated media location %s could not be found.' % media_root)
+
+        if options.get('dry_run', False):
             print "\n    DRY RUN! NO FILES WILL BE MODIFIED."
+        print "\nCollecting media in %s" % media_root
+
+        if app_labels:
+            try:
+                app_list = [models.get_app(label) for label in app_labels]
+            except (ImproperlyConfigured, ImportError), e:
+                raise CommandError(
+                    "%s. Is your INSTALLED_APPS setting correct?" % e)
+        else:
+            if not options.get('all', False):
+                raise CommandError('Enter at least one appname or use the --all option')
+
+            app_list = []
+            for app_entry in settings.INSTALLED_APPS:
+                try:
+                    app_mod = import_module(app_entry)
+                except ImportError, e:
+                    raise CommandError('ImportError %s: %s' % (app, e.args[0]))
+                app_media_dir = os.path.join(
+                    os.path.dirname(app_mod.__file__), 'media')
+                if os.path.isdir(app_media_dir):
+                    app_list.append(app_mod)
+
+        app_labels = [app.__name__.rsplit('.', 1)[-1] for app in app_list]
+        print "Traversing apps: %s" % get_text_list(app_labels, 'and')
+        for app_mod in app_list:
+            self.handle_app(app_mod, **options)
+
+        # Look in additional locations for media
+        extra_media = []
+        for label, path in EXTRA_MEDIA:
+            if os.path.isdir(path):
+                extra_media.append((label, path))
+        extra_labels = [label for label, path in extra_media]
+        print "Looking additionally in: %s" % get_text_list(extra_labels, 'and')
+        exclude = options.get('exclude')
+        for extra_label, extra_path in extra_media:
+            self.add_media_files(extra_label, extra_path, exclude)
+
         # This mapping collects files that may be copied.  Keys are what the
         # file's path relative to `media_root` will be when copied.  Values
         # are a list of 2-tuples containing the the name of the app providing
@@ -57,42 +108,21 @@ class Command(BaseCommand):
         # greater than 1 if multiple apps provide a media file with the same
         # relative path.
 
-        media_files = {}
-        for app in app_labels:
-            if app not in self.ignore_apps:
-                for rel_path, abs_path in self.handle_app(app, **options):
-                    media_files.setdefault(rel_path, []).append((app, abs_path))
-
-        if os.path.isdir(pinax_media_root):
-            app_labels = []
-            app_labels[:] = self.filter_names(os.listdir(pinax_media_root), exclude=exclude)
-            for app in app_labels:
-                if app in short_app_labels and app not in self.ignore_apps:
-                    for rel_path, abs_path in self.handle_pinax(app, pinax_media_root, **options):
-                        media_files.setdefault(rel_path, []).append((app, abs_path))
-
-        if os.path.isdir(project_media_root):
-            app_labels = []
-            app_labels[:] = self.filter_names(os.listdir(project_media_root), exclude=exclude)
-            for app in app_labels:
-                if app not in self.ignore_apps:
-                    for rel_path, abs_path in self.handle_project(app, project_media_root, **options):
-                        media_files.setdefault(rel_path, []).append((app, abs_path))
-
         # Forget the unused versions of a media file
-        for f in media_files:
-            media_files[f] = dict(media_files[f]).items()
+        for f in self.media_files:
+            self.media_files[f] = dict(self.media_files[f]).items()
 
         # Stop if no media files were found
-        if not media_files:
+        if not self.media_files:
             print "\nNo media found."
             return
 
+        interactive = options.get('interactive', False)
         # Try to copy in some predictable order.
-        destinations = list(media_files)
+        destinations = list(self.media_files)
         destinations.sort()
         for destination in destinations:
-            sources = media_files[destination]
+            sources = self.media_files[destination]
             first_source, other_sources = sources[0], sources[1:]
             if interactive and other_sources:
                 first_app = first_source[0]
@@ -117,57 +147,34 @@ class Command(BaseCommand):
                         print "The app %r does not provide this file." % app
             else:
                 app, source = first_source
+
+            # Special case apps that have media in <app>/media, not in
+            # <app>/media/<app>, e.g. django.contrib.admin
+            if app in [app.rsplit('.', 1)[-1] for app in PREPEND_LABEL_APPS]:
+                destination = os.path.join(app, destination)
+
             print "\nSelected %r provided by %r." % (destination, app)
             self.process_file(source, destination, media_root, **options)
 
-    def handle_pinax(self, app, location, **options):
-        media_dirs = options.get('media_dirs')
-        exclude = options.get('exclude')
-        for media_dir in media_dirs:
-            app_media = os.path.join(location, app)
-            if os.path.isdir(app_media):
-                prefix_length = len(location) + len(os.sep)
-                for root, dirs, files in os.walk(app_media):
-                    # Filter `dirs` and `files` based on the exclusion pattern.
-                    dirs[:] = self.filter_names(dirs, exclude=exclude)
-                    files[:] = self.filter_names(files, exclude=exclude)
-                    for filename in files:
-                        absolute_path = os.path.join(root, filename)
-                        relative_path = absolute_path[prefix_length:]
-                        yield (relative_path, absolute_path)
-
-    def handle_project(self, app, location, **options):
-        media_dirs = options.get('media_dirs')
-        exclude = options.get('exclude')
-        for media_dir in media_dirs:
-            prefix_length = len(location) + len(os.sep)
-            for root, dirs, files in os.walk(location):
-                # Filter `dirs` and `files` based on the exclusion pattern.
-                dirs[:] = self.filter_names(dirs, exclude=exclude)
-                files[:] = self.filter_names(files, exclude=exclude)
-                for filename in files:
-                    absolute_path = os.path.join(root, filename)
-                    relative_path = absolute_path[prefix_length:]
-                    yield (relative_path, absolute_path)
-
     def handle_app(self, app, **options):
-        if isinstance(app, basestring):
-            app = __import__(app, {}, {}, [''])
-        app_root = os.path.dirname(app.__file__)
-        media_dirs = options.get('media_dirs')
         exclude = options.get('exclude')
+        media_dirs = options.get('media_dirs')
+        app_label = app.__name__.rsplit('.', 1)[-1]
+        app_root = os.path.dirname(app.__file__)
         for media_dir in media_dirs:
             app_media = os.path.join(app_root, media_dir)
             if os.path.isdir(app_media):
-                prefix_length = len(app_media) + len(os.sep)
-                for root, dirs, files in os.walk(app_media):
-                    # Filter `dirs` and `files` based on the exclusion pattern.
-                    dirs[:] = self.filter_names(dirs, exclude=exclude)
-                    files[:] = self.filter_names(files, exclude=exclude)
-                    for filename in files:
-                        absolute_path = os.path.join(root, filename)
-                        relative_path = absolute_path[prefix_length:]
-                        yield (relative_path, absolute_path)
+                self.add_media_files(app_label, app_media, exclude)
+
+    def add_media_files(self, app, location, exclude):
+        prefix_length = len(location) + len(os.sep)
+        for root, dirs, files in os.walk(location):
+            # Filter files based on the exclusion pattern.
+            for filename in self.filter_names(files, exclude=exclude):
+                absolute_path = os.path.join(root, filename)
+                relative_path = absolute_path[prefix_length:]
+                self.media_files.setdefault(
+                    relative_path, []).append((app, absolute_path))
 
     def process_file(self, source, destination, root, link=False, **options):
         dry_run = options.get('dry_run', False)
@@ -271,6 +278,5 @@ class Command(BaseCommand):
         else:
             exclude = [pattern for patterns in exclude for pattern in patterns.split()]
         excluded_names = set(
-            [name for pattern in exclude for name in func(names, pattern)]
-        )
+            [name for pattern in exclude for name in func(names, pattern)])
         return set(names) - excluded_names

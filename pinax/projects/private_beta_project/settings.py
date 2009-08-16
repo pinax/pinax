@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Django settings for basic pinax project.
+# Django settings for private beta project.
 
 import os.path
 import pinax
@@ -172,6 +172,11 @@ AUTHENTICATED_EXEMPT_URLS = [
     r"^/account/password_reset",
     r"^/account/confirm_email",
 ]
+
+STATICFILES_EXTRA_MEDIA = (
+    ('pinax', os.path.join(PINAX_ROOT, 'media', PINAX_THEME)),
+    ('private_beta_project', os.path.join(PROJECT_ROOT, 'media')),
+)
 
 # local_settings.py can be used to override environment-specific settings
 # like database and email that differ between development and production.
