@@ -232,6 +232,45 @@ This option is used in the standard projects' URLconf to determine, if
 this settings is bound to the ``DEBUG`` setting in the default
 ``settings.py``.
 
+STATICFILES_EXTRA_MEDIA
+-----------------------
+
+:Default: ``[]``
+
+This setting defines the additional locations the ``staticfiles`` app will
+traverse when looking for media files, e.g. if you use the
+:ref:`build_media <ref-media-build_media>` or
+:ref:`resolve_media <ref-media-resolve_media>` management command or
+use the :ref:`static file serving view <ref-media-devel>`.
+
+It should be defined as a sequence of ``(label, path)`` tuples, e.g.::
+
+    STATICFILES_EXTRA_MEDIA = (
+        ('pinax', os.path.join(PINAX_ROOT, 'media', PINAX_THEME)),
+        ('my_project', os.path.join(PROJECT_ROOT, 'media')),
+    )
+
+STATICFILES_PREPEND_LABEL_APPS
+-------------------------------
+
+:Default: ``('django.contrib.admin',)``
+
+A sequence of app paths that have the media files in ``<app>/media``, not in
+``<app>/media/<app>``, e.g. ``django.contrib.admin``.
+
+STATICFILES_MEDIA_DIRNAMES
+---------------------------
+
+:Default: ``('media',)``
+
+A sequence of directory names to be used when searching for media files in
+installed apps, e.g. if an app has its media files in ``<app>/static``
+use::
+
+    STATICFILES_MEDIA_DIRNAMES = (
+        'media',
+        'static',
+    )
 
 .. _ref-settings-urchin-id:
 

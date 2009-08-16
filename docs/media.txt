@@ -41,6 +41,8 @@ Site specific media files goes to::
 The special static file service view should be able to serve the media files in
 development. 
 
+.. _ref-media-build_media:
+
 build_media management command
 ================================
 
@@ -49,20 +51,36 @@ all the apps and arrange them under the `<project_name>/site_media folder`.
 
 The command::
 
-    <project_name>/python manage.py build_media
+    <project_name>/python manage.py build_media --all
     
-will collect the media files from Pinax and all the apps and places them in the
-`site_media` folder.
+will collect the media files from Pinax and all the apps and places them in
+the folder defined in the MEDIA_ROOT setting.
 
 If you have two apps with the same file and the same relative path it's advised
-to use the --interactive option so the script will prompt you to choose which
-one to use. This is useful in case you want to overwrite default media files
-with your custom app for example. Remember to remove the site_media folder
-before you use this option or the script will prompt you for each file.
+to use the ``--interactive`` option so the script will prompt you to choose
+which one to use. This is useful in case you want to overwrite default media
+files with your custom app for example. Remember to remove the site_media
+folder before you use this option or the script will prompt you for each file.
 
 Please also refer to the help of the build_media management command by running::
 
     <project_name>/python manage.py build_media --help
+
+.. _ref-media-resolve_media:
+
+resolve_media management command
+================================
+
+To quickly resolve the full file path of a media file on the filesystem,
+you can pass its expected URL path(s) to the ``resolve_media`` management
+command, e.g.::
+
+    $ ./manage resolve_media pinax/css/base.css
+    Resolving css/site_tabs.css:
+      /Users/jtauber/virtualenvs/mysite/lib/python2.6/site-packages/Pinax-0.7beta3-py2.6.egg/pinax/media/default/pinax/css/base.css
+
+If multiple locations are found which match the given path it will list all of
+them, sorted by its importance.
 
 .. _ref-media-devel:
 
