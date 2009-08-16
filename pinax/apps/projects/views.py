@@ -125,5 +125,6 @@ def project(request, group_slug=None, form_class=ProjectUpdateForm, adduser_form
         "project_form": project_form,
         "adduser_form": adduser_form,
         "project": project,
+        "group": project, # @@@ this should be the only context var for the project
         "is_member": is_member,
     }, context_instance=RequestContext(request))
