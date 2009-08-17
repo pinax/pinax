@@ -60,13 +60,13 @@
         // We disable the the resolution by default
         // when the page loads. Unless, of course,
         // the ticket is already in the resolved state (state==2)
-		if( $('#id_resolution') ){
-	        $('#id_resolution').attr("disabled", true);
-	        var state_value = $('#id_state')[0].value;
-	        if  (state_value == "2" || state_value == "3") {
-	            $('#id_resolution').attr("disabled", false);
-	        }
-		}
+        if( $('#id_resolution') ){
+            $('#id_resolution').attr("disabled", true);
+            var state_value = $('#id_state')[0].value;
+            if  (state_value == "2" || state_value == "3") {
+                $('#id_resolution').attr("disabled", false);
+            }
+        }
     });
 
     $('#id_state').change(function(){
