@@ -11,8 +11,6 @@ admin.autodiscover()
 from account.openid_consumer import PinaxConsumer
 from waitinglist.forms import WaitingListEntryForm
 
-import private_beta_project as project
-
 
 # @@@ turn into template tag
 def homepage(request):
@@ -25,7 +23,6 @@ def homepage(request):
         form = WaitingListEntryForm()
     return direct_to_template(request, "homepage.html", {
         "form": form,
-        "about_text": project.__about__,
     })
 
 
