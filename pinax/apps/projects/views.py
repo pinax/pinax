@@ -92,8 +92,18 @@ def delete(request, group_slug=None, redirect_url=None):
 
 @login_required
 def your_projects(request, template_name="projects/your_projects.html"):
+
+    projects = Project.objects.filter(member_users=request.user).order_by("name")
+
+    content_type = ContentType.objects.get_for_model(Project)
+
+    projects = projects.extra(select=SortedDict([
+        ('member_count', MEMBER_COUNT_SQL),
+        ('topic_count', TOPIC_COUNT_SQL),
+    ]), select_params=(content_type.id,))
+
     return render_to_response(template_name, {
-        "projects": Project.objects.filter(member_users=request.user).order_by("name"),
+        "projects": projects,
     }, context_instance=RequestContext(request))
 
 
