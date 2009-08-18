@@ -93,7 +93,7 @@ def delete(request, group_slug=None, redirect_url=None):
 @login_required
 def your_projects(request, template_name="projects/your_projects.html"):
     return render_to_response(template_name, {
-        "projects": Project.objects.filter(members=request.user).order_by("name"),
+        "projects": Project.objects.filter(member_users=request.user).order_by("name"),
     }, context_instance=RequestContext(request))
 
 
