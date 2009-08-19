@@ -20,12 +20,6 @@ def get_media_path(path, all=False):
         b) <app>/media/<path>
     """
     collection = []
-    def collect_or_return(media, collect):
-        if os.path.exists(media):
-            if not all:
-                return media
-            collection.append(media)
-
     for location in [SITE_MEDIA_ROOT] + [root for label, root in EXTRA_MEDIA]:
         media = os.path.join(location, path)
         if os.path.exists(media):
