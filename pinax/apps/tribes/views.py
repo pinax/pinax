@@ -111,7 +111,7 @@ def tribe(request, group_slug=None, form_class=TribeUpdateForm,
     if action == 'update' and tribe_form.is_valid():
         tribe = tribe_form.save()
     elif action == 'join':
-        if is_member:
+        if not is_member:
             tribe.members.add(request.user)
             request.user.message_set.create(
                 message=_("You have joined the tribe %(tribe_name)s") % {"tribe_name": tribe.name})
