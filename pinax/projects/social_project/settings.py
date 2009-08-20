@@ -2,10 +2,11 @@
 # Django settings for social pinax project.
 
 import os.path
+import posixpath
 import pinax
 
-PINAX_ROOT = os.path.realpath(os.path.dirname(pinax.__file__))
-PROJECT_ROOT = os.path.realpath(os.path.dirname(__file__))
+PINAX_ROOT = os.path.abspath(os.path.dirname(pinax.__file__))
+PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
 # tells Pinax to use the default theme
 PINAX_THEME = 'default'
@@ -59,7 +60,7 @@ MEDIA_URL = '/site_media/'
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/media/'
+ADMIN_MEDIA_PREFIX = posixpath.join(MEDIA_URL, "admin/")
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = ''

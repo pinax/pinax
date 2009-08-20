@@ -2,6 +2,7 @@
 # Django settings for code project.
 
 import os.path
+import posixpath
 import pinax
 
 PINAX_ROOT = os.path.abspath(os.path.dirname(pinax.__file__))
@@ -59,7 +60,7 @@ MEDIA_URL = '/site_media/'
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/media/admin/'
+ADMIN_MEDIA_PREFIX = posixpath.join(MEDIA_URL, "admin/")
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = ''
