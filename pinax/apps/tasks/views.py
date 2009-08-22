@@ -352,7 +352,7 @@ def user_tasks(request, username, group_slug=None, template_name="tasks/user_tas
     created_tasks = other_user.created_tasks.all()
     
     if group:
-        assigned_tasks = group.content_objects(assigned_tasks)        
+        assigned_tasks = group.content_objects(assigned_tasks)
         created_tasks = group.content_objects(created_tasks)
     
     # default filtering
@@ -388,18 +388,19 @@ def user_tasks(request, username, group_slug=None, template_name="tasks/user_tas
     nudged_filter = TaskFilter(filter_data, queryset=nudged_tasks, prefix="n")
     nudged_tasks = nudged_filter.qs
     
-    if group:
-        url = bridge.reverse("tasks_mini_list", group)
-    else:
-        url = reverse("tasks_mini_list")
+    site_url = "http://" + Site.objects.get_current().domain
     
-    bookmarklet = """javascript:(
-            function() {
-                url = '%s';
-                window.open(url, 'tasklist', 'height=500, width=250, title=no, location=no, scrollbars=yes, menubars=no, navigation=no, statusbar=no, directories=no, resizable=yes, status=no, toolbar=no, menuBar=no');
-            }
-        )()""" % url
-
+    if group:
+        url = site_url + bridge.reverse("tasks_mini_list", group)
+    else:
+        url = site_url + reverse("tasks_mini_list")
+    
+    bookmarklet = """javascript:(function() {
+url = '%s';
+window.open(url, 'tasklist', 'height=500, width=250, title=no, location=no,
+scrollbars=yes, menubars=no, navigation=no, statusbar=no, directories=no,
+resizable=yes, status=no, toolbar=no, menuBar=no');})()""" % url
+    
     return render_to_response(template_name, {
         "group": group,
         "assigned_filter": assigned_filter,
