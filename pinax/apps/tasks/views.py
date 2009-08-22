@@ -475,7 +475,11 @@ def focus(request, field, value, group_slug=None, template_name="tasks/focus.htm
             tasks = Task.objects.none() # @@@ or throw 404?
     elif field == "state":
         task_filter = None # prevent task filtering
-        tasks = tasks.filter(state=workflow.REVERSE_STATE_CHOICES[value])
+        try:
+            state = workflow.REVERSE_STATE_CHOICES[value]
+        except KeyError:
+            raise Http404
+        tasks = tasks.filter(state=state)
     elif field == "assignee":
         if value == "unassigned": # @@@ this means can't have a username 'unassigned':
             tasks = tasks.filter(assignee__isnull=True)
