@@ -130,7 +130,7 @@ def add_task(request, group_slug=None, secret_id=None, form_class=TaskForm, temp
         paste.expires = datetime.now() + timedelta(seconds=3600*24*30*12*100) # Update the expiration time to maximum
         paste.save()
         paste_link = ugettext('Link to the snippet: http://%(domain)s%(link)s\n\n' % {
-                                'domain': Site.objects.get_current().name,
+                                'domain': Site.objects.get_current().domain,
                                 'link': reverse('snippet_details', kwargs={'snippet_id': paste.secret_id})
                              })
         initial = {
