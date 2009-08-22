@@ -10,7 +10,7 @@
     <div class="right_panel">
         {% include "basic_profiles/profile_right_panel.html" %}
     </div>
-
+    
     <div class="vcard">
         {% if other_user.get_profile.name %}
             <h1>{% blocktrans %}Profile for <span class="nickname">{{ other_user }}</span>{% endblocktrans %}</h1>
@@ -25,39 +25,9 @@
             {% if other_user.get_profile.website %}<p><b>{% trans "Website" %}</b>: <a class="url" href="{{ other_user.get_profile.website }}">{{ other_user.get_profile.website }}</a></p>{% endif %}
         </div>
         
-        
-        {% if user.is_authenticated %}
-            {% if is_me %}
-                <div class="form-toggle">
-                    <p><span id="edit-profile-toggle">{% trans "Edit profile" %}</span></p>
-                    
-                    <form class="uniForm" id="edit-profile" method="POST" action="" style="display: none;">
-                        <fieldset class="inlineLabels">
-                            {{ profile_form|as_uni_form }}
-                            <div class="form_block">
-                            <input type="hidden" name="action" value="update" />
-                            <input type="submit" value="{% trans "update" %}"/>
-                            </div>
-                        </fieldset>
-                    </form>
-                </div>
-            {% endif %}
+        {% if is_me %}
+            <p><a href="{% url profile_edit %}">Edit profile</a></p>
         {% endif %}
+        
     </div><!--/vcard-->
 {% endblock %}
-
-{% block extra_body %}
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#edit-profile').hide();
-            $('#edit-profile-toggle').click(function() {
-                $('#edit-profile').toggle();
-                return false;
-            });
-            if ($('#edit-profile .errorField').length) {
-                $('#edit-profile').show();
-            }
-        });
-    </script>
-{% endblock %}
-

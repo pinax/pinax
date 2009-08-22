@@ -1,11 +1,14 @@
+from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
-from django.contrib.auth.models import User
-from django.http import HttpResponse, HttpResponseForbidden
+from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
 
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import ugettext
+
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 #from friends.forms import InviteFriendForm
 #from friends.models import FriendshipInvitation, Friendship
@@ -111,6 +114,27 @@ def profile(request, username, template_name="basic_profiles/profile.html"):
 #        "invite_form": invite_form,
 #        "previous_invitations_to": previous_invitations_to,
 #        "previous_invitations_from": previous_invitations_from,
+    }, context_instance=RequestContext(request))
+
+
+@login_required
+def profile_edit(request, form_class=ProfileForm, template_name="basic_profiles/profile_edit.html"):
+    
+    profile = request.user.get_profile()
+    
+    if request.method == "POST":
+        profile_form = form_class(request.POST, instance=profile)
+        if profile_form.is_valid():
+            profile = profile_form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+            return HttpResponseRedirect(reverse("profile_detail", args=[request.user.username]))
+    else:
+        profile_form = form_class(instance=profile)
+    
+    return render_to_response(template_name, {
+        "profile": profile,
+        "profile_form": profile_form,
     }, context_instance=RequestContext(request))
 
 # def username_autocomplete(request):
