@@ -74,7 +74,7 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
         previous_invitations_to = None
         previous_invitations_from = None
         if request.method == "POST":
-            if request.POST["action"] == "remove":
+            if request.POST.get("action") == "remove": # @@@ perhaps the form should just post to friends and be redirected here
                 Friendship.objects.remove(request.user, other_user)
                 request.user.message_set.create(message=_("You have removed %(from_user)s from friends") % {'from_user': other_user})
                 is_friend = False
@@ -85,7 +85,7 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
     
     else:
         if request.user.is_authenticated() and request.method == "POST":
-            if request.POST["action"] == "invite":
+            if request.POSTget("action") == "invite": # @@@ perhaps the form should just post to friends and be redirected here
                 invite_form = InviteFriendForm(request.user, request.POST)
                 if invite_form.is_valid():
                     invite_form.save()
@@ -95,7 +95,7 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
                     'message': ugettext("Let's be friends!"),
                 })
                 invitation_id = request.POST.get("invitation", None)
-                if request.POST["action"] == "accept": # @@@ perhaps the form should just post to friends and be redirected here
+                if request.POST.get("action") == "accept": # @@@ perhaps the form should just post to friends and be redirected here
                     try:
                         invitation = FriendshipInvitation.objects.get(id=invitation_id)
                         if invitation.to_user == request.user:
@@ -105,7 +105,7 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
                             other_friends = Friendship.objects.friends_for_user(other_user)
                     except FriendshipInvitation.DoesNotExist:
                         pass
-                elif request.POST["action"] == "decline":
+                elif request.POST.get("action") == "decline": # @@@ perhaps the form should just post to friends and be redirected here
                     try:
                         invitation = FriendshipInvitation.objects.get(id=invitation_id)
                         if invitation.to_user == request.user:
