@@ -1,7 +1,7 @@
 from django.conf import settings
 
-def contact_email(request):
-    return {'contact_email': getattr(settings, 'CONTACT_EMAIL', '')}
+from template_utils.context_processors import settings_processor
 
-def site_name(request):
-    return {'site_name': getattr(settings, 'SITE_NAME', '')}
+pinax_settings = settings_processor(
+    'CONTACT_EMAIL', 'SITE_NAME'
+)

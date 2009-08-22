@@ -60,13 +60,11 @@ def accept_join(request, confirmation_key, form_class=SignupForm,
     join_invitation = get_object_or_404(JoinInvitation, confirmation_key = confirmation_key.lower())
     if request.user.is_authenticated():
         return render_to_response("account/signup.html", {
-            "contact_email": settings.CONTACT_EMAIL,
         }, context_instance=RequestContext(request))
     else:
         form = form_class(initial={"email": join_invitation.contact.email, "confirmation_key": join_invitation.confirmation_key })
         return render_to_response(template_name, {
             "form": form,
-            "contact_email": settings.CONTACT_EMAIL,
         }, context_instance=RequestContext(request))
 
 def contacts(request, form_class=ImportVCardForm,
