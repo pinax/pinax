@@ -17,7 +17,7 @@ If you are using mod_wsgi, which we recommend, you will need to provide a WSGI
 script. All projects include a ``deploy/`` directory which contains this
 script named ``pinax.wsgi``. You may modify this file as it best suits you.
 
-To configure Apache here is a basic configuration::
+Here is a basic configuration for Apache (assuming you are using Python 2.5)::
 
     WSGIDaemonProcess mysite-production python-path=/path/to/virtualenvs/pinax-env/lib/python2.5/site-packages
     WSGIProcessGroup mysite-production
@@ -28,9 +28,10 @@ To configure Apache here is a basic configuration::
         Allow from all
     </Directory>
 
-The above configuration will likely need to be modified before use. We
-encourage you to read about `WSGIDaemonProcess`_ to learn more about what you
-can configure.
+The above configuration will likely need to be modified before use. Most
+specifically make sure the ``python-path`` option points to the right Python
+version. We encourage you to read about `WSGIDaemonProcess`_ to learn more
+about what you can configure.
 
 Using mod_python
 ----------------
