@@ -417,8 +417,21 @@ resizable=yes, status=no, toolbar=no, menuBar=no');})()""" % url
 
 @login_required
 def mini_list(request, group_slug=None, template_name="tasks/mini_list.html", bridge=None):
-    assigned_tasks = request.user.assigned_tasks.all().exclude(state="2").exclude(state="3").order_by("state", "-modified") # @@@ filter(project__deleted=False)
+    if bridge:
+        try:
+            group = bridge.get_group(group_slug)
+        except ObjectDoesNotExist:
+            raise Http404
+    else:
+        group = None
+    
+    assigned_tasks = request.user.assigned_tasks.all().exclude(state="2").exclude(state="3").order_by("state", "-modified")
+    
+    if group:
+        assigned_tasks = group.content_objects(assigned_tasks)
+    
     return render_to_response(template_name, {
+        "group": group,
         "assigned_tasks": assigned_tasks,
     }, context_instance=RequestContext(request))
 
