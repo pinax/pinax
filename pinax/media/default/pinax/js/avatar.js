@@ -1,6 +1,3 @@
-jQuery.fn.autoscroll = function() {
-    $('html,body').animate({scrollTop: this.offset().top}, 500);
-}
 $(function() {
     var profile_avatar = $('#profile_avatar');
     if(profile_avatar) {
