@@ -2,6 +2,7 @@ from django import template
 from django.utils.encoding import smart_str
 from django.core.urlresolvers import reverse, NoReverseMatch
 from django.db.models import get_model
+from django.db.models.query import QuerySet
 
 
 register = template.Library()
@@ -51,8 +52,14 @@ class ContentObjectsNode(template.Node):
     
     def render(self, context):
         group = self.group_var.resolve(context)
-        app_name, model_name = self.model_name_var.resolve(context).split(".")
-        model = get_model(app_name, model_name)
+        model_name = self.model_name_var.resolve(context)
+        
+        if isinstance(model_name, QuerySet):
+            model = model_name
+        else:
+            app_name, model_name = model_name.split(".")
+            model = get_model(app_name, model_name)
+        
         context[self.context_var] = group.content_objects(model)
         return ""
 
