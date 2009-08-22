@@ -82,11 +82,13 @@ We recommend setting up some scripts to run these commands within your
 virtual environment. You can use the following shell script as the basis for
 each management command::
 
+    #!/bin/sh
+
     WORKON_HOME=/home/user/virtualenvs
     PROJECT_ROOT=/path/to/project
 
     # activate virtual environment
-    source $WORKON_HOME/pinax-env/bin/activate
+    . $WORKON_HOME/pinax-env/bin/activate
 
     cd $PROJECT_ROOT
     python manage.py send_mail >> $PROJECT_ROOT/logs/cron_mail.log 2>&1
