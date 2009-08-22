@@ -135,7 +135,7 @@ INSTALLED_APPS = (
     'photologue',
     'attachments',
     'django_markup',
-    'filter',
+    'django_filters',
     
     # internal (for now)
     'basic_profiles',

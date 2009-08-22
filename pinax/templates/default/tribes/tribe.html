@@ -10,6 +10,7 @@
 {% load tribes_tags %}
 {% load group_tags %}
 {% load topics_tags %}
+{% load photo_tags %}
 
 {% block head_title %}{{ tribe.name }}{% endblock %}
 
@@ -132,8 +133,8 @@
                 </p>
             {% endif %}
             
-            {# the queryset returned here can be expensive since there is no select_related for photo join #}
-            {% content_objects tribe "photos.Pool" as photos %}
+            {% public_pool_photos as photos %}
+            {% content_objects tribe photos as photos %}
             
             <h2>{% trans "Tribe Photo Pool" %}</h2>
             
