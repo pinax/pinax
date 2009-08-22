@@ -1,8 +1,11 @@
+from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
-from django.contrib.auth.models import User
-from django.http import HttpResponse, HttpResponseForbidden
+from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
 from django.conf import settings
+
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import ugettext
@@ -16,12 +19,13 @@ from profiles.models import Profile
 from profiles.forms import ProfileForm
 
 from avatar.templatetags.avatar_tags import avatar
-#from gravatar.templatetags.gravatar import gravatar as avatar
+
 
 if "notification" in settings.INSTALLED_APPS:
     from notification import models as notification
 else:
     notification = None
+
 
 def profiles(request, template_name="profiles/profiles.html", extra_context=None):
     if extra_context is None:
@@ -43,10 +47,14 @@ def profiles(request, template_name="profiles/profiles.html", extra_context=None
         'search_terms': search_terms,
     }, **extra_context), context_instance=RequestContext(request))
 
+
 def profile(request, username, template_name="profiles/profile.html", extra_context=None):
+    
     if extra_context is None:
         extra_context = {}
+    
     other_user = get_object_or_404(User, username=username)
+    
     if request.user.is_authenticated():
         is_friend = Friendship.objects.are_friends(request.user, other_user)
         is_following = Following.objects.is_following(request.user, other_user)
@@ -74,7 +82,7 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
                     'to_user': username,
                     'message': ugettext("Let's be friends!"),
                 })
-
+    
     else:
         if request.user.is_authenticated() and request.method == "POST":
             if request.POST["action"] == "invite":
@@ -111,26 +119,11 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
                 'to_user': username,
                 'message': ugettext("Let's be friends!"),
             })
+    
     previous_invitations_to = FriendshipInvitation.objects.invitations(to_user=other_user, from_user=request.user)
     previous_invitations_from = FriendshipInvitation.objects.invitations(to_user=request.user, from_user=other_user)
     
-    if is_me:
-        if request.method == "POST":
-            if request.POST["action"] == "update":
-                profile_form = ProfileForm(request.POST, instance=other_user.get_profile())
-                if profile_form.is_valid():
-                    profile = profile_form.save(commit=False)
-                    profile.user = other_user
-                    profile.save()
-            else:
-                profile_form = ProfileForm(instance=other_user.get_profile())
-        else:
-            profile_form = ProfileForm(instance=other_user.get_profile())
-    else:
-        profile_form = None
-
     return render_to_response(template_name, dict({
-        "profile_form": profile_form,
         "is_me": is_me,
         "is_friend": is_friend,
         "is_following": is_following,
@@ -140,3 +133,24 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
         "previous_invitations_to": previous_invitations_to,
         "previous_invitations_from": previous_invitations_from,
     }, **extra_context), context_instance=RequestContext(request))
+
+
+@login_required
+def profile_edit(request, form_class=ProfileForm, template_name="profiles/profile_edit.html"):
+    
+    profile = request.user.get_profile()
+    
+    if request.method == "POST":
+        profile_form = form_class(request.POST, instance=profile)
+        if profile_form.is_valid():
+            profile = profile_form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+            return HttpResponseRedirect(reverse("profile_detail", args=[request.user.username]))
+    else:
+        profile_form = form_class(instance=profile)
+    
+    return render_to_response(template_name, {
+        "profile": profile,
+        "profile_form": profile_form,
+    }, context_instance=RequestContext(request))

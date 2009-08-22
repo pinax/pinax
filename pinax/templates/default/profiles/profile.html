@@ -22,12 +22,14 @@
                 <a href="{% url avatar_change %}" id="avatar_replace">(replace)</a>
                 {% endif %}
             </div>
-
+            
             {% if other_user.get_profile.name %}
                 <h1>{% blocktrans %}Profile for <span class="nickname">{{ other_user }}</span>{% endblocktrans %}</h1>
             {% else %}
                 <h1>{% blocktrans %}Profile for <span class="fn nickname">{{ other_user }}</span>{% endblocktrans %}</h1>
             {% endif %}
+            
+            
             
             <div class="profile_info">
                 {% if other_user.get_profile.name %}<p><b>{% trans "Name" %}</b>: <span class="fn">{{ other_user.get_profile.name }}</span></p>{% endif %}
@@ -35,7 +37,11 @@
                 {% if other_user.get_profile.location%}<p><b>{% trans "Location" %}</b>: {{ other_user.get_profile.location }}</p>{% endif %}
                 {% if other_user.get_profile.website %}<p><b>{% trans "Website" %}</b>: <a class="url" href="{{ other_user.get_profile.website }}">{{ other_user.get_profile.website }}</a></p>{% endif %}
             </div>
-        
+            
+            {% if is_me %}
+                <p><a href="{% url profile_edit %}">Edit profile</a></p>
+            {% endif %}
+            
             {% if user.is_authenticated %}
                 <p>
                     <a href="{% url tweet_followers other_user %}">{% trans "Followers" %}</a>: {% follower_count other_user %}
@@ -43,19 +49,6 @@
                 </p>
                 
                 {% if is_me %}
-                    <div class="form-toggle">
-                    <p><span id="edit-profile-toggle">{% trans "Edit profile" %}</span></p>
-                    
-                    <form class="uniForm" id="edit-profile" method="POST" action="" style="display: none;">
-                        <fieldset class="inlineLabels">
-                            {{ profile_form|as_uni_form }}
-                            <div class="form_block">
-                            <input type="hidden" name="action" value="update" />
-                            <input type="submit" value="{% trans "update" %}"/>
-                            </div>
-                        </fieldset>
-                    </form>
-                    </div>
                 {% else %}
                     {# @@@ this could be done with ajax, or at the very least turned into an inclusion tag #}
                     <div>
