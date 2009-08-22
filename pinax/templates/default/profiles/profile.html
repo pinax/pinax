@@ -2,9 +2,13 @@
 
 {% load i18n %}
 {% load avatar_tags %}
-{% load app_plugins %}
 {% load uni_form %}
+{% load group_tags %}
 {% load microblogging_tags %}
+{% load blog_tags %}
+{% load tagging_tags %}
+{% load photo_tags %}
+{% load threadedcommentstags %}
 
 {% block head_title %}{% blocktrans %}Profile for {{ other_user }}{% endblocktrans %}{% endblock %}
 
@@ -109,8 +113,86 @@
                     
                 {% endif %} {# is me #}
                 
-                {% plugin_point "profiles.profile" user=other_user owner=other_user viewer=user %}
+                <h2>{% trans "Wiki Articles" %}</h2>
                 
+                {% if other_user.article_set.all %}
+                    <table class="bookmarks">
+                        {% for article in other_user.article_set.all %}
+                        <tr class="{% cycle odd,even %}">
+                            <td class="meta">
+                                {{ article.created_at|date }}
+                            </td>
+                            <td>
+                                <h2><a href="{% groupurl wiki_article article.group title=article.title %}">{{ article.title }}</a></h2>
+                                <div class="body">{{ article.content|truncatewords:25 }}</div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                {% else %}
+                    <p>{% trans "No wiki articles yet." %}</p>
+                {% endif %}
+                
+                
+                <h2>{% trans "Bookmarks" %}</h2>
+                
+                {% if other_user.saved_bookmarks.all %}
+                    <table class="bookmarks narrow">
+                        {% for bookmark_instance in other_user.saved_bookmarks.all.select_related %}
+                            <tr class="{% cycle odd,even %} xfolkentry">
+                                <td class="meta">
+                                    {{ bookmark_instance.saved|date }}
+                                    {# add who originally added it and when #}
+                                </td>
+                                <td>
+                                    <h2><a class="taggedlink" href="{{ bookmark_instance.bookmark.url }}">{{ bookmark_instance.description }}</a></h2>
+                                    <div class="url">{% if bookmark_instance.bookmark.get_favicon_url %}<img src="{{ bookmark_instance.bookmark.get_favicon_url }}" height="16" width="16"/> {% endif %}{{ bookmark_instance.bookmark.url }}</div>
+                                    <div class="body description">{{ bookmark_instance.note|linebreaks }}</div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% else %}
+                    {% url add_bookmark as add_bookmark_url %}
+                    <p>{% blocktrans %}You haven't added any <a href="{{ add_bookmark_url }}">bookmarks</a> yet.{% endblocktrans %}</p>
+                {% endif %}
+                
+                
+                <h2>{% trans "Blog Posts" %}</h2>
+                
+                {% if other_user.added_posts.all %}
+                    {% for blog_post in other_user.added_posts.all %}
+                        {% show_blog_post blog_post %}
+                    {% endfor %}
+                {% else %}
+                    {% trans "No blog posts yet." %}
+                {% endif %}
+                
+                
+                <h2>{% trans "Tweets" %}</h2>
+                
+                {% if user.is_authenticated and is_me %}
+                    {% sent_tweet_listing user 0 is_me %}
+                {% else %}
+                    {% sent_tweet_listing other_user 0 is_me %}
+                {% endif %}
+                
+                
+                <h2>{% trans "Photos" %}</h2>
+                
+                {% public_photos for other_user as photos %}
+                
+                {% if photos %}
+                    <div class="clearfix">
+                    {% for photo in photos %}
+                        <div class="gallery-photo-thumb">
+                            <a href="/photos/details/{{ photo.id }}/"><img src="{{ photo.get_thumbnail_url }}" alt="{{ photo.title }}"/></a>
+                        </div>
+                    {% endfor %}
+                    </div>
+                {% else %}
+                   {% trans "No photos uploaded yet." %}
+                {% endif %}
                 
             {% else %} {# not user.is_authenticated #}
                 {% url acct_signup as signup_url %}
