@@ -120,21 +120,3 @@
         </div><!--/vcard-->
     </div>
 {% endblock %}
-
-{% block extra_body %}
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#edit-profile').hide();
-            $('#edit-profile-toggle').click(function() {
-                $('#edit-profile').toggle();
-                $('#edit-profile').autoscroll();
-                return false;
-            });
-            if ($('#edit-profile .errorField').length) {
-                $('#edit-profile').show();
-                $('#edit-profile .errorField').autoscroll();
-            }
-        });
-    </script>
-{% endblock %}
-
