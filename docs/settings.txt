@@ -232,7 +232,7 @@ This option is used in the standard projects' URLconf to determine, if
 this settings is bound to the ``DEBUG`` setting in the default
 ``settings.py``.
 
-STATICFILES_EXTRA_MEDIA
+STATICFILES_DIRS
 -----------------------
 
 :Default: ``[]``
@@ -245,7 +245,7 @@ use the :ref:`static file serving view <ref-media-devel>`.
 
 It should be defined as a sequence of ``(label, path)`` tuples, e.g.::
 
-    STATICFILES_EXTRA_MEDIA = (
+    STATICFILES_DIRS = (
         ('pinax', os.path.join(PINAX_ROOT, 'media', PINAX_THEME)),
         ('my_project', os.path.join(PROJECT_ROOT, 'media')),
     )

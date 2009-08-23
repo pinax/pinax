@@ -241,7 +241,7 @@ WIKI_REQUIRES_LOGIN = True
 # following URL: https://developer.yahoo.com/wsregapp/
 # YAHOO_MAPS_API_KEY = ''
 
-STATICFILES_EXTRA_MEDIA = (
+STATICFILES_DIRS = (
     ('pinax', os.path.join(PINAX_ROOT, 'media', PINAX_THEME)),
     ('social_project', os.path.join(PROJECT_ROOT, 'media')),
 )

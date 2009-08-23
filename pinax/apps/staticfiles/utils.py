@@ -2,10 +2,7 @@ import os
 import sys
 from django.conf import settings
 
-SITE_MEDIA_ROOT = getattr(settings, 'MEDIA_ROOT',
-    os.path.join(settings.PROJECT_ROOT, 'site_media'))
-EXTRA_MEDIA = getattr(settings, 'STATICFILES_EXTRA_MEDIA', ())
-MEDIA_DIRNAMES = getattr(settings, 'STATICFILES_MEDIA_DIRNAMES', ['media'])
+from staticfiles.settings import ROOT, DIRS, DIRNAMES
 
 def get_media_path(path, all=False):
     """
@@ -20,7 +17,8 @@ def get_media_path(path, all=False):
         b) <app>/media/<path>
     """
     collection = []
-    for location in [SITE_MEDIA_ROOT] + [root for label, root in EXTRA_MEDIA]:
+    locations = [ROOT] + [root for label, root in DIRS]
+    for location in locations:
         media = os.path.join(location, path)
         if os.path.exists(media):
             if not all:
@@ -32,7 +30,7 @@ def get_media_path(path, all=False):
     for app in installed_apps:
         app_mod = import_module(app)
         app_root = os.path.dirname(app_mod.__file__)
-        for media_dir in MEDIA_DIRNAMES:
+        for media_dir in DIRNAMES:
             media = os.path.join(app_root, media_dir, path)
             if os.path.exists(media):
                 if not all:

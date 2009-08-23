@@ -10,28 +10,24 @@ from django.utils.text import get_text_list
 from django.core.management.base import BaseCommand, CommandError, AppCommand
 
 from staticfiles.utils import import_module
+from staticfiles.settings import ROOT, DIRS, DIRNAMES, PREPEND_LABEL_APPS
 
 try:
     set
 except NameError:
     from sets import Set as set # Python 2.3 fallback
 
-MEDIA_DIRNAMES = getattr(settings, 'STATICFILES_MEDIA_DIRNAMES', ['media'])
-EXTRA_MEDIA = getattr(settings, 'STATICFILES_EXTRA_MEDIA', ())
-PREPEND_LABEL_APPS = getattr(
-    settings, 'STATICFILES_PREPEND_LABEL_APPS', ('django.contrib.admin',))
-
 class Command(AppCommand):
     """
     Command that allows to copy or symlink media files from different
-    locations to the settings.MEDIA_ROOT.
+    locations to the settings.STATICFILES_ROOT.
 
     Based on the collectmedia management command by Brian Beck:
     http://blog.brianbeck.com/post/50940622/collectmedia
     """
     media_files = {}
-    media_dirs = MEDIA_DIRNAMES
-    media_root = settings.MEDIA_ROOT
+    media_dirs = DIRNAMES
+    media_root = ROOT
     exclude = ['CVS', '.*', '*~']
     option_list = AppCommand.option_list + (
         make_option('-i', '--interactive', action='store_true', dest='interactive',
@@ -53,8 +49,7 @@ class Command(AppCommand):
     args = '[appname appname ...]'
 
     def handle(self, *app_labels, **options):
-        media_root = os.path.normpath(
-            options.get('media_root', settings.MEDIA_ROOT))
+        media_root = os.path.normpath(options.get('media_root'))
 
         if not os.path.isdir(media_root):
             raise CommandError(
@@ -92,7 +87,7 @@ class Command(AppCommand):
 
         # Look in additional locations for media
         extra_media = []
-        for label, path in EXTRA_MEDIA:
+        for label, path in DIRS:
             if os.path.isdir(path):
                 extra_media.append((label, path))
         extra_labels = [label for label, path in extra_media]

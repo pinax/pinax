@@ -9,7 +9,6 @@ import urllib
 import mimetypes
 import posixpath
 
-from django.conf import settings
 from django.utils.http import http_date
 from django.views.static import was_modified_since, directory_index
 from django.http import Http404, HttpResponse, HttpResponseRedirect, \

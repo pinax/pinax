@@ -51,7 +51,7 @@ USE_I18N = True
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
 
-MEDIA_ROOT = os.path.join(os.path.dirname(__file__), "site_media")
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, "site_media")
 
 # URL that handles the media served from MEDIA_ROOT.
 # Example: "http://media.lawrence.com"
@@ -186,7 +186,7 @@ AUTHENTICATED_EXEMPT_URLS = [
     r"^/account/confirm_email",
 ]
 
-STATICFILES_EXTRA_MEDIA = (
+STATICFILES_DIRS = (
     ('pinax', os.path.join(PINAX_ROOT, 'media', PINAX_THEME)),
     ('intranet_project', os.path.join(PROJECT_ROOT, 'media')),
 )
