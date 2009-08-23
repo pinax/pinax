@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{{ MEDIA_URL }}pinax/css/wiki.css" />
     <link rel="stylesheet" href="{{ MEDIA_URL }}tasks/css/tasks.css" />
     <link rel="stylesheet" href="{{ MEDIA_URL }}pinax/css/topics.css" />
-    <script type="text/javascript" src="{{ MEDIA_URL }}pinax/js/topics.js"></script>
+    <link rel="stylesheet" href="{{ MEDIA_URL }}bookmarks/css/bookmarks.css" />
     {% block extra_head %}{% endblock %}
 {% endblock %}
 
@@ -40,6 +40,7 @@
 {% block extra_body_base %}
     <script src="{{ MEDIA_URL }}jquery-1.3.min.js" type="text/javascript"></script>
     <script src="{{ MEDIA_URL }}tasks/js/tasks.js" type="text/javascript"></script>
+    <script src="{{ MEDIA_URL }}pinax/js/topics.js" type="text/javascript"></script>
     <script src="{{ MEDIA_URL }}js/comments.js" type="text/javascript"></script>
     {% block extra_body %}{% endblock %}
 {% endblock %}
