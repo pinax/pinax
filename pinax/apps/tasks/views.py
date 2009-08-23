@@ -258,7 +258,7 @@ def task(request, id, group_slug=None, template_name="tasks/task.html", bridge=N
             is_member = True
     
     if is_member and request.method == "POST":
-        form = EditTaskForm(request.user, request.POST, instance=task)
+        form = EditTaskForm(request.user, group, request.POST, instance=task)
         if form.is_valid():
             task = form.save()
             task.save_history(change_owner=request.user)
@@ -280,9 +280,9 @@ def task(request, id, group_slug=None, template_name="tasks/task.html", bridge=N
                 request.user.message_set.create(message="updated tags on the task")
                 if notification:
                     notification.send(notify_list, "tasks_tags", {"user": request.user, "task": task, "group": group})
-            form = EditTaskForm(request.user, instance=task)
+            form = EditTaskForm(request.user, group, instance=task)
     else:
-        form = EditTaskForm(request.user, instance=task)
+        form = EditTaskForm(request.user, group, instance=task)
     
     # The NUDGE dictionary
     nudge = {}

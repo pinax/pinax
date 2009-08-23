@@ -53,8 +53,9 @@ class EditTaskForm(forms.ModelForm):
     """
     
     
-    def __init__(self, user, *args, **kwargs):
+    def __init__(self, user, group, *args, **kwargs):
         self.user = user
+        self.group = group
         
         super(EditTaskForm, self).__init__(*args, **kwargs)
         
