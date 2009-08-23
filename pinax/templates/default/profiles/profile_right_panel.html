@@ -2,7 +2,7 @@
 {% load avatar_tags %}
 
 {% if is_me %}
-    <div class="tribes">
+    <div class="groups">
         <h2>{% trans "Your Tribes" %}</h2>
         {% if other_user.tribes.all %}
             {% for tribe in other_user.tribes.all %}
@@ -34,7 +34,7 @@
 {% endif %}
 
 {% if is_friend %}
-    <div class="tribes">
+    <div class="groups">
         <h2>{% blocktrans %}{{ other_user }}'s Tribes{% endblocktrans %}</h2>
         {% if other_user.tribes.all %}
             {% for tribe in other_user.tribes.all %}
