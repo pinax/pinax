@@ -142,12 +142,11 @@ def add_task(request, group_slug=None, secret_id=None, form_class=TaskForm, temp
     
     if request.method == "POST":
         if request.user.is_authenticated():
-            task_form = form_class(group, request.POST)
+            task_form = form_class(request.user, group, request.POST)
             if task_form.is_valid():
                 task = task_form.save(commit=False)
                 task.creator = request.user
                 task.group = group
-                # @@@ we should check that assignee is really a member
                 task.save()
                 task.save_history()
                 request.user.message_set.create(message="added task '%s'" % task.summary)
@@ -170,7 +169,7 @@ def add_task(request, group_slug=None, secret_id=None, form_class=TaskForm, temp
                     redirect_to = reverse("task_list")
                 return HttpResponseRedirect(redirect_to)
     else:
-        task_form = form_class(group=group, initial=initial)
+        task_form = form_class(request.user, group, initial=initial)
     
     return render_to_response(template_name, {
         "group": group,

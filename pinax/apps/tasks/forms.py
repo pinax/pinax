@@ -13,8 +13,12 @@ from tagging_utils.widgets import TagAutoCompleteInput
 from tagging.forms import TagField
 
 class TaskForm(forms.ModelForm):
-    def __init__(self, group, *args, **kwargs):
+    def __init__(self, user, group, *args, **kwargs):
+        self.user = user
+        self.group = group
+        
         super(TaskForm, self).__init__(*args, **kwargs)
+        
         self.fields["assignee"].queryset = group.member_queryset().order_by("username")
         self.fields['summary'].widget.attrs["size"] = 65
     
@@ -27,6 +31,15 @@ class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = ('summary', 'detail', 'assignee', 'tags', 'markup')
+    
+    def clean(self):
+        self.check_group_membership()
+        return self.cleaned_data
+    
+    def check_group_membership(self):
+        group = self.group
+        if group and not self.group.user_is_member(self.user):
+            raise forms.ValidationError("You must be a member to create tasks")
 
 
 class EditTaskForm(forms.ModelForm):
