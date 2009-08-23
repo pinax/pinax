@@ -19,7 +19,7 @@ def generate():
             content = words(num_words, common=False)
             oembed = random.choice(OEMBED_CONTENT)
             split_num = random.randint(0, len(content) - 1)
-            content = capfirst('%s %s %s' % (content[:split_num], oembed, 
+            content = capfirst('%s %s %s' % (content[:split_num], oembed,
                 content[split_num:]))[:139] + '.'
             Tweet.objects.create(
                 sender=user,

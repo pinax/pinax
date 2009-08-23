@@ -28,7 +28,7 @@
             <input type="submit" value="{% trans "post" %}">
         </p>
     </form>
-
+    
     <p>{% blocktrans with user.followed.count as follow_count and user.followed.count|pluralize:_("person,people") as follow_name %}
         These are tweets from the {{ follow_count }} {{ follow_name }} you are following (plus your own){% endblocktrans %}:
     </p>

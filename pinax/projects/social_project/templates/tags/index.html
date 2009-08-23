@@ -7,7 +7,7 @@
 {% load avatar_tags %}
 {% load blog_tags %}
 {% load wiki_tags %}
-{% load voting_tags %} 
+{% load voting_tags %}
 {% load extra_voting_tags %}
 
 {% load in_filter %}
@@ -18,7 +18,7 @@
 
 {% block body %}
     <h1>{% trans "All Photos Matching " %}<i>"{{ tag }}"</i></h1>
-
+    
     {% if phototags %}
         <div class="thumb-row clearfix">
         {% for photo in phototags %}
@@ -34,10 +34,10 @@
     {% else %}
         No photos matching tag.
     {% endif %}
-
+    
     {% if bookmarktags %}
         {% scores_for_objects bookmarktags as score_dict %}
-
+        
         <h1>All Bookmarks Matching <i>{{ tag }}</i></h1>
         <table class="bookmarks" width="100%">
             {% for bookmark in bookmarktags %}
@@ -57,14 +57,14 @@
                 </tr>
             {% endfor %}
         </table>
-
+        
     {% else %}
         No bookmarks matching tag.
     {% endif %}
-
-
+    
+    
     <h1>{% trans "All Blog Posts Matching " %}<i>"{{ tag }}"</i></h1>
-
+    
     {% if alltags %}
         <p>{% trans "These are blog posts from everyone:" %}</p>
         {% for blog_post in alltags %}
@@ -75,7 +75,7 @@
     {% endif %}
     
     <h1>{% blocktrans %}All Tribes Matching <i>{{ tag }}</i>{% endblocktrans %}</h1>
-
+    
     <dl>
         {% for tribe in tribe_tags %}
             {% show_tribe tribe %}
@@ -84,14 +84,14 @@
     
     {% comment %}
     <h1>{% blocktrans %}All Tribe Topics Matching <i>{{ tag }}</i>{% endblocktrans %}</h1>
-
+    
     {% for topic in tribe_topic_tags %}
         {% show_tribe_topic topic %}
     {% endfor %}
     {% endcomment %}
-
+    
     <h1>{% blocktrans %}All Wiki Articles Matching <i>{{ tag }}</i>{% endblocktrans %}</h1>
-
+    
     <table class="topics">
         {% for article in wiki_article_tags %}
             {% show_teaser article %}

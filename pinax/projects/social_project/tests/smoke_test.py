@@ -1,5 +1,5 @@
 ## initially a quick smoke test to see if certain URLs throw exceptions or not
-## would have caught a high percentage of recent trunk breakages 
+## would have caught a high percentage of recent trunk breakages
 
 ## run with ./manage.py runscript tests.smoke_test
 
@@ -24,7 +24,7 @@ def run():
     ]
     
     for page in pages:
-        print page, 
+        print page,
         try:
             x = c.get(page)
             if x.status_code in [301, 302]:

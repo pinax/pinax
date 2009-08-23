@@ -159,7 +159,7 @@ def new_comment(sender, instance, **kwargs):
         task.save()
         
         # pass in the instance.user so that the task history owner is recorded
-        # as the commenter        
+        # as the commenter
         task.save_history(comment_instance=instance,change_owner=instance.user)
         
         group = task.group

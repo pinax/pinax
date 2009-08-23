@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import *
 
-urlpatterns = patterns('',    
+urlpatterns = patterns('',
     # all photos or latest photos
     url(r'^$', 'photos.views.photos', name="photos"),
     # a photos details

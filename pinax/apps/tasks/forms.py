@@ -38,7 +38,7 @@ class EditTaskForm(forms.ModelForm):
     
     def __init__(self, user, *args, **kwargs):
         super(EditTaskForm, self).__init__(*args, **kwargs)
-        self.user = user        
+        self.user = user
         self.fields["assignee"].queryset = self.fields["assignee"].queryset.order_by('username')
         self.fields['summary'].widget.attrs["size"] = 55
         self.fields.keyOrder = ["summary","tags", "status", "assignee", "state", "resolution"]
@@ -55,7 +55,7 @@ class EditTaskForm(forms.ModelForm):
             self.fields['resolution'].widget = ReadOnlyWidget(field=self.instance._meta.get_field('resolution'))
     
     # TODO: work on this for CPC ticket #131
-    def save(self, commit=False):            
+    def save(self, commit=False):
         
         return super(EditTaskForm, self).save(True)
         

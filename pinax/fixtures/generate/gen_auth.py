@@ -1,27 +1,27 @@
 import random
 from django.contrib.auth.models import User
 
-names = """Jacob Emily Michael Emma Joshua Madison Ethan Isabella Matthew Ava 
-Daniel Abigail Christopher Olivia Andrew Hannah Anthony Sophia William 
-Samantha Joseph Elizabeth Alexander Ashley David Mia Ryan Alexis Noah 
-Sarah James Natalie Nicholas Grace Tyler Chloe Logan Alyssa John Brianna 
-Christian Ella Jonathan Taylor Nathan Anna Benjamin Lauren Samuel Hailey 
-Dylan Kayla Brandon Addison Gabriel Victoria Elijah Jasmine Aiden Savannah 
-Angel Julia Jose Jessica Zachary Lily Caleb Sydney Jack Morgan Jackson 
-Katherine Kevin Destiny Gavin Lillian Mason Alexa Isaiah Alexandra Austin 
-Kaitlyn Evan Kaylee Luke Nevaeh Aidan Brooke Justin Makayla Jordan Allison 
+names = """Jacob Emily Michael Emma Joshua Madison Ethan Isabella Matthew Ava
+Daniel Abigail Christopher Olivia Andrew Hannah Anthony Sophia William
+Samantha Joseph Elizabeth Alexander Ashley David Mia Ryan Alexis Noah
+Sarah James Natalie Nicholas Grace Tyler Chloe Logan Alyssa John Brianna
+Christian Ella Jonathan Taylor Nathan Anna Benjamin Lauren Samuel Hailey
+Dylan Kayla Brandon Addison Gabriel Victoria Elijah Jasmine Aiden Savannah
+Angel Julia Jose Jessica Zachary Lily Caleb Sydney Jack Morgan Jackson
+Katherine Kevin Destiny Gavin Lillian Mason Alexa Isaiah Alexandra Austin
+Kaitlyn Evan Kaylee Luke Nevaeh Aidan Brooke Justin Makayla Jordan Allison
 Robert Maria Isaac Angelina Landon Rachel Jayden Gabriella
 """
 
-surnames = """Smith Johnson Williams Brown Jones Miller Davis Garcia 
-Rodriguez Wilson Martinez Anderson Taylor Thomas Hernandez Moore Martin 
-Jackson Thompson White Lopez Le Gonzalez Harris Clark Lewis Robinson Walker 
-Perez Hall Young Allen Sanchez Wright King Scott Green Baker Adams Nelson 
-Hill Ramirez Campbell Mitchell Roberts Carter Phillips Evans Turner Torres 
-Parker Collins Edwards Stewart Flores Morris Nguyen Murphy Rivera Cook Rogers 
-Morgan Peterson Cooper Reed Bailey Bell Gomez Kelly Howard Ward Cox Diaz 
-Richardson Wood Watson Brooks Bennett Gray James Reyes Cruz Hughes Price 
-Myers Long Foster Sanders Ross Morales Powell Sullivan Russell Ortiz 
+surnames = """Smith Johnson Williams Brown Jones Miller Davis Garcia
+Rodriguez Wilson Martinez Anderson Taylor Thomas Hernandez Moore Martin
+Jackson Thompson White Lopez Le Gonzalez Harris Clark Lewis Robinson Walker
+Perez Hall Young Allen Sanchez Wright King Scott Green Baker Adams Nelson
+Hill Ramirez Campbell Mitchell Roberts Carter Phillips Evans Turner Torres
+Parker Collins Edwards Stewart Flores Morris Nguyen Murphy Rivera Cook Rogers
+Morgan Peterson Cooper Reed Bailey Bell Gomez Kelly Howard Ward Cox Diaz
+Richardson Wood Watson Brooks Bennett Gray James Reyes Cruz Hughes Price
+Myers Long Foster Sanders Ross Morales Powell Sullivan Russell Ortiz
 Jenkins Gutierrez Perry Butler Barnes Fisher
 """
 

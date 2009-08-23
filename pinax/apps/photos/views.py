@@ -161,7 +161,7 @@ def details(request, id, template_name="photos/details.html", group_slug=None, b
     
     return render_to_response(template_name, {
         "group": group,
-        "host": host, 
+        "host": host,
         "photo": photo,
         "photo_url": photo_url,
         "is_me": is_me,

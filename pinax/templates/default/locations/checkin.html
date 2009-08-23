@@ -5,8 +5,8 @@
 {% block body %}
     <p>Did you mean: {{ location.place }}</p>
     <form action="{% url loc_checkin %}" method="POST">
-        <input type="hidden" name="place" value="{{ location.place }}" id="id_place" /> 
-        <input type="hidden" name="latitude" value="{{ location.latitude }}" id="id_latitude" /> 
+        <input type="hidden" name="place" value="{{ location.place }}" id="id_place" />
+        <input type="hidden" name="latitude" value="{{ location.latitude }}" id="id_latitude" />
         <input type="hidden" name="longitude" value="{{ location.longitude }}" id="id_longitude" />
         <p><input type="submit" value="Checkin &rarr;"></p>
     </form>

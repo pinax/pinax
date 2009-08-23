@@ -32,7 +32,7 @@ class OrderByVotesNode(template.Node):
         qn = connection.ops.quote_name
         ctype = ContentType.objects.get_for_model(model)
         by_score = model.objects.extra(select={'score': """
-                SELECT coalesce(SUM(vote), 0 ) 
+                SELECT coalesce(SUM(vote), 0 )
                 FROM %s
                 WHERE content_type_id = %s
                 AND object_id = %s.%s
