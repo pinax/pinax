@@ -19,7 +19,12 @@ class TaskForm(forms.ModelForm):
         
         super(TaskForm, self).__init__(*args, **kwargs)
         
-        self.fields["assignee"].queryset = group.member_queryset().order_by("username")
+        if group:
+            assignee_queryset = group.member_queryset()
+        else:
+            assignee_queryset = self.fields["assignee"].queryset
+        
+        self.fields["assignee"].queryset = assignee_queryset.order_by("username")
         self.fields['summary'].widget.attrs["size"] = 65
     
     def save(self, commit=True):
