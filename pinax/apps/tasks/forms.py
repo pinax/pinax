@@ -54,9 +54,16 @@ class EditTaskForm(forms.ModelForm):
     
     
     def __init__(self, user, *args, **kwargs):
-        super(EditTaskForm, self).__init__(*args, **kwargs)
         self.user = user
-        self.fields["assignee"].queryset = self.fields["assignee"].queryset.order_by('username')
+        
+        super(EditTaskForm, self).__init__(*args, **kwargs)
+        
+        if group:
+            assignee_queryset = group.member_queryset()
+        else:
+            assignee_queryset = self.fields["assignee"].queryset
+        
+        self.fields["assignee"].queryset = assignee_queryset.order_by("username")
         self.fields['summary'].widget.attrs["size"] = 55
         self.fields.keyOrder = ["summary","tags", "status", "assignee", "state", "resolution"]
         
