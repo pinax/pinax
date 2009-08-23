@@ -69,9 +69,6 @@ class EditTaskForm(forms.ModelForm):
         
         if self.instance.assignee != user:
             del self.fields["status"]
-                
-        # @@@ for now this following filtering is commented out until we work out how to do generic membership
-        # self.fields["assignee"].queryset = self.fields["assignee"].queryset.filter(project=project)
         
         self.fields["state"].choices = self.instance.allowable_states(user)
         
