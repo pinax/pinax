@@ -60,7 +60,11 @@
                         {% endif %}
                     {% endif %}
                 </td>
-                <td>{% task_tags change group %}</td>
+                <td>
+                    {% if change.owner %}
+                        {% task_tags change group %}
+                    {% endif %}
+                </td>
                 <td>{{ change.humanized_state }}
                     {% if change.humanized_resolution %}
                         <br />{{ change.humanized_resolution }}
