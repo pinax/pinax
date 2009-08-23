@@ -94,5 +94,5 @@ snippet below the rest of the url configuration::
     from django.conf import settings
     if settings.SERVE_MEDIA:
         urlpatterns += patterns('', 
-            (r'^site_media/(?P<path>.*)$', 'staticfiles.views.serve')
+            (r'^site_media/', include('staticfiles.urls')),
         )
