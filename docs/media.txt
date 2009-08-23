@@ -46,15 +46,16 @@ development.
 build_media management command
 ================================
 
-The build_media script should be able to collect the media files from Pinax and
-all the apps and arrange them under the `<project_name>/site_media folder`. 
+The build_media script collects the media files from Pinax and all the
+installed apps and arranges them under the
+``<project_name>/site_media/static`` folder.
 
 The command::
 
     <project_name>/python manage.py build_media --all
-    
+
 will collect the media files from Pinax and all the apps and places them in
-the folder defined in the MEDIA_ROOT setting.
+the folder defined in the ``STATIC_ROOT`` setting.
 
 If you have two apps with the same file and the same relative path it's advised
 to use the ``--interactive`` option so the script will prompt you to choose
@@ -87,9 +88,10 @@ them, sorted by its importance.
 Serving static files during development
 =========================================
 
-Pinax provides the static file serving view staticfiles.views.serve to handle the app
-and theme media. Make sure your projects' urls.py contains the following
-snippet below the rest of the url configuration::
+Pinax provides the static file serving view ``staticfiles.views.serve`` to
+handle the app and theme media as well as other media files found in the
+``MEDIA_ROOT`` directory. Make sure your projects' urls.py contains the
+following snippet below the rest of the url configuration::
 
     from django.conf import settings
     if settings.SERVE_MEDIA:

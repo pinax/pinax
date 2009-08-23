@@ -10,7 +10,7 @@ def get_media_path(path, all=False):
     given order and return the absolute file path:
 
     1. The site media path, e.g. for user-contributed files, e.g.:
-        <project>/site_media/<path>
+        <project>/site_media/static/<path>
     2. Any extra media locations given in the settings
     4. Installed apps:
         a) <app>/media/<app>/<path>
