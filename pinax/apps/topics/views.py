@@ -67,7 +67,7 @@ def topics(request, group_slug=None, form_class=TopicForm, template_name="topics
     if group:
         topics = group.content_objects(Topic)
     else:
-        topics = Topic.objects.all()
+        topics = Topic.objects.filter(object_id=None)
     
     return render_to_response(template_name, {
         "group": group,
@@ -91,7 +91,7 @@ def topic(request, topic_id, group_slug=None, edit=False, template_name="topics/
     if group:
         topics = group.content_objects(Topic)
     else:
-        topics = Topic.objects.all()
+        topics = Topic.objects.filter(object_id=None)
     
     topic = get_object_or_404(topics, id=topic_id)
     
@@ -127,7 +127,7 @@ def topic_delete(request, topic_id, group_slug=None, bridge=None):
     if group:
         topics = group.content_objects(Topic)
     else:
-        topics = Topic.objects.all()
+        topics = Topic.objects.filter(object_id=None)
     
     topic = get_object_or_404(topics, id=topic_id)
     
