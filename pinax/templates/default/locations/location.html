@@ -1,0 +1,1 @@
+<p class="location"><a href="{{ location.user.get_absolute_url }}">{{ request.user }}</a> checked in at {% if forloop %}<a href="#" id="loc_{{ forloop.counter0 }}">{% endif %}{{ location.place }}{% if forloop %}</a>{% endif %} at {{ location.time_checkin|date:"F d Y g:i a" }}</p>

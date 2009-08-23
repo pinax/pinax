@@ -1,0 +1,21 @@
+{% extends "locations/base.html" %}
+
+{% block head_title %}All Locations{% endblock %}
+
+{% block body %}
+<p>Did you mean: {{ location.place }}</p>
+<form action="{% url loc_checkin %}" method="POST">
+	<input type="hidden" name="place" value="{{ location.place }}" id="id_place" /> 
+	<input type="hidden" name="latitude" value="{{ location.latitude }}" id="id_latitude" /> 
+	<input type="hidden" name="longitude" value="{{ location.longitude }}" id="id_longitude" />
+	<p><input type="submit" value="Checkin &rarr;"></p>
+</form>
+<div id="ymap"></div>
+{% endblock %}
+
+{% block extra_body %}
+    <script type="text/javascript">
+        var _geo = [[{{ location.latitude }}, {{ location.longitude }}, '{{ location.place }}']];
+    </script>
+    <script type="text/javascript" src="http://api.maps.yahoo.com/ajaxymap?v=3.8&appid={{ YAHOO_MAPS_API_KEY }}"></script>
+{% endblock %}

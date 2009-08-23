@@ -1,0 +1,16 @@
+{% extends "locations/base.html" %}
+{% load pagination_tags %}
+
+{% block head_title %}Nearby checkins{% endblock %}
+
+{% block body %}
+
+{% if queryset %}
+    {% for location in queryset %}
+    	{% include "locations/location.html" %}
+    {% endfor %}
+{% else %}
+    <p>There are no users who checked in near your location.</p>
+{% endif %}
+{% endblock %}
+		

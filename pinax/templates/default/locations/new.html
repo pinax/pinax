@@ -1,0 +1,11 @@
+{% extends "locations/base.html" %}
+
+
+{% block head_title %}New Location{% endblock %}
+
+{% block body %}
+<form method="POST" accept-charset="utf-8">
+	{{ location_form }}
+	<p><input type="submit" value="Continue &rarr;"></p>
+</form>
+{% endblock %}

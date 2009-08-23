@@ -1,0 +1,27 @@
+{% extends "locations/base.html" %}
+{% load pagination_tags %}
+
+{% block head_title %}All Locations{% endblock %}
+
+{% block body %}
+	<form action="{% url loc_new %}" method="POST" accept-charset="utf-8">
+		<p>{{ location_form }}
+		   <input type="submit" value="Search &rarr;"></p>
+	</form>
+<div id="ymap"></div>
+{% autopaginate locations %}
+{% for location in locations %}
+    {% include "locations/location.html" %}
+{% endfor %}
+{% paginate %}
+{% endblock %}
+
+{% block extra_body %}
+    <script type="text/javascript">
+        var _geo = new Array();
+        {% for location in locations %}
+            _geo[{{ forloop.counter0 }}] = [{{ location.latitude }}, {{ location.longitude }}, '{{ location.place }}'];
+        {% endfor %}
+    </script>
+    <script type="text/javascript" src="http://api.maps.yahoo.com/ajaxymap?v=3.8&appid={{ YAHOO_MAPS_API_KEY }}"></script>
+{% endblock %}

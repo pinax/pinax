@@ -1,0 +1,17 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+
+{% block rtab_id %}id="locations_tab"{% endblock %}
+
+{% block subnav %}
+    {% if user.is_authenticated %}
+    <ul>
+        <li><a href="{% url loc_yours %} ">{% trans "Your Checkins" %}</a></li>
+        <li><a href="{% url loc_friends %} ">{% trans "Friends Checkins" %}</a></li>
+        <li><a href="{% url loc_nearby %} ">{% trans "Nearby Checkins" %}</a></li>
+    </ul>
+    {% else %}
+        &nbsp;
+    {% endif %}
+{% endblock %}
