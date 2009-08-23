@@ -178,7 +178,7 @@ SERIALIZATION_MODULES = {
     "jsonfk": "pinax.core.serializers.jsonfk",
 }
 
-STATICFILES_DIRS = (
+STATIC_DIRS = (
     ('pinax', os.path.join(PINAX_ROOT, 'media', PINAX_THEME)),
     ('cms_project_company', os.path.join(PROJECT_ROOT, 'media')),
 )

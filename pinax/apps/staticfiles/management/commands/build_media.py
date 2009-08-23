@@ -10,7 +10,7 @@ from django.utils.text import get_text_list
 from django.core.management.base import BaseCommand, CommandError, AppCommand
 
 from staticfiles.utils import import_module
-from staticfiles.settings import ROOT, DIRS, DIRNAMES, PREPEND_LABEL_APPS
+from staticfiles.settings import ROOT, DIRS, MEDIA_DIRNAMES, PREPEND_LABEL_APPS
 
 try:
     set
@@ -20,13 +20,13 @@ except NameError:
 class Command(AppCommand):
     """
     Command that allows to copy or symlink media files from different
-    locations to the settings.STATICFILES_ROOT.
+    locations to the settings.STATIC_ROOT.
 
     Based on the collectmedia management command by Brian Beck:
     http://blog.brianbeck.com/post/50940622/collectmedia
     """
     media_files = {}
-    media_dirs = DIRNAMES
+    media_dirs = MEDIA_DIRNAMES
     media_root = ROOT
     exclude = ['CVS', '.*', '*~']
     option_list = AppCommand.option_list + (

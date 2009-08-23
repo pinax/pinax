@@ -58,14 +58,14 @@ MEDIA_URL = '/site_media/media/'
 
 # Absolute path to the directory that holds static files like app media.
 # Example: "/home/media/media.lawrence.com/apps/"
-STATICFILES_ROOT = os.path.join(PROJECT_ROOT, 'site_media', 'static')
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'site_media', 'static')
 
 # URL that handles the static files like app media.
 # Example: "http://media.lawrence.com"
-STATICFILES_URL = '/site_media/static/'
+STATIC_URL = '/site_media/static/'
 
 # Additional directories which hold static files
-STATICFILES_DIRS = (
+STATIC_DIRS = (
     ('basic_project', os.path.join(PROJECT_ROOT, 'media')),
     ('pinax', os.path.join(PINAX_ROOT, 'media', PINAX_THEME)),
 )
@@ -73,7 +73,7 @@ STATICFILES_DIRS = (
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = posixpath.join(STATICFILES_URL, "admin/")
+ADMIN_MEDIA_PREFIX = posixpath.join(STATIC_URL, "admin/")
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = ''
