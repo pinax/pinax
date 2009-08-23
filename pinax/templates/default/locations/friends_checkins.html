@@ -4,9 +4,9 @@
 {% block head_title %}Friends Locations{% endblock %}
 
 {% block body %}
-	{% for friendship in friends %}
-	    {% with friendship.friend.location_set.latest as location %}
-	        {% include "locations/location.html" %}
-		{% endwith %}
-	{% endfor %}
+    {% for friendship in friends %}
+        {% with friendship.friend.location_set.latest as location %}
+            {% include "locations/location.html" %}
+        {% endwith %}
+    {% endfor %}
 {% endblock %}

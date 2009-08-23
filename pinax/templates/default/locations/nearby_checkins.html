@@ -7,10 +7,9 @@
 
 {% if queryset %}
     {% for location in queryset %}
-    	{% include "locations/location.html" %}
+        {% include "locations/location.html" %}
     {% endfor %}
 {% else %}
     <p>There are no users who checked in near your location.</p>
 {% endif %}
 {% endblock %}
-		
