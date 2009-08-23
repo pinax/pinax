@@ -4,6 +4,8 @@ from sys import stderr
 from django import forms
 from django.core.exceptions import ImproperlyConfigured
 from django.db.models import get_app
+from django.utils.translation import ugettext
+
 from django.contrib.auth.models import User
 
 from tasks.models import Task, TaskHistory
@@ -86,6 +88,14 @@ class EditTaskForm(forms.ModelForm):
     
     class Meta(TaskForm.Meta):
         fields = ('summary','status', 'assignee', 'state', 'tags', 'resolution')
+    
+    def clean_resolution(self):
+        if self.cleaned_data["state"] == u"2":
+            if not self.cleaned_data["resolution"]:
+                raise forms.ValidationError(
+                    ugettext("You must provide a resolution to mark this task as resolved")
+                )
+        return self.cleaned_data["resolution"]
 
 class SearchTaskForm(forms.Form):
     
