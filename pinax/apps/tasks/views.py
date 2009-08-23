@@ -140,23 +140,8 @@ def add_task(request, group_slug=None, secret_id=None, form_class=TaskForm, temp
     else:
         initial = {}
     
-    search_form = SearchTaskForm()
-    search_results = []
     if request.method == "POST":
-        action = request.POST.get('action', None)
-        if action == 'search':
-            search_form = SearchTaskForm(request.POST)
-            search = request.POST.get('search', None)
-            task_form = form_class(group=group)
-            if search:
-                qset = (
-                    Q(summary__contains=search)|
-                    Q(detail__contains=search)
-                    )
-                search_results = Task.objects.filter(qset).distinct()
-        
-        
-        if request.user.is_authenticated() and not action:
+        if request.user.is_authenticated():
             task_form = form_class(group, request.POST)
             if task_form.is_valid():
                 task = task_form.save(commit=False)
@@ -191,8 +176,6 @@ def add_task(request, group_slug=None, secret_id=None, form_class=TaskForm, temp
         "group": group,
         "is_member": is_member,
         "task_form": task_form,
-        "search_form": search_form,
-        "search_results":search_results,
         "group_base": group_base,
     }, context_instance=RequestContext(request))
 
