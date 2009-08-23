@@ -354,6 +354,9 @@ def user_tasks(request, username, group_slug=None, template_name="tasks/user_tas
     if group:
         assigned_tasks = group.content_objects(assigned_tasks)
         created_tasks = group.content_objects(created_tasks)
+    else:
+        assigned_tasks = assigned_tasks.filter(object_id=None)
+        created_tasks = created_tasks.filter(object_id=None)
     
     # default filtering
     state_keys = dict(workflow.STATE_CHOICES).keys()
@@ -429,6 +432,8 @@ def mini_list(request, group_slug=None, template_name="tasks/mini_list.html", br
     
     if group:
         assigned_tasks = group.content_objects(assigned_tasks)
+    else:
+        assigned_tasks = assigned_tasks.filter(object_id=None)
     
     return render_to_response(template_name, {
         "group": group,
@@ -609,4 +614,4 @@ def tasks_history(request, id, group_slug=None, template_name="tasks/task_histor
 
 def export_state_transitions(request):
     export = workflow.export_state_transitions()
-    return HttpResponse(export,mimetype='text/csv')
+    return HttpResponse(export, mimetype='text/csv')
