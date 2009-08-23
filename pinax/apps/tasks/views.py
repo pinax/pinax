@@ -168,7 +168,7 @@ def add_task(request, group_slug=None, secret_id=None, form_class=TaskForm, temp
                 request.user.message_set.create(message="added task '%s'" % task.summary)
                 if notification:
                     if group:
-                        notify_list = group.member_users.all()
+                        notify_list = group.member_queryset()
                     else:
                         notify_list = User.objects.all() # @@@
                     notify_list = notify_list.exclude(id__exact=request.user.id)
@@ -262,7 +262,7 @@ def task(request, id, group_slug=None, template_name="tasks/task.html", bridge=N
     task = get_object_or_404(tasks, id=id)
     
     if group:
-        notify_list = group.member_users.all()
+        notify_list = group.member_queryset()
     else:
         notify_list = User.objects.all()
     notify_list = notify_list.exclude(id__exact=request.user.id)
@@ -342,7 +342,7 @@ def user_tasks(request, username, group_slug=None, template_name="tasks/user_tas
         group = None
     
     if group:
-        other_user = get_object_or_404(group.member_users.all(), username=username)
+        other_user = get_object_or_404(group.member_queryset(), username=username)
         group_base = bridge.group_base_template()
     else:
         other_user = get_object_or_404(User, username=username)

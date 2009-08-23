@@ -166,7 +166,7 @@ def new_comment(sender, instance, **kwargs):
         if notification:
             
             if group:
-                notify_list = group.member_users.all().exclude(id__exact=instance.user.id) # @@@
+                notify_list = group.member_queryset().exclude(id__exact=instance.user.id) # @@@
             else:
                 notify_list = User.objects.all().exclude(id__exact=instance.user.id)
             
