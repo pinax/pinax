@@ -26,8 +26,14 @@
         </div>
         
         {% if is_me %}
-            <p><a href="{% url profile_edit %}">Edit profile</a></p>
+            <p><a href="{% url profile_edit %}" rel="facebox">Edit profile</a></p>
         {% endif %}
         
     </div><!--/vcard-->
+{% endblock %}
+
+
+{% block extra_body %}
+    <script type="text/javascript">
+    </script>
 {% endblock %}
