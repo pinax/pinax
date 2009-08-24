@@ -85,7 +85,7 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
     
     else:
         if request.user.is_authenticated() and request.method == "POST":
-            if request.POSTget("action") == "invite": # @@@ perhaps the form should just post to friends and be redirected here
+            if request.POST.get("action") == "invite": # @@@ perhaps the form should just post to friends and be redirected here
                 invite_form = InviteFriendForm(request.user, request.POST)
                 if invite_form.is_valid():
                     invite_form.save()
