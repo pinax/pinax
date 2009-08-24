@@ -81,7 +81,7 @@ def group(request, group_slug=None, form_class=BasicGroupUpdateForm, template_na
         request.user.message_set.create(message="You have joined the group %s" % group.name)
         if notification:
             notification.send([group.creator], "groups_created_new_member", {"user": request.user, "group": group})
-            notification.send(group.members.all(), "groups_new_member", {"user": request.user, "group": group})
+            notification.send(group.member_queryset(), "groups_new_member", {"user": request.user, "group": group})
     elif action == "leave":
         group.members.remove(request.user)
         request.user.message_set.create(message="You have left the group %s" % group.name)

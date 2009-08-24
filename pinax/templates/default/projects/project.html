@@ -20,7 +20,7 @@
             <div class="members">
                 <h2>{% trans "Members" %}</h2>
                 <table width="100%">
-                    {% for member in project.members.all %}
+                    {% for member in project.member_queryset %}
                         {% if forloop.counter0|divisibleby:"3" %}<tr>{% endif %}
                         <td>
                             <div class="avatar">{% avatar member.user 40 %}</div>
@@ -28,7 +28,7 @@
                         </td>
                         {% if forloop.counter0|add:"1"|divisibleby:"3" %}</tr>{% endif %}
                     {% endfor %}
-                    {% if project.members.all|length|divisibleby:"3" %}{% else %}</tr>{% endif %}
+                    {% if project.member_queryset|length|divisibleby:"3" %}{% else %}</tr>{% endif %}
                 </table>
             </div>
         </div>
