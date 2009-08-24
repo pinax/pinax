@@ -46,14 +46,18 @@ class Group(models.Model):
         return {'group_slug': self.slug}
     
     def member_queryset(self):
-        # look for the common case of a m2m named members (in some cases
-        # the related_name of the user FK on the intermediary model might
-        # be named members and we need User instances)
-        try:
-            members = self._meta.get_field("members")
-        except FieldDoesNotExist:
-            raise NotImplementedError("You must define a member_queryset for %s" % str(self.__class__))
+        if not hasattr(self, "_members_attr"):
+            # look for the common case of a m2m named members (in some cases
+            # the related_name of the user FK on the intermediary model might
+            # be named members and we need User instances)
+            try:
+                members = self._meta.get_field("members")
+            except FieldDoesNotExist:
+                raise NotImplementedError("You must define a member_queryset for %s" % str(self.__class__))
+            else:
+                self._members_attr = members
         else:
+            members = self._members_attr
             if isinstance(members, models.ManyToManyField) and issubclass(members.rel.to, User):
                 return self.members.all()
             else:
