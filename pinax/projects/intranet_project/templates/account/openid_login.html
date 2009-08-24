@@ -1,0 +1,13 @@
+<div id="openid" class="box">
+    <form class="login" method="POST" action="/openid/register/">
+        <table>
+            <tr><td colspan="2">{{ form.non_field_errors }}</td></tr>
+            <tr>
+                <td><label for="id_username"><img src="{{ MEDIA_URL }}images/openid-icon.png" />&nbsp;OpenID Identifier</label></td>
+                <td><input class="openid" type="text" name="openid_url" /></td>
+            </tr>
+            <tr><td></td><td><input type="submit" value="Log in &raquo;" /></td></tr>
+            <tr><td></td><td><a href="{% url acct_login %}" id="normal_switch">Switch to normal login</a></td></tr>
+        </table>
+    </form>
+</div>

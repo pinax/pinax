@@ -1,3 +1,4 @@
+import urlparse
 
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
@@ -32,11 +33,27 @@ class PinaxConsumer(RegistrationConsumer):
         that redirects back to a certain URL if there's no openid_url in the
         POST body.
         """
+        
         openid_url = request.POST.get('openid_url')
         openids = request.session.get('openids')
         
         if not openid_url and not openids:
-            return account_login(request, url_required=True)
+            return account_login(request, url_required=True, extra_context={
+                "openid_login": True,
+            })
+        
+        # perform OpenID login if openid_url is defined. we do this now (as
+        # opposed to letting super(...).do_register() handle it) to allow
+        # users who have existing OpenID association to login even when
+        # ACCOUNT_OPEN_SIGNUP is turned off
+        if openid_url:
+            return self.start_openid_process(request,
+                user_url = openid_url,
+                on_complete_url = urlparse.urljoin(
+                    request.path, '../register_complete/'
+                ),
+                trust_root = urlparse.urljoin(request.path, '..')
+            )
         
         if not settings.ACCOUNT_OPEN_SIGNUP:
             return render_to_response("django_openid/registration_closed.html", {

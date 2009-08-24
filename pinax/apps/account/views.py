@@ -21,9 +21,11 @@ association_model = models.get_model('django_openid', 'Association')
 if association_model is not None:
     from django_openid.models import UserOpenidAssociation
 
-def login(request, form_class=LoginForm,
-        template_name="account/login.html", success_url=None,
-        associate_openid=False, openid_success_url=None, url_required=False):
+def login(request, form_class=LoginForm, template_name="account/login.html",
+          success_url=None, associate_openid=False, openid_success_url=None,
+          url_required=False, extra_context=None):
+    if extra_context is None:
+        extra_context = {}
     if success_url is None:
         success_url = get_default_redirect(request)
     if request.method == "POST" and not url_required:
@@ -38,10 +40,14 @@ def login(request, form_class=LoginForm,
             return HttpResponseRedirect(success_url)
     else:
         form = form_class()
-    return render_to_response(template_name, {
+    ctx = {
         "form": form,
         "url_required": url_required,
-    }, context_instance=RequestContext(request))
+    }
+    ctx.update(extra_context)
+    return render_to_response(template_name, ctx,
+        context_instance = RequestContext(request)
+    )
 
 def signup(request, form_class=SignupForm,
         template_name="account/signup.html", success_url=None):
