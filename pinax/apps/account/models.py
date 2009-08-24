@@ -1,3 +1,5 @@
+import sys
+
 from datetime import datetime
 
 from django.db import models
@@ -6,7 +8,7 @@ from django.contrib.auth.models import User, AnonymousUser
 from django.db.models.signals import post_save
 from django.utils.translation import get_language_from_request, ugettext_lazy as _
 
-from emailconfirmation.models import EmailConfirmation
+from emailconfirmation.models import EmailAddress, EmailConfirmation
 
 from timezones.fields import TimeZoneField
 from emailconfirmation.signals import email_confirmed
@@ -65,6 +67,24 @@ def create_account(sender, instance=None, **kwargs):
     account, created = Account.objects.get_or_create(user=instance)
 
 post_save.connect(create_account, sender=User)
+
+
+# @@@ move to emailconfirmation app?
+def superuser_email_address(sender, instance=None, **kwargs):
+    if instance is None:
+        return
+    # only run when we are in syncdb or createsuperuser to be as unobstrusive
+    # as possible and reduce the risk of running at inappropriate times
+    if "syncdb" in sys.argv or "createsuperuser" in sys.argv:
+        defaults = {
+            "user": instance,
+            "verified": True,
+            "primary": True,
+        }
+        EmailAddress.objects.get_or_create(email=instance.email, **defaults)
+
+post_save.connect(superuser_email_address, sender=User)
+
 
 class AnonymousAccount(object):
     def __init__(self, request=None):
