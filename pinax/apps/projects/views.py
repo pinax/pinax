@@ -82,7 +82,7 @@ def delete(request, group_slug=None, redirect_url=None):
     
     # @@@ eventually, we'll remove restriction that project.creator can't leave project but we'll still require project.members.all().count() == 1
     if (request.user.is_authenticated() and request.method == "POST" and
-            request.user == project.creator and project.member_queryset().count() == 1):
+            request.user == project.creator and project.members.all().count() == 1):
         project.delete()
         request.user.message_set.create(message=_("Project %(project_name)s deleted.") % {"project_name": project.name})
         # no notification required as the deleter must be the only member

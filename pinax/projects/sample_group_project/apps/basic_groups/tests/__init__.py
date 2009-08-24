@@ -40,7 +40,7 @@ class BasicGroupsTest(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response["location"], "http://testserver/groups/group/test/")
         self.assertEqual(BasicGroup.objects.get(slug="test").creator.username, "tester")
-        self.assertEqual(BasicGroup.objects.get(slug="test").member_queryset()[0].username, "tester")
+        self.assertEqual(BasicGroup.objects.get(slug="test").members.all()[0].username, "tester")
     
     def test_auth_creator_membership(self):
         """is membership for creator correct?"""
@@ -54,5 +54,5 @@ class BasicGroupsTest(TestCase):
         })
         response = self.client.get("/groups/group/test/")
         self.assertEqual(BasicGroup.objects.get(slug="test").creator.username, "tester")
-        self.assertEqual(BasicGroup.objects.get(slug="test").member_queryset()[0].username, "tester")
+        self.assertEqual(BasicGroup.objects.get(slug="test").members.all()[0].username, "tester")
         self.assertEqual(response.context[0]["is_member"], True)

@@ -4,7 +4,7 @@
 <dt>{{ group.name }} (<a href="{{ group.get_absolute_url }}">{{ group.slug }}</a>)</dt>
 <dd>{{ group.description }}
     <div class="group_stats">
-        {% trans "Members:" %} <b>{{ group.member_queryset.count }}</b>
+        {% trans "Members:" %} <b>{{ group.members.count }}</b>
         <br />
         {% show_tags_for group %} {# @@@ #}
     </div>

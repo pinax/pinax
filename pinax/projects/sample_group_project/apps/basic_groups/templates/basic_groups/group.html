@@ -15,7 +15,7 @@
             <div class="members">
                 <h2>{% trans "Members" %}</h2>
                 <table width="100%">
-                    {% for member in group.member_queryset %}
+                    {% for member in group.members.all %}
                         {% if forloop.counter0|divisibleby:"3" %}<tr>{% endif %}
                         <td>
                             <div class="avatar">{# avatar member 40 #}</div>
@@ -23,7 +23,7 @@
                         </td>
                         {% if forloop.counter0|add:"1"|divisibleby:"3" %}</tr>{% endif %}
                     {% endfor %}
-                    {% if group.member_queryset|length|divisibleby:"3" %}{% else %}</tr>{% endif %}
+                    {% if group.members.all|length|divisibleby:"3" %}{% else %}</tr>{% endif %}
                 </table>
             </div>
         </div>
@@ -55,7 +55,7 @@
                 </form>
             </div>
             
-            {% ifequal group.member_queryset.count 1 %}
+            {% ifequal group.members.all.count 1 %}
                 <p><img src="{{ MEDIA_URL }}pinax/images/silk/icons/delete.png" /> <a href="#" onclick="$('#delete_group_form').toggle(); return false;">{% trans "Delete Group" %}</a><p>
                  <form class="delete_form" id="delete_group_form" action="{% url group_delete group.slug %}" method="POST" style="display: none;">
                      <input type="submit" value="{% trans "Delete Group" %}" /> (all content will be removed)

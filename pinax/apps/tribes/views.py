@@ -81,7 +81,7 @@ def delete(request, group_slug=None, redirect_url=None):
     
     # @@@ eventually, we'll remove restriction that tribe.creator can't leave tribe but we'll still require tribe.members.all().count() == 1
     if (request.user.is_authenticated() and request.method == "POST" and
-            request.user == tribe.creator and tribe.member_queryset().count() == 1):
+            request.user == tribe.creator and tribe.members.all().count() == 1):
         tribe.delete()
         request.user.message_set.create(message=_("Tribe %(tribe_name)s deleted.") % {"tribe_name": tribe.name})
         # no notification required as the deleter must be the only member
@@ -118,7 +118,7 @@ def tribe(request, group_slug=None, form_class=TribeUpdateForm,
             is_member = True
             if notification:
                 notification.send([tribe.creator], "tribes_created_new_member", {"user": request.user, "tribe": tribe})
-                notification.send(tribe.member_queryset(), "tribes_new_member", {"user": request.user, "tribe": tribe})
+                notification.send(tribe.members.all(), "tribes_new_member", {"user": request.user, "tribe": tribe})
         else:
             request.user.message_set.create(
                 message=_("You have already joined tribe %(tribe_name)s") % {"tribe_name": tribe.name})
