@@ -171,6 +171,7 @@ AUTHENTICATED_EXEMPT_URLS = [
     r"^/account/signup/$",
     r"^/account/password_reset",
     r"^/account/confirm_email",
+    r"/openid"
 ]
 
 STATICFILES_EXTRA_MEDIA = (

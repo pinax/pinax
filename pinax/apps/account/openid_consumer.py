@@ -34,8 +34,14 @@ class PinaxConsumer(RegistrationConsumer):
         """
         openid_url = request.POST.get('openid_url')
         openids = request.session.get('openids')
+        
         if not openid_url and not openids:
             return account_login(request, url_required=True)
+        
+        if not settings.ACCOUNT_OPEN_SIGNUP:
+            return render_to_response("django_openid/registration_closed.html", {
+            }, context_instance=RequestContext(request))
+        
         return super(PinaxConsumer, self).do_register(request, *args, **kwargs)
     
     def show_already_signed_in(self, request):
