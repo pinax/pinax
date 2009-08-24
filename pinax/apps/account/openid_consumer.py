@@ -1,5 +1,7 @@
 import urlparse
 
+from openid import oidutil
+
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
@@ -11,6 +13,13 @@ from django_openid.registration import RegistrationConsumer
 from account.forms import OpenIDSignupForm
 from account.utils import get_default_redirect
 from account.views import login as account_login
+
+
+# install our own logger that does nothing
+def dummy_log(*args, **kwargs):
+    return
+oidutil.log = dummy_log
+
 
 class PinaxConsumer(RegistrationConsumer):
     
