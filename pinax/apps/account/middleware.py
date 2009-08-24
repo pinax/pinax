@@ -47,6 +47,7 @@ class AuthenticatedMiddleware(object):
         self.login_url = login_url
         self.exemptions = [
             r"^%s" % settings.MEDIA_URL,
+            r"^%s" % settings.STATIC_URL,
             r"^%s$" % login_url,
         ] + getattr(settings, "AUTHENTICATED_EXEMPT_URLS", [])
     
