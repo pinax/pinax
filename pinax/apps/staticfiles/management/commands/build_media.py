@@ -5,12 +5,15 @@ import shutil
 from optparse import make_option
 
 from django.conf import settings
-from django.db.models import get_apps
+from django.core.exceptions import ImproperlyConfigured
+from django.db.models import get_apps, get_app
 from django.utils.text import get_text_list
 from django.core.management.base import BaseCommand, CommandError, AppCommand
 
 from staticfiles.utils import import_module
 from staticfiles.settings import ROOT, DIRS, MEDIA_DIRNAMES, PREPEND_LABEL_APPS
+
+prepend_label_apps = [a.rsplit('.', 1)[-1] for a in PREPEND_LABEL_APPS]
 
 try:
     set
@@ -61,40 +64,33 @@ class Command(AppCommand):
 
         if app_labels:
             try:
-                app_list = [models.get_app(label) for label in app_labels]
+                app_list = self.load_apps(
+                    [get_app(label).__name__.rsplit('.', 1)[0] for label in app_labels]
+                )
             except (ImproperlyConfigured, ImportError), e:
                 raise CommandError(
                     "%s. Is your INSTALLED_APPS setting correct?" % e)
         else:
             if not options.get('all', False):
                 raise CommandError('Enter at least one appname or use the --all option')
+            app_list = self.load_apps(settings.INSTALLED_APPS)
 
-            app_list = []
-            for app_entry in settings.INSTALLED_APPS:
-                try:
-                    app_mod = import_module(app_entry)
-                except ImportError, e:
-                    raise CommandError('ImportError %s: %s' % (app, e.args[0]))
-                app_media_dir = os.path.join(
-                    os.path.dirname(app_mod.__file__), 'media')
-                if os.path.isdir(app_media_dir):
-                    app_list.append(app_mod)
-
-        app_labels = [app.__name__.rsplit('.', 1)[-1] for app in app_list]
-        print "Traversing apps: %s" % get_text_list(app_labels, 'and')
+        traversed_apps = [app.__name__.rsplit('.', 1)[-1] for app in app_list]
+        print "Traversing apps: %s" % get_text_list(traversed_apps, 'and')
         for app_mod in app_list:
             self.handle_app(app_mod, **options)
 
-        # Look in additional locations for media
-        extra_media = []
-        for label, path in DIRS:
-            if os.path.isdir(path):
-                extra_media.append((label, path))
-        extra_labels = [label for label, path in extra_media]
-        print "Looking additionally in: %s" % get_text_list(extra_labels, 'and')
-        exclude = options.get('exclude')
-        for extra_label, extra_path in extra_media:
-            self.add_media_files(extra_label, extra_path, exclude)
+        if not app_labels:
+            # Look in additional locations for media, only if --all is used.
+            extra_media = []
+            for label, path in DIRS:
+                if os.path.isdir(path):
+                    extra_media.append((label, path))
+            extra_labels = [label for label, path in extra_media]
+            print "Looking additionally in: %s" % get_text_list(extra_labels, 'and')
+            exclude = options.get('exclude')
+            for extra_label, extra_path in extra_media:
+                self.add_media_files(extra_label, extra_path, exclude)
 
         # This mapping collects files that may be copied.  Keys are what the
         # file's path relative to `media_root` will be when copied.  Values
@@ -145,9 +141,8 @@ class Command(AppCommand):
 
             # Special case apps that have media in <app>/media, not in
             # <app>/media/<app>, e.g. django.contrib.admin
-            if app in [app.rsplit('.', 1)[-1] for app in PREPEND_LABEL_APPS]:
+            if app in prepend_label_apps:
                 destination = os.path.join(app, destination)
-
             print "\nSelected %r provided by %r." % (destination, app)
             self.process_file(source, destination, media_root, **options)
 
@@ -160,6 +155,19 @@ class Command(AppCommand):
             app_media = os.path.join(app_root, media_dir)
             if os.path.isdir(app_media):
                 self.add_media_files(app_label, app_media, exclude)
+
+    def load_apps(self, apps):
+        app_list = []
+        for app_entry in apps:
+            try:
+                app_mod = import_module(app_entry)
+            except ImportError, e:
+                raise CommandError('ImportError %s: %s' % (app, e.args[0]))
+            app_media_dir = os.path.join(
+                os.path.dirname(app_mod.__file__), 'media')
+            if os.path.isdir(app_media_dir):
+                app_list.append(app_mod)
+        return app_list
 
     def add_media_files(self, app, location, exclude):
         prefix_length = len(location) + len(os.sep)
