@@ -18,5 +18,5 @@
         var _geo = [[{{ location.latitude }}, {{ location.longitude }}, '{{ location.place }}']];
     </script>
     <script type="text/javascript" src="http://api.maps.yahoo.com/ajaxymap?v=3.8&amp;appid={{ YAHOO_MAPS_API_KEY }}"></script>
-    <script type="text/javascript" src="{{ MEDIA_URL }}pinax/js/locations.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}pinax/js/locations.js"></script>
 {% endblock %}
