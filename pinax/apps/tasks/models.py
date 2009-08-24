@@ -159,14 +159,14 @@ def new_comment(sender, instance, **kwargs):
         task.save()
         
         # pass in the instance.user so that the task history owner is recorded
-        # as the commenter        
+        # as the commenter
         task.save_history(comment_instance=instance,change_owner=instance.user)
         
         group = task.group
         if notification:
             
             if group:
-                notify_list = group.member_users.all().exclude(id__exact=instance.user.id) # @@@
+                notify_list = group.member_queryset().exclude(id__exact=instance.user.id) # @@@
             else:
                 notify_list = User.objects.all().exclude(id__exact=instance.user.id)
             

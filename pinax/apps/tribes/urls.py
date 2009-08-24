@@ -8,9 +8,10 @@ from groups.bridge import ContentBridge
 bridge = ContentBridge(Tribe, 'tribes')
 
 urlpatterns = patterns('tribes.views',
-    url(r'^$', 'tribes', name="tribe_list"), 
+    url(r'^$', 'tribes', name="tribe_list"),
     url(r'^create/$', 'create', name="tribe_create"),
     url(r'^your_tribes/$', 'your_tribes', name="your_tribes"),
+    
     # tribe-specific
     url(r'^tribe/(?P<group_slug>[-\w]+)/$', 'tribe', name="tribe_detail"),
     url(r'^tribe/(?P<group_slug>[-\w]+)/delete/$', 'delete', name="tribe_delete"),

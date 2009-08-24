@@ -1,9 +1,9 @@
-{% extends "messages/base.html" %} 
+{% extends "messages/base.html" %}
 
-{% load i18n %} 
+{% load i18n %}
 {% load timezone_filters %}
 
-{% block body %} 
+{% block body %}
     <h1>{% trans "Sent Messages" %}</h1>
     
     <table class="messages">
@@ -11,7 +11,7 @@
             <tr><th>{% trans "Recipient" %}</th><th>{% trans "Subject" %}</th><th>{% trans "Sent" %}</th><th>{% trans "Action" %}</th></tr>
         </thead>
         <tbody>
-            {% for message in message_list %} 
+            {% for message in message_list %}
                 <tr>
                     <td>{{ message.recipient }}</td>
                     <td>

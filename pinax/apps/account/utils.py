@@ -9,7 +9,7 @@ def get_default_redirect(request, redirect_field_name="next",
     Returns the URL to be used in login procedures by looking at different
     values in the following order:
     
-    - LOGIN_REDIRECT_URLNAME - the name of a URLconf entry in the settings  
+    - LOGIN_REDIRECT_URLNAME - the name of a URLconf entry in the settings
     - LOGIN_REDIRECT_URL - the URL in the setting
     - a REQUEST value, GET or POST, named "next" by default.
     """

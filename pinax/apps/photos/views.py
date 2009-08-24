@@ -75,8 +75,14 @@ def yourphotos(request, template_name="photos/yourphotos.html", group_slug=None,
     else:
         group = None
     
-    # @@@ group support
-    photos = Image.objects.filter(member=request.user).order_by("-date_added")
+    photos = Image.objects.filter(member=request.user)
+    
+    if group:
+        photos = group.content_objects(photos, join="pool")
+    else:
+        photos = photos.filter(pool__object_id=None)
+    
+    photos = photos.order_by("-date_added")
     
     return render_to_response(template_name, {
         "group": group,
@@ -98,11 +104,17 @@ def photos(request, template_name="photos/latest.html", group_slug=None, bridge=
     else:
         group = None
     
-    # @@@ group support
     photos = Image.objects.filter(
         Q(is_public=True) |
         Q(is_public=False, member=request.user)
-    ).order_by("-date_added")
+    )
+    
+    if group:
+        photos = group.content_objects(photos, join="pool")
+    else:
+        photos = photos.filter(pool__object_id=None)
+    
+    photos = photos.order_by("-date_added")
     
     return render_to_response(template_name, {
         "group": group,
@@ -124,11 +136,19 @@ def details(request, id, template_name="photos/details.html", group_slug=None, b
     else:
         group = None
     
-    # @@@ group support
-    photo = get_object_or_404(Image, id=id)
+    photos = Image.objects.all()
+    
+    if group:
+        photos = group.content_objects(photos, join="pool")
+    else:
+        photos = photos.filter(pool__object_id=None)
+    
+    photo = get_object_or_404(photos, id=id)
+    
     # @@@: test
     if not photo.is_public and request.user != photo.member:
         raise Http404
+    
     photo_url = photo.get_display_url()
     
     title = photo.title
@@ -141,7 +161,7 @@ def details(request, id, template_name="photos/details.html", group_slug=None, b
     
     return render_to_response(template_name, {
         "group": group,
-        "host": host, 
+        "host": host,
         "photo": photo,
         "photo_url": photo_url,
         "is_me": is_me,
@@ -163,10 +183,18 @@ def memberphotos(request, username, template_name="photos/memberphotos.html", gr
         group = None
     
     user = get_object_or_404(User, username=username)
+    
     photos = Image.objects.filter(
         member__username = username,
         is_public = True,
-    ).order_by("-date_added")
+    )
+    
+    if group:
+        photos = group.content_objects(photos, join="pool")
+    else:
+        photos = photos.filter(pool__object_id=None)
+    
+    photos = photos.order_by("-date_added")
     
     return render_to_response(template_name, {
         "group": group,
@@ -186,8 +214,14 @@ def edit(request, id, form_class=PhotoEditForm,
     else:
         group = None
     
-    # @@@ group support
-    photo = get_object_or_404(Image, id=id)
+    photos = Image.objects.all()
+    
+    if group:
+        photos = group.content_objects(photos, join="pool")
+    else:
+        photos = photos.filter(pool__object_id=None)
+    
+    photo = get_object_or_404(photos, id=id)
     photo_url = photo.get_display_url()
 
     if request.method == "POST":
@@ -240,8 +274,14 @@ def destroy(request, id, group_slug=None, bridge=None):
     else:
         group = None
     
-    # @@ group support
-    photo = Image.objects.get(pk=id)
+    photos = Image.objects.all()
+    
+    if group:
+        photos = group.content_objects(photos, join="pool")
+    else:
+        photos = photos.filter(pool__object_id=None)
+    
+    photo = get_object_or_404(photos, id=id)
     title = photo.title
     
     if group:

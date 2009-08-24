@@ -34,10 +34,10 @@
                 <th>Comment</th>
             </tr>
         </thead>
-        <tbody> 
+        <tbody>
             {% for change in task_history %}
                 <tr class="{% cycle odd,even %}">
-                <td>{{ forloop.revcounter }}</td> 
+                <td>{{ forloop.revcounter }}</td>
                 <td>
                     {% if change.owner %}
                         <a href="{% groupurl tasks_for_user group username=change.owner %}">{{ change.owner }}</a>
@@ -60,7 +60,11 @@
                         {% endif %}
                     {% endif %}
                 </td>
-                <td>{% task_tags change group %}</td>
+                <td>
+                    {% if change.owner %}
+                        {% task_tags change group %}
+                    {% endif %}
+                </td>
                 <td>{{ change.humanized_state }}
                     {% if change.humanized_resolution %}
                         <br />{{ change.humanized_resolution }}

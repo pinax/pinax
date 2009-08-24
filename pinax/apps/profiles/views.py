@@ -85,7 +85,7 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
     
     else:
         if request.user.is_authenticated() and request.method == "POST":
-            if request.POSTget("action") == "invite": # @@@ perhaps the form should just post to friends and be redirected here
+            if request.POST.get("action") == "invite": # @@@ perhaps the form should just post to friends and be redirected here
                 invite_form = InviteFriendForm(request.user, request.POST)
                 if invite_form.is_valid():
                     invite_form.save()
@@ -136,7 +136,15 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
 
 
 @login_required
-def profile_edit(request, form_class=ProfileForm, template_name="profiles/profile_edit.html"):
+def profile_edit(request, form_class=ProfileForm, **kwargs):
+    
+    template_name = kwargs.get("template_name", "profiles/profile_edit.html")
+    
+    if request.is_ajax():
+        template_name = kwargs.get(
+            "template_name_facebox",
+            "profiles/profile_edit_facebox.html"
+        )
     
     profile = request.user.get_profile()
     

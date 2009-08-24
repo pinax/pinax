@@ -15,7 +15,7 @@ class TestTask(TestCase):
         self.user_joe = User.objects.get(username__exact='joe')
         
         self.task_nudge_count = 2
-        self.other_task_nudge_count = 1       
+        self.other_task_nudge_count = 1
     
     def tearDown(self):
         pass
@@ -53,11 +53,11 @@ class TestTask(TestCase):
             1. We have nudges across multiple tasks.
             2. After denudging the task, the task has no more nudges
             3. After denudging the task, the other task still has nudges
-        """            
+        """
         
         # we have nudges across multiple tasks including our sample task
         self.assertEquals(len(self.task.task_nudge.all()), self.task_nudge_count)
-        self.assertEquals(len(self.other_task.task_nudge.all()), self.other_task_nudge_count)        
+        self.assertEquals(len(self.other_task.task_nudge.all()), self.other_task_nudge_count)
         
         # now we denudge our task
         self.task.denudge()
@@ -66,8 +66,8 @@ class TestTask(TestCase):
         self.assertEquals(len(self.task.task_nudge.all()), 0)
         
         # The other task should have its original number of nudges
-        self.assertEquals(len(self.other_task.task_nudge.all()), self.other_task_nudge_count)                
-            
+        self.assertEquals(len(self.other_task.task_nudge.all()), self.other_task_nudge_count)
+
 
 class TestTaskHistory(TestCase):
     fixtures = ['test_tasks.json']
@@ -98,7 +98,7 @@ class TestTaskHistory(TestCase):
         self.assertEquals(history.owner, self.user_admin)
         
     def test_change_history_by_non_creator(self):
-        """ In CPC task 173 non-comment changes by users besides the task 
+        """ In CPC task 173 non-comment changes by users besides the task
         creator don't save the current user. This checks to see that the history
         is changed accurately.
         """

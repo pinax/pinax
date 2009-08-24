@@ -3,7 +3,6 @@
 {% load i18n %}
 {% load openid_tags %}
 {% load ifsetting_tag %}
-{% load svn_app_version %}
 {% load analytics %}
 
 {% block extra_head_base %}
@@ -21,6 +20,7 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}pinax/css/tabs.css" />
     <link rel="stylesheet" href="{{ STATIC_URL }}pinax/css/topics.css" />
     <link rel="stylesheet" href="{{ STATIC_URL }}pinax/css/wiki.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}bookmarks/css/bookmarks.css" />
     {% block extra_head %}{% endblock %}
 {% endblock %}
 
@@ -67,8 +67,6 @@
     - <a href="{% url terms %}">{% trans "Terms of Service" %}</a>
     - <a href="{% url privacy %}">{% trans "Privacy Policy" %}</a>
     - <a href="{% url dmca %}">{% trans "DMCA Notice" %}</a>
-    - Version: {% svn_app_version %}
-    - Django: {% svn_app_version "django" %}
 </div>
 {% endblock %}
 

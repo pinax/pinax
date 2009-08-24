@@ -9,24 +9,24 @@
 
 <div class="task clearfix">
     <div class="task-meta">
-
+        
         {% if task.assignee %}
             <div class="avatar">{% avatar task.assignee 40 %}</div>
             <div class="details"><b>{% trans "Assignee" %}</b>: <a href="{% groupurl tasks_for_user group username=task.assignee %}">{{ task.assignee }}</a></div>
         {% else %}
             <span class="warning">{% trans "Unassigned" %}</span>
-        {% endif %}        
+        {% endif %}
         <div><b>{% trans "State" %}</b>: {{ task.get_state_display }}</div>
         <div><b>{% trans "Creator" %}</b>: <a href="{% groupurl tasks_for_user group username=task.creator %}">{{ task.creator }}</a></div>
         <div><b>{% trans "Created" %}</b>: {{ task.created|date }}</div>
         <div><b>{% trans "Modified" %}</b>: {{ task.modified|shorttimesince }} ago</div>
-        <div><a href="{% groupurl tasks_history group id=task.id %}">{% trans "History of this Task" %}</a></div>                        
+        <div><a href="{% groupurl tasks_history group id=task.id %}">{% trans "History of this Task" %}</a></div>
         <div><b>Nudges</b>: {{ nudge.count }}
             {% if nudge.history %}
                 <a href="#" id="nudge-history">nudge list</a>
             {% endif %}
         </div>
-        {% if nudge.history %}        
+        {% if nudge.history %}
             <div id="nudge-history-target">
                 <ol>
                 {% for item in nudge.history %}
@@ -57,7 +57,7 @@
             {% if comment_count %}
                 {{ comment_count }} comment{{ comment_count|pluralize }};
             {% endif %}
-            <b>{% trans "Status" %}</b>: 
+            <b>{% trans "Status" %}</b>:
             {% if task.status %}
                 {{ task.status }}
             {% else %}

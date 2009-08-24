@@ -1,0 +1,17 @@
+<div id="userpass" class="box">
+    {% if user.is_authenticated %}
+        <p><span class="warning">NOTE:</span> you are already logged in as {{ user }}.</p>
+    {% endif %}
+    <form class="login" method="POST" action="{% url acct_login %}">
+        <table>
+            <tr><td colspan="2">{{ form.non_field_errors }}</td></tr>
+            {% for field in form %}
+                {% if field.errors %}<tr><td colspan="2">{{ field.errors }}</td></tr>{% endif %}
+                <tr><td width="100px">{{ field.label_tag }}</td><td>{{ field }}</td></tr>
+            {% endfor %}
+            <tr><td></td><td><input type="submit" value="Log in &raquo;" /></td></tr>
+            <tr><td></td><td><a href="{% url acct_passwd_reset %}">Forgot password?</a></td></tr>
+            <tr><td></td><td><img src="{{ MEDIA_URL }}images/openid-icon.png" />&nbsp;<a href="/openid/register/" id="openid_switch">Switch to OpenID login</a></td></tr>
+        </table>
+    </form>
+</div>

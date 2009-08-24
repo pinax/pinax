@@ -17,6 +17,9 @@ def signup(request, form_class=SignupForm,
         template_name="account/signup.html", success_url=None):
     if success_url is None:
         success_url = get_default_redirect(request)
+    
+    code = request.GET.get("code")
+    
     if request.method == "POST":
         form = form_class(request.POST)
         if form.is_valid():
@@ -33,7 +36,6 @@ def signup(request, form_class=SignupForm,
             })
             return HttpResponseRedirect(success_url)
     else:
-        code = request.GET.get("code")
         signup_code = check_signup_code(code)
         if signup_code:
             form = form_class(initial={"signup_code": code})
@@ -47,6 +49,7 @@ def signup(request, form_class=SignupForm,
             else:
                 form = form_class()
     return render_to_response(template_name, {
+        "code": code,
         "form": form,
     }, context_instance=RequestContext(request))
 

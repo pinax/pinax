@@ -1,9 +1,9 @@
-{% extends "messages/base.html" %} 
+{% extends "messages/base.html" %}
 
-{% load i18n %} 
+{% load i18n %}
 {% load timezone_filters %}
 
-{% block body %} 
+{% block body %}
     <h1>{% trans "Deleted Messages" %}</h1>
     
     <table class="messages">
@@ -11,10 +11,10 @@
             <tr><th>{% trans "Sender" %}</th><th>{% trans "Subject" %}</th><th>{% trans "Date" %}</th><th>{% trans "Action" %}</th></tr>
         </thead>
         <tbody>
-            {% for message in message_list %} 
+            {% for message in message_list %}
                 <tr>
                     <td>{{ message.sender }}</td>
-                    <td> 
+                    <td>
                         {{ message.subject }}
                     </td>
                     <td>{{ message.sent_at|localtime:account.timezone|date:_("DATETIME_FORMAT") }}</td>

@@ -227,6 +227,8 @@ LANGUAGES = (
 
 # URCHIN_ID = "ua-..."
 
+YAHOO_MAPS_API_KEY = "..."
+
 class NullStream(object):
     def write(*args, **kwargs):
         pass

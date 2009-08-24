@@ -67,7 +67,7 @@ def topics(request, group_slug=None, form_class=TopicForm, template_name="topics
     if group:
         topics = group.content_objects(Topic)
     else:
-        topics = Topic.objects.all()
+        topics = Topic.objects.filter(object_id=None)
     
     return render_to_response(template_name, {
         "group": group,
@@ -91,12 +91,11 @@ def topic(request, topic_id, group_slug=None, edit=False, template_name="topics/
     if group:
         topics = group.content_objects(Topic)
     else:
-        topics = Topic.objects.all()
+        topics = Topic.objects.filter(object_id=None)
     
     topic = get_object_or_404(topics, id=topic_id)
     
-    if (request.method == "POST" and edit == True and 
-        (request.user == topic.creator or request.user == topic.group.creator)):
+    if (request.method == "POST" and edit == True and (request.user == topic.creator or request.user == topic.group.creator)):
         topic.body = request.POST["body"]
         topic.save()
         return HttpResponseRedirect(topic.get_absolute_url(group))
@@ -127,12 +126,11 @@ def topic_delete(request, topic_id, group_slug=None, bridge=None):
     if group:
         topics = group.content_objects(Topic)
     else:
-        topics = Topic.objects.all()
+        topics = Topic.objects.filter(object_id=None)
     
     topic = get_object_or_404(topics, id=topic_id)
     
-    if (request.method == "POST" and (request.user == topic.creator or
-        request.user == topic.group.creator)): 
+    if (request.method == "POST" and (request.user == topic.creator or request.user == topic.group.creator)):
         ThreadedComment.objects.all_for_object(topic).delete()
         topic.delete()
     

@@ -9,14 +9,13 @@
 {% block tab_id %}id="prices_tab"{% endblock %}
 
 {% block body %}
-    {% gblock "prices_content" for "gblocks.TitleAndText" %} 
+    {% gblock "prices_content" for "gblocks.TitleAndText" %}
     
     <h2>You can download our price list as pdf:</h2>
-
     
-    {% gblock "prices_content" for "gblocks.TitleAndText" into "content_obj" %} 
+    {% gblock "prices_content" for "gblocks.TitleAndText" into "content_obj" %}
     {% get_attachments_for content_obj as "attachment_list" %}
-
+    
     {% if attachment_list %}
     <ul>
     {% for att in attachment_list %}

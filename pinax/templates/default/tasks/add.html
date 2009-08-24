@@ -10,24 +10,6 @@
     <h1>Add Task</h1>
 
     {% if is_member %}
-        {% comment %}
-        <div class="search">
-            <form method="POST" action="" id="search_form">
-                {{ search_form.as_p }}
-            </form>
-            {% if search_results %}
-                <ul>
-                {% for task in search_results %}
-                  <li>
-                      <a href="{% groupurl task_detail group task.id %}">{{ task }}</a>
-                      {{ task.detail|slice:":49"}}
-                  </li>
-                {% endfor %}
-                </ul>
-            {% endif %}
-            <hr />
-        </div>
-        {% endcomment %}
 
          <div class="main-form">
             <form method="POST" action="" id="task_form" class="uniForm">

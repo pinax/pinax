@@ -4,7 +4,7 @@ register = template.Library()
 
 def comments(context, obj):
     return {
-        'object': obj, 
+        'object': obj,
         'request': context['request'],
         'user': context['user'],
     }

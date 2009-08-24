@@ -43,7 +43,7 @@ class Image(ImageModel):
     is_public = models.BooleanField(_('is public'), default=True, help_text=_('Public photographs will be displayed in the default views.'))
     member = models.ForeignKey(User, related_name="added_photos", blank=True, null=True)
     safetylevel = models.IntegerField(_('safetylevel'), choices=SAFETY_LEVEL, default=1)
-    photoset = models.ManyToManyField(PhotoSet, verbose_name=_('photo set'))
+    photoset = models.ManyToManyField(PhotoSet, blank=True, verbose_name=_('photo set'))
     tags = TagField()
 
     def __unicode__(self):

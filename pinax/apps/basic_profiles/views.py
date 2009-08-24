@@ -58,7 +58,15 @@ def profile(request, username, template_name="basic_profiles/profile.html"):
 
 
 @login_required
-def profile_edit(request, form_class=ProfileForm, template_name="basic_profiles/profile_edit.html"):
+def profile_edit(request, form_class=ProfileForm, **kwargs):
+    
+    template_name = kwargs.get("template_name", "basic_profiles/profile_edit.html")
+    
+    if request.is_ajax():
+        template_name = kwargs.get(
+            "template_name_facebox",
+            "basic_profiles/profile_edit_facebox.html"
+        )
     
     profile = request.user.get_profile()
     

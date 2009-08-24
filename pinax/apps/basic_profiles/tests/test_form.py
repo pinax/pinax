@@ -19,14 +19,14 @@ class TestProfileForm(TestCase):
     def tearDown(self):
         pass
         
-    def test_profile_form(self):        
+    def test_profile_form(self):
         form = ProfileForm(instance=self.profile)
         # include a bad url to force an error
         data = {
             "name": "John Smith",
             "about": "John likes wine",
             "location": "France maybe!",
-            "website": "httpasd://python.org"            
+            "website": "httpasd://python.org"
         }
         form = ProfileForm(data)
         self.assertEquals(False, form.is_valid())

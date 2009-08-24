@@ -19,7 +19,7 @@
     {% if object_list %}
         {# ## FIXME this should probably be done in djanog-sorting #}
         {% with request.field|cut:"-" as sort_order %}
-
+        
         <p class="helptext">{% trans "These are bookmarks from your friends:" %}</p>
         
         <p>{% trans "Sort by:" %}
@@ -108,7 +108,7 @@
 {% block extra_body %}
     <script>
         function vote(bookmark_id, direction) {
-            /* note post url is relative so is sensitive to URL of this page @@@ */ 
+            /* note post url is relative so is sensitive to URL of this page @@@ */
             $.post('../' + bookmark_id + '/' + direction + 'vote/', function(data) {
                 var jsonResult = eval('(' + data + ')');
                 var new_score = jsonResult.score.score;
