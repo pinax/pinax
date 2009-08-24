@@ -37,3 +37,7 @@ class PinaxConsumer(RegistrationConsumer):
         if not openid_url and not openids:
             return account_login(request, url_required=True)
         return super(PinaxConsumer, self).do_register(request, *args, **kwargs)
+    
+    def show_already_signed_in(self, request):
+        return render_to_response("django_openid/already_logged_in.html", {
+        }, context_instance=RequestContext(request))
