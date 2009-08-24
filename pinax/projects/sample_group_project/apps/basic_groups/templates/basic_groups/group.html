@@ -56,7 +56,7 @@
             </div>
             
             {% ifequal group.members.all.count 1 %}
-                <p><img src="{{ MEDIA_URL }}pinax/images/silk/icons/delete.png" /> <a href="#" onclick="$('#delete_group_form').toggle(); return false;">{% trans "Delete Group" %}</a><p>
+                <p><img src="{{ STATIC_URL }}pinax/images/silk/icons/delete.png" /> <a href="#" onclick="$('#delete_group_form').toggle(); return false;">{% trans "Delete Group" %}</a><p>
                  <form class="delete_form" id="delete_group_form" action="{% url group_delete group.slug %}" method="POST" style="display: none;">
                      <input type="submit" value="{% trans "Delete Group" %}" /> (all content will be removed)
                 </form>

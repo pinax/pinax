@@ -1,5 +1,5 @@
 {% if tag_counts %}
-    <img src="{{ MEDIA_URL }}pinax/images/silk/icons/tag_blue.png" border="0" class="noborder" align="absmiddle" />
+    <img src="{{ STATIC_URL }}pinax/images/silk/icons/tag_blue.png" border="0" class="noborder" align="absmiddle" />
     {% for tag in tag_counts %}
         <a href="/tags/{{ tag.name }}">{{ tag.name }}</a> ({{ tag.count }})
     {% endfor %}

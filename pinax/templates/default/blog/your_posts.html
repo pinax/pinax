@@ -50,12 +50,12 @@
                     </td>
                     <td width="50px" align="center">
                         <a href="{% url blog_edit post.id %}">
-                            <img src="{{ MEDIA_URL }}pinax/images/silk/icons/pencil.png" border="0" title="{% trans "Edit Post" %}" />
+                            <img src="{{ STATIC_URL }}pinax/images/silk/icons/pencil.png" border="0" title="{% trans "Edit Post" %}" />
                         </a>
                     </td>
                     <td align="right">
                         <form action="{% url blog_destroy post.id %}" method="POST">
-                            <input type="image" src="{{ MEDIA_URL }}pinax/images/silk/icons/delete.png" border="0" title="{% trans "Delete Post" %}" />
+                            <input type="image" src="{{ STATIC_URL }}pinax/images/silk/icons/delete.png" border="0" title="{% trans "Delete Post" %}" />
                             <input type="hidden" name="action" value="delete"/>
                        </form>
                     </td>

@@ -22,6 +22,7 @@ def show_task(context, task, nudge):
         "nudge": nudge,
         "task": task,
         "MEDIA_URL": settings.MEDIA_URL,
+        "STATIC_URL": settings.STATIC_URL,
         "group": context["group"],
     }
 

@@ -85,7 +85,7 @@
                             </form>
                         </div>
                         
-                        <p><img src="{{ MEDIA_URL }}pinax/images/silk/icons/delete.png" /> <a href="#" onclick="$('#delete_project_form').toggle(); return false;">{% trans "Delete project" %}</a><p>
+                        <p><img src="{{ STATIC_URL }}pinax/images/silk/icons/delete.png" /> <a href="#" onclick="$('#delete_project_form').toggle(); return false;">{% trans "Delete project" %}</a><p>
                          <form class="delete_form" id="delete_project_form" action="{% url project_delete project.slug %}" method="POST" style="display: none;">
                              <input type="submit" value="{% trans "Delete Project" %}" /> (all content will be removed)
                         </form>

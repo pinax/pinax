@@ -1,7 +1,7 @@
 {% load tagging_tags %}
 {% tags_for_object obj as tags %}
 {% if tags %}
-    <img src="{{ MEDIA_URL }}pinax/images/silk/icons/tag_blue.png" border="0" class="noborder" align="absmiddle" />
+    <img src="{{ STATIC_URL }}pinax/images/silk/icons/tag_blue.png" border="0" class="noborder" align="absmiddle" />
     {% for tag in tags %}
         <a href="/tags/{{ tag }}">{{ tag }}</a>
     {% endfor %}

@@ -20,7 +20,7 @@
         <div class="gallery-photo-thumb">
             <a href="{% groupurl photo_details group id=photo.id %}"><img src="{{ photo.get_thumbnail_url }}" alt="{{ photo.title }}"/></a><br />
             from <a href="{% url profile_detail photo.member.username %}">{{ photo.member.username }}</a><br />
-            <img src="{{ MEDIA_URL }}pinax/images/silk/icons/comment.png" border="0" class="noborder" align="absmiddle" /><a href="{% groupurl photo_details group id=photo.id %}/#photocomments">{% get_comment_count for photo as commentcount %} {{ commentcount }} Comments</a><br />
+            <img src="{{ STATIC_URL }}pinax/images/silk/icons/comment.png" border="0" class="noborder" align="absmiddle" /><a href="{% groupurl photo_details group id=photo.id %}/#photocomments">{% get_comment_count for photo as commentcount %} {{ commentcount }} Comments</a><br />
             Viewed {{ photo.view_count }} times
         </div>
         {% endfor %}

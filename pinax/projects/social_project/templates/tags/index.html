@@ -25,7 +25,7 @@
                 <div class="gallery-photo-thumb">
                     <a href="/photos/details/{{ photo.id }}/"><img src="{{ photo.get_thumbnail_url }}" alt="{{ photo.title }}"/></a><br />
                     from <a href="{% url profile_detail photo.member.username %}">{{ photo.member.username }}</a><br />
-                    <img src="{{ MEDIA_URL }}pinax/images/silk/icons/comment.png" border="0" class="noborder" align="absmiddle" /><a href="/photos/details/{{ photo.id }}/">{% get_comment_count for photo as commentcount %} {{ commentcount }} Comments</a>
+                    <img src="{{ STATIC_URL }}pinax/images/silk/icons/comment.png" border="0" class="noborder" align="absmiddle" /><a href="/photos/details/{{ photo.id }}/">{% get_comment_count for photo as commentcount %} {{ commentcount }} Comments</a>
                     <br />
                     Viewed {{ photo.view_count }} Times
                 </div>
@@ -111,16 +111,16 @@
                 $('#bookmark_' + bookmark_id + '_score').text(new_score + ' point' + (new_score == 1 ? '': 's'));
             });
             if (direction == 'up') {
-                $('#up_' + bookmark_id).replaceWith('<a id="up_' + bookmark_id + '" href="#" onclick="return false;"><img src="{{ MEDIA_URL }}up_mod.png"/>');
-                $('#down_' + bookmark_id).replaceWith('<a id="down_' + bookmark_id + '" href="#" onclick="vote(' + bookmark_id + ', \'clear\'); return false;"><img src="{{ MEDIA_URL }}down_grey.png"/>');
+                $('#up_' + bookmark_id).replaceWith('<a id="up_' + bookmark_id + '" href="#" onclick="return false;"><img src="{{ STATIC_URL }}up_mod.png"/>');
+                $('#down_' + bookmark_id).replaceWith('<a id="down_' + bookmark_id + '" href="#" onclick="vote(' + bookmark_id + ', \'clear\'); return false;"><img src="{{ STATIC_URL }}down_grey.png"/>');
             }
             else if (direction == 'down') {
-                $('#up_' + bookmark_id).replaceWith('<a id="up_' + bookmark_id + '" href="#" onclick="vote(' + bookmark_id + ', \'clear\'); return false;"><img src="{{ MEDIA_URL }}up_grey.png"/>');
-                $('#down_' + bookmark_id).replaceWith('<a id="down_' + bookmark_id + '" href="#" onclick="return false;"><img src="{{ MEDIA_URL }}down_mod.png"/>');
+                $('#up_' + bookmark_id).replaceWith('<a id="up_' + bookmark_id + '" href="#" onclick="vote(' + bookmark_id + ', \'clear\'); return false;"><img src="{{ STATIC_URL }}up_grey.png"/>');
+                $('#down_' + bookmark_id).replaceWith('<a id="down_' + bookmark_id + '" href="#" onclick="return false;"><img src="{{ STATIC_URL }}down_mod.png"/>');
             }
             else { // clear
-                $('#up_' + bookmark_id).replaceWith('<a id="up_' + bookmark_id + '" href="#" onclick="vote(' + bookmark_id + ', \'up\'); return false;"><img src="{{ MEDIA_URL }}up_grey.png"/>');
-                $('#down_' + bookmark_id).replaceWith('<a id="down_' + bookmark_id + '" href="#" onclick="vote(' + bookmark_id + ', \'down\'); return false;"><img src="{{ MEDIA_URL }}down_grey.png"/>');
+                $('#up_' + bookmark_id).replaceWith('<a id="up_' + bookmark_id + '" href="#" onclick="vote(' + bookmark_id + ', \'up\'); return false;"><img src="{{ STATIC_URL }}up_grey.png"/>');
+                $('#down_' + bookmark_id).replaceWith('<a id="down_' + bookmark_id + '" href="#" onclick="vote(' + bookmark_id + ', \'down\'); return false;"><img src="{{ STATIC_URL }}down_grey.png"/>');
             }
         }
     </script>

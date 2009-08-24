@@ -17,10 +17,10 @@
 
 {% block extra_body %}
     {{ block.super }}
-    <script type="text/javascript" src="{{ MEDIA_URL }}pinax/js/jquery.bgiframe.min.js"></script>
-    <script type="text/javascript" src="{{ MEDIA_URL }}pinax/js/jquery.dimensions.js"></script>
-    <script type="text/javascript" src="{{ MEDIA_URL }}pinax/js/jquery.ajaxQueue.js"></script>
-    <script type="text/javascript" src="{{ MEDIA_URL }}pinax/js/jquery.autocomplete.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}pinax/js/jquery.bgiframe.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}pinax/js/jquery.dimensions.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}pinax/js/jquery.ajaxQueue.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}pinax/js/jquery.autocomplete.min.js"></script>
     <script type="text/javascript">
         $().ready(function() {
             $("#id_recipient").autocomplete("{% url profile_username_autocomplete %}", {

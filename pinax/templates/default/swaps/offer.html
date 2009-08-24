@@ -24,7 +24,7 @@
         
         <div class="blog-tags">
             <p>
-                <img src="{{ MEDIA_URL }}pinax/images/silk/icons/tag_blue.png" border="0" class="noborder" align="absmiddle" />
+                <img src="{{ STATIC_URL }}pinax/images/silk/icons/tag_blue.png" border="0" class="noborder" align="absmiddle" />
                 {% tags_for_object offer as tags %}
                 {% for tag in tags %}
                     <a href="/tags/{{ tag }}">{{ tag }}</a>

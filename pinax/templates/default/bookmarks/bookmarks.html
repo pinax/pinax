@@ -66,13 +66,13 @@
                         {% dict_entry_for_item bookmark from vote_dict as vote %}
                         {% dict_entry_for_item bookmark from score_dict as score %}
                         {% if user.is_authenticated %}
-                            <a id="up_{{ bookmark.id }}" href="#" onclick="vote({{ bookmark.id }}, '{% if vote and vote.is_downvote %}clear{% else %}up{% endif %}'); return false;"><img src="{{ MEDIA_URL }}bookmarks/img/up_{% if vote and vote.is_upvote %}mod{% else %}grey{% endif %}.png"/></a><br />
+                            <a id="up_{{ bookmark.id }}" href="#" onclick="vote({{ bookmark.id }}, '{% if vote and vote.is_downvote %}clear{% else %}up{% endif %}'); return false;"><img src="{{ STATIC_URL }}bookmarks/img/up_{% if vote and vote.is_upvote %}mod{% else %}grey{% endif %}.png"/></a><br />
                         {% endif %}
                         <span id="bookmark_{{ bookmark.id }}_score">
                             {{ score.score|default:0 }} point{{ score.score|default:0|pluralize }}
                         </span><br />
                         {% if user.is_authenticated %}
-                            <a id="down_{{ bookmark.id }}" href="#" onclick="vote({{ bookmark.id }}, '{% if vote and vote.is_upvote %}clear{% else %}down{% endif %}'); return false;"><img id="img_{{ bookmark.id }}_down" src="{{ MEDIA_URL }}bookmarks/img/down_{% if vote and vote.is_downvote %}mod{% else %}grey{% endif %}.png"/></a>
+                            <a id="down_{{ bookmark.id }}" href="#" onclick="vote({{ bookmark.id }}, '{% if vote and vote.is_upvote %}clear{% else %}down{% endif %}'); return false;"><img id="img_{{ bookmark.id }}_down" src="{{ STATIC_URL }}bookmarks/img/down_{% if vote and vote.is_downvote %}mod{% else %}grey{% endif %}.png"/></a>
                         {% endif %}
                     </td>
                     <td>
@@ -115,16 +115,16 @@
                 $('#bookmark_' + bookmark_id + '_score').text(new_score + ' point' + (new_score == 1 ? '': 's'));
             });
             if (direction == 'up') {
-                $('#up_' + bookmark_id).replaceWith('<a id="up_' + bookmark_id + '" href="#" onclick="return false;"><img src="{{ MEDIA_URL }}bookmarks/img/up_mod.png"/>');
-                $('#down_' + bookmark_id).replaceWith('<a id="down_' + bookmark_id + '" href="#" onclick="vote(' + bookmark_id + ', \'clear\'); return false;"><img src="{{ MEDIA_URL }}bookmarks/img/down_grey.png"/>');
+                $('#up_' + bookmark_id).replaceWith('<a id="up_' + bookmark_id + '" href="#" onclick="return false;"><img src="{{ STATIC_URL }}bookmarks/img/up_mod.png"/>');
+                $('#down_' + bookmark_id).replaceWith('<a id="down_' + bookmark_id + '" href="#" onclick="vote(' + bookmark_id + ', \'clear\'); return false;"><img src="{{ STATIC_URL }}bookmarks/img/down_grey.png"/>');
             }
             else if (direction == 'down') {
-                $('#up_' + bookmark_id).replaceWith('<a id="up_' + bookmark_id + '" href="#" onclick="vote(' + bookmark_id + ', \'clear\'); return false;"><img src="{{ MEDIA_URL }}bookmarks/img/up_grey.png"/>');
-                $('#down_' + bookmark_id).replaceWith('<a id="down_' + bookmark_id + '" href="#" onclick="return false;"><img src="{{ MEDIA_URL }}bookmarks/img/down_mod.png"/>');
+                $('#up_' + bookmark_id).replaceWith('<a id="up_' + bookmark_id + '" href="#" onclick="vote(' + bookmark_id + ', \'clear\'); return false;"><img src="{{ STATIC_URL }}bookmarks/img/up_grey.png"/>');
+                $('#down_' + bookmark_id).replaceWith('<a id="down_' + bookmark_id + '" href="#" onclick="return false;"><img src="{{ STATIC_URL }}bookmarks/img/down_mod.png"/>');
             }
             else { // clear
-                $('#up_' + bookmark_id).replaceWith('<a id="up_' + bookmark_id + '" href="#" onclick="vote(' + bookmark_id + ', \'up\'); return false;"><img src="{{ MEDIA_URL }}bookmarks/img/up_grey.png"/>');
-                $('#down_' + bookmark_id).replaceWith('<a id="down_' + bookmark_id + '" href="#" onclick="vote(' + bookmark_id + ', \'down\'); return false;"><img src="{{ MEDIA_URL }}bookmarks/img/down_grey.png"/>');
+                $('#up_' + bookmark_id).replaceWith('<a id="up_' + bookmark_id + '" href="#" onclick="vote(' + bookmark_id + ', \'up\'); return false;"><img src="{{ STATIC_URL }}bookmarks/img/up_grey.png"/>');
+                $('#down_' + bookmark_id).replaceWith('<a id="down_' + bookmark_id + '" href="#" onclick="vote(' + bookmark_id + ', \'down\'); return false;"><img src="{{ STATIC_URL }}bookmarks/img/down_grey.png"/>');
             }
         }
     </script>

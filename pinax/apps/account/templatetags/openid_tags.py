@@ -23,7 +23,7 @@ def openid_icon(openid, user):
     matches = [u.openid == oid for u in UserOpenidAssociation.objects.filter(user=user)]
     if any(matches):
         return mark_safe(u'<img src="%s" alt="%s" />' % (
-            os.path.join(settings.MEDIA_URL, 'images', 'openid-icon.png'),
+            os.path.join(settings.STATIC_URL, 'images', 'openid-icon.png'),
             ugettext('Logged in with OpenID')
         ))
     else:

@@ -30,7 +30,7 @@
         </div>
         
         <div class="form-toggle">
-            <p><span id="flag-toggle"><img src="{{MEDIA_URL}}pinax/images/silk/icons/flag_red.png" />{% trans "Flag as inappropriate" %}</span></p>
+            <p><span id="flag-toggle"><img src="{{ STATIC_URL }}pinax/images/silk/icons/flag_red.png" />{% trans "Flag as inappropriate" %}</span></p>
              <div id="flag-form" style="display: none;">
                 {% flag photo request.user.id %}
              </div>
