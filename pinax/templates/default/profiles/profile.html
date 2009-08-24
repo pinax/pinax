@@ -41,7 +41,7 @@
             </div>
             
             {% if is_me %}
-                <p><a href="{% url profile_edit %}">Edit profile</a></p>
+                <p><a href="{% url profile_edit %}" rel="facebox">Edit profile</a></p>
             {% endif %}
             
             {% if user.is_authenticated %}
