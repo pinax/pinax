@@ -162,7 +162,7 @@ class Command(AppCommand):
             try:
                 app_mod = import_module(app_entry)
             except ImportError, e:
-                raise CommandError('ImportError %s: %s' % (app, e.args[0]))
+                raise CommandError('ImportError %s: %s' % (app_entry, e.args[0]))
             app_media_dir = os.path.join(
                 os.path.dirname(app_mod.__file__), 'media')
             if os.path.isdir(app_media_dir):
