@@ -6,9 +6,9 @@ from optparse import make_option
 
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
-from django.db.models import get_apps, get_app
+from django.db.models import get_app
 from django.utils.text import get_text_list
-from django.core.management.base import BaseCommand, CommandError, AppCommand
+from django.core.management.base import CommandError, AppCommand
 
 from staticfiles.utils import import_module
 from staticfiles.settings import ROOT, DIRS, MEDIA_DIRNAMES, PREPEND_LABEL_APPS
@@ -236,7 +236,7 @@ class Command(AppCommand):
         if sys.platform == 'win32':
             message = "Linking is not supported by this platform (%s)."
             raise os.error(message % sys.platform)
-        
+
         if interactive:
             exists = os.path.exists(destination) or os.path.islink(destination)
             if exists:
