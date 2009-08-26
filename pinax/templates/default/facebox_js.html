@@ -3,7 +3,7 @@
     jQuery(document).ready(function($) {
         $('a[rel*=facebox]').facebox({
             loadingImage: '{{ STATIC_URL }}pinax/images/facebox/loading.gif',
-            closeImage: '{{ STATIC_URL }}pinax/images/facebox/closelabel.gif',
+            closeImage: '{{ STATIC_URL }}pinax/images/facebox/closelabel.gif'
         });
         $(document).bind('reveal.facebox', function() {
             $("form.in_facebox").submit(function() {
