@@ -997,7 +997,6 @@ import os
 import sys
 import re
 import urllib
-import pkg_resources
 
 PINAX_GIT_LOCATION = 'git://github.com/pinax/pinax.git'
 PINAX_PYPI_MIRRORS = [
@@ -1100,6 +1099,7 @@ def resolve_command(cmd, path=None, pathext=None):
     return os.path.realpath(cmd)
 
 try:
+    import pkg_resources
     pip_dist = pkg_resources.get_distribution('pip')
 except (ImportError, pkg_resources.DistributionNotFound):
     pass
