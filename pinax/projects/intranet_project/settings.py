@@ -155,10 +155,7 @@ INSTALLED_APPS = (
     'topics',
     'tagging_utils',
     'threadedcomments_extras',
-    #'pastebin',
-    #'quickbar',
     'tasks',
-    #'documents',
     
     'tag_app',
     

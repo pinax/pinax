@@ -6,6 +6,7 @@
 {% load switchcase %}
 {% load tagging_tags %}
 {% load restructuredtext %}
+{% load theme_tags %}
 
 {% block head_title %}{% blocktrans %}Your Blog Posts{% endblocktrans %}{% endblock %}
 
@@ -50,11 +51,12 @@
                     </td>
                     <td width="50px" align="center">
                         <a href="{% url blog_edit post.id %}">
-                            <img src="{{ STATIC_URL }}pinax/images/silk/icons/pencil.png" border="0" title="{% trans "Edit Post" %}" />
+                            {% silk "pencil" %}
                         </a>
                     </td>
                     <td align="right">
                         <form action="{% url blog_destroy post.id %}" method="POST">
+                            {# @@@ still can't replace this with a silk tag yet #}
                             <input type="image" src="{{ STATIC_URL }}pinax/images/silk/icons/delete.png" border="0" title="{% trans "Delete Post" %}" />
                             <input type="hidden" name="action" value="delete"/>
                        </form>

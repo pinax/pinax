@@ -5,6 +5,7 @@
 {% load extra_tagging_tags %}
 {% load group_tags %}
 {% load basic_group_tags %}
+{% load theme_tags %}
 
 {% block head_title %}{{ group.name }}{% endblock %}
 
@@ -28,11 +29,11 @@
             </div>
         </div>
     {% endif %}
-
+    
     <div style="width: 550px;">
-
+        
         <h1>{% trans "Group" %} {{ group.name }}</h1>
-
+        
         <p>
             {% trans "Slug:" %} <tt>{{ group.slug }}</tt><br />
             {% trans "Creator:" %} <a href="{% url profile_detail group.creator.username %}">{{ group.creator }}</a><br />
@@ -40,9 +41,9 @@
             <br />
             {% show_tags_for group %}
         </p>
-
+        
         <p>{{ group.description }}</p>
-
+        
         {% ifequal user group.creator %}
             <div class="form-toggle">
                 <p><span id="edit-group-toggle">{% trans "Edit details" %}</span></p>
@@ -56,7 +57,7 @@
             </div>
             
             {% ifequal group.members.all.count 1 %}
-                <p><img src="{{ STATIC_URL }}pinax/images/silk/icons/delete.png" /> <a href="#" onclick="$('#delete_group_form').toggle(); return false;">{% trans "Delete Group" %}</a><p>
+                <p>{% silk "delete" %} <a href="#" onclick="$('#delete_group_form').toggle(); return false;">{% trans "Delete Group" %}</a><p>
                  <form class="delete_form" id="delete_group_form" action="{% url group_delete group.slug %}" method="POST" style="display: none;">
                      <input type="submit" value="{% trans "Delete Group" %}" /> (all content will be removed)
                 </form>
