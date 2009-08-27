@@ -1098,21 +1098,6 @@ def resolve_command(cmd, path=None, pathext=None):
         sys.exit(3)
     return os.path.realpath(cmd)
 
-try:
-    import pkg_resources
-    pip_dist = pkg_resources.get_distribution('pip')
-except (ImportError, pkg_resources.DistributionNotFound):
-    pass
-else:
-    if pkg_resources.parse_version(pip_dist.version) == pkg_resources.parse_version('0.3dev'):
-        print 'ERROR: this script requires pip 0.3.1 or greater.'
-        print 'Since you decided to use a development version of pip, please make sure you are using a recent one.'
-        sys.exit(101)
-    elif pkg_resources.parse_version(version) < pkg_resources.parse_version('0.3.1'):
-        print 'ERROR: this script requires pip 0.3.1 or greater.'
-        print 'Please upgrade your pip %s to create a Pinax virtualenv.' % version
-        sys.exit(101)
-
 def extend_parser(parser):
     parser.add_option("-s", "--source",
         metavar="DIR_OR_URL", dest="pinax_source", default=PINAX_GIT_LOCATION,
