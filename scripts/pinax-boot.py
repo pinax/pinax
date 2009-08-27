@@ -995,6 +995,8 @@ def create_bootstrap_script(extra_text, python_version=''):
 
 import os
 import sys
+import re
+import urllib
 
 PINAX_GIT_LOCATION = 'git://github.com/pinax/pinax.git'
 PINAX_PYPI_MIRRORS = [
@@ -1005,7 +1007,7 @@ PINAX_MUST_HAVES = {
     'setuptools-git': ('0.3.4', 'setuptools_git-0.3.4.tar.gz'),
     'setuptools-dummy': ('0.0.3', 'setuptools_dummy-0.0.3.tar.gz'),
     'Django': ('1.0.3', 'Django-1.0.3.tar.gz'),
-    'pip': ('0.4', 'pip-0.4.tar.gz'),
+    'pip': ('0.4.1dev', 'pip-0.4.1dev.tar.gz'),
 }
 
 DJANGO_VERSIONS = (
@@ -1035,6 +1037,20 @@ if os.path.exists(pydistutils):
     print "ERROR: Please make sure you remove any previous custom paths from"
     print "your %s file." % pydistutils
     sys.exit(3)
+
+_drive_re = re.compile('^([a-z]):', re.I)
+
+def filename_to_url(filename):
+    """
+    Convert a path to a file: URL.  The path will be made absolute.
+    """
+    filename = os.path.normcase(os.path.abspath(filename))
+    if _drive_re.match(filename):
+        filename = filename[0] + '|' + filename[2:]
+    url = urllib.quote(filename)
+    url = url.replace(os.path.sep, '/')
+    url = url.lstrip('/')
+    return 'file:///' + url
 
 def winpath(path):
     if sys.platform == 'win32':
@@ -1156,28 +1172,6 @@ def install_base(easy_install, requirements_dir, packages):
             src,
         ], filter_stdout=filter_lines, show_stdout=False)
 
-def release_files_exist(release_dir, requirements_file):
-    f = open(requirements_file)
-    requirements = f.read()
-    f.close()
-    requirements = requirements.splitlines()
-    available_requirements, missing_requirements = [], []
-    result = True
-    for no, line in enumerate(requirements):
-        line = line.strip()
-        if not line or line.startswith('#'):
-            continue
-        requirement = os.path.normpath(join(release_dir, line))
-        if not os.path.exists(requirement):
-            result = False
-            missing_requirements.append(requirement)
-        else:
-            available_requirements.append(requirement)
-    if result:
-        return True, available_requirements
-    else:
-        return False, missing_requirements
-
 def after_install(options, home_dir):
     this_dir = os.path.dirname(__file__)
     home_dir, lib_dir, inc_dir, bin_dir = path_locations(home_dir)
@@ -1246,36 +1240,23 @@ def after_install(options, home_dir):
         # release should *never* touch the Internet.
         logger.notify('Going to install a full Pinax %s release.' % options.release)
         release_dir = join(requirements_dir, options.release)
-        # We use easy_install for now, as long as pip can't be run on Windows
-        # call_subprocess([pip, 'install', '--upgrade',
-        #         '--requirement', os.path.abspath(join(release_dir, 'full.txt')),
-        #         '--environment', home_dir], show_stdout=True, cwd=release_dir)
-        requirements_file = os.path.realpath(join(release_dir, 'full.txt'))
+        requirements_file = os.path.abspath(join(release_dir, 'release.txt'))
         if not os.path.exists(requirements_file):
             print "ERROR: no requirements were found for version %s." % options.release
             sys.exit(101)
-
-        # check if this is a full release with bundled packages
-        result, requirements = release_files_exist(release_dir, requirements_file)
-        # get the packages from the PyPI, requires internet connection
-        if not result:
-            print "This release does not have all the required requirements:"
-            for line in requirements:
-                print "    %s" % os.path.basename(line)
-            sys.exit(101)
-            
-        for no, line in enumerate(requirements):
-            line = line.strip()
-            if not line or line.startswith('#'):
-                continue
-            logger.notify('Installing %s' % line)
+        logger.indent += 2
+        try:
+            logger.notify('Installing Pinax')
             call_subprocess([
-                easy_install,
-                '--quiet',
-                '--always-unzip',
-                line
-            ], filter_stdout=filter_lines, show_stdout=False)
-
+                pip,
+                'install',
+                '--ignore-installed',
+                '--environment', home_dir,
+                '--requirement', requirements_file,
+                '--find-links', filename_to_url(release_dir),
+            ], show_stdout=True)
+        finally:
+            logger.indent -= 2
         logger.notify("Please activate the newly created virtualenv by running in '%s': "
                       % home_dir)
         logger.indent += 2
