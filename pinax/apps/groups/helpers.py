@@ -37,20 +37,21 @@ def generate_next_scoped_id(content_object, scoped_id_model):
                 "object_id": kwargs["object_id"],
             }
         try:
-            transaction.enter_transaction_management()
-            transaction.managed(True)
-            
-            cursor = connection.cursor()
-            cursor.execute(sql)
-            
-            # we modified data, mark dirty
-            transaction.set_dirty()
-            
-            scoped_id = scoped_id_model._default_manager.get(pk=scoped_id.pk)
-            transaction.commit()
-        except: # @@@ fix for 2.4
-            transaction.rollback()
-            raise
+            try:
+                transaction.enter_transaction_management()
+                transaction.managed(True)
+                
+                cursor = connection.cursor()
+                cursor.execute(sql)
+                
+                # we modified data, mark dirty
+                transaction.set_dirty()
+                
+                scoped_id = scoped_id_model._default_manager.get(pk=scoped_id.pk)
+                transaction.commit()
+            except:
+                transaction.rollback()
+                raise
         finally:
             transaction.leave_transaction_management()
             
