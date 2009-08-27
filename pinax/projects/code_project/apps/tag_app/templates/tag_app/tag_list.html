@@ -1,7 +1,9 @@
 {% load tagging_tags %}
+{% load theme_tags %}
+
 {% tags_for_object obj as tags %}
 {% if tags %}
-    <img src="{{ STATIC_URL }}pinax/images/silk/icons/tag_blue.png" border="0" class="noborder" align="absmiddle" />
+    {% silk "tag_blue" %}
     {% for tag in tags %}
         <a href="/tags/{{ tag }}">{{ tag }}</a>
     {% endfor %}

@@ -6,6 +6,7 @@
 {% load threadedcommentstags %}
 {% load markup_tags %}
 {% load group_tags %}
+{% load theme_tags %}
 
 <div class="task clearfix">
     <div class="task-meta">
@@ -64,6 +65,6 @@
                 {% trans "none" %}
             {% endif %}
         </div>
-        <p><img src="{{ STATIC_URL }}pinax/images/silk/icons/tag_blue.png" border="0" class="noborder" align="absmiddle" /> {% task_tags task group %}</p>
+        <p>{% silk "tag_blue" %} {% task_tags task group %}</p>
     </div>
 </div>

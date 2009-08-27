@@ -9,6 +9,7 @@
 {% load markup %}
 {% load restructuredtext %}
 {% load threadedcommentstags %}
+{% load theme_tags %}
 
 {% block head_title %}{% blocktrans %}All Open Offers{% endblocktrans %}{% endblock %}
 
@@ -77,7 +78,7 @@
                         </p>
                         {# @@@ I've seen this multiple places -- should be inclusion tag #}
                         <div class="blog-tags">
-                            <img src="{{ STATIC_URL }}pinax/images/silk/icons/tag_blue.png" border="0" class="noborder" align="absmiddle" />
+                            {% silk "tag_blue" %}
                             {% tags_for_object offer as tags %}
                             {% for tag in tags %}
                                 <a href="/tags/{{ tag }}">{{ tag }}</a>

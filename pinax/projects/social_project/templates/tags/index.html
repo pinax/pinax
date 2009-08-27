@@ -9,7 +9,7 @@
 {% load wiki_tags %}
 {% load voting_tags %}
 {% load extra_voting_tags %}
-
+{% load theme_tags %}
 {% load in_filter %}
 {% load extra_tagging_tags %}
 
@@ -25,7 +25,7 @@
                 <div class="gallery-photo-thumb">
                     <a href="/photos/details/{{ photo.id }}/"><img src="{{ photo.get_thumbnail_url }}" alt="{{ photo.title }}"/></a><br />
                     from <a href="{% url profile_detail photo.member.username %}">{{ photo.member.username }}</a><br />
-                    <img src="{{ STATIC_URL }}pinax/images/silk/icons/comment.png" border="0" class="noborder" align="absmiddle" /><a href="/photos/details/{{ photo.id }}/">{% get_comment_count for photo as commentcount %} {{ commentcount }} Comments</a>
+                    {% silk "comment" %} <a href="/photos/details/{{ photo.id }}/">{% get_comment_count for photo as commentcount %} {{ commentcount }} Comments</a>
                     <br />
                     Viewed {{ photo.view_count }} Times
                 </div>

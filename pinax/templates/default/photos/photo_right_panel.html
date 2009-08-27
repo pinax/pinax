@@ -2,6 +2,7 @@
 {% load avatar_tags %}
 {% load tagging_tags %}
 {% load group_tags %}
+{% load theme_tags %}
 
 <div class="photo-right-profile clearfix">
     <div class="photo-avatar">{% avatar photo.member.username 50 %}</div>
@@ -15,7 +16,7 @@
 
 <div class="photo-right-tools">
     {% if photo.tags %}
-        <h2><img src="{{ STATIC_URL }}pinax/images/silk/icons/tag_blue.png" border="0" class="noborder" align="absmiddle" /> Tags</h2>
+        <h2>{% silk "tag_blue" %} Tags</h2>
         <ul>
             {% tags_for_object photo as tags %}
             {% for tag in tags %}

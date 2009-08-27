@@ -5,7 +5,7 @@
 {% load comments_tag %}
 {% load tagging_tags %}
 {% load blog_tags %}
-{% load blog_tags %}
+{% load theme_tags %}
 
 {% block head_title %}{% blocktrans %}Blog Post{% endblocktrans %} : {{ post.title }}{% endblock %}
 
@@ -20,7 +20,7 @@
         <h2>{{ post.title }}</h2>
         <div class="blog-meta"><p>Posted by: <a href="{% url profile_detail post.author.username %}">{{ post.author.username }}</a> on {{ post.publish|date }}</p></div>
         <div class="blog-tags">
-            <p><img src="{{ STATIC_URL }}pinax/images/silk/icons/tag_blue.png" border="0" class="noborder" align="absmiddle" />
+            <p>{% silk "tag_blue" %}
             {% tags_for_object post as tags %}
             {% for tag in tags %}
                 <a href="/tags/{{ tag }}">{{ tag }}</a>

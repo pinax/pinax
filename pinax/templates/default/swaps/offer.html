@@ -5,6 +5,7 @@
 {% load threadedcommentstags %}
 {% load tagging_tags %}
 {% load wiki_tags %}
+{% load theme_tags %}
 
 {% block head_title %}{% blocktrans %}Offer{% endblocktrans %} : {{ offer.short_description }}{% endblock %}
 
@@ -24,7 +25,7 @@
         
         <div class="blog-tags">
             <p>
-                <img src="{{ STATIC_URL }}pinax/images/silk/icons/tag_blue.png" border="0" class="noborder" align="absmiddle" />
+                {% silk "tag_blue" %}
                 {% tags_for_object offer as tags %}
                 {% for tag in tags %}
                     <a href="/tags/{{ tag }}">{{ tag }}</a>
