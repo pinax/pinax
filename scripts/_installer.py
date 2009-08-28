@@ -149,6 +149,7 @@ def install_base(parent_dir, bin_dir, requirements_dir, packages):
     easy_install = resolve_command(EASY_INSTALL_CMD, bin_dir)
     pip_package = packages.pop("pip")
     version, filename = pip_package
+    src = join(requirements_dir, 'base', filename)
     if not os.path.exists(src):
         # get it from the PyPI
         src = 'pip==%s' % version
@@ -158,7 +159,6 @@ def install_base(parent_dir, bin_dir, requirements_dir, packages):
         '--quiet',
         '--always-copy',
         '--always-unzip',
-        join(requirements_dir, 'base', filename)
     ] + find_links + [
         src,
     ], filter_stdout=filter_lines, show_stdout=False)
