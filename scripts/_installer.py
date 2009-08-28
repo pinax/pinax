@@ -28,10 +28,12 @@ JAUNTY_FIX = """/usr/lib/python2.6/dist-packages
 if sys.platform == 'win32':
     GIT_CMD = 'git.cmd'
     PIP_CMD = 'pip.exe'
+    EASY_INSTALL_CMD = 'easy_install.exe'
     extra = {'shell': True}
 else:
     GIT_CMD = 'git'
     PIP_CMD = 'pip'
+    EASY_INSTALL_CMD = 'easy_install'
     extra = {}
 
 # Bailing if "~/.pydistutils.cfg" exists
@@ -136,11 +138,30 @@ def adjust_options(options, args):
     if not args:
         return # caller will raise error
 
-def install_base(python, parent_dir, requirements_dir, packages):
+def install_base(parent_dir, bin_dir, requirements_dir, packages):
     """
     Installs base packages from the bundled tarball if existing
     """
-    pip = os.path.realpath(join(parent_dir, 'scripts', 'pip.py'))
+    packages = packages.copy() # prevent changing the global data
+    
+    # we have to special case pip here and install it with easy_install
+    # because in most cases the user installed pip with easy_install which if
+    # we installed it another way won't work.
+    easy_install = resolve_command(EASY_INSTALL_CMD, bin_dir)
+    pip_package = packages.pop("pip")
+    version, filename = pip_package
+    logger.notify('Installing pip %s' % version)
+    call_subprocess([
+        easy_install,
+        '--quiet',
+        '--always-copy',
+        '--always-unzip',
+        join(requirements_dir, 'base', filename)
+    ], filter_stdout=filter_lines, show_stdout=False)
+    
+    # resolve path to the freshly installed pip
+    pip = resolve_command(PIP_CMD, bin_dir)
+    
     for pkg in packages:
         version, filename = packages[pkg]
         src = join(requirements_dir, 'base', filename)
@@ -152,7 +173,6 @@ def install_base(python, parent_dir, requirements_dir, packages):
         for mirror in PINAX_PYPI_MIRRORS:
             find_links.extend(['--find-links', mirror])
         call_subprocess([
-            python,
             pip,
             'install',
             '--quiet',
@@ -161,6 +181,8 @@ def install_base(python, parent_dir, requirements_dir, packages):
         ] + find_links + [
             src,
         ], filter_stdout=filter_lines, show_stdout=False)
+    
+    return pip
 
 def after_install(options, home_dir):
     this_dir = os.path.dirname(__file__)
@@ -171,10 +193,7 @@ def after_install(options, home_dir):
     python = resolve_command(expected_exe, bin_dir)
 
     requirements_dir = join(parent_dir, 'requirements')
-    install_base(python, parent_dir, requirements_dir, PINAX_MUST_HAVES)
-
-    # resolve path to the freshly installed pip
-    pip = resolve_command(PIP_CMD, bin_dir)
+    pip = install_base(parent_dir, bin_dir, requirements_dir, PINAX_MUST_HAVES)
 
     version_file = join(parent_dir, 'VERSION')
     if os.path.exists(version_file) and not options.release:
