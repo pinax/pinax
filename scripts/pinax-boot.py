@@ -1135,7 +1135,7 @@ def install_base(python, parent_dir, requirements_dir, packages):
     """
     Installs base packages from the bundled tarball if existing
     """
-    pip = join(parent_dir, 'scripts', 'pip.py')
+    pip = os.path.realpath(join(parent_dir, 'scripts', 'pip.py'))
     for pkg in packages:
         version, filename = packages[pkg]
         src = join(requirements_dir, 'base', filename)
