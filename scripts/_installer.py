@@ -144,11 +144,9 @@ def install_base(python, parent_dir, requirements_dir, packages):
     for pkg in packages:
         version, filename = packages[pkg]
         src = join(requirements_dir, 'base', filename)
-        index = []
         if not os.path.exists(src):
             # get it from the PyPI
             src = '%s==%s' % (pkg, version)
-            index = ['--index-url', 'http://192.0.2.30/'] # no intertubes
         logger.notify('Installing %s %s' % (pkg, version))
         find_links = []
         for mirror in PINAX_PYPI_MIRRORS:
@@ -160,7 +158,7 @@ def install_base(python, parent_dir, requirements_dir, packages):
             '--quiet',
             '--no-deps',
             '--ignore-installed',
-        ] + index + find_links + [
+        ] + find_links + [
             src,
         ], filter_stdout=filter_lines, show_stdout=False)
 
@@ -244,7 +242,6 @@ def after_install(options, home_dir):
                 '--ignore-installed',
                 '--environment', home_dir,
                 '--requirement', requirements_file,
-                '--index-url', 'http://192.0.2.30/', # no intertubes for you
                 '--find-links', filename_to_url(release_dir),
             ], show_stdout=True)
         finally:
