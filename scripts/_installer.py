@@ -139,12 +139,19 @@ def install_base(parent_dir, bin_dir, requirements_dir, packages):
     """
     packages = packages.copy() # prevent changing the global data
     
+    find_links = []
+    for mirror in PINAX_PYPI_MIRRORS:
+        find_links.extend(['--find-links', mirror])
+    
     # we have to special case pip here and install it with easy_install
     # because in most cases the user installed pip with easy_install which if
     # we installed it another way won't work.
     easy_install = resolve_command(EASY_INSTALL_CMD, bin_dir)
     pip_package = packages.pop("pip")
     version, filename = pip_package
+    if not os.path.exists(src):
+        # get it from the PyPI
+        src = 'pip==%s' % version
     logger.notify('Installing pip %s' % version)
     call_subprocess([
         easy_install,
@@ -152,6 +159,8 @@ def install_base(parent_dir, bin_dir, requirements_dir, packages):
         '--always-copy',
         '--always-unzip',
         join(requirements_dir, 'base', filename)
+    ] + find_links + [
+        src,
     ], filter_stdout=filter_lines, show_stdout=False)
     
     # resolve path to the freshly installed pip
@@ -164,9 +173,6 @@ def install_base(parent_dir, bin_dir, requirements_dir, packages):
             # get it from the PyPI
             src = '%s==%s' % (pkg, version)
         logger.notify('Installing %s %s' % (pkg, version))
-        find_links = []
-        for mirror in PINAX_PYPI_MIRRORS:
-            find_links.extend(['--find-links', mirror])
         call_subprocess([
             pip,
             'install',
