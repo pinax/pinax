@@ -1,17 +1,18 @@
 from django import forms
 from django.utils.safestring import mark_safe
 from django.core.urlresolvers import reverse
+from django.conf import settings
 
 class TagAutoCompleteInput(forms.TextInput):
     class Media:
         css = {
-            'all': ('pinax/css/jquery.autocomplete.css',)
+            'all': (settings.STATIC_URL + 'pinax/css/jquery.autocomplete.css',)
         }
         js = (
-            'pinax/js/jquery-1.3.2.min.js',
-            'pinax/js/jquery.bgiframe.min.js',
-            'pinax/js/jquery.ajaxQueue.js',
-            'pinax/js/jquery.autocomplete.min.js'
+            settings.STATIC_URL + 'pinax/js/jquery-1.3.2.min.js',
+            settings.STATIC_URL + 'pinax/js/jquery.bgiframe.min.js',
+            settings.STATIC_URL + 'pinax/js/jquery.ajaxQueue.js',
+            settings.STATIC_URL + 'pinax/js/jquery.autocomplete.min.js'
         )
     def __init__(self, app_label, model, *args, **kwargs):
         self.app_label = app_label
