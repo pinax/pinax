@@ -1,6 +1,5 @@
 import os
 import sys
-import re
 import urllib
 
 PINAX_GIT_LOCATION = 'git://github.com/pinax/pinax.git'
@@ -38,19 +37,17 @@ if os.path.exists(pydistutils):
     print "your %s file." % pydistutils
     sys.exit(3)
 
-_drive_re = re.compile('^([a-z]):', re.I)
-
 def filename_to_url(filename):
     """
     Convert a path to a file: URL.  The path will be made absolute.
     """
     filename = os.path.normcase(os.path.abspath(filename))
-    if _drive_re.match(filename):
-        filename = filename[0] + '|' + filename[2:]
-    url = urllib.quote(filename)
-    url = url.replace(os.path.sep, '/')
-    url = url.lstrip('/')
-    return 'file:///' + url
+    drive, filename = os.path.splitdrive(filename)
+    filepath = filename.split(os.path.sep)
+    url = '/'.join([urllib.quote(part) for part in filepath])
+    if not drive:
+        url = url.lstrip('/')
+    return 'file:///' + drive + url
 
 def winpath(path):
     if sys.platform == 'win32':
