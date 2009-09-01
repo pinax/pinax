@@ -248,6 +248,7 @@ def after_install(options, home_dir):
                 pip,
                 'install',
                 '--no-deps',
+                '--no-index',
                 '--ignore-installed',
                 '--environment', home_dir,
                 '--requirement', requirements_file,
