@@ -67,7 +67,7 @@ class EditTaskForm(forms.ModelForm):
             assignee_queryset = self.fields["assignee"].queryset
         
         self.fields["assignee"].queryset = assignee_queryset.order_by("username")
-        self.fields['summary'].widget.attrs["size"] = 55
+        self.fields['summary'].widget.attrs["size"] = 65
         self.fields.keyOrder = ["summary","tags", "status", "assignee", "state", "resolution"]
         
         if self.instance.assignee != user:
