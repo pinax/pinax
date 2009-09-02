@@ -256,13 +256,15 @@ def after_install(options, home_dir):
             ], show_stdout=True)
         finally:
             logger.indent -= 2
-        logger.notify("Please activate the newly created virtualenv by running in '%s': "
-                      % home_dir)
+        env_dir = os.path.normpath(home_dir)
+        logger.notify("Please activate the newly created virtualenv by running: ")
         logger.indent += 2
-        logger.notify("'source bin/activate' on Linux/Unix/Mac OS "
-                      "or '.\\Scripts\\activate.bat' on Windows")
+        if sys.platform == "win32":
+            logger.notify("%s\\Scripts\\activate.bat" % env_dir)
+        else:
+            logger.notify("source %s/bin/activate" % env_dir)
         logger.indent -= 2
-        logger.notify('Pinax environment created successfully.')
+        logger.notify("Pinax environment created successfully.")
     else:
         logger.notify("Cannot locate a VERSION file for release. You are "
             "likely not running from a release tarball. Perhaps you meant to "
