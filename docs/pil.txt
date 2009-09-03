@@ -1,0 +1,20 @@
+Installing PIL
+==============
+
+To be able to run the ``social_project`` or any photo support provided with
+Pinax you will need the `Python Imaging Library`_ (aka PIL). We don't install
+this for you because its installation will vary and requires compilation.
+First, check with your OS package manager (if applicable) to see if it can
+provide PIL for you. Windows users can simply use the binaries provided on the
+PIL website.
+
+This command has worked for some users; it installs a tweaked version::
+
+    (pinax-env)$ pip install http://dist.repoze.org/PIL-1.1.6.tar.gz
+
+Of course you'll need a C compiler `libjpeg`_ and `libz`_ libraries upon which
+PIL depends.
+
+.. _`Python Imaging Library`: http://www.pythonware.com/products/pil/
+.. _`libjpeg`: http://freshmeat.net/projects/libjpeg/
+.. _`libz`: http://www.zlib.net/
