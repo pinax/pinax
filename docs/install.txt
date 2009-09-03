@@ -1,127 +1,89 @@
 Installation
 ============
 
-We have two different approaches to installing Pinax. The best approach is to
-download our stable release and follow the :ref:`install-released-tarball-instructions`.
-The benefit to this approach is that it requires absolutely no Internet
-connection once you have downloaded the tarball.
+This covers installation from a release bundle. For information on installing
+a development version, see http://pinaxproject.com/docs/dev/contributing.html.
 
-The alternative approach is to start from the development version. You can
-take this approach by following the :ref:`install-development-instructions`. This means
-you will be working with the bleeding edge of our code. We can not guarantee
-any stability.
+The release bundle has almost everything you need to get Pinax up and running.
+The only things not included are `Python`_ itself, the `Python Imaging Library`_
+(PIL) and a database such as SQLite (which is included in Python 2.5+).
 
-Alternatively, if you prefer or use `Buildout`_ see the
-:ref:`buildout instructions <ref-buildout>` for details.
-
-.. _install-released-tarball-instructions:
+For more information on installing PIL, see :ref:`ref-pil`.
 
 .. note::
 
-    If you are on OS X be sure you have the Apple developer tools installed.
+    If you are on Mac OS X, make sure you have the Apple developer tools
+    installed before proceeding with Pinax installation.
 
-Released tarball instructions
------------------------------
 
-We have provided a script that will create a virtual environment for you.
-Once you have downloaded the release tarball, cd into the extracted directory.
-Let's create a virtual environment that you will install everything into::
+Installing Pinax
+----------------
+
+Pinax makes use of Python virtual environments (or virtualenvs) to isolate
+the various packages it uses from the rest of your system. Pinax comes with a
+script that will create the virtualenv for you and install Django and the
+various applications and libraries that make up Pinax.
+
+To run this script, extract the release bundle, cd into it and run::
+
+    $ python scripts/pinax-boot.py <path-to-virtual-env-to-create>
+
+This will set up the virtualenv and install everything.
+
+For example, if you wanted to create your environment in a directory parallel
+to where you extracted the bundle you could run::
 
     $ python scripts/pinax-boot.py ../pinax-env
-    $ cd ../
-    $ source ./pinax-env/bin/activate
-    (pinax-env)$
 
-Note that we have told you to create the new environment in the directory
-above the tarball directory. We encourage you create the environment anywhere
-you like.
+If you use virtualenvwrapper_ (which we recommend), this would become::
 
-If you use `virtualenvwrapper`_ (we highly encourage you do), you can easily
-replace ``../`` with your ``WORKON_HOME``. This gives you regular access to
-``workon`` to activate your environment.
+    $ python scripts/pinax-boot.py $WORKON_HOME/pinax-env
 
-You can skip the :ref:`install-development-instructions` section and begin
-reading the :ref:`install-common-to-both-approaches` section.
 
-.. _install-development-instructions:
-
-Development instructions
-------------------------
-
-.. note::
-
-    These instructions are for the **developement** version of Pinax. We do
-    not guarantee it will actually work. It is possible dependancies will fail
-    to install or the master branch is unstable. Consider this your warning,
-    but if you do proceed and find issues, please report them at
-    http://code.pinaxproject.com.
-
-Before installing the development version make sure you have the following:
-
-* `Git`_
-* `Subversion`_
-
-These may not always be needed, but as fixes are made in external applications
-we may need to switch to their development versions. We try our best to avoid
-this. We abolutely require Git because it is our versioning control system of
-choice.
-
-Download the latest pinax-boot.py script (you can put this anywhere, we will
-assume current working directory)::
-
-    $ curl -O http://github.com/pinax/pinax/raw/master/scripts/pinax-boot.py
-
-Create a virtual environment with the downloaded script::
-
-    $ python pinax-boot.py --development ./pinax-env
-    $ source ./pinax-env/bin/activate
-    (pinax-env)$
-
-The last step deals with the external apps and libraries you want to use
-while developing your project. To do this choose **one** of these options:
-
-* *All* dependencies (external_apps and libs) used in all sample projects::
-
-    (pinax-env)$ cd pinax-env/
-    (pinax-env)$ pip install --requirement src/pinax/requirements/external_apps.txt
-
-* *Only* the dependencies of one of the sample projects, e.g. the social_project::
-
-    (pinax-env)$ cd pinax-env/src/pinax/projects/
-    (pinax-env)$ pip install --requirement social_project/requirements.txt
-
-.. _install-common-to-both-approaches:
-
-Common to both approaches
+Activating the virtualenv
 -------------------------
 
-A note about PIL
-~~~~~~~~~~~~~~~~
+Any time you work on a project involving Pinax, you will want to activate
+the virtualenv.
 
-To be able to run the ``social_project`` or any photo support provided with
-Pinax you will need the `Python Imaging Library`_ (aka PIL). We don't install
-this for you because its installation will vary and requires compilation.
-First, check with your OS package manager (if applicable) to see if it can
-provide PIL for you. Windows users can simply use the binaries provided on the
-PIL website.
+This is done with::
 
-This command has worked for some users; it installed a tweaked version::
+    $ source <path-to-virtual-env-created>/bin/activate
 
-    (pinax-env)$ pip install http://dist.repoze.org/PIL-1.1.6.tar.gz
+or, in our example above using ``../pinax-env``::
 
-Of course you'll need a C compiler `libjpeg`_ and `libz`_ libraries upon which
-PIL depends.
+    $ source ../pinax-env/bin/activate
 
-Creating a project
-~~~~~~~~~~~~~~~~~~
+On Windows you would run::
 
-Your next step is to create a Pinax project. Let's first check what is
-available::
+    $ ..\pinax-env\Scripts\activate.bat
+
+With virtualenvwrapper, this becomes::
+
+    $ workon pinax-env
+
+which you can run from anywhere on your filesystem.
+
+Note that you will develop your Pinax-based project in a directory outside
+your virtualenv. As long as the virtualenv is active, your project will have
+access to all of the apps and libraries Pinax provides.
+
+
+Starting a new Pinax project
+----------------------------
+
+The recommended way to start a new Pinax-based project is to clone one of the
+existing projects. This is done via the ``pinax-admin clone_project``
+command which you can run once you are in your Pinax virtual-env.
+
+You can get a list of available projects with::
 
     (pinax-env)$ pinax-admin clone_project -l
 
-This will show you a list of project that you can base your new project off
-of. For the purpose of testing Pinax, let's start with the social_project::
+This will show you a list of projects that you can base your new project on.
+
+Just as quick demonstration, let's start with the social_project. cd into the
+directory you'd like to create your new project in and run::
 
     (pinax-env)$ pinax-admin clone_project social_project mysite
 
@@ -138,7 +100,6 @@ default homepage!
 Note that mail and some notifications are queued rather than delivered
 immediately. See :ref:`ref-sending-mail-and-notices` for details.
 
-
 What's next?
 ------------
 
@@ -146,11 +107,6 @@ Look at our :doc:`customization <customization>` documentation to learn how you
 might customize your cloned project. If you are ready to deploy your project
 check out the :doc:`deployment <deployment>` documentation.
 
-
-.. _`virtualenvwrapper`: http://www.doughellmann.com/projects/virtualenvwrapper/
-.. _`Git`: http://git-scm.com/
-.. _`Subversion`: http://subversion.tigris.org/
+.. _Python: http://python.org
 .. _`Python Imaging Library`: http://www.pythonware.com/products/pil/
-.. _`libjpeg`: http://freshmeat.net/projects/libjpeg/
-.. _`libz`: http://www.zlib.net/
-.. _`Buildout`: http://pypi.python.org/pypi/zc.buildout
+.. _`virtualenvwrapper`: http://www.doughellmann.com/projects/virtualenvwrapper/
