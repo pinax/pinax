@@ -1,0 +1,135 @@
+.. _ref-contributing:
+
+Contributing to Pinax
+=====================
+
+We are always looking for people wanting to improve Pinax itself. This
+document outlines the necessary bits to begin contributing to Pinax.
+
+Getting started
+---------------
+
+The Pinax source code is hosted on GitHub_. This means you must have git_
+installed locally. We recommend you create an account on GitHub allowing you
+to watch and fork the Pinax source code.
+
+You will want to be sure that your git configuration is set for making commits
+to a repository. Check the following::
+
+    git config user.name
+    git config user.email
+
+If the output of any of the two commands above are not entirely correct you
+can easily correct them::
+
+    git config --global user.name "First Last"
+    git config --global user.name "email@somewhere.com"
+
+It is critical you set this information up correctly. It helps us identify
+who you are when you start giving us those awesome patches.
+
+Grabbing the source code
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Once you have forked the Pinax source code you can now make a clone of it to
+your local disk. To do this::
+
+    git clone git@github.com:<username>/pinax.git
+
+This will create new directory named ``pinax`` which now contains the Pinax
+source tree ready for you to get started.
+
+Setting up your environment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Now that you've cloned the source code you are ready to get your environment
+setup to work on Pinax. This section also applies if you are looking to just
+run off the latest code. We'll assume that your current working directory is
+from within the clone (the ``pinax`` directory)::
+
+    python scripts/pinax-boot.py --development --source=. ../pinax-dev
+    source ../pinax-dev/bin/activate
+
+If you use virtualenvwrapper you could alternatively do::
+
+    python scripts/pinax-boot.py --development --source=. $WORKON_HOME/pinax-dev
+    workon pinax-development
+
+Finally, you need to install the dependencies for the development version::
+
+    pip install --requirement requirements/external_apps.txt
+
+Committing code
+---------------
+
+The great thing about using a distributed versioning control system like git
+is that everyone becomes a committer. When other people write good patches
+it makes it very easy to include their fixes/features and give them proper
+credit for the work.
+
+We recommend that you do all your work on Pinax in a separate branch. When you
+are ready to work on a bug or a new feature create yourself a new branch. The
+reason why this is important is you can commit as often you like. When you are
+ready you can merge in the change. Let's take a look at a common workflow::
+
+    git checkout -b task-1
+    ... do work and git commit often ...
+    git push origin task-1
+    git checkout -b task-1-ready
+    git merge --squash --no-commit task-1
+    git commit -m "Fixed #1 — added a great new feature"
+    git push origin task-1-ready
+
+The reason we have created two new branches is to stay off of ``master``.
+Keeping master clean of only upstream changes makes yours and ours lives
+easier. You can then send us a pull request for the fix/feature from the
+"ready" branch. Then we can easily review it and even take a look at the
+individual commits for why you may have done something. If we say that
+you've done something slightly wrong you can now go back to the ``task-1``
+branch and correct it. Let's see how we might do this::
+
+    git checkout -b task-1
+    ... fix and git commit often ...
+    git push
+    git branch -D task-1-ready
+    git checkout -b task-1-ready
+    git merge --squash --no-commit task-1
+    git commit -m "Fixed #1 — added a great new feature"
+    git push
+
+Send another pull request and we can review the fix.
+
+Writing commit messages
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Writing a good commit message makes it simple for us to identify what your
+commit does from a high-level. We are not too picky, but there are some basic
+guidelines we'd like to ask you to follow.
+
+::
+
+    Fixed #1 — added some feature
+
+We ask that you indicate which task you have fixed (if the commit fixes it) or
+if you are working something complex you may want or be asked to only commits
+parts::
+
+    Refs #1 — added part one of feature X
+
+As said earlier we are not too picky (some core developers may change commit
+messages before pulling in your changes), but as you get the basics down you
+make the process of getting your patch into core faster.
+
+Another critical part is that you keep the **first** line as short and sweet
+as possible. This line is important because when git shows commits and it has
+limited space or a different formatting option is used the first line becomes
+all someone might see. If you need to explain why you made this change or
+explain something in detail use this format::
+
+    Fixed #13 — added this great big feature
+    
+    You need to be driving 88 miles per hour to generate 1.21 gigawatts of
+    power to properly use this feature.
+
+.. _`GitHub`: http://github.com/pinax/pinax/tree/master
+.. _git: http://git-scm.com
