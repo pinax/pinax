@@ -12,7 +12,7 @@
     <p>You can drag this '<a href="{{ bookmarklet }}">Add to {{ SITE_NAME }} Bookmarks</a>' link to your bookmark bar to post the pages you visit!</p>
     
     <form method="POST" action="" class="uniForm">
-        <fieldset class="inlineLabels">
+        <fieldset>
             {{ bookmark_form|as_uni_form }}
             <div class="form_block">
                 <input type="submit" value="{% trans 'add bookmark' %}">
