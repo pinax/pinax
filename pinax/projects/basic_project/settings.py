@@ -136,10 +136,10 @@ INSTALLED_APPS = (
     'timezones',
     'ajax_validation',
     'uni_form',
+    'staticfiles',
     
     # internal (for now)
     'basic_profiles',
-    'staticfiles',
     'account',
     'signup_codes',
     'about',

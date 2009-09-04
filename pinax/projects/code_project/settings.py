@@ -147,10 +147,10 @@ INSTALLED_APPS = (
     'attachments',
     'django_markup',
     'django_filters',
+    'staticfiles',
     
     # internal (for now)
     'basic_profiles',
-    'staticfiles',
     'account',
     'signup_codes',
     'about',

@@ -136,10 +136,10 @@ INSTALLED_APPS = (
     'ajax_validation',
     'uni_form',
     'dbtemplates',
+    'staticfiles',
     
     # internal (for now)
     'basic_profiles',
-    'staticfiles',
     'account',
     'django.contrib.admin',
     

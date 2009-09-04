@@ -146,6 +146,7 @@ INSTALLED_APPS = (
     'django_markup',
     'attachments',
     'django_filters',
+    'staticfiles',
     
     # internal (for now)
     'basic_profiles',

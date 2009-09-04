@@ -172,11 +172,11 @@ INSTALLED_APPS = (
     'uni_form',
     'django_sorting',
     'django_markup',
+    'staticfiles',
     
     # internal (for now)
     'analytics',
     'profiles',
-    'staticfiles',
     'account',
     'signup_codes',
     'tribes',
