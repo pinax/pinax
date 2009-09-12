@@ -7,36 +7,7 @@
 {% block body %}
     <h1>{% trans "Invitations" %}</h1>
     
-    <div class="form-toggle">
-        <p><span id="join-invite-toggle">{% trans "Invite someone new to join" %}</span></p>
-        
-        <form id="join-invite" method="POST" action="">
-            <p>{% trans "If you'd like to invite someone to join Pinax, you can enter their email address and a message for them below:" %}</p>
-            <table>
-                <tr>
-                    <th>{{ join_request_form.email.label_tag }}</th>
-                    <td>
-                        {% if join_request_form.existing_users %}
-                            <ul class="errorlist">
-                                <li>{% trans "Someone with this email address has already joined:" %}
-                                    {% for other_user in join_request_form.existing_users %}
-                                    <a href="{% url profile_detail other_user %}">{{ other_user }}</a>{% endfor %}
-                                </li>
-                            </ul>
-                        {% else %}
-                            {{ join_request_form.email.errors }}
-                        {% endif %}
-                        {{ join_request_form.email }}
-                    </td>
-                </tr>
-                <tr>
-                    <th>{{ join_request_form.message.label_tag }}</th>
-                    <td>{{ join_request_form.message.errors }}{{ join_request_form.message }}</td>
-                </tr>
-                <tr><td></td><td><input type="hidden" name="action" value="invite" /><input type="submit" value="{% trans "invite" %}"/></td></tr>
-            </table>
-        </form>
-    </div>
+    <p><a href="{% url invite_to_join %}" rel="facebox">{% trans "Invite someone new to join" %}</a></p>
     
     <h2>{% trans "Friendship Requests Received" %}</h2>
     

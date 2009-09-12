@@ -1,0 +1,15 @@
+{% extends "messages/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Invite someone new to join" %}{% endblock %}
+
+{% block body %}
+
+   <h2>{% trans "Invite someone new to join" %}</h2>
+
+   <p>{% trans "If you'd like to invite someone to join Pinax, you can enter their email address and a message for them below:" %}</p>
+
+   {% include "friends_app/invite_form.html" %}
+
+{% endblock %}
