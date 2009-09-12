@@ -21,10 +21,15 @@ To summarize, Pinax gives you the ability to:
 Pinax comes with a number of built-in applications of both *Group Apps* 
 and *Group-Aware* apps detailed in this page's appendix, but its easy enough 
 to create your own. 
+
+Table of Contents
+=================
+
+.. contents:: :local:
             
             
 Writing your own group aware domain objects
-=============================================           
+-------------------------------------------           
 
 First lets make a Task application. Please keep in mind that our example, when 
 complete, can be quicklybrought into any Pinax Group-App, not just projects::
@@ -46,7 +51,9 @@ complete, can be quicklybrought into any Pinax Group-App, not just projects::
         # Some sample fields below to show individual distinction of this model
         title = models.CharField(max_length=140)
         description = models.TextField(max_length=140)        
-        creator = models.ForeignKey(User, verbose_name=_('creator'), related_name="%(class)s_created")
+        creator = models.ForeignKey(User, 
+                    verbose_name=_('creator'), 
+                    related_name="%(class)s_created")
         created = models.DateTimeField(_('created'), default=datetime.datetime.now)    
         
         # The following three fields are required for being group aware.
@@ -70,7 +77,7 @@ complete, can be quicklybrought into any Pinax Group-App, not just projects::
             return reverse("task_detail", kwargs = kwargs)
             
 forms
------
+~~~~~
     
 We don't want to display the special object_id, content_type, and group fields
 to end clients and users. So we use Django forms to control what is displayed::
@@ -110,7 +117,7 @@ to end clients and users. So we use Django forms to control what is displayed::
                 raise forms.ValidationError(_("You must be a member to create new Tasks"))
                 
 views
------
+~~~~~
 
 Just like the models and forms, we build our Task views in such a way that 
 they can handle being within or without a group::
@@ -155,7 +162,7 @@ in the group. To do this::
         is_member = group.user_is_member(request.user)
 
 URLs
-----
+~~~~
 
 The ``urls.py`` file of your app will not need anything special. Most of that
 is handled by Pinax. However, URL reversal needs to be group aware. We have
@@ -215,7 +222,7 @@ to work with no group association.
 ----
 
 Writing your own group app
-==========================
+--------------------------
 
 We will continue with the Project/Task corollary. Our group application will 
 be a Project (which contain tasks, members, and more)::
@@ -242,7 +249,7 @@ be a Project (which contain tasks, members, and more)::
             return {'group_slug': self.slug}
             
 Adding in a a group-aware project
----------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In order for a ``group-app`` to be able to display a ``group-aware`` 
 application there needs to be a bridge. We take a sample projects.urls.py::
@@ -279,23 +286,33 @@ And that lets us render a URL such as ``/projects/<my-project>/tasks``.
 
 ----
 
-Appendix - Group support
-========================
+Appendix
+--------
 
-Group support in Pinax allows you to define any type of group. Pinax comes
-bundled with two types of groups:
+Appendix A - Group Apps provided by Pinax
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Pinax comes bundled with two types of group-apps:
 
  * tribes — used in social_project
  * projects — used in code_project
 
-A group app can have any content object associated with it. Pinax includes
-several apps that are group aware:
+Appendix B - Group Aware Apps provided by Pinax
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
- * tasks
+Pinax includes several apps that are group aware:
+
  * photos
+ * tasks 
+ * topics 
  * wiki
- * topics
 
-The idea is a group aware app has the ability to work with or without a group
-association. This is done using a nullable generic foreign key. Pinax comes
-with an app to do much of the work to make this all happen.
+Appendix C - Group Apps available on Pypi
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ * pinax-dances (tutorial application)
+ 
+Appendix D - Group Aware Apps available on Pypi
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ * pinax-wall (tutorial application) 
