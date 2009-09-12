@@ -6,48 +6,27 @@ Groups Overview
 Groups in Pinax are simply container application/models that contain other 
 application/models. For example, if we had something called 'Project' it 
 might have 'Tasks' within it. The Pinax Groups system is designed to make this
-scenario easy to implement.
+scenario easy to implement. It allows you to convert a application and model 
+to become a container, henceforce called respectively a *Group App* and the 
+model is called a '*Group Model*'. It also allows you to convert an 
+application and associated models to become '*Group-Aware*', which if done
+properly makes it capable of working inside a group or as a stand-alone 
+application.
 
- * Convert a application and model to become a container, henceforce called respectively a *Group App* and the model is called a '*Group Model*'.
- * Convent an application and associated models to become '*Group-Aware*', which if done properly makes it capable of working inside a group or as a stand-alone application.
+To summarize, Pinax gives you the ability to:
 
-Pinax comes with a number of built-in groups detailed at the end of this 
-section, but its easy enough to create your own. In the appendix to this page
-you'll be a provided with a list of stock Pinax Group applications and Pinax
+ * Create a *Group App* that can hold another application that is *Group-Aware*.
+ * Create a *Group-Aware* application that can either stand-alone or be held inside a *Group App*.
 
-
-Writing your own group app
-==========================
-
-We will continue with the Project/Task corollary. Our group application will 
-be a Project (which contain tasks, members, and more)::
-
-    from django.core.urlresolvers import reverse
-    from django.contrib.auth.models import User
-    from django.db import models    
-    from django.utils.translation import ugettext_lazy as _
- 
-    from groups.base import Group
- 
-    class Project(Group):
-        """ Doesn't inherit the normal *models.Model*. Group comes with a title,
-            description, created, creator and some glue pieces and utility 
-            methods built in for convienance.
-        """
-    
-        members = models.ManyToManyField(User, related_name='basic_groups', verbose_name=_('members'))
-    
-        def get_absolute_url(self):
-            return reverse('group_detail', kwargs={'group_slug': self.slug})
-    
-        def get_url_kwargs(self):
-            return {'group_slug': self.slug}
+Pinax comes with a number of built-in applications of both *Group Apps* 
+and *Group-Aware* apps detailed in this page's appendix, but its easy enough 
+to create your own. 
             
             
 Writing your own group aware domain objects
 =============================================           
 
-Now lets make a Task application. Please keep in mind that our example, when 
+First lets make a Task application. Please keep in mind that our example, when 
 complete, can be quicklybrought into any Pinax Group-App, not just projects::
 
     import datetime
@@ -182,17 +161,16 @@ The ``urls.py`` file of your app will not need anything special. Most of that
 is handled by Pinax. However, URL reversal needs to be group aware. We have
 some helpers to help you work with this easily.
 
-Let's say you have the following ``urls.py``::
+Let's say you have the following code in ``tasks.urls.py``::
 
     from django.conf.urls.defaults import *
     
-    
     urlpatterns = patterns("",
-        url(r"^blogs/$", "blog.views.blog_list", name="blog_list"),
-        url(r"^blog/(?P<slug>[-\w]+)/$", "blog.views.blog_detail", name="blog_detail"),
+        url(r"^tasks/$", "tasks.views.task_list", name="task_list"),
+        url(r"^tasks/(?P<slug>[-\w]+)/$", "tasks.views.blog_detail", name="task_detail"),
     )
 
-To ensure URLs to ``blog_list`` are correctly generated you will need to use
+To ensure URLs to ``task_list`` are correctly generated you will need to use
 ``reverse`` located on the ``ContentBridge`` object::
 
     def some_view_with_redirect(request, bridge=None):
@@ -200,10 +178,10 @@ To ensure URLs to ``blog_list`` are correctly generated you will need to use
         return HttpResponseRedirect(bridge.reverse("blog_list", group))
 
 The ``reverse`` method work almost identical to Django's ``reverse``. It is
-essentially a wrapper. To reverse the ``blog_detail`` URL::
+essentially a wrapper. To reverse the ``taskdetail`` URL::
 
-    blog = Blog.objects.get(pk=1)
-    bridge.reverse("blog_detail", group, kwargs={"slug": blog.slug})
+    task = Task.objects.get(pk=1)
+    bridge.reverse("task_detail", group, kwargs={"slug": task.slug})
 
 .. note::
 
@@ -216,8 +194,8 @@ There are some cases when you don't have easy access to the ``ContentBridge``.
 You may only have access to a domain object instance. You can get access to
 the ``ContentBridge`` from the instance. For example::
 
-    blog = Blog.objects.get(pk=1)
-    blog.content_bridge.reverse(...)
+    task = Task.objects.get(pk=1)
+    task.content_bridge.reverse(...)
 
 URL reversal in templates
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -228,15 +206,81 @@ with our ``ContentBridge.reverse``. Here is how you might use it::
 
     {% load group_tags %}
     
-    <a href="{% groupurl blog_detail group slug=blog.slug %}">{{ blog.name }}</a>
+    <a href="{% groupurl task_detail group slug=task.slug %}">{{ task.title }}</a>
 
 The ``{% groupurl %}`` templatetag will fall back to normal Django URL reversal
 if the value of the passed in ``group`` is ``None``. This enables the ability
 to work with no group association.
 
+----
 
-Group support
-=============
+Writing your own group app
+==========================
+
+We will continue with the Project/Task corollary. Our group application will 
+be a Project (which contain tasks, members, and more)::
+
+    from django.core.urlresolvers import reverse
+    from django.contrib.auth.models import User
+    from django.db import models    
+    from django.utils.translation import ugettext_lazy as _
+ 
+    from groups.base import Group
+ 
+    class Project(Group):
+        """ Doesn't inherit the normal *models.Model*. Group comes with a title,
+            description, created, creator and some glue pieces and utility 
+            methods built in for convienance.
+        """
+    
+        members = models.ManyToManyField(User, related_name='basic_groups', verbose_name=_('members'))
+    
+        def get_absolute_url(self):
+            return reverse('group_detail', kwargs={'group_slug': self.slug})
+    
+        def get_url_kwargs(self):
+            return {'group_slug': self.slug}
+            
+Adding in a a group-aware project
+---------------------------------
+
+In order for a ``group-app`` to be able to display a ``group-aware`` 
+application there needs to be a bridge. We take a sample projects.urls.py::
+
+    # Standard urlsconf import
+    from django.conf.urls.defaults import *
+
+    # Create your normal project url views
+    urlpatterns = patterns('',
+        url(r'^add_project$', 'projects.views.add', name="project_add"),
+        url(r'^your_projects/$', 'projects.views.your_project', name="your_projects"),
+        url(r'^(?P<slug>[-\w]+)$', 'projects.views.project_detail', name="project_detail"),                
+        url(r'^$', 'projects.views.projects', name="project_list"),
+        ...
+    )
+    
+So we can render a URL such as ``/projects/<my-project>``.
+
+And then we add in the following code underneath the urlpatterns definition::
+    
+    # Pinax groups special object
+    from groups.bridge import ContentBridge
+
+    # Fetch the group-aware model
+    from tasks.models import Task
+
+    # Create the bridge object
+    bridge = ContentBridge(Task, 'tasks')
+
+    # Add in the bridged url
+    urlpatterns += bridge.include_urls('task.urls', r'^projects/(?P<group_slug>[-\w]+)/tasks')
+
+And that lets us render a URL such as ``/projects/<my-project>/tasks``.
+
+----
+
+Appendix - Group support
+========================
 
 Group support in Pinax allows you to define any type of group. Pinax comes
 bundled with two types of groups:
