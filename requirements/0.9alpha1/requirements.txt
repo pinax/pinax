@@ -1,0 +1,77 @@
+# Get all requirements formerly known as "external_libs" explicitly
+--requirement=libs.txt
+--find-links=http://pypi.pinaxproject.com
+--find-links=http://pypi2.pinaxproject.com
+
+docutils==0.5
+
+# vobject depends on dateutil. it requires >=1.1. OS X ships with 1.2 with
+# Python 2.5 and requiring anything newer will break for --development. this
+# is not an issue for the released tarball
+python-dateutil>=1.1
+
+gdata==1.3.3
+Pygments==1.0
+python-openid==2.2.4
+python-twitter==0.6
+python-yadis==1.1.0
+pytz==2009l
+simplejson==2.0.9
+textile==2.1.3
+vobject==0.8.1c
+BeautifulSoup==3.0.7a
+Django==1.0.3
+Markdown==2.0.1
+ybrowserauth==1.2
+geopy==0.93dev-r0
+diff-match-patch==20090804
+django-atomformat==0.1.0dev
+creole==1.0.1
+
+# Python 2.4
+# pysqlite
+# hashlib
+# elementtree==1.2.7-20070827-preview
+
+# Already released apps
+django-ajax-validation==0.1.3
+django-announcements==0.1.0
+django-avatar==1.0.2
+django-dbtemplates==0.5.8
+django-notification==0.1.4
+django-pagination==1.0.5.1
+django-robots==0.6.1
+django-messages==0.4.2
+django-threadedcomments==0.5.1
+django-extensions==0.4.1
+django-uni-form==0.6.0
+django-timezones==0.1.4
+django-bookmarks==0.1.0
+django-email-confirmation==0.1.3
+django-gravatar==0.1.0
+django-mailer==0.1.0
+django-friends==0.1.4
+django-locations==0.1.1
+django-oembed==0.1.0
+django-swaps==0.5.3
+django-flag==0.1.1
+django-debug-toolbar==0.7.0
+django-db-log==1.0.1
+django-attachments==0.3
+django-markup==0.3
+django-microblogging==0.1.2
+django-wikiapp==0.2.0
+sorl==3.1
+django-generic-flatblocks==0.3.0
+django-frontendadmin==0.4
+django-filter==0.5.1
+django-photologue==2.3
+django-tagging==0.3
+
+# packages we create ourselves for release:
+django-voting==0.1_pre
+django-openid==0.2.0
+django-sorting>=0.1
+template_utils==0.4p2
+django-staticfiles==0.1.2
+django-debug-toolbar==0.8.0
