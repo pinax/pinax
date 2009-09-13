@@ -10,7 +10,7 @@ import pinax
 from optparse import make_option
 from django.core.management.base import BaseCommand, CommandError
 
-EXCLUDED_PATTERNS = ('.svn',)
+EXCLUDED_PATTERNS = ('.svn','.pyc',)
 DEFAULT_PINAX_ROOT = None # fallback to the normal PINAX_ROOT in settings.py.
 PINAX_ROOT_RE = re.compile(r'PINAX_ROOT\s*=.*$', re.M)
 SECRET_KEY_RE = re.compile(r'SECRET_KEY\s*=.*$', re.M)
