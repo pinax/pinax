@@ -1,0 +1,94 @@
+This covers installation from a release bundle. For information on installing
+a development version, see http://pinaxproject.com/docs/dev/contributing.html.
+
+The release bundle has almost everything you need to get Pinax up and running.
+The only things not included are Python itself, the Python Imaging Library
+(PIL) and a database such as SQLite (which is included in Python 2.5+).
+
+For more information on installing PIL, see
+http://pinaxproject.com/docs/0.7/pil.html.
+
+If you are on Mac OS X, make sure you have the Apple developer tools installed
+before proceeding with Pinax installation.
+
+
+Installing Pinax
+================
+
+Pinax makes use of Python virtual environments (or virtualenvs) to isolate
+the various packages it uses from the rest of your system. Pinax comes with a
+script that will create the virtualenv for you and install Django and the
+various applications and libraries that make up Pinax.
+
+To run this script, extract the release bundle, cd into it and run::
+
+    $ python scripts/pinax-boot.py <path-to-virtual-env-to-create>
+
+This will set up the virtualenv and install everything.
+
+For example, if you wanted to create your environment in a directory parallel
+to where you extracted the bundle you could run::
+
+    $ python scripts/pinax-boot.py ../pinax-env
+
+If you use virtualenvwrapper (which we recommend), this would become::
+
+    $ python scripts/pinax-boot.py $WORKON_HOME/pinax-env
+
+
+Activating the virtualenv
+=========================
+
+Any time you work on a project involving Pinax, you will want to activate
+the virtualenv.
+
+This is done with::
+
+    $ source <path-to-virtual-env-created>/bin/activate
+
+or, in our example above using ../pinax-env::
+
+    $ source ../pinax-env/bin/activate
+
+On Windows you would run::
+
+    $ ..\pinax-env\Scripts\activate.bat
+
+With virtualenvwrapper, this becomes::
+
+    $ workon pinax-env
+
+which you can run from anywhere on your filesystem.
+
+Note that you will develop your Pinax-based project in a directory outside
+your virtualenv. As long as the virtualenv is active, your project will have
+access to all of the apps and libraries Pinax provides.
+
+
+Starting a new Pinax project
+============================
+
+The recommended way to start a new Pinax-based project is to clone one of the
+existing projects. This is done via the ``pinax-admin clone_project``
+command which you can run once you are in your Pinax virtual-env.
+
+You can get a list of available projects with::
+
+    (pinax-env)$ pinax-admin clone_project -l
+
+This will show you a list of projects that you can base your new project on.
+
+Just as quick demonstration, let's start with the social_project. cd into the
+directory you'd like to create your new project in and run::
+
+    (pinax-env)$ pinax-admin clone_project social_project mysite
+
+This will create a new Pinax project called 'mysite' in your current working
+directory. Lastly, let's get it running::
+
+    (pinax-env)$ cd mysite/
+    (pinax-env)$ python manage.py syncdb
+    (pinax-env)$ python manage.py runserver
+
+Point your browser at http://localhost:8000/ and you should see the Pinax
+default homepage!
