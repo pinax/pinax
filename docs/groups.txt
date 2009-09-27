@@ -3,14 +3,14 @@
 Groups Overview
 ===============
 
-Groups in Pinax are simply container application/models that contain other 
-application/models. For example, if we had something called 'Project' it 
+Groups in Pinax are simply container application/models that contain other
+application/models. For example, if we had something called 'Project' it
 might have 'Tasks' within it. The Pinax Groups system is designed to make this
-scenario easy to implement. It allows you to convert a application and model 
-to become a container, henceforce called respectively a *Group App* and the 
-model is called a '*Group Model*'. It also allows you to convert an 
+scenario easy to implement. It allows you to convert an application and model 
+to become a container, henceforce called respectively a *Group App* and the
+model is called a '*Group Model*'. It also allows you to convert an
 application and associated models to become '*Group-Aware*', which if done
-properly makes it capable of working inside a group or as a stand-alone 
+properly makes it capable of working inside a group or as a stand-alone
 application.
 
 To summarize, Pinax gives you the ability to:
@@ -18,101 +18,102 @@ To summarize, Pinax gives you the ability to:
  * Create a *Group App* that can hold another application that is *Group-Aware*.
  * Create a *Group-Aware* application that can either stand-alone or be held inside a *Group App*.
 
-Pinax comes with a number of built-in applications of both *Group Apps* 
-and *Group-Aware* apps detailed in this page's appendix, but its easy enough 
-to create your own. 
+Pinax comes with a number of built-in applications of both *Group Apps*
+and *Group-Aware* apps detailed in this page's appendix, but its easy enough
+to create your own.
 
-            
-            
 Writing your own group aware domain objects
--------------------------------------------           
+-------------------------------------------
 
-First lets make a Task application. Please keep in mind that our example, when 
+First lets make a Task application. Please keep in mind that our example, when
 complete, can be quicklybrought into any Pinax Group-App, not just projects::
 
     import datetime
-
+    
     from django.contrib.auth.models import User
     from django.contrib.contenttypes import generic
     from django.contrib.contenttypes.models import ContentType
     from django.db import models    
     from django.utils.translation import ugettext_lazy as _
-
+    
+    
     class Task(models.Model):
-        """ We don't use anything Pinax specific in this model. In fact, we 
-            make a point with the *get_absolute_url* method of making it able
-            to handle being in a group or as a stand-alone Django application.
         """
-
+        We don't use anything Pinax specific in this model. In fact, we
+        make a point with the *get_absolute_url* method of making it able
+        to handle being in a group or as a stand-alone Django application.
+        """
+        
         # Some sample fields below to show individual distinction of this model
         title = models.CharField(max_length=140)
-        description = models.TextField(max_length=140)        
-        creator = models.ForeignKey(User, 
+        description = models.TextField(max_length=140)
+        creator = models.ForeignKey(User,
                     verbose_name=_('creator'), 
                     related_name="%(class)s_created")
-        created = models.DateTimeField(_('created'), default=datetime.datetime.now)    
+        created = models.DateTimeField(_('created'), default=datetime.datetime.now)
         
         # The following three fields are required for being group aware.
-        # We use a nullable generic foreign key to enable it to be optional 
-        # and we don't know what group model it will point to.        
+        # We use a nullable generic foreign key to enable it to be optional
+        # and we don't know what group model it will point to.
         object_id = models.IntegerField(null=True)
         content_type = models.ForeignKey(ContentType, null=True)
-        group = generic.GenericForeignKey("object_id", "content_type")           
-                
+        group = generic.GenericForeignKey("object_id", "content_type")
+        
         def __unicode__(self):
-            return self.title       
-
-        # permalink/get_absolute_url
-        @models.permalink
-        def get_absolute_url(self, group = None):
+            return self.title
+        
+        def get_absolute_url(self, group=None):
             kwargs = {"id": self.id}
             # We check for attachment of a group. This way if the Task object
             # is not attached to the group the application continues to function.
             if group:
                 return group.content_bridge.reverse("task_detail", group, kwargs)
-            return reverse("task_detail", kwargs = kwargs)
-            
-forms
+            return reverse("task_detail", kwargs=kwargs)
+
+Forms
 ~~~~~
-    
+
 We don't want to display the special object_id, content_type, and group fields
 to end clients and users. So we use Django forms to control what is displayed::
 
     from django import forms
     from django.utils.translation import ugettext as _
-
+    
     from tasks.models import Task
-
+    
+    
     class TaskForm(forms.ModelForm):
-        """ Our Task form is just like the Task model in that it can work with
-            groups or independantly.
+        """
+        Our Task form is just like the Task model in that it can work with
+        groups or independantly.
         """
         
         def __init__(self, user, group=None, *args, **kwargs):
             self.user = user
             self.group = group
             super(TaskForm, self).__init__(*args, **kwargs)
-    
-        def save(self, commit = True):
+        
+        def save(self, commit=True):
             return super(TaskForm, self).save(commit)
-    
+        
         class Meta:
             model = Task
             fields = ('title', 'description') # only display 2 fields
-    
+        
         def clean(self):
             self.check_group_membership()
             return self.cleaned_data
-    
+        
         def check_group_membership(self):
-            """ We only let valid group members add new tasks. If the Task is
-                *not* attached to a group then it ignores this step.
+            """
+            We only let valid group members add new tasks. If the Task is
+            *not* attached to a group then it ignores this step.
             """
             group = self.group
             if group and not self.group.user_is_member(self.user):
                 raise forms.ValidationError(_("You must be a member to create new Tasks"))
-                
-views
+
+Views
 ~~~~~
 
 Just like the models and forms, we build our Task views in such a way that 
@@ -124,6 +125,7 @@ they can handle being within or without a group::
     from django.core.exceptions import ObjectDoesNotExist
     
     from tasks.models import Task
+    
     
     def task_list(request, group_slug=None, bridge=None):
         
@@ -143,7 +145,7 @@ they can handle being within or without a group::
             tasks = group.content_objects(Task)
         else:
             tasks = Task.objects.all()
-
+        
         # Is the user a member of the parent group?
         if not request.user.is_authenticated():
             is_member = False
@@ -225,8 +227,6 @@ The ``{% groupurl %}`` templatetag will fall back to normal Django URL reversal
 if the value of the passed in ``group`` is ``None``. This enables the ability
 to work with no group association.
 
-----
-
 Writing your own group app
 --------------------------
 
@@ -237,23 +237,25 @@ be a Project (which contain tasks, members, and more)::
     from django.contrib.auth.models import User
     from django.db import models    
     from django.utils.translation import ugettext_lazy as _
- 
+    
     from groups.base import Group
- 
+    
+    
     class Project(Group):
-        """ Doesn't inherit the normal *models.Model*. Group comes with a title,
-            description, created, creator and some glue pieces and utility 
-            methods built in for convienance.
         """
-    
-        members = models.ManyToManyField(User, related_name='basic_groups', verbose_name=_('members'))
-    
+        Doesn't inherit the normal *models.Model*. Group comes with a title,
+        description, created, creator and some glue pieces and utility 
+        methods built in for convenience.
+        """
+        
+        members = models.ManyToManyField(User, related_name='projects', verbose_name=_('members'))
+        
         def get_absolute_url(self):
             return reverse('group_detail', kwargs={'group_slug': self.slug})
-    
+        
         def get_url_kwargs(self):
             return {'group_slug': self.slug}
-            
+
 Adding in a a group-aware project
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -262,7 +264,8 @@ application there needs to be a bridge. We take a sample projects.urls.py::
 
     # Standard urlsconf import
     from django.conf.urls.defaults import *
-
+    
+    
     # Create your normal project url views
     urlpatterns = patterns('',
         url(r'^add_project$', 'projects.views.add', name="project_add"),
@@ -278,19 +281,18 @@ And then we add in the following code underneath the urlpatterns definition::
     
     # Pinax groups special object
     from groups.bridge import ContentBridge
-
+    
     # Fetch the group-aware model
     from tasks.models import Task
-
+    
+    
     # Create the bridge object
     bridge = ContentBridge(Task, 'tasks')
-
+    
     # Add in the bridged url
     urlpatterns += bridge.include_urls('task.urls', r'^projects/(?P<group_slug>[-\w]+)/tasks')
 
 And that lets us render a URL such as ``/projects/<my-project>/tasks``.
-
-----
 
 Appendix
 --------
@@ -309,16 +311,16 @@ Appendix B - Group Aware Apps provided by Pinax
 Pinax includes several apps that are group aware:
 
  * photos
- * tasks 
- * topics 
+ * tasks
+ * topics
  * wiki
 
-Appendix C - Group Apps available on Pypi
+Appendix C - Group Apps available on PyPI
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
  * pinax-dances (tutorial application)
- 
-Appendix D - Group Aware Apps available on Pypi
+
+Appendix D - Group Aware Apps available on PyPI
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
- * pinax-wall (tutorial application) 
+ * pinax-wall (tutorial application)
