@@ -76,7 +76,7 @@ def new(request, form_class=BlogForm, template_name="blog/new.html"):
             if blog_form.is_valid():
                 blog = blog_form.save(commit=False)
                 blog.author = request.user
-                if settings.BEHIND_PROXY:
+                if getattr(settings, 'BEHIND_PROXY', False):
                     blog.creator_ip = request.META["HTTP_X_FORWARDED_FOR"]
                 else:
                     blog.creator_ip = request.META['REMOTE_ADDR']
