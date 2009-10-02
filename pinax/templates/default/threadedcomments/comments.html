@@ -37,17 +37,18 @@
 {% paginate %}
 
 {% if user.is_authenticated %}
-    <form class="uniForm" method="POST" action="{% get_comment_url object %}">
-        <fieldset class="inlineLabels">
-            <div class="ctrlHolder">
-                <textarea id="id_comment" rows="10" cols="40" name="comment"></textarea>
-            </div>
-            <div class="form_block">
-                <input type="hidden" name="next" value="{{ request.path }}" />
-                <input type="submit" value="{% trans "Post Response" %}" />
-            </div>
-        </fieldset>
-    </form>
+    <fieldset class="inlineLabels">
+        <form class="uniForm" method="POST" action="{% get_comment_url object %}">
+                <div class="ctrlHolder">
+                    <label for="id_comment">Comment</label>                    
+                    <textarea id="id_comment" rows="10" cols="40" name="comment"></textarea>
+                </div>
+                <div class="form_block">
+                    <input type="hidden" name="next" value="{{ request.path }}" />
+                    <input type="submit" value="{% trans "Post Response" %}" />
+                </div>
+        </form>
+    </fieldset>    
 {% else %}
     <h3>Please <a href="{% url acct_login %}">Login</a> (or <a href="{% url acct_signup %}">Sign Up</a>) to leave a comment</h3>
 {% endif %}
