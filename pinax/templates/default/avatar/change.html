@@ -24,11 +24,13 @@
         {% url avatar_delete as avatar_delete_url %}
         <p>{% blocktrans %}Don&rsquo;t like these avatars? You can <a href="{{ avatar_delete_url }}">choose which ones to delete</a>.{% endblocktrans %}</p>
     {% endif %}
-    <h3>{% trans "Upload an Avatar:" %}</h3>
+    <p>
     <form enctype="multipart/form-data" method="POST" action="">
+        <label for="avatar">{% trans "Upload an Avatar:" %}</label>
         <input type="file" name="avatar" value="{% trans "Avatar Image" %}" />
         <input type="submit" value="{% trans "Upload New Image" %}" />
     </form>
+    </p>  
 {% endblock %}
 
 {% block extra_body %}
