@@ -698,11 +698,21 @@ def install_python(home_dir, lib_dir, inc_dir, bin_dir, site_packages, clear):
             raise
 
         # Some tools depend on pythonX.Y being present
-        pth = py_executable + '%s.%s' % (
-                sys.version_info[0], sys.version_info[1])
-        if os.path.exists(pth):
-            os.unlink(pth)
-        os.symlink('python', pth)
+        py_executable_version = '%s.%s' % (
+            sys.version_info[0], sys.version_info[1])
+        if not py_executable.endswith(py_executable_version):
+            # symlinking pythonX.Y > python
+            pth = py_executable + '%s.%s' % (
+                    sys.version_info[0], sys.version_info[1])
+            if os.path.exists(pth):
+                os.unlink(pth)
+            os.symlink('python', pth)
+        else:
+            # reverse symlinking python -> pythonX.Y (with --python)
+            pth = join(bin_dir, 'python')
+            if os.path.exists(pth):
+                os.unlink(pth)
+            os.symlink(os.path.basename(py_executable), pth)
 
     if sys.platform == 'win32' and ' ' in py_executable:
         # There's a bug with subprocess on Windows when using a first
@@ -826,7 +836,7 @@ def fixup_scripts(home_dir):
         if not lines:
             logger.warn('Script %s is an empty file' % filename)
             continue
-        if lines[0].strip() != shebang:
+        if not lines[0].strip().startswith(shebang):
             if os.path.basename(filename) in OK_ABS_SCRIPTS:
                 logger.debug('Cannot make script %s relative' % filename)
             elif lines[0].strip() == new_shebang:
@@ -1005,12 +1015,12 @@ PINAX_PYPI_MIRRORS = [
 PINAX_MUST_HAVES = {
     'setuptools-git': ('0.3.4', 'setuptools_git-0.3.4.tar.gz'),
     'setuptools-dummy': ('0.0.3', 'setuptools_dummy-0.0.3.tar.gz'),
-    'Django': ('1.0.3', 'Django-1.0.3.tar.gz'),
+    'Django': ('1.0.4', 'Django-1.0.4.tar.gz'),
     'pip': ('0.4.1dev', 'pip-0.4.1dev.tar.gz'),
 }
 
 DJANGO_VERSIONS = (
-    '1.0.3',
+    '1.0.4',
 #    '1.1',
 )
 
@@ -1104,7 +1114,7 @@ def extend_parser(parser):
         help="Setup development environment")
     parser.add_option("--django-version",
         metavar="DJANGO_VERSION", dest="django_version", default=None,
-        help="The version of Django to be installed, e.g. --django-version=1.0.3 will install Django 1.0.3. The default is 1.0.3.")
+        help="The version of Django to be installed, e.g. --django-version=1.0.4 will install Django 1.0.4. The default is 1.0.4.")
 
 def adjust_options(options, args):
     """

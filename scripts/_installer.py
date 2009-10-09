@@ -10,12 +10,12 @@ PINAX_PYPI_MIRRORS = [
 PINAX_MUST_HAVES = {
     'setuptools-git': ('0.3.4', 'setuptools_git-0.3.4.tar.gz'),
     'setuptools-dummy': ('0.0.3', 'setuptools_dummy-0.0.3.tar.gz'),
-    'Django': ('1.0.3', 'Django-1.0.3.tar.gz'),
+    'Django': ('1.0.4', 'Django-1.0.4.tar.gz'),
     'pip': ('0.4.1dev', 'pip-0.4.1dev.tar.gz'),
 }
 
 DJANGO_VERSIONS = (
-    '1.0.3',
+    '1.0.4',
 #    '1.1',
 )
 
@@ -109,7 +109,7 @@ def extend_parser(parser):
         help="Setup development environment")
     parser.add_option("--django-version",
         metavar="DJANGO_VERSION", dest="django_version", default=None,
-        help="The version of Django to be installed, e.g. --django-version=1.0.3 will install Django 1.0.3. The default is 1.0.3.")
+        help="The version of Django to be installed, e.g. --django-version=1.0.4 will install Django 1.0.4. The default is 1.0.4.")
 
 def adjust_options(options, args):
     """
