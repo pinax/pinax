@@ -172,20 +172,6 @@ class OpenIDSignupForm(forms.Form):
         except User.DoesNotExist:
             return self.cleaned_data["username"]
         raise forms.ValidationError(u"This username is already taken. Please choose another.")
-    
-    def save(self):
-        username = self.cleaned_data["username"]
-        email = self.cleaned_data["email"]
-        new_user = User.objects.create_user(username, "", "!")
-        
-        if email:
-            new_user.message_set.create(message="Confirmation email sent to %s" % email)
-            EmailAddress.objects.add_email(new_user, email)
-        
-        if self.openid:
-            # Associate openid with the new account.
-            new_user.openids.create(openid = self.openid)
-        return new_user
 
 
 class UserForm(forms.Form):
