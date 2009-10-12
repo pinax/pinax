@@ -29,7 +29,7 @@ class RegistrationFormOpenID(forms.Form):
     def save(self):
         username = self.cleaned_data["username"]
         email = self.cleaned_data["email"]
-        new_user = User.objects.create_user(username, "", "!")
+        new_user = User.objects.create_user(username, "")
         
         if email:
             new_user.message_set.create(message="Confirmation email sent to %s" % email)
