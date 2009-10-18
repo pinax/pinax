@@ -88,7 +88,19 @@ directory you'd like to create your new project in and run::
     (pinax-env)$ pinax-admin clone_project social_project mysite
 
 This will create a new Pinax project called 'mysite' in your current working
-directory. Lastly, let's get it running::
+directory.
+
+.. note::
+
+    We recommend you don't clone projects into the ``pinax-env`` (the virtual
+    environment) directory. This directory is best left for only the
+    environment isolated away from your project. This enables you to:
+
+    * version your project separately from your Pinax environment
+    * blow away / upgrade your Pinax environment / try different Pinax versions,
+      etc without affecting your project
+
+Lastly, let's get it running::
 
     (pinax-env)$ cd mysite/
     (pinax-env)$ python manage.py syncdb
