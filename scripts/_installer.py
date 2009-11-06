@@ -11,7 +11,7 @@ PINAX_MUST_HAVES = {
     'setuptools-git': ('0.3.4', 'setuptools_git-0.3.4.tar.gz'),
     'setuptools-dummy': ('0.0.3', 'setuptools_dummy-0.0.3.tar.gz'),
     'Django': ('1.0.4', 'Django-1.0.4.tar.gz'),
-    'pip': ('0.4.1dev', 'pip-0.4.1dev.tar.gz'),
+    'pip': ('0.5.2dev', 'pip-0.5.2dev.tar.gz'),
 }
 
 DJANGO_VERSIONS = (
