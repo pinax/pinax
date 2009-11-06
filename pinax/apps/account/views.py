@@ -23,11 +23,11 @@ if association_model is not None:
 
 def login(request, form_class=LoginForm, template_name="account/login.html",
           success_url=None, associate_openid=False, openid_success_url=None,
-          url_required=False, extra_context=None):
+          url_required=False, extra_context=None, redirect_field_name="next"):
     if extra_context is None:
         extra_context = {}
     if success_url is None:
-        success_url = get_default_redirect(request)
+        success_url = get_default_redirect(request, redirect_field_name)
     if request.method == "POST" and not url_required:
         form = form_class(request.POST)
         if form.login(request):
@@ -43,6 +43,8 @@ def login(request, form_class=LoginForm, template_name="account/login.html",
     ctx = {
         "form": form,
         "url_required": url_required,
+        "redirect_field_name": redirect_field_name,
+        "redirect_field_value": request.GET.get(redirect_field_name),
     }
     ctx.update(extra_context)
     return render_to_response(template_name, ctx,
