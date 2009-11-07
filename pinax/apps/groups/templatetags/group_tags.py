@@ -64,6 +64,30 @@ class ContentObjectsNode(template.Node):
         return ""
 
 
+class ObjectGroupUrlNode(template.Node):
+    def __init__(self, obj, group, asvar):
+        self.obj_var = template.Variable(obj)
+        self.group = group
+        self.asvar = asvar
+    
+    def render(self, context):
+        url = ""
+        obj = self.obj_var.resolve(context)
+        group = self.group.resolve(context)
+        
+        try:
+            url = obj.get_absolute_url(group)
+        except NoReverseMatch:
+            if self.asvar is None:
+                raise
+        
+        if self.asvar:
+            context[self.asvar] = url
+            return ""
+        else:
+            return url
+
+
 @register.tag
 def groupurl(parser, token):
     bits = token.contents.split()
@@ -105,3 +129,33 @@ def content_objects(parser, token):
     if len(bits) != 5:
         raise template.TemplateSyntaxError("'%s' requires five arguments." % bits[0])
     return ContentObjectsNode(bits[1], bits[2], bits[4])
+
+
+@register.tag
+def object_group_url(parer, token):
+    """
+    given an object and an optional group, call get_absolute_url passing the
+    group variable::
+    
+        {% object_group_url task group %}
+    """
+    bits = token.contents.split()
+    tag_name = bits[0]
+    if len(bits) < 3:
+        raise template.TemplateSyntaxError("'%s' takes at least two arguments"
+            " (object and a group)" % tag_name)
+    
+    obj = bits[1]
+    group = parser.compile_filter(bits[2])
+    
+    if len(bits) > 3:
+        if bits[3] != "as":
+            raise template.TemplateSyntaxError("'%s' requires the forth"
+                " argument to be 'as'" % tag_name)
+        try:
+            asvar = bits[4]
+        except IndexError:
+            raise template.TemplateSyntaxError("'%s' requires an argument"
+                " after 'as'" % tag_name)
+    
+    return ObjectGroupUrlNode(obj, group, asvar)
