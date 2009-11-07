@@ -132,7 +132,7 @@ def content_objects(parser, token):
 
 
 @register.tag
-def object_group_url(parer, token):
+def object_group_url(parser, token):
     """
     given an object and an optional group, call get_absolute_url passing the
     group variable::
