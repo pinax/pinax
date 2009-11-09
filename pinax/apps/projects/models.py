@@ -21,7 +21,7 @@ class Project(Group):
         return self.member_users.all()
     
     def user_is_member(self, user):
-         # @@@ is there a better way?
+         # @@@ use exists() when we're on 1.2
          return ProjectMember.objects.filter(project=self, user=user).count() > 0
     
     def get_url_kwargs(self):
