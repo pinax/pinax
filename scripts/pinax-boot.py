@@ -7,6 +7,7 @@
 import sys
 import os
 import optparse
+import re
 import shutil
 import logging
 import distutils.sysconfig
@@ -274,15 +275,7 @@ def _install_req(py_executable, unzip=False, distribute=False):
         except ImportError:
             pass
 
-    search_dirs = ['.', os.path.dirname(__file__), join(os.path.dirname(__file__), 'virtualenv_support')]
-    if os.path.splitext(os.path.dirname(__file__))[0] != 'virtualenv':
-        # Probably some boot script; just in case virtualenv is installed...
-        try:
-            import virtualenv
-        except ImportError:
-            pass
-        else:
-            search_dirs.append(os.path.join(os.path.dirname(virtualenv.__file__), 'virtualenv_support'))
+    search_dirs = file_search_dirs()
 
     if setup_fn is not None:
         setup_fn = _find_file(setup_fn, search_dirs)
@@ -350,11 +343,50 @@ def _install_req(py_executable, unzip=False, distribute=False):
         if is_jython and os._name == 'nt':
             os.remove(ez_setup)
 
+def file_search_dirs():
+    here = os.path.dirname(os.path.abspath(__file__))
+    dirs = ['.', here,
+            join(here, 'virtualenv_support')]
+    if os.path.splitext(os.path.dirname(__file__))[0] != 'virtualenv':
+        # Probably some boot script; just in case virtualenv is installed...
+        try:
+            import virtualenv
+        except ImportError:
+            pass
+        else:
+            dirs.append(os.path.join(os.path.dirname(virtualenv.__file__), 'virtualenv_support'))
+    return dirs
+
 def install_setuptools(py_executable, unzip=False):
     _install_req(py_executable, unzip)
 
 def install_distribute(py_executable, unzip=False):
     _install_req(py_executable, unzip, distribute=True)
+
+_pip_re = re.compile(r'^pip-.*(zip|tar.gz|tar.bz2|tgz|tbz)$', re.I)
+def install_pip(py_executable):
+    filenames = []
+    for dir in file_search_dirs():
+        filenames.extend([join(dir, fn) for fn in os.listdir(dir)
+                          if _pip_re.search(fn)])
+    filenames.sort(key=lambda x: os.path.basename(x).lower())
+    if not filenames:
+        filename = 'pip'
+    else:
+        filename = filenames[-1]
+    cmd = [py_executable, join(os.path.dirname(py_executable), 'easy_install'), filename]
+    if filename == 'pip':
+        logger.info('Installing pip from network...')
+    else:
+        logger.info('Installing %s' % os.path.basename(filename))
+    logger.indent += 2
+    def _filter_setup(line):
+        return filter_ez_setup(line, 'pip')
+    try:
+        call_subprocess(cmd, show_stdout=False,
+                        filter_stdout=_filter_setup)
+    finally:
+        logger.indent -= 2
 
 def filter_ez_setup(line, project_name='setuptools'):
     if not line.strip():
@@ -377,7 +409,7 @@ def filter_ez_setup(line, project_name='setuptools'):
 
 def main():
     parser = optparse.OptionParser(
-        version="1.4",
+        version="1.4.1",
         usage="%prog [OPTIONS] DEST_DIR")
 
     parser.add_option(
@@ -581,6 +613,8 @@ def create_environment(home_dir, site_packages=True, clear=False,
         install_distribute(py_executable, unzip=unzip_setuptools)
     else:
         install_setuptools(py_executable, unzip=unzip_setuptools)
+
+    install_pip(py_executable)
 
     install_activate(home_dir, bin_dir)
 
@@ -1090,7 +1124,6 @@ PINAX_MUST_HAVES = {
     'setuptools-git': ('0.3.4', 'setuptools_git-0.3.4.tar.gz'),
     'setuptools-dummy': ('0.0.3', 'setuptools_dummy-0.0.3.tar.gz'),
     'Django': ('1.0.4', 'Django-1.0.4.tar.gz'),
-    'pip': ('0.5.2dev', 'pip-0.5.2dev.tar.gz'),
 }
 
 DJANGO_VERSIONS = (
@@ -1101,12 +1134,10 @@ DJANGO_VERSIONS = (
 if sys.platform == 'win32':
     GIT_CMD = 'git.cmd'
     PIP_CMD = 'pip.exe'
-    EASY_INSTALL_CMD = 'easy_install.exe'
     extra = {'shell': True}
 else:
     GIT_CMD = 'git'
     PIP_CMD = 'pip'
-    EASY_INSTALL_CMD = 'easy_install'
     extra = {}
 
 # Bailing if "~/.pydistutils.cfg" exists
@@ -1218,30 +1249,8 @@ def install_base(parent_dir, bin_dir, requirements_dir, packages):
     find_links = []
     for mirror in PINAX_PYPI_MIRRORS:
         find_links.extend(['--find-links', mirror])
-    
-    # we have to special case pip here and install it with easy_install
-    # because in most cases the user installed pip with easy_install which if
-    # we installed it another way won't work.
-    easy_install = resolve_command(EASY_INSTALL_CMD, bin_dir)
-    pip_package = packages.pop("pip")
-    version, filename = pip_package
-    src = join(requirements_dir, 'base', filename)
-    if not os.path.exists(src):
-        # get it from the PyPI
-        src = 'pip==%s' % version
-    logger.notify('Installing pip %s' % version)
-    call_subprocess([
-        easy_install,
-        '--quiet',
-        '--always-copy',
-        '--always-unzip',
-    ] + find_links + [
-        src,
-    ], filter_stdout=filter_lines, show_stdout=False)
-    
     # resolve path to the freshly installed pip
     pip = resolve_command(PIP_CMD, bin_dir)
-    
     for pkg in packages:
         version, filename = packages[pkg]
         src = join(requirements_dir, 'base', filename)
@@ -1258,7 +1267,6 @@ def install_base(parent_dir, bin_dir, requirements_dir, packages):
         ] + find_links + [
             src,
         ], filter_stdout=filter_lines, show_stdout=False)
-    
     return pip
 
 def after_install(options, home_dir):
