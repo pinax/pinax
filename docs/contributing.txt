@@ -59,6 +59,30 @@ Finally, you need to install the dependencies for the development version::
 
     pip install --no-deps --requirement requirements/external_apps.txt
 
+Staying up-to-date
+------------------
+
+The development version of Pinax is always being updated. You'll want to make
+sure you keep up. Your clone of Pinax can easily stay in-sync using git. You
+will need to setup a git remote to pull in changes from upstream Pinax::
+
+    git remote add upstream git://github.com/pinax/pinax.git
+
+Now you will be able to merge in changes that are made upstream::
+
+    git fetch upstream
+    git merge upstream/master
+
+The above will pulling all changes upstream and merge them with your current
+branch. This can be simplified::
+
+    git pull upstream master
+
+To keep your virtual environment in-sync you will need to use pip (make sure
+you are **inside** your virtual environment)::
+
+    pip install --no-deps --upgrade --requirement requirements/external_apps.txt
+
 Committing code
 ---------------
 
