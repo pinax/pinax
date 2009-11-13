@@ -1,7 +1,9 @@
 # Django settings for stati_project project.
 
 import os.path
+import pinax
 
+PINAX_ROOT = os.path.abspath(os.path.dirname(pinax.__file__))
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
 DEBUG = True
