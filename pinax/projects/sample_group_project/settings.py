@@ -139,6 +139,7 @@ INSTALLED_APPS = (
     'mailer',
     'announcements',
     'pagination',
+    'groups',
     'timezones',
     'ajax_validation',
     'tagging',
@@ -164,7 +165,6 @@ INSTALLED_APPS = (
     'tag_app',
     'tagging_utils',
     'threadedcomments_extras',
-    'groups',
     
     'topics',
     'tasks',

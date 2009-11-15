@@ -157,7 +157,8 @@ INSTALLED_APPS = (
     'oembed',
     'djangodblog',
     'pagination',
-#    'gravatar',
+    'groups',
+    # 'gravatar',
     'threadedcomments',
     'threadedcomments_extras',
     'wiki',
@@ -189,7 +190,6 @@ INSTALLED_APPS = (
     'photos',
     'tag_app',
     'topics',
-    'groups',
     
     'django.contrib.admin',
 
