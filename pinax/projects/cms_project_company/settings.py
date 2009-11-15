@@ -124,6 +124,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 INSTALLED_APPS = (
     # included
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -147,7 +148,6 @@ INSTALLED_APPS = (
     # internal (for now)
     'basic_profiles',
     'account',
-    'django.contrib.admin',
     
     # project specific
     'sorl.thumbnail',

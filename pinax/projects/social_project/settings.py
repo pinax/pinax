@@ -136,6 +136,7 @@ COMBINED_INBOX_COUNT_SOURCES = (
 
 INSTALLED_APPS = (
     # included
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -190,9 +191,6 @@ INSTALLED_APPS = (
     'photos',
     'tag_app',
     'topics',
-    
-    'django.contrib.admin',
-
 )
 
 ABSOLUTE_URL_OVERRIDES = {

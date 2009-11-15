@@ -125,6 +125,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 INSTALLED_APPS = (
     # included
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -173,8 +174,6 @@ INSTALLED_APPS = (
     'basic_groups',
     
     'about',
-    
-    'django.contrib.admin',
 )
 
 ABSOLUTE_URL_OVERRIDES = {
