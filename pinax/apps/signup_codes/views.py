@@ -13,8 +13,40 @@ from signup_codes.models import check_signup_code
 from signup_codes.forms import SignupForm, InviteUserForm
 
 
-def signup(request, form_class=SignupForm,
-        template_name="account/signup.html", success_url=None):
+def group_and_bridge(kwargs):
+    """
+    Given kwargs from the view (with view specific keys popped) pull out the
+    bridge and fetch group from database.
+    """
+    
+    bridge = kwargs.pop("bridge", None)
+    
+    if bridge:
+        try:
+            group = bridge.get_group(**kwargs)
+        except ObjectDoesNotExist:
+            raise Http404
+    else:
+        group = None
+    
+    return group, bridge
+
+
+def group_context(group, bridge):
+    # @@@ use bridge
+    return {
+        "group": group,
+    }
+
+
+def signup(request, **kwargs):
+    
+    form_class = kwargs.pop("form_class", SignupForm)
+    template_name = kwargs.pop("template_name", "account/signup.html")
+    success_url = kwargs.pop("success_url", None)
+    
+    group, bridge = group_and_bridge(kwargs)
+    
     if success_url is None:
         success_url = get_default_redirect(request)
     
@@ -48,18 +80,27 @@ def signup(request, form_class=SignupForm,
                 }, context_instance=RequestContext(request))
             else:
                 form = form_class()
-    return render_to_response(template_name, {
+    
+    ctx = group_context(group, context)
+    ctx.update({
         "code": code,
         "form": form,
-    }, context_instance=RequestContext(request))
+    })
+    
+    return render_to_response(template_name, RequestContext(request, ctx))
 
 
 @staff_member_required
-def admin_invite_user(request, form_class=InviteUserForm,
-        template_name="signup_codes/admin_invite_user.html"):
+def admin_invite_user(request, **kwargs):
     """
     This view, by default, works inside the Django admin.
     """
+    
+    form_class = kwargs.pop("form_class", InviteUserForm)
+    template_name = kwargs.pop("template_name", "signup_codes/admin_invite_user.html")
+    
+    group, bridge = group_and_bridge(kwargs)
+    
     if request.method == "POST":
         form = form_class(request.POST)
         if form.is_valid():
@@ -69,7 +110,11 @@ def admin_invite_user(request, form_class=InviteUserForm,
             form = form_class() # reset
     else:
         form = form_class()
-    return render_to_response(template_name, {
+    
+    ctx = group_context(group, context)
+    ctx.update({
         "title": ugettext("Invite user"),
         "form": form,
-    }, context_instance=RequestContext(request))
+    })
+    
+    return render_to_response(template_name, RequestContext(request, ctx))
