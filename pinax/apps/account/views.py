@@ -25,9 +25,16 @@ if association_model is not None:
     from django_openid.models import UserOpenidAssociation
 
 
-def login(request, form_class=LoginForm, template_name="account/login.html",
-          success_url=None, associate_openid=False, openid_success_url=None,
-          url_required=False, extra_context=None, redirect_field_name="next"):
+def login(request, **kwargs):
+    
+    form_class = kwargs.pop("form_class", LoginForm)
+    template_name = kwargs.pop("template_name", "account/login.html")
+    success_url = kwargs.pop("success_url", None)
+    associate_openid = kwargs.pop("associate_openid", False)
+    openid_success_url = kwargs.pop("openid_success_url", None)
+    url_required = kwargs.pop("url_required", False)
+    extra_context = kwargs.pop("extra_context", {})
+    redirect_field_name = kwargs.pop("redirect_field_name", "next")
     
     if extra_context is None:
         extra_context = {}
@@ -60,8 +67,11 @@ def login(request, form_class=LoginForm, template_name="account/login.html",
     )
 
 
-def signup(request, form_class=SignupForm,
-        template_name="account/signup.html", success_url=None):
+def signup(request, **kwargs):
+    
+    form_class = kwargs.pop("form_class", SignupForm)
+    template_name = kwargs.pop("template_name", "account/signup.html")
+    success_url = kwargs.pop("success_url", None)
     
     if success_url is None:
         success_url = get_default_redirect(request)
@@ -91,8 +101,10 @@ def signup(request, form_class=SignupForm,
 
 
 @login_required
-def email(request, form_class=AddEmailForm,
-        template_name="account/email.html"):
+def email(request, **kwargs):
+    
+    form_class = kwargs.pop("form_class", AddEmailForm)
+    template_name = kwargs.pop("template_name", "account/email.html")
     
     if request.method == "POST" and request.user.is_authenticated():
         if request.POST["action"] == "add":
@@ -146,8 +158,10 @@ def email(request, form_class=AddEmailForm,
 
 
 @login_required
-def password_change(request, form_class=ChangePasswordForm,
-        template_name="account/password_change.html"):
+def password_change(request, **kwargs):
+    
+    form_class = kwargs.pop("form_class", ChangePasswordForm)
+    template_name = kwargs.pop("template_name", "account/password_change.html")
     
     if not request.user.password:
         return HttpResponseRedirect(reverse("acct_passwd_set"))
@@ -166,8 +180,10 @@ def password_change(request, form_class=ChangePasswordForm,
 
 
 @login_required
-def password_set(request, form_class=SetPasswordForm,
-        template_name="account/password_set.html"):
+def password_set(request, **kwargs):
+    
+    form_class = kwargs.pop("form_class", SetPasswordForm)
+    template_name = kwargs.pop("template_name", "account/password_set.html")
     
     if request.user.password:
         return HttpResponseRedirect(reverse("acct_passwd"))
@@ -186,7 +202,9 @@ def password_set(request, form_class=SetPasswordForm,
 
 
 @login_required
-def password_delete(request, template_name="account/password_delete.html"):
+def password_delete(request, **kwargs):
+    
+    template_name = kwargs.pop("template_name", "account/password_delete.html")
     
     # prevent this view when openids is not present or it is empty.
     if not request.user.password or \
@@ -203,9 +221,11 @@ def password_delete(request, template_name="account/password_delete.html"):
     }, context_instance=RequestContext(request))
 
 
-def password_reset(request, form_class=ResetPasswordForm,
-        template_name="account/password_reset.html",
-        template_name_done="account/password_reset_done.html"):
+def password_reset(request, **kwargs):
+    
+    form_class = kwargs.pop("form_class", ResetPasswordForm)
+    template_name = kwargs.pop("template_name", "account/password_reset.html")
+    template_name_done = kwargs.pop("template_name_done", "account/password_reset_done.html")
     
     if request.method == "POST":
         password_reset_form = form_class(request.POST)
@@ -222,8 +242,10 @@ def password_reset(request, form_class=ResetPasswordForm,
     }, context_instance=RequestContext(request))
 
 
-def password_reset_from_key(request, key, form_class=ResetPasswordKeyForm,
-        template_name="account/password_reset_from_key.html"):
+def password_reset_from_key(request, key, **kwargs):
+    
+    form_class = kwargs.pop("form_class", ResetPasswordKeyForm)
+    template_name = kwargs.pop("template_name", "account/password_reset_from_key.html")
     
     if request.method == "POST":
         password_reset_key_form = form_class(request.POST)
@@ -239,8 +261,11 @@ def password_reset_from_key(request, key, form_class=ResetPasswordKeyForm,
 
 
 @login_required
-def timezone_change(request, form_class=ChangeTimezoneForm,
-        template_name="account/timezone_change.html"):
+def timezone_change(request, **kwargs):
+    
+    form_class = kwargs.pop("form_class", ChangeTimezoneForm)
+    template_name = kwargs.pop("template_name", "account/timezone_change.html")
+    
     if request.method == "POST":
         form = form_class(request.user, request.POST)
         if form.is_valid():
@@ -253,8 +278,10 @@ def timezone_change(request, form_class=ChangeTimezoneForm,
 
 
 @login_required
-def language_change(request, form_class=ChangeLanguageForm,
-        template_name="account/language_change.html"):
+def language_change(request, **kwargs):
+    
+    form_class = kwargs.pop("form_class", ChangeLanguageForm)
+    template_name = kwargs.pop("template_name", "account/language_change.html")
     
     if request.method == "POST":
         form = form_class(request.user, request.POST)
@@ -271,8 +298,12 @@ def language_change(request, form_class=ChangeLanguageForm,
 
 
 @login_required
-def other_services(request, template_name="account/other_services.html"):
+def other_services(request, **kwargs):
+    
     from microblogging.utils import twitter_verify_credentials
+    
+    template_name = kwargs.pop("template_name", "account/other_services.html")
+    
     twitter_form = TwitterForm(request.user)
     twitter_authorized = False
     if request.method == "POST":
@@ -295,6 +326,7 @@ def other_services(request, template_name="account/other_services.html"):
         twitter_account = twitter_account_for_user(request.user)
         twitter_authorized = twitter_verify_credentials(twitter_account)
         twitter_form = TwitterForm(request.user)
+    
     return render_to_response(template_name, {
         "twitter_form": twitter_form,
         "twitter_authorized": twitter_authorized,
