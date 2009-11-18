@@ -1,12 +1,12 @@
 from django.conf import settings
+from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.http import HttpResponseRedirect
-from django.contrib.auth import authenticate
-from django.contrib.auth import login as auth_login
 from django.utils.translation import ugettext
 
 from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth import authenticate
+from django.contrib.auth import login as auth_login
 
 from account.utils import get_default_redirect
 from signup_codes.models import check_signup_code
@@ -63,8 +63,8 @@ def signup(request, **kwargs):
             
             auth_login(request, user)
             request.user.message_set.create(
-                message=ugettext("Successfully logged in as %(username)s.") % {
-                'username': user.username
+                message = ugettext("Successfully logged in as %(username)s.") % {
+                    "username": user.username,
             })
             return HttpResponseRedirect(success_url)
     else:
