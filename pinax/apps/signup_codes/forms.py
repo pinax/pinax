@@ -11,11 +11,12 @@ from django.contrib.sites.models import Site
 from pinax.core.utils import get_send_mail
 send_mail = get_send_mail()
 
-from account.forms import SignupForm as BaseSignupForm
+from account.forms import GroupForm, SignupForm as BaseSignupForm
 from signup_codes.models import SignupCode, check_signup_code
 
 
 class SignupForm(BaseSignupForm):
+    
     signup_code = forms.CharField(max_length=40, required=False, widget=forms.HiddenInput())
     
     def clean_signup_code(self):
@@ -27,7 +28,8 @@ class SignupForm(BaseSignupForm):
             raise forms.ValidationError("Signup code was not valid.")
 
 
-class InviteUserForm(forms.Form):
+class InviteUserForm(GroupForm):
+    
     email = forms.EmailField()
     
     def create_signup_code(self, commit=True):
@@ -57,4 +59,3 @@ class InviteUserForm(forms.Form):
             "domain": domain,
         })
         send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [email], priority="high")
-        

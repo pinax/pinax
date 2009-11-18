@@ -53,7 +53,7 @@ def signup(request, **kwargs):
     code = request.GET.get("code")
     
     if request.method == "POST":
-        form = form_class(request.POST)
+        form = form_class(request.POST, group=group)
         if form.is_valid():
             username, password = form.save()
             user = authenticate(username=username, password=password)
@@ -70,7 +70,7 @@ def signup(request, **kwargs):
     else:
         signup_code = check_signup_code(code)
         if signup_code:
-            form = form_class(initial={"signup_code": code})
+            form = form_class(initial={"signup_code": code}, group=group)
         else:
             if not settings.ACCOUNT_OPEN_SIGNUP:
                 # if account signup is not open we want to fail when there is
@@ -79,7 +79,7 @@ def signup(request, **kwargs):
                     "code": code,
                 }, context_instance=RequestContext(request))
             else:
-                form = form_class()
+                form = form_class(group=group)
     
     ctx = group_context(group, context)
     ctx.update({
@@ -102,14 +102,14 @@ def admin_invite_user(request, **kwargs):
     group, bridge = group_and_bridge(kwargs)
     
     if request.method == "POST":
-        form = form_class(request.POST)
+        form = form_class(request.POST, group=group)
         if form.is_valid():
             email = form.cleaned_data["email"]
             form.send_signup_code()
             request.user.message_set.create(message=ugettext("An e-mail has been sent to %(email)s.") % {"email": email})
             form = form_class() # reset
     else:
-        form = form_class()
+        form = form_class(group=group)
     
     ctx = group_context(group, context)
     ctx.update({

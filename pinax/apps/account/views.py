@@ -71,7 +71,7 @@ def login(request, **kwargs):
         success_url = get_default_redirect(request, redirect_field_name)
     
     if request.method == "POST" and not url_required:
-        form = form_class(request.POST)
+        form = form_class(request.POST, group=group)
         if form.login(request):
             if associate_openid and association_model is not None:
                 for openid in request.session.get("openids", []):
@@ -81,7 +81,7 @@ def login(request, **kwargs):
                 success_url = openid_success_url or success_url
             return HttpResponseRedirect(success_url)
     else:
-        form = form_class()
+        form = form_class(group=group)
     
     ctx = group_context(group, bridge)
     ctx.update({
@@ -107,7 +107,7 @@ def signup(request, **kwargs):
         success_url = get_default_redirect(request)
     
     if request.method == "POST":
-        form = form_class(request.POST)
+        form = form_class(request.POST, group=group)
         if form.is_valid():
             username, password = form.save()
             if settings.ACCOUNT_EMAIL_VERIFICATION:
@@ -123,7 +123,7 @@ def signup(request, **kwargs):
                 })
                 return HttpResponseRedirect(success_url)
     else:
-        form = form_class()
+        form = form_class(group=group)
     
     ctx = group_context(group, bridge)
     ctx.update({

@@ -24,7 +24,15 @@ from account.models import PasswordReset
 
 alnum_re = re.compile(r'^\w+$')
 
-class LoginForm(forms.Form):
+
+class GroupForm(forms.Form):
+    
+    def __init__(self, *args, **kwargs):
+        self.group = kwargs.pop("group", None)
+        super(GroupForm, self).__init__(*args, **kwargs)
+
+
+class LoginForm(GroupForm):
     
     username = forms.CharField(label=_("Username"), max_length=30, widget=forms.TextInput())
     password = forms.CharField(label=_("Password"), widget=forms.PasswordInput(render_value=False))
@@ -57,7 +65,7 @@ class LoginForm(forms.Form):
         return False
 
 
-class SignupForm(forms.Form):
+class SignupForm(GroupForm):
     
     username = forms.CharField(label=_("Username"), max_length=30, widget=forms.TextInput())
     password1 = forms.CharField(label=_("Password"), widget=forms.PasswordInput(render_value=False))
