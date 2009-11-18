@@ -46,6 +46,7 @@ def signup(request, **kwargs):
     success_url = kwargs.pop("success_url", None)
     
     group, bridge = group_and_bridge(kwargs)
+    ctx = group_context(group, context)
     
     if success_url is None:
         success_url = get_default_redirect(request)
@@ -73,15 +74,16 @@ def signup(request, **kwargs):
             form = form_class(initial={"signup_code": code}, group=group)
         else:
             if not settings.ACCOUNT_OPEN_SIGNUP:
+                ctx.update({
+                    "code": code,
+                })
+                ctx = RequestContext(request, ctx)
                 # if account signup is not open we want to fail when there is
                 # no sign up code or what was provided failed.
-                return render_to_response("signup_codes/failure.html", {
-                    "code": code,
-                }, context_instance=RequestContext(request))
+                return render_to_response("signup_codes/failure.html", ctx)
             else:
                 form = form_class(group=group)
     
-    ctx = group_context(group, context)
     ctx.update({
         "code": code,
         "form": form,
