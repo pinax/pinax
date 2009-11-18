@@ -43,6 +43,7 @@ def signup(request, **kwargs):
     
     form_class = kwargs.pop("form_class", SignupForm)
     template_name = kwargs.pop("template_name", "account/signup.html")
+    template_name_failure = kwargs.pop("template_name_failure", "signup_codes/failure.html")
     success_url = kwargs.pop("success_url", None)
     
     group, bridge = group_and_bridge(kwargs)
@@ -80,7 +81,7 @@ def signup(request, **kwargs):
                 ctx = RequestContext(request, ctx)
                 # if account signup is not open we want to fail when there is
                 # no sign up code or what was provided failed.
-                return render_to_response("signup_codes/failure.html", ctx)
+                return render_to_response(template_name_failure, ctx)
             else:
                 form = form_class(group=group)
     
