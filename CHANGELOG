@@ -1,0 +1,60 @@
+# this is for keeping track of what we're adding to 0.9 as we go to make it
+# easier to write "What's New" documentation and presentations later. Please
+# update it whenever a substantial change is made.
+
+# the format of this document is subject to change; I'm just wanting to get
+# things started
+
+Added nested group support
+--------------------------
+
+**This feature is in-development**
+
+ * The internal groups app was externalized as django-groups.
+ 
+ * Group base model was given two new fields: content_type and object_id for
+   nesting groups (these field names are subject to change).
+ 
+ * group_slug has been replaced with group-level specific naming. For example
+   in the previous groups support group apps would hook up a content object
+   apps such as::
+   
+       bridge = ContentBridge(Project, "projects")
+       ...
+       urlpatterns += bridge.include_urls('topics.urls', r'^project/(?P<group_slug>[-\w]+)/topics/')
+   
+   We can no longer rely on group_slug as shown above since content object
+   apps can now be group apps. The new and correct way is to use the lower
+   case form of the model name::
+   
+       bridge = ContentBridge(Project)
+       ...
+       urlpatterns += bridge.include_urls("topics.urls", r"^project/(?P<project_slug>[-\w]+)/topics/")
+   
+   Notice the second argument to ContentBridge is no longer needed. It now
+   uses the app_label for the model by default.
+ 
+ * The new signature of ContentBridge.get_group has changed from::
+   
+       bridge.get_group(group_slug)
+   
+   to::
+   
+        bridge.get_group(**kwargs)
+   
+   where kwargs comes from the new required view signature::
+   
+       def project_detail(request, pk, **kwargs):
+           ...
+   
+   The reason for this change is because the data you get from the URL has
+   slightly changed as well.
+ 
+ * TODO
+
+
+Added a new starter project for serving up static media and templates
+---------------------------------------------------------------------
+
+ * Allows HTML mockups to have a ready Pinax layout and take advantage of the 
+   Django templating language.

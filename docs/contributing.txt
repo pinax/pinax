@@ -57,7 +57,31 @@ If you use virtualenvwrapper you could alternatively do::
 
 Finally, you need to install the dependencies for the development version::
 
-    pip install --requirement requirements/external_apps.txt
+    pip install --no-deps --requirement requirements/external_apps.txt
+
+Staying up-to-date
+------------------
+
+The development version of Pinax is always being updated. You'll want to make
+sure you keep up. Your clone of Pinax can easily stay in-sync using git. You
+will need to setup a git remote to pull in changes from upstream Pinax::
+
+    git remote add upstream git://github.com/pinax/pinax.git
+
+Now you will be able to merge in changes that are made upstream::
+
+    git fetch upstream
+    git merge upstream/master
+
+The above will pull in all changes upstream and merge them with your current
+branch. This can be simplified::
+
+    git pull upstream master
+
+To keep your virtual environment in-sync you will need to use pip (make sure
+you are **inside** your virtual environment)::
+
+    pip install --no-deps --requirement requirements/external_apps.txt
 
 Committing code
 ---------------
@@ -72,13 +96,13 @@ are ready to work on a bug or a new feature create yourself a new branch. The
 reason why this is important is you can commit as often you like. When you are
 ready you can merge in the change. Let's take a look at a common workflow::
 
-    git checkout -b task-1
+    git checkout -b task-1-work
     ... do work and git commit often ...
-    git push origin task-1
-    git checkout -b task-1-ready
-    git merge --squash --no-commit task-1
+    git push origin task-1-work
+    git checkout -b task-1
+    git merge --squash --no-commit task-1-work
     git commit -m "Fixed #1 — added a great new feature"
-    git push origin task-1-ready
+    git push origin task-1
 
 The reason we have created two new branches is to stay off of ``master``.
 Keeping master clean of only upstream changes makes yours and ours lives
@@ -88,12 +112,12 @@ individual commits for why you may have done something. If we say that
 you've done something slightly wrong you can now go back to the ``task-1``
 branch and correct it. Let's see how we might do this::
 
-    git checkout -b task-1
+    git checkout -b task-1-work
     ... fix and git commit often ...
     git push
-    git branch -D task-1-ready
-    git checkout -b task-1-ready
-    git merge --squash --no-commit task-1
+    git branch -D task-1
+    git checkout -b task-1
+    git merge --squash --no-commit task-1-work
     git commit -m "Fixed #1 — added a great new feature"
     git push
 
@@ -126,7 +150,7 @@ limited space or a different formatting option is used the first line becomes
 all someone might see. If you need to explain why you made this change or
 explain something in detail use this format::
 
-    Fixed #13 — added this great big feature
+    Fixed #13 — added time travel
     
     You need to be driving 88 miles per hour to generate 1.21 gigawatts of
     power to properly use this feature.

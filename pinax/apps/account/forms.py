@@ -24,7 +24,15 @@ from account.models import PasswordReset
 
 alnum_re = re.compile(r'^\w+$')
 
-class LoginForm(forms.Form):
+
+class GroupForm(forms.Form):
+    
+    def __init__(self, *args, **kwargs):
+        self.group = kwargs.pop("group", None)
+        super(GroupForm, self).__init__(*args, **kwargs)
+
+
+class LoginForm(GroupForm):
     
     username = forms.CharField(label=_("Username"), max_length=30, widget=forms.TextInput())
     password = forms.CharField(label=_("Password"), widget=forms.PasswordInput(render_value=False))
@@ -57,7 +65,7 @@ class LoginForm(forms.Form):
         return False
 
 
-class SignupForm(forms.Form):
+class SignupForm(GroupForm):
     
     username = forms.CharField(label=_("Username"), max_length=30, widget=forms.TextInput())
     password1 = forms.CharField(label=_("Password"), widget=forms.PasswordInput(render_value=False))
@@ -172,20 +180,6 @@ class OpenIDSignupForm(forms.Form):
         except User.DoesNotExist:
             return self.cleaned_data["username"]
         raise forms.ValidationError(u"This username is already taken. Please choose another.")
-    
-    def save(self):
-        username = self.cleaned_data["username"]
-        email = self.cleaned_data["email"]
-        new_user = User.objects.create_user(username, "", "!")
-        
-        if email:
-            new_user.message_set.create(message="Confirmation email sent to %s" % email)
-            EmailAddress.objects.add_email(new_user, email)
-        
-        if self.openid:
-            # Associate openid with the new account.
-            new_user.openids.create(openid = self.openid)
-        return new_user
 
 
 class UserForm(forms.Form):

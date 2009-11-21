@@ -8,12 +8,12 @@
     
     <table class="messages">
         <thead>
-            <tr><th>{% trans "Sender" %}</th><th>{% trans "Subject" %}</th><th>{% trans "Date" %}</th><th>{% trans "Action" %}</th></tr>
+            <tr><th scope="col">{% trans "Sender" %}</th><th scope="col">{% trans "Subject" %}</th><th scope="col">{% trans "Date" %}</th><th scope="col">{% trans "Action" %}</th></tr>
         </thead>
         <tbody>
             {% for message in message_list %}
                 <tr>
-                    <td>{{ message.sender }}</td>
+                    <td scope="row">{{ message.sender }}</td>
                     <td>
                         {{ message.subject }}
                     </td>

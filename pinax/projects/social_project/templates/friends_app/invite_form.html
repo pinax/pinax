@@ -1,0 +1,22 @@
+{% load uni_form %}
+{% load i18n %}
+
+<form class="uniForm" method="POST" action="{% url invite_to_join %}">
+    <fieldset>
+        {% if join_request_form.existing_users %}
+        <div class="form_block">
+            <ul class="errorlist">
+                <li>{% trans "Someone with this email address has already joined:" %}
+                    {% for other_user in join_request_form.existing_users %}
+                    <a href="{% url profile_detail other_user %}">{{ other_user }}</a>{% endfor %}
+                </li>
+            </ul>
+        </div>
+        {% endif %}
+        {{ join_request_form|as_uni_form }}
+        <div class="form_block">
+            <input type="submit" value="invite" />
+            or <a href="{% url invitations %}">cancel</a>
+        </div>
+    </fieldset>
+</form>

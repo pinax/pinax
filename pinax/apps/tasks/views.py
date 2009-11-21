@@ -147,6 +147,8 @@ def add_task(request, group_slug=None, secret_id=None, form_class=TaskForm, temp
                 task = task_form.save(commit=False)
                 task.creator = request.user
                 task.group = group
+                if hasattr(workflow, "initial_state"):
+                    task.state = workflow.initial_state(task, user)
                 task.save()
                 task.save_history()
                 request.user.message_set.create(message="added task '%s'" % task.summary)

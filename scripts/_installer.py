@@ -10,24 +10,21 @@ PINAX_PYPI_MIRRORS = [
 PINAX_MUST_HAVES = {
     'setuptools-git': ('0.3.4', 'setuptools_git-0.3.4.tar.gz'),
     'setuptools-dummy': ('0.0.3', 'setuptools_dummy-0.0.3.tar.gz'),
-    'Django': ('1.0.3', 'Django-1.0.3.tar.gz'),
-    'pip': ('0.4.1dev', 'pip-0.4.1dev.tar.gz'),
+    'Django': ('1.0.4', 'Django-1.0.4.tar.gz'),
 }
 
 DJANGO_VERSIONS = (
-    '1.0.3',
+    '1.0.4',
 #    '1.1',
 )
 
 if sys.platform == 'win32':
     GIT_CMD = 'git.cmd'
     PIP_CMD = 'pip.exe'
-    EASY_INSTALL_CMD = 'easy_install.exe'
     extra = {'shell': True}
 else:
     GIT_CMD = 'git'
     PIP_CMD = 'pip'
-    EASY_INSTALL_CMD = 'easy_install'
     extra = {}
 
 # Bailing if "~/.pydistutils.cfg" exists
@@ -109,7 +106,7 @@ def extend_parser(parser):
         help="Setup development environment")
     parser.add_option("--django-version",
         metavar="DJANGO_VERSION", dest="django_version", default=None,
-        help="The version of Django to be installed, e.g. --django-version=1.0.3 will install Django 1.0.3. The default is 1.0.3.")
+        help="The version of Django to be installed, e.g. --django-version=1.0.4 will install Django 1.0.4. The default is 1.0.4.")
 
 def adjust_options(options, args):
     """
@@ -139,30 +136,8 @@ def install_base(parent_dir, bin_dir, requirements_dir, packages):
     find_links = []
     for mirror in PINAX_PYPI_MIRRORS:
         find_links.extend(['--find-links', mirror])
-    
-    # we have to special case pip here and install it with easy_install
-    # because in most cases the user installed pip with easy_install which if
-    # we installed it another way won't work.
-    easy_install = resolve_command(EASY_INSTALL_CMD, bin_dir)
-    pip_package = packages.pop("pip")
-    version, filename = pip_package
-    src = join(requirements_dir, 'base', filename)
-    if not os.path.exists(src):
-        # get it from the PyPI
-        src = 'pip==%s' % version
-    logger.notify('Installing pip %s' % version)
-    call_subprocess([
-        easy_install,
-        '--quiet',
-        '--always-copy',
-        '--always-unzip',
-    ] + find_links + [
-        src,
-    ], filter_stdout=filter_lines, show_stdout=False)
-    
     # resolve path to the freshly installed pip
     pip = resolve_command(PIP_CMD, bin_dir)
-    
     for pkg in packages:
         version, filename = packages[pkg]
         src = join(requirements_dir, 'base', filename)
@@ -179,7 +154,6 @@ def install_base(parent_dir, bin_dir, requirements_dir, packages):
         ] + find_links + [
             src,
         ], filter_stdout=filter_lines, show_stdout=False)
-    
     return pip
 
 def after_install(options, home_dir):

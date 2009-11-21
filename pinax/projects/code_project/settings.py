@@ -17,6 +17,10 @@ TEMPLATE_DEBUG = DEBUG
 # tells Pinax to serve media through django.views.static.serve.
 SERVE_MEDIA = DEBUG
 
+INTERNAL_IPS = (
+    '127.0.0.1',
+)
+
 ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
 )
@@ -107,6 +111,7 @@ MIDDLEWARE_CLASSES = (
     'pagination.middleware.PaginationMiddleware',
     'django_sorting.middleware.SortingMiddleware',
     'pinax.middleware.security.HideSensistiveFieldsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 ROOT_URLCONF = 'code_project.urls'
@@ -133,13 +138,13 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 INSTALLED_APPS = (
     # included
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.humanize',
     'django.contrib.markup',
-    'django.contrib.admin',
     'pinax.templatetags',
     
     # external
@@ -149,6 +154,7 @@ INSTALLED_APPS = (
     'mailer',
     'announcements',
     'pagination',
+    'groups',
     'timezones',
     'avatar',
     'threadedcomments',
@@ -161,6 +167,7 @@ INSTALLED_APPS = (
     'django_markup',
     'django_filters',
     'staticfiles',
+    'debug_toolbar',
     
     # internal (for now)
     'basic_profiles',
@@ -170,7 +177,6 @@ INSTALLED_APPS = (
     'tag_app',
     'tagging_utils',
     'threadedcomments_extras',
-    'groups',
     'projects',
     'tasks',
     'topics',

@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 
 from django.utils.translation import ugettext_lazy as _
 
@@ -13,8 +14,7 @@ from friends.importer import import_yahoo, import_google
 
 # @@@ if made more generic these could be moved to django-friends proper
 
-def friends(request, form_class=JoinRequestForm,
-        template_name="friends_app/invitations.html"):
+def friends(request, template_name="friends_app/invitations.html"):
     if request.method == "POST":
         invitation_id = request.POST.get("invitation", None)
         if request.POST["action"] == "accept":
@@ -25,12 +25,6 @@ def friends(request, form_class=JoinRequestForm,
                     request.user.message_set.create(message=_("Accepted friendship request from %(from_user)s") % {'from_user': invitation.from_user})
             except FriendshipInvitation.DoesNotExist:
                 pass
-            join_request_form = form_class()
-        elif request.POST["action"] == "invite": # invite to join
-            join_request_form = form_class(request.POST)
-            if join_request_form.is_valid():
-                join_request_form.save(request.user)
-                join_request_form = form_class() # @@@
         elif request.POST["action"] == "decline":
             try:
                 invitation = FriendshipInvitation.objects.get(id=invitation_id)
@@ -39,21 +33,36 @@ def friends(request, form_class=JoinRequestForm,
                     request.user.message_set.create(message=_("Declined friendship request from %(from_user)s") % {'from_user': invitation.from_user})
             except FriendshipInvitation.DoesNotExist:
                 pass
-            join_request_form = form_class()
-    else:
-        join_request_form = form_class()
     
     invites_received = request.user.invitations_to.invitations().order_by("-sent")
     invites_sent = request.user.invitations_from.invitations().order_by("-sent")
     joins_sent = request.user.join_from.all().order_by("-sent")
     
     return render_to_response(template_name, {
-        "join_request_form": join_request_form,
         "invites_received": invites_received,
         "invites_sent": invites_sent,
         "joins_sent": joins_sent,
     }, context_instance=RequestContext(request))
 friends = login_required(friends)
+
+def invite(request, form_class=JoinRequestForm, **kwargs):
+    template_name = kwargs.get("template_name", "friends_app/invite.html")
+    if request.is_ajax():
+        template_name = kwargs.get(
+            "template_name_facebox",
+            "friends_app/invite_facebox.html"
+        )
+
+    join_request_form = form_class()
+    if request.method == "POST":
+        join_request_form = form_class(request.POST)
+        if join_request_form.is_valid():
+            join_request_form.save(request.user)
+            return HttpResponseRedirect(reverse('invitations'))
+    return render_to_response(template_name, {
+        "join_request_form": join_request_form,
+        }, context_instance=RequestContext(request))
+invite = login_required(invite)
 
 def accept_join(request, confirmation_key, form_class=SignupForm,
         template_name="account/signup.html"):

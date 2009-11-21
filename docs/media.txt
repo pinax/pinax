@@ -7,6 +7,11 @@
 This document explains how Pinax handles media files across external and 
 internal applications and themes.
 
+Pinax places static media (css, js, and images such as backgrounds, icons and 
+logos) in a separate directory from the normal Django media directory (uploads 
+and other user generated content stored on the file server). This is done in
+order to allow for easy server optimization and improved security.
+
 Basic media handling
 =======================
 
@@ -98,3 +103,4 @@ following snippet below the rest of the url configuration::
         urlpatterns += patterns('', 
             (r'^site_media/', include('staticfiles.urls')),
         )
+

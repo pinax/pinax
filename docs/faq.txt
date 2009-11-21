@@ -1,0 +1,66 @@
+.. _ref-faq:
+
+Frequently asked questions
+==========================
+
+Does Pinax work on Django 1.1?
+------------------------------
+
+Yes. Pinax 0.7 ships with Django 1.0.4 by default. Django 1.1 came too late in
+our 0.7 release cycle. However, we tested it on Django 1.1 to ensure it works
+and it works well. To use Django 1.1 in your Pinax project simply follow our
+:ref:`installation <ref-install>` documentation and once you are in the
+virtual environment run::
+
+    pip install -U Django==1.1.1
+
+This will install Django 1.1.1 over 1.0.4.
+
+How do I change the references to example.com
+---------------------------------------------
+
+``example.com`` is the default value for
+``Site.objects.get(pk=settings.SITE_ID).domain``. This comes from the Django
+contrib app named ``sites``. It is enabled in Pinax by default. Pinax uses
+this value to construct URLs back to your site in e-mails, for example. There
+are two ways to change this value. First, you can modify it in the shell
+(using ``python manage.py shell``)::
+
+    >>> from django.conf import settings
+    >>> from django.contrib.sites.models import Site
+    >>> site = Site.objects.get(pk=settings.SITE_ID)
+    >>> site.domain = "localhost:8000"
+    >>> site.name = "Development site"
+    >>> site.save()
+
+Alternatively, you can perform the same action through the admin interface.
+
+    .. image:: _images/admin_sites_change.jpg
+
+Why won't my e-mail send?
+-------------------------
+
+Pinax queues all e-mail for delivery. This is the behavior of django-mailer.
+All messages are stored in the database. This enables you to view what will
+be sent via the admin during development.
+
+    .. image:: _images/admin_mailer_messages.jpg
+
+To send the messages that are queued you should use the ``send_mail``
+management command. To invoke this you would run::
+
+    python manage.py send_mail
+
+Be sure you have set the appropriate ``EMAIL_*`` settings. A full list of
+these settings can be found `in Django settings documentation`_. Our
+:ref:`deployment <ref-sending-mail-and-notices>` documentation gives
+instructions on how to set this up on a cron.
+
+Also, some e-mail may occur as a result of notifications. Some notifications
+are queued. Be sure you run::
+
+    python manage.py emit_notices
+
+to clear the notification queue and get those e-mails queued.
+
+.. _in Django settings documentation: http://docs.djangoproject.com/en/dev/ref/settings/#email-host

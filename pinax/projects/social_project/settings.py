@@ -17,6 +17,10 @@ TEMPLATE_DEBUG = DEBUG
 # tells Pinax to serve media through django.views.static.serve.
 SERVE_MEDIA = DEBUG
 
+INTERNAL_IPS = (
+    '127.0.0.1',
+)
+
 ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
 )
@@ -95,6 +99,7 @@ MIDDLEWARE_CLASSES = (
     'django_sorting.middleware.SortingMiddleware',
     'djangodblog.middleware.DBLogMiddleware',
     'pinax.middleware.security.HideSensistiveFieldsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
 )
 
@@ -131,6 +136,7 @@ COMBINED_INBOX_COUNT_SOURCES = (
 
 INSTALLED_APPS = (
     # included
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -152,7 +158,8 @@ INSTALLED_APPS = (
     'oembed',
     'djangodblog',
     'pagination',
-#    'gravatar',
+    'groups',
+    # 'gravatar',
     'threadedcomments',
     'threadedcomments_extras',
     'wiki',
@@ -173,6 +180,7 @@ INSTALLED_APPS = (
     'django_sorting',
     'django_markup',
     'staticfiles',
+    'debug_toolbar',
     
     # internal (for now)
     'analytics',
@@ -183,10 +191,6 @@ INSTALLED_APPS = (
     'photos',
     'tag_app',
     'topics',
-    'groups',
-    
-    'django.contrib.admin',
-
 )
 
 ABSOLUTE_URL_OVERRIDES = {

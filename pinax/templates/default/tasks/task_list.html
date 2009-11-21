@@ -91,34 +91,36 @@
             {% tags_for_model tasks.Task as task_tags %}
             {% for section in task_tags %}
                 {% tasks_for_tag section as tagtasks in tasks %}
-                <tbody><tr class="task_grouping">
-                    <td colspan="6">
-                        <span class="focus"><a href="{% focus_url group_by section group %}">focus</a></span>
-                        <span class="toggle">
-                            <span class="arrow">&#x25BE;</span>
-                            {{ section }}
-                            <span class="count">({{ tagtasks|length }})</span>
-                        </span>
-                    </td>
-                </tr></tbody>
-                <tbody class="task_group" id="group_{{ forloop.counter }}">
-                    {% for item in tagtasks %}
-                        <tr class="task_{{ item.get_state_display }} {% cycle odd,even %}">
-                            <td>{{ item.id }}</td>
-                            <td><a href="{% groupurl task_detail group id=item.id %}">{{ item.summary }}</a></td>
-                            <td style="white-space: nowrap">{{ item.modified|shorttimesince }} ago</td>
-                            <td>
-                                {% if item.assignee %}
-                                    <a href="{% groupurl tasks_for_user group username=item.assignee %}">{{ item.assignee }}</a>
-                                {% else %}
-                                    <span class="warning">unassigned</span>
-                                {% endif %}
-                            </td>
-                            <td>{% task_tags item group %}</td>
-                            <td>{{ item.status }}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
+                {% if tagtasks %}
+                    <tbody><tr class="task_grouping">
+                        <td colspan="6">
+                            <span class="focus"><a href="{% focus_url group_by section group %}">focus</a></span>
+                            <span class="toggle">
+                                <span class="arrow">&#x25BE;</span>
+                                {{ section }}
+                                <span class="count">({{ tagtasks|length }})</span>
+                            </span>
+                        </td>
+                    </tr></tbody>
+                    <tbody class="task_group" id="group_{{ forloop.counter }}">
+                        {% for item in tagtasks %}
+                            <tr class="task_{{ item.get_state_display }} {% cycle odd,even %}">
+                                <td>{{ item.id }}</td>
+                                <td><a href="{% groupurl task_detail group id=item.id %}">{{ item.summary }}</a></td>
+                                <td style="white-space: nowrap">{{ item.modified|shorttimesince }} ago</td>
+                                <td>
+                                    {% if item.assignee %}
+                                        <a href="{% groupurl tasks_for_user group username=item.assignee %}">{{ item.assignee }}</a>
+                                    {% else %}
+                                        <span class="warning">unassigned</span>
+                                    {% endif %}
+                                </td>
+                                <td>{% task_tags item group %}</td>
+                                <td>{{ item.status }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                {% endif %}
             {% endfor %}
         {% else %}
             {% for section in grouped_tasks %}

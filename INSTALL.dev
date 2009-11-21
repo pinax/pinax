@@ -1,0 +1,58 @@
+This covers installation of the development version of Pinax.
+
+We would like to warn you now that you will be using a version of Pinax that
+may not be entirely stable. If you are looking to run Pinax in a production
+environment we recommend you download the latest stable release from
+http://pinaxproject.com/download/.
+
+There are two different ways you might want to install a development release
+of Pinax:
+
+1) You want to try the latest code and don't mind if a tool clones Pinax for
+   you and installs it.
+
+2) You are looking to contribute to Pinax and need to setup your environment
+   to commit back.
+
+If you are looking for 2 you can move along to our online contributing
+documentation located at http://pinaxproject.com/docs/dev/contributing.html.
+
+The rest of the file will cover 1.
+
+To install a development version of Pinax you will first need the
+pinax-boot.py script. pinax-boot.py is a slightly modified version of
+virtualenv:
+
+    curl -O http://github.com/pinax/pinax/raw/master/scripts/pinax-boot.py
+
+This file may need to be updated if you want to upgrade your environment to
+a newer version of Pinax. You are now ready to create a virtual environment
+that will hold your development version of Pinax:
+
+    $ python pinax-boot.py --development pinax-env
+
+The result of this command will be a new directory, pinax-env, that contains
+a baseline environment containing pip, Django and Pinax. It contains no
+dependancies at this point.
+
+Activate this new environment:
+
+    $ source pinax-env/bin/activate
+    (pinax-env)$
+
+If you are a virtualenvwrapper user the above two command could have been:
+
+    $ python pinax-boot.py --development $WORKON_HOME/pinax-env
+    $ workon pinax-env
+    (pinax-env)$
+
+Make sure that whenever we reference pinax-env you prefix it $WORKON_HOME/.
+(That was a period, not a part of the prefix).
+
+Now you are ready to install the Pinax dependancies:
+
+    (pinax-env)$ pip install -r pinax-env/src/pinax/requirements/external_apps.txt
+
+This may take some time as it needs to pull the packages down from the
+Internet. Once it has completed you are ready to use Pinax! See
+INSTALL.release "Starting a new Pinax project" section to continue.
