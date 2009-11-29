@@ -14,6 +14,9 @@ else:
     notification = None
 
 
+MARKUP_CHOICES = getattr(settings, "MARKUP_CHOICES", [])
+
+
 class Post(models.Model):
     """Post model."""
     STATUS_CHOICES = (
@@ -32,7 +35,7 @@ class Post(models.Model):
     created_at      = models.DateTimeField(_('created at'), default=datetime.now)
     updated_at      = models.DateTimeField(_('updated at'))
     markup          = models.CharField(_(u"Post Content Markup"), max_length=20,
-                              choices=settings.MARKUP_CHOICES,
+                              choices=MARKUP_CHOICES,
                               null=True, blank=True)
     tags            = TagField()
     
