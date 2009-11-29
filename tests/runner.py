@@ -1,3 +1,4 @@
+import optparse
 import os
 import sys
 
@@ -6,30 +7,6 @@ from django.core.management import setup_environ, call_command
 
 import pinax
 from pinax.utils.importlib import import_module
-
-
-PINAX_ROOT = os.path.abspath(os.path.dirname(pinax.__file__))
-
-
-PROJECT_APP_DIRS = []
-
-
-# setup sys.path for Pinax and projects
-sys.path.insert(0, os.path.join(PINAX_ROOT, "apps"))
-sys.path.insert(0, os.path.join(PINAX_ROOT, "projects"))
-
-
-def setup_project(name):
-    sys.path.insert(0, os.path.join(PINAX_ROOT, "projects", name))
-    project_app_dir = os.path.join(PINAX_ROOT, "projects", name, "apps")
-    PROJECT_APP_DIRS.append(project_app_dir)
-    sys.path.insert(0, project_app_dir)
-    settings_mod = import_module("%s.settings" % name)
-    setup_environ(settings_mod)
-
-
-def reset_project():
-    del sys.path[:2]
 
 
 #
@@ -41,31 +18,62 @@ def reset_project():
 #
 
 
-def main():
-    projects = [
-        "basic_project",
-        "code_project",
-        "intranet_project",
-        "private_beta_project",
-        "sample_group_project",
-        "social_project",
-    ]
-    
-    installed_apps = set()
+PINAX_ROOT = os.path.abspath(os.path.dirname(pinax.__file__))
+PINAX_PROJECTS = [
+    "basic_project",
+    "code_project",
+    "intranet_project",
+    "private_beta_project",
+    "sample_group_project",
+    "social_project",
+]
+
+# setup sys.path for Pinax and projects
+sys.path.insert(0, os.path.join(PINAX_ROOT, "apps"))
+sys.path.insert(0, os.path.join(PINAX_ROOT, "projects"))
+
+
+def setup_project(name):
+    """
+    Helper for build_app_list to prepare the process for settings of a given
+    Pinax project.
+    """
+    settings_mod = import_module("%s.settings" % name)
+    setup_environ(settings_mod)
+
+
+def build_app_list(projects):
+    """
+    Given a list of projects return a unique list of apps.
+    """
+    apps = set()
     
     for project in projects:
         setup_project(project)
         settings._setup()
-        installed_apps.update(set(settings.INSTALLED_APPS))
-        reset_project()
+        apps.update(settings.INSTALLED_APPS)
+    
+    return list(apps)
+
+
+def build_project_app_paths(projects):
+    app_dirs = []
+    for project in projects:
+        app_dir = os.path.join(PINAX_ROOT, "projects", project, "apps")
+        app_dirs.append(app_dir)
+    return app_dirs
+
+
+def setup_test_environment():
+    apps = build_app_list(PINAX_PROJECTS)
     
     # @@@ not quite sure how to handle this yet, but basic_profiles and
     # profiles clash as one is a fork of the other. for now we can just test
     # profiles behavior
-    installed_apps.remove("basic_profiles")
+    apps.remove("basic_profiles")
     
     # setup path for all project apps/
-    sys.path = PROJECT_APP_DIRS + sys.path[:]
+    sys.path = build_project_app_paths(PINAX_PROJECTS) + sys.path[:]
     
     # reset settings
     settings._wrapped = None
@@ -80,9 +88,13 @@ def main():
             "django.contrib.sessions.middleware.SessionMiddleware",
             "django.contrib.auth.middleware.AuthenticationMiddleware",
         ],
-        "INSTALLED_APPS": list(installed_apps),
+        "INSTALLED_APPS": apps,
     })
+
+
+def main():
     
+    setup_test_environment()
     call_command("test")
 
 
