@@ -59,9 +59,6 @@ def main():
         installed_apps.update(set(settings.INSTALLED_APPS))
         reset_project()
     
-    # @@@ remove some apps that we need to deal with later
-    #installed_apps.remove("django_openid")
-    
     # setup path for all project apps/
     sys.path = PROJECT_APP_DIRS + sys.path[:]
     
