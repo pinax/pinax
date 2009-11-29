@@ -2,20 +2,21 @@
 
 {% load i18n %}
 {% load uni_form %}
+{% load account_tags %}
 
-{% block head_title %}{% blocktrans %}Profile for {{ other_user }}{% endblocktrans %}{% endblock %}
+{% block head_title %}{% blocktrans %}Profile for {% user_display other_user %}{% endblocktrans %}{% endblock %}
 
 {% block body %}
-    
+    {% user_display other_user as other_user_display %}
     <div class="right_panel">
         {% include "basic_profiles/profile_right_panel.html" %}
     </div>
     
     <div class="vcard">
         {% if other_user.get_profile.name %}
-            <h1>{% blocktrans %}Profile for <span class="nickname">{{ other_user }}</span>{% endblocktrans %}</h1>
+            <h1>{% blocktrans %}Profile for <span class="nickname">{{ other_user_display }}</span>{% endblocktrans %}</h1>
         {% else %}
-            <h1>{% blocktrans %}Profile for <span class="fn nickname">{{ other_user }}</span>{% endblocktrans %}</h1>
+            <h1>{% blocktrans %}Profile for <span class="fn nickname">{{ other_user_display }}</span>{% endblocktrans %}</h1>
         {% endif %}
         
         <div class="profile_info">

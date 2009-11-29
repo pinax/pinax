@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load account_tags %}
 {% load extra_tagging_tags %}
 {% load tasks_tags %}
 {% load avatar_tags %}
@@ -13,12 +14,12 @@
         
         {% if task.assignee %}
             <div class="avatar">{% avatar task.assignee 40 %}</div>
-            <div class="details"><b>{% trans "Assignee" %}</b>: <a href="{% groupurl tasks_for_user group username=task.assignee %}">{{ task.assignee }}</a></div>
+            <div class="details"><b>{% trans "Assignee" %}</b>: <a href="{% groupurl tasks_for_user group username=task.assignee %}">{% user_display task.assignee %}</a></div>
         {% else %}
             <span class="warning">{% trans "Unassigned" %}</span>
         {% endif %}
         <div><b>{% trans "State" %}</b>: {{ task.get_state_display }}</div>
-        <div><b>{% trans "Creator" %}</b>: <a href="{% groupurl tasks_for_user group username=task.creator %}">{{ task.creator }}</a></div>
+        <div><b>{% trans "Creator" %}</b>: <a href="{% groupurl tasks_for_user group username=task.creator %}">{% user_display task.creator %}</a></div>
         <div><b>{% trans "Created" %}</b>: {{ task.created|date }}</div>
         <div><b>{% trans "Modified" %}</b>: {{ task.modified|shorttimesince }} ago</div>
         <div><a href="{% groupurl tasks_history group id=task.id %}">{% trans "History of this Task" %}</a></div>
@@ -31,7 +32,7 @@
             <div id="nudge-history-target">
                 <ol>
                 {% for item in nudge.history %}
-                     <li><a href="{% groupurl tasks_for_user group username=item.nudger %}">{{ item.nudger }}</a>
+                     <li><a href="{% groupurl tasks_for_user group username=item.nudger %}">{% user_display item.nudger %}</a>
                     {{ item.modified|shorttimesince }}</li>
                 {% endfor %}
                 </ol>

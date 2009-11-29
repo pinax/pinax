@@ -2,12 +2,13 @@
 
 {% load i18n %}
 {% load microblogging_tags %}
+{% load account_tags %}
 
 {% block head_title %}{% blocktrans %}Tweets{% endblocktrans %}{% endblock %}
 
 {% block extra_head %}
-    <link rel="alternate" type="application/atom+xml" title="Tweets Feed for User {{ user.username|capfirst }}" href="/feeds/tweets/only/{{ user.username }}/" />
-    <link rel="alternate" type="application/atom+xml" title="Tweets Feed for User {{ user.username|capfirst }} and friends" href="/feeds/tweets/with_friends/{{ user.username }}/" />
+    <link rel="alternate" type="application/atom+xml" title="Tweets Feed for User {% user_display user %}" href="/feeds/tweets/only/{{ user.username }}/" />
+    <link rel="alternate" type="application/atom+xml" title="Tweets Feed for User {% user_display user %} and friends" href="/feeds/tweets/with_friends/{{ user.username }}/" />
 {% endblock %}
 
 {% block body %}

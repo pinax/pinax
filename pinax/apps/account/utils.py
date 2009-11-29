@@ -1,7 +1,9 @@
 from django.conf import settings
 from django.core.urlresolvers import reverse
 
+
 LOGIN_REDIRECT_URLNAME = getattr(settings, "LOGIN_REDIRECT_URLNAME", '')
+
 
 def get_default_redirect(request, redirect_field_name="next",
         login_redirect_urlname=LOGIN_REDIRECT_URLNAME):
@@ -22,3 +24,8 @@ def get_default_redirect(request, redirect_field_name="next",
     if not redirect_to or "://" in redirect_to or " " in redirect_to:
         redirect_to = default_redirect_to
     return redirect_to
+
+
+def user_display(user):
+    func = getattr(settings, "ACCOUNT_USER_DISPLAY", lambda user: user.username)
+    return func(user)

@@ -1,6 +1,7 @@
 {% extends "blog/base.html" %}
 
 {% load i18n %}
+{% load account_tags %}
 {% load blog_tags %}
 {% load markup %}
 {% load switchcase %}
@@ -12,7 +13,7 @@
 
 {% block extra_head %}
     <link rel="alternate" type="application/atom+xml" title="Blog Post Feed for All Users" href="/feeds/posts/all/" />
-    <link rel="alternate" type="application/atom+xml" title="Blog Post Feed for User {{ user.username }}" href="/feeds/posts/only/{{ user.username }}/" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Post Feed for User {% user_display user %}" href="/feeds/posts/only/{{ user.username }}/" />
 {% endblock %}
 
 {% block body %}

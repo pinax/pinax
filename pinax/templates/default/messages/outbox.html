@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load timezone_filters %}
+{% load account_tags %}
 
 {% block body %}
     <h1>{% trans "Sent Messages" %}</h1>
@@ -13,7 +14,7 @@
         <tbody>
             {% for message in message_list %}
                 <tr>
-                    <td scope="row">{{ message.recipient }}</td>
+                    <td scope="row">{% user_display message.recipient %}</td>
                     <td>
                         <a href="{{ message.get_absolute_url }}">{{ message.subject }}</a>
                     </td>

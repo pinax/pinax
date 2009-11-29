@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load humanize %}
+{% load account_tags %}
 {% load comments_tag %}
 {% load tagging_tags %}
 {% load blog_tags %}
@@ -18,7 +19,7 @@
     
     <div class="blog-post">
         <h2>{{ post.title }}</h2>
-        <div class="blog-meta"><p>Posted by: <a href="{% url profile_detail post.author.username %}">{{ post.author.username }}</a> on {{ post.publish|date }}</p></div>
+        <div class="blog-meta"><p>Posted by: <a href="{% url profile_detail post.author.username %}">{% user_display post.author %}</a> on {{ post.publish|date }}</p></div>
         <div class="blog-tags">
             <p>{% silk "tag_blue" %}
             {% tags_for_object post as tags %}

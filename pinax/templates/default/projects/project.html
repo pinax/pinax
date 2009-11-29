@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load uni_form %}
+{% load account_tags %}
 {% load avatar_tags %}
 {% load threadedcommentstags %}
 {% load pagination_tags %}
@@ -25,7 +26,7 @@
                         {% if forloop.counter0|divisibleby:"3" %}<tr>{% endif %}
                         <td>
                             <div class="avatar">{% avatar member.user 40 %}</div>
-                            <div class="details"><a href="{% url profile_detail member.user.username %}" title="{{ member.user.username }}">{{ member.user.username }}</a></div>
+                            <div class="details"><a href="{% url profile_detail member.user.username %}" title="{% user_display member.user %}">{% user_display member.user %}</a></div>
                         </td>
                         {% if forloop.counter0|add:"1"|divisibleby:"3" %}</tr>{% endif %}
                     {% endfor %}
@@ -41,7 +42,7 @@
         
         <p>
             {% trans "Slug:" %} <tt>{{ project.slug }}</tt><br />
-            {% trans "Creator:" %} <a href="{% url profile_detail project.creator.username %}">{{ project.creator }}</a><br />
+            {% trans "Creator:" %} <a href="{% url profile_detail project.creator.username %}">{% user_display project.creator %}</a><br />
             {% trans "Created:" %} {{ project.created|date }}
             <br />
             {% show_tags_for project %}
@@ -94,7 +95,7 @@
                         <p>You are member of this project.</p>
                     {% endifequal %}
                 {% else %}
-                    <p>It is up to the creator of this project (<a href="{% url profile_detail project.creator.username %}">{{ project.creator }}</a>) to add you.</p>
+                    <p>It is up to the creator of this project (<a href="{% url profile_detail project.creator.username %}">{% user_display project.creator %}</a>) to add you.</p>
                 {% endif %}
             </div>
         {% endif %}

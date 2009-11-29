@@ -1,6 +1,7 @@
 {% extends "topics/base.html" %}
 
 {% load i18n %}
+{% load account_tags %}
 {% load uni_form %}
 {% load extra_tagging_tags %}
 {% load pagination_tags %}
@@ -17,7 +18,7 @@
         <li class="odd thread-0 clearfix">
             <div class="meta">
                 <div class="avatar">{% avatar topic.creator 40 %}</div>
-                <div class="details"><a href="{% url profile_detail topic.creator.username %}">{{ topic.creator }}</a></div>
+                <div class="details"><a href="{% url profile_detail topic.creator.username %}">{% user_display topic.creator %}</a></div>
                 {{ topic.created|date }}
             </div>
             <div class="bulk">

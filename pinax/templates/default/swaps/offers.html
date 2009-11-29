@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load avatar_tags %}
+{% load account_tags %}
 {% load humanize %}
 {% load pagination_tags %}
 {% load tagging_tags %}
@@ -73,7 +74,7 @@
                     <td class="meta">
                         {% avatar offer.offerer 40 %}
                         <p>
-                            <b>Offered by:</b><br /><a href="{% url profile_detail offer.offerer.username %}">{{ offer.offerer.username }}</a>
+                            <b>Offered by:</b><br /><a href="{% url profile_detail offer.offerer.username %}">{% user_display offer.offerer %}</a>
                             on {{ offer.offered_time|date }}
                         </p>
                         {# @@@ I've seen this multiple places -- should be inclusion tag #}

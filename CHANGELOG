@@ -5,6 +5,13 @@
 # the format of this document is subject to change; I'm just wanting to get
 # things started
 
+Improved support for non-username sites
+---------------------------------------
+
+ * Introduced new templatetag {% user_display %} which takes a single User
+   instance and maps it to a display value defined by ACCOUNT_USER_DISPLAY.
+   Default value of ACCOUNT_USER_DISPLAY is lambda user: user.username.
+
 Added nested group support
 --------------------------
 

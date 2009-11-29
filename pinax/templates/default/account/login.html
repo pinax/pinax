@@ -3,6 +3,7 @@
 {% load i18n %}
 {% load uni_form %}
 {% load ifsetting_tag %}
+{% load account_tags %}
 
 {% block head_title %}{% trans "Login" %}{% endblock %}
 
@@ -15,7 +16,8 @@
     <h1>{% trans "Log In" %}</h1>
     
     {% if user.is_authenticated %}
-        <p><span class="warning">{% trans "Note" %}</span>: {% blocktrans %}you are already logged in as {{ user }}.{% endblocktrans %}</p>
+        {% user_display user as user_display %}
+        <p><span class="warning">{% trans "Note" %}</span>: {% blocktrans %}you are already logged in as {{ user_display }}.{% endblocktrans %}</p>
     {% else %}
         {% ifsetting ACCOUNT_OPEN_SIGNUP %}
         {% url acct_signup as signup_url %}

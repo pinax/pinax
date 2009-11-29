@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load account_tags %}
 {% load pagination_tags %}
 {% load avatar_tags %}
 {% load humanize %}
@@ -6,7 +7,7 @@
 <div class="profile clearfix">
     {# @@@ factor out style into css file #}
     <div style="float: left;">{% avatar user 40 %}</div>
-    <div style="padding: 5px; margin-left: 50px;"><a href="{% url profile_detail user.username %}">{{ user }}</a><br />
+    <div style="padding: 5px; margin-left: 50px;"><a href="{% url profile_detail user.username %}">{% user_display user %}</a><br />
      {% if user.get_profile.name %}<b>{% trans "Name" %}</b>: {{ user.get_profile.name }}{% endif %}<br />
      {% if user.get_profile.about %}<b>{% trans "About" %}</b>: {{ user.get_profile.about }}{% endif %}<br />
      {% if user.get_profile.location%}<b>{% trans "Location" %}</b>: {{ user.get_profile.location }}{% endif %}<br />

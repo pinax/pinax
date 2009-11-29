@@ -1,4 +1,4 @@
-{% load i18n %}{% blocktrans with comment.comment as post_comment and post.get_absolute_url as post_url %}{{ user }} has commented on your blog post '{{ post }}':
+{% load i18n %}{% load account_tags %}{% user_display user as user_display %}{% blocktrans with comment.comment as post_comment and post.get_absolute_url as post_url %}{{ user_display }} has commented on your blog post '{{ post }}':
 
 {{ post_comment }}
 

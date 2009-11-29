@@ -3,6 +3,7 @@
 {% load i18n %}
 {% load oembed_tags %}
 {% load pagination_tags %}
+{% load account_tags %}
 
 {% block head_title %}{% blocktrans %}Friends' Tweets{% endblocktrans %}{% endblock %}
 
@@ -18,7 +19,7 @@
         {% for tweet in object_list %}
             <div class="tweet" id="t{{ tweet.id }}">
                 <a name="tweet-{{ tweet.id }}"></a>
-                <p><a href="{% url profile_detail tweet.sender %}"><b>{{ tweet.sender }}</b></a>
+                <p><a href="{% url profile_detail tweet.sender %}"><b>{% user_display tweet.sender %}</b></a>
                 {{ tweet.html|safe|oembed|urlize }}</p>
                 <span class="timesince">{% blocktrans with tweet.sent|timesince as tweet_age %}{{ tweet_age }} ago{% endblocktrans %}</span>
                 <a class="reply" href="{% url tweets_you_follow %}?reply={{ tweet.sender }}">{% trans "reply" %}</a>

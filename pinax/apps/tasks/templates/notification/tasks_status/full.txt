@@ -1,8 +1,9 @@
-{% load i18n %}
+{% load i18n %}{% load account_tags %}
+{% user_display user as user_display %}
 {% if group %}
-{% blocktrans with task.status as task_status %}{{ user }} has updated the status of task '{{ task }}' in '{{ group }}' to '{{ task_status }}'.{% endblocktrans %}
+{% blocktrans with task.status as task_status %}{{ user_display }} has updated the status of task '{{ task }}' in '{{ group }}' to '{{ task_status }}'.{% endblocktrans %}
 {% else %}
-{% blocktrans with task.status as task_status %}{{ user }} has updated the status of task '{{ task }}' to '{{ task_status }}'.{% endblocktrans %}
+{% blocktrans with task.status as task_status %}{{ user_display }} has updated the status of task '{{ task }}' to '{{ task_status }}'.{% endblocktrans %}
 {% endif %}
 
 

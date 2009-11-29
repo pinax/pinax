@@ -1,6 +1,7 @@
 {% extends "messages/base.html" %}
 
 {% load i18n %}
+{% load account_tags %}
 {% load timezone_filters %}
 
 {% block body %}
@@ -13,7 +14,7 @@
         <tbody>
             {% for message in message_list %}
                 <tr>
-                    <td scope="row">{{ message.sender }}</td>
+                    <td scope="row">{% user_display message.sender %}</td>
                     <td>
                         {% if message.new %}<strong>{% endif %}
                         {% if message.replied %}<em>{% endif %}

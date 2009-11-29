@@ -1,6 +1,7 @@
 {% extends "swaps/base.html" %}
 
 {% load i18n %}
+{% load account_tags %}
 {% load humanize %}
 {% load tagging_tags %}
 {% load comments_tag %}
@@ -17,7 +18,7 @@
         
         <div class="blog-meta">
             <p>
-                Offered by: <a href="{% url profile_detail swap.proposing_offer.offerer.username %}">{{ swap.proposing_offer.offerer.username }}</a>
+                Offered by: <a href="{% url profile_detail swap.proposing_offer.offerer.username %}">{% user_display swap.proposing_offer.offerer %}</a>
                 on {{ swap.proposing_offer.offered_time|date }}
             </p>
         </div>
@@ -42,7 +43,7 @@
         
         <div class="blog-meta">
             <p>
-                Offered by: <a href="{% url profile_detail swap.responding_offer.offerer.username %}">{{ swap.responding_offer.offerer.username }}</a>
+                Offered by: <a href="{% url profile_detail swap.responding_offer.offerer.username %}">{% user_display swap.responding_offer.offerer %}</a>
                 on {{ swap.responding_offer.offered_time|date }}
             </p>
         </div>

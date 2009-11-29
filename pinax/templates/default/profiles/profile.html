@@ -1,6 +1,7 @@
 {% extends "profiles/base.html" %}
 
 {% load i18n %}
+{% load account_tags %}
 {% load avatar_tags %}
 {% load uni_form %}
 {% load group_tags %}
@@ -10,10 +11,10 @@
 {% load photo_tags %}
 {% load threadedcommentstags %}
 
-{% block head_title %}{% blocktrans %}Profile for {{ other_user }}{% endblocktrans %}{% endblock %}
+{% block head_title %}{% user_display other_user as other_user_display %}{% blocktrans %}Profile for {{ other_user_display }}{% endblocktrans %}{% endblock %}
 
 {% block body %}
-    
+    {% user_display other_user as other_user_display %}
     <div class="right_panel">
         {% include "profiles/profile_right_panel.html" %}
     </div>
@@ -28,9 +29,9 @@
             </div>
             
             {% if other_user.get_profile.name %}
-                <h1>{% blocktrans %}Profile for <span class="nickname">{{ other_user }}</span>{% endblocktrans %}</h1>
+                <h1>{% blocktrans %}Profile for <span class="nickname">{{ other_user_display }}</span>{% endblocktrans %}</h1>
             {% else %}
-                <h1>{% blocktrans %}Profile for <span class="fn nickname">{{ other_user }}</span>{% endblocktrans %}</h1>
+                <h1>{% blocktrans %}Profile for <span class="fn nickname">{{ other_user_display }}</span>{% endblocktrans %}</h1>
             {% endif %}
             
             <div class="profile_info">
@@ -65,7 +66,7 @@
                     
                     {# @@@ this should be an inclusion tag #}
                     {% if is_friend %}
-                        <p>{% blocktrans %}You are friends with {{ other_user }}.{% endblocktrans %} <a href="{% url messages_compose %}{{ other_user }}/">{% trans "Send a message" %}</a>.</p>
+                        <p>{% blocktrans %}You are friends with {{ other_user_display }}.{% endblocktrans %} <a href="{% url messages_compose %}{{ other_user }}/">{% trans "Send a message" %}</a>.</p>
                         <div>
                             <form method="POST" action="">
                                 <input type="hidden" name="action" value="remove" /><input type="submit" value="{% trans "remove from friends" %}"/>
@@ -73,10 +74,10 @@
                         </div>
                     {% else %}
                         {% if previous_invitations_from %}
-                            <p>{% blocktrans %}{{ other_user }} has requested friendship.{% endblocktrans %}</p>
+                            <p>{% blocktrans %}{{ other_user_display }} has requested friendship.{% endblocktrans %}</p>
                             {% for invitation in previous_invitations_from %}
                                 <div class="friendship_request">
-                                    <p>From <a href="{% url profile_detail invitation.from_user.username %}">{{ invitation.from_user }}</a> ({{ invitation.sent }}):</p>
+                                    <p>From <a href="{% url profile_detail invitation.from_user.username %}">{% user_display invitation.from_user %}</a> ({{ invitation.sent }}):</p>
                                     <p class="invitation_message">{{ invitation.message }}</p>
                                     <form method="post" action="">
                                         <input type="hidden" name="invitation" value="{{ invitation.id }}"/>
@@ -101,7 +102,7 @@
                                         <div class="form_block">
                                             <input type="hidden" name="action" value="invite" />
                                             <input type="submit" value="{% trans "invite" %}"/>
-                                            {% blocktrans %}{{ other_user }} to be a friend.{%  endblocktrans %}
+                                            {% blocktrans %}{{ other_user_display }} to be a friend.{%  endblocktrans %}
                                         </div>
                                     </fieldset>
                                 </form>

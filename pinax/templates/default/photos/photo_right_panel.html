@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load account_tags %}
 {% load avatar_tags %}
 {% load tagging_tags %}
 {% load group_tags %}
@@ -8,7 +9,7 @@
     <div class="photo-avatar">{% avatar photo.member.username 50 %}</div>
     <div class="photo-profile-details">
         <h2>Taken By</h2>
-        <a href="{% url profile_detail photo.member.username %}" title="{{ photo.member.username }}">{{ photo.member.username }}</a><br />
+        <a href="{% url profile_detail photo.member.username %}" title="{% user_display photo.member %}">{% user_display photo.member %}</a><br />
         {{ photo.date_taken|date }}<br />
         Viewed {{ photo.view_count }} times
     </div>

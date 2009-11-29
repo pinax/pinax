@@ -1,6 +1,6 @@
-{% load i18n %}{% blocktrans %}You have been invited by {{ user }} to join {{ SITE_NAME }}.
+{% load i18n %}{% load account_tags %}{% user_display user as user_display %}{% blocktrans %}You have been invited by {{ user_display }} to join {{ SITE_NAME }}.
 
-{{ user }} said:
+{{ user_display }} said:
 
 {{ message }}
 

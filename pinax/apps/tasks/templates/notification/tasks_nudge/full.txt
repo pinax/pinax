@@ -1,6 +1,7 @@
-{% load i18n %}
+{% load i18n %}{% load account_tags %}
+{% user_display nudger as nudger_display %}
 {% blocktrans %}
-{{ nudger }} has nudged you about task '{{ task }}'. Please go to the task and provide either a status update or comment.
+{{ nudger_display }} has nudged you about task '{{ task }}'. Please go to the task and provide either a status update or comment.
 {% endblocktrans %}
 
 

@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load humanize %}
+{% load account_tags %}
 {% load pagination_tags %}
 {% load tagging_tags %}
 {% load wiki_tags %}
@@ -34,9 +35,9 @@
           <tr class="{% cycle odd,even %}">
             <td><a href="{{ swap.get_absolute_url }}">{{ swap.accepted_time|shorttimesince }}</a></td>
             <td>{{ swap.proposing_offer }}</td>
-            <td>{{ swap.proposing_offer.offerer }}</td>
+            <td>{% user_display swap.proposing_offer.offerer %}</td>
             <td>{{ swap.responding_offer }}</td>
-            <td>{{ swap.responding_offer.offerer }}</td>
+            <td>{% user_display swap.responding_offer.offerer %}</td>
             <td>{{ swap.get_state_display }}</td>
           </tr>
         {% endfor %}

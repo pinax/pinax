@@ -2,15 +2,18 @@
 
 {% load i18n %}
 {% load avatar_tags %}
+{% load account_tags %}
 
-{% block head_title %}{% blocktrans %}Followers of {{ other_user }}{% endblocktrans %}{% endblock %}
+{% user_display other_user as other_user_display %}
+
+{% block head_title %}{% blocktrans %}Followers of {{ other_user_display }}{% endblocktrans %}{% endblock %}
 
 {% block body %}
-    <h1>{% blocktrans %}Followers of {{ other_user }}{% endblocktrans %}</h1>
+    <h1>{% blocktrans %}Followers of {{ other_user_display }}{% endblocktrans %}</h1>
     
     {% url profile_detail other_user.username as other_user_url %}
     
-    <p>{% blocktrans %}Followers of <a href="{{ other_user_url }}">{{ other_user }}</a>'s tweets:{% endblocktrans %}</p>
+    <p>{% blocktrans %}Followers of <a href="{{ other_user_url }}">{{ other_user_display }}</a>'s tweets:{% endblocktrans %}</p>
     
     {% if follow_list %}
         {% for following_user in follow_list %}
@@ -18,7 +21,7 @@
             <div class="profile clearfix">
                 {# @@@ factor out style into css file #}
                 <div style="float: left;">{% avatar following_user 40 %}</div>
-                <div style="padding: 5px; margin-left: 50px;"><a href="{% url profile_detail following_user.username %}">{{ following_user }}</a></div>
+                <div style="padding: 5px; margin-left: 50px;"><a href="{% url profile_detail following_user.username %}">{% user_display following_user %}</a></div>
             </div>
         {% endfor %}
     {% else %}
@@ -26,5 +29,5 @@
     {% endif %}
     
     {% url tweet_following other_user.username as tweet_following_url %}
-    <p>{% blocktrans %}Also see <a href="{{ tweet_following_url }}">who {{ other_user }} is following</a>.{% endblocktrans %}
+    <p>{% blocktrans %}Also see <a href="{{ tweet_following_url }}">who {{ other_user_display }} is following</a>.{% endblocktrans %}
 {% endblock %}

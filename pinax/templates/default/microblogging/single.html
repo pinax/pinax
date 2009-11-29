@@ -1,6 +1,7 @@
 {% extends "microblogging/base.html" %}
 
 {% load i18n %}
+{% load account_tags %}
 {% load oembed_tags %}
 
 {% block head_title %}{% blocktrans %}Single Tweet{% endblocktrans %}{% endblock %}
@@ -8,10 +9,10 @@
 {% block body %}
     <h1>{% trans "Single Tweet" %}</h1>
     
-    <p>Here is a single tweet from {{ tweet.sender.username }}:</p>
+    <p>Here is a single tweet from {% user_display tweet.sender %}:</p>
     
         <div class="tweet" id="t{{ tweet.id }}">
-        <a href="{% url profile_detail tweet.sender %}"><b>{{ tweet.sender }}</b></a>
+        <a href="{% url profile_detail tweet.sender %}"><b>{% user_display tweet.sender %}</b></a>
         {{ tweet.html|safe|oembed|urlize }}
         <span class="timesince">{{ tweet.sent|timesince }} ago</span>
         <a class="reply" href="{% url tweets_you_follow %}?reply={{ tweet.sender }}">reply</a>

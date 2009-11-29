@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load account_tags %}
 {% load markup_tags %}
 {% load avatar_tags %}
 {% load extra_tagging_tags %}
@@ -19,7 +20,7 @@
     <div class="blog-post-meta">
         {% avatar blog_post.author 40 %}
         <p><b>{% trans "Posted:" %}</b><br />
-            <a href="{% url profile_detail blog_post.author.username %}">{{ blog_post.author.username }}</a> {% trans "on" %} {{ blog_post.publish|date }}</p>
+            <a href="{% url profile_detail blog_post.author.username %}">{% user_display blog_post.author %}</a> {% trans "on" %} {{ blog_post.publish|date }}</p>
         <div class="blog-tags">
             <p>{% show_tags_for blog_post %}</p>
         </div>

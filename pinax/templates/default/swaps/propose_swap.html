@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load uni_form %}
+{% load account_tags %}
 
 {% block head_title %}{% blocktrans %}Propose a Swap{% endblocktrans %}{% endblock %}
 
@@ -12,7 +13,7 @@
         <h3>For: {{ offer.short_description }}</h3>
         <p>Offer: {{ offer.offering }}</p>
         <p>Want: {{ offer.want|urlize }}</p>
-        <p>Offered by: {{ offer.offerer }}</p>
+        <p>Offered by: {% user_display offer.offerer %}</p>
     </div>
     
     <div>
