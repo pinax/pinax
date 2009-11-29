@@ -24,7 +24,7 @@ def setup_project(name):
     project_app_dir = os.path.join(PINAX_ROOT, "projects", name, "apps")
     PROJECT_APP_DIRS.append(project_app_dir)
     sys.path.insert(0, project_app_dir)
-    settings_mod = import_module("settings")
+    settings_mod = import_module("%s.settings" % name)
     setup_environ(settings_mod)
 
 
