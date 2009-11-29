@@ -94,8 +94,22 @@ def setup_test_environment():
 
 def main():
     
+    usage = "%prog [options] [app app app]"
+    parser = optparse.OptionParser(usage=usage)
+    
+    parser.add_option("-v", "--verbosity",
+        action = "store",
+        dest = "verbosity",
+        default = "0",
+        type = "choice",
+        choices = ["0", "1", "2"],
+        help = "verbosity level; 0=minimal output, 1=normal output, 2=all output",
+    )
+    
+    options, args = parser.parse_args()
+    
     setup_test_environment()
-    call_command("test")
+    call_command("test", *args, verbosity=int(options.verbosity))
 
 
 if __name__ == "__main__":
