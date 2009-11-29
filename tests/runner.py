@@ -59,6 +59,11 @@ def main():
         installed_apps.update(set(settings.INSTALLED_APPS))
         reset_project()
     
+    # @@@ not quite sure how to handle this yet, but basic_profiles and
+    # profiles clash as one is a fork of the other. for now we can just test
+    # profiles behavior
+    installed_apps.remove("basic_profiles")
+    
     # setup path for all project apps/
     sys.path = PROJECT_APP_DIRS + sys.path[:]
     
