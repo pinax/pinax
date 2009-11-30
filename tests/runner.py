@@ -27,6 +27,9 @@ PINAX_PROJECTS = [
     "sample_group_project",
     "social_project",
 ]
+EXTRA_APP_ALIASES = {
+    "django_filters": ["django_filters.tests"],
+}
 
 # setup sys.path for Pinax and projects
 sys.path.insert(0, os.path.join(PINAX_ROOT, "apps"))
@@ -51,7 +54,10 @@ def build_app_list(projects):
     for project in projects:
         setup_project(project)
         settings._setup()
-        apps.update(settings.INSTALLED_APPS)
+        for app in settings.INSTALLED_APPS:
+            if app in EXTRA_APP_ALIASES:
+                apps.update(EXTRA_APP_ALIASES[app])
+            apps.add(app)
     
     return list(apps)
 
