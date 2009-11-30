@@ -83,6 +83,30 @@ you are **inside** your virtual environment)::
 
     pip install --no-deps --requirement requirements/external_apps.txt
 
+Running the tests
+-----------------
+
+Before you begin committing code you'll want to make sure the Pinax test suite
+passes. Running the test suite is simple. At the root of your Pinax clone
+run::
+
+    python tests/runner.py
+
+You must be inside the development virtual environment for this to work. If
+you only want to run a subset of tests (all tests are inside apps) you can
+specify them explicitly::
+
+    python tests/runner.py tasks projects
+
+This useful while developing. However, be sure to run the full suite before
+committing any code to ensure it doesn't break other parts of Pinax.
+
+.. note::
+
+    The test runner is new as of November 29, 2009. There are currently many
+    failing tests. We are working on it. This message will be removed when
+    the test suite is generally usable for contributors.
+
 Committing code
 ---------------
 
