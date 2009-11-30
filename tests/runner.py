@@ -106,11 +106,34 @@ def main():
         choices = ["0", "1", "2"],
         help = "verbosity level; 0=minimal output, 1=normal output, 2=all output",
     )
+    parser.add_option("--coverage",
+        action = "store_true",
+        dest = "coverage",
+        default = False,
+        help = "hook in coverage during test suite run and save out results",
+    )
     
     options, args = parser.parse_args()
     
+    if options.coverage:
+        try:
+            import coverage
+        except ImportError:
+            sys.stderr.write("coverage is not installed.\n")
+            sys.exit(1)
+        else:
+            cov = coverage.coverage(auto_data=True)
+            cov.start()
+    else:
+        cov = None
+    
     setup_test_environment()
+    
     call_command("test", *args, verbosity=int(options.verbosity))
+    
+    if cov:
+        cov.stop()
+        cov.save()
 
 
 if __name__ == "__main__":
