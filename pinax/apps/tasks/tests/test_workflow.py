@@ -1,14 +1,15 @@
 # coding: utf-8
+from django.test import TestCase
 
 from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
-from django.test import TestCase
 
 from tasks.models import Task
 from tasks.workflow import always, is_assignee, is_assignee_or_none
 from tasks.workflow import is_creator, no_assignee, is_task_manager
 from tasks.workflow import OR
 from tasks.workflow import TASK_MANAGER
+
 
 class TestWorkflowFunctions(TestCase):
     fixtures = ['test_tasks.json']

@@ -1,9 +1,10 @@
 # coding: utf-8
-
-from django.contrib.auth.models import User
 from django.test import TestCase
 
+from django.contrib.auth.models import User
+
 from tasks.models import Task, TaskHistory, Nudge
+
 
 class TestTask(TestCase):
     fixtures = ['test_tasks.json']

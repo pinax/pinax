@@ -1,17 +1,18 @@
 # coding: utf-8
-
 from django.test import TestCase
 from django.contrib.auth.models import User
 
+
 class AnonymousTaskTest(TestCase):
     fixtures = ['test_tasks.json']
-
+    urls = "tasks.tests.tasks_urls"
+    
     def setUp(self):
         pass
-
+    
     def tearDown(self):
         pass
-
+    
     def testAnonymousCannotEdit(self):
         """Anonymous users should not edit tasks"""
         response = self.client.get('/tasks/task/1/')
@@ -22,13 +23,14 @@ class AnonymousTaskTest(TestCase):
 
 class AuthenticatedTaskTest(TestCase):
     fixtures = ['test_tasks.json']
-
+    urls = "tasks.tests.tasks_urls"
+    
     def setUp(self):
         pass
-
+    
     def tearDown(self):
         pass
-
+    
     def testMemberCanEdit(self):
         """Member users should be able to edit tasks"""
         self.client.login(username='admin', password='test')

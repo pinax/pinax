@@ -1,5 +1,4 @@
 # coding: utf-8
-
 from django.test import TestCase
 
 
@@ -15,8 +14,10 @@ Lower Header
 Blah blah blah
 """
 
+
 class TestAddForm(TestCase):
     fixtures = ['test_tasks.json']
+    urls = "tasks.tests.tasks_urls"
     
     def setUp(self):
         self.client.login(username='admin', password='test')
@@ -61,7 +62,4 @@ class TestAddForm(TestCase):
         response = self.client.get('/tasks/')
         
         self.assertContains(response, '<a rel="tag" href="/tasks/tag/test/">test</a>')
-
-
-        
         
