@@ -96,6 +96,7 @@ def setup_test_environment():
             "django.contrib.auth.middleware.AuthenticationMiddleware",
         ],
         "INSTALLED_APPS": apps,
+        "LOGIN_URL": "/account/login/",
     })
 
 
