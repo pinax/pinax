@@ -11,7 +11,7 @@ class ProjectsTest(TestCase):
         
         response = self.client.get("/projects/create/")
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response["location"], "http://testserver/account/login?next=/projects/create/")
+        self.assertEqual(response["location"], "http://testserver/account/login/?next=/projects/create/")
     
     def test_auth_create_get(self):
         """can an auth'd user get to page?"""
@@ -26,7 +26,7 @@ class ProjectsTest(TestCase):
         
         response = self.client.post("/projects/create/")
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response["location"], "http://testserver/account/login?next=/projects/create/")
+        self.assertEqual(response["location"], "http://testserver/account/login/?next=/projects/create/")
     
     def test_auth_create_post(self):
         """can an auth'd user post to create a new project?"""
