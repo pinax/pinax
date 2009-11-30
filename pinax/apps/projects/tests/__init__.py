@@ -4,6 +4,7 @@ from projects.models import Project
 
 class ProjectsTest(TestCase):
     fixtures = ["projects_auth.json"]
+    urls = "projects.tests.project_urls"
     
     def test_unauth_create_get(self):
         """can an unauth'd user get to page?"""
