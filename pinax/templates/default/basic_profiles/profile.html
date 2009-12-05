@@ -4,7 +4,7 @@
 {% load uni_form %}
 {% load account_tags %}
 
-{% block head_title %}{% blocktrans %}Profile for {% user_display other_user %}{% endblocktrans %}{% endblock %}
+{% block head_title %}{% user_display other_user as other_user_display %}{% blocktrans %}Profile for {{ other_user_display }}{% endblocktrans %}{% endblock %}
 
 {% block body %}
     {% user_display other_user as other_user_display %}
