@@ -19,17 +19,15 @@ from pinax.utils.importlib import import_module
 from tagging.fields import TagField
 from tagging.models import Tag
 
+from tasks.fields import MarkupField
+
 if "notification" in settings.INSTALLED_APPS:
     from notification import models as notification
 else:
     notification = None
 
 
-MARKUP_CHOICES = getattr(settings, "MARKUP_CHOICES", [])
-
-
 workflow = import_module(getattr(settings, "TASKS_WORKFLOW_MODULE", "tasks.workflow"))
-
 
 
 class Task(models.Model):
@@ -49,8 +47,7 @@ class Task(models.Model):
     
     summary = models.CharField(_('summary'), max_length=100)
     detail = models.TextField(_('detail'), blank=True)
-    markup = models.CharField(_(u'Detail Markup'), max_length=20,
-        choices=MARKUP_CHOICES, blank=True)
+    markup = MarkupField(_(u'Detail Markup'))
     creator = models.ForeignKey(User, related_name="created_tasks", verbose_name=_('creator'))
     created = models.DateTimeField(_('created'), default=datetime.now)
     modified = models.DateTimeField(_('modified'), default=datetime.now) # task modified when commented on or when various fields changed
@@ -194,8 +191,7 @@ class TaskHistory(models.Model):
     group = generic.GenericForeignKey("content_type", "object_id")
     summary = models.CharField(_('summary'), max_length=100)
     detail = models.TextField(_('detail'), blank=True)
-    markup = models.CharField(_(u'Detail Markup'), max_length=20,
-        choices=MARKUP_CHOICES, blank=True)
+    markup = MarkupField(_(u'Detail Markup'))
     creator = models.ForeignKey(User, related_name="history_created_tasks", verbose_name=_('creator'))
     created = models.DateTimeField(_('created'), default=datetime.now)
     modified = models.DateTimeField(_('modified'), default=datetime.now) # task modified when commented on or when various fields changed
