@@ -95,12 +95,26 @@ def setup_test_environment():
             "django.contrib.sessions.middleware.SessionMiddleware",
             "django.contrib.auth.middleware.AuthenticationMiddleware",
         ],
+        "INSTALLED_APPS": apps,
+        "LOGIN_URL": "/account/login/",
+        
         "TEMPLATE_DIRS": [
             os.path.join(os.path.dirname(__file__), "templates"),
             os.path.join(os.path.dirname(pinax.__file__), "templates", "default"),
         ],
-        "INSTALLED_APPS": apps,
-        "LOGIN_URL": "/account/login/",
+        
+        # these settings are currently required to support Pinax default
+        # templates.
+        "TEMPLATE_CONTEXT_PROCESSORS": [
+            "django.core.context_processors.auth",
+            "django.core.context_processors.debug",
+            "django.core.context_processors.i18n",
+            "django.core.context_processors.media",
+            "django.core.context_processors.request",
+            "pinax.core.context_processors.pinax_settings",
+        ],
+        "CONTACT_EMAIL": "feedback@example.com",
+        "SITE_NAME": "Pinax",
     })
 
 
