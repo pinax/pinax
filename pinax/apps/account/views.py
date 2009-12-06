@@ -1,16 +1,19 @@
 from django.conf import settings
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import Q
-from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect, HttpResponseForbidden, Http404
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
+from django.utils.http import base36_to_int
 from django.utils.translation import ugettext, ugettext_lazy as _
 
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.contrib.auth.tokens import default_token_generator
 
 from emailconfirmation.models import EmailAddress, EmailConfirmation
 
@@ -299,25 +302,38 @@ def password_reset(request, **kwargs):
     return render_to_response(template_name, RequestContext(request, ctx))
 
 
-def password_reset_from_key(request, key, **kwargs):
+def password_reset_from_key(request, uidb36, key, **kwargs):
     
-    form_class = kwargs.pop("form_class", ResetPasswordKeyForm)
-    template_name = kwargs.pop("template_name", "account/password_reset_from_key.html")
+    form_class = kwargs.get("form_class", ResetPasswordKeyForm)
+    template_name = kwargs.get("template_name", "account/password_reset_from_key.html")
+    token_generator = kwargs.get("token_generator", default_token_generator)
     
     group, bridge = group_and_bridge(kwargs)
-    
-    if request.method == "POST":
-        password_reset_key_form = form_class(request.POST)
-        if password_reset_key_form.is_valid():
-            password_reset_key_form.save()
-            password_reset_key_form = None
-    else:
-        password_reset_key_form = form_class(initial={"temp_key": key})
-    
     ctx = group_context(group, bridge)
-    ctx.update({
-        "form": password_reset_key_form,
-    })
+    
+    # pull out user
+    try:
+        uid_int = base36_to_int(uidb36)
+    except ValueError:
+        raise Http404
+    
+    user = get_object_or_404(User, id=uid_int)
+    
+    if token_generator.check_token(user, key):
+        if request.method == "POST":
+            password_reset_key_form = form_class(request.POST, user=user, temp_key=key)
+            if password_reset_key_form.is_valid():
+                password_reset_key_form.save()
+                password_reset_key_form = None
+        else:
+            password_reset_key_form = form_class()
+        ctx.update({
+            "form": password_reset_key_form,
+        })
+    else:
+        ctx.update({
+            "token_fail": True,
+        })
     
     return render_to_response(template_name, RequestContext(request, ctx))
 

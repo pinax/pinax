@@ -6,12 +6,14 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as _, ugettext
 from django.utils.encoding import smart_unicode
 from django.utils.hashcompat import sha_constructor
+from django.utils.http import int_to_base36
 
 from pinax.core.utils import get_send_mail
 send_mail = get_send_mail()
 
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
+from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.models import Site
 
 from emailconfirmation.models import EmailAddress
@@ -268,13 +270,14 @@ class ResetPasswordForm(forms.Form):
             raise forms.ValidationError(_("Email address not verified for any user account"))
         return self.cleaned_data["email"]
     
-    def save(self):
-        for user in User.objects.filter(email__iexact=self.cleaned_data["email"]):
-            temp_key = sha_constructor("%s%s%s" % (
-                settings.SECRET_KEY,
-                user.email,
-                settings.SECRET_KEY,
-            )).hexdigest()
+    def save(self, **kwargs):
+        
+        email = self.cleaned_data["email"]
+        token_generator = kwargs.get("token_generator", default_token_generator)
+        
+        for user in User.objects.filter(email__iexact=email):
+            
+            temp_key = token_generator.make_token(user)
             
             # save it to the password reset model
             password_reset = PasswordReset(user=user, temp_key=temp_key)
@@ -283,10 +286,11 @@ class ResetPasswordForm(forms.Form):
             current_site = Site.objects.get_current()
             domain = unicode(current_site.domain)
             
-            #send the password reset email
+            # send the password reset email
             subject = _("Password reset email sent")
             message = render_to_string("account/password_reset_key_message.txt", {
                 "user": user,
+                "uid": int_to_base36(user.id),
                 "temp_key": temp_key,
                 "domain": domain,
             })
@@ -298,13 +302,11 @@ class ResetPasswordKeyForm(forms.Form):
     
     password1 = forms.CharField(label=_("New Password"), widget=forms.PasswordInput(render_value=False))
     password2 = forms.CharField(label=_("New Password (again)"), widget=forms.PasswordInput(render_value=False))
-    temp_key = forms.CharField(widget=forms.HiddenInput)
     
-    def clean_temp_key(self):
-        temp_key = self.cleaned_data.get("temp_key")
-        if not PasswordReset.objects.filter(temp_key=temp_key, reset=False).count() == 1:
-            raise forms.ValidationError(_("Temporary key is invalid."))
-        return temp_key
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop("user", None)
+        self.temp_key = kwargs.pop("temp_key", None)
+        super(ResetPasswordKeyForm, self).__init__(*args, **kwargs)
     
     def clean_password2(self):
         if "password1" in self.cleaned_data and "password2" in self.cleaned_data:
@@ -313,20 +315,14 @@ class ResetPasswordKeyForm(forms.Form):
         return self.cleaned_data["password2"]
     
     def save(self):
-        # get the password_reset object
-        temp_key = self.cleaned_data.get("temp_key")
-        password_reset = PasswordReset.objects.get(temp_key__exact=temp_key)
-        
-        # now set the new user password
-        user = User.objects.get(passwordreset__exact=password_reset)
+        # set the new user password
+        user = self.user
         user.set_password(self.cleaned_data["password1"])
         user.save()
         user.message_set.create(message=ugettext(u"Password successfully changed."))
         
-        # change all the password reset records to this person to be true.
-        for password_reset in PasswordReset.objects.filter(user=user):
-            password_reset.reset = True
-            password_reset.save()
+        # mark password reset object as reset
+        PasswordReset.objects.filter(temp_key=self.temp_key).update(reset=True)
 
 
 class ChangeTimezoneForm(AccountForm):
