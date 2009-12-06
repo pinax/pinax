@@ -16,6 +16,15 @@ from tagging.forms import TagField
 
 
 class TaskForm(forms.ModelForm):
+    """
+    Form for creating tasks
+    """
+    
+    tags = TagField(
+        required = False,
+        widget = TagAutoCompleteInput(app_label='tasks', model='task')
+    )
+    
     def __init__(self, user, group, *args, **kwargs):
         self.user = user
         self.group = group
@@ -29,12 +38,6 @@ class TaskForm(forms.ModelForm):
         
         self.fields["assignee"].queryset = assignee_queryset.order_by("username")
         self.fields['summary'].widget.attrs["size"] = 65
-    
-    def save(self, commit=True):
-        
-        return super(TaskForm, self).save(commit)
-    
-    tags = TagField(required=False, widget=TagAutoCompleteInput(app_label='tasks', model='task'))
     
     class Meta:
         model = Task
@@ -52,7 +55,7 @@ class TaskForm(forms.ModelForm):
 
 class EditTaskForm(forms.ModelForm):
     """
-    a form for editing task
+    Form for editing tasks
     """
     
     status = forms.CharField(
@@ -108,9 +111,3 @@ class EditTaskForm(forms.ModelForm):
                     ugettext("You must provide a resolution to mark this task as resolved")
                 )
         return self.cleaned_data["resolution"]
-
-
-class SearchTaskForm(forms.Form):
-    
-    search = forms.CharField(label="Search before adding a task",initial="search")
-    action = forms.CharField(initial="search",widget=forms.HiddenInput)

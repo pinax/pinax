@@ -33,7 +33,7 @@ else:
 
 from tasks.models import Task, TaskHistory, Nudge
 from tasks.filters import TaskFilter
-from tasks.forms import TaskForm, EditTaskForm, SearchTaskForm
+from tasks.forms import TaskForm, EditTaskForm
 
 workflow = import_module(getattr(settings, "TASKS_WORKFLOW_MODULE", "tasks.workflow"))
 
