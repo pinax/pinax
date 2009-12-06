@@ -8,11 +8,12 @@ from django.utils.translation import ugettext
 
 from django.contrib.auth.models import User
 
-from tasks.models import Task, TaskHistory
+from tasks.models import Task, TaskHistory, workflow
 from tasks.widgets import ReadOnlyWidget
 
 from tagging_utils.widgets import TagAutoCompleteInput
 from tagging.forms import TagField
+
 
 class TaskForm(forms.ModelForm):
     def __init__(self, user, group, *args, **kwargs):
@@ -68,7 +69,18 @@ class EditTaskForm(forms.ModelForm):
         
         self.fields["assignee"].queryset = assignee_queryset.order_by("username")
         self.fields['summary'].widget.attrs["size"] = 65
-        self.fields.keyOrder = ["summary","tags", "status", "assignee", "state", "resolution"]
+        self.fields.keyOrder = [
+            "summary",
+            "detail",
+            "tags",
+            "status",
+            "assignee",
+            "state",
+            "resolution",
+        ]
+        
+        if not workflow.is_task_manager(self.instance, user):
+            del self.fields["detail"]
         
         if self.instance.assignee != user:
             del self.fields["status"]
@@ -87,7 +99,7 @@ class EditTaskForm(forms.ModelForm):
     tags = TagField(required=False, widget=TagAutoCompleteInput(app_label='tasks', model='task'))
     
     class Meta(TaskForm.Meta):
-        fields = ('summary','status', 'assignee', 'state', 'tags', 'resolution')
+        fields = ('summary', 'detail', 'status', 'assignee', 'state', 'tags', 'resolution')
     
     def clean_resolution(self):
         if self.cleaned_data["state"] == u"2":
@@ -96,6 +108,7 @@ class EditTaskForm(forms.ModelForm):
                     ugettext("You must provide a resolution to mark this task as resolved")
                 )
         return self.cleaned_data["resolution"]
+
 
 class SearchTaskForm(forms.Form):
     
