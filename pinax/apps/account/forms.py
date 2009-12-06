@@ -25,6 +25,10 @@ from account.models import PasswordReset
 alnum_re = re.compile(r'^\w+$')
 
 
+REQUIRED_EMAIL = getattr(settings, "ACCOUNT_REQUIRED_EMAIL", False)
+EMAIL_VERIFICATION = getattr(settings, "ACCOUNT_EMAIL_VERIFICATION", False)
+
+
 class GroupForm(forms.Form):
     
     def __init__(self, *args, **kwargs):
@@ -71,7 +75,7 @@ class SignupForm(GroupForm):
     password1 = forms.CharField(label=_("Password"), widget=forms.PasswordInput(render_value=False))
     password2 = forms.CharField(label=_("Password (again)"), widget=forms.PasswordInput(render_value=False))
     
-    if settings.ACCOUNT_REQUIRED_EMAIL or settings.ACCOUNT_EMAIL_VERIFICATION:
+    if REQUIRED_EMAIL or EMAIL_VERIFICATION:
         email = forms.EmailField(
             label = _("Email"),
             required = True,
@@ -137,7 +141,7 @@ class SignupForm(GroupForm):
                 new_user.message_set.create(message=ugettext(u"Confirmation email sent to %(email)s") % {'email': email})
                 EmailAddress.objects.add_email(new_user, email)
         
-        if settings.ACCOUNT_EMAIL_VERIFICATION:
+        if EMAIL_VERIFICATION:
             new_user.is_active = False
             new_user.save()
                 
@@ -147,7 +151,7 @@ class SignupForm(GroupForm):
 class OpenIDSignupForm(forms.Form):
     username = forms.CharField(label="Username", max_length=30, widget=forms.TextInput())
     
-    if settings.ACCOUNT_REQUIRED_EMAIL or settings.ACCOUNT_EMAIL_VERIFICATION:
+    if REQUIRED_EMAIL or EMAIL_VERIFICATION:
         email = forms.EmailField(
             label = _("Email"),
             required = True,
