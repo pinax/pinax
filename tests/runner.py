@@ -95,6 +95,10 @@ def setup_test_environment():
             "django.contrib.sessions.middleware.SessionMiddleware",
             "django.contrib.auth.middleware.AuthenticationMiddleware",
         ],
+        "TEMPLATE_DIRS": [
+            os.path.join(os.path.dirname(__file__), "templates"),
+            os.path.join(os.path.dirname(pinax.__file__), "templates", "default"),
+        ],
         "INSTALLED_APPS": apps,
         "LOGIN_URL": "/account/login/",
     })
