@@ -95,7 +95,7 @@ class PasswordResetTest(TestCase):
             "email": "bob@example.com",
         }
         response = self.client.post("/account/password_reset/", data)
-        self.assertEquals(response.status_code, 200)
+        self.assertEquals(response.status_code, 302)
         self.assertEquals(len(mail.outbox), 1)
     
     def _read_reset_email(self,  email):
@@ -116,7 +116,7 @@ class PasswordResetTest(TestCase):
             "email": "bob@example.com",
         }
         response = self.client.post("/account/password_reset/", data)
-        self.assertEquals(response.status_code, 200)
+        self.assertEquals(response.status_code, 302)
         self.assertEquals(len(mail.outbox), 1)
         return self._read_reset_email(mail.outbox[0])
     

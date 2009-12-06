@@ -279,7 +279,6 @@ def password_reset(request, **kwargs):
     
     form_class = kwargs.pop("form_class", ResetPasswordForm)
     template_name = kwargs.pop("template_name", "account/password_reset.html")
-    template_name_done = kwargs.pop("template_name_done", "account/password_reset_done.html")
     
     group, bridge = group_and_bridge(kwargs)
     ctx = group_context(group, bridge)
@@ -288,16 +287,28 @@ def password_reset(request, **kwargs):
         password_reset_form = form_class(request.POST)
         if password_reset_form.is_valid():
             email = password_reset_form.save()
-            ctx.update({
-                "email": email,
-            })
-            return render_to_response(template_name_done, RequestContext(request, ctx))
+            
+            if group:
+                redirect_to = bridge.reverse("acct_passwd_reset_done", group)
+            else:
+                redirect_to = reverse("acct_passwd_reset_done")
+            return HttpResponseRedirect(redirect_to)
     else:
         password_reset_form = form_class()
     
     ctx.update({
         "password_reset_form": password_reset_form,
     })
+    
+    return render_to_response(template_name, RequestContext(request, ctx))
+
+
+def password_reset_done(request, **kwargs):
+    
+    template_name = kwargs.pop("template_name", "account/password_reset_done.html")
+    
+    group, bridge = group_and_bridge(kwargs)
+    ctx = group_context(group, bridge)
     
     return render_to_response(template_name, RequestContext(request, ctx))
 
