@@ -55,6 +55,14 @@ class EditTaskForm(forms.ModelForm):
     a form for editing task
     """
     
+    status = forms.CharField(
+        required = False,
+        widget = forms.TextInput(attrs={'size':'50', 'maxlength': '100'})
+    )
+    tags = TagField(
+        required = False,
+        widget = TagAutoCompleteInput(app_label='tasks', model='task')
+    )
     
     def __init__(self, user, group, *args, **kwargs):
         self.user = user
@@ -89,14 +97,6 @@ class EditTaskForm(forms.ModelForm):
         
         if self.instance.state == '3':
             self.fields['resolution'].widget = ReadOnlyWidget(field=self.instance._meta.get_field('resolution'))
-    
-    # TODO: work on this for CPC ticket #131
-    def save(self, commit=False):
-        
-        return super(EditTaskForm, self).save(True)
-        
-    status = forms.CharField(required=False, widget=forms.TextInput(attrs={'size':'50', 'maxlength': '100'}))
-    tags = TagField(required=False, widget=TagAutoCompleteInput(app_label='tasks', model='task'))
     
     class Meta(TaskForm.Meta):
         fields = ('summary', 'detail', 'status', 'assignee', 'state', 'tags', 'resolution')
