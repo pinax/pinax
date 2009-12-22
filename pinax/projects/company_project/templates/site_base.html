@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>{% block head_title %}ACME, Inc.{% endblock %}</title>
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/base.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/syntax.css" type="text/css" media="screen" />
+    
+    <link rel="alternate" type="application/atom+xml" href="{% url blog_feed "technical" %}" title="technical blog feed"/>
+    <link rel="alternate" type="application/atom+xml" href="{% url blog_feed "business" %}" title="business blog feed"/>
+    <link rel="alternate" type="application/atom+xml" href="{% url blog_feed_combined %}" title="combined blog feed"/>
+  </head>
+  <body id="{% block body_id %}default{% endblock %}">
+    <div id="wrapper">
+        {% block header %}
+            <h1 id="logo">ACME, Inc.</h1>
+        {% endblock %}
+        
+        <div id="content">
+            {% block content %}
+            {% endblock %}
+        </div><!-- End content -->
+    </div>
+    {# @@@ google analytics #}
+    {% block extra_body %}{% endblock %}
+  </body>
+</html>

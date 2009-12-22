@@ -1,0 +1,25 @@
+<entry xml:base="http://{{ current_site.domain }}/">
+    <id>http://{{ current_site.domain }}{{ entry.get_absolute_url }}</id>
+    <title>{{ entry.title }}</title>
+    <link rel="alternate" type="text/html" href="http://{{ current_site.domain }}{{ entry.get_absolute_url }}"/>
+    
+    <updated>{{ entry.updated|date:"Y-m-d\TH:i:s\Z" }}</updated>
+    <published>{{ entry.published|date:"Y-m-d\TH:i:s\Z" }}</published>
+    
+    <author>
+         <name>{{ entry.author.get_full_name }}</name>
+    </author>
+    
+    <summary type="xhtml">
+        <div xmlns="http://www.w3.org/1999/xhtml">
+            {{ entry.teaser_html|safe }}
+        </div>
+    </summary>
+    
+    <content type="xhtml" xml:lang="en">
+        <div xmlns="http://www.w3.org/1999/xhtml">
+            {{ entry.teaser_html|safe }}
+            {{ entry.content_html|safe }}
+        </div>
+    </content>
+</entry>

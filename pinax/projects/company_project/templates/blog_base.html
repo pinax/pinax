@@ -1,0 +1,22 @@
+{% extends "site_base.html" %}
+
+{% load webdesign %}
+
+{% block body_id %}blog{% endblock %}
+{% block header %}{% endblock %}
+
+{% block content %}
+    <div class="grouping clear">
+        <div class="primary">
+            {% block primary %}{% endblock %}
+        </div>
+        
+        <div class="secondary">
+            <h1><a href="/" id="logo">ACME, Inc.</a></h1>
+            {% block secondary %}
+                <h2>Sidebar</h2>
+                {% lorem 3 p %}
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}
