@@ -1,22 +1,14 @@
 {% extends "site_base.html" %}
 
 {% load webdesign %}
-{% load blog_tags %}
+{% load biblion_tags %}
 
 {% block body_id %}homepage{% endblock %}
 
 {% block content %}
     
-    {% latest_blog_posts as posts %}
-    <div class="announcement"><b><a href="{% url blog %}">The ACME Blog</a></b>
-        {% if posts %} &mdash; 
-        <span id="posts">
-            {% for post in posts %}
-                <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
-            {% endfor %}
-        </span>
-        {% endif %}
-    </div>
+{% latest_blog_post as latest_post %}
+    <div class="announcement"><b><a href="{% url blog %}">ACME Blog</a></b>{% if latest_post %} &mdash; <a href="{{ latest_post.get_absolute_url }}">{{ latest_post.title }}</a>{% endif %}</div>
     
     <div class="grouping clear">
         <div class="primary">
@@ -45,15 +37,4 @@
 {% endblock %}
 
 {% block extra_body %}
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
-<script src="{{ MEDIA_URL }}js/jquery.cycle.all.js"></script>
-<script>
-    $(function() {
-        $("#posts").cycle({
-            fx: "fade",
-            pause: 1,
-            timeout: 3000
-        });
-    });
-</script>
 {% endblock %}
