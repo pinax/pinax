@@ -23,7 +23,7 @@
         {% endifsetting %}
     {% endif %}
     
-    <form class="login uniForm" method="POST" action="">
+    <form class="login uniForm" method="POST" action="{% url acct_login %}">
         <fieldset class="inlineLabels">
             <div class="form_block">
                 <a href="{% url acct_passwd_reset %}">{% trans "Forgot password?" %}</a>
