@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# Django settings for basic pinax project.
 
 import os.path
+import posixpath
 import pinax
 
 PINAX_ROOT = os.path.abspath(os.path.dirname(pinax.__file__))
@@ -55,6 +55,20 @@ MEDIA_ROOT = os.path.join(os.path.dirname(__file__), "site_media")
 # URL that handles the media served from MEDIA_ROOT.
 # Example: "http://media.lawrence.com"
 MEDIA_URL = '/site_media/'
+
+# Absolute path to the directory that holds static files like app media.
+# Example: "/home/media/media.lawrence.com/apps/"
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'site_media', 'static')
+
+# URL that handles the static files like app media.
+# Example: "http://media.lawrence.com"
+STATIC_URL = '/site_media/static/'
+
+# Additional directories which hold static files
+STATICFILES_DIRS = (
+    ('cms_project_company', os.path.join(PROJECT_ROOT, 'media')),
+    ('pinax', os.path.join(PINAX_ROOT, 'media', PINAX_THEME)),
+)
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
@@ -114,11 +128,6 @@ INSTALLED_APPS = (
 #TWITTER_USERNAME = ""
 #TWITTER_PASSWORD = ""
 #TWITTER_TWEET_PREFIX = "New Post:" # NOTE: space will be appended
-
-STATICFILES_EXTRA_MEDIA = [
-    ('pinax', os.path.join(PINAX_ROOT, 'media', PINAX_THEME)),
-    ('company_project', os.path.join(PROJECT_ROOT, 'media')),
-]
 
 # local_settings.py can be used to override environment-specific settings
 # like database and email that differ between development and production.
