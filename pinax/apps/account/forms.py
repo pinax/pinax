@@ -119,6 +119,16 @@ class SignupForm(GroupForm):
             user.save()
         return user
     
+    def user_credentials(self):
+        """
+        Provides the credentials required to authenticate the user after
+        sign-up is completed.
+        """
+        return {
+            "username": self.cleaned_data["username"],
+            "password": self.cleaned_data["password1"],
+        }
+    
     def save(self):
         username = self.cleaned_data["username"]
         email = self.cleaned_data["email"]
@@ -159,7 +169,7 @@ class SignupForm(GroupForm):
             new_user.is_active = False
             new_user.save()
         
-        return username, password # required for authenticate()
+        return self.user_credentials() # required for authenticate()
 
 
 class OpenIDSignupForm(forms.Form):
