@@ -184,11 +184,11 @@ LOGIN_REDIRECT_URLNAME = "what_next"
 
 AUTHENTICATED_EXEMPT_URLS = [
     r"^/$",
-    r"^/success/$",
     r"^/account/signup/$",
     r"^/account/password_reset",
     r"^/account/confirm_email",
-    r"/openid"
+    r"/openid",
+    r"^/waitinglist",
 ]
 
 # local_settings.py can be used to override environment-specific settings

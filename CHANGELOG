@@ -5,6 +5,18 @@
 # the format of this document is subject to change; I'm just wanting to get
 # things started
 
+Improved waitinglist app
+------------------------
+
+ * Added {% waitinglist_entry_form as varname %} templatetag to give slightly
+   more flexibility to where the form is displayed. Used to be coupled in
+   the homepage.html template.
+ * Fixed the spelling of waitinglist_sucess URLpattern name.
+ * Removed nasty homepage view from private_beta_project/urls.py that dealt
+   with WaitingListEntryForm. This added a new view list_signup in waitinglist
+   app where POSTs are sent. GETs render waitinglist/list_signup.html where
+   a user can add themselves as well.
+
 Improved password reset
 -----------------------
 
