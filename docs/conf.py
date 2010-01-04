@@ -35,7 +35,7 @@ master_doc = 'index'
 
 # General substitutions.
 project = 'Pinax'
-copyright = '2008, James Tauber and Pinax Team'
+copyright = '2010, James Tauber and Pinax Team'
 
 # The default replacements for |version| and |release|, also used in various
 # other places throughout the built documents.
