@@ -5,6 +5,14 @@
 # the format of this document is subject to change; I'm just wanting to get
 # things started
 
+
+Improvements to account app
+---------------------------
+
+ * Moved User instance creation to a new method ``SignupForm.create_user``
+   This gives an extension point to modify how User instances are created
+   via the ``SignupForm``.
+
 Improved waitinglist app
 ------------------------
 

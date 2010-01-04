@@ -107,6 +107,18 @@ class SignupForm(GroupForm):
                 raise forms.ValidationError(_("You must type the same password each time."))
         return self.cleaned_data
     
+    def create_user(self, username, email, password=None, commit=True):
+        user = User()
+        user.username = username
+        user.email = email.strip().lower()
+        if password:
+            user.set_password(password)
+        else:
+            user.set_unusable_password()
+        if commit:
+            user.save()
+        return user
+    
     def save(self):
         username = self.cleaned_data["username"]
         email = self.cleaned_data["email"]
@@ -126,19 +138,19 @@ class SignupForm(GroupForm):
         
         if confirmed:
             if email == join_invitation.contact.email:
-                new_user = User.objects.create_user(username, email, password)
+                new_user = self.create_user(username, email, password)
                 join_invitation.accept(new_user) # should go before creation of EmailAddress below
                 new_user.message_set.create(message=ugettext(u"Your email address has already been verified"))
                 # already verified so can just create
                 EmailAddress(user=new_user, email=email, verified=True, primary=True).save()
             else:
-                new_user = User.objects.create_user(username, "", password)
+                new_user = self.create_user(username, "", password)
                 join_invitation.accept(new_user) # should go before creation of EmailAddress below
                 if email:
                     new_user.message_set.create(message=ugettext(u"Confirmation email sent to %(email)s") % {'email': email})
                     EmailAddress.objects.add_email(new_user, email)
         else:
-            new_user = User.objects.create_user(username, "", password)
+            new_user = self.create_user(username, "", password)
             if email:
                 new_user.message_set.create(message=ugettext(u"Confirmation email sent to %(email)s") % {'email': email})
                 EmailAddress.objects.add_email(new_user, email)
@@ -146,7 +158,7 @@ class SignupForm(GroupForm):
         if EMAIL_VERIFICATION:
             new_user.is_active = False
             new_user.save()
-                
+        
         return username, password # required for authenticate()
 
 
