@@ -27,6 +27,7 @@ from account.models import PasswordReset
 alnum_re = re.compile(r'^\w+$')
 
 
+# @@@ might want to find way to prevent settings access globally here.
 REQUIRED_EMAIL = getattr(settings, "ACCOUNT_REQUIRED_EMAIL", False)
 EMAIL_VERIFICATION = getattr(settings, "ACCOUNT_EMAIL_VERIFICATION", False)
 
@@ -76,21 +77,17 @@ class SignupForm(GroupForm):
     username = forms.CharField(label=_("Username"), max_length=30, widget=forms.TextInput())
     password1 = forms.CharField(label=_("Password"), widget=forms.PasswordInput(render_value=False))
     password2 = forms.CharField(label=_("Password (again)"), widget=forms.PasswordInput(render_value=False))
-    
-    if REQUIRED_EMAIL or EMAIL_VERIFICATION:
-        email = forms.EmailField(
-            label = _("Email"),
-            required = True,
-            widget = forms.TextInput()
-        )
-    else:
-        email = forms.EmailField(
-            label = _("Email (optional)"),
-            required = False,
-            widget = forms.TextInput()
-        )
-    
+    email = forms.EmailField(widget=forms.TextInput())
     confirmation_key = forms.CharField(max_length=40, required=False, widget=forms.HiddenInput())
+    
+    def __init__(self, *args, **kwargs):
+        super(SignupForm, self).__init__(*args, **kwargs)
+        if REQUIRED_EMAIL or EMAIL_VERIFICATION:
+            self.fields["email"].label = ugettext("E-mail")
+            self.fields["email"].required = True
+        else:
+            self.fields["email"].label = ugettext("E-mail (optional)")
+            self.fields["email"].required = False
     
     def clean_username(self):
         if not alnum_re.search(self.cleaned_data["username"]):
@@ -173,32 +170,27 @@ class SignupForm(GroupForm):
 
 
 class OpenIDSignupForm(forms.Form):
-    username = forms.CharField(label="Username", max_length=30, widget=forms.TextInput())
     
-    if REQUIRED_EMAIL or EMAIL_VERIFICATION:
-        email = forms.EmailField(
-            label = _("Email"),
-            required = True,
-            widget = forms.TextInput()
-        )
-    else:
-        email = forms.EmailField(
-            label = _("Email (optional)"),
-            required = False,
-            widget = forms.TextInput()
-        )
+    username = forms.CharField(label="Username", max_length=30, widget=forms.TextInput())
+    email = forms.EmailField(widget=forms.TextInput())
     
     def __init__(self, *args, **kwargs):
         # remember provided (validated!) OpenID to attach it to the new user
         # later.
         self.openid = kwargs.pop("openid", None)
-        
         # pop these off since they are passed to this method but we can't
         # pass them to forms.Form.__init__
         kwargs.pop("reserved_usernames", [])
         kwargs.pop("no_duplicate_emails", False)
         
         super(OpenIDSignupForm, self).__init__(*args, **kwargs)
+        
+        if REQUIRED_EMAIL or EMAIL_VERIFICATION:
+            self.fields["email"].label = ugettext("E-mail")
+            self.fields["email"].required = True
+        else:
+            self.fields["email"].label = ugettext("E-mail (optional)")
+            self.fields["email"].required = False
     
     def clean_username(self):
         if not alnum_re.search(self.cleaned_data["username"]):
