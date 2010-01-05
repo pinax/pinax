@@ -159,6 +159,9 @@ class SignupForm(GroupForm):
         else:
             new_user = self.create_user(username, "", password)
             if email:
+                # @@@ 1.2: this user message makes little sense when
+                # EMAIL_VERIFICATION is True moving to new messages in 1.2
+                # will fix it.
                 new_user.message_set.create(message=ugettext(u"Confirmation email sent to %(email)s") % {'email': email})
                 EmailAddress.objects.add_email(new_user, email)
         
