@@ -18,6 +18,7 @@ from django.contrib.sites.models import Site
 
 from emailconfirmation.models import EmailAddress
 from account.models import Account
+from account.utils import user_display
 
 from timezones.forms import TimeZoneField
 
