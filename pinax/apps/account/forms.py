@@ -99,7 +99,11 @@ class LoginForm(GroupForm):
     def login(self, request):
         if self.is_valid():
             login(request, self.user)
-            request.user.message_set.create(message=ugettext(u"Successfully logged in as %(username)s.") % {'username': self.user.username})
+            request.user.message_set.create(
+                message = ugettext(u"Successfully logged in as %(user)s.") % {
+                    'user': user_display(self.user)
+                }
+            )
             if self.cleaned_data['remember']:
                 request.session.set_expiry(60 * 60 * 24 * 7 * 3)
             else:
