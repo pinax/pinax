@@ -195,6 +195,17 @@ LOGIN_REDIRECT_URLNAME = "home"
 ACCOUNT_OPEN_SIGNUP = False
 ACCOUNT_REQUIRED_EMAIL = False
 ACCOUNT_EMAIL_VERIFICATION = False
+ACCOUNT_EMAIL_AUTHENTICATION = False
+ACCOUNT_UNIQUE_EMAIL = EMAIL_CONFIRMATION_UNIQUE_EMAIL = False
+
+if ACCOUNT_EMAIL_AUTHENTICATION:
+    AUTHENTICATION_BACKENDS = (
+        "account.auth_backends.EmailModelBackend",
+    )
+else:
+    AUTHENTICATION_BACKENDS = (
+        "django.contrib.auth.backends.ModelBackend",
+    )
 
 AUTHENTICATED_EXEMPT_URLS = [
     r"^/account/signup/$",

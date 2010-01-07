@@ -30,6 +30,9 @@ alnum_re = re.compile(r'^\w+$')
 # @@@ might want to find way to prevent settings access globally here.
 REQUIRED_EMAIL = getattr(settings, "ACCOUNT_REQUIRED_EMAIL", False)
 EMAIL_VERIFICATION = getattr(settings, "ACCOUNT_EMAIL_VERIFICATION", False)
+EMAIL_AUTHENTICATION = getattr(settings, "ACCOUNT_EMAIL_AUTHENTICATION", False)
+UNIQUE_EMAIL = getattr(settings, "ACCOUNT_UNIQUE_EMAIL", False)
+
 
 
 class GroupForm(forms.Form):
@@ -41,23 +44,56 @@ class GroupForm(forms.Form):
 
 class LoginForm(GroupForm):
     
-    username = forms.CharField(label=_("Username"), max_length=30, widget=forms.TextInput())
     password = forms.CharField(label=_("Password"), widget=forms.PasswordInput(render_value=False))
     remember = forms.BooleanField(label=_("Remember Me"), help_text=_("If checked you will stay logged in for 3 weeks"), required=False)
     
     user = None
     
+    def __init__(self, *args, **kwargs):
+        super(LoginForm, self).__init__(*args, **kwargs)
+        ordering = []
+        if EMAIL_AUTHENTICATION:
+            self.fields["email"] = forms.EmailField(
+                label = ugettext("E-mail"),
+            )
+            ordering.append("email")
+        else:
+            self.fields["username"] = forms.CharField(
+                label = ugettext("Username"),
+                max_length = 30,
+            )
+            ordering.append("username")
+        ordering.extend(["password", "remember"])
+        self.fields.keyOrder = ordering
+    
+    def user_credentials(self):
+        """
+        Provides the credentials required to authenticate the user for
+        login.
+        """
+        credentials = {}
+        if EMAIL_AUTHENTICATION:
+            credentials["email"] = self.cleaned_data["email"]
+        else:
+            credentials["username"] = self.cleaned_data["username"]
+        credentials["password"] = self.cleaned_data["password"]
+        return credentials
+    
     def clean(self):
         if self._errors:
             return
-        user = authenticate(username=self.cleaned_data["username"], password=self.cleaned_data["password"])
+        user = authenticate(**self.user_credentials())
         if user:
             if user.is_active:
                 self.user = user
             else:
                 raise forms.ValidationError(_("This account is currently inactive."))
         else:
-            raise forms.ValidationError(_("The username and/or password you specified are not correct."))
+            if EMAIL_AUTHENTICATION:
+                error = _("The e-mail address and/or password you specified are not correct.")
+            else:
+                error = _("The username and/or password you specified are not correct.")
+            raise forms.ValidationError(error)
         return self.cleaned_data
     
     def login(self, request):
@@ -82,7 +118,7 @@ class SignupForm(GroupForm):
     
     def __init__(self, *args, **kwargs):
         super(SignupForm, self).__init__(*args, **kwargs)
-        if REQUIRED_EMAIL or EMAIL_VERIFICATION:
+        if REQUIRED_EMAIL or EMAIL_VERIFICATION or EMAIL_AUTHENTICATION:
             self.fields["email"].label = ugettext("E-mail")
             self.fields["email"].required = True
         else:
@@ -98,16 +134,30 @@ class SignupForm(GroupForm):
             return self.cleaned_data["username"]
         raise forms.ValidationError(_("This username is already taken. Please choose another."))
     
+    def clean_email(self):
+        value = self.cleaned_data["email"]
+        if UNIQUE_EMAIL or EMAIL_AUTHENTICATION:
+            try:
+                User.objects.get(email__iexact=value)
+            except User.DoesNotExist:
+                return value
+            raise forms.ValidationError(_("A user is registered with this e-mail address."))
+        return value
+    
     def clean(self):
         if "password1" in self.cleaned_data and "password2" in self.cleaned_data:
             if self.cleaned_data["password1"] != self.cleaned_data["password2"]:
                 raise forms.ValidationError(_("You must type the same password each time."))
         return self.cleaned_data
     
-    def create_user(self, username, email, password=None, commit=True):
+    def create_user(self, username=None, commit=True):
         user = User()
+        if username is None:
+            raise NotImplementedError("SignupForm.create_user does not handle "
+                "username=None case. You must override this method.")
         user.username = username
-        user.email = email.strip().lower()
+        user.email = self.cleaned_data["email"].strip().lower()
+        password = self.cleaned_data["password1"]
         if password:
             user.set_password(password)
         else:
@@ -121,15 +171,19 @@ class SignupForm(GroupForm):
         Provides the credentials required to authenticate the user after
         sign-up is completed.
         """
-        return {
-            "username": self.cleaned_data["username"],
-            "password": self.cleaned_data["password1"],
-        }
+        credentials = {}
+        if EMAIL_AUTHENTICATION:
+            credentials["email"] = self.cleaned_data["email"]
+        else:
+            credentials["username"] = self.cleaned_data["username"]
+        credentials["password"] = self.cleaned_data["password1"]
+        return credentials
     
     def save(self):
-        username = self.cleaned_data["username"]
+        # don't assume a username is available. it is a common removal if
+        # site developer wants to use e-mail authentication.
+        username = self.cleaned_data.get("username")
         email = self.cleaned_data["email"]
-        password = self.cleaned_data["password1"]
         
         if self.cleaned_data["confirmation_key"]:
             from friends.models import JoinInvitation # @@@ temporary fix for issue 93
@@ -145,19 +199,19 @@ class SignupForm(GroupForm):
         
         if confirmed:
             if email == join_invitation.contact.email:
-                new_user = self.create_user(username, email, password)
+                new_user = self.create_user(username)
                 join_invitation.accept(new_user) # should go before creation of EmailAddress below
                 new_user.message_set.create(message=ugettext(u"Your email address has already been verified"))
                 # already verified so can just create
                 EmailAddress(user=new_user, email=email, verified=True, primary=True).save()
             else:
-                new_user = self.create_user(username, "", password)
+                new_user = self.create_user(username)
                 join_invitation.accept(new_user) # should go before creation of EmailAddress below
                 if email:
                     new_user.message_set.create(message=ugettext(u"Confirmation email sent to %(email)s") % {'email': email})
                     EmailAddress.objects.add_email(new_user, email)
         else:
-            new_user = self.create_user(username, "", password)
+            new_user = self.create_user(username)
             if email:
                 # @@@ 1.2: this user message makes little sense when
                 # EMAIL_VERIFICATION is True moving to new messages in 1.2
@@ -188,7 +242,7 @@ class OpenIDSignupForm(forms.Form):
         
         super(OpenIDSignupForm, self).__init__(*args, **kwargs)
         
-        if REQUIRED_EMAIL or EMAIL_VERIFICATION:
+        if REQUIRED_EMAIL or EMAIL_VERIFICATION or EMAIL_AUTHENTICATION:
             self.fields["email"].label = ugettext("E-mail")
             self.fields["email"].required = True
         else:
@@ -203,6 +257,16 @@ class OpenIDSignupForm(forms.Form):
         except User.DoesNotExist:
             return self.cleaned_data["username"]
         raise forms.ValidationError(u"This username is already taken. Please choose another.")
+    
+    def clean_email(self):
+        value = self.cleaned_data["email"]
+        if UNIQUE_EMAIL or EMAIL_AUTHENTICATION:
+            try:
+                User.objects.get(email__iexact=value)
+            except User.DoesNotExist:
+                return value
+            raise forms.ValidationError(_("A user is registered with this e-mail address."))
+        return value
 
 
 class UserForm(forms.Form):
@@ -227,11 +291,25 @@ class AddEmailForm(UserForm):
     email = forms.EmailField(label=_("Email"), required=True, widget=forms.TextInput(attrs={'size':'30'}))
     
     def clean_email(self):
-        try:
-            EmailAddress.objects.get(user=self.user, email=self.cleaned_data["email"])
-        except EmailAddress.DoesNotExist:
-            return self.cleaned_data["email"]
-        raise forms.ValidationError(_("This email address already associated with this account."))
+        value = self.cleaned_data["email"]
+        errors = {
+            "this_account": _("This e-mail address already associated with this account."),
+            "different_account": _("This e-mail address already associated with another account."),
+        }
+        if UNIQUE_EMAIL:
+            try:
+                email = EmailAddress.objects.get(email__iexact=value)
+            except EmailAddress.DoesNotExist:
+                return value
+            if email.user == self.user:
+                raise forms.ValidationError(errors["this_account"])
+            raise forms.ValidationError(errors["different_account"])
+        else:
+            try:
+                EmailAddress.objects.get(user=self.user, email__iexact=value)
+            except EmailAddress.DoesNotExist:
+                return value
+            raise forms.ValidationError(errors["this_account"])
     
     def save(self):
         self.user.message_set.create(message=ugettext(u"Confirmation email sent to %(email)s") % {'email': self.cleaned_data["email"]})
