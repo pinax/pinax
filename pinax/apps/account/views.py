@@ -17,7 +17,7 @@ from django.contrib.auth.tokens import default_token_generator
 
 from emailconfirmation.models import EmailAddress, EmailConfirmation
 
-from account.utils import get_default_redirect
+from account.utils import get_default_redirect, user_display
 from account.models import OtherServiceInfo
 from account.forms import SignupForm, AddEmailForm, LoginForm, \
     ChangePasswordForm, SetPasswordForm, ResetPasswordForm, \
@@ -121,8 +121,8 @@ def signup(request, **kwargs):
                 user = authenticate(**credentials)
                 auth_login(request, user)
                 request.user.message_set.create(
-                    message=_("Successfully logged in as %(username)s.") % {
-                    "username": user.username
+                    message=_("Successfully logged in as %(user)s.") % {
+                    "user": user_display(user)
                 })
                 return HttpResponseRedirect(success_url)
     else:
