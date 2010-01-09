@@ -102,12 +102,13 @@ def signup(request, **kwargs):
     
     form_class = kwargs.pop("form_class", SignupForm)
     template_name = kwargs.pop("template_name", "account/signup.html")
+    redirect_field_name = kwargs.pop("redirect_field_name", "next")
     success_url = kwargs.pop("success_url", None)
     
     group, bridge = group_and_bridge(kwargs)
     
     if success_url is None:
-        success_url = get_default_redirect(request)
+        success_url = get_default_redirect(request, redirect_field_name)
     
     if request.method == "POST":
         form = form_class(request.POST, group=group)
@@ -131,6 +132,8 @@ def signup(request, **kwargs):
     ctx = group_context(group, bridge)
     ctx.update({
         "form": form,
+        "redirect_field_name": redirect_field_name,
+        "redirect_field_value": request.GET.get(redirect_field_name),
     })
     
     return render_to_response(template_name, RequestContext(request, ctx))
