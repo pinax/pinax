@@ -127,31 +127,25 @@ def adjust_options(options, args):
     if not args:
         return # caller will raise error
 
-def install_base(parent_dir, bin_dir, requirements_dir, packages):
+def install_base(parent_dir, bin_dir, requirements_dir, options, packages):
     """
     Installs base packages from the bundled tarball if existing
     """
     packages = packages.copy() # prevent changing the global data
-    
-    find_links = ['--find-links', filename_to_url(join(requirements_dir, 'base'))]
+    pip = resolve_command(PIP_CMD, bin_dir) # resolve path to the freshly installed pip
+    args = [pip, 'install', '--no-deps', '--ignore-installed']
+    if not options.development:
+         args.append('--quiet')
+    args.extend(['--find-links', filename_to_url(join(requirements_dir, 'base'))])
     for mirror in PINAX_PYPI_MIRRORS:
-        find_links.extend(['--find-links', mirror])
-    # resolve path to the freshly installed pip
-    pip = resolve_command(PIP_CMD, bin_dir)
+        args.extend(['--find-links', mirror])
     for pkg, version in packages.items():
         if not version.startswith(('=', '<', '>')):
             version = '==%s' % version
         src = '%s%s' % (pkg, version)
         logger.notify('Installing %s' % src)
-        call_subprocess([
-            pip,
-            'install',
-            '--quiet',
-            '--no-deps',
-            '--ignore-installed',
-        ] + find_links + [
-            src,
-        ], filter_stdout=filter_lines, show_stdout=False)
+        args.append(src)
+        call_subprocess(args, filter_stdout=filter_lines, show_stdout=False)
     return pip
 
 def after_install(options, home_dir):
@@ -163,7 +157,7 @@ def after_install(options, home_dir):
     python = resolve_command(expected_exe, bin_dir)
 
     requirements_dir = join(parent_dir, 'requirements')
-    pip = install_base(parent_dir, bin_dir, requirements_dir, PINAX_MUST_HAVES)
+    pip = install_base(parent_dir, bin_dir, requirements_dir, options, PINAX_MUST_HAVES)
 
     version_file = join(parent_dir, 'VERSION')
     if os.path.exists(version_file) and not options.release:
