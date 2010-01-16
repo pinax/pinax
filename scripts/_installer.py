@@ -8,9 +8,9 @@ PINAX_PYPI_MIRRORS = [
     'http://pypi2.pinaxproject.com',
 ]
 PINAX_MUST_HAVES = {
-    'setuptools-git': ('0.3.4', 'setuptools_git-0.3.4.tar.gz'),
-    'setuptools-dummy': ('0.1.0.4', 'setuptools_dummy-0.1.0.4.tar.gz'),
-    'Django': ('1.2.dev12229', 'Django-1.2.dev12229.tar.gz'),
+    'setuptools-git': '0.3.4',
+    'setuptools-dummy': '0.1.0.4',
+    'Django': '>1.1.1',
 }
 
 DJANGO_VERSIONS = (
@@ -123,8 +123,7 @@ def adjust_options(options, args):
             print "ERROR: this Django version is not supported."
             print "Use one of those: %s" % ", ".join(DJANGO_VERSIONS)
             sys.exit(101)
-        django_tarball = 'Django-%s.tar.gz' % options.django_version
-        PINAX_MUST_HAVES['django'] = (options.django_version, django_tarball)
+        PINAX_MUST_HAVES['Django'] = options.django_version
     if not args:
         return # caller will raise error
 
@@ -134,18 +133,16 @@ def install_base(parent_dir, bin_dir, requirements_dir, packages):
     """
     packages = packages.copy() # prevent changing the global data
     
-    find_links = []
+    find_links = ['--find-links', filename_to_url(join(requirements_dir, 'base'))]
     for mirror in PINAX_PYPI_MIRRORS:
         find_links.extend(['--find-links', mirror])
     # resolve path to the freshly installed pip
     pip = resolve_command(PIP_CMD, bin_dir)
-    for pkg in packages:
-        version, filename = packages[pkg]
-        src = join(requirements_dir, 'base', filename)
-        if not os.path.exists(src):
-            # get it from the PyPI
-            src = '%s==%s' % (pkg, version)
-        logger.notify('Installing %s %s' % (pkg, version))
+    for pkg, version in packages.items():
+        if not version.startswith(('=', '<', '>')):
+            version = '==%s' % version
+        src = '%s%s' % (pkg, version)
+        logger.notify('Installing %s' % src)
         call_subprocess([
             pip,
             'install',
