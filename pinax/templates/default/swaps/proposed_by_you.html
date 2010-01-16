@@ -33,6 +33,7 @@
                     <td>{{ swap.get_state_display }}</td>
                     <td>
                         <form action="{% url cancel_swap swap.id %}" method="POST">
+                            {% csrf_token %}
                             <input type="submit" value="{% trans "Cancel" %}" />
                         </form>
                     </td>

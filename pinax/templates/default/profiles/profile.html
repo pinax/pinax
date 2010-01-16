@@ -56,6 +56,7 @@
                     {# @@@ this could be done with ajax, or at the very least turned into an inclusion tag #}
                     <div>
                         <form method="POST" action="{% url toggle_follow other_user %}">
+                            {% csrf_token %}
                             {% if is_following %}
                                 <input type="hidden" name="action" value="unfollow" /><input type="submit" value="{% trans "unfollow" %}"/>
                             {% else %}
@@ -69,6 +70,7 @@
                         <p>{% blocktrans %}You are friends with {{ other_user_display }}.{% endblocktrans %} <a href="{% url messages_compose %}{{ other_user }}/">{% trans "Send a message" %}</a>.</p>
                         <div>
                             <form method="POST" action="">
+                                {% csrf_token %}
                                 <input type="hidden" name="action" value="remove" /><input type="submit" value="{% trans "remove from friends" %}"/>
                             </form>
                         </div>
@@ -85,6 +87,7 @@
                                         <input type="submit" value="{% trans 'accept' %}" />
                                     </form>
                                     <form method="post" action="">
+                                        {% csrf_token %}
                                         <input type="hidden" name="invitation" value="{{ invitation.id }}"/>
                                         <input type="hidden" name="action" value="decline"/>
                                         <input type="submit" value="{% trans 'decline' %}" />
@@ -97,6 +100,7 @@
                             {% else %}
                                 <h2>{% trans "Add As Friend" %}</h2>
                                 <form class="uniForm" method="POST" action="">
+                                    {% csrf_token %}
                                     <fieldset class="inlineLabels">
                                         {{ invite_form|as_uni_form }}
                                         <div class="form_block">

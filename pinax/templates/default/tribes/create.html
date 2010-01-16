@@ -16,6 +16,7 @@
     <p>{% trans "A <b>tribe</b> is a group of people with some common interest." %}</p>
     {% if user.is_authenticated %}
         <form class="uniForm" id="tribe_form" method="POST" action="">
+            {% csrf_token %}
             <fieldset class="inlineLabels">
                 {{ tribe_form|as_uni_form }}
                 <div class="form_block">

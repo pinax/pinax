@@ -3,6 +3,7 @@
 {% load account_tags %}
 
 <form class="uniForm" method="POST" action="{% url invite_to_join %}">
+    {% csrf_token %}
     <fieldset>
         {% if join_request_form.existing_users %}
         <div class="form_block">

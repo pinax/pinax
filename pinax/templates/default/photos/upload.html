@@ -7,6 +7,7 @@
 
 {% block body %}
     <form class="uniForm" id="edit-profile" method="POST" enctype="multipart/form-data" action="">
+        {% csrf_token %}
         <fieldset class="inlineLabels">
             {{ photo_form|as_uni_form }}
             <div class="form_block">

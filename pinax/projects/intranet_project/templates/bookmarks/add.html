@@ -8,6 +8,7 @@
     <p>You can drag this '<a href="{{ bookmarklet }}">Add to {{ SITE_NAME }} Bookmarks</a>' link to your bookmark bar to post the pages you visit!</p>
     
     <form method="POST" action="">
+        {% csrf_token %}
         <table>
             {{ bookmark_form }}
             <tr><td></td><td><input type="submit" value="add bookmark"></td></tr>

@@ -24,6 +24,7 @@
         <h3>Or make a new offer:</h3>
         
         <form class="uniForm" id="proposal_form" method="POST" action="">
+            {% csrf_token %}
             <fieldset class="inlineLabels">
                 {{ offer_form|as_uni_form }}
                 <div class="form_block">

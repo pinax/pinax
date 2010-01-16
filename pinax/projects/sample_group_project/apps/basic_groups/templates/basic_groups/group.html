@@ -49,6 +49,7 @@
                 <p><span id="edit-group-toggle">{% trans "Edit details" %}</span></p>
                 
                 <form id="edit-group" method="POST" action="">
+                    {% csrf_token %}
                     <table>
                         {{ group_form }}
                         <tr><td></td><td><input type="hidden" name="action" value="update" /><input type="submit" value="{% trans 'update' %}"/></td></tr>
@@ -59,6 +60,7 @@
             {% ifequal group.members.all.count 1 %}
                 <p>{% silk "delete" %} <a href="#" onclick="$('#delete_group_form').toggle(); return false;">{% trans "Delete Group" %}</a><p>
                  <form class="delete_form" id="delete_group_form" action="{% url group_delete group.slug %}" method="POST" style="display: none;">
+                     {% csrf_token %}
                      <input type="submit" value="{% trans "Delete Group" %}" /> (all content will be removed)
                 </form>
             {% else %}
@@ -70,6 +72,7 @@
         {% if user.is_authenticated %}
             <div>
                 <form method="POST" action="">
+                    {% csrf_token %}
                     {% if is_member %}
                         {% ifequal user group.creator %}
                             <p>{% trans "You are the creator of this group so can't leave (yet)." %}</p>

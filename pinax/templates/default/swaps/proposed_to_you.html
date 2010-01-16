@@ -32,9 +32,11 @@
                     <td>{{ swap.get_state_display }}</td>
                     <td>
                         <form style="display: inline;" action="{% url accept_swap swap.id %}" method="POST">
+                            {% csrf_token %}
                             <input type="submit" value="{% trans "Accept" %}" />
                         </form>
                         <form style="display: inline;" action="{% url reject_swap swap.id %}" method="POST">
+                            {% csrf_token %}
                             <input type="submit" value="{% trans "Reject" %}" />
                         </form>
                     </td>

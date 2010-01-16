@@ -9,6 +9,7 @@
     <h1>{% trans "Add a new Offer" %}</h1>
     
     <form class="uniForm" id="offer_form" method="POST" action="">
+        {% csrf_token %}
         <fieldset class="inlineLabels">
             {{ offer_form|as_uni_form }}
             <div class="form_block">

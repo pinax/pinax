@@ -1,5 +1,6 @@
 <div id="openid" class="box">
     <form class="login" method="POST" action="/openid/register/">
+        {% csrf_token %}
         <table>
             <tr><td colspan="2">{{ form.non_field_errors }}</td></tr>
             <tr>

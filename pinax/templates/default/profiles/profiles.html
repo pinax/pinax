@@ -12,6 +12,7 @@
     <h1>{% trans "Profiles" %}</h1>
     
     <form method="GET" action="">
+        {% csrf_token %}
         <input type="text" name="search" value="{{ search_terms }}" />
         <input type="submit" value="Search" />
         {% if search_terms %}

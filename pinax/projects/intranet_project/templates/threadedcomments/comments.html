@@ -16,12 +16,14 @@
                 <div class="body">{{ response.comment|urlize|linebreaks }}</div>
                 {% ifequal user response.user %}
                 <form method="POST" action="{% url tc_comment_delete response.id %}">
+                    {% csrf_token %}
                     <input type="submit" value="{% trans "Delete Post" %}" />
                     <input type="hidden" name="next" value="{{ request.path }}" />
                 </form>
                 {% endifequal %}
                 <a href="javascript:toggle_comment_form({{ response.id }})">{% trans "Reply to This Post" %}</a>
                 <form class="hidden" method="POST" action="{% get_comment_url object response %}" id="comment_form_{{ response.id }}">
+                    {% csrf_token %}
                     <table><tr><td><textarea id="id_comment" rows="10" cols="40" name="comment"></textarea></td></tr>
                     <tr><td><input type="submit" value="{% trans "Post Response" %}" /></td></tr></table>
                     <input type="hidden" name="next" value="{{ request.path }}" />
@@ -33,6 +35,7 @@
 {% paginate %}
 {% if user.is_authenticated %}
     <form action="{% get_comment_url object %}" method="POST">
+        {% csrf_token %}
         <table>
             <tr><td><textarea id="id_comment" rows="10" cols="40" name="comment"></textarea></td></tr>
             <tr><td><input type="submit" value="{% trans "Post Response" %}" /></td></tr>

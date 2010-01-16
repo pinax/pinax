@@ -7,6 +7,7 @@
 <div id="content-main">
     <p>{% blocktrans %}Invite a user given an e-mail address. The user will be e-mailed a signup code to create their account on this website.{% endblocktrans %}</p>
     <form method="POST" action="">
+    {% csrf_token %}
     <div>
         {{ form.as_p }}
         <input type="submit" value="Send signup code" />

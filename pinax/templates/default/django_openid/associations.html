@@ -14,6 +14,7 @@
     <p>{% blocktrans with del_buttons|pluralize as buttons %}Your account is currently associated with the following OpenID {{ buttons }}:{% endblocktrans %}</p>
     {% for openid in openids %}
     <form action="{{ action }}" method="POST">
+        {% csrf_token %}
         <p>
             {{ openid.openid }}
             {% if request.user.password %}
@@ -28,6 +29,7 @@
     <p>{% trans "To associate a new OpenID with this account, sign in with it here:" %}</p>
     
     <form action="{{ action_new }}" method="POST">
+        {% csrf_token %}
         <p>
             <input type="text" name="openid_url" value="" />
             <input type="hidden" name="next" value="{{ associate_next }}">

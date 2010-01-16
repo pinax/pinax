@@ -14,6 +14,7 @@
         <p>{% trans "Already have an account?" %} <a href="{% url acct_login %}">{% trans "Log In" %}</a>!</p>
         
         <form class="signup uniForm" id="signup_form" method="post" action="{% url acct_signup %}">
+            {% csrf_token %}
             <fieldset class="inlineLabels">
                 {{ form|as_uni_form }}
                 <div  class="form_blick">

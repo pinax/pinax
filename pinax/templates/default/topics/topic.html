@@ -27,6 +27,7 @@
                 <p>{% show_tags_for topic %}</p>
                 {% ifequal user topic.creator %}
                 <form class="uniForm" method="POST" action="{{ request.path }}delete/">
+                    {% csrf_token %}
                     <fieldset class="inlineLabels">
                         <div class="form_block">
                             <input type="submit" value="{% trans "Delete Topic" %}" />
@@ -42,6 +43,7 @@
     {% if edit %}
         <h2>Edit</h2>
         <form class="uniForm" method="post" action="{{ request.path }}">
+            {% csrf_token %}
             <fieldset class="inlineLabels">
                 <div class="form_block">
                     <textarea id="id_body" name="body">{{ topic.body }}</textarea>

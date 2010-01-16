@@ -11,6 +11,7 @@
     {% ifequal offer.offerer request.user %}
         <div>
             <form class="uniForm" id="offer_form" method="POST" action="">
+                {% csrf_token %}
                 <fieldset class="inlineLabels">
                     {{ offer_form|as_uni_form }}
                     <div class="form_block">

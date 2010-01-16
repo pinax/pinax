@@ -8,6 +8,7 @@
 {% block body %}
     {% ifequal post.author request.user %}
     <form class="uniForm" id="edit-profile" method="POST" action="">
+        {% csrf_token %}
         <fieldset class="inlineLabels">
             {{ blog_form|as_uni_form }}
             <div class="form_block">

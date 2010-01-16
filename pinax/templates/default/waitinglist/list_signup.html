@@ -14,6 +14,7 @@
     <p>{% blocktrans %}Give us your e-mail address and you'll be added to the waiting list{% endblocktrans %}</p>
     
     <form class="uniForm" method="POST" action="{% url waitinglist_list_signup %}">
+        {% csrf_token %}
         {{ form|as_uni_form }}
         <input type="submit" value="Sign up" />
     </form>

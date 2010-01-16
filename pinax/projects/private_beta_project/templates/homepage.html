@@ -45,6 +45,7 @@
     </p>
     
     <form method="POST" action="{% url waitinglist_list_signup %}">
+        {% csrf_token %}
         {% waitinglist_entry_form as form %}
         {{ form.as_p }}
         <input type="submit" value="Sign up" />

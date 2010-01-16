@@ -11,6 +11,7 @@
     {% else %}
         <h3>Select which avatars to delete:</h3>
         <form method="POST" action="">
+            {% csrf_token %}
             <ul class="avatar_choices">
                 {{ delete_avatar_form.choices }}
             </ul>

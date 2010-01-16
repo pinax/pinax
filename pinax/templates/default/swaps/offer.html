@@ -40,11 +40,13 @@
                     </form>
                     {% if offer.is_deletable %}
                         <form style="display: inline;" action="{% url offer_delete offer.id %}" method="POST">
+                            {% csrf_token %}
                             <input type="submit" value="{% trans "Delete Offer" %}" />
                         </form>
                     {% else %}
                         {% if offer.is_cancelable %}
                             <form style="display: inline;" action="{% url offer_cancel offer.id %}" method="POST">
+                                {% csrf_token %}
                                 <input type="submit" value="{% trans "Cancel Offer" %}" />
                             </form>
                         {% endif %}

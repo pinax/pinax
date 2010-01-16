@@ -33,6 +33,7 @@
         <h2>{% trans "New Topic" %}</h2>
         
         <form class="uniForm" method="POST" action="">
+            {% csrf_token %}
             <fieldset class="inlineLabels">
                 {{ topic_form|as_uni_form }}
                 <div class="form_block">

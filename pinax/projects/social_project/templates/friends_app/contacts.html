@@ -17,6 +17,7 @@
     <h2>Import vCard</h2>
     
     <form enctype="multipart/form-data" method="post" action="">
+        {% csrf_token %}
         <input type="hidden" name="action" value="upload_vcard" />
         <table>
             {{ import_vcard_form }}
@@ -28,6 +29,7 @@
     
     {% if authsub_token %}
         <form method="POST" action="">
+            {% csrf_token %}
             <input type="hidden" name="action" value="import_google" />
             <input type="submit" value="{% trans 'Import Google Contacts' %}" />
         </form>
@@ -44,6 +46,7 @@
     
     {% if bbauth_token %}
         <form method="POST" action="">
+            {% csrf_token %}
             <input type="hidden" name="action" value="import_yahoo" />
             <input type="submit" value="{% trans 'Import Yahoo Address Book' %}" />
         </form>

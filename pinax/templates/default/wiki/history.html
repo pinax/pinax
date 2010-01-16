@@ -16,6 +16,7 @@
 
     {% if changes %}
          <form method="post" action="{% groupurl wiki_revert_to_revision group title=article.title %}">
+             {% csrf_token %}
             <table class="messages">
                 <tr class="tbheader">
                     <th>{% trans "Date" %}</th>

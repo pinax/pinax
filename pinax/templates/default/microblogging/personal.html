@@ -16,6 +16,7 @@
     
     {# @@@ can the publish to twitter checkbox actually be part of form and then we can use uni-form #}
     <form method="POST" action="{% url tweets_you_follow %}">
+        {% csrf_token %}
         <p>{% trans "What are you doing?" %}</p>
         {{ form.as_p }}
         {% if twitter_authorized %}

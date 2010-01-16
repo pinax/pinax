@@ -55,6 +55,7 @@
                 <p><span id="edit-project-toggle">{% trans "Edit details" %}</span></p>
                 
                 <form class="uniForm" id="edit-project" method="POST" action="">
+                    {% csrf_token %}
                     <fieldset class="inlineLabels">
                         {{ project_form|as_uni_form }}
                         <div class="form_block">
@@ -77,6 +78,7 @@
                             <p><span id="add-member-toggle">{% trans "Add new member" %}</span></p>
                             
                             <form class="uniForm" id="add-member" method="POST" action="">
+                                {% csrf_token %}
                                 <fieldset class="inlineLabels">
                                     {{ adduser_form|as_uni_form }}
                                     <div class="form_block">
@@ -89,6 +91,7 @@
                         
                         <p>{% silk "delete" %} <a href="#" onclick="$('#delete_project_form').toggle(); return false;">{% trans "Delete project" %}</a><p>
                          <form class="delete_form" id="delete_project_form" action="{% url project_delete project.slug %}" method="POST" style="display: none;">
+                             {% csrf_token %}
                              <input type="submit" value="{% trans "Delete Project" %}" /> (all content will be removed)
                         </form>
                     {% else %}

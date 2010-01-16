@@ -1,6 +1,7 @@
 {% load uni_form %}
 
 <form class="uniForm" method="POST" action="{% url profile_edit %}">
+    {% csrf_token %}
     <fieldset>
         {{ profile_form|as_uni_form }}
         <div class="form_block">
