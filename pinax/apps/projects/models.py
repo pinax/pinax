@@ -34,6 +34,7 @@ class Project(Group):
 
 
 class ProjectMember(models.Model):
+    
     project = models.ForeignKey(Project,
         related_name = "members",
         verbose_name = _("project")
@@ -45,3 +46,6 @@ class ProjectMember(models.Model):
     away = models.BooleanField(_("away"), default=False)
     away_message = models.CharField(_("away_message"), max_length=500)
     away_since = models.DateTimeField(_("away since"), default=datetime.now)
+    
+    class Meta:
+        unique_together = (("user", "project"),)
