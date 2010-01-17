@@ -1,15 +1,16 @@
 import datetime
 
-from django.shortcuts import render_to_response, get_object_or_404
-from django.http import HttpResponseRedirect, Http404
-from django.template import RequestContext
+from django.conf import settings
 from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect, Http404
+from django.shortcuts import render_to_response, get_object_or_404
+from django.template import RequestContext
 from django.utils.translation import ugettext, ugettext_lazy as _
+from django.views.generic import date_based
+
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from django.views.generic import date_based
-from django.conf import settings
 
 from blog.models import Post
 from blog.forms import *
@@ -24,6 +25,8 @@ try:
 except ImportError:
     friends = False
 
+
+
 def blogs(request, username=None, template_name="blog/blogs.html"):
     blogs = Post.objects.filter(status=2).select_related(depth=1).order_by("-publish")
     if username is not None:
@@ -33,15 +36,21 @@ def blogs(request, username=None, template_name="blog/blogs.html"):
         "blogs": blogs,
     }, context_instance=RequestContext(request))
 
+
 def post(request, username, year, month, slug,
          template_name="blog/post.html"):
-    post = Post.objects.filter(slug=slug, publish__year=int(year), publish__month=int(month)).filter(author__username=username)
+    post = Post.objects.filter(
+        slug = slug,
+        publish__year = int(year),
+        publish__month = int(month),
+        author__username = username
+    )
     if not post:
         raise Http404
-
+    
     if post[0].status == 1 and post[0].author != request.user:
         raise Http404
-
+    
     return render_to_response(template_name, {
         "post": post[0],
     }, context_instance=RequestContext(request))
@@ -104,15 +113,16 @@ def new(request, form_class=BlogForm, template_name="blog/new.html"):
             blog_form = form_class()
     else:
         blog_form = form_class()
-
+    
     return render_to_response(template_name, {
         "blog_form": blog_form
     }, context_instance=RequestContext(request))
 
+
 @login_required
 def edit(request, id, form_class=BlogForm, template_name="blog/edit.html"):
     post = get_object_or_404(Post, id=id)
-
+    
     if request.method == "POST":
         if post.author != request.user:
             messages.add_message(request, messages.ERROR,
@@ -137,7 +147,7 @@ def edit(request, id, form_class=BlogForm, template_name="blog/edit.html"):
             blog_form = form_class(instance=post)
     else:
         blog_form = form_class(instance=post)
-
+    
     return render_to_response(template_name, {
         "blog_form": blog_form,
         "post": post,

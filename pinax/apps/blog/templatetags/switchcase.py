@@ -9,10 +9,13 @@ Usage::
     {% case "eggs" %}...{% endcase %}
 {% endswitch %}
 """
-
 from django import template
 
+
+
 register = template.Library()
+
+
 
 @register.tag
 def switch(parser, token):
@@ -42,7 +45,8 @@ def switch(parser, token):
     casenodes = childnodes.get_nodes_by_type(CaseNode)
     
     return SwitchNode(args[1], casenodes)
-    
+
+
 @register.tag
 def case(parser, token):
     """
@@ -50,12 +54,13 @@ def case(parser, token):
     """
     args = token.split_contents()
     assert len(args) == 2
-
+    
     # Same dance as above, except this time we care about all the child nodes
     children = parser.parse(("endcase",))
     parser.delete_first_token()
     return CaseNode(args[1], children)
-    
+
+
 class SwitchNode(template.Node):
     def __init__(self, value, cases):
         self.value = value
@@ -77,7 +82,8 @@ class SwitchNode(template.Node):
         
         # No matches; render nothing.
         return ""
-        
+
+
 class CaseNode(template.Node):
     def __init__(self, value, childnodes):
         self.value = value
