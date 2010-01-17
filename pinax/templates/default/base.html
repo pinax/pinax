@@ -54,7 +54,10 @@
             {% if messages %}
                 <ul id="messages">
                     {% for message in messages %}
-                    <li id="message_{{ forloop.counter }}"{% if message.tags %} class="{{ message.tags }}"{% endif %}><a href="#" onclick="$('#message_{{ forloop.counter }}').fadeOut(); return false;"><small>{% trans "clear" %}</small></a> {{ message }}</li>
+                    <li id="message_{{ forloop.counter }}"{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                        <a href="#"><small>{% trans "clear" %}</small></a>
+                        {{ message }}
+                    </li>
                     {% endfor %}
                 </ul>
             {% endif %}
