@@ -41,7 +41,7 @@ class PinaxConsumer(RegistrationConsumer):
     def do_register(self, request, *args, **kwargs):
         """
         A small wrapper around django_openid's implementation of registration
-        that redirects back to a certain URL if there"s no openid_url in the
+        that redirects back to a certain URL if there's no openid_url in the
         POST body.
         """
         
