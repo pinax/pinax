@@ -1,24 +1,28 @@
-from django.http import get_host
-from django.core.urlresolvers import reverse
-from django.utils.html import escape
+## based on http://www.djangosnippets.org/snippets/706/
 import gdata.contacts.service
 
-from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect, get_host
+from django.utils.html import escape
 
-## based on http://www.djangosnippets.org/snippets/706/
 
-GOOGLE_CONTACTS_URI = 'http://www.google.com/m8/feeds/'
+
+GOOGLE_CONTACTS_URI = "http://www.google.com/m8/feeds/"
+
+
 
 def get_url_host(request):
     if request.is_secure():
-        protocol = 'https'
+        protocol = "https"
     else:
-        protocol = 'http'
+        protocol = "http"
     host = escape(get_host(request))
-    return '%s://%s' % (protocol, host)
+    return "%s://%s" % (protocol, host)
+
 
 def get_full_url(request):
     return get_url_host(request) + request.get_full_path()
+
 
 def get_auth_sub_url(next):
     scope = GOOGLE_CONTACTS_URI
@@ -27,12 +31,13 @@ def get_auth_sub_url(next):
     contacts_service = gdata.contacts.service.ContactsService()
     return contacts_service.GenerateAuthSubURL(next, scope, secure, session);
 
+
 def login(request, redirect_to=None):
     if redirect_to is None:
-        redirect_to = reverse('invitations_contacts')
+        redirect_to = reverse("invitations_contacts")
     if "token" in request.GET:
         # add token to session for now
-        request.session['authsub_token'] = request.GET["token"]
+        request.session["authsub_token"] = request.GET["token"]
         return HttpResponseRedirect(redirect_to)
     else:
         next = get_full_url(request)
