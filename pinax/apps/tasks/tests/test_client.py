@@ -57,7 +57,7 @@ class TestAddForm(TestCase):
         response = self.client.get("/tasks/task/3/")
         
         # test the markup
-        self.assertContains(response, "<h1 class="title">Sample Header</h1>")
+        self.assertContains(response, '<h1 class="title">Sample Header</h1>')
     
     def test_tag_for_rel(self):
         #  checking for tag
