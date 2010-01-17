@@ -5,6 +5,7 @@ import django_filters as filters
 from tasks.models import Task
 
 
+
 class TaskFilter(filters.FilterSet):
     
     state = filters.MultipleChoiceFilter(

@@ -2,8 +2,10 @@ from django.conf import settings
 from django.db import models
 
 
+
 MARKUP_DEFAULT_FILTER = getattr(settings, "MARKUP_DEFAULT_FILTER", None)
 MARKUP_CHOICES = getattr(settings, "MARKUP_CHOICES", [])
+
 
 
 # @@@ the behavior here should be available in django-markup

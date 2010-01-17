@@ -15,6 +15,7 @@ from tagging_utils.widgets import TagAutoCompleteInput
 from tagging.forms import TagField
 
 
+
 class TaskForm(forms.ModelForm):
     """
     Form for creating tasks
@@ -22,7 +23,7 @@ class TaskForm(forms.ModelForm):
     
     tags = TagField(
         required = False,
-        widget = TagAutoCompleteInput(app_label='tasks', model='task')
+        widget = TagAutoCompleteInput(app_label="tasks", model="task")
     )
     
     def __init__(self, user, group, *args, **kwargs):
@@ -37,11 +38,11 @@ class TaskForm(forms.ModelForm):
             assignee_queryset = self.fields["assignee"].queryset
         
         self.fields["assignee"].queryset = assignee_queryset.order_by("username")
-        self.fields['summary'].widget.attrs["size"] = 65
+        self.fields["summary"].widget.attrs["size"] = 65
     
     class Meta:
         model = Task
-        fields = ('summary', 'detail', 'assignee', 'tags', 'markup')
+        fields = ("summary", "detail", "assignee", "tags", "markup")
     
     def clean(self):
         self.check_group_membership()
@@ -60,11 +61,11 @@ class EditTaskForm(forms.ModelForm):
     
     status = forms.CharField(
         required = False,
-        widget = forms.TextInput(attrs={'size':'50', 'maxlength': '100'})
+        widget = forms.TextInput(attrs={"size": "50", "maxlength": "100"})
     )
     tags = TagField(
         required = False,
-        widget = TagAutoCompleteInput(app_label='tasks', model='task')
+        widget = TagAutoCompleteInput(app_label="tasks", model="task")
     )
     
     def __init__(self, user, group, *args, **kwargs):
@@ -79,7 +80,7 @@ class EditTaskForm(forms.ModelForm):
             assignee_queryset = self.fields["assignee"].queryset
         
         self.fields["assignee"].queryset = assignee_queryset.order_by("username")
-        self.fields['summary'].widget.attrs["size"] = 65
+        self.fields["summary"].widget.attrs["size"] = 65
         self.fields.keyOrder = [
             "summary",
             "detail",
@@ -98,11 +99,19 @@ class EditTaskForm(forms.ModelForm):
         
         self.fields["state"].choices = self.instance.allowable_states(user)
         
-        if self.instance.state == '3':
-            self.fields['resolution'].widget = ReadOnlyWidget(field=self.instance._meta.get_field('resolution'))
+        if self.instance.state == "3":
+            self.fields["resolution"].widget = ReadOnlyWidget(field=self.instance._meta.get_field("resolution"))
     
     class Meta(TaskForm.Meta):
-        fields = ('summary', 'detail', 'status', 'assignee', 'state', 'tags', 'resolution')
+        fields = (
+            "summary",
+            "detail",
+            "status",
+            "assignee",
+            "state",
+            "tags",
+            "resolution"
+        )
     
     def clean_resolution(self):
         if self.cleaned_data["state"] == u"2":
