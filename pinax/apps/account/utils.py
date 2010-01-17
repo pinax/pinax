@@ -2,7 +2,9 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 
 
-LOGIN_REDIRECT_URLNAME = getattr(settings, "LOGIN_REDIRECT_URLNAME", '')
+
+LOGIN_REDIRECT_URLNAME = getattr(settings, "LOGIN_REDIRECT_URLNAME", "")
+
 
 
 def get_default_redirect(request, redirect_field_name="next",

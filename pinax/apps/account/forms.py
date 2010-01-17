@@ -1,15 +1,12 @@
 import re
 
 from django import forms
-from django.template.loader import render_to_string
 from django.conf import settings
+from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _, ugettext
 from django.utils.encoding import smart_unicode
 from django.utils.hashcompat import sha_constructor
 from django.utils.http import int_to_base36
-
-from pinax.core.utils import get_send_mail
-send_mail = get_send_mail()
 
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
@@ -17,16 +14,19 @@ from django.contrib.auth.models import User
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.models import Site
 
-from emailconfirmation.models import EmailAddress
-from account.models import Account
-from account.utils import user_display
+from pinax.core.utils import get_send_mail
+send_mail = get_send_mail()
 
+from emailconfirmation.models import EmailAddress
 from timezones.forms import TimeZoneField
 
-from account.models import PasswordReset
+from account.models import Account, PasswordReset
+from account.models import OtherServiceInfo, other_service, update_other_services
+from account.utils import user_display
 
 
-alnum_re = re.compile(r'^\w+$')
+
+alnum_re = re.compile(r"^\w+$")
 
 
 # @@@ might want to find way to prevent settings access globally here.
@@ -46,8 +46,15 @@ class GroupForm(forms.Form):
 
 class LoginForm(GroupForm):
     
-    password = forms.CharField(label=_("Password"), widget=forms.PasswordInput(render_value=False))
-    remember = forms.BooleanField(label=_("Remember Me"), help_text=_("If checked you will stay logged in for 3 weeks"), required=False)
+    password = forms.CharField(
+        label = _("Password"),
+        widget = forms.PasswordInput(render_value=False)
+    )
+    remember = forms.BooleanField(
+        label = _("Remember Me"),
+        help_text = _("If checked you will stay logged in for 3 weeks"),
+        required = False
+    )
     
     user = None
     
@@ -101,7 +108,7 @@ class LoginForm(GroupForm):
     def login(self, request):
         if self.is_valid():
             login(request, self.user)
-            if self.cleaned_data['remember']:
+            if self.cleaned_data["remember"]:
                 request.session.set_expiry(60 * 60 * 24 * 7 * 3)
             else:
                 request.session.set_expiry(0)
@@ -111,11 +118,25 @@ class LoginForm(GroupForm):
 
 class SignupForm(GroupForm):
     
-    username = forms.CharField(label=_("Username"), max_length=30, widget=forms.TextInput())
-    password1 = forms.CharField(label=_("Password"), widget=forms.PasswordInput(render_value=False))
-    password2 = forms.CharField(label=_("Password (again)"), widget=forms.PasswordInput(render_value=False))
+    username = forms.CharField(
+        label = _("Username"),
+        max_length = 30,
+        widget = forms.TextInput()
+    )
+    password1 = forms.CharField(
+        label = _("Password"),
+        widget = forms.PasswordInput(render_value=False)
+    )
+    password2 = forms.CharField(
+        label = _("Password (again)"),
+        widget = forms.PasswordInput(render_value=False)
+    )
     email = forms.EmailField(widget=forms.TextInput())
-    confirmation_key = forms.CharField(max_length=40, required=False, widget=forms.HiddenInput())
+    confirmation_key = forms.CharField(
+        max_length = 40,
+        required = False,
+        widget = forms.HiddenInput()
+    )
     
     def __init__(self, *args, **kwargs):
         super(SignupForm, self).__init__(*args, **kwargs)
@@ -181,7 +202,7 @@ class SignupForm(GroupForm):
         return credentials
     
     def save(self, request=None):
-        # don't assume a username is available. it is a common removal if
+        # don"t assume a username is available. it is a common removal if
         # site developer wants to use e-mail authentication.
         username = self.cleaned_data.get("username")
         email = self.cleaned_data["email"]
@@ -189,7 +210,7 @@ class SignupForm(GroupForm):
         if self.cleaned_data["confirmation_key"]:
             from friends.models import JoinInvitation # @@@ temporary fix for issue 93
             try:
-                join_invitation = JoinInvitation.objects.get(confirmation_key = self.cleaned_data["confirmation_key"])
+                join_invitation = JoinInvitation.objects.get(confirmation_key=self.cleaned_data["confirmation_key"])
                 confirmed = True
             except JoinInvitation.DoesNotExist:
                 confirmed = False
@@ -239,14 +260,18 @@ class SignupForm(GroupForm):
 
 class OpenIDSignupForm(forms.Form):
     
-    username = forms.CharField(label="Username", max_length=30, widget=forms.TextInput())
+    username = forms.CharField(
+        label = _("Username"),
+        max_length = 30,
+        widget = forms.TextInput()
+    )
     email = forms.EmailField(widget=forms.TextInput())
     
     def __init__(self, *args, **kwargs):
         # remember provided (validated!) OpenID to attach it to the new user
         # later.
         self.openid = kwargs.pop("openid", None)
-        # pop these off since they are passed to this method but we can't
+        # pop these off since they are passed to this method but we can"t
         # pass them to forms.Form.__init__
         kwargs.pop("reserved_usernames", [])
         kwargs.pop("no_duplicate_emails", False)
@@ -299,7 +324,11 @@ class AccountForm(UserForm):
 
 class AddEmailForm(UserForm):
     
-    email = forms.EmailField(label=_("Email"), required=True, widget=forms.TextInput(attrs={'size':'30'}))
+    email = forms.EmailField(
+        label = _("Email"),
+        required = True,
+        widget = forms.TextInput(attrs={"size":"30"})
+    )
     
     def clean_email(self):
         value = self.cleaned_data["email"]
@@ -328,9 +357,18 @@ class AddEmailForm(UserForm):
 
 class ChangePasswordForm(UserForm):
     
-    oldpassword = forms.CharField(label=_("Current Password"), widget=forms.PasswordInput(render_value=False))
-    password1 = forms.CharField(label=_("New Password"), widget=forms.PasswordInput(render_value=False))
-    password2 = forms.CharField(label=_("New Password (again)"), widget=forms.PasswordInput(render_value=False))
+    oldpassword = forms.CharField(
+        label = _("Current Password"),
+        widget = forms.PasswordInput(render_value=False)
+    )
+    password1 = forms.CharField(
+        label = _("New Password"),
+        widget = forms.PasswordInput(render_value=False)
+    )
+    password2 = forms.CharField(
+        label = _("New Password (again)"),
+        widget = forms.PasswordInput(render_value=False)
+    )
     
     def clean_oldpassword(self):
         if not self.user.check_password(self.cleaned_data.get("oldpassword")):
@@ -344,14 +382,20 @@ class ChangePasswordForm(UserForm):
         return self.cleaned_data["password2"]
     
     def save(self):
-        self.user.set_password(self.cleaned_data['password1'])
+        self.user.set_password(self.cleaned_data["password1"])
         self.user.save()
 
 
 class SetPasswordForm(UserForm):
     
-    password1 = forms.CharField(label=_("Password"), widget=forms.PasswordInput(render_value=False))
-    password2 = forms.CharField(label=_("Password (again)"), widget=forms.PasswordInput(render_value=False))
+    password1 = forms.CharField(
+        label = _("Password"),
+        widget = forms.PasswordInput(render_value=False)
+    )
+    password2 = forms.CharField(
+        label = _("Password (again)"),
+        widget = forms.PasswordInput(render_value=False)
+    )
     
     def clean_password2(self):
         if "password1" in self.cleaned_data and "password2" in self.cleaned_data:
@@ -366,7 +410,11 @@ class SetPasswordForm(UserForm):
 
 class ResetPasswordForm(forms.Form):
     
-    email = forms.EmailField(label=_("Email"), required=True, widget=forms.TextInput(attrs={'size':'30'}))
+    email = forms.EmailField(
+        label = _("Email"),
+        required = True,
+        widget = forms.TextInput(attrs={"size":"30"})
+    )
     
     def clean_email(self):
         if EmailAddress.objects.filter(email__iexact=self.cleaned_data["email"], verified=True).count() == 0:
@@ -403,8 +451,14 @@ class ResetPasswordForm(forms.Form):
 
 class ResetPasswordKeyForm(forms.Form):
     
-    password1 = forms.CharField(label=_("New Password"), widget=forms.PasswordInput(render_value=False))
-    password2 = forms.CharField(label=_("New Password (again)"), widget=forms.PasswordInput(render_value=False))
+    password1 = forms.CharField(
+        label = _("New Password"),
+        widget = forms.PasswordInput(render_value=False)
+    )
+    password2 = forms.CharField(
+        label = _("New Password (again)"),
+        widget = forms.PasswordInput(render_value=False)
+    )
     
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop("user", None)
@@ -441,7 +495,11 @@ class ChangeTimezoneForm(AccountForm):
 
 class ChangeLanguageForm(AccountForm):
     
-    language = forms.ChoiceField(label=_("Language"), required=True, choices=settings.LANGUAGES)
+    language = forms.ChoiceField(
+        label = _("Language"),
+        required = True,
+        choices = settings.LANGUAGES
+    )
     
     def __init__(self, *args, **kwargs):
         super(ChangeLanguageForm, self).__init__(*args, **kwargs)
@@ -452,14 +510,13 @@ class ChangeLanguageForm(AccountForm):
         self.account.save()
 
 
-# @@@ these should somehow be moved out of account or at least out of this module
-
-from account.models import OtherServiceInfo, other_service, update_other_services
-
 class TwitterForm(UserForm):
     username = forms.CharField(label=_("Username"), required=True)
-    password = forms.CharField(label=_("Password"), required=True,
-                               widget=forms.PasswordInput(render_value=False))
+    password = forms.CharField(
+        label = _("Password"),
+        required = True,
+        widget = forms.PasswordInput(render_value=False)
+    )
     
     def __init__(self, *args, **kwargs):
         super(TwitterForm, self).__init__(*args, **kwargs)
@@ -468,6 +525,6 @@ class TwitterForm(UserForm):
     def save(self):
         from microblogging.utils import get_twitter_password
         update_other_services(self.user,
-            twitter_user = self.cleaned_data['username'],
-            twitter_password = get_twitter_password(settings.SECRET_KEY, self.cleaned_data['password']),
+            twitter_user = self.cleaned_data["username"],
+            twitter_password = get_twitter_password(settings.SECRET_KEY, self.cleaned_data["password"]),
         )

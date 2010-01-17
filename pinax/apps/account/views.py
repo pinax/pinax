@@ -18,16 +18,17 @@ from django.contrib.auth.tokens import default_token_generator
 
 from emailconfirmation.models import EmailAddress, EmailConfirmation
 
-from account.utils import get_default_redirect, user_display
-from account.models import OtherServiceInfo
-from account.forms import SignupForm, AddEmailForm, LoginForm, \
-    ChangePasswordForm, SetPasswordForm, ResetPasswordForm, \
-    ChangeTimezoneForm, ChangeLanguageForm, TwitterForm, ResetPasswordKeyForm
-
-
 association_model = models.get_model("django_openid", "Association")
 if association_model is not None:
     from django_openid.models import UserOpenidAssociation
+
+from account.utils import get_default_redirect, user_display
+from account.models import OtherServiceInfo
+from account.forms import AddEmailForm, ChangeLanguageForm, ChangePasswordForm
+from account.forms import ChangeTimezoneForm, LoginForm, ResetPasswordKeyForm
+from account.forms import ResetPasswordForm, SetPasswordForm, SignupForm
+from account.forms import TwitterForm
+
 
 
 def group_and_bridge(kwargs):
@@ -85,7 +86,7 @@ def login(request, **kwargs):
                 success_url = openid_success_url or success_url
             messages.add_message(request, messages.SUCCESS,
                 ugettext(u"Successfully logged in as %(user)s.") % {
-                    'user': user_display(form.user)
+                    "user": user_display(form.user)
                 }
             )
             return HttpResponseRedirect(success_url)

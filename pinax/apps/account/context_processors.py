@@ -1,5 +1,6 @@
-
 from account.models import Account, AnonymousAccount
+
+
 
 def openid(request):
     if hasattr(request, "openid"):
@@ -19,4 +20,4 @@ def account(request):
             account = AnonymousAccount(request)
     else:
         account = AnonymousAccount(request)
-    return {'account': account}
+    return {"account": account}
