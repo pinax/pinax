@@ -118,3 +118,7 @@ INSTALLED_APPS = (
 # @@@ this shouldn't beed need but are :-(
 CONTACT_EMAIL = ""
 SITE_NAME = ""
+
+DEBUG_TOOLBAR_CONFIG = {
+    "INTERCEPT_REDIRECTS": False,
+}
