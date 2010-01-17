@@ -1,9 +1,8 @@
 from django.core.urlresolvers import reverse
 from django.conf import settings
+from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
-from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
-
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import ugettext
 
@@ -13,29 +12,29 @@ from django.contrib.auth.models import User
 from basic_profiles.models import Profile
 from basic_profiles.forms import ProfileForm
 
-
 if "notification" in settings.INSTALLED_APPS:
     from notification import models as notification
 else:
     notification = None
 
 
+
 def profiles(request, template_name="basic_profiles/profiles.html"):
     users = User.objects.all().order_by("-date_joined")
-    search_terms = request.GET.get('search', '')
-    order = request.GET.get('order')
+    search_terms = request.GET.get("search", "")
+    order = request.GET.get("order")
     if not order:
-        order = 'date'
+        order = "date"
     if search_terms:
         users = users.filter(username__icontains=search_terms)
-    if order == 'date':
+    if order == "date":
         users = users.order_by("-date_joined")
-    elif order == 'name':
+    elif order == "name":
         users = users.order_by("username")
     return render_to_response(template_name, {
-        'users':users,
-        'order' : order,
-        'search_terms' : search_terms
+        "users":users,
+        "order" : order,
+        "search_terms" : search_terms
     }, context_instance=RequestContext(request))
 
 
