@@ -115,6 +115,8 @@ INSTALLED_APPS = (
     'staticfiles',
 )
 
+MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
+
 # @@@ this shouldn't beed need but are :-(
 CONTACT_EMAIL = ""
 SITE_NAME = ""

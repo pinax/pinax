@@ -3,7 +3,6 @@ from datetime import datetime, timedelta
 from itertools import chain
 from operator import attrgetter
 
-
 from django.shortcuts import render_to_response, get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
 from django.conf import settings
@@ -14,6 +13,7 @@ from django.core.exceptions import ImproperlyConfigured
 from django.db.models import get_app
 from django.db.models import Q
 
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
@@ -151,7 +151,9 @@ def add_task(request, group_slug=None, secret_id=None, form_class=TaskForm, temp
                     task.state = workflow.initial_state(task, user)
                 task.save()
                 task.save_history()
-                request.user.message_set.create(message="added task '%s'" % task.summary)
+                messages.add_message(request, messages.SUCCESS,
+                    ugettext("added task '%s'") % task.summary
+                )
                 if notification:
                     if group:
                         notify_list = group.member_queryset()
@@ -205,8 +207,9 @@ def nudge(request, id, group_slug=None, bridge=None):
         # you've already nudged this task.
         nudge = nudged[0]
         nudge.delete()
-        message = "You've removed your nudge from this task"
-        request.user.message_set.create(message=message)
+        messages.add_message(request, messages.SUCCESS,
+            ugettext("You've removed your nudge from this task")
+        )
         return HttpResponseRedirect(task_url)
     
     
@@ -216,8 +219,9 @@ def nudge(request, id, group_slug=None, bridge=None):
     count = Nudge.objects.filter(task__exact=task).count()
     
     # send the message to the user
-    message = "%s has been nudged about this task" % task.assignee
-    request.user.message_set.create(message=message)
+    messages.add_message(request, messages.SUCCESS,
+        ugettext("%s has been nudged about this task") % task.assignee
+    )
     
     # send out the nudge notification
     if notification:
@@ -267,19 +271,32 @@ def task(request, id, group_slug=None, template_name="tasks/task.html", bridge=N
             if task.assignee == request.user:
                 task.denudge()
             if "status" in form.changed_data:
-                request.user.message_set.create(message="updated your status on the task")
+                messages.add_message(request, messages.SUCCESS,
+                    ugettext("updated your status on the task")
+                )
                 if notification:
                     notification.send(notify_list, "tasks_status", {"user": request.user, "task": task, "group": group})
             if "state" in form.changed_data:
-                request.user.message_set.create(message="task marked %s" % task.get_state_display())
+                messages.add_message(request, messages.SUCCESS,
+                    ugettext("task marked %(state)s") % {
+                        "state": task.get_state_display()
+                    }
+                )
                 if notification:
                     notification.send(notify_list, "tasks_change", {"user": request.user, "task": task, "group": group, "new_state": task.get_state_display()})
             if "assignee" in form.changed_data:
-                request.user.message_set.create(message="assigned task to '%s'" % task.assignee)
+                messages.add_message(request, messages.SUCCESS,
+                    ugettext("assigned task to '%(assignee)s'") % {
+                        # @@@ user_display
+                        "assignee": task.assignee
+                    }
+                )
                 if notification:
                     notification.send(notify_list, "tasks_assignment", {"user": request.user, "task": task, "assignee": task.assignee, "group": group})
             if "tags" in form.changed_data:
-                request.user.message_set.create(message="updated tags on the task")
+                messages.add_message(request, messages.SUCCESS,
+                    ugettext("updated tags on the task")
+                )
                 if notification:
                     notification.send(notify_list, "tasks_tags", {"user": request.user, "task": task, "group": group})
             form = EditTaskForm(request.user, group, instance=task)

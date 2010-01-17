@@ -11,6 +11,7 @@ from django.utils.http import int_to_base36
 from pinax.core.utils import get_send_mail
 send_mail = get_send_mail()
 
+from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.contrib.auth.tokens import default_token_generator
@@ -100,11 +101,6 @@ class LoginForm(GroupForm):
     def login(self, request):
         if self.is_valid():
             login(request, self.user)
-            request.user.message_set.create(
-                message = ugettext(u"Successfully logged in as %(user)s.") % {
-                    'user': user_display(self.user)
-                }
-            )
             if self.cleaned_data['remember']:
                 request.session.set_expiry(60 * 60 * 24 * 7 * 3)
             else:
@@ -184,7 +180,7 @@ class SignupForm(GroupForm):
         credentials["password"] = self.cleaned_data["password1"]
         return credentials
     
-    def save(self):
+    def save(self, request=None):
         # don't assume a username is available. it is a common removal if
         # site developer wants to use e-mail authentication.
         username = self.cleaned_data.get("username")
@@ -206,22 +202,32 @@ class SignupForm(GroupForm):
             if email == join_invitation.contact.email:
                 new_user = self.create_user(username)
                 join_invitation.accept(new_user) # should go before creation of EmailAddress below
-                new_user.message_set.create(message=ugettext(u"Your email address has already been verified"))
+                if request:
+                    messages.add_message(request, messages.INFO,
+                        ugettext(u"Your email address has already been verified")
+                    )
                 # already verified so can just create
                 EmailAddress(user=new_user, email=email, verified=True, primary=True).save()
             else:
                 new_user = self.create_user(username)
                 join_invitation.accept(new_user) # should go before creation of EmailAddress below
                 if email:
-                    new_user.message_set.create(message=ugettext(u"Confirmation email sent to %(email)s") % {'email': email})
+                    if request:
+                        messages.add_message(request, messages.INFO,
+                            ugettext(u"Confirmation email sent to %(email)s") % {
+                                "email": email,
+                            }
+                        )
                     EmailAddress.objects.add_email(new_user, email)
         else:
             new_user = self.create_user(username)
             if email:
-                # @@@ 1.2: this user message makes little sense when
-                # EMAIL_VERIFICATION is True moving to new messages in 1.2
-                # will fix it.
-                new_user.message_set.create(message=ugettext(u"Confirmation email sent to %(email)s") % {'email': email})
+                if request and not EMAIL_VERIFICATION:
+                    messages.add_message(request, messages.INFO,
+                        ugettext(u"Confirmation email sent to %(email)s") % {
+                            "email": email,
+                        }
+                    )
                 EmailAddress.objects.add_email(new_user, email)
         
         if EMAIL_VERIFICATION:
@@ -317,7 +323,6 @@ class AddEmailForm(UserForm):
             raise forms.ValidationError(errors["this_account"])
     
     def save(self):
-        self.user.message_set.create(message=ugettext(u"Confirmation email sent to %(email)s") % {'email': self.cleaned_data["email"]})
         return EmailAddress.objects.add_email(self.user, self.cleaned_data["email"])
 
 
@@ -341,7 +346,6 @@ class ChangePasswordForm(UserForm):
     def save(self):
         self.user.set_password(self.cleaned_data['password1'])
         self.user.save()
-        self.user.message_set.create(message=ugettext(u"Password successfully changed."))
 
 
 class SetPasswordForm(UserForm):
@@ -358,7 +362,6 @@ class SetPasswordForm(UserForm):
     def save(self):
         self.user.set_password(self.cleaned_data["password1"])
         self.user.save()
-        self.user.message_set.create(message=ugettext(u"Password successfully set."))
 
 
 class ResetPasswordForm(forms.Form):
@@ -419,8 +422,6 @@ class ResetPasswordKeyForm(forms.Form):
         user = self.user
         user.set_password(self.cleaned_data["password1"])
         user.save()
-        user.message_set.create(message=ugettext(u"Password successfully changed."))
-        
         # mark password reset object as reset
         PasswordReset.objects.filter(temp_key=self.temp_key).update(reset=True)
 
@@ -436,7 +437,6 @@ class ChangeTimezoneForm(AccountForm):
     def save(self):
         self.account.timezone = self.cleaned_data["timezone"]
         self.account.save()
-        self.user.message_set.create(message=ugettext(u"Timezone successfully updated."))
 
 
 class ChangeLanguageForm(AccountForm):
@@ -450,7 +450,6 @@ class ChangeLanguageForm(AccountForm):
     def save(self):
         self.account.language = self.cleaned_data["language"]
         self.account.save()
-        self.user.message_set.create(message=ugettext(u"Language successfully updated."))
 
 
 # @@@ these should somehow be moved out of account or at least out of this module
@@ -472,4 +471,3 @@ class TwitterForm(UserForm):
             twitter_user = self.cleaned_data['username'],
             twitter_password = get_twitter_password(settings.SECRET_KEY, self.cleaned_data['password']),
         )
-        self.user.message_set.create(message=ugettext(u"Successfully authenticated."))

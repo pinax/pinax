@@ -4,6 +4,7 @@ from django.template import RequestContext
 from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
 from django.conf import settings
 
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
@@ -76,7 +77,11 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
         if request.method == "POST":
             if request.POST.get("action") == "remove": # @@@ perhaps the form should just post to friends and be redirected here
                 Friendship.objects.remove(request.user, other_user)
-                request.user.message_set.create(message=_("You have removed %(from_user)s from friends") % {'from_user': other_user})
+                messages.add_message(request, messages.SUCCESS,
+                    ugettext("You have removed %(from_user)s from friends") % {
+                        "from_user": other_user
+                    }
+                )
                 is_friend = False
                 invite_form = InviteFriendForm(request.user, {
                     'to_user': username,
@@ -100,7 +105,11 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
                         invitation = FriendshipInvitation.objects.get(id=invitation_id)
                         if invitation.to_user == request.user:
                             invitation.accept()
-                            request.user.message_set.create(message=_("You have accepted the friendship request from %(from_user)s") % {'from_user': invitation.from_user})
+                            messages.add_message(request, messages.SUCCESS,
+                                ugettext("You have accepted the friendship request from %(from_user)s") % {
+                                    "from_user": invitation.from_user
+                                }
+                            )
                             is_friend = True
                             other_friends = Friendship.objects.friends_for_user(other_user)
                     except FriendshipInvitation.DoesNotExist:
@@ -110,7 +119,11 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
                         invitation = FriendshipInvitation.objects.get(id=invitation_id)
                         if invitation.to_user == request.user:
                             invitation.decline()
-                            request.user.message_set.create(message=_("You have declined the friendship request from %(from_user)s") % {'from_user': invitation.from_user})
+                            messages.add_message(request, messages.SUCCESS,
+                                ugettext("You have declined the friendship request from %(from_user)s") % {
+                                    "from_user": invitation.from_user
+                                }
+                            )
                             other_friends = Friendship.objects.friends_for_user(other_user)
                     except FriendshipInvitation.DoesNotExist:
                         pass
@@ -154,6 +167,7 @@ def profile_edit(request, form_class=ProfileForm, **kwargs):
             profile = profile_form.save(commit=False)
             profile.user = request.user
             profile.save()
+            messages.add_message(request, messages.SUCCESS, ugettext("Your profile has been updated."))
             return HttpResponseRedirect(reverse("profile_detail", args=[request.user.username]))
     else:
         profile_form = form_class(instance=profile)

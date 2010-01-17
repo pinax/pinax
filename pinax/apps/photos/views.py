@@ -5,7 +5,8 @@ from django.db.models import Q
 from django.http import Http404
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ObjectDoesNotExist
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext, ugettext_lazy as _
+from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
@@ -45,7 +46,9 @@ def upload(request, form_class=PhotoUploadForm,
                     group.associate(pool)
                     pool.save()
                 
-                request.user.message_set.create(message=_("Successfully uploaded photo '%s'") % photo.title)
+                messages.add_message(request, messages.SUCCESS,
+                    ugettext("Successfully uploaded photo '%s'") % photo.title
+                )
                 
                 include_kwargs = {"id": photo.id}
                 if group:
@@ -226,8 +229,9 @@ def edit(request, id, form_class=PhotoEditForm,
 
     if request.method == "POST":
         if photo.member != request.user:
-            request.user.message_set.create(message="You can't edit photos that aren't yours")
-            
+            message.add_message(request, messages.ERROR,
+                ugettext("You can't edit photos that aren't yours")
+            )
             include_kwargs = {"id": photo.id}
             if group:
                 redirect_to = bridge.reverse("photo_details", group, kwargs=include_kwargs)
@@ -241,7 +245,9 @@ def edit(request, id, form_class=PhotoEditForm,
                 photoobj = photo_form.save(commit=False)
                 photoobj.save()
                 
-                request.user.message_set.create(message=_("Successfully updated photo '%s'") % photo.title)
+                messages.add_message(request, messages.SUCCESS,
+                    ugettext("Successfully updated photo '%s'") % photo.title
+                )
                 
                 include_kwargs = {"id": photo.id}
                 if group:
@@ -290,11 +296,15 @@ def destroy(request, id, group_slug=None, bridge=None):
         redirect_to = reverse("photos_yours")
     
     if photo.member != request.user:
-        request.user.message_set.create(message="You can't delete photos that aren't yours")
+        message.add_message(request, messages.ERROR,
+            ugettext("You can't edit photos that aren't yours")
+        )
         return HttpResponseRedirect(redirect_to)
-
+    
     if request.method == "POST" and request.POST["action"] == "delete":
         photo.delete()
-        request.user.message_set.create(message=_("Successfully deleted photo '%s'") % title)
+        messages.add_message(request, messages.SUCCESS,
+            ugettext("Successfully deleted photo '%s'") % title
+        )
     
     return HttpResponseRedirect(redirect_to)

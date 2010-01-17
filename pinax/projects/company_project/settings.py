@@ -93,6 +93,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.doc.XViewMiddleware',
 )
 
@@ -108,6 +109,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.i18n",
     "django.core.context_processors.media",
     "django.core.context_processors.request",
+    "django.contrib.messages.context_processors.messages",
 )
 
 INSTALLED_APPS = (
@@ -116,6 +118,7 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
+    'django.contrib.messages',
     'django.contrib.humanize',
     'django.contrib.webdesign',
     
@@ -129,6 +132,8 @@ INSTALLED_APPS = (
     'django.contrib.admin',
 
 )
+
+MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 
 #TWITTER_USERNAME = ""
 #TWITTER_PASSWORD = ""

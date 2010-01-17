@@ -99,6 +99,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django_openid.consumer.SessionConsumer',
+    'django.contrib.messages.middleware.MessageMiddleware',
     'account.middleware.LocaleMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'pagination.middleware.PaginationMiddleware',
@@ -119,6 +120,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.i18n",
     "django.core.context_processors.media",
     "django.core.context_processors.request",
+    "django.contrib.messages.context_processors.messages",
     
     "pinax.core.context_processors.pinax_settings",
     
@@ -134,6 +136,7 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
+    'django.contrib.messages',
     'django.contrib.humanize',
     'pinax.templatetags',
     
@@ -167,6 +170,8 @@ INSTALLED_APPS = (
 FIXTURE_DIRS = [
     os.path.join(PROJECT_ROOT, "fixtures"),
 ]
+
+MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 
 ABSOLUTE_URL_OVERRIDES = {
     "auth.user": lambda o: "/profiles/profile/%s/" % o.username,

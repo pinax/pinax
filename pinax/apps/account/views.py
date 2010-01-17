@@ -9,6 +9,7 @@ from django.template import RequestContext
 from django.utils.http import base36_to_int
 from django.utils.translation import ugettext, ugettext_lazy as _
 
+from django.contrib import messages
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.decorators import login_required
@@ -82,6 +83,11 @@ def login(request, **kwargs):
                         user=form.user, openid=openid.openid
                     )
                 success_url = openid_success_url or success_url
+            messages.add_message(request, messages.SUCCESS,
+                ugettext(u"Successfully logged in as %(user)s.") % {
+                    'user': user_display(form.user)
+                }
+            )
             return HttpResponseRedirect(success_url)
     else:
         form = form_class(group=group)
@@ -113,7 +119,7 @@ def signup(request, **kwargs):
     if request.method == "POST":
         form = form_class(request.POST, group=group)
         if form.is_valid():
-            credentials = form.save()
+            credentials = form.save(request=request)
             if settings.ACCOUNT_EMAIL_VERIFICATION:
                 return render_to_response("account/verification_sent.html", {
                     "email": form.cleaned_data["email"],
@@ -121,10 +127,11 @@ def signup(request, **kwargs):
             else:
                 user = authenticate(**credentials)
                 auth_login(request, user)
-                request.user.message_set.create(
-                    message=_("Successfully logged in as %(user)s.") % {
-                    "user": user_display(user)
-                })
+                messages.add_message(request, messages.SUCCESS,
+                    ugettext("Successfully logged in as %(user)s.") % {
+                        "user": user_display(user)
+                    }
+                )
                 return HttpResponseRedirect(success_url)
     else:
         form = form_class(group=group)
@@ -152,6 +159,11 @@ def email(request, **kwargs):
             add_email_form = form_class(request.user, request.POST)
             if add_email_form.is_valid():
                 add_email_form.save()
+                messages.add_message(request, messages.INFO,
+                    ugettext(u"Confirmation email sent to %(email)s") % {
+                            "email": add_email_form.cleaned_data["email"]
+                        }
+                    )
                 add_email_form = form_class() # @@@
         else:
             add_email_form = form_class()
@@ -162,10 +174,11 @@ def email(request, **kwargs):
                         user=request.user,
                         email=email,
                     )
-                    request.user.message_set.create(
-                        message=_("Confirmation email sent to %(email)s") % {
+                    messages.add_message(request, messages.INFO,
+                        ugettext("Confirmation email sent to %(email)s") % {
                             "email": email,
-                        })
+                        }
+                    )
                     EmailConfirmation.objects.send_confirmation(email_address)
                 except EmailAddress.DoesNotExist:
                     pass
@@ -177,10 +190,11 @@ def email(request, **kwargs):
                         email=email
                     )
                     email_address.delete()
-                    request.user.message_set.create(
-                        message=_("Removed email address %(email)s") % {
+                    messages.add_message(request, messages.SUCCESS,
+                        ugettext("Removed email address %(email)s") % {
                             "email": email,
-                        })
+                        }
+                    )
                 except EmailAddress.DoesNotExist:
                     pass
             elif request.POST["action"] == "primary":
@@ -216,6 +230,9 @@ def password_change(request, **kwargs):
         password_change_form = form_class(request.user, request.POST)
         if password_change_form.is_valid():
             password_change_form.save()
+            messages.add_message(request, messages.SUCCESS,
+                ugettext(u"Password successfully changed.")
+            )
             password_change_form = form_class(request.user)
     else:
         password_change_form = form_class(request.user)
@@ -243,6 +260,9 @@ def password_set(request, **kwargs):
         password_set_form = form_class(request.user, request.POST)
         if password_set_form.is_valid():
             password_set_form.save()
+            messages.add_message(request, messages.SUCCESS,
+                ugettext(u"Password successfully set.")
+            )
             return HttpResponseRedirect(reverse("acct_passwd"))
     else:
         password_set_form = form_class(request.user)
@@ -338,6 +358,9 @@ def password_reset_from_key(request, uidb36, key, **kwargs):
             password_reset_key_form = form_class(request.POST, user=user, temp_key=key)
             if password_reset_key_form.is_valid():
                 password_reset_key_form.save()
+                messages.add_message(request, messages.SUCCESS,
+                    ugettext(u"Password successfully changed.")
+                )
                 password_reset_key_form = None
         else:
             password_reset_key_form = form_class()
@@ -364,6 +387,9 @@ def timezone_change(request, **kwargs):
         form = form_class(request.user, request.POST)
         if form.is_valid():
             form.save()
+            messages.add_message(request, messages.SUCCESS,
+                ugettext(u"Timezone successfully updated.")
+            )
     else:
         form = form_class(request.user)
     
@@ -387,6 +413,9 @@ def language_change(request, **kwargs):
         form = form_class(request.user, request.POST)
         if form.is_valid():
             form.save()
+            messages.add_message(request, messages.SUCCESS,
+                ugettext(u"Language successfully updated.")
+            )
             next = request.META.get("HTTP_REFERER", None)
             return HttpResponseRedirect(next)
     else:
@@ -422,10 +451,14 @@ def other_services(request, **kwargs):
                 twitter_authorized = twitter_verify_credentials(
                     twitter_account)
                 if not twitter_authorized:
-                    request.user.message_set.create(
-                        message=ugettext("Twitter authentication failed"))
+                    messages.add_message(request, messages.ERROR,
+                        ugettext("Twitter authentication failed")
+                    )
                 else:
                     twitter_form.save()
+                    messages.add_message(request, messages.SUCCESS,
+                        ugettext(u"Successfully authenticated.")
+                    )
     else:
         from microblogging.utils import twitter_account_for_user
         twitter_account = twitter_account_for_user(request.user)
@@ -451,6 +484,8 @@ def other_services_remove(request):
         Q(key="twitter_user") | Q(key="twitter_password")
     ).delete()
     
-    request.user.message_set.create(message=ugettext("Removed twitter account information successfully."))
+    messages.add_message(request, messages.SUCCESS,
+        ugettext("Removed twitter account information successfully.")
+    )
     
     return HttpResponseRedirect(reverse("acct_other_services"))

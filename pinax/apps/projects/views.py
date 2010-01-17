@@ -2,11 +2,12 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.utils.datastructures import SortedDict
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext, ugettext_lazy as _
 
 from django.conf import settings
 
@@ -84,7 +85,11 @@ def delete(request, group_slug=None, redirect_url=None):
     if (request.user.is_authenticated() and request.method == "POST" and
             request.user == project.creator and project.members.all().count() == 1):
         project.delete()
-        request.user.message_set.create(message=_("Project %(project_name)s deleted.") % {"project_name": project.name})
+        messages.add_message(request, messages.SUCCESS,
+            ugettext("Project %(project_name)s deleted.") % {
+                "project_name": project.name
+            }
+        )
         # no notification required as the deleter must be the only member
     
     return HttpResponseRedirect(redirect_url)
@@ -126,7 +131,12 @@ def project(request, group_slug=None, form_class=ProjectUpdateForm, adduser_form
     if request.user == project.creator and action == "add":
         adduser_form = adduser_form_class(request.POST, project=project)
         if adduser_form.is_valid():
-            adduser_form.save(request.user)
+            project_member = adduser_form.save(request.user)
+            messages.add_message(request, messages.SUCCESS,
+                ugettext("added %(user)s to project") % {
+                    "user": project_member.user
+                }
+            )
             adduser_form = adduser_form_class(project=project) # clear form
     else:
         adduser_form = adduser_form_class(project=project)
