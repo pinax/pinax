@@ -20,12 +20,12 @@ class ProjectForm(forms.ModelForm):
     )
     
     def clean_slug(self):
-        if Project.objects.filter(slug__iexact=self.cleaned_data["slug"]).count() > 0:
+        if Project.objects.filter(slug__iexact=self.cleaned_data["slug"]).exists():
             raise forms.ValidationError(_("A project already exists with that slug."))
         return self.cleaned_data["slug"].lower()
     
     def clean_name(self):
-        if Project.objects.filter(name__iexact=self.cleaned_data["name"]).count() > 0:
+        if Project.objects.filter(name__iexact=self.cleaned_data["name"]).exists():
             raise forms.ValidationError(_("A project already exists with that name."))
         return self.cleaned_data["name"]
     
@@ -39,7 +39,7 @@ class ProjectForm(forms.ModelForm):
 class ProjectUpdateForm(forms.ModelForm):
     
     def clean_name(self):
-        if Project.objects.filter(name__iexact=self.cleaned_data["name"]).count() > 0:
+        if Project.objects.filter(name__iexact=self.cleaned_data["name"]).exists():
             if self.cleaned_data["name"] == self.instance.name:
                 pass # same instance
             else:
@@ -65,7 +65,7 @@ class AddUserForm(forms.Form):
         except User.DoesNotExist:
             raise forms.ValidationError(_("There is no user with this username."))
         
-        if ProjectMember.objects.filter(project=self.project, user=user).count() > 0:
+        if ProjectMember.objects.filter(project=self.project, user=user).exists():
             raise forms.ValidationError(_("User is already a member of this project."))
         
         return self.cleaned_data['recipient']
