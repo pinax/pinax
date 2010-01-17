@@ -4,7 +4,9 @@ from django.conf import settings
 from account.utils import user_display
 
 
+
 register = template.Library()
+
 
 
 class UserDisplayNode(template.Node):
