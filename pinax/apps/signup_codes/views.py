@@ -14,6 +14,7 @@ from signup_codes.models import check_signup_code
 from signup_codes.forms import SignupForm, InviteUserForm
 
 
+
 def group_and_bridge(kwargs):
     """
     Given kwargs from the view (with view specific keys popped) pull out the
