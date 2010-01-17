@@ -9,7 +9,7 @@ PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-# tells Pinax to serve media through django.views.static.serve.
+# tells Pinax to serve media through the staticfiles app.
 SERVE_MEDIA = DEBUG
 
 ADMINS = (
@@ -65,7 +65,7 @@ STATIC_URL = '/site_media/static/'
 
 # Additional directories which hold static files
 STATICFILES_DIRS = (
-    ('static_project', os.path.join(PROJECT_ROOT, 'media')),
+    os.path.join(PROJECT_ROOT, 'media'),
 )
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a

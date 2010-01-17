@@ -102,3 +102,43 @@ Added a new starter project for serving up static media and templates
 
  * Allows HTML mockups to have a ready Pinax layout and take advantage of the 
    Django templating language.
+
+Updated django-staticfiles from 0.1.2 to 0.2.0
+----------------------------------------------
+
+ * The build_media and resolve_media management commands have been renamed to
+   build_static and resolve_static to be slightly less confusing.
+
+ * Remove the unneeded prefix in the STATICFILES_MEDIA_DIRS setting unless you
+   specifically want to use that prefix in your templates as well.
+
+   Before:
+   
+        STATICFILES_DIRS = (
+            ('my_project', os.path.join(PROJECT_ROOT, 'media')),
+            ('pinax', os.path.join(PINAX_ROOT, 'media', PINAX_THEME)),
+        )
+
+   After:
+
+        STATICFILES_DIRS = (
+            os.path.join(PROJECT_ROOT, 'media'),
+            os.path.join(PINAX_ROOT, 'media', PINAX_THEME),
+        )
+
+ * Update your urls.py to use the latest version of the media and static file
+   serving view:
+
+   Before:
+
+        if settings.SERVE_MEDIA:
+            urlpatterns += patterns('',
+                (r'^site_media/', include('staticfiles.urls')),
+            )
+
+   After:
+
+        if settings.SERVE_MEDIA:
+            urlpatterns += patterns('',
+                (r'', include('staticfiles.urls')),
+            )
