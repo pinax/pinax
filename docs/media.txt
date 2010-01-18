@@ -93,7 +93,7 @@ following snippet below the rest of the url configuration::
 
     from django.conf import settings
     if settings.SERVE_MEDIA:
-        urlpatterns += patterns('', 
-            (r'', include('staticfiles.urls')),
+        urlpatterns += patterns("", 
+            (r"", include("staticfiles.urls")),
         )
 
