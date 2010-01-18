@@ -78,7 +78,7 @@ STATICFILES_DIRS = [
 ADMIN_MEDIA_PREFIX = "/media/"
 
 # Make this unique, and don"t share it with anybody.
-SECRET_KEY = "0=b6e8#n2*dn9o)%f(h4go)_onbswji9*a#2tj+st^o3x-ak&b"
+SECRET_KEY = ""
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = [
