@@ -1,11 +1,11 @@
 import os
 
-from django.shortcuts import render_to_response, get_object_or_404
-from django.template import RequestContext
-from django.http import HttpResponseRedirect, HttpResponse, HttpResponseForbidden, Http404
-from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponseForbidden, Http404
+from django.shortcuts import render_to_response, get_object_or_404
+from django.template import RequestContext
 from django.template.loader import select_template
 from django.utils.translation import ugettext, ugettext_lazy as _
 
@@ -21,6 +21,8 @@ from threadedcomments.models import ThreadedComment
 
 from topics.forms import TopicForm
 from topics.models import Topic
+
+
 
 def topics(request, group_slug=None, form_class=TopicForm, template_name="topics/topics.html", bridge=None):
     
