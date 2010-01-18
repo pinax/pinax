@@ -235,7 +235,7 @@ this settings is bound to the ``DEBUG`` setting in the default
 STATIC_ROOT
 -----------
 
-:Default: ``'<PROJECT_ROOT>/site_media/static'``
+:Default: ``"<PROJECT_ROOT>/site_media/static"``
 
 The absolute path to the directory that holds static files like app media::
 
@@ -247,11 +247,11 @@ different ``STATICFILES_STORAGE_``, you don't need to set this).
 STATIC_URL
 ----------
 
-:Default: ``'/site_media/static/'``
+:Default: ``"/site_media/static/"``
 
 URL that handles the files served from STATIC_ROOT, e.g.::
 
-    STATIC_URL = '/site_media/static/'
+    STATIC_URL = "/site_media/static/"
 
 Note that this should **always** have a trailing slash.
 
@@ -317,7 +317,7 @@ use::
 STATICFILES_STORAGE
 -------------------
 
-:Default: ``'staticfiles.storage.StaticFileStorage'``
+:Default: ``"staticfiles.storage.StaticFileStorage"``
 
 The storage backend to use for copying static files to a single location.
 
