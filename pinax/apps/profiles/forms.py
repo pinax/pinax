@@ -8,11 +8,11 @@ class ProfileForm(forms.ModelForm):
     
     class Meta:
         model = Profile
-        exclude = (
+        exclude = [
             "user",
             "blogrss",
             "timezone",
             "language",
             "twitter_user",
             "twitter_password",
-        )
+        ]

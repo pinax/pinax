@@ -40,7 +40,7 @@ class Topic(models.Model):
     tags = TagField()
     
     class Meta:
-        ordering = ("-modified", )
+        ordering = ["-modified"]
     
     def __unicode__(self):
         return self.title

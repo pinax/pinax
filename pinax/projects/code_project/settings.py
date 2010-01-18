@@ -17,13 +17,13 @@ TEMPLATE_DEBUG = DEBUG
 # tells Pinax to serve media through the staticfiles app.
 SERVE_MEDIA = DEBUG
 
-INTERNAL_IPS = (
+INTERNAL_IPS = [
     "127.0.0.1",
-)
+]
 
-ADMINS = (
+ADMINS = [
     # ("Your Name", "your_email@domain.com"),
-)
+]
 
 MANAGERS = ADMINS
 
@@ -73,10 +73,10 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, "site_media", "static")
 STATIC_URL = "/site_media/static/"
 
 # Additional directories which hold static files
-STATICFILES_DIRS = (
+STATICFILES_DIRS = [
     os.path.join(PROJECT_ROOT, "media"),
     os.path.join(PINAX_ROOT, "media", PINAX_THEME),
-)
+]
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
@@ -87,12 +87,12 @@ ADMIN_MEDIA_PREFIX = posixpath.join(STATIC_URL, "admin/")
 SECRET_KEY = ""
 
 # List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
+TEMPLATE_LOADERS = [
     "django.template.loaders.filesystem.load_template_source",
     "django.template.loaders.app_directories.load_template_source",
-)
+]
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE_CLASSES = [
     "django.middleware.common.CommonMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -105,16 +105,16 @@ MIDDLEWARE_CLASSES = (
     "django_sorting.middleware.SortingMiddleware",
     "pinax.middleware.security.HideSensistiveFieldsMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
-)
+]
 
 ROOT_URLCONF = "code_project.urls"
 
-TEMPLATE_DIRS = (
+TEMPLATE_DIRS = [
     os.path.join(PROJECT_ROOT, "templates"),
     os.path.join(PINAX_ROOT, "templates", PINAX_THEME),
-)
+]
 
-TEMPLATE_CONTEXT_PROCESSORS = (
+TEMPLATE_CONTEXT_PROCESSORS = [
     "django.core.context_processors.auth",
     "django.core.context_processors.debug",
     "django.core.context_processors.i18n",
@@ -128,9 +128,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "announcements.context_processors.site_wide_announcements",
     "account.context_processors.openid",
     "account.context_processors.account",
-)
+]
 
-INSTALLED_APPS = (
+INSTALLED_APPS = [
     # included
     "django.contrib.admin",
     "django.contrib.auth",
@@ -175,8 +175,7 @@ INSTALLED_APPS = (
     "projects",
     "tasks",
     "topics",
-
-)
+]
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 
@@ -185,12 +184,12 @@ ABSOLUTE_URL_OVERRIDES = {
 }
 
 MARKUP_FILTER_FALLBACK = "none"
-MARKUP_CHOICES = (
+MARKUP_CHOICES = [
     ("restructuredtext", u"reStructuredText"),
     ("textile", u"Textile"),
     ("markdown", u"Markdown"),
     ("creole", u"Creole"),
-)
+]
 WIKI_MARKUP_CHOICES = MARKUP_CHOICES
 
 AUTH_PROFILE_MODULE = "basic_profiles.Profile"
@@ -203,13 +202,13 @@ ACCOUNT_EMAIL_AUTHENTICATION = False
 ACCOUNT_UNIQUE_EMAIL = EMAIL_CONFIRMATION_UNIQUE_EMAIL = False
 
 if ACCOUNT_EMAIL_AUTHENTICATION:
-    AUTHENTICATION_BACKENDS = (
+    AUTHENTICATION_BACKENDS = [
         "account.auth_backends.EmailModelBackend",
-    )
+    ]
 else:
-    AUTHENTICATION_BACKENDS = (
+    AUTHENTICATION_BACKENDS = [
         "django.contrib.auth.backends.ModelBackend",
-    )
+    ]
 
 EMAIL_CONFIRMATION_DAYS = 2
 EMAIL_DEBUG = DEBUG

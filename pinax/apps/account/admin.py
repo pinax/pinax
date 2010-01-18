@@ -5,7 +5,7 @@ from account.models import Account, OtherServiceInfo, PasswordReset
 
 
 class PasswordResetAdmin(admin.ModelAdmin):
-    list_display = ("user", "temp_key", "timestamp", "reset")
+    list_display = ["user", "temp_key", "timestamp", "reset"]
 
 
 

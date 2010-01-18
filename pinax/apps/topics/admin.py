@@ -5,7 +5,7 @@ from topics.models import Topic
 
 
 class TopicAdmin(admin.ModelAdmin):
-    list_display = ("title", )
+    list_display = ["title"]
 
 
 

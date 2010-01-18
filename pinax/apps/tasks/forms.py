@@ -42,7 +42,7 @@ class TaskForm(forms.ModelForm):
     
     class Meta:
         model = Task
-        fields = ("summary", "detail", "assignee", "tags", "markup")
+        fields = ["summary", "detail", "assignee", "tags", "markup"]
     
     def clean(self):
         self.check_group_membership()
@@ -103,7 +103,7 @@ class EditTaskForm(forms.ModelForm):
             self.fields["resolution"].widget = ReadOnlyWidget(field=self.instance._meta.get_field("resolution"))
     
     class Meta(TaskForm.Meta):
-        fields = (
+        fields = [
             "summary",
             "detail",
             "status",
@@ -111,7 +111,7 @@ class EditTaskForm(forms.ModelForm):
             "state",
             "tags",
             "resolution"
-        )
+        ]
     
     def clean_resolution(self):
         if self.cleaned_data["state"] == u"2":

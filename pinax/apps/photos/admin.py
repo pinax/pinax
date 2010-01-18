@@ -5,7 +5,7 @@ from photos.models import Image, Pool
 
 
 class PhotoAdmin(admin.ModelAdmin):
-    list_display = (
+    list_display = [
         "title",
         "title_slug",
         "caption",
@@ -14,11 +14,11 @@ class PhotoAdmin(admin.ModelAdmin):
         "member",
         "safetylevel",
         "tags",
-    )
+    ]
 
 
 class PoolAdmin(admin.ModelAdmin):
-    list_display = ("photo",)
+    list_display = ["photo"]
 
 
 

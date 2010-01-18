@@ -79,7 +79,7 @@ class Task(models.Model):
     )
     
     # fields for review and saves
-    fields = (
+    fields = [
         "summary",
         "detail",
         "creator",
@@ -90,7 +90,7 @@ class Task(models.Model):
         "status",
         "state",
         "resolution",
-    )
+    ]
     
     def __unicode__(self):
         return self.summary

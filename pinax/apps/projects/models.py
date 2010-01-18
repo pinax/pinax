@@ -48,4 +48,4 @@ class ProjectMember(models.Model):
     away_since = models.DateTimeField(_("away since"), default=datetime.now)
     
     class Meta:
-        unique_together = (("user", "project"),)
+        unique_together = [("user", "project")]

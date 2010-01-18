@@ -11,7 +11,7 @@ class PhotoUploadForm(forms.ModelForm):
     
     class Meta:
         model = Image
-        exclude = ("member", "photoset", "title_slug", "effect", "crop_from")
+        exclude = ["member", "photoset", "title_slug", "effect", "crop_from"]
         
     def clean_image(self):
         if "#" in self.cleaned_data["image"].name:
@@ -28,14 +28,14 @@ class PhotoEditForm(forms.ModelForm):
     
     class Meta:
         model = Image
-        exclude = (
+        exclude = [
             "member",
             "photoset",
             "title_slug",
             "effect",
             "crop_from",
             "image",
-        )
+        ]
     
     def __init__(self, user=None, *args, **kwargs):
         self.user = user

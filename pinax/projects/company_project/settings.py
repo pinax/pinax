@@ -16,9 +16,13 @@ TEMPLATE_DEBUG = DEBUG
 # tells Pinax to serve media through the staticfiles app.
 SERVE_MEDIA = DEBUG
 
-ADMINS = (
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
+ADMINS = [
     # ("Your Name", "your_email@domain.com"),
-)
+]
 
 MANAGERS = ADMINS
 
@@ -68,10 +72,10 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, "site_media", "static")
 STATIC_URL = "/site_media/static/"
 
 # Additional directories which hold static files
-STATICFILES_DIRS = (
+STATICFILES_DIRS = [
     os.path.join(PROJECT_ROOT, "media"),
     os.path.join(PINAX_ROOT, "media", PINAX_THEME),
-)
+]
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
@@ -82,38 +86,38 @@ ADMIN_MEDIA_PREFIX = posixpath.join(STATIC_URL, "admin/")
 SECRET_KEY = ""
 
 # List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
+TEMPLATE_LOADERS = [
     "django.template.loaders.filesystem.load_template_source",
     "django.template.loaders.app_directories.load_template_source",
-)
+]
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE_CLASSES = [
     "django.middleware.common.CommonMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.doc.XViewMiddleware",
-)
+]
 
 ROOT_URLCONF = "company_project.urls"
 
-TEMPLATE_DIRS = (
+TEMPLATE_DIRS = [
     os.path.join(PROJECT_ROOT, "templates"),
-)
+]
 
-TEMPLATE_CONTEXT_PROCESSORS = (
+TEMPLATE_CONTEXT_PROCESSORS = [
     "django.core.context_processors.auth",
     "django.core.context_processors.debug",
     "django.core.context_processors.i18n",
     "django.core.context_processors.media",
     "django.core.context_processors.request",
     "django.contrib.messages.context_processors.messages",
-
+    
     "pinax.core.context_processors.pinax_settings",
-)
+]
 
-INSTALLED_APPS = (
+INSTALLED_APPS = [
     # included
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -131,8 +135,7 @@ INSTALLED_APPS = (
     
     # admin
     "django.contrib.admin",
-
-)
+]
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 

@@ -16,13 +16,13 @@ class BlogForm(forms.ModelForm):
     
     class Meta:
         model = Post
-        exclude = (
+        exclude = [
             "author",
             "creator_ip",
             "created_at",
             "updated_at",
             "publish",
-        )
+        ]
     
     def __init__(self, user=None, *args, **kwargs):
         self.user = user
