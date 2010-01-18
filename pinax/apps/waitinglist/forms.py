@@ -1,10 +1,11 @@
-
 from django import forms
 
 from waitinglist.models import WaitingListEntry
 
 
+
 class WaitingListEntryForm(forms.ModelForm):
+    
     class Meta:
         model = WaitingListEntry
     
@@ -19,4 +20,3 @@ class WaitingListEntryForm(forms.ModelForm):
                 "email": value,
                 "date": entry.created.strftime("%m/%d/%y"),
             })
-        
