@@ -1,17 +1,18 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 
-from blog.models import Post
 from tagging.models import Tag, TaggedItem
+from wiki.models import Article as WikiArticle
+
+from blog.models import Post
 from photos.models import Image
 from bookmarks.models import BookmarkInstance
 from projects.models import Project, Task
 from projects.models import Topic as ProjectTopic
-
 # from tribes.models import Tribe
 # from tribes.models import Topic as TribeTopic
 
-from wiki.models import Article as WikiArticle
+
 
 def tags(request, tag, template_name='tags/index.html'):
     tag = get_object_or_404(Tag, name=tag)

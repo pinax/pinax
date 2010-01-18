@@ -1,10 +1,10 @@
-
 import os
 import sys
 
 from os.path import abspath, dirname, join
 from site import addsitedir
 
+# activate virtualenv
 VIRTUALENV_BASE = ""
 if not VIRTUALENV_BASE:
     raise Exception("VIRTUALENV_BASE is not set correctly.")
@@ -13,6 +13,7 @@ activate_this = join(VIRTUALENV_BASE, "bin/activate_this.py")
 execfile(activate_this, dict(__file__=activate_this))
 
 from django.core.handlers.modpython import ModPythonHandler
+
 
 
 class PinaxModPythonHandler(ModPythonHandler):

@@ -1,10 +1,10 @@
-
 import os
 import sys
 
 from os.path import abspath, dirname, join
 from site import addsitedir
 
+# activate virtualenv
 VIRTUALENV_BASE = ""
 if not VIRTUALENV_BASE:
     raise Exception("VIRTUALENV_BASE is not set correctly.")
@@ -15,9 +15,10 @@ execfile(activate_this, dict(__file__=activate_this))
 from django.core.handlers.modpython import ModPythonHandler
 
 
+
 class PinaxModPythonHandler(ModPythonHandler):
     def __call__(self, req):
-        # mod_python fakes the environ, and thus doesn't process SetEnv. 
+        # mod_python fakes the environ, and thus doesn't process SetEnv.
         # This fixes that. Django will call this again since there is no way
         # of overriding __call__ to just process the request.
         os.environ.update(req.subprocess_env)

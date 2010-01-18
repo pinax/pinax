@@ -1,13 +1,14 @@
+from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponseForbidden, Http404
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
-from django.http import HttpResponseRedirect, HttpResponse, HttpResponseForbidden, Http404
-from django.core.urlresolvers import reverse
+from django.utils.translation import ugettext
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.conf import settings
-from django.utils.translation import ugettext
 
 if "notification" in settings.INSTALLED_APPS:
     from notification import models as notification
@@ -16,6 +17,7 @@ else:
 
 from basic_groups.models import BasicGroup
 from basic_groups.forms import BasicGroupForm, BasicGroupUpdateForm
+
 
 
 @login_required
@@ -31,7 +33,9 @@ def create(request, form_class=BasicGroupForm, template_name="basic_groups/creat
         group.save()
         if notification:
             # @@@ might be worth having a shortcut for sending to all users
-            notification.send(User.objects.all(), "groups_new_group", {"group": group}, queue=True)
+            notification.send(User.objects.all(), "groups_new_group", {
+                "group": group
+            }, queue=True)
         return HttpResponseRedirect(group.get_absolute_url())
     
     return render_to_response(template_name, {
@@ -90,8 +94,14 @@ def group(request, group_slug=None, form_class=BasicGroupUpdateForm, template_na
             }
         )
         if notification:
-            notification.send([group.creator], "groups_created_new_member", {"user": request.user, "group": group})
-            notification.send(group.members.all(), "groups_new_member", {"user": request.user, "group": group})
+            notification.send([group.creator], "groups_created_new_member", {
+                "user": request.user,
+                "group": group
+            })
+            notification.send(group.members.all(), "groups_new_member", {
+                "user": request.user,
+                "group": group
+            })
     elif action == "leave":
         group.members.remove(request.user)
         message.add_message(request, messages.SUCCESS,
