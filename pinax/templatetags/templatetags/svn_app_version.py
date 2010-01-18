@@ -1,12 +1,16 @@
+from os.path import abspath
+from os.path import dirname as dn
+
 from django import template
 from django.conf import settings
 from django.core.cache import cache
-from django.utils.encoding import smart_str
-from os.path import abspath
-from os.path import dirname as dn
-from django.utils.version import get_svn_revision
 from django.db.models.loading import get_app
+from django.utils.encoding import smart_str
+from django.utils.version import get_svn_revision
+
+
 register = template.Library()
+
 
 
 @register.simple_tag
@@ -37,7 +41,10 @@ def svn_app_version(appname=None, fail_silently=bool(not settings.DEBUG)):
         cache.set(cname, version, 60*60*24*30)
     return version
 
-def get_all_versions(fail_silently=bool(not settings.DEBUG)):
+
+def get_all_versions(fail_silently=None):
+    if fail_silently is None:
+        fail_silently = bool(not settings.DEBUG)
     # this cannot be done on load as there would be circular and parital imports
     try:
         allnames = ['', 'django'] + settings.INSTALLED_APPS
