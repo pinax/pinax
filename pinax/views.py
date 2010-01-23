@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.http import HttpResponseServerError
-from django.template import loader, Context
+from django.template import loader, Context, RequestContext
 
 
 
@@ -12,3 +12,15 @@ def server_error(request, template_name="500.html"):
         "STATIC_URL": settings.STATIC_URL,
     })
     return HttpResponseServerError(t.render(ctx))
+
+
+def static_view(request, path):
+    """
+    serve pages directly from the templates directories.
+    """
+    if not path or path.endswith("/"):
+        template_name = path + "index.html"
+    else:
+        template_name = path
+    ctx = RequestContext(request)
+    return render_to_response(template_name, ctx)

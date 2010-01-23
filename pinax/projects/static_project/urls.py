@@ -8,19 +8,8 @@ from django.template import RequestContext
 handler500 = "pinax.views.server_error"
 
 
-def static_view(request, path):
-    """
-    serve pages directly from the templates directories.
-    """
-    if not path or path.endswith("/"):
-        template_name = path + "index.html"
-    else:
-        template_name = path
-    return render_to_response(template_name, RequestContext(request))
-
-
 urlpatterns = patterns("",
-    (r"^(.*)$", static_view)
+    (r"^(.*)$", "pinax.views.static_view")
 )
 
 
