@@ -34,7 +34,7 @@ urlpatterns = patterns("",
     (r"^announcements/", include("announcements.urls")),
     (r"^waitinglist/", include("waitinglist.urls")),
     
-    (r"^admin/(.*)", admin.site.root),
+    (r"^admin/", include(admin.site.urls)),
 )
 
 if settings.SERVE_MEDIA:

@@ -33,7 +33,7 @@ urlpatterns = patterns("",
     (r"^comments/", include("threadedcomments.urls")),
     (r"^wiki/", include("wiki.urls")),
     
-    (r"^admin/(.*)", admin.site.root),
+    (r"^admin/", include(admin.site.urls)),
 )
 
 if settings.SERVE_MEDIA:

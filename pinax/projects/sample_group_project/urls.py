@@ -40,7 +40,7 @@ urlpatterns = patterns("",
     (r"^tribes/", include("tribes.urls")),
     (r"^projects/", include("projects.urls")),
     
-    (r"^admin/(.*)", admin.site.root),
+    (r"^admin/", include(admin.site.urls)),
 )
 
 

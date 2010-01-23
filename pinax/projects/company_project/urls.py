@@ -17,7 +17,7 @@ urlpatterns = patterns("",
     url(r"^feed/$", "biblion.views.blog_feed", name="blog_feed_combined"),
     url(r"^feed/(?P<section>[-\w]+)/$", "biblion.views.blog_feed", name="blog_feed"),
     
-    url(r"^admin/(.*)", admin.site.root),
+    (r"^admin/", include(admin.site.urls)),
 )
 
 
