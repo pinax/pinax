@@ -9,6 +9,9 @@ from account.openid_consumer import PinaxConsumer
 
 
 
+handler500 = "pinax.views.server_error"
+
+
 urlpatterns = patterns("",
     # some simple pages
     url(r"^$", direct_to_template, {"template": "homepage.html"}, name="home"),
@@ -25,6 +28,7 @@ urlpatterns = patterns("",
     (r"^openid/(.*)", PinaxConsumer()),
     (r"^admin/(.*)", admin.site.root),
 )
+
 
 if settings.SERVE_MEDIA:
     urlpatterns += patterns("",

@@ -9,11 +9,13 @@ from account.openid_consumer import PinaxConsumer
 
 
 
+handler500 = "pinax.views.server_error"
+
+
 if settings.ACCOUNT_OPEN_SIGNUP:
     signup_view = "account.views.signup"
 else:
     signup_view = "signup_codes.views.signup"
-
 
 
 urlpatterns = patterns("",

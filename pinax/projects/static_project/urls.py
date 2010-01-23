@@ -5,6 +5,9 @@ from django.template import RequestContext
 
 
 
+handler500 = "pinax.views.server_error"
+
+
 def static_view(request, path):
     """
     serve pages directly from the templates directories.

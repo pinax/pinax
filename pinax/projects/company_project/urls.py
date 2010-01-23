@@ -7,9 +7,7 @@ admin.autodiscover()
 
 
 
-# override the default handler500 so i can pass MEDIA_URL
-handler500 = "company_project.views.server_error"
-
+handler500 = "pinax.views.server_error"
 
 
 urlpatterns = patterns("",
