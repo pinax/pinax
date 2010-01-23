@@ -4,6 +4,14 @@ from django.template import loader, Context, RequestContext
 
 
 
+def noop(request):
+    """
+    provides a callable that can be used to stub out a URL that might be
+    mapped by the proxying/containing webserver.
+    """
+    pass
+
+
 def server_error(request, template_name="500.html"):
     # You need to create a 500.html template.
     t = loader.get_template(template_name)
