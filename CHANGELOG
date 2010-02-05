@@ -6,6 +6,24 @@
 # things started
 
 
+Removed PINAX_ROOT sys.path hack in projects
+--------------------------------------------
+
+ * Pinax no longer uses PINAX_ROOT in the sys.path to add the apps/ directory
+   directly. Apps are now reference with their full path.
+   
+   Before::
+   
+       from account.views import login
+   
+   After::
+   
+       from pinax.apps.account.views import login
+   
+   We recommend you update your projects to use the new import path. If you
+   leave the sys.path addition in your project that behavior may actually
+   work, but is untested and not supported.
+
 Upgraded Django from 1.0.X to Django 1.2.X
 ------------------------------------------
 
@@ -65,7 +83,7 @@ Added nested group support
    
        bridge = ContentBridge(Project, "projects")
        ...
-       urlpatterns += bridge.include_urls("topics.urls", r"^project/(?P<group_slug>[-\w]+)/topics/")
+       urlpatterns += bridge.include_urls("pinax.apps.topics.urls", r"^project/(?P<group_slug>[-\w]+)/topics/")
    
    We can no longer rely on group_slug as shown above since content object
    apps can now be group apps. The new and correct way is to use the lower
@@ -73,7 +91,7 @@ Added nested group support
    
        bridge = ContentBridge(Project)
        ...
-       urlpatterns += bridge.include_urls("topics.urls", r"^project/(?P<project_slug>[-\w]+)/topics/")
+       urlpatterns += bridge.include_urls("pinax.apps.topics.urls", r"^project/(?P<project_slug>[-\w]+)/topics/")
    
    Notice the second argument to ContentBridge is no longer needed. It now
    uses the app_label for the model by default.

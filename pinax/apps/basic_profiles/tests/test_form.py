@@ -4,8 +4,8 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 
-from basic_profiles.forms import ProfileForm
-from basic_profiles.models import Profile
+from pinax.apps.basic_profiles.forms import ProfileForm
+from pinax.apps.basic_profiles.models import Profile
 
 
 

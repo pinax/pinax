@@ -9,8 +9,8 @@ from django.utils.translation import ugettext
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
-from basic_profiles.models import Profile
-from basic_profiles.forms import ProfileForm
+from pinax.apps.basic_profiles.models import Profile
+from pinax.apps.basic_profiles.forms import ProfileForm
 
 if "notification" in settings.INSTALLED_APPS:
     from notification import models as notification

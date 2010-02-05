@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from signup_codes.models import SignupCode
+from pinax.apps.signup_codes.models import SignupCode
 
 
 

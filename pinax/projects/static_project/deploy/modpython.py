@@ -24,8 +24,6 @@ class PinaxModPythonHandler(ModPythonHandler):
         from django.conf import settings
         
         sys.path.insert(0, abspath(join(dirname(__file__), "../../")))
-        
-        sys.path.insert(0, join(settings.PINAX_ROOT, "apps"))
         sys.path.insert(0, join(settings.PROJECT_ROOT, "apps"))
         
         return super(PinaxModPythonHandler, self).__call__(req)

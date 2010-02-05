@@ -21,8 +21,8 @@ else:
     notification = None
 
 
-from profiles.forms import ProfileForm
-from profiles.models import Profile
+from pinax.apps.profiles.forms import ProfileForm
+from pinax.apps.profiles.models import Profile
 
 
 

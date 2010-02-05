@@ -16,8 +16,8 @@ if "notification" in settings.INSTALLED_APPS:
 else:
     notification = None
 
-from tribes.models import Tribe
-from tribes.forms import TribeForm, TribeUpdateForm
+from pinax.apps.tribes.models import Tribe
+from pinax.apps.tribes.forms import TribeForm, TribeUpdateForm
 
 
 

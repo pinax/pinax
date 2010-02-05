@@ -112,8 +112,8 @@ MIDDLEWARE_CLASSES = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django_openid.consumer.SessionConsumer",
     "django.contrib.messages.middleware.MessageMiddleware",
-    "account.middleware.LocaleMiddleware",
-    "account.middleware.AuthenticatedMiddleware",
+    "pinax.apps.account.middleware.LocaleMiddleware",
+    "pinax.apps.account.middleware.AuthenticatedMiddleware",
     "django.middleware.doc.XViewMiddleware",
     "pagination.middleware.PaginationMiddleware",
     "pinax.middleware.security.HideSensistiveFieldsMiddleware",
@@ -139,12 +139,12 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     
     "notification.context_processors.notification",
     "announcements.context_processors.site_wide_announcements",
-    "account.context_processors.openid",
-    "account.context_processors.account",
+    "pinax.apps.account.context_processors.openid",
+    "pinax.apps.account.context_processors.account",
 ]
 
 INSTALLED_APPS = [
-    # included
+    # Django
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -153,6 +153,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.humanize",
     "django.contrib.markup",
+    
     "pinax.templatetags",
     
     # external
@@ -178,15 +179,16 @@ INSTALLED_APPS = [
     "debug_toolbar",
     "tagging_ext",
     
-    # internal (for now)
-    "basic_profiles",
-    "account",
-    "signup_codes",
-    "topics",
-    "tagging_utils",
-    "threadedcomments_extras",
-    "tasks",
+    # Pinax
+    "pinax.apps.basic_profiles",
+    "pinax.apps.account",
+    "pinax.apps.signup_codes",
+    "pinax.apps.topics",
+    "pinax.apps.tagging_utils",
+    "pinax.apps.threadedcomments_extras",
+    "pinax.apps.tasks",
     
+    # project
 ]
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
@@ -222,7 +224,7 @@ ACCOUNT_UNIQUE_EMAIL = EMAIL_CONFIRMATION_UNIQUE_EMAIL = False
 
 if ACCOUNT_EMAIL_AUTHENTICATION:
     AUTHENTICATION_BACKENDS = [
-        "account.auth_backends.EmailModelBackend",
+        "pinax.apps.account.auth_backends.EmailModelBackend",
     ]
 else:
     AUTHENTICATION_BACKENDS = [

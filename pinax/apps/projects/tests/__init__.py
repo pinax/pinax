@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from projects.models import Project
+from pinax.apps.projects.models import Project
 
 
 

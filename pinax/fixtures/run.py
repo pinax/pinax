@@ -22,7 +22,7 @@ setup_environ(settings_mod)
 path = addsitedir(join(settings.PINAX_ROOT, "libs/external_libs"), set())
 if path:
     sys.path = list(path) + sys.path
-sys.path.insert(0, join(settings.PINAX_ROOT, "apps"))
+
 sys.path.insert(0, join(settings.PROJECT_ROOT, "apps"))
 
 settings.DATABASE_ENGINE = 'sqlite3'

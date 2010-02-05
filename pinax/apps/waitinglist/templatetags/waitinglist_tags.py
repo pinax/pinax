@@ -1,6 +1,6 @@
 from django import template
 
-from waitinglist.forms import WaitingListEntryForm
+from pinax.apps.waitinglist.forms import WaitingListEntryForm
 
 
 

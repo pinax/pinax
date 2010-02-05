@@ -3,7 +3,7 @@ from django.core.management.base import NoArgsCommand
 
 from django.contrib.auth.models import User
 
-from basic_profiles.models import Profile
+from pinax.apps.basic_profiles.models import Profile
 
 
 class Command(NoArgsCommand):

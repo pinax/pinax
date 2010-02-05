@@ -16,8 +16,8 @@ if "notification" in settings.INSTALLED_APPS:
 else:
     notification = None
 
-from projects.forms import ProjectForm, ProjectUpdateForm, AddUserForm
-from projects.models import Project, ProjectMember
+from pinax.apps.projects.forms import ProjectForm, ProjectUpdateForm, AddUserForm
+from pinax.apps.projects.models import Project, ProjectMember
 
 
 

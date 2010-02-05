@@ -1,5 +1,5 @@
 from django.contrib import admin
-from projects.models import Project
+from pinax.apps.projects.models import Project
 
 
 

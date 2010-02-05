@@ -99,7 +99,7 @@ MIDDLEWARE_CLASSES = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django_openid.consumer.SessionConsumer",
     "django.contrib.messages.middleware.MessageMiddleware",
-    "account.middleware.LocaleMiddleware",
+    "pinax.apps.account.middleware.LocaleMiddleware",
     "django.middleware.doc.XViewMiddleware",
     "pagination.middleware.PaginationMiddleware",
     "django_sorting.middleware.SortingMiddleware",
@@ -128,8 +128,8 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     
     "notification.context_processors.notification",
     "announcements.context_processors.site_wide_announcements",
-    "account.context_processors.openid",
-    "account.context_processors.account",
+    "pinax.apps.account.context_processors.openid",
+    "pinax.apps.account.context_processors.account",
     "messages.context_processors.inbox",
     "friends_app.context_processors.invitations",
     "social_project.context_processors.combined_inbox_count",
@@ -142,7 +142,7 @@ COMBINED_INBOX_COUNT_SOURCES = [
 ]
 
 INSTALLED_APPS = [
-    # included
+    # Django
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -151,6 +151,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.humanize",
     "django.contrib.markup",
+    
     "pinax.templatetags",
     
     # external
@@ -169,15 +170,12 @@ INSTALLED_APPS = [
     "groups",
     # "gravatar",
     "threadedcomments",
-    "threadedcomments_extras",
     "wiki",
     "swaps",
     "timezones",
     "voting",
-    "voting_extras",
     "tagging",
     "bookmarks",
-    "blog",
     "ajax_validation",
     "photologue",
     "avatar",
@@ -191,14 +189,19 @@ INSTALLED_APPS = [
     "debug_toolbar",
     "tagging_ext",
     
-    # internal (for now)
-    "analytics",
-    "profiles",
-    "account",
-    "signup_codes",
-    "tribes",
-    "photos",
-    "topics",
+    # Pinax
+    "pinax.apps.analytics",
+    "pinax.apps.profiles",
+    "pinax.apps.account",
+    "pinax.apps.signup_codes",
+    "pinax.apps.blog",
+    "pinax.apps.tribes",
+    "pinax.apps.photos",
+    "pinax.apps.topics",
+    "pinax.apps.threadedcomments_extras",
+    "pinax.apps.voting_extras",
+    
+    # project
 ]
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
@@ -227,7 +230,7 @@ ACCOUNT_UNIQUE_EMAIL = EMAIL_CONFIRMATION_UNIQUE_EMAIL = False
 
 if ACCOUNT_EMAIL_AUTHENTICATION:
     AUTHENTICATION_BACKENDS = [
-        "account.auth_backends.EmailModelBackend",
+        "pinax.apps.account.auth_backends.EmailModelBackend",
     ]
 else:
     AUTHENTICATION_BACKENDS = [

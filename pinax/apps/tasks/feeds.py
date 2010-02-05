@@ -8,7 +8,7 @@ from django.template.defaultfilters import linebreaks, escape
 
 from django.contrib.sites.models import Site
 
-from tasks.models import TaskHistory
+from pinax.apps.tasks.models import TaskHistory
 
 
 

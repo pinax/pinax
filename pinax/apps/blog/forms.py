@@ -3,7 +3,7 @@ from datetime import datetime
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-from blog.models import Post
+from pinax.apps.blog.models import Post
 
 
 

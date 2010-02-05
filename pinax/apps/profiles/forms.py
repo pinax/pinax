@@ -1,6 +1,6 @@
 from django import forms
 
-from profiles.models import Profile
+from pinax.apps.profiles.models import Profile
 
 
 

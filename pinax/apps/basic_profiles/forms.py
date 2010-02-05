@@ -1,7 +1,7 @@
 from django import forms
 from django.conf import settings
 
-from basic_profiles.models import Profile
+from pinax.apps.basic_profiles.models import Profile
 
 
 

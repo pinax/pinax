@@ -111,12 +111,20 @@ TEMPLATE_CONTEXT_PROCESSORS = [
 ]
 
 INSTALLED_APPS = [
+    # Django
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.sites",
     
+    "pinax.templatetags",
+    
+    # external
     "staticfiles",
+    
+    # Pinax
+    
+    # project
 ]
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from photos.models import Image, Pool
+from pinax.apps.photos.models import Image, Pool
 
 
 

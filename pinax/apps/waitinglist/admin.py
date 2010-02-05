@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from waitinglist.models import WaitingListEntry
+from pinax.apps.waitinglist.models import WaitingListEntry
 
 
 

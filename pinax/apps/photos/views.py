@@ -12,8 +12,8 @@ from django.contrib.auth.decorators import login_required
 
 from photologue.models import *
 
-from photos.models import Image, Pool
-from photos.forms import PhotoUploadForm, PhotoEditForm
+from pinax.apps.photos.models import Image, Pool
+from pinax.apps.photos.forms import PhotoUploadForm, PhotoEditForm
 
 
 

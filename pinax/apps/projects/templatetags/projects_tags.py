@@ -1,5 +1,5 @@
 from django import template
-from projects.forms import ProjectForm
+from pinax.apps.projects.forms import ProjectForm
 
 
 

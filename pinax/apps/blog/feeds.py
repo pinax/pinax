@@ -12,7 +12,7 @@ from django.contrib.sites.models import Site
 
 from friends.models import friend_set_for
 
-from blog.models import Post
+from pinax.apps.blog.models import Post
 
 
 

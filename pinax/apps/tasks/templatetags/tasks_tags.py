@@ -9,7 +9,7 @@ from django.contrib.contenttypes.models import ContentType
 from tagging.models import Tag, TaggedItem
 from tagging.utils import parse_tag_input
 
-from tasks.models import Task
+from pinax.apps.tasks.models import Task
 
 
 

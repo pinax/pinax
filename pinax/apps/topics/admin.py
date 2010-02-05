@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from topics.models import Topic
+from pinax.apps.topics.models import Topic
 
 
 

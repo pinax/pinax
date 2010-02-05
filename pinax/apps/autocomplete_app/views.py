@@ -10,7 +10,7 @@ from django.http import HttpResponse, HttpResponseForbidden
 def username_autocomplete_all(request):
     if request.user.is_authenticated():
         from django.contrib.auth.models import User
-        from basic_profiles.models import Profile
+        from pinax.apps.basic_profiles.models import Profile
         from avatar.templatetags.avatar_tags import avatar
         q = request.GET.get("q")
         users = User.objects.all()
@@ -38,7 +38,7 @@ def username_autocomplete_all(request):
 def username_autocomplete_friends(request):
     if request.user.is_authenticated():
         from friends.models import Friendship
-        from profiles.models import Profile
+        from pinax.apps.profiles.models import Profile
         from avatar.templatetags.avatar_tags import avatar
         q = request.GET.get("q")
         friends = Friendship.objects.friends_for_user(request.user)

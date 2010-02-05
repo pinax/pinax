@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from tribes.models import Tribe
+from pinax.apps.tribes.models import Tribe
 
 
 

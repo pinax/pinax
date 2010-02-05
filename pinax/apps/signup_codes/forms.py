@@ -11,8 +11,8 @@ from django.contrib.sites.models import Site
 from pinax.core.utils import get_send_mail
 send_mail = get_send_mail()
 
-from account.forms import GroupForm, SignupForm as BaseSignupForm
-from signup_codes.models import SignupCode, check_signup_code
+from pinax.apps.account.forms import GroupForm, SignupForm as BaseSignupForm
+from pinax.apps.signup_codes.models import SignupCode, check_signup_code
 
 
 class SignupForm(BaseSignupForm):

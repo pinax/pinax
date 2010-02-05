@@ -2,7 +2,7 @@ import re
 
 from django import template
 
-from photos.models import Image, Pool
+from pinax.apps.photos.models import Image, Pool
 
 
 

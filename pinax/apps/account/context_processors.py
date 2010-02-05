@@ -1,4 +1,4 @@
-from account.models import Account, AnonymousAccount
+from pinax.apps.account.models import Account, AnonymousAccount
 
 
 

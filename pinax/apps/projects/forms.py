@@ -9,7 +9,7 @@ if "notification" in settings.INSTALLED_APPS:
 else:
     notification = None
 
-from projects.models import Project, ProjectMember
+from pinax.apps.projects.models import Project, ProjectMember
 
 
 

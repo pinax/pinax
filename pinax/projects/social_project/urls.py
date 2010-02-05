@@ -5,20 +5,20 @@ from django.views.generic.simple import direct_to_template
 from django.contrib import admin
 admin.autodiscover()
 
-from tagging.models import TaggedItem
-
-from account.openid_consumer import PinaxConsumer
-from blog.feeds import BlogFeedAll, BlogFeedUser
-from blog.models import Post
 from bookmarks.feeds import BookmarkFeed
 from bookmarks.models import BookmarkInstance
 from microblogging.feeds import TweetFeedAll, TweetFeedUser, TweetFeedUserWithFriends
 from microblogging.models import Tweet
-from photos.models import Image
-from swaps.models import Offer
-from topics.models import Topic
-from tribes.models import Tribe
+from tagging.models import TaggedItem
 from wiki.models import Article as WikiArticle
+
+from pinax.apps.account.openid_consumer import PinaxConsumer
+from pinax.apps.blog.feeds import BlogFeedAll, BlogFeedUser
+from pinax.apps.blog.models import Post
+from pinax.apps.photos.models import Image
+from pinax.apps.swaps.models import Offer
+from pinax.apps.topics.models import Topic
+from pinax.apps.tribes.models import Tribe
 
 
 
@@ -39,9 +39,9 @@ bookmarks_feed_dict = {"feed_dict": {"": BookmarkFeed }}
 
 
 if settings.ACCOUNT_OPEN_SIGNUP:
-    signup_view = "account.views.signup"
+    signup_view = "pinax.apps.account.views.signup"
 else:
-    signup_view = "signup_codes.views.signup"
+    signup_view = "pinax.apps.signup_codes.views.signup"
 
 
 urlpatterns = patterns("",
@@ -49,28 +49,28 @@ urlpatterns = patterns("",
         "template": "homepage.html",
     }, name="home"),
     
-    url(r"^admin/invite_user/$", "signup_codes.views.admin_invite_user", name="admin_invite_user"),
+    url(r"^admin/invite_user/$", "pinax.apps.signup_codes.views.admin_invite_user", name="admin_invite_user"),
     url(r"^account/signup/$", signup_view, name="acct_signup"),
     
     (r"^about/", include("about.urls")),
-    (r"^account/", include("account.urls")),
+    (r"^account/", include("pinax.apps.account.urls")),
     (r"^openid/(.*)", PinaxConsumer()),
-    (r"^bbauth/", include("bbauth.urls")),
-    (r"^authsub/", include("authsub.urls")),
-    (r"^profiles/", include("profiles.urls")),
-    (r"^blog/", include("blog.urls")),
+    (r"^bbauth/", include("pinax.apps.bbauth.urls")),
+    (r"^authsub/", include("pinax.apps.authsub.urls")),
+    (r"^profiles/", include("pinax.apps.profiles.urls")),
+    (r"^blog/", include("pinax.apps.blog.urls")),
     (r"^invitations/", include("friends_app.urls")),
     (r"^notices/", include("notification.urls")),
     (r"^messages/", include("messages.urls")),
     (r"^announcements/", include("announcements.urls")),
     (r"^tweets/", include("microblogging.urls")),
-    (r"^tribes/", include("tribes.urls")),
+    (r"^tribes/", include("pinax.apps.tribes.urls")),
     (r"^comments/", include("threadedcomments.urls")),
     (r"^robots.txt$", include("robots.urls")),
     (r"^i18n/", include("django.conf.urls.i18n")),
     (r"^bookmarks/", include("bookmarks.urls")),
     (r"^admin/", include(admin.site.urls)),
-    (r"^photos/", include("photos.urls")),
+    (r"^photos/", include("pinax.apps.photos.urls")),
     (r"^avatar/", include("avatar.urls")),
     (r"^swaps/", include("swaps.urls")),
     (r"^flag/", include("flag.urls")),

@@ -1,4 +1,4 @@
-from profiles.models import Profile
+from pinax.apps.profiles.models import Profile
 from django.contrib.auth.models import User
 from django.contrib.webdesign.lorem_ipsum import words
 from django.template.defaultfilters import capfirst

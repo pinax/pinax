@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-from tribes.models import Tribe
+from pinax.apps.tribes.models import Tribe
 
 
 

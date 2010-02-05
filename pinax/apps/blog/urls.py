@@ -1,31 +1,31 @@
 from django.conf.urls.defaults import *
 
-from blog import views, models
-from blog.forms import *
+from pinax.apps.blog import views, models
+from pinax.apps.blog.forms import *
 
 
 
 urlpatterns = patterns("",
     # blog post
-    url(r"^post/(?P<username>[-\w]+)/(?P<year>\d{4})/(?P<month>\d{2})/(?P<slug>[-\w]+)/$", "blog.views.post", name="blog_post"),
+    url(r"^post/(?P<username>[-\w]+)/(?P<year>\d{4})/(?P<month>\d{2})/(?P<slug>[-\w]+)/$", "pinax.apps.blog.views.post", name="blog_post"),
     
     # all blog posts
-    url(r"^$", "blog.views.blogs", name="blog_list_all"),
+    url(r"^$", "pinax.apps.blog.views.blogs", name="blog_list_all"),
     
     # blog post for user
-    url(r"^posts/(?P<username>\w+)/$", "blog.views.blogs", name="blog_list_user"),
+    url(r"^posts/(?P<username>\w+)/$", "pinax.apps.blog.views.blogs", name="blog_list_user"),
     
     # your posts
-    url(r"^your_posts/$", "blog.views.your_posts", name="blog_list_yours"),
+    url(r"^your_posts/$", "pinax.apps.blog.views.your_posts", name="blog_list_yours"),
     
     # new blog post
-    url(r"^new/$", "blog.views.new", name="blog_new"),
+    url(r"^new/$", "pinax.apps.blog.views.new", name="blog_new"),
     
     # edit blog post
-    url(r"^edit/(\d+)/$", "blog.views.edit", name="blog_edit"),
+    url(r"^edit/(\d+)/$", "pinax.apps.blog.views.edit", name="blog_edit"),
     
     #destory blog post
-    url(r"^destroy/(\d+)/$", "blog.views.destroy", name="blog_destroy"),
+    url(r"^destroy/(\d+)/$", "pinax.apps.blog.views.destroy", name="blog_destroy"),
     
     # ajax validation
     (r"^validate/$", "ajax_validation.views.validate", {

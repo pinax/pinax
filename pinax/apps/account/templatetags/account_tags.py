@@ -1,7 +1,7 @@
 from django import template
 from django.conf import settings
 
-from account.utils import user_display
+from pinax.apps.account.utils import user_display
 
 
 

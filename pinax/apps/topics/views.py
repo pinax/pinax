@@ -19,8 +19,8 @@ else:
 
 from threadedcomments.models import ThreadedComment
 
-from topics.forms import TopicForm
-from topics.models import Topic
+from pinax.apps.topics.forms import TopicForm
+from pinax.apps.topics.models import Topic
 
 
 

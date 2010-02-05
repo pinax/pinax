@@ -10,9 +10,9 @@ from django.shortcuts import render_to_response
 
 from django_openid.registration import RegistrationConsumer
 
-from account.forms import OpenIDSignupForm
-from account.utils import get_default_redirect
-from account.views import login as account_login
+from pinax.apps.account.forms import OpenIDSignupForm
+from pinax.apps.account.utils import get_default_redirect
+from pinax.apps.account.views import login as account_login
 
 
 

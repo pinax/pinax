@@ -12,7 +12,7 @@ from friends.forms import JoinRequestForm
 from friends.importer import import_yahoo, import_google
 from friends.models import *
 
-from account.forms import SignupForm
+from pinax.apps.account.forms import SignupForm
 
 from friends_app.forms import ImportVCardForm
 

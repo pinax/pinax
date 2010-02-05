@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from profiles.models import Profile
+from pinax.apps.profiles.models import Profile
 
 
 

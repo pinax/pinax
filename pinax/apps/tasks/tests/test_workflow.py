@@ -4,11 +4,11 @@ from django.test import TestCase
 from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
 
-from tasks.models import Task
-from tasks.workflow import always, is_assignee, is_assignee_or_none
-from tasks.workflow import is_creator, no_assignee, is_task_manager
-from tasks.workflow import OR
-from tasks.workflow import TASK_MANAGER
+from pinax.apps.tasks.models import Task
+from pinax.apps.tasks.workflow import always, is_assignee, is_assignee_or_none
+from pinax.apps.tasks.workflow import is_creator, no_assignee, is_task_manager
+from pinax.apps.tasks.workflow import OR
+from pinax.apps.tasks.workflow import TASK_MANAGER
 
 
 

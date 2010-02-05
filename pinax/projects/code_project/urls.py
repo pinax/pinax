@@ -5,7 +5,7 @@ from django.views.generic.simple import direct_to_template
 from django.contrib import admin
 admin.autodiscover()
 
-from account.openid_consumer import PinaxConsumer
+from pinax.apps.account.openid_consumer import PinaxConsumer
 
 
 
@@ -13,9 +13,9 @@ handler500 = "pinax.views.server_error"
 
 
 if settings.ACCOUNT_OPEN_SIGNUP:
-    signup_view = "account.views.signup"
+    signup_view = "pinax.apps.account.views.signup"
 else:
-    signup_view = "signup_codes.views.signup"
+    signup_view = "pinax.apps.signup_codes.views.signup"
 
 
 urlpatterns = patterns("",
@@ -23,20 +23,20 @@ urlpatterns = patterns("",
         "template": "homepage.html",
     }, name="home"),
     
-    url(r"^admin/invite_user/$", "signup_codes.views.admin_invite_user", name="admin_invite_user"),
+    url(r"^admin/invite_user/$", "pinax.apps.signup_codes.views.admin_invite_user", name="admin_invite_user"),
     url(r"^account/signup/$", signup_view, name="acct_signup"),
     
     (r"^about/", include("about.urls")),
-    (r"^account/", include("account.urls")),
+    (r"^account/", include("pinax.apps.account.urls")),
     (r"^openid/(.*)", PinaxConsumer()),
-    (r"^profiles/", include("basic_profiles.urls")),
+    (r"^profiles/", include("pinax.apps.basic_profiles.urls")),
     (r"^notices/", include("notification.urls")),
     (r"^avatar/", include("avatar.urls")),
     (r"^comments/", include("threadedcomments.urls")),
     (r"^announcements/", include("announcements.urls")),
-    (r"^tagging_utils/", include("tagging_utils.urls")),
+    (r"^tagging_utils/", include("pinax.apps.tagging_utils.urls")),
     (r"^attachments/", include("attachments.urls")),
-    (r"^projects/", include("projects.urls")),
+    (r"^projects/", include("pinax.apps.projects.urls")),
     
     (r"^admin/", include(admin.site.urls)),
 )

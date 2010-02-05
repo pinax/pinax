@@ -31,13 +31,13 @@ else:
 
 from tagging.models import Tag
 
-from tasks.filters import TaskFilter
-from tasks.forms import TaskForm, EditTaskForm
-from tasks.models import Task, TaskHistory, Nudge
+from pinax.apps.tasks.filters import TaskFilter
+from pinax.apps.tasks.forms import TaskForm, EditTaskForm
+from pinax.apps.tasks.models import Task, TaskHistory, Nudge
 
 
 
-workflow = import_module(getattr(settings, "TASKS_WORKFLOW_MODULE", "tasks.workflow"))
+workflow = import_module(getattr(settings, "TASKS_WORKFLOW_MODULE", "pinax.apps.tasks.workflow"))
 
 
 

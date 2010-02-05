@@ -2,7 +2,7 @@ from django import template
 
 from django.contrib.contenttypes.models import ContentType
 
-from topics.models import Topic
+from pinax.apps.topics.models import Topic
 
 
 

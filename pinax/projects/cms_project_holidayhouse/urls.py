@@ -5,7 +5,7 @@ from django.views.generic.simple import direct_to_template
 from django.contrib import admin
 admin.autodiscover()
 
-from account.openid_consumer import PinaxConsumer
+from pinax.apps.account.openid_consumer import PinaxConsumer
 
 
 
@@ -24,7 +24,7 @@ urlpatterns = patterns("",
     (r"^attachments/", include("attachments.urls")),
     
     # pinax provided
-    (r"^account/", include("account.urls")),
+    (r"^account/", include("pinax.apps.account.urls")),
     (r"^openid/(.*)", PinaxConsumer()),
     (r"^admin/", include(admin.site.urls)),
 )

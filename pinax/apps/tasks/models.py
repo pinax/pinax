@@ -22,11 +22,11 @@ from tagging.fields import TagField
 from tagging.models import Tag
 from threadedcomments.models import ThreadedComment
 
-from tasks.fields import MarkupField
+from pinax.apps.tasks.fields import MarkupField
 
 
 
-workflow = import_module(getattr(settings, "TASKS_WORKFLOW_MODULE", "tasks.workflow"))
+workflow = import_module(getattr(settings, "TASKS_WORKFLOW_MODULE", "pinax.apps.tasks.workflow"))
 
 
 

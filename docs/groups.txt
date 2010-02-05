@@ -82,7 +82,7 @@ to end clients and users. So we use Django forms to control what is displayed::
     from django import forms
     from django.utils.translation import ugettext as _
     
-    from tasks.models import Task
+    from pinax.apps.tasks.models import Task
     
     
     
@@ -128,7 +128,7 @@ they can handle being within or without a group::
     from django.template import RequestContext
     from django.shortcuts import render_to_response
     
-    from tasks.models import Task
+    from pinax.apps.tasks.models import Task
     
     
     
@@ -186,8 +186,8 @@ Let's say you have the following code in ``tasks.urls.py``::
     from django.conf.urls.defaults import *
     
     urlpatterns = patterns("",
-        url(r"^tasks/$", "tasks.views.task_list", name="task_list"),
-        url(r"^tasks/(?P<slug>[-\w]+)/$", "tasks.views.blog_detail", name="task_detail"),
+        url(r"^tasks/$", "pinax.apps.tasks.views.task_list", name="task_list"),
+        url(r"^tasks/(?P<slug>[-\w]+)/$", "pinax.apps.tasks.views.blog_detail", name="task_detail"),
     )
 
 To ensure URLs to ``task_list`` are correctly generated you will need to use
@@ -279,10 +279,10 @@ application there needs to be a bridge. We take a sample projects.urls.py::
     
     # Create your normal project url views
     urlpatterns = patterns("",
-        url(r"^add_project$", "projects.views.add", name="project_add"),
-        url(r"^your_projects/$", "projects.views.your_project", name="your_projects"),
-        url(r"^(?P<slug>[-\w]+)$", "projects.views.project_detail", name="project_detail"),
-        url(r"^$", "projects.views.projects", name="project_list"),
+        url(r"^add_project$", "pinax.apps.projects.views.add", name="project_add"),
+        url(r"^your_projects/$", "pinax.apps.projects.views.your_project", name="your_projects"),
+        url(r"^(?P<slug>[-\w]+)$", "pinax.apps.projects.views.project_detail", name="project_detail"),
+        url(r"^$", "pinax.apps.projects.views.projects", name="project_list"),
         ...
     )
     
@@ -294,7 +294,7 @@ And then we add in the following code underneath the urlpatterns definition::
     from groups.bridge import ContentBridge
     
     # Fetch the group-aware model
-    from tasks.models import Task
+    from pinax.apps.tasks.models import Task
     
     
     

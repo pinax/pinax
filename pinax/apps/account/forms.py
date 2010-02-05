@@ -20,9 +20,9 @@ send_mail = get_send_mail()
 from emailconfirmation.models import EmailAddress
 from timezones.forms import TimeZoneField
 
-from account.models import Account, PasswordReset
-from account.models import OtherServiceInfo, other_service, update_other_services
-from account.utils import user_display
+from pinax.apps.account.models import Account, PasswordReset
+from pinax.apps.account.models import OtherServiceInfo, other_service, update_other_services
+from pinax.apps.account.utils import user_display
 
 
 

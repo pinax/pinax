@@ -1,6 +1,6 @@
 from django import template
 
-from tribes.forms import TribeForm
+from pinax.apps.tribes.forms import TribeForm
 
 
 

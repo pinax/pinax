@@ -9,9 +9,9 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 
-from account.utils import get_default_redirect, user_display
-from signup_codes.models import check_signup_code
-from signup_codes.forms import SignupForm, InviteUserForm
+from pinax.apps.account.utils import get_default_redirect, user_display
+from pinax.apps.signup_codes.models import check_signup_code
+from pinax.apps.signup_codes.forms import SignupForm, InviteUserForm
 
 
 

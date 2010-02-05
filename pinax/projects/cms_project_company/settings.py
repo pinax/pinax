@@ -113,7 +113,7 @@ MIDDLEWARE_CLASSES = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django_openid.consumer.SessionConsumer",
     "django.contrib.messages.middleware.MessageMiddleware",
-    "account.middleware.LocaleMiddleware",
+    "pinax.apps.account.middleware.LocaleMiddleware",
     "django.middleware.doc.XViewMiddleware",
     "pagination.middleware.PaginationMiddleware",
     "pinax.middleware.security.HideSensistiveFieldsMiddleware",
@@ -138,12 +138,12 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     "pinax.core.context_processors.pinax_settings",
     
     "notification.context_processors.notification",
-    "account.context_processors.openid",
-    "account.context_processors.account",
+    "pinax.apps.account.context_processors.openid",
+    "pinax.apps.account.context_processors.account",
 ]
 
 INSTALLED_APPS = [
-    # included
+    # Django
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -151,6 +151,8 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "django.contrib.messages",
     "django.contrib.humanize",
+    "django.contrib.markup",
+    
     "pinax.templatetags",
     
     # external
@@ -165,19 +167,18 @@ INSTALLED_APPS = [
     "dbtemplates",
     "staticfiles",
     "debug_toolbar",
-    
-    # internal (for now)
-    "analytics",
-    "basic_profiles",
-    "account",
-    
-    # project specific
     "sorl.thumbnail",
     "frontendadmin",
     "attachments",
     "django_generic_flatblocks",
     "django_generic_flatblocks.contrib.gblocks",
-    "django.contrib.markup",
+    
+    # Pinax
+    "pinax.apps.analytics",
+    "pinax.apps.basic_profiles",
+    "pinax.apps.account",
+    
+    # project
 ]
 
 FIXTURE_DIRS = [
@@ -212,7 +213,7 @@ ACCOUNT_UNIQUE_EMAIL = EMAIL_CONFIRMATION_UNIQUE_EMAIL = False
 
 if ACCOUNT_EMAIL_AUTHENTICATION:
     AUTHENTICATION_BACKENDS = [
-        "account.auth_backends.EmailModelBackend",
+        "pinax.apps.account.auth_backends.EmailModelBackend",
     ]
 else:
     AUTHENTICATION_BACKENDS = [

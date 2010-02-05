@@ -2,7 +2,7 @@ from django import forms
 
 import django_filters as filters
 
-from tasks.models import Task
+from pinax.apps.tasks.models import Task
 
 
 

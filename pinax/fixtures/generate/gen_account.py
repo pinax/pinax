@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.template.defaultfilters import capfirst
 from django.conf import settings
 
-from account.models import Account, update_other_services
+from pinax.apps.account.models import Account, update_other_services
 from timezones.forms import COMMON_TIMEZONE_CHOICES
 
 RSS_FEEDS = (

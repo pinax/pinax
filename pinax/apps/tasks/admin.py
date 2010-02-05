@@ -1,6 +1,6 @@
 from django.contrib import admin
 from attachments.admin import AttachmentInlines
-from tasks.models import Task
+from pinax.apps.tasks.models import Task
 
 
 

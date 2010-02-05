@@ -22,4 +22,4 @@ urlpatterns = patterns("",
 )
 
 
-urlpatterns += bridge.include_urls("topics.urls", r"^group/(?P<group_slug>[-\w]+)/topics/")
+urlpatterns += bridge.include_urls("pinax.apps.topics.urls", r"^group/(?P<group_slug>[-\w]+)/topics/")

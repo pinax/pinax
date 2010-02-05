@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from tribes.models import Tribe
+from pinax.apps.tribes.models import Tribe
 
 class TribesTest(TestCase):
     fixtures = ["tribes_auth.json"]
