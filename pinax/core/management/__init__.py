@@ -1,11 +1,16 @@
 import os
 import sys
-import pinax
 
 from django.core.management import LaxOptionParser
 from django.core.management.base import BaseCommand, handle_default_options
 
+import pinax
+
+
+
 _commands = None
+
+
 
 def load_command_class(package_name, name):
     """
@@ -13,15 +18,16 @@ def load_command_class(package_name, name):
     All errors raised by the import process (ImportError, AttributeError) are
     allowed to propagate.
     """
-    module_name = '%s.management.commands.%s' % (package_name, name)
+    module_name = "%s.management.commands.%s" % (package_name, name)
     module = __import__(module_name)
-    for part in module_name.split('.')[1:]:
+    for part in module_name.split(".")[1:]:
         module = getattr(module, part)
     command = module.Command()
-    # If we don't do the following two things, Django tries to import settings.
+    # If we don"t do the following two things, Django tries to import settings.
     command.__class__.can_import_settings = False
     command.__class__.validate = lambda *args, **kwargs: None
     return command
+
 
 def find_commands(management_dir):
     """
@@ -30,12 +36,13 @@ def find_commands(management_dir):
     
     Returns an empty list if no commands are defined.
     """
-    command_dir = os.path.join(management_dir, 'commands')
+    command_dir = os.path.join(management_dir, "commands")
     try:
         return [f[:-3] for f in os.listdir(command_dir)
-            if not f.startswith('_') and f.endswith('.py')]
+            if not f.startswith("_") and f.endswith(".py")]
     except OSError:
         return []
+
 
 def get_commands():
     """
@@ -57,11 +64,12 @@ def get_commands():
     if _commands is not None:
         return _commands
     
-    _commands = dict([(name, 'pinax.core') for name in
+    _commands = dict([(name, "pinax.core") for name in
         find_commands(__path__[0])])
-
-    # Now that we've built the command list, return it.
+    
+    # Now that we"ve built the command list, return it.
     return _commands
+
 
 class ManagementUtility(object):
     """
@@ -76,26 +84,26 @@ class ManagementUtility(object):
     
     def main_help_text(self):
         """
-        Returns the script's main help text, as a string.
+        Returns the script"s main help text, as a string.
         """
-        usage = ['',
+        usage = ["",
                 "Type '%s help <subcommand>' for help on a specific subcommand."
-                 % self.prog_name, '']
-        usage.append('Available subcommands:')
+                 % self.prog_name, ""]
+        usage.append("Available subcommands:")
         commands = get_commands().keys()
         commands.sort()
         for cmd in commands:
-            usage.append('  %s' % cmd)
-        return '\n'.join(usage)
+            usage.append("  %s" % cmd)
+        return "\n".join(usage)
     
     def fetch_command(self, subcommand):
         """
         Tries to fetch the given subcommand, printing a message with the
-        appropriate command called from the command line if it can't be found.
+        appropriate command called from the command line if it can"t be found.
         """
         commands = get_commands()
         if subcommand not in commands:
-            sys.stderr.write('Unknown command: %r\nType %s help for usage.\n' %
+            sys.stderr.write("Unknown command: %r\nType %s help for usage.\n" %
                 (subcommand, self.prog_name))
             sys.exit(1)
         package_name = commands[subcommand]
@@ -104,7 +112,7 @@ class ManagementUtility(object):
         else:
             klass = load_command_class(package_name, subcommand)
         return klass
-
+    
     def execute(self):
         """
         Given the command-line arguments, this figures out which subcommand is
@@ -125,20 +133,21 @@ class ManagementUtility(object):
             sys.stderr.write("Type '%s help' for usage.\n" % self.prog_name)
             sys.exit(1)
         
-        if subcommand == 'help':
+        if subcommand == "help":
             if len(args) > 2:
                 self.fetch_command(args[2]).print_help(self.prog_name, args[2])
             else:
                 parser.print_lax_help()
-                sys.stderr.write(self.main_help_text() + '\n')
+                sys.stderr.write(self.main_help_text() + "\n")
                 sys.exit(1)
-        elif self.argv[1:] == ['--version']:
+        elif self.argv[1:] == ["--version"]:
             pass
-        elif self.argv[1:] in [['--help'], ['-h']]:
+        elif self.argv[1:] in [["--help"], ["-h"]]:
             parser.print_lax_help()
-            sys.stderr.write(self.main_help_text() + '\n')
+            sys.stderr.write(self.main_help_text() + "\n")
         else:
             self.fetch_command(subcommand).run_from_argv(self.argv)
+
 
 def execute_from_command_line(argv=None):
     """

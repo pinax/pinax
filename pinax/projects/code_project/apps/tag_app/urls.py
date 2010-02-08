@@ -1,6 +1,8 @@
 from django.conf.urls.defaults import *
 
-urlpatterns = patterns('',
+
+
+urlpatterns = patterns("",
     # all tags
-    url(r'^(?P<tag>.+)/$', 'tag_app.views.tags', name='tag_results'),
+    url(r"^(?P<tag>.+)/$", "tag_app.views.tags", name="tag_results"),
 )

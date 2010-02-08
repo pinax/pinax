@@ -1,14 +1,18 @@
 from django import template
 from django.conf import settings
 
+
+
 register = template.Library()
+
+
 
 class IfSettingNode(template.Node):
     def __init__(self, nodelist_true, nodelist_false, setting):
         self.nodelist_true = nodelist_true
         self.nodelist_false = nodelist_false
         self.setting = setting
-        
+    
     def render(self, context):
         try:
             setting_value = getattr(settings, self.setting)
@@ -20,6 +24,7 @@ class IfSettingNode(template.Node):
             else:
                 return self.nodelist_false.render(context)
             return ""
+
 
 @register.tag
 def ifsetting(parser, token):

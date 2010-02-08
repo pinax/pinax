@@ -95,6 +95,6 @@ class Pool(models.Model):
     
     class Meta:
         # Enforce unique associations per object
-        unique_together = (("photo", "content_type", "object_id"),)
+        unique_together = [("photo", "content_type", "object_id")]
         verbose_name = _("pool")
         verbose_name_plural = _("pools")

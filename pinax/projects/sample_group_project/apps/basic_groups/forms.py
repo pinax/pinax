@@ -3,6 +3,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from basic_groups.models import BasicGroup
 
+
+
 # @@@ we should have auto slugs, even if suggested and overrideable
 
 class BasicGroupForm(forms.ModelForm):
@@ -23,7 +25,7 @@ class BasicGroupForm(forms.ModelForm):
     
     class Meta:
         model = BasicGroup
-        fields = ('name', 'slug', 'description')
+        fields = ("name", "slug", "description")
 
 
 # @@@ is this the right approach, to have two forms where creation and update fields differ?
@@ -40,4 +42,4 @@ class BasicGroupUpdateForm(forms.ModelForm):
     
     class Meta:
         model = BasicGroup
-        fields = ('name', 'description')
+        fields = ("name", "description")

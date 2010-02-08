@@ -24,7 +24,7 @@
         {% for photo in phototags %}
                 <div class="gallery-photo-thumb">
                     <a href="/photos/details/{{ photo.id }}/"><img src="{{ photo.get_thumbnail_url }}" alt="{{ photo.title }}"/></a><br />
-                    from <a href="{% url profile_detail photo.member.username %}">{% user_display photo.member.username %}</a><br />
+                    from <a href="{% url profile_detail photo.member.username %}">{% user_display photo.member %}</a><br />
                     {% silk "comment" %} <a href="/photos/details/{{ photo.id }}/">{% get_comment_count for photo as commentcount %} {{ commentcount }} Comments</a>
                     <br />
                     Viewed {{ photo.view_count }} Times

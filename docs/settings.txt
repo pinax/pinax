@@ -200,10 +200,10 @@ This setting is also used for the core templates that are provided with Pinax
 by default. The default ``settings.py`` files provided by Pinax for instance
 load templates from following locations::
     
-    TEMPLATE_DIRS = (
+    TEMPLATE_DIRS = [
         os.path.join(PROJECT_ROOT, "templates"),
         os.path.join(PINAX_ROOT, "templates", PINAX_THEME),                                                                                                                                           
-    )
+    ]
         
 Note that this setting only applies to Pinax' core media files and templates
 and is not used either in the internal nor the external apps by default. 
@@ -235,7 +235,7 @@ this settings is bound to the ``DEBUG`` setting in the default
 STATIC_ROOT
 -----------
 
-:Default: ``'<PROJECT_ROOT>/site_media/static'``
+:Default: ``"<PROJECT_ROOT>/site_media/static"``
 
 The absolute path to the directory that holds static files like app media::
 
@@ -247,11 +247,11 @@ different ``STATICFILES_STORAGE_``, you don't need to set this).
 STATIC_URL
 ----------
 
-:Default: ``'/site_media/static/'``
+:Default: ``"/site_media/static/"``
 
 URL that handles the files served from STATIC_ROOT, e.g.::
 
-    STATIC_URL = '/site_media/static/'
+    STATIC_URL = "/site_media/static/"
 
 Note that this should **always** have a trailing slash.
 
@@ -266,20 +266,20 @@ use the :ref:`static file serving view <ref-media-devel>`.
 
 It should be defined as a sequence of paths to static file directories, e.g.::
 
-    STATICFILES_DIRS = (
+    STATICFILES_DIRS = [
         os.path.join(PROJECT_ROOT, "media"),
         os.path.join(PINAX_ROOT, "media", PINAX_THEME),
-    )
+    ]
 
 In case you specifically want to load media from a certain location you can
 prefix the path of the media file by using a ``(prefix, path)`` tuple instead,
 e.g.::
 
-    STATICFILES_DIRS = (
+    STATICFILES_DIRS = [
         os.path.join(PROJECT_ROOT, "media"),
         os.path.join(PINAX_ROOT, "media", PINAX_THEME),
         ("xmas", "/var/www/xmax-special/media"),
-    )
+    ]
 
 In your HTML you then would be able to use the following snippet to load the
 fancy christmas stylesheet::
@@ -295,7 +295,7 @@ The directory ``/var/www/xmax-special`` would look like this::
 STATICFILES_PREPEND_LABEL_APPS
 ------------------------------
 
-:Default: ``('django.contrib.admin',)``
+:Default: ``["django.contrib.admin"]``
 
 A sequence of app paths that have the media files in ``<app>/media``, not in
 ``<app>/media/<app>``, e.g. ``django.contrib.admin``.
@@ -303,21 +303,21 @@ A sequence of app paths that have the media files in ``<app>/media``, not in
 STATICFILES_MEDIA_DIRNAMES
 --------------------------
 
-:Default: ``('media',)``
+:Default: ``["media"]``
 
 A sequence of directory names to be used when searching for media files in
 installed apps, e.g. if an app has its media files in ``<app>/static``
 use::
 
-    STATICFILES_MEDIA_DIRNAMES = (
-        'media',
-        'static',
-    )
+    STATICFILES_MEDIA_DIRNAMES = [
+        "media",
+        "static",
+    ]
 
 STATICFILES_STORAGE
 -------------------
 
-:Default: ``'staticfiles.storage.StaticFileStorage'``
+:Default: ``"staticfiles.storage.StaticFileStorage"``
 
 The storage backend to use for copying static files to a single location.
 
@@ -341,7 +341,7 @@ MARKUP_CHOICES
 --------------
 
 :Applications: ``pinax.apps.blog``, ``pinax.apps.tasks``
-:Default: ``(('restructuredtext', u'reStructuredText'), ('textile', u'Textile'), ('markdown', u'Markdown'), ('creole', u'Creole'),)``
+:Default: ``[("restructuredtext", u"reStructuredText"), ("textile", u"Textile"), ("markdown", u"Markdown"), ("creole", u"Creole")]``
 
 The actual origin of this setting is `django-wikiapp`_ which is one of the
 external applications Pinax integrates. ``pinax.apps.blog`` uses it to

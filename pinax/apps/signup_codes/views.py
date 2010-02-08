@@ -49,7 +49,7 @@ def signup(request, **kwargs):
     success_url = kwargs.pop("success_url", None)
     
     group, bridge = group_and_bridge(kwargs)
-    ctx = group_context(group, context)
+    ctx = group_context(group, bridge)
     
     if success_url is None:
         success_url = get_default_redirect(request)
@@ -121,7 +121,7 @@ def admin_invite_user(request, **kwargs):
     else:
         form = form_class(group=group)
     
-    ctx = group_context(group, context)
+    ctx = group_context(group, bridge)
     ctx.update({
         "title": ugettext("Invite user"),
         "form": form,

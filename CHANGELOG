@@ -65,7 +65,7 @@ Added nested group support
    
        bridge = ContentBridge(Project, "projects")
        ...
-       urlpatterns += bridge.include_urls('topics.urls', r'^project/(?P<group_slug>[-\w]+)/topics/')
+       urlpatterns += bridge.include_urls("topics.urls", r"^project/(?P<group_slug>[-\w]+)/topics/")
    
    We can no longer rely on group_slug as shown above since content object
    apps can now be group apps. The new and correct way is to use the lower
@@ -114,17 +114,17 @@ Updated django-staticfiles from 0.1.2 to 0.2.0
 
    Before:
    
-        STATICFILES_DIRS = (
-            ('my_project', os.path.join(PROJECT_ROOT, 'media')),
-            ('pinax', os.path.join(PINAX_ROOT, 'media', PINAX_THEME)),
-        )
+        STATICFILES_DIRS = [
+            ("my_project", os.path.join(PROJECT_ROOT, "media")),
+            ("pinax", os.path.join(PINAX_ROOT, "media", PINAX_THEME)),
+        ]
 
    After:
 
-        STATICFILES_DIRS = (
-            os.path.join(PROJECT_ROOT, 'media'),
-            os.path.join(PINAX_ROOT, 'media', PINAX_THEME),
-        )
+        STATICFILES_DIRS = [
+            os.path.join(PROJECT_ROOT, "media"),
+            os.path.join(PINAX_ROOT, "media", PINAX_THEME),
+        ]
 
  * Update your urls.py to use the latest version of the media and static file
    serving view:
@@ -132,13 +132,13 @@ Updated django-staticfiles from 0.1.2 to 0.2.0
    Before:
 
         if settings.SERVE_MEDIA:
-            urlpatterns += patterns('',
-                (r'^site_media/', include('staticfiles.urls')),
+            urlpatterns += patterns("",
+                (r"^site_media/", include("staticfiles.urls")),
             )
 
    After:
 
         if settings.SERVE_MEDIA:
-            urlpatterns += patterns('',
-                (r'', include('staticfiles.urls')),
+            urlpatterns += patterns("",
+                (r"", include("staticfiles.urls")),
             )

@@ -3,7 +3,10 @@ from django.utils.translation import ugettext_lazy as _
 
 from tribes.models import Tribe
 
+
+
 # @@@ we should have auto slugs, even if suggested and overrideable
+
 
 class TribeForm(forms.ModelForm):
     
@@ -23,7 +26,7 @@ class TribeForm(forms.ModelForm):
     
     class Meta:
         model = Tribe
-        fields = ('name', 'slug', 'description')
+        fields = ["name", "slug", "description"]
 
 
 # @@@ is this the right approach, to have two forms where creation and update fields differ?
@@ -40,4 +43,4 @@ class TribeUpdateForm(forms.ModelForm):
     
     class Meta:
         model = Tribe
-        fields = ('name', 'description')
+        fields = ["name", "description"]
