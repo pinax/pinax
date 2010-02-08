@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load account_tags %}
 {% load avatar_tags %}
 {% load tagging_tags %}
 {% load group_tags %}
@@ -8,7 +9,7 @@
     <div class="photo-avatar">{% avatar photo.member.username 50 %}</div>
     <div class="photo-profile-details">
         <h2>Taken By</h2>
-        <a href="{% url profile_detail photo.member.username %}" title="{{ photo.member.username }}">{{ photo.member.username }}</a><br />
+        <a href="{% url profile_detail photo.member.username %}" title="{% user_display photo.member %}">{% user_display photo.member %}</a><br />
         {{ photo.date_taken|date }}<br />
         Viewed {{ photo.view_count }} times
     </div>
@@ -37,6 +38,7 @@
     
     {% if is_me %}
         <form action="{% groupurl photo_destroy group id=photo.id %}" method="POST">
+            {% csrf_token %}
             <label>Delete Photo</label> <input type="image" src="{{ STATIC_URL }}pinax/images/silk/icons/delete.png" border="0" title="{% trans "Delete Photo" %}" />
                         <input type="hidden" name="action" value="delete"/>
         </form>

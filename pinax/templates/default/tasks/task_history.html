@@ -1,6 +1,7 @@
 {% extends "tasks/base.html" %}
 
 {% load i18n %}
+{% load account_tags %}
 {% load shorttimesince_tag %}
 {% load order_by %}
 {% load humanize %}
@@ -40,7 +41,7 @@
                 <td>{{ forloop.revcounter }}</td>
                 <td>
                     {% if change.owner %}
-                        <a href="{% groupurl tasks_for_user group username=change.owner %}">{{ change.owner }}</a>
+                        <a href="{% groupurl tasks_for_user group username=change.owner %}">{% user_display change.owner %}</a>
                     {% endif %}
                     {% if change.nudger %}
                         <a href="{% groupurl tasks_for_user group username=change.nudger %}">{{ change.nudger }}</a>
@@ -54,7 +55,7 @@
                     {% if change.nudger %}
                     {% else %}
                         {% if change.assignee %}
-                            <a href="{% groupurl tasks_for_user group username=change.assignee %}">{{ change.assignee }}</a>
+                            <a href="{% groupurl tasks_for_user group username=change.assignee %}">{% user_display change.assignee %}</a>
                         {% else %}
                             <span class="warning">unassigned</span>
                         {% endif %}

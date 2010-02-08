@@ -3,9 +3,11 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse, HttpResponseForbidden, Http404
 from django.core.urlresolvers import reverse
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.conf import settings
+from django.utils.translation import ugettext
 
 if "notification" in settings.INSTALLED_APPS:
     from notification import models as notification
@@ -54,7 +56,11 @@ def delete(request, group_slug=None, redirect_url=None):
     # @@@ eventually, we'll remove restriction that group.creator can't leave group but we'll still require group.members.all().count() == 1
     if request.user.is_authenticated() and request.method == "POST" and request.user == group.creator and group.members.all().count() == 1:
         group.delete()
-        request.user.message_set.create(message="Group %s deleted." % group)
+        messages.add_message(request, messages.SUCCESS,
+            ugettext("Group %(group)s deleted." % {
+                "group": group
+            })
+        )
         # no notification required as the deleter must be the only member
     
     return HttpResponseRedirect(redirect_url)
@@ -78,13 +84,21 @@ def group(request, group_slug=None, form_class=BasicGroupUpdateForm, template_na
         group = group_form.save()
     elif action == "join":
         group.members.add(request.user)
-        request.user.message_set.create(message="You have joined the group %s" % group.name)
+        messages.add_message(request, messages.SUCCESS,
+            ugettext("You have joined the group %(group)s") % {
+                "group": group,
+            }
+        )
         if notification:
             notification.send([group.creator], "groups_created_new_member", {"user": request.user, "group": group})
             notification.send(group.members.all(), "groups_new_member", {"user": request.user, "group": group})
     elif action == "leave":
         group.members.remove(request.user)
-        request.user.message_set.create(message="You have left the group %s" % group.name)
+        message.add_message(request, messages.SUCCESS,
+            ugettext("You have left the group %(group)s") % {
+                "group": group,
+            }
+        )
         if notification:
             pass # @@@ no notification on departure yet
     

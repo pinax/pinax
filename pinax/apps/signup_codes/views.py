@@ -4,13 +4,15 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils.translation import ugettext
 
+from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 
-from account.utils import get_default_redirect
+from account.utils import get_default_redirect, user_display
 from signup_codes.models import check_signup_code
 from signup_codes.forms import SignupForm, InviteUserForm
+
 
 
 def group_and_bridge(kwargs):
@@ -64,10 +66,11 @@ def signup(request, **kwargs):
             signup_code.use(user)
             
             auth_login(request, user)
-            request.user.message_set.create(
-                message = ugettext("Successfully logged in as %(username)s.") % {
-                    "username": user.username,
-            })
+            messages.add_message(request, messages.SUCCESS,
+                ugettext("Successfully logged in as %(username)s.") % {
+                    "username": user_display(user),
+                }
+            )
             return HttpResponseRedirect(success_url)
     else:
         signup_code = check_signup_code(code)
@@ -109,7 +112,11 @@ def admin_invite_user(request, **kwargs):
         if form.is_valid():
             email = form.cleaned_data["email"]
             form.send_signup_code()
-            request.user.message_set.create(message=ugettext("An e-mail has been sent to %(email)s.") % {"email": email})
+            messages.add_message(request, messages.INFO,
+                ugettext("An e-mail has been sent to %(email)s.") % {
+                    "email": email
+                }
+            )
             form = form_class() # reset
     else:
         form = form_class(group=group)

@@ -28,6 +28,9 @@ can easily correct them::
 It is critical you set this information up correctly. It helps us identify
 who you are when you start giving us those awesome patches.
 
+.. _`GitHub`: http://github.com/pinax/pinax/tree/master
+.. _git: http://git-scm.com
+
 Grabbing the source code
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -82,6 +85,30 @@ To keep your virtual environment in-sync you will need to use pip (make sure
 you are **inside** your virtual environment)::
 
     pip install --no-deps --requirement requirements/external_apps.txt
+
+Running the tests
+-----------------
+
+Before you begin committing code you'll want to make sure the Pinax test suite
+passes. Running the test suite is simple. At the root of your Pinax clone
+run::
+
+    python tests/runner.py
+
+You must be inside the development virtual environment for this to work. If
+you only want to run a subset of tests (all tests are inside apps) you can
+specify them explicitly::
+
+    python tests/runner.py tasks projects
+
+This useful while developing. However, be sure to run the full suite before
+committing any code to ensure it doesn't break other parts of Pinax.
+
+.. note::
+
+    The test runner is new as of November 29, 2009. There are currently many
+    failing tests. We are working on it. This message will be removed when
+    the test suite is generally usable for contributors.
 
 Committing code
 ---------------
@@ -155,5 +182,92 @@ explain something in detail use this format::
     You need to be driving 88 miles per hour to generate 1.21 gigawatts of
     power to properly use this feature.
 
-.. _`GitHub`: http://github.com/pinax/pinax/tree/master
-.. _git: http://git-scm.com
+Coding style
+------------
+
+When writing code to be included in Pinax keep our style in mind:
+
+ * Follow PEP8_ — there are some cases where we do not follow PEP8. It is an
+   excellent starting point.
+ * Follow `Django's coding style`_ — we're pretty much in agreement on
+   Django style outlined there.
+
+We would like to enforce a few more strict guides not outlined by PEP8 or
+Django's coding style:
+
+ * PEP8 tries to keep line length at 80 characters. We follow it when we can,
+   but not when it makes a line harder to read. It is okay to go a little bit
+   over 80 characters if not breaking the line improves readability.
+ * Use double quotes not single quotes. Single quotes are allowed in cases
+   where a double quote is needed in the string. This makes the code read
+   cleaner in those cases.
+ * Blank lines are indented to the appropriate level for the block they are
+   in.
+ * Docstrings always use three double quotes on a line of their own, so, for
+   example, a single line docstring should take up three lines not one.
+ * Imports are grouped specifically and ordered alphabetically. This is shown
+   in the example below.
+ * Always use ``reverse`` and never ``@models.permalink``.
+
+Here is an example of these rules applied::
+
+    # first set of imports are stdlib imports
+    # non-from imports go first then from style import in their own group
+    import csv
+    
+    from datetime import datetime
+    
+    # second set of imports are Django imports with contrib in their own
+    # group.
+    from django.core.urlresolvers import reverse
+    from django.db import models
+    from django.utils.translation import ugettext_lazy as _
+    
+    from django.contrib.auth.models import User
+    
+    # third set of imports are Pinax imports
+    from pinax.utils.importlib import import_module
+    
+    # forth set of imports are external apps (if applicable)
+    from tagging.fields import TagField
+    
+    # fifth set of imports are local apps
+    from tasks.fields import MarkupField
+    
+    
+    
+    class Task(models.Model):
+        """
+        A model for storing a task.
+        """
+        
+        creator = models.ForeignKey(User)
+        created = models.DateTimeField(default=datetime.now)
+        modified = models.DateTimeField(default=datetime.now)
+        
+        objects = models.Manager()
+        
+        class Meta:
+            verbose_name = _("task")
+            verbose_name_plural = _("tasks")
+        
+        def __unicode__(self):
+            return self.summary
+        
+        def save(self, **kwargs):
+            self.modified = datetime.now()
+            super(Task, self).save(**kwargs)
+        
+        def get_absolute_url(self):
+            return reverse("task_detail", kwargs={"task_id": self.pk})
+        
+        # custom methods
+    
+    
+    class TaskComment(models.Model):
+        # ... you get the point ...
+        pass
+    
+
+.. _PEP8: http://www.python.org/dev/peps/pep-0008/
+.. _`Django's coding style`: http://docs.djangoproject.com/en/dev/internals/contributing/#coding-style

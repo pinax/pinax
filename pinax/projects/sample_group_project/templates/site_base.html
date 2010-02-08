@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load i18n %}
+{% load account_tags %}
 {% load ifsetting_tag %}
 {% load openid_tags %}
 
@@ -13,7 +14,7 @@
 
 {% block login %}
     {% if user.is_authenticated %}
-        {% openid_icon openid user %}<b>{{ user }}</b> | <a href="{% url acct_email %}">{% trans "Account" %}</a> | {% if user.is_staff %}<a href="/admin/">{% trans "Admin" %}</a> | {% endif %}<a href="/openid/logout/?next={% url acct_logout %}">{% trans "Logout" %}</a>
+        {% openid_icon openid user %}<b>{% user_display user %}</b> | <a href="{% url acct_email %}">{% trans "Account" %}</a> | {% if user.is_staff %}<a href="/admin/">{% trans "Admin" %}</a> | {% endif %}<a href="/openid/logout/?next={% url acct_logout %}">{% trans "Logout" %}</a>
     {% else %}
         <a href="{% url acct_login %}">{% trans "Login" %}</a> {% ifsetting ACCOUNT_OPEN_SIGNUP %}{% trans "or" %} <a href="{% url acct_signup %}"><b>{% trans "Sign up" %}</b></a>{% endifsetting %}
     {% endif %}
@@ -35,7 +36,7 @@
 
 {% block footer %}
 <div class="legal">
-    {% trans "&copy; 2008 &lt;your company here&gt;" %}
+    {% trans "&copy; 2010 &lt;your company here&gt;" %}
     - <a href="{% url about %}">{% trans "About" %}</a>
     - <a href="{% url terms %}">{% trans "Terms of Service" %}</a>
     - <a href="{% url privacy %}">{% trans "Privacy Policy" %}</a>

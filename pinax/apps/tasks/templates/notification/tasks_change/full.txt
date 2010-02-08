@@ -1,8 +1,9 @@
-{% load i18n %}
+{% load i18n %}{% load account_tags %}
+{% user_display user as user_display %}
 {% if group %}
-{% blocktrans %}{{ user }} has marked task '{{ task }}' in '{{ group }}' as {{ new_state }}.{% endblocktrans %}
+{% blocktrans %}{{ user_display }} has marked task '{{ task }}' in '{{ group }}' as {{ new_state }}.{% endblocktrans %}
 {% else %}
-{% blocktrans %}{{ user }} has marked task '{{ task }}' as {{ new_state }}.{% endblocktrans %}
+{% blocktrans %}{{ user_display }} has marked task '{{ task }}' as {{ new_state }}.{% endblocktrans %}
 {% endif %}
 
 {% ifequal task.state '2' %}

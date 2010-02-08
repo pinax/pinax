@@ -1,10 +1,11 @@
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from django.conf import settings
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext, ugettext_lazy as _
 
 from friends.models import *
 from friends.forms import JoinRequestForm
@@ -22,7 +23,11 @@ def friends(request, template_name="friends_app/invitations.html"):
                 invitation = FriendshipInvitation.objects.get(id=invitation_id)
                 if invitation.to_user == request.user:
                     invitation.accept()
-                    request.user.message_set.create(message=_("Accepted friendship request from %(from_user)s") % {'from_user': invitation.from_user})
+                    messages.add_message(request, messages.SUCCESS,
+                        ugettext("Accepted friendship request from %(from_user)s") % {
+                            "from_user": invitation.from_user
+                        }
+                    )
             except FriendshipInvitation.DoesNotExist:
                 pass
         elif request.POST["action"] == "decline":
@@ -30,7 +35,11 @@ def friends(request, template_name="friends_app/invitations.html"):
                 invitation = FriendshipInvitation.objects.get(id=invitation_id)
                 if invitation.to_user == request.user:
                     invitation.decline()
-                    request.user.message_set.create(message=_("Declined friendship request from %(from_user)s") % {'from_user': invitation.from_user})
+                    messages.add_message(request, messages.SUCCESS,
+                        ugettext("Declined friendship request from %(from_user)s") % {
+                            "from_user": invitation.from_user
+                        }
+                    )
             except FriendshipInvitation.DoesNotExist:
                 pass
     
@@ -83,7 +92,12 @@ def contacts(request, form_class=ImportVCardForm,
             import_vcard_form = form_class(request.POST, request.FILES)
             if import_vcard_form.is_valid():
                 imported, total = import_vcard_form.save(request.user)
-                request.user.message_set.create(message=_("%(total)s vCards found, %(imported)s contacts imported.") % {'imported': imported, 'total': total})
+                messages.add_message(request, messages.SUCCESS,
+                    ugettext("%(total)s vCards found, %(imported)s contacts imported.") % {
+                        "imported": imported,
+                        "total": total
+                    }
+                )
                 import_vcard_form = ImportVCardForm()
         else:
             import_vcard_form = form_class()
@@ -92,13 +106,23 @@ def contacts(request, form_class=ImportVCardForm,
                 del request.session['bbauth_token']
                 if bbauth_token:
                     imported, total = import_yahoo(bbauth_token, request.user)
-                    request.user.message_set.create(message=_("%(total)s people with email found, %(imported)s contacts imported.") % {'imported': imported, 'total': total})
+                    messages.add_message(request, message.SUCCESS,
+                        ugettext("%(total)s people with email found, %(imported)s contacts imported.") % {
+                            "imported": imported,
+                            "total": total
+                        }
+                    )
             if request.POST["action"] == "import_google":
                 authsub_token = request.session.get('authsub_token')
                 del request.session['authsub_token']
                 if authsub_token:
                     imported, total = import_google(authsub_token, request.user)
-                    request.user.message_set.create(message=_("%(total)s people with email found, %(imported)s contacts imported.") % {'imported': imported, 'total': total})
+                    messages.add_message(request, messages.SUCCESS,
+                        ugettext("%(total)s people with email found, %(imported)s contacts imported.") % {
+                            "imported": imported,
+                            "total": total
+                        }
+                    )
     else:
         import_vcard_form = form_class()
     

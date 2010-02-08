@@ -10,10 +10,10 @@ from basic_profiles.models import Profile
 
 
 class TestProfileForm(TestCase):
-    fixtures = ['test_basic_profiles.json']
+    fixtures = ["test_basic_profiles.json"]
     
     def setUp(self):
-        self.user = User.objects.get(username='bob')
+        self.user = User.objects.get(username="bob")
         self.profile = Profile.objects.get(user=self.user)
     
     def tearDown(self):

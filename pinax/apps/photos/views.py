@@ -1,17 +1,20 @@
-from django.shortcuts import render_to_response, get_object_or_404
-from django.http import HttpResponseRedirect, get_host
-from django.template import RequestContext
 from django.db.models import Q
-from django.http import Http404
-from django.core.urlresolvers import reverse
 from django.core.exceptions import ObjectDoesNotExist
-from django.utils.translation import ugettext_lazy as _
+from django.core.urlresolvers import reverse
+from django.http import Http404, HttpResponseRedirect, get_host
+from django.shortcuts import render_to_response, get_object_or_404
+from django.template import RequestContext
+from django.utils.translation import ugettext, ugettext_lazy as _
+
+from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 from photologue.models import *
+
 from photos.models import Image, Pool
 from photos.forms import PhotoUploadForm, PhotoEditForm
+
 
 
 @login_required
@@ -30,7 +33,7 @@ def upload(request, form_class=PhotoUploadForm,
         group = None
     
     photo_form = form_class()
-    if request.method == 'POST':
+    if request.method == "POST":
         if request.POST.get("action") == "upload":
             photo_form = form_class(request.user, request.POST, request.FILES)
             if photo_form.is_valid():
@@ -45,7 +48,9 @@ def upload(request, form_class=PhotoUploadForm,
                     group.associate(pool)
                     pool.save()
                 
-                request.user.message_set.create(message=_("Successfully uploaded photo '%s'") % photo.title)
+                messages.add_message(request, messages.SUCCESS,
+                    ugettext("Successfully uploaded photo '%s'") % photo.title
+                )
                 
                 include_kwargs = {"id": photo.id}
                 if group:
@@ -54,7 +59,7 @@ def upload(request, form_class=PhotoUploadForm,
                     redirect_to = reverse("photo_details", kwargs=include_kwargs)
                 
                 return HttpResponseRedirect(redirect_to)
-
+    
     return render_to_response(template_name, {
         "group": group,
         "photo_form": photo_form,
@@ -223,11 +228,12 @@ def edit(request, id, form_class=PhotoEditForm,
     
     photo = get_object_or_404(photos, id=id)
     photo_url = photo.get_display_url()
-
+    
     if request.method == "POST":
         if photo.member != request.user:
-            request.user.message_set.create(message="You can't edit photos that aren't yours")
-            
+            message.add_message(request, messages.ERROR,
+                ugettext("You can't edit photos that aren't yours")
+            )
             include_kwargs = {"id": photo.id}
             if group:
                 redirect_to = bridge.reverse("photo_details", group, kwargs=include_kwargs)
@@ -241,7 +247,9 @@ def edit(request, id, form_class=PhotoEditForm,
                 photoobj = photo_form.save(commit=False)
                 photoobj.save()
                 
-                request.user.message_set.create(message=_("Successfully updated photo '%s'") % photo.title)
+                messages.add_message(request, messages.SUCCESS,
+                    ugettext("Successfully updated photo '%s'") % photo.title
+                )
                 
                 include_kwargs = {"id": photo.id}
                 if group:
@@ -252,10 +260,10 @@ def edit(request, id, form_class=PhotoEditForm,
                 return HttpResponseRedirect(redirect_to)
         else:
             photo_form = form_class(instance=photo)
-
+    
     else:
         photo_form = form_class(instance=photo)
-
+    
     return render_to_response(template_name, {
         "group": group,
         "photo_form": photo_form,
@@ -290,11 +298,15 @@ def destroy(request, id, group_slug=None, bridge=None):
         redirect_to = reverse("photos_yours")
     
     if photo.member != request.user:
-        request.user.message_set.create(message="You can't delete photos that aren't yours")
+        message.add_message(request, messages.ERROR,
+            ugettext("You can't edit photos that aren't yours")
+        )
         return HttpResponseRedirect(redirect_to)
-
+    
     if request.method == "POST" and request.POST["action"] == "delete":
         photo.delete()
-        request.user.message_set.create(message=_("Successfully deleted photo '%s'") % title)
+        messages.add_message(request, messages.SUCCESS,
+            ugettext("Successfully deleted photo '%s'") % title
+        )
     
     return HttpResponseRedirect(redirect_to)

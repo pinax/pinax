@@ -1,5 +1,6 @@
 {% extends "wiki/base.html" %}
 
+{% load account_tags %}
 {% load timezone_filters %}
 {% load i18n %}
 {% load wiki_tags %}
@@ -15,6 +16,7 @@
 
     {% if changes %}
          <form method="post" action="{% groupurl wiki_revert_to_revision group title=article.title %}">
+             {% csrf_token %}
             <table class="messages">
                 <tr class="tbheader">
                     <th>{% trans "Date" %}</th>
@@ -32,11 +34,11 @@
                             {% if change.is_anonymous_change %}
                                 {{ change.editor_ip }}
                             {% else %}
-                                <a href="{% url profile_detail change.editor.username %}">{{ change.editor }}</a>
+                                <a href="{% url profile_detail change.editor.username %}">{% user_display change.editor %}</a>
                             {% endif %}
                         </td>
                         <td>
-                            {% if change.comment %}<i>'{{ change.comment}}'</i> {% endif %}
+                            {% if change.comment %}<i>'{{ change.comment }}'</i> {% endif %}
                         </td>
                         <td>
                             {% if forloop.first %}

@@ -1,13 +1,14 @@
 {% extends "blog/base.html" %}
 
 {% load i18n %}
-{% load uni_form %}
+{% load uni_form_tags %}
 
 {% block head_title %}{% blocktrans %}Editing Post{% endblocktrans %}{% endblock %}
 
 {% block body %}
     {% ifequal post.author request.user %}
     <form class="uniForm" id="edit-profile" method="POST" action="">
+        {% csrf_token %}
         <fieldset class="inlineLabels">
             {{ blog_form|as_uni_form }}
             <div class="form_block">

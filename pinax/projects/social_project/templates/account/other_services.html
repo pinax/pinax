@@ -9,6 +9,7 @@
 <h1>{% trans "Other Services" %}</h1>
 <h3><a id="twitterform-toggle" href="#">{% trans "Twitter" %}</a></h3>
 <form  action="" method="POST" name="TwitterForm" id="TwitterForm">
+  {% csrf_token %}
   {% if twitter_authorized %}
   <p style="background:#C8E8FB">
     {% trans "You have already authorized a twitter account." %}

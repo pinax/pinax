@@ -1,10 +1,11 @@
-
 from datetime import datetime
 
 from django.db import models
 from django.db.models.signals import post_save
 
 from django.contrib.auth.models import User
+
+
 
 class SignupCode(models.Model):
     """
@@ -35,7 +36,7 @@ class SignupCode(models.Model):
         result.signup_code = self
         result.user = user
         result.save()
-    
+
 
 class SignupCodeResult(models.Model):
     """

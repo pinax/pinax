@@ -1,9 +1,14 @@
 import re
 
 from django import template
+
 from account.models import other_service
 
+
+
 register = template.Library()
+
+
 
 class OtherServiceNode(template.Node):
     def __init__(self, user, key, asvar):
@@ -18,12 +23,12 @@ class OtherServiceNode(template.Node):
                     
         if self.asvar:
             context[self.asvar] = value
-            return ''
+            return ""
         else:
             return value
 
 
-@register.tag(name='other_service')
+@register.tag(name="other_service")
 def other_service_tag(parser, token):
     bits = token.split_contents()
     if len(bits) == 3: # {% other_service user key %}
@@ -32,7 +37,7 @@ def other_service_tag(parser, token):
         asvar = None
     elif len(bits) == 5: # {% other_service user key as var %}
         if bits[3] != "as":
-            raise template.TemplateSyntaxError("3rd argument to %s should be 'as'" % bits[0])
+            raise template.TemplateSyntaxError("Third argument to %s should be 'as'" % bits[0])
         user = parser.compile_filter(bits[1])
         key = bits[2]
         asvar = bits[4]

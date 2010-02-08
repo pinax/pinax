@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load pagination_tags %}
+{% load account_tags %}
 {% load avatar_tags %}
 {% load extra_tagging_tags %}
 
@@ -19,7 +20,7 @@
                     <td class="meta">
                         <div class="avatar">{% avatar bookmark_instance.bookmark.adder 40 %}</div>
                         <div class="date">{{ bookmark_instance.bookmark.added|date }}</div>
-                        <div class="details"><a href="{% url profile_detail bookmark_instance.bookmark.adder.username %}">{{ bookmark_instance.bookmark.adder }}</a></div>
+                        <div class="details"><a href="{% url profile_detail bookmark_instance.bookmark.adder.username %}">{% user_display bookmark_instance.bookmark.adder %}</a></div>
                     </td>
                     <td>
                         <h2><a href="{{ bookmark_instance.bookmark.url }}">{{ bookmark_instance.description }}</a></h2>
@@ -31,6 +32,7 @@
                         {% endif %}
                         <div class="url">{% if bookmark_instance.bookmark.get_favicon_url %}<img src="{{ bookmark_instance.bookmark.get_favicon_url }}" height="16" width="16"/> {% endif %}{{ bookmark_instance.bookmark.url }}</div>
                         <form method="POST" action="{% url delete_bookmark_instance bookmark_instance.id %}">
+                            {% csrf_token %}
                             <input type="submit" value="{% trans "Delete Bookmark" %}" />
                             <input type="hidden" name="next" value="{{ request.path }}" />
                         </form>

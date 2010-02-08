@@ -1,0 +1,40 @@
+{% extends "site_base.html" %}
+
+{% load webdesign %}
+{% load biblion_tags %}
+
+{% block body_id %}homepage{% endblock %}
+
+{% block content %}
+    
+{% latest_blog_post as latest_post %}
+    <div class="announcement"><b><a href="{% url blog %}">ACME Blog</a></b>{% if latest_post %} &mdash; <a href="{{ latest_post.get_absolute_url }}">{{ latest_post.title }}</a>{% endif %}</div>
+    
+    <div class="grouping clear">
+        <div class="primary">
+            <h2>Primary Section Heading</h2>
+            <p>{% lorem %}</p>
+        </div>
+        
+        <div class="secondary">
+            <h2>Secondary Section Heading</h2>
+            <p>{% lorem %}</p>
+        </div>
+    </div>
+    
+    <div class="grouping clear">
+        <div class="primary">
+            <h2>Primary Section Heading</h2>
+            <p>{% lorem %}</p>
+        </div>
+        
+        <div class="secondary">
+            <h2>Secondary Section Heading</h2>
+            <p>{% lorem %}</p>
+        </div>
+    </div>
+    
+{% endblock %}
+
+{% block extra_body %}
+{% endblock %}

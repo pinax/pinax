@@ -1,0 +1,22 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load uni_form_tags %}
+
+{% block head_title %}{% trans "Welcome" %}{% endblock %}
+
+{% block tab_id %}id="home_tab"{% endblock %}
+
+{% block body %}
+
+    <h1>{% trans "Signup for the waiting list" %}</h1>
+    
+    <p>{% blocktrans %}Give us your e-mail address and you'll be added to the waiting list{% endblocktrans %}</p>
+    
+    <form class="uniForm" method="POST" action="{% url waitinglist_list_signup %}">
+        {% csrf_token %}
+        {{ form|as_uni_form }}
+        <input type="submit" value="Sign up" />
+    </form>
+
+{% endblock %}

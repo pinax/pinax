@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load timezone_filters %}
+{% load account_tags %}
 
 {% block body %}
     <h1>{% trans "Deleted Messages" %}</h1>
@@ -13,7 +14,7 @@
         <tbody>
             {% for message in message_list %}
                 <tr>
-                    <td scope="row">{{ message.sender }}</td>
+                    <td scope="row">{% user_display message.sender %}</td>
                     <td>
                         {{ message.subject }}
                     </td>

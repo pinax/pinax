@@ -16,6 +16,7 @@
         <h3>Select a different avatar:</h3>
         <p>( Custom avatars will not show up unless you have a <a href="{% url acct_email%}">confirmed email address</a>. )</p>
         <form method="POST" action="">
+            {% csrf_token %}
             <ul class="avatar_choices">
                 {{ primary_avatar_form.choice }}
             </ul>
@@ -26,6 +27,7 @@
     {% endif %}
     <p>
     <form enctype="multipart/form-data" method="POST" action="">
+        {% csrf_token %}
         <label for="avatar">{% trans "Upload an Avatar:" %}</label>
         <input type="file" name="avatar" value="{% trans "Avatar Image" %}" />
         <input type="submit" value="{% trans "Upload New Image" %}" />

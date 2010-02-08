@@ -47,14 +47,14 @@
             <div id="left_tabs" >{% block left_tabs %}{% endblock %}</div>
             <div id="right_tabs" >{% block right_tabs %}{% endblock %}</div>
         </div>
-        <div id="subnav" class="clxearfix">{% block subnav_base %}<div class="clearfix">{% block subnav %}&nbsp;{% endblock %}</div>{% endblock %}</div>
+        <div id="subnav" class="clearfix">{% block subnav_base %}<div class="clearfix">{% block subnav %}&nbsp;{% endblock %}</div>{% endblock %}</div>
         
         {% block body_outer %}
         <div id="body">
             {% if messages %}
                 <ul id="messages">
                     {% for message in messages %}
-                    <li id="message_{{ forloop.counter }}"><a href="#" onclick="$('#message_{{ forloop.counter }}').fadeOut(); return false;"><small>{% trans "clear" %}</small></a> {{ message }}</li>
+                    <li id="message_{{ forloop.counter }}"{% if message.tags %} class="{{ message.tags }}"{% endif %}><a href="#" onclick="$('#message_{{ forloop.counter }}').fadeOut(); return false;"><small>{% trans "clear" %}</small></a> {{ message }}</li>
                     {% endfor %}
                 </ul>
             {% endif %}

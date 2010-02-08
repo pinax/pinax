@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load pagination_tags %}
+{% load account_tags %}
 
 {% block head_title %}{% trans "Contacts" %}{% endblock %}
 
@@ -16,6 +17,7 @@
     <h2>Import vCard</h2>
     
     <form enctype="multipart/form-data" method="post" action="">
+        {% csrf_token %}
         <input type="hidden" name="action" value="upload_vcard" />
         <table>
             {{ import_vcard_form }}
@@ -27,6 +29,7 @@
     
     {% if authsub_token %}
         <form method="POST" action="">
+            {% csrf_token %}
             <input type="hidden" name="action" value="import_google" />
             <input type="submit" value="{% trans 'Import Google Contacts' %}" />
         </form>
@@ -43,6 +46,7 @@
     
     {% if bbauth_token %}
         <form method="POST" action="">
+            {% csrf_token %}
             <input type="hidden" name="action" value="import_yahoo" />
             <input type="submit" value="{% trans 'Import Yahoo Address Book' %}" />
         </form>
@@ -69,7 +73,7 @@
                         <td>{{ contact.email }}</td>
                         <td>
                             {% for other_user in contact.users.all %}
-                                <a href="{% url profile_detail other_user.username %}">{{ other_user }}</a>
+                                <a href="{% url profile_detail other_user.username %}">{% user_display other_user %}</a>
                             {% endfor %}
                         </td>
                     </tr>

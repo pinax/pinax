@@ -5,6 +5,7 @@
 
 {% block body %}
     <form action="{% url loc_new %}" method="POST" accept-charset="utf-8">
+        {% csrf_token %}
         <p>{{ location_form }}
            <input type="submit" value="Search &rarr;"></p>
     </form>

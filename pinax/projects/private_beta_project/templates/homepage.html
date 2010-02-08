@@ -1,6 +1,7 @@
 {% extends "site_base.html" %}
 
 {% load i18n %}
+{% load waitinglist_tags %}
 
 {% block head_title %}{% trans "Welcome" %}{% endblock %}
 
@@ -43,7 +44,9 @@
         beta code for this please give us your e-mail address below
     </p>
     
-    <form method="POST" action="">
+    <form method="POST" action="{% url waitinglist_list_signup %}">
+        {% csrf_token %}
+        {% waitinglist_entry_form as form %}
         {{ form.as_p }}
         <input type="submit" value="Sign up" />
     </form>

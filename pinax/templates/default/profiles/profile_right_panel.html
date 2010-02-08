@@ -1,5 +1,8 @@
 {% load i18n %}
 {% load avatar_tags %}
+{% load account_tags %}
+
+{% user_display other_user as other_user_display %}
 
 {% if is_me %}
     <div class="groups">
@@ -21,7 +24,7 @@
                 {% if forloop.counter0|divisibleby:"3" %}<tr>{% endif %}
                     <td>
                         <div class="avatar">{% avatar friendship.friend 40 %}</div>
-                        <div class="details"><a href="{% url profile_detail friendship.friend.username %}" title="{{ friendship.friend.username }}">{{ friendship.friend.username }}</a></div>
+                        <div class="details"><a href="{% url profile_detail friendship.friend.username %}" title="{% user_display friendship.friend %}">{% user_display friendship.friend %}</a></div>
                     </td>
                 {% if forloop.counter0|add:"1"|divisibleby:"3" %}</tr>{% endif %}
                 {% endfor %}
@@ -35,7 +38,7 @@
 
 {% if is_friend %}
     <div class="groups">
-        <h2>{% blocktrans %}{{ other_user }}'s Tribes{% endblocktrans %}</h2>
+        <h2>{% blocktrans %}{{ other_user_display }}'s Tribes{% endblocktrans %}</h2>
         {% if other_user.tribes.all %}
             {% for tribe in other_user.tribes.all %}
                 <a href="{% url tribe_detail tribe.slug %}">{{ tribe.name }}</a>
@@ -45,13 +48,13 @@
         {% endif %}
     </div>
     <div class="friends">
-        <h2>{% blocktrans %}{{ other_user }}'s Friends{% endblocktrans %}</h2>
+        <h2>{% blocktrans %}{{ other_user_display }}'s Friends{% endblocktrans %}</h2>
         <table width="100%">
             {% for friendship in other_friends %}
                 {% if forloop.counter0|divisibleby:"3" %}<tr>{% endif %}
                 <td>
                     <div class="avatar">{% avatar friendship.friend 40 %}</div>
-                    <div class="details"><a href="{% url profile_detail friendship.friend.username %}" title="{{ friendship.friend.username }}">{{ friendship.friend.username }}</a></div>
+                    <div class="details"><a href="{% url profile_detail friendship.friend.username %}" title="{% user_display friendship.friend %}">{% user_display friendship.friend %}</a></div>
                 </td>
                 {% if forloop.counter0|add:"1"|divisibleby:"3" %}</tr>{% endif %}
             {% endfor %}

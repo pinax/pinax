@@ -1,0 +1,20 @@
+{% extends "blog_base.html" %}
+
+{% load webdesign %}
+
+{% block head_title %}ACME Blog{% endblock %}
+
+{% block primary %}
+    
+    {% if posts %}
+        {% for post in posts %}
+            <h2><a href="{{ post.get_absolute_url }}" class="post-link">{{ post.title }}</a></h2>
+            {% include "dateline.html" %}
+            <p class="teaser">{{ post.teaser_html|safe }}</p>
+            <p class="more"><a href="{{ post.get_absolute_url }}" class="post-link">read more...</a></p>
+        {% endfor %}
+    {% else %}
+        <p>No blog posts have been published.</p>
+    {% endif %}
+    
+{% endblock %}

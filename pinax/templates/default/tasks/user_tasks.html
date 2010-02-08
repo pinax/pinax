@@ -1,15 +1,18 @@
 {% extends "tasks/base.html" %}
 
 {% load i18n %}
+{% load account_tags %}
 {% load tasks_tags %}
 {% load shorttimesince_tag %}
 {% load humanize %}
 {% load group_tags %}
 
-{% block head_title %}Tasks for {{ other_user }}{% endblock %}
+{% user_display other_user as other_user_display %}
+
+{% block head_title %}Tasks for {{ other_user_display }}{% endblock %}
 
 {% block body %}
-    <h1>Tasks for <a href="{% url profile_detail other_user %}">{{ other_user }}</a></h1>
+    <h1>Tasks for <a href="{% url profile_detail other_user %}">{{ other_user_display }}</a></h1>
     
     <p>You can drag this '<a href="{{ bookmarklet }}">{{ SITE_NAME }} Tasks</a>' link to your bookmark bar to quickly get to your open tasks!</p>
     

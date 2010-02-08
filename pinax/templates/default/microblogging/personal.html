@@ -2,12 +2,13 @@
 
 {% load i18n %}
 {% load microblogging_tags %}
+{% load account_tags %}
 
 {% block head_title %}{% blocktrans %}Tweets{% endblocktrans %}{% endblock %}
 
 {% block extra_head %}
-    <link rel="alternate" type="application/atom+xml" title="Tweets Feed for User {{ user.username|capfirst }}" href="/feeds/tweets/only/{{ user.username }}/" />
-    <link rel="alternate" type="application/atom+xml" title="Tweets Feed for User {{ user.username|capfirst }} and friends" href="/feeds/tweets/with_friends/{{ user.username }}/" />
+    <link rel="alternate" type="application/atom+xml" title="Tweets Feed for User {% user_display user %}" href="/feeds/tweets/only/{{ user.username }}/" />
+    <link rel="alternate" type="application/atom+xml" title="Tweets Feed for User {% user_display user %} and friends" href="/feeds/tweets/with_friends/{{ user.username }}/" />
 {% endblock %}
 
 {% block body %}
@@ -15,6 +16,7 @@
     
     {# @@@ can the publish to twitter checkbox actually be part of form and then we can use uni-form #}
     <form method="POST" action="{% url tweets_you_follow %}">
+        {% csrf_token %}
         <p>{% trans "What are you doing?" %}</p>
         {{ form.as_p }}
         {% if twitter_authorized %}

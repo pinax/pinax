@@ -2,11 +2,11 @@ import urlparse
 
 from openid import oidutil
 
+from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from django.shortcuts import render_to_response
-from django.conf import settings
 
 from django_openid.registration import RegistrationConsumer
 
@@ -15,10 +15,12 @@ from account.utils import get_default_redirect
 from account.views import login as account_login
 
 
+
 # install our own logger that does nothing
 def dummy_log(*args, **kwargs):
     return
 oidutil.log = dummy_log
+
 
 
 class PinaxConsumer(RegistrationConsumer):
@@ -43,8 +45,8 @@ class PinaxConsumer(RegistrationConsumer):
         POST body.
         """
         
-        openid_url = request.POST.get('openid_url')
-        openids = request.session.get('openids')
+        openid_url = request.POST.get("openid_url")
+        openids = request.session.get("openids")
         
         if not openid_url and not openids:
             return account_login(request, url_required=True, extra_context={
@@ -59,9 +61,9 @@ class PinaxConsumer(RegistrationConsumer):
             return self.start_openid_process(request,
                 user_url = openid_url,
                 on_complete_url = urlparse.urljoin(
-                    request.path, '../register_complete/'
+                    request.path, "../register_complete/"
                 ),
-                trust_root = urlparse.urljoin(request.path, '..')
+                trust_root = urlparse.urljoin(request.path, "..")
             )
         
         if not settings.ACCOUNT_OPEN_SIGNUP:

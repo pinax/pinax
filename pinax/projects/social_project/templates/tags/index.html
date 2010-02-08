@@ -2,7 +2,7 @@
 
 {% load i18n %}
 {% load threadedcommentstags %}
-
+{% load account_tags %}
 {% load tribes_tags %}
 {% load avatar_tags %}
 {% load blog_tags %}
@@ -24,7 +24,7 @@
         {% for photo in phototags %}
                 <div class="gallery-photo-thumb">
                     <a href="/photos/details/{{ photo.id }}/"><img src="{{ photo.get_thumbnail_url }}" alt="{{ photo.title }}"/></a><br />
-                    from <a href="{% url profile_detail photo.member.username %}">{{ photo.member.username }}</a><br />
+                    from <a href="{% url profile_detail photo.member.username %}">{% user_display photo.member.username %}</a><br />
                     {% silk "comment" %} <a href="/photos/details/{{ photo.id }}/">{% get_comment_count for photo as commentcount %} {{ commentcount }} Comments</a>
                     <br />
                     Viewed {{ photo.view_count }} Times
@@ -44,7 +44,7 @@
                 <tr class="{% cycle odd,even %}">
                     <td class="meta">
                         <div class="avatar">{% avatar bookmark.bookmark.adder 40 %}</div>
-                        <div class="details"><a href="{% url profile_detail bookmark.bookmark.adder.username %}">{{ bookmark.bookmark.adder }}</a></div>
+                        <div class="details"><a href="{% url profile_detail bookmark.bookmark.adder.username %}">{% user_display bookmark.bookmark.adder %}</a></div>
                         {{ bookmark.bookmark.added|date }}
                     </td>
                     

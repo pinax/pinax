@@ -3,6 +3,7 @@
         <p><span class="warning">NOTE:</span> you are already logged in as {{ user }}.</p>
     {% endif %}
     <form class="login" method="POST" action="{% url acct_login %}">
+        {% csrf_token %}
         <table>
             <tr><td colspan="2">{{ form.non_field_errors }}</td></tr>
             {% for field in form %}

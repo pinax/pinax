@@ -1,7 +1,7 @@
 {% extends "tasks/base.html" %}
 
 {% load i18n %}
-{% load uni_form %}
+{% load uni_form_tags %}
 {% load group_tags %}
 
 {% block head_title %}Add Task{% endblock %}
@@ -13,6 +13,7 @@
 
          <div class="main-form">
             <form method="POST" action="" id="task_form" class="uniForm">
+                {% csrf_token %}
                 <div class="form_block">
                     {{ task_form.media }}
                     {{ task_form|as_uni_form }}

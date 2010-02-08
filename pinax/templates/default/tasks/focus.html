@@ -3,6 +3,7 @@
 {# @@@ commonalities between this and task_list.html might need to be factored out #}
 
 {% load i18n %}
+{% load account_tags %}
 {% load shorttimesince_tag %}
 {% load order_by %}
 {% load humanize %}
@@ -114,7 +115,7 @@
                             <td style="white-space: nowrap">{{ item.modified|shorttimesince }} ago</td>
                             <td>
                                 {% if item.assignee %}
-                                    {{ item.assignee }}
+                                    {% user_display item.assignee %}
                                 {% else %}
                                     <span class="warning">unassigned</span>
                                 {% endif %}
@@ -152,7 +153,7 @@
                             <td style="white-space: nowrap">{{ task.modified|shorttimesince }} ago</td>
                             <td>
                                 {% if task.assignee %}
-                                    {{ task.assignee }}
+                                    {% user_display task.assignee %}
                                 {% else %}
                                     <span class="warning">unassigned</span>
                                 {% endif %}

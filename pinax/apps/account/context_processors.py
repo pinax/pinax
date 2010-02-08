@@ -1,8 +1,16 @@
-
 from account.models import Account, AnonymousAccount
 
+
+
 def openid(request):
-    return {'openid': request.openid}
+    if hasattr(request, "openid"):
+        openid = request.openid
+    else:
+        openid = None
+    return {
+        "openid": openid,
+    }
+
 
 def account(request):
     if request.user.is_authenticated():
@@ -12,4 +20,4 @@ def account(request):
             account = AnonymousAccount(request)
     else:
         account = AnonymousAccount(request)
-    return {'account': account}
+    return {"account": account}

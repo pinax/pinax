@@ -1,25 +1,19 @@
+from django.conf import settings
 from django.core.urlresolvers import reverse
+from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
-from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
-from django.conf import settings
-
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
-
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import ugettext
 
-from friends.forms import InviteFriendForm
-from friends.models import FriendshipInvitation, Friendship
-
-from microblogging.models import Following
-
-from profiles.models import Profile
-from profiles.forms import ProfileForm
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 from avatar.templatetags.avatar_tags import avatar
-
+from friends.forms import InviteFriendForm
+from friends.models import FriendshipInvitation, Friendship
+from microblogging.models import Following
 
 if "notification" in settings.INSTALLED_APPS:
     from notification import models as notification
@@ -27,24 +21,29 @@ else:
     notification = None
 
 
+from profiles.forms import ProfileForm
+from profiles.models import Profile
+
+
+
 def profiles(request, template_name="profiles/profiles.html", extra_context=None):
     if extra_context is None:
         extra_context = {}
     users = User.objects.all().order_by("-date_joined")
-    search_terms = request.GET.get('search', '')
-    order = request.GET.get('order')
+    search_terms = request.GET.get("search", "")
+    order = request.GET.get("order")
     if not order:
-        order = 'date'
+        order = "date"
     if search_terms:
         users = users.filter(username__icontains=search_terms)
-    if order == 'date':
+    if order == "date":
         users = users.order_by("-date_joined")
-    elif order == 'name':
+    elif order == "name":
         users = users.order_by("username")
     return render_to_response(template_name, dict({
-        'users': users,
-        'order': order,
-        'search_terms': search_terms,
+        "users": users,
+        "order": order,
+        "search_terms": search_terms,
     }, **extra_context), context_instance=RequestContext(request))
 
 
@@ -76,11 +75,15 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
         if request.method == "POST":
             if request.POST.get("action") == "remove": # @@@ perhaps the form should just post to friends and be redirected here
                 Friendship.objects.remove(request.user, other_user)
-                request.user.message_set.create(message=_("You have removed %(from_user)s from friends") % {'from_user': other_user})
+                messages.add_message(request, messages.SUCCESS,
+                    ugettext("You have removed %(from_user)s from friends") % {
+                        "from_user": other_user
+                    }
+                )
                 is_friend = False
                 invite_form = InviteFriendForm(request.user, {
-                    'to_user': username,
-                    'message': ugettext("Let's be friends!"),
+                    "to_user": username,
+                    "message": ugettext("Let's be friends!"),
                 })
     
     else:
@@ -91,8 +94,8 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
                     invite_form.save()
             else:
                 invite_form = InviteFriendForm(request.user, {
-                    'to_user': username,
-                    'message': ugettext("Let's be friends!"),
+                    "to_user": username,
+                    "message": ugettext("Let's be friends!"),
                 })
                 invitation_id = request.POST.get("invitation", None)
                 if request.POST.get("action") == "accept": # @@@ perhaps the form should just post to friends and be redirected here
@@ -100,7 +103,11 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
                         invitation = FriendshipInvitation.objects.get(id=invitation_id)
                         if invitation.to_user == request.user:
                             invitation.accept()
-                            request.user.message_set.create(message=_("You have accepted the friendship request from %(from_user)s") % {'from_user': invitation.from_user})
+                            messages.add_message(request, messages.SUCCESS,
+                                ugettext("You have accepted the friendship request from %(from_user)s") % {
+                                    "from_user": invitation.from_user
+                                }
+                            )
                             is_friend = True
                             other_friends = Friendship.objects.friends_for_user(other_user)
                     except FriendshipInvitation.DoesNotExist:
@@ -110,14 +117,18 @@ def profile(request, username, template_name="profiles/profile.html", extra_cont
                         invitation = FriendshipInvitation.objects.get(id=invitation_id)
                         if invitation.to_user == request.user:
                             invitation.decline()
-                            request.user.message_set.create(message=_("You have declined the friendship request from %(from_user)s") % {'from_user': invitation.from_user})
+                            messages.add_message(request, messages.SUCCESS,
+                                ugettext("You have declined the friendship request from %(from_user)s") % {
+                                    "from_user": invitation.from_user
+                                }
+                            )
                             other_friends = Friendship.objects.friends_for_user(other_user)
                     except FriendshipInvitation.DoesNotExist:
                         pass
         else:
             invite_form = InviteFriendForm(request.user, {
-                'to_user': username,
-                'message': ugettext("Let's be friends!"),
+                "to_user": username,
+                "message": ugettext("Let's be friends!"),
             })
     
     previous_invitations_to = FriendshipInvitation.objects.invitations(to_user=other_user, from_user=request.user)
@@ -154,6 +165,7 @@ def profile_edit(request, form_class=ProfileForm, **kwargs):
             profile = profile_form.save(commit=False)
             profile.user = request.user
             profile.save()
+            messages.add_message(request, messages.SUCCESS, ugettext("Your profile has been updated."))
             return HttpResponseRedirect(reverse("profile_detail", args=[request.user.username]))
     else:
         profile_form = form_class(instance=profile)

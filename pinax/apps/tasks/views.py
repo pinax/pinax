@@ -1,46 +1,45 @@
-from datetime import date
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 from itertools import chain
 from operator import attrgetter
 
-
-from django.shortcuts import render_to_response, get_object_or_404
-from django.core.exceptions import ObjectDoesNotExist
 from django.conf import settings
-from django.http import HttpResponse, HttpResponseRedirect, Http404
-from django.template import RequestContext
+from django.core.exceptions import ObjectDoesNotExist, ImproperlyConfigured
 from django.core.urlresolvers import reverse
-from django.core.exceptions import ImproperlyConfigured
-from django.db.models import get_app
-from django.db.models import Q
+from django.db.models import Q, get_app
+from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.shortcuts import render_to_response, get_object_or_404
+from django.template import RequestContext
+from django.utils.translation import ugettext
 
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
-from django.contrib.sites.models import Site
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.sites.models import Site
 
 from pinax.utils.importlib import import_module
 
-from tagging.models import Tag
-from django.utils.translation import ugettext
-
 # Only import dpaste Snippet Model if it's activated
-if 'dpaste' in getattr(settings, 'INSTALLED_APPS', []):
+if "dpaste" in getattr(settings, "INSTALLED_APPS"):
     from dpaste.models import Snippet
 else:
     Snippet = False
+if "notification" in getattr(settings, "INSTALLED_APPS"):
+    from notification import models as notification
+else:
+    notification = None
 
-from tasks.models import Task, TaskHistory, Nudge
+from tagging.models import Tag
+
 from tasks.filters import TaskFilter
-from tasks.forms import TaskForm, EditTaskForm, SearchTaskForm
+from tasks.forms import TaskForm, EditTaskForm
+from tasks.models import Task, TaskHistory, Nudge
+
+
 
 workflow = import_module(getattr(settings, "TASKS_WORKFLOW_MODULE", "tasks.workflow"))
 
-try:
-    notification = get_app('notification')
-except ImproperlyConfigured:
-    notification = None
 
 
 def tasks(request, group_slug=None, template_name="tasks/task_list.html", bridge=None):
@@ -75,7 +74,7 @@ def tasks(request, group_slug=None, template_name="tasks/task_list.html", bridge
     # default filtering
     state_keys = dict(workflow.STATE_CHOICES).keys()
     default_states = set(state_keys).difference(
-        # don't show these states
+        # don"t show these states
         set(["2", "3"])
     )
     
@@ -129,13 +128,13 @@ def add_task(request, group_slug=None, secret_id=None, form_class=TaskForm, temp
         paste = get_object_or_404(Snippet, secret_id=secret_id)
         paste.expires = datetime.now() + timedelta(seconds=3600*24*30*12*100) # Update the expiration time to maximum
         paste.save()
-        paste_link = ugettext('Link to the snippet: http://%(domain)s%(link)s\n\n' % {
-                                'domain': Site.objects.get_current().domain,
-                                'link': reverse('snippet_details', kwargs={'snippet_id': paste.secret_id})
-                             })
+        paste_link = ugettext("Link to the snippet: http://%(domain)s%(link)s\n\n") % {
+            "domain": Site.objects.get_current().domain,
+            "link": reverse("snippet_details", kwargs={"snippet_id": paste.secret_id})
+        }
         initial = {
-            'summary': paste.title,
-            'detail': paste_link,
+            "summary": paste.title,
+            "detail": paste_link,
         }
     else:
         initial = {}
@@ -151,7 +150,9 @@ def add_task(request, group_slug=None, secret_id=None, form_class=TaskForm, temp
                     task.state = workflow.initial_state(task, user)
                 task.save()
                 task.save_history()
-                request.user.message_set.create(message="added task '%s'" % task.summary)
+                messages.add_message(request, messages.SUCCESS,
+                    ugettext("added task '%s'") % task.summary
+                )
                 if notification:
                     if group:
                         notify_list = group.member_queryset()
@@ -159,7 +160,7 @@ def add_task(request, group_slug=None, secret_id=None, form_class=TaskForm, temp
                         notify_list = User.objects.all() # @@@
                     notify_list = notify_list.exclude(id__exact=request.user.id)
                     notification.send(notify_list, "tasks_new", {"creator": request.user, "task": task, "group": group})
-                if request.POST.has_key('add-another-task'):
+                if request.POST.has_key("add-another-task"):
                     if group:
                         redirect_to = bridge.reverse("task_add", group)
                     else:
@@ -180,9 +181,12 @@ def add_task(request, group_slug=None, secret_id=None, form_class=TaskForm, temp
         "group_base": group_base,
     }, context_instance=RequestContext(request))
 
+
 @login_required
 def nudge(request, id, group_slug=None, bridge=None):
-    """ Called when a user nudges a ticket """
+    """
+    Called when a user nudges a ticket
+    """
     
     if bridge:
         try:
@@ -205,8 +209,9 @@ def nudge(request, id, group_slug=None, bridge=None):
         # you've already nudged this task.
         nudge = nudged[0]
         nudge.delete()
-        message = "You've removed your nudge from this task"
-        request.user.message_set.create(message=message)
+        messages.add_message(request, messages.SUCCESS,
+            ugettext("You've removed your nudge from this task")
+        )
         return HttpResponseRedirect(task_url)
     
     
@@ -216,8 +221,9 @@ def nudge(request, id, group_slug=None, bridge=None):
     count = Nudge.objects.filter(task__exact=task).count()
     
     # send the message to the user
-    message = "%s has been nudged about this task" % task.assignee
-    request.user.message_set.create(message=message)
+    messages.add_message(request, messages.SUCCESS,
+        ugettext("%s has been nudged about this task") % task.assignee
+    )
     
     # send out the nudge notification
     if notification:
@@ -225,6 +231,7 @@ def nudge(request, id, group_slug=None, bridge=None):
         notification.send(notify_list, "tasks_nudge", {"nudger": request.user, "task": task, "count": count})
     
     return HttpResponseRedirect(task_url)
+
 
 def task(request, id, group_slug=None, template_name="tasks/task.html", bridge=None):
     
@@ -267,19 +274,32 @@ def task(request, id, group_slug=None, template_name="tasks/task.html", bridge=N
             if task.assignee == request.user:
                 task.denudge()
             if "status" in form.changed_data:
-                request.user.message_set.create(message="updated your status on the task")
+                messages.add_message(request, messages.SUCCESS,
+                    ugettext("updated your status on the task")
+                )
                 if notification:
                     notification.send(notify_list, "tasks_status", {"user": request.user, "task": task, "group": group})
             if "state" in form.changed_data:
-                request.user.message_set.create(message="task marked %s" % task.get_state_display())
+                messages.add_message(request, messages.SUCCESS,
+                    ugettext("task marked %(state)s") % {
+                        "state": task.get_state_display()
+                    }
+                )
                 if notification:
                     notification.send(notify_list, "tasks_change", {"user": request.user, "task": task, "group": group, "new_state": task.get_state_display()})
             if "assignee" in form.changed_data:
-                request.user.message_set.create(message="assigned task to '%s'" % task.assignee)
+                messages.add_message(request, messages.SUCCESS,
+                    ugettext("assigned task to '%(assignee)s'") % {
+                        # @@@ user_display
+                        "assignee": task.assignee
+                    }
+                )
                 if notification:
                     notification.send(notify_list, "tasks_assignment", {"user": request.user, "task": task, "assignee": task.assignee, "group": group})
             if "tags" in form.changed_data:
-                request.user.message_set.create(message="updated tags on the task")
+                messages.add_message(request, messages.SUCCESS,
+                    ugettext("updated tags on the task")
+                )
                 if notification:
                     notification.send(notify_list, "tasks_tags", {"user": request.user, "task": task, "group": group})
             form = EditTaskForm(request.user, group, instance=task)
@@ -288,21 +308,21 @@ def task(request, id, group_slug=None, template_name="tasks/task.html", bridge=N
     
     # The NUDGE dictionary
     nudge = {}
-    nudge['nudgeable'] = False
+    nudge["nudgeable"] = False
     
     # get the count of nudges so assignee can see general level of interest.
-    nudge['count'] = Nudge.objects.filter(task__exact=task).count()
+    nudge["count"] = Nudge.objects.filter(task__exact=task).count()
     
     # get the nudge if you are not the assignee otherwise just a None
     if is_member and request.user != task.assignee and task.assignee:
-        nudge['nudgeable'] = True
+        nudge["nudgeable"] = True
         try:
-            nudge['nudge'] = Nudge.objects.filter(nudger__exact=request.user, task__exact=task)[0]
+            nudge["nudge"] = Nudge.objects.filter(nudger__exact=request.user, task__exact=task)[0]
         except IndexError:
-            nudge['nudge'] = None
+            nudge["nudge"] = None
     
     # get the nudge history
-    nudge['history'] = Nudge.objects.filter(task__exact=task)
+    nudge["history"] = Nudge.objects.filter(task__exact=task)
     
     return render_to_response(template_name, {
         "group": group,
@@ -345,11 +365,11 @@ def user_tasks(request, username, group_slug=None, template_name="tasks/user_tas
     # default filtering
     state_keys = dict(workflow.STATE_CHOICES).keys()
     default_states = set(state_keys).difference(
-        # don't show these states
+        # don"t show these states
         set(["2", "3"])
     )
     
-    # have to store for each prefix because initial data isn't support on the
+    # have to store for each prefix because initial data isn"t support on the
     # FilterSet
     filter_data = {
         "a-state": list(default_states),
@@ -383,10 +403,10 @@ def user_tasks(request, username, group_slug=None, template_name="tasks/user_tas
         url = site_url + reverse("tasks_mini_list")
     
     bookmarklet = """javascript:(function() {
-url = '%s';
-window.open(url, 'tasklist', 'height=500, width=250, title=no, location=no,
+url = "%s";
+window.open(url, "tasklist", "height=500, width=250, title=no, location=no,
 scrollbars=yes, menubars=no, navigation=no, statusbar=no, directories=no,
-resizable=yes, status=no, toolbar=no, menuBar=no');})()""" % url
+resizable=yes, status=no, toolbar=no, menuBar=no");})()""" % url
     
     return render_to_response(template_name, {
         "group": group,
@@ -455,11 +475,11 @@ def focus(request, field, value, group_slug=None, template_name="tasks/focus.htm
     # default filtering
     state_keys = dict(workflow.STATE_CHOICES).keys()
     default_states = set(state_keys).difference(
-        # don't show these states
+        # don"t show these states
         set(["2", "3"])
     )
     
-    # have to store for each prefix because initial data isn't support on the
+    # have to store for each prefix because initial data isn"t support on the
     # FilterSet
     filter_data = {
         "state": list(default_states),
@@ -470,7 +490,7 @@ def focus(request, field, value, group_slug=None, template_name="tasks/focus.htm
     
     if field == "modified":
         try:
-            # @@@ this seems hackish and brittle but I couldn't work out another way
+            # @@@ this seems hackish and brittle but I couldn"t work out another way
             year, month, day = value.split("-")
             # have to int month and day in case zero-padded
             tasks = tasks.filter(modified__year=int(year), modified__month=int(month), modified__day=int(day))
@@ -484,7 +504,7 @@ def focus(request, field, value, group_slug=None, template_name="tasks/focus.htm
             raise Http404
         tasks = tasks.filter(state=state)
     elif field == "assignee":
-        if value == "unassigned": # @@@ this means can't have a username 'unassigned':
+        if value == "unassigned": # @@@ this means can"t have a username "unassigned":
             tasks = tasks.filter(assignee__isnull=True)
         else:
             try:
@@ -574,12 +594,12 @@ def tasks_history(request, id, group_slug=None, template_name="tasks/task_histor
         group_base = None
     
     task = get_object_or_404(tasks, id=id)
-    task_history = task.history_task.all().order_by('-modified')
-    nudge_history = task.task_nudge.all().order_by('-modified')
+    task_history = task.history_task.all().order_by("-modified")
+    nudge_history = task.task_nudge.all().order_by("-modified")
     
     result_list = sorted(
         chain(task_history, nudge_history),
-        key=attrgetter('modified')
+        key=attrgetter("modified")
         )
     result_list.reverse()
     
@@ -598,4 +618,4 @@ def tasks_history(request, id, group_slug=None, template_name="tasks/task_histor
 
 def export_state_transitions(request):
     export = workflow.export_state_transitions()
-    return HttpResponse(export, mimetype='text/csv')
+    return HttpResponse(export, mimetype="text/csv")

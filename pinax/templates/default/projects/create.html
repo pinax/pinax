@@ -1,7 +1,7 @@
 {% extends "projects/base.html" %}
 
 {% load i18n %}
-{% load uni_form %}
+{% load uni_form_tags %}
 {% load humanize %}
 {% load pagination_tags %}
 {% load order_by %}
@@ -16,6 +16,7 @@
     <p>{% trans "A <b>project</b> is a group of people working together on a common set of tasks." %}</p>
     {% if user.is_authenticated %}
         <form class="uniForm" id="project_form" method="POST" action="">
+            {% csrf_token %}
             <fieldset class="inlineLabels">
                 {{ project_form|as_uni_form }}
                 <div class="form_block">

@@ -1,5 +1,7 @@
 from django.conf.urls.defaults import *
 
-urlpatterns = patterns('',
-    url(r'^login/$', 'authsub.views.login', name="authsub_login"),
+
+
+urlpatterns = patterns("",
+    url(r"^login/$", "authsub.views.login", name="authsub_login"),
 )

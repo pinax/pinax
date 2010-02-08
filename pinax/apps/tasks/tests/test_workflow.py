@@ -1,8 +1,8 @@
 # coding: utf-8
+from django.test import TestCase
 
 from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
-from django.test import TestCase
 
 from tasks.models import Task
 from tasks.workflow import always, is_assignee, is_assignee_or_none
@@ -10,24 +10,25 @@ from tasks.workflow import is_creator, no_assignee, is_task_manager
 from tasks.workflow import OR
 from tasks.workflow import TASK_MANAGER
 
+
+
 class TestWorkflowFunctions(TestCase):
-    fixtures = ['test_tasks.json']
+    fixtures = ["test_tasks.json"]
     
     def setUp(self):
-        self.user_admin = User.objects.get(username__exact='admin')
-        self.user_joe = User.objects.get(username__exact='joe')
-        self.user_sam = User.objects.get(username__exact='sam')
+        self.user_admin = User.objects.get(username__exact="admin")
+        self.user_joe = User.objects.get(username__exact="joe")
+        self.user_sam = User.objects.get(username__exact="sam")
         
         # The task is assigned to user joe by user admin
         self.task = Task.objects.get(pk__exact=1)
         self.task.assignee = self.user_joe
         self.task.save()
         
-        # lets set up a sample group
+        # let's set up a sample group
         self.group = Group(name=TASK_MANAGER)
         self.group.save()
         self.group.user_set.add(self.user_admin)
-    
     
     def tearDown(self):
         pass
@@ -83,4 +84,3 @@ class TestWorkflowFunctions(TestCase):
         self.assertEquals(True, OR(is_creator, is_assignee)(self.task, self.user_joe))
         self.assertEquals(False, OR(is_creator, is_assignee)(self.task, None))
         self.assertEquals(False, OR(is_creator, is_assignee)(self.task, self.user_sam))
-        

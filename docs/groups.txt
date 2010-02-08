@@ -57,7 +57,7 @@ complete, can be quicklybrought into any Pinax Group-App, not just projects::
         # and we don't know what group model it will point to.
         object_id = models.IntegerField(null=True)
         content_type = models.ForeignKey(ContentType, null=True)
-        group = generic.GenericForeignKey("object_id", "content_type")
+        group = generic.GenericForeignKey("content_type", "object_id")
         
         def __unicode__(self):
             return self.title

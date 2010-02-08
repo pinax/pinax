@@ -2,6 +2,8 @@ from django.db.models import signals, get_app
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.translation import ugettext_noop as _
 
+
+
 try:
     notification = get_app('notification')
     

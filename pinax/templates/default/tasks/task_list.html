@@ -1,6 +1,7 @@
 {% extends "tasks/base.html" %}
 
 {% load i18n %}
+{% load account_tags %}
 {% load shorttimesince_tag %}
 {% load order_by %}
 {% load humanize %}
@@ -110,7 +111,7 @@
                                 <td style="white-space: nowrap">{{ item.modified|shorttimesince }} ago</td>
                                 <td>
                                     {% if item.assignee %}
-                                        <a href="{% groupurl tasks_for_user group username=item.assignee %}">{{ item.assignee }}</a>
+                                        <a href="{% groupurl tasks_for_user group username=item.assignee %}">{% user_display item.assignee %}</a>
                                     {% else %}
                                         <span class="warning">unassigned</span>
                                     {% endif %}
@@ -150,7 +151,7 @@
                             <td style="white-space: nowrap">{{ task.modified|shorttimesince }} ago</td>
                             <td>
                                 {% if task.assignee %}
-                                    <a href="{% groupurl tasks_for_user group username=task.assignee %}">{{ task.assignee }}</a>
+                                    <a href="{% groupurl tasks_for_user group username=task.assignee %}">{% user_display task.assignee %}</a>
                                     
                                 {% else %}
                                     <span class="warning">unassigned</span>

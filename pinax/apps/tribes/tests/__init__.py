@@ -10,7 +10,7 @@ class TribesTest(TestCase):
         
         response = self.client.get("/tribes/create/")
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response["location"], "http://testserver/account/login?next=/tribes/create/")
+        self.assertEqual(response["location"], "http://testserver/account/login/?next=/tribes/create/")
     
     def test_auth_create_get(self):
         """can an auth'd user get to page?"""
@@ -25,7 +25,7 @@ class TribesTest(TestCase):
         
         response = self.client.post("/tribes/create/")
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response["location"], "http://testserver/account/login?next=/tribes/create/")
+        self.assertEqual(response["location"], "http://testserver/account/login/?next=/tribes/create/")
     
     def test_auth_create_post(self):
         """can an auth'd user post to create a new tribe?"""

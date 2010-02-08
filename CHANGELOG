@@ -5,6 +5,50 @@
 # the format of this document is subject to change; I'm just wanting to get
 # things started
 
+
+Upgraded Django from 1.0.X to Django 1.2.X
+------------------------------------------
+
+ * Projects have been updated to use Django 1.2.X features.
+ * Pinax core has been modified to work with CSRF (by default) and new
+   messages contrib app.
+
+Improvements to account app
+---------------------------
+
+ * Moved User instance creation to a new method ``SignupForm.create_user``
+   This gives an extension point to modify how User instances are created
+   via the ``SignupForm``.
+ * ``SignupForm.save`` now returns a dictionary of user credentials to be
+   used in the call to ``authenticate``. This makes it easier to do e-mail
+   based authentication.
+
+Improved waitinglist app
+------------------------
+
+ * Added {% waitinglist_entry_form as varname %} templatetag to give slightly
+   more flexibility to where the form is displayed. Used to be coupled in
+   the homepage.html template.
+ * Fixed the spelling of waitinglist_sucess URLpattern name.
+ * Removed nasty homepage view from private_beta_project/urls.py that dealt
+   with WaitingListEntryForm. This added a new view list_signup in waitinglist
+   app where POSTs are sent. GETs render waitinglist/list_signup.html where
+   a user can add themselves as well.
+
+Improved password reset
+-----------------------
+
+ * Password reset has been slightly modified to address many issues that were
+   discovered in 0.7. It was brought in line with the same password reset
+   spec that Django contrib auth implements.
+
+Improved support for non-username sites
+---------------------------------------
+
+ * Introduced new templatetag {% user_display %} which takes a single User
+   instance and maps it to a display value defined by ACCOUNT_USER_DISPLAY.
+   Default value of ACCOUNT_USER_DISPLAY is lambda user: user.username.
+
 Added nested group support
 --------------------------
 
@@ -58,3 +102,43 @@ Added a new starter project for serving up static media and templates
 
  * Allows HTML mockups to have a ready Pinax layout and take advantage of the 
    Django templating language.
+
+Updated django-staticfiles from 0.1.2 to 0.2.0
+----------------------------------------------
+
+ * The build_media and resolve_media management commands have been renamed to
+   build_static and resolve_static to be slightly less confusing.
+
+ * Remove the unneeded prefix in the STATICFILES_MEDIA_DIRS setting unless you
+   specifically want to use that prefix in your templates as well.
+
+   Before:
+   
+        STATICFILES_DIRS = (
+            ('my_project', os.path.join(PROJECT_ROOT, 'media')),
+            ('pinax', os.path.join(PINAX_ROOT, 'media', PINAX_THEME)),
+        )
+
+   After:
+
+        STATICFILES_DIRS = (
+            os.path.join(PROJECT_ROOT, 'media'),
+            os.path.join(PINAX_ROOT, 'media', PINAX_THEME),
+        )
+
+ * Update your urls.py to use the latest version of the media and static file
+   serving view:
+
+   Before:
+
+        if settings.SERVE_MEDIA:
+            urlpatterns += patterns('',
+                (r'^site_media/', include('staticfiles.urls')),
+            )
+
+   After:
+
+        if settings.SERVE_MEDIA:
+            urlpatterns += patterns('',
+                (r'', include('staticfiles.urls')),
+            )

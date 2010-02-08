@@ -1,7 +1,8 @@
 {% extends "tribes/base.html" %}
 
 {% load i18n %}
-{% load uni_form %}
+{% load account_tags %}
+{% load uni_form_tags %}
 {% load wiki_tags %}
 {% load avatar_tags %}
 {% load threadedcommentstags %}
@@ -26,7 +27,7 @@
                         {% if forloop.counter0|divisibleby:"3" %}<tr>{% endif %}
                         <td>
                             <div class="avatar">{% avatar member 40 %}</div>
-                            <div class="details"><a href="{% url profile_detail member.username %}" title="{{ member.username }}">{{ member.username }}</a></div>
+                            <div class="details"><a href="{% url profile_detail member.username %}" title="{{ member.username }}">{% user_display member %}</a></div>
                         </td>
                         {% if forloop.counter0|add:"1"|divisibleby:"3" %}</tr>{% endif %}
                     {% endfor %}
@@ -42,7 +43,7 @@
         
         <p>
             {% trans "Slug:" %} <tt>{{ tribe.slug }}</tt><br />
-            {% trans "Creator:" %} <a href="{% url profile_detail tribe.creator.username %}">{{ tribe.creator }}</a><br />
+            {% trans "Creator:" %} <a href="{% url profile_detail tribe.creator.username %}">{% user_display tribe.creator %}</a><br />
             {% trans "Created:" %} {{ tribe.created|date }}
             <br />
             {% show_tags_for tribe %}
@@ -55,6 +56,7 @@
                 <p><span id="edit-tribe-toggle">{% trans "Edit details" %}</span></p>
                 
                 <form class="uniForm" id="edit-tribe" method="POST" action="">
+                    {% csrf_token %}
                     <fieldset class="inlineLabels">
                         {{ tribe_form|as_uni_form }}
                         <div class="form_block">
@@ -68,6 +70,7 @@
             {% ifequal tribe.members.all.count 1 %}
                 <p>{% silk "delete" %} <a href="#" onclick="$('#delete_tribe_form').toggle(); return false;">{% trans "Delete tribe" %}</a><p>
                  <form class="delete_form" id="delete_tribe_form" action="{% url tribe_delete tribe.slug %}" method="POST" style="display: none;">
+                     {% csrf_token %}
                      <input type="submit" value="{% trans "Delete Tribe" %}" /> (all content will be removed)
                 </form>
             {% else %}
@@ -79,6 +82,7 @@
         {% if user.is_authenticated %}
             <div>
                 <form method="POST" action="">
+                    {% csrf_token %}
                     {% if is_member %}
                         {% ifequal user tribe.creator %}
                             <p>{% trans "You are the creator of this tribe so can't leave (yet)." %}</p>

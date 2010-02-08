@@ -1,7 +1,7 @@
 {% extends "basic_groups/base.html" %}
 
 {% load i18n %}
-{% load uni_form %}
+{% load uni_form_tags %}
 {% load humanize %}
 {% load pagination_tags %}
 {% load order_by %}
@@ -17,6 +17,7 @@
     <p>{% trans "This is just a basic group example with no extra content items." %}</p>
     {% if user.is_authenticated %}
         <form id="group_form" method="POST" action="{% url group_create %}" class="uniForm">
+            {% csrf_token %}
             <fieldset class="inlineLabels">
                 {{ group_form|as_uni_form }}
                 <div class="form_block">

@@ -1,22 +1,25 @@
+from django.conf import settings
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
-from django.http import HttpResponseRedirect
-from django.core.urlresolvers import reverse
+from django.utils.datastructures import SortedDict
+from django.utils.translation import ugettext, ugettext_lazy as _
+
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
-from django.utils.datastructures import SortedDict
-from django.utils.translation import ugettext_lazy as _
-
-from django.conf import settings
 
 if "notification" in settings.INSTALLED_APPS:
     from notification import models as notification
 else:
     notification = None
 
-from projects.models import Project, ProjectMember
 from projects.forms import ProjectForm, ProjectUpdateForm, AddUserForm
+from projects.models import Project, ProjectMember
+
+
 
 TOPIC_COUNT_SQL = """
 SELECT COUNT(*)
@@ -30,6 +33,8 @@ SELECT COUNT(*)
 FROM projects_projectmember
 WHERE projects_projectmember.project_id = projects_project.id
 """
+
+
 
 @login_required
 def create(request, form_class=ProjectForm, template_name="projects/create.html"):
@@ -57,7 +62,7 @@ def projects(request, template_name="projects/projects.html"):
     
     projects = Project.objects.all()
     
-    search_terms = request.GET.get('search', '')
+    search_terms = request.GET.get("search", "")
     if search_terms:
         projects = (projects.filter(name__icontains=search_terms) |
             projects.filter(description__icontains=search_terms))
@@ -65,26 +70,30 @@ def projects(request, template_name="projects/projects.html"):
     content_type = ContentType.objects.get_for_model(Project)
     
     projects = projects.extra(select=SortedDict([
-        ('member_count', MEMBER_COUNT_SQL),
-        ('topic_count', TOPIC_COUNT_SQL),
+        ("member_count", MEMBER_COUNT_SQL),
+        ("topic_count", TOPIC_COUNT_SQL),
     ]), select_params=(content_type.id,))
     
     return render_to_response(template_name, {
-        'projects': projects,
-        'search_terms': search_terms,
+        "projects": projects,
+        "search_terms": search_terms,
     }, context_instance=RequestContext(request))
 
 
 def delete(request, group_slug=None, redirect_url=None):
     project = get_object_or_404(Project, slug=group_slug)
     if not redirect_url:
-        redirect_url = reverse('project_list')
+        redirect_url = reverse("project_list")
     
-    # @@@ eventually, we'll remove restriction that project.creator can't leave project but we'll still require project.members.all().count() == 1
+    # @@@ eventually, we"ll remove restriction that project.creator can"t leave project but we"ll still require project.members.all().count() == 1
     if (request.user.is_authenticated() and request.method == "POST" and
             request.user == project.creator and project.members.all().count() == 1):
         project.delete()
-        request.user.message_set.create(message=_("Project %(project_name)s deleted.") % {"project_name": project.name})
+        messages.add_message(request, messages.SUCCESS,
+            ugettext("Project %(project_name)s deleted.") % {
+                "project_name": project.name
+            }
+        )
         # no notification required as the deleter must be the only member
     
     return HttpResponseRedirect(redirect_url)
@@ -92,16 +101,16 @@ def delete(request, group_slug=None, redirect_url=None):
 
 @login_required
 def your_projects(request, template_name="projects/your_projects.html"):
-
+    
     projects = Project.objects.filter(member_users=request.user).order_by("name")
-
+    
     content_type = ContentType.objects.get_for_model(Project)
-
+    
     projects = projects.extra(select=SortedDict([
-        ('member_count', MEMBER_COUNT_SQL),
-        ('topic_count', TOPIC_COUNT_SQL),
+        ("member_count", MEMBER_COUNT_SQL),
+        ("topic_count", TOPIC_COUNT_SQL),
     ]), select_params=(content_type.id,))
-
+    
     return render_to_response(template_name, {
         "projects": projects,
     }, context_instance=RequestContext(request))
@@ -126,7 +135,12 @@ def project(request, group_slug=None, form_class=ProjectUpdateForm, adduser_form
     if request.user == project.creator and action == "add":
         adduser_form = adduser_form_class(request.POST, project=project)
         if adduser_form.is_valid():
-            adduser_form.save(request.user)
+            project_member = adduser_form.save(request.user)
+            messages.add_message(request, messages.SUCCESS,
+                ugettext("added %(user)s to project") % {
+                    "user": project_member.user
+                }
+            )
             adduser_form = adduser_form_class(project=project) # clear form
     else:
         adduser_form = adduser_form_class(project=project)

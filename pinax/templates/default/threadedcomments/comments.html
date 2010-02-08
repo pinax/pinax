@@ -1,6 +1,7 @@
+{% load account_tags %}
 {% load threadedcommentstags %}
 {% load i18n %}
-{% load uni_form %}
+{% load uni_form_tags %}
 {% load pagination_tags %}
 {% load avatar_tags %}
 
@@ -12,19 +13,21 @@
         <li class="{% cycle even,odd %} thread-{{ response.depth }} clearfix">
             <div class="meta">
                 <div class="avatar">{% avatar response.user 40 %}</div>
-                <div class="details"><a href="{% url profile_detail response.user.username %}">{{ response.user     }}</a></div>
+                <div class="details"><a href="{% url profile_detail response.user.username %}">{% user_display response.user %}</a></div>
                 {{ response.date_submitted|date }}
             </div>
             <div class="bulk">
                 <div class="body">{{ response.comment|urlize|linebreaks }}</div>
                 {% ifequal user response.user %}
                 <form method="POST" action="{% url tc_comment_delete response.id %}">
+                    {% csrf_token %}
                     <input type="submit" value="{% trans "Delete Post" %}" />
                     <input type="hidden" name="next" value="{{ request.path }}" />
                 </form>
                 {% endifequal %}
                 <a href="javascript:toggle_comment_form({{ response.id }})">{% trans "Reply to This Post" %}</a>
                 <form class="hidden" method="POST" action="{% get_comment_url object response %}" id="comment_form_{{ response.id }}">
+                    {% csrf_token %}
                     <table><tr><td><textarea id="id_comment" rows="10" cols="40" name="comment"></textarea></td></tr>
                     <tr><td><input type="submit" value="{% trans "Post Response" %}" /></td></tr></table>
                     <input type="hidden" name="next" value="{{ request.path }}" />

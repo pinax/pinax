@@ -1,8 +1,8 @@
 .. _ref-media:
 
-====================================
- Media Handling
-====================================
+==============
+Media Handling
+==============
 
 This document explains how Pinax handles media files across external and 
 internal applications and themes.
@@ -13,7 +13,7 @@ and other user generated content stored on the file server). This is done in
 order to allow for easy server optimization and improved security.
 
 Basic media handling
-=======================
+====================
 
 If you want to override default media files, place yours under 
 `<project_name>/media/...` with the same path. For example:
@@ -28,7 +28,7 @@ Your file::
     
     
 Locations of media files
-=========================
+========================
 
 If you want to use Pinax' media handling with your own Django apps, please
 make sure you put the media files like JavaScript, cascading stylesheets (CSS)
@@ -46,44 +46,37 @@ Site specific media files goes to::
 The special static file service view should be able to serve the media files in
 development. 
 
-.. _ref-media-build_media:
+.. _ref-media-build_static:
 
-build_media management command
-================================
+build_static management command
+===============================
 
-The build_media script collects the media files from Pinax and all the
+The build_static script collects the media files from Pinax and all the
 installed apps and arranges them under the
 ``<project_name>/site_media/static`` folder.
 
 The command::
 
-    <project_name>/python manage.py build_media --all
+    <project_name>/python manage.py build_static
 
 will collect the media files from Pinax and all the apps and places them in
 the folder defined in the ``STATIC_ROOT`` setting.
 
-If you have two apps with the same file and the same relative path it's advised
-to use the ``--interactive`` option so the script will prompt you to choose
-which one to use. This is useful in case you want to overwrite default media
-files with your custom app for example. Remember to remove the site_media
-folder before you use this option or the script will prompt you for each file.
+Please also refer to the help of the build_static management command by running::
 
-Please also refer to the help of the build_media management command by running::
+    <project_name>/python manage.py build_static --help
 
-    <project_name>/python manage.py build_media --help
+.. _ref-media-resolve_static:
 
-.. _ref-media-resolve_media:
+resolve_static management command
+=================================
 
-resolve_media management command
-================================
-
-To quickly resolve the full file path of a media file on the filesystem,
-you can pass its expected URL path(s) to the ``resolve_media`` management
+To quickly resolve the absolute path of a media file on the filesystem,
+you can pass its expected path(s) to the ``resolve_static`` management
 command, e.g.::
 
     $ ./manage resolve_media pinax/css/base.css
-    Resolving css/site_tabs.css:
-      /Users/jtauber/virtualenvs/mysite/lib/python2.6/site-packages/Pinax-0.7beta3-py2.6.egg/pinax/media/default/pinax/css/base.css
+    /Users/Jannis/.virtualenvs/mysite/lib/python2.6/site-packages/Pinax-0.9alpha1-py2.6.egg/pinax/media/default/pinax/css/base.css
 
 If multiple locations are found which match the given path it will list all of
 them, sorted by its importance.
@@ -93,7 +86,7 @@ them, sorted by its importance.
 Serving static files during development
 =========================================
 
-Pinax provides the static file serving view ``staticfiles.views.serve`` to
+The ``staticfiles`` app provides the static file serving view to
 handle the app and theme media as well as other media files found in the
 ``MEDIA_ROOT`` directory. Make sure your projects' urls.py contains the
 following snippet below the rest of the url configuration::
@@ -101,6 +94,6 @@ following snippet below the rest of the url configuration::
     from django.conf import settings
     if settings.SERVE_MEDIA:
         urlpatterns += patterns('', 
-            (r'^site_media/', include('staticfiles.urls')),
+            (r'', include('staticfiles.urls')),
         )
 

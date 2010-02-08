@@ -1,14 +1,16 @@
-{% load uni_form %}
+{% load uni_form_tags %}
 {% load i18n %}
+{% load account_tags %}
 
 <form class="uniForm" method="POST" action="{% url invite_to_join %}">
+    {% csrf_token %}
     <fieldset>
         {% if join_request_form.existing_users %}
         <div class="form_block">
             <ul class="errorlist">
                 <li>{% trans "Someone with this email address has already joined:" %}
                     {% for other_user in join_request_form.existing_users %}
-                    <a href="{% url profile_detail other_user %}">{{ other_user }}</a>{% endfor %}
+                    <a href="{% url profile_detail other_user %}">{% user_display other_user %}</a>{% endfor %}
                 </li>
             </ul>
         </div>

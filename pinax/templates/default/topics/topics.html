@@ -1,7 +1,7 @@
 {% extends "topics/base.html" %}
 
 {% load i18n %}
-{% load uni_form %}
+{% load uni_form_tags %}
 {% load pagination_tags %}
 
 {% block head_title %}{% spaceless %}
@@ -33,6 +33,7 @@
         <h2>{% trans "New Topic" %}</h2>
         
         <form class="uniForm" method="POST" action="">
+            {% csrf_token %}
             <fieldset class="inlineLabels">
                 {{ topic_form|as_uni_form }}
                 <div class="form_block">

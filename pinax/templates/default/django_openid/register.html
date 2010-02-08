@@ -1,7 +1,7 @@
 {% extends "account/base.html" %}
 
 {% load i18n %}
-{% load uni_form %}
+{% load uni_form_tags %}
 
 {% block head_title %}{% trans "Choose a Username" %}{% endblock %}
 
@@ -15,6 +15,7 @@
     <p>{% blocktrans %}Now that you have logged in with your OpenID, we need you to choose a username for this site.{% endblocktrans %}</p>
     
     <form class="uniForm signup" id="edit-profile" method="POST" action="">
+        {% csrf_token %}
         <fieldset class="inlineLabels">
             {{ form|as_uni_form }}
             <div class="form_block">

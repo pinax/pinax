@@ -1,4 +1,4 @@
-
+{% load account_tags %}
 {% load blog_tags %}
 {% load avatar_tags %}
 
@@ -7,7 +7,7 @@
         <div class="avatar">{% avatar article.latest_changeset.editor 40 %}</div>
         <div class="details">
             <a href="{% url profile_detail article.latest_changeset.editor.username %}">
-                {{ article.latest_changeset.editor }}
+                {% user_display article.latest_changeset.editor %}
             </a>
         </div>
         {{ article.last_update|date }}

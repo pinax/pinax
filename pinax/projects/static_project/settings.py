@@ -9,7 +9,7 @@ PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-# tells Pinax to serve media through django.views.static.serve.
+# tells Pinax to serve media through the staticfiles app.
 SERVE_MEDIA = DEBUG
 
 ADMINS = (
@@ -18,10 +18,16 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASE_USER = ''             # Not used with sqlite3.
-DATABASE_PASSWORD = ''         # Not used with sqlite3.
-DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
-DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3", # Add "postgresql_psycopg2", "postgresql", "mysql", "sqlite3" or "oracle".
+        "NAME": "dev.db",                       # Or path to database file if using sqlite3.
+        "USER": "",                             # Not used with sqlite3.
+        "PASSWORD": "",                         # Not used with sqlite3.
+        "HOST": "",                             # Set to empty string for localhost. Not used with sqlite3.
+        "PORT": "",                             # Set to empty string for default. Not used with sqlite3.
+    }
+}
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -59,7 +65,7 @@ STATIC_URL = '/site_media/static/'
 
 # Additional directories which hold static files
 STATICFILES_DIRS = (
-    ('static_project', os.path.join(PROJECT_ROOT, 'media')),
+    os.path.join(PROJECT_ROOT, 'media'),
 )
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
@@ -80,6 +86,7 @@ TEMPLATE_LOADERS = (
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
 )
 
@@ -108,6 +115,19 @@ INSTALLED_APPS = (
     'staticfiles',
 )
 
+MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
+
 # @@@ this shouldn't beed need but are :-(
 CONTACT_EMAIL = ""
 SITE_NAME = ""
+
+DEBUG_TOOLBAR_CONFIG = {
+    "INTERCEPT_REDIRECTS": False,
+}
+
+# local_settings.py can be used to override environment-specific settings
+# like database and email that differ between development and production.
+try:
+    from local_settings import *
+except ImportError:
+    pass

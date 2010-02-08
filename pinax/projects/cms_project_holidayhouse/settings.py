@@ -14,7 +14,7 @@ PINAX_THEME = 'default'
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-# tells Pinax to serve media through django.views.static.serve.
+# tells Pinax to serve media through the staticfiles app.
 SERVE_MEDIA = DEBUG
 
 INTERNAL_IPS = (
@@ -27,12 +27,16 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASE_ENGINE = 'sqlite3'    # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'ado_mssql'.
-DATABASE_NAME = 'dev.db'       # Or path to database file if using sqlite3.
-DATABASE_USER = ''             # Not used with sqlite3.
-DATABASE_PASSWORD = ''         # Not used with sqlite3.
-DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
-DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3", # Add "postgresql_psycopg2", "postgresql", "mysql", "sqlite3" or "oracle".
+        "NAME": "dev.db",                       # Or path to database file if using sqlite3.
+        "USER": "",                             # Not used with sqlite3.
+        "PASSWORD": "",                         # Not used with sqlite3.
+        "HOST": "",                             # Set to empty string for localhost. Not used with sqlite3.
+        "PORT": "",                             # Set to empty string for default. Not used with sqlite3.
+    }
+}
 
 # Local time zone for this installation. Choices can be found here:
 # http://www.postgresql.org/docs/8.1/static/datetime-keywords.html#DATETIME-TIMEZONE-SET-TABLE
@@ -83,8 +87,8 @@ STATIC_URL = '/site_media/static/'
 
 # Additional directories which hold static files
 STATICFILES_DIRS = (
-    ('cms_project_holidayhouse', os.path.join(PROJECT_ROOT, 'media')),
-    ('pinax', os.path.join(PINAX_ROOT, 'media', PINAX_THEME)),
+    os.path.join(PROJECT_ROOT, 'media'),
+    os.path.join(PINAX_ROOT, 'media', PINAX_THEME),
 )
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
@@ -105,8 +109,10 @@ TEMPLATE_LOADERS = (
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django_openid.consumer.SessionConsumer',
+    'django.contrib.messages.middleware.MessageMiddleware',
     'account.middleware.LocaleMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'pagination.middleware.PaginationMiddleware',
@@ -127,6 +133,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.i18n",
     "django.core.context_processors.media",
     "django.core.context_processors.request",
+    "django.contrib.messages.context_processors.messages",
     
     "pinax.core.context_processors.pinax_settings",
     
@@ -142,6 +149,7 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
+    'django.contrib.messages',
     'django.contrib.humanize',
     'pinax.templatetags',
     
@@ -176,6 +184,8 @@ FIXTURE_DIRS = [
     os.path.join(PROJECT_ROOT, "fixtures"),
 ]
 
+MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
+
 ABSOLUTE_URL_OVERRIDES = {
     "auth.user": lambda o: "/profiles/profile/%s/" % o.username,
 }
@@ -197,6 +207,17 @@ NOTIFICATION_LANGUAGE_MODULE = 'account.Account'
 ACCOUNT_OPEN_SIGNUP = False
 ACCOUNT_REQUIRED_EMAIL = False
 ACCOUNT_EMAIL_VERIFICATION = False
+ACCOUNT_EMAIL_AUTHENTICATION = False
+ACCOUNT_UNIQUE_EMAIL = EMAIL_CONFIRMATION_UNIQUE_EMAIL = False
+
+if ACCOUNT_EMAIL_AUTHENTICATION:
+    AUTHENTICATION_BACKENDS = (
+        "account.auth_backends.EmailModelBackend",
+    )
+else:
+    AUTHENTICATION_BACKENDS = (
+        "django.contrib.auth.backends.ModelBackend",
+    )
 
 EMAIL_CONFIRMATION_DAYS = 2
 EMAIL_DEBUG = DEBUG
@@ -207,6 +228,10 @@ LOGIN_REDIRECT_URLNAME = "home"
 
 SERIALIZATION_MODULES = {
     "jsonfk": "pinax.core.serializers.jsonfk",
+}
+
+DEBUG_TOOLBAR_CONFIG = {
+    "INTERCEPT_REDIRECTS": False,
 }
 
 # local_settings.py can be used to override environment-specific settings

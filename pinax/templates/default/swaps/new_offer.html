@@ -1,7 +1,7 @@
 {% extends "swaps/base.html" %}
 
 {% load i18n %}
-{% load uni_form %}
+{% load uni_form_tags %}
 
 {% block head_title %}{% blocktrans %}Add a new Offer{% endblocktrans %}{% endblock %}
 
@@ -9,6 +9,7 @@
     <h1>{% trans "Add a new Offer" %}</h1>
     
     <form class="uniForm" id="offer_form" method="POST" action="">
+        {% csrf_token %}
         <fieldset class="inlineLabels">
             {{ offer_form|as_uni_form }}
             <div class="form_block">

@@ -1,0 +1,20 @@
+{% extends "blog_base.html" %}
+
+{% block head_title %}{{ post.title }} &mdash; ACME Blog{% endblock %}
+
+{% block primary %}
+    <h2>{{ post.title }}</h2>
+    {% include "dateline.html" %}
+    
+    <div class="teaser">{{ post.teaser_html|safe }}</div>
+    
+    <div class="content">{{ post.content_html|safe }}</div>
+    
+    <p class="share"></p>
+    
+    <div class="post_footer">
+        <h2>{{ post.title }}</h2>
+        {% include "dateline.html" %}
+    </div>
+    
+{% endblock %}

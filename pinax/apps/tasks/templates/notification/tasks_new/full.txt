@@ -1,8 +1,9 @@
-{% load i18n %}
+{% load i18n %}{% load account_tags %}
+{% user_display creator as creator_display %}
 {% if group %}
-{% blocktrans %}{{ creator }} has added a task '{{ task }}' in '{{ group }}'.{% endblocktrans %}
+{% blocktrans %}{{ creator_display }} has added a task '{{ task }}' in '{{ group }}'.{% endblocktrans %}
 {% else %}
-{% blocktrans %}{{ creator }} has added a task '{{ task }}'.{% endblocktrans %}
+{% blocktrans %}{{ creator_display }} has added a task '{{ task }}'.{% endblocktrans %}
 {% endif %}
 
 

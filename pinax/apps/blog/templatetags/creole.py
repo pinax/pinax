@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
-""" Provides the `creole` template filter, to render
+# @@@ THIS FILE IS NOT USED. REMOVE IT AFTER VERIFYING
+"""
+Provides the `creole` template filter, to render
 texts using the markup used by the MoinMoin wiki.
 """
-
 from django import template
 from django.conf import settings
+
 
 try:
     from creoleparser.dialects import Creole10 as Creole
@@ -29,12 +31,14 @@ def creole(text, **kw):
     parser = CreoleParser(dialect=dialect)
     return parser.render(text)
 
+
 class CreoleTextNode(template.Node):
     def __init__(self, nodelist):
         self.nodelist = nodelist
-
+    
     def render(self, context):
         return creole(self.nodelist.render(context))
+
 
 @register.tag("creole")
 def crl_tag(parser, token):
@@ -44,4 +48,3 @@ def crl_tag(parser, token):
     nodelist = parser.parse(('endcreole',))
     parser.delete_first_token()
     return CreoleTextNode(nodelist)
-

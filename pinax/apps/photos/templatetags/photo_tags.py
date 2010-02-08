@@ -5,29 +5,31 @@ from django import template
 from photos.models import Image, Pool
 
 
+
 register = template.Library()
 
 
-class PrintExifNode(template.Node):
 
+class PrintExifNode(template.Node):
+    
     def __init__(self, exif):
         self.exif = exif
-
+    
     def render(self, context):
         try:
             exif = unicode(self.exif.resolve(context, True))
         except template.VariableDoesNotExist:
-            exif = u''
-
-        EXPR =  "'(?P<key>[^:]*)'\:(?P<value>[^,]*),"
+            exif = u""
+        
+        EXPR = "'(?P<key>[^:]*)'\:(?P<value>[^,]*),"
         expr = re.compile(EXPR)
-        msg  = "<table>"
+        msg = "<table>"
         for i in expr.findall(exif):
             msg += "<tr><td>%s</td><td>%s</td></tr>" % (i[0],i[1])
-
+        
         msg += "</table>"
-
-        return u'<div id="exif">%s</div>' % (msg)
+        
+        return u'<div id="exif">%s</div>' % msg
 
 
 @register.tag(name="print_exif")
@@ -35,9 +37,9 @@ def do_print_exif(parser, token):
     try:
         tag_name, exif = token.contents.split()
     except ValueError:
-        msg = '%r tag requires a single argument' % token.contents[0]
+        msg = "%r tag requires a single argument" % token.contents[0]
         raise template.TemplateSyntaxError(msg)
-
+    
     exif = parser.compile_filter(exif)
     return PrintExifNode(exif)
 
@@ -73,6 +75,7 @@ class PublicPhotosNode(template.Node):
         context[self.context_var] = queryset
         return ""
 
+
 @register.tag
 def public_photos(parser, token, use_pool=False):
     
@@ -83,17 +86,17 @@ def public_photos(parser, token, use_pool=False):
         raise template.TemplateSyntaxError(message)
     else:
         if len(bits) == 3:
-            if bits[1] != 'as':
+            if bits[1] != "as":
                 message = "'%s' second argument must be 'as'" % bits[0]
                 raise template.TemplateSyntaxError(message)
             
             return PublicPhotosNode(bits[2], use_pool=use_pool)
             
         elif len(bits) == 5:
-            if bits[1] != 'for':
+            if bits[1] != "for":
                 message = "'%s' second argument must be 'for'" % bits[0]
                 raise template.TemplateSyntaxError(message)
-            if bits[3] != 'as':
+            if bits[3] != "as":
                 message = "'%s' forth argument must be 'as'" % bits[0]
                 raise template.TemplateSyntaxError(message)
             

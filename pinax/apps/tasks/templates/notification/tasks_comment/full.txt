@@ -1,8 +1,9 @@
-{% load i18n %}
+{% load i18n %}{% load account_tags %}
+{% user_display user as user_display %}
 {% if group %}
-{% blocktrans %}{{ user }} has commented on task '{{ task }}' in '{{ group }}':{% endblocktrans %}
+{% blocktrans %}{{ user_display }} has commented on task '{{ task }}' in '{{ group }}':{% endblocktrans %}
 {% else %}
-{% blocktrans %}{{ user }} has commented on task '{{ task }}':{% endblocktrans %}
+{% blocktrans %}{{ user_display }} has commented on task '{{ task }}':{% endblocktrans %}
 {% endif %}
 
 {{ comment.comment }}

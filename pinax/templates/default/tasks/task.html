@@ -1,9 +1,10 @@
 {% extends "tasks/base.html" %}
 
 {% load i18n %}
+{% load account_tags %}
 {% load tasks_tags %}
 {% load comments_tag %}
-{% load uni_form %}
+{% load uni_form_tags %}
 {% load attachments_tags %}
 {% load group_tags %}
 {% load theme_tags %}
@@ -20,6 +21,7 @@
     {% if is_member %}
         <h2>{% trans "Edit" %}</h2>
         <form method="POST" action="" id="task_form" class="uniForm">
+            {% csrf_token %}
             {{ form.media }}
             {{ form|as_uni_form }}
             

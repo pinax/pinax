@@ -1,7 +1,7 @@
 {% extends "blog/base.html" %}
 
 {% load i18n %}
-{% load uni_form %}
+{% load uni_form_tags %}
 
 {% block head_title %}{% blocktrans %}Write a Blog Post{% endblocktrans %}{% endblock %}
 
@@ -9,6 +9,7 @@
     
     {# @@@ not sure how to bring back teaser toggle with uni_form #}
     <form class="uniForm" id="edit-profile" method="POST" action="">
+        {% csrf_token %}
         <fieldset class="inlineLabels">
             {{ blog_form|as_uni_form }}
             <div class="form_block">

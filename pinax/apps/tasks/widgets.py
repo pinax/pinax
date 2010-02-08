@@ -1,10 +1,12 @@
 from django import forms
-from django.utils.html import escape, conditional_escape
 from django.utils.encoding import force_unicode
+from django.utils.html import escape, conditional_escape
 from django.utils.safestring import mark_safe
 
+
+
 class ReadOnlyWidget(forms.TextInput):
-    input_type = 'hidden'
+    input_type = "hidden"
     
     def __init__(self, field, *args, **kwargs):
         self.field = field
@@ -26,5 +28,4 @@ class ReadOnlyWidget(forms.TextInput):
         except Exception,e:
             output = e
         
-        return mark_safe('<span>%s</span>\n%s' % (output, field_value))
-    
+        return mark_safe("<span>%s</span>\n%s" % (output, field_value))

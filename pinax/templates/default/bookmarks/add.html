@@ -1,7 +1,7 @@
 {% extends "bookmarks/base.html" %}
 
 {% load i18n %}
-{% load uni_form %}
+{% load uni_form_tags %}
 
 {% block head_title %}{% blocktrans %}Add Bookmark{% endblocktrans %}{% endblock %}
 
@@ -12,6 +12,7 @@
     <p>You can drag this '<a href="{{ bookmarklet }}">Add to {{ SITE_NAME }} Bookmarks</a>' link to your bookmark bar to post the pages you visit!</p>
     
     <form method="POST" action="" class="uniForm">
+        {% csrf_token %}
         <fieldset>
             {{ bookmark_form|as_uni_form }}
             <div class="form_block">

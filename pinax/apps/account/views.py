@@ -1,29 +1,34 @@
 from django.conf import settings
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import Q
-from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect, HttpResponseForbidden, Http404
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
+from django.utils.http import base36_to_int
 from django.utils.translation import ugettext, ugettext_lazy as _
 
+from django.contrib import messages
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.contrib.auth.tokens import default_token_generator
 
 from emailconfirmation.models import EmailAddress, EmailConfirmation
-
-from account.utils import get_default_redirect
-from account.models import OtherServiceInfo
-from account.forms import SignupForm, AddEmailForm, LoginForm, \
-    ChangePasswordForm, SetPasswordForm, ResetPasswordForm, \
-    ChangeTimezoneForm, ChangeLanguageForm, TwitterForm, ResetPasswordKeyForm
-
 
 association_model = models.get_model("django_openid", "Association")
 if association_model is not None:
     from django_openid.models import UserOpenidAssociation
+
+from account.utils import get_default_redirect, user_display
+from account.models import OtherServiceInfo
+from account.forms import AddEmailForm, ChangeLanguageForm, ChangePasswordForm
+from account.forms import ChangeTimezoneForm, LoginForm, ResetPasswordKeyForm
+from account.forms import ResetPasswordForm, SetPasswordForm, SignupForm
+from account.forms import TwitterForm
+
 
 
 def group_and_bridge(kwargs):
@@ -79,6 +84,11 @@ def login(request, **kwargs):
                         user=form.user, openid=openid.openid
                     )
                 success_url = openid_success_url or success_url
+            messages.add_message(request, messages.SUCCESS,
+                ugettext(u"Successfully logged in as %(user)s.") % {
+                    "user": user_display(form.user)
+                }
+            )
             return HttpResponseRedirect(success_url)
     else:
         form = form_class(group=group)
@@ -99,28 +109,30 @@ def signup(request, **kwargs):
     
     form_class = kwargs.pop("form_class", SignupForm)
     template_name = kwargs.pop("template_name", "account/signup.html")
+    redirect_field_name = kwargs.pop("redirect_field_name", "next")
     success_url = kwargs.pop("success_url", None)
     
     group, bridge = group_and_bridge(kwargs)
     
     if success_url is None:
-        success_url = get_default_redirect(request)
+        success_url = get_default_redirect(request, redirect_field_name)
     
     if request.method == "POST":
         form = form_class(request.POST, group=group)
         if form.is_valid():
-            username, password = form.save()
+            credentials = form.save(request=request)
             if settings.ACCOUNT_EMAIL_VERIFICATION:
                 return render_to_response("account/verification_sent.html", {
                     "email": form.cleaned_data["email"],
                 }, context_instance=RequestContext(request))
             else:
-                user = authenticate(username=username, password=password)
+                user = authenticate(**credentials)
                 auth_login(request, user)
-                request.user.message_set.create(
-                    message=_("Successfully logged in as %(username)s.") % {
-                    "username": user.username
-                })
+                messages.add_message(request, messages.SUCCESS,
+                    ugettext("Successfully logged in as %(user)s.") % {
+                        "user": user_display(user)
+                    }
+                )
                 return HttpResponseRedirect(success_url)
     else:
         form = form_class(group=group)
@@ -128,6 +140,8 @@ def signup(request, **kwargs):
     ctx = group_context(group, bridge)
     ctx.update({
         "form": form,
+        "redirect_field_name": redirect_field_name,
+        "redirect_field_value": request.GET.get(redirect_field_name),
     })
     
     return render_to_response(template_name, RequestContext(request, ctx))
@@ -146,6 +160,11 @@ def email(request, **kwargs):
             add_email_form = form_class(request.user, request.POST)
             if add_email_form.is_valid():
                 add_email_form.save()
+                messages.add_message(request, messages.INFO,
+                    ugettext(u"Confirmation email sent to %(email)s") % {
+                            "email": add_email_form.cleaned_data["email"]
+                        }
+                    )
                 add_email_form = form_class() # @@@
         else:
             add_email_form = form_class()
@@ -156,10 +175,11 @@ def email(request, **kwargs):
                         user=request.user,
                         email=email,
                     )
-                    request.user.message_set.create(
-                        message=_("Confirmation email sent to %(email)s") % {
+                    messages.add_message(request, messages.INFO,
+                        ugettext("Confirmation email sent to %(email)s") % {
                             "email": email,
-                        })
+                        }
+                    )
                     EmailConfirmation.objects.send_confirmation(email_address)
                 except EmailAddress.DoesNotExist:
                     pass
@@ -171,10 +191,11 @@ def email(request, **kwargs):
                         email=email
                     )
                     email_address.delete()
-                    request.user.message_set.create(
-                        message=_("Removed email address %(email)s") % {
+                    messages.add_message(request, messages.SUCCESS,
+                        ugettext("Removed email address %(email)s") % {
                             "email": email,
-                        })
+                        }
+                    )
                 except EmailAddress.DoesNotExist:
                     pass
             elif request.POST["action"] == "primary":
@@ -210,6 +231,9 @@ def password_change(request, **kwargs):
         password_change_form = form_class(request.user, request.POST)
         if password_change_form.is_valid():
             password_change_form.save()
+            messages.add_message(request, messages.SUCCESS,
+                ugettext(u"Password successfully changed.")
+            )
             password_change_form = form_class(request.user)
     else:
         password_change_form = form_class(request.user)
@@ -237,6 +261,9 @@ def password_set(request, **kwargs):
         password_set_form = form_class(request.user, request.POST)
         if password_set_form.is_valid():
             password_set_form.save()
+            messages.add_message(request, messages.SUCCESS,
+                ugettext(u"Password successfully set.")
+            )
             return HttpResponseRedirect(reverse("acct_passwd"))
     else:
         password_set_form = form_class(request.user)
@@ -276,7 +303,6 @@ def password_reset(request, **kwargs):
     
     form_class = kwargs.pop("form_class", ResetPasswordForm)
     template_name = kwargs.pop("template_name", "account/password_reset.html")
-    template_name_done = kwargs.pop("template_name_done", "account/password_reset_done.html")
     
     group, bridge = group_and_bridge(kwargs)
     ctx = group_context(group, bridge)
@@ -285,10 +311,12 @@ def password_reset(request, **kwargs):
         password_reset_form = form_class(request.POST)
         if password_reset_form.is_valid():
             email = password_reset_form.save()
-            ctx.update({
-                "email": email,
-            })
-            return render_to_response(template_name_done, RequestContext(request, ctx))
+            
+            if group:
+                redirect_to = bridge.reverse("acct_passwd_reset_done", group)
+            else:
+                redirect_to = reverse("acct_passwd_reset_done")
+            return HttpResponseRedirect(redirect_to)
     else:
         password_reset_form = form_class()
     
@@ -299,25 +327,51 @@ def password_reset(request, **kwargs):
     return render_to_response(template_name, RequestContext(request, ctx))
 
 
-def password_reset_from_key(request, key, **kwargs):
+def password_reset_done(request, **kwargs):
     
-    form_class = kwargs.pop("form_class", ResetPasswordKeyForm)
-    template_name = kwargs.pop("template_name", "account/password_reset_from_key.html")
+    template_name = kwargs.pop("template_name", "account/password_reset_done.html")
     
     group, bridge = group_and_bridge(kwargs)
-    
-    if request.method == "POST":
-        password_reset_key_form = form_class(request.POST)
-        if password_reset_key_form.is_valid():
-            password_reset_key_form.save()
-            password_reset_key_form = None
-    else:
-        password_reset_key_form = form_class(initial={"temp_key": key})
-    
     ctx = group_context(group, bridge)
-    ctx.update({
-        "form": password_reset_key_form,
-    })
+    
+    return render_to_response(template_name, RequestContext(request, ctx))
+
+
+def password_reset_from_key(request, uidb36, key, **kwargs):
+    
+    form_class = kwargs.get("form_class", ResetPasswordKeyForm)
+    template_name = kwargs.get("template_name", "account/password_reset_from_key.html")
+    token_generator = kwargs.get("token_generator", default_token_generator)
+    
+    group, bridge = group_and_bridge(kwargs)
+    ctx = group_context(group, bridge)
+    
+    # pull out user
+    try:
+        uid_int = base36_to_int(uidb36)
+    except ValueError:
+        raise Http404
+    
+    user = get_object_or_404(User, id=uid_int)
+    
+    if token_generator.check_token(user, key):
+        if request.method == "POST":
+            password_reset_key_form = form_class(request.POST, user=user, temp_key=key)
+            if password_reset_key_form.is_valid():
+                password_reset_key_form.save()
+                messages.add_message(request, messages.SUCCESS,
+                    ugettext(u"Password successfully changed.")
+                )
+                password_reset_key_form = None
+        else:
+            password_reset_key_form = form_class()
+        ctx.update({
+            "form": password_reset_key_form,
+        })
+    else:
+        ctx.update({
+            "token_fail": True,
+        })
     
     return render_to_response(template_name, RequestContext(request, ctx))
 
@@ -334,6 +388,9 @@ def timezone_change(request, **kwargs):
         form = form_class(request.user, request.POST)
         if form.is_valid():
             form.save()
+            messages.add_message(request, messages.SUCCESS,
+                ugettext(u"Timezone successfully updated.")
+            )
     else:
         form = form_class(request.user)
     
@@ -357,6 +414,9 @@ def language_change(request, **kwargs):
         form = form_class(request.user, request.POST)
         if form.is_valid():
             form.save()
+            messages.add_message(request, messages.SUCCESS,
+                ugettext(u"Language successfully updated.")
+            )
             next = request.META.get("HTTP_REFERER", None)
             return HttpResponseRedirect(next)
     else:
@@ -392,10 +452,14 @@ def other_services(request, **kwargs):
                 twitter_authorized = twitter_verify_credentials(
                     twitter_account)
                 if not twitter_authorized:
-                    request.user.message_set.create(
-                        message=ugettext("Twitter authentication failed"))
+                    messages.add_message(request, messages.ERROR,
+                        ugettext("Twitter authentication failed")
+                    )
                 else:
                     twitter_form.save()
+                    messages.add_message(request, messages.SUCCESS,
+                        ugettext(u"Successfully authenticated.")
+                    )
     else:
         from microblogging.utils import twitter_account_for_user
         twitter_account = twitter_account_for_user(request.user)
@@ -421,6 +485,8 @@ def other_services_remove(request):
         Q(key="twitter_user") | Q(key="twitter_password")
     ).delete()
     
-    request.user.message_set.create(message=ugettext("Removed twitter account information successfully."))
+    messages.add_message(request, messages.SUCCESS,
+        ugettext("Removed twitter account information successfully.")
+    )
     
     return HttpResponseRedirect(reverse("acct_other_services"))
