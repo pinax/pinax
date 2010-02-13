@@ -256,9 +256,9 @@ class TaskHistory(models.Model):
     def __unicode__(self):
         return "for " + str(self.task)
     
-    def save(self, force_insert=False, force_update=False):
+    def save(self, **kwargs):
         self.modified = datetime.now()
-        super(TaskHistory, self).save(force_insert, force_update)
+        super(TaskHistory, self).save(**kwargs)
 
 
 class Nudge(models.Model):
