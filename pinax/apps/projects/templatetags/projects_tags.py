@@ -12,7 +12,7 @@ def show_project(context, project):
     return {"project": project, "request": context["request"]}
 
 
-# @@@ should move these next two as they aren"t particularly project-specific
+# @@@ should move these next two as they aren't particularly project-specific
 
 
 @register.simple_tag

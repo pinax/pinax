@@ -16,7 +16,7 @@ class LocaleMiddleware(object):
     """
     This is a very simple middleware that parses a request
     and decides what translation object to install in the current
-    thread context depending on the user"s account. This allows pages
+    thread context depending on the user's account. This allows pages
     to be dynamically translated to the language the user desires
     (if the language is available, of course).
     """

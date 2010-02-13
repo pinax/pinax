@@ -77,7 +77,7 @@ STATICFILES_DIRS = [
 # Examples: "http://foo.com/media/", "/media/".
 ADMIN_MEDIA_PREFIX = "/media/"
 
-# Make this unique, and don"t share it with anybody.
+# Make this unique, and don't share it with anybody.
 SECRET_KEY = ""
 
 # List of callables that know how to import templates from various sources.
@@ -121,7 +121,7 @@ INSTALLED_APPS = [
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 
-# @@@ this shouldn"t beed need but are :-(
+# @@@ this shouldn't beed need but are :-(
 CONTACT_EMAIL = ""
 SITE_NAME = ""
 

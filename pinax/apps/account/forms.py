@@ -202,7 +202,7 @@ class SignupForm(GroupForm):
         return credentials
     
     def save(self, request=None):
-        # don"t assume a username is available. it is a common removal if
+        # don't assume a username is available. it is a common removal if
         # site developer wants to use e-mail authentication.
         username = self.cleaned_data.get("username")
         email = self.cleaned_data["email"]
@@ -271,7 +271,7 @@ class OpenIDSignupForm(forms.Form):
         # remember provided (validated!) OpenID to attach it to the new user
         # later.
         self.openid = kwargs.pop("openid", None)
-        # pop these off since they are passed to this method but we can"t
+        # pop these off since they are passed to this method but we can't
         # pass them to forms.Form.__init__
         kwargs.pop("reserved_usernames", [])
         kwargs.pop("no_duplicate_emails", False)

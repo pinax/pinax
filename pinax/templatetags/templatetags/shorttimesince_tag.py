@@ -13,7 +13,7 @@ register = Library()
 
 def calculate_shorttimesince(d, now=None):
     """
-    like django"s built in timesince but abbreviates units
+    like django's built in timesince but abbreviates units
     """
     chunks = (
       (60 * 60 * 24 * 365, lambda n: ungettext("yr", "yr", n)),
