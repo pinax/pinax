@@ -108,7 +108,7 @@ setup(
         'requirements': ['%s/*.tar.gz' % VERSION],
     },
     zip_safe=False,
-    package_data=find_package_data('pinax'),
+    package_data=find_package_data(),
     entry_points={
         'console_scripts': [
             'pinax-admin = pinax.core.management:execute_from_command_line',
