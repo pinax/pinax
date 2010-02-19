@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-hotclub-0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 03:17+0200\n"
+"POT-Creation-Date: 2010-02-20 00:11+0100\n"
 "PO-Revision-Date: 2008-06-17 22:50-0300\n"
 "Last-Translator: Eduardo de Oliveira Padoan <eduardo.padoan@gmail.com>\n"
 "Language-Team:  <eduardo.padoan@gmail.com>\n"
@@ -15,31 +15,31 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: models.py:11
+#: models.py:15
 msgid "user"
 msgstr "usuário"
 
-#: models.py:12
+#: models.py:16
 msgid "name"
 msgstr "nome"
 
-#: models.py:13
+#: models.py:17
 msgid "about"
 msgstr "sobre"
 
-#: models.py:14
+#: models.py:18
 msgid "location"
 msgstr "localização"
 
-#: models.py:15
+#: models.py:23
 msgid "website"
 msgstr "website"
 
-#: models.py:25
+#: models.py:30
 msgid "profile"
 msgstr "Perfil"
 
-#: models.py:26
+#: models.py:31
 msgid "profiles"
 msgstr "Perfis"
 
@@ -48,33 +48,38 @@ msgstr "Perfis"
 msgid "You have removed %(from_user)s from friends"
 msgstr "você respondeu a %(message)s de %(recipient)s."
 
-#: views.py:83 views.py:95 views.py:120
+#: views.py:86 views.py:98 views.py:131
 msgid "Let's be friends!"
 msgstr "Vamos ser amigos!"
 
-#: views.py:103
+#: views.py:107
 #, python-format
 msgid "You have accepted the friendship request from %(from_user)s"
 msgstr "Você aceitou o pedido de amizade de %(from_user)s"
 
-#: views.py:113
+#: views.py:121
 #, fuzzy, python-format
 msgid "You have declined the friendship request from %(from_user)s"
 msgstr "Você aceitou o pedido de amizade de %(from_user)s"
 
-#: templates/profile_item.html:10
+#: views.py:168
+#, fuzzy
+msgid "Your profile has been updated."
+msgstr "ums nova tribo foi criada"
+
+#: templates/profile_item.html:11
 msgid "Name"
 msgstr "Nome"
 
-#: templates/profile_item.html:11
+#: templates/profile_item.html:12
 msgid "About"
 msgstr "Sobre"
 
-#: templates/profile_item.html:12
+#: templates/profile_item.html:13
 msgid "Location"
 msgstr "Localização"
 
-#: templates/profile_item.html:13
+#: templates/profile_item.html:14
 msgid "Website"
 msgstr "Website"
 
@@ -567,9 +572,6 @@ msgstr "Website"
 
 #~ msgid "New Tribe Created"
 #~ msgstr "Nova Tribo Criada"
-
-#~ msgid "a new tribe has been created"
-#~ msgstr "ums nova tribo foi criada"
 
 #~ msgid "Friend Created Tribe"
 #~ msgstr "Amigo Criou Tribo"

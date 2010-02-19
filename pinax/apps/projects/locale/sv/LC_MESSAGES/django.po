@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 03:17+0200\n"
+"POT-Creation-Date: 2010-02-20 00:11+0100\n"
 "PO-Revision-Date: 2008-07-04 22:28+0200\n"
 "Last-Translator: jens persson <jens@persson.cx>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
-#: forms.py:13
+#: forms.py:23
 #, fuzzy
 msgid ""
 "a short version of the name consisting only of letters, numbers, underscores "
@@ -26,94 +26,109 @@ msgstr ""
 "en kort version av namnet som bara innehålla bokstäverna a till z, siffror "
 "och understrykningar."
 
-#: forms.py:14
-#, fuzzy
-msgid "This value must contain only letters, numbers, underscores and hyphens."
-msgstr ""
-"Det här värdet kan bara innehålla bokstäverna a till z, siffror "
-"understrykningar och punkter."
-
-#: forms.py:18
+#: forms.py:28
 msgid "A project already exists with that slug."
 msgstr "Ett projekt med den polletten finns redan."
 
-#: forms.py:23 forms.py:40
+#: forms.py:33 forms.py:51
 msgid "A project already exists with that name."
 msgstr "Ett projekt med det namnet finns redan."
 
-#: forms.py:50
+#: forms.py:61
 msgid "User"
 msgstr "Användare"
 
-#: forms.py:60
+#: forms.py:71
 msgid "There is no user with this username."
 msgstr "Det finns ingen användare med det användarnamnet."
 
-#: forms.py:63
+#: forms.py:74
 msgid "User is already a member of this project."
 msgstr ""
 
-#: management.py:9
+#: management.py:11
 msgid "New Project Member"
 msgstr "Ny projektmedlem"
 
-#: management.py:9
+#: management.py:11
 msgid "a project you are a member of has a new member"
 msgstr "en av dina projekt har fått en ny medlem"
 
-#: management.py:10
+#: management.py:12
 #, fuzzy
 msgid "New Member Of Project You Created"
 msgstr "En ny medlem i en stam du har skapat"
 
-#: management.py:10
+#: management.py:12
 #, fuzzy
 msgid "a project you created has a new member"
 msgstr "en av stammarna du har skapat har fått en ny medlem"
 
-#: management.py:11
+#: management.py:13
 #, fuzzy
 msgid "New Project Created"
 msgstr "En ny stam skapades"
 
-#: management.py:11
+#: management.py:13
 #, fuzzy
 msgid "a new project has been created"
 msgstr "en ny stam har skapats"
 
-#: models.py:12
+#: management.py:14
+#, fuzzy
+msgid "Added as a Project Member"
+msgstr "Ny projektmedlem"
+
+#: management.py:14
+#, fuzzy
+msgid "you have become member of a project"
+msgstr "du har blivit medlem i ett projekt"
+
+#: models.py:17
 msgid "members"
 msgstr "medlemmar"
 
-#: models.py:15
+#: models.py:21
 msgid "private"
 msgstr "privat"
 
-#: models.py:34
+#: models.py:40
 msgid "project"
 msgstr "projekt"
 
-#: models.py:35
+#: models.py:44
 msgid "user"
 msgstr "användare"
 
-#: models.py:37
+#: models.py:46
 msgid "away"
 msgstr ""
 
-#: models.py:38
+#: models.py:47
 #, fuzzy
 msgid "away_message"
 msgstr "meddelanden"
 
-#: models.py:39
+#: models.py:48
 msgid "away since"
 msgstr ""
 
-#: views.py:87
+#: views.py:94
 #, python-format
 msgid "Project %(project_name)s deleted."
 msgstr ""
+
+#: views.py:141
+#, fuzzy, python-format
+msgid "added %(user)s to project"
+msgstr "Medlem i ett projekt"
+
+#, fuzzy
+#~ msgid ""
+#~ "This value must contain only letters, numbers, underscores and hyphens."
+#~ msgstr ""
+#~ "Det här värdet kan bara innehålla bokstäverna a till z, siffror "
+#~ "understrykningar och punkter."
 
 #~ msgid "Username"
 #~ msgstr "Användarnamn"
@@ -665,12 +680,6 @@ msgstr ""
 
 #~ msgid "You have accepted the friendship request from %(from_user)s"
 #~ msgstr "Du har accepterat en vänskapsförfrågan från %(from_user)s"
-
-#~ msgid "Added to Project"
-#~ msgstr "Medlem i ett projekt"
-
-#~ msgid "you have been added to a project"
-#~ msgstr "du har blivit medlem i ett projekt"
 
 #~ msgid "New Project Topic Started"
 #~ msgstr "Nytt projektämne startade"

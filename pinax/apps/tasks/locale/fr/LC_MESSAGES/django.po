@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 03:18+0200\n"
+"POT-Creation-Date: 2010-02-20 00:11+0100\n"
 "PO-Revision-Date: 2008-07-22 23:33+0100\n"
 "Last-Translator: Roland Frédéric <frederic.roland@creativeconvergence.be>\n"
 "Language-Team: Frédéric Roland <frederic.roland@creativeconvergence.be>\n"
@@ -17,290 +17,423 @@ msgstr ""
 "X-Poedit-Language: French\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: forms.py:96
+#: forms.py:120
 msgid "You must provide a resolution to mark this task as resolved"
 msgstr ""
 
-#: management.py:11
+#: management.py:13
 #, fuzzy
 msgid "New Task"
 msgstr "Ajouter une Tâche au Projet"
 
-#: management.py:11
+#: management.py:13
 #, fuzzy
 msgid "a new task been created"
 msgstr "une nouvelle tribu a été créée"
 
-#: management.py:12
+#: management.py:14
 #, fuzzy
 msgid "Task Comment"
 msgstr "Commentaire"
 
-#: management.py:12
+#: management.py:14
 #, fuzzy
 msgid "a new comment has been made on a task"
 msgstr ""
 "une tâche d'un projet dont vous êtes membre a reçu un nouveau commentaire"
 
-#: management.py:13
+#: management.py:15
 #, fuzzy
 msgid "Task State Change"
 msgstr "dernier changement"
 
-#: management.py:13
+#: management.py:15
 #, fuzzy
 msgid "there has been a change in the state of a task"
 msgstr ""
 "il y a eu un changement d'état d'une tâche dans un projet dont vous êtes "
 "membre"
 
-#: management.py:14
+#: management.py:16
 #, fuzzy
 msgid "Task Assignment"
 msgstr "responsable"
 
-#: management.py:14
+#: management.py:16
 #, fuzzy
 msgid "a task has been (re)assigned"
 msgstr "une nouvelle tribu a été créée"
 
-#: management.py:15
+#: management.py:17
 msgid "Task Status Update"
 msgstr ""
 
-#: management.py:15
+#: management.py:17
 #, fuzzy
 msgid "there has been a status update to a task"
 msgstr ""
 "il y a eu un changement de status sur une tâche appartenant à un projet dont "
 "vous êtes membre"
 
-#: management.py:16
+#: management.py:18
 msgid "Task Tag Update"
 msgstr ""
 
-#: management.py:16
+#: management.py:18
 #, fuzzy
 msgid "there has been a change in the tagging of a task"
 msgstr ""
 "il y a eu un changement d'état d'une tâche dans un projet dont vous êtes "
 "membre"
 
-#: management.py:17
+#: management.py:19
 msgid "Task Nudge"
 msgstr ""
 
-#: management.py:17
+#: management.py:19
 msgid "there has been a nudge of a task"
 msgstr ""
 
-#: models.py:46 models.py:191
+#: models.py:47 models.py:216
 msgid "summary"
 msgstr "sommaire"
 
-#: models.py:47 models.py:192
+#: models.py:48 models.py:217
 msgid "detail"
 msgstr "détail"
 
-#: models.py:48 models.py:193
+#: models.py:49 models.py:218
 #, fuzzy
 msgid "Detail Markup"
 msgstr "Marquage:"
 
-#: models.py:50 models.py:195
+#: models.py:52 models.py:221
 msgid "creator"
 msgstr "créateur"
 
-#: models.py:51 models.py:196
+#: models.py:54 models.py:223
 msgid "created"
 msgstr "créé"
 
-#: models.py:52 models.py:197
+#: models.py:55 models.py:224
 msgid "modified"
 msgstr "modifié à"
 
-#: models.py:53 models.py:198
+#: models.py:58 models.py:227
 msgid "assignee"
 msgstr "responsable"
 
-#: models.py:58 models.py:202
+#: models.py:66 models.py:234
 msgid "status"
 msgstr "status"
 
-#: models.py:59 models.py:203
+#: models.py:70 models.py:235
 msgid "state"
 msgstr "état"
 
-#: models.py:60 models.py:204
+#: models.py:75 models.py:240
 msgid "resolution"
 msgstr ""
 
-#: models.py:183
+#: models.py:207
 #, fuzzy
 msgid "tasks"
 msgstr "étiquettes"
 
-#: models.py:207
+#: models.py:248
 msgid "comment"
 msgstr "commentaire"
 
-#: models.py:210
+#: models.py:253
 msgid "Owner"
 msgstr ""
 
-#: models.py:222
+#: models.py:268
 #, fuzzy
 msgid "nudger"
 msgstr "Expéditeur"
 
-#: models.py:223
+#: models.py:272
 #, fuzzy
 msgid "task"
 msgstr "étiquettes"
 
-#: models.py:224
+#: models.py:274
 #, fuzzy
 msgid "nudge date"
 msgstr "mettre à jour"
 
-#: views.py:132
+#: views.py:131
 #, python-format
 msgid ""
 "Link to the snippet: http://%(domain)s%(link)s\n"
 "\n"
 msgstr ""
 
-#: templates/notification/tasks_assignment/notice.html:4
+#: views.py:154
+#, fuzzy, python-format
+msgid "added task '%s'"
+msgstr "Ajouter une tâche"
+
+#: views.py:213
+msgid "You've removed your nudge from this task"
+msgstr ""
+
+#: views.py:225
+#, python-format
+msgid "%s has been nudged about this task"
+msgstr ""
+
+#: views.py:278
+#, fuzzy
+msgid "updated your status on the task"
+msgstr "Mettez ce que vous voulez sur ces onglets :-)"
+
+#: views.py:284
+#, python-format
+msgid "task marked %(state)s"
+msgstr ""
+
+#: views.py:292
+#, python-format
+msgid "assigned task to '%(assignee)s'"
+msgstr ""
+
+#: views.py:301
+msgid "updated tags on the task"
+msgstr ""
+
+#: templates/notification/tasks_assignment/full.txt:5
 #, fuzzy, python-format
 msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> has assigned task '<a href=\"%"
-"(task_url)s\">%(task)s</a>' in '<a href=\"%(group_url)s\">%(group)s</a>' to "
-"<a href=\"%(assignee_url)s\">%(assignee)s</a>."
+"%(user_display)s has assigned task '%(task)s' in '%(group)s' to %"
+"(assignee_display)s."
 msgstr ""
-"<a href=\"%(user_url)s\">%(user)s</a> a assigné la tâche '<a href=\"%"
-"(task_url)s\">%(task)s</a>' du projet <a href=\"%(project_url)s\">%(project)"
-"s</a> à <a href=\"%(assignee_url)s\">%(assignee)s</a>."
+"%(user)s a assigné la tâche '%(task)s' du projet %(project)s à %(assignee)s."
+
+#: templates/notification/tasks_assignment/full.txt:7
+#, fuzzy, python-format
+msgid "%(user_display)s has assigned task '%(task)s' to %(assignee_display)s."
+msgstr ""
+"%(user)s a assigné la tâche '%(task)s' du projet %(project)s à %(assignee)s."
+
+#: templates/notification/tasks_assignment/full.txt:14
+#: templates/notification/tasks_change/full.txt:17
+#: templates/notification/tasks_comment/full.txt:15
+#: templates/notification/tasks_new/full.txt:13
+#: templates/notification/tasks_nudge/full.txt:11
+#: templates/notification/tasks_status/full.txt:13
+#: templates/notification/tasks_tags/full.txt:13
+#, python-format
+msgid "Tags: %(task_tags)s"
+msgstr ""
 
 #: templates/notification/tasks_assignment/notice.html:6
 #, fuzzy, python-format
 msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> has assigned task '<a href=\"%"
-"(task_url)s\">%(task)s</a>' to <a href=\"%(assignee_url)s\">%(assignee)s</a>."
+"<a href=\"%(user_url)s\">%(user_display)s</a> has assigned task '<a href=\"%"
+"(task_url)s\">%(task)s</a>' in '<a href=\"%(group_url)s\">%(group)s</a>' to "
+"<a href=\"%(assignee_url)s\">%(assignee_display)s</a>."
 msgstr ""
 "<a href=\"%(user_url)s\">%(user)s</a> a assigné la tâche '<a href=\"%"
 "(task_url)s\">%(task)s</a>' du projet <a href=\"%(project_url)s\">%(project)"
 "s</a> à <a href=\"%(assignee_url)s\">%(assignee)s</a>."
 
-#: templates/notification/tasks_change/notice.html:4
+#: templates/notification/tasks_assignment/notice.html:8
 #, fuzzy, python-format
 msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> has marked task '<a href=\"%(task_url)s"
-"\">%(task)s</a>' in '<a href=\"%(group_url)s\">%(group)s</a>' as %(new_state)"
-"s."
+"<a href=\"%(user_url)s\">%(user_display)s</a> has assigned task '<a href=\"%"
+"(task_url)s\">%(task)s</a>' to <a href=\"%(assignee_url)s\">%"
+"(assignee_display)s</a>."
 msgstr ""
-"<a href=\"%(user_url)s\">%(user)s</a> a marqué la tâche '<a href=\"%"
+"<a href=\"%(user_url)s\">%(user)s</a> a assigné la tâche '<a href=\"%"
 "(task_url)s\">%(task)s</a>' du projet <a href=\"%(project_url)s\">%(project)"
-"s</a> %(new_state)s."
+"s</a> à <a href=\"%(assignee_url)s\">%(assignee)s</a>."
 
-#: templates/notification/tasks_change/notice.html:6
+#: templates/notification/tasks_change/full.txt:4
 #, fuzzy, python-format
 msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> has marked task '<a href=\"%(task_url)s"
-"\">%(task)s</a>' as %(new_state)s."
+"%(user_display)s has marked task '%(task)s' in '%(group)s' as %(new_state)s."
 msgstr ""
-"<a href=\"%(user_url)s\">%(user)s</a> a marqué la tâche '<a href=\"%"
-"(task_url)s\">%(task)s</a>' du projet <a href=\"%(project_url)s\">%(project)"
-"s</a> %(new_state)s."
+"%(user)s as marqué la tâche '%(task)s' du projet %(project)s %(new_state)s."
 
-#: templates/notification/tasks_change/notice.html:10
+#: templates/notification/tasks_change/full.txt:6
+#, fuzzy, python-format
+msgid "%(user_display)s has marked task '%(task)s' as %(new_state)s."
+msgstr ""
+"%(user)s as marqué la tâche '%(task)s' du projet %(project)s %(new_state)s."
+
+#: templates/notification/tasks_change/full.txt:10
+#: templates/notification/tasks_change/notice.html:11
 msgid "resolution:"
 msgstr ""
 
-#: templates/notification/tasks_comment/notice.html:4
+#: templates/notification/tasks_change/notice.html:5
 #, fuzzy, python-format
 msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> has commented on task '<a href=\"%"
-"(task_url)s\">%(task)s</a>' in '<a href=\"%(group_url)s\">%(group)s</a>'."
+"<a href=\"%(user_url)s\">%(user_display)s</a> has marked task '<a href=\"%"
+"(task_url)s\">%(task)s</a>' in '<a href=\"%(group_url)s\">%(group)s</a>' as %"
+"(new_state)s."
+msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> a marqué la tâche '<a href=\"%"
+"(task_url)s\">%(task)s</a>' du projet <a href=\"%(project_url)s\">%(project)"
+"s</a> %(new_state)s."
+
+#: templates/notification/tasks_change/notice.html:7
+#, fuzzy, python-format
+msgid ""
+"<a href=\"%(user_url)s\">%(user_display)s</a> has marked task '<a href=\"%"
+"(task_url)s\">%(task)s</a>' as %(new_state)s."
+msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> a marqué la tâche '<a href=\"%"
+"(task_url)s\">%(task)s</a>' du projet <a href=\"%(project_url)s\">%(project)"
+"s</a> %(new_state)s."
+
+#: templates/notification/tasks_comment/full.txt:4
+#, fuzzy, python-format
+msgid "%(user_display)s has commented on task '%(task)s' in '%(group)s':"
+msgstr "%(user)s a commenté la tâche '%(task)s' du projet %(project)s."
+
+#: templates/notification/tasks_comment/full.txt:6
+#, fuzzy, python-format
+msgid "%(user_display)s has commented on task '%(task)s':"
+msgstr "%(user)s a commenté la tâche '%(task)s' du projet %(project)s."
+
+#: templates/notification/tasks_comment/notice.html:5
+#, fuzzy, python-format
+msgid ""
+"<a href=\"%(user_url)s\">%(user_display)s</a> has commented on task '<a href="
+"\"%(task_url)s\">%(task)s</a>' in '<a href=\"%(group_url)s\">%(group)s</a>'."
 msgstr ""
 "<a href=\"%(user_url)s\">%(user)s</a> a mis à jour le status de la tâche '<a "
 "href=\"%(task_url)s\">%(task)s</a>' du projet <a href=\"%(project_url)s\">%"
 "(project)s</a>."
 
-#: templates/notification/tasks_comment/notice.html:6
+#: templates/notification/tasks_comment/notice.html:7
 #, fuzzy, python-format
 msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> has commented on task '<a href=\"%"
-"(task_url)s\">%(task)s</a>'."
+"<a href=\"%(user_url)s\">%(user_display)s</a> has commented on task '<a href="
+"\"%(task_url)s\">%(task)s</a>'."
 msgstr ""
 "<a href=\"%(user_url)s\">%(user)s</a> a laissé un commentaire sur l'article "
 "'<a href=\"%(post_url)s\">%(post)s</a>' de votre blog."
 
-#: templates/notification/tasks_new/notice.html:3
+#: templates/notification/tasks_new/full.txt:4
 #, fuzzy, python-format
-msgid ""
-"<a href=\"%(creator_url)s\">%(creator)s</a> has added a task '<a href=\"%"
-"(task_url)s\">%(task)s</a>' in '<a href=\"%(group_url)s\">%(group)s</a>'."
-msgstr ""
-"<a href=\"%(creator_url)s\">%(creator)s</a> a ajouté une tâche '<a href=\"%"
-"(task_url)s\">%(task)s</a>' dans le projet '<a href=\"%(project_url)s\">%"
-"(project)s</a>'."
+msgid "%(creator_display)s has added a task '%(task)s' in '%(group)s'."
+msgstr "%(creator)s a ajouté une tâche '%(task)s' dans le projet %(project)s."
+
+#: templates/notification/tasks_new/full.txt:6
+#, fuzzy, python-format
+msgid "%(creator_display)s has added a task '%(task)s'."
+msgstr "%(creator)s a ajouté une tâche '%(task)s' dans le projet %(project)s."
 
 #: templates/notification/tasks_new/notice.html:5
 #, fuzzy, python-format
 msgid ""
-"<a href=\"%(creator_url)s\">%(creator)s</a> has added a task '<a href=\"%"
-"(task_url)s\">%(task)s</a>'."
+"<a href=\"%(creator_url)s\">%(creator_display)s</a> has added a task '<a "
+"href=\"%(task_url)s\">%(task)s</a>' in '<a href=\"%(group_url)s\">%(group)s</"
+"a>'."
 msgstr ""
 "<a href=\"%(creator_url)s\">%(creator)s</a> a ajouté une tâche '<a href=\"%"
 "(task_url)s\">%(task)s</a>' dans le projet '<a href=\"%(project_url)s\">%"
 "(project)s</a>'."
 
-#: templates/notification/tasks_nudge/notice.html:3
+#: templates/notification/tasks_new/notice.html:7
 #, fuzzy, python-format
 msgid ""
-"<a href=\"%(user_url)s\">%(nudger)s</a> has nudged you on task '<a href=\"%"
-"(task_url)s\">%(task)s</a>'."
+"<a href=\"%(creator_url)s\">%(creator_display)s</a> has added a task '<a "
+"href=\"%(task_url)s\">%(task)s</a>'."
+msgstr ""
+"<a href=\"%(creator_url)s\">%(creator)s</a> a ajouté une tâche '<a href=\"%"
+"(task_url)s\">%(task)s</a>' dans le projet '<a href=\"%(project_url)s\">%"
+"(project)s</a>'."
+
+#: templates/notification/tasks_nudge/full.txt:3
+#, python-format
+msgid ""
+"\n"
+"%(nudger_display)s has nudged you about task '%(task)s'. Please go to the "
+"task and provide either a status update or comment.\n"
+msgstr ""
+
+#: templates/notification/tasks_nudge/notice.html:4
+#, fuzzy, python-format
+msgid ""
+"<a href=\"%(user_url)s\">%(nudger_display)s</a> has nudged you on task '<a "
+"href=\"%(task_url)s\">%(task)s</a>'."
 msgstr ""
 "<a href=\"%(user_url)s\">%(user)s</a> a laissé un commentaire sur l'article "
 "'<a href=\"%(post_url)s\">%(post)s</a>' de votre blog."
 
-#: templates/notification/tasks_status/notice.html:4
+#: templates/notification/tasks_status/full.txt:4
 #, fuzzy, python-format
 msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> has updated the status of task '<a "
-"href=\"%(task_url)s\">%(task)s</a>' in '<a href=\"%(group_url)s\">%(group)s</"
-"a>' to '%(task_status)s'."
+"%(user_display)s has updated the status of task '%(task)s' in '%(group)s' to "
+"'%(task_status)s'."
+msgstr ""
+"%(user)s a mis à jour le status de la tâche '%(task)s' du projet %(project)s."
+
+#: templates/notification/tasks_status/full.txt:6
+#, fuzzy, python-format
+msgid ""
+"%(user_display)s has updated the status of task '%(task)s' to '%(task_status)"
+"s'."
+msgstr ""
+"%(user)s a mis à jour le status de la tâche '%(task)s' du projet %(project)s."
+
+#: templates/notification/tasks_status/notice.html:5
+#, fuzzy, python-format
+msgid ""
+"<a href=\"%(user_url)s\">%(user_display)s</a> has updated the status of task "
+"'<a href=\"%(task_url)s\">%(task)s</a>' in '<a href=\"%(group_url)s\">%"
+"(group)s</a>' to '%(task_status)s'."
 msgstr ""
 "<a href=\"%(user_url)s\">%(user)s</a> a mis à jour le status de la tâche '<a "
 "href=\"%(task_url)s\">%(task)s</a>' du projet <a href=\"%(project_url)s\">%"
 "(project)s</a>."
 
-#: templates/notification/tasks_status/notice.html:6
+#: templates/notification/tasks_status/notice.html:7
 #, fuzzy, python-format
 msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> has updated the status of task '<a "
-"href=\"%(task_url)s\">%(task)s</a>' to '%(task_status)s'."
+"<a href=\"%(user_url)s\">%(user_display)s</a> has updated the status of task "
+"'<a href=\"%(task_url)s\">%(task)s</a>' to '%(task_status)s'."
 msgstr ""
 "<a href=\"%(user_url)s\">%(user)s</a> a mis à jour le status de la tâche '<a "
 "href=\"%(task_url)s\">%(task)s</a>' du projet <a href=\"%(project_url)s\">%"
 "(project)s</a>."
 
-#: templates/notification/tasks_tags/notice.html:4
+#: templates/notification/tasks_tags/full.txt:4
 #, fuzzy, python-format
 msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> has updated the tags of task '<a href="
-"\"%(task_url)s\">%(task)s</a>' in '<a href=\"%(group_url)s\">%(group)s</a>' "
-"to '%(task_tags)s'."
+"%(user_display)s has updated the tags of task '%(task)s' in '%(group)s' to '%"
+"(task_tags)s'."
+msgstr ""
+"%(user)s a mis à jour le status de la tâche '%(task)s' du projet %(project)s."
+
+#: templates/notification/tasks_tags/full.txt:6
+#, fuzzy, python-format
+msgid ""
+"%(user_display)s has updated the tags of task '%(task)s' to '%(task_tags)s'."
+msgstr ""
+"%(user)s a mis à jour le status de la tâche '%(task)s' du projet %(project)s."
+
+#: templates/notification/tasks_tags/notice.html:5
+#, fuzzy, python-format
+msgid ""
+"<a href=\"%(user_url)s\">%(user_display)s</a> has updated the tags of task "
+"'<a href=\"%(task_url)s\">%(task)s</a>' in '<a href=\"%(group_url)s\">%"
+"(group)s</a>' to '%(task_tags)s'."
 msgstr ""
 "<a href=\"%(user_url)s\">%(user)s</a> a mis à jour le status de la tâche '<a "
 "href=\"%(task_url)s\">%(task)s</a>' du projet <a href=\"%(project_url)s\">%"
 "(project)s</a>."
 
-#: templates/notification/tasks_tags/notice.html:6
+#: templates/notification/tasks_tags/notice.html:7
 #, fuzzy, python-format
 msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> has updated the tags of task '<a href="
-"\"%(task_url)s\">%(task)s</a>' to '%(task_tags)s'."
+"<a href=\"%(user_url)s\">%(user_display)s</a> has updated the tags of task "
+"'<a href=\"%(task_url)s\">%(task)s</a>' to '%(task_tags)s'."
 msgstr ""
 "<a href=\"%(user_url)s\">%(user)s</a> a mis à jour le status de la tâche '<a "
 "href=\"%(task_url)s\">%(task)s</a>' du projet <a href=\"%(project_url)s\">%"
@@ -1559,10 +1692,6 @@ msgstr ""
 #~ "<a href=\"%(new_member_url)s\">%(new_member)s</a> a été ajouté au projet "
 #~ "'<a href=\"%(project_url)s\">%(project)s</a>'."
 
-#~ msgid "%(creator)s has added a task '%(task)s' in project %(project)s."
-#~ msgstr ""
-#~ "%(creator)s a ajouté une tâche '%(task)s' dans le projet %(project)s."
-
 #~ msgid "%(creator)s has started a topic '%(topic)s' in project %(project)s."
 #~ msgstr ""
 #~ "%(creator)s a lancé un sujet '%(topic)s' dans le projet %(project)s."
@@ -1575,29 +1704,6 @@ msgstr ""
 #~ "<a href=\"%(creator_url)s\">%(creator)s</a> a démarré le sujet '<a href="
 #~ "\"%(topic_url)s\">%(topic)s</a>' dans le projet <a href=\"%(project_url)s"
 #~ "\">%(project)s</a>."
-
-#~ msgid ""
-#~ "%(user)s has assigned task '%(task)s' in project %(project)s to %"
-#~ "(assignee)s."
-#~ msgstr ""
-#~ "%(user)s a assigné la tâche '%(task)s' du projet %(project)s à %(assignee)"
-#~ "s."
-
-#~ msgid ""
-#~ "%(user)s has marked task '%(task)s' in project %(project)s as %(new_state)"
-#~ "s."
-#~ msgstr ""
-#~ "%(user)s as marqué la tâche '%(task)s' du projet %(project)s %(new_state)"
-#~ "s."
-
-#~ msgid "%(user)s has commented on task '%(task)s' in project %(project)s."
-#~ msgstr "%(user)s a commenté la tâche '%(task)s' du projet %(project)s."
-
-#~ msgid ""
-#~ "%(user)s has updated the status of task '%(task)s' in project %(project)s."
-#~ msgstr ""
-#~ "%(user)s a mis à jour le status de la tâche '%(task)s' du projet %"
-#~ "(project)s."
 
 #~ msgid "%(user)s has responded to your topic '%(topic)s'."
 #~ msgstr "%(user)s a répondu a votre sujet '%(topic)s'."
@@ -2843,9 +2949,6 @@ msgstr ""
 #~ msgid "Tasks for Project"
 #~ msgstr "Tâches du Projet"
 
-#~ msgid "add task"
-#~ msgstr "Ajouter une tâche"
-
 #~ msgid "Back to Topic List for Project "
 #~ msgstr "Retour à la Liste de Sujets pour le Projet"
 
@@ -3508,9 +3611,6 @@ msgstr ""
 
 #~ msgid "Swedish"
 #~ msgstr "Suedois"
-
-#~ msgid "Put whatever you want on these tabs :-)"
-#~ msgstr "Mettez ce que vous voulez sur ces onglets :-)"
 
 #~ msgid "External Projects Used"
 #~ msgstr "Projets Externe Utilisés"

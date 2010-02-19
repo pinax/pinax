@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-hotclub-0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 03:13+0200\n"
+"POT-Creation-Date: 2010-02-20 00:10+0100\n"
 "PO-Revision-Date: 2008-06-25 12:38+0100\n"
 "Last-Translator: Jannis Leidel <jannis@leidel.info>\n"
 "Language-Team:  <jannis@leidel.info>\n"
@@ -17,139 +17,169 @@ msgstr ""
 "X-Poedit-Language: German\n"
 "X-Poedit-Country: GERMANY\n"
 
-#: forms.py:10
+#: forms.py:14
 #, fuzzy
 msgid ""
 "a short version of the title consisting only of letters, numbers, "
 "underscores and hyphens."
 msgstr "Ein Kürzel kann nur Buchstaben, Ziffern und Unterstriche enthalten."
 
-#: forms.py:11
-#, fuzzy
-msgid "This value must contain only letters, numbers, underscores and hyphens."
-msgstr ""
-"Dieser Wert darf nur Buchstaben, Ziffern, Unterstriche und Punkt ('.') "
-"enthalten."
-
-#: management.py:9
+#: management.py:11
 msgid "Friend Posted to Blog"
 msgstr ""
 
-#: management.py:9
+#: management.py:11
 #, fuzzy
 msgid "a friend of yours posted to their blog"
 msgstr "Ein Freund von dir trat einem Tribe bei."
 
-#: management.py:10
+#: management.py:12
 #, fuzzy
 msgid "New Comment on Blog Post"
 msgstr "Aktuelle Weblog-Artikel"
 
-#: management.py:10
+#: management.py:12
 msgid "a comment was made on one of your blog posts"
 msgstr ""
 
-#: models.py:20
+#: models.py:30
 #, fuzzy
 msgid "Draft"
 msgstr "Datum"
 
-#: models.py:21
+#: models.py:31
 #, fuzzy
 msgid "Public"
 msgstr "Ist öffentlich"
 
-#: models.py:23
+#: models.py:34
 msgid "title"
 msgstr "Titel"
 
-#: models.py:24
+#: models.py:35
 msgid "slug"
 msgstr "Kürzel"
 
-#: models.py:26
+#: models.py:37
 #, fuzzy
 msgid "IP Address of the Post Creator"
 msgstr "IP-Adresse des Artikelauthors"
 
-#: models.py:27
+#: models.py:41
 msgid "body"
 msgstr "Inhalt"
 
-#: models.py:28
+#: models.py:42
 #, fuzzy
 msgid "tease"
 msgstr "Template"
 
-#: models.py:29
+#: models.py:43
 #, fuzzy
 msgid "status"
 msgstr "gesendet"
 
-#: models.py:30
+#: models.py:44
 #, fuzzy
 msgid "allow comments"
 msgstr "Kommentar"
 
-#: models.py:31
+#: models.py:45
 #, fuzzy
 msgid "publish"
 msgstr "Ist öffentlich"
 
-#: models.py:32
+#: models.py:46
 #, fuzzy
 msgid "created at"
 msgstr "gelesen"
 
-#: models.py:33
+#: models.py:47
 #, fuzzy
 msgid "updated at"
 msgstr "aktualisieren"
 
-#: models.py:34
+#: models.py:48
 #, fuzzy
 msgid "Post Content Markup"
 msgstr "Artikelinhalt-Markup"
 
-#: models.py:40
+#: models.py:57
 msgid "post"
 msgstr "Abschicken"
 
-#: models.py:41
+#: models.py:58
 #, fuzzy
 msgid "posts"
 msgstr "Abschicken"
 
-#: views.py:64
+#: views.py:73
+msgid "You can't delete posts that aren't yours"
+msgstr ""
+
+#: views.py:80
 #, fuzzy, python-format
 msgid "Successfully deleted post '%s'"
 msgstr "Nachricht erfolgreich gelöscht."
 
-#: views.py:85
+#: views.py:104
 #, python-format
 msgid "Successfully saved post '%s'"
 msgstr ""
 
-#: views.py:114
+#: views.py:129
+msgid "You can't edit posts that aren't yours"
+msgstr ""
+
+#: views.py:138
 #, fuzzy, python-format
 msgid "Successfully updated post '%s'"
 msgstr "Zeitzone erfolgreich geändert."
 
+#: templates/notification/blog_friend_post/full.txt:1
+#, python-format
+msgid ""
+"%(author_display)s has posted %(post_title)s to their blog.\n"
+"\n"
+"http://%(current_site)s%(post_url)s"
+msgstr ""
+
 #: templates/notification/blog_friend_post/notice.html:2
 #, fuzzy, python-format
 msgid ""
-"<a href=\"%(author_url)s\">%(post_author)s</a> has posted <a href=\"%"
+"<a href=\"%(author_url)s\">%(author_display)s</a> has posted <a href=\"%"
 "(post_url)s\">%(post_title)s</a> to their blog."
 msgstr ""
 "<a href=\"%(signup_url)s\">Registriere</a> und <a href=\"%(login_url)s"
 "\">melde dich an</a>, um diesem Tribe beizutreten."
 
-#: templates/notification/blog_post_comment/notice.html:2
-#, python-format
+#: templates/notification/blog_post_comment/full.txt:1
+#, fuzzy, python-format
 msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> has commented on your blog post '<a "
-"href=\"%(post_url)s\">%(post)s</a>'."
+"%(user_display)s has commented on your blog post '%(post)s':\n"
+"\n"
+"%(post_comment)s\n"
+"\n"
+"http://%(current_site)s%(post_url)s"
 msgstr ""
+"<a href=\"%(signup_url)s\">Registriere</a> und <a href=\"%(login_url)s"
+"\">melde dich an</a>, um diesem Tribe beizutreten."
+
+#: templates/notification/blog_post_comment/notice.html:2
+#, fuzzy, python-format
+msgid ""
+"<a href=\"%(user_url)s\">%(user_display)s</a> has commented on your blog "
+"post '<a href=\"%(post_url)s\">%(post)s</a>'."
+msgstr ""
+"<a href=\"%(signup_url)s\">Registriere</a> und <a href=\"%(login_url)s"
+"\">melde dich an</a>, um diesem Tribe beizutreten."
+
+#, fuzzy
+#~ msgid ""
+#~ "This value must contain only letters, numbers, underscores and hyphens."
+#~ msgstr ""
+#~ "Dieser Wert darf nur Buchstaben, Ziffern, Unterstriche und Punkt ('.') "
+#~ "enthalten."
 
 #~ msgid "Username"
 #~ msgstr "Benutzername"

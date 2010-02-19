@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-hotclub-0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 03:17+0200\n"
+"POT-Creation-Date: 2010-02-20 00:11+0100\n"
 "PO-Revision-Date: 2008-09-22 00:41+0100\n"
 "Last-Translator: robert <robertrv@gmail.com>\n"
 "Language-Team:  <robertrv@gmail.com>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: /home/rrv/projects/eclipse-ws/pinax\n"
 
-#: forms.py:13
+#: forms.py:23
 #, fuzzy
 msgid ""
 "a short version of the name consisting only of letters, numbers, underscores "
@@ -28,99 +28,114 @@ msgstr ""
 "una versión corta del nombre compuesta solamente de letras, números y "
 "subrayados (_)"
 
-#: forms.py:14
-#, fuzzy
-msgid "This value must contain only letters, numbers, underscores and hyphens."
-msgstr "Este valor solo puede contener letras, números y subrayados (_)"
-
-#: forms.py:18
+#: forms.py:28
 #, fuzzy
 msgid "A project already exists with that slug."
 msgstr "Ya existe una tribu con ese slug"
 
-#: forms.py:23 forms.py:40
+#: forms.py:33 forms.py:51
 #, fuzzy
 msgid "A project already exists with that name."
 msgstr "Ya existe una tribu con ese nombre"
 
-#: forms.py:50
+#: forms.py:61
 msgid "User"
 msgstr "Usuario"
 
-#: forms.py:60
+#: forms.py:71
 msgid "There is no user with this username."
 msgstr "No existe ningún usuario con ese nombre de usuario"
 
-#: forms.py:63
+#: forms.py:74
 msgid "User is already a member of this project."
 msgstr ""
 
-#: management.py:9
+#: management.py:11
 #, fuzzy
 msgid "New Project Member"
 msgstr "Nuevo miembro de Tribu"
 
-#: management.py:9
+#: management.py:11
 #, fuzzy
 msgid "a project you are a member of has a new member"
 msgstr "una tribu de la que eres miembro tiene un nuevo miembro"
 
-#: management.py:10
+#: management.py:12
 #, fuzzy
 msgid "New Member Of Project You Created"
 msgstr "Nuevo mimebro de la tribu que tu creaste"
 
-#: management.py:10
+#: management.py:12
 #, fuzzy
 msgid "a project you created has a new member"
 msgstr "una tribu que creaste tiene un nuevo miembro"
 
-#: management.py:11
+#: management.py:13
 #, fuzzy
 msgid "New Project Created"
 msgstr "Nueva tribu creada"
 
-#: management.py:11
+#: management.py:13
 #, fuzzy
 msgid "a new project has been created"
 msgstr "una nueva tribu ha sido creada"
 
-#: models.py:12
+#: management.py:14
+#, fuzzy
+msgid "Added as a Project Member"
+msgstr "Nuevo miembro de Tribu"
+
+#: management.py:14
+#, fuzzy
+msgid "you have become member of a project"
+msgstr "has respondido al mensaje"
+
+#: models.py:17
 msgid "members"
 msgstr "miembros"
 
-#: models.py:15
+#: models.py:21
 #, fuzzy
 msgid "private"
 msgstr "invitar"
 
-#: models.py:34
+#: models.py:40
 #, fuzzy
 msgid "project"
 msgstr "id de objeto"
 
-#: models.py:35
+#: models.py:44
 msgid "user"
 msgstr "usuario"
 
-#: models.py:37
+#: models.py:46
 #, fuzzy
 msgid "away"
 msgstr "establecer como ausente"
 
-#: models.py:38
+#: models.py:47
 #, fuzzy
 msgid "away_message"
 msgstr "mensaje"
 
-#: models.py:39
+#: models.py:48
 msgid "away since"
 msgstr ""
 
-#: views.py:87
+#: views.py:94
 #, python-format
 msgid "Project %(project_name)s deleted."
 msgstr ""
+
+#: views.py:141
+#, python-format
+msgid "added %(user)s to project"
+msgstr ""
+
+#, fuzzy
+#~ msgid ""
+#~ "This value must contain only letters, numbers, underscores and hyphens."
+#~ msgstr "Este valor solo puede contener letras, números y subrayados (_)"
 
 #~ msgid "Not Found"
 #~ msgstr "No encontrado"
@@ -2184,10 +2199,6 @@ msgstr ""
 
 #~ msgid "You have accepted the friendship request from %(from_user)s"
 #~ msgstr "Aceptada petición de amistad de %(from_user)s"
-
-#, fuzzy
-#~ msgid "you have been added to a project"
-#~ msgstr "has respondido al mensaje"
 
 #, fuzzy
 #~ msgid "New Project Topic Started"

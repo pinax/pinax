@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-hotclub-0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 03:18+0200\n"
+"POT-Creation-Date: 2010-02-20 00:12+0100\n"
 "PO-Revision-Date: 2008-07-15 10:29+0100\n"
 "Last-Translator: Jannis Leidel <jannis@leidel.info>\n"
 "Language-Team:  <beshrkayali@gmail.com>\n"
@@ -17,246 +17,370 @@ msgstr ""
 "X-Poedit-Language: Arabic\n"
 "X-Poedit-Country: SYRIAN ARAB REPUBLIC\n"
 
-#: forms.py:96
+#: forms.py:120
 msgid "You must provide a resolution to mark this task as resolved"
 msgstr ""
 
-#: management.py:11
+#: management.py:13
 #, fuzzy
 msgid "New Task"
 msgstr "كلمة المرور الجديدة"
 
-#: management.py:11
+#: management.py:13
 #, fuzzy
 msgid "a new task been created"
 msgstr "تم إنشاء قبيلة جديدة"
 
-#: management.py:12
+#: management.py:14
 #, fuzzy
 msgid "Task Comment"
 msgstr "تعليق"
 
-#: management.py:12
+#: management.py:14
 #, fuzzy
 msgid "a new comment has been made on a task"
 msgstr "تم إنشاء قبيلة جديدة"
 
-#: management.py:13
+#: management.py:15
 #, fuzzy
 msgid "Task State Change"
 msgstr "آخر تعديل"
 
-#: management.py:13
+#: management.py:15
 msgid "there has been a change in the state of a task"
 msgstr ""
 
-#: management.py:14
+#: management.py:16
 msgid "Task Assignment"
 msgstr ""
 
-#: management.py:14
+#: management.py:16
 #, fuzzy
 msgid "a task has been (re)assigned"
 msgstr "تم إنشاء قبيلة جديدة"
 
-#: management.py:15
+#: management.py:17
 msgid "Task Status Update"
 msgstr ""
 
-#: management.py:15
+#: management.py:17
 msgid "there has been a status update to a task"
 msgstr ""
 
-#: management.py:16
+#: management.py:18
 msgid "Task Tag Update"
 msgstr ""
 
-#: management.py:16
+#: management.py:18
 msgid "there has been a change in the tagging of a task"
 msgstr ""
 
-#: management.py:17
+#: management.py:19
 msgid "Task Nudge"
 msgstr ""
 
-#: management.py:17
+#: management.py:19
 msgid "there has been a nudge of a task"
 msgstr ""
 
-#: models.py:46 models.py:191
+#: models.py:47 models.py:216
 msgid "summary"
 msgstr ""
 
-#: models.py:47 models.py:192
+#: models.py:48 models.py:217
 #, fuzzy
 msgid "detail"
 msgstr "تعديل المعلومات"
 
-#: models.py:48 models.py:193
+#: models.py:49 models.py:218
 #, fuzzy
 msgid "Detail Markup"
 msgstr "Markup:"
 
-#: models.py:50 models.py:195
+#: models.py:52 models.py:221
 msgid "creator"
 msgstr "المنشئ"
 
-#: models.py:51 models.py:196
+#: models.py:54 models.py:223
 msgid "created"
 msgstr "منشأ"
 
-#: models.py:52 models.py:197
+#: models.py:55 models.py:224
 msgid "modified"
 msgstr "معدل"
 
-#: models.py:53 models.py:198
+#: models.py:58 models.py:227
 msgid "assignee"
 msgstr ""
 
-#: models.py:58 models.py:202
+#: models.py:66 models.py:234
 #, fuzzy
 msgid "status"
 msgstr "تم الإرسال في"
 
-#: models.py:59 models.py:203
+#: models.py:70 models.py:235
 #, fuzzy
 msgid "state"
 msgstr "تم الإرسال في"
 
-#: models.py:60 models.py:204
+#: models.py:75 models.py:240
 msgid "resolution"
 msgstr ""
 
-#: models.py:183
+#: models.py:207
 msgid "tasks"
 msgstr ""
 
-#: models.py:207
+#: models.py:248
 msgid "comment"
 msgstr "تعليق"
 
-#: models.py:210
+#: models.py:253
 msgid "Owner"
 msgstr ""
 
-#: models.py:222
+#: models.py:268
 #, fuzzy
 msgid "nudger"
 msgstr "المرسل"
 
-#: models.py:223
+#: models.py:272
 msgid "task"
 msgstr ""
 
-#: models.py:224
+#: models.py:274
 #, fuzzy
 msgid "nudge date"
 msgstr "تحديث"
 
-#: views.py:132
+#: views.py:131
 #, python-format
 msgid ""
 "Link to the snippet: http://%(domain)s%(link)s\n"
 "\n"
 msgstr ""
 
-#: templates/notification/tasks_assignment/notice.html:4
+#: views.py:154
+#, python-format
+msgid "added task '%s'"
+msgstr ""
+
+#: views.py:213
+msgid "You've removed your nudge from this task"
+msgstr ""
+
+#: views.py:225
+#, python-format
+msgid "%s has been nudged about this task"
+msgstr ""
+
+#: views.py:278
+msgid "updated your status on the task"
+msgstr ""
+
+#: views.py:284
+#, python-format
+msgid "task marked %(state)s"
+msgstr ""
+
+#: views.py:292
+#, python-format
+msgid "assigned task to '%(assignee)s'"
+msgstr ""
+
+#: views.py:301
+msgid "updated tags on the task"
+msgstr ""
+
+#: templates/notification/tasks_assignment/full.txt:5
 #, python-format
 msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> has assigned task '<a href=\"%"
-"(task_url)s\">%(task)s</a>' in '<a href=\"%(group_url)s\">%(group)s</a>' to "
-"<a href=\"%(assignee_url)s\">%(assignee)s</a>."
+"%(user_display)s has assigned task '%(task)s' in '%(group)s' to %"
+"(assignee_display)s."
+msgstr ""
+
+#: templates/notification/tasks_assignment/full.txt:7
+#, python-format
+msgid "%(user_display)s has assigned task '%(task)s' to %(assignee_display)s."
+msgstr ""
+
+#: templates/notification/tasks_assignment/full.txt:14
+#: templates/notification/tasks_change/full.txt:17
+#: templates/notification/tasks_comment/full.txt:15
+#: templates/notification/tasks_new/full.txt:13
+#: templates/notification/tasks_nudge/full.txt:11
+#: templates/notification/tasks_status/full.txt:13
+#: templates/notification/tasks_tags/full.txt:13
+#, python-format
+msgid "Tags: %(task_tags)s"
 msgstr ""
 
 #: templates/notification/tasks_assignment/notice.html:6
 #, python-format
 msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> has assigned task '<a href=\"%"
-"(task_url)s\">%(task)s</a>' to <a href=\"%(assignee_url)s\">%(assignee)s</a>."
+"<a href=\"%(user_url)s\">%(user_display)s</a> has assigned task '<a href=\"%"
+"(task_url)s\">%(task)s</a>' in '<a href=\"%(group_url)s\">%(group)s</a>' to "
+"<a href=\"%(assignee_url)s\">%(assignee_display)s</a>."
 msgstr ""
 
-#: templates/notification/tasks_change/notice.html:4
+#: templates/notification/tasks_assignment/notice.html:8
 #, python-format
 msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> has marked task '<a href=\"%(task_url)s"
-"\">%(task)s</a>' in '<a href=\"%(group_url)s\">%(group)s</a>' as %(new_state)"
-"s."
+"<a href=\"%(user_url)s\">%(user_display)s</a> has assigned task '<a href=\"%"
+"(task_url)s\">%(task)s</a>' to <a href=\"%(assignee_url)s\">%"
+"(assignee_display)s</a>."
 msgstr ""
 
-#: templates/notification/tasks_change/notice.html:6
+#: templates/notification/tasks_change/full.txt:4
 #, python-format
 msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> has marked task '<a href=\"%(task_url)s"
-"\">%(task)s</a>' as %(new_state)s."
+"%(user_display)s has marked task '%(task)s' in '%(group)s' as %(new_state)s."
 msgstr ""
 
-#: templates/notification/tasks_change/notice.html:10
+#: templates/notification/tasks_change/full.txt:6
+#, python-format
+msgid "%(user_display)s has marked task '%(task)s' as %(new_state)s."
+msgstr ""
+
+#: templates/notification/tasks_change/full.txt:10
+#: templates/notification/tasks_change/notice.html:11
 msgid "resolution:"
 msgstr ""
 
-#: templates/notification/tasks_comment/notice.html:4
+#: templates/notification/tasks_change/notice.html:5
 #, python-format
 msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> has commented on task '<a href=\"%"
-"(task_url)s\">%(task)s</a>' in '<a href=\"%(group_url)s\">%(group)s</a>'."
+"<a href=\"%(user_url)s\">%(user_display)s</a> has marked task '<a href=\"%"
+"(task_url)s\">%(task)s</a>' in '<a href=\"%(group_url)s\">%(group)s</a>' as %"
+"(new_state)s."
 msgstr ""
 
-#: templates/notification/tasks_comment/notice.html:6
+#: templates/notification/tasks_change/notice.html:7
 #, python-format
 msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> has commented on task '<a href=\"%"
-"(task_url)s\">%(task)s</a>'."
+"<a href=\"%(user_url)s\">%(user_display)s</a> has marked task '<a href=\"%"
+"(task_url)s\">%(task)s</a>' as %(new_state)s."
 msgstr ""
 
-#: templates/notification/tasks_new/notice.html:3
+#: templates/notification/tasks_comment/full.txt:4
+#, python-format
+msgid "%(user_display)s has commented on task '%(task)s' in '%(group)s':"
+msgstr ""
+
+#: templates/notification/tasks_comment/full.txt:6
+#, python-format
+msgid "%(user_display)s has commented on task '%(task)s':"
+msgstr ""
+
+#: templates/notification/tasks_comment/notice.html:5
 #, python-format
 msgid ""
-"<a href=\"%(creator_url)s\">%(creator)s</a> has added a task '<a href=\"%"
-"(task_url)s\">%(task)s</a>' in '<a href=\"%(group_url)s\">%(group)s</a>'."
+"<a href=\"%(user_url)s\">%(user_display)s</a> has commented on task '<a href="
+"\"%(task_url)s\">%(task)s</a>' in '<a href=\"%(group_url)s\">%(group)s</a>'."
+msgstr ""
+
+#: templates/notification/tasks_comment/notice.html:7
+#, python-format
+msgid ""
+"<a href=\"%(user_url)s\">%(user_display)s</a> has commented on task '<a href="
+"\"%(task_url)s\">%(task)s</a>'."
+msgstr ""
+
+#: templates/notification/tasks_new/full.txt:4
+#, python-format
+msgid "%(creator_display)s has added a task '%(task)s' in '%(group)s'."
+msgstr ""
+
+#: templates/notification/tasks_new/full.txt:6
+#, python-format
+msgid "%(creator_display)s has added a task '%(task)s'."
 msgstr ""
 
 #: templates/notification/tasks_new/notice.html:5
 #, python-format
 msgid ""
-"<a href=\"%(creator_url)s\">%(creator)s</a> has added a task '<a href=\"%"
-"(task_url)s\">%(task)s</a>'."
-msgstr ""
-
-#: templates/notification/tasks_nudge/notice.html:3
-#, python-format
-msgid ""
-"<a href=\"%(user_url)s\">%(nudger)s</a> has nudged you on task '<a href=\"%"
-"(task_url)s\">%(task)s</a>'."
-msgstr ""
-
-#: templates/notification/tasks_status/notice.html:4
-#, python-format
-msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> has updated the status of task '<a "
+"<a href=\"%(creator_url)s\">%(creator_display)s</a> has added a task '<a "
 "href=\"%(task_url)s\">%(task)s</a>' in '<a href=\"%(group_url)s\">%(group)s</"
-"a>' to '%(task_status)s'."
+"a>'."
 msgstr ""
 
-#: templates/notification/tasks_status/notice.html:6
+#: templates/notification/tasks_new/notice.html:7
 #, python-format
 msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> has updated the status of task '<a "
-"href=\"%(task_url)s\">%(task)s</a>' to '%(task_status)s'."
+"<a href=\"%(creator_url)s\">%(creator_display)s</a> has added a task '<a "
+"href=\"%(task_url)s\">%(task)s</a>'."
 msgstr ""
 
-#: templates/notification/tasks_tags/notice.html:4
+#: templates/notification/tasks_nudge/full.txt:3
 #, python-format
 msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> has updated the tags of task '<a href="
-"\"%(task_url)s\">%(task)s</a>' in '<a href=\"%(group_url)s\">%(group)s</a>' "
-"to '%(task_tags)s'."
+"\n"
+"%(nudger_display)s has nudged you about task '%(task)s'. Please go to the "
+"task and provide either a status update or comment.\n"
 msgstr ""
 
-#: templates/notification/tasks_tags/notice.html:6
+#: templates/notification/tasks_nudge/notice.html:4
 #, python-format
 msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> has updated the tags of task '<a href="
-"\"%(task_url)s\">%(task)s</a>' to '%(task_tags)s'."
+"<a href=\"%(user_url)s\">%(nudger_display)s</a> has nudged you on task '<a "
+"href=\"%(task_url)s\">%(task)s</a>'."
+msgstr ""
+
+#: templates/notification/tasks_status/full.txt:4
+#, python-format
+msgid ""
+"%(user_display)s has updated the status of task '%(task)s' in '%(group)s' to "
+"'%(task_status)s'."
+msgstr ""
+
+#: templates/notification/tasks_status/full.txt:6
+#, python-format
+msgid ""
+"%(user_display)s has updated the status of task '%(task)s' to '%(task_status)"
+"s'."
+msgstr ""
+
+#: templates/notification/tasks_status/notice.html:5
+#, python-format
+msgid ""
+"<a href=\"%(user_url)s\">%(user_display)s</a> has updated the status of task "
+"'<a href=\"%(task_url)s\">%(task)s</a>' in '<a href=\"%(group_url)s\">%"
+"(group)s</a>' to '%(task_status)s'."
+msgstr ""
+
+#: templates/notification/tasks_status/notice.html:7
+#, python-format
+msgid ""
+"<a href=\"%(user_url)s\">%(user_display)s</a> has updated the status of task "
+"'<a href=\"%(task_url)s\">%(task)s</a>' to '%(task_status)s'."
+msgstr ""
+
+#: templates/notification/tasks_tags/full.txt:4
+#, python-format
+msgid ""
+"%(user_display)s has updated the tags of task '%(task)s' in '%(group)s' to '%"
+"(task_tags)s'."
+msgstr ""
+
+#: templates/notification/tasks_tags/full.txt:6
+#, python-format
+msgid ""
+"%(user_display)s has updated the tags of task '%(task)s' to '%(task_tags)s'."
+msgstr ""
+
+#: templates/notification/tasks_tags/notice.html:5
+#, python-format
+msgid ""
+"<a href=\"%(user_url)s\">%(user_display)s</a> has updated the tags of task "
+"'<a href=\"%(task_url)s\">%(task)s</a>' in '<a href=\"%(group_url)s\">%"
+"(group)s</a>' to '%(task_tags)s'."
+msgstr ""
+
+#: templates/notification/tasks_tags/notice.html:7
+#, python-format
+msgid ""
+"<a href=\"%(user_url)s\">%(user_display)s</a> has updated the tags of task "
+"'<a href=\"%(task_url)s\">%(task)s</a>' to '%(task_tags)s'."
 msgstr ""
 
 #~ msgid "Username"

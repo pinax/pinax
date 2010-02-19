@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 03:17+0200\n"
+"POT-Creation-Date: 2010-02-20 00:11+0100\n"
 "PO-Revision-Date: 2008-07-04 22:28+0200\n"
 "Last-Translator: jens persson <jens@persson.cx>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -17,31 +17,31 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
-#: models.py:11
+#: models.py:15
 msgid "user"
 msgstr "användare"
 
-#: models.py:12
+#: models.py:16
 msgid "name"
 msgstr "namn"
 
-#: models.py:13
+#: models.py:17
 msgid "about"
 msgstr "om"
 
-#: models.py:14
+#: models.py:18
 msgid "location"
 msgstr "plats"
 
-#: models.py:15
+#: models.py:23
 msgid "website"
 msgstr "webbplats"
 
-#: models.py:25
+#: models.py:30
 msgid "profile"
 msgstr "konto"
 
-#: models.py:26
+#: models.py:31
 msgid "profiles"
 msgstr "konton"
 
@@ -50,33 +50,38 @@ msgstr "konton"
 msgid "You have removed %(from_user)s from friends"
 msgstr "du har svarat på %(message)s från %(recipient)s."
 
-#: views.py:83 views.py:95 views.py:120
+#: views.py:86 views.py:98 views.py:131
 msgid "Let's be friends!"
 msgstr "Låt oss bli vänner!"
 
-#: views.py:103
+#: views.py:107
 #, python-format
 msgid "You have accepted the friendship request from %(from_user)s"
 msgstr "Du har accepterat en vänskapsförfrågan från %(from_user)s"
 
-#: views.py:113
+#: views.py:121
 #, fuzzy, python-format
 msgid "You have declined the friendship request from %(from_user)s"
 msgstr "Du har accepterat en vänskapsförfrågan från %(from_user)s"
 
-#: templates/profile_item.html:10
+#: views.py:168
+#, fuzzy
+msgid "Your profile has been updated."
+msgstr "en ny stam har skapats"
+
+#: templates/profile_item.html:11
 msgid "Name"
 msgstr "Namn"
 
-#: templates/profile_item.html:11
+#: templates/profile_item.html:12
 msgid "About"
 msgstr "Om"
 
-#: templates/profile_item.html:12
+#: templates/profile_item.html:13
 msgid "Location"
 msgstr "Plats"
 
-#: templates/profile_item.html:13
+#: templates/profile_item.html:14
 msgid "Website"
 msgstr "Webbplats"
 
@@ -1930,9 +1935,6 @@ msgstr "Webbplats"
 
 #~ msgid "New Tribe Created"
 #~ msgstr "En ny stam skapades"
-
-#~ msgid "a new tribe has been created"
-#~ msgstr "en ny stam har skapats"
 
 #~ msgid "Friend Created Tribe"
 #~ msgstr "Vän skapad en stam"

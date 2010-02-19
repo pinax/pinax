@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-hotclub-0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 03:17+0200\n"
+"POT-Creation-Date: 2010-02-20 00:11+0100\n"
 "PO-Revision-Date: 2008-07-15 10:29+0100\n"
 "Last-Translator: Jannis Leidel <jannis@leidel.info>\n"
 "Language-Team:  <beshrkayali@gmail.com>\n"
@@ -17,31 +17,31 @@ msgstr ""
 "X-Poedit-Language: Arabic\n"
 "X-Poedit-Country: SYRIAN ARAB REPUBLIC\n"
 
-#: models.py:11
+#: models.py:15
 msgid "user"
 msgstr "المستخدم"
 
-#: models.py:12
+#: models.py:16
 msgid "name"
 msgstr "إسم"
 
-#: models.py:13
+#: models.py:17
 msgid "about"
 msgstr "حول"
 
-#: models.py:14
+#: models.py:18
 msgid "location"
 msgstr "المكان"
 
-#: models.py:15
+#: models.py:23
 msgid "website"
 msgstr "الموقع الإلكتروني"
 
-#: models.py:25
+#: models.py:30
 msgid "profile"
 msgstr "ملف شخصي"
 
-#: models.py:26
+#: models.py:31
 msgid "profiles"
 msgstr "ملفات شخصية"
 
@@ -50,33 +50,38 @@ msgstr "ملفات شخصية"
 msgid "You have removed %(from_user)s from friends"
 msgstr "قمت بالرد على الرسالة %(message)s من %(recipient)s."
 
-#: views.py:83 views.py:95 views.py:120
+#: views.py:86 views.py:98 views.py:131
 msgid "Let's be friends!"
 msgstr "دعنا نصبح أصدقاء!"
 
-#: views.py:103
+#: views.py:107
 #, python-format
 msgid "You have accepted the friendship request from %(from_user)s"
 msgstr "قمت بالموافقة على طلب دعوة صداقة من %(from_user)s"
 
-#: views.py:113
+#: views.py:121
 #, fuzzy, python-format
 msgid "You have declined the friendship request from %(from_user)s"
 msgstr "قمت بالموافقة على طلب دعوة صداقة من %(from_user)s"
 
-#: templates/profile_item.html:10
+#: views.py:168
+#, fuzzy
+msgid "Your profile has been updated."
+msgstr "تم إنشاء قبيلة جديدة"
+
+#: templates/profile_item.html:11
 msgid "Name"
 msgstr "الإسم"
 
-#: templates/profile_item.html:11
+#: templates/profile_item.html:12
 msgid "About"
 msgstr "حول"
 
-#: templates/profile_item.html:12
+#: templates/profile_item.html:13
 msgid "Location"
 msgstr "المكان"
 
-#: templates/profile_item.html:13
+#: templates/profile_item.html:14
 msgid "Website"
 msgstr "الموقع"
 
@@ -1681,9 +1686,6 @@ msgstr "الموقع"
 
 #~ msgid "New Tribe Created"
 #~ msgstr "قبيلة جديدة تم إنشاءها"
-
-#~ msgid "a new tribe has been created"
-#~ msgstr "تم إنشاء قبيلة جديدة"
 
 #~ msgid "Friend Created Tribe"
 #~ msgstr "أحد أصدقائك قام بإنشاء قبيلة"

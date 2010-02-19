@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-hotclub-0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 03:20+0200\n"
+"POT-Creation-Date: 2010-02-20 00:12+0100\n"
 "PO-Revision-Date: 2008-06-17 22:27+0200\n"
 "Last-Translator: Gil Klein <gklein@gmail.com>\n"
 "Language-Team: Gil Klein <gklein@gmail.com>\n"
@@ -17,81 +17,103 @@ msgstr ""
 "X-Poedit-Language: Hebrew\n"
 "X-Poedit-Country: ISRAEL\n"
 
-#: forms.py:11
+#: forms.py:14
 #, fuzzy
 msgid ""
 "a short version of the name consisting only of letters, numbers, underscores "
 "and hyphens."
 msgstr "גירסה מקוצרת של השם המכילה רק מספרים אותיות וקו תחתון"
 
-#: forms.py:12
-#, fuzzy
-msgid "This value must contain only letters, numbers, underscores and hyphens."
-msgstr "שדה זה חייב להכיל רק מספרים אותיות וקו תחתון"
-
-#: forms.py:16
+#: forms.py:19
 msgid "A tribe already exists with that slug."
 msgstr "קיים כבר שבט בשם קצר זה"
 
-#: forms.py:21 forms.py:38
+#: forms.py:24 forms.py:41
 msgid "A tribe already exists with that name."
 msgstr "קיים כבר שבט בשם זה"
 
-#: management.py:9
+#: management.py:11
 msgid "New Tribe Member"
 msgstr "חבר שבט חדש"
 
-#: management.py:9
+#: management.py:11
 msgid "a tribe you are a member of has a new member"
 msgstr "שבט שאת/ה חבר בו צרף חבר חדש"
 
-#: management.py:10
+#: management.py:12
 msgid "New Member Of Tribe You Created"
 msgstr "חבר חדש בשבט שיצרת"
 
-#: management.py:10
+#: management.py:12
 msgid "a tribe you created has a new member"
 msgstr "שבט שיצרת צירף חבר חדש"
 
-#: management.py:11
+#: management.py:13
 msgid "New Tribe Created"
 msgstr "שבט חדש נוצר"
 
-#: management.py:11
+#: management.py:13
 msgid "a new tribe has been created"
 msgstr "שבט חדש נוצר"
 
-#: models.py:10
+#: models.py:15
 msgid "members"
 msgstr "חברים"
 
-#: views.py:86
+#: views.py:94
 #, python-format
 msgid "Tribe %(tribe_name)s deleted."
 msgstr ""
 
-#: views.py:117
+#: views.py:128
 #, python-format
 msgid "You have joined the tribe %(tribe_name)s"
 msgstr ""
 
-#: views.py:124
+#: views.py:144
 #, fuzzy, python-format
 msgid "You have already joined tribe %(tribe_name)s"
 msgstr ".%(user)s את/ה מוחבר כבר כ "
+
+#: views.py:151
+#, fuzzy, python-format
+msgid "You have left the tribe %(tribe_name)s"
+msgstr ".%(user)s את/ה מוחבר כבר כ "
+
+#: templates/notification/tribes_created_new_member/full.txt:1
+#: templates/notification/tribes_new_member/full.txt:1
+#, python-format
+msgid ""
+"%(user_display)s has joined the tribe %(tribe)s.\n"
+"\n"
+"http://%(current_site)s%(tribe_url)s\n"
+msgstr ""
 
 #: templates/notification/tribes_created_new_member/notice.html:2
 #: templates/notification/tribes_new_member/notice.html:2
 #, python-format
 msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> has joined the tribe <a href=\"%"
-"(tribe_url)s\">%(tribe)s</a>."
+"<a href=\"%(user_url)s\">%(user_display)s</a> has joined the tribe <a href="
+"\"%(tribe_url)s\">%(tribe)s</a>."
+msgstr ""
+
+#: templates/notification/tribes_new_tribe/full.txt:1
+#, python-format
+msgid ""
+"A new tribe %(tribe)s has been created.\n"
+"\n"
+"http://%(current_site)s%(tribe_url)s\n"
 msgstr ""
 
 #: templates/notification/tribes_new_tribe/notice.html:2
 #, fuzzy, python-format
 msgid "A new group <a href=\"%(tribe_url)s\">%(tribe)s</a> has been created."
 msgstr "את/ה עדיין לא חבר באף <a href=\"%(tribe_url)s\">שבט</a>."
+
+#, fuzzy
+#~ msgid ""
+#~ "This value must contain only letters, numbers, underscores and hyphens."
+#~ msgstr "שדה זה חייב להכיל רק מספרים אותיות וקו תחתון"
 
 #~ msgid "Username"
 #~ msgstr "שם משתמש"

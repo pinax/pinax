@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 03:20+0200\n"
+"POT-Creation-Date: 2010-02-20 00:12+0100\n"
 "PO-Revision-Date: 2008-07-22 23:33+0100\n"
 "Last-Translator: Roland Frédéric <frederic.roland@creativeconvergence.be>\n"
 "Language-Team: Frédéric Roland <frederic.roland@creativeconvergence.be>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Poedit-Language: French\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: forms.py:11
+#: forms.py:14
 #, fuzzy
 msgid ""
 "a short version of the name consisting only of letters, numbers, underscores "
@@ -26,79 +26,103 @@ msgstr ""
 "une version abrégée du nom qui ne peut contenir que des lettres, des "
 "chiffres ou des caractères de soulignement."
 
-#: forms.py:12
-#, fuzzy
-msgid "This value must contain only letters, numbers, underscores and hyphens."
-msgstr ""
-"Cette valeur ne peut contenir que des lettres, des chiffres ou des "
-"caractères de soulignement et des points '.'."
-
-#: forms.py:16
+#: forms.py:19
 msgid "A tribe already exists with that slug."
 msgstr "Une tribu existe déjà sous ce nom abrégé."
 
-#: forms.py:21 forms.py:38
+#: forms.py:24 forms.py:41
 msgid "A tribe already exists with that name."
 msgstr "Une tribu existe déjà sous ce nom."
 
-#: management.py:9
+#: management.py:11
 msgid "New Tribe Member"
 msgstr "Nouveau Membres d'une Tribu"
 
-#: management.py:9
+#: management.py:11
 msgid "a tribe you are a member of has a new member"
 msgstr "une tribu dont vous êtes membre a un nouveau membre"
 
-#: management.py:10
+#: management.py:12
 msgid "New Member Of Tribe You Created"
 msgstr "Nouveau membre d'une tribu que vous avez créée"
 
-#: management.py:10
+#: management.py:12
 msgid "a tribe you created has a new member"
 msgstr "une tribu que vous avez créée vient d'enregistrer un nouveau membre"
 
-#: management.py:11
+#: management.py:13
 msgid "New Tribe Created"
 msgstr "Nouvelle Tribu Créée"
 
-#: management.py:11
+#: management.py:13
 msgid "a new tribe has been created"
 msgstr "une nouvelle tribu a été créée"
 
-#: models.py:10
+#: models.py:15
 msgid "members"
 msgstr "membres"
 
-#: views.py:86
+#: views.py:94
 #, fuzzy, python-format
 msgid "Tribe %(tribe_name)s deleted."
 msgstr "Sujets pour %(tribe_name)s"
 
-#: views.py:117
+#: views.py:128
 #, fuzzy, python-format
 msgid "You have joined the tribe %(tribe_name)s"
 msgstr "%(user)s a rejoint la tribu %(tribe)s."
 
-#: views.py:124
+#: views.py:144
 #, fuzzy, python-format
 msgid "You have already joined tribe %(tribe_name)s"
 msgstr "%(user)s a rejoint la tribu %(tribe)s."
 
-#: templates/notification/tribes_created_new_member/notice.html:2
-#: templates/notification/tribes_new_member/notice.html:2
-#, python-format
+#: views.py:151
+#, fuzzy, python-format
+msgid "You have left the tribe %(tribe_name)s"
+msgstr "%(user)s a rejoint la tribu %(tribe)s."
+
+#: templates/notification/tribes_created_new_member/full.txt:1
+#: templates/notification/tribes_new_member/full.txt:1
+#, fuzzy, python-format
 msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> has joined the tribe <a href=\"%"
-"(tribe_url)s\">%(tribe)s</a>."
+"%(user_display)s has joined the tribe %(tribe)s.\n"
+"\n"
+"http://%(current_site)s%(tribe_url)s\n"
 msgstr ""
 "<a href=\"%(user_url)s\">%(user)s</a> a rejoint la tribu <a href=\"%"
 "(tribe_url)s\">%(tribe)s</a>."
+
+#: templates/notification/tribes_created_new_member/notice.html:2
+#: templates/notification/tribes_new_member/notice.html:2
+#, fuzzy, python-format
+msgid ""
+"<a href=\"%(user_url)s\">%(user_display)s</a> has joined the tribe <a href="
+"\"%(tribe_url)s\">%(tribe)s</a>."
+msgstr ""
+"<a href=\"%(user_url)s\">%(user)s</a> a rejoint la tribu <a href=\"%"
+"(tribe_url)s\">%(tribe)s</a>."
+
+#: templates/notification/tribes_new_tribe/full.txt:1
+#, fuzzy, python-format
+msgid ""
+"A new tribe %(tribe)s has been created.\n"
+"\n"
+"http://%(current_site)s%(tribe_url)s\n"
+msgstr "Une nouvelle tribu %(tribe)s a été créée."
 
 #: templates/notification/tribes_new_tribe/notice.html:2
 #, fuzzy, python-format
 msgid "A new group <a href=\"%(tribe_url)s\">%(tribe)s</a> has been created."
 msgstr ""
 "Une nouvelle tribu <a href=\"%(tribe_url)s\">%(tribe)s</a> a été créée."
+
+#, fuzzy
+#~ msgid ""
+#~ "This value must contain only letters, numbers, underscores and hyphens."
+#~ msgstr ""
+#~ "Cette valeur ne peut contenir que des lettres, des chiffres ou des "
+#~ "caractères de soulignement et des points '.'."
 
 #~ msgid "Username"
 #~ msgstr "Nom d'utilisateur"
@@ -3103,9 +3127,6 @@ msgstr ""
 #~ "<a href=\"%(user_url)s\">%(topic_creator)s</a> a démarré un sujet '<a "
 #~ "href=\"%(topic_url)s\">%(topic)s</a>' dans la tribu <a href=\"%(tribe_url)"
 #~ "s\">%(topic_tribe)s</a>."
-
-#~ msgid "A new tribe %(tribe)s has been created."
-#~ msgstr "Une nouvelle tribu %(tribe)s a été créée."
 
 #~ msgid "Anonimous"
 #~ msgstr "Anonyme"

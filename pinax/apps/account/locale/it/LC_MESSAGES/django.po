@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 03:22+0200\n"
+"POT-Creation-Date: 2010-02-20 00:09+0100\n"
 "PO-Revision-Date: 2008-07-23 19:01+0200\n"
 "Last-Translator: Nicola Larosa <nico@tekNico.net>\n"
 "Language-Team: Italiano\n"
@@ -17,178 +17,195 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
-#: forms.py:29 forms.py:62 forms.py:367
-msgid "Username"
-msgstr "Nome utente"
-
-#: forms.py:30 forms.py:63 forms.py:249 forms.py:368
+#: forms.py:50 forms.py:127 forms.py:392 forms.py:516
 msgid "Password"
 msgstr ""
 
-#: forms.py:31
+#: forms.py:54
 msgid "Remember Me"
 msgstr "Ricordati di Me"
 
-#: forms.py:31
+#: forms.py:55
 msgid "If checked you will stay logged in for 3 weeks"
 msgstr "Se selezionato, l'accesso rimarrà valido per tre settimane"
 
-#: forms.py:43
+#: forms.py:66 forms.py:144 forms.py:282
+#, fuzzy
+msgid "E-mail"
+msgstr "Email"
+
+#: forms.py:71 forms.py:122 forms.py:264 forms.py:514
+msgid "Username"
+msgstr "Nome utente"
+
+#: forms.py:99
 msgid "This account is currently inactive."
 msgstr "Questo account al momento non è attivo."
 
-#: forms.py:45
+#: forms.py:102
+#, fuzzy
+msgid "The e-mail address and/or password you specified are not correct."
+msgstr "Il nome utente e/o la password indicati non sono corretti."
+
+#: forms.py:104
 msgid "The username and/or password you specified are not correct."
 msgstr "Il nome utente e/o la password indicati non sono corretti."
 
-#: forms.py:51 views.py:68
-#, python-format
-msgid "Successfully logged in as %(username)s."
-msgstr "Accesso effettuato come %(username)s."
-
-#: forms.py:64 forms.py:250
+#: forms.py:131 forms.py:396
 msgid "Password (again)"
 msgstr "Password (di nuovo)"
 
-#: forms.py:68 forms.py:144 forms.py:210 forms.py:266
-msgid "Email"
-msgstr "Email"
-
-#: forms.py:74 forms.py:150
-msgid "Email (optional)"
+#: forms.py:147 forms.py:285
+#, fuzzy
+msgid "E-mail (optional)"
 msgstr "Email (opzionale)"
 
-#: forms.py:83
+#: forms.py:152
 msgid "Usernames can only contain letters, numbers and underscores."
 msgstr "I nomi utente possono contenere solo lettere, numeri e sottolineature."
 
-#: forms.py:88
+#: forms.py:157
 msgid "This username is already taken. Please choose another."
 msgstr "Questo nome utente è già usato, scegline un altro."
 
-#: forms.py:93 forms.py:238 forms.py:255 forms.py:314
+#: forms.py:166 forms.py:304
+msgid "A user is registered with this e-mail address."
+msgstr ""
+
+#: forms.py:172 forms.py:381 forms.py:403 forms.py:471
 msgid "You must type the same password each time."
 msgstr "Bisogna inserire la stessa password ogni volta."
 
-#: forms.py:117
+#: forms.py:228
 msgid "Your email address has already been verified"
 msgstr "Il tuo indirizzo email è già stato verificato."
 
-#: forms.py:124 forms.py:129 forms.py:220 views.py:97
+#: forms.py:238 forms.py:248 views.py:164 views.py:179
 #, python-format
 msgid "Confirmation email sent to %(email)s"
 msgstr "Email di conferma inviata a %(email)s"
 
-#: forms.py:217
-msgid "This email address already associated with this account."
+#: forms.py:328 forms.py:414
+msgid "Email"
+msgstr "Email"
+
+#: forms.py:336
+#, fuzzy
+msgid "This e-mail address already associated with this account."
 msgstr "Questo indirizzo email è già associato a questo account."
 
-#: forms.py:226
+#: forms.py:337
+#, fuzzy
+msgid "This e-mail address already associated with another account."
+msgstr "Questo indirizzo email è già associato a questo account."
+
+#: forms.py:361
 msgid "Current Password"
 msgstr "Password Attuale"
 
-#: forms.py:227 forms.py:301
+#: forms.py:365 forms.py:455
 msgid "New Password"
 msgstr "Nuova Password"
 
-#: forms.py:228 forms.py:302
+#: forms.py:369 forms.py:459
 msgid "New Password (again)"
 msgstr "Nuova Password (di nuovo)"
 
-#: forms.py:232
+#: forms.py:375
 msgid "Please type your current password."
 msgstr "Per favore, inserisci la tua password attuale."
 
-#: forms.py:244 forms.py:326
-msgid "Password successfully changed."
-msgstr "La password è stata cambiata correttamente."
-
-#: forms.py:261
-#, fuzzy
-msgid "Password successfully set."
-msgstr "La password è stata cambiata correttamente."
-
-#: forms.py:270
+#: forms.py:421
 msgid "Email address not verified for any user account"
 msgstr "Indirizzo email non verificato per alcun account utente"
 
-#: forms.py:289
+#: forms.py:441
 #, fuzzy
 msgid "Password reset email sent"
 msgstr "Reimposta password"
 
-#: forms.py:308
-msgid "Temporary key is invalid."
-msgstr ""
-
-#: forms.py:336
+#: forms.py:485
 msgid "Timezone"
 msgstr "Fuso orario"
 
-#: forms.py:345
-msgid "Timezone successfully updated."
-msgstr "Fuso orario aggiornato correttamente."
-
-#: forms.py:350
+#: forms.py:499
 msgid "Language"
 msgstr "Lingua"
 
-#: forms.py:359
-msgid "Language successfully updated."
-msgstr "Lingua aggiornata correttamente."
-
-#: forms.py:381
-msgid "Successfully authenticated."
-msgstr "Autenticato correttamente."
-
-#: models.py:18 models.py:31 models.py:104
+#: models.py:20 models.py:37 models.py:116
 msgid "user"
 msgstr "utente"
 
-#: models.py:20
+#: models.py:22
 msgid "timezone"
 msgstr "fuso orario"
 
-#: models.py:21
+#: models.py:23
 msgid "language"
 msgstr "lingua"
 
-#: models.py:32
+#: models.py:38
 #, fuzzy
 msgid "Other Service Info Key"
 msgstr "Altri Servizi"
 
-#: models.py:33
+#: models.py:39
 #, fuzzy
 msgid "Other Service Info Value"
 msgstr "Altri Servizi"
 
-#: models.py:106
+#: models.py:118
 msgid "temp_key"
 msgstr ""
 
-#: models.py:107
+#: models.py:119
 msgid "timestamp"
 msgstr ""
 
-#: models.py:108
+#: models.py:120
 msgid "reset yet?"
 msgstr ""
 
-#: views.py:112
+#: views.py:88 views.py:132
+#, fuzzy, python-format
+msgid "Successfully logged in as %(user)s."
+msgstr "Accesso effettuato come %(username)s."
+
+#: views.py:195
 #, python-format
 msgid "Removed email address %(email)s"
 msgstr ""
 
-#: views.py:252
+#: views.py:235 views.py:363
+msgid "Password successfully changed."
+msgstr "La password è stata cambiata correttamente."
+
+#: views.py:265
+#, fuzzy
+msgid "Password successfully set."
+msgstr "La password è stata cambiata correttamente."
+
+#: views.py:392
+msgid "Timezone successfully updated."
+msgstr "Fuso orario aggiornato correttamente."
+
+#: views.py:418
+msgid "Language successfully updated."
+msgstr "Lingua aggiornata correttamente."
+
+#: views.py:456
 msgid "Twitter authentication failed"
 msgstr ""
 
-#: views.py:271
+#: views.py:461
+msgid "Successfully authenticated."
+msgstr "Autenticato correttamente."
+
+#: views.py:489
 msgid "Removed twitter account information successfully."
 msgstr ""
 
-#: templatetags/openid_tags.py:27
+#: templatetags/openid_tags.py:32
 #, fuzzy
 msgid "Logged in with OpenID"
 msgstr "Registrati con OpenID"

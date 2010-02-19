@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-hotclub-0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 03:17+0200\n"
+"POT-Creation-Date: 2010-02-20 00:11+0100\n"
 "PO-Revision-Date: 2008-06-25 12:38+0100\n"
 "Last-Translator: Jannis Leidel <jannis@leidel.info>\n"
 "Language-Team:  <jannis@leidel.info>\n"
@@ -17,31 +17,31 @@ msgstr ""
 "X-Poedit-Language: German\n"
 "X-Poedit-Country: GERMANY\n"
 
-#: models.py:11
+#: models.py:15
 msgid "user"
 msgstr "Benutzer"
 
-#: models.py:12
+#: models.py:16
 msgid "name"
 msgstr "Name"
 
-#: models.py:13
+#: models.py:17
 msgid "about"
 msgstr "Über"
 
-#: models.py:14
+#: models.py:18
 msgid "location"
 msgstr "Ort"
 
-#: models.py:15
+#: models.py:23
 msgid "website"
 msgstr "Webseite"
 
-#: models.py:25
+#: models.py:30
 msgid "profile"
 msgstr "Profil"
 
-#: models.py:26
+#: models.py:31
 msgid "profiles"
 msgstr "Profile"
 
@@ -50,33 +50,38 @@ msgstr "Profile"
 msgid "You have removed %(from_user)s from friends"
 msgstr "Du hast auf %(message)s von %(recipient)s geantwortet."
 
-#: views.py:83 views.py:95 views.py:120
+#: views.py:86 views.py:98 views.py:131
 msgid "Let's be friends!"
 msgstr "Lass uns Freunde sein!"
 
-#: views.py:103
+#: views.py:107
 #, python-format
 msgid "You have accepted the friendship request from %(from_user)s"
 msgstr "Du hast das Freundschaftsangebot von %(from_user)s angenommen"
 
-#: views.py:113
+#: views.py:121
 #, fuzzy, python-format
 msgid "You have declined the friendship request from %(from_user)s"
 msgstr "Du hast das Freundschaftsangebot von %(from_user)s angenommen"
 
-#: templates/profile_item.html:10
+#: views.py:168
+#, fuzzy
+msgid "Your profile has been updated."
+msgstr "Ein neuer Tribe wurde gestartet"
+
+#: templates/profile_item.html:11
 msgid "Name"
 msgstr "Name"
 
-#: templates/profile_item.html:11
+#: templates/profile_item.html:12
 msgid "About"
 msgstr "Über"
 
-#: templates/profile_item.html:12
+#: templates/profile_item.html:13
 msgid "Location"
 msgstr "Ort"
 
-#: templates/profile_item.html:13
+#: templates/profile_item.html:14
 msgid "Website"
 msgstr "Webseite"
 
@@ -1737,9 +1742,6 @@ msgstr "Webseite"
 
 #~ msgid "New Tribe Created"
 #~ msgstr "Neuer Tribe gestartet"
-
-#~ msgid "a new tribe has been created"
-#~ msgstr "Ein neuer Tribe wurde gestartet"
 
 #~ msgid "Friend Created Tribe"
 #~ msgstr "Freund startete Tribe"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 03:13+0200\n"
+"POT-Creation-Date: 2010-02-20 00:10+0100\n"
 "PO-Revision-Date: 2008-07-04 22:28+0200\n"
 "Last-Translator: jens persson <jens@persson.cx>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
-#: forms.py:10
+#: forms.py:14
 #, fuzzy
 msgid ""
 "a short version of the title consisting only of letters, numbers, "
@@ -26,119 +26,149 @@ msgstr ""
 "en kort version av namnet som bara innehåller bokstäverna a till z, siffror "
 "och understrykningar."
 
-#: forms.py:11
-#, fuzzy
-msgid "This value must contain only letters, numbers, underscores and hyphens."
-msgstr ""
-"Det här värdet kan bara innehålla bokstäverna a till z, siffror "
-"understrykningar och punkter."
-
-#: management.py:9
+#: management.py:11
 msgid "Friend Posted to Blog"
 msgstr "En vän skrev i sin blogg"
 
-#: management.py:9
+#: management.py:11
 msgid "a friend of yours posted to their blog"
 msgstr "en av dina vänner har skrivit i sin blogg"
 
-#: management.py:10
+#: management.py:12
 msgid "New Comment on Blog Post"
 msgstr "Nya kommentarer på en bloggpost"
 
-#: management.py:10
+#: management.py:12
 msgid "a comment was made on one of your blog posts"
 msgstr "någon kommenterade på en av dina bloggposter"
 
-#: models.py:20
+#: models.py:30
 msgid "Draft"
 msgstr "Utkast"
 
-#: models.py:21
+#: models.py:31
 msgid "Public"
 msgstr "Publik"
 
-#: models.py:23
+#: models.py:34
 msgid "title"
 msgstr "titel"
 
-#: models.py:24
+#: models.py:35
 msgid "slug"
 msgstr "pollett"
 
-#: models.py:26
+#: models.py:37
 msgid "IP Address of the Post Creator"
 msgstr "Post skaparens IPadress"
 
-#: models.py:27
+#: models.py:41
 msgid "body"
 msgstr "meddelande"
 
-#: models.py:28
+#: models.py:42
 msgid "tease"
 msgstr "ingress"
 
-#: models.py:29
+#: models.py:43
 msgid "status"
 msgstr "status"
 
-#: models.py:30
+#: models.py:44
 msgid "allow comments"
 msgstr "tillåt kommentarer"
 
-#: models.py:31
+#: models.py:45
 msgid "publish"
 msgstr "publicera"
 
-#: models.py:32
+#: models.py:46
 msgid "created at"
 msgstr "skapad den"
 
-#: models.py:33
+#: models.py:47
 msgid "updated at"
 msgstr "uppdaterad den"
 
-#: models.py:34
+#: models.py:48
 msgid "Post Content Markup"
 msgstr "Post uppmärkning"
 
-#: models.py:40
+#: models.py:57
 msgid "post"
 msgstr "posta"
 
-#: models.py:41
+#: models.py:58
 msgid "posts"
 msgstr "poster"
 
-#: views.py:64
+#: views.py:73
+msgid "You can't delete posts that aren't yours"
+msgstr ""
+
+#: views.py:80
 #, fuzzy, python-format
 msgid "Successfully deleted post '%s'"
 msgstr "Meddelandet har tagits bort."
 
-#: views.py:85
+#: views.py:104
 #, python-format
 msgid "Successfully saved post '%s'"
 msgstr ""
 
-#: views.py:114
+#: views.py:129
+msgid "You can't edit posts that aren't yours"
+msgstr ""
+
+#: views.py:138
 #, fuzzy, python-format
 msgid "Successfully updated post '%s'"
 msgstr "Tidszonen har uppdaterats."
 
+#: templates/notification/blog_friend_post/full.txt:1
+#, python-format
+msgid ""
+"%(author_display)s has posted %(post_title)s to their blog.\n"
+"\n"
+"http://%(current_site)s%(post_url)s"
+msgstr ""
+
 #: templates/notification/blog_friend_post/notice.html:2
 #, fuzzy, python-format
 msgid ""
-"<a href=\"%(author_url)s\">%(post_author)s</a> has posted <a href=\"%"
+"<a href=\"%(author_url)s\">%(author_display)s</a> has posted <a href=\"%"
 "(post_url)s\">%(post_title)s</a> to their blog."
 msgstr ""
 "<a href=\"%(signup_url)s\">Registrera dig</a> och <a href=\"%(login_url)s"
 "\">logga in </a> för att gå med i den här stammen."
 
-#: templates/notification/blog_post_comment/notice.html:2
-#, python-format
+#: templates/notification/blog_post_comment/full.txt:1
+#, fuzzy, python-format
 msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> has commented on your blog post '<a "
-"href=\"%(post_url)s\">%(post)s</a>'."
+"%(user_display)s has commented on your blog post '%(post)s':\n"
+"\n"
+"%(post_comment)s\n"
+"\n"
+"http://%(current_site)s%(post_url)s"
 msgstr ""
+"<a href=\"%(signup_url)s\">Registrera dig</a> och <a href=\"%(login_url)s"
+"\">logga in </a> för att gå med i den här stammen."
+
+#: templates/notification/blog_post_comment/notice.html:2
+#, fuzzy, python-format
+msgid ""
+"<a href=\"%(user_url)s\">%(user_display)s</a> has commented on your blog "
+"post '<a href=\"%(post_url)s\">%(post)s</a>'."
+msgstr ""
+"<a href=\"%(signup_url)s\">Registrera dig</a> och <a href=\"%(login_url)s"
+"\">logga in </a> för att gå med i den här stammen."
+
+#, fuzzy
+#~ msgid ""
+#~ "This value must contain only letters, numbers, underscores and hyphens."
+#~ msgstr ""
+#~ "Det här värdet kan bara innehålla bokstäverna a till z, siffror "
+#~ "understrykningar och punkter."
 
 #~ msgid "Username"
 #~ msgstr "Användarnamn"

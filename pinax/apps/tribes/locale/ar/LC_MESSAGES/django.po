@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-hotclub-0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-28 03:20+0200\n"
+"POT-Creation-Date: 2010-02-20 00:12+0100\n"
 "PO-Revision-Date: 2008-07-15 10:29+0100\n"
 "Last-Translator: Jannis Leidel <jannis@leidel.info>\n"
 "Language-Team:  <beshrkayali@gmail.com>\n"
@@ -17,81 +17,103 @@ msgstr ""
 "X-Poedit-Language: Arabic\n"
 "X-Poedit-Country: SYRIAN ARAB REPUBLIC\n"
 
-#: forms.py:11
+#: forms.py:14
 #, fuzzy
 msgid ""
 "a short version of the name consisting only of letters, numbers, underscores "
 "and hyphens."
 msgstr "صيغة مختصر من العنوان تحتوي على أحرف، أرقام أو شارطة سفلية فقط."
 
-#: forms.py:12
-#, fuzzy
-msgid "This value must contain only letters, numbers, underscores and hyphens."
-msgstr "يجب أن تحتوي هذه القيمة على أحرف، أرقام أو الشارطة السفلية"
-
-#: forms.py:16
+#: forms.py:19
 msgid "A tribe already exists with that slug."
 msgstr "هناك قبيلة موجودة مسبقاً بنفس العنوان المختصر"
 
-#: forms.py:21 forms.py:38
+#: forms.py:24 forms.py:41
 msgid "A tribe already exists with that name."
 msgstr "هناك قبيلة موجودة مسبقاً بنفس الإسم"
 
-#: management.py:9
+#: management.py:11
 msgid "New Tribe Member"
 msgstr "عضو قبيلة جديد"
 
-#: management.py:9
+#: management.py:11
 msgid "a tribe you are a member of has a new member"
 msgstr "أحد القبائل التي تنتمي إليها إنضم إليها عنصر جديد"
 
-#: management.py:10
+#: management.py:12
 msgid "New Member Of Tribe You Created"
 msgstr "عضو جديد في قبيلة أنشأتها"
 
-#: management.py:10
+#: management.py:12
 msgid "a tribe you created has a new member"
 msgstr "إنضم عضو جديد لأحد القبائل التي أنشأتها"
 
-#: management.py:11
+#: management.py:13
 msgid "New Tribe Created"
 msgstr "قبيلة جديدة تم إنشاءها"
 
-#: management.py:11
+#: management.py:13
 msgid "a new tribe has been created"
 msgstr "تم إنشاء قبيلة جديدة"
 
-#: models.py:10
+#: models.py:15
 msgid "members"
 msgstr "أعضاء"
 
-#: views.py:86
+#: views.py:94
 #, python-format
 msgid "Tribe %(tribe_name)s deleted."
 msgstr ""
 
-#: views.py:117
+#: views.py:128
 #, fuzzy, python-format
 msgid "You have joined the tribe %(tribe_name)s"
 msgstr "قمت بإسترجاع الرسالة %(message)s."
 
-#: views.py:124
+#: views.py:144
 #, fuzzy, python-format
 msgid "You have already joined tribe %(tribe_name)s"
 msgstr "لقد قمت بالدخول مسبقاً بالإسم  %(user)s."
+
+#: views.py:151
+#, fuzzy, python-format
+msgid "You have left the tribe %(tribe_name)s"
+msgstr "قمت بإسترجاع الرسالة %(message)s."
+
+#: templates/notification/tribes_created_new_member/full.txt:1
+#: templates/notification/tribes_new_member/full.txt:1
+#, python-format
+msgid ""
+"%(user_display)s has joined the tribe %(tribe)s.\n"
+"\n"
+"http://%(current_site)s%(tribe_url)s\n"
+msgstr ""
 
 #: templates/notification/tribes_created_new_member/notice.html:2
 #: templates/notification/tribes_new_member/notice.html:2
 #, python-format
 msgid ""
-"<a href=\"%(user_url)s\">%(user)s</a> has joined the tribe <a href=\"%"
-"(tribe_url)s\">%(tribe)s</a>."
+"<a href=\"%(user_url)s\">%(user_display)s</a> has joined the tribe <a href="
+"\"%(tribe_url)s\">%(tribe)s</a>."
+msgstr ""
+
+#: templates/notification/tribes_new_tribe/full.txt:1
+#, python-format
+msgid ""
+"A new tribe %(tribe)s has been created.\n"
+"\n"
+"http://%(current_site)s%(tribe_url)s\n"
 msgstr ""
 
 #: templates/notification/tribes_new_tribe/notice.html:2
 #, fuzzy, python-format
 msgid "A new group <a href=\"%(tribe_url)s\">%(tribe)s</a> has been created."
 msgstr "لست عضواً في أي <a href=\"%(tribe_url)s\">قبيلة</a> بعد!"
+
+#, fuzzy
+#~ msgid ""
+#~ "This value must contain only letters, numbers, underscores and hyphens."
+#~ msgstr "يجب أن تحتوي هذه القيمة على أحرف، أرقام أو الشارطة السفلية"
 
 #~ msgid "Username"
 #~ msgstr "إسم المستخدم"
