@@ -134,7 +134,7 @@ class Task(models.Model):
             th.owner = change_owner
         else:
             # This record is being created right now, hence the assignment
-            # of the creator to the task history object"s owner field.
+            # of the creator to the task history object's owner field.
             th.owner = self.creator
         
         # handle the comments
@@ -148,10 +148,10 @@ class Task(models.Model):
         return state choices allowed given current state and user
         """
         
-        # I"m the relevant state choices.
+        # I'm the relevant state choices.
         choices = []
         
-        # I"m the states already allowed for the users
+        # I'm the states already allowed for the users
         existing_states = []
         
         for transition in workflow.STATE_TRANSITIONS:
@@ -256,9 +256,9 @@ class TaskHistory(models.Model):
     def __unicode__(self):
         return "for " + str(self.task)
     
-    def save(self, force_insert=False, force_update=False):
+    def save(self, **kwargs):
         self.modified = datetime.now()
-        super(TaskHistory, self).save(force_insert, force_update)
+        super(TaskHistory, self).save(**kwargs)
 
 
 class Nudge(models.Model):

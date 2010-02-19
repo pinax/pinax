@@ -74,7 +74,7 @@ def tasks(request, group_slug=None, template_name="tasks/task_list.html", bridge
     # default filtering
     state_keys = dict(workflow.STATE_CHOICES).keys()
     default_states = set(state_keys).difference(
-        # don"t show these states
+        # don't show these states
         set(["2", "3"])
     )
     
@@ -365,11 +365,11 @@ def user_tasks(request, username, group_slug=None, template_name="tasks/user_tas
     # default filtering
     state_keys = dict(workflow.STATE_CHOICES).keys()
     default_states = set(state_keys).difference(
-        # don"t show these states
+        # don't show these states
         set(["2", "3"])
     )
     
-    # have to store for each prefix because initial data isn"t support on the
+    # have to store for each prefix because initial data isn't support on the
     # FilterSet
     filter_data = {
         "a-state": list(default_states),
@@ -475,11 +475,11 @@ def focus(request, field, value, group_slug=None, template_name="tasks/focus.htm
     # default filtering
     state_keys = dict(workflow.STATE_CHOICES).keys()
     default_states = set(state_keys).difference(
-        # don"t show these states
+        # don't show these states
         set(["2", "3"])
     )
     
-    # have to store for each prefix because initial data isn"t support on the
+    # have to store for each prefix because initial data isn't support on the
     # FilterSet
     filter_data = {
         "state": list(default_states),
@@ -490,7 +490,7 @@ def focus(request, field, value, group_slug=None, template_name="tasks/focus.htm
     
     if field == "modified":
         try:
-            # @@@ this seems hackish and brittle but I couldn"t work out another way
+            # @@@ this seems hackish and brittle but I couldn't work out another way
             year, month, day = value.split("-")
             # have to int month and day in case zero-padded
             tasks = tasks.filter(modified__year=int(year), modified__month=int(month), modified__day=int(day))

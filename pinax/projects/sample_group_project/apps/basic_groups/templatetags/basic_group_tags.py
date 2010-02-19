@@ -11,7 +11,7 @@ def show_group(group):
     return {"group": group}
 
 
-# @@@ should move these next two as they aren"t particularly group-specific
+# @@@ should move these next two as they aren't particularly group-specific
 
 @register.simple_tag
 def clear_search_url(request):

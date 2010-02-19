@@ -85,7 +85,8 @@ def delete(request, group_slug=None, redirect_url=None):
     if not redirect_url:
         redirect_url = reverse("tribe_list")
     
-    # @@@ eventually, we"ll remove restriction that tribe.creator can"t leave tribe but we"ll still require tribe.members.all().count() == 1
+    # @@@ eventually, we'll remove restriction that tribe.creator can't leave
+    # tribe but we'll still require tribe.members.all().count() == 1
     if (request.user.is_authenticated() and request.method == "POST" and
             request.user == tribe.creator and tribe.members.all().count() == 1):
         tribe.delete()

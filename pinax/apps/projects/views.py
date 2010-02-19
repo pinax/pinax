@@ -85,7 +85,8 @@ def delete(request, group_slug=None, redirect_url=None):
     if not redirect_url:
         redirect_url = reverse("project_list")
     
-    # @@@ eventually, we"ll remove restriction that project.creator can"t leave project but we"ll still require project.members.all().count() == 1
+    # @@@ eventually, we'll remove restriction that project.creator can't
+    # leave project but we'll still require project.members.all().count() == 1
     if (request.user.is_authenticated() and request.method == "POST" and
             request.user == project.creator and project.members.all().count() == 1):
         project.delete()

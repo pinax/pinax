@@ -12,7 +12,7 @@ register = template.Library()
 def show_tribe(context, tribe):
     return {"tribe": tribe, "request": context["request"]}
 
-# @@@ should move these next two as they aren"t particularly tribe-specific
+# @@@ should move these next two as they aren't particularly tribe-specific
 
 @register.simple_tag
 def clear_search_url(request):

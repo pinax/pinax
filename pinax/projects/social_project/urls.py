@@ -73,7 +73,7 @@ urlpatterns = patterns("",
     (r"^feeds/bookmarks/(.*)/?$", "django.contrib.syndication.views.feed", bookmarks_feed_dict),
 )
 
-## @@@ for now, we"ll use friends_app to glue this stuff together
+## @@@ for now, we'll use friends_app to glue this stuff together
 
 from photos.models import Image
 

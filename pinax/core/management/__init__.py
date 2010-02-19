@@ -23,7 +23,7 @@ def load_command_class(package_name, name):
     for part in module_name.split(".")[1:]:
         module = getattr(module, part)
     command = module.Command()
-    # If we don"t do the following two things, Django tries to import settings.
+    # If we don't do the following two things, Django tries to import settings.
     command.__class__.can_import_settings = False
     command.__class__.validate = lambda *args, **kwargs: None
     return command
@@ -67,7 +67,7 @@ def get_commands():
     _commands = dict([(name, "pinax.core") for name in
         find_commands(__path__[0])])
     
-    # Now that we"ve built the command list, return it.
+    # Now that we've built the command list, return it.
     return _commands
 
 
@@ -84,7 +84,7 @@ class ManagementUtility(object):
     
     def main_help_text(self):
         """
-        Returns the script"s main help text, as a string.
+        Returns the script's main help text, as a string.
         """
         usage = ["",
                 "Type '%s help <subcommand>' for help on a specific subcommand."
@@ -99,7 +99,7 @@ class ManagementUtility(object):
     def fetch_command(self, subcommand):
         """
         Tries to fetch the given subcommand, printing a message with the
-        appropriate command called from the command line if it can"t be found.
+        appropriate command called from the command line if it can't be found.
         """
         commands = get_commands()
         if subcommand not in commands:
