@@ -175,6 +175,7 @@ INSTALLED_APPS = [
     "django_markup",
     "django_filters",
     "staticfiles",
+    "debug_toolbar",
     "tagging_ext",
     
     # internal (for now)
