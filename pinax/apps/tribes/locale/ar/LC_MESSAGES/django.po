@@ -8,29 +8,27 @@ msgstr ""
 "Project-Id-Version: django-hotclub-0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-02-20 00:12+0100\n"
-"PO-Revision-Date: 2008-07-15 10:29+0100\n"
-"Last-Translator: Jannis Leidel <jannis@leidel.info>\n"
+"PO-Revision-Date: 2010-02-22 09:05+0300\n"
+"Last-Translator: Ahmad Al-Ibrahim <speedy@speedy.org>\n"
 "Language-Team:  <beshrkayali@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: Arabic\n"
-"X-Poedit-Country: SYRIAN ARAB REPUBLIC\n"
+"X-Poedit-Country: Kuwait\n"
 
 #: forms.py:14
-#, fuzzy
-msgid ""
-"a short version of the name consisting only of letters, numbers, underscores "
-"and hyphens."
-msgstr "صيغة مختصر من العنوان تحتوي على أحرف، أرقام أو شارطة سفلية فقط."
+msgid "a short version of the name consisting only of letters, numbers, underscores and hyphens."
+msgstr "صيغة مختصر من العنوان تحتوي على أحرف، أرقام، شارطة سفلية، أو واصلة فقط."
 
 #: forms.py:19
 msgid "A tribe already exists with that slug."
-msgstr "هناك قبيلة موجودة مسبقاً بنفس العنوان المختصر"
+msgstr "هناك قبيلة موجودة مسبقاً بنفس العنوان المختصر."
 
-#: forms.py:24 forms.py:41
+#: forms.py:24
+#: forms.py:41
 msgid "A tribe already exists with that name."
-msgstr "هناك قبيلة موجودة مسبقاً بنفس الإسم"
+msgstr "هناك قبيلة موجودة مسبقاً بنفس الإسم."
 
 #: management.py:11
 msgid "New Tribe Member"
@@ -38,7 +36,7 @@ msgstr "عضو قبيلة جديد"
 
 #: management.py:11
 msgid "a tribe you are a member of has a new member"
-msgstr "أحد القبائل التي تنتمي إليها إنضم إليها عنصر جديد"
+msgstr "أحد القبائل التي تنتمي إليها إنضم إليها عضو جديد"
 
 #: management.py:12
 msgid "New Member Of Tribe You Created"
@@ -50,7 +48,7 @@ msgstr "إنضم عضو جديد لأحد القبائل التي أنشأتها
 
 #: management.py:13
 msgid "New Tribe Created"
-msgstr "قبيلة جديدة تم إنشاءها"
+msgstr "قبيلة جديدة أنشئت"
 
 #: management.py:13
 msgid "a new tribe has been created"
@@ -63,22 +61,22 @@ msgstr "أعضاء"
 #: views.py:94
 #, python-format
 msgid "Tribe %(tribe_name)s deleted."
-msgstr ""
+msgstr "قبيلة %(tribe_name)s حذفت."
 
 #: views.py:128
-#, fuzzy, python-format
+#, python-format
 msgid "You have joined the tribe %(tribe_name)s"
-msgstr "قمت بإسترجاع الرسالة %(message)s."
+msgstr "لقد إنضممت لقبيلة %(tribe_name)s"
 
 #: views.py:144
-#, fuzzy, python-format
+#, python-format
 msgid "You have already joined tribe %(tribe_name)s"
-msgstr "لقد قمت بالدخول مسبقاً بالإسم  %(user)s."
+msgstr "لقد إنضممت إلى قبيلة %(tribe_name)s مسبقا"
 
 #: views.py:151
-#, fuzzy, python-format
+#, python-format
 msgid "You have left the tribe %(tribe_name)s"
-msgstr "قمت بإسترجاع الرسالة %(message)s."
+msgstr "لقد تركت قبيلة %(tribe_name)s"
 
 #: templates/notification/tribes_created_new_member/full.txt:1
 #: templates/notification/tribes_new_member/full.txt:1
@@ -88,14 +86,15 @@ msgid ""
 "\n"
 "http://%(current_site)s%(tribe_url)s\n"
 msgstr ""
+"%(user_display)s إنضم إلى قبيلة %(tribe)s.\n"
+"\n"
+"http://%(current_site)s%(tribe_url)s\n"
 
 #: templates/notification/tribes_created_new_member/notice.html:2
 #: templates/notification/tribes_new_member/notice.html:2
 #, python-format
-msgid ""
-"<a href=\"%(user_url)s\">%(user_display)s</a> has joined the tribe <a href="
-"\"%(tribe_url)s\">%(tribe)s</a>."
-msgstr ""
+msgid "<a href=\"%(user_url)s\">%(user_display)s</a> has joined the tribe <a href=\"%(tribe_url)s\">%(tribe)s</a>."
+msgstr "<a href=\"%(user_url)s\">%(user_display)s</a> إنضم إلى قبيلة <a href=\"%(tribe_url)s\">%(tribe)s</a>."
 
 #: templates/notification/tribes_new_tribe/full.txt:1
 #, python-format
@@ -104,456 +103,317 @@ msgid ""
 "\n"
 "http://%(current_site)s%(tribe_url)s\n"
 msgstr ""
+"تم إنشاء قبيلة %(tribe)s.\n"
+"\n"
+"http://%(current_site)s%(tribe_url)s\n"
 
 #: templates/notification/tribes_new_tribe/notice.html:2
-#, fuzzy, python-format
+#, python-format
 msgid "A new group <a href=\"%(tribe_url)s\">%(tribe)s</a> has been created."
-msgstr "لست عضواً في أي <a href=\"%(tribe_url)s\">قبيلة</a> بعد!"
+msgstr "تم إنشاء مجموعة <a href=\"%(tribe_url)s\">%(tribe)s</a>."
 
 #, fuzzy
 #~ msgid ""
 #~ "This value must contain only letters, numbers, underscores and hyphens."
 #~ msgstr "يجب أن تحتوي هذه القيمة على أحرف، أرقام أو الشارطة السفلية"
-
 #~ msgid "Username"
 #~ msgstr "إسم المستخدم"
-
 #~ msgid "Password"
 #~ msgstr "كلمة المرور"
-
 #~ msgid "This account is currently inactive."
 #~ msgstr "هذا الحساب غير فعال حالياً"
-
 #~ msgid "The username and/or password you specified are not correct."
 #~ msgstr "إسم المستخدم و/أو كلمة المرور غير صحيحة."
-
 #~ msgid "Successfully logged in as %(username)s."
 #~ msgstr "تم الدخول بنجاح للمستخدم %(username)s"
-
 #~ msgid "Password (again)"
 #~ msgstr "كلمة المرور (مرة ثانية)"
-
 #~ msgid "Email (optional)"
 #~ msgstr "البريد الإلكتروني (غير ضروري)"
-
 #~ msgid "Usernames can only contain letters, numbers and underscores."
 #~ msgstr ""
 #~ "لا يمكن لإسم المستخدم سوى أن يحتوي على أحرف، أرقام وعلامة الشارطة السفلية"
-
 #~ msgid "This username is already taken. Please choose another."
 #~ msgstr "إسم المستخدم هذا غير متوفر. الرجاء إختيار إسم آخر."
-
 #~ msgid "You must type the same password each time."
 #~ msgstr "يجب أن تكون كلمتا المرور متطابقتين."
-
 #~ msgid "Your email address has already been verified"
 #~ msgstr "لقد سبق وأن تم التحقق من بريدك الإلكتروني."
-
 #~ msgid "Confirmation email sent to %(email)s"
 #~ msgstr "ثم إرسال رسالة التحقق من البريد الإلكتروني إلى %(email)s"
-
 #~ msgid "Email"
 #~ msgstr "البريد الإلكتروني"
-
 #~ msgid "This email address already associated with this account."
 #~ msgstr "البريد الإلكتروني هذا سبق وأن تم إستخدامه مستخدم آخر."
-
 #~ msgid "Current Password"
 #~ msgstr "كلمة المرور الحالية"
-
 #~ msgid "New Password"
 #~ msgstr "كلمة المرور الجديدة"
-
 #~ msgid "New Password (again)"
 #~ msgstr "كلمة السر الجديدة (مرة أخرى)"
-
 #~ msgid "Please type your current password."
 #~ msgstr "الرجاء إدخال كلمة المرور الحالية."
-
 #~ msgid "Password successfully changed."
 #~ msgstr "تم تغيير كلمة المرور بنجاح."
-
 #~ msgid "Email address not verified for any user account"
 #~ msgstr "لم يتم التحقق من البريد الإلكتروني هذا لأي مستخدم"
-
 #~ msgid "Password reset"
 #~ msgstr "تغيير كلمة المرور"
-
 #~ msgid "Timezone"
 #~ msgstr "المنطقة الزمنية"
-
 #~ msgid "Timezone successfully updated."
 #~ msgstr "تم تحديث المنطقة الزمنية بنجاح"
-
 #~ msgid "title"
 #~ msgstr "العنوان"
-
 #~ msgid "content"
 #~ msgstr "المحتوى"
-
 #~ msgid "creator"
 #~ msgstr "المنشئ"
-
 #~ msgid "creation_date"
 #~ msgstr "تاريخ_الإنشاء"
-
 #~ msgid "site wide"
 #~ msgstr "site wide"
-
 #~ msgid "members only"
 #~ msgstr "للأعضاء فقط"
-
 #~ msgid "announcement"
 #~ msgstr "تنبيه"
-
 #~ msgid "announcements"
 #~ msgstr "تنبيهات"
-
 #~ msgid "Enabled"
 #~ msgstr "فعال"
-
 #~ msgid "Disabled"
 #~ msgstr "غير فعال"
-
 #~ msgid "Removed"
 #~ msgstr "محذوف"
-
 #~ msgid "The label for the plugin point."
 #~ msgstr "نص الإضافة"
-
 #~ msgid "is this a registered plugin point with a library entry?"
 #~ msgstr "هل هذه نقطة إضافة معرفة على المكتبة؟"
-
 #~ msgid "is this a registered plugin?"
 #~ msgstr "هل هذه إضافة معرفة؟"
-
 #~ msgid "users can not remove this plugin."
 #~ msgstr "لا يمكن للمستخدمين حذف هذه الإضافة"
-
 #~ msgid "template to load for the plugin."
 #~ msgstr "القالب لتشغيل هذه الإضافة"
-
 #~ msgid ""
 #~ "That url has already been submitted and Pinax does not yet support "
 #~ "multiple bookmarking of a URL"
 #~ msgstr ""
 #~ "لقد سبق وأن تم إضافته. بيناكس لا يدعم إضافة العنوان نفسه أكثر من مرة إلى "
 #~ "المفضلة"
-
 #~ msgid "description"
 #~ msgstr "وصف"
-
 #~ msgid "note"
 #~ msgstr "ملاحظة"
-
 #~ msgid "adder"
 #~ msgstr "الناشر"
-
 #~ msgid "added"
 #~ msgstr "مضاف"
-
 #~ msgid "name"
 #~ msgstr "إسم"
-
 #~ msgid "Example: 'flatpages/default.html'"
 #~ msgstr "مثال: 'flatpages/default.html'"
-
 #~ msgid "creation date"
 #~ msgstr "تاريخ الإنشاء"
-
 #~ msgid "last changed"
 #~ msgstr "آخر تعديل"
-
 #~ msgid "template"
 #~ msgstr "قالب"
-
 #~ msgid "templates"
 #~ msgstr "قوالب"
-
 #~ msgid "Date information"
 #~ msgstr "معلومات التاريخ"
-
 #~ msgid "Type"
 #~ msgstr "النوع"
-
 #~ msgid "type"
 #~ msgstr "نوع"
-
 #~ msgid "Request Log"
 #~ msgstr "طلب سجل الأحداث"
-
 #~ msgid "Level"
 #~ msgstr "الدرجة / المرحلة"
-
 #~ msgid "Timestamp"
 #~ msgstr "الوقت"
-
 #~ msgid "Location"
 #~ msgstr "المكان"
-
 #~ msgid "Message"
 #~ msgstr "رسالة"
-
 #~ msgid "Time"
 #~ msgstr "الوقت"
-
 #~ msgid "Show"
 #~ msgstr "عرض"
-
 #~ msgid "Hide"
 #~ msgstr "إخفاء"
-
 #~ msgid "No log messages matching filter."
 #~ msgstr "لا يوجد سجل يوافق المرشح المطلوب."
-
 #~ msgid "Show location"
 #~ msgstr "عرض المكان"
-
 #~ msgid "Filter"
 #~ msgstr "المرشح"
-
 #~ msgid "No filter (show all)"
 #~ msgstr "بدون مرشح (عرض الكل)"
-
 #~ msgid "Accepted friendship request from %(from_user)s"
 #~ msgstr "تمت الموافقة على طلب صداقة من %(from_user)s"
-
 #~ msgid "%(total)s vCards found, %(imported)s contacts imported."
 #~ msgstr ""
 #~ "%(total)s بطاقات vCards تم العثور عليها, %(imported)s أشخاص تمت إضافتهم."
-
 #~ msgid "%(total)s people with email found, %(imported)s contacts imported."
 #~ msgstr ""
 #~ "%(total)s شخص/أشخاص بهذا البريد الإلكتروني تم العثور عليهم., %(imported)s "
 #~ "أشخاص تمت إضافتهم."
-
 #~ msgid "Recipient"
 #~ msgstr "المتلقي"
-
 #~ msgid "Subject"
 #~ msgstr "الموضوع"
-
 #~ msgid "Body"
 #~ msgstr "الرسالة"
-
 #~ msgid "There is no user with this username."
 #~ msgstr "لا يوجد مستخدم بهذا الإسم."
-
 #~ msgid "you have replied to %(message)s from %(recipient)s."
 #~ msgstr "قمت بالرد على الرسالة %(message)s من %(recipient)s."
-
 #~ msgid "%(sender)s has sent you a reply to %(message)s."
 #~ msgstr "%(sender)s قام بالرد على رسالتك %(message)s."
-
 #~ msgid "you have sent a message to %(recipient)s."
 #~ msgstr "قمت بإرسال رسالة إلى %(recipient)s."
-
 #~ msgid "you have received a message from %(sender)s."
 #~ msgstr "إستلمت رسالة من %(sender)s."
-
 #~ msgid "Message Received"
 #~ msgstr "تم إستلام الرسالة."
-
 #~ msgid "you have received a message"
 #~ msgstr "إستلمت رسالة"
-
 #~ msgid "Message Sent"
 #~ msgstr "تم إرسال الرسالة"
-
 #~ msgid "you have sent a message"
 #~ msgstr "قمت بإرسال رسالة"
-
 #~ msgid "Message Replied"
 #~ msgstr "تم الرد على الرسالة"
-
 #~ msgid "you have replied to a message"
 #~ msgstr "قمت بالرد على رسالة"
-
 #~ msgid "Reply Received"
 #~ msgstr "تم إستلام الرد"
-
 #~ msgid "you have received a reply to a message"
 #~ msgstr "قمت بإستلام رد على رسالة"
-
 #~ msgid "Message Deleted"
 #~ msgstr "تم حذف الرسالة"
-
 #~ msgid "you have deleted a message"
 #~ msgstr "قمت بحذف رسالة"
-
 #~ msgid "Message Recovered"
 #~ msgstr "تم إسترجاع الرسالة"
-
 #~ msgid "you have undelete a message"
 #~ msgstr "قمت بإسترجاع رسالة"
-
 #~ msgid "Sender"
 #~ msgstr "المرسل"
-
 #~ msgid "Parent message"
 #~ msgstr "الرسالة الأصل"
-
 #~ msgid "sent at"
 #~ msgstr "تم الإرسال في"
-
 #~ msgid "read at"
 #~ msgstr "تمت القراءة في"
-
 #~ msgid "replied at"
 #~ msgstr "تم الرد في"
-
 #~ msgid "Sender deleted at"
 #~ msgstr "حذف المرسل الرسالة في"
-
 #~ msgid "Recipient deleted at"
 #~ msgstr "حذف المتلقي الرسالة في"
-
 #~ msgid "Messages"
 #~ msgstr "الرسائل"
-
 #~ msgid "New Message:"
 #~ msgstr "رسالة جديدة:"
-
 #~ msgid "Message successfully sent."
 #~ msgstr "تم إرسال الرسالة بنجاح."
-
 #~ msgid ""
 #~ "%(sender)s wrote:\n"
 #~ "%(body)s"
 #~ msgstr ""
 #~ "كتب %(sender)s: \n"
 #~ "%(body)s"
-
 #~ msgid "Re: %(subject)s"
 #~ msgstr "رد على: %(subject)s"
-
 #~ msgid "Message successfully deleted."
 #~ msgstr "تم حذف الرسالة بنجاح."
-
 #~ msgid "you have deleted the message %(message)s."
 #~ msgstr "قمت بحذف الرساة %(message)s."
-
 #~ msgid "Message successfully recovered."
 #~ msgstr "تم إسترجاع الرسالة بنجاح."
-
 #~ msgid "Inbox"
 #~ msgstr "صندوق الوارد"
-
 #~ msgid "Sent Messages"
 #~ msgstr "الرسائل المرسلة"
-
 #~ msgid "New Message"
 #~ msgstr "رسالة جديدة"
-
 #~ msgid "Trash"
 #~ msgstr "سلة المهملات"
-
 #~ msgid "Compose Message"
 #~ msgstr "إنشاء رسالة"
-
 #~ msgid "Send"
 #~ msgstr "إرسال"
-
 #~ msgid "Received"
 #~ msgstr "مستلمة"
-
 #~ msgid "Action"
 #~ msgstr "وظيفة"
-
 #~ msgid "DATETIME_FORMAT"
 #~ msgstr "N j, Y, P"
-
 #~ msgid "delete"
 #~ msgstr "حذف"
-
 #~ msgid "Sent from %(site_url)s"
 #~ msgstr "مرسلة من قبل %(site_url)s"
-
 #~ msgid "Sent"
 #~ msgstr "أرسلت"
-
 #~ msgid "Deleted Messages"
 #~ msgstr "الرسائل المحذوفة"
-
 #~ msgid "Date"
 #~ msgstr "التاريخ"
-
 #~ msgid "undelete"
 #~ msgstr "إسترجاع"
-
 #~ msgid ""
 #~ "Deleted Messages are removed from the trash at unregular intervals, don't "
 #~ "rely on this feature for long-time storage."
 #~ msgstr ""
 #~ "سيتم إلغاء الرسال المحذوفة في أوقات غير محددة لذلك لا تعتمد هذه الخاصية "
 #~ "لكي تحفظ رسائلك."
-
 #~ msgid "View Message"
 #~ msgstr "عرض الرسالة"
-
 #~ msgid "Reply"
 #~ msgstr "رد على الرسالة"
-
 #~ msgid "Delete"
 #~ msgstr "حذف"
-
 #~ msgid "label"
 #~ msgstr "تصنيف"
-
 #~ msgid "display"
 #~ msgstr "عرض"
-
 #~ msgid "default"
 #~ msgstr "إفتراضي"
-
 #~ msgid "notice type"
 #~ msgstr "نوع الملاحظة"
-
 #~ msgid "notice types"
 #~ msgstr "أنواع الملاحظات"
-
 #~ msgid "user"
 #~ msgstr "المستخدم"
-
 #~ msgid "medium"
 #~ msgstr "وسط"
-
 #~ msgid "send"
 #~ msgstr "إرسال"
-
 #~ msgid "notice setting"
 #~ msgstr "إعدادت الملاحظات"
-
 #~ msgid "notice settings"
 #~ msgstr "إعدادت الملاحظات"
-
 #~ msgid "message"
 #~ msgstr "رسالة"
-
 #~ msgid "unseen"
 #~ msgstr "غير مشاهد"
-
 #~ msgid "archived"
 #~ msgstr "مؤرشفة"
-
 #~ msgid "notice"
 #~ msgstr "ملاحظة"
-
 #~ msgid "notices"
 #~ msgstr "ملاحظات"
-
 #~ msgid "message template"
 #~ msgstr "قالب الرسالة"
-
 #~ msgid "signal"
 #~ msgstr "إشارة / تنبيه"
-
 #~ msgid "observed item"
 #~ msgstr "عنصر ملاحظ"
-
 #~ msgid "observed items"
 #~ msgstr "عناصر ملاحظة"
-
 #~ msgid ""
 #~ "You have received the following notice:\n"
 #~ "\n"
@@ -572,46 +432,32 @@ msgstr "لست عضواً في أي <a href=\"%(tribe_url)s\">قبيلة</a> ب�
 #~ "لكي تقرأ الملاحظات الأخرى التي إستلمتها يمكنك الذهاب إلى %(notices_url)s\n"
 #~ "\n"
 #~ "إذا كنت تواجه أي مشكلة الرجاء المراسلة على: %(contact_email)s.\n"
-
 #~ msgid "%(display)s Notification"
 #~ msgstr "%(display)s تنبيهات"
-
 #~ msgid "about"
 #~ msgstr "حول"
-
 #~ msgid "location"
 #~ msgstr "المكان"
-
 #~ msgid "website"
 #~ msgstr "الموقع الإلكتروني"
-
 #~ msgid "blog rss/atom"
 #~ msgstr "خلاصات Rss/Atom للمدونة"
-
 #~ msgid "timezone"
 #~ msgstr "المنطقة الزمنية"
-
 #~ msgid "profile"
 #~ msgstr "ملف شخصي"
-
 #~ msgid "profiles"
 #~ msgstr "ملفات شخصية"
-
 #~ msgid "You are now following %(other_user)s"
 #~ msgstr "أنت الآن تتبع %(other_user)s"
-
 #~ msgid "You have stopped following %(other_user)s"
 #~ msgstr "لقد توقفت عن إتباع %(other_user)s"
-
 #~ msgid "Let's be friends!"
 #~ msgstr "دعنا نصبح أصدقاء!"
-
 #~ msgid "You have accepted the friendship request from %(from_user)s"
 #~ msgstr "قمت بالموافقة على طلب دعوة صداقة من %(from_user)s"
-
 #~ msgid "pattern"
 #~ msgstr "نموذج"
-
 #~ msgid ""
 #~ "Case-sensitive. A missing trailing slash does also match to files which "
 #~ "start with the name of the pattern, e.g., '/admin' matches /admin.html "
@@ -622,13 +468,10 @@ msgstr "لست عضواً في أي <a href=\"%(tribe_url)s\">قبيلة</a> ب�
 #~ "بإسم من هذا النموذج., مثال. , '/admin' تطابق /admin.html too. بعض محركات "
 #~ "البحث المشهورة تسمح بـ (*) كـ wildcard وعلامة الدولار ($) لكي تطابق عنوان "
 #~ "الموقع."
-
 #~ msgid "url"
 #~ msgstr "عنوان"
-
 #~ msgid "robot"
 #~ msgstr "روبوت"
-
 #~ msgid ""
 #~ "This should be a user agent string like 'Googlebot'. Enter an asterisk "
 #~ "(*) for all user agents. For a full list look at the <a target=_blank "
@@ -639,182 +482,129 @@ msgstr "لست عضواً في أي <a href=\"%(tribe_url)s\">قبيلة</a> ب�
 #~ "للحصول على جميع المستخدمين العملاء. للحصول على قائمة كاملة إضهب إلى <a "
 #~ "target=_blank href='http://www.robotstxt.org/wc/active/html/index."
 #~ "html'>قاعدة بيانات روبوتات الويب</a>."
-
 #~ msgid "These are URLs which are allowed to be accessed by web robots."
 #~ msgstr "هذه العناوين المسموح للروبوتات من مواقع البحث بالدخول إليها."
-
 #~ msgid "These are URLs which are not allowed to be accessed by web robots."
 #~ msgstr "هذه العناوين الغير مسموح للروبوتات من مواقع البحث بالدخول إليها"
-
 #~ msgid "crawl delay"
 #~ msgstr "تأخير عملية الـ crawl"
-
 #~ msgid "rule"
 #~ msgstr "قاعدة"
-
 #~ msgid "rules"
 #~ msgstr "قواعد"
-
 #~ msgid "URL patterns"
 #~ msgstr "نموذج العنوان"
-
 #~ msgid "Advanced options"
 #~ msgstr "خيارات متقدمة"
-
 #~ msgid "and"
 #~ msgstr "و"
-
 #~ msgid "allowed"
 #~ msgstr "مسموح"
-
 #~ msgid "disallowed"
 #~ msgstr "غير مسموح"
-
 #~ msgid "Not Found"
 #~ msgstr "غير موجود"
-
 #~ msgid "We're sorry but that page could not be found."
 #~ msgstr "نحن آسفون ولكن لم يتم العثور على الصفحة!"
-
 #~ msgid "Server Error"
 #~ msgstr "خطأ في المخدم"
-
 #~ msgid ""
 #~ "We're sorry but a server error has occurred. We've been notified and will "
 #~ "look into it as soon as possible."
 #~ msgstr ""
 #~ "نحن آسفون ولكن حدث خطأ ما في المخدم. لقد تم إعلامنا وسنبحث بهذا الأمر في "
 #~ "أسرع وقت ممكن."
-
 #~ msgid "Apps"
 #~ msgstr "التطبيقات"
-
 #~ msgid "More about the apps that make up Pinax."
 #~ msgstr "المزيد من المعلومات حول التطبيقات التي يستخدمها بيناكس."
-
 #~ msgid "External"
 #~ msgstr "خارجية"
-
 #~ msgid ""
 #~ "These already exist as independent apps. Some pre-existed Pinax, some "
 #~ "were written especially for it."
 #~ msgstr ""
 #~ "هذه التطبيقات موجودة بشكل مستقل. بعضها قبل البدء ببيناكس، وبعضها مكتوب "
 #~ "خصصيصاً لبيناكس."
-
 #~ msgid "user notification management"
 #~ msgstr "التحكم في نظام تنبيه المستخدم"
-
 #~ msgid "simple email verification"
 #~ msgstr "عملية التحقق من البريد الإلكتروني البسيطة"
-
 #~ msgid "useful management commands"
 #~ msgstr "أوامر إدارة هامة"
-
 #~ msgid "for managing robots.txt files"
 #~ msgstr "لإدارة ملف robots.txt"
-
 #~ msgid "loader for templates from the database"
 #~ msgstr "مشغل القوال من قاعدة البيانات"
-
 #~ msgid "friendship, contact and invitation management"
 #~ msgstr "صداقة، صديق و إدارة الدعوات"
-
 #~ msgid "mail queuing and management"
 #~ msgstr " إدارة مجموعات الرسائل"
-
 #~ msgid "private messages between users"
 #~ msgstr "رسائل خاصة بين المستخدمين"
-
 #~ msgid "site announcements"
 #~ msgstr "تنبيهات الموقع"
-
 #~ msgid "support for oembeded links"
 #~ msgstr "دعم روابط أو إيبيد oEmbed"
-
 #~ msgid "debugging and logging"
 #~ msgstr "تصليح الأخطاء وحفظ السجلات"
-
 #~ msgid "exception logging to the database"
 #~ msgstr "تسجيل الأحداث الخاصة لقاعدة البيانات"
-
 #~ msgid "easy pagination"
 #~ msgstr "تسهيل عملية إنشاء الصفحات"
-
 #~ msgid "threaded comments"
 #~ msgstr "نقاشات"
-
 #~ msgid "simple wiki"
 #~ msgstr "ويكي بسيطة"
-
 #~ msgid "db schema evolution"
 #~ msgstr "تطور تخطيط قاعدةا لبيانات"
-
 #~ msgid "timezone localization"
 #~ msgstr "مركزة المنطقة الزمنية"
-
 #~ msgid "feed aggregation"
 #~ msgstr "تجميع الخلاصات"
-
 #~ msgid "extension points in templates"
 #~ msgstr "نقاط التمديد في القوالب"
-
 #~ msgid "generic voting"
 #~ msgstr "تصويت عام"
-
 #~ msgid "URL bookmarking"
 #~ msgstr "إضافة عناوين إلى المفضلة"
-
 #~ msgid ""
 #~ "<a href=\"http://code.google.com/p/django-openid/\">django-openid</a> is "
 #~ "also used but locally for modification."
 #~ msgstr ""
 #~ "<a href=\"http://code.google.com/p/django-openid/\">django-openid</a> "
 #~ "مستخدمة أيضاً. ولكن بشكل داخلي من أجل القيام ببعض التعديلات عليها."
-
 #~ msgid "Local"
 #~ msgstr "محلي"
-
 #~ msgid ""
 #~ "These are currently inside Pinax but could potentially be broken out as "
 #~ "generic apps."
 #~ msgstr ""
 #~ "تتوافر حالياً كجزء داخلي من كود بيناكس. ولكن من الممكن أن يتم فصلها في "
 #~ "تطبيقات منفصلة."
-
 #~ msgid "Google analytics javascript"
 #~ msgstr "كود جافا سكريبت لمحلل غوغل"
-
 #~ msgid "profile pages"
 #~ msgstr "صفحة الملف الشخصي"
-
 #~ msgid "a Twitter clone"
 #~ msgstr "نسخة مماثلة لتويتتر."
-
 #~ msgid ""
 #~ "overall account management: signup, login, password change/reset, etc"
 #~ msgstr ""
 #~ "إدارة عامة لقائمة الأعضاء: تسجيل حساب جديد، تسجيل دخول وتغيير كلمة السر "
 #~ "أو إعادتها."
-
 #~ msgid "groups of people with common interests"
 #~ msgstr "مجموعة من الناس بنفس الإهتمام"
-
 #~ msgid "for displaying gravatars"
 #~ msgstr "لعرض الصور من غرافييتر"
-
 #~ msgid "for authenticating with Google's AuthSub"
 #~ msgstr "للتوثيق مع نظام AuthSub من غوغل."
-
 #~ msgid "for authenticating with Yahoo's BBAuth"
 #~ msgstr "للتوثيق مع نظام BBAuth من ياهو ."
-
 #~ msgid "Hide announcement"
 #~ msgstr "إخفاء الإعلانات"
-
 #~ msgid "clear"
 #~ msgstr "مسح"
-
 #~ msgid ""
 #~ "\n"
 #~ "        <p><b>Pinax</b> is a <a href=\"http://djangoproject.com/"
@@ -845,17 +635,14 @@ msgstr "لست عضواً في أي <a href=\"%(tribe_url)s\">قبيلة</a> ب�
 #~ "\n"
 #~ "<p>إذا كان لديك أي سؤال أو إستفسار عن مشروع <b>بيناكس</b>, الرجاء <a href="
 #~ "\"mailto:jtauber@jtauber.com\">مراسلة James Tauber</a>.</p>"
-
 #~ msgid "Wondering <a href=\"%(what_next_url)s\">What Next</a>?"
 #~ msgstr "تتسائل <a href=\"%(what_next_url)s\">مالذي ستفعله الآن</a>?"
-
 #~ msgid ""
 #~ "You can <a href=\"%(signup_url)s\">Sign up</a> and <a href=\"%(login_url)s"
 #~ "\">Log in</a> to try out the site."
 #~ msgstr ""
 #~ "يمكنك<a href=\"%(signup_url)s\">تسجيل حساب جديد</a> و <a href=\"%"
 #~ "(login_url)s\">تسجيل دخولك</a>, لكي تجرب بيناكس."
-
 #~ msgid ""
 #~ "At this stage, there is openid support, email verification, password "
 #~ "management, site announcements, user-to-user messaging, friend invitation "
@@ -869,70 +656,48 @@ msgstr "لست عضواً في أي <a href=\"%(tribe_url)s\">قبيلة</a> ب�
 #~ "وخارجية)، نسخة مطابقة لموقع تويتتر، جماعات (تدعى قبائل)، نقاش مابين أعضاء "
 #~ "القبائل، ويكي للقبائل، تجميع الخلاصات، مفضلة مواقع، إضافة جهات إتصال من "
 #~ "خلال بطاقات vCard، دعم لغوغل وياهو و بيئة تنبيهات متكاملة."
-
 #~ msgid "Account"
 #~ msgstr "حساب"
-
 #~ msgid "Logout"
 #~ msgstr "تسجيل خروج"
-
 #~ msgid "Login"
 #~ msgstr "تسجيل دخول"
-
 #~ msgid "Sign up"
 #~ msgstr "تسجيل حساب جديد"
-
 #~ msgid "Home"
 #~ msgstr "الصفحةا لرئيسية"
-
 #~ msgid "Sites"
 #~ msgstr "مواقع"
-
 #~ msgid "Team"
 #~ msgstr "فريق"
-
 #~ msgid "Profile"
 #~ msgstr "ملف شخصي"
-
 #~ msgid "Tribes"
 #~ msgstr "قبائل"
-
 #~ msgid "Tweets"
 #~ msgstr "تتويتات"
-
 #~ msgid "Bookmarks"
 #~ msgstr "عناوين مفضلة"
-
 #~ msgid "&copy; 2008 &lt;your company here&gt;"
 #~ msgstr "&copy; 2008 &lt;إسم شركتك هنا&gt;"
-
 #~ msgid "About Pinax"
 #~ msgstr "حول بيناكس"
-
 #~ msgid "Pinax Blog"
 #~ msgstr "مدونة بيناكس"
-
 #~ msgid "Terms of Service"
 #~ msgstr "قوانين الإستخدام"
-
 #~ msgid "Privacy Policy"
 #~ msgstr "إتفاقية الخصوصية"
-
 #~ msgid "Sites built on Pinax, both originals and contrafacts."
 #~ msgstr "المواقع المبنية بإستخدام بيناكس، الأصلية والمتطورة"
-
 #~ msgid "The people responsible for Pinax."
 #~ msgstr "الأشخاص وراء بيناكس"
-
 #~ msgid "and the developers of the awesome re-usable django apps we used."
 #~ msgstr "والمطورين وراء تطبيقات جانغو المعاد إستعمالها في بيناكس."
-
 #~ msgid "Translators"
 #~ msgstr "المترجمين"
-
 #~ msgid "About"
 #~ msgstr "حول"
-
 #~ msgid ""
 #~ "\n"
 #~ "        <p>Your <b>About Page</b> would normally go here, be here's a "
@@ -969,126 +734,92 @@ msgstr "لست عضواً في أي <a href=\"%(tribe_url)s\">قبيلة</a> ب�
 #~ "<p>إذا كان لديك أي سؤال أو إستفسار عن مشروع <b>بيناكس</b>, الرجاء <a href="
 #~ "\"mailto:jtauber@jtauber.com\">مراسلة James Tauber</a>.</p>\n"
 #~ "    "
-
 #~ msgid "<p>Your <b>Privacy Policy</b> would normally go here...</p>"
 #~ msgstr "<p><b>إتفاقية الخصوصية</b> ستكون هنا</p>"
-
 #~ msgid "<p>Your <b>Terms of Service</b> would normally go here...</p>"
 #~ msgstr "<p><b>إتفاقية الإستخدام</b> ستكون هنا.</p>"
-
 #~ msgid "What Next?"
 #~ msgstr "ماذا تريد أن تفعل؟"
-
 #~ msgid ""
 #~ "Start by <a href=\"%(signup_url)s\">signing up</a> and <a href=\"%"
 #~ "(login_url)s\">logging in</a>."
 #~ msgstr ""
 #~ "يمكنك البدء بأن <a href=\"%(signup_url)s\">تسجل حساباً جديداً</a> و <a href="
 #~ "\"%(login_url)s\">الدخول به.</a>."
-
 #~ msgid "E-Mail Addresses"
 #~ msgstr "عنوان البريد الإلكتروني"
-
 #~ msgid "OpenID Associations"
 #~ msgstr "الإرتباط مع OpenIDs"
-
 #~ msgid "Change Password"
 #~ msgstr "تغيير كلمة المرور"
-
 #~ msgid "Reset Password"
 #~ msgstr "إعادة كلمة المرور"
-
 #~ msgid "Email Addresses"
 #~ msgstr "عنوان البريد الإلكتروني"
-
 #~ msgid "verified"
 #~ msgstr "محقق منه"
-
 #~ msgid "primary"
 #~ msgstr "أساسي"
-
 #~ msgid "make primary"
 #~ msgstr "إجعله أساسياً"
-
 #~ msgid "unverified"
 #~ msgstr "غير محقق منه"
-
 #~ msgid "re-send verification email"
 #~ msgstr "أعد إرسال رسالة التحقق من البريد الإلكتروني"
-
 #~ msgid "remove"
 #~ msgstr "حذف"
-
 #~ msgid "None"
 #~ msgstr "لاشيء"
-
 #~ msgid ""
 #~ "You should really add one so you can receive notifications, reset your "
 #~ "password if you forget it, etc."
 #~ msgstr ""
 #~ "من الضروري جداً أن تضيف واحداً لكي تتلقى التنبيهات، تتمكن من تغيير كلمة "
 #~ "مرورك في حال نسيتها وغيرها.."
-
 #~ msgid "Add Email Address"
 #~ msgstr "أضف بريد إلكتروني"
-
 #~ msgid "add"
 #~ msgstr "أضف"
-
 #~ msgid "Log In"
 #~ msgstr "تسجيل دخول"
-
 #~ msgid "Note"
 #~ msgstr "ملاحظة"
-
 #~ msgid "Don't have an account? <a href=\"%(signup_url)s\">Sign up</a>!"
 #~ msgstr "ليس لديك حساب بعد؟ <a href=\"%(signup_url)s\">سجل الآن</a>!"
-
 #~ msgid "Forgot password?"
 #~ msgstr "نسيت كلمة مرورك؟"
-
 #~ msgid "Log in &raquo;"
 #~ msgstr "تسجيل دخول &raquo;"
-
 #~ msgid "Or sign in with your OpenID"
 #~ msgstr "أو إدخل من خلال حساب الـ OpenID الخاص بك."
-
 #~ msgid "OpenID Identifier"
 #~ msgstr "معرف الـ OpenID"
-
 #~ msgid ""
 #~ "If you have any trouble logging in to your account, contact us at <a href="
 #~ "\"mailto:%(contact_email)s\">%(contact_email)s</a>."
 #~ msgstr ""
 #~ "إذا كنت تواجه مشاكل في الدخول راسلنا على <a href=\"mailto:%(contact_email)"
 #~ "s\">%(contact_email)s</a>."
-
 #~ msgid "You've been logged out."
 #~ msgstr "لقد تم تسجيل خروجك."
-
 #~ msgid "change password"
 #~ msgstr "تغيير كلمة المرور"
-
 #~ msgid "Password Reset"
 #~ msgstr "إعادة كلمة المرور"
-
 #~ msgid ""
 #~ "Forgotten your password? Enter your e-mail address below, and we'll reset "
 #~ "your password and e-mail the new one to you."
 #~ msgstr ""
 #~ "نسيت كلمة مرورك؟ أدخل بريدك الإلكتروني في الأسفل وسوف نقوم بتغيير كلمة "
 #~ "مرورك وإرسال كلمة المرور الجديدة إليك."
-
 #~ msgid "Reset my password"
 #~ msgstr "تغيير كلمة المرور"
-
 #~ msgid ""
 #~ "If you have any trouble resetting your password, contact us at <a href="
 #~ "\"mailto:%(contact_email)s\">%(contact_email)s</a>."
 #~ msgstr ""
 #~ "إذا كنت تواجه أي مشكلة في تغيير كلمة مرورك، راسلنا على: <a href=\"mailto:%"
 #~ "(contact_email)s\">%(contact_email)s</a>."
-
 #~ msgid ""
 #~ "A new password has been sent to <b>%(email)s</b>. If you do not receive "
 #~ "it within a few minutes, contact us at <a href=\"mailto:%(contact_email)s"
@@ -1097,14 +828,12 @@ msgstr "لست عضواً في أي <a href=\"%(tribe_url)s\">قبيلة</a> ب�
 #~ "لقد تم إرسال كلمة المرور الجديدة إلى <b>%(email)s</b>. إذا لم تستلمها "
 #~ "خلال دقائق راسلنا على: <a href=\"mailto:%(contact_email)s\">%"
 #~ "(contact_email)s</a>."
-
 #~ msgid ""
 #~ "When you receive the new password, you should <a href=\"%(login_url)s"
 #~ "\">log in</a> and change it as soon as possible."
 #~ msgstr ""
 #~ "في أسرع وقت ممكن. عندما تستلم كلمة المرور الجديدة، يجب عليك <a href=\"%"
 #~ "(login_url)s\">الدخول</a> وتغييرها "
-
 #~ msgid ""
 #~ "You're receiving this e-mail because you requested a password reset\n"
 #~ "for your user account at Pinax.\n"
@@ -1136,22 +865,16 @@ msgstr "لست عضواً في أي <a href=\"%(tribe_url)s\">قبيلة</a> ب�
 #~ "You should log in as soon as possible and change your password.\n"
 #~ "\n"
 #~ "Thanks for using our site!\n"
-
 #~ msgid "Signup"
 #~ msgstr "تسجيل حساب جديد"
-
 #~ msgid "Sign Up"
 #~ msgstr "تسجيل حساب جديد"
-
 #~ msgid "You are already logged in."
 #~ msgstr "أنت تقوم بالدخول الآن!"
-
 #~ msgid "Already have an account?"
 #~ msgstr "لديك حساب؟"
-
 #~ msgid "Sign Up &raquo;"
 #~ msgstr "تسجيل حساب &raquo;"
-
 #~ msgid ""
 #~ "By clicking \"Sign Up\", you are indicating that you have read and agree "
 #~ "to the <a href=\"%(terms_url)s\">Terms of Use</a> and <a href=\"%"
@@ -1159,66 +882,49 @@ msgstr "لست عضواً في أي <a href=\"%(tribe_url)s\">قبيلة</a> ب�
 #~ msgstr ""
 #~ "بضغطك على \"تسجيل \", فأنت تقر بموافقتك على  <a href=\"%(terms_url)s"
 #~ "\">شروط الإستخدام</a> و <a href=\"%(privacy_url)s\">إتفاقية الخصوصية</a>."
-
 #~ msgid ""
 #~ "If you have any trouble creating your account, contact us at <a href="
 #~ "\"mailto:%(contact_email)s\">%(contact_email)s</a>."
 #~ msgstr ""
 #~ "إذا كنت تواجه مشكلة في تسجيل حساب جديد، راسلنا على:  <a href=\"mailto:%"
 #~ "(contact_email)s\">%(contact_email)s</a>."
-
 #~ msgid ""
 #~ "Pinax can localize all times into your preferred timezone. Change your "
 #~ "timezone below."
 #~ msgstr ""
 #~ "بإمكان بيناكس أن يعرض الأوقات بحسب منطقتك الزمنية. يمكنك تغيير المنطقة "
 #~ "الزمنية من هنا."
-
 #~ msgid "Change my timezone"
 #~ msgstr "تغيير المنطقة الزمنية"
-
 #~ msgid "Announcements : %(object)s"
 #~ msgstr "تنبيهات : %(object)s"
-
 #~ msgid "Announcements"
 #~ msgstr "تنبيهات"
-
 #~ msgid "There are no announcements for you."
 #~ msgstr "لايوجد تنبيهات"
-
 #~ msgid "Add Bookmark"
 #~ msgstr "أضف للمفضلة"
-
 #~ msgid "add bookmark"
 #~ msgstr "أضف للمفضلة"
-
 #~ msgid "All Bookmarks"
 #~ msgstr "أضف عناوين مفضلة"
-
 #~ msgid "These are bookmarks from everyone:"
 #~ msgstr "هذه عناوين مفضلة  من الجميع:"
-
 #~ msgid "No bookmarks yet."
 #~ msgstr "لايوجد عناوين مفضلة بعد."
-
 #~ msgid ""
 #~ "You haven't added any <a href=\"%(add_bookmark_url)s\">bookmarks</a> yet."
 #~ msgstr ""
 #~ "لم تقم بإضافة أي <a href=\"%(add_bookmark_url)s\">عنوان مفضل</a> بعد."
-
 #~ msgid "Confirm Email"
 #~ msgstr "تأكيد البريد الإلكتروني"
-
 #~ msgid "Email Confirmed"
 #~ msgstr "تم التأكد من البريد الإلكتروني"
-
 #~ msgid ""
 #~ "You have confirmed that %(email)s is an email address for user '%(user)s'."
 #~ msgstr "لقد أكدت أن %(email)s هو البريد الإلكتروني للمستخدم '%(user)s'."
-
 #~ msgid "Invalid confirmation key."
 #~ msgstr "مفتاح التأكيد غير صحيح."
-
 #~ msgid ""
 #~ "User '%(user)s' at Pinax has given this as an email address.\n"
 #~ "\n"
@@ -1227,115 +933,82 @@ msgstr "لست عضواً في أي <a href=\"%(tribe_url)s\">قبيلة</a> ب�
 #~ "المستخدم '%(user)s' من بيناكس أدخل هذا البريد كعنوان بريده الإلكتروني.\n"
 #~ "\n"
 #~ "إذا كنت أنت هذا المستخدم إذهب إلى: %(activate_url)s\n"
-
 #~ msgid "Confirm email address for Pinax"
 #~ msgstr "تأكيد  عنوان البريد الإلكتروني لبيناكس."
-
 #~ msgid "%(post_age)s ago"
 #~ msgstr "منذ %(post_age)s"
-
 #~ msgid "Recent Blog Posts"
 #~ msgstr "آخر التدوينات"
-
 #~ msgid "You have been invited to join Pinax"
 #~ msgstr "لقد تمت دعوتك إلى بيناكس!"
-
 #~ msgid "Contacts"
 #~ msgstr "جهات الإتصال"
-
 #~ msgid "upload"
 #~ msgstr "رفع"
-
 #~ msgid "Import Google Contacts"
 #~ msgstr "إستيراد جهات إتصال من غوغل"
-
 #~ msgid "Import Yahoo Address Book"
 #~ msgstr "إتسيراد جهات إتصال من ياهوو"
-
 #~ msgid "No contacts."
 #~ msgstr "لايوجد جهات إتصال."
-
 #~ msgid "Invitations"
 #~ msgstr "دعوات"
-
 #~ msgid "Invite someone new to join"
 #~ msgstr "قم بدعوة شخص جديد للإنضمام!"
-
 #~ msgid ""
 #~ "If you'd like to invite someone to join Pinax, you can enter their email "
 #~ "address and a message for them below:"
 #~ msgstr ""
 #~ "إذا أردت أن تدعو شخصاً جديداً للإنضمام إلى بيناكس، بإمكانك إدخال بريده "
 #~ "الإلكتروني ورسالة لك في الأسفل:"
-
 #~ msgid "Someone with this email address has already joined:"
 #~ msgstr "هناك شخص مسجل في بيناكس بعنوان البريد الإلكتروني هذا نفسه!"
-
 #~ msgid "invite"
 #~ msgstr "دعوة"
-
 #~ msgid "Friendship Requests Received"
 #~ msgstr "تم إستلام طلب دعوة صداقة"
-
 #~ msgid "accept"
 #~ msgstr "قبول"
-
 #~ msgid "No friendship requests received."
 #~ msgstr "لم يتم إستلام أي طلب دعوة صداقة."
-
 #~ msgid "Friendship Requests Sent"
 #~ msgstr "تم إرسال طلب صداقة"
-
 #~ msgid "No friendship requests sent."
 #~ msgstr "لم يتم إرسال أي طلب صداقة."
-
 #~ msgid "Join Requests Sent"
 #~ msgstr "تم إرسال طلب الإنضمام"
-
 #~ msgid "No join requests sent."
 #~ msgstr "لم يتم إرسال أي طلب إنضمام"
-
 #~ msgid "Compose"
 #~ msgstr "إنشاء"
-
 #~ msgid "Notices"
 #~ msgstr "ملاحظات"
-
 #~ msgid ""
 #~ "Deleted Messages are removed from the trash at irregular intervals, don't "
 #~ "rely on this feature for long-time storage."
 #~ msgstr ""
 #~ "الرسائل المحذوفة تحذف نهائياً في أوقات غير محددة. لا تعتمد على هذه سلة "
 #~ "الرسائل المحذوفة لتخزينا."
-
 #~ msgid "MONTH_DAY_FORMAT"
 #~ msgstr "F j"
-
 #~ msgid "No notices."
 #~ msgstr "لايوجد ملاحظات"
-
 #~ msgid "Settings"
 #~ msgstr "إعدادات"
-
 #~ msgid "Primary email"
 #~ msgstr "البريد الإلكتروني الأساسي"
-
 #~ msgid "change under <a href=\"%(email_url)s\">Account</a>"
 #~ msgstr "التغيير في <a href=\"%(email_url)s\">الحساب</a>"
-
 #~ msgid ""
 #~ "You do not have a verified email address to which notices can be sent. "
 #~ "You can add one by going to <a href=\"%(email_url)s\">Account</a>."
 #~ msgstr ""
 #~ "لم تقم بتأكيد عنوان بريد إلكتروني ليتم إرسال التنبيهات إليه. يمكنك إضافة "
 #~ "بريد بالذهاب إلى: <a href=\"%(email_url)s\">Account</a>."
-
 #~ msgid "Notification Type"
 #~ msgstr "نوع التنبيه"
-
 #~ msgid "Change"
 #~ msgstr "تغيير"
-
 #~ msgid ""
 #~ "You have received the following notice from Pinax:\n"
 #~ "\n"
@@ -1356,36 +1029,26 @@ msgstr "لست عضواً في أي <a href=\"%(tribe_url)s\">قبيلة</a> ب�
 #~ "\n"
 #~ "إذا كنت تواجه أي مشكلة أخرى، لا تتردد في المراسلة على:t %(contact_email)"
 #~ "s\n"
-
 #~ msgid "%(display)s Notification From Pinax"
 #~ msgstr "%(display)s تنبيهات من بيناكس"
-
 #~ msgid "Manage OpenID Associations"
 #~ msgstr "إدارة ربط حساب الـ OpenID"
-
 #~ msgid ""
 #~ "Your account is currently associated with the following OpenID %(buttons)"
 #~ "s:"
 #~ msgstr "حسابك الآن مربوط بحسابات الـ OpenID التالية: %(buttons)s:"
-
 #~ msgid "Remove association"
 #~ msgstr "إحذف الإرتباط"
-
 #~ msgid "Associate"
 #~ msgstr "قم بالربط"
-
 #~ msgid "To associate a new OpenID with this account, sign in with it here:"
 #~ msgstr "لتربط حساب OpenID بحسابك هذا، قم بالدخول به هنا: "
-
 #~ msgid "Authenticate and associate with this account"
 #~ msgstr "أعطي الصلاحية وقم بالربط بهذا الحساب"
-
 #~ msgid "Sign Up with OpenID"
 #~ msgstr "قم بالدخول بـ OpenID"
-
 #~ msgid "Please correct the errors below:"
 #~ msgstr "الرجاء تصليح الأخطاء هذه: "
-
 #~ msgid ""
 #~ "Already have an account? <a href=\"/account/login/?next=/openid/"
 #~ "associations/\">Login here</a> to associate your OpenID with your "
@@ -1393,7 +1056,6 @@ msgstr "لست عضواً في أي <a href=\"%(tribe_url)s\">قبيلة</a> ب�
 #~ msgstr ""
 #~ "لديك حساب مسبقا؟ <a href=\"/account/login/?next=/openid/associations/"
 #~ "\">إدخل به من هنا</a> لكي تربط حساب OpenID بحسابك."
-
 #~ msgid ""
 #~ "By clicking \"Sign Up\", you are indicating that you have read and agree "
 #~ "to the <a href=\"/about/terms\">Terms of Use</a> and <a href=\"/about/"
@@ -1401,58 +1063,40 @@ msgstr "لست عضواً في أي <a href=\"%(tribe_url)s\">قبيلة</a> ب�
 #~ msgstr ""
 #~ "بضغطك \"تسجيل حساب\", أنت توافق على  <a href=\"/about/terms\">شروط "
 #~ "الإستخدام</a> و <a href=\"/about/privacy\">إتفاقية الخصوصية</a>."
-
 #~ msgid "Your Profile"
 #~ msgstr "ملفك الشخصي"
-
 #~ msgid "All Profiles"
 #~ msgstr "جميع الملفات الشخصية"
-
 #~ msgid "Profile for %(other_user)s"
 #~ msgstr "الملف الشخصي لـ %(other_user)s"
-
 #~ msgid "Name"
 #~ msgstr "الإسم"
-
 #~ msgid "Website"
 #~ msgstr "الموقع"
-
 #~ msgid "Followers"
 #~ msgstr "التابعين"
-
 #~ msgid "Following"
 #~ msgstr "تابع لـ"
-
 #~ msgid "Edit profile"
 #~ msgstr "تعديل الملف الشخصي"
-
 #~ msgid "update"
 #~ msgstr "تحديث"
-
 #~ msgid "unfollow"
 #~ msgstr "فك الإتباع"
-
 #~ msgid "follow tweets"
 #~ msgstr "متابعة التتويتات"
-
 #~ msgid "You are friends with %(other_user)s."
 #~ msgstr "أنت و  %(other_user)s أصدقاء."
-
 #~ msgid "Send a message"
 #~ msgstr "إبعث رسالة"
-
 #~ msgid "%(other_user)s has requested friendship."
 #~ msgstr "%(other_user)s طلب أن يصبح صديقاً لك."
-
 #~ msgid "Friendship request sent."
 #~ msgstr "تم إرسال طلب صداقة."
-
 #~ msgid "Add As Friend"
 #~ msgstr "أضف كصديق"
-
 #~ msgid "%(other_user)s to be a friend."
 #~ msgstr "%(other_user)s ليصبح صديقاً لك."
-
 #~ msgid ""
 #~ "<a href=\"%(signup_url)s\">Sign up</a> and <a href=\"%(login_url)s\">log "
 #~ "in </a> to add this person as a friend and see their tweets and blog "
@@ -1460,184 +1104,128 @@ msgstr "لست عضواً في أي <a href=\"%(tribe_url)s\">قبيلة</a> ب�
 #~ msgstr ""
 #~ "<a href=\"%(signup_url)s\">سجل حساب جديد</a> و <a href=\"%(login_url)s"
 #~ "\">سجل دخول</a> لكي تضيف هذا الشخص كصديق ولكي ترى تتويتاته وتدويناته."
-
 #~ msgid "Your Tribes"
 #~ msgstr "القبائل التي تنتمي إليها"
-
 #~ msgid "Your Friends"
 #~ msgstr "قائمة الأصدقاء"
-
 #~ msgid ""
 #~ "None. You should look at the list of <a href=\"/profiles/\">profiles</a> "
 #~ "and see if there's anyone you know."
 #~ msgstr ""
 #~ "لا أحد. بإمكانك النظر إلى قائمة <a href=\"/profiles/\">الملفات الشخصية</"
 #~ "a>  لتبحث عن شخص تعرفة."
-
 #~ msgid "%(other_user)s's Tribes"
 #~ msgstr "القبائل التي ينتمي إليها %(other_user)s"
-
 #~ msgid "Not yet a member of any tribes."
 #~ msgstr "ليس عضواً في أي قبيلة بعد."
-
 #~ msgid "%(other_user)s's Friends"
 #~ msgstr "أصدقاء %(other_user)s"
-
 #~ msgid "Profiles"
 #~ msgstr "الملفات الشخصية"
-
 #~ msgid "All Tribes"
 #~ msgstr "جميع القبائل"
-
 #~ msgid "Back to Topic List for Tribe "
 #~ msgstr "العودة إلى قائمة المواضيع في القبيلة"
-
 #~ msgid "Delete Topic"
 #~ msgstr "إحذف الموضوع"
-
 #~ msgid "Delete Post"
 #~ msgstr "إحذف التدوينة"
-
 #~ msgid "Post Response"
 #~ msgstr "رد"
-
 #~ msgid "Discussion Topics for Tribe"
 #~ msgstr "مواضيع المناقشة للقبيلة"
-
 #~ msgid "Create New Topic"
 #~ msgstr "أنشئ مقالة جديدة"
-
 #~ msgid "Members"
 #~ msgstr "أعضاء"
-
 #~ msgid "Tribe"
 #~ msgstr "قبيلة"
-
 #~ msgid "Edit details"
 #~ msgstr "تعديل المعلومات"
-
 #~ msgid "leave"
 #~ msgstr "إترك"
-
 #~ msgid "join tribe"
 #~ msgstr "إنضم إلى القبيلة"
-
 #~ msgid ""
 #~ "<a href=\"%(signup_url)s\">Sign up</a> and <a href=\"%(login_url)s\">log "
 #~ "in </a> to join this tribe."
 #~ msgstr ""
 #~ "<a href=\"%(signup_url)s\">سجل حساب</a> و <a href=\"%(login_url)s\">إدخل "
 #~ "به</a> لتنضم إلى هذه القبيلة"
-
 #~ msgid "Start your own"
 #~ msgstr "أنشئ خاصتك"
-
 #~ msgid "create"
 #~ msgstr "أنشئ"
-
 #~ msgid ""
 #~ "<a href=\"%(signup_url)s\">Sign up</a> and <a href=\"%(login_url)s\">log "
 #~ "in </a> to create your own tribe or join an existing one."
 #~ msgstr ""
 #~ "<a href=\"%(signup_url)s\">سجل حساب جديد</a> و <a href=\"%(login_url)s"
 #~ "\">قم بالدخول</a> لكي تنشئ قبيلتك الخاصة أو تنضم إلى واحدة."
-
 #~ msgid "All Articles"
 #~ msgstr "جميع المقالات"
-
 #~ msgid "Wiki for Tribe"
 #~ msgstr "ويكي القبيلة"
-
 #~ msgid "Markup:"
 #~ msgstr "Markup:"
-
 #~ msgid "Plain Text."
 #~ msgstr "نص عادي"
-
 #~ msgid "Edit Article"
 #~ msgstr "تعديل المقال"
-
 #~ msgid "Save Article"
 #~ msgstr "حفظ المقال"
-
 #~ msgid "History for article"
 #~ msgstr "تاريخ المقال"
-
 #~ msgid "Editor"
 #~ msgstr "المحرر"
-
 #~ msgid "Comment"
 #~ msgstr "تعليق"
-
 #~ msgid "Revert to..."
 #~ msgstr "أرجع الإصدارة إلى:"
-
 #~ msgid "Current Revision"
 #~ msgstr "الإصدارة الحالية"
-
 #~ msgid "Revert"
 #~ msgstr "إسترجع إصدارة"
-
 #~ msgid "No changes in this article"
 #~ msgstr "لا يوجد تغييرات في هذه المقال"
-
 #~ msgid "Go"
 #~ msgstr "إذهب"
-
 #~ msgid "Actions"
 #~ msgstr "مهام"
-
 #~ msgid "Edit this article"
 #~ msgstr "عدل هذه المقالة"
-
 #~ msgid "Editing history"
 #~ msgstr "تعديل التاريخ"
-
 #~ msgid "Create this article"
 #~ msgstr "أنشئ هذه المقالة"
-
 #~ msgid "This article does not exist."
 #~ msgstr "هذه المقالة غير موجوة!"
-
 #~ msgid ">Create it now</a>?"
 #~ msgstr ">أنشئها الآن</a>?"
-
 #~ msgid "Wiki Articles"
 #~ msgstr "مقالات ويكي"
-
 #~ msgid "No wiki articles yet."
 #~ msgstr "لايوجد أي مقال ويكي بعد."
-
 #~ msgid "Tweets You Follow"
 #~ msgstr "التتويتات التي تتبعها"
-
 #~ msgid "All Tweets"
 #~ msgstr "جميع التتويتات"
-
 #~ msgid "%(tweet_age)s ago"
 #~ msgstr "منذ %(tweet_age)s"
-
 #~ msgid "reply"
 #~ msgstr "رد"
-
 #~ msgid "You haven't posted any <a href=\"%(tweets_url)s\">tweets</a> yet."
 #~ msgstr "لم تقم بإدراج أي <a href=\"%(tweets_url)s\">تتويتة</a> بعد."
-
 #~ msgid "There are currently no tweets to be listed."
 #~ msgstr "لايوجد حالياً أي تتويتة مدرجة"
-
 #~ msgid "What are you doing?"
 #~ msgstr "ماذا تفعل الآن؟"
-
 #~ msgid "chars left."
 #~ msgstr "أحرف متبقية"
-
 #~ msgid "post"
 #~ msgstr "إنشاء"
-
 #~ msgid "person,people"
 #~ msgstr "شخص، أشخاص"
-
 #~ msgid ""
 #~ "\n"
 #~ "        These are tweets from the %(follow_count)s %(follow_name)s you "
@@ -1646,213 +1234,144 @@ msgstr "لست عضواً في أي <a href=\"%(tribe_url)s\">قبيلة</a> ب�
 #~ "\n"
 #~ "      هذه التتويتات من %(follow_count)s %(follow_name)s الذين تتبعهم "
 #~ "(بالإضافة إلى تتويتاتك)"
-
 #~ msgid "Public Tweets"
 #~ msgstr "تتويتات عامة"
-
 #~ msgid "These are tweets from everyone:"
 #~ msgstr "تتويتات الجميع:"
-
 #~ msgid "Single Tweet"
 #~ msgstr "تتويتة واحدة"
-
 #~ msgid "comment"
 #~ msgstr "تعليق"
-
 #~ msgid "markdown"
 #~ msgstr "markdown"
-
 #~ msgid "textile"
 #~ msgstr "textile"
-
 #~ msgid "restructuredtext"
 #~ msgstr "restructuredtext"
-
 #~ msgid "plaintext"
 #~ msgstr "نص عادي"
-
 #~ msgid "object ID"
 #~ msgstr "معرف العنصر"
-
 #~ msgid "date/time submitted"
 #~ msgstr "تم تأكيد الوقت"
-
 #~ msgid "date/time modified"
 #~ msgstr "تم تغيير الوقت"
-
 #~ msgid "date/time approved"
 #~ msgstr "تم قبول الوقت"
-
 #~ msgid "is public"
 #~ msgstr "عام"
-
 #~ msgid "is approved"
 #~ msgstr "مقبول"
-
 #~ msgid "IP address"
 #~ msgstr "عنوان الآي بي"
-
 #~ msgid "Threaded Comment"
 #~ msgstr "نقاش"
-
 #~ msgid "Threaded Comments"
 #~ msgstr "نقاشات"
-
 #~ msgid "site"
 #~ msgstr "الموقع الإلكتروني"
-
 #~ msgid "e-mail address"
 #~ msgstr "عنوان البريد الإلكتروني"
-
 #~ msgid "Free Threaded Comment"
 #~ msgstr "نقاش حر"
-
 #~ msgid "Free Threaded Comments"
 #~ msgstr "نقاشات حرة"
-
 #~ msgid "This value must contain only letters, numbers and underscores."
 #~ msgstr "هذه القيمة من الممكن ان تحوي أحرف، أرقام أو شارطة سفلية فقط."
-
 #~ msgid "Friend Joined Tribe"
 #~ msgstr "أحد أصدقائك إنضم إلى قبيلة"
-
 #~ msgid "a friend of yours joined a tribe"
 #~ msgstr "أحد أصدقائك إنضم إلى قبيلة"
-
 #~ msgid "Friend Created Tribe"
 #~ msgstr "أحد أصدقائك قام بإنشاء قبيلة"
-
 #~ msgid "a friend has created a new tribe"
 #~ msgstr "أحد أصدقائك قام بإنشاء قبيلة جديدة"
-
 #~ msgid "New Topic Started"
 #~ msgstr "تم بدء موضوع جديد"
-
 #~ msgid "a new topic has started in a tribe you're a member of"
 #~ msgstr "هناك موضوع جديد في أحد القبائل التي تنتمي إليها"
-
 #~ msgid "Response To Your Topic"
 #~ msgstr "رد على موضوعك"
-
 #~ msgid "someone has responded on a topic you started"
 #~ msgstr "قام أحدهم بالرد على أحد موضوعاتك"
-
 #~ msgid "slug"
 #~ msgstr "عنوان مختصر"
-
 #~ msgid "created"
 #~ msgstr "منشأ"
-
 #~ msgid "tribe"
 #~ msgstr "قبيلة"
-
 #~ msgid "modified"
 #~ msgstr "معدل"
-
 #~ msgid "body"
 #~ msgstr "المحتوى"
-
 #~ msgid "Must be a WikiWord."
 #~ msgstr "يجب أن يكون WikiWord."
-
 #~ msgid "reStructuredText"
 #~ msgstr "reStructuredText"
-
 #~ msgid "Textile"
 #~ msgstr "Textile"
-
 #~ msgid "Markdown"
 #~ msgstr "Markdown"
-
 #~ msgid "Article Title"
 #~ msgstr "عنوان المقالة"
-
 #~ msgid "Article Content"
 #~ msgstr "محتوى المقالة"
-
 #~ msgid "Article Content Markup"
 #~ msgstr "Markup لمحتوى المقالة"
-
 #~ msgid "Article Creator"
 #~ msgstr "منشئ المقالة"
-
 #~ msgid "IP Address of the Article Creator"
 #~ msgstr "عنوان الآي بي لمنشئ المقالة"
-
 #~ msgid "Article"
 #~ msgstr "مقالة"
-
 #~ msgid "Articles"
 #~ msgstr "المقالات"
-
 #~ msgid "IP Address of the Editor"
 #~ msgstr "عنوان الآي بي للمحرر"
-
 #~ msgid "Revision Number"
 #~ msgstr "رقم الإصدارة"
-
 #~ msgid "Old Title"
 #~ msgstr "العنوان القديم"
-
 #~ msgid "Content Patch"
 #~ msgstr "تعديل المحتوى"
-
 #~ msgid "Editor comment"
 #~ msgstr "تعليق المحرر"
-
 #~ msgid "Modified at"
 #~ msgstr "معدل في"
-
 #~ msgid "Reverted Revision"
 #~ msgstr "الإصدارة المرجعة"
-
 #~ msgid "Change set"
 #~ msgstr "تغيير المجموعة"
-
 #~ msgid "Change sets"
 #~ msgstr "تغيير المجمواعت"
-
 #~ msgid "List all articles"
 #~ msgstr "سرد كافة المقالات"
-
 #~ msgid "Edit"
 #~ msgstr "تحرير"
-
 #~ msgid "Save"
 #~ msgstr "حفظ"
-
 #~ msgid "Article History"
 #~ msgstr "تاريخ المقالة"
-
 #~ msgid "At"
 #~ msgstr "في"
-
 #~ msgid "User"
 #~ msgstr "مستخدم"
-
 #~ msgid "Current revision"
 #~ msgstr "الإصدارة الحالية"
-
 #~ msgid "Create a new article"
 #~ msgstr "إنشاء مقالة جديدة"
-
 #~ msgid "Recent Changes"
 #~ msgstr "آخر التغييرات"
-
 #~ msgid "Article by title"
 #~ msgstr "مقالة حسب العنوان"
-
 #~ msgid "text"
 #~ msgstr "نص"
-
 #~ msgid "sender"
 #~ msgstr "المرسل"
-
 #~ msgid "sent"
 #~ msgstr "مرسلة"
-
 #~ msgid "follower"
 #~ msgstr "متابِع"
-
 #~ msgid "followed"
 #~ msgstr "متابَع"
+
