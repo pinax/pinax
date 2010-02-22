@@ -1,8 +1,0 @@
-{% load theme_tags %}
-
-{% if tag_counts %}
-    {% silk "tag_blue" %}
-    {% for tag in tag_counts %}
-        <a href="/tags/{{ tag.name }}">{{ tag.name }}</a> ({{ tag.count }})
-    {% endfor %}
-{% endif %}
