@@ -179,6 +179,7 @@ INSTALLED_APPS = [
     "django_filters",
     "staticfiles",
     "debug_toolbar",
+    "flag",    
     
     # internal (for now)
     "basic_profiles",
