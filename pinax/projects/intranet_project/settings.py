@@ -176,6 +176,7 @@ INSTALLED_APPS = [
     "django_filters",
     "staticfiles",
     "debug_toolbar",
+    "tagging_ext",
     
     # internal (for now)
     "basic_profiles",
@@ -186,7 +187,6 @@ INSTALLED_APPS = [
     "threadedcomments_extras",
     "tasks",
     
-    "tag_app",
 ]
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"

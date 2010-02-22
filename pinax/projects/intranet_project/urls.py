@@ -36,6 +36,43 @@ urlpatterns = patterns("",
     (r"^admin/", include(admin.site.urls)),
 )
 
+from tagging.models import TaggedItem
+
+from bookmarks.models import BookmarkInstance
+from tasks.models import Task
+from topics.models import Topic
+from wiki.models import Article as WikiArticle
+
+tagged_models = (
+    dict(title="Bookmarks",
+        query=lambda tag : TaggedItem.objects.get_by_model(BookmarkInstance, tag),
+        content_template="pinax_tagging_ext/bookmarks.html",                
+    ),
+    dict(title="Topics",
+        query=lambda tag: TaggedItem.objects.get_by_model(Topic, tag),
+    ),
+    dict(title="Tasks",
+        query=lambda tag: TaggedItem.objects.get_by_model(Task, tag),
+    ),    
+    dict(title="Wiki Articles",
+        query=lambda tag: TaggedItem.objects.get_by_model(WikiArticle, tag),
+    ),
+        
+
+)
+tagging_ext_kwargs = {
+  'tagged_models':tagged_models,
+}
+
+urlpatterns += patterns('',
+  url(r'^tags/(?P<tag>.+)/(?P<model>.+)$', 'tagging_ext.views.tag_by_model',
+        kwargs=tagging_ext_kwargs, name='tagging_ext_tag_by_model'),
+  url(r'^tags/(?P<tag>.+)/$', 'tagging_ext.views.tag',
+        kwargs=tagging_ext_kwargs, name='tagging_ext_tag'),
+  url(r'^tags/$', 'tagging_ext.views.index', name='tagging_ext_index'),
+)
+
+
 if settings.SERVE_MEDIA:
     urlpatterns += patterns("",
         (r"", include("staticfiles.urls")),
