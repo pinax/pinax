@@ -223,6 +223,7 @@ AUTHENTICATED_EXEMPT_URLS = [
     r"^/account/confirm_email",
     r"/openid",
     r"^/waitinglist",
+    r"^/__debug__",
 ]
 
 DEBUG_TOOLBAR_CONFIG = {
