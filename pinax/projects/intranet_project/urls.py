@@ -39,21 +39,35 @@ urlpatterns = patterns("",
 from tagging.models import TaggedItem
 
 from bookmarks.models import BookmarkInstance
+from photos.models import Image
+from blog.models import Post
+from projects.models import Project
 from tasks.models import Task
 from topics.models import Topic
 from wiki.models import Article as WikiArticle
 
 tagged_models = (
+    dict(title="Blog Posts",
+        query=lambda tag : TaggedItem.objects.get_by_model(Post, tag).filter(status=2),
+        content_template="pinax_tagging_ext/blogs.html",
+    ),
     dict(title="Bookmarks",
         query=lambda tag : TaggedItem.objects.get_by_model(BookmarkInstance, tag),
-        content_template="pinax_tagging_ext/bookmarks.html",                
+        content_template="pinax_tagging_ext/bookmarks.html",
     ),
-    dict(title="Topics",
-        query=lambda tag: TaggedItem.objects.get_by_model(Topic, tag),
+    dict(title="Photos",
+        query=lambda tag: TaggedItem.objects.get_by_model(Image, tag).filter(safetylevel=1),
+        content_template="pinax_tagging_ext/photos.html",
     ),
+    dict(title="Projects",
+        query=lambda tag: TaggedItem.objects.get_by_model(Project, tag),
+    ),    
     dict(title="Tasks",
         query=lambda tag: TaggedItem.objects.get_by_model(Task, tag),
     ),    
+    dict(title="Topics",
+        query=lambda tag: TaggedItem.objects.get_by_model(Topic, tag),
+    ),
     dict(title="Wiki Articles",
         query=lambda tag: TaggedItem.objects.get_by_model(WikiArticle, tag),
     ),
