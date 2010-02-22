@@ -123,32 +123,14 @@ are ready to work on a bug or a new feature create yourself a new branch. The
 reason why this is important is you can commit as often you like. When you are
 ready you can merge in the change. Let's take a look at a common workflow::
 
-    git checkout -b task-1-work
-    ... do work and git commit often ...
-    git push origin task-1-work
-    git checkout -b task-1
-    git merge --squash --no-commit task-1-work
-    git commit -m "Fixed #1 — added a great new feature"
-    git push origin task-1
+    git checkout -b task-566
+    ... fix and git commit often ...
+    git push origin task-566
 
 The reason we have created two new branches is to stay off of ``master``.
 Keeping master clean of only upstream changes makes yours and ours lives
-easier. You can then send us a pull request for the fix/feature from the
-"ready" branch. Then we can easily review it and even take a look at the
-individual commits for why you may have done something. If we say that
-you've done something slightly wrong you can now go back to the ``task-1``
-branch and correct it. Let's see how we might do this::
-
-    git checkout -b task-1-work
-    ... fix and git commit often ...
-    git push
-    git branch -D task-1
-    git checkout -b task-1
-    git merge --squash --no-commit task-1-work
-    git commit -m "Fixed #1 — added a great new feature"
-    git push
-
-Send another pull request and we can review the fix.
+easier. You can then send us a pull request for the fix/feature. Then we can
+easily review it and merge it when ready.
 
 Writing commit messages
 ~~~~~~~~~~~~~~~~~~~~~~~
