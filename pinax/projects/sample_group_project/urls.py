@@ -39,9 +39,46 @@ urlpatterns = patterns("",
     (r"^groups/", include("basic_groups.urls")),
     (r"^tribes/", include("tribes.urls")),
     (r"^projects/", include("projects.urls")),
+    (r"^flag/", include("flag.urls")),    
     
     (r"^admin/", include(admin.site.urls)),
 )
+
+from tagging.models import TaggedItem
+
+from projects.models import Project
+from tasks.models import Task
+from topics.models import Topic
+from wiki.models import Article as WikiArticle
+
+tagged_models = (
+    dict(title="Projects",
+        query=lambda tag: TaggedItem.objects.get_by_model(Project, tag),
+    ),
+    dict(title="Topics",
+        query=lambda tag: TaggedItem.objects.get_by_model(Topic, tag),
+    ),
+    dict(title="Project Tasks",
+        query=lambda tag: TaggedItem.objects.get_by_model(Task, tag),
+    ),
+    dict(title="Wiki Articles",
+        query=lambda tag: TaggedItem.objects.get_by_model(WikiArticle, tag),
+    ),
+        
+
+)
+tagging_ext_kwargs = {
+  'tagged_models':tagged_models,
+}
+
+urlpatterns += patterns('',
+  url(r'^tags/(?P<tag>.+)/(?P<model>.+)$', 'tagging_ext.views.tag_by_model',
+        kwargs=tagging_ext_kwargs, name='tagging_ext_tag_by_model'),
+  url(r'^tags/(?P<tag>.+)/$', 'tagging_ext.views.tag',
+        kwargs=tagging_ext_kwargs, name='tagging_ext_tag'),
+  url(r'^tags/$', 'tagging_ext.views.index', name='tagging_ext_index'),
+)
+
 
 
 if settings.SERVE_MEDIA:

@@ -179,13 +179,13 @@ INSTALLED_APPS = [
     "django_filters",
     "staticfiles",
     "debug_toolbar",
-    "flag",    
+    "flag",
+    "tagging_ext",    
     
     # internal (for now)
     "basic_profiles",
     "account",
     "signup_codes",
-    "tag_app",
     "tagging_utils",
     "threadedcomments_extras",
     
