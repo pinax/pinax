@@ -45,10 +45,11 @@ class Topic(models.Model):
     def __unicode__(self):
         return self.title
     
-    def get_absolute_url(self, group=None):
+    def get_absolute_url(self):
         kwargs = {"topic_id": self.pk}
-        if group:
-            return group.content_bridge.reverse("topic_detail", group, kwargs=kwargs)
+
+        if self.group:
+            return self.group.content_bridge.reverse("topic_detail", self.group, kwargs=kwargs)
         else:
             return reverse("topic_detail", kwargs=kwargs)
 
