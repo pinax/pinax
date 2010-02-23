@@ -50,7 +50,6 @@ urlpatterns = patterns("",
     (r"^authsub/", include("authsub.urls")),
     (r"^profiles/", include("profiles.urls")),
     (r"^blog/", include("blog.urls")),
-    (r"^tags/", include("tag_app.urls")),
     (r"^invitations/", include("friends_app.urls")),
     (r"^notices/", include("notification.urls")),
     (r"^messages/", include("messages.urls")),
@@ -111,6 +110,55 @@ urlpatterns += patterns("",
     url("^blog/friends_blogs/$", "friends_app.views.friends_objects", kwargs=friends_blogs_kwargs, name="friends_blogs"),
     url("^tweets/friends_tweets/$", "friends_app.views.friends_objects", kwargs=friends_tweets_kwargs, name="friends_tweets"),
     url("^bookmarks/friends_bookmarks/$", "friends_app.views.friends_objects", kwargs=friends_bookmarks_kwargs, name="friends_bookmarks"),
+)
+
+from tagging.models import TaggedItem
+
+from blog.models import Post
+from bookmarks.models import BookmarkInstance
+from swaps.models import Offer
+from topics.models import Topic
+from tribes.models import Tribe
+from wiki.models import Article as WikiArticle
+
+tagged_models = (
+    dict(title="Blog Posts",
+        query=lambda tag : TaggedItem.objects.get_by_model(Post, tag).filter(status=2),
+        content_template="pinax_tagging_ext/blogs.html",
+    ),
+    dict(title="Bookmarks",
+        query=lambda tag : TaggedItem.objects.get_by_model(BookmarkInstance, tag),
+        content_template="pinax_tagging_ext/bookmarks.html",                
+    ),
+    dict(title="Photos",
+        query=lambda tag: TaggedItem.objects.get_by_model(Image, tag).filter(safetylevel=1),
+        content_template="pinax_tagging_ext/photos.html",
+    ),    
+    dict(title="Swap Offers",
+        query=lambda tag : TaggedItem.objects.get_by_model(Offer, tag),            
+    ),        
+    dict(title="Topics",
+        query=lambda tag: TaggedItem.objects.get_by_model(Topic, tag),
+    ),
+    dict(title="Tribes",
+        query=lambda tag: TaggedItem.objects.get_by_model(Tribe, tag),
+    ),    
+    dict(title="Wiki Articles",
+        query=lambda tag: TaggedItem.objects.get_by_model(WikiArticle, tag),
+    ),
+        
+
+)
+tagging_ext_kwargs = {
+  'tagged_models':tagged_models,
+}
+
+urlpatterns += patterns('',
+  url(r'^tags/(?P<tag>.+)/(?P<model>.+)$', 'tagging_ext.views.tag_by_model',
+        kwargs=tagging_ext_kwargs, name='tagging_ext_tag_by_model'),
+  url(r'^tags/(?P<tag>.+)/$', 'tagging_ext.views.tag',
+        kwargs=tagging_ext_kwargs, name='tagging_ext_tag'),
+  url(r'^tags/$', 'tagging_ext.views.index', name='tagging_ext_index'),
 )
 
 if settings.SERVE_MEDIA:

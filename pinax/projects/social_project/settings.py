@@ -189,6 +189,7 @@ INSTALLED_APPS = [
     "django_markup",
     "staticfiles",
     "debug_toolbar",
+    "tagging_ext",
     
     # internal (for now)
     "analytics",
@@ -197,7 +198,6 @@ INSTALLED_APPS = [
     "signup_codes",
     "tribes",
     "photos",
-    "tag_app",
     "topics",
 ]
 
