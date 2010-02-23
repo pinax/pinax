@@ -155,7 +155,7 @@ def main():
     
     setup_test_environment()
     
-    call_command("test", *args, verbosity=int(options.verbosity))
+    call_command("test", verbosity=int(options.verbosity), *args)
     
     if cov:
         cov.stop()
