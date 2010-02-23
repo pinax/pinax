@@ -13,6 +13,8 @@ from emailconfirmation.models import EmailAddress, EmailConfirmation
 from emailconfirmation.signals import email_confirmed
 from timezones.fields import TimeZoneField
 
+from account import receivers
+
 
 
 class Account(models.Model):
@@ -127,10 +129,5 @@ class PasswordReset(models.Model):
         )
 
 
-def mark_user_active(sender, instance=None, **kwargs):
-    user = kwargs.get("email_address").user
-    user.is_active = True
-    user.save()
-
-
-email_confirmed.connect(mark_user_active, sender=EmailConfirmation)
+# signals
+email_confirmed.connect(receivers.email_confirmed)

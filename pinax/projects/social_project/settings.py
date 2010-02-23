@@ -191,6 +191,7 @@ INSTALLED_APPS = [
     "debug_toolbar",
     
     # internal (for now)
+    "request_receivers",
     "analytics",
     "profiles",
     "account",

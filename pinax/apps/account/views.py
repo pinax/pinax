@@ -22,12 +22,13 @@ association_model = models.get_model("django_openid", "Association")
 if association_model is not None:
     from django_openid.models import UserOpenidAssociation
 
-from account.utils import get_default_redirect, user_display
+from account import signals
 from account.models import OtherServiceInfo
 from account.forms import AddEmailForm, ChangeLanguageForm, ChangePasswordForm
 from account.forms import ChangeTimezoneForm, LoginForm, ResetPasswordKeyForm
 from account.forms import ResetPasswordForm, SetPasswordForm, SignupForm
 from account.forms import TwitterForm
+from account.utils import get_default_redirect, user_display
 
 
 
@@ -127,6 +128,7 @@ def signup(request, **kwargs):
                 }, context_instance=RequestContext(request))
             else:
                 user = authenticate(**credentials)
+                signals.user_signed_up.send(sender=request, user=user)
                 auth_login(request, user)
                 messages.add_message(request, messages.SUCCESS,
                     ugettext("Successfully logged in as %(user)s.") % {
