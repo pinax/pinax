@@ -1,23 +1,26 @@
 Dependencies
 ============
 
-This documents what apps use what other apps and what external libs.
+This documents what apps use what other apps and what external libs. 
+It is divided into the Pinax core apps and dependent apps that are 
+loaded as part of the install process.
+
+Pinax Apps
+----------
+
+These are the apps you will find within the Pinax package.
 
 account
-    uses apps misc, emailconfirmation, friends, profiles, timezones, microblogging
+    uses apps misc, emailconfirmation, friends, profiles, timezones, microblogging, openid
 
-ajax_validation
-    uses library simplejson
-
-announcements
-    uses app notification
-    and library atomformat
+analytics
+    no dependencies outside django
 
 authsub
     uses library gdata
 
-avatar
-    uses library PIL
+autocomplete_app
+    uses avatar, basic_profiles, friends, notification, profiles
 
 basic_profiles
     uses app notification
@@ -27,47 +30,10 @@ bbauth
 
 blog
     uses apps friends, notification, tagging, threadedcomments
-    and library atomformat
+    and libraries atomformat, creole, docutils
 
-bookmarks
-    uses apps tagging, voting
-    and library atomformat
-
-misc
-    uses apps blog, bookmarks, mailer, tribes, microblogging, voting
-
-django_extensions
-    uses a wide range of libraries depends on command
-
-django_openid
-    uses libraries openid, yadis
-
-djangologging
-    uses library pygments
-
-emailconfirmation
-    uses app mailer
-
-friends
-    uses apps emailconfirmation, mailer, notification
-    and libraries gdata, simplejson, vobject, ybrowserauth
-
-friends_app
-    uses apps account, friends, notification
-
-messages
-    uses app mailer, notification
-
-notification
-    uses app mailer
-    and library atomformat
-
-oembed
-    uses library simplejson
-
-photologue
-    uses app tagging
-    and library PIL
+groups
+    no dependencies outside Django
 
 photos
     uses apps photologue, projects, tagging, tribes
@@ -78,22 +44,191 @@ profiles
 projects
     uses apps friends, notification, photos, tagging, things, threadedcomments, wiki
 
-swaps
-    uses apps notification, tagging, threadedcomments
+signup_codes
+    uses account
 
-tag_app
-    uses apps blog, bookmarks, photos, projects, tagging, tribes, wiki
+tagging_utils
+    uses tagging
 
-timezones
-    uses library pytz
+tasks
+    uses attachments, dpaste, notification, tagging, tagging_utils, threadedcomments,
+    and library atomformat
+
+threadedcomments_extras
+    no dependencies outside Django
+
+topics
+    uses notification, tagging, threadedcomments
 
 tribes
-    uses apps friends, notification, photos, tagging, things, threadedcomments, wiki, microblogging
+    uses apps groups, notification
 
-wiki
+voting_extras
+    uses voting
+
+waitinglist
+    no dependencies outside Django
+
+
+External Apps
+-------------
+
+These are the external apps that Pinax uses.
+
+biblion
+
+django_ajax_validation
+
+django_announcements
+    uses app notification
+    and library atomformat
+
+django_atomformat
+
+django_attachments
+
+django_avatar
+    uses library PIL
+    
+django_bookmarks
+    uses apps tagging, voting
+    and library atomformat
+
+django_db_log
+
+django_dbtemplates
+
+django_email_confirmation
+    uses app mailer
+
+django_extensions
+    uses a wide range of libraries depends on command
+
+django_filters
+
+django_flag
+
+django_friends
+    uses apps emailconfirmation, mailer, notification
+    and libraries gdata, vobject, ybrowserauth
+
+django_frontendadmin
+
+django_generic_flatblocks
+
+django_gravatar
+
+django_groups
+
+django_locations
+
+django_mailer
+
+django_markup
+
+django_messages
+    uses app mailer, notification
+
+django_microblogging
+    uses apps account, notification, tribes
+    and libraries atomformat, twitter
+
+django_notification
+    uses app mailer
+    and library atomformat
+
+
+django_oembed
+
+django_openid
+    uses libraries openid, yadis
+
+django_pagination
+
+django_photologue
+    uses app tagging
+    and library PIL, EXIF
+    
+django_robots
+
+django_sorting
+
+django_staticfiles
+
+django_swaps
+    uses apps notification, tagging, threadedcomments
+
+django_tagging
+
+django_tagging_ext
+
+django_threadedcomments
+
+django_timezones
+    uses library pytz
+
+django_uni_form
+
+django_voting
+    uses library simplejson
+
+django_wikiapp
     uses apps notification, tagging
     and libraries atomformat, creoleparser, diff_match_patch, docutils
 
-microblogging
-    uses apps account, notification, tribes
-    and libraries atomformat, twitter
+template_utils
+
+
+Pinax Apps Within Projects
+--------------------------
+
+friends_app (social_project)
+    uses apps account, friends, notification
+
+about
+    
+
+tag_app
+    deprecated
+
+External Libraries
+------------------
+
+atom
+
+creole
+
+diff_match_patch
+
+docutils
+
+elementtree
+
+gdata
+
+geopy
+
+markdown
+
+pip
+
+pygments
+
+python_openid
+
+python_twitter
+
+python_yadis
+
+pytz
+
+smartypants
+
+sorl
+
+textile
+
+vobject
+
+ybrowserauth
+
