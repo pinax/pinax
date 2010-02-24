@@ -127,7 +127,7 @@ tagged_models = (
         content_template="pinax_tagging_ext/photos.html",
     ),
     dict(title="Swap Offers",
-        query=lambda tag : TaggedItem.objects.get_by_model(Offer, tag),            
+        query=lambda tag : TaggedItem.objects.get_by_model(Offer, tag),
     ),
     dict(title="Topics",
         query=lambda tag: TaggedItem.objects.get_by_model(Topic, tag),

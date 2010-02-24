@@ -39,7 +39,7 @@ urlpatterns = patterns("",
     (r"^groups/", include("basic_groups.urls")),
     (r"^tribes/", include("tribes.urls")),
     (r"^projects/", include("projects.urls")),
-    (r"^flag/", include("flag.urls")),    
+    (r"^flag/", include("flag.urls")),
     
     (r"^admin/", include(admin.site.urls)),
 )
