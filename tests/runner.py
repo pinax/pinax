@@ -4,10 +4,9 @@ import sys
 
 from django.conf import settings
 from django.core.management import setup_environ, call_command
+from django.utils.importlib import import_module
 
 import pinax
-from pinax.utils.importlib import import_module
-
 
 #
 # thoughts on a test runner. the goal is to run all tests in Pinax.
