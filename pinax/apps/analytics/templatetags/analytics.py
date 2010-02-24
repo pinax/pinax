@@ -25,9 +25,10 @@ def urchin():
 @register.simple_tag
 def ga():
     # Use new Google Analytics tracking code
-    urchin_id = getattr(settings, "URCHIN_ID", None)
-    if urchin_id:
-        return """
+    if not settings.DEBUG: # not to render GA tracking code if debug is True
+        urchin_id = getattr(settings, "URCHIN_ID", None)
+        if urchin_id:
+            return """
     <script type="text/javascript">
         var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
         document.write(unescape("%%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%%3E%%3C/script%%3E"));
@@ -36,6 +37,6 @@ def ga():
         var pageTracker = _gat._getTracker("%s");
         pageTracker._trackPageview();
     </script>
-    """ % settings.URCHIN_ID
+        """ % settings.URCHIN_ID
     else:
         return ""

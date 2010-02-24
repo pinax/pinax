@@ -3,6 +3,7 @@
 {% load i18n %}
 {% load openid_tags %}
 {% load generic_flatblocks %}
+{% load analytics %}
 
 {% block extra_head_base %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/site_tabs.css" />
@@ -39,24 +40,27 @@
     {% gblock "website_footer" for "gblocks.Text" %}
 {% endblock %}
 
-{% block extra_body %}
-<script type="text/javascript">
-$(document).ready(function(){
+{% block extra_body_base %}
+    {% ga %}
+    {% block extra_body %}
+    <script type="text/javascript">
+    $(document).ready(function(){
     $('a.frontendadmin_edit').hover(
         function(){$(this).parent().css('outline', '4px solid #E9B007')},
         function(){$(this).parent().css('outline', '')}
     );
     
     $('a.frontendadmin_edit').click(function(){
-            $(this).parent().css('outline', '');
-            $(this).parent().load(this.href);
-            return false;
+        $(this).parent().css('outline', '');
+        $(this).parent().load(this.href);
+        return false;
     });
     
     $('a.frontendadmin_delete').hover(
         function(){$(this).parent().css('outline', '4px solid #E9B007')},
         function(){$(this).parent().css('outline', '')}
     );
-});
-</script>
+    });
+    </script>
+    {% endblock %}
 {% endblock %}

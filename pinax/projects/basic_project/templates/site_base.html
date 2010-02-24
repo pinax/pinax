@@ -4,6 +4,7 @@
 {% load account_tags %}
 {% load openid_tags %}
 {% load ifsetting_tag %}
+{% load analytics %}
 
 {% block extra_head_base %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/site_tabs.css" />
@@ -37,4 +38,7 @@
     - <a href="{% url privacy %}">{% trans "Privacy Policy" %}</a>
     - <a href="{% url dmca %}">{% trans "DMCA Notice" %}</a>
 </div>
+{% endblock %}
+{% block extra_body_base %}
+    {% ga %}
 {% endblock %}
