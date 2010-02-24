@@ -45,7 +45,7 @@ from tagging.models import TaggedItem
 
 from projects.models import Project
 from tasks.models import Task
-from topics.models import Topic as ProjectTopic 
+from topics.models import Topic as ProjectTopic
 from wiki.models import Article as WikiArticle
 
 tagged_models = (

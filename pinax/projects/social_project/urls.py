@@ -5,12 +5,24 @@ from django.views.generic.simple import direct_to_template
 from django.contrib import admin
 admin.autodiscover()
 
+from tagging.models import TaggedItem
+
 from account.openid_consumer import PinaxConsumer
 from blog.feeds import BlogFeedAll, BlogFeedUser
+from blog.models import Post
 from bookmarks.feeds import BookmarkFeed
+from bookmarks.models import BookmarkInstance
 from microblogging.feeds import TweetFeedAll, TweetFeedUser, TweetFeedUserWithFriends
+from microblogging.models import Tweet
+from photos.models import Image
+from swaps.models import Offer
+from topics.models import Topic
+from tribes.models import Tribe
+from wiki.models import Article as WikiArticle
 
 
+
+handler500 = "pinax.views.server_error"
 
 tweets_feed_dict = {"feed_dict": {
     "all": TweetFeedAll,
@@ -23,10 +35,7 @@ blogs_feed_dict = {"feed_dict": {
     "only": BlogFeedUser,
 }}
 
-bookmarks_feed_dict = {"feed_dict": { "": BookmarkFeed }}
-
-
-handler500 = "pinax.views.server_error"
+bookmarks_feed_dict = {"feed_dict": {"": BookmarkFeed }}
 
 
 if settings.ACCOUNT_OPEN_SIGNUP:
@@ -74,28 +83,20 @@ urlpatterns = patterns("",
 
 ## @@@ for now, we'll use friends_app to glue this stuff together
 
-from photos.models import Image
-
 friends_photos_kwargs = {
     "template_name": "photos/friends_photos.html",
     "friends_objects_function": lambda users: Image.objects.filter(is_public=True, member__in=users),
 }
-
-from blog.models import Post
 
 friends_blogs_kwargs = {
     "template_name": "blog/friends_posts.html",
     "friends_objects_function": lambda users: Post.objects.filter(author__in=users),
 }
 
-from microblogging.models import Tweet
-
 friends_tweets_kwargs = {
     "template_name": "microblogging/friends_tweets.html",
     "friends_objects_function": lambda users: Tweet.objects.filter(sender_id__in=[user.id for user in users], sender_type__name="user"),
 }
-
-from bookmarks.models import Bookmark
 
 friends_bookmarks_kwargs = {
     "template_name": "bookmarks/friends_bookmarks.html",
@@ -106,20 +107,11 @@ friends_bookmarks_kwargs = {
 }
 
 urlpatterns += patterns("",
-    url("^photos/friends_photos/$", "friends_app.views.friends_objects", kwargs=friends_photos_kwargs, name="friends_photos"),
-    url("^blog/friends_blogs/$", "friends_app.views.friends_objects", kwargs=friends_blogs_kwargs, name="friends_blogs"),
-    url("^tweets/friends_tweets/$", "friends_app.views.friends_objects", kwargs=friends_tweets_kwargs, name="friends_tweets"),
-    url("^bookmarks/friends_bookmarks/$", "friends_app.views.friends_objects", kwargs=friends_bookmarks_kwargs, name="friends_bookmarks"),
+    url(r"^photos/friends_photos/$", "friends_app.views.friends_objects", kwargs=friends_photos_kwargs, name="friends_photos"),
+    url(r"^blog/friends_blogs/$", "friends_app.views.friends_objects", kwargs=friends_blogs_kwargs, name="friends_blogs"),
+    url(r"^tweets/friends_tweets/$", "friends_app.views.friends_objects", kwargs=friends_tweets_kwargs, name="friends_tweets"),
+    url(r"^bookmarks/friends_bookmarks/$", "friends_app.views.friends_objects", kwargs=friends_bookmarks_kwargs, name="friends_bookmarks"),
 )
-
-from tagging.models import TaggedItem
-
-from blog.models import Post
-from bookmarks.models import BookmarkInstance
-from swaps.models import Offer
-from topics.models import Topic
-from tribes.models import Tribe
-from wiki.models import Article as WikiArticle
 
 tagged_models = (
     dict(title="Blog Posts",
@@ -133,32 +125,30 @@ tagged_models = (
     dict(title="Photos",
         query=lambda tag: TaggedItem.objects.get_by_model(Image, tag).filter(safetylevel=1),
         content_template="pinax_tagging_ext/photos.html",
-    ),    
+    ),
     dict(title="Swap Offers",
         query=lambda tag : TaggedItem.objects.get_by_model(Offer, tag),            
-    ),        
+    ),
     dict(title="Topics",
         query=lambda tag: TaggedItem.objects.get_by_model(Topic, tag),
     ),
     dict(title="Tribes",
         query=lambda tag: TaggedItem.objects.get_by_model(Tribe, tag),
-    ),    
+    ),
     dict(title="Wiki Articles",
         query=lambda tag: TaggedItem.objects.get_by_model(WikiArticle, tag),
     ),
-        
-
 )
 tagging_ext_kwargs = {
-  'tagged_models':tagged_models,
+    "tagged_models": tagged_models,
 }
 
-urlpatterns += patterns('',
-  url(r'^tags/(?P<tag>.+)/(?P<model>.+)$', 'tagging_ext.views.tag_by_model',
-        kwargs=tagging_ext_kwargs, name='tagging_ext_tag_by_model'),
-  url(r'^tags/(?P<tag>.+)/$', 'tagging_ext.views.tag',
-        kwargs=tagging_ext_kwargs, name='tagging_ext_tag'),
-  url(r'^tags/$', 'tagging_ext.views.index', name='tagging_ext_index'),
+urlpatterns += patterns("",
+    url(r"^tags/(?P<tag>.+)/(?P<model>.+)$", "tagging_ext.views.tag_by_model",
+        kwargs=tagging_ext_kwargs, name="tagging_ext_tag_by_model"),
+    url(r"^tags/(?P<tag>.+)/$", "tagging_ext.views.tag",
+        kwargs=tagging_ext_kwargs, name="tagging_ext_tag"),
+    url(r"^tags/$", "tagging_ext.views.index", name="tagging_ext_index"),
 )
 
 if settings.SERVE_MEDIA:
