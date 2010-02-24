@@ -120,7 +120,7 @@ tagged_models = (
     ),
     dict(title="Bookmarks",
         query=lambda tag : TaggedItem.objects.get_by_model(BookmarkInstance, tag),
-        content_template="pinax_tagging_ext/bookmarks.html",                
+        content_template="pinax_tagging_ext/bookmarks.html",
     ),
     dict(title="Photos",
         query=lambda tag: TaggedItem.objects.get_by_model(Image, tag).filter(safetylevel=1),
