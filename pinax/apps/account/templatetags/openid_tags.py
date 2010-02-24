@@ -7,17 +7,7 @@ from django.utils.translation import ugettext
 
 from django_openid.models import UserOpenidAssociation
 
-
-
-try:
-    any
-except NameError:
-    def any(seq):
-        for x in seq:
-            if x:
-                return True
-        return False
-
+from pinax.utils.compat import any
 
 register = template.Library()
 

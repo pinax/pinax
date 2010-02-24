@@ -5,6 +5,7 @@ future.
 """
 from django.contrib.auth.models import Group
 
+from pinax.utils.compat import any
 
 
 TASK_MANAGER = "coredev"
