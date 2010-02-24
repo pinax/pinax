@@ -9,6 +9,7 @@ from django.db.models import Q, get_app
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
+from django.utils.importlib import import_module
 from django.utils.translation import ugettext
 
 from django.contrib import messages
@@ -17,8 +18,6 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
-
-from pinax.utils.importlib import import_module
 
 # Only import dpaste Snippet Model if it's activated
 if "dpaste" in getattr(settings, "INSTALLED_APPS"):
