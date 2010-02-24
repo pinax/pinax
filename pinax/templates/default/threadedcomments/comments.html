@@ -42,7 +42,7 @@
 {% if user.is_authenticated %}
     <fieldset class="inlineLabels">
         <form class="uniForm" method="POST" action="{% get_comment_url object %}">
-	    	{% csrf_token %}
+            {% csrf_token %}
                 <div class="ctrlHolder">
                     <label for="id_comment">Comment</label>                    
                     <textarea id="id_comment" rows="10" cols="40" name="comment"></textarea>
