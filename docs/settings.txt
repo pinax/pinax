@@ -75,7 +75,7 @@ inbox in order to get the current inbox count for the current user. In fact
 you don't specify the application but a context processor function which you
 specify here. If you for example create a project based on the
 ``social_project`` template, the ``messages``, ``notification`` and
-``friends_app`` all provide information that affects the inbox count. 
+``friends_app`` all provide information that affects the inbox count.
 
 Such a context processor should return a dictionary with one or more entries
 for the additional inbox count.
@@ -144,8 +144,8 @@ used by the ``notification`` application.
 
 .. _ref-settings-pinax-items-per-feed:
 
-PINAX_ITEMS_PER_FEED 
----------------------
+PINAX_ITEMS_PER_FEED
+--------------------
 
 :Applications: ``pinax.apps.blog``
 :Default: ``20``
@@ -166,7 +166,7 @@ Pinax itself is installed so that you can easily re-use for instance templates
 from that location or work with the original static files like
 the ``build_media`` command does. There this settng is used to find the
 media files of those internal applications used in your project, which are
-then copied into one central location. 
+then copied into one central location.
 
 For more on this topic take a look at :ref:`ref-media`.
 
@@ -202,11 +202,11 @@ load templates from following locations::
     
     TEMPLATE_DIRS = [
         os.path.join(PROJECT_ROOT, "templates"),
-        os.path.join(PINAX_ROOT, "templates", PINAX_THEME),                                                                                                                                           
+        os.path.join(PINAX_ROOT, "templates", PINAX_THEME),
     ]
         
 Note that this setting only applies to Pinax' core media files and templates
-and is not used either in the internal nor the external apps by default. 
+and is not used either in the internal nor the external apps by default.
 
 
 .. _ref-settings-restructuredtext-filter-settings:
@@ -219,7 +219,7 @@ RESTRUCTUREDTEXT_FILTER_SETTINGS
 
 Using this option you can pass additional settings as dictionary through the
 ``restructuredtext`` template library to the underlying
-``docutils.core.publish_parts`` function. 
+``docutils.core.publish_parts`` function.
 
 
 .. _ref-settings-serve-media:

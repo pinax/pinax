@@ -25,7 +25,7 @@ but recently Jacob Kaplan-Moss has written a couple_ enthusiastic
 tutorials_ on how to use it.
 
 Pinax has many many components so it seems a natural candidate for
-buildout. 
+buildout.
 
 Virtualenv (optional)
 =====================
@@ -38,12 +38,12 @@ different libraries or versions.
 
 Virtualenv creates a private copy of your python with its own
 ``site-packages`` directory so you can install as a normal user and each
-project can have it's own set of libraries. 
+project can have it's own set of libraries.
 
 I tend to install a very minimal set of critical tools into my system
 python: setuptools and virtualenv.  All my application's libraries are
 installed into the running code's sys.path by buildout, so I don't end
-up with conflicts. 
+up with conflicts.
 
 If, however, you do keep a bunch of libraries in your system
 ``site-packages``, they will be visible to an application you create with

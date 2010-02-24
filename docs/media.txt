@@ -4,18 +4,18 @@
 Media Handling
 ==============
 
-This document explains how Pinax handles media files across external and 
+This document explains how Pinax handles media files across external and
 internal applications and themes.
 
-Pinax places static media (css, js, and images such as backgrounds, icons and 
-logos) in a separate directory from the normal Django media directory (uploads 
+Pinax places static media (css, js, and images such as backgrounds, icons and
+logos) in a separate directory from the normal Django media directory (uploads
 and other user generated content stored on the file server). This is done in
 order to allow for easy server optimization and improved security.
 
 Basic media handling
 ====================
 
-If you want to override default media files, place yours under 
+If you want to override default media files, place yours under
 `<project_name>/media/...` with the same path. For example:
 
 Original file::
@@ -44,7 +44,7 @@ Site specific media files goes to::
     <project_name>/media/siteExample.js
     
 The special static file service view should be able to serve the media files in
-development. 
+development.
 
 .. _ref-media-build_static:
 
@@ -93,7 +93,7 @@ following snippet below the rest of the url configuration::
 
     from django.conf import settings
     if settings.SERVE_MEDIA:
-        urlpatterns += patterns("", 
+        urlpatterns += patterns("",
             (r"", include("staticfiles.urls")),
         )
 

@@ -6,7 +6,7 @@ Groups Overview
 Groups in Pinax are simply container application/models that contain other
 application/models. For example, if we had something called 'Project' it
 might have 'Tasks' within it. The Pinax Groups system is designed to make this
-scenario easy to implement. It allows you to convert an application and model 
+scenario easy to implement. It allows you to convert an application and model
 to become a container, henceforce called respectively a *Group App* and the
 model is called a '*Group Model*'. It also allows you to convert an
 application and associated models to become '*Group-Aware*', which if done
@@ -50,7 +50,7 @@ complete, can be quicklybrought into any Pinax Group-App, not just projects::
         title = models.CharField(max_length=140)
         description = models.TextField(max_length=140)
         creator = models.ForeignKey(User,
-            verbose_name=_("creator"), 
+            verbose_name=_("creator"),
             related_name="%(class)s_created"
         )
         created = models.DateTimeField(_("created"), default=datetime.datetime.now)
@@ -120,7 +120,7 @@ to end clients and users. So we use Django forms to control what is displayed::
 Views
 ~~~~~
 
-Just like the models and forms, we build our Task views in such a way that 
+Just like the models and forms, we build our Task views in such a way that
 they can handle being within or without a group::
 
     from django.core.exceptions import ObjectDoesNotExist
@@ -235,7 +235,7 @@ to work with no group association.
 Writing your own group app
 --------------------------
 
-We will continue with the Project/Task corollary. Our group application will 
+We will continue with the Project/Task corollary. Our group application will
 be a Project (which contain tasks, members, and more)::
 
     from django.core.urlresolvers import reverse
@@ -250,7 +250,7 @@ be a Project (which contain tasks, members, and more)::
     class Project(Group):
         """
         Doesn't inherit the normal *models.Model*. Group comes with a title,
-        description, created, creator and some glue pieces and utility 
+        description, created, creator and some glue pieces and utility
         methods built in for convenience.
         """
         
@@ -270,7 +270,7 @@ be a Project (which contain tasks, members, and more)::
 Adding in a a group-aware project
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In order for a ``group-app`` to be able to display a ``group-aware`` 
+In order for a ``group-app`` to be able to display a ``group-aware``
 application there needs to be a bridge. We take a sample projects.urls.py::
 
     # Standard urlsconf import
