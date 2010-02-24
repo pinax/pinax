@@ -167,6 +167,7 @@ INSTALLED_APPS = [
     "debug_toolbar",
     
     # internal (for now)
+    "analytics",
     "basic_profiles",
     "account",
     
@@ -224,6 +225,8 @@ CONTACT_EMAIL = "feedback@example.com"
 SITE_NAME = "Acme, Inc."
 LOGIN_URL = "/account/login/"
 LOGIN_REDIRECT_URLNAME = "home"
+
+# URCHIN_ID = "ua-..."
 
 SERIALIZATION_MODULES = {
     "jsonfk": "pinax.core.serializers.jsonfk",

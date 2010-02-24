@@ -131,6 +131,9 @@ INSTALLED_APPS = [
     "staticfiles",
     "biblion",
     
+    # internal (for now)
+    "analytics",
+
     # local
     
     # admin
@@ -146,6 +149,8 @@ MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 # @@@ this shouldn"t beed need but are :-(
 CONTACT_EMAIL = ""
 SITE_NAME = ""
+
+# URCHIN_ID = "ua-..."
 
 DEBUG_TOOLBAR_CONFIG = {
     "INTERCEPT_REDIRECTS": False,

@@ -167,6 +167,7 @@ INSTALLED_APPS = [
     "debug_toolbar",
     
     # internal (for now)
+    "analytics",
     "basic_profiles",
     "account",
     "signup_codes",
@@ -212,6 +213,8 @@ CONTACT_EMAIL = "feedback@example.com"
 SITE_NAME = "Pinax"
 LOGIN_URL = "/account/login/"
 LOGIN_REDIRECT_URLNAME = "what_next"
+
+# URCHIN_ID = "ua-..."
 
 DEBUG_TOOLBAR_CONFIG = {
     "INTERCEPT_REDIRECTS": False,
