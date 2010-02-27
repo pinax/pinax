@@ -31,7 +31,6 @@ EXTRA_APP_ALIASES = {
 }
 
 # setup sys.path for Pinax and projects
-sys.path.insert(0, os.path.join(PINAX_ROOT, "apps"))
 sys.path.insert(0, os.path.join(PINAX_ROOT, "projects"))
 
 
@@ -75,7 +74,7 @@ def setup_test_environment():
     # @@@ not quite sure how to handle this yet, but basic_profiles and
     # profiles clash as one is a fork of the other. for now we can just test
     # profiles behavior
-    apps.remove("basic_profiles")
+    apps.remove("pinax.apps.basic_profiles")
     
     # setup path for all project apps/
     sys.path = build_project_app_paths(PINAX_PROJECTS) + sys.path[:]
