@@ -170,8 +170,6 @@ INSTALLED_APPS = [
     "wiki",
     "avatar",
     "threadedcomments",
-    "tribes",
-    "projects",
     "gravatar",
     "django_sorting",
     "photologue",
@@ -192,6 +190,8 @@ INSTALLED_APPS = [
     "pinax.apps.topics",
     "pinax.apps.tasks",
     "pinax.apps.photos",
+    "pinax.apps.projects",
+    "pinax.apps.tribes",
     
     # project
     "about",

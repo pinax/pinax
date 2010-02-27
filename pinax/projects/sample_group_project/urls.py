@@ -37,14 +37,9 @@ urlpatterns = patterns("",
     (r"^attachments/", include("attachments.urls")),
     
     (r"^groups/", include("basic_groups.urls")),
-<<<<<<< HEAD
-    (r"^tribes/", include("tribes.urls")),
-    (r"^projects/", include("projects.urls")),
-    (r"^flag/", include("flag.urls")),
-=======
     (r"^tribes/", include("pinax.apps.tribes.urls")),
     (r"^projects/", include("pinax.apps.projects.urls")),
->>>>>>> a6f88d0... Moved from relying on PINAX_ROOT/apps in sys.path to a full import path
+    (r"^flag/", include("flag.urls")),
     
     (r"^admin/", include(admin.site.urls)),
 )

@@ -5,20 +5,16 @@ from django.views.generic.simple import direct_to_template
 from django.contrib import admin
 admin.autodiscover()
 
-<<<<<<< HEAD
-from tagging.models import TaggedItem
-
-from account.openid_consumer import PinaxConsumer
-from blog.models import Post
 from bookmarks.models import BookmarkInstance
-from photos.models import Image
-from projects.models import Project
-from tasks.models import Task
-from topics.models import Topic
+from tagging.models import TaggedItem
 from wiki.models import Article as WikiArticle
-=======
+
 from pinax.apps.account.openid_consumer import PinaxConsumer
->>>>>>> a6f88d0... Moved from relying on PINAX_ROOT/apps in sys.path to a full import path
+from pinax.apps.blog.models import Post
+from pinax.apps.photos.models import Image
+from pinax.apps.projects.models import Project
+from pinax.apps.tasks.models import Task
+from pinax.apps.topics.models import Topic
 
 
 
