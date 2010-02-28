@@ -1,16 +1,19 @@
+from django.core.urlresolvers import reverse
 from django.test import TestCase
 
 from basic_groups.models import BasicGroup
 
+
 class BasicGroupsTest(TestCase):
     fixtures = ["basic_groups_auth.json"]
+    urls = "basic_groups.tests.basic_groups_urls"
     
     def test_unauth_create_get(self):
         """
         can an unauth'd user get to page?
         """
         
-        response = self.client.get("/groups/create/")
+        response = self.client.get(reverse("group_create"))
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response["location"], "http://testserver/account/login/?next=/groups/create/")
     
@@ -21,7 +24,7 @@ class BasicGroupsTest(TestCase):
         
         logged_in = self.client.login(username="tester", password="tester")
         self.assertTrue(logged_in)
-        response = self.client.get("/groups/create/")
+        response = self.client.get(reverse("group_create"))
         self.assertEqual(response.status_code, 200)
     
     def test_unauth_create_post(self):
@@ -29,7 +32,7 @@ class BasicGroupsTest(TestCase):
         can an unauth'd user post to create a new group?
         """
         
-        response = self.client.post("/groups/create/")
+        response = self.client.post(reverse("group_create"))
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response["location"], "http://testserver/account/login/?next=/groups/create/")
     
@@ -40,7 +43,7 @@ class BasicGroupsTest(TestCase):
         
         logged_in = self.client.login(username="tester", password="tester")
         self.assertTrue(logged_in)
-        response = self.client.post("/groups/create/", {
+        response = self.client.post(reverse("group_create"), {
             "slug": "test",
             "name": "Test Group",
             "description": "A test group.",
@@ -57,12 +60,12 @@ class BasicGroupsTest(TestCase):
         
         logged_in = self.client.login(username="tester", password="tester")
         self.assertTrue(logged_in)
-        response = self.client.post("/groups/create/", {
+        response = self.client.post(reverse("group_create"), {
             "slug": "test",
             "name": "Test Group",
             "description": "A test group.",
         })
-        response = self.client.get("/groups/group/test/")
+        response = self.client.get(reverse("group_detail", args=["test"]))
         self.assertEqual(BasicGroup.objects.get(slug="test").creator.username, "tester")
         self.assertEqual(BasicGroup.objects.get(slug="test").members.all()[0].username, "tester")
         self.assertEqual(response.context[0]["is_member"], True)
