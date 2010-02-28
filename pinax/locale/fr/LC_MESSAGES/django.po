@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-02-20 00:08+0100\n"
-"PO-Revision-Date: 2010-02-28 19:46+0100\n"
+"PO-Revision-Date: 2010-02-28 20:41+0100\n"
 "Last-Translator: James Pic <jamespic@gmial.com>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
@@ -228,7 +228,7 @@ msgstr "vous êtes déjà authentifié en tant que %(user_display)s."
 #: templates/default/account/login.html:24
 #, python-format
 msgid "Don't have an account? <a href=\"%(signup_url)s\">Sign up</a>!"
-msgstr "Vous ne disposez pas encore de compte? <a href=\"%(signup_url)s\">cliquez-ici pour vous enregistrer facilement</a>!"
+msgstr "Vous ne disposez pas encore de compte? <a href=\"%(signup_url)s\">cliquez-ici pour vous inscrire facilement</a>!"
 
 #: templates/default/account/login.html:32
 msgid "Forgot password?"
@@ -392,11 +392,11 @@ msgstr "définir le mot de passe"
 
 #: templates/default/account/signup.html:6
 msgid "Signup"
-msgstr "Enregistrement"
+msgstr "Inscription"
 
 #: templates/default/account/signup.html:9
 msgid "Sign Up"
-msgstr "Enregistrez-vous"
+msgstr "Inscrivez-vous"
 
 #: templates/default/account/signup.html:12
 msgid "You are already logged in."
@@ -409,7 +409,7 @@ msgstr "Avez-vous déjà un compte d'enregistré?"
 #: templates/default/account/signup.html:21
 #: templates/default/django_openid/register.html:22
 msgid "Sign Up &raquo;"
-msgstr "Enregistrez-moi &raquo;"
+msgstr "M'inscrire maintenant &raquo;"
 
 #: templates/default/account/signup.html:28
 #, python-format
@@ -460,7 +460,7 @@ msgid ""
 "(CONTACT_EMAIL)s</a>."
 msgstr ""
 "Nous avons envoyé un email à <b>%(email)s</b> pour votre sécurité. Cliquez "
-"sur le lien qu'il contient pour terminer votre enregistrement. Si vous ne le "
+"sur le lien qu'il contient pour terminer votre inscription. Si vous ne le "
 "recevez pas dans quelques minutes, contactez-nous sur "
 "<a href=\"mailto:%(CONTACT_EMAIL)s\">%(CONTACT_EMAIL)s</a>."
 
@@ -877,14 +877,14 @@ msgstr ""
 #: templates/default/django_openid/registration_closed.html:5
 #: templates/default/django_openid/registration_closed.html:8
 msgid "Signup closed"
-msgstr "Enregistrement fermé"
+msgstr "Inscriptions fermées"
 
 #: templates/default/django_openid/registration_closed.html:10
 msgid ""
 "Whoops, you can't register for an account now. This site is currently closed "
 "for sign-up."
-msgstr "Oups, vous ne pouvez pas enregistrer de compte maintenant. les "
-"enregistrements sont actuellement fermés sur ce site"
+msgstr "Oups, vous ne pouvez pas vous inscrire pour l'instant. les "
+"inscriptions sont actuellement fermés sur ce site"
 
 #: templates/default/emailconfirmation/confirm_email.html:6
 msgid "Confirm Email"
@@ -1249,6 +1249,8 @@ msgid ""
 "Users whose tweets <a href=\"%(other_user_url)s\">%(other_user_display)s</a> "
 "is following:"
 msgstr ""
+"Utilisateurs dont <a href=\"%(other_user_url)s\">%(other_user_display)s</a> "
+"suit les tweets:"
 
 #: templates/default/microblogging/following.html:27
 msgid "Not following anyone."
@@ -1503,7 +1505,7 @@ msgstr "inviter"
 #: templates/default/profiles/profile.html:109
 #, python-format
 msgid "%(other_user_display)s to be a friend."
-msgstr ""
+msgstr "%(other_user_display)s pour devenir votre ami."
 
 #: templates/default/profiles/profile.html:119
 #: templates/default/projects/project.html:123
@@ -1544,7 +1546,7 @@ msgid ""
 "<a href=\"%(signup_url)s\">Sign up</a> and <a href=\"%(login_url)s\">log in "
 "</a> to add this person as a friend and see their tweets and blog posts."
 msgstr ""
-"<a href=\"%(signup_url)s\">Enregistrez-vous</a> et <a href=\"%(login_url)s\">authentifiez-vous "
+"<a href=\"%(signup_url)s\">Inscrivez-vous</a> et <a href=\"%(login_url)s\">authentifiez-vous "
 "</a> pour ajouter cette personne dans vos amis et voir ses tweets et articles"
 
 #: templates/default/profiles/profile_right_panel.html:9
@@ -1618,7 +1620,7 @@ msgid ""
 "<a href=\"%(signup_url)s\">Sign up</a> and <a href=\"%(login_url)s\">log in "
 "</a> to create your own project or join an existing one."
 msgstr ""
-"<a href=\"%(signup_url)s\">Enregistrez-vous</a> et <a href=\"%(login_url)s\">authentifiez-vous"
+"<a href=\"%(signup_url)s\">Inscrivez-vous</a> et <a href=\"%(login_url)s\">authentifiez-vous"
 "</a> pour créer un projet ou rejoindre un projet existant."
 
 #: templates/default/projects/project.html:23
@@ -1942,6 +1944,8 @@ msgid ""
 "<a href=\"%(user_url)s\">%(commenter_display)s</a> has commented on the swap "
 "'<a href=\"%(swap_url)s\">%(swap)s</a>' in which your offer is involved."
 msgstr ""
+"<a href=\"%(user_url)s\">%(commenter_display)s</a> a commenté l'échange "
+"'<a href=\"%(swap_url)s\">%(swap)s</a>' qui implique votre offre."
 
 #: templates/default/swaps/notification/swaps_conflict/full.txt:1
 #, python-format
@@ -1952,6 +1956,11 @@ msgid ""
 "that lost a conflict to another swap http://%(current_site)s%"
 "(winning_swap_url)s.\n"
 msgstr ""
+"\n"
+"Une de vos offres est impliquée dans l'échange http://%(current_site)s%"
+"(losing_swap_url)s\n"
+"qui a perdu un conflit contre un autre échange http://%(current_site)s%"
+"(winning_swap_url)s.\n"
 
 #: templates/default/swaps/notification/swaps_conflict/notice.html:1
 #, python-format
@@ -1962,6 +1971,11 @@ msgid ""
 "that lost a conflict to another swap <a href=\"%(winning_swap_url)s\">%"
 "(winning_swap)s</a>.\n"
 msgstr ""
+"\n"
+"Une de vos offres fut impliquée dans un échange <a href=\"%(losing_swap_url)s\">%"
+"(losing_swap)s</a>\n"
+"qui a perdu un conflit contre l'échange <a href=\"%(winning_swap_url)s\">%"
+"(winning_swap)s</a>.\n"
 
 #: templates/default/swaps/notification/swaps_proposal/full.txt:1
 #, python-format
@@ -1971,6 +1985,10 @@ msgid ""
 "\n"
 "http://%(current_site)s%(swap_url)s"
 msgstr ""
+"%(creator_display)s propose un échange de %(proposing_offer)s contre votre %"
+"(responding_offer)s.\n"
+"\n"
+"http://%(current_site)s%(swap_url)s"
 
 #: templates/default/swaps/notification/swaps_proposal/notice.html:2
 #, python-format
@@ -1979,6 +1997,9 @@ msgid ""
 "\"%(swap_url)s\">swap</a>' of %(proposing_offer)s for your %"
 "(responding_offer)s.\n"
 msgstr ""
+"<a href=\"%(creator_url)s\">%(creator_display)s</a> a proposé un '<a href="
+"\"%(swap_url)s\">échange</a>' de %(proposing_offer)s contre votre %"
+"(responding_offer)s.\n"
 
 #: templates/default/swaps/notification/swaps_proposing_offer_changed/full.txt:1
 #, python-format
@@ -1988,6 +2009,10 @@ msgid ""
 "\n"
 "http://%(current_site)s%(swap_url)s"
 msgstr ""
+"%(creator_display)s a changé l'%(proposing_offer)s dans un échange "
+"contre votre %(responding_offer)s.\n"
+"\n"
+"http://%(current_site)s%(swap_url)s"
 
 #: templates/default/swaps/notification/swaps_proposing_offer_changed/notice.html:2
 #, python-format
@@ -1996,6 +2021,9 @@ msgid ""
 "(proposing_offer)s in a proposed '<a href=\"%(swap_url)s\">swap</a>' for "
 "your %(responding_offer)s.\n"
 msgstr ""
+"<a href=\"%(creator_url)s\">%(creator_display)s</a> a changé l'offre %"
+"(proposing_offer)s dans le cadre de la proposition '<a href=\"%(swap_url)s\">d'échange</a>' contre "
+"vos %(responding_offer)s.\n"
 
 #: templates/default/swaps/notification/swaps_rejection/full.txt:1
 #, python-format
@@ -2005,6 +2033,10 @@ msgid ""
 "\n"
 "http://%(current_site)s%(swap_url)s"
 msgstr ""
+"%(creator_display)s a décliné votre proposition d'échange de %(proposing_offer)s "
+"contre %(responding_offer)s.\n"
+"\n"
+"http://%(current_site)s%(swap_url)s"
 
 #: templates/default/swaps/notification/swaps_rejection/notice.html:2
 #, python-format
@@ -2013,6 +2045,9 @@ msgid ""
 "proposed '<a href=\"%(swap_url)s\">swap</a>' of %(proposing_offer)s for %"
 "(responding_offer)s.\n"
 msgstr ""
+"<a href=\"%(creator_url)s\">%(creator_display)s</a> a décliné votre "
+"proposition d'<a href=\"%(swap_url)s\">échange</a> de %(proposing_offer)s contre %"
+"(responding_offer)s.\n"
 
 #: templates/default/swaps/notification/swaps_responding_offer_changed/full.txt:1
 #, python-format
@@ -2022,6 +2057,10 @@ msgid ""
 "\n"
 "http://%(current_site)s%(swap_url)s"
 msgstr ""
+"%(creator_display)s a changé son offre %(responding_offer)s "
+"en réponse à votre proposition d'échange de %(proposing_offer)s.\n"
+"\n"
+"http://%(current_site)s%(swap_url)s"
 
 #: templates/default/swaps/notification/swaps_responding_offer_changed/notice.html:2
 #, python-format
@@ -2030,6 +2069,9 @@ msgid ""
 "responding offer %(responding_offer)s to your proposed '<a href=\"%(swap_url)"
 "s\">swap</a>' for %(proposing_offer)s.\n"
 msgstr ""
+"<a href=\"%(creator_url)s\">%(creator_display)s</a> a changé son "
+"offre %(responding_offer)s de votre proposition d'<a href=\"%(swap_url)"
+"s\">échange</a> contre %(proposing_offer)s.\n"
 
 #: templates/default/tasks/add.html:20
 msgid "Add task"
@@ -2156,6 +2198,10 @@ msgid ""
 "(acct_signup_url)s\">Sign Up</a>) to leave a comment</h3>\n"
 "    "
 msgstr ""
+"\n"
+"        <h3>Merci de <a href=\"%(acct_login_url)s\">vous authentifier</a> (ou <a href=\"%"
+"(acct_signup_url)s\">vous inscrire</a>) pour laisser un commentaire</h3>\n"
+"    "
 
 #: templates/default/topics/topic.html:12
 msgid "Topic"
@@ -2176,6 +2222,9 @@ msgid ""
 "                (most recent: %(topic_modified)s)\n"
 "                "
 msgstr ""
+"\n"
+"                (plus récent: %(topic_modified)s)\n"
+"                "
 
 #: templates/default/topics/topics.html:9
 #, python-format
@@ -2224,6 +2273,8 @@ msgid ""
 "<a href=\"%(signup_url)s\">Sign up</a> and <a href=\"%(login_url)s\">log in "
 "</a> to create your own tribe or join an existing one."
 msgstr ""
+"<a href=\"%(signup_url)s\">Inscrivez-vous</a> et <a href=\"%(login_url)s\">authentifiez-vous"
+"</a> pour créer ou rejoindre une tribu"
 
 #: templates/default/tribes/tribe.html:42
 msgid "Tribe"
@@ -2239,11 +2290,11 @@ msgstr "Effacer la tribu"
 
 #: templates/default/tribes/tribe.html:77
 msgid "You are not the only member of the tribe so you can't delete the tribe."
-msgstr ""
+msgstr "Vous n'êtes le seul membre d'aucune tribu, vous ne pouvez donc en effacer aucune"
 
 #: templates/default/tribes/tribe.html:88
 msgid "You are the creator of this tribe so can't leave (yet)."
-msgstr ""
+msgstr "Vous êtes le créateur de cette tribu, vous ne pouvez donc pas la quitter (pour l'instant)."
 
 #: templates/default/tribes/tribe.html:91
 msgid "leave"
@@ -2259,6 +2310,8 @@ msgid ""
 "<a href=\"%(signup_url)s\">Sign up</a> and <a href=\"%(login_url)s\">log in "
 "</a> to join this tribe."
 msgstr ""
+"<a href=\"%(signup_url)s\">Inscrivez-vous</a> et <a href=\"%(login_url)s\">authentifiez-vous"
+"</a> pour rejoindre cette tribu."
 
 #: templates/default/tribes/tribe.html:144
 msgid "Tribe Photo Pool"
@@ -2277,6 +2330,10 @@ msgid ""
 "can <a href=\"%(photo_upload_url)s\">add a photo</a>.</a>\n"
 "                    "
 msgstr ""
+"\n"
+"                        Cette tribu n'a encore publié aucune photo. Vous "
+"pouvez <a href=\"%(photo_upload_url)s\">publier une photo</a>.</a>\n"
+"                    "
 
 #: templates/default/tribes/tribe.html:170
 msgid "Upcoming Events"
@@ -2306,11 +2363,11 @@ msgstr "Bienvenue"
 
 #: templates/default/waitinglist/list_signup.html:12
 msgid "Signup for the waiting list"
-msgstr "Enregistrez-vous sur la liste d'attente"
+msgstr "Inscrivez-vous sur la liste d'attente"
 
 #: templates/default/waitinglist/list_signup.html:14
 msgid "Give us your e-mail address and you'll be added to the waiting list"
-msgstr "Enregistrez votre adresse email pour être ajouté à la liste d'attente"
+msgstr "Inscrivez votre adresse email pour être ajouté à la liste d'attente"
 
 #: templates/default/wiki/base.html:10
 msgid "All Articles"
