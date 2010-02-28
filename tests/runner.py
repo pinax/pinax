@@ -110,6 +110,7 @@ def setup_test_environment():
             "django.core.context_processors.i18n",
             "django.core.context_processors.media",
             "django.core.context_processors.request",
+            "django.contrib.messages.context_processors.messages",
             "pinax.core.context_processors.pinax_settings",
         ],
         "CONTACT_EMAIL": "feedback@example.com",
