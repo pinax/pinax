@@ -3,6 +3,7 @@ import re
 
 from django.conf import settings
 from django.core import mail
+from django.core.urlresolvers import reverse
 from django.test import TestCase
 
 from django.contrib.auth.models import User
@@ -37,7 +38,7 @@ class PasswordResetTest(TestCase):
         """
         Test GET on /password_reset/
         """
-        response = self.client.get("/account/password_reset/")
+        response = self.client.get(reverse("acct_passwd_reset"))
         self.assertEquals(response.status_code, 200)
     
     def test_email_not_found(self):
@@ -48,7 +49,7 @@ class PasswordResetTest(TestCase):
         data = {
             "email": "nothing@example.com",
         }
-        response = self.client.post("/account/password_reset/", data)
+        response = self.client.post(reverse("acct_passwd_reset"), data)
         self.assertEquals(response.status_code, 200)
         # @@@ instead of hard-coding this error message rely on a error key
         # defined in the form where the site developer would override this
@@ -71,7 +72,7 @@ class PasswordResetTest(TestCase):
         data = {
             "email": "bob@example.com",
         }
-        response = self.client.post("/account/password_reset/", data)
+        response = self.client.post(reverse("acct_passwd_reset"), data)
         self.assertEquals(response.status_code, 200)
         # @@@ instead of hard-coding this error message rely on a error key
         # defined in the form where the site developer would override this
@@ -94,7 +95,7 @@ class PasswordResetTest(TestCase):
         data = {
             "email": "bob@example.com",
         }
-        response = self.client.post("/account/password_reset/", data)
+        response = self.client.post(reverse("acct_passwd_reset"), data)
         self.assertEquals(response.status_code, 302)
         self.assertEquals(len(mail.outbox), 1)
     
@@ -115,7 +116,7 @@ class PasswordResetTest(TestCase):
         data = {
             "email": "bob@example.com",
         }
-        response = self.client.post("/account/password_reset/", data)
+        response = self.client.post(reverse("acct_passwd_reset"), data)
         self.assertEquals(response.status_code, 302)
         self.assertEquals(len(mail.outbox), 1)
         return self._read_reset_email(mail.outbox[0])
