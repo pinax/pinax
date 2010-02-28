@@ -1,18 +1,20 @@
+from django.core.urlresolvers import reverse
 from django.test import TestCase
 
 from pinax.apps.tribes.models import Tribe
 
 class TribesTest(TestCase):
     fixtures = ["tribes_auth.json"]
+    urls = "pinax.apps.tribes.tests.tribes_urls"
     
     def test_unauth_create_get(self):
         """
         can an unauth'd user get to page?
         """
         
-        response = self.client.get("/tribes/create/")
+        response = self.client.get(reverse("tribe_create"))
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response["location"], "http://testserver/account/login/?next=/tribes/create/")
+        self.assertEqual(response["location"], "http://testserver/account/login/?next=%s" % reverse("tribe_create"))
     
     def test_auth_create_get(self):
         """
@@ -21,7 +23,7 @@ class TribesTest(TestCase):
         
         logged_in = self.client.login(username="tester", password="tester")
         self.assertTrue(logged_in)
-        response = self.client.get("/tribes/create/")
+        response = self.client.get(reverse("tribe_create"))
         self.assertEqual(response.status_code, 200)
     
     def test_unauth_create_post(self):
@@ -29,9 +31,9 @@ class TribesTest(TestCase):
         can an unauth'd user post to create a new tribe?
         """
         
-        response = self.client.post("/tribes/create/")
+        response = self.client.post(reverse("tribe_create"))
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response["location"], "http://testserver/account/login/?next=/tribes/create/")
+        self.assertEqual(response["location"], "http://testserver/account/login/?next=%s" % reverse("tribe_create"))
     
     def test_auth_create_post(self):
         """
@@ -40,7 +42,7 @@ class TribesTest(TestCase):
         
         logged_in = self.client.login(username="tester", password="tester")
         self.assertTrue(logged_in)
-        response = self.client.post("/tribes/create/", {
+        response = self.client.post(reverse("tribe_create"), {
             "slug": "test",
             "name": "Test Tribe",
             "description": "A test tribe.",
@@ -57,12 +59,12 @@ class TribesTest(TestCase):
         
         logged_in = self.client.login(username="tester", password="tester")
         self.assertTrue(logged_in)
-        response = self.client.post("/tribes/create/", {
+        response = self.client.post(reverse("tribe_create"), {
             "slug": "test",
             "name": "Test Tribe",
             "description": "A test tribe.",
         })
-        response = self.client.get("/tribes/tribe/test/")
+        response = self.client.get(reverse("tribe_detail", args=["test"]))
         self.assertEqual(Tribe.objects.get(slug="test").creator.username, "tester")
         self.assertEqual(Tribe.objects.get(slug="test").members.all()[0].username, "tester")
         self.assertEqual(response.context[0]["is_member"], True)
