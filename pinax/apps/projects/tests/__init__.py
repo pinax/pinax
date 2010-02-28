@@ -6,7 +6,7 @@ from pinax.apps.projects.models import Project
 
 class ProjectsTest(TestCase):
     fixtures = ["projects_auth.json"]
-    urls = "projects.tests.project_urls"
+    urls = "pinax.apps.projects.tests.project_urls"
     
     def test_unauth_create_get(self):
         """
