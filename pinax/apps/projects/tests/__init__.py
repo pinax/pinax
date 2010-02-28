@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.test import TestCase
 
 from pinax.apps.projects.models import Project
@@ -13,7 +14,7 @@ class ProjectsTest(TestCase):
         can an unauth'd user get to page?
         """
         
-        response = self.client.get("/projects/create/")
+        response = self.client.get(reverse("project_create"))
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response["location"], "http://testserver/account/login/?next=/projects/create/")
     
@@ -24,7 +25,7 @@ class ProjectsTest(TestCase):
         
         logged_in = self.client.login(username="tester", password="tester")
         self.assertTrue(logged_in)
-        response = self.client.get("/projects/create/")
+        response = self.client.get(reverse("project_create"))
         self.assertEqual(response.status_code, 200)
     
     def test_unauth_create_post(self):
@@ -32,7 +33,7 @@ class ProjectsTest(TestCase):
         can an unauth'd user post to create a new project?
         """
         
-        response = self.client.post("/projects/create/")
+        response = self.client.post(reverse("project_create"))
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response["location"], "http://testserver/account/login/?next=/projects/create/")
     
@@ -43,7 +44,7 @@ class ProjectsTest(TestCase):
         
         logged_in = self.client.login(username="tester", password="tester")
         self.assertTrue(logged_in)
-        response = self.client.post("/projects/create/", {
+        response = self.client.post(reverse("project_create"), {
             "slug": "test",
             "name": "Test Project",
             "description": "A test project.",
@@ -59,12 +60,12 @@ class ProjectsTest(TestCase):
         
         logged_in = self.client.login(username="tester", password="tester")
         self.assertTrue(logged_in)
-        response = self.client.post("/projects/create/", {
+        response = self.client.post(reverse("project_create"), {
             "slug": "test",
             "name": "Test Project",
             "description": "A test project.",
         })
-        response = self.client.get("/projects/project/test/")
+        response = self.client.get(reverse("project_detail", args=["test"]))
         self.assertEqual(Project.objects.get(slug="test").creator.username, "tester")
         self.assertEqual(len(Project.objects.get(slug="test").members.all()), 1)
         self.assertEqual(Project.objects.get(slug="test").members.all()[0].user.username, "tester")
