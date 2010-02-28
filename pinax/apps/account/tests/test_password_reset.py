@@ -15,7 +15,7 @@ from emailconfirmation.models import EmailAddress, EmailConfirmation
 class PasswordResetTest(TestCase):
     # tests based on django.contrib.auth tests
     
-    urls = "account.tests.account_urls"
+    urls = "pinax.apps.account.tests.account_urls"
     
     def setUp(self):
         self.old_installed_apps = settings.INSTALLED_APPS
