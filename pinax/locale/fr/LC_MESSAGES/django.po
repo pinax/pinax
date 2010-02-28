@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-02-20 00:08+0100\n"
-"PO-Revision-Date: 2010-02-28 19:03+0100\n"
+"PO-Revision-Date: 2010-02-28 19:46+0100\n"
 "Last-Translator: James Pic <jamespic@gmial.com>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
@@ -56,6 +56,9 @@ msgid ""
 "        <p>Your <b>About Page</b> would normally go here...</p>\n"
 "    "
 msgstr ""
+"\n"
+"        <p>Le contenu de votre page <b>A propos</b> devrait etre ici ...</p>\n"
+"    "
 
 #: templates/default/about/about.html:11
 msgid ""
@@ -64,16 +67,21 @@ msgid ""
 "\">Silk icon set 1.3</a> by Mark James.\n"
 "    "
 msgstr ""
+"\n"
+"        Ce site utilise les <a href=\"http://www.famfamfam.com/lab/icons/silk/"
+"\">Icones Silk 1.3</a> par Mark James.\n"
+"    "
 
 #: templates/default/about/dmca.html:5
 msgid "Digital Millennium Copyright Act Notice"
-msgstr ""
+msgstr "Directive de copyright de l'Union Européenne"
 
 #: templates/default/about/dmca.html:8
 msgid ""
 "<p>Your <b>Digital Millennium Copyright Act Notice</b> would normally go "
 "here...</p>"
 msgstr ""
+"<p>Votre <b>Directive de copyright de l'Union Européenne</b> devrait normalement aller "
 
 #: templates/default/about/privacy.html:5
 msgid "Privacy Policy"
@@ -81,7 +89,7 @@ msgstr "Politique de confidentialité"
 
 #: templates/default/about/privacy.html:8
 msgid "<p>Your <b>Privacy Policy</b> would normally go here...</p>"
-msgstr ""
+msgstr "<p>Votre <b>Politique de confidentialité</b> devrait normalement aller ici ...</p>"
 
 #: templates/default/about/terms.html:5
 msgid "Terms of Service"
@@ -89,7 +97,7 @@ msgstr "Termes du service"
 
 #: templates/default/about/terms.html:8
 msgid "<p>Your <b>Terms of Service</b> would normally go here...</p>"
-msgstr ""
+msgstr "<p>Vos <b>Termes de service</b> devraient normalement aller ici"
 
 #: templates/default/account/base.html:11
 msgid "E-Mail Addresses"
@@ -915,6 +923,18 @@ msgid ""
 "If you have any questions about %(SITE_NAME)s, don't hesitate to contact %"
 "(CONTACT_EMAIL)s\n"
 msgstr ""
+"%(user_display)s vous invite à rejoindre %(SITE_NAME)s %(user_display)s.\n"
+"\n"
+"%(user_display)s a dit:\n"
+"\n"
+"%(message)s\n"
+"\n"
+"Pour accepter l'invitation, aller à\n"
+"\n"
+"%(accept_url)s\n"
+"\n"
+"Si vous avez la moindre question au sujet de %(SITE_NAME)s, n'hesitez pas à contacter%"
+"(CONTACT_EMAIL)s\n"
 
 #: templates/default/friends/join_invite_subject.txt:1
 #, python-format
@@ -1074,6 +1094,13 @@ msgid ""
 "\n"
 "http://%(current_site)s%(message_url)s"
 msgstr ""
+"%(sender_display)s vous a envoyé un message:\n"
+"\n"
+"%(message)s\n"
+"\n"
+"%(message_body)s\n"
+"\n"
+"http://%(current_site)s%(message_url)s"
 
 #: templates/default/messages/notification/messages_received/notice.html:2
 #, python-format
@@ -1081,6 +1108,8 @@ msgid ""
 "You have received the message <a href=\"%(message_url)s\">%(message)s</a> "
 "from <a href=\"%(sender_url)s\">%(sender_display)s</a>."
 msgstr ""
+"Vous avez reçu le message <a href=\"%(message_url)s\">%(message)s</a> "
+"de la part de <a href=\"%(sender_url)s\">%(sender_display)s</a>."
 
 #: templates/default/messages/notification/messages_received/short.txt:1
 #: templates/default/messages/notification/messages_reply_received/short.txt:1
@@ -1113,6 +1142,8 @@ msgid ""
 "You have replied to <a href=\"%(message_url)s\">%(message_parent_msg)s</a> "
 "from <a href=\"%(recipient_url)s\">%(recipient_display)s</a>."
 msgstr ""
+"Vous avez répondu à <a href=\"%(message_url)s\">%(message_parent_msg)s</a> "
+"de la part de <a href=\"%(recipient_url)s\">%(recipient_display)s</a>."
 
 #: templates/default/messages/notification/messages_reply_received/full.txt:1
 #, python-format
@@ -1125,6 +1156,13 @@ msgid ""
 "\n"
 "http://%(current_site)s%(message_url)s"
 msgstr ""
+"%(sender_display)s a répondu à '%(message_parent_msg)s':\n"
+"\n"
+"%(message)s\n"
+"\n"
+"%(message_body)s\n"
+"\n"
+"http://%(current_site)s%(message_url)s"
 
 #: templates/default/messages/notification/messages_reply_received/notice.html:2
 #, python-format
@@ -1146,6 +1184,8 @@ msgid ""
 "You have sent the message <a href=\"%(message_url)s\">%(message)s</a> to <a "
 "href=\"%(recipient_url)s\">%(recipient_display)s</a>."
 msgstr ""
+"Vous avez envoyé le message <a href=\"%(message_url)s\">%(message)s</a> to <a "
+"href=\"%(recipient_url)s\">%(recipient_display)s</a>."
 
 #: templates/default/microblogging/base.html:10
 msgid "Tweets You Follow"
@@ -1182,6 +1222,7 @@ msgid ""
 "Followers of <a href=\"%(other_user_url)s\">%(other_user_display)s</a>'s "
 "tweets:"
 msgstr ""
+"Tweets des suiveurs de <a href=\"%(other_user_url)s\">%(other_user_display)s</a>:"
 
 #: templates/default/microblogging/followers.html:28
 msgid "No followers."
@@ -1193,6 +1234,8 @@ msgid ""
 "Also see <a href=\"%(tweet_following_url)s\">who %(other_user_display)s is "
 "following</a>."
 msgstr ""
+"Consultez aussi <a href=\"%(tweet_following_url)s\">qui %(other_user_display)s suit"
+"</a>."
 
 #: templates/default/microblogging/following.html:9
 #: templates/default/microblogging/following.html:12
@@ -1217,6 +1260,8 @@ msgid ""
 "Also see <a href=\"%(tweet_followers_url)s\">who is following</a> %"
 "(other_user_display)s."
 msgstr ""
+"Voir aussi <a href=\"%(tweet_followers_url)s\">qui suit</a> %"
+"(other_user_display)s."
 
 #: templates/default/microblogging/friends_tweets.html:13
 msgid "These are tweets from your friends:"
@@ -1240,7 +1285,7 @@ msgstr "Pas encore de tweets."
 #: templates/default/microblogging/listing.html:21
 #, python-format
 msgid "You haven't posted any <a href=\"%(tweets_url)s\">tweets</a> yet."
-msgstr ""
+msgstr "Vous n'avez encore publié aucun <a href=\"%(tweets_url)s\">tweets</a>."
 
 #: templates/default/microblogging/listing.html:23
 msgid "There are currently no tweets to be listed."
@@ -1284,6 +1329,9 @@ msgid ""
 "        These are tweets from the %(follow_count)s %(follow_name)s you are "
 "following (plus your own)"
 msgstr ""
+"\n"
+"        Ce sont les tweets des %(follow_count)s %(follow_name)s que vous "
+"suivez (en plus des votres)"
 
 #: templates/default/microblogging/public.html:6
 msgid "Public Tweets"
@@ -1291,12 +1339,12 @@ msgstr "Tweets publiques"
 
 #: templates/default/microblogging/public.html:16
 msgid "These are tweets from everyone:"
-msgstr ""
+msgstr "Ce sont les tweets de tout le monde:"
 
 #: templates/default/microblogging/single.html:7
 #: templates/default/microblogging/single.html:10
 msgid "Single Tweet"
-msgstr ""
+msgstr "Tweet seul"
 
 #: templates/default/notification/notices.html:21
 msgid "Mark all unseen notices seen"
@@ -1325,6 +1373,8 @@ msgid ""
 "You do not have a verified email address to which notices can be sent. You "
 "can add one by going to <a href=\"%(email_url)s\">Account</a>."
 msgstr ""
+"Vous n'avez vérifié aucune adresse email auxquelle les notifications pourraient "
+"être envoyée. Vous pouvez en ajouter une en cliquant sur  <a href=\"%(email_url)s\">Votre compte</a>"
 
 #: templates/default/notification/notices.html:70
 msgid "Notification Type"
@@ -1494,6 +1544,8 @@ msgid ""
 "<a href=\"%(signup_url)s\">Sign up</a> and <a href=\"%(login_url)s\">log in "
 "</a> to add this person as a friend and see their tweets and blog posts."
 msgstr ""
+"<a href=\"%(signup_url)s\">Enregistrez-vous</a> et <a href=\"%(login_url)s\">authentifiez-vous "
+"</a> pour ajouter cette personne dans vos amis et voir ses tweets et articles"
 
 #: templates/default/profiles/profile_right_panel.html:9
 #: templates/default/tribes/base.html:16
@@ -1505,7 +1557,7 @@ msgstr "Vos tribus"
 #: templates/default/profiles/profile_right_panel.html:16
 #, python-format
 msgid "You are not yet a member of any <a href=\"%(tribe_url)s\">tribes</a>."
-msgstr ""
+msgstr "Vous n'êtes encore le membre d'aucune <a href=\"%(tribe_url)s\">tribu</a>."
 
 #: templates/default/profiles/profile_right_panel.html:20
 msgid "Your Friends"
@@ -1526,7 +1578,7 @@ msgstr "Tribus de %(other_user_display)s"
 
 #: templates/default/profiles/profile_right_panel.html:47
 msgid "Not yet a member of any tribes."
-msgstr ""
+msgstr "Vous n'êtes encore le membre d'aucune tribu."
 
 #: templates/default/profiles/profile_right_panel.html:51
 #, python-format
@@ -1557,6 +1609,7 @@ msgid ""
 "A <b>project</b> is a group of people working together on a common set of "
 "tasks."
 msgstr ""
+"Un <b>projet</b> est un groupe de personnes qui travaillent ensemble pour accomplir des taches communes"
 
 #: templates/default/projects/create.html:31
 #: templates/default/projects/projects.html:23
@@ -1565,6 +1618,8 @@ msgid ""
 "<a href=\"%(signup_url)s\">Sign up</a> and <a href=\"%(login_url)s\">log in "
 "</a> to create your own project or join an existing one."
 msgstr ""
+"<a href=\"%(signup_url)s\">Enregistrez-vous</a> et <a href=\"%(login_url)s\">authentifiez-vous"
+"</a> pour créer un projet ou rejoindre un projet existant."
 
 #: templates/default/projects/project.html:23
 #: templates/default/tribes/tribe.html:24
@@ -1640,6 +1695,10 @@ msgid ""
 "\"wiki\">wiki</a> to start a new article.\n"
 "                    "
 msgstr ""
+"\n"
+"                        Aucun pour l'instant. Cliquez sur <a href=\"%(wiki_url)s\" title="
+"\"wiki\">wiki</a> pour commencer un nouvel article.\n"
+"                    "
 
 #: templates/default/projects/project.html:141
 msgid "Tasks"
@@ -1662,7 +1721,7 @@ msgstr "Projets"
 
 #: templates/default/projects/projects.html:17
 msgid "A <b>project</b> is a group of people working on a common set of tasks."
-msgstr ""
+msgstr "Un <b>projet</b> est un groupe de personnes qui travaillent sur un assortiment de taches commun"
 
 #: templates/default/projects/your_projects.html:13
 msgid "These are the projects you participate in."
@@ -1677,6 +1736,8 @@ msgid ""
 "Invite a user given an e-mail address. The user will be e-mailed a signup "
 "code to create their account on this website."
 msgstr ""
+"Invitez un utilisateur par email. Cet utilisateur recevera un email "
+"contenant un code d'inscription pour créer un compte sur ce site."
 
 #: templates/default/signup_codes/failure.html:5
 #: templates/default/signup_codes/failure.html:8
@@ -1818,6 +1879,10 @@ msgid ""
 "\n"
 "http://%(current_site)s%(swap_url)s"
 msgstr ""
+"%(creator_display)s a accepté votre proposition d'échange de %(proposing_offer)s "
+"contre %(responding_offer)s.\n"
+"\n"
+"http://%(current_site)s%(swap_url)s"
 
 #: templates/default/swaps/notification/swaps_acceptance/notice.html:2
 #, python-format
@@ -1826,6 +1891,9 @@ msgid ""
 "proposed '<a href=\"%(swap_url)s\">swap</a>' of %(proposing_offer)s for %"
 "(responding_offer)s.\n"
 msgstr ""
+"<a href=\"%(creator_url)s\">%(creator_display)s</a> a accepté votre "
+"proposition d'<a href=\"%(swap_url)s\">échange</a> de %(proposing_offer)s pour %"
+"(responding_offer)s.\n"
 
 #: templates/default/swaps/notification/swaps_cancellation/full.txt:1
 #, python-format
@@ -1835,6 +1903,10 @@ msgid ""
 "\n"
 "http://%(current_site)s%(swap_url)s"
 msgstr ""
+"%(creator_display)s a annulé la proposition d'échange de %(proposing_offer)s "
+"pour %(responding_offer)s.\n"
+"\n"
+"http://%(current_site)s%(swap_url)s"
 
 #: templates/default/swaps/notification/swaps_cancellation/notice.html:2
 #, python-format
@@ -1843,6 +1915,9 @@ msgid ""
 "proposed '<a href=\"%(swap_url)s\">swap</a>' of %(proposing_offer)s for %"
 "(responding_offer)s.\n"
 msgstr ""
+"<a href=\"%(creator_url)s\">%(creator_display)s</a> a annulé la "
+"proposition d'<a href=\"%(swap_url)s\">échange</a> de %(proposing_offer)s contre %"
+"(responding_offer)s.\n"
 
 #: templates/default/swaps/notification/swaps_comment/full.txt:1
 #, python-format
@@ -1854,6 +1929,12 @@ msgid ""
 "\n"
 "http://%(current_site)s%(swap_url)s"
 msgstr ""
+"%(commenter_display)s a commenté l'échange %(swap)s qui implique votre "
+"offre:\n"
+"\n"
+"%(swap_comment)s\n"
+"\n"
+"http://%(current_site)s%(swap_url)s"
 
 #: templates/default/swaps/notification/swaps_comment/notice.html:2
 #, python-format
