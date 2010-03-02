@@ -332,6 +332,10 @@ Used by ``pinax.apps.analytics`` as part of your account information on `Google
 Analytics`_. Based on this setting the JavaScript is generated that is then
 embedded into your website to allow Google Analytics to track your traffic.
 
+Tracking code will not be outputted if ``DEBUG`` is ``True`` to prevent
+unnecessary tracking.
+
+
 .. _google analytics: http://analytics.google.com/
 
 
