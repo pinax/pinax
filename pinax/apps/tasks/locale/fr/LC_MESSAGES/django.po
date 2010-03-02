@@ -7,10 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-20 00:11+0100\n"
+"POT-Creation-Date: 2010-03-02 19:30+0100\n"
 "PO-Revision-Date: 2010-03-01 14:27+0100\n"
 "Last-Translator: James Pic <http://jamespic.com/>\n"
-"Language-Team: Pinax Team <http://www.transifex.net/projects/p/pinax/team/fr/>\n"
+"Language-Team: Pinax Team <http://www.transifex.net/projects/p/pinax/team/fr/"
+">\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -77,73 +78,73 @@ msgstr "Nudge de tache"
 msgid "there has been a nudge of a task"
 msgstr "une tache a été nudgée"
 
-#: models.py:47 models.py:216
+#: models.py:46 models.py:215
 msgid "summary"
 msgstr "sommaire"
 
-#: models.py:48 models.py:217
+#: models.py:47 models.py:216
 msgid "detail"
 msgstr "détail"
 
-#: models.py:49 models.py:218
+#: models.py:48 models.py:217
 #, fuzzy
 msgid "Detail Markup"
 msgstr "Syntaxe"
 
-#: models.py:52 models.py:221
+#: models.py:51 models.py:220
 msgid "creator"
 msgstr "créateur"
 
-#: models.py:54 models.py:223
+#: models.py:53 models.py:222
 msgid "created"
 msgstr "créé"
 
-#: models.py:55 models.py:224
+#: models.py:54 models.py:223
 msgid "modified"
 msgstr "modifié à"
 
-#: models.py:58 models.py:227
+#: models.py:57 models.py:226
 msgid "assignee"
 msgstr "responsable"
 
-#: models.py:66 models.py:234
+#: models.py:65 models.py:233
 msgid "status"
 msgstr "status"
 
-#: models.py:70 models.py:235
+#: models.py:69 models.py:234
 msgid "state"
 msgstr "état"
 
-#: models.py:75 models.py:240
+#: models.py:74 models.py:239
 #, fuzzy
 msgid "resolution"
 msgstr "solution"
 
-#: models.py:207
+#: models.py:206
 msgid "tasks"
 msgstr "taches"
 
-#: models.py:248
+#: models.py:247
 msgid "comment"
 msgstr "commentaire"
 
-#: models.py:253
+#: models.py:252
 msgid "Owner"
 msgstr "Auteur"
 
-#: models.py:268
+#: models.py:267
 msgid "nudger"
 msgstr "nudgeur"
 
-#: models.py:272
+#: models.py:271
 msgid "task"
 msgstr "tache"
 
-#: models.py:274
+#: models.py:273
 msgid "nudge date"
 msgstr "date du nudge"
 
-#: views.py:131
+#: views.py:130
 #, python-format
 msgid ""
 "Link to the snippet: http://%(domain)s%(link)s\n"
@@ -152,35 +153,35 @@ msgstr ""
 "Lien vers le bout de code: http://%(domain)s%(link)s\n"
 "\n"
 
-#: views.py:154
+#: views.py:153
 #, python-format
 msgid "added task '%s'"
 msgstr "tache '%s' ajoutée"
 
-#: views.py:213
+#: views.py:212
 msgid "You've removed your nudge from this task"
 msgstr "Vous avez retiré votre nudge de cette tache"
 
-#: views.py:225
+#: views.py:224
 #, python-format
 msgid "%s has been nudged about this task"
 msgstr "%s a été nudgé à propos de cette tache"
 
-#: views.py:278
+#: views.py:277
 msgid "updated your status on the task"
 msgstr "votre statut a été mis à jour sur la tache"
 
-#: views.py:284
+#: views.py:283
 #, python-format
 msgid "task marked %(state)s"
 msgstr "tache marquée %(state)s"
 
-#: views.py:292
+#: views.py:291
 #, python-format
 msgid "assigned task to '%(assignee)s'"
 msgstr "tache assignée à '%(assignee)s'"
 
-#: views.py:301
+#: views.py:300
 msgid "updated tags on the task"
 msgstr "étiquettes de la tache mises à jour"
 
@@ -217,8 +218,8 @@ msgid ""
 "<a href=\"%(assignee_url)s\">%(assignee_display)s</a>."
 msgstr ""
 "<a href=\"%(user_url)s\">%(user_display)s</a> a assigné la tache '<a href=\"%"
-"(task_url)s\">%(task)s</a>' du projet '<a href=\"%(group_url)s\">%(group)s</a>' à "
-"<a href=\"%(assignee_url)s\">%(assignee_display)s</a>."
+"(task_url)s\">%(task)s</a>' du projet '<a href=\"%(group_url)s\">%(group)s</"
+"a>' à <a href=\"%(assignee_url)s\">%(assignee_display)s</a>."
 
 #: templates/notification/tasks_assignment/notice.html:8
 #, python-format
@@ -236,7 +237,8 @@ msgstr ""
 msgid ""
 "%(user_display)s has marked task '%(task)s' in '%(group)s' as %(new_state)s."
 msgstr ""
-"%(user_display)s a marqué la tahce '%(task)s' du projet '%(group)s' comme %(new_state)s."
+"%(user_display)s a marqué la tahce '%(task)s' du projet '%(group)s' comme %"
+"(new_state)s."
 
 #: templates/notification/tasks_change/full.txt:6
 #, python-format
@@ -256,8 +258,8 @@ msgid ""
 "(new_state)s."
 msgstr ""
 "<a href=\"%(user_url)s\">%(user_display)s</a> a marqué la tache '<a href=\"%"
-"(task_url)s\">%(task)s</a>' du projet '<a href=\"%(group_url)s\">%(group)s</a>' comme %"
-"(new_state)s."
+"(task_url)s\">%(task)s</a>' du projet '<a href=\"%(group_url)s\">%(group)s</"
+"a>' comme %(new_state)s."
 
 #: templates/notification/tasks_change/notice.html:7
 #, python-format
@@ -285,7 +287,8 @@ msgid ""
 "\"%(task_url)s\">%(task)s</a>' in '<a href=\"%(group_url)s\">%(group)s</a>'."
 msgstr ""
 "<a href=\"%(user_url)s\">%(user_display)s</a> a commenté la tache '<a href="
-"\"%(task_url)s\">%(task)s</a>' du projet '<a href=\"%(group_url)s\">%(group)s</a>'."
+"\"%(task_url)s\">%(task)s</a>' du projet '<a href=\"%(group_url)s\">%(group)"
+"s</a>'."
 
 #: templates/notification/tasks_comment/notice.html:7
 #, python-format
@@ -299,7 +302,8 @@ msgstr ""
 #: templates/notification/tasks_new/full.txt:4
 #, python-format
 msgid "%(creator_display)s has added a task '%(task)s' in '%(group)s'."
-msgstr "%(creator_display)s a ajouté la tache '%(task)s' au projet '%(group)s'."
+msgstr ""
+"%(creator_display)s a ajouté la tache '%(task)s' au projet '%(group)s'."
 
 #: templates/notification/tasks_new/full.txt:6
 #, python-format
@@ -314,8 +318,8 @@ msgid ""
 "a>'."
 msgstr ""
 "<a href=\"%(creator_url)s\">%(creator_display)s</a> a ajouté la tache '<a "
-"href=\"%(task_url)s\">%(task)s</a>' au projet '<a href=\"%(group_url)s\">%(group)s</"
-"a>'."
+"href=\"%(task_url)s\">%(task)s</a>' au projet '<a href=\"%(group_url)s\">%"
+"(group)s</a>'."
 
 #: templates/notification/tasks_new/notice.html:7
 #, python-format
@@ -334,8 +338,8 @@ msgid ""
 "task and provide either a status update or comment.\n"
 msgstr ""
 "\n"
-"%(nudger_display)s vous a nudgé à propos de la tache '%(task)s'. Merci de consulter "
-"la tache et soit de mettre à jour la tache soit de la commenter.\n"
+"%(nudger_display)s vous a nudgé à propos de la tache '%(task)s'. Merci de "
+"consulter la tache et soit de mettre à jour la tache soit de la commenter.\n"
 
 #: templates/notification/tasks_nudge/notice.html:4
 #, python-format
@@ -343,8 +347,8 @@ msgid ""
 "<a href=\"%(user_url)s\">%(nudger_display)s</a> has nudged you on task '<a "
 "href=\"%(task_url)s\">%(task)s</a>'."
 msgstr ""
-"<a href=\"%(user_url)s\">%(nudger_display)s</a> a vous a nudgé sur la tache '<a "
-"href=\"%(task_url)s\">%(task)s</a>'."
+"<a href=\"%(user_url)s\">%(nudger_display)s</a> a vous a nudgé sur la tache "
+"'<a href=\"%(task_url)s\">%(task)s</a>'."
 
 #: templates/notification/tasks_status/full.txt:4
 #, python-format
@@ -352,8 +356,8 @@ msgid ""
 "%(user_display)s has updated the status of task '%(task)s' in '%(group)s' to "
 "'%(task_status)s'."
 msgstr ""
-"%(user_display)s a mis à jour le statut de la tache '%(task)s' du projet '%(group)s' à "
-"'%(task_status)s'."
+"%(user_display)s a mis à jour le statut de la tache '%(task)s' du projet '%"
+"(group)s' à '%(task_status)s'."
 
 #: templates/notification/tasks_status/full.txt:6
 #, python-format
@@ -361,8 +365,8 @@ msgid ""
 "%(user_display)s has updated the status of task '%(task)s' to '%(task_status)"
 "s'."
 msgstr ""
-"%(user_display)s a mis à jour le statut de la tahce '%(task)s' à '%(task_status)"
-"s'."
+"%(user_display)s a mis à jour le statut de la tahce '%(task)s' à '%"
+"(task_status)s'."
 
 #: templates/notification/tasks_status/notice.html:5
 #, python-format
@@ -371,9 +375,9 @@ msgid ""
 "'<a href=\"%(task_url)s\">%(task)s</a>' in '<a href=\"%(group_url)s\">%"
 "(group)s</a>' to '%(task_status)s'."
 msgstr ""
-"<a href=\"%(user_url)s\">%(user_display)s</a> a mis à jour le statut de la tache "
-"'<a href=\"%(task_url)s\">%(task)s</a>' dans le projet '<a href=\"%(group_url)s\">%"
-"(group)s</a>' à '%(task_status)s'."
+"<a href=\"%(user_url)s\">%(user_display)s</a> a mis à jour le statut de la "
+"tache '<a href=\"%(task_url)s\">%(task)s</a>' dans le projet '<a href=\"%"
+"(group_url)s\">%(group)s</a>' à '%(task_status)s'."
 
 #: templates/notification/tasks_status/notice.html:7
 #, python-format
@@ -381,8 +385,8 @@ msgid ""
 "<a href=\"%(user_url)s\">%(user_display)s</a> has updated the status of task "
 "'<a href=\"%(task_url)s\">%(task)s</a>' to '%(task_status)s'."
 msgstr ""
-"<a href=\"%(user_url)s\">%(user_display)s</a> a mis à jour le statut de la tache "
-"'<a href=\"%(task_url)s\">%(task)s</a>' à '%(task_status)s'."
+"<a href=\"%(user_url)s\">%(user_display)s</a> a mis à jour le statut de la "
+"tache '<a href=\"%(task_url)s\">%(task)s</a>' à '%(task_status)s'."
 
 #: templates/notification/tasks_tags/full.txt:4
 #, python-format
@@ -390,15 +394,16 @@ msgid ""
 "%(user_display)s has updated the tags of task '%(task)s' in '%(group)s' to '%"
 "(task_tags)s'."
 msgstr ""
-"%(user_display)s a mis à jour les étiquettes de la tache '%(task)s' du projet '%(group)s' à '%"
-"(task_tags)s'."
+"%(user_display)s a mis à jour les étiquettes de la tache '%(task)s' du "
+"projet '%(group)s' à '%(task_tags)s'."
 
 #: templates/notification/tasks_tags/full.txt:6
 #, python-format
 msgid ""
 "%(user_display)s has updated the tags of task '%(task)s' to '%(task_tags)s'."
 msgstr ""
-"%(user_display)s a mis à jour les étiquettes de la tâche '%(task)s' à %(task_tags)s."
+"%(user_display)s a mis à jour les étiquettes de la tâche '%(task)s' à %"
+"(task_tags)s."
 
 #: templates/notification/tasks_tags/notice.html:5
 #, python-format
@@ -407,9 +412,9 @@ msgid ""
 "'<a href=\"%(task_url)s\">%(task)s</a>' in '<a href=\"%(group_url)s\">%"
 "(group)s</a>' to '%(task_tags)s'."
 msgstr ""
-"<a href=\"%(user_url)s\">%(user_display)s</a> a mis à jour les étiquettes de la tache "
-"'<a href=\"%(task_url)s\">%(task)s</a>' du projet '<a href=\"%(group_url)s\">%"
-"(group)s</a>' à '%(task_tags)s'."
+"<a href=\"%(user_url)s\">%(user_display)s</a> a mis à jour les étiquettes de "
+"la tache '<a href=\"%(task_url)s\">%(task)s</a>' du projet '<a href=\"%"
+"(group_url)s\">%(group)s</a>' à '%(task_tags)s'."
 
 #: templates/notification/tasks_tags/notice.html:7
 #, python-format
@@ -417,5 +422,5 @@ msgid ""
 "<a href=\"%(user_url)s\">%(user_display)s</a> has updated the tags of task "
 "'<a href=\"%(task_url)s\">%(task)s</a>' to '%(task_tags)s'."
 msgstr ""
-"<a href=\"%(user_url)s\">%(user_display)s</a> a mis à jour les étiquettes de la tache "
-"'<a href=\"%(task_url)s\">%(task)s</a>' à '%(task_tags)s'."
+"<a href=\"%(user_url)s\">%(user_display)s</a> a mis à jour les étiquettes de "
+"la tache '<a href=\"%(task_url)s\">%(task)s</a>' à '%(task_tags)s'."
