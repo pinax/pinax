@@ -145,8 +145,8 @@ INSTALLED_APPS = [
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 
 BIBLION_SECTIONS = [
-    ("technical", ugetext(u"Technical")),
-    ("business", ugetext(u"Business")),
+    ("technical", ugettext(u"Technical")),
+    ("business", ugettext(u"Business")),
 ]
 
 #TWITTER_USERNAME = ""
