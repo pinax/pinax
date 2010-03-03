@@ -39,7 +39,7 @@
     {% if is_me %}
         <form action="{% groupurl photo_destroy group id=photo.id %}" method="POST">
             {% csrf_token %}
-            <label>Delete Photo</label> <input type="image" src="{{ STATIC_URL }}pinax/images/silk/icons/delete.png" border="0" title="{% trans "Delete Photo" %}" />
+            <label>Delete Photo</label> <input type="image" src="{{ STATIC_URL }}pinax/img/silk/icons/delete.png" border="0" title="{% trans "Delete Photo" %}" />
                         <input type="hidden" name="action" value="delete"/>
         </form>
         

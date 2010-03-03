@@ -31,7 +31,7 @@ class SilkNode(template.Node):
             attrs = " %s" % " ".join(attrs)
         else:
             attrs = ""
-        return """<img src="%spinax/images/silk/icons/%s.png"%s />""" % (
+        return """<img src="%spinax/img/silk/icons/%s.png"%s />""" % (
             settings.STATIC_URL,
             name,
             attrs,
