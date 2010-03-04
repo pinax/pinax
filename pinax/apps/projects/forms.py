@@ -63,6 +63,7 @@ class AddUserForm(forms.Form):
     def __init__(self, *args, **kwargs):
         self.project = kwargs.pop("project")
         super(AddUserForm, self).__init__(*args, **kwargs)
+        self._user_cache = None
     
     def clean_recipient(self):
         try:
@@ -73,10 +74,14 @@ class AddUserForm(forms.Form):
         if ProjectMember.objects.filter(project=self.project, user=user).exists():
             raise forms.ValidationError(_("User is already a member of this project."))
         
+        # store user instance we queried for here to prevent additional
+        # lookups.
+        self._user_cache = user
+        
         return self.cleaned_data["recipient"]
     
     def save(self, user):
-        new_member = User.objects.get(username__exact=self.cleaned_data["recipient"])
+        new_member = self._user_cache
         project_member = ProjectMember(project=self.project, user=new_member)
         project_member.save()
         self.project.members.add(project_member)
