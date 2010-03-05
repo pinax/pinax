@@ -179,7 +179,7 @@ class SignupForm(GroupForm):
                 "username=None case. You must override this method.")
         user.username = username
         user.email = self.cleaned_data["email"].strip().lower()
-        password = self.cleaned_data["password1"]
+        password = self.cleaned_data.get("password1")
         if password:
             user.set_password(password)
         else:
@@ -188,18 +188,10 @@ class SignupForm(GroupForm):
             user.save()
         return user
     
-    def user_credentials(self):
-        """
-        Provides the credentials required to authenticate the user after
-        sign-up is completed.
-        """
-        credentials = {}
-        if EMAIL_AUTHENTICATION:
-            credentials["email"] = self.cleaned_data["email"]
-        else:
-            credentials["username"] = self.cleaned_data["username"]
-        credentials["password"] = self.cleaned_data["password1"]
-        return credentials
+    def login(self, request, user):
+        # nasty hack to get get_user to work in Django
+        user.backend = "django.contrib.auth.backends.ModelBackend"
+        login(request, user)
     
     def save(self, request=None):
         # don't assume a username is available. it is a common removal if
@@ -255,17 +247,10 @@ class SignupForm(GroupForm):
             new_user.is_active = False
             new_user.save()
         
-        return self.user_credentials() # required for authenticate()
+        return new_user
 
 
-class OpenIDSignupForm(forms.Form):
-    
-    username = forms.CharField(
-        label = _("Username"),
-        max_length = 30,
-        widget = forms.TextInput()
-    )
-    email = forms.EmailField(widget=forms.TextInput())
+class OpenIDSignupForm(SignupForm):
     
     def __init__(self, *args, **kwargs):
         # remember provided (validated!) OpenID to attach it to the new user
@@ -278,31 +263,9 @@ class OpenIDSignupForm(forms.Form):
         
         super(OpenIDSignupForm, self).__init__(*args, **kwargs)
         
-        if REQUIRED_EMAIL or EMAIL_VERIFICATION or EMAIL_AUTHENTICATION:
-            self.fields["email"].label = ugettext("E-mail")
-            self.fields["email"].required = True
-        else:
-            self.fields["email"].label = ugettext("E-mail (optional)")
-            self.fields["email"].required = False
-    
-    def clean_username(self):
-        if not alnum_re.search(self.cleaned_data["username"]):
-            raise forms.ValidationError(u"Usernames can only contain letters, numbers and underscores.")
-        try:
-            user = User.objects.get(username__iexact=self.cleaned_data["username"])
-        except User.DoesNotExist:
-            return self.cleaned_data["username"]
-        raise forms.ValidationError(u"This username is already taken. Please choose another.")
-    
-    def clean_email(self):
-        value = self.cleaned_data["email"]
-        if UNIQUE_EMAIL or EMAIL_AUTHENTICATION:
-            try:
-                User.objects.get(email__iexact=value)
-            except User.DoesNotExist:
-                return value
-            raise forms.ValidationError(_("A user is registered with this e-mail address."))
-        return value
+        # these fields make no sense in OpenID
+        del self.fields["password1"]
+        del self.fields["password2"]
 
 
 class UserForm(forms.Form):

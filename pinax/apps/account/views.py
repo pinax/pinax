@@ -120,14 +120,13 @@ def signup(request, **kwargs):
     if request.method == "POST":
         form = form_class(request.POST, group=group)
         if form.is_valid():
-            credentials = form.save(request=request)
+            user = form.save(request=request)
             if settings.ACCOUNT_EMAIL_VERIFICATION:
                 return render_to_response("account/verification_sent.html", {
                     "email": form.cleaned_data["email"],
                 }, context_instance=RequestContext(request))
             else:
-                user = authenticate(**credentials)
-                auth_login(request, user)
+                form.login(request, user)
                 messages.add_message(request, messages.SUCCESS,
                     ugettext("Successfully logged in as %(user)s.") % {
                         "user": user_display(user)
