@@ -106,6 +106,8 @@ class PinaxConsumer(RegistrationConsumer):
             if form.is_valid():
                 # Pinax modification
                 user = form.save(request=request)
+                if openid:
+                    user.openids.create(openid=openid)
                 if settings.ACCOUNT_EMAIL_VERIFICATION:
                     return render_to_response("account/verification_sent.html", {
                         "email": form.cleaned_data["email"],
