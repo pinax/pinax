@@ -9,6 +9,7 @@ from bookmarks.feeds import BookmarkFeed
 from bookmarks.models import BookmarkInstance
 from microblogging.feeds import TweetFeedAll, TweetFeedUser, TweetFeedUserWithFriends
 from microblogging.models import Tweet
+from swaps.models import Offer
 from tagging.models import TaggedItem
 from wiki.models import Article as WikiArticle
 
@@ -16,7 +17,6 @@ from pinax.apps.account.openid_consumer import PinaxConsumer
 from pinax.apps.blog.feeds import BlogFeedAll, BlogFeedUser
 from pinax.apps.blog.models import Post
 from pinax.apps.photos.models import Image
-from pinax.apps.swaps.models import Offer
 from pinax.apps.topics.models import Topic
 from pinax.apps.tribes.models import Tribe
 
