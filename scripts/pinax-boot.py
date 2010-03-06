@@ -1135,14 +1135,7 @@ PINAX_PYPI_MIRRORS = [
     'http://pypi2.pinaxproject.com',
 ]
 PINAX_MUST_HAVES = {
-    'Django': '>1.1.1',
 }
-
-DJANGO_VERSIONS = (
-#    '1.0.4',
-#    '1.1',
-    '1.2.dev12229',
-)
 
 if sys.platform == 'win32':
     GIT_CMD = 'git.cmd'
@@ -1230,9 +1223,6 @@ def extend_parser(parser):
     parser.add_option("-d", "--development",
         action="store_true", dest="development",
         help="Setup development environment")
-    parser.add_option("--django-version",
-        metavar="DJANGO_VERSION", dest="django_version", default=None,
-        help="The version of Django to be installed, e.g. --django-version=1.0.4 will install Django 1.0.4. (The default is 1.2)")
 
 def adjust_options(options, args):
     """
@@ -1243,12 +1233,6 @@ def adjust_options(options, args):
     if options.release and options.development:
         print "ERROR: please use --development without providing a --release version."
         sys.exit(101)
-    if options.django_version:
-        if options.django_version not in DJANGO_VERSIONS:
-            print "ERROR: this Django version is not supported."
-            print "Use one of those: %s" % ", ".join(DJANGO_VERSIONS)
-            sys.exit(101)
-        PINAX_MUST_HAVES['Django'] = options.django_version
     if not args:
         return # caller will raise error
 
