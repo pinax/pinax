@@ -93,7 +93,7 @@ class CommandRunner(object):
             argv.extend(["help", "--version"])
         # load command and run it!
         try:
-            self.loader.load(command).run(argv)
+            self.loader.load(command).run_from_argv(argv)
         except CommandNotFound, e:
             sys.stderr.write("%s\n" % e.args[0])
             sys.exit(1)

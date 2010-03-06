@@ -40,7 +40,7 @@ class BaseCommand(object):
         parser = self.create_parser(prog_name, command)
         parser.print_help()
     
-    def run(self, argv):
+    def run_from_argv(self, argv):
         parser = self.create_parser(argv[0], argv[1])
         options, args = parser.parse_args(argv[2:])
         self.handle(*args, **options.__dict__)
