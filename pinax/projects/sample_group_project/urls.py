@@ -5,7 +5,13 @@ from django.views.generic.simple import direct_to_template
 from django.contrib import admin
 admin.autodiscover()
 
+from tagging.models import TaggedItem
+from wiki.models import Article as WikiArticle
+
 from pinax.apps.account.openid_consumer import PinaxConsumer
+from pinax.apps.projects.models import Project
+from pinax.apps.tasks.models import Task
+from pinax.apps.topics.models import Topic
 
 
 
@@ -44,12 +50,6 @@ urlpatterns = patterns("",
     (r"^admin/", include(admin.site.urls)),
 )
 
-from tagging.models import TaggedItem
-
-from projects.models import Project
-from tasks.models import Task
-from topics.models import Topic
-from wiki.models import Article as WikiArticle
 
 tagged_models = (
     dict(title="Projects",
