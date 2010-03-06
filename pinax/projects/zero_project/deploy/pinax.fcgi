@@ -1,4 +1,4 @@
-# pinax.fcgi is configured to live in projects/basic_project/deploy.
+# pinax.fcgi is configured to live in projects/zero_project/deploy.
 import os
 import sys
 
@@ -8,7 +8,7 @@ from site import addsitedir
 sys.path.insert(0, abspath(join(dirname(__file__), "../../")))
 
 from django.conf import settings
-os.environ["DJANGO_SETTINGS_MODULE"] = "basic_project.settings"
+os.environ["DJANGO_SETTINGS_MODULE"] = "zero_project.settings"
 
 sys.path.insert(0, join(settings.PROJECT_ROOT, "apps"))
 
