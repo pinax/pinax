@@ -6,11 +6,9 @@ import re
 import shutil
 import sys
 
-from optparse import make_option
-
-from django.core.management.base import BaseCommand, CommandError
-
 import pinax
+
+from pinax.core.management.base import BaseCommand, CommandError
 
 
 
@@ -168,23 +166,22 @@ def main(default_pinax_root, project_name, destination, verbose=True):
 
 
 class Command(BaseCommand):
+    
     help = "Clones a Pinax starter project to <new_project_name> (which can be a path)."
     args = "<original_project> <new_project_name>"
     
-    clone_project_options = (
-        make_option("-l", "--list-projects", dest="list_projects",
+    option_list = BaseCommand.option_list + [
+        optparse.make_option("-l", "--list-projects", dest="list_projects",
             action = "store_true",
             help = "lists the projects that are available on this system"),
-        make_option("-r", "--pinax-root", dest="pinax_root",
+        optparse.make_option("-r", "--pinax-root", dest="pinax_root",
             default = DEFAULT_PINAX_ROOT,
             action = "store_true",
             help = "where Pinax lives on your system (defaults to Pinax in your virtual environment)"),
-        make_option("-b", "--verbose", dest="verbose",
+        optparse.make_option("-b", "--verbose", dest="verbose",
             action = "store_false", default=True,
             help = "enables verbose output"),
-    )
-    
-    option_list = BaseCommand.option_list + clone_project_options
+    ]
     
     def handle(self, *args, **options):
         """
