@@ -8,8 +8,6 @@ PINAX_PYPI_MIRRORS = [
     'http://pypi2.pinaxproject.com',
 ]
 PINAX_MUST_HAVES = {
-    'setuptools-git': '0.3.4',
-    'setuptools-dummy': '0.1.0.4',
     'Django': '>1.1.1',
 }
 
