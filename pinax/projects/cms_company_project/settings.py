@@ -107,7 +107,7 @@ MIDDLEWARE_CLASSES = [
     "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
-ROOT_URLCONF = "cms_project_company.urls"
+ROOT_URLCONF = "cms_company_project.urls"
 
 TEMPLATE_DIRS = [
     os.path.join(os.path.dirname(__file__), "templates"),
