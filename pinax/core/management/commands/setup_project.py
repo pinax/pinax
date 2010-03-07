@@ -5,6 +5,10 @@ import re
 import shutil
 import sys
 
+import pip
+
+from pip.exceptions import InstallationError
+
 import pinax
 
 from pinax.core.management.base import BaseCommand, CommandError
@@ -30,6 +34,17 @@ class Command(BaseCommand):
             dest = "base",
             default = "zero",
             help = "the starter project to use as a base (excluding _project, e.g., basic or social. see --list-projects)"
+        ),
+        optparse.make_option("--no-reqs",
+            dest = "no_reqs",
+            action = "store_true",
+            help = "do not install requirements automatically"
+        ),
+        optparse.make_option("--allow-no-virtualenv",
+            dest = "allow_no_virtualenv",
+            action = "store_true",
+            default = False,
+            help = "turn off the requirement pip must run inside a virtual environment"
         )
     ]
     
@@ -44,7 +59,7 @@ class Command(BaseCommand):
             self.print_help("pinax-admin", "setup_project")
             sys.exit(0)
         
-        self.setup_project(args[0], options["base"])
+        self.setup_project(args[0], options["base"], options)
     
     def base_list(self):
         
@@ -69,7 +84,7 @@ class Command(BaseCommand):
         
         return projects
     
-    def setup_project(self, destination, base):
+    def setup_project(self, destination, base, options):
         
         user_project_name = os.path.basename(destination)
         
@@ -104,31 +119,44 @@ class Command(BaseCommand):
             else:
                 project_name = os.path.basename(base)
         
-        copytree(source, destination,
-            excluded_patterns=[
-                ".svn", ".pyc", "dev.db"
-            ]
-        )
-        
-        ProjectFixer(destination, project_name, user_project_name).fix()
+        installer = ProjectInstaller(source, destination, project_name, user_project_name)
+        installer.copy()
+        installer.fix_settings()
+        print "Created project %s" % user_project_name
+        if not options["no_reqs"]:
+            print "Installing project requirements..."
+            try:
+                installer.install_reqs(not options["allow_no_virtualenv"])
+            except InstallationError:
+                print ("Installation of requirements failed. The project %s "
+                    "has been created though.") % user_project_name
+        else:
+            print
+            print ("Skipping requirement installation. Run pip install --no-deps "
+                "-r requirements/project.txt inside the project directory.")
 
 
-class ProjectFixer(object):
+class ProjectInstaller(object):
     """
-    Fixes up a project to work correctly.
+    Provides the methods to install a project at a given destination
     """
     
-    def __init__(self, project_dir, project_name, user_project_name):
+    def __init__(self, source_dir, project_dir, project_name, user_project_name):
+        self.source_dir = source_dir
         self.project_dir = project_dir
         self.project_name = project_name
         self.user_project_name = user_project_name
     
-    def fix(self):
-        self.fix_settings()
-    
     def generate_secret_key(self):
         chars = "abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)"
         return "".join([random.choice(chars) for i in xrange(50)])
+    
+    def copy(self):
+        copytree(self.source_dir, self.project_dir,
+            excluded_patterns=[
+                ".svn", ".pyc", "dev.db"
+            ]
+        )
     
     def fix_settings(self):
         # @@@ settings refactor
@@ -145,6 +173,28 @@ class ProjectFixer(object):
         data = data.replace(self.project_name, self.user_project_name)
         
         open(settings_filename, "wb").write(data)
+    
+    def install_reqs(self, require_virtualenv=True):
+        # @@@ move to using Python pip APIs and not relying on the OS
+        
+        if sys.platform == "win32":
+            PIP_CMD = "pip.exe"
+        else:
+            PIP_CMD = "pip"
+        
+        pip_cmd = resolve_command(PIP_CMD)
+        requirements_file = os.path.join(self.project_dir, "requirements", "project.txt")
+        
+        environ = {}
+        if require_virtualenv:
+            environ["PIP_REQUIRE_VIRTUALENV"] = "true"
+        
+        pip.call_subprocess([
+            pip_cmd,
+            "install",
+            "--no-deps",
+            "--requirement", requirements_file,
+        ], show_stdout=True, extra_environ=environ)
 
 
 def copytree(src, dst, symlinks=False, excluded_patterns=None):
@@ -194,3 +244,43 @@ def copytree(src, dst, symlinks=False, excluded_patterns=None):
             errors.extend((src, dst, str(why)))
     if errors:
         raise shutil.Error, errors
+
+
+# needed for ProjectInstaller.install_reqs
+def resolve_command(cmd, path=None, pathext=None):
+    """
+    Searches the PATH for the given executable and returns the normalized path
+    """
+    # save the path searched for for later fallback
+    searched_for_path = path
+    if path is None:
+        path = os.environ.get("PATH", []).split(os.pathsep)
+    if isinstance(path, basestring):
+        path = [path]
+    # check if there are funny path extensions for executables, e.g. Windows
+    if pathext is None:
+        pathext = os.environ.get("PATHEXT", ".COM;.EXE;.BAT;.CMD").split(os.pathsep)
+    # don"t use extensions if the command ends with one of them
+    for ext in pathext:
+        if cmd.endswith(ext):
+            pathext = [""]
+            break
+    # check if we find the command on PATH
+    for _dir in path:
+        f = os.path.join(_dir, cmd)
+        for ext in pathext:
+            # try without extension first
+            if os.path.isfile(f):
+                return os.path.realpath(f)
+            # then including the extension
+            fext = f + ext
+            if os.path.isfile(fext):
+                return os.path.realpath(fext)
+    # last resort: just try the searched for path
+    if searched_for_path:
+        cmd = os.path.join(os.path.realpath(searched_for_path), cmd)
+    if not os.path.exists(cmd):
+        print "ERROR: this script requires %s." % cmd
+        print "Please verify it exists because it couldn't be found."
+        sys.exit(3)
+    return os.path.realpath(cmd)
