@@ -52,7 +52,7 @@ class PinaxConsumer(RegistrationConsumer):
         This implementation modifies the POST case and will not run
         create_user, confirm_email_step or on_registration_complete hooks.
         """
-        # Show a registration / signup form, provided the user is not 
+        # Show a registration / signup form, provided the user is not
         # already logged in
         if not request.user.is_anonymous():
             return self.show_already_signed_in(request)
