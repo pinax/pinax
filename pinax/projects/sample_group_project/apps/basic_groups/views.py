@@ -1,6 +1,5 @@
 from django.conf import settings
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
 from django.http import HttpResponseRedirect, HttpResponse, HttpResponseForbidden, Http404
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
@@ -104,7 +103,7 @@ def group(request, group_slug=None, form_class=BasicGroupUpdateForm, template_na
             })
     elif action == "leave":
         group.members.remove(request.user)
-        message.add_message(request, messages.SUCCESS,
+        messages.add_message(request, messages.SUCCESS,
             ugettext("You have left the group %(group)s") % {
                 "group": group,
             }
