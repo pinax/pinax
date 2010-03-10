@@ -1,8 +1,9 @@
 from django.conf import settings
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils.translation import ugettext
+from djagno.core.exceptions import ObjectDoesNotExist
 
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required

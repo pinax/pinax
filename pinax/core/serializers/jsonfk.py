@@ -4,13 +4,13 @@ Eric Holscher's sandbox code at http://github.com/ericholscher/sandbox/blob/d32d
 """
 from StringIO import StringIO
 
+from django.conf import settings
+from django.core.serializers import base
+from django.core.serializers.json import Serializer as JSONSerializer
+from django.core.serializers.python import _get_model
 from django.db import models
 from django.utils import simplejson
-from django.core.serializers import base
 from django.utils.encoding import smart_unicode
-from django.core.serializers.python import _get_model
-from django.core.serializers.json import Serializer as JSONSerializer
-
 
 
 class Serializer(JSONSerializer):

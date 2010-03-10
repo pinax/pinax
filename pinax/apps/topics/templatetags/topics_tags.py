@@ -43,6 +43,6 @@ def do_get_topics_for_group(parser, token):
     try:
         _tagname, group_name, _as, context_name = token.split_contents()
     except ValueError:
-        raise template.TemplateSyntaxError(u"%(tagname)r tag syntax is as follows: "
-            "{%% %(tagname)r GROUP as VARIABLE %%}" % {"tagname": tagname})
+        raise template.TemplateSyntaxError(u"""get_topics_for_group tag syntax is as follows: 
+            {%% get_topics_for_group GROUP as VARIABLE %%}""")
     return TopicsForGroupNode(group_name, context_name)
