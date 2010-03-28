@@ -122,7 +122,7 @@ def install_base(parent_dir, bin_dir, requirements_dir, options, packages):
     for mirror in PINAX_PYPI_MIRRORS:
         args.extend(['--find-links', mirror])
     for pkg, version in packages.items():
-        if not version.startswith(('=', '<', '>')):
+        if not (version.startswith('=') or version.startswith('<') or version.startswith('>')):
             version = '==%s' % version
         src = '%s%s' % (pkg, version)
         logger.notify('Installing %s' % src)
