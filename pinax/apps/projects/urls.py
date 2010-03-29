@@ -6,7 +6,7 @@ from groups.bridge import ContentBridge
 
 
 
-bridge = ContentBridge(Project, "projects")
+bridge = ContentBridge(Project)
 
 
 
@@ -19,6 +19,6 @@ urlpatterns = patterns("pinax.apps.projects.views",
     url(r"^project/(?P<group_slug>[-\w]+)/delete/$", "delete", name="project_delete"),
 )
 
-urlpatterns += bridge.include_urls("pinax.apps.topics.urls", r"^project/(?P<group_slug>[-\w]+)/topics/")
-urlpatterns += bridge.include_urls("pinax.apps.tasks.urls", r"^project/(?P<group_slug>[-\w]+)/tasks/")
-urlpatterns += bridge.include_urls("wiki.urls", r"^project/(?P<group_slug>[-\w]+)/wiki/")
+urlpatterns += bridge.include_urls("pinax.apps.topics.urls", r"^project/(?P<project_slug>[-\w]+)/topics/")
+urlpatterns += bridge.include_urls("pinax.apps.tasks.urls", r"^project/(?P<project_slug>[-\w]+)/tasks/")
+urlpatterns += bridge.include_urls("wiki.urls", r"^project/(?P<project_slug>[-\w]+)/wiki/")
