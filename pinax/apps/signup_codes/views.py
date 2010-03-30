@@ -7,8 +7,6 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
-from django.contrib.auth import authenticate
-from django.contrib.auth import login as auth_login
 
 from pinax.apps.account.utils import get_default_redirect, user_display
 from pinax.apps.signup_codes.models import check_signup_code
@@ -60,13 +58,12 @@ def signup(request, **kwargs):
     if request.method == "POST":
         form = form_class(request.POST, group=group)
         if form.is_valid():
-            username, password = form.save()
-            user = authenticate(username=username, password=password)
+            user = form.save(request=request)
             
             signup_code = form.cleaned_data["signup_code"]
             signup_code.use(user)
             
-            auth_login(request, user)
+            form.login(request, user)
             messages.add_message(request, messages.SUCCESS,
                 ugettext("Successfully logged in as %(username)s.") % {
                     "username": user_display(user),
