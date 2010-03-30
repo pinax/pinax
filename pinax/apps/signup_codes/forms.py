@@ -55,10 +55,11 @@ class InviteUserForm(GroupForm):
         current_site = Site.objects.get_current()
         domain = unicode(current_site.domain)
         
-        subject = ugettext("Create an acccount on %(domain)s") % {"domain": domain}
-        message = render_to_string("signup_codes/invite_user.txt", {
+        ctx = {
             "group": self.group,
             "signup_code": signup_code,
             "domain": domain,
-        })
+        }
+        subject = render_to_string("signup_codes/invite_user_subject.txt", ctx)
+        message = render_to_string("signup_codes/invite_user.txt", ctx)
         send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [email], priority="high")
