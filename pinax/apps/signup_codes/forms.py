@@ -57,6 +57,7 @@ class InviteUserForm(GroupForm):
         
         subject = ugettext("Create an acccount on %(domain)s") % {"domain": domain}
         message = render_to_string("signup_codes/invite_user.txt", {
+            "group": self.group,
             "signup_code": signup_code,
             "domain": domain,
         })
