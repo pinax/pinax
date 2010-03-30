@@ -35,12 +35,14 @@ class InviteUserForm(GroupForm):
     def create_signup_code(self, commit=True):
         email = self.cleaned_data["email"]
         expiry = datetime.now() + timedelta(hours=1)
-        code = sha_constructor("%s%s%s%s" % (
+        bits = [
             settings.SECRET_KEY,
             email,
             str(expiry),
-            settings.SECRET_KEY,
-        )).hexdigest()
+        ]
+        if self.group:
+            bits.append("%s%s" % (self.group._meta, self.group.pk))
+        code = sha_constructor("".join(bits)).hexdigest()
         signup_code = SignupCode(code=code, email=email, max_uses=1, expiry=expiry)
         if commit:
             signup_code.save()
