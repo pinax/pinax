@@ -41,32 +41,46 @@ workflow = import_module(getattr(settings, "TASKS_WORKFLOW_MODULE", "pinax.apps.
 
 
 
-def tasks(request, group_slug=None, template_name="tasks/task_list.html", bridge=None):
+def group_and_bridge(request):
+    """
+    Given the request we can depend on the GroupMiddleware to provide the
+    group and bridge.
+    """
     
-    if bridge:
-        try:
-            group = bridge.get_group(group_slug)
-        except ObjectDoesNotExist:
-            raise Http404
+    # be group aware
+    group = getattr(request, "group", None)
+    if group:
+        bridge = request.bridge
     else:
-        group = None
+        bridge = None
     
-    if not request.user.is_authenticated():
-        is_member = False
+    return group, bridge
+
+
+def group_context(group, bridge):
+    # @@@ use bridge
+    ctx = {
+        "group": group,
+    }
+    if group:
+        ctx["group_base"] = bridge.group_base_template()
+    return ctx
+
+
+def tasks(request, template_name="tasks/task_list.html"):
+    
+    group, bridge = group_and_bridge(request)
+    if group:
+        is_member = group.request.user_is_member()
     else:
-        if group:
-            is_member = group.user_is_member(request.user)
-        else:
-            is_member = True
+        is_member = True
     
     group_by = request.GET.get("group_by")
     
     if group:
         tasks = group.content_objects(Task)
-        group_base = bridge.group_base_template()
     else:
         tasks = Task.objects.filter(object_id=None)
-        group_base = None
     
     tasks = tasks.select_related("assignee")
     
@@ -86,40 +100,26 @@ def tasks(request, group_slug=None, template_name="tasks/task_list.html", bridge
     group_by_querydict.pop("group_by", None)
     group_by_querystring = group_by_querydict.urlencode()
     
-    return render_to_response(template_name, {
-        "group": group,
+    ctx = group_context(group, bridge)
+    ctx.update({
         "group_by": group_by,
         "gbqs": group_by_querystring,
         "is_member": is_member,
-        "group_base": group_base,
         "task_filter": task_filter,
         "tasks": task_filter.qs,
         "querystring": request.GET.urlencode(),
-    }, context_instance=RequestContext(request))
+    })
+    
+    return render_to_response(template_name, RequestContext(request, ctx))
 
 
-def add_task(request, group_slug=None, secret_id=None, form_class=TaskForm, template_name="tasks/add.html", bridge=None):
+def add_task(request, secret_id=None, form_class=TaskForm, template_name="tasks/add.html"):
     
-    if bridge:
-        try:
-            group = bridge.get_group(group_slug)
-        except ObjectDoesNotExist:
-            raise Http404
-    else:
-        group = None
-    
+    group, bridge = group_and_bridge(request)
     if group:
-        group_base = bridge.group_base_template()
+        is_member = group.request.user_is_member()
     else:
-        group_base = None
-    
-    if not request.user.is_authenticated():
-        is_member = False
-    else:
-        if group:
-            is_member = group.user_is_member(request.user)
-        else:
-            is_member = True
+        is_member = True
     
     # If we got an ID for a snippet in url, collect some initial values
     # But only if we could import the Snippet Model so
@@ -173,27 +173,26 @@ def add_task(request, group_slug=None, secret_id=None, form_class=TaskForm, temp
     else:
         task_form = form_class(request.user, group, initial=initial)
     
-    return render_to_response(template_name, {
-        "group": group,
+    ctx = group_context(group, bridge)
+    ctx.update({
         "is_member": is_member,
         "task_form": task_form,
-        "group_base": group_base,
-    }, context_instance=RequestContext(request))
+    })
+    
+    return render_to_response(template_name, RequestContext(request, ctx))
 
 
 @login_required
-def nudge(request, id, group_slug=None, bridge=None):
+def nudge(request, id):
     """
     Called when a user nudges a ticket
     """
     
-    if bridge:
-        try:
-            group = bridge.get_group(group_slug)
-        except ObjectDoesNotExist:
-            raise Http404
+    group, bridge = group_and_bridge(request)
+    if group:
+        is_member = group.request.user_is_member()
     else:
-        group = None
+        is_member = True
     
     if group:
         tasks = group.content_objects(Task)
@@ -232,22 +231,18 @@ def nudge(request, id, group_slug=None, bridge=None):
     return HttpResponseRedirect(task_url)
 
 
-def task(request, id, group_slug=None, template_name="tasks/task.html", bridge=None):
+def task(request, id, template_name="tasks/task.html"):
     
-    if bridge:
-        try:
-            group = bridge.get_group(group_slug)
-        except ObjectDoesNotExist:
-            raise Http404
+    group, bridge = group_and_bridge(request)
+    if group:
+        is_member = group.request.user_is_member()
     else:
-        group = None
+        is_member = True
     
     if group:
         tasks = group.content_objects(Task)
-        group_base = bridge.group_base_template()
     else:
         tasks = Task.objects.filter(object_id=None)
-        group_base = None
     
     task = get_object_or_404(tasks, id=id)
     
@@ -323,33 +318,30 @@ def task(request, id, group_slug=None, template_name="tasks/task.html", bridge=N
     # get the nudge history
     nudge["history"] = Nudge.objects.filter(task__exact=task)
     
-    return render_to_response(template_name, {
-        "group": group,
+    ctx = group_context(group, bridge)
+    ctx.update({
         "nudge": nudge,
         "task": task,
         "is_member": is_member,
         "form": form,
-        "group_base": group_base,
-    }, context_instance=RequestContext(request))
+    })
+    
+    return render_to_response(template_name, RequestContext(request, ctx))
 
 
 @login_required
-def user_tasks(request, username, group_slug=None, template_name="tasks/user_tasks.html", bridge=None):
+def user_tasks(request, username, template_name="tasks/user_tasks.html"):
     
-    if bridge:
-        try:
-            group = bridge.get_group(group_slug)
-        except ObjectDoesNotExist:
-            raise Http404
+    group, bridge = group_and_bridge(request)
+    if group:
+        is_member = group.request.user_is_member()
     else:
-        group = None
+        is_member = True
     
     if group:
         other_user = get_object_or_404(group.member_queryset(), username=username)
-        group_base = bridge.group_base_template()
     else:
         other_user = get_object_or_404(User, username=username)
-        group_base = None
     
     assigned_tasks = other_user.assigned_tasks.all()
     created_tasks = other_user.created_tasks.all()
@@ -407,8 +399,8 @@ window.open(url, "tasklist", "height=500, width=250, title=no, location=no,
 scrollbars=yes, menubars=no, navigation=no, statusbar=no, directories=no,
 resizable=yes, status=no, toolbar=no, menuBar=no");})()""" % url
     
-    return render_to_response(template_name, {
-        "group": group,
+    ctx = group_context(group, bridge)
+    ctx.update({
         "assigned_filter": assigned_filter,
         "created_filter": created_filter,
         "nudged_filter": nudged_filter,
@@ -417,19 +409,19 @@ resizable=yes, status=no, toolbar=no, menuBar=no");})()""" % url
         "nudged_tasks": nudged_tasks,
         "other_user": other_user,
         "bookmarklet": bookmarklet,
-        "group_base": group_base,
-    }, context_instance=RequestContext(request))
+    })
+    
+    return render_to_response(template_name, RequestContext(request, ctx))
 
 
 @login_required
-def mini_list(request, group_slug=None, template_name="tasks/mini_list.html", bridge=None):
-    if bridge:
-        try:
-            group = bridge.get_group(group_slug)
-        except ObjectDoesNotExist:
-            raise Http404
+def mini_list(request, template_name="tasks/mini_list.html"):
+    
+    group, bridge = group_and_bridge(request)
+    if group:
+        is_member = group.request.user_is_member()
     else:
-        group = None
+        is_member = True
     
     assigned_tasks = request.user.assigned_tasks.all().exclude(state="2").exclude(state="3").order_by("state", "-modified")
     
@@ -438,38 +430,28 @@ def mini_list(request, group_slug=None, template_name="tasks/mini_list.html", br
     else:
         assigned_tasks = assigned_tasks.filter(object_id=None)
     
-    return render_to_response(template_name, {
-        "group": group,
+    ctx = group_context(group, bridge)
+    ctx.update({
         "assigned_tasks": assigned_tasks,
-    }, context_instance=RequestContext(request))
+    })
+    
+    return render_to_response(template_name, RequestContext(request, ctx))
 
 
-def focus(request, field, value, group_slug=None, template_name="tasks/focus.html", bridge=None):
+def focus(request, field, value, template_name="tasks/focus.html"):
     
-    if bridge:
-        try:
-            group = bridge.get_group(group_slug)
-        except ObjectDoesNotExist:
-            raise Http404
+    group, bridge = group_and_bridge(request)
+    if group:
+        is_member = group.request.user_is_member()
     else:
-        group = None
-    
-    if not request.user.is_authenticated():
-        is_member = False
-    else:
-        if group:
-            is_member = group.user_is_member(request.user)
-        else:
-            is_member = True
+        is_member = True
     
     group_by = request.GET.get("group_by")
     
     if group:
         tasks = group.content_objects(Task)
-        group_base = bridge.group_base_template()
     else:
         tasks = Task.objects.filter(object_id=None)
-        group_base = None
     
     # default filtering
     state_keys = dict(workflow.STATE_CHOICES).keys()
@@ -528,8 +510,8 @@ def focus(request, field, value, group_slug=None, template_name="tasks/focus.htm
     group_by_querydict.pop("group_by", None)
     group_by_querystring = group_by_querydict.urlencode()
     
-    return render_to_response(template_name, {
-        "group": group,
+    ctx = group_context(group, bridge)
+    ctx.update({
         "task_filter": task_filter,
         "tasks": tasks,
         "field": field,
@@ -537,60 +519,46 @@ def focus(request, field, value, group_slug=None, template_name="tasks/focus.htm
         "group_by": group_by,
         "gbqs": group_by_querystring,
         "is_member": is_member,
-        "group_base": group_base,
-    }, context_instance=RequestContext(request))
+    })
+    
+    return render_to_response(template_name, RequestContext(request, ctx))
 
 
-def tasks_history_list(request, group_slug=None, template_name="tasks/tasks_history_list.html", bridge=None):
+def tasks_history_list(request, template_name="tasks/tasks_history_list.html"):
     
-    if bridge:
-        try:
-            group = bridge.get_group(group_slug)
-        except ObjectDoesNotExist:
-            raise Http404
+    group, bridge = group_and_bridge(request)
+    if group:
+        is_member = group.request.user_is_member()
     else:
-        group = None
-    
-    if not request.user.is_authenticated():
-        is_member = False
-    else:
-        if group:
-            is_member = group.user_is_member(request.user)
-        else:
-            is_member = True
+        is_member = True
     
     if group:
         tasks = group.content_objects(TaskHistory)
-        group_base = bridge.group_base_template()
     else:
         tasks = TaskHistory.objects.filter(object_id=None)
-        group_base = None
     tasks = tasks.order_by("-modified")
     
-    return render_to_response(template_name, {
-        "group": group,
+    ctx = group_context(group, bridge)
+    ctx.update({
         "task_history": tasks,
         "is_member": is_member,
-        "group_base": group_base,
-    }, context_instance=RequestContext(request))
-
-
-def tasks_history(request, id, group_slug=None, template_name="tasks/task_history.html", bridge=None):
+    })
     
-    if bridge:
-        try:
-            group = bridge.get_group(group_slug)
-        except ObjectDoesNotExist:
-            raise Http404
+    return render_to_response(template_name, RequestContext(request, ctx))
+
+
+def tasks_history(request, id, template_name="tasks/task_history.html"):
+    
+    group, bridge = group_and_bridge(request)
+    if group:
+        is_member = group.request.user_is_member()
     else:
-        group = None
+        is_member = True
     
     if group:
         tasks = group.content_objects(Task)
-        group_base = bridge.group_base_template()
     else:
         tasks = Task.objects.filter(object_id=None)
-        group_base = None
     
     task = get_object_or_404(tasks, id=id)
     task_history = task.history_task.all().order_by("-modified")
@@ -606,13 +574,14 @@ def tasks_history(request, id, group_slug=None, template_name="tasks/task_histor
         change.humanized_state = workflow.STATE_CHOICES_DICT.get(change.state, None)
         change.humanized_resolution = workflow.RESOLUTION_CHOICES_DICT.get(change.resolution, None)
     
-    return render_to_response(template_name, {
-        "group": group,
+    ctx = group_context(group, bridge)
+    ctx.update({
         "task": task,
         "task_history": result_list,
         "nudge_history": nudge_history,
-        "group_base": group_base,
-    }, context_instance=RequestContext(request))
+    })
+    
+    return render_to_response(template_name, RequestContext(request, ctx))
 
 
 def export_state_transitions(request):

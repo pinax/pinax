@@ -99,6 +99,7 @@ MIDDLEWARE_CLASSES = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django_openid.consumer.SessionConsumer",
     "django.contrib.messages.middleware.MessageMiddleware",
+    "groups.middleware.GroupAwareMiddleware",
     "pinax.apps.account.middleware.LocaleMiddleware",
     "pinax.apps.account.middleware.AuthenticatedMiddleware",
     "django.middleware.doc.XViewMiddleware",

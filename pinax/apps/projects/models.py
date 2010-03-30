@@ -28,9 +28,6 @@ class Project(Group):
     
     def user_is_member(self, user):
          return ProjectMember.objects.filter(project=self, user=user).exists()
-    
-    def get_url_kwargs(self):
-        return {"group_slug": self.slug}
 
 
 class ProjectMember(models.Model):
