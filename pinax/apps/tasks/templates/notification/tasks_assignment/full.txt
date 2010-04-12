@@ -1,10 +1,10 @@
 {% load i18n %}{% load account_tags %}
 {% user_display user as user_display %}
-{% user_display assignee as assignee_display %}
+{% if assignee %}{% user_display assignee as assignee_display %}{% endif %}
 {% if group %}
-{% blocktrans %}{{ user_display }} has assigned task '{{ task }}' in '{{ group }}' to {{ assignee_display }}.{% endblocktrans %}
+{% blocktrans with assignee_display|default:"unassigned" as assignee %}{{ user_display }} has assigned task '{{ task }}' in '{{ group }}' to {{ assignee }}.{% endblocktrans %}
 {% else %}
-{% blocktrans %}{{ user_display }} has assigned task '{{ task }}' to {{ assignee_display }}.{% endblocktrans %}
+{% blocktrans with assignee_display|default:"unassigned" as assignee %}{{ user_display }} has assigned task '{{ task }}' to {{ assignee }}.{% endblocktrans %}
 {% endif %}
 
 

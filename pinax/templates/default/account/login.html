@@ -32,6 +32,9 @@
                 <a href="{% url acct_passwd_reset %}">{% trans "Forgot password?" %}</a>
             </div>
             {{ form|as_uni_form }}
+            {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
             <div class="form_block">
                 <input type="submit" value="{% trans "Log in &raquo;" %}" />
             </div>

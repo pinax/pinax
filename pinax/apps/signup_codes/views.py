@@ -7,8 +7,6 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
-from django.contrib.auth import authenticate
-from django.contrib.auth import login as auth_login
 
 from pinax.apps.account.utils import get_default_redirect, user_display
 from pinax.apps.signup_codes.models import check_signup_code
@@ -16,30 +14,30 @@ from pinax.apps.signup_codes.forms import SignupForm, InviteUserForm
 
 
 
-def group_and_bridge(kwargs):
+def group_and_bridge(request):
     """
-    Given kwargs from the view (with view specific keys popped) pull out the
-    bridge and fetch group from database.
+    Given the request we can depend on the GroupMiddleware to provide the
+    group and bridge.
     """
     
-    bridge = kwargs.pop("bridge", None)
-    
-    if bridge:
-        try:
-            group = bridge.get_group(**kwargs)
-        except ObjectDoesNotExist:
-            raise Http404
+    # be group aware
+    group = getattr(request, "group", None)
+    if group:
+        bridge = request.bridge
     else:
-        group = None
+        bridge = None
     
     return group, bridge
 
 
 def group_context(group, bridge):
     # @@@ use bridge
-    return {
+    ctx = {
         "group": group,
     }
+    if group:
+        ctx["group_base"] = bridge.group_base_template()
+    return ctx
 
 
 def signup(request, **kwargs):
@@ -49,7 +47,7 @@ def signup(request, **kwargs):
     template_name_failure = kwargs.pop("template_name_failure", "signup_codes/failure.html")
     success_url = kwargs.pop("success_url", None)
     
-    group, bridge = group_and_bridge(kwargs)
+    group, bridge = group_and_bridge(request)
     ctx = group_context(group, bridge)
     
     if success_url is None:
@@ -60,13 +58,12 @@ def signup(request, **kwargs):
     if request.method == "POST":
         form = form_class(request.POST, group=group)
         if form.is_valid():
-            username, password = form.save()
-            user = authenticate(username=username, password=password)
+            user = form.save(request=request)
             
             signup_code = form.cleaned_data["signup_code"]
             signup_code.use(user)
             
-            auth_login(request, user)
+            form.login(request, user)
             messages.add_message(request, messages.SUCCESS,
                 ugettext("Successfully logged in as %(username)s.") % {
                     "username": user_display(user),
@@ -106,8 +103,7 @@ def admin_invite_user(request, **kwargs):
     form_class = kwargs.pop("form_class", InviteUserForm)
     template_name = kwargs.pop("template_name", "signup_codes/admin_invite_user.html")
     
-    group, bridge = group_and_bridge(kwargs)
-    
+    group, bridge = group_and_bridge(request)
     if request.method == "POST":
         form = form_class(request.POST, group=group)
         if form.is_valid():
