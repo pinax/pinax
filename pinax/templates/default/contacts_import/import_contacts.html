@@ -66,6 +66,7 @@
     
     <h2>Import from vCard</h2>
         <form enctype="multipart/form-data" method="post" action="" class="vcard-form">
+            {% csrf_token %}
             <input type="hidden" name="action" value="upload_vcard" />
             {{ form.as_p }}
             <input type="submit" value="Upload" />
@@ -92,6 +93,7 @@
     <h2>Import from Yahoo Address Book</h2>
     {% if yahoo_token %}
         <form method="post" action="">
+            {% csrf_token %}
             <input type="hidden" name="action" value="import_yahoo" />
             <input type="submit" value="Import Yahoo Address Book" />
         </form>
