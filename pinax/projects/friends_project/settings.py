@@ -153,6 +153,7 @@ INSTALLED_APPS = [
     "uni_form",
     "staticfiles",
     "debug_toolbar",
+    "contacts_import",
     
     # Pinax
     "pinax.apps.analytics",
