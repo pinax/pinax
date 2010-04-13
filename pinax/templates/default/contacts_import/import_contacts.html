@@ -1,0 +1,120 @@
+{% extends "site_base.html" %}
+
+{% load contacts_import_tags %}
+
+{% block head_title %}Import Contacts{% endblock %}
+
+{% block extra_head %}
+    <link href="{{ STATIC_URL }}css/facebox.css" media="screen" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+
+{% block subnav %}
+{% endblock %}
+
+{% block body %}
+    <h1>Import Contacts</h1>
+    
+    {% if page.object_list %}
+        <form action="" method="post">
+            <h3>Showing {{ page.object_list|length }} out of {{ page.paginator.count }} contact{{ page.paginator.count|pluralize }}</h3>
+            <input type="hidden" name="action" value="import-contacts" />
+            <a href="#" id="select-all">Select All</a> - <a href="#" id="unselect-all">Unselect All</a>
+            <table class="import-table" width="100%">
+                <colgroup>
+                    <col width="50" />
+                    <col width="300" />
+                    <col width="350" />
+                </colgroup>
+                <thead>
+                    <th></th>
+                    <th>Contact Name</th>
+                    <th>Email</th>
+                </thead>
+                {% for contact in page.object_list %}
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="add-contacts" value="{{ contact.pk }}" {% if request.session|contact_selected:contact.pk %}checked="checked"{% endif %} />
+                        </td>
+                        <td>{{ contact.name }}</td>
+                        <td>{{ contact.email }}</td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="3" class="no-border" align="center">
+                        {% if page.object_list %}
+                            <input type="submit" value="Finish and Add Contacts" name="finish" class="import-button" />
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="no-border" align="left">
+                        {% if page.has_previous %}
+                            <input type="submit" value="Previous" name="prev" class="import-button" />
+                        {% endif %}
+                    </td>
+                    <td class="no-border"></td>
+                    <td class="no-border" align="right">
+                        {% if page.has_next %}
+                            <input type="submit" value="Next" name="next" class="import-button" />
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+        </form>
+    {% endif %}
+    
+    <h2>Import from vCard</h2>
+        <form enctype="multipart/form-data" method="post" action="" class="vcard-form">
+            <input type="hidden" name="action" value="upload_vcard" />
+            {{ form.as_p }}
+            <input type="submit" value="Upload" />
+        </form>
+        <div class="clearfix"></div>
+    
+    <h2>Import from Google Contacts</h2>
+    {% if authsub_token %}
+        <form method="post" action="">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="import_google" />
+            <input type="submit" value="Import Google Contacts" />
+        </form>
+    {% else %}
+        <p>
+            This is a two step process.  First you must
+            <a href="{% url authsub_login %}">authenticate with Google</a>.
+            Once you have agreed to let {{ SITE_NAME }} have access to your Google
+            Contacts you will be taken back here and be able to import your
+            contacts.
+        </p>
+    {% endif %}
+    
+    <h2>Import from Yahoo Address Book</h2>
+    {% if yahoo_token %}
+        <form method="post" action="">
+            <input type="hidden" name="action" value="import_yahoo" />
+            <input type="submit" value="Import Yahoo Address Book" />
+        </form>
+    {% else %}
+        <p>
+            This is a two step process.  First you must
+            <a href="{# url oauth_access_login "yahoo" #}">authenticate with Yahoo</a>.
+            Once you have agreed to let {{ SITE_NAME }} have access to your Yahoo
+            Address Book you will be taken back here and be able to import your
+            contacts.
+        </p>
+    {% endif %}
+{% endblock %}
+
+{% block extra_body %}
+    <script type="text/javascript">
+        $(function() {
+            $("#select-all").click(function() {
+                $("input[name=add-contacts]").attr("checked", true);
+            });
+            $("#unselect-all").click(function() {
+                $("input[name=add-contacts]").attr("checked", false);
+            });
+        });
+    </script>
+{% endblock %}
