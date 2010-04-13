@@ -17,6 +17,7 @@
     
     {% if page.object_list %}
         <form action="" method="post">
+            {% csrf_token %}
             <h3>Showing {{ page.object_list|length }} out of {{ page.paginator.count }} contact{{ page.paginator.count|pluralize }}</h3>
             <input type="hidden" name="action" value="import-contacts" />
             <a href="#" id="select-all">Select All</a> - <a href="#" id="unselect-all">Unselect All</a>
