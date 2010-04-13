@@ -1130,10 +1130,7 @@ import sys
 import urllib
 
 PINAX_GIT_LOCATION = 'git://github.com/pinax/pinax.git'
-PINAX_PYPI_MIRRORS = [
-    'http://pypi.pinaxproject.com',
-    'http://pypi2.pinaxproject.com',
-]
+PINAX_DIST_INDEX = 'http://dist.pinaxproject.com'
 PINAX_MUST_HAVES = {
 }
 
@@ -1246,8 +1243,7 @@ def install_base(parent_dir, bin_dir, requirements_dir, options, packages):
     if not options.development:
          args.append('--quiet')
     args.extend(['--find-links', filename_to_url(join(requirements_dir, 'base'))])
-    for mirror in PINAX_PYPI_MIRRORS:
-        args.extend(['--find-links', mirror])
+    args.extend(['--extra-index-url', PINAX_DIST_INDEX])
     for pkg, version in packages.items():
         if not (version.startswith('=') or version.startswith('<') or version.startswith('>')):
             version = '==%s' % version
