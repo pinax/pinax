@@ -13,7 +13,7 @@ class Contact(models.Model):
     owner = models.ForeignKey(User, related_name="contacts")
     
     name = models.CharField(max_length=100, blank=True)
-    email = models.EmailField()
+    email = models.EmailField(db_index=True)
     added = models.DateField(default=datetime.now)
     
     # the user this contact ultimately corrosponds to
