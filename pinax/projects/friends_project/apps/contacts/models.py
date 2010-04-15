@@ -14,7 +14,7 @@ class Contact(models.Model):
     added = models.DateField(default=datetime.now)
     
     # the user this contact ultimately corrosponds to
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, null=True)
     
     def __unicode__(self):
         return "%s (%s's contact)" % (self.email,  self.user)
