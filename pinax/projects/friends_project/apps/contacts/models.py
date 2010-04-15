@@ -4,6 +4,7 @@ from django.db import models
 
 from django.contrib.auth.models import User
 
+from emailconfirmation.models import EmailConfirmation
 from emailconfirmation.signals import email_confirmed
 
 
