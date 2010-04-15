@@ -46,8 +46,8 @@ def import_callback(request, selected):
             owner = request.user,
             name = imported_contact.name,
             email = imported_contact.email,
-            user = on_site_users.get(imported_contact.email),
         )
+        contact.user_id = on_site_users.get(imported_contact.email)
         contact.save()
     
     return HttpResponseRedirect(reverse("contacts"))
