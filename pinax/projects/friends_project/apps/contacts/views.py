@@ -39,7 +39,7 @@ def import_callback(request, selected):
         verified = True
     ).select_related("user").values("email", "user")
     for email_address in email_addresses:
-        on_site_users[email_address.email] = email_address.user
+        on_site_users[email_address["email"]] = email_address["user"]
     
     for imported_contact in imported_contacts:
         contact = Contact(
