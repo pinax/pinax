@@ -32,7 +32,7 @@
                 {% for contact in page.object_list %}
                     <tr>
                         <td>
-                            <input type="checkbox" name="add-contacts" value="{{ contact.pk }}" {% if request.session|contact_selected:contact.pk %}checked="checked"{% endif %} />
+                            <input type="checkbox" name="selected-contacts" value="{{ contact.pk }}" {% if request.session|contact_selected:contact.pk %}checked="checked"{% endif %} />
                         </td>
                         <td>{{ contact.name }}</td>
                         <td>{{ contact.email }}</td>
@@ -110,10 +110,10 @@
     <script type="text/javascript">
         $(function() {
             $("#select-all").click(function() {
-                $("input[name=add-contacts]").attr("checked", true);
+                $("input[name=selected-contacts]").attr("checked", true);
             });
             $("#unselect-all").click(function() {
-                $("input[name=add-contacts]").attr("checked", false);
+                $("input[name=selected-contacts]").attr("checked", false);
             });
         });
     </script>
