@@ -25,7 +25,8 @@ def contacts(request, template_name="contacts/contacts.html"):
 def import_callback(request, selected):
     """
     This function is called by django-contacts-import (configured via
-    CONTACTS_IMPORT_CALLBACK).
+    CONTACTS_IMPORT_CALLBACK) once an import is done and the user has selected
+    contacts they want to use.
     """
     
     imported_contacts = TransientContact.objects.filter(pk__in=selected)
