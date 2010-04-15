@@ -20,9 +20,9 @@
                         <td>{% if contact.name %}{{ contact.name }}{% else %}?{% endif %}</td>
                         <td>{{ contact.email }}</td>
                         <td>
-                            {% for other_user in contact.users.all %}
-                                <a href="{% url profile_detail other_user.username %}">{% user_display other_user %}</a>
-                            {% endfor %}
+                            {% if contact.user %}
+                                <a href="{% url profile_detail contact.user %}">{% user_display contact.user %}</a>
+                            {% endif %}
                         </td>
                     </tr>
                 {% endfor %}
