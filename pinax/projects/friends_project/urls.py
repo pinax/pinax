@@ -32,7 +32,7 @@ urlpatterns = patterns("",
     (r"^profiles/", include("pinax.apps.basic_profiles.urls")),
     (r"^notices/", include("notification.urls")),
     (r"^announcements/", include("announcements.urls")),
-    (r"^contacts/", include("contacts_import.urls")),
+    (r"^contacts/", include("contacts.urls")),
     
     (r"^admin/", include(admin.site.urls)),
 )

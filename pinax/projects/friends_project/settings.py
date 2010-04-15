@@ -163,6 +163,7 @@ INSTALLED_APPS = [
     
     # project
     "about",
+    "contacts",
 ]
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
@@ -210,6 +211,8 @@ LOGIN_REDIRECT_URLNAME = "what_next"
 DEBUG_TOOLBAR_CONFIG = {
     "INTERCEPT_REDIRECTS": False,
 }
+
+CONTACTS_IMPORT_CALLBACK = "contacts.views.import_callback"
 
 # local_settings.py can be used to override environment-specific settings
 # like database and email that differ between development and production.
