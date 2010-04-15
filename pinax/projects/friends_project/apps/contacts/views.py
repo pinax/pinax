@@ -6,6 +6,7 @@ from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 
 from contacts_import.models import TransientContact
+from emailconfirmation.models import EmailAddress
 
 from contacts.models import Contact
 
@@ -31,11 +32,21 @@ def import_callback(request, selected):
     
     imported_contacts = TransientContact.objects.filter(pk__in=selected)
     
+    # look for on site users of the selected contacts
+    on_site_users = {}
+    email_addresses = EmailAddress.objects.filter(
+        email__in = [c.email for c in imported_contacts],
+        verified = True
+    ).select_related("user").values("email", "user")
+    for email_address in email_addresses:
+        on_site_users[email_address.email] = email_address.user
+    
     for imported_contact in imported_contacts:
         contact = Contact(
             owner = request.user,
             name = imported_contact.name,
             email = imported_contact.email,
+            user = on_site_users.get(imported_contact.email),
         )
         contact.save()
     
