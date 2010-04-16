@@ -154,6 +154,7 @@ INSTALLED_APPS = [
     "staticfiles",
     "debug_toolbar",
     "contacts_import",
+    "oauth_access",
     
     # Pinax
     "pinax.apps.analytics",

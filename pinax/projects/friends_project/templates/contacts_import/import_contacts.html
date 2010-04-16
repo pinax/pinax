@@ -98,7 +98,7 @@
     {% else %}
         <p>
             This is a two step process.  First you must
-            <a href="{# url oauth_access_login "yahoo" #}">authenticate with Yahoo</a>.
+            <a href="{% url oauth_access_login "yahoo" %}">authenticate with Yahoo</a>.
             Once you have agreed to let {{ SITE_NAME }} have access to your Yahoo
             Address Book you will be taken back here and be able to import your
             contacts.
