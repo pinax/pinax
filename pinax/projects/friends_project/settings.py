@@ -215,6 +215,26 @@ DEBUG_TOOLBAR_CONFIG = {
 
 CONTACTS_IMPORT_CALLBACK = "contacts.views.import_callback"
 
+OAUTH_ACCESS_SETTINGS = {
+    "yahoo": {
+        "keys": {
+            # goto http://developer.yahoo.com/ to obtain these for your site.
+            # make sure your Site instance is setup to point at the domain you
+            # register with Yahoo or this will not work!
+            #
+            # uncomment the two lines below and fill in with your values.
+            # "KEY": "",
+            # "SECRET": "",
+        },
+        "endpoints": {
+            "request_token": "https://api.login.yahoo.com/oauth/v2/get_request_token",
+            "access_token": "https://api.login.yahoo.com/oauth/v2/get_token",
+            "authorize": "https://api.login.yahoo.com/oauth/v2/request_auth",
+            "callback": "oauth_callbacks.yahoo_callback", # in apps/ directory
+        }
+    }
+}
+
 # local_settings.py can be used to override environment-specific settings
 # like database and email that differ between development and production.
 try:
