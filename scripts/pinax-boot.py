@@ -1130,19 +1130,9 @@ import sys
 import urllib
 
 PINAX_GIT_LOCATION = 'git://github.com/pinax/pinax.git'
-PINAX_PYPI_MIRRORS = [
-    'http://pypi.pinaxproject.com',
-    'http://pypi2.pinaxproject.com',
-]
+PINAX_DIST_INDEX = 'http://dist.pinaxproject.com'
 PINAX_MUST_HAVES = {
-    'Django': '>1.1.1',
 }
-
-DJANGO_VERSIONS = (
-#    '1.0.4',
-#    '1.1',
-    '1.2.dev12229',
-)
 
 if sys.platform == 'win32':
     GIT_CMD = 'git.cmd'
@@ -1230,9 +1220,6 @@ def extend_parser(parser):
     parser.add_option("-d", "--development",
         action="store_true", dest="development",
         help="Setup development environment")
-    parser.add_option("--django-version",
-        metavar="DJANGO_VERSION", dest="django_version", default=None,
-        help="The version of Django to be installed, e.g. --django-version=1.0.4 will install Django 1.0.4. (The default is 1.2)")
 
 def adjust_options(options, args):
     """
@@ -1243,12 +1230,6 @@ def adjust_options(options, args):
     if options.release and options.development:
         print "ERROR: please use --development without providing a --release version."
         sys.exit(101)
-    if options.django_version:
-        if options.django_version not in DJANGO_VERSIONS:
-            print "ERROR: this Django version is not supported."
-            print "Use one of those: %s" % ", ".join(DJANGO_VERSIONS)
-            sys.exit(101)
-        PINAX_MUST_HAVES['Django'] = options.django_version
     if not args:
         return # caller will raise error
 
@@ -1262,8 +1243,7 @@ def install_base(parent_dir, bin_dir, requirements_dir, options, packages):
     if not options.development:
          args.append('--quiet')
     args.extend(['--find-links', filename_to_url(join(requirements_dir, 'base'))])
-    for mirror in PINAX_PYPI_MIRRORS:
-        args.extend(['--find-links', mirror])
+    args.extend(['--extra-index-url', PINAX_DIST_INDEX])
     for pkg, version in packages.items():
         if not (version.startswith('=') or version.startswith('<') or version.startswith('>')):
             version = '==%s' % version

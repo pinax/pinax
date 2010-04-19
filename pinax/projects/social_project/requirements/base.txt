@@ -1,12 +1,17 @@
---find-links=http://pypi.pinaxproject.com
---find-links=http://pypi2.pinaxproject.com
+# base.txt is a pip requirements file which describes the nesscary
+# distributions required to run this project. If you need something that is
+# project specific not listed here use project.txt. You can, of course, update
+# versions of distributions here if needed.
+
+--extra-index-url=http://dist.pinaxproject.com/dev/
+
+Django # 1.2.devN
 
 # Get all requirements formerly known as "external_libs" explicitly
 # hashlib
 python-dateutil==1.4.1
 docutils==0.5
 elementtree==1.2.7-20070827-preview
-
 gdata==1.3.3
 Pygments==1.0
 python-openid==2.2.4
@@ -15,18 +20,17 @@ python-yadis==1.1.0
 simplejson==2.0.9
 textile==2.1.3
 vobject==0.8.1c
-
 ybrowserauth==1.2
 Markdown==2.0.3
 diff-match-patch==20090804
-geopy==0.93dev-r0
+geopy==0.94
 pytz==2009l
-creole==1.0.1
+creole==1.1
 
 django-ajax-validation==0.1.3
 django-announcements==0.1.0
-django-atomformat==0.1.1dev
-django-avatar==1.0.3
+django-atomformat==0.1.1.dev1
+django-avatar==1.0.4
 django-bookmarks==0.1.0
 django-db-log==1.0.1
 django-debug-toolbar==0.8.3
@@ -42,7 +46,7 @@ django-microblogging>0.2.dev0
 django-notification==0.1.4
 django-oembed==0.1.1
 django-openid>=0.2.3.dev0
-django-pagination==1.0.5.1
+django-pagination==1.0.6
 django-robots==0.6.1
 django-swaps==0.5.3
 django-sorting>=0.1
@@ -50,7 +54,7 @@ django-tagging==0.3.1
 django-threadedcomments==0.5.2
 django-timezones>0.2.dev0
 django-uni-form==0.7.0
-django-voting==0.1_pre
+django-voting==0.1
 django-wikiapp==0.2.0
 django-photologue==2.3
 django-attachments==0.3

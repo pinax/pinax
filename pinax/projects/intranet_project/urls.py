@@ -10,9 +10,6 @@ from tagging.models import TaggedItem
 from wiki.models import Article as WikiArticle
 
 from pinax.apps.account.openid_consumer import PinaxConsumer
-from pinax.apps.blog.models import Post
-from pinax.apps.photos.models import Image
-from pinax.apps.projects.models import Project
 from pinax.apps.tasks.models import Task
 from pinax.apps.topics.models import Topic
 
@@ -47,20 +44,9 @@ urlpatterns = patterns("",
 
 
 tagged_models = (
-    dict(title="Blog Posts",
-        query=lambda tag : TaggedItem.objects.get_by_model(Post, tag).filter(status=2),
-        content_template="pinax_tagging_ext/blogs.html",
-    ),
     dict(title="Bookmarks",
         query=lambda tag : TaggedItem.objects.get_by_model(BookmarkInstance, tag),
         content_template="pinax_tagging_ext/bookmarks.html",
-    ),
-    dict(title="Photos",
-        query=lambda tag: TaggedItem.objects.get_by_model(Image, tag).filter(safetylevel=1),
-        content_template="pinax_tagging_ext/photos.html",
-    ),
-    dict(title="Projects",
-        query=lambda tag: TaggedItem.objects.get_by_model(Project, tag),
     ),
     dict(title="Tasks",
         query=lambda tag: TaggedItem.objects.get_by_model(Task, tag),
