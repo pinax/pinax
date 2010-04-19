@@ -1,0 +1,13 @@
+{% extends "site_base.html" %}
+
+{% block body %}
+    {% if error == "token_missing" %}
+        <h1>No token present</h1>
+        <p>There was no token found.</p>
+    {% else %}
+        {% if error == "token_mismatch" %}
+            <h1>Token mismatch</h1>
+            <p>Something fishy happened.</p>
+        {% endifequal %}
+    {% endifequal %}
+{% endblock %}
