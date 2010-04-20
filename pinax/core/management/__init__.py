@@ -39,7 +39,7 @@ class CommandLoader(object):
         try:
             command = self.commands[name]
         except KeyError:
-            raise CommandNotFound("Unable to find command '%s'" % command)
+            raise CommandNotFound("Unable to find command '%s'" % name)
         else:
             if isinstance(command, tuple):
                 # an exception occurred when importing the command so let's
