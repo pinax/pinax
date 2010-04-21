@@ -12,10 +12,15 @@ PIL website.
 
 This command has worked for some users; it installs a tweaked version::
 
-    (pinax-env)$ pip install http://dist.repoze.org/PIL-1.1.6.tar.gz
+    (pinax-env)$ pip install PIL
 
 Of course you'll need a C compiler `libjpeg`_ and `libz`_ libraries upon which
 PIL depends.
+
+.. note::
+
+    PIL will install *without* `libjpeg`_ and `libz`_. It simply won't support
+    JPEGs or PNGs.
 
 .. _`Python Imaging Library`: http://www.pythonware.com/products/pil/
 .. _`libjpeg`: http://freshmeat.net/projects/libjpeg/
