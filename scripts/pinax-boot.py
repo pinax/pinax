@@ -4,7 +4,7 @@
 """Create a "virtual" Python installation
 """
 
-virtualenv_version = "1.4.6"
+virtualenv_version = "1.4.8"
 
 import sys
 import os
@@ -515,12 +515,9 @@ def main():
         logger.fatal('Please deactivate your workingenv, then re-run this script')
         sys.exit(3)
 
-    if os.environ.get('PYTHONHOME'):
-        if sys.platform == 'win32':
-            name = '%PYTHONHOME%'
-        else:
-            name = '$PYTHONHOME'
-        logger.warn('%s is set; this can cause problems creating environments' % name)
+    if 'PYTHONHOME' in os.environ:
+        logger.warn('PYTHONHOME is set.  You *must* activate the virtualenv before using it')
+        del os.environ['PYTHONHOME']
 
     if options.relocatable:
         make_environment_relocatable(home_dir)
@@ -738,7 +735,7 @@ def install_python(home_dir, lib_dir, inc_dir, bin_dir, site_packages, clear):
     mkdir(bin_dir)
     py_executable = join(bin_dir, os.path.basename(sys.executable))
     if 'Python.framework' in prefix:
-        if py_executable.endswith('/Python'):
+        if re.search(r'/Python(?:-32|-64)*$', py_executable):
             # The name of the python executable is not quite what
             # we want, rename it.
             py_executable = os.path.join(
@@ -786,7 +783,7 @@ def install_python(home_dir, lib_dir, inc_dir, bin_dir, site_packages, clear):
         #                              browse_thread/thread/17cab2f85da75951
         shutil.copy(
                 os.path.join(
-                    prefix, 'Resources/Python.app/Contents/MacOS/Python'),
+                    prefix, 'Resources/Python.app/Contents/MacOS/%s' % os.path.basename(sys.executable)),
                 py_executable)
 
         # Copy the framework's dylib into the virtual
@@ -1130,7 +1127,7 @@ import sys
 import urllib
 
 PINAX_GIT_LOCATION = 'git://github.com/pinax/pinax.git'
-PINAX_DIST_INDEX = 'http://dist.pinaxproject.com'
+PINAX_DIST_INDEX = 'http://dist.pinaxproject.com/dev/'
 PINAX_MUST_HAVES = {
 }
 
@@ -1647,31 +1644,35 @@ Fbjk9U5Baed3+Jq4CqTjH0EBcQmdp2OGElLpG4ZIahiq39wR3V2T4/zi09z5N4dES24=
 
 ##file activate.sh
 ACTIVATE_SH = """
-eJytVF1v2jAUfc+vuA19aKvRiNdOPFAVqUgtrQhj0kplTHJDLAUb2Q5ZO+2/7zokbQKs0rTmgeDc
-73OObwemqTCQiAxhnRsLS4TcYAyFsCn4RuU6QlgKGfDIii236MNFotUaltykF14HXlQOEZdSWdC5
-BGEhFhojm714Xox1FJydwy8P6BEJPEFXgn/KHu5u2Gw0mX4b3LHHwfTWh2f4CjZFWXq6x33uH3N9
-88CfG6Vt6fj2LZcGLRwElfZEeOW7s5vcpCrPYojRUs/lUMBlDK8m/QJFKqIUUr5F4PQiU6TWa2e2
-KbclXlUqQi3iWUa4WQUrqk0w0L9EaXfYcAK2CjWXAN8JW5XbymyFXFVpWo4OCDh1fUOUcrlCAwWR
-xGP38wIOcCqr0Wyoc4z3wL0ehIRnV+1OP8JbNhtOwtHD+AjI5Whd3YLnbzSFvWMshb0DksjxgKOw
-9yFFlbluYedSW4fj2XtjJ9QXNdIHXyoZo7E6d0LDvd46EGKWQO1wsle960y1QuvSvz0S9c4utMaM
-2JcWtlwLvszQNDXdru15jVb7PmONI2O+V4HQnMc7kCjBuJN3dWh4B4xdj8ZsPLgfMnZVuTXV7+04
-e4VWGLsZhYPruyF7nDzcP073ENonwNWvmSvT+Qu6Eyj5GmHeyjv3FyUBNNqhIDrgVCl4RtfCoBM6
-DOiLJOWuRFRtCKUF4dkIQYTU2s1VEBRFcfmKlrS+vaT7EBiV2IJrDLjLErSF99RocUGpjzY7Xyye
-4X02zAy2s5x9MOj5eyApZE/RTq6ftEw+YZH85xL59wVSLw+C4Q8Om94M
+eJytVFFv2jAQfs+vuIU+QDWK+tqKB6oigdRC1bBOW1sZk1yIpWAj2yGj0/77ziFAUijStPIA2Hc+
+f/7u+64Bk0QYiEWKsMiMhRlCZjCCXNgEfKMyHSLMhOzw0IoVt+jDeazVAmbcJOdeA9Yqg5BLqSzo
+TIKwEAmNoU3Xnhfh9hQ0W/DbA/o0QKNBCyqNAOVKaCUXKC2suBZ8lqIpskQMz9CW4J+x8d0texo+
+Tr717thDbzLw4RWuwSYoi0z3cdvdY6m7DPy1VNoWibu9TDocB4eKeCxOwvgxGYxHg/F9/xiYXfAA
+0v7YAbBd6CS8ehaBLCktmmgSlRGpEVqiv+gPcBnBm0m+Qp6IMIGErxA4/VAoVIuFC9uE26L1ZSkS
+QMjTlCRgFcwJAXWU/sVKu8WSk0bKo+YC4DvJRGW2DFsh52WZWqIjCM4cuRAmXM7RQE5645H7WoPT
+Dl1LulgScozeUX/TC6jpbbVZ/QwG7Kn/GAzHoyPkF09r6xo9HzUxuDzWveDyoG2UeNCv4PJko8rw
+FsImZRvtj572wL4QLgLSBV8qGaGxOnOewXfYGhBgGsM24cu729sutDXb9uo/HvlzExdaY0rdrxmt
+Ys/63Z5Xgdr1GassGfO9koTqe7wDHxGNGw+Wi0p2h7Gb4YiNevd9xq7KtKpFd7j3inds0Q5FrBN7
+LtIUYi5St1/NMi7LKdZpDhdLuwZ6FwkTmhsTUMaMR2SNdc7XLaoXFrahqQdTqtUs6Myu4YoUu6vb
+guspCFm4ytsL6sNB8IFtu7UjFWlUnO00s7nhDWqssdth0Lu567OHx/H9w+TkjYWKd8ItyvlTAo+S
+LxBeanVf/GmhP+rsoR8a4EwpeEpTgRgin0OPdiQZdy7CctYrLcq5XR5BhMTa5VWnk+f5xRtasvrq
+gsZBx6jY5lxjh7sqnbrvnisQp1T6KNiX6fQV9m/D1GC9SvPEQ1v7g+WIrxjaMf9Js/QT5uh/ztB/
+n5/b2Uk0/AXm/2MV
 """.decode("base64").decode("zlib")
 
 ##file activate.bat
 ACTIVATE_BAT = """
-eJx9kE0OgjAQhfdNeodZ0ASuICERA1EilAaRlckspFU2dCH3jxSQNgad1fx87+W1e3l/atBKUfKS
-AzRZVV/jHFPeRIjOhEgJJZ2CXg/QStX1sgVRlYWowacExjL6eRN5wjtSEiySD45lnqyeP7VsA2OL
-mcE2zhFbMcfItw/gcZEiBmC5P8Hi+jTnGZvvNOOKhfDQg4bLORNm3s41aSfc3HcWts7O77Ib4iHj
-S87QEaY8oeQNhWR0fg==
+eJyFUssKgzAQvAfyD3swYH+hItSiVKlGsalQKOyhauvFHOr/U+MzFcWc9jEzO7vkVLw+EmRZUvIt
+GsiCVNydED2e2YhahkgJJVUJtWwgL8qqLnJI0jhKBJiUQPsUv6/YRmJcKDkMlBGOcehOmptctgJj
+e2IP4cfcjyNvFOwVp/JSdWqMygq+MthmkwHNojmfhjuRh3iAGffncsPYhpl2mm5sbY+9QzjC7ylt
+sFy6LTEL3rKRcLsGicrXV++4HVz1jzN4Vta+BnsingM+nMLSiB53KfkBsnmnEA==
 """.decode("base64").decode("zlib")
 
 ##file deactivate.bat
 DEACTIVATE_BAT = """
 eJxzSE3OyFfIT0vj4spMU0hJTcvMS01RiPf3cYkP8wwKCXX0iQ8I8vcNCFHQ4FIAguLUEgWIgK0q
-FlWqXJpcICVYpGzx2OAY4gExGchANxcopMqFxVCQUi4uK1c/Fy4AyB051w==
+FlWqXJpcICVYpGzx2BAZ4uHv5+Hv6wq1BWINXBTdKriEKkI1DhW2QAfhttcxxANiFZCBbglQSJUL
+i2dASrm4rFz9XLgAwJNbyQ==
 """.decode("base64").decode("zlib")
 
 ##file distutils-init.py
@@ -1706,15 +1707,15 @@ xJ4EFmGbvfJiicSHFRzUSISMY6hq3GLCRLnIvSTnEefN0FIjw5tF0Hkk9Q5dRunBsVoyFi24aaLg
 
 ##file activate_this.py
 ACTIVATE_THIS = """
-eJx1UsGOnDAMvecrIlYriDRlKvU20h5aaY+teuilGo1QALO4CwlKAjP8fe1QGGalRoLEefbzs+Mk
-Sb7NcvRo3iTcoGqwgyy06As+HWSNVciKaBTFywYoJWc7yit2ndBVwEkHkIzKCV0YdQdmkvShs6YH
-E3IhfjFaaSNLoHxQy2sLJrL0ow98JQmEG/rAYn7OobVGogngBgf0P0hjgwgt7HOUaI5DdBVJkggR
-3HwSktaqWcCtgiHIH7qHV+esW2CnkRJ+9R5cQGsikkWEV/J7leVGs9TV4TvcO5QOOrTHYI+xeCjY
-JR/m9GPDHv2oSZunUokS2A/WBelnvx6tF6LUJO2FjjlH5zU6Q+Kz/9m69LxvSZVSwiOlGnT1rt/A
-77j+WDQZ8x9k2mFJetOle88+lc8sJJ/AeerI+fTlQigTfVqJUiXoKaaC3AqmI+KOnivjMLbvBVFU
-1JDruuadNGcPmkgiBTnQXUGUDd6IK9JEQ9yPdM96xZP8bieeMRqTuqbxIbbey2DjVUNzRs1rosFS
-TsLAdS/0fBGNdTGKhuqD7mUmsFlgGjN2eSj1tM3GnjfXwwCmzjhMbR4rLZXXk+Z/6Hp7Pn2+kJ49
-jfgLHgI4Jg==
+eJyNUk2L3DAMvftXiCxLEphmSvc2MIcu9NaWHnopwxCcRNlRN7GD7clM/n0lp5mPZQs1JLb8pKcn
+WUmSPE9w9GReAM9Yt9RhFg7kSzmtoKE6ZGU0ynJ7AfIcJnuEE3Wd0nWgUQcEQWEkF466QzMCf+Ss
+6dGEQqmfgtbaQIWcDxs4HdBElv7og1wBg3gmH0TMjykcrAEyAd3gkP8rMDaocMDbHBWZ9RBdVZIk
+SgU3bRTwWjQrPNc4BPiue/zinHUz7DRxws/eowtkTUSyiMhKfi2y3NHMdXX0itcOpYMOh3Ww61g8
+luJSDFP6tmH3ftyki2eeJ7mifrAugJ/8crReqUqztC0fC4kuGnKGxWf/snXlZb8kzXMmboW0GDod
+Wut62G4hPZF5+pTO5XtiKYOuX/UL+ptcvy2ZTPKvIP1KFdeTiuuHxTXNFXYe/5+km0nmJ3r0KTxG
+YSM6z23fbZ7276Tg9x5LdiuFjok7noks1sP2tWscpeRX6KaRnRuT3WnKlQQ51F3JlC2dmSvSRENd
+j3wvetUDfLOjDDLPYtPwjDJb7yHYeNXyMPMLtdEQKRtl8HQrdLdX3O4YxZP7RvfcNH6ZCPMsi8td
+qZvLAN7yFnoY0DSZhOUXj4WWy+tZ8190ud1tPu5Zzy2N+gOGaVfA
 """.decode("base64").decode("zlib")
 
 if __name__ == '__main__':
