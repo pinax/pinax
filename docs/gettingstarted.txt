@@ -111,9 +111,9 @@ out of the box.
 
 ::
 
-    (mysite-env)$ pinax-admin setup_project myproject
+    (mysite-env)$ pinax-admin setup_project mysite
 
-This will create a new project named ``myproject``. By default it will install
+This will create a new project named ``mysite``. By default it will install
 dependencies for you. You can turn that behavior off by giving ``setup_project``
 the ``--no-reqs`` option.
 
@@ -132,7 +132,7 @@ To see what Pinax has to offer run::
 This will list all available project bases and a short description about
 each. To base your project off of any of these you'd run::
 
-    (mysite-env)$ pinax-admin setup_project -b basic myproject
+    (mysite-env)$ pinax-admin setup_project -b basic mysite
 
 In many cases the default (``zero``) is enough to get you going, but others
 may provide a better starting point for your project.
