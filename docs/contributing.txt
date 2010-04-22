@@ -46,21 +46,19 @@ Setting up your environment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Now that you've cloned the source code you are ready to get your environment
-setup to work on Pinax. This section also applies if you are looking to just
-run off the latest code. We'll assume that your current working directory is
-from within the clone (the ``pinax`` directory)::
+setup to work on Pinax. You should be a running a recent release of
+`virtualenv`_ to setup Pinax. We'll assume that your current working directory
+is from within the clone (the ``pinax`` directory)::
 
-    python scripts/pinax-boot.py --development --source=. ../pinax-dev
+    virtualenv ../pinax-dev
     source ../pinax-dev/bin/activate
-
-If you use virtualenvwrapper you could alternatively do::
-
-    python scripts/pinax-boot.py --development --source=. $WORKON_HOME/pinax-dev
-    workon pinax-dev
+    pip install -e .
 
 Finally, you need to install the dependencies for the development version::
 
     pip install --no-deps --requirement requirements/external_apps.txt
+
+.. _virtualenv: http://pypi.python.org/pypi/virtualenv
 
 Staying up-to-date
 ------------------
