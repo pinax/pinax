@@ -39,6 +39,6 @@ def has_openid(request):
     allowing caller to know whether OpenID is good to depend on.
     """
     for association in UserOpenidAssociation.objects.filter(user=request.user):
-        if association == str(request.openid):
+        if association.openid == unicode(request.openid):
             return True
     return False
