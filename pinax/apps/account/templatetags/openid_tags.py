@@ -1,10 +1,7 @@
 import os
 
 from django import template
-from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
-from django.utils.safestring import mark_safe
-from django.utils.translation import ugettext
 
 from pinax.apps.account.utils import has_openid
 
