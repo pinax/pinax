@@ -42,6 +42,9 @@ Improvements to account app
    based authentication.
  * OpenIDSignupForm now subclasses SignupForm giving it full signup
    capabilities like normal user/password signup.
+ * {% openid_icon %} has been removed in favor of {% ifopenid %}.
+ * removed pinax.apps.account.context_processors.openid in favor of just using
+   request.openid instead.
 
 Improved waitinglist app
 ------------------------

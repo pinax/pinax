@@ -126,7 +126,6 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     
     "notification.context_processors.notification",
     "announcements.context_processors.site_wide_announcements",
-    "pinax.apps.account.context_processors.openid",
     "pinax.apps.account.context_processors.account",
 ]
 
