@@ -1,6 +1,8 @@
 from django.conf import settings
 from django.core.urlresolvers import reverse
 
+from pinax.apps.account.signals import user_logged_in
+
 
 LOGIN_REDIRECT_URLNAME = getattr(settings, "LOGIN_REDIRECT_URLNAME", "")
 
@@ -45,3 +47,8 @@ def has_openid(request):
         if association.openid == unicode(request.openid):
             return True
     return False
+
+
+def perform_login(request, user):
+    user_logged_in.send(sender=user.__class__, request=request, user=user)
+    login(request, user)

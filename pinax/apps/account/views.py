@@ -77,7 +77,8 @@ def login(request, **kwargs):
     
     if request.method == "POST" and not url_required:
         form = form_class(request.POST, group=group)
-        if form.login(request):
+        if form.is_valid():
+            form.login(request)
             if associate_openid and association_model is not None:
                 for openid in request.session.get("openids", []):
                     assoc, created = UserOpenidAssociation.objects.get_or_create(
