@@ -1,6 +1,8 @@
 from django.conf import settings
 from django.core.urlresolvers import reverse
 
+from django.contrib.auth import login
+
 from pinax.apps.account.signals import user_logged_in
 
 
