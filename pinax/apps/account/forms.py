@@ -244,7 +244,15 @@ class SignupForm(GroupForm):
             new_user.is_active = False
             new_user.save()
         
+        self.after_signup(new_user)
+        
         return new_user
+    
+    def after_signup(self, user, **kwargs):
+        """
+        An extension point for subclasses.
+        """
+        pass
 
 
 class OpenIDSignupForm(SignupForm):
