@@ -214,7 +214,7 @@ class SignupForm(GroupForm):
                 join_invitation.accept(new_user) # should go before creation of EmailAddress below
                 if request:
                     messages.add_message(request, messages.INFO,
-                        ugettext(u"Your email address has already been verified")
+                        ugettext(u"Your e-mail address has already been verified")
                     )
                 # already verified so can just create
                 EmailAddress(user=new_user, email=email, verified=True, primary=True).save()
@@ -224,7 +224,7 @@ class SignupForm(GroupForm):
                 if email:
                     if request:
                         messages.add_message(request, messages.INFO,
-                            ugettext(u"Confirmation email sent to %(email)s") % {
+                            ugettext(u"Confirmation e-mail sent to %(email)s") % {
                                 "email": email,
                             }
                         )
@@ -234,7 +234,7 @@ class SignupForm(GroupForm):
             if email:
                 if request and not EMAIL_VERIFICATION:
                     messages.add_message(request, messages.INFO,
-                        ugettext(u"Confirmation email sent to %(email)s") % {
+                        ugettext(u"Confirmation e-mail sent to %(email)s") % {
                             "email": email,
                         }
                     )
@@ -293,9 +293,9 @@ class AccountForm(UserForm):
 class AddEmailForm(UserForm):
     
     email = forms.EmailField(
-        label = _("Email"),
+        label = _("E-mail"),
         required = True,
-        widget = forms.TextInput(attrs={"size":"30"})
+        widget = forms.TextInput(attrs={"size": "30"})
     )
     
     def clean_email(self):
@@ -379,14 +379,14 @@ class SetPasswordForm(UserForm):
 class ResetPasswordForm(forms.Form):
     
     email = forms.EmailField(
-        label = _("Email"),
+        label = _("E-mail"),
         required = True,
         widget = forms.TextInput(attrs={"size":"30"})
     )
     
     def clean_email(self):
         if EmailAddress.objects.filter(email__iexact=self.cleaned_data["email"], verified=True).count() == 0:
-            raise forms.ValidationError(_("Email address not verified for any user account"))
+            raise forms.ValidationError(_("E-mail address not verified for any user account"))
         return self.cleaned_data["email"]
     
     def save(self, **kwargs):
@@ -406,7 +406,7 @@ class ResetPasswordForm(forms.Form):
             domain = unicode(current_site.domain)
             
             # send the password reset email
-            subject = _("Password reset email sent")
+            subject = _("Password reset e-mail sent")
             message = render_to_string("account/password_reset_key_message.txt", {
                 "user": user,
                 "uid": int_to_base36(user.id),
