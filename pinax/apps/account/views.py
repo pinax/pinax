@@ -99,7 +99,7 @@ def login(request, **kwargs):
         "form": form,
         "url_required": url_required,
         "redirect_field_name": redirect_field_name,
-        "redirect_field_value": request.GET.get(redirect_field_name),
+        "redirect_field_value": request.REQUEST.get(redirect_field_name),
     })
     ctx.update(extra_context)
     
@@ -141,7 +141,7 @@ def signup(request, **kwargs):
     ctx.update({
         "form": form,
         "redirect_field_name": redirect_field_name,
-        "redirect_field_value": request.GET.get(redirect_field_name),
+        "redirect_field_value": request.REQUEST.get(redirect_field_name),
     })
     
     return render_to_response(template_name, RequestContext(request, ctx))
