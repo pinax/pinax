@@ -1,0 +1,94 @@
+.. _ref-account-reference:
+
+=========
+Reference
+=========
+
+This document covers various components of ``pinax.apps.account``.
+
+
+Settings
+========
+
+``ACCOUNT_EMAIL_VERIFICATION``
+------------------------------
+
+This setting is used to control whether or not email verification is sent upon
+signup:
+
+::
+
+    ACCOUNT_EMAIL_VERIFICATION = True
+
+
+``DEFAULT_FROM_EMAIL``
+----------------------
+
+``LANGUAGES``
+-------------
+
+``LOGIN_REDIRECT_URL``
+----------------------
+
+``SECRET_KEY``
+--------------
+
+``LOGIN_URL``
+-------------
+
+``MEDIA_URL``
+-------------
+
+``STATIC_URL``
+--------------
+
+``LANGUAGE_CODE``
+-----------------
+
+``TIME_ZONE``
+-------------
+
+``ACCOUNT_OPEN_SIGNUP``
+-----------------------
+
+``LOGIN_REDIRECT_URL``
+----------------------
+
+
+Modules
+=======
+
+``pinax.apps.account.auth_backends``
+------------------------------------
+
+.. module:: pinax.apps.account.auth_backends
+
+
+``pinax.apps.account.utils``
+----------------------------
+
+.. module:: pinax.apps.account.utils
+
+.. autofunction:: get_default_redirect
+.. autofunction:: user_display
+.. autofunction:: has_openid
+
+
+``pinax.apps.account.views``
+----------------------------
+
+.. module:: pinax.apps.account.views
+
+.. autofunction:: login
+.. autofunction:: signup
+.. autofunction:: email
+.. autofunction:: password_change
+.. autofunction:: password_set
+.. autofunction:: password_delete
+.. autofunction:: password_reset
+.. autofunction:: password_reset_done
+.. autofunction:: password_reset_from_key
+.. autofunction:: timezone_change
+.. autofunction:: language_change
+.. autofunction:: other_services
+.. autofunction:: other_services_remove
