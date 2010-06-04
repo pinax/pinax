@@ -21,46 +21,33 @@ is sent upon signup:
     ACCOUNT_EMAIL_VERIFICATION = True
 
 
-``DEFAULT_FROM_EMAIL``
-----------------------
-
-**Required**. This setting is the default email address that emails are sent
-from.
+``LOGIN_REDIRECT_URLNAME``
+--------------------------
+The name defined in the URLconf that maps to the url that the user will be
+redirected to after login success.
 
 ::
 
-	DEFAULT_FROM_EMAIL = "user@example.com"
+	LOGIN_REDIRECT_URLNAME = "home"
 
-
-``LANGUAGES``
--------------
-
-``LOGIN_REDIRECT_URL``
-----------------------
-
-``SECRET_KEY``
---------------
-
-``LOGIN_URL``
--------------
-
-``MEDIA_URL``
--------------
 
 ``STATIC_URL``
 --------------
+**Required**.  A url for static files that need serving.
 
-``LANGUAGE_CODE``
------------------
+::
 
-``TIME_ZONE``
--------------
+	STATIC_URL = "/static/"
+
 
 ``ACCOUNT_OPEN_SIGNUP``
 -----------------------
+**Required**.  Permit signing up for an Account via OpenID.
 
-``LOGIN_REDIRECT_URL``
-----------------------
+::
+
+	ACCOUNT_OPEN_SIGNUP = True
+
 
 Named Urls
 ==========
@@ -245,3 +232,7 @@ Modules
 .. autofunction:: language_change
 .. autofunction:: other_services
 .. autofunction:: other_services_remove
+
+
+.. _LOGIN_REDIRECT_URL: http://docs.djangoproject.com/en/dev/ref/settings/#login-redirect-url
+.. _SECRET_KEY: http://docs.djangoproject.com/en/dev/ref/settings/#secret-key
