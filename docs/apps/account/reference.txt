@@ -13,8 +13,8 @@ Settings
 ``ACCOUNT_EMAIL_VERIFICATION``
 ------------------------------
 
-This setting is used to control whether or not email verification is sent upon
-signup:
+**Required**. This setting is used to control whether or not email verification
+is sent upon signup:
 
 ::
 
@@ -23,6 +23,14 @@ signup:
 
 ``DEFAULT_FROM_EMAIL``
 ----------------------
+
+**Required**. This setting is the default email address that emails are sent
+from.
+
+::
+
+	DEFAULT_FROM_EMAIL = "user@example.com"
+
 
 ``LANGUAGES``
 -------------
@@ -53,6 +61,151 @@ signup:
 
 ``LOGIN_REDIRECT_URL``
 ----------------------
+
+Named Urls
+==========
+
+The named urls in this app should enable the use of of the ``{% url %}``
+template tag as well as ``reverse`` lookups in your project code without having
+to know the implementation details of this app.
+
+acct_email
+----------
+This is the url that on POST will process a number of actions related to an
+email address on an account and on GET will render a template that provides the
+email form in context.
+
+acct_signup
+-----------
+This url will process a form to create an account on POST and render a template
+with a signup form instance in context on GET requests.
+
+acct_login
+----------
+Process a login request from POST requests and render a template with a login
+form instance in context on GET requests.
+
+acct_login_openid
+-----------------
+Process the login POST request while associating submitted OpenID credentials
+to the account if they don't already exist.
+
+acct_passwd
+-----------
+Process a password change form POST or render a template with a password change
+form instance in context.
+
+acct_passwd_set
+---------------
+Process a password set form POST or render a template with a password set form
+instance in context.
+
+acct_passwd_delete
+------------------
+Process a password delete form POST or render a template with a password delete
+form instance in context.
+
+acct_passwd_delete_done
+-----------------------
+Renders static template to inform user that the password delete is complete.
+
+acct_timezone_change
+--------------------
+Processes a timezone form POST request to change a user's timezone or renders
+a template with the timezone change form instance in context.
+
+acct_other_services
+-------------------
+Adds credentials for Twitter on form POST, or renders a template with the form
+instance in context.
+
+acct_other_services_remove
+--------------------------
+Removes Twitter account association with user.
+
+acct_language_change
+--------------------
+Processes a default language selection form POST request or renders a template
+with the language change form in context.
+
+acct_logout
+-----------
+Calls the ``django.contrib.auth.views.logout`` view.
+
+acct_confirm_email
+------------------
+Calls the ``emailconfirmation.views.confirm_email`` view.
+
+:arguments: The token generated in the ``emailconfirmation`` app that matches ``(\w+)``.
+
+acct_passwd_reset
+-----------------
+Process a password reset form POST request and redirect to ``acct_passwd_reset_done``
+or render a template with the password reset form instance in context.
+
+acct_passwd_reset_done
+----------------------
+Renders a template confirming the password reset process is complete.
+
+acct_passwd_reset_key
+---------------------
+Process a password reset using user key form POST request or render a template
+with the form in context.
+
+:keyword arguments: The UUID and Key for the reset reset request that matches ``(?P<uidb36>[0-9A-Za-z]+)-(?P<key>.+)``
+
+signup_form_validate
+--------------------
+Calls the ``ajax_validation.views.validate`` view with the ``pinax.apps.account.forms.SignupForm``.
+
+
+Templates
+=========
+
+account/login.html
+------------------
+
+:context: ``group``, ``form``, ``url_required``, ``redirect_field_name``, ``redirect_field_value``
+
+account/signup.html
+-------------------
+
+account/verification_sent.html
+------------------------------
+
+account/email.html
+------------------
+
+account/password_change.html
+----------------------------
+
+account/password_set.html
+-------------------------
+
+account/password_delete.html
+----------------------------
+
+account/password_delete_done.html
+---------------------------------
+
+account/password_reset.html
+---------------------------
+
+account/password_reset_done.html
+--------------------------------
+
+account/password_reset_from_key.html
+------------------------------------
+
+account/timezone_change.html
+----------------------------
+
+account/language_change.html
+----------------------------
+
+account/other_services.html
+---------------------------
+
 
 
 Modules
