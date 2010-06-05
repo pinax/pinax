@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 
 
 class EmailModelBackend(ModelBackend):
+    """A backend that provides authentication through email instead of username."""
     
     def authenticate(self, email=None, password=None):
         try:
