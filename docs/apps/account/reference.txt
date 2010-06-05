@@ -160,41 +160,73 @@ login.html
 signup.html
 -----------
 
+:context: ``group``, ``form``, ``redirect_field_name``, ``redirect_field_value``
+
 verification_sent.html
 ----------------------
+
+:context: ``group``, ``email``, ``success_url``
 
 email.html
 ----------
 
+:context: ``group``, ``add_email_form``
+
 password_change.html
 --------------------
+
+:context: ``group``, ``password_change_form``
 
 password_set.html
 -----------------
 
+:context: ``group``, ``password_set_form``
+
 password_delete.html
 --------------------
+
+:context: ``group``
 
 password_delete_done.html
 -------------------------
 
+:context: None
+
 password_reset.html
 -------------------
+
+:context: ``group``, ``password_reset_form``
 
 password_reset_done.html
 ------------------------
 
+:context: ``group``
+
 password_reset_from_key.html
 ----------------------------
+
+If there is a valid token:
+
+:context: ``group``, ``form``
+
+otherwise:
+
+:context: ``group``, ``token_fail = True``
 
 timezone_change.html
 --------------------
 
+:context: ``group``, ``form``
+
 language_change.html
 --------------------
 
+:context: ``group``, ``form``
+
 other_services.html
 -------------------
+
+:context: ``group``, ``twitter_form``, ``twitter_authorized``
 
 
 
