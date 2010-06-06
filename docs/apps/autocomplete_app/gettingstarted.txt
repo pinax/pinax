@@ -55,5 +55,31 @@ The above url mapping will give you two different lookups, one using the
 ``django-friends`` app to look through just the logged in user's friends, and
 the other looking through all users in the system.
 
+.. code-block:: html
+
+    ###
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.autocomplete.min.js"></script>
+    <script type="text/javascript">
+        $().ready(function() {
+            $("#id_recipient").autocomplete("{% url profile_username_autocomplete %}", {
+                formatItem: function(data, i, n, value) {
+                    values = value.split(",,");
+                    return values[0] + values[1] + "<br />" + values[2];
+                },
+                formatResult: function(data, value) {
+                    return value.split(",,")[1];
+                },
+                // TODO: improve highlighting to only affect username.
+                highlight: false
+            });
+            $("#id_recipient").focus()
+        });
+    </script>
+    ###
+
+    ###
+    <input id="id_recipient" type="text">
+    ###
 
 .. _pip: http://pip.openplans.org/
