@@ -1,0 +1,58 @@
+.. _ref-blog-gettingstarted:
+
+===============
+Getting started
+===============
+
+This document is designed to get you up and running with
+``pinax.apps.blog``...
+
+Prerequisites
+=============
+
+These are the requirements to run ``pinax.apps.blog``:
+
+ * Python **2.4+** (Python 3.x is **not** supported yet)
+ * Django **1.2+**
+ * atomformat
+ * creoleparser
+ * docutils
+ * django-friends
+ * django-tagging
+ * django-notification
+ * django-threadedcomments
+
+These dependencies should be added to your ``requirements/project.txt`` file
+and installed using pip_. For example::
+
+    pip install -r requirements/project.txt
+
+Installation
+============
+
+Add ``pinax.apps.blog`` to your ``INSTALLED_APPS``.  In addition, make sure
+required django apps are also installed:
+
+.. code-block:: python
+
+    INSTALLED_APPS = [
+        # ...
+        "friends",
+        "tagging",
+        "threadedcomments".
+        "notification",
+        "pinax.apps.blog",
+    ]
+
+Hook up ``pinax.apps.blog`` to your URLconf:
+
+.. code-block:: python
+
+    urlpatterns = patterns("",
+        # ...
+        url(r"^blog/", include("pinax.apps.blog.urls"))
+    )
+
+
+
+.. _pip: http://pip.openplans.org/

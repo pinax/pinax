@@ -1,0 +1,213 @@
+.. _ref-blog-reference:
+
+=========
+Reference
+=========
+
+This document covers various components of ``pinax.apps.blog``.
+
+
+Settings
+========
+
+``PINAX_ITEMS_PER_FEED``
+------------------------
+
+This setting is used to control how many items in a feed.  Defaults to 20:
+
+::
+
+    PINAX_ITEMS_PER_FEED = 50
+
+
+``MARKUP_CHOICES``
+------------------
+A list of markup choices to make available in the blog.  Defaults to an empty
+list.  Available choices are: ``[("restructuredtext", u"reStructuredText"), ("textile", u"Textile"), ("markdown", u"Markdown"), ("creole", u"Creole")]``
+
+The actual origin of this setting is `django-wikiapp`_ which is one of the
+external applications Pinax integrates. ``pinax.apps.blog`` uses it to
+determine, how a post's content should be converted from plain text to HTML.
+
+.. _django-wikiapp: http://code.google.com/p/django-wikiapp/
+
+::
+
+	MARKUP_CHOICES = [("textile", "Textile"), ("markdown", "Markdown")]
+
+
+``RESTRUCTUREDTEXT_FILTER_SETTINGS``
+------------------------------------
+Using this option you can pass additional settings as dictionary through the
+``restructuredtext`` template library to the underlying
+``docutils.core.publish_parts`` function.  Defaults to empty ``dict``.
+
+::
+
+	RESTRUCTUREDTEXT_FILTER_SETTINGS = {}
+
+
+``BEHIND_PROXY``
+----------------
+the users' real IP addresses are stored when they create blog posts. When
+activated the blog takes the user's IP address from
+``request.META['HTTP_X_FORWARDED_FOR']`` instead of
+``request.META['REMOTE_ADDR']``.  Defaults to False.
+
+::
+
+	BEHIND_PROXY = True
+
+
+Named Urls
+==========
+
+The named urls in this app should enable the use of of the ``{% url %}``
+template tag as well as ``reverse`` lookups in your project code without having
+to know the implementation details of this app.
+
+blog_post
+---------
+Render a template with a specific blog post entry in context.
+
+:keyword arguments: ``(?P<username>[-\w]+)/(?P<year>\d{4})/(?P<month>\d{2})/(?P<slug>[-\w]+)``
+
+blog_list_all
+-------------
+Render a template with a queryset in context of all blog posts.
+
+blog_list_user
+--------------
+Renders a template with a queryset in context of blog posts that are owned by a
+specified username.
+
+:keyword arguments: The username to list blog posts for matching ``(?P<username>\w+)``.
+
+blog_list_yours
+---------------
+Renders a template with a queryset in context of blog posts that are owned by
+the logged in user.
+
+blog_new
+--------
+A GET request renders a template with a form instance in context.  A POST request
+processes the data from this form and redirects user to blog_list_yours_.
+
+blog_edit
+---------
+Upon a GET request a form is rendered to edit the blog entry.  This urls also
+will process the POST request from submitting the form.  After updating the post
+the response will be redirected to blog_list_yours_.
+
+:arguments: The id for the blog post that matches ``(\d+)``.
+
+blog_destroy
+------------
+Delete a blog post that is yours on POST requests.  Otherwise, it redirects
+the user to blog_list_yours_.
+
+:arguments: The id for the blog post that matches ``(\d+)``.
+
+blog_form_validate
+------------------
+Uses the ajax_validation app, it validates the blog post with the ``pinax.apps.blog.forms.BlogForm``.
+
+
+Templates
+=========
+
+Templates should be placed in an ``blog/`` folder at the root of one of your
+template search paths.
+
+blogs.html
+----------
+
+:context: ``blogs``
+
+post.html
+---------
+
+:context: ``post``
+
+your_posts.html
+---------------
+
+:context: ``blogs``
+
+new.html
+--------
+
+:context: ``blog_form``
+
+edit.html
+---------
+
+:context: ``blog_form``, ``post``
+
+
+
+Modules
+=======
+
+``pinax.apps.blog.admin``
+-------------------------
+
+.. automodule:: pinax.apps.blog.admin
+   :members:
+   :undoc-members:
+
+``pinax.apps.blog.feeds``
+-------------------------
+
+.. automodule:: pinax.apps.blog.feeds
+   :members:
+   :undoc-members:
+
+``pinax.apps.blog.forms``
+-------------------------
+
+.. automodule:: pinax.apps.blog.forms
+   :members:
+   :undoc-members:
+
+``pinax.apps.blog.models``
+--------------------------
+
+.. automodule:: pinax.apps.blog.models
+   :members:
+   :undoc-members:
+
+``pinax.apps.blog.templatetags.blog_tags``
+------------------------------------------
+
+.. automodule:: pinax.apps.blog.templatetags.blog_tags
+   :members:
+   :undoc-members:
+
+``pinax.apps.blog.templatetags.creole``
+---------------------------------------
+
+.. automodule:: pinax.apps.blog.templatetags.creole
+   :members:
+   :undoc-members:
+
+``pinax.apps.blog.templatetags.restructuredtext``
+-------------------------------------------------
+
+.. automodule:: pinax.apps.blog.templatetags.restructuredtext
+   :members:
+   :undoc-members:
+
+``pinax.apps.blog.templatetags.switchcase``
+-------------------------------------------
+
+.. automodule:: pinax.apps.blog.templatetags.switchcase
+   :members:
+   :undoc-members:
+
+``pinax.apps.blog.views``
+-------------------------
+
+.. automodule:: pinax.apps.blog.views
+   :members:
+   :undoc-members:
