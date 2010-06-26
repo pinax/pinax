@@ -76,21 +76,14 @@ Go ahead and install Pinax::
 
     (mysite-env)$ pip install Pinax
 
-.. note:: ``pip install Pinax`` will fail
+.. note:: ``pip install Pinax`` is a development version
 
-    This is a temporary note for readers of the 0.9 development version. The
-    above will not work as-is at current time. You should instead run::
+    Currently, only our development version is available with pip install.
+    Previous versions of Pinax were not available with pip install.
     
-        (mysite-env)$ pip install --extra-index-url=http://dist.pinaxproject.com/dev/ Pinax
-
-If you want to be a bit more adventurous you can install the development
-version of Pinax (which gives you the latest commit in our git repository)::
-
-    (mysite-env)$ pip install Pinax==dev
-
-Keep in mind the development version may not be 100% stable. If you are
-looking to help out with development you should read our
-:ref:`contributing documentation <ref-contributing>`.
+    Keep in mind the development version may not be 100% stable. If you are
+    looking to help out with development you should read our
+    :ref:`contributing documentation <ref-contributing>`.
 
 ``pip`` you say? pip_ is a tool bundled with virtualenv to install Python
 packages. It is super handy and it is used in Pinax extensively to handle
