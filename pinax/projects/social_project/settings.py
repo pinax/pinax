@@ -170,7 +170,7 @@ INSTALLED_APPS = [
     "groups",
     # "gravatar",
     "threadedcomments",
-    "wiki",
+    "wakawaka",
     "swaps",
     "timezones",
     "voting",

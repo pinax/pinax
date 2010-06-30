@@ -157,7 +157,7 @@ INSTALLED_APPS = [
     "ajax_validation",
     "tagging",
     "uni_form",
-    "wiki",
+    "wakawaka",
     "django_sorting",
     "attachments",
     "django_markup",

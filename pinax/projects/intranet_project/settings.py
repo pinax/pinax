@@ -157,7 +157,7 @@ INSTALLED_APPS = [
     "avatar",
     "tagging",
     "threadedcomments",
-    "wiki",
+    "wakawaka",
     "uni_form",
     "django_markup",
     "attachments",

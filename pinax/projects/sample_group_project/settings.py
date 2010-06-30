@@ -154,7 +154,7 @@ INSTALLED_APPS = [
     "ajax_validation",
     "tagging",
     "uni_form",
-    "wiki",
+    "wakawaka",
     "avatar",
     "threadedcomments",
     "gravatar",
