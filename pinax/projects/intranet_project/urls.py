@@ -37,7 +37,7 @@ urlpatterns = patterns("",
     (r"^tasks/", include("pinax.apps.tasks.urls")),
     (r"^topics/", include("pinax.apps.topics.urls")),
     (r"^comments/", include("threadedcomments.urls")),
-    (r"^wiki/", include("wiki.urls")),
+    (r"^wiki/", include("wakawaka.urls")),
     
     (r"^admin/", include(admin.site.urls)),
 )
