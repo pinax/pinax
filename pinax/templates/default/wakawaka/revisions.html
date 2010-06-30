@@ -1,0 +1,13 @@
+{% extends "wakawaka/base.html" %}
+
+{% load i18n %}
+
+{% block title %}
+    {% blocktrans with page.slug as slug %}History for {{ slug }}{% endblocktrans %}
+{% endblock %}
+
+{% block content %}
+	<h1>{% blocktrans with page.slug as slug %}History for {{ slug }}{% endblocktrans %}</h1>
+
+	{% include "wakawaka/revision_table.html" %}
+{% endblock %}

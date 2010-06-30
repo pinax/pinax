@@ -1,0 +1,16 @@
+{% extends "wakawaka/base.html" %}
+
+{% load i18n %}
+
+{% block title %}
+	{% trans "All wiki pages" %}
+{% endblock %}
+
+{% block content %}
+	<h1>{% trans "All wiki pages" %}</h1>
+	<ul>
+	{% for page in page_list %}
+	<li><a href="{% url wakawaka_page slug=page.slug %}">{{ page.slug }}</a>
+	{% endfor %}
+	</ul>
+{% endblock %}
