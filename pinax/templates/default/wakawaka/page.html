@@ -3,20 +3,18 @@
 {% load wakawaka_tags %}
 {% load i18n %}
 
-{% block extrahead %}
-    {{ block.super }}
-    
+{% block extra_head %}
     {# Don't let search engines scan this old revision #}
     {% if rev.is_not_current %}
         <meta name="robots" content="noindex" />
     {% endif %}
 {% endblock %}
 
-{% block title %}
+{% block head_title %}
     {{ page.slug }}
 {% endblock %}
 
-{% block content %}
+{% block body %}
     <h1><a href="{% url wakawaka_page slug=page.slug %}">{{ page.slug }}</a></h1>
     
     {% if rev.is_not_current %}

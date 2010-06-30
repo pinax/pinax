@@ -2,11 +2,11 @@
 
 {% load i18n %}
 
-{% block title %}
+{% block head_title %}
     {% trans "All wiki pages" %}
 {% endblock %}
 
-{% block content %}
+{% block body %}
     <h1>{% trans "All wiki pages" %}</h1>
     <ul>
     {% for page in page_list %}

@@ -2,7 +2,7 @@
 
 {% load i18n %}
 
-{% block title %}
+{% block head_title %}
     {% if page.is_initial %}
         {% blocktrans with page.slug as slug %}Add {{ slug  }}{% endblocktrans %}
     {% else %}
@@ -10,7 +10,7 @@
     {% endif %}
 {% endblock %}
 
-{% block content %}
+{% block body %}
     <h1>
         {% if page.is_initial %}
             {% blocktrans with page.slug as slug %}Add {{ slug  }}{% endblocktrans %}

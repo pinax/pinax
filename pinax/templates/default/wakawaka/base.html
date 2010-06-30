@@ -1,34 +1,13 @@
+{% extends group_base|default:"site_base.html" %}
+
 {% load i18n %}
 
-<html>
-<head>
-    <title>{% block title %}{% endblock %}</title>
-    {% block extrahead %}{% endblock %}
-</head>
-<body>
-    {% if messages %}
-    <ul class="messages">
-    {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
+{% block body_class %}wiki{% endblock %}
+
+{% block subnav %}
+    <ul>
+        <li><a href="{% url wakawaka_index %}">{% trans "Start" %}</a></li>
+        <li><a href="{% url wakawaka_revision_list %}">{% trans "Recent revisions" %}</a></li>
+        <li><a href="{% url wakawaka_page_list %}">{% trans "All Pages" %}</a></li>
     </ul>
-    {% endif %}
-    
-    {% spaceless %}
-    <div class="info">
-        <span>
-            <a href="{% url wakawaka_index %}">{% trans "Start" %}</a>
-        </span>
-        <span>
-            <a href="{% url wakawaka_revision_list %}">{% trans "Recent revisions" %}</a>
-        </span>
-        <span>
-            <a href="{% url wakawaka_page_list %}">{% trans "All Pages" %}</a>
-        </span>
-    </div>
-    {% endspaceless %}
-    
-    {% block content %}
-    {% endblock %}
-</body>
-</html>
+{% endblock %}
