@@ -6,7 +6,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 from tagging.models import TaggedItem
-from wiki.models import Article as WikiArticle
+from wakawaka.models import WikiPage
 
 from pinax.apps.account.openid_consumer import PinaxConsumer
 from pinax.apps.projects.models import Project
@@ -59,7 +59,7 @@ tagged_models = (
         query=lambda tag: TaggedItem.objects.get_by_model(Task, tag),
     ),
     dict(title="Wiki Articles",
-        query=lambda tag: TaggedItem.objects.get_by_model(WikiArticle, tag),
+        query=lambda tag: TaggedItem.objects.get_by_model(WikiPage, tag),
     ),
         
 
