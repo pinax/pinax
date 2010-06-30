@@ -7,7 +7,7 @@ As more sites are built using Pinax, more best practices will emerge, but for
 now what we recommend is:
 
 - Always work off a stable release. The most current release is 0.7.1.
-- Use the pinax-admin :ref:`clone_project <customization-cloneproject>` command.
+- Use the pinax-admin `setup_project <customization-setupproject>` command.
 - Make necessary changes to the ``settings.py`` and ``urls.py`` files in your
   copied directory.
 - Change the domain and display name of the Site in the admin interface.
@@ -77,16 +77,20 @@ zero_project
     provides the project directory layout and some key infrastructure apps on
     which the other starter projects are based.
 
-.. _customization-cloneproject:
+.. _customization-setuoproject:
 
-pinax-admin clone_project
---------------------------
+pinax-admin setup_project
+-------------------------
 
 Pinax provides you with ``pinax-admin``, a command line utility. With
-``pinax-admin`` you can quickly generate a cloned project. For example, if you
-wanted to clone the basic_project you could simply do the following::
+``pinax-admin`` you can quickly generate a cloned project. For example, to get
+started quickly with Pinax you could simply do the following::
 
-    (pinax-env)$ pinax-admin clone_project basic_project mysite
+    (mysite-env)$ pinax-admin setup_project mysite
+
+Or if you want to use the ``basic`` project base you could do::
+
+    (mysite-env)$ pinax-admin setup_project -b basic mysite
 
 
 Settings You Will (Possibly) Want To Override
