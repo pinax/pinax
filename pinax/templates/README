@@ -1,49 +1,23 @@
 This directory contains sets of common templates that are shared
 between the example projects that are supplied with Pinax.
 
+
 SUGGESTED SIMPLE USE:
 
 The settings.py must include TEMPLATE_LOADERS where "filesystem" is
 designated before "app_directories" like this:
 
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.load_template_source',
-    'django.template.loaders.app_directories.load_template_source',
-)
+TEMPLATE_LOADERS = [
+    "django.template.loaders.filesystem.load_template_source",
+    "django.template.loaders.app_directories.load_template_source",
+]
 
 The TEMPLATE_DIRS is then set so that you pick up the project
 specific templates, the Pinax common default templates and then
 the app-specific templates defined within each installed app.
 In your settings.py file that looks like this:
 
-TEMPLATE_DIRS = (
-    os.path.join(os.path.dirname(__file__), "templates"),
-    os.path.join(PINAX_ROOT, "templates", "default"),
-)
-
-
-SUGGESTED USE WHEN TRACKING PINAX TRUNK:
-
-Here is a slightly more complex setup that allows you to work
-off of the Pinax trunk and pick up changes to the project that
-you have cloned. Say you have cloned basic_project; you will have
-the same setting for TEMPLATE_LOADERS as above, but you should
-set up your TEMPLATE_DIRS like this:
-
-TEMPLATE_DIRS = (
-    os.path.join(os.path.dirname(__file__), "templates"),
-    os.path.join(PINAX_ROOT, "project", "basic_project", "templates"),
-    os.path.join(PINAX_ROOT, "templates", "default"),
-)
-
-Note that with this setup the only thing that should be in your project's
-local templates directory should be:
-
- - templates that override templates from Pinax or a Pinax app, or
- - templates that are unique to your project.
-
-While this approach conveniently isolates your template work thus
-easing maintenance, note the possibility that things might break
-when you update the Pinax trunk. Hopefully this would be a rare
-occurrence and, when it does happen, there should be note about it
-in the Pinax backwards compatibility file.
+TEMPLATE_DIRS = [
+    os.path.join(PROJECT_ROOT, "templates"),
+    os.path.join(PINAX_ROOT, "templates", PINAX_THEME),
+]

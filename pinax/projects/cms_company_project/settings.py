@@ -125,7 +125,6 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     "pinax.core.context_processors.pinax_settings",
     
     "notification.context_processors.notification",
-    "pinax.apps.account.context_processors.openid",
     "pinax.apps.account.context_processors.account",
 ]
 

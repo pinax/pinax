@@ -86,7 +86,7 @@
                             {% plural %}
                                 Saved {{ count }} times
                             {% endblocktrans %}
-                            {% if bookmark|in_list:user_bookmarks %}
+                            {% if bookmark in user_bookmarks %}
                                 {% blocktrans %}(including you){% endblocktrans %}
                             {% else %}
                                 (<a href="{% url add_bookmark %}?url={{ bookmark.url }};description={{ bookmark.description }}">{% blocktrans %}save{% endblocktrans %}</a>)

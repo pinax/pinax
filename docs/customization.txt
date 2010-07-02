@@ -6,8 +6,8 @@ Customization
 As more sites are built using Pinax, more best practices will emerge, but for
 now what we recommend is:
 
-- Always work off a stable release. The most current release is 0.7beta3.
-- Use the pinax-admin :ref:`clone_project <customization-cloneproject>` command.
+- Always work off a stable release. The most current release is 0.7.1.
+- Use the pinax-admin :ref:`setup_project <customization-setupproject>` command.
 - Make necessary changes to the ``settings.py`` and ``urls.py`` files in your
   copied directory.
 - Change the domain and display name of the Site in the admin interface.
@@ -23,70 +23,74 @@ Pinax provides several projects to use as a starting point for
 customization.  Depending on your development style, you may prefer one project
 over the other.
 
-basic_project
+basic
     This project comes with the bare minimum set of applications and templates to
     get you started. It includes no extra tabs, only the profile and notices tabs are
     included by default. From here you can add any extra functionality and
     applications that you would like.
 
-cms_company_project
+cms_company
     A very simple CMS that lets you set up templates and then edit content,
     including images, right in the frontend of the site.
     
     The sample media, templates and content including in the project demonstrate
     a basic company website.
 
-cms_holidayhouse_project
+cms_holidayhouse
     A very simple CMS that lets you set up templates and then edit content,
     including images, right in the frontend of the site.
     
     The sample media, templates and content including in the project demonstrate
     a basic site for holiday house rentals.
 
-code_project
+code
     This project demonstrates group functionality and the tasks, wiki and topics
     apps. It is intended to be the starting point for things like code project
     management where each code project gets its own wiki, task tracking system
     and threaded discussions.
 
-intranet_project
+intranet
     This project demonstrates a closed site requiring an invitation to join and
     not exposing any information publicly. It provides a top-level task tracking
     system, wiki and bookmarks. It is intended to be the starting point of sites
     like intranets.
 
-private_beta_project
+private_beta
     This project demonstrates the use of a waiting list and signup codes for
     sites in private beta. Otherwise it is the same as basic_project.
 
-sample_group_project
+sample_group
     This project demonstrates group functionality with a barebones group
     containing no extra content apps as well as two additional group types,
     tribes and projects, which show different membership approaches and
     content apps such as topics, wiki, photos and task management.
 
-social_project
+social
     This project demonstrates a social networking site. It provides profiles,
     friends, photos, blogs, tribes, wikis, tweets, bookmarks, swaps,
     locations and user-to-user messaging.
     
     In 0.5 this was called ``complete_project``.
 
-zero_project
+zero
     This project lays the foundation for all other Pinax starter projects. It
     provides the project directory layout and some key infrastructure apps on
     which the other starter projects are based.
 
-.. _customization-cloneproject:
+.. _customization-setupproject:
 
-pinax-admin clone_project
---------------------------
+pinax-admin setup_project
+-------------------------
 
 Pinax provides you with ``pinax-admin``, a command line utility. With
-``pinax-admin`` you can quickly generate a cloned project. For example, if you
-wanted to clone the basic_project you could simply do the following::
+``pinax-admin`` you can quickly generate a cloned project. For example, to get
+started quickly with Pinax you could simply do the following::
 
-    (pinax-env)$ pinax-admin clone_project basic_project mysite
+    (mysite-env)$ pinax-admin setup_project mysite
+
+Or if you want to use the ``basic`` project base you could do::
+
+    (mysite-env)$ pinax-admin setup_project -b basic mysite
 
 
 Settings You Will (Possibly) Want To Override

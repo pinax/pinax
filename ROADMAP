@@ -1,0 +1,79 @@
+PINAX 0.9 ROADMAP
+=================
+
+This is a roadmap for the Pinax 0.9 release. It is broken down into three
+sections. MUST, SHOULD and COULD. See each section for details.
+
+We would love for those who are looking to contribute to work on what is on
+this list. MUST has full core developer support. SHOULD we are deferring
+somewhat to the community, but if a core developer wants to pick something up
+they might. COULD we are entirely looking at the community to get done for
+this release.
+
+Note that new apps will generally only be accepted if they are used in a
+starter project (either existing or new). Also note that starter projects have
+differing levels of maturity and stability and we're focused more on the
+"lower level" projects like zero_project and basic_project for the initial
+alpha and will move up the stack, doing something like social_project last.
+
+
+MUST
+----
+
+(we won't ship 0.9 without these)
+
+* implement better per-object permissions (leveraging Django 1.2)
+* make use of e-mail backends (django-mailer supports it in master, but needs
+  to be integrated/tested)
+* finish django-friends split and get all split apps working
+* clean up tagging (consider moving to django-taggit)
+* decide and do something about notification / activity stream
+* change over wiki to wakawaka
+* change over blog to biblion
+* sort out photos issues: photologue vs imagekit, etc, etc
+* clean-up profiles to give a good answer to: "How do I add more fields to a
+  user?" (in progress)
+* [DONE] implement improved_install branch from proposals: http://tr.im/N20T
+  and http://tr.im/N216
+* all tests at Pinax AND project-level must pass
+
+
+SHOULD
+------
+
+(it would be really good to get these done)
+
+* alternative themes (mostly including what Pinax needs to do to support these
+  better, with at least one more included as a proof of concept)
+* settings refactor
+* externalize and clean up some of the apps currently included
+* better i18n/l10n support
+* add more external authentication (FB Connect and OAuth providers)
+* workflow
+* open stack
+* calendar / events
+
+
+COULD
+-----
+
+(more likely 1.0 unless someone steps up to take ownership)
+
+* come up with CMS story
+* come up with e-commerce story
+
+
+CRITERIA FOR 0.9 ALPHA 1
+------------------------
+
+* [DONE] add zero_project
+* finish settings refactor
+* anything contributed during the sprints is merged back in
+* [DONE] rethink the package data strategy (possibly get rid of 
+  setuptools-dummy)
+* make sure AUTHORS file is complete
+* [DONE] implement proposals: http://tr.im/N20T and http://tr.im/N216
+* [DONE] ensure per-project requirements files are complete and accurate
+* integrate in django-compressor (nice-to-have)
+* [DONE] switch to PEP386-compliant version naming
+* update CHANGELOG

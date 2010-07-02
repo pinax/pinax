@@ -9,7 +9,7 @@ from django.utils.hashcompat import sha_constructor
 from django.utils.http import int_to_base36
 
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.models import Site
@@ -22,7 +22,7 @@ from timezones.forms import TimeZoneField
 
 from pinax.apps.account.models import Account, PasswordReset
 from pinax.apps.account.models import OtherServiceInfo, other_service, update_other_services
-from pinax.apps.account.utils import user_display
+from pinax.apps.account.utils import user_display, perform_login
 
 
 
@@ -106,14 +106,11 @@ class LoginForm(GroupForm):
         return self.cleaned_data
     
     def login(self, request):
-        if self.is_valid():
-            login(request, self.user)
-            if self.cleaned_data["remember"]:
-                request.session.set_expiry(60 * 60 * 24 * 7 * 3)
-            else:
-                request.session.set_expiry(0)
-            return True
-        return False
+        perform_login(request, self.user)
+        if self.cleaned_data["remember"]:
+            request.session.set_expiry(60 * 60 * 24 * 7 * 3)
+        else:
+            request.session.set_expiry(0)
 
 
 class SignupForm(GroupForm):
@@ -191,7 +188,7 @@ class SignupForm(GroupForm):
     def login(self, request, user):
         # nasty hack to get get_user to work in Django
         user.backend = "django.contrib.auth.backends.ModelBackend"
-        login(request, user)
+        perform_login(request, user)
     
     def save(self, request=None):
         # don't assume a username is available. it is a common removal if
@@ -217,7 +214,7 @@ class SignupForm(GroupForm):
                 join_invitation.accept(new_user) # should go before creation of EmailAddress below
                 if request:
                     messages.add_message(request, messages.INFO,
-                        ugettext(u"Your email address has already been verified")
+                        ugettext(u"Your e-mail address has already been verified")
                     )
                 # already verified so can just create
                 EmailAddress(user=new_user, email=email, verified=True, primary=True).save()
@@ -227,7 +224,7 @@ class SignupForm(GroupForm):
                 if email:
                     if request:
                         messages.add_message(request, messages.INFO,
-                            ugettext(u"Confirmation email sent to %(email)s") % {
+                            ugettext(u"Confirmation e-mail sent to %(email)s") % {
                                 "email": email,
                             }
                         )
@@ -237,7 +234,7 @@ class SignupForm(GroupForm):
             if email:
                 if request and not EMAIL_VERIFICATION:
                     messages.add_message(request, messages.INFO,
-                        ugettext(u"Confirmation email sent to %(email)s") % {
+                        ugettext(u"Confirmation e-mail sent to %(email)s") % {
                             "email": email,
                         }
                     )
@@ -247,7 +244,15 @@ class SignupForm(GroupForm):
             new_user.is_active = False
             new_user.save()
         
+        self.after_signup(new_user)
+        
         return new_user
+    
+    def after_signup(self, user, **kwargs):
+        """
+        An extension point for subclasses.
+        """
+        pass
 
 
 class OpenIDSignupForm(SignupForm):
@@ -288,9 +293,9 @@ class AccountForm(UserForm):
 class AddEmailForm(UserForm):
     
     email = forms.EmailField(
-        label = _("Email"),
+        label = _("E-mail"),
         required = True,
-        widget = forms.TextInput(attrs={"size":"30"})
+        widget = forms.TextInput(attrs={"size": "30"})
     )
     
     def clean_email(self):
@@ -374,14 +379,14 @@ class SetPasswordForm(UserForm):
 class ResetPasswordForm(forms.Form):
     
     email = forms.EmailField(
-        label = _("Email"),
+        label = _("E-mail"),
         required = True,
         widget = forms.TextInput(attrs={"size":"30"})
     )
     
     def clean_email(self):
         if EmailAddress.objects.filter(email__iexact=self.cleaned_data["email"], verified=True).count() == 0:
-            raise forms.ValidationError(_("Email address not verified for any user account"))
+            raise forms.ValidationError(_("E-mail address not verified for any user account"))
         return self.cleaned_data["email"]
     
     def save(self, **kwargs):
@@ -401,7 +406,7 @@ class ResetPasswordForm(forms.Form):
             domain = unicode(current_site.domain)
             
             # send the password reset email
-            subject = _("Password reset email sent")
+            subject = _("Password reset e-mail sent")
             message = render_to_string("account/password_reset_key_message.txt", {
                 "user": user,
                 "uid": int_to_base36(user.id),

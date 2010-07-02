@@ -33,7 +33,7 @@
                         <div class="body">{{ bookmark.note|linebreaks }}</div>
                         <div class="save">
                             Saved {{ bookmark.saved_instances.count }} time{{ bookmark.saved_instances.count|pluralize }}
-                            {% if bookmark|in_list:user_bookmarks %}
+                            {% if bookmark in user_bookmarks %}
                                 (including by you)
                             {% else %}
                                 (<a href="{% url add_bookmark %}?url={{ bookmark.url }};description={{ bookmark.description }}">save</a>)

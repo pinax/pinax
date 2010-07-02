@@ -7,7 +7,12 @@ import sys
 
 import pip
 
-from pip.exceptions import InstallationError
+try:
+    from pip.exceptions import InstallationError
+except ImportError:
+    print ("You are using an older version of pip. Please upgrade pip to "
+           "0.7+ (which ships with virtualenv 1.4.7+)")
+    sys.exit(1)
 
 import pinax
 

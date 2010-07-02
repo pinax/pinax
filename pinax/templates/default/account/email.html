@@ -8,7 +8,7 @@
 {% block body %}
     <h1>{% trans "Account" %}</h1>
     
-    <h2>{% trans "Email Addresses" %}</h2>
+    <h2>{% trans "E-mail Addresses" %}</h2>
     
     {% if user.emailaddress_set.all %}
         <table class="email_list">
@@ -39,7 +39,7 @@
                                 <input type="hidden" name="action" value="send"/>
                             </form>
                             -
-                            <a href="#" onclick="$('#send_{{ forloop.counter }}').submit();">{% trans "re-send verification email" %}</a>
+                            <a href="#" onclick="$('#send_{{ forloop.counter }}').submit();">{% trans "re-send verification e-mail" %}</a>
                         </td>
                     {% endif %}
                     <td>
@@ -60,7 +60,7 @@
         <p><span class="warning">{% trans "None" %}</span>. {% trans "You should really add one so you can receive notifications, reset your password if you forget it, etc." %}</p>
     {% endif %}
     
-    <h3>{% trans "Add Email Address" %}</h3>
+    <h3>{% trans "Add E-mail Address" %}</h3>
     
     <form method="post" action="" class="uniForm">
         {% csrf_token %}
