@@ -118,8 +118,9 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     "django.core.context_processors.request",
     "django.contrib.messages.context_processors.messages",
     
-    "pinax.core.context_processors.pinax_settings",
     "staticfiles.context_processors.static_url",
+    
+    "pinax.core.context_processors.pinax_settings",
 ]
 
 INSTALLED_APPS = [
