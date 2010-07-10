@@ -20,7 +20,7 @@ urlpatterns = patterns("",
     url(r"^about/", include("about.urls")),
     url(r"^account/", include("pinax.apps.account.urls")),
     url(r"^openid/(.*)", PinaxConsumer()),
-    url(r"^profiles/", include("pinax.apps.basic_profiles.urls")),
+    url(r"^profiles/", include("idios.urls")),
     url(r"^notices/", include("notification.urls")),
     url(r"^announcements/", include("announcements.urls")),
 )

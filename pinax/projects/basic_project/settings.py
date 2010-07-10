@@ -154,15 +154,16 @@ INSTALLED_APPS = [
     "emailconfirmation",
     "announcements",
     "pagination",
+    "idios",
     
     # Pinax
     "pinax.apps.account",
     "pinax.apps.signup_codes",
     "pinax.apps.analytics",
-    "pinax.apps.basic_profiles",
     
     # project
     "about",
+    "profiles",
 ]
 
 FIXTURE_DIRS = [
@@ -175,7 +176,7 @@ ABSOLUTE_URL_OVERRIDES = {
     "auth.user": lambda o: "/profiles/profile/%s/" % o.username,
 }
 
-AUTH_PROFILE_MODULE = "basic_profiles.Profile"
+AUTH_PROFILE_MODULE = "profiles.Profile"
 NOTIFICATION_LANGUAGE_MODULE = "account.Account"
 
 ACCOUNT_OPEN_SIGNUP = True

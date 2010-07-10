@@ -1,0 +1,37 @@
+{% extends "idios/base.html" %}
+
+{% load i18n %}
+{% load uni_form_tags %}
+{% load account_tags %}
+
+{% block head_title %}{% user_display other_user as other_user_display %}{% blocktrans %}Profile for {{ other_user_display }}{% endblocktrans %}{% endblock %}
+
+{% block body %}
+    {% user_display other_user as other_user_display %}
+    
+    <div class="vcard">
+        {% if other_user.get_profile.name %}
+            <h1>{% blocktrans %}Profile for <span class="nickname">{{ other_user_display }}</span>{% endblocktrans %}</h1>
+        {% else %}
+            <h1>{% blocktrans %}Profile for <span class="fn nickname">{{ other_user_display }}</span>{% endblocktrans %}</h1>
+        {% endif %}
+        
+        <div class="profile_info">
+            {% if other_user.get_profile.name %}<p><b>{% trans "Name" %}</b>: <span class="fn">{{ other_user.get_profile.name }}</span></p>{% endif %}
+            {% if other_user.get_profile.about %}<p><b>{% trans "About" %}</b>: {{ other_user.get_profile.about }}</p>{% endif %}
+            {% if other_user.get_profile.location %}<p><b>{% trans "Location" %}</b>: {{ other_user.get_profile.location }}</p>{% endif %}
+            {% if other_user.get_profile.website %}<p><b>{% trans "Website" %}</b>: <a class="url" href="{{ other_user.get_profile.website }}">{{ other_user.get_profile.website }}</a></p>{% endif %}
+        </div>
+        
+        {% if is_me %}
+            <p><a href="{% url profile_edit %}" rel="facebox">Edit profile</a></p>
+        {% endif %}
+        
+    </div><!--/vcard-->
+{% endblock %}
+
+
+{% block extra_body %}
+    <script type="text/javascript">
+    </script>
+{% endblock %}
