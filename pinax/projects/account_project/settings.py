@@ -97,7 +97,9 @@ MIDDLEWARE_CLASSES = [
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django_openid.consumer.SessionConsumer",
     "django.contrib.messages.middleware.MessageMiddleware",
+    "pinax.apps.account.middleware.LocaleMiddleware",
     "pinax.middleware.security.HideSensistiveFieldsMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
@@ -143,6 +145,7 @@ INSTALLED_APPS = [
     "uni_form",
     "django_openid",
     "ajax_validation",
+    "timezones",
     "emailconfirmation",
     
     # Pinax
@@ -150,6 +153,7 @@ INSTALLED_APPS = [
     "pinax.apps.signup_codes",
     
     # project
+    "about",
 ]
 
 FIXTURE_DIRS = [
@@ -174,9 +178,10 @@ else:
     ]
 
 LOGIN_URL = "/account/login/" # @@@ any way this can be a url name?
-LOGIN_REDIRECT_URLNAME = "home"
+LOGIN_REDIRECT_URLNAME = "what_next"
 
 EMAIL_CONFIRMATION_DAYS = 2
+EMAIL_DEBUG = DEBUG
 
 DEBUG_TOOLBAR_CONFIG = {
     "INTERCEPT_REDIRECTS": False,
