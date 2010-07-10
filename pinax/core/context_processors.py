@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.contrib.site.models import Site
+from django.contrib.sites.models import Site
 
 
 def pinax_settings(request):
