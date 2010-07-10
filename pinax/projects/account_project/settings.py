@@ -173,6 +173,11 @@ else:
         "django.contrib.auth.backends.ModelBackend",
     ]
 
+LOGIN_URL = "/account/login/" # @@@ any way this can be a url name?
+LOGIN_REDIRECT_URLNAME = "home"
+
+EMAIL_CONFIRMATION_DAYS = 2
+
 DEBUG_TOOLBAR_CONFIG = {
     "INTERCEPT_REDIRECTS": False,
 }
