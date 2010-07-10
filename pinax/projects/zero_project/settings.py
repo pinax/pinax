@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Django settings for layer zero pinax project.
+# Django settings for zero_project project.
 
 import os.path
 import posixpath
