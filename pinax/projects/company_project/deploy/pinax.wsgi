@@ -1,3 +1,5 @@
+# pinax.wsgi is configured to live in projects/company_project/deploy.
+
 import os
 import sys
 

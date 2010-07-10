@@ -1,13 +1,14 @@
 {% extends "site_base.html" %}
 
+{% load i18n %}
+
 {% block body_id %}homepage{% endblock %}
 
 {% block content %}
     <div class="primary">
-        <h2>Not Found</h2>
+        <h2>{% trans "Not Found" %}</h2>
         
-        <p>We tried really hard, but couldn't find a regex that matches that path.
-            Maybe you came here for the view, but there isn't one at this URL.</p>
+        <p>{% trans "We're sorry but that page could not be found." %}</p>
         
     </div>
 {% endblock %}
