@@ -134,8 +134,6 @@ INSTALLED_APPS = [
     "pinax.templatetags",
     
     # external
-    "mailer",
-    "uni_form",
     "staticfiles",
     "debug_toolbar",
     
