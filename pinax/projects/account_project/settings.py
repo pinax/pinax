@@ -152,6 +152,10 @@ INSTALLED_APPS = [
     # project
 ]
 
+FIXTURE_DIRS = [
+    os.path.join(PROJECT_ROOT, "fixtures"),
+]
+
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 
 ACCOUNT_OPEN_SIGNUP = True
