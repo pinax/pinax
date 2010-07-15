@@ -1,3 +1,4 @@
+from django.core.exceptions import ObjectDoesNotExist
 from django.conf import settings
 from django.http import HttpResponse, HttpResponseForbidden
 
@@ -10,7 +11,6 @@ from django.http import HttpResponse, HttpResponseForbidden
 def username_autocomplete_all(request):
     if request.user.is_authenticated():
         from django.contrib.auth.models import User
-        from pinax.apps.basic_profiles.models import Profile
         from avatar.templatetags.avatar_tags import avatar
         q = request.GET.get("q")
         users = User.objects.all()
@@ -25,7 +25,7 @@ def username_autocomplete_all(request):
                         user.username,
                         profile.location
                     )
-                except Profile.DoesNotExist:
+                except ObjectDoesNotExist:
                     pass
                 content.append(entry)
         response = HttpResponse("\n".join(content))
@@ -38,7 +38,6 @@ def username_autocomplete_all(request):
 def username_autocomplete_friends(request):
     if request.user.is_authenticated():
         from friends.models import Friendship
-        from pinax.apps.profiles.models import Profile
         from avatar.templatetags.avatar_tags import avatar
         q = request.GET.get("q")
         friends = Friendship.objects.friends_for_user(request.user)
@@ -52,7 +51,7 @@ def username_autocomplete_friends(request):
                         friendship["friend"].username,
                         profile.location
                     )
-                except Profile.DoesNotExist:
+                except ObjectDoesNotExist:
                     pass
                 content.append(entry)
         response = HttpResponse("\n".join(content))
