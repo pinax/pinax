@@ -6,8 +6,8 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class WaitingListEntry(models.Model):
-    email = models.EmailField(unique=True)
-    created = models.DateTimeField(default=datetime.now, editable=False)
+    email = models.EmailField(_("email address"), unique=True)
+    created = models.DateTimeField(_("created"), default=datetime.now, editable=False)
     
     class Meta:
         verbose_name = _("waiting list entry")
