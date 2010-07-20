@@ -32,6 +32,8 @@
     - <a href="{% url dmca %}">{% trans "DMCA Notice" %}</a>
 </div>
 {% endblock %}
+
 {% block extra_body_base %}
     {% ga %}
+    {% block extra_body %}{% endblock %}
 {% endblock %}
