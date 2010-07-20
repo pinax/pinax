@@ -8,36 +8,22 @@ admin.autodiscover()
 from pinax.apps.account.openid_consumer import PinaxConsumer
 
 
-
 handler500 = "pinax.views.server_error"
-
-
-if settings.ACCOUNT_OPEN_SIGNUP:
-    signup_view = "pinax.apps.account.views.signup"
-else:
-    signup_view = "pinax.apps.signup_codes.views.signup"
 
 
 urlpatterns = patterns("",
     url(r"^$", direct_to_template, {
         "template": "homepage.html",
     }, name="home"),
-    
     url(r"^admin/invite_user/$", "pinax.apps.signup_codes.views.admin_invite_user", name="admin_invite_user"),
-    url(r"^account/signup/$", signup_view, name="acct_signup"),
-    
-    (r"^about/", include("about.urls")),
-    (r"^account/", include("pinax.apps.account.urls")),
-    (r"^openid/(.*)", PinaxConsumer()),
-    (r"^profiles/", include("pinax.apps.basic_profiles.urls")),
-    (r"^notices/", include("notification.urls")),
-    (r"^announcements/", include("announcements.urls")),
-    (r"^waitinglist/", include("pinax.apps.waitinglist.urls")),
-    
-    (r"^admin/", include(admin.site.urls)),
+    url(r"^admin/", include(admin.site.urls)),
+    url(r"^about/", include("about.urls")),
+    url(r"^account/", include("pinax.apps.account.urls")),
+    url(r"^openid/(.*)", PinaxConsumer()),
+    url(r"^waitinglist/", include("pinax.apps.waitinglist.urls")),
 )
 
 if settings.SERVE_MEDIA:
     urlpatterns += patterns("",
-        (r"", include("staticfiles.urls")),
+        url(r"", include("staticfiles.urls")),
     )

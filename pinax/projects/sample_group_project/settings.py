@@ -123,6 +123,8 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     "django.core.context_processors.request",
     "django.contrib.messages.context_processors.messages",
     
+    "staticfiles.context_processors.static_url",
+    
     "pinax.core.context_processors.pinax_settings",
     
     "notification.context_processors.notification",
