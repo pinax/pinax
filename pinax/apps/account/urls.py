@@ -1,12 +1,18 @@
+from django.conf import settings
 from django.conf.urls.defaults import *
 
 from pinax.apps.account.forms import SignupForm
 
 
+if settings.ACCOUNT_OPEN_SIGNUP:
+    signup_view = "pinax.apps.account.views.signup"
+else:
+    signup_view = "pinax.apps.signup_codes.views.signup"
+
 
 urlpatterns = patterns("",
     url(r"^email/$", "pinax.apps.account.views.email", name="acct_email"),
-    url(r"^signup/$", "pinax.apps.account.views.signup", name="acct_signup"),
+    url(r"^signup/$", signup_view, name="acct_signup"),
     url(r"^login/$", "pinax.apps.account.views.login", name="acct_login"),
     url(r"^login/openid/$", "pinax.apps.account.views.login", {"associate_openid": True},
         name="acct_login_openid"),
