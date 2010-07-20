@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Django settings for group project.
+# Django settings for sample group project.
 
 import os.path
 import posixpath
@@ -39,16 +39,15 @@ DATABASES = {
 }
 
 # Local time zone for this installation. Choices can be found here:
-# http://www.postgresql.org/docs/8.1/static/datetime-keywords.html#DATETIME-TIMEZONE-SET-TABLE
-# although not all variations may be possible on all operating systems.
+# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
+# although not all choices may be available on all operating systems.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
 TIME_ZONE = "US/Eastern"
 
 # Language code for this installation. All choices can be found here:
-# http://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes
-# http://blogs.law.harvard.edu/tech/stories/storyReader$15
-LANGUAGE_CODE = "en"
+# http://www.i18nguy.com/unicode/language-identifiers.html
+LANGUAGE_CODE = "en-us"
 
 SITE_ID = 1
 
@@ -60,8 +59,9 @@ USE_I18N = True
 # Example: "/home/media/media.lawrence.com/"
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, "site_media", "media")
 
-# URL that handles the media served from MEDIA_ROOT.
-# Example: "http://media.lawrence.com"
+# URL that handles the media served from MEDIA_ROOT. Make sure to use a
+# trailing slash if there is a path component (optional in other cases).
+# Examples: "http://media.lawrence.com", "http://example.com/media/"
 MEDIA_URL = "/site_media/media/"
 
 # Absolute path to the directory that holds static files like app media.
@@ -101,7 +101,6 @@ MIDDLEWARE_CLASSES = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "groups.middleware.GroupAwareMiddleware",
     "pinax.apps.account.middleware.LocaleMiddleware",
-    "django.middleware.doc.XViewMiddleware",
     "pagination.middleware.PaginationMiddleware",
     "django_sorting.middleware.SortingMiddleware",
     "pinax.middleware.security.HideSensistiveFieldsMiddleware",
@@ -127,9 +126,10 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     
     "pinax.core.context_processors.pinax_settings",
     
+    "pinax.apps.account.context_processors.account",
+    
     "notification.context_processors.notification",
     "announcements.context_processors.site_wide_announcements",
-    "pinax.apps.account.context_processors.account",
 ]
 
 INSTALLED_APPS = [
@@ -146,16 +146,19 @@ INSTALLED_APPS = [
     
     # external
     "notification", # must be first
-    "django_openid",
-    "emailconfirmation",
+    "staticfiles",
+    "debug_toolbar",
     "mailer",
+    "uni_form",
+    "django_openid",
+    "ajax_validation",
+    "timezones",
+    "emailconfirmation",
     "announcements",
     "pagination",
+    "idios",
     "groups",
-    "timezones",
-    "ajax_validation",
     "tagging",
-    "uni_form",
     "wiki",
     "avatar",
     "threadedcomments",
@@ -165,15 +168,13 @@ INSTALLED_APPS = [
     "attachments",
     "django_markup",
     "django_filters",
-    "staticfiles",
-    "debug_toolbar",
     "flag",
     "tagging_ext",
     
     # Pinax
-    "pinax.apps.basic_profiles",
     "pinax.apps.account",
     "pinax.apps.signup_codes",
+    "pinax.apps.analytics",
     "pinax.apps.tagging_utils",
     "pinax.apps.threadedcomments_extras",
     "pinax.apps.topics",
@@ -185,6 +186,7 @@ INSTALLED_APPS = [
     # project
     "about",
     "basic_groups",
+    "profiles",
 ]
 
 FIXTURE_DIRS = [
@@ -206,7 +208,7 @@ MARKUP_CHOICES = [
 ]
 WIKI_MARKUP_CHOICES = MARKUP_CHOICES
 
-AUTH_PROFILE_MODULE = "basic_profiles.Profile"
+AUTH_PROFILE_MODULE = "profiles.Profile"
 NOTIFICATION_LANGUAGE_MODULE = "account.Account"
 
 ACCOUNT_OPEN_SIGNUP = True
@@ -224,12 +226,13 @@ else:
         "django.contrib.auth.backends.ModelBackend",
     ]
 
+LOGIN_URL = "/account/login/" # @@@ any way this can be a url name?
+LOGIN_REDIRECT_URLNAME = "what_next"
+
 EMAIL_CONFIRMATION_DAYS = 2
 EMAIL_DEBUG = DEBUG
-CONTACT_EMAIL = "feedback@example.com"
-SITE_NAME = "Pinax"
-LOGIN_URL = "/account/login/"
-LOGIN_REDIRECT_URLNAME = "what_next"
+
+# URCHIN_ID = "ua-..."
 
 DEBUG_TOOLBAR_CONFIG = {
     "INTERCEPT_REDIRECTS": False,
