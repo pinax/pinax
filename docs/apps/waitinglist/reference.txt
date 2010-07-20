@@ -1,0 +1,95 @@
+.. _ref-waitinglist-reference:
+
+=========
+Reference
+=========
+
+This document covers various components of ``pinax.apps.waitinglist``.
+
+
+Named URLs
+==========
+
+The named URLs in this app should enable the use of of the ``{% url %}``
+template tag as well as ``reverse`` lookups in your project code without having
+to know the implementation details of this app.
+
+
+waitinglist_list_signup
+-----------------------
+
+On ``GET`` request, render the `list_signup.html`_ template with a form instance
+from ``pinax.apps.waitinglist.forms.WaitingListEntryForm`` in context.
+
+On ``POST`` request, process the the form.  Then redirect to 
+`waitinglist_success`_.
+
+
+waitinglist_success
+-------------------
+
+Renders a ``direct_to_template`` template, `success.html`_.
+
+
+Templates
+=========
+
+Templates should be placed in an ``waitinglist/`` folder at the root of one of
+your template search paths.
+
+
+list_signup.html
+----------------
+
+:context: ``form``
+
+
+success.html
+------------
+
+No context.  Just a plain HTML template.
+
+
+
+Modules
+=======
+
+
+``pinax.apps.waitinglist.admin``
+--------------------------------
+
+.. automodule:: pinax.apps.waitinglist.admin
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.waitinglist.forms``
+--------------------------------
+
+.. automodule:: pinax.apps.waitinglist.forms
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.waitinglist.models``
+----------------------------------
+
+.. automodule:: pinax.apps.waitinglist.models
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.waitinglist.templatetags.waitinglist_tags``
+--------------------------------------------------------
+
+.. automodule:: pinax.apps.waitinglist.templatetags.waitinglist_tags
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.waitinglist.views``
+--------------------------------
+
+.. automodule:: pinax.apps.waitinglist.views
+   :members:
+   :undoc-members:

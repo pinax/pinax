@@ -1,0 +1,173 @@
+.. _ref-photos-reference:
+
+=========
+Reference
+=========
+
+This document covers various components of ``pinax.apps.photos``.
+
+
+Named URLs
+==========
+
+The named URLs in this app should enable the use of of the ``{% url %}``
+template tag as well as ``reverse`` lookups in your project code without having
+to know the implementation details of this app.
+
+
+photos
+------
+
+Renders the ``photos/latest.html`` template with a list of recent ``photos``
+in context.
+
+
+photo_details
+-------------
+
+Renders the ``photos/details.html`` template with the ``photo`` object in
+context along with some other relevant context variables.
+
+:keyword arguments: The id of the photo matching ``(?P<id>\d+)``
+
+
+photo_upload
+------------
+
+For a GET request, this URL will render the ``photos/upload.html`` template
+with an instance of the ``pinax.apps.photos.forms.PhotoUploadForm`` in context
+as a variable named ``photo_form``.
+
+For a POST request to this URL, the ``photo_form`` will be processed -- the
+upload handled and the database record created before redirecting to
+photo_details_.
+
+
+photos_yours
+------------
+
+Renders the ``photos/yourphotos.html`` template with a collection of photos
+that belong to the logged in user as the ``photos`` context variable.
+
+
+photos_member
+-------------
+
+Renders the ``photos/memberphotos.html`` template with a collection of photos
+for a particular user that are flagged as ``public = True``.
+
+:keyword arguments: The username of the member matching ``(?P<username>[\w]+)``
+
+
+photo_destroy
+-------------
+
+A GET request to this URL will simply redirect the user to photos_yours_.
+
+A POST request to this URL will delete the photo if the user is the owner of
+the image.  Then it will redirect the user to photos_yours_.
+
+:keyword arguments: The id of the photo matching ``(?P<id>\d+)``
+
+
+photo_edit
+----------
+
+A GET request to this URL will render the ``photos/edit.html`` with an instance
+of the ``pinax.apps.photos.forms.PhotoEditForm`` in context as the
+``photo_form`` context variable along with ``photo`` and ``photo_url``.
+
+A POST request to this URL will process the data submitted in the form, only
+saving the data if the user requesting the update is the owner of the photo.  It
+will then redirect the user to photo_details_.
+
+:keyword arguments: The id of the photo matching ``(?P<id>\d+)``
+
+
+
+Templates
+=========
+
+Templates should be placed in an ``photos/`` folder at the root of one of your
+template search paths.
+
+
+upload.html
+-----------
+
+:context: ``group``, ``group_base``, ``photo_form``
+
+
+yourphotos.html
+---------------
+
+:context: ``group``, ``group_base``, ``photos``
+
+
+latest.html
+-----------
+
+:context: ``group``, ``group_base``, ``photos``
+
+
+details.html
+------------
+
+:context: ``group``, ``group_base``, ``photo``, ``host``, ``photo_url``, ``is_me``
+
+
+memberphotos.html
+-----------------
+
+:context: ``group``, ``group_base``, ``photos``
+
+
+edit.html
+---------
+
+:context: ``group``, ``group_base``, ``photo``, ``photo_form``, ``photo_url``
+
+
+Modules
+=======
+
+
+``pinax.apps.photos.admin``
+---------------------------
+
+.. automodule:: pinax.apps.photos.admin
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.photos.forms``
+---------------------------
+
+.. automodule:: pinax.apps.photos.forms
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.photos.models``
+----------------------------
+
+.. automodule:: pinax.apps.photos.models
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.photos.templatetags.photo_tags``
+---------------------------------------------
+
+.. automodule:: pinax.apps.photos.templatetags.photo_tags
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.photos.views``
+---------------------------
+
+.. automodule:: pinax.apps.photos.views
+   :members:
+   :undoc-members:
+

@@ -1,21 +1,27 @@
-.. _ref-bbauth-gettingstarted:
+.. _ref-tasks-gettingstarted:
 
 ===============
 Getting started
 ===============
 
 This document is designed to get you up and running with
-``pinax.apps.bbauth``...
+``pinax.apps.tasks``...
 
 
 Prerequisites
 =============
 
-These are the requirements to run ``pinax.apps.bbauth``:
+These are the requirements to run ``pinax.apps.tasks``:
 
  * Python **2.4+** (Python 3.x is **not** supported yet)
  * Django **1.2+**
- * ybrowserauth **1.2**
+ * django-attachments **0.3.1**
+ * django-atomformat **0.1.1.dev1**
+ * django-filter **0.5.3**
+ * django-tagging **0.3.1**
+ * django-notification **0.1.4**
+ * django-threadedcomments **0.5.2**
+ * dpaste [optional]
 
 These dependencies should be added to your ``requirements/project.txt`` file
 and installed using pip_. For example::
@@ -26,27 +32,24 @@ and installed using pip_. For example::
 Installation
 ============
 
-Add ``pinax.apps.bbauth`` to your ``INSTALLED_APPS``:
+Add ``pinax.apps.tasks`` to your ``INSTALLED_APPS``:
 
 .. code-block:: python
 
     INSTALLED_APPS = [
         # ...
-        "pinax.apps.bbauth",
+        "pinax.apps.tasks",
     ]
 
-Hook up ``pinax.apps.bbauth`` to your URLconf:
+Hook up ``pinax.apps.account`` to your URLconf:
 
 .. code-block:: python
 
     urlpatterns = patterns("",
         # ...
-        url(r"^bbauth/", include("pinax.apps.bbauth.urls"))
+        url(r"^tasks/", include("pinax.apps.tasks.urls"))
     )
 
-You should also `register your project`_ with Yahoo! to get the tokens you need for
-the proper settings variables.
 
 
 .. _pip: http://pip.openplans.org/
-.. _register your project: http://developer.yahoo.com/auth/appreg.html

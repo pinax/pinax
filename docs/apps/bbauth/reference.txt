@@ -10,6 +10,7 @@ This document covers various components of ``pinax.apps.bbauth``.
 Settings
 ========
 
+
 ``BBAUTH_APP_ID``
 -----------------
 
@@ -23,38 +24,47 @@ with Yahoo`_!:
 
 ``BBAUTH_SHARED_SECRET``
 ------------------------
+
 **Required**. The shared secret that when paired with your ``BBAUTH_APP_ID``
 authenticates your application with Yahoo! via a call to 
 ``ybrowserauth.YBrowserAuth``.  This value is also assigned via `registering with Yahoo`_!:
 
 ::
 
-	BBAUTH_SHARED_SECRET = ""
+    BBAUTH_SHARED_SECRET = ""
 
 
 Named Urls
 ==========
 
+
 The named urls in this app should enable the use of of the ``{% url %}``
 template tag as well as ``reverse`` lookups in your project code without having
 to know the implementation details of this app.
 
+
 bbauth_login
 ------------
+
 Authenticates user through Yahoo! redirecting user to Yahoo! login if not
 already authenticated.
 
+
 bbauth_success
 --------------
+
 Validates Yahoo! session and sets token into session.
+
 
 bbauth_logout
 -------------
+
 Destroys Yahoo! based app session.
 
 
 Modules
 =======
+
 
 ``pinax.apps.bbauth.views``
 ----------------------------
