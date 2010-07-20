@@ -3,11 +3,11 @@ Simplistic switch/case tag for Django.
 
 Usage::
 
-{% load switchcase %}
-{% switch meal %}
-    {% case "spam" %}...{% endcase %}
-    {% case "eggs" %}...{% endcase %}
-{% endswitch %}
+    {% load switchcase %}
+    {% switch meal %}
+        {% case "spam" %}...{% endcase %}
+        {% case "eggs" %}...{% endcase %}
+    {% endswitch %}
 """
 from django import template
 

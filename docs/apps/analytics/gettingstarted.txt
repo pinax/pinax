@@ -1,0 +1,67 @@
+.. _ref-analytics-gettingstarted:
+
+===============
+Getting started
+===============
+
+This documentation's purpose is to help get you up and running with
+``pinax.apps.analytics`` as fast as possible.
+
+
+Prerequisites
+=============
+
+To run ``pinax.apps.analytics`` you need the following:
+
+ * Python **2.4+** (Python 3.x is **not** supported yet)
+ * Django **1.2+**
+
+These dependencies should be added to your ``requirements/project.txt`` file
+and installed using pip_. For example::
+
+    pip install -r requirements/project.txt
+
+
+Installation
+============
+
+Add ``pinax.apps.analytics`` to your ``INSTALLED_APPS``:
+
+.. code-block:: python
+
+    INSTALLED_APPS = [
+        # ...
+        "pinax.apps.analytics",
+    ]
+
+
+Usage
+=====
+
+You now have two template tags at your disposal to being using in your
+templates:
+
+::
+
+    {% urchin %}
+
+and 
+
+::
+
+    {% ga %}
+
+To use either of these simply add the ``URCHIN_ID`` setting to ``settings.py``
+and then in the template where you use to add the tracking code, put the
+following in your header:
+
+::
+
+    {% load analytics %}
+
+and then put either the ``urchin`` or ``ga`` tag in the right spot in your 
+template.
+
+
+.. _pip: http://pip.openplans.org/
+.. _Google Analytics: http://analytics.google.com

@@ -1,9 +1,7 @@
 from django import template
 
 
-
 register = template.Library()
-
 
 
 @register.inclusion_tag("profile_item.html")

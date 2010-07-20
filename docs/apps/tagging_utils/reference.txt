@@ -1,0 +1,57 @@
+.. _ref-tagging_utils-reference:
+
+=========
+Reference
+=========
+
+This document covers various components of ``pinax.apps.tagging_utils``.
+
+
+Settings
+========
+
+``STATIC_URL``
+--------------
+
+**Required**.  An URL for static files that need serving.
+
+::
+
+    STATIC_URL = "/static/"
+
+
+Named URLs
+==========
+
+The named URLs in this app should enable the use of of the ``{% url %}``
+template tag as well as ``reverse`` lookups in your project code without having
+to know the implementation details of this app.
+
+
+tagging_utils_autocomplete
+--------------------------
+
+This URL provides an Ajax callback that will supply delimited data for the
+jQuery autocomplete plugin to display autocomplete info for tags in a UI.
+
+:keyword arguments: The ``app_label`` and ``model`` that tags are associated with and that match ``(?P<app_label>\w+)/(?P<model>\w+)``.
+
+
+Modules
+=======
+
+
+``pinax.apps.tagging_utils.views``
+----------------------------------
+
+.. automodule:: pinax.apps.tagging_utils.views
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.tagging_utils.widgets``
+------------------------------------
+
+.. automodule:: pinax.apps.tagging_utils.widgets
+   :members:
+   :undoc-members:

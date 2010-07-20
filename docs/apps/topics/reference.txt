@@ -1,0 +1,117 @@
+.. _ref-topics-reference:
+
+=========
+Reference
+=========
+
+This document covers various components of ``pinax.apps.topics``.
+
+
+
+Named URLs
+==========
+
+The named URLs in this app should enable the use of of the ``{% url %}``
+template tag as well as ``reverse`` lookups in your project code without having
+to know the implementation details of this app.
+
+
+topic_list
+----------
+
+On ``GET`` requests, render the `topics.html`_ template with a list of
+topics as well as a ``pinax.apps.topics.forms.TopicForm`` instance.
+
+On ``POST`` requests, process the form data to create a new ``Topic``
+
+
+topic_edit
+----------
+
+On ``POST`` requests, update the ``Topic.body`` data and redirect to `topic_detail`_.
+
+:keyword arguments: The of the Topic to edit.  Must match ``(?P<topic_id>\d+)``.
+
+
+topic_delete
+------------
+
+On ``POST`` requests, delete the ``Topic`` and ``ThreadedComments`` associated
+with it and redirect to the ``next`` context variable..
+
+:keyword arguments: The of the Topic to delete.  Must match ``(?P<topic_id>\d+)``.
+
+
+topic_detail
+------------
+
+On ``GET`` requests, fetch the Topic as render the `topic.html`_ template with
+the ``Topic`` object in context.
+
+:keyword arguments: The of the Topic to display.  Must match ``(?P<topic_id>\d+)``.
+
+
+
+Templates
+=========
+
+Templates should be placed in an ``topics/`` folder at the root of one of your
+template search paths.
+
+
+topic.html
+----------
+
+:context: ``group``, ``group_base``, ``topic``, ``edit``
+
+
+topics.html
+-----------
+
+:context: ``group``, ``group_base``, ``topics``, ``topic_form``, ``is_member``
+
+
+
+Modules
+=======
+
+
+``pinax.apps.topics.admin``
+----------------------------
+
+.. automodule:: pinax.apps.topics.admin
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.topics.forms``
+----------------------------
+
+.. automodule:: pinax.apps.topics.forms
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.topics.models``
+-----------------------------
+
+.. automodule:: pinax.apps.topics.models
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.topics.templatetags.topics_tags``
+----------------------------------------------
+
+.. automodule:: pinax.apps.topics.templatetags.topics_tags
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.topics.views``
+---------------------------
+
+.. automodule:: pinax.apps.topics.views
+   :members:
+   :undoc-members:
+

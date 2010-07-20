@@ -1,0 +1,138 @@
+.. _ref-tribes-reference:
+
+=========
+Reference
+=========
+
+This document covers various components of ``pinax.apps.tribes``.
+
+
+
+
+Named URLs
+==========
+
+
+tribe_list
+----------
+
+Upon a ``GET`` request renter the `tribes.html`_ template with ``tribes`` and
+``search_terms`` in context.  Each ``tribe`` also get a ``member_count`` and a
+``topic_count`` attribute assigned.
+
+
+tribe_create
+------------
+
+On ``GET`` requests render the `create.html`_ template with a ``tribe_form`` 
+instance in context.
+
+On ``POST`` requests process the form and create a new ``Tribe`` and add the
+``request.user`` as a member of the ``Tribe``.
+
+
+your_tribes
+-----------
+
+On ``GET`` requests render the `your_tribes.html`_ template with a ``tribes``
+queryset in context that contains all ``Tribes`` where ``request.user`` is a
+member.
+
+
+tribe_detail
+------------
+
+On ``GET`` requests render the `tribe.html`_ template with ``tribe``, ``tribe_form``,
+``group``, and ``is_member`` variables in context.
+
+On ``POST`` request process that form to update the ``Tribe``, join the ``Tribe``
+or leave the ``Tribe``.
+
+:keyword arguments: The slug with that identifies a a ``Topic``.  Must match: ``(?P<group_slug>[-\w]+)``.
+
+
+tribe_delete
+------------
+
+Via a ``POST`` request, delete a ``Tribe`` that ``request.user`` created
+previously.
+
+:keyword arguments: The slug with that identifies a a ``Topic``.  Must match: ``(?P<group_slug>[-\w]+)``.
+
+
+
+Templates
+=========
+
+Templates should be placed in an ``tribes/`` folder at the root of one of your
+template search paths.
+
+
+create.html
+-----------
+
+:context: ``tribe_form``
+
+
+tribes.html
+-----------
+
+:context: ``tribes``, ``search_terms``
+
+
+your_tribes.html
+----------------
+
+:context: ``tribes``
+
+
+tribe.html
+----------
+
+:context: ``group``, ``tribe``, ``tribe_form``, ``is_member``
+
+
+
+Modules
+=======
+
+
+``pinax.apps.tribes.admin``
+---------------------------
+
+.. automodule:: pinax.apps.tribes.admin
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.tribes.forms``
+---------------------------
+
+.. automodule:: pinax.apps.tribes.forms
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.tribes.models``
+----------------------------
+
+.. automodule:: pinax.apps.tribes.models
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.tribes.templatetags.tribes_tags``
+----------------------------------------------
+
+.. automodule:: pinax.apps.tribes.templatetags.tribes_tags
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.tribes.views``
+---------------------------
+
+.. automodule:: pinax.apps.tribes.views
+   :members:
+   :undoc-members:
+

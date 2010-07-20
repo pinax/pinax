@@ -1,0 +1,396 @@
+.. _ref-account-reference:
+
+=========
+Reference
+=========
+
+This document covers various components of ``pinax.apps.account``.
+
+
+Settings
+========
+
+
+``ACCOUNT_EMAIL_VERIFICATION``
+------------------------------
+
+**Required**. This setting is used to control whether or not email verification
+is sent upon signup:
+
+::
+
+    ACCOUNT_EMAIL_VERIFICATION = True
+
+
+``LOGIN_REDIRECT_URLNAME``
+--------------------------
+
+The name defined in the URLconf that maps to the url that the user will be
+redirected to after login success.
+
+::
+
+    LOGIN_REDIRECT_URLNAME = "home"
+
+
+``STATIC_URL``
+--------------
+
+**Required**.  An URL for static files that need serving.
+
+::
+
+    STATIC_URL = "/static/"
+
+
+``ACCOUNT_OPEN_SIGNUP``
+-----------------------
+
+**Required**.  Permit signing up for an account via OpenID.
+
+::
+
+    ACCOUNT_OPEN_SIGNUP = True
+
+
+Named URLs
+==========
+
+The named URLs in this app should enable the use of of the ``{% url %}``
+template tag as well as ``reverse`` lookups in your project code without having
+to know the implementation details of this app.
+
+
+acct_email
+----------
+
+This is the URL that on POST will process a number of actions related to an
+email address on an account and on GET will render a template that provides the
+email form in context.
+
+
+acct_signup
+-----------
+
+This URL will process a form to create an account on POST and render a template
+with a signup form instance in context on GET requests.
+
+
+acct_login
+----------
+
+Process a login request from POST requests and render a template with a login
+form instance in context on GET requests.
+
+
+acct_login_openid
+-----------------
+
+Process the login POST request while associating submitted OpenID credentials
+to the account if they don't already exist.
+
+
+acct_passwd
+-----------
+
+Process a password change form POST or render a template with a password change
+form instance in context.
+
+
+acct_passwd_set
+---------------
+
+Process a password set form POST or render a template with a password set form
+instance in context.
+
+
+acct_passwd_delete
+------------------
+
+Process a password delete form POST or render a template with a password delete
+form instance in context.
+
+
+acct_passwd_delete_done
+-----------------------
+
+Renders static template to inform user that the password delete is complete.
+
+
+acct_timezone_change
+--------------------
+
+Processes a timezone form POST request to change a user's timezone or renders
+a template with the timezone change form instance in context.
+
+
+acct_other_services
+-------------------
+
+Adds credentials for Twitter on form POST, or renders a template with the form
+instance in context.
+
+
+acct_other_services_remove
+--------------------------
+
+Removes Twitter account association with user.
+
+
+acct_language_change
+--------------------
+
+Processes a default language selection form POST request or renders a template
+with the language change form in context.
+
+
+acct_logout
+-----------
+
+Calls the ``django.contrib.auth.views.logout`` view.
+
+
+acct_confirm_email
+------------------
+
+Calls the ``emailconfirmation.views.confirm_email`` view.
+
+:arguments: The token generated in the ``emailconfirmation`` app that matches ``(\w+)``.
+
+
+acct_passwd_reset
+-----------------
+
+Process a password reset form POST request and redirect to ``acct_passwd_reset_done``
+or render a template with the password reset form instance in context.
+
+
+acct_passwd_reset_done
+----------------------
+
+Renders a template confirming the password reset process is complete.
+
+
+acct_passwd_reset_key
+---------------------
+
+Process a password reset using user key form POST request or render a template
+with the form in context.
+
+:keyword arguments: The UUID and Key for the reset reset request that matches ``(?P<uidb36>[0-9A-Za-z]+)-(?P<key>.+)``
+
+
+signup_form_validate
+--------------------
+
+Calls the ``ajax_validation.views.validate`` view with the
+``pinax.apps.account.forms.SignupForm``.
+
+
+Templates
+=========
+
+Templates should be placed in an ``account/`` folder at the root of one of your
+template search paths.
+
+
+login.html
+----------
+
+:context: ``group``, ``form``, ``url_required``, ``redirect_field_name``, ``redirect_field_value``
+
+
+signup.html
+-----------
+
+:context: ``group``, ``form``, ``redirect_field_name``, ``redirect_field_value``
+
+
+verification_sent.html
+----------------------
+
+:context: ``group``, ``email``, ``success_url``
+
+
+email.html
+----------
+
+:context: ``group``, ``add_email_form``
+
+
+password_change.html
+--------------------
+
+:context: ``group``, ``password_change_form``
+
+
+password_set.html
+-----------------
+
+:context: ``group``, ``password_set_form``
+
+
+password_delete.html
+--------------------
+
+:context: ``group``
+
+
+password_delete_done.html
+-------------------------
+
+:context: None
+
+
+password_reset.html
+-------------------
+
+:context: ``group``, ``password_reset_form``
+
+
+password_reset_done.html
+------------------------
+
+:context: ``group``
+
+
+password_reset_from_key.html
+----------------------------
+
+If there is a valid token:
+
+:context: ``group``, ``form``
+
+otherwise:
+
+:context: ``group``, ``token_fail = True``
+
+
+timezone_change.html
+--------------------
+
+:context: ``group``, ``form``
+
+
+language_change.html
+--------------------
+
+:context: ``group``, ``form``
+
+
+other_services.html
+-------------------
+
+:context: ``group``, ``twitter_form``, ``twitter_authorized``
+
+
+Modules
+=======
+
+
+``pinax.apps.account.admin``
+----------------------------
+
+.. automodule:: pinax.apps.account.admin
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.account.auth_backends``
+------------------------------------
+
+.. automodule:: pinax.apps.account.auth_backends
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.account.context_processors``
+-----------------------------------------
+
+.. automodule:: pinax.apps.account.context_processors
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.account.forms``
+----------------------------
+
+.. automodule:: pinax.apps.account.forms
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.account.middleware``
+---------------------------------
+
+.. automodule:: pinax.apps.account.middleware
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.account.models``
+-----------------------------
+
+.. automodule:: pinax.apps.account.models
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.account.openid_consumer``
+--------------------------------------
+
+.. automodule:: pinax.apps.account.openid_consumer
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.account.signals``
+------------------------------
+
+.. automodule:: pinax.apps.account.signals
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.account.templatetags.account_tags``
+------------------------------------------------
+
+.. automodule:: pinax.apps.account.templatetags.account_tags
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.account.templatetags.openid_tags``
+-----------------------------------------------
+
+.. automodule:: pinax.apps.account.templatetags.openid_tags
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.account.templatetags.other_service_tags``
+------------------------------------------------------
+
+.. automodule:: pinax.apps.account.templatetags.other_service_tags
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.account.utils``
+----------------------------
+
+.. automodule:: pinax.apps.account.utils
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.account.views``
+----------------------------
+
+.. automodule:: pinax.apps.account.views
+   :members:
+   :undoc-members:
+
+
+.. _LOGIN_REDIRECT_URL: http://docs.djangoproject.com/en/dev/ref/settings/#login-redirect-url
+.. _SECRET_KEY: http://docs.djangoproject.com/en/dev/ref/settings/#secret-key
