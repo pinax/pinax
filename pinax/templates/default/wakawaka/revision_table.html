@@ -1,6 +1,9 @@
 {% load i18n %}
+{% load group_tags %}
 
-<form method="GET" action="{% url wakawaka_changes slug=page.slug %}">
+{% groupurl wakawaka_changes group slug=page.slug as wiki_changes_url %}
+    
+<form method="GET" action="{{ wiki_changes_url }}">
 {% csrf_token %}
 <table class="history" border="1">
 <tr>
@@ -36,8 +39,8 @@
     <td class="message">{{ rev.message }}</td>
     <td class="creator">{{ rev.creator.username }}</td>
     <td class="options">
-        <a href="{% url wakawaka_page slug=page.slug, rev_id=rev.pk %}">{% trans "View" %}</a>
-        <a href="{% url wakawaka_edit slug=page.slug, rev_id=rev.pk %}">{% trans "Revert" %}</a>
+        <a href="{% groupurl wakawaka_page group slug=page.slug,rev_id=rev.pk %}">{% trans "View" %}</a>
+        <a href="{% groupurl wakawaka_edit group slug=page.slug,rev_id=rev.pk %}">{% trans "Revert" %}</a>
     </td>
 </tr>
 {% endfor %}
