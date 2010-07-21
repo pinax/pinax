@@ -65,7 +65,7 @@ logged in:
     {% block right_tabs %}
         {% if user.is_authenticated %}
             <ul class="tabs">{% spaceless %}
-                <li id="tab_profile"><a href="{% url profile_detail user %}">Profile</a></li>
+                <li id="tab_profile"><a href="{% url profile_detail user.username %}">Profile</a></li>
                 <li id="tab_blogs"><a href="{% url blog_list_user %}">Blogs</a></li>
                 <li id="tab_bookmarks"><a href="{% url all_bookmarks %}">Bookmarks</a></li>
             {% endspaceless %}</ul>

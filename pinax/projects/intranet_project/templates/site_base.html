@@ -22,7 +22,7 @@
 {% block right_tabs %}
     {% if user.is_authenticated %}
         <ul class="tabs">{% spaceless %}
-            <li id="tab_profile"><a href="{% url profile_detail user %}">{% trans "Profile" %}</a></li>
+            <li id="tab_profile"><a href="{% url profile_detail user.username %}">{% trans "Profile" %}</a></li>
             <li id="tab_topics"><a href="{% url topic_list %}">{% trans "Topics" %}</a></li>
             <li id="tab_tasks"><a href="{% url task_list %}">{% trans "Tasks" %}</a></li>
             <li id="tab_wiki"><a href="{% url wakawaka_index %}">{% trans "Wiki" %}</a></li>
