@@ -1,0 +1,22 @@
+{% extends "wakawaka/base.html" %}
+
+{% load wakawaka_tags %}
+{% load i18n %}
+
+{% block extra_head %}
+    {# Don't let search engines scan this old revision #}
+    {% if rev.is_not_current %}
+        <meta name="robots" content="noindex" />
+    {% endif %}
+{% endblock %}
+
+{% block head_title %}
+    {% blocktrans with page.slug as slug %}Changes for {{ slug  }}{% endblocktrans %}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ page.slug }}</h1>
+    
+    <pre class="changes">{{ diff }}</pre>
+    {% include "wakawaka/revision_table.html" %}
+{% endblock %}

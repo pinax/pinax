@@ -1,0 +1,18 @@
+{% extends group_base|default:"site_base.html" %}
+
+{% load i18n %}
+{% load group_tags %}
+
+{% block body_class %}wiki{% endblock %}
+
+{% block subnav %}
+    <ul>
+        {% groupurl wakawaka_index group as wiki_index %}
+        {% groupurl wakawaka_revision_list group as wiki_rev_list %}
+        {% groupurl wakawaka_page_list group as wiki_page_list %}
+        
+        <li><a href="{{ wiki_index }}">{% trans "Start" %}</a></li>
+        <li><a href="{{ wiki_rev_list }}">{% trans "Recent revisions" %}</a></li>
+        <li><a href="{{ wiki_page_list }}">{% trans "All Pages" %}</a></li>
+    </ul>
+{% endblock %}
