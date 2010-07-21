@@ -6,21 +6,18 @@ from django.contrib import admin
 admin.autodiscover()
 
 
-
 handler500 = "pinax.views.server_error"
-
 
 
 urlpatterns = patterns("",
     url(r"^$", direct_to_template, {
         "template": "homepage.html",
     }, name="home"),
-    
-    (r"^admin/", include(admin.site.urls)),
+    url(r"^admin/", include(admin.site.urls)),
 )
 
 
 if settings.SERVE_MEDIA:
     urlpatterns += patterns("",
-        (r"", include("staticfiles.urls")),
+        url(r"", include("staticfiles.urls")),
     )

@@ -1,0 +1,29 @@
+{% extends "idios/base.html" %}
+
+{% load i18n %}
+{% load account_tags %}
+{% load pagination_tags %}
+
+{% block head_title %}{% trans "All Profiles" %}{% endblock %}
+
+{% block body %}
+    <h1>{% trans "All Profiles" %}</h1>
+    
+    {% autopaginate users %}
+    
+    {% for user in users %}
+        <div class="profile-item">
+            <div class="name">
+                <a href="{{ user.get_absolute_url }}">{% user_display user %}</a></div>
+            <div class="details">
+                {% if user.get_profile.location %}{{ user.get_profile.location }}{% endif %}
+                {% if user.get_profile.location and user.get_profile.website %}&bull;{% endif %}
+                {% if user.get_profile.website %}<a href="{{ user.get_profile.website }}">{{ user.get_profile.website }}</a>{% endif %}
+            </div>
+            <div class="clear"></div>
+        </div>
+    {% endfor %}
+    
+    {% paginate %}
+    
+{% endblock %}

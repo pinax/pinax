@@ -4,7 +4,6 @@ from django.conf import settings
 from django.http import HttpResponseRedirect
 
 
-
 def login(request, redirect_to="/invitations/contacts"): # @@@ redirect_to should not be hard-coded here
     ybbauth = ybrowserauth.YBrowserAuth(settings.BBAUTH_APP_ID, settings.BBAUTH_SHARED_SECRET)
     yahoo_login = ybbauth.getAuthURL(appd=redirect_to)

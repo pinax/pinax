@@ -1,0 +1,64 @@
+.. _ref-voting_extras-gettingstarted:
+
+===============
+Getting started
+===============
+
+This document is designed to get you up and running with the
+``pinax.apps.voting_extras``...
+
+
+Prerequisites
+=============
+
+These are the requirements to run ``pinax.apps.voting_extras``:
+
+ * Python **2.4+** (Python 3.x is **not** supported yet)
+ * Django **1.2+**
+ * django-voting **0.1**
+
+These dependencies should be added to your ``requirements/project.txt`` file
+and installed using pip_. For example::
+
+    pip install -r requirements/project.txt
+
+
+Installation
+============
+
+Add ``pinax.apps.voting_extras`` to your ``INSTALLED_APPS``:
+
+.. code-block:: python
+
+    INSTALLED_APPS = [
+        # ...
+        "voting",
+        "pinax.apps.voting_extras",
+    ]
+
+
+.. _ref-voting_extras-gettingstarted-usage:
+
+Usage
+=====
+
+After installing this app in your Django project, you now have access to easily
+add comments for a particular object in one of your templates.
+
+Simple, load the template tag and call it within your template.
+
+.. code-block:: html
+
+
+    {% load extra_voting_tags %}
+    
+    {% order_by_votes my_object_list %}
+    <!-- OR -->
+    {% order_by_reddit my_object_list date_field_name %}
+
+    {% for obj in my_object_list %}
+    ...
+    {% endfor %}
+
+
+.. _pip: http://pip.openplans.org/

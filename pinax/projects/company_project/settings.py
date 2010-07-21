@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
+# Django settings for company pinax project.
 
 import os.path
 import posixpath
 import pinax
-
-ugettext = lambda s: s
 
 PINAX_ROOT = os.path.abspath(os.path.dirname(pinax.__file__))
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
@@ -40,16 +39,15 @@ DATABASES = {
 }
 
 # Local time zone for this installation. Choices can be found here:
-# http://www.postgresql.org/docs/8.1/static/datetime-keywords.html#DATETIME-TIMEZONE-SET-TABLE
-# although not all variations may be possible on all operating systems.
+# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
+# although not all choices may be available on all operating systems.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
 TIME_ZONE = "US/Eastern"
 
 # Language code for this installation. All choices can be found here:
-# http://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes
-# http://blogs.law.harvard.edu/tech/stories/storyReader$15
-LANGUAGE_CODE = "en"
+# http://www.i18nguy.com/unicode/language-identifiers.html
+LANGUAGE_CODE = "en-us"
 
 SITE_ID = 1
 
@@ -99,7 +97,8 @@ MIDDLEWARE_CLASSES = [
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
-    "django.middleware.doc.XViewMiddleware",
+    "pinax.middleware.security.HideSensistiveFieldsMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = "company_project.urls"
@@ -115,6 +114,8 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     "django.core.context_processors.media",
     "django.core.context_processors.request",
     "django.contrib.messages.context_processors.messages",
+    
+    "staticfiles.context_processors.static_url",
     
     "pinax.core.context_processors.pinax_settings",
 ]
@@ -134,6 +135,7 @@ INSTALLED_APPS = [
     
     # external
     "staticfiles",
+    "debug_toolbar",
     "biblion",
     
     # Pinax
@@ -142,26 +144,26 @@ INSTALLED_APPS = [
     # project
 ]
 
+FIXTURE_DIRS = [
+    os.path.join(PROJECT_ROOT, "fixtures"),
+]
+
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
+
+DEBUG_TOOLBAR_CONFIG = {
+    "INTERCEPT_REDIRECTS": False,
+}
+
+ugettext = lambda s: s
 
 BIBLION_SECTIONS = [
     ("technical", ugettext(u"Technical")),
     ("business", ugettext(u"Business")),
 ]
 
-#TWITTER_USERNAME = ""
-#TWITTER_PASSWORD = ""
-#TWITTER_TWEET_PREFIX = "New Post:" # NOTE: space will be appended
-
-# @@@ this shouldn"t beed need but are :-(
-CONTACT_EMAIL = ""
-SITE_NAME = ""
-
-# URCHIN_ID = "ua-..."
-
-DEBUG_TOOLBAR_CONFIG = {
-    "INTERCEPT_REDIRECTS": False,
-}
+# TWITTER_USERNAME = ""
+# TWITTER_PASSWORD = ""
+# TWITTER_TWEET_PREFIX = "New Post:" # NOTE: space will be appended
 
 # local_settings.py can be used to override environment-specific settings
 # like database and email that differ between development and production.

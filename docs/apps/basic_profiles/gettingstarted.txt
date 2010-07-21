@@ -1,0 +1,49 @@
+.. _ref-basic_profiles-gettingstarted:
+
+===============
+Getting started
+===============
+
+This document is designed to get you up and running with the
+``pinax.apps.basic_profiles``...
+
+
+Prerequisites
+=============
+
+These are the requirements to run ``pinax.apps.basic_profiles``:
+
+ * Python **2.4+** (Python 3.x is **not** supported yet)
+ * Django **1.2+**
+ * ``pinax.apps.account``
+ * django-pagination (http://code.google.com/p/django-pagination/)
+
+These dependencies should be added to your ``requirements/project.txt`` file
+and installed using pip_. For example::
+
+    pip install -r requirements/project.txt
+
+
+Installation
+============
+
+Add ``pinax.apps.basic_profiles`` to your ``INSTALLED_APPS``:
+
+.. code-block:: python
+
+    INSTALLED_APPS = [
+        # ...
+        "pinax.apps.basic_profiles",
+    ]
+
+Hook up ``pinax.apps.basic_profiles`` to your URLconf:
+
+.. code-block:: python
+
+    urlpatterns = patterns("",
+        # ...
+        url(r"^profiles/", include("pinax.apps.basic_profiles.urls"))
+    )
+
+
+.. _pip: http://pip.openplans.org/

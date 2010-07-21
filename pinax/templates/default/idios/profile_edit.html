@@ -1,0 +1,13 @@
+{% extends "idios/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Edit Profile" %}{% endblock %}
+
+{% block body %}
+    
+    <h1>{% trans "Edit Profile" %}</h1>
+    
+    {% include "idios/profile_form.html" %}
+    
+{% endblock %}

@@ -1,0 +1,84 @@
+.. _ref-signup_codes-reference:
+
+=========
+Reference
+=========
+
+This document covers various components of ``pinax.apps.signup_codes``.
+
+
+Settings
+========
+
+``ACCOUNT_OPEN_SIGNUP``
+-----------------------
+
+**Required**.  Permit signing up for an account via OpenID.
+
+::
+
+    ACCOUNT_OPEN_SIGNUP = True
+
+
+Templates
+=========
+
+Templates should be placed in an ``signup_codes/`` folder unless otherwise
+noted, at the root of one of your template search paths.
+
+
+admin_invite_user.html
+----------------------
+
+:context: ``group``, ``group_base``, ``title``, ``form``
+
+
+account/signup.html
+-------------------
+
+:context: ``group``, ``group_base``, ``code``, ``form``
+
+
+failure.html
+------------
+
+:context: ``group``, ``group_base``, ``code``
+
+
+
+Modules
+=======
+
+
+``pinax.apps.signup_codes.admin``
+---------------------------------
+
+.. automodule:: pinax.apps.signup_codes.admin
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.signup_codes.forms``
+---------------------------------
+
+.. automodule:: pinax.apps.signup_codes.forms
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.signup_codes.models``
+----------------------------------
+
+.. automodule:: pinax.apps.signup_codes.models
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.signup_codes.views``
+---------------------------------
+
+.. automodule:: pinax.apps.signup_codes.views
+   :members:
+   :undoc-members:
+
+
