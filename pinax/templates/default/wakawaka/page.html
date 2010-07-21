@@ -2,6 +2,7 @@
 
 {% load wakawaka_tags %}
 {% load i18n %}
+{% load group_tags %}
 
 {% block extra_head %}
     {# Don't let search engines scan this old revision #}
@@ -15,19 +16,20 @@
 {% endblock %}
 
 {% block body %}
-    <h1><a href="{% url wakawaka_page slug=page.slug %}">{{ page.slug }}</a></h1>
+    <h1><a href="{% groupurl wakawaka_page group slug=page.slug %}">{{ page.slug }}</a></h1>
     
     {% if rev.is_not_current %}
     <p class="revert-warning">
         {% trans "You are viewing an older revision!" %}
-        <a href="{% url wakawaka_page slug=page.slug %}">
+        <a href="{% groupurl wakawaka_page group slug=page.slug %}">
           {% trans "See the latest version" %}
         </a>
     </p>
     {% endif %}
     
     <div class="page">
-    {{ rev.content|urlize|wikify|linebreaks }}
+    {% wikify_content rev.content group as content %}
+    {{ content|urlize|linebreaks }}
     </div>
     
     {% spaceless %}
@@ -39,12 +41,13 @@
             {% blocktrans with page.current.creator as creator and rev.modified|date:_("DATETIME_FORMAT") as modified %}
                 Recently modified by <em>{{ creator }}</em>: {{ modified }}
             {% endblocktrans %}
-            (<a href="{% url wakawaka_revision_list slug=page.slug %}">{% trans "History" %}</a>)
+            
+            (<a href="{% groupurl wakawaka_revision_list group slug=page.slug %}">{% trans "History" %}</a>)
         </span>
         
         {% if perms.wakawaka.change_wikipage %}
         <span>
-            <a href="{% url wakawaka_edit slug=page.slug %}">{% trans "Edit" %}</a>
+            <a href="{% groupurl wakawaka_edit group slug=page.slug %}">{% trans "Edit" %}</a>
         </span>
         {% endif %}
     </div>

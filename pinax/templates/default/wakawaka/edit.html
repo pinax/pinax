@@ -1,6 +1,7 @@
 {% extends "wakawaka/base.html" %}
 
 {% load i18n %}
+{% load group_tags %}
 
 {% block head_title %}
     {% if page.is_initial %}
@@ -32,7 +33,7 @@
             {% if page.is_initial %}
                 javascript:window.history.go(-1);
             {% else %}
-                {% url wakawaka_page slug=page.slug %}
+                {% groupurl wakawaka_page group slug=page.slug %}
             {% endif %}
             ">{% trans "Cancel" %}</a>
         </p>

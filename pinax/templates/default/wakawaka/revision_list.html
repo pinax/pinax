@@ -1,6 +1,7 @@
 {% extends "wakawaka/base.html" %}
 
 {% load i18n %}
+{% load group_tags %}
 
 {% block head_title %}
     {% trans "List of all revisions" %}
@@ -24,9 +25,9 @@
         <td class="message">{{ rev.message }}</td>
         <td class="creator">{{ rev.creator.username }}</td>
         <td class="options">
-            <a href="{% url wakawaka_page slug=rev.page.slug, rev_id=rev.pk %}">{% trans "View" %}</a>
+            <a href="{% groupurl wakawaka_page group slug=rev.page.slug,rev_id=rev.pk %}">{% trans "View" %}</a>
             {% if user.is_authenticated %}
-            <a href="{% url wakawaka_edit slug=rev.page.slug, rev_id=rev.pk %}">{% trans "Revert" %}</a>
+            <a href="{% groupurl wakawaka_edit group slug=rev.page.slug,rev_id=rev.pk %}">{% trans "Revert" %}</a>
             {% endif %}
         </td>
     </tr>
