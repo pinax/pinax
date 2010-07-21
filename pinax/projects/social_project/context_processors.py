@@ -7,7 +7,9 @@ from pinax.apps.tribes.models import Tribe
 from bookmarks.models import Bookmark
 from pinax.apps.blog.models import Post
 
+
 _inbox_count_sources = None
+
 
 def inbox_count_sources():
     global _inbox_count_sources
@@ -28,6 +30,7 @@ def inbox_count_sources():
         _inbox_count_sources = tuple(sources)
     return _inbox_count_sources
 
+
 def combined_inbox_count(request):
     """
     A context processor that uses other context processors defined in
@@ -43,13 +46,16 @@ def combined_inbox_count(request):
                     count = count + int(value)
                 except (TypeError, ValueError):
                     pass
-    return {'combined_inbox_count': count,}
+    return {
+        "combined_inbox_count": count,
+    }
+
 
 def footer(request):
     return {
-        'latest_tweets': Tweet.objects.all().order_by('-sent')[:5],
-        'latest_tribes': Tribe.objects.all().order_by('-created')[:5],
-        'latest_users': User.objects.all().order_by('-date_joined')[:9],
-        'latest_bookmarks': Bookmark.objects.all().order_by('-added')[:5],
-        'latest_blogs': Post.objects.filter(status=2).order_by('-publish')[:5],
+        "latest_tweets": Tweet.objects.all().order_by("-sent")[:5],
+        "latest_tribes": Tribe.objects.all().order_by("-created")[:5],
+        "latest_users": User.objects.all().order_by("-date_joined")[:9],
+        "latest_bookmarks": Bookmark.objects.all().order_by("-added")[:5],
+        "latest_blogs": Post.objects.filter(status=2).order_by("-publish")[:5],
     }

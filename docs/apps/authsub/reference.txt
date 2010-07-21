@@ -1,0 +1,33 @@
+.. _ref-authsub-reference:
+
+=========
+Reference
+=========
+
+This document covers various components of ``pinax.apps.authsub``.
+
+
+Named Urls
+==========
+
+The named urls in this app should enable the use of of the ``{% url %}``
+template tag as well as ``reverse`` lookups in your project code without having
+to know the implementation details of this app.
+
+authsub_login
+-------------
+
+This redirects user to the ``invitations_contacts`` named url in the
+``django-friends`` app or to the Google Contacts API.
+
+
+Modules
+=======
+
+
+``pinax.apps.authsub.views``
+----------------------------
+
+.. automodule:: pinax.apps.authsub.views
+   :members:
+   :undoc-members:

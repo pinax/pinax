@@ -39,16 +39,15 @@ DATABASES = {
 }
 
 # Local time zone for this installation. Choices can be found here:
-# http://www.postgresql.org/docs/8.1/static/datetime-keywords.html#DATETIME-TIMEZONE-SET-TABLE
-# although not all variations may be possible on all operating systems.
+# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
+# although not all choices may be available on all operating systems.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
 TIME_ZONE = "US/Eastern"
 
 # Language code for this installation. All choices can be found here:
-# http://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes
-# http://blogs.law.harvard.edu/tech/stories/storyReader$15
-LANGUAGE_CODE = "en"
+# http://www.i18nguy.com/unicode/language-identifiers.html
+LANGUAGE_CODE = "en-us"
 
 SITE_ID = 1
 
@@ -60,8 +59,9 @@ USE_I18N = True
 # Example: "/home/media/media.lawrence.com/"
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, "site_media", "media")
 
-# URL that handles the media served from MEDIA_ROOT.
-# Example: "http://media.lawrence.com"
+# URL that handles the media served from MEDIA_ROOT. Make sure to use a
+# trailing slash if there is a path component (optional in other cases).
+# Examples: "http://media.lawrence.com", "http://example.com/media/"
 MEDIA_URL = "/site_media/media/"
 
 # Absolute path to the directory that holds static files like app media.
@@ -101,8 +101,6 @@ MIDDLEWARE_CLASSES = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "pinax.apps.account.middleware.LocaleMiddleware",
     "pinax.apps.account.middleware.AuthenticatedMiddleware",
-    "django.middleware.doc.XViewMiddleware",
-    "pagination.middleware.PaginationMiddleware",
     "pinax.middleware.security.HideSensistiveFieldsMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
@@ -122,10 +120,10 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     "django.core.context_processors.request",
     "django.contrib.messages.context_processors.messages",
     
+    "staticfiles.context_processors.static_url",
+    
     "pinax.core.context_processors.pinax_settings",
     
-    "notification.context_processors.notification",
-    "announcements.context_processors.site_wide_announcements",
     "pinax.apps.account.context_processors.account",
 ]
 
@@ -142,20 +140,16 @@ INSTALLED_APPS = [
     "pinax.templatetags",
     
     # external
-    "notification", # must be first
-    "django_openid",
-    "emailconfirmation",
-    "mailer",
-    "announcements",
-    "pagination",
-    "timezones",
-    "ajax_validation",
-    "uni_form",
     "staticfiles",
     "debug_toolbar",
+    "mailer",
+    "uni_form",
+    "django_openid",
+    "ajax_validation",
+    "timezones",
+    "emailconfirmation",
     
     # Pinax
-    "pinax.apps.basic_profiles",
     "pinax.apps.account",
     "pinax.apps.waitinglist",
     "pinax.apps.signup_codes",
@@ -164,22 +158,11 @@ INSTALLED_APPS = [
     "about",
 ]
 
-MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
-
-ABSOLUTE_URL_OVERRIDES = {
-    "auth.user": lambda o: "/profiles/profile/%s/" % o.username,
-}
-
-MARKUP_FILTER_FALLBACK = "none"
-MARKUP_CHOICES = [
-    ("restructuredtext", u"reStructuredText"),
-    ("textile", u"Textile"),
-    ("markdown", u"Markdown"),
-    ("creole", u"Creole"),
+FIXTURE_DIRS = [
+    os.path.join(PROJECT_ROOT, "fixtures"),
 ]
 
-AUTH_PROFILE_MODULE = "basic_profiles.Profile"
-NOTIFICATION_LANGUAGE_MODULE = "account.Account"
+MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 
 ACCOUNT_OPEN_SIGNUP = False
 ACCOUNT_REQUIRED_EMAIL = False
@@ -196,12 +179,12 @@ else:
         "django.contrib.auth.backends.ModelBackend",
     ]
 
-EMAIL_CONFIRMATION_DAYS = 2
-EMAIL_DEBUG = DEBUG
-CONTACT_EMAIL = "feedback@example.com"
-SITE_NAME = "Pinax"
 LOGIN_URL = "/account/login/"
 LOGIN_REDIRECT_URLNAME = "what_next"
+
+
+EMAIL_CONFIRMATION_DAYS = 2
+EMAIL_DEBUG = DEBUG
 
 AUTHENTICATED_EXEMPT_URLS = [
     r"^/$",

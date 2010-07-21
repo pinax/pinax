@@ -1,0 +1,143 @@
+.. _ref-projects-reference:
+
+=========
+Reference
+=========
+
+This document covers various components of ``pinax.apps.projects``.
+
+
+Named URLs
+==========
+
+The named URLs in this app should enable the use of of the ``{% url %}``
+template tag as well as ``reverse`` lookups in your project code without having
+to know the implementation details of this app.
+
+
+project_list
+------------
+
+Renders the ``projects/projects.html`` template with a list of all Project
+objects in context as ``projects``, optionally filtered via the query parameter
+``search`` on the ``name`` and ``description`` fields.
+
+
+project_create
+--------------
+
+On GET requests, renders the ``projects/create.html`` template with an instance
+of ``pinax.apps.projects.forms.ProjectForm`` as the ``project_form`` context
+variable.
+
+On POST requests, it processes the ``pinax.apps.projects.forms.ProjectForm``
+form to create a new form.  It then redirects to `project_detail`_.
+
+
+your_projects
+-------------
+
+Renders the ``projects/your_projects.html`` template with a list of all Project
+objects where the current logged in user is a member as the context variable
+``projects``.
+
+
+project_detail
+--------------
+
+Renders the ``projects/project.html`` template with a single Project object as
+the context variable ``project``.
+
+If this URL receives a POST request it will either add the current user to the
+project via the ``pinax.apps.projects.forms.AddUserForm`` or will update the
+project via the ``pinax.apps.projects.forms.ProjectUpdateForm``.
+
+:keyword arguments: The slug that identifies the project that matches ``(?P<group_slug>[-\w]+)``.
+
+
+project_delete
+--------------
+
+Upon POST request and validation that user is the project creator and is the
+only remaining member on the project, this will delete the project.  After
+deletion, whether failed or succeeded, it will redirect the user to
+`project_list`_
+
+:keyword arguments: The slug that identifies the project that matches ``(?P<group_slug>[-\w]+)``.
+
+
+Templates
+=========
+
+Templates should be placed in an ``projects/`` folder at the root of one of your
+template search paths.
+
+
+create.html
+-----------
+
+:context: ``project_form``
+
+
+project.html
+------------
+
+:context: ``project_form``, ``adduser_form``, ``project``, ``group``, ``is_member``
+
+
+projects.html
+-------------
+
+:context: ``projects``, ``search_terms``
+
+
+your_projects.html
+------------------
+
+:context: ``projects``
+
+
+
+Modules
+=======
+
+
+``pinax.apps.projects.admin``
+-----------------------------
+
+.. automodule:: pinax.apps.projects.admin
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.projects.forms``
+-----------------------------
+
+.. automodule:: pinax.apps.projects.forms
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.projects.models``
+------------------------------
+
+.. automodule:: pinax.apps.projects.models
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.projects.templatetags.projects_tags``
+--------------------------------------------------
+
+.. automodule:: pinax.apps.projects.templatetags.projects_tags
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.projects.views``
+-----------------------------
+
+.. automodule:: pinax.apps.projects.views
+   :members:
+   :undoc-members:
+

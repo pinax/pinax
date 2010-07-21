@@ -1,0 +1,49 @@
+.. _ref-tribes-gettingstarted:
+
+===============
+Getting started
+===============
+
+This document is designed to get you up and running with
+``pinax.apps.tribes``...
+
+
+Prerequisites
+=============
+
+These are the requirements to run ``pinax.apps.tribes``:
+
+ * Python **2.4+** (Python 3.x is **not** supported yet)
+ * Django **1.2+**
+ * django-groups **0.1.dev10**
+
+These dependencies should be added to your ``requirements/project.txt`` file
+and installed using pip_. For example::
+
+    pip install -r requirements/project.txt
+
+
+Installation
+============
+
+Add ``pinax.apps.tribes`` to your ``INSTALLED_APPS``:
+
+.. code-block:: python
+
+    INSTALLED_APPS = [
+        # ...
+        "pinax.apps.tribes",
+    ]
+
+Hook up ``pinax.apps.tribes`` to your URLconf:
+
+.. code-block:: python
+
+    urlpatterns = patterns("",
+        # ...
+        url(r"^tribes/", include("pinax.apps.tribes.urls"))
+    )
+
+
+
+.. _pip: http://pip.openplans.org/

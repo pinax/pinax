@@ -1,0 +1,55 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load ifsetting_tag %}
+
+{% block head_title %}{% trans "Welcome" %}{% endblock %}
+
+{% block body_class %}home{% endblock %}
+
+{% block body %}
+    
+    <h1>{% trans "Welcome to Pinax" %}</h1>
+    
+    <p>
+        {% blocktrans %}
+        <b>Pinax</b> is a <a href="http://djangoproject.com/">Django</a>
+        project intended to provide a starting point for websites. By
+        integrating numerous reusable Django apps to take care of the
+        things that many sites have in common, it lets you focus on what
+        makes your site different.
+        {% endblocktrans %}
+    </p>
+    
+    <p>
+        {% blocktrans %}
+        For more information about Pinax, see
+        <a href="http://pinaxproject.com/">http://pinaxproject.com/</a>.
+        {% endblocktrans %}
+    </p>
+    
+    <h2>{% trans "About this project" %}</h2>
+    
+    <p>
+        {% blocktrans %}
+        This project lays the foundation for all other Pinax starter projects. It
+        provides the project directory layout and some key infrastructure apps on
+        which the other starter projects are based.
+        {% endblocktrans %}
+    </p>
+    
+    <hr />
+    {% if user.is_authenticated %}
+        {% url what_next as what_next_url %}
+        <p class="what_next">{% blocktrans %}Wondering <a href="{{ what_next_url }}">What Next</a>?{% endblocktrans %}</p>
+    {% else %}
+        {% url acct_login as login_url %}
+        {% ifsetting ACCOUNT_OPEN_SIGNUP %}
+            {% url acct_signup as signup_url %}
+            <p>{% blocktrans %}You can <a href="{{ signup_url }}">Sign up</a> and <a href="{{ login_url }}">Log in</a> to try out the site.{% endblocktrans %}</p>
+        {% else %}
+            <p>{% blocktrans %}You can <a href="{{ login_url }}">Log in</a> to try out the site.{% endblocktrans %}</p>
+        {% endifsetting %}
+    {% endif %}
+    
+{% endblock %}

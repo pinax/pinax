@@ -4,7 +4,6 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 
 
-
 handler500 = "pinax.views.server_error"
 
 

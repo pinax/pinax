@@ -1,0 +1,90 @@
+.. _ref-autocomplete_app-gettingstarted:
+
+===============
+Getting started
+===============
+
+This document is designed to get you up and running with the
+``pinax.apps.autocomplete_app``...
+
+
+Prerequisites
+=============
+
+These are the requirements to run ``pinax.apps.autocomplete_app``:
+
+ * Python **2.4+** (Python 3.x is **not** supported yet)
+ * Django **1.2+**
+ * ``pinax.apps.basic_profiles``
+ * ``pinax.apps.profiles``
+ * django-avatar (http://github.com/ericflo/django-avatar)
+ * django-friends (http://github.com/jtauber/django-friends/)
+
+These dependencies should be added to your ``requirements/project.txt`` file
+and installed using pip_. For example::
+
+    pip install -r requirements/project.txt
+
+
+Installation
+============
+
+Add ``pinax.apps.autocomplete_app`` to your ``INSTALLED_APPS``:
+
+.. code-block:: python
+
+    INSTALLED_APPS = [
+        # ...
+        "pinax.apps.autocomplete_app",
+    ]
+
+
+.. _ref-autocomplete_app-gettingstarted-usage:
+
+Usage
+=====
+
+After installing this app in your Django project, you now have access to easily
+provide autocomplete lookups via client side javascript.
+
+First, you'll want to wire up the appropriate urls for you app:
+
+.. code-block:: python
+
+    urlpatterns = patterns("",
+    	url(r"^username_autocomplete_friends/$", "pinax.apps.autocomplete_app.views.username_autocomplete_friends", name="profile_username_autocomplete_friends"),
+    	url(r"^username_autocomplete/$", "pinax.apps.autocomplete_app.views.username_autocomplete_all", name="profile_username_autocomplete"),
+    )
+
+The above url mapping will give you two different lookups, one using the
+``django-friends`` app to look through just the logged in user's friends, and
+the other looking through all users in the system.
+
+.. code-block:: html
+
+    ###
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.autocomplete.min.js"></script>
+    <script type="text/javascript">
+        $().ready(function() {
+            $("#id_recipient").autocomplete("{% url profile_username_autocomplete %}", {
+                formatItem: function(data, i, n, value) {
+                    values = value.split(",,");
+                    return values[0] + values[1] + "<br />" + values[2];
+                },
+                formatResult: function(data, value) {
+                    return value.split(",,")[1];
+                },
+                // TODO: improve highlighting to only affect username.
+                highlight: false
+            });
+            $("#id_recipient").focus()
+        });
+    </script>
+    ###
+
+    ###
+    <input id="id_recipient" type="text">
+    ###
+
+.. _pip: http://pip.openplans.org/

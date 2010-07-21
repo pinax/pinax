@@ -1,0 +1,290 @@
+.. _ref-tasks-reference:
+
+=========
+Reference
+=========
+
+This document covers various components of ``pinax.apps.tasks``.
+
+
+Settings
+========
+
+
+``PINAX_ITEMS_PER_FEED``
+------------------------
+
+The number of tasks items to include in the feed.  Defaults to ``20``.
+
+::
+
+    PINAX_ITEMS_PER_FEED = 100
+
+
+``TASKS_WORKFLOW_MODULE``
+-------------------------
+
+The module that controls the workflow of a task.  Defaults to
+`pinax.apps.tasks.workflow`_.
+
+::
+
+    TASKS_WORKFLOW_MODULE = "myproject.workflow"
+
+
+``STATIC_URL``
+--------------
+
+**Required**.  An URL for static files that need serving.
+
+::
+
+    STATIC_URL = "/static/"
+
+
+Named URLs
+==========
+
+The named URLs in this app should enable the use of of the ``{% url %}``
+template tag as well as ``reverse`` lookups in your project code without having
+to know the implementation details of this app.
+
+
+task_list
+---------
+
+Renders the `task_list.html`_ template with a filtered list of tasks in
+context.
+
+
+task_focus
+----------
+
+Renders the `focus.html`_ template filtering down ``Tasks`` by either
+``modified``, ``state``, ``assignee``, or ``tag``.
+
+:keyword arguments: The field/value with which to filter down the ``Tasks`` matching ``(?P<field>modified|state|assignee|tag)/(?P<value>[^/]+)/``.
+
+
+task_add
+--------
+
+For GET requests, renders `add.html`_ template with a ``pinax.apps.tasks.forms.TaskForm``
+instance in context.
+
+For a POST request, process the form, redirecting either to `task_add`_ or `task_list`_.
+
+
+task_add_paste
+--------------
+
+For GET requests, renders `add.html`_ template with a ``pinax.apps.tasks.forms.TaskForm``
+instance in context.
+
+For a POST request, processes the form, redirecting either to `task_add`_ or `task_list`_.
+
+:keyword arguments: There is an optional argument that is the ``secret_id`` for the ``dpaste.models.Snippet``.  It must match ``(?P<secret_id>\w+)``.
+
+
+task_detail
+-----------
+
+For GET requests, renders the `task.html`_ template with a particular
+``pinax.apps.tasks.models.Task`` object as well as an instance of
+``pinax.apps.tasks.forms.EditTaskForm``.
+
+For POST requests, processes the form.
+
+:keyword arguments: The id of the tasks you wish to view/edit: ``(?P<id>\d+)``.
+
+
+tasks_for_user
+--------------
+
+Renders the `user_tasks.html`_ template with tasks for the user who's
+username is specified in the URL argument.
+
+:keyword arguments: The username of the user who's tickets you wish to view.  Must match ``(?P<username>[-\w]+)``.
+
+
+tasks_mini_list
+---------------
+
+Renders the `mini_list.html`_ template with all the logged in user's
+assigned tasks.
+
+
+tasks_history_list
+------------------
+
+Renders the `tasks_history_list.html`_ template with a list of 
+``pinax.apps.models.TaskHistory`` objects where ``object_id is None``.
+
+
+tasks_history
+-------------
+
+Renders the `task_history.html`_ template with a 
+``pinax.apps.tasks.models.Task`` object and a list of 
+``pinax.apps.tasks.models.TaskHistory`` objects that are linked to that
+object.
+
+:keyword arguments: The id of the Task to view history on.  Must match ``(?P<id>\d+)``.
+
+
+tasks_nudge
+-----------
+
+Toggles a ``pinax.apps.tasks.models.Nudge`` object's existence for a given
+``pinax.apps.tasks.models.Task`` object and user context.  If the a ``Nudge``
+exists, it gets deleted.  If it doesn't it's created.
+
+:keyword arguments: The id of the Task to nudge.  Must match ``(?P<id>\d+)``.
+
+
+tasks_export_state_transitions
+------------------------------
+
+Returns a data dump via a ``text/csv`` file of workflow state data.
+
+
+
+Templates
+=========
+
+Templates should be placed in an ``tasks/`` folder at the root of one of your
+template search paths.
+
+
+task_list.html
+--------------
+
+:context: ``group``, ``group_base``, ``group_by``, ``gbqs``, ``is_member``, ``task_filter``, ``tasks``, ``querystring``
+
+
+add.html
+--------
+
+:context: ``group``, ``group_base``, ``is_member``, ``task_form``
+
+
+task.html
+---------
+
+:context: ``group``, ``group_base``, ``nudge``, ``task``, ``is_member``, ``form``
+
+
+user_tasks.html
+---------------
+
+:context: ``group``, ``group_base``, ``assigned_filter``, ``created_filter``, ``nudged_filter``, ``assigned_tasks``, ``created_tasks``, ``nudged_tasks``, ``other_user``, ``bookmarklet``
+
+
+mini_list.html
+--------------
+
+:context: ``group``, ``group_base``, ``assigned_tasks``
+
+
+focus.html
+----------
+
+:context: ``group``, ``group_base``, ``task_filter``, ``tasks``, ``field``, ``value``, ``group_by``, ``gbqs``, ``is_member``
+
+
+tasks_history_list.html
+-----------------------
+
+:context: ``group``, ``group_base``, ``task_history``, ``is_member``
+
+
+task_history.html
+-----------------
+
+:context: ``group``, ``group_base``, ``task_history``, ``task``, ``nudge_history``
+
+
+
+Modules
+=======
+
+
+``pinax.apps.tasks.admin``
+--------------------------
+
+.. automodule:: pinax.apps.tasks.admin
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.tasks.feeds``
+--------------------------
+
+.. automodule:: pinax.apps.tasks.feeds
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.tasks.fields``
+---------------------------
+
+.. automodule:: pinax.apps.tasks.fields
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.tasks.filters``
+----------------------------
+
+.. automodule:: pinax.apps.tasks.filters
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.tasks.forms``
+--------------------------
+
+.. automodule:: pinax.apps.tasks.forms
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.tasks.models``
+---------------------------
+
+.. automodule:: pinax.apps.tasks.models
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.tasks.templatetags.tasks_tags``
+--------------------------------------------
+
+.. automodule:: pinax.apps.tasks.templatetags.tasks_tags
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.tasks.views``
+--------------------------
+
+.. automodule:: pinax.apps.tasks.views
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.tasks.widgets``
+----------------------------
+
+.. automodule:: pinax.apps.tasks.widgets
+   :members:
+   :undoc-members:
+
+
+``pinax.apps.tasks.workflow``
+-----------------------------
+
+.. automodule:: pinax.apps.tasks.workflow
+   :members:
+   :undoc-members:
+

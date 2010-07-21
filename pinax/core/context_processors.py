@@ -1,9 +1,11 @@
 from django.conf import settings
 
-from template_utils.context_processors import settings_processor
+from django.contrib.sites.models import Site
 
 
-
-pinax_settings = settings_processor(
-    "CONTACT_EMAIL", "SITE_NAME", "STATIC_URL"
-)
+def pinax_settings(request):
+    site = Site.objects.get_current()
+    return {
+        "SITE_NAME": site.name,
+        "SITE_DOMAIN": site.domain
+    }

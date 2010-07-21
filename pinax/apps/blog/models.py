@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 
 from tagging.fields import TagField
 from tagging.models import Tag
+from threadedcomments.models import ThreadedComment
 
 if "notification" in settings.INSTALLED_APPS:
     from notification import models as notification
@@ -76,7 +77,6 @@ class Post(models.Model):
 
 
 # handle notification of new comments
-from threadedcomments.models import ThreadedComment
 def new_comment(sender, instance, **kwargs):
     post = instance.content_object
     if isinstance(post, Post):

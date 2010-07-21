@@ -14,7 +14,6 @@ from pinax.apps.tasks.models import Task
 from pinax.apps.topics.models import Topic
 
 
-
 handler500 = "pinax.views.server_error"
 
 
@@ -22,24 +21,20 @@ urlpatterns = patterns("",
     url(r"^$", direct_to_template, {
         "template": "homepage.html",
     }, name="home"),
-    
     url(r"^admin/invite_user/$", "pinax.apps.signup_codes.views.admin_invite_user", name="admin_invite_user"),
-    url(r"^account/signup/$", "pinax.apps.signup_codes.views.signup", name="acct_signup"),
-    
-    (r"^account/", include("pinax.apps.account.urls")),
-    (r"^openid/(.*)", PinaxConsumer()),
-    (r"^profiles/", include("pinax.apps.basic_profiles.urls")),
-    (r"^notices/", include("notification.urls")),
-    (r"^announcements/", include("announcements.urls")),
-    (r"^tagging_utils/", include("pinax.apps.tagging_utils.urls")),
-    (r"^attachments/", include("attachments.urls")),
-    (r"^bookmarks/", include("bookmarks.urls")),
-    (r"^tasks/", include("pinax.apps.tasks.urls")),
-    (r"^topics/", include("pinax.apps.topics.urls")),
-    (r"^comments/", include("threadedcomments.urls")),
-    (r"^wiki/", include("wakawaka.urls")),
-    
-    (r"^admin/", include(admin.site.urls)),
+    url(r"^admin/", include(admin.site.urls)),
+    url(r"^account/", include("pinax.apps.account.urls")),
+    url(r"^openid/(.*)", PinaxConsumer()),
+    url(r"^profiles/", include("idios.urls")),
+    url(r"^notices/", include("notification.urls")),
+    url(r"^announcements/", include("announcements.urls")),
+    url(r"^tagging_utils/", include("pinax.apps.tagging_utils.urls")),
+    url(r"^attachments/", include("attachments.urls")),
+    url(r"^bookmarks/", include("bookmarks.urls")),
+    url(r"^tasks/", include("pinax.apps.tasks.urls")),
+    url(r"^topics/", include("pinax.apps.topics.urls")),
+    url(r"^comments/", include("threadedcomments.urls")),
+    url(r"^wiki/", include("wakawaka.urls")),
 )
 
 
@@ -73,5 +68,5 @@ urlpatterns += patterns("",
 
 if settings.SERVE_MEDIA:
     urlpatterns += patterns("",
-        (r"", include("staticfiles.urls")),
+        url(r"", include("staticfiles.urls")),
     )

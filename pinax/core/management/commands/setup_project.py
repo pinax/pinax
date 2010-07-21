@@ -1,3 +1,4 @@
+import glob
 import optparse
 import os
 import random
@@ -127,6 +128,7 @@ class Command(BaseCommand):
         installer = ProjectInstaller(source, destination, project_name, user_project_name)
         installer.copy()
         installer.fix_settings()
+        installer.fix_deploy(project_name, user_project_name)
         print "Created project %s" % user_project_name
         if not options["no_reqs"]:
             print "Installing project requirements..."
@@ -178,6 +180,16 @@ class ProjectInstaller(object):
         data = data.replace(self.project_name, self.user_project_name)
         
         open(settings_filename, "wb").write(data)
+    
+    def fix_deploy(self, base, project_name):
+        for deploy_file in glob.glob(os.path.join(self.project_dir, "deploy/") + "*"):
+            df = open(deploy_file, "rb")
+            deploy_settings = df.read()
+            df.close()
+            deploy_settings = deploy_settings.replace(base, project_name)
+            df = open(deploy_file, "wb")
+            df.write(deploy_settings)
+            df.close()
     
     def install_reqs(self, require_virtualenv=True):
         # @@@ move to using Python pip APIs and not relying on the OS
