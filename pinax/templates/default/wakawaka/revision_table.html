@@ -1,9 +1,7 @@
 {% load i18n %}
 {% load group_tags %}
 
-{% groupurl wakawaka_changes group slug=page.slug as wiki_changes_url %}
-    
-<form method="GET" action="{{ wiki_changes_url }}">
+<form method="GET" action="{% groupurl wakawaka_changes group slug=page.slug %}">
 {% csrf_token %}
 <table class="history" border="1">
 <tr>
