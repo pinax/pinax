@@ -19,6 +19,12 @@ class AuthenticationBackend(ModelBackend):
         else:
             if user.check_password(credentials["password"]):
                 return user
+    
+    def has_perm(self, user, perm):
+        # @@@ allow all users to add wiki pages
+        if perm in ["wakawaka.add_wikipage", "wakawaka.add_revision"]:
+            return True
+        return super(AuthenticationBackend, self).has_perm(user, perm)
 
 
 EmailModelBackend = AuthenticationBackend
