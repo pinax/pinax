@@ -339,29 +339,11 @@ unnecessary tracking.
 .. _google analytics: http://analytics.google.com/
 
 
-.. _ref-settings-wiki-markup-choices:
+.. _ref-settings-markup-choices:
 
 MARKUP_CHOICES
 --------------
 
 :Applications: ``pinax.apps.blog``, ``pinax.apps.tasks``
 :Default: ``[("restructuredtext", u"reStructuredText"), ("textile", u"Textile"), ("markdown", u"Markdown"), ("creole", u"Creole")]``
-
-The actual origin of this setting is `django-wikiapp`_ which is one of the
-external applications Pinax integrates. ``pinax.apps.blog`` uses it to
-determine, how a post's content should be converted from plain text to HTML.
-
-.. _django-wikiapp: http://code.google.com/p/django-wikiapp/
-
-
-.. _ref-settings-wiki-requires-login:
-
-WIKI_REQUIRES_LOGIN
--------------------
-
-:Applications: ``wiki`` (`external <http://code.google.com/p/django-wikiapp/>`_)
-:Default: ``False``
-
-With this setting you configure the Wiki to be only accessible to people who
-are logged in.
 
