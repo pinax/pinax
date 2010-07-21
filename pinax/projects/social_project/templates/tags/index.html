@@ -6,7 +6,7 @@
 {% load tribes_tags %}
 {% load avatar_tags %}
 {% load blog_tags %}
-{% load wiki_tags %}
+{% load wakawaka_tags %}
 {% load voting_tags %}
 {% load extra_voting_tags %}
 {% load theme_tags %}
@@ -94,7 +94,7 @@
     
     <table class="topics">
         {% for article in wiki_article_tags %}
-            {% show_teaser article %}
+            {{ article }}
         {% endfor %}
     </table>
 
