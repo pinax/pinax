@@ -159,7 +159,7 @@ INSTALLED_APPS = [
     "idios",
     "groups",
     "tagging",
-    "wiki",
+    "wakawaka",
     "avatar",
     "threadedcomments",
     "gravatar",
@@ -206,7 +206,6 @@ MARKUP_CHOICES = [
     ("markdown", u"Markdown"),
     ("creole", u"Creole"),
 ]
-WIKI_MARKUP_CHOICES = MARKUP_CHOICES
 
 AUTH_PROFILE_MODULE = "profiles.Profile"
 NOTIFICATION_LANGUAGE_MODULE = "account.Account"

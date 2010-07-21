@@ -165,7 +165,7 @@ INSTALLED_APPS = [
     "ajax_validation",
     "tagging",
     "uni_form",
-    "wiki",
+    "wakawaka",
     "django_sorting",
     "attachments",
     "django_markup",
@@ -204,7 +204,6 @@ MARKUP_CHOICES = [
     ("markdown", u"Markdown"),
     ("creole", u"Creole"),
 ]
-WIKI_MARKUP_CHOICES = MARKUP_CHOICES
 
 AUTH_PROFILE_MODULE = "profiles.Profile"
 NOTIFICATION_LANGUAGE_MODULE = "account.Account"

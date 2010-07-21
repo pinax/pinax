@@ -10,7 +10,7 @@
 {% load projects_tags %}
 {% load group_tags %}
 {% load topics_tags %}
-{% load wiki_tags %}
+{% load wakawaka_tags %}
 {% load theme_tags %}
 
 {% block head_title %}{{ project.name }}{% endblock %}
@@ -119,18 +119,18 @@
                 {% endif %}
             {% endwith %}
             
-            {% content_objects project "wiki.Article" as articles %}
+            {% content_objects project "wakawaka.WikiPage" as articles %}
             <h2>{% trans "Wiki Articles" %}{% if articles %} ({{ articles|length }}){% endif %}</h2>
             
             {% if articles %}
                 <table class="topics">
                     {% for article in articles %}
-                        {% show_teaser article %}
+                        {{ article }}
                     {% endfor %}
                 </table>
-                <p><a href="{% groupurl wiki_list project %}">{% trans "more..." %}</a></p>
+                <p><a href="{% groupurl wakawaka_page_list project %}">{% trans "more..." %}</a></p>
             {% else %}
-                {% groupurl wiki_list project as wiki_url %}
+                {% groupurl wakawaka_page_list project as wiki_url %}
                 <p>
                     {% blocktrans %}
                         None yet. Go to the <a href="{{ wiki_url }}" title="wiki">wiki</a> to start a new article.

@@ -163,7 +163,7 @@ INSTALLED_APPS = [
     "avatar",
     "tagging",
     "threadedcomments",
-    "wiki",
+    "wakawaka",
     "django_markup",
     "attachments",
     "django_filters",
@@ -199,7 +199,6 @@ MARKUP_CHOICES = [
     ("markdown", u"Markdown"),
     ("creole", u"Creole"),
 ]
-WIKI_MARKUP_CHOICES = MARKUP_CHOICES
 
 AUTH_PROFILE_MODULE = "profiles.Profile"
 NOTIFICATION_LANGUAGE_MODULE = "account.Account"

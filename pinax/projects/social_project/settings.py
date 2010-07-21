@@ -99,6 +99,7 @@ MIDDLEWARE_CLASSES = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django_openid.consumer.SessionConsumer",
     "django.contrib.messages.middleware.MessageMiddleware",
+    "groups.middleware.GroupAwareMiddleware",
     "pinax.apps.account.middleware.LocaleMiddleware",
     "django.middleware.doc.XViewMiddleware",
     "pagination.middleware.PaginationMiddleware",
@@ -172,7 +173,7 @@ INSTALLED_APPS = [
     "oembed",
     "groups",
     "threadedcomments",
-    "wiki",
+    "wakawaka",
     "swaps",
     "voting",
     "tagging",
@@ -219,7 +220,6 @@ MARKUP_CHOICES = [
     ("markdown", u"Markdown"),
     ("creole", u"Creole"),
 ]
-WIKI_MARKUP_CHOICES = MARKUP_CHOICES
 
 AUTH_PROFILE_MODULE = "profiles.Profile"
 NOTIFICATION_LANGUAGE_MODULE = "account.Account"
@@ -269,8 +269,6 @@ RESTRUCTUREDTEXT_FILTER_SETTINGS = {
 BEHIND_PROXY = False
 
 FORCE_LOWERCASE_TAGS = True
-
-WIKI_REQUIRES_LOGIN = True
 
 # Uncomment this line after signing up for a Yahoo Maps API key at the
 # following URL: https://developer.yahoo.com/wsregapp/
