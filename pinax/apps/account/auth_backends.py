@@ -22,7 +22,13 @@ class AuthenticationBackend(ModelBackend):
     
     def has_perm(self, user, perm):
         # @@@ allow all users to add wiki pages
-        if perm in ["wakawaka.add_wikipage", "wakawaka.add_revision"]:
+        wakawaka_perms = [
+            "wakawaka.add_wikipage",
+            "wakawaka.add_revision",
+            "wakawaka.change_wikipage",
+            "wakawaka.change_revision"
+        ]
+        if perm in wakawaka_perms:
             return True
         return super(AuthenticationBackend, self).has_perm(user, perm)
 
