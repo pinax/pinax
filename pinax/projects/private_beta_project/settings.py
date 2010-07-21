@@ -170,14 +170,9 @@ ACCOUNT_EMAIL_VERIFICATION = False
 ACCOUNT_EMAIL_AUTHENTICATION = False
 ACCOUNT_UNIQUE_EMAIL = EMAIL_CONFIRMATION_UNIQUE_EMAIL = False
 
-if ACCOUNT_EMAIL_AUTHENTICATION:
-    AUTHENTICATION_BACKENDS = [
-        "pinax.apps.account.auth_backends.EmailModelBackend",
-    ]
-else:
-    AUTHENTICATION_BACKENDS = [
-        "django.contrib.auth.backends.ModelBackend",
-    ]
+AUTHENTICATION_BACKENDS = [
+    "pinax.apps.account.auth_backends.AuthenticationBackend",
+]
 
 LOGIN_URL = "/account/login/"
 LOGIN_REDIRECT_URLNAME = "what_next"
