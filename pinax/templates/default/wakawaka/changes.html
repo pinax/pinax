@@ -8,6 +8,10 @@
     {% if rev.is_not_current %}
         <meta name="robots" content="noindex" />
     {% endif %}
+    {# Add support for the Universal Edit Button #}
+    {% if perms.wakawaka.change_wikipage %}
+    <link rel="edit" title="{% trans "Edit this page" %}" href="{% url wakawaka_edit slug=page.slug %}" />
+    {% endif %}
 {% endblock %}
 
 {% block head_title %}
