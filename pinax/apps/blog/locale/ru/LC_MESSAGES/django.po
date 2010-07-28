@@ -2,8 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
@@ -18,109 +17,107 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #: forms.py:14
-msgid ""
-"a short version of the title consisting only of letters, numbers, "
-"underscores and hyphens."
-msgstr ""
+msgid "a short version of the title consisting only of letters, numbers, underscores and hyphens."
+msgstr "короткая версия названия, состоящая только из букв, цифр, тире и подчеркиваний."
 
 #: management.py:11
 msgid "Friend Posted to Blog"
-msgstr ""
+msgstr "Друг добавил запись в блог"
 
 #: management.py:11
 msgid "a friend of yours posted to their blog"
-msgstr ""
+msgstr "ваш друг добавил запись в блог"
 
 #: management.py:12
 msgid "New Comment on Blog Post"
-msgstr ""
+msgstr "Новый комментарий к записи в блоге"
 
 #: management.py:12
 msgid "a comment was made on one of your blog posts"
-msgstr ""
+msgstr "одну из ваших записей в блоге прокомментировали"
 
 #: models.py:30
 msgid "Draft"
-msgstr ""
+msgstr "Черновик"
 
 #: models.py:31
 msgid "Public"
-msgstr ""
+msgstr "Открытая"
 
 #: models.py:34
 msgid "title"
-msgstr ""
+msgstr "заголовок"
 
 #: models.py:35
 msgid "slug"
-msgstr ""
+msgstr "короткая версия названия"
 
 #: models.py:37
 msgid "IP Address of the Post Creator"
-msgstr ""
+msgstr "IP адрес автора записи"
 
 #: models.py:41
 msgid "body"
-msgstr ""
+msgstr "текст"
 
 #: models.py:42
 msgid "tease"
-msgstr ""
+msgstr "вступление"
 
 #: models.py:43
 msgid "status"
-msgstr ""
+msgstr "статус"
 
 #: models.py:44
 msgid "allow comments"
-msgstr ""
+msgstr "разрешить комментарии"
 
 #: models.py:45
 msgid "publish"
-msgstr ""
+msgstr "опубликовать"
 
 #: models.py:46
 msgid "created at"
-msgstr ""
+msgstr "создано"
 
 #: models.py:47
 msgid "updated at"
-msgstr ""
+msgstr "обновлено"
 
 #: models.py:48
 msgid "Post Content Markup"
-msgstr ""
+msgstr "Разметка содержимого записи"
 
 #: models.py:57
 msgid "post"
-msgstr ""
+msgstr "запись"
 
 #: models.py:58
 msgid "posts"
-msgstr ""
+msgstr "записи"
 
 #: views.py:73
 msgid "You can't delete posts that aren't yours"
-msgstr ""
+msgstr "Вы не можете удалять чужие записи"
 
 #: views.py:80
 #, python-format
 msgid "Successfully deleted post '%s'"
-msgstr ""
+msgstr "Запись '%s' удалена"
 
 #: views.py:104
 #, python-format
 msgid "Successfully saved post '%s'"
-msgstr ""
+msgstr "Запись '%s' сохранена"
 
 #: views.py:129
 msgid "You can't edit posts that aren't yours"
-msgstr ""
+msgstr "Вы не можете редактировать чужие записи"
 
 #: views.py:138
 #, python-format
 msgid "Successfully updated post '%s'"
-msgstr ""
+msgstr "Запись '%s' обновлена"
 
 #: templates/notification/blog_friend_post/full.txt:1
 #, python-format
@@ -129,13 +126,14 @@ msgid ""
 "\n"
 "http://%(current_site)s%(post_url)s"
 msgstr ""
+"%(author_display)s опубликовал(а) %(post_title)s в своем блоге.\n"
+"\n"
+"http://%(current_site)s%(post_url)s"
 
 #: templates/notification/blog_friend_post/notice.html:2
 #, python-format
-msgid ""
-"<a href=\"%(author_url)s\">%(author_display)s</a> has posted <a href=\"%"
-"(post_url)s\">%(post_title)s</a> to their blog."
-msgstr ""
+msgid "<a href=\"%(author_url)s\">%(author_display)s</a> has posted <a href=\"%(post_url)s\">%(post_title)s</a> to their blog."
+msgstr "<a href=\"%(author_url)s\">%(author_display)s</a> опубликовал(а) <a href=\"%(post_url)s\">%(post_title)s</a>  в своем блоге."
 
 #: templates/notification/blog_post_comment/full.txt:1
 #, python-format
@@ -146,10 +144,13 @@ msgid ""
 "\n"
 "http://%(current_site)s%(post_url)s"
 msgstr ""
+"%(user_display)s оставил(а) комментарий к вашей записи в блоге '%(post)s':\n"
+"\n"
+"%(post_comment)s\n"
+"\n"
+"http://%(current_site)s%(post_url)s"
 
 #: templates/notification/blog_post_comment/notice.html:2
 #, python-format
-msgid ""
-"<a href=\"%(user_url)s\">%(user_display)s</a> has commented on your blog "
-"post '<a href=\"%(post_url)s\">%(post)s</a>'."
-msgstr ""
+msgid "<a href=\"%(user_url)s\">%(user_display)s</a> has commented on your blog post '<a href=\"%(post_url)s\">%(post)s</a>'."
+msgstr "<a href=\"%(user_url)s\">%(user_display)s</a> оставил(а) комментарий к вашей записи в блоге '<a href=\"%(post_url)s\">%(post)s</a>'."
