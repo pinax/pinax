@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-hotclub-0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-02 19:22+0100\n"
+"POT-Creation-Date: 2010-07-28 23:48+0200\n"
 "PO-Revision-Date: 2008-06-17 22:27+0200\n"
 "Last-Translator: Gil Klein <gklein@gmail.com>\n"
 "Language-Team: Gil Klein <gklein@gmail.com>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Poedit-Language: Hebrew\n"
 "X-Poedit-Country: ISRAEL\n"
 
-#: forms.py:50 forms.py:127 forms.py:392 forms.py:516
+#: forms.py:50 forms.py:124 forms.py:360 forms.py:484
 msgid "Password"
 msgstr "סיסמא"
 
@@ -30,12 +30,12 @@ msgstr "חברים"
 msgid "If checked you will stay logged in for 3 weeks"
 msgstr ""
 
-#: forms.py:66 forms.py:144 forms.py:282
+#: forms.py:66 forms.py:141 forms.py:296 forms.py:382
 #, fuzzy
 msgid "E-mail"
 msgstr "אימייל"
 
-#: forms.py:71 forms.py:122 forms.py:264 forms.py:514
+#: forms.py:71 forms.py:119 forms.py:482
 msgid "Username"
 msgstr "שם משתמש"
 
@@ -52,84 +52,82 @@ msgstr "שם המשתמש או הסיסמא שגויים"
 msgid "The username and/or password you specified are not correct."
 msgstr "שם המשתמש או הסיסמא שגויים"
 
-#: forms.py:131 forms.py:396
+#: forms.py:128 forms.py:364
 msgid "Password (again)"
 msgstr "(סיסמא (שוב"
 
-#: forms.py:147 forms.py:285
+#: forms.py:144
 #, fuzzy
 msgid "E-mail (optional)"
 msgstr "(אימייל (לא חובה"
 
-#: forms.py:152
+#: forms.py:149
 msgid "Usernames can only contain letters, numbers and underscores."
 msgstr "שם משתמש יכול להכיל רק תווים, מספרים וקו תחתון"
 
-#: forms.py:157
+#: forms.py:154
 msgid "This username is already taken. Please choose another."
 msgstr "שם המשתמש תפוס. בחר שם אחר."
 
-#: forms.py:166 forms.py:304
+#: forms.py:163
 msgid "A user is registered with this e-mail address."
 msgstr ""
 
-#: forms.py:172 forms.py:381 forms.py:403 forms.py:471
+#: forms.py:169 forms.py:349 forms.py:371 forms.py:439
 msgid "You must type the same password each time."
 msgstr "הסיסמאות שהקשת צריכות להיות זהות."
 
-#: forms.py:228
-msgid "Your email address has already been verified"
+#: forms.py:217
+#, fuzzy
+msgid "Your e-mail address has already been verified"
 msgstr "כתובת האימייל שלך כבר אומתה"
 
-#: forms.py:238 forms.py:248 views.py:164 views.py:179
-#, python-format
-msgid "Confirmation email sent to %(email)s"
+#: forms.py:227 forms.py:237
+#, fuzzy, python-format
+msgid "Confirmation e-mail sent to %(email)s"
 msgstr " %(email)s אימייל אישור נשלח ל "
 
-#: forms.py:328 forms.py:414
-msgid "Email"
-msgstr "אימייל"
-
-#: forms.py:336
+#: forms.py:304
 #, fuzzy
 msgid "This e-mail address already associated with this account."
 msgstr "כתובת האימייל משוייכת כבר לחשבון זה"
 
-#: forms.py:337
+#: forms.py:305
 #, fuzzy
 msgid "This e-mail address already associated with another account."
 msgstr "כתובת האימייל משוייכת כבר לחשבון זה"
 
-#: forms.py:361
+#: forms.py:329
 msgid "Current Password"
 msgstr "סיסמא נוכחית"
 
-#: forms.py:365 forms.py:455
+#: forms.py:333 forms.py:423
 msgid "New Password"
 msgstr "סיסמא חדשה"
 
-#: forms.py:369 forms.py:459
+#: forms.py:337 forms.py:427
 msgid "New Password (again)"
 msgstr "(סיסמה חדשה (שוב"
 
-#: forms.py:375
+#: forms.py:343
 msgid "Please type your current password."
 msgstr "אנא הקש את סיסמתך הנוכחית"
 
-#: forms.py:421
-msgid "Email address not verified for any user account"
+#: forms.py:389
+#, fuzzy
+msgid "E-mail address not verified for any user account"
 msgstr "כתובת האימייל לא אומתה עבור אף חשבון"
 
-#: forms.py:441
+#: forms.py:409
 #, fuzzy
-msgid "Password reset email sent"
+msgid "Password reset e-mail sent"
 msgstr "איפוס סיסמא"
 
-#: forms.py:485
+#: forms.py:453
 msgid "Timezone"
 msgstr "איזור זמן"
 
-#: forms.py:499
+#: forms.py:467
 msgid "Language"
 msgstr ""
 
@@ -165,51 +163,58 @@ msgstr ""
 msgid "reset yet?"
 msgstr ""
 
-#: views.py:88 views.py:132
+#: openid_consumer.py:120 views.py:89 views.py:136
 #, fuzzy, python-format
 msgid "Successfully logged in as %(user)s."
 msgstr ".%(username)s התחברת בהצלחה כ"
 
-#: views.py:195
+#: views.py:167 views.py:182
+#, python-format
+msgid "Confirmation email sent to %(email)s"
+msgstr " %(email)s אימייל אישור נשלח ל "
+
+#: views.py:198
 #, python-format
 msgid "Removed email address %(email)s"
 msgstr ""
 
-#: views.py:235 views.py:363
+#: views.py:238 views.py:366
 msgid "Password successfully changed."
 msgstr ".הסיסמא הוחלפה בהצלחה"
 
-#: views.py:265
+#: views.py:268
 #, fuzzy
 msgid "Password successfully set."
 msgstr ".הסיסמא הוחלפה בהצלחה"
 
-#: views.py:392
+#: views.py:395
 msgid "Timezone successfully updated."
 msgstr "איזור זמן עודכן בהצלחה."
 
-#: views.py:418
+#: views.py:421
 #, fuzzy
 msgid "Language successfully updated."
 msgstr "איזור זמן עודכן בהצלחה."
 
-#: views.py:456
+#: views.py:459
 msgid "Twitter authentication failed"
 msgstr ""
 
-#: views.py:461
+#: views.py:464
 #, fuzzy
 msgid "Successfully authenticated."
 msgstr "איזור זמן עודכן בהצלחה."
 
-#: views.py:489
+#: views.py:492
 msgid "Removed twitter account information successfully."
 msgstr ""
 
-#: templatetags/openid_tags.py:22
+#~ msgid "Email"
+#~ msgstr "אימייל"
+
 #, fuzzy
-msgid "Logged in with OpenID"
-msgstr "OpenID התחבר באמצעות "
+#~ msgid "Logged in with OpenID"
+#~ msgstr "OpenID התחבר באמצעות "
 
 #~ msgid "Accepted friendship request from %(from_user)s"
 #~ msgstr " %(from_user)s התקבלה בקשת חברות מ  "
