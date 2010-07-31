@@ -11,7 +11,7 @@ from microblogging.feeds import TweetFeedAll, TweetFeedUser, TweetFeedUserWithFr
 from microblogging.models import Tweet
 from swaps.models import Offer
 from tagging.models import TaggedItem
-from wiki.models import Article as WikiArticle
+from wakawaka.models import WikiPage
 
 from pinax.apps.account.openid_consumer import PinaxConsumer
 from pinax.apps.blog.feeds import BlogFeedAll, BlogFeedUser
@@ -21,8 +21,8 @@ from pinax.apps.topics.models import Topic
 from pinax.apps.tribes.models import Tribe
 
 
-
 handler500 = "pinax.views.server_error"
+
 
 tweets_feed_dict = {"feed_dict": {
     "all": TweetFeedAll,
@@ -38,47 +38,36 @@ blogs_feed_dict = {"feed_dict": {
 bookmarks_feed_dict = {"feed_dict": {"": BookmarkFeed }}
 
 
-if settings.ACCOUNT_OPEN_SIGNUP:
-    signup_view = "pinax.apps.account.views.signup"
-else:
-    signup_view = "pinax.apps.signup_codes.views.signup"
-
-
 urlpatterns = patterns("",
     url(r"^$", direct_to_template, {
         "template": "homepage.html",
     }, name="home"),
-    
     url(r"^admin/invite_user/$", "pinax.apps.signup_codes.views.admin_invite_user", name="admin_invite_user"),
-    url(r"^account/signup/$", signup_view, name="acct_signup"),
-    
-    (r"^about/", include("about.urls")),
-    (r"^account/", include("pinax.apps.account.urls")),
-    (r"^openid/(.*)", PinaxConsumer()),
-    (r"^bbauth/", include("pinax.apps.bbauth.urls")),
-    (r"^authsub/", include("pinax.apps.authsub.urls")),
-    (r"^profiles/", include("pinax.apps.profiles.urls")),
-    (r"^blog/", include("pinax.apps.blog.urls")),
-    (r"^invitations/", include("friends_app.urls")),
-    (r"^notices/", include("notification.urls")),
-    (r"^messages/", include("messages.urls")),
-    (r"^announcements/", include("announcements.urls")),
-    (r"^tweets/", include("microblogging.urls")),
-    (r"^tribes/", include("pinax.apps.tribes.urls")),
-    (r"^comments/", include("threadedcomments.urls")),
-    (r"^robots.txt$", include("robots.urls")),
-    (r"^i18n/", include("django.conf.urls.i18n")),
-    (r"^bookmarks/", include("bookmarks.urls")),
-    (r"^admin/", include(admin.site.urls)),
-    (r"^photos/", include("pinax.apps.photos.urls")),
-    (r"^avatar/", include("avatar.urls")),
-    (r"^swaps/", include("swaps.urls")),
-    (r"^flag/", include("flag.urls")),
-    (r"^locations/", include("locations.urls")),
-    
-    (r"^feeds/tweets/(.*)/$", "django.contrib.syndication.views.feed", tweets_feed_dict),
-    (r"^feeds/posts/(.*)/$", "django.contrib.syndication.views.feed", blogs_feed_dict),
-    (r"^feeds/bookmarks/(.*)/?$", "django.contrib.syndication.views.feed", bookmarks_feed_dict),
+    url(r"^admin/", include(admin.site.urls)),
+    url(r"^about/", include("about.urls")),
+    url(r"^account/", include("pinax.apps.account.urls")),
+    url(r"^openid/(.*)", PinaxConsumer()),
+    url(r"^profiles/", include("pinax.apps.profiles.urls")),
+    url(r"^bbauth/", include("pinax.apps.bbauth.urls")),
+    url(r"^authsub/", include("pinax.apps.authsub.urls")),
+    url(r"^blog/", include("pinax.apps.blog.urls")),
+    url(r"^invitations/", include("friends_app.urls")),
+    url(r"^notices/", include("notification.urls")),
+    url(r"^messages/", include("messages.urls")),
+    url(r"^announcements/", include("announcements.urls")),
+    url(r"^tweets/", include("microblogging.urls")),
+    url(r"^tribes/", include("pinax.apps.tribes.urls")),
+    url(r"^comments/", include("threadedcomments.urls")),
+    url(r"^i18n/", include("django.conf.urls.i18n")),
+    url(r"^bookmarks/", include("bookmarks.urls")),
+    url(r"^photos/", include("pinax.apps.photos.urls")),
+    url(r"^avatar/", include("avatar.urls")),
+    url(r"^swaps/", include("swaps.urls")),
+    url(r"^flag/", include("flag.urls")),
+    url(r"^locations/", include("locations.urls")),
+    url(r"^feeds/tweets/(.*)/$", "django.contrib.syndication.views.feed", tweets_feed_dict),
+    url(r"^feeds/posts/(.*)/$", "django.contrib.syndication.views.feed", blogs_feed_dict),
+    url(r"^feeds/bookmarks/(.*)/?$", "django.contrib.syndication.views.feed", bookmarks_feed_dict),
 )
 
 ## @@@ for now, we'll use friends_app to glue this stuff together
@@ -136,7 +125,7 @@ tagged_models = (
         query=lambda tag: TaggedItem.objects.get_by_model(Tribe, tag),
     ),
     dict(title="Wiki Articles",
-        query=lambda tag: TaggedItem.objects.get_by_model(WikiArticle, tag),
+        query=lambda tag: TaggedItem.objects.get_by_model(WikiPage, tag),
     ),
 )
 tagging_ext_kwargs = {
@@ -153,5 +142,5 @@ urlpatterns += patterns("",
 
 if settings.SERVE_MEDIA:
     urlpatterns += patterns("",
-        (r"", include("staticfiles.urls")),
+        url(r"", include("staticfiles.urls")),
     )

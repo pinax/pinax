@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django-hotclub-0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-02 19:21+0100\n"
+"POT-Creation-Date: 2010-07-28 23:48+0200\n"
 "PO-Revision-Date: 2010-02-22 09:46+0300\n"
 "Last-Translator: Ahmad Al-Ibrahim <speedy@speedy.org>\n"
 "Language-Team:  <beshrkayali@gmail.com>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Poedit-Language: Arabic\n"
 "X-Poedit-Country: Kuwait\n"
 
-#: forms.py:50 forms.py:127 forms.py:392 forms.py:516
+#: forms.py:50 forms.py:124 forms.py:360 forms.py:484
 msgid "Password"
 msgstr "كلمة المرور"
 
@@ -29,11 +29,11 @@ msgstr "تذكرني"
 msgid "If checked you will stay logged in for 3 weeks"
 msgstr "تسجيل الدخول لمدة 3 أسابيع"
 
-#: forms.py:66 forms.py:144 forms.py:282
+#: forms.py:66 forms.py:141 forms.py:296 forms.py:382
 msgid "E-mail"
 msgstr "البريد الإلكتروني"
 
-#: forms.py:71 forms.py:122 forms.py:264 forms.py:514
+#: forms.py:71 forms.py:119 forms.py:482
 msgid "Username"
 msgstr "إسم المستخدم"
 
@@ -49,81 +49,80 @@ msgstr "البريد الإلكتروني و/أو كلمة المرور غير �
 msgid "The username and/or password you specified are not correct."
 msgstr "إسم المستخدم و/أو كلمة المرور غير صحيحة."
 
-#: forms.py:131 forms.py:396
+#: forms.py:128 forms.py:364
 msgid "Password (again)"
 msgstr "كلمة المرور (مرة اخرى)"
 
-#: forms.py:147 forms.py:285
+#: forms.py:144
 msgid "E-mail (optional)"
 msgstr "البريد الإلكتروني (إختياري)"
 
-#: forms.py:152
+#: forms.py:149
 msgid "Usernames can only contain letters, numbers and underscores."
 msgstr ""
 "لا يمكن لإسم المستخدم سوى أن يحتوي على أحرف، أرقام وعلامة الشارطة السفلية."
 
-#: forms.py:157
+#: forms.py:154
 msgid "This username is already taken. Please choose another."
 msgstr "إسم المستخدم هذا غير متوفر. الرجاء إختيار إسم آخر."
 
-#: forms.py:166 forms.py:304
+#: forms.py:163
 msgid "A user is registered with this e-mail address."
 msgstr "مستخدم آخر مسجل بهذا البريد الإلكتروني."
 
-#: forms.py:172 forms.py:381 forms.py:403 forms.py:471
+#: forms.py:169 forms.py:349 forms.py:371 forms.py:439
 msgid "You must type the same password each time."
 msgstr "يجب أن تكون كلمتا المرور متطابقتين."
 
-#: forms.py:228
-msgid "Your email address has already been verified"
+#: forms.py:217
+#, fuzzy
+msgid "Your e-mail address has already been verified"
 msgstr "لقد سبق وأن تم التحقق من بريدك الإلكتروني"
 
-#: forms.py:238 forms.py:248 views.py:164 views.py:179
-#, python-format
-msgid "Confirmation email sent to %(email)s"
+#: forms.py:227 forms.py:237
+#, fuzzy, python-format
+msgid "Confirmation e-mail sent to %(email)s"
 msgstr "ثم إرسال رسالة التحقق من البريد الإلكتروني إلى %(email)s"
 
-#: forms.py:328 forms.py:414
-msgid "Email"
-msgstr "البريد الإلكتروني"
-
-#: forms.py:336
+#: forms.py:304
 msgid "This e-mail address already associated with this account."
 msgstr "هذا البريد الإلكتروني مرتبط مع هذا الحساب مسبقا."
 
-#: forms.py:337
+#: forms.py:305
 msgid "This e-mail address already associated with another account."
 msgstr "هذا البريد الإلكتروني مرتبط مع حساب آخر مسبقا."
 
-#: forms.py:361
+#: forms.py:329
 msgid "Current Password"
 msgstr "كلمة المرور الحالية"
 
-#: forms.py:365 forms.py:455
+#: forms.py:333 forms.py:423
 msgid "New Password"
 msgstr "كلمة المرور الجديدة"
 
-#: forms.py:369 forms.py:459
+#: forms.py:337 forms.py:427
 msgid "New Password (again)"
 msgstr "كلمة السر الجديدة (مرة أخرى)"
 
-#: forms.py:375
+#: forms.py:343
 msgid "Please type your current password."
 msgstr "الرجاء إدخال كلمة المرور الحالية."
 
-#: forms.py:421
-msgid "Email address not verified for any user account"
+#: forms.py:389
+#, fuzzy
+msgid "E-mail address not verified for any user account"
 msgstr "لم يتم التحقق من البريد الإلكتروني هذا لأي مستخدم"
 
-#: forms.py:441
-msgid "Password reset email sent"
+#: forms.py:409
+#, fuzzy
+msgid "Password reset e-mail sent"
 msgstr "تم إرسال رسالة تغيير كلمة المرور عبر البريد الالكتروني"
 
-#: forms.py:485
+#: forms.py:453
 msgid "Timezone"
 msgstr "المنطقة الزمنية"
 
-#: forms.py:499
+#: forms.py:467
 msgid "Language"
 msgstr "اللغة"
 
@@ -159,47 +158,54 @@ msgstr "الطابع الزمني"
 msgid "reset yet?"
 msgstr "إعادة ضبط الآن؟"
 
-#: views.py:88 views.py:132
+#: openid_consumer.py:120 views.py:89 views.py:136
 #, python-format
 msgid "Successfully logged in as %(user)s."
 msgstr "تم الدخول بنجاح للمستخدم %(user)s."
 
-#: views.py:195
+#: views.py:167 views.py:182
+#, python-format
+msgid "Confirmation email sent to %(email)s"
+msgstr "ثم إرسال رسالة التحقق من البريد الإلكتروني إلى %(email)s"
+
+#: views.py:198
 #, python-format
 msgid "Removed email address %(email)s"
 msgstr "تم إزالة البريد الإلكتروني %(email)s"
 
-#: views.py:235 views.py:363
+#: views.py:238 views.py:366
 msgid "Password successfully changed."
 msgstr "تم تغيير كلمة المرور بنجاح."
 
-#: views.py:265
+#: views.py:268
 msgid "Password successfully set."
 msgstr "تم تغيير كلمة المرور بنجاح."
 
-#: views.py:392
+#: views.py:395
 msgid "Timezone successfully updated."
 msgstr "تم تحديث المنطقة الزمنية بنجاح."
 
-#: views.py:418
+#: views.py:421
 msgid "Language successfully updated."
 msgstr "تم تحديث اللغة بنجاح."
 
-#: views.py:456
+#: views.py:459
 msgid "Twitter authentication failed"
 msgstr "فشل مصادقة Twitter"
 
-#: views.py:461
+#: views.py:464
 msgid "Successfully authenticated."
 msgstr "تم الدخول بنجاح."
 
-#: views.py:489
+#: views.py:492
 msgid "Removed twitter account information successfully."
 msgstr "تم إزالة بيانات حساب Twitter بنجاح."
 
-#: templatetags/openid_tags.py:22
-msgid "Logged in with OpenID"
-msgstr "تم الدخول بإستخدام OpenID"
+#~ msgid "Email"
+#~ msgstr "البريد الإلكتروني"
+
+#~ msgid "Logged in with OpenID"
+#~ msgstr "تم الدخول بإستخدام OpenID"
 
 #~ msgid "title"
 #~ msgstr "العنوان"

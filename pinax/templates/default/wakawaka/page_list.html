@@ -1,0 +1,18 @@
+{% extends "wakawaka/base.html" %}
+
+{% load i18n %}
+{% load group_tags %}
+
+
+{% block head_title %}
+    {% trans "All wiki pages" %}
+{% endblock %}
+
+{% block body %}
+    <h1>{% trans "All wiki pages" %}</h1>
+    <ul>
+    {% for page in page_list %}
+    <li><a href="{% groupurl wakawaka_page group slug=page.slug %}">{{ page.slug }}</a>
+    {% endfor %}
+    </ul>
+{% endblock %}

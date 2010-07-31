@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: v1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-02 19:22+0100\n"
+"POT-Creation-Date: 2010-07-28 23:48+0200\n"
 "PO-Revision-Date: 2010-03-01 14:22+0100\n"
 "Last-Translator: James Pic <http://jamespic.com/     >\n"
 "Language-Team: Pinax Team <http://www.transifex.net/projects/p/pinax/team/fr/"
@@ -18,7 +18,7 @@ msgstr ""
 "X-Poedit-Language: French\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: forms.py:50 forms.py:127 forms.py:392 forms.py:516
+#: forms.py:50 forms.py:124 forms.py:360 forms.py:484
 msgid "Password"
 msgstr "Mot de passe"
 
@@ -30,11 +30,11 @@ msgstr "Se souvenir de moi"
 msgid "If checked you will stay logged in for 3 weeks"
 msgstr "Si cette case est cochée vous resterez connecté pour 3 semaines "
 
-#: forms.py:66 forms.py:144 forms.py:282
+#: forms.py:66 forms.py:141 forms.py:296 forms.py:382
 msgid "E-mail"
 msgstr "Courriel"
 
-#: forms.py:71 forms.py:122 forms.py:264 forms.py:514
+#: forms.py:71 forms.py:119 forms.py:482
 msgid "Username"
 msgstr "Nom d'utilisateur"
 
@@ -54,83 +54,82 @@ msgstr ""
 "Le nom d'utilisateur et/ou le mot de passe que vous avez spécifié est "
 "incorrect."
 
-#: forms.py:131 forms.py:396
+#: forms.py:128 forms.py:364
 msgid "Password (again)"
 msgstr "Mot de passe (encore)"
 
-#: forms.py:147 forms.py:285
+#: forms.py:144
 msgid "E-mail (optional)"
 msgstr "Courriel (optionel)"
 
-#: forms.py:152
+#: forms.py:149
 msgid "Usernames can only contain letters, numbers and underscores."
 msgstr ""
 "Les noms d'utilisateur ne peuvent contenir que des lettres, des chiffres ou "
 "des caractères de soulignement."
 
-#: forms.py:157
+#: forms.py:154
 msgid "This username is already taken. Please choose another."
 msgstr ""
 "Ce nom d'utilisateur est déjà pris. Choisissez-en un autre s'il vous plaît."
 
-#: forms.py:166 forms.py:304
+#: forms.py:163
 msgid "A user is registered with this e-mail address."
 msgstr "Un utilisateur est déjà inscrit avec cette adresse email"
 
-#: forms.py:172 forms.py:381 forms.py:403 forms.py:471
+#: forms.py:169 forms.py:349 forms.py:371 forms.py:439
 msgid "You must type the same password each time."
 msgstr "Vous devez saisir le même mot de passe chaque fois."
 
-#: forms.py:228
-msgid "Your email address has already been verified"
+#: forms.py:217
+#, fuzzy
+msgid "Your e-mail address has already been verified"
 msgstr "Votre adresse de courriel a déjà été vérifiée"
 
-#: forms.py:238 forms.py:248 views.py:164 views.py:179
-#, python-format
-msgid "Confirmation email sent to %(email)s"
+#: forms.py:227 forms.py:237
+#, fuzzy, python-format
+msgid "Confirmation e-mail sent to %(email)s"
 msgstr "Courriel de confirmation envoyé à %(email)s"
 
-#: forms.py:328 forms.py:414
-msgid "Email"
-msgstr "Courriel"
-
-#: forms.py:336
+#: forms.py:304
 msgid "This e-mail address already associated with this account."
 msgstr "Cette adresse de courriel est déjà associée avec ce compte."
 
-#: forms.py:337
+#: forms.py:305
 msgid "This e-mail address already associated with another account."
 msgstr "Cette adresse de courriel est déjà associée avec un autre compte."
 
-#: forms.py:361
+#: forms.py:329
 msgid "Current Password"
 msgstr "Mot de passe actuel"
 
-#: forms.py:365 forms.py:455
+#: forms.py:333 forms.py:423
 msgid "New Password"
 msgstr "Nouveau mot de passe"
 
-#: forms.py:369 forms.py:459
+#: forms.py:337 forms.py:427
 msgid "New Password (again)"
 msgstr "Nouveau mot de passe (encore)"
 
-#: forms.py:375
+#: forms.py:343
 msgid "Please type your current password."
 msgstr "Saisissez votre mot de passe actuel s'il vous plaît."
 
-#: forms.py:421
-msgid "Email address not verified for any user account"
+#: forms.py:389
+#, fuzzy
+msgid "E-mail address not verified for any user account"
 msgstr "Adresse courriel non vérifiée pour aucun compte utilisateur"
 
-#: forms.py:441
-msgid "Password reset email sent"
+#: forms.py:409
+#, fuzzy
+msgid "Password reset e-mail sent"
 msgstr "Email de réinitialisation du mot de passe envoyé"
 
-#: forms.py:485
+#: forms.py:453
 msgid "Timezone"
 msgstr "Fuseau horaire"
 
-#: forms.py:499
+#: forms.py:467
 msgid "Language"
 msgstr "Langue"
 
@@ -166,44 +165,51 @@ msgstr "Horodatage"
 msgid "reset yet?"
 msgstr "déjà rédéfini?"
 
-#: views.py:88 views.py:132
+#: openid_consumer.py:120 views.py:89 views.py:136
 #, python-format
 msgid "Successfully logged in as %(user)s."
 msgstr "Connecté en temps que %(user)s avec succès."
 
-#: views.py:195
+#: views.py:167 views.py:182
+#, python-format
+msgid "Confirmation email sent to %(email)s"
+msgstr "Courriel de confirmation envoyé à %(email)s"
+
+#: views.py:198
 #, python-format
 msgid "Removed email address %(email)s"
 msgstr "Adresse email retirée %(email)s"
 
-#: views.py:235 views.py:363
+#: views.py:238 views.py:366
 msgid "Password successfully changed."
 msgstr "Mot de passe changé avec succès."
 
-#: views.py:265
+#: views.py:268
 msgid "Password successfully set."
 msgstr "Mot de passe changé avec succès."
 
-#: views.py:392
+#: views.py:395
 msgid "Timezone successfully updated."
 msgstr "Fuseau horaire mis à jour avec succès."
 
-#: views.py:418
+#: views.py:421
 msgid "Language successfully updated."
 msgstr "Langue mise à jour avec succès."
 
-#: views.py:456
+#: views.py:459
 msgid "Twitter authentication failed"
 msgstr "Echec de l'authentification sur Twitter"
 
-#: views.py:461
+#: views.py:464
 msgid "Successfully authenticated."
 msgstr "Authentifié avec succès."
 
-#: views.py:489
+#: views.py:492
 msgid "Removed twitter account information successfully."
 msgstr "Informations de connection au compte twitter effacées."
 
-#: templatetags/openid_tags.py:22
-msgid "Logged in with OpenID"
-msgstr "S'authentifier avec OpenID"
+#~ msgid "Email"
+#~ msgstr "Courriel"
+
+#~ msgid "Logged in with OpenID"
+#~ msgstr "S'authentifier avec OpenID"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-06 04:21-0700\n"
+"POT-Creation-Date: 2010-07-28 23:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,15 +16,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 
-#: templates/homepage.html:5
+#: templates/homepage.html:6
 msgid "Welcome"
 msgstr "Bienvenue"
 
-#: templates/homepage.html:11
+#: templates/homepage.html:12
 msgid "Welcome to Pinax"
 msgstr "Bienevenue sur le site"
 
-#: templates/homepage.html:14
+#: templates/homepage.html:15
 msgid ""
 "\n"
 "        <b>Pinax</b> is a <a href=\"http://djangoproject.com/\">Django</a>\n"
@@ -35,7 +35,7 @@ msgid ""
 "        "
 msgstr ""
 
-#: templates/homepage.html:24
+#: templates/homepage.html:25
 msgid ""
 "\n"
 "        For more information about Pinax, see\n"
@@ -43,11 +43,11 @@ msgid ""
 "        "
 msgstr ""
 
-#: templates/homepage.html:30
+#: templates/homepage.html:31
 msgid "About this project"
 msgstr "A propos de ce projet"
 
-#: templates/homepage.html:33
+#: templates/homepage.html:34
 msgid ""
 "\n"
 "        This project lays the foundation for all other Pinax starter "
@@ -58,30 +58,66 @@ msgid ""
 "        "
 msgstr ""
 
-#: templates/site_base.html:15
-msgid "Tab 1"
-msgstr ""
+#: templates/homepage.html:44
+#, fuzzy, python-format
+msgid "Wondering <a href=\"%(what_next_url)s\">What Next</a>?"
+msgstr "Vous vous demandez <a href=\"%(what_next_url)s\">Que faire apres</a>?"
 
-#: templates/site_base.html:22
+#: templates/homepage.html:49
+#, python-format
+msgid ""
+"You can <a href=\"%(signup_url)s\">Sign up</a> and <a href=\"%(login_url)s"
+"\">Log in</a> to try out the site."
+msgstr ""
+"Vous pouvez <a href=\"%(signup_url)s\">vous inscrire</a> et <a href=\"%"
+"(login_url)s\">vous authentifier</a> pour essayer le site."
+
+#: templates/homepage.html:51
+#, python-format
+msgid "You can <a href=\"%(login_url)s\">Log in</a> to try out the site."
+msgstr ""
+"Vous pouvez <a href=\"%(login_url)s\">vous authentifier</a> pour essayer le "
+"site."
+
+#: templates/site_base.html:18
 msgid "&copy; 2010 &lt;your company here&gt;"
 msgstr "&copy; 2010 &lt;votre raison sociale ici&gt;"
 
+#: templates/site_base.html:19
+msgid "About"
+msgstr "A propos"
+
+#: templates/site_base.html:20
 #, fuzzy
-#~ msgid "Wondering <a href=\"%(what_next_url)s\">What Next</a>?"
-#~ msgstr ""
-#~ "Vous vous demandez <a href=\"%(what_next_url)s\">Que faire apres</a>?"
+msgid "Terms of Service"
+msgstr "Termes de service"
 
-#~ msgid ""
-#~ "You can <a href=\"%(signup_url)s\">Sign up</a> and <a href=\"%(login_url)s"
-#~ "\">Log in</a> to try out the site."
-#~ msgstr ""
-#~ "Vous pouvez <a href=\"%(signup_url)s\">vous inscrire</a> et <a href=\"%"
-#~ "(login_url)s\">vous authentifier</a> pour essayer le site."
+#: templates/site_base.html:21
+msgid "Privacy Policy"
+msgstr "Politique de confidentialité"
 
-#~ msgid "You can <a href=\"%(login_url)s\">Log in</a> to try out the site."
-#~ msgstr ""
-#~ "Vous pouvez <a href=\"%(login_url)s\">vous authentifier</a> pour essayer "
-#~ "le site."
+#: templates/site_base.html:22
+#, fuzzy
+msgid "DMCA Notice"
+msgstr "Notifications"
+
+#: templates/about/what_next.html:6 templates/about/what_next.html.py:9
+msgid "What Next?"
+msgstr "Que faire maintenant?"
+
+#: templates/about/what_next.html:32
+#, python-format
+msgid ""
+"Start by <a href=\"%(signup_url)s\">signing up</a> and <a href=\"%(login_url)"
+"s\">logging in</a>."
+msgstr ""
+"Commencez par <a href=\"%(signup_url)s\">vous inscrire</a> et <a href=\"%"
+"(login_url)s\">vous authentifier</a>"
+
+#: templates/about/what_next.html:34
+#, python-format
+msgid "Start by <a href=\"%(login_url)s\">logging in</a>."
+msgstr "Commencez par <a href=\"%(login_url)s\">vous authentifier</a>"
 
 #~ msgid "Account"
 #~ msgstr "Compte"
@@ -103,32 +139,6 @@ msgstr "&copy; 2010 &lt;votre raison sociale ici&gt;"
 
 #~ msgid "Profile"
 #~ msgstr "Profil"
-
-#~ msgid "Notices"
-#~ msgstr "Notifications"
-
-#~ msgid "About"
-#~ msgstr "A propos"
-
-#, fuzzy
-#~ msgid "Terms of Service"
-#~ msgstr "Termes de service"
-
-#~ msgid "Privacy Policy"
-#~ msgstr "Politique de confidentialité"
-
-#~ msgid "What Next?"
-#~ msgstr "Que faire maintenant?"
-
-#~ msgid ""
-#~ "Start by <a href=\"%(signup_url)s\">signing up</a> and <a href=\"%"
-#~ "(login_url)s\">logging in</a>."
-#~ msgstr ""
-#~ "Commencez par <a href=\"%(signup_url)s\">vous inscrire</a> et <a href=\"%"
-#~ "(login_url)s\">vous authentifier</a>"
-
-#~ msgid "Start by <a href=\"%(login_url)s\">logging in</a>."
-#~ msgstr "Commencez par <a href=\"%(login_url)s\">vous authentifier</a>"
 
 #~ msgid "E-Mail Addresses"
 #~ msgstr "Addresses email"

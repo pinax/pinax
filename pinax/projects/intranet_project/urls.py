@@ -7,7 +7,7 @@ admin.autodiscover()
 
 from bookmarks.models import BookmarkInstance
 from tagging.models import TaggedItem
-from wiki.models import Article as WikiArticle
+from wakawaka.models import WikiPage
 
 from pinax.apps.account.openid_consumer import PinaxConsumer
 from pinax.apps.tasks.models import Task
@@ -34,7 +34,7 @@ urlpatterns = patterns("",
     url(r"^tasks/", include("pinax.apps.tasks.urls")),
     url(r"^topics/", include("pinax.apps.topics.urls")),
     url(r"^comments/", include("threadedcomments.urls")),
-    url(r"^wiki/", include("wiki.urls")),
+    url(r"^wiki/", include("wakawaka.urls")),
 )
 
 
@@ -50,7 +50,7 @@ tagged_models = (
         query=lambda tag: TaggedItem.objects.get_by_model(Topic, tag),
     ),
     dict(title="Wiki Articles",
-        query=lambda tag: TaggedItem.objects.get_by_model(WikiArticle, tag),
+        query=lambda tag: TaggedItem.objects.get_by_model(WikiPage, tag),
     ),
 )
 tagging_ext_kwargs = {

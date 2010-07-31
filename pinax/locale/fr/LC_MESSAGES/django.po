@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-02 19:16+0100\n"
+"POT-Creation-Date: 2010-07-28 23:45+0200\n"
 "PO-Revision-Date: 2010-02-28 20:43+0100\n"
 "Last-Translator: James Pic <jamespic@gmial.com>\n"
 "Language-Team: French\n"
@@ -46,7 +46,7 @@ msgid "clear"
 msgstr "éffacer"
 
 #: templates/default/about/about.html:5
-#: templates/default/basic_profiles/profile.html:24
+#: templates/default/idios/profile.html:21
 #: templates/default/profiles/profile.html:39
 msgid "About"
 msgstr "A propos"
@@ -151,7 +151,8 @@ msgid "Account"
 msgstr "Compte"
 
 #: templates/default/account/email.html:11
-msgid "Email Addresses"
+#, fuzzy
+msgid "E-mail Addresses"
 msgstr "Adresses email"
 
 #: templates/default/account/email.html:20
@@ -171,7 +172,8 @@ msgid "unverified"
 msgstr "non vérifiée"
 
 #: templates/default/account/email.html:42
-msgid "re-send verification email"
+#, fuzzy
+msgid "re-send verification e-mail"
 msgstr "ré-envoyer la vérification par email"
 
 #: templates/default/account/email.html:53
@@ -191,7 +193,8 @@ msgstr ""
 "mot de passe si vous l'oubliez, etc."
 
 #: templates/default/account/email.html:63
-msgid "Add Email Address"
+#, fuzzy
+msgid "Add E-mail Address"
 msgstr "Ajouter une adresse email"
 
 #: templates/default/account/email.html:71
@@ -241,16 +244,16 @@ msgstr ""
 msgid "Forgot password?"
 msgstr "Mot de passe oublié?"
 
-#: templates/default/account/login.html:36
-#: templates/default/account/login.html:61
+#: templates/default/account/login.html:39
+#: templates/default/account/login.html:64
 msgid "Log in &raquo;"
 msgstr "S'authentifier &raquo;"
 
-#: templates/default/account/login.html:41
+#: templates/default/account/login.html:44
 msgid "Or sign in with your OpenID"
 msgstr "Ou s'authentifier avec OpenID"
 
-#: templates/default/account/login.html:66
+#: templates/default/account/login.html:69
 #, python-format
 msgid ""
 "If you have any trouble logging in to your account, contact us at <a href="
@@ -417,12 +420,12 @@ msgstr "Vous êtes déjà authentifié."
 msgid "Already have an account?"
 msgstr "Avez-vous déjà un compte d'enregistré?"
 
-#: templates/default/account/signup.html:21
+#: templates/default/account/signup.html:24
 #: templates/default/django_openid/register.html:22
 msgid "Sign Up &raquo;"
 msgstr "M'inscrire maintenant &raquo;"
 
-#: templates/default/account/signup.html:28
+#: templates/default/account/signup.html:31
 #, python-format
 msgid ""
 "By clicking \"Sign Up\", you are indicating that you have read and agree to "
@@ -433,7 +436,7 @@ msgstr ""
 "href=\"%(terms_url)s\">termes d'utilisation</a> ainsi que notre <a href=\"%"
 "(privacy_url)s\">Politique de confidentialité</a>."
 
-#: templates/default/account/signup.html:30
+#: templates/default/account/signup.html:33
 #: templates/default/django_openid/register.html:32
 #, python-format
 msgid ""
@@ -519,92 +522,6 @@ msgstr "Image d'avatar"
 #: templates/default/avatar/change.html:33
 msgid "Upload New Image"
 msgstr "Envoyer une nouvelle image"
-
-#: templates/default/basic_profiles/base.html:10
-#: templates/default/profiles/base.html:10
-msgid "Your Profile"
-msgstr "Votre profil"
-
-#: templates/default/basic_profiles/base.html:11
-#: templates/default/basic_profiles/profiles.html:9
-#: templates/default/profiles/base.html:11
-#: templates/default/profiles/profiles.html:9
-msgid "All Profiles"
-msgstr "Tout les profils"
-
-#: templates/default/basic_profiles/profile.html:7
-#: templates/default/profiles/profile.html:14
-#, python-format
-msgid "Profile for %(other_user_display)s"
-msgstr "Profil pour %(other_user_display)s"
-
-#: templates/default/basic_profiles/profile.html:17
-#: templates/default/profiles/profile.html:32
-#, python-format
-msgid "Profile for <span class=\"nickname\">%(other_user_display)s</span>"
-msgstr "Profil pour <span class=\"nickname\">%(other_user_display)s</span>"
-
-#: templates/default/basic_profiles/profile.html:19
-#: templates/default/profiles/profile.html:34
-#, python-format
-msgid "Profile for <span class=\"fn nickname\">%(other_user_display)s</span>"
-msgstr "Profil pour <span class=\"fn nickname\">%(other_user_display)s</span>"
-
-#: templates/default/basic_profiles/profile.html:23
-#: templates/default/basic_profiles/profiles.html:25
-#: templates/default/profiles/profile.html:38
-#: templates/default/profiles/profiles.html:26
-msgid "Name"
-msgstr "Nom"
-
-#: templates/default/basic_profiles/profile.html:25
-#: templates/default/profiles/profile.html:40
-msgid "Location"
-msgstr "Localisation"
-
-#: templates/default/basic_profiles/profile.html:26
-#: templates/default/profiles/profile.html:41
-msgid "Website"
-msgstr "Site internet"
-
-#: templates/default/basic_profiles/profile_edit.html:5
-#: templates/default/basic_profiles/profile_edit.html:9
-#: templates/default/basic_profiles/profile_edit_facebox.html:3
-#: templates/default/profiles/profile_edit.html:5
-#: templates/default/profiles/profile_edit.html:9
-#: templates/default/profiles/profile_edit_facebox.html:3
-msgid "Edit Profile"
-msgstr "Modifier votre profil"
-
-#: templates/default/basic_profiles/profiles.html:12
-#: templates/default/profiles/profiles.html:12
-msgid "Profiles"
-msgstr "Profils"
-
-#: templates/default/basic_profiles/profiles.html:23
-#: templates/default/profiles/profiles.html:24
-#: templates/default/projects/projects.html:36
-#: templates/default/tribes/tribes.html:36
-msgid "Order by:"
-msgstr "Classer par:"
-
-#: templates/default/basic_profiles/profiles.html:27
-#: templates/default/messages/trash.html:12
-#: templates/default/messages/view.html:16
-#: templates/default/profiles/profiles.html:28
-#: templates/default/wiki/history.html:22
-msgid "Date"
-msgstr "Date"
-
-#: templates/default/basic_profiles/profiles.html:37
-#: templates/default/notification/notices.html:27
-#: templates/default/profiles/profiles.html:38
-#: templates/default/tasks/focus.html:141
-#: templates/default/tasks/task_list.html:139
-#: templates/default/tasks/task_list_detail.html:60
-#: templates/default/wiki/index.html:22
-msgid "MONTH_DAY_FORMAT"
-msgstr "MONTH_DAY_FORMAT"
 
 #: templates/default/blog/base.html:10
 #: templates/default/blog/friends_posts.html:7
@@ -698,58 +615,59 @@ msgid "Your Bookmarks"
 msgstr "vos favoris"
 
 #: templates/default/bookmarks/base.html:11
-#: templates/default/bookmarks/friends_bookmarks.html:13
-#: templates/default/bookmarks/friends_bookmarks.html:18
+#: templates/default/bookmarks/friends_bookmarks.html:12
+#: templates/default/bookmarks/friends_bookmarks.html:17
 msgid "Friends' Bookmarks"
 msgstr "Favoris des amis"
 
 #: templates/default/bookmarks/base.html:12
-#: templates/default/bookmarks/bookmarks.html:13
-#: templates/default/bookmarks/bookmarks.html:20
+#: templates/default/bookmarks/bookmarks.html:12
+#: templates/default/bookmarks/bookmarks.html:19
 msgid "All Bookmarks"
 msgstr "Tout les favoris"
 
-#: templates/default/bookmarks/bookmarks.html:25
+#: templates/default/bookmarks/bookmarks.html:24
 msgid "These are bookmarks from everyone:"
 msgstr "Voici des favoris qui proviennent de tout le monde:"
 
-#: templates/default/bookmarks/bookmarks.html:27
-#: templates/default/bookmarks/friends_bookmarks.html:26
+#: templates/default/bookmarks/bookmarks.html:26
+#: templates/default/bookmarks/friends_bookmarks.html:25
 msgid "Sort by:"
 msgstr "Classer par:"
 
-#: templates/default/bookmarks/bookmarks.html:30
-#: templates/default/bookmarks/bookmarks.html:32
-#: templates/default/bookmarks/bookmarks.html:38
-#: templates/default/bookmarks/bookmarks.html:40
-#: templates/default/bookmarks/bookmarks.html:45
-#: templates/default/bookmarks/bookmarks.html:47
-#: templates/default/bookmarks/friends_bookmarks.html:29
-#: templates/default/bookmarks/friends_bookmarks.html:31
-#: templates/default/bookmarks/friends_bookmarks.html:37
-#: templates/default/bookmarks/friends_bookmarks.html:39
-#: templates/default/bookmarks/friends_bookmarks.html:44
-#: templates/default/bookmarks/friends_bookmarks.html:46
+#: templates/default/bookmarks/bookmarks.html:29
+#: templates/default/bookmarks/bookmarks.html:31
+#: templates/default/bookmarks/bookmarks.html:37
+#: templates/default/bookmarks/bookmarks.html:39
+#: templates/default/bookmarks/bookmarks.html:44
+#: templates/default/bookmarks/bookmarks.html:46
+#: templates/default/bookmarks/friends_bookmarks.html:28
+#: templates/default/bookmarks/friends_bookmarks.html:30
+#: templates/default/bookmarks/friends_bookmarks.html:36
+#: templates/default/bookmarks/friends_bookmarks.html:38
+#: templates/default/bookmarks/friends_bookmarks.html:43
+#: templates/default/bookmarks/friends_bookmarks.html:45
+#: templates/default/wakawaka/edit.html:42
 msgid "or"
 msgstr "ou"
 
-#: templates/default/bookmarks/bookmarks.html:31
-#: templates/default/bookmarks/friends_bookmarks.html:30
+#: templates/default/bookmarks/bookmarks.html:30
+#: templates/default/bookmarks/friends_bookmarks.html:29
 msgid "total points"
 msgstr "total des points"
 
-#: templates/default/bookmarks/bookmarks.html:37
-#: templates/default/bookmarks/friends_bookmarks.html:36
+#: templates/default/bookmarks/bookmarks.html:36
+#: templates/default/bookmarks/friends_bookmarks.html:35
 msgid "reddit-like hotness"
 msgstr "le meilleur"
 
-#: templates/default/bookmarks/bookmarks.html:48
-#: templates/default/bookmarks/friends_bookmarks.html:47
+#: templates/default/bookmarks/bookmarks.html:47
+#: templates/default/bookmarks/friends_bookmarks.html:46
 msgid "date added"
 msgstr "date d'ajout"
 
-#: templates/default/bookmarks/bookmarks.html:84
-#: templates/default/bookmarks/friends_bookmarks.html:83
+#: templates/default/bookmarks/bookmarks.html:83
+#: templates/default/bookmarks/friends_bookmarks.html:82
 #, python-format
 msgid ""
 "\n"
@@ -768,23 +686,23 @@ msgstr[1] ""
 "                                Sauvegarder %(count)s fois\n"
 "                            "
 
-#: templates/default/bookmarks/bookmarks.html:90
-#: templates/default/bookmarks/friends_bookmarks.html:89
+#: templates/default/bookmarks/bookmarks.html:89
+#: templates/default/bookmarks/friends_bookmarks.html:88
 msgid "(including you)"
 msgstr "(vous y compris)"
 
-#: templates/default/bookmarks/bookmarks.html:92
-#: templates/default/bookmarks/friends_bookmarks.html:91
+#: templates/default/bookmarks/bookmarks.html:91
+#: templates/default/bookmarks/friends_bookmarks.html:90
 msgid "save"
 msgstr "sauvegarde"
 
-#: templates/default/bookmarks/bookmarks.html:105
-#: templates/default/bookmarks/friends_bookmarks.html:104
+#: templates/default/bookmarks/bookmarks.html:104
+#: templates/default/bookmarks/friends_bookmarks.html:103
 #: templates/default/bookmarks/your_bookmarks.html:48
 msgid "No bookmarks yet."
 msgstr "Pas de favoris pour l'instant."
 
-#: templates/default/bookmarks/friends_bookmarks.html:24
+#: templates/default/bookmarks/friends_bookmarks.html:23
 msgid "These are bookmarks from your friends:"
 msgstr "Ce sont les favoris de vos amis:"
 
@@ -898,17 +816,19 @@ msgstr ""
 "actuellement fermés sur ce site"
 
 #: templates/default/emailconfirmation/confirm_email.html:6
-msgid "Confirm Email"
+#, fuzzy
+msgid "Confirm E-mail"
 msgstr "Confirmer l'email"
 
 #: templates/default/emailconfirmation/confirm_email.html:10
-msgid "Email Confirmed"
+#, fuzzy
+msgid "E-mail Confirmed"
 msgstr "Email confirmé"
 
 #: templates/default/emailconfirmation/confirm_email.html:12
-#, python-format
+#, fuzzy, python-format
 msgid ""
-"You have confirmed that %(email)s is an email address for user '%"
+"You have confirmed that %(email)s is an e-mail address for user '%"
 "(user_display)s'."
 msgstr ""
 "Vous avez confirmé que l'email %(email)s correspond à l'utilisateur '%"
@@ -951,6 +871,62 @@ msgstr ""
 #, python-format
 msgid "You have been invited to join %(SITE_NAME)s"
 msgstr "Vous avez été invité à rejoindre %(SITE_NAME)s"
+
+#: templates/default/idios/base.html:10
+#: templates/default/profiles/base.html:10
+msgid "Your Profile"
+msgstr "Votre profil"
+
+#: templates/default/idios/base.html:11
+#: templates/default/idios/profiles.html:7
+#: templates/default/idios/profiles.html:10
+#: templates/default/profiles/base.html:11
+#: templates/default/profiles/profiles.html:9
+msgid "All Profiles"
+msgstr "Tout les profils"
+
+#: templates/default/idios/profile.html:7
+#: templates/default/profiles/profile.html:14
+#, python-format
+msgid "Profile for %(other_user_display)s"
+msgstr "Profil pour %(other_user_display)s"
+
+#: templates/default/idios/profile.html:14
+#: templates/default/profiles/profile.html:32
+#, python-format
+msgid "Profile for <span class=\"nickname\">%(other_user_display)s</span>"
+msgstr "Profil pour <span class=\"nickname\">%(other_user_display)s</span>"
+
+#: templates/default/idios/profile.html:16
+#: templates/default/profiles/profile.html:34
+#, python-format
+msgid "Profile for <span class=\"fn nickname\">%(other_user_display)s</span>"
+msgstr "Profil pour <span class=\"fn nickname\">%(other_user_display)s</span>"
+
+#: templates/default/idios/profile.html:20
+#: templates/default/profiles/profile.html:38
+#: templates/default/profiles/profiles.html:26
+msgid "Name"
+msgstr "Nom"
+
+#: templates/default/idios/profile.html:22
+#: templates/default/profiles/profile.html:40
+msgid "Location"
+msgstr "Localisation"
+
+#: templates/default/idios/profile.html:23
+#: templates/default/profiles/profile.html:41
+msgid "Website"
+msgstr "Site internet"
+
+#: templates/default/idios/profile_edit.html:5
+#: templates/default/idios/profile_edit.html:9
+#: templates/default/idios/profile_edit_facebox.html:3
+#: templates/default/profiles/profile_edit.html:5
+#: templates/default/profiles/profile_edit.html:9
+#: templates/default/profiles/profile_edit_facebox.html:3
+msgid "Edit Profile"
+msgstr "Modifier votre profil"
 
 #: templates/default/locations/base.html:10
 msgid "Your Checkins"
@@ -1031,7 +1007,8 @@ msgstr "Action"
 #: templates/default/messages/outbox.html:21
 #: templates/default/messages/trash.html:21
 #: templates/default/messages/view.html:17
-#: templates/default/tasks/task.html:44 templates/default/wiki/history.html:31
+#: templates/default/tasks/task.html:44
+#: templates/default/wakawaka/page.html:45
 msgid "DATETIME_FORMAT"
 msgstr "DATETIME_FORMAT"
 
@@ -1058,6 +1035,12 @@ msgstr "Destinnataire"
 msgid "Deleted Messages"
 msgstr "Messages éffacés"
 
+#: templates/default/messages/trash.html:12
+#: templates/default/messages/view.html:16
+#: templates/default/profiles/profiles.html:28
+msgid "Date"
+msgstr "Date"
+
 #: templates/default/messages/trash.html:22
 msgid "undelete"
 msgstr "restaurer"
@@ -1079,6 +1062,7 @@ msgid "Reply"
 msgstr "Répondre"
 
 #: templates/default/messages/view.html:28
+#: templates/default/wakawaka/edit.html:64
 msgid "Delete"
 msgstr "Effacer"
 
@@ -1363,6 +1347,14 @@ msgstr "Tweet seul"
 msgid "Mark all unseen notices seen"
 msgstr "Marquer tout les nofications comme lues"
 
+#: templates/default/notification/notices.html:27
+#: templates/default/profiles/profiles.html:38
+#: templates/default/tasks/focus.html:141
+#: templates/default/tasks/task_list.html:139
+#: templates/default/tasks/task_list_detail.html:60
+msgid "MONTH_DAY_FORMAT"
+msgstr "MONTH_DAY_FORMAT"
+
 #: templates/default/notification/notices.html:45
 msgid "No notices."
 msgstr "Pas de notification."
@@ -1601,6 +1593,16 @@ msgstr "Vous n'êtes encore le membre d'aucune tribu."
 #, python-format
 msgid "%(other_user_display)s's Friends"
 msgstr "Amis de %(other_user_display)s"
+
+#: templates/default/profiles/profiles.html:12
+msgid "Profiles"
+msgstr "Profils"
+
+#: templates/default/profiles/profiles.html:24
+#: templates/default/projects/projects.html:36
+#: templates/default/tribes/tribes.html:36
+msgid "Order by:"
+msgstr "Classer par:"
 
 #: templates/default/projects/base.html:17
 #: templates/default/projects/your_projects.html:7
@@ -1874,6 +1876,7 @@ msgid "Swaps proposed by you"
 msgstr "Echanges que vous proposez"
 
 #: templates/default/swaps/proposed_by_you.html:37
+#: templates/default/wakawaka/edit.html:48
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -2139,6 +2142,7 @@ msgid "Back to Task List"
 msgstr "Retour à la Liste des taches"
 
 #: templates/default/tasks/task.html:22
+#: templates/default/wakawaka/page.html:54
 msgid "Edit"
 msgstr "Modifier"
 
@@ -2150,7 +2154,7 @@ msgstr "Mettre à jour"
 msgid "Attachments"
 msgstr "Attachements"
 
-#: templates/default/tasks/task.html:53 templates/default/wiki/history.html:24
+#: templates/default/tasks/task.html:53
 msgid "Comment"
 msgstr "Commentaire"
 
@@ -2190,15 +2194,15 @@ msgstr "Statut"
 msgid "none"
 msgstr "aucun"
 
-#: templates/default/tasks/user_tasks.html:69
+#: templates/default/tasks/user_tasks.html:67
 msgid "You have no nudged tasks right now."
 msgstr "Aucune tache klaxonnée pour l'instant"
 
-#: templates/default/tasks/user_tasks.html:121
+#: templates/default/tasks/user_tasks.html:119
 msgid "You have no assigned tasks right now."
 msgstr "Aucune tache ne vous est assignée pour l'instant"
 
-#: templates/default/tasks/user_tasks.html:173
+#: templates/default/tasks/user_tasks.html:171
 msgid "You have no created tasks right now."
 msgstr "Vous n'avez encore créé aucune tache pour l'instant"
 
@@ -2388,93 +2392,166 @@ msgstr "Voici les tribus auxquelles vous participez."
 msgid "Welcome"
 msgstr "Bienvenue"
 
-#: templates/default/waitinglist/list_signup.html:12
+#: templates/default/waitinglist/list_signup.html:10
 msgid "Signup for the waiting list"
 msgstr "Inscrivez-vous sur la liste d'attente"
 
-#: templates/default/waitinglist/list_signup.html:14
+#: templates/default/waitinglist/list_signup.html:12
 msgid "Give us your e-mail address and you'll be added to the waiting list"
 msgstr "Inscrivez votre adresse email pour être ajouté à la liste d'attente"
 
-#: templates/default/wiki/base.html:10
-msgid "All Articles"
-msgstr "Tout les articles"
+#: templates/default/wakawaka/base.html:10
+#, fuzzy
+msgid "Start"
+msgstr "Statut"
 
-#: templates/default/wiki/changeset.html:20
-msgid "Markup:"
-msgstr "Syntaxe:"
-
-#: templates/default/wiki/changeset.html:24
-msgid "Plain Text."
-msgstr "Texte."
-
-#: templates/default/wiki/edit.html:8 templates/default/wiki/edit.html:14
-msgid "Edit Article"
-msgstr "Modifier l'article"
-
-#: templates/default/wiki/edit.html:21
-msgid "Save Article"
-msgstr "Sauvegarder l'article"
-
-#: templates/default/wiki/history.html:15
-msgid "History for article"
-msgstr "Historique de l'article"
-
-#: templates/default/wiki/history.html:23
-msgid "Editor"
-msgstr "Editeur"
-
-#: templates/default/wiki/history.html:25
-msgid "Revert to..."
-msgstr ""
-
-#: templates/default/wiki/history.html:45
-msgid "Current Revision"
+#: templates/default/wakawaka/base.html:11
+#, fuzzy
+msgid "Recent revisions"
 msgstr "Révision actuelle"
 
-#: templates/default/wiki/history.html:55
+#: templates/default/wakawaka/base.html:12
+#, fuzzy
+msgid "All Pages"
+msgstr "Tout les profils"
+
+#: templates/default/wakawaka/changes.html:14
+#: templates/default/wakawaka/edit.html:10
+#: templates/default/wakawaka/page.html:15
+#: templates/default/wakawaka/revisions.html:10
+#, fuzzy
+msgid "Edit this page"
+msgstr "Modifier cet article"
+
+#: templates/default/wakawaka/changes.html:19
+#, python-format
+msgid "Changes for %(slug)s"
+msgstr ""
+
+#: templates/default/wakawaka/edit.html:16
+#: templates/default/wakawaka/edit.html:25
+#, python-format
+msgid "Add %(slug)s"
+msgstr ""
+
+#: templates/default/wakawaka/edit.html:18
+#: templates/default/wakawaka/edit.html:27
+#, python-format
+msgid "Edit %(slug)s"
+msgstr ""
+
+#: templates/default/wakawaka/edit.html:32
+msgid "You are editing an revision which is not the latest!"
+msgstr ""
+
+#: templates/default/wakawaka/edit.html:36
+#, fuzzy
+msgid "The page is locked for you."
+msgstr "Il n'y a aucune annonce pour vous."
+
+#: templates/default/wakawaka/edit.html:41
+msgid "Save changes"
+msgstr ""
+
+#: templates/default/wakawaka/edit.html:52
+#, python-format
+msgid "The page is locked for %(lock_owner)s since about %(lock_timestamp)s."
+msgstr ""
+
+#: templates/default/wakawaka/edit.html:53
+msgid "Reset lock"
+msgstr ""
+
+#: templates/default/wakawaka/edit.html:60
+msgid "Please confirm deletion"
+msgstr ""
+
+#: templates/default/wakawaka/edit.html:69
+msgid "Revisions for this page"
+msgstr ""
+
+#: templates/default/wakawaka/page.html:28
+msgid "You are viewing an older revision!"
+msgstr ""
+
+#: templates/default/wakawaka/page.html:30
+msgid "See the latest version"
+msgstr ""
+
+#: templates/default/wakawaka/page.html:45
+#, fuzzy, python-format
+msgid ""
+"\n"
+"                Recently modified by <em>%(creator)s</em>: %(modified)s\n"
+"            "
+msgstr ""
+"\n"
+"                (plus récent: %(topic_modified)s)\n"
+"                "
+
+#: templates/default/wakawaka/page.html:49
+#, fuzzy
+msgid "History"
+msgstr "Historique des taches"
+
+#: templates/default/wakawaka/page_list.html:8
+#: templates/default/wakawaka/page_list.html:12
+msgid "All wiki pages"
+msgstr ""
+
+#: templates/default/wakawaka/revision_list.html:7
+#: templates/default/wakawaka/revision_list.html:11
+msgid "List of all revisions"
+msgstr ""
+
+#: templates/default/wakawaka/revision_list.html:15
+#, fuzzy
+msgid "Page"
+msgstr "Changer"
+
+#: templates/default/wakawaka/revision_list.html:16
+#: templates/default/wakawaka/revision_table.html:9
+#, fuzzy
+msgid "Changed"
+msgstr "Changer"
+
+#: templates/default/wakawaka/revision_list.html:17
+#: templates/default/wakawaka/revision_table.html:10
+#, fuzzy
+msgid "Message"
+msgstr "Voir les messages"
+
+#: templates/default/wakawaka/revision_list.html:18
+#: templates/default/wakawaka/revision_table.html:11
+#, fuzzy
+msgid "Modified by"
+msgstr "Modifié"
+
+#: templates/default/wakawaka/revision_list.html:28
+#: templates/default/wakawaka/revision_table.html:40
+msgid "View"
+msgstr ""
+
+#: templates/default/wakawaka/revision_list.html:30
+#: templates/default/wakawaka/revision_table.html:41
 msgid "Revert"
 msgstr ""
 
-#: templates/default/wiki/history.html:58
-msgid "No changes in this article"
-msgstr "Pas de changement pour cet article"
+#: templates/default/wakawaka/revision_table.html:8
+#, fuzzy
+msgid "Compare"
+msgstr "Ecrire"
 
-#: templates/default/wiki/searchbox.html:12
-msgid "Go"
-msgstr "Go"
+#: templates/default/wakawaka/revision_table.html:47
+#, fuzzy
+msgid "Compare revisions"
+msgstr "Révision actuelle"
 
-#: templates/default/wiki/view.html:17
-msgid "Actions"
-msgstr "Actions"
-
-#: templates/default/wiki/view.html:20
-msgid "Edit this article"
-msgstr "Modifier cet article"
-
-#: templates/default/wiki/view.html:22
-msgid "Editing history"
-msgstr "Modification de l'historique"
-
-#: templates/default/wiki/view.html:26
-msgid "Create this article"
-msgstr "Créer cet article"
-
-#: templates/default/wiki/view.html:39
-msgid "This article does not exist."
-msgstr "Cet article n'existe pas"
-
-#: templates/default/wiki/view.html:40
-msgid ">Create it now</a>?"
-msgstr ">Le créer maintenant</a>?"
-
-#: templates/default/wiki/view.html:53
-msgid "Stop Observing Article"
-msgstr "Ne plus observer l'article"
-
-#: templates/default/wiki/view.html:58
-msgid "Observe Article"
-msgstr "Observer l'article"
+#: templates/default/wakawaka/revisions.html:15
+#: templates/default/wakawaka/revisions.html:19
+#, fuzzy, python-format
+msgid "History for %(slug)s"
+msgstr "Historique de l'article"
 
 #: templatetags/templatetags/shorttimesince_tag.py:19
 msgid "yr"
@@ -2522,3 +2599,48 @@ msgstr "%(number)d%(type)s"
 #, python-format
 msgid ", %(number)d%(type)s"
 msgstr ", %(number)d%(type)s"
+
+#~ msgid "All Articles"
+#~ msgstr "Tout les articles"
+
+#~ msgid "Markup:"
+#~ msgstr "Syntaxe:"
+
+#~ msgid "Plain Text."
+#~ msgstr "Texte."
+
+#~ msgid "Edit Article"
+#~ msgstr "Modifier l'article"
+
+#~ msgid "Save Article"
+#~ msgstr "Sauvegarder l'article"
+
+#~ msgid "Editor"
+#~ msgstr "Editeur"
+
+#~ msgid "No changes in this article"
+#~ msgstr "Pas de changement pour cet article"
+
+#~ msgid "Go"
+#~ msgstr "Go"
+
+#~ msgid "Actions"
+#~ msgstr "Actions"
+
+#~ msgid "Editing history"
+#~ msgstr "Modification de l'historique"
+
+#~ msgid "Create this article"
+#~ msgstr "Créer cet article"
+
+#~ msgid "This article does not exist."
+#~ msgstr "Cet article n'existe pas"
+
+#~ msgid ">Create it now</a>?"
+#~ msgstr ">Le créer maintenant</a>?"
+
+#~ msgid "Stop Observing Article"
+#~ msgstr "Ne plus observer l'article"
+
+#~ msgid "Observe Article"
+#~ msgstr "Observer l'article"

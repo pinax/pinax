@@ -1,0 +1,59 @@
+{% extends "wakawaka/base.html" %}
+
+{% load wakawaka_tags %}
+{% load i18n %}
+{% load group_tags %}
+
+{% block extra_head %}
+    {# Don't let search engines scan this old revision #}
+    {% if rev.is_not_current %}
+        <meta name="robots" content="noindex" />
+    {% endif %}
+    
+    {# Add support for the Universal Edit Button #}
+    {% if perms.wakawaka.change_wikipage %}
+    <link rel="edit" title="{% trans "Edit this page" %}" href="{% groupurl wakawaka_edit group slug=page.slug %}" />
+    {% endif %}
+{% endblock %}
+
+{% block head_title %}
+    {{ page.slug }}
+{% endblock %}
+
+{% block body %}
+    <h1><a href="{% groupurl wakawaka_page group slug=page.slug %}">{{ page.slug }}</a></h1>
+    
+    {% if rev.is_not_current %}
+    <p class="revert-warning">
+        {% trans "You are viewing an older revision!" %}
+        <a href="{% groupurl wakawaka_page group slug=page.slug %}">
+          {% trans "See the latest version" %}
+        </a>
+    </p>
+    {% endif %}
+    
+    <div class="page">
+        {% include "wakawaka/page_content.html" %}
+    </div>
+    
+    {% spaceless %}
+    <div class="info">
+        <span>
+            <strong>{{ page.slug }}</strong>
+        </span>
+        <span>
+            {% blocktrans with page.current.creator as creator and rev.modified|date:_("DATETIME_FORMAT") as modified %}
+                Recently modified by <em>{{ creator }}</em>: {{ modified }}
+            {% endblocktrans %}
+            
+            (<a href="{% groupurl wakawaka_revision_list group slug=page.slug %}">{% trans "History" %}</a>)
+        </span>
+        
+        {% if perms.wakawaka.change_wikipage %}
+        <span>
+            <a href="{% groupurl wakawaka_edit group slug=page.slug %}">{% trans "Edit" %}</a>
+        </span>
+        {% endif %}
+    </div>
+    {% endspaceless %}
+{% endblock %}

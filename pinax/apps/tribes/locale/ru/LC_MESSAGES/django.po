@@ -3,81 +3,83 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-02 19:32+0100\n"
+"POT-Creation-Date: 2010-07-28 23:54+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #: forms.py:14
 msgid ""
 "a short version of the name consisting only of letters, numbers, underscores "
 "and hyphens."
 msgstr ""
+"короткая версия названия, состоящая только из букв, цифр, тире и "
+"подчеркиваний."
 
 #: forms.py:19
 msgid "A tribe already exists with that slug."
-msgstr ""
+msgstr "Клан с таким коротким названием уже существует."
 
 #: forms.py:24 forms.py:41
 msgid "A tribe already exists with that name."
-msgstr ""
+msgstr "Клан с таким названием  уже существует."
 
 #: management.py:11
 msgid "New Tribe Member"
-msgstr ""
+msgstr "Новый член клана"
 
 #: management.py:11
 msgid "a tribe you are a member of has a new member"
-msgstr ""
+msgstr "в клане, членом которого вы являетесь, новый член"
 
 #: management.py:12
 msgid "New Member Of Tribe You Created"
-msgstr ""
+msgstr "Новый член клана, который вы создали"
 
 #: management.py:12
 msgid "a tribe you created has a new member"
-msgstr ""
+msgstr "в клане который вы создали новый член"
 
 #: management.py:13
 msgid "New Tribe Created"
-msgstr ""
+msgstr "Создан новый клан"
 
 #: management.py:13
 msgid "a new tribe has been created"
-msgstr ""
+msgstr "создан новый клан"
 
 #: models.py:15
 msgid "members"
-msgstr ""
+msgstr "члены"
 
 #: views.py:94
 #, python-format
 msgid "Tribe %(tribe_name)s deleted."
-msgstr ""
+msgstr "Клан %(tribe_name)s удален."
 
 #: views.py:128
 #, python-format
 msgid "You have joined the tribe %(tribe_name)s"
-msgstr ""
+msgstr "Вы вступили в клан %(tribe_name)s"
 
 #: views.py:144
 #, python-format
 msgid "You have already joined tribe %(tribe_name)s"
-msgstr ""
+msgstr "Вы уже вступили к клану %(tribe_name)s"
 
 #: views.py:151
 #, python-format
 msgid "You have left the tribe %(tribe_name)s"
-msgstr ""
+msgstr "Вы покинули клан %(tribe_name)s"
 
 #: templates/notification/tribes_created_new_member/full.txt:1
 #: templates/notification/tribes_new_member/full.txt:1
@@ -87,6 +89,9 @@ msgid ""
 "\n"
 "http://%(current_site)s%(tribe_url)s\n"
 msgstr ""
+"%(user_display)s вступил(а) в клан %(tribe)s.\n"
+"\n"
+"http://%(current_site)s%(tribe_url)s\n"
 
 #: templates/notification/tribes_created_new_member/notice.html:2
 #: templates/notification/tribes_new_member/notice.html:2
@@ -95,6 +100,8 @@ msgid ""
 "<a href=\"%(user_url)s\">%(user_display)s</a> has joined the tribe <a href="
 "\"%(tribe_url)s\">%(tribe)s</a>."
 msgstr ""
+"<a href=\"%(user_url)s\">%(user_display)s</a> вступил(а) в клан <a href=\"%"
+"(tribe_url)s\">%(tribe)s</a>."
 
 #: templates/notification/tribes_new_tribe/full.txt:1
 #, python-format
@@ -103,8 +110,11 @@ msgid ""
 "\n"
 "http://%(current_site)s%(tribe_url)s\n"
 msgstr ""
+"Был создан новый клан %(tribe)s.\n"
+"\n"
+"http://%(current_site)s%(tribe_url)s\n"
 
 #: templates/notification/tribes_new_tribe/notice.html:2
 #, python-format
 msgid "A new group <a href=\"%(tribe_url)s\">%(tribe)s</a> has been created."
-msgstr ""
+msgstr "Была создана новая группа <a href=\"%(tribe_url)s\">%(tribe)s</a>."

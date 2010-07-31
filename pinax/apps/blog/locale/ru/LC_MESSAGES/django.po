@@ -3,124 +3,126 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-03-02 19:25+0100\n"
+"POT-Creation-Date: 2010-07-28 23:50+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #: forms.py:14
 msgid ""
 "a short version of the title consisting only of letters, numbers, "
 "underscores and hyphens."
 msgstr ""
+"короткая версия названия, состоящая только из букв, цифр, тире и "
+"подчеркиваний."
 
 #: management.py:11
 msgid "Friend Posted to Blog"
-msgstr ""
+msgstr "Друг добавил запись в блог"
 
 #: management.py:11
 msgid "a friend of yours posted to their blog"
-msgstr ""
+msgstr "ваш друг добавил запись в блог"
 
 #: management.py:12
 msgid "New Comment on Blog Post"
-msgstr ""
+msgstr "Новый комментарий к записи в блоге"
 
 #: management.py:12
 msgid "a comment was made on one of your blog posts"
-msgstr ""
-
-#: models.py:30
-msgid "Draft"
-msgstr ""
+msgstr "одну из ваших записей в блоге прокомментировали"
 
 #: models.py:31
-msgid "Public"
-msgstr ""
+msgid "Draft"
+msgstr "Черновик"
 
-#: models.py:34
-msgid "title"
-msgstr ""
+#: models.py:32
+msgid "Public"
+msgstr "Открытая"
 
 #: models.py:35
+msgid "title"
+msgstr "заголовок"
+
+#: models.py:36
 msgid "slug"
-msgstr ""
+msgstr "короткая версия названия"
 
-#: models.py:37
+#: models.py:38
 msgid "IP Address of the Post Creator"
-msgstr ""
-
-#: models.py:41
-msgid "body"
-msgstr ""
+msgstr "IP адрес автора записи"
 
 #: models.py:42
-msgid "tease"
-msgstr ""
+msgid "body"
+msgstr "текст"
 
 #: models.py:43
-msgid "status"
-msgstr ""
+msgid "tease"
+msgstr "вступление"
 
 #: models.py:44
-msgid "allow comments"
-msgstr ""
+msgid "status"
+msgstr "статус"
 
 #: models.py:45
-msgid "publish"
-msgstr ""
+msgid "allow comments"
+msgstr "разрешить комментарии"
 
 #: models.py:46
-msgid "created at"
-msgstr ""
+msgid "publish"
+msgstr "опубликовать"
 
 #: models.py:47
-msgid "updated at"
-msgstr ""
+msgid "created at"
+msgstr "создано"
 
 #: models.py:48
-msgid "Post Content Markup"
-msgstr ""
+msgid "updated at"
+msgstr "обновлено"
 
-#: models.py:57
-msgid "post"
-msgstr ""
+#: models.py:49
+msgid "Post Content Markup"
+msgstr "Разметка содержимого записи"
 
 #: models.py:58
+msgid "post"
+msgstr "запись"
+
+#: models.py:59
 msgid "posts"
-msgstr ""
+msgstr "записи"
 
 #: views.py:73
 msgid "You can't delete posts that aren't yours"
-msgstr ""
+msgstr "Вы не можете удалять чужие записи"
 
 #: views.py:80
 #, python-format
 msgid "Successfully deleted post '%s'"
-msgstr ""
+msgstr "Запись '%s' удалена"
 
 #: views.py:104
 #, python-format
 msgid "Successfully saved post '%s'"
-msgstr ""
+msgstr "Запись '%s' сохранена"
 
 #: views.py:129
 msgid "You can't edit posts that aren't yours"
-msgstr ""
+msgstr "Вы не можете редактировать чужие записи"
 
 #: views.py:138
 #, python-format
 msgid "Successfully updated post '%s'"
-msgstr ""
+msgstr "Запись '%s' обновлена"
 
 #: templates/notification/blog_friend_post/full.txt:1
 #, python-format
@@ -129,6 +131,9 @@ msgid ""
 "\n"
 "http://%(current_site)s%(post_url)s"
 msgstr ""
+"%(author_display)s опубликовал(а) %(post_title)s в своем блоге.\n"
+"\n"
+"http://%(current_site)s%(post_url)s"
 
 #: templates/notification/blog_friend_post/notice.html:2
 #, python-format
@@ -136,6 +141,8 @@ msgid ""
 "<a href=\"%(author_url)s\">%(author_display)s</a> has posted <a href=\"%"
 "(post_url)s\">%(post_title)s</a> to their blog."
 msgstr ""
+"<a href=\"%(author_url)s\">%(author_display)s</a> опубликовал(а) <a href=\"%"
+"(post_url)s\">%(post_title)s</a>  в своем блоге."
 
 #: templates/notification/blog_post_comment/full.txt:1
 #, python-format
@@ -146,6 +153,11 @@ msgid ""
 "\n"
 "http://%(current_site)s%(post_url)s"
 msgstr ""
+"%(user_display)s оставил(а) комментарий к вашей записи в блоге '%(post)s':\n"
+"\n"
+"%(post_comment)s\n"
+"\n"
+"http://%(current_site)s%(post_url)s"
 
 #: templates/notification/blog_post_comment/notice.html:2
 #, python-format
@@ -153,3 +165,5 @@ msgid ""
 "<a href=\"%(user_url)s\">%(user_display)s</a> has commented on your blog "
 "post '<a href=\"%(post_url)s\">%(post)s</a>'."
 msgstr ""
+"<a href=\"%(user_url)s\">%(user_display)s</a> оставил(а) комментарий к вашей "
+"записи в блоге '<a href=\"%(post_url)s\">%(post)s</a>'."

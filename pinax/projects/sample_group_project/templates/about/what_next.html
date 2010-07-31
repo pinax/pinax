@@ -15,7 +15,7 @@
             <dt><a href="{% url acct_email %}">verify an email address</a></dt>
             <dd>so you can receive notifications, reset your password and so people can find you more easily.</dd>
             
-            <dt><a href="{% url profile_detail user %}">fill out your profile</a></dt>
+            <dt><a href="{% url profile_detail user.username %}">fill out your profile</a></dt>
             <dd>to tell the world a little about yourself.</dd>
             
             {% ifsetting ACCOUNT_OPEN_SIGNUP %}

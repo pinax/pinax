@@ -1,0 +1,22 @@
+{% extends "wakawaka/base.html" %}
+
+{% load i18n %}
+{% load group_tags %}
+
+{% block extrahead %}
+    {{ block.super }}
+    {# Add support for the Universal Edit Button #}
+    {% if perms.wakawaka.change_wikipage %}
+    <link rel="edit" title="{% trans "Edit this page" %}" href="{% groupurl wakawaka_edit group slug=page.slug %}" />
+    {% endif %}
+{% endblock %}
+
+{% block head_title %}
+    {% blocktrans with page.slug as slug %}History for {{ slug }}{% endblocktrans %}
+{% endblock %}
+
+{% block body %}
+    <h1>{% blocktrans with page.slug as slug %}History for {{ slug }}{% endblocktrans %}</h1>
+    
+    {% include "wakawaka/revision_table.html" %}
+{% endblock %}

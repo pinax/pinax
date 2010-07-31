@@ -1,0 +1,48 @@
+{% load i18n %}
+{% load group_tags %}
+
+<form method="GET" action="{% groupurl wakawaka_changes group slug=page.slug %}">
+{% csrf_token %}
+<table class="history" border="1">
+<tr>
+    <th>{% trans "Compare" %}</th>
+    <th>{% trans "Changed" %}</th>
+    <th>{% trans "Message" %}</th>
+    <th>{% trans "Modified by" %}</th>
+    <th>&nbsp;</th>
+</tr>
+{% for rev in page.revisions.all %}
+<tr>
+    <td class="compare">
+        <input type="radio" name="a" value="{{ rev.pk }}"
+            {% if rev_a %}
+                {% ifequal rev_a.pk rev.pk %}checked{% endifequal %}
+            {% else %}
+                {% ifequal forloop.counter 1 %}checked{% endifequal %}
+            {% endif %}
+        />
+        <input type="radio" name="b" value="{{ rev.pk }}"
+            {% if rev_b %}
+                {% ifequal rev_b.pk rev.pk %}checked{% endifequal %}
+            {% else %}
+                {% ifequal page.revisions.all|length 1 %}
+                    checked
+                {% else %}
+                    {% ifequal forloop.counter 2 %}checked{% endifequal %}
+                {% endifequal %}
+            {% endif %}
+        />
+    </td>
+    <td class="modifed">{{ rev.modified|timesince }} ago</td>
+    <td class="message">{{ rev.message }}</td>
+    <td class="creator">{{ rev.creator.username }}</td>
+    <td class="options">
+        <a href="{% groupurl wakawaka_page group slug=page.slug,rev_id=rev.pk %}">{% trans "View" %}</a>
+        <a href="{% groupurl wakawaka_edit group slug=page.slug,rev_id=rev.pk %}">{% trans "Revert" %}</a>
+    </td>
+</tr>
+{% endfor %}
+</table>
+
+<p><input type="submit" value="{% trans "Compare revisions" %}"/></p>
+</form>

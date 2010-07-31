@@ -159,7 +159,7 @@ INSTALLED_APPS = [
     "idios",
     "groups",
     "tagging",
-    "wiki",
+    "wakawaka",
     "avatar",
     "threadedcomments",
     "gravatar",
@@ -206,7 +206,6 @@ MARKUP_CHOICES = [
     ("markdown", u"Markdown"),
     ("creole", u"Creole"),
 ]
-WIKI_MARKUP_CHOICES = MARKUP_CHOICES
 
 AUTH_PROFILE_MODULE = "profiles.Profile"
 NOTIFICATION_LANGUAGE_MODULE = "account.Account"
@@ -217,14 +216,9 @@ ACCOUNT_EMAIL_VERIFICATION = False
 ACCOUNT_EMAIL_AUTHENTICATION = False
 ACCOUNT_UNIQUE_EMAIL = EMAIL_CONFIRMATION_UNIQUE_EMAIL = False
 
-if ACCOUNT_EMAIL_AUTHENTICATION:
-    AUTHENTICATION_BACKENDS = [
-        "pinax.apps.account.auth_backends.EmailModelBackend",
-    ]
-else:
-    AUTHENTICATION_BACKENDS = [
-        "django.contrib.auth.backends.ModelBackend",
-    ]
+AUTHENTICATION_BACKENDS = [
+    "pinax.apps.account.auth_backends.AuthenticationBackend",
+]
 
 LOGIN_URL = "/account/login/" # @@@ any way this can be a url name?
 LOGIN_REDIRECT_URLNAME = "what_next"

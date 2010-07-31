@@ -39,29 +39,29 @@ DATABASES = {
 }
 
 # Local time zone for this installation. Choices can be found here:
-# http://www.postgresql.org/docs/8.1/static/datetime-keywords.html#DATETIME-TIMEZONE-SET-TABLE
-# although not all variations may be possible on all operating systems.
+# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
+# although not all choices may be available on all operating systems.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
 TIME_ZONE = "US/Eastern"
 
 # Language code for this installation. All choices can be found here:
-# http://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes
-# http://blogs.law.harvard.edu/tech/stories/storyReader$15
-LANGUAGE_CODE = "en"
+# http://www.i18nguy.com/unicode/language-identifiers.html
+LANGUAGE_CODE = "en-us"
 
 SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
-USE_I18N = False
+USE_I18N = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, "site_media", "media")
 
-# URL that handles the media served from MEDIA_ROOT.
-# Example: "http://media.lawrence.com"
+# URL that handles the media served from MEDIA_ROOT. Make sure to use a
+# trailing slash if there is a path component (optional in other cases).
+# Examples: "http://media.lawrence.com", "http://example.com/media/"
 MEDIA_URL = "/site_media/media/"
 
 # Absolute path to the directory that holds static files like app media.
@@ -104,10 +104,8 @@ MIDDLEWARE_CLASSES = [
     "django.middleware.doc.XViewMiddleware",
     "pagination.middleware.PaginationMiddleware",
     "django_sorting.middleware.SortingMiddleware",
-    "djangodblog.middleware.DBLogMiddleware",
     "pinax.middleware.security.HideSensistiveFieldsMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
-    "django.middleware.transaction.TransactionMiddleware",
 ]
 
 ROOT_URLCONF = "social_project.urls"
@@ -129,11 +127,13 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     
     "pinax.core.context_processors.pinax_settings",
     
+    "pinax.apps.account.context_processors.account",
+    
     "notification.context_processors.notification",
     "announcements.context_processors.site_wide_announcements",
-    "pinax.apps.account.context_processors.account",
     "messages.context_processors.inbox",
     "friends_app.context_processors.invitations",
+    
     "social_project.context_processors.combined_inbox_count",
 ]
 
@@ -158,44 +158,40 @@ INSTALLED_APPS = [
     
     # external
     "notification", # must be first
-    "django_openid",
-    "emailconfirmation",
-    "django_extensions",
-    "robots",
-    "friends",
+    "staticfiles",
+    "debug_toolbar",
     "mailer",
-    "messages",
-    "announcements",
-    "oembed",
-    "djangodblog",
-    "pagination",
-    "groups",
-    # "gravatar",
-    "threadedcomments",
-    "wiki",
-    "swaps",
+    "uni_form",
+    "django_openid",
+    "ajax_validation",
     "timezones",
+    "emailconfirmation",
+    "announcements",
+    "pagination",
+    "friends",
+    "messages",
+    "oembed",
+    "groups",
+    "threadedcomments",
+    "wakawaka",
+    "swaps",
     "voting",
     "tagging",
     "bookmarks",
-    "ajax_validation",
     "photologue",
     "avatar",
     "flag",
     "microblogging",
     "locations",
-    "uni_form",
     "django_sorting",
     "django_markup",
-    "staticfiles",
-    "debug_toolbar",
     "tagging_ext",
     
     # Pinax
-    "pinax.apps.analytics",
-    "pinax.apps.profiles",
     "pinax.apps.account",
     "pinax.apps.signup_codes",
+    "pinax.apps.analytics",
+    "pinax.apps.profiles",
     "pinax.apps.blog",
     "pinax.apps.tribes",
     "pinax.apps.photos",
@@ -204,6 +200,7 @@ INSTALLED_APPS = [
     "pinax.apps.voting_extras",
     
     # project
+    "about",
 ]
 
 FIXTURE_DIRS = [
@@ -223,7 +220,6 @@ MARKUP_CHOICES = [
     ("markdown", u"Markdown"),
     ("creole", u"Creole"),
 ]
-WIKI_MARKUP_CHOICES = MARKUP_CHOICES
 
 AUTH_PROFILE_MODULE = "profiles.Profile"
 NOTIFICATION_LANGUAGE_MODULE = "account.Account"
@@ -234,21 +230,15 @@ ACCOUNT_EMAIL_VERIFICATION = False
 ACCOUNT_EMAIL_AUTHENTICATION = False
 ACCOUNT_UNIQUE_EMAIL = EMAIL_CONFIRMATION_UNIQUE_EMAIL = False
 
-if ACCOUNT_EMAIL_AUTHENTICATION:
-    AUTHENTICATION_BACKENDS = [
-        "pinax.apps.account.auth_backends.EmailModelBackend",
-    ]
-else:
-    AUTHENTICATION_BACKENDS = [
-        "django.contrib.auth.backends.ModelBackend",
-    ]
+AUTHENTICATION_BACKENDS = [
+    "pinax.apps.account.auth_backends.AuthenticationBackend",
+]
+
+LOGIN_URL = "/account/login/" # @@@ any way this can be a url name?
+LOGIN_REDIRECT_URLNAME = "what_next"
 
 EMAIL_CONFIRMATION_DAYS = 2
 EMAIL_DEBUG = DEBUG
-CONTACT_EMAIL = "feedback@example.com"
-SITE_NAME = "Pinax"
-LOGIN_URL = "/account/login/"
-LOGIN_REDIRECT_URLNAME = "what_next"
 
 ugettext = lambda s: s
 LANGUAGES = [
@@ -279,8 +269,6 @@ RESTRUCTUREDTEXT_FILTER_SETTINGS = {
 BEHIND_PROXY = False
 
 FORCE_LOWERCASE_TAGS = True
-
-WIKI_REQUIRES_LOGIN = True
 
 # Uncomment this line after signing up for a Yahoo Maps API key at the
 # following URL: https://developer.yahoo.com/wsregapp/
