@@ -108,7 +108,7 @@ class Command(BaseCommand):
             raise CommandError(
                 "'%s' conflicts with the name of an existing Python "
                 "package/module and cannot be used as a project name. Please "
-                "try another name." % project_name
+                "try another name." % user_project_name
             )
         
         # check the base value (we could later be much smarter about it and
