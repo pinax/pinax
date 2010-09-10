@@ -4,11 +4,13 @@
 {% load avatar_tags %}
 {% load account_tags %}
 
-{% user_display other_user as other_user_display %}
-
-{% block head_title %}{% blocktrans %}{{ other_user_display }} is Following{% endblocktrans %}{% endblock %}
+{% block head_title %}
+    {% user_display other_user as other_user_display %}
+    {% blocktrans %}{{ other_user_display }} is Following{% endblocktrans %}
+{% endblock %}
 
 {% block body %}
+    {% user_display other_user as other_user_display %}
     <h1>{% blocktrans %}{{ other_user_display }} is Following{% endblocktrans %}</h1>
     
     {% url profile_detail other_user.username as other_user_url %}
