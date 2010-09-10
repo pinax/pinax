@@ -37,6 +37,14 @@ def blogs(request, username=None, template_name="blog/blogs.html"):
     }, context_instance=RequestContext(request))
 
 
+def tag(request, name, template_name="blog/tagged_posts.html"):
+    
+    return render_to_response(template_name, {
+        "posts": Post.objects.filter(tags__name__in=[name,]),
+        "tag": name
+    }, context_instance=RequestContext(request))
+
+
 def post(request, username, year, month, slug,
          template_name="blog/post.html"):
     post = Post.objects.filter(

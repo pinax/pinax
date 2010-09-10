@@ -2,7 +2,7 @@
 {% load account_tags %}
 {% load markup_tags %}
 {% load avatar_tags %}
-{% load extra_tagging_tags %}
+
 
 <div class="blog-post clearfix">
     <h2><a href="{{ blog_post.get_absolute_url }}">{{ blog_post.title }}</a></h2>
@@ -22,7 +22,7 @@
         <p><b>{% trans "Posted:" %}</b><br />
             <a href="{% url profile_detail blog_post.author.username %}">{% user_display blog_post.author %}</a> {% trans "on" %} {{ blog_post.publish|date }}</p>
         <div class="blog-tags">
-            <p>{% show_tags_for blog_post %}</p>
+            <p>{% blog_post.tags.all %}</p>
         </div>
     </div>
 </div>

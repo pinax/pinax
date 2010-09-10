@@ -4,7 +4,6 @@
 {% load humanize %}
 {% load account_tags %}
 {% load comments_tag %}
-{% load tagging_tags %}
 {% load blog_tags %}
 {% load theme_tags %}
 
@@ -22,9 +21,8 @@
         <div class="blog-meta"><p>Posted by: <a href="{% url profile_detail post.author.username %}">{% user_display post.author %}</a> on {{ post.publish|date }}</p></div>
         <div class="blog-tags">
             <p>{% silk "tag_blue" %}
-            {% tags_for_object post as tags %}
-            {% for tag in tags %}
-                <a href="/tags/{{ tag }}">{{ tag }}</a>
+            {% for tag in post.tags.all %}
+                <a href="{% url blog_tag name=tag.name %}">{{ tag }}</a>
             {% endfor %}</p>
             {% ifequal post.author request.user %}
                 <a href="{% url blog_edit post.id %}">Edit Post</a>

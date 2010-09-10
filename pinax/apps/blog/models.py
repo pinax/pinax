@@ -7,8 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from django.contrib.auth.models import User
 
-from tagging.fields import TagField
-from tagging.models import Tag
+from taggit.managers import TaggableManager
 from threadedcomments.models import ThreadedComment
 
 if "notification" in settings.INSTALLED_APPS:
@@ -52,7 +51,7 @@ class Post(models.Model):
         null = True,
         blank = True
     )
-    tags = TagField()
+    tags = TaggableManager()
     
     class Meta:
         verbose_name = _("post")

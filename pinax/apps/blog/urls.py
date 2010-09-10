@@ -21,6 +21,9 @@ urlpatterns = patterns("",
     # new blog post
     url(r"^new/$", "pinax.apps.blog.views.new", name="blog_new"),
     
+    # tags
+    url(r"^tags/(?P<name>\w+)/$", "pinax.apps.blog.views.tag", name="blog_tag"),
+    
     # edit blog post
     url(r"^edit/(\d+)/$", "pinax.apps.blog.views.edit", name="blog_edit"),
     
