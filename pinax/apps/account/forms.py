@@ -2,6 +2,7 @@ import re
 
 from django import forms
 from django.conf import settings
+from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _, ugettext
 from django.utils.encoding import smart_unicode
@@ -13,9 +14,6 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.models import Site
-
-from pinax.core.utils import get_send_mail
-send_mail = get_send_mail()
 
 from emailconfirmation.models import EmailAddress
 from timezones.forms import TimeZoneField
@@ -413,7 +411,7 @@ class ResetPasswordForm(forms.Form):
                 "temp_key": temp_key,
                 "domain": domain,
             })
-            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user.email], priority="high")
+            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user.email])
         return self.cleaned_data["email"]
 
 

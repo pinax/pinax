@@ -2,14 +2,12 @@ from datetime import datetime, timedelta
 
 from django import forms
 from django.conf import settings
+from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.hashcompat import sha_constructor
 from django.utils.translation import ugettext_lazy as _, ugettext
 
 from django.contrib.sites.models import Site
-
-from pinax.core.utils import get_send_mail
-send_mail = get_send_mail()
 
 from pinax.apps.account.forms import GroupForm, SignupForm as BaseSignupForm
 from pinax.apps.signup_codes.models import SignupCode, check_signup_code
@@ -62,4 +60,4 @@ class InviteUserForm(GroupForm):
         }
         subject = render_to_string("signup_codes/invite_user_subject.txt", ctx)
         message = render_to_string("signup_codes/invite_user.txt", ctx)
-        send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [email], priority="high")
+        send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [email])
