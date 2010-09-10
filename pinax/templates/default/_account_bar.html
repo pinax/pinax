@@ -2,13 +2,13 @@
 {% if user.is_authenticated %}
     {% ifopenid %}<img src="{{ STATIC_URL }}images/openid-icon.png" alt="Logged in with OpenID" />{% endifopenid %}<b>{% user_display user %}</b>
     |
-    <a href="{% url acct_email %}">Account</a>
+    <a href="{% url acct_email %}">{% trans "Account" %}</a>
     |
     {% if user.is_staff %}
-        <a href="/admin/">Admin</a>
+        <a href="/admin/">{% trans "Admin" %}</a>
         |
     {% endif %}
-    <a href="{% if request.openid %}/openid/logout/?next={% url acct_logout %}{% else %}{% url acct_logout %}{% endif %}">Logout</a>
+    <a href="{% if request.openid %}/openid/logout/?next={% url acct_logout %}{% else %}{% url acct_logout %}{% endif %}">{% trans "Logout" %}</a>
 {% else %}
     {% url acct_login as acct_login_url %}
     {% url acct_signup as acct_signup_url %}
