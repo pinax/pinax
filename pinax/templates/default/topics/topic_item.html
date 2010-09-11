@@ -2,7 +2,6 @@
 {% load account_tags %}
 {% load avatar_tags %}
 {% load threadedcommentstags %}
-{% load extra_tagging_tags %}
 {% load group_tags %}
 
 <div class="topic clearfix">
@@ -23,6 +22,6 @@
                 {% endblocktrans %}
             </div>
         {% endif %}
-        <p>{% show_tags_for topic %}</p>
+        <p>{% topic.tags.all %}</p>
     </div>
 </div>

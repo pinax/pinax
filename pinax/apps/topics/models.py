@@ -14,9 +14,8 @@ if "notification" in settings.INSTALLED_APPS:
 else:
     notification = None
 
-from tagging.fields import TagField
+from taggit.managers import TaggableManager
 from threadedcomments.models import ThreadedComment
-
 
 
 class Topic(models.Model):
@@ -37,7 +36,7 @@ class Topic(models.Model):
     modified = models.DateTimeField(_("modified"), default=datetime.now) # topic modified when commented on
     body = models.TextField(_("body"), blank=True)
     
-    tags = TagField()
+    tags = TaggableManager()
     
     class Meta:
         ordering = ["-modified"]

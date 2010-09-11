@@ -3,7 +3,6 @@
 {% load i18n %}
 {% load account_tags %}
 {% load uni_form_tags %}
-{% load extra_tagging_tags %}
 {% load pagination_tags %}
 {% load comments_tag %}
 {% load avatar_tags %}
@@ -24,7 +23,7 @@
             <div class="bulk">
                 <h1>{{ topic.title }}</h1>
                 <div class="body">{{ topic.body|urlize|linebreaks }}</div>
-                <p>{% show_tags_for topic %}</p>
+                <p>{% topic.tags.all %}</p>
                 {% ifequal user topic.creator %}
                 <form class="uniForm" method="POST" action="{{ request.path }}delete/">
                     {% csrf_token %}
