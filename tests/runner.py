@@ -68,11 +68,6 @@ def build_project_app_paths(projects):
 def setup_test_environment():
     apps = build_app_list(PINAX_PROJECTS)
     
-    # @@@ not quite sure how to handle this yet, but basic_profiles and
-    # profiles clash as one is a fork of the other. for now we can just test
-    # profiles behavior
-    apps.remove("pinax.apps.basic_profiles")
-    
     # setup path for all project apps/
     sys.path = build_project_app_paths(PINAX_PROJECTS) + sys.path[:]
     
