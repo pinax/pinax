@@ -18,8 +18,7 @@ if "notification" in settings.INSTALLED_APPS:
 else:
     notification = None
 
-from tagging.fields import TagField
-from tagging.models import Tag
+from taggit.managers import TaggableManager
 from threadedcomments.models import ThreadedComment
 
 from pinax.apps.tasks.fields import MarkupField
@@ -59,7 +58,7 @@ class Task(models.Model):
         blank = True
     )
     
-    tags = TagField()
+    tags = TaggableManager()
     
     # status is a short message the assignee can give on their current status
     status = models.CharField(_("status"),
@@ -228,7 +227,7 @@ class TaskHistory(models.Model):
         blank = True
     )
     
-    tags = TagField()
+    tags = TaggableManager()
     
     status = models.CharField(_("status"), max_length=100, blank=True)
     state = models.CharField(_("state"),

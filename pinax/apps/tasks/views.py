@@ -19,6 +19,9 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
 
+from taggit.models import TaggedItem
+
+
 # Only import dpaste Snippet Model if it's activated
 if "dpaste" in getattr(settings, "INSTALLED_APPS"):
     from dpaste.models import Snippet
@@ -29,7 +32,6 @@ if "notification" in getattr(settings, "INSTALLED_APPS"):
 else:
     notification = None
 
-from tagging.models import Tag
 
 from pinax.apps.tasks.filters import TaskFilter
 from pinax.apps.tasks.forms import TaskForm, EditTaskForm
@@ -102,6 +104,7 @@ def tasks(request, template_name="tasks/task_list.html"):
     
     ctx = group_context(group, bridge)
     ctx.update({
+        "tags_for_task": TaggedItem.tags_for(Task),
         "group_by": group_by,
         "gbqs": group_by_querystring,
         "is_member": is_member,
@@ -495,11 +498,8 @@ def focus(request, field, value, template_name="tasks/focus.html"):
                 tasks = Task.objects.none() # @@@ or throw 404?
     elif field == "tag":
         try:
-            # @@@ is there a better way?
-            task_type = ContentType.objects.get_for_model(Task)
-            tasks = tasks.filter(id__in=Tag.objects.get(name=value).items.filter(content_type=task_type).values_list("object_id", flat=True))
-            # @@@ still need to filter on group if group not None
-        except Tag.DoesNotExist:
+            tasks = tasks.filter(tags__name__in=[value,])
+        except:
             tasks = Task.objects.none() # @@@ or throw 404?
     
     if task_filter is not None:
@@ -512,6 +512,7 @@ def focus(request, field, value, template_name="tasks/focus.html"):
     
     ctx = group_context(group, bridge)
     ctx.update({
+        "tags_for_task": TaggedItem.tags_for(Task),
         "task_filter": task_filter,
         "tasks": tasks,
         "field": field,

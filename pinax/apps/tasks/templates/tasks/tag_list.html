@@ -1,4 +1,5 @@
 {% load tasks_tags %}
+
 {% if tags %}
     {% for tag in tags %}
         <a rel="tag" href="{% focus_url "tag" tag group %}">{{ tag }}</a>

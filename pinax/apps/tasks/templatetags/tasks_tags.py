@@ -6,15 +6,10 @@ from django.core.urlresolvers import reverse
 
 from django.contrib.contenttypes.models import ContentType
 
-from tagging.models import Tag, TaggedItem
-from tagging.utils import parse_tag_input
-
 from pinax.apps.tasks.models import Task
 
 
-
 register = template.Library()
-
 
 
 @register.inclusion_tag("tasks/task_item.html", takes_context=True)
@@ -41,20 +36,10 @@ def focus_url(field, value, group=None):
         return group.content_bridge.reverse("task_focus", group, kwargs=kwargs)
 
 
-@register.inclusion_tag("tasks/tag_list.html")
-def task_tags(obj, group=None):
-    taglist = parse_tag_input(obj.tags)
-    return {
-        "tags": taglist,
-        "group": group,
-    }
-
-
 class TasksForTagNode(template.Node):
-    def __init__(self, tag, var_name, selection):
+    def __init__(self, tag, var_name):
         self.tag = tag
         self.var_name = var_name
-        self.selection = selection
     
     def render(self, context):
         try:
@@ -63,17 +48,7 @@ class TasksForTagNode(template.Node):
             tag = self.tag
         
         try:
-            selection = template.Variable(self.selection).resolve(context)
-        except:
-            selection = Task.objects.all()
-        
-        task_contenttype = ContentType.objects.get(app_label="tasks", model="task")
-        try:
-            qs = TaggedItem.objects.filter(
-                tag__name = str(tag),
-                content_type = task_contenttype
-            ).values_list("object_id")
-            tasks = selection.filter(id__in=[i[0] for i in qs])
+            tasks = Task.objects.filter(tags__name__in = [str(tag), ])
         except:
             return ""
         
@@ -88,20 +63,14 @@ def tasks_for_tag(parser, token):
     except ValueError:
         raise template.TemplateSyntaxError, "%r tag requires arguments" % token.contents.split()[0]
     
-    m = re.search(r"(\w+) as (\w+) in (\w+)", arg)
+    m = re.search(r"(\w+) as (\w+)", arg)
     if not m:
-        m = re.search(r"(\w+) as (\w+)", arg)
-        if not m:
-            raise template.TemplateSyntaxError, "%r tag had invalid arguments" % tag_name
+        raise template.TemplateSyntaxError, "%r tag had invalid arguments" % tag_name
     
     tag = m.groups()[0]
     var_name = m.groups()[1]
-    try:
-        selection = m.groups()[2]
-    except IndexError:
-        selection = None
     
-    return TasksForTagNode(tag, var_name, selection)
+    return TasksForTagNode(tag, var_name)
 
 
 @register.filter

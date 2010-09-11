@@ -12,7 +12,7 @@ from pinax.apps.tasks.models import Task, TaskHistory, workflow
 from pinax.apps.tasks.widgets import ReadOnlyWidget
 
 from pinax.apps.tagging_utils.widgets import TagAutoCompleteInput
-from tagging.forms import TagField
+from taggit.forms import TagField
 
 
 

@@ -6,7 +6,6 @@
 {% load order_by %}
 {% load humanize %}
 {% load tasks_tags %}
-{% load tagging_tags %}
 {% load group_tags %}
 
 {#}{% block head_title %}Tasks for {{ project.name }}{% endblock %}#}
@@ -89,9 +88,8 @@
             <th>Status</th>
         </tr>
         {% ifequal group_by "tag" %}
-            {% tags_for_model tasks.Task as task_tags %}
-            {% for section in task_tags %}
-                {% tasks_for_tag section as tagtasks in tasks %}
+            {% for section in tags_for_task %}
+                {% tasks_for_tag section as tagtasks %}
                 {% if tagtasks %}
                     <tbody><tr class="task_grouping">
                         <td colspan="6">
@@ -116,7 +114,7 @@
                                         <span class="warning">unassigned</span>
                                     {% endif %}
                                 </td>
-                                <td>{% task_tags item group %}</td>
+                                <td>{% item.tags.all %}</td>
                                 <td>{{ item.status }}</td>
                             </tr>
                         {% endfor %}
@@ -157,7 +155,7 @@
                                     <span class="warning">unassigned</span>
                                 {% endif %}
                             </td>
-                            <td>{% task_tags task group %}</td>
+                            <td>{% task.tags.all %}</td>
                             <td>{{ task.status }}</td>
                         </tr>
                     {% endfor %}

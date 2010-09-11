@@ -6,7 +6,6 @@
 {% load order_by %}
 {% load humanize %}
 {% load tasks_tags %}
-{% load tagging_tags %}
 {% load markup_tags %}
 {% load group_tags %}
 
@@ -63,7 +62,7 @@
                 </td>
                 <td>
                     {% if change.owner %}
-                        {% task_tags change group %}
+                        {% change.tags.all %}
                     {% endif %}
                 </td>
                 <td>{{ change.humanized_state }}

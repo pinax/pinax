@@ -12,6 +12,6 @@
 Task details:
 {{ task.detail }}
 
-{% blocktrans with task.tags as task_tags %}Tags: {{ task_tags }}{% endblocktrans %}
+{% blocktrans with task.tags.all as task_tags %}Tags: {{ task_tags }}{% endblocktrans %}
 
 Link: http://{{ current_site }}{{ task.get_absolute_url }}

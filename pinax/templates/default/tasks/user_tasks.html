@@ -55,7 +55,7 @@
                             <td>{{ task.id }}</td>
                             <td><a href="{% groupurl task_detail group id=task.id %}">{{ task.summary }}</a></td>
                             <td style="white-space: nowrap">{{ task.modified|shorttimesince }} ago</td>
-                            <td>{% task_tags task group %}</td>
+                            <td>{% task.tags.all %}</td>
                             <td>{{ task.status }}</td>
                         </tr>
                     {% endfor %}
@@ -107,7 +107,7 @@
                             <td>{{ task.id }}</td>
                             <td><a href="{% groupurl task_detail group id=task.id %}">{{ task.summary }}</a></td>
                             <td style="white-space: nowrap">{{ task.modified|shorttimesince }} ago</td>
-                            <td>{% task_tags task group %}</td>
+                            <td>{% task.tags.all %}</td>
                             <td>{{ task.status }}</td>
                         </tr>
                     {% endfor %}
@@ -159,7 +159,7 @@
                             <td>{{ task.id }}</td>
                             <td><a href="{% groupurl task_detail group id=task.id %}">{{ task.summary }}</a></td>
                             <td style="white-space: nowrap">{{ task.modified|shorttimesince }} ago</td>
-                            <td>{% task_tags task group %}</td>
+                            <td>{% task.tags.all %}</td>
                             <td>{{ task.status }}</td>
                         </tr>
                     {% endfor %}
