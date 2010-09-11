@@ -4,9 +4,9 @@ import sys
 
 from django.conf import settings
 from django.core.management import setup_environ, call_command
-from django.utils.importlib import import_module
 
 import pinax
+import pinax.env
 
 #
 # thoughts on a test runner. the goal is to run all tests in Pinax.
@@ -30,17 +30,14 @@ EXTRA_APP_ALIASES = {
     "django_filters": ["django_filters.tests"],
 }
 
-# setup sys.path for Pinax and projects
-sys.path.insert(0, os.path.join(PINAX_ROOT, "projects"))
-
 
 def setup_project(name):
     """
     Helper for build_app_list to prepare the process for settings of a given
     Pinax project.
     """
-    settings_mod = import_module("%s.settings" % name)
-    setup_environ(settings_mod)
+    project_path = os.path.join(PINAX_ROOT, "projects", name)
+    pinax.env.setup_environ(project_path=project_path)
 
 
 def build_app_list(projects):
