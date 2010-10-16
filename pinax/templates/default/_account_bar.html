@@ -15,6 +15,6 @@
     {% ifsetting ACCOUNT_OPEN_SIGNUP %}
         {% blocktrans %}<a href="{{ acct_login_url }}">Log in</a> or <a href="{{ acct_signup_url }}">Sign Up</a>{% endblocktrans %}
     {% else %}
-        {% blocktrans %}<a href="{{ url acct_login_url }}">Log in</a>{% endblocktrans %}
+        {% blocktrans %}<a href="{{ acct_login_url }}">Log in</a>{% endblocktrans %}
     {% endifsetting %}
 {% endif %}
