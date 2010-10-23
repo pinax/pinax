@@ -26,16 +26,61 @@
             </fieldset>
         </form>
         
+        {# @@@ currently OpenID signup is not supported via signup codes #}
+        {% if not code %}
+            <p>{% trans "Or sign in with your OpenID" %}:</p>
+            {# @@@ why isn't this just does as a form object ? #}
+            <form class="login uniForm" action="/openid/register/" method="POST">
+                {% csrf_token %}
+                <fieldset class="inlineLabels">
+                    {% if url_required %}
+                        <div class="ctrlHolder error">
+                            <p class="errorField">
+                                <strong>This field is required.</strong>
+                            </p>
+                            <label for="id_username">* OpenID Identifier</label>
+                            <input class="openid" type="text" name="openid_url" />
+                        </div>
+                    {% else %}
+                        <div class="ctrlHolder">
+                            <label for="id_username">* OpenID Identifier</label>
+                            <input class="openid" type="text" name="openid_url" />
+                        </div>
+                    {% endif %}
+                    <div class="form_block">
+                        <input type="submit" value="{% trans "Log in &raquo;" %}" />
+                    </div>
+                </fieldset>
+            </form>
+    
+            {% load oauth_access_tags %}
+            <div class="connect">
+            connect with
+            {% if not user|authed_via:"twitter" %}
+                <a href="{% url oauth_access_login "twitter" %}?next={{ request.path }}&amp;sm={{ split_test}}&amp;sn=twitter-login">twitter</a>
+            {% else %}
+                <b>twitter</b>
+            {% endif %}
+            or
+            {% if not user|authed_via:"facebook" %}
+                <a href="{% url oauth_access_login "facebook" %}?next={{ request.path }}&amp;sm={{ split_test}}&amp;sn=facebook-login">facebook</a>
+            {% else %}
+                <b>facebook</b>
+            {% endif %}
+            to persist your answers
+
+            {% if request.user.is_authenticated %}
+                <div><a href="{% url acct_logout %}?next={{ request.path }}&amp;sm={{ split_test }}&amp;sn=logout">logout</a></div>
+            {% endif %}
+            </div>
+        {% endif %}
+        
         {% url terms as terms_url %}
         {% url privacy as privacy_url %}
         <p>{% blocktrans %}By clicking "Sign Up", you are indicating that you have read and agree to the <a href="{{ terms_url }}">Terms of Use</a> and <a href="{{ privacy_url }}">Privacy Policy</a>.{% endblocktrans %}</p>
         
         <p>{% blocktrans %}If you have any trouble creating your account, contact us at <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>.{% endblocktrans %}</p>
         
-        {# @@@ currently OpenID signup is not supported via signup codes #}
-        {% if not code %}
-            <p>If you have OpenID, <a href="{% url acct_login %}">log in</a> using that to begin using this site with OpenID right away.</p>
-        {% endif %}
     {% endif %}
 {% endblock %}
 
