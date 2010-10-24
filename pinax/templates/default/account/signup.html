@@ -52,22 +52,6 @@
                     </div>
                 </fieldset>
             </form>
-    
-            {% load oauth_access_tags %}
-            <div class="connect">
-            connect with
-            {% if not user|authed_via:"twitter" %}
-                <a href="{% url oauth_access_login "twitter" %}?next={{ request.path }}&amp;sm={{ split_test}}&amp;sn=twitter-login">twitter</a>
-            {% else %}
-                <b>twitter</b>
-            {% endif %}
-            or
-            {% if not user|authed_via:"facebook" %}
-                <a href="{% url oauth_access_login "facebook" %}?next={{ request.path }}&amp;sm={{ split_test}}&amp;sn=facebook-login">facebook</a>
-            {% else %}
-                <b>facebook</b>
-            {% endif %}
-            to persist your answers
 
             {% if request.user.is_authenticated %}
                 <div><a href="{% url acct_logout %}?next={{ request.path }}&amp;sm={{ split_test }}&amp;sn=logout">logout</a></div>
