@@ -5,7 +5,7 @@
     <a href="{% url acct_email %}">{% trans "Account" %}</a>
     |
     {% if user.is_staff %}
-        <a href="/admin/">{% trans "Admin" %}</a>
+        <a href="{% url admin:index %}">{% trans "Admin" %}</a>
         |
     {% endif %}
     <a href="{% if request.openid %}/openid/logout/?next={% url acct_logout %}{% else %}{% url acct_logout %}{% endif %}">{% trans "Logout" %}</a>
