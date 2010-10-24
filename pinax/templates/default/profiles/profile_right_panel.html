@@ -31,7 +31,8 @@
                 {% if other_friends|length|divisibleby:"3" %}{% else %}</tr>{% endif %}
             </table>
         {% else %}
-            <p>{% blocktrans %}None. You should look at the list of <a href="/profiles/">profiles</a> and see if there's anyone you know.{% endblocktrans %}</p>
+            {% url profile_list as profile_url %}
+            <p>{% blocktrans %}None. You should look at the list of <a href="{{ profile_url }}">profiles</a> and see if there's anyone you know.{% endblocktrans %}</p>
         {% endif %}
     </div>
 {% endif %}
