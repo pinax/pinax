@@ -14,15 +14,15 @@ Using mod_wsgi
 --------------
 
 If you are using mod_wsgi, which we recommend, you will need to provide a WSGI
-script. All projects include a ``deploy/`` directory which contains this
-script named ``pinax.wsgi``. You may modify this file as it best suits you.
+script. All projects include a ``deploy/`` directory which contain this
+script named ``wsgi.py``. You may modify this file to best suit your needs.
 
 Here is a basic configuration for Apache (assuming you are using Python 2.5)::
 
-    WSGIDaemonProcess mysite-production python-path=/path/to/virtualenvs/pinax-env/lib/python2.5/site-packages
-    WSGIProcessGroup mysite-production
+    WSGIDaemonProcess mysite python-path=/path/to/virtualenvs/pinax-env/lib/python2.5/site-packages
+    WSGIProcessGroup mysite
     
-    WSGIScriptAlias / /path/to/project/deploy/pinax.wsgi
+    WSGIScriptAlias / /path/to/project/deploy/wsgi.py
     <Directory /path/to/project/deploy>
         Order deny,allow
         Allow from all

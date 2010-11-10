@@ -11,8 +11,8 @@ def setup_environ(dunder_file=None, project_path=None):
     if dunder_file is not None:
         file_path = os.path.abspath(os.path.dirname(dunder_file))
         deploy_files = [
-            "pinax.fcgi",
-            "pinax.wsgi",
+            "fcgi.py",
+            "wsgi.py",
         ]
         if dunder_file in deploy_files:
             project_path = os.path.abspath(os.path.join(file_path, os.pardir))
