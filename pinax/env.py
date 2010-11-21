@@ -11,14 +11,14 @@ def setup_environ(dunder_file=None, project_path=None):
     if dunder_file is not None:
         file_path = os.path.abspath(os.path.dirname(dunder_file))
         deploy_files = [
-            "fcgi.py",
-            "wsgi.py",
+            "fcgi.py", "fcgi.pyc",
+            "wsgi.py", "wsgi.pyc",
         ]
-        if dunder_file in deploy_files:
+        if os.path.basename(dunder_file) in deploy_files:
             project_path = os.path.abspath(os.path.join(file_path, os.pardir))
         else:
             project_path = file_path
-    
+            
     # the basename must be the project name and importable.
     project_name = os.path.basename(project_path)
     
