@@ -111,7 +111,6 @@ def setup_test_environment():
         ],
         "CONTACT_EMAIL": "feedback@example.com",
         "SITE_NAME": "Pinax",
-        "BIBLION_SECTIONS": [],
     })
 
 
