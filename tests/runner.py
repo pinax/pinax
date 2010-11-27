@@ -82,7 +82,7 @@ def setup_test_environment():
     settings.configure(**{
         "DATABASE_ENGINE": "sqlite3",
         "SITE_ID": 1,
-        "ROOT_URLCONF": "",
+        "ROOT_URLCONF": "urls",
         "STATIC_URL": "/site_media/static/",
         "MIDDLEWARE_CLASSES": [
             "django.middleware.common.CommonMiddleware",
