@@ -90,7 +90,7 @@ def setup_test_environment():
             "django.contrib.auth.middleware.AuthenticationMiddleware",
             "django.contrib.messages.middleware.MessageMiddleware",
         ],
-        "INSTALLED_APPS": apps,
+        "INSTALLED_APPS": apps + ["idios.tests"],
         "LOGIN_URL": "/account/login/",
         
         "TEMPLATE_DIRS": [
@@ -111,6 +111,7 @@ def setup_test_environment():
         ],
         "CONTACT_EMAIL": "feedback@example.com",
         "SITE_NAME": "Pinax",
+        "AUTH_PROFILE_MODULE": "tests.SimpleProfile",
     })
 
 
