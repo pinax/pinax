@@ -4,7 +4,7 @@ from django.conf.urls.defaults import *
 from pinax.apps.account.forms import SignupForm
 
 
-if settings.ACCOUNT_OPEN_SIGNUP:
+if getattr(settings, "ACCOUNT_OPEN_SIGNUP", None):
     signup_view = "pinax.apps.account.views.signup"
 else:
     signup_view = "pinax.apps.signup_codes.views.signup"

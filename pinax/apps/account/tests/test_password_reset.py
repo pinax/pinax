@@ -54,7 +54,7 @@ class PasswordResetTest(TestCase):
         # @@@ instead of hard-coding this error message rely on a error key
         # defined in the form where the site developer would override this
         # error message.
-        self.assertContains(response, "Email address not verified for any user account")
+        self.assertContains(response, "E-mail address not verified for any user account")
         self.assertEquals(len(mail.outbox), 0)
     
     def test_email_not_verified(self):
@@ -77,7 +77,7 @@ class PasswordResetTest(TestCase):
         # @@@ instead of hard-coding this error message rely on a error key
         # defined in the form where the site developer would override this
         # error message.
-        self.assertContains(response, "Email address not verified for any user account")
+        self.assertContains(response, "E-mail address not verified for any user account")
         self.assertEquals(len(mail.outbox), 0)
     
     def test_email_found(self):
