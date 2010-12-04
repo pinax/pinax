@@ -32,6 +32,7 @@ PINAX_PROJECTS = [
 ]
 EXTRA_APP_ALIASES = {
     "django_filters": ["django_filters.tests"],
+    "idios": ["idios.tests"],
 }
 
 
@@ -90,7 +91,7 @@ def setup_test_environment():
             "django.contrib.auth.middleware.AuthenticationMiddleware",
             "django.contrib.messages.middleware.MessageMiddleware",
         ],
-        "INSTALLED_APPS": apps + ["idios.tests"],
+        "INSTALLED_APPS": apps,
         "LOGIN_URL": "/account/login/",
         
         "TEMPLATE_DIRS": [
