@@ -114,6 +114,7 @@ def setup_test_environment():
         "CONTACT_EMAIL": "feedback@example.com",
         "SITE_NAME": "Pinax",
         "AUTH_PROFILE_MODULE": "tests.SimpleProfile",
+        "PHOTOLOGUE_DIR": os.path.join(os.path.dirname(os.path.abspath(__file__)), 'photologue')
     })
 
 
