@@ -163,7 +163,6 @@ INSTALLED_APPS = [
     
     # Pinax
     "pinax.apps.analytics",
-    "pinax.apps.basic_profiles",
     "pinax.apps.account",
     
     # project
