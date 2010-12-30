@@ -113,6 +113,7 @@ setup(
     maintainer="Brian Rosner",
     maintainer_email="brosner@gmail.com",
     url="http://pinaxproject.com/",
+    download_url="http://pinaxproject.com/downloads/",
     packages=find_packages(),
     package_data=package_data,
     zip_safe=False,
