@@ -51,7 +51,14 @@ def signup(request, **kwargs):
     ctx = group_context(group, bridge)
     
     if success_url is None:
-        success_url = get_default_redirect(request)
+        if hasattr(settings, "SIGNUP_REDIRECT_URLNAME"):
+            fallback_url = reverse(settings.SIGNUP_REDIRECT_URLNAME)
+        else:
+            if hasattr(settings, "LOGIN_REDIRECT_URLNAME"):
+                fallback_url = reverse(settings.LOGIN_REDIRECT_URLNAME)
+            else:
+                fallback_url = settings.LOGIN_REDIRECT_URL
+        success_url = get_default_redirect(request, fallback_url, redirect_field_name)
     
     code = request.GET.get("code")
     
