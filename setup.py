@@ -7,7 +7,7 @@ from distutils.util import convert_path
 from setuptools import setup, find_packages
 
 
-VERSION = __import__('pinax').__version__
+VERSION = __import__("pinax").__version__
 
 
 def read(*path):
