@@ -19,7 +19,7 @@ urlpatterns = patterns("",
     url(r"^admin/", include(admin.site.urls)),
     url(r"^about/", include("about.urls")),
     url(r"^account/", include("pinax.apps.account.urls")),
-    url(r"^openid/(.*)", PinaxConsumer()),
+    url(r"^openid/", include(PinaxConsumer().urls)),
     url(r"^waitinglist/", include("pinax.apps.waitinglist.urls")),
 )
 
