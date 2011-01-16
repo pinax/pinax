@@ -17,7 +17,7 @@ class HideSensistiveFieldsMiddleware(object):
     
     def process_exception(self, request, exception):
         if not request or not request.POST or settings.DEBUG:
-            return False
+            return None
         masked = False
         mutable = True
         if hasattr(request.POST, "_mutable"):
