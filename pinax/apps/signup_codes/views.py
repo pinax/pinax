@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -58,7 +59,7 @@ def signup(request, **kwargs):
                 fallback_url = reverse(settings.LOGIN_REDIRECT_URLNAME)
             else:
                 fallback_url = settings.LOGIN_REDIRECT_URL
-        success_url = get_default_redirect(request, fallback_url, redirect_field_name)
+        success_url = get_default_redirect(request, fallback_url)
     
     code = request.GET.get("code")
     
