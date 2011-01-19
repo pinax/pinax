@@ -83,7 +83,7 @@ def signup(request, **kwargs):
         if signup_code:
             initial = {
                 "signup_code": code,
-                "email": code.email,
+                "email": signup_code.email,
             }
             form = form_class(initial=initial, group=group)
         else:
