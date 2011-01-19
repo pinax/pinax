@@ -81,7 +81,11 @@ def signup(request, **kwargs):
     else:
         signup_code = check_signup_code(code)
         if signup_code:
-            form = form_class(initial={"signup_code": code}, group=group)
+            initial = {
+                "signup_code": code
+                "email": code.email,
+            }
+            form = form_class(initial=initial, group=group)
         else:
             if not settings.ACCOUNT_OPEN_SIGNUP:
                 ctx.update({
