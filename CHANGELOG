@@ -1,0 +1,16 @@
+Restructured Theme Template and Media Directories
+-------------------------------------------------
+
+Switched the directory hierarchy of themes from separate media/<theme>/ and
+templates/<theme>/ to themes/<theme>/media and themes/<theme>/templates/
+
+This also means that, in settings.py, STATICFILES_DIRS needs to be changed
+from
+    os.path.join(PINAX_ROOT, "media", PINAX_THEME)
+to
+    os.path.join(PINAX_ROOT, "themes", PINAX_THEME, "media")
+
+and TEMPLATE_DIRS from
+    os.path.join(PINAX_ROOT, "templates", PINAX_THEME)
+to
+    os.path.join(PINAX_ROOT, "themes", PINAX_THEME, "templates")
