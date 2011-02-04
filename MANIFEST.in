@@ -1,0 +1,26 @@
+include AUTHORS
+include LICENSE
+include README
+include INSTALL*
+include CHANGELOG
+
+recursive-include docs *
+
+recursive-include pinax/locale *.po *.mo
+recursive-include pinax/media *
+recursive-include pinax/templates *
+
+recursive-include pinax/apps/*/fixtures *.json *.jsonfk
+recursive-include pinax/apps/*/locale *.po *.mo
+recursive-include pinax/apps/*/templates *.html *.txt *.xml
+recursive-include pinax/apps/*/media *
+
+include pinax/projects/*/requirements.txt
+recursive-include pinax/projects/*/deploy *.wsgi *.fcgi
+recursive-include pinax/projects/*/fixtures *.json *.jsonfk
+recursive-include pinax/projects/*/locale *.po *.mo
+recursive-include pinax/projects/*/media *
+recursive-include pinax/projects/*/site_media *
+recursive-include pinax/projects/*/requirements *
+recursive-include pinax/projects/*/templates *.html *.txt *.xml
+recursive-include pinax/projects/*/apps/*/templates *.html *.txt *.xml
