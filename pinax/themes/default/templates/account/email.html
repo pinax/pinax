@@ -1,0 +1,76 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load uni_form_tags %}
+
+{% block head_title %}{% trans "Account" %}{% endblock %}
+
+{% block body %}
+    <h1>{% trans "Account" %}</h1>
+    
+    <h2>{% trans "E-mail Addresses" %}</h2>
+    
+    {% if user.emailaddress_set.all %}
+        <table class="email_list">
+            {% for emailaddress in user.emailaddress_set.all %}
+                <tr>
+                    <td>{% if emailaddress.primary %}<b>{{ emailaddress.email }}</b>{% else %}{{ emailaddress.email }}{% endif %}</td>
+                    {% if emailaddress.verified %}
+                        <td>
+                            <span class="verified">{% trans "verified" %}</span>
+                            {% if emailaddress.primary %}
+                                - <span class="primary">{% trans "primary" %}</span>
+                            {% else %}
+                                <form style="display: none;" id="primary_{{ forloop.counter }}" method="post" action="">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="email" value="{{ emailaddress.email }}"/>
+                                    <input type="hidden" name="action" value="primary"/>
+                                </form>
+                                -
+                                <a href="#" onclick="$('#primary_{{ forloop.counter }}').submit();">{% trans "make primary" %}</a>
+                            {% endif %}
+                        </td>
+                    {% else %}
+                        <td>
+                            <span class="unverified">{% trans "unverified" %}</span>
+                            <form style="display: none;" id="send_{{ forloop.counter }}" method="post" action="">
+                                {% csrf_token %}
+                                <input type="hidden" name="email" value="{{ emailaddress.email }}"/>
+                                <input type="hidden" name="action" value="send"/>
+                            </form>
+                            -
+                            <a href="#" onclick="$('#send_{{ forloop.counter }}').submit();">{% trans "re-send verification e-mail" %}</a>
+                        </td>
+                    {% endif %}
+                    <td>
+                        {% if emailaddress.primary %}
+                        {% else %}
+                            <form style="display: none;" id="remove_{{ forloop.counter }}" method="post" action="">
+                                {% csrf_token %}
+                                <input type="hidden" name="email" value="{{ emailaddress.email }}"/>
+                                <input type="hidden" name="action" value="remove"/>
+                            </form>
+                            <a class="remove" href="#" onclick="$('#remove_{{ forloop.counter }}').submit()">{% trans "remove" %}</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %} {# no user.emailaddress_set.all #}
+        <p><span class="warning">{% trans "None" %}</span>. {% trans "You should really add one so you can receive notifications, reset your password if you forget it, etc." %}</p>
+    {% endif %}
+    
+    <h3>{% trans "Add E-mail Address" %}</h3>
+    
+    <form method="post" action="" class="uniForm">
+        {% csrf_token %}
+        <fieldset class="inlineLabels">
+            {{ add_email_form|as_uni_form }}
+             <div class = "form_block">
+                 <input type="hidden" name="action" value="add"/>
+                 <input type="submit" value="{% trans "add" %}"/>
+            </div>
+        </fieldset>
+    </form>
+    
+{% endblock %}

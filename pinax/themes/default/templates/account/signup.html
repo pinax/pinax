@@ -1,0 +1,80 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load uni_form_tags %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block body %}
+    <h1>{% trans "Sign Up" %}</h1>
+    
+    {% if user.is_authenticated %}
+        <p>{% trans "You are already logged in." %}</p>
+    {% else %}
+        <p>{% trans "Already have an account?" %} <a href="{% url acct_login %}">{% trans "Log In" %}</a>!</p>
+        
+        <form class="signup uniForm" id="signup_form" method="post" action="{% url acct_signup %}">
+            {% csrf_token %}
+            <fieldset class="inlineLabels">
+                {{ form|as_uni_form }}
+                {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                {% endif %}
+                <div class="form_block">
+                    <input type="submit" value="{% trans "Sign Up &raquo;" %}" />
+                </div>
+            </fieldset>
+        </form>
+        
+        {# @@@ currently OpenID signup is not supported via signup codes #}
+        {% if not code %}
+            <p>{% trans "Or sign in with your OpenID" %}:</p>
+            {# @@@ why isn't this just does as a form object ? #}
+            <form class="login uniForm" action="/openid/register/" method="POST">
+                {% csrf_token %}
+                <fieldset class="inlineLabels">
+                    {% if url_required %}
+                        <div class="ctrlHolder error">
+                            <p class="errorField">
+                                <strong>This field is required.</strong>
+                            </p>
+                            <label for="id_username">* OpenID Identifier</label>
+                            <input class="openid" type="text" name="openid_url" />
+                        </div>
+                    {% else %}
+                        <div class="ctrlHolder">
+                            <label for="id_username">* OpenID Identifier</label>
+                            <input class="openid" type="text" name="openid_url" />
+                        </div>
+                    {% endif %}
+                    <div class="form_block">
+                        <input type="submit" value="{% trans "Log in &raquo;" %}" />
+                    </div>
+                </fieldset>
+            </form>
+
+            {% if request.user.is_authenticated %}
+                <div><a href="{% url acct_logout %}?next={{ request.path }}&amp;sm={{ split_test }}&amp;sn=logout">logout</a></div>
+            {% endif %}
+            </div>
+        {% endif %}
+        
+        {% url terms as terms_url %}
+        {% url privacy as privacy_url %}
+        <p>{% blocktrans %}By clicking "Sign Up", you are indicating that you have read and agree to the <a href="{{ terms_url }}">Terms of Use</a> and <a href="{{ privacy_url }}">Privacy Policy</a>.{% endblocktrans %}</p>
+        
+        <p>{% blocktrans %}If you have any trouble creating your account, contact us at <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>.{% endblocktrans %}</p>
+        
+    {% endif %}
+{% endblock %}
+
+{% block extra_body %}
+    {% load jquery_validation %}
+    {% include_validation %}
+    <script type="text/javascript">
+        $(function(){
+            $('#signup_form').validate('{% url signup_form_validate %}', {type: 'table', fields: ['username'], dom: $('#id_username'), event: 'change'});
+            $("#id_username").focus();
+        });
+    </script>
+{% endblock %}

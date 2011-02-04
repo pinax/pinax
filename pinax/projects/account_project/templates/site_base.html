@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block extra_head_base %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/site_tabs.css" />
+    {% block extra_head %}{% endblock %}
+{% endblock %}
+
+{% block logo_link_image %}<a href="{% url home %}"><img src="{{ STATIC_URL }}pinax/img/logo.png" alt="Pinax"/></a>{% endblock %}
+
+{% block login %}
+    {% include "_account_bar.html" %}
+{% endblock %}
+
+{% block footer %}
+<div class="legal">
+    {% trans "&copy; 2010 &lt;your company here&gt;" %}
+    - <a href="{% url about %}">{% trans "About" %}</a>
+    - <a href="{% url terms %}">{% trans "Terms of Service" %}</a>
+    - <a href="{% url privacy %}">{% trans "Privacy Policy" %}</a>
+    - <a href="{% url dmca %}">{% trans "DMCA Notice" %}</a>
+</div>
+{% endblock %}
