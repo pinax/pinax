@@ -1,0 +1,271 @@
+/* GENERAL */
+
+html, body {
+    height: 100%;
+}
+body {
+    background-color: #FFF;
+    margin: 0;
+    color: #333;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 10pt;
+}
+a, a:visited {
+    color: #13C;
+}
+img {
+    border: 0;
+}
+dt {
+    font-weight: bold;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 0;
+    font-size: inherit;
+}
+td {
+    margin: 0;
+    border: 0;
+    padding: 0;
+}
+h1 {
+    margin: 0;
+}
+
+
+
+#body {
+    clear: both;
+    margin: 0 auto;
+    padding: 10px;
+    width: 800px;
+}
+#footer {
+    color: #999; /* footer text colour */
+    margin: 50px auto;
+    padding: 10px;
+    clear: both;
+    width: 800px;
+}
+#footer a, #footer a:visited {
+    color: #444; /* footer link colour */
+}
+#footer a:hover {
+    color: #777; /* footer link hover colour */
+}
+
+
+/* CLEARS */
+
+.clearboth {
+    clear: both;
+}
+
+/* reference:
+ *   http://www.positioniseverything.net/easyclearing.html
+ *   http://www.zeldman.com/2006/10/27/ie7fixes1/
+ *      comment by michael on 10/28/2006
+ */
+.clearfix {
+    min-height: 1%;
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+/* hides from ie5-mac \*/
+* html .clearfix { height: 1%; }
+/* end hide from ie5-mac */
+
+
+/* HEADER */
+
+#tabhead {
+    background: #035 url('../img/heading.png') left top repeat-x;
+    border-bottom: 1px solid #000; /* tab border */
+    position: relative;
+}
+#tabhead .logo {
+    height: 80px;
+    padding-left: 5px;
+    padding-top: 0;
+}
+#tabhead .logo img {
+    width: 190px;
+    height: 79px;
+}
+#tabhead .login {
+    position: absolute;
+    top: 6px;
+    right: 15px;
+    color: #DEF; /* login bar text colour */
+}
+#tabhead .login a, #tabhead .login a:visited {
+    color: #DEF; /* login bar link colour */
+}
+#tabhead .login a:hover {
+    color: #FFF; /* login bar link hover colour */
+}
+
+#locale_switcher {
+    display: inline;
+}
+
+#subnav {
+    margin: 0;
+    padding: 0;
+    background: #DEF; /* tab colour */
+    border-bottom: 1px solid #9BC;
+}
+#subnav ul {
+    float: right;
+    margin: 0 20px;
+    padding: 0;
+}
+#subnav ul li {
+    display: inline;
+    list-style-type: none;
+}
+#subnav ul a:link, #subnav ul a:visited {
+    float: left;
+    font-weight: bold;
+    text-decoration: none;
+    color: #444;
+    padding: 4px 20px;
+}
+#subnav ul a:hover {
+    color: #FFF;
+    background: #9BC;
+}
+
+
+/* FORMS */
+
+form th {
+    text-align : left;
+}
+form.signup input[type="submit"], form.login input[type="submit"] {
+    margin: 20px 0;
+    font-size: 14pt;
+}
+input[type="text"], input[type="password"], textarea {
+    padding: 3px;
+    margin: 3px;
+    border: solid 1px #C6C6C6;
+    border-bottom: solid 1px #E3E3E3;
+    color: #666;
+    font-size: 12pt;
+    background: #F3F3F3 url('../img/form-shadow.png') left top repeat-x;
+}
+ul.errorlist {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    color: red;
+}
+
+
+/* MESSAGES */
+
+ul#messages {
+    margin: 0 0 10px 0;
+    padding: 0;
+    list-style: none;
+}
+ul#messages li {
+    padding: 5px 10px;
+    margin: 3px;
+}
+ul#messages li a {
+    float: right;
+    color: #693;
+}
+ul#messages .debug {
+    background: #EEE;
+    border: 1px solid #BBB;
+}
+ul#messages .info {
+    background: #DEF;
+    border: 1px solid #9BC;
+}
+ul#messages .success {
+    background: #EFD;
+    border: 1px solid #BC9;
+}
+ul#messages .warning {
+    background: #FED;
+    border: 1px solid #CB9;
+}
+ul#messages .error {
+    background: #FDD;
+    border: 1px solid #C99;
+}
+
+
+/* WHAT NEXT */
+
+dl.what_next {
+    margin: 2em;
+}
+dl.what_next dt {
+    font-size: 120%;
+}
+dl.what_next dd {
+    margin: 0 0 1em 0;
+    font-style: italic;
+}
+p.what_next {
+    font-size: 120%;
+}
+
+
+/* FORM TOGGLE */
+
+.form-toggle p {
+    margin-bottom: 2px;
+}
+
+.form-toggle p span {
+    background: #DEF;
+    padding: 3px 6px;
+    border-top: 1px solid #9BC;
+    border-left: 1px solid #9BC;
+    border-right: 1px solid #9BC;
+    cursor: pointer;
+}
+
+.form-toggle form {
+    padding: 3px 6px;
+    margin: 0;
+    background: #DEF;
+    border: 1px solid #9BC;
+}
+
+
+
+/* EXTRAS TO CLEAN UP */
+
+.warning {
+    color: red;
+    font-weight: bold;
+}
+
+div.profile_info p {
+    margin: 0;
+}
+div.left_panel {
+    width: 550px;
+}
+div.right_panel {
+    margin-top: 20px;
+    width: 200px;
+    float: right;
+    z-index: 999;
+}
