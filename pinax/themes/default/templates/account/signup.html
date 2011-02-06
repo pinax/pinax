@@ -56,7 +56,7 @@
             {% if request.user.is_authenticated %}
                 <div><a href="{% url acct_logout %}?next={{ request.path }}&amp;sm={{ split_test }}&amp;sn=logout">logout</a></div>
             {% endif %}
-            </div>
+        
         {% endif %}
         
         {% url terms as terms_url %}
