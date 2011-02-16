@@ -162,7 +162,7 @@ they can handle being within or without a group::
         
         return render_to_response("tasks/task_list.html", {
             "group": group,
-            "blogs": blogs,
+            "tasks": tasks,
             "is_member": is_member,
         }, context_instance=RequestContext(request))
         
@@ -187,7 +187,7 @@ Let's say you have the following code in ``tasks.urls.py``::
     
     urlpatterns = patterns("",
         url(r"^tasks/$", "pinax.apps.tasks.views.task_list", name="task_list"),
-        url(r"^tasks/(?P<slug>[-\w]+)/$", "pinax.apps.tasks.views.blog_detail", name="task_detail"),
+        url(r"^tasks/(?P<slug>[-\w]+)/$", "pinax.apps.tasks.views.task_detail", name="task_detail"),
     )
 
 To ensure URLs to ``task_list`` are correctly generated you will need to use
@@ -195,7 +195,7 @@ To ensure URLs to ``task_list`` are correctly generated you will need to use
 
     def some_view_with_redirect(request, bridge=None):
         ...
-        return HttpResponseRedirect(bridge.reverse("blog_list", group))
+        return HttpResponseRedirect(bridge.reverse("task_list", group))
 
 The ``reverse`` method work almost identical to Django's ``reverse``. It is
 essentially a wrapper. To reverse the ``taskdetail`` URL::
