@@ -19,16 +19,9 @@ import pinax.env
 
 PINAX_ROOT = os.path.abspath(os.path.dirname(pinax.__file__))
 PINAX_PROJECTS = [
-    "zero_project",
     "account_project",
-    "basic_project",
     "static_project",
-    "code_project",
-    "company_project",
-    "intranet_project",
-    "private_beta_project",
-    "sample_group_project",
-    "social_project",
+    "zero_project",
 ]
 EXTRA_APP_ALIASES = {
     "django_filters": ["django_filters.tests"],
