@@ -101,6 +101,7 @@ def setup_test_environment():
             "django.core.context_processors.request",
             "django.contrib.messages.context_processors.messages",
             "pinax.core.context_processors.pinax_settings",
+            "pinax.apps.account.context_processors.account",
         ],
         "CONTACT_EMAIL": "feedback@example.com",
         "SITE_NAME": "Pinax",
