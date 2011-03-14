@@ -1,0 +1,51 @@
+.. _ref-account-gettingstarted:
+
+===============
+Getting started
+===============
+
+This document is designed to get you up and running with
+``pinax.apps.account``...
+
+
+Prerequisites
+=============
+
+These are the requirements to run ``pinax.apps.account``:
+
+ * Python **2.4+** (Python 3.x is **not** supported yet)
+ * Django **1.2+**
+ * django-email-confirmation
+ * django-timezones
+ * django-ajax-validation
+
+These dependencies should be added to your ``requirements/project.txt`` file
+and installed using pip_. For example::
+
+    pip install -r requirements/project.txt
+
+
+Installation
+============
+
+Add ``pinax.apps.account`` to your ``INSTALLED_APPS``:
+
+.. code-block:: python
+
+    INSTALLED_APPS = [
+        # ...
+        "pinax.apps.account",
+    ]
+
+Hook up ``pinax.apps.account`` to your URLconf:
+
+.. code-block:: python
+
+    urlpatterns = patterns("",
+        # ...
+        url(r"^account/", include("pinax.apps.account.urls"))
+    )
+
+
+
+.. _pip: http://pip.openplans.org/
