@@ -105,6 +105,12 @@ MIDDLEWARE_CLASSES = [
     "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
+STATICFILES_FINDERS = [
+    "staticfiles.finders.FileSystemFinder",
+    "staticfiles.finders.AppDirectoriesFinder",
+    "staticfiles.finders.LegacyAppDirectoriesFinder",
+]
+
 ROOT_URLCONF = "basic_project.urls"
 
 TEMPLATE_DIRS = [
@@ -120,7 +126,7 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     "django.core.context_processors.request",
     "django.contrib.messages.context_processors.messages",
     
-    "staticfiles.context_processors.static_url",
+    "staticfiles.context_processors.static",
     
     "pinax.core.context_processors.pinax_settings",
     
