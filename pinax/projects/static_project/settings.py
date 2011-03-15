@@ -71,7 +71,16 @@ STATIC_URL = "/site_media/static/"
 
 # Additional directories which hold static files
 STATICFILES_DIRS = [
-    os.path.join(PROJECT_ROOT, "media"),
+    os.path.join(PROJECT_ROOT, "static"),
+    os.path.join(PINAX_ROOT, "themes", PINAX_THEME, "static"),
+]
+
+# Changed from default to include LegacyAppDirectories while 3rd party
+# apps are upgrading
+STATICFILES_FINDERS = [
+    "staticfiles.finders.FileSystemFinder",
+    "staticfiles.finders.AppDirectoriesFinder",
+    "staticfiles.finders.LegacyAppDirectoriesFinder",
 ]
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
@@ -94,12 +103,6 @@ MIDDLEWARE_CLASSES = [
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
-]
-
-STATICFILES_FINDERS = [
-    "staticfiles.finders.FileSystemFinder",
-    "staticfiles.finders.AppDirectoriesFinder",
-    "staticfiles.finders.LegacyAppDirectoriesFinder",
 ]
 
 ROOT_URLCONF = "static_project.urls"
