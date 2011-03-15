@@ -1,0 +1,16 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load account_tags %}
+
+{% block head_title %}{% trans "Confirm E-mail" %}{% endblock %}
+
+{% block body %}
+    {% if email_address %}
+        <h1>{% trans "E-mail Confirmed" %}</h1>
+        {% user_display email_address.user as user_display %}
+        <p>{% blocktrans with email_address.email as email %}You have confirmed that {{ email }} is an e-mail address for user '{{ user_display }}'.{% endblocktrans %}</p>
+    {% else %}
+        <p>{% trans "Invalid confirmation key." %}</p>
+    {% endif %}
+{% endblock %}
