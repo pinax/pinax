@@ -150,6 +150,7 @@ INSTALLED_APPS = [
     
     # Pinax
     "pinax.apps.account",
+    "pinax.apps.analytics",
     "pinax.apps.signup_codes",
     
     # project
