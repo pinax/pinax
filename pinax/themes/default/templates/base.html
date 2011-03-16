@@ -1,3 +1,4 @@
+{% load compress %}
 {% load i18n %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}" xml:lang="{{ LANGUAGE_CODE }}" lang="{{ LANGUAGE_CODE }}">
@@ -9,11 +10,13 @@
                 zoom: 1; /* trigger hasLayout */
             }
         </style><![endif]-->
-        <link rel="stylesheet" href="{{ STATIC_URL }}pinax/css/base.css" />
-        <link rel="stylesheet" href="{{ STATIC_URL }}pinax/css/tabs.css" />
-        {% block extra_head_base %}
-            {% block extra_head %}{% endblock %}
-        {% endblock %}
+        {% compress css %}
+            <link rel="stylesheet" href="{{ STATIC_URL }}pinax/css/base.css" />
+            <link rel="stylesheet" href="{{ STATIC_URL }}pinax/css/tabs.css" />
+            {% block extra_head_base %}
+                {% block extra_head %}{% endblock %}
+            {% endblock %}
+        {% endcompress %}
     </head>
     
     <body class="{% block body_class %}{% endblock %}">
@@ -35,11 +38,12 @@
         
         <div id="footer">{% block footer %}{% endblock %}</div>
         
-        <script src="{% block jquery_src %}{{ STATIC_URL }}pinax/js/jquery-1.5.min.js{% endblock %}" type="text/javascript"></script>
-        <script src="{{ STATIC_URL }}pinax/js/base.js" type="text/javascript"></script>
-        {% block extra_body_base %}
-            
-            {% block extra_body %}{% endblock %}
-        {% endblock %}
+        {% compress js %}
+            <script src="{% block jquery_src %}{{ STATIC_URL }}pinax/js/jquery-1.5.min.js{% endblock %}" type="text/javascript"></script>
+            <script src="{{ STATIC_URL }}pinax/js/base.js" type="text/javascript"></script>
+            {% block extra_body_base %}
+                {% block extra_body %}{% endblock %}
+            {% endblock %}
+        {% endcompress %}
     </body>
 </html>

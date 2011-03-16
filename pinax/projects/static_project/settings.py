@@ -74,8 +74,6 @@ STATICFILES_DIRS = [
     os.path.join(PROJECT_ROOT, "static"),
 ]
 
-# Changed from default to include LegacyAppDirectories while 3rd party
-# apps are upgrading
 STATICFILES_FINDERS = [
     "staticfiles.finders.FileSystemFinder",
     "staticfiles.finders.AppDirectoriesFinder",
