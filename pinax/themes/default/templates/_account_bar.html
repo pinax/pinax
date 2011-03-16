@@ -13,8 +13,8 @@
     {% url acct_login as acct_login_url %}
     {% url acct_signup as acct_signup_url %}
     {% ifsetting ACCOUNT_OPEN_SIGNUP %}
-        {% blocktrans %}<a href="{{ acct_login_url }}">Log in</a> or <a href="{{ acct_signup_url }}">Sign Up</a>{% endblocktrans %}
+        {% blocktrans with request.path as request_path %}<a href="{{ acct_login_url }}?next={{ request_path }}">Log in</a> or <a href="{{ acct_signup_url }}">Sign Up</a>{% endblocktrans %}
     {% else %}
-        {% blocktrans %}<a href="{{ acct_login_url }}">Log in</a>{% endblocktrans %}
+        {% blocktrans with request.path as request_path %}<a href="{{ acct_login_url }}?next={{ request_path }}">Log in</a>{% endblocktrans %}
     {% endifsetting %}
 {% endif %}
