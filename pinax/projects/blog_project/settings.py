@@ -153,6 +153,8 @@ INSTALLED_APPS = [
     "ajax_validation",
     "timezones",
     "emailconfirmation",
+    "biblion",
+    "dialogos",
     
     # Pinax
     "pinax.apps.account",

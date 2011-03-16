@@ -1,0 +1,41 @@
+{% extends "site_base.html" %}
+
+{% load biblion_tags %}
+
+{% block body_id %}blog{% endblock %}
+
+{% block main_content %}
+    <div class="blog-content">
+        <div class="main">
+            {% block blog_content %}{% endblock %}
+        </div>
+        <aside class="sidebar">
+            <div class="blog-sections">
+                {% blog_sections as sections %}
+                <h4>Categories</h4>
+                <hr />
+                <ul>
+                {% for section in sections %}
+                    {% ifequal section.0 "all" %}
+                        <li><a href="{% url blog %}">{{ section.1 }}</a></li>
+                    {% else %}
+                        <li><a href="{% url blog_section section.0 %}">{{ section.1 }}</a></li>
+                    {% endifequal %}
+                {% endfor %}
+                </ul>
+            </div>
+            <div class="blog-sections">
+                {% latest_blog_posts as recent_posts %}
+                <h4>Recent Posts</h4>
+                <hr />
+                <ul>
+                {% for post in recent_posts %}
+                    <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
+                {% empty %}
+                    <li>None.</li>
+                {% endfor %}
+                </ul>
+            </div>
+        </aside>
+    </div>
+{% endblock %}

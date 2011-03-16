@@ -1,0 +1,29 @@
+{% extends "biblion/blog_base.html" %}
+
+{% load biblion_tags %}
+
+{% block head_title %}{{ post.title }}{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/syntax.css" />
+{% endblock %}
+
+{% block blog_content %}
+    <p class="breadcrumbs">
+        <a href="{% url blog %}">&laquo; back to blog</a>
+    </p>
+    
+    <div class="full-post">
+        <h2 class="post-title">{{ post.title }}</h2>
+        {% include "biblion/dateline.html" %}
+        <hr />
+        
+        <div class="teaser">{{ post.teaser_html|safe }}</div>
+        
+        <div class="content">{{ post.content_html|safe }}</div>
+    </div>
+    
+    <p class="breadcrumbs">
+        <a href="{% url blog %}">&laquo; back to blog</a>
+    </p>
+{% endblock %}

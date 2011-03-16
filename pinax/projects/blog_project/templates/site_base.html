@@ -5,6 +5,7 @@
 
 {% block extra_head_base %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/site_tabs.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/syntax.css" />
     <link rel="stylesheet" href="{{ STATIC_URL }}uni_form/uni-form.css" />
     {% block extra_head %}{% endblock %}
 {% endblock %}
@@ -13,6 +14,12 @@
 
 {% block login %}
     {% include "_account_bar.html" %}
+{% endblock %}
+
+{% block right_tabs %}
+    <ul class="tabs">{% spaceless %}
+        <li id="tab_blog"><a href="{% url blog %}">{% trans "Blog" %}</a></li>
+    {% endspaceless %}</ul>
 {% endblock %}
 
 {% block footer %}
