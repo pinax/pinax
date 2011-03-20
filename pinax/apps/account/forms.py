@@ -20,7 +20,7 @@ from timezones.forms import TimeZoneField
 
 from pinax.apps.account.models import Account, PasswordReset
 from pinax.apps.account.models import OtherServiceInfo, other_service, update_other_services
-from pinax.apps.account.utils import user_display, perform_login
+from pinax.apps.account.utils import user_display, perform_login, change_password
 
 
 
@@ -348,8 +348,7 @@ class ChangePasswordForm(UserForm):
         return self.cleaned_data["password2"]
     
     def save(self):
-        self.user.set_password(self.cleaned_data["password1"])
-        self.user.save()
+        change_password(self.user, self.cleaned_data["password1"])
 
 
 class SetPasswordForm(UserForm):

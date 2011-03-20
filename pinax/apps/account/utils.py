@@ -45,3 +45,9 @@ def has_openid(request):
 def perform_login(request, user):
     user_logged_in.send(sender=user.__class__, request=request, user=user)
     login(request, user)
+
+
+def change_password(user, new_pass):
+    user.set_password(new_pass)
+    user.save()
+    password_changed.send(sender=user.__class__, user=user)
