@@ -1,0 +1,23 @@
+{% extends "idios/base.html" %}
+
+{% load i18n %}
+{% load uni_form_tags %}
+{% load account_tags %}
+
+{% block head_title %}{% user_display page_user as page_user_display %}{% blocktrans %}Profile for {{ page_user_display }}{% endblocktrans %}{% endblock %}
+
+{% block body %}
+    {% user_display page_user as page_user_display %}
+    
+    <h1>{% blocktrans %}Profile for {{ page_user_display }}{% endblocktrans %}</h1>
+    
+    {% include "profiles/_profile_info.html" %}
+    
+    {% if is_me %}
+        <p><a href="{% url profile_edit %}" rel="facebox">Edit profile</a></p>
+    {% endif %}
+{% endblock %}
+
+{% block extra_body %}
+    {% include "facebox_js.html" %}
+{% endblock %}
