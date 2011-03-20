@@ -164,7 +164,6 @@ INSTALLED_APPS = [
     "mailer",
     "uni_form",
     "django_openid",
-    "ajax_validation",
     "timezones",
     "emailconfirmation",
     "announcements",
