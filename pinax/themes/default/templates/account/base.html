@@ -2,8 +2,11 @@
 
 {% load i18n %}
 
-{% block body_class %}account{% endblock %}
+{% block extra_head %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}pinax/css/account.css" />
+{% endblock %}
 
+{% block body_class %}account{% endblock %}
 
 {% block subnav %}
     {% if user.is_authenticated %}
