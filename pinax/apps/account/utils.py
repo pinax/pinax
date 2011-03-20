@@ -2,7 +2,7 @@ from django.conf import settings
 
 from django.contrib.auth import login
 
-from pinax.apps.account.signals import user_logged_in
+from pinax.apps.account.signals import user_logged_in, password_changed
 
 
 def get_default_redirect(request, fallback_url, redirect_field_name="next", session_key_value="redirect_to"):

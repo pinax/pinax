@@ -5,7 +5,7 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 
 
-class ChangePasswordTest(TestCase):    
+class ChangePasswordTest(TestCase):
     urls = "pinax.apps.account.tests.account_urls"
     
     def setUp(self):
@@ -13,6 +13,10 @@ class ChangePasswordTest(TestCase):
         # remove django-mailer to properly test for outbound e-mail
         if "mailer" in settings.INSTALLED_APPS:
             settings.INSTALLED_APPS.remove("mailer")
+        
+        self.EMAIL_AUTHENTICATION = getattr(settings, "ACCOUNT_EMAIL_AUTHENTICATION", False)
+        User.objects.create_user("bob", "bob@example.com", "abc123")
+        
     
     def tearDown(self):
         settings.INSTALLED_APPS = self.old_installed_apps
@@ -28,13 +32,10 @@ class ChangePasswordTest(TestCase):
         """
         Error if user can not login and get to the password change view
         """
-        EMAIL_AUTHENTICATION = getattr(settings, "ACCOUNT_EMAIL_AUTHENTICATION", False)
-        
-        bob = User.objects.create_user("bob", "bob@example.com", "abc123")
         data = {
             "password": "abc123",
         }
-        if EMAIL_AUTHENTICATION:
+        if self.EMAIL_AUTHENTICATION:
             data["email"] = "bob@example.com"
         else:
             data["username"] = "bob"
