@@ -35,7 +35,4 @@ urlpatterns = patterns("",
     url(r"^password_reset/$", "pinax.apps.account.views.password_reset", name="acct_passwd_reset"),
     url(r"^password_reset/done/$", "pinax.apps.account.views.password_reset_done", name="acct_passwd_reset_done"),
     url(r"^password_reset_key/(?P<uidb36>[0-9A-Za-z]+)-(?P<key>.+)/$", "pinax.apps.account.views.password_reset_from_key", name="acct_passwd_reset_key"),
-    
-    # ajax validation
-    (r"^validate/$", "ajax_validation.views.validate", {"form_class": SignupForm}, "signup_form_validate"),
 )
