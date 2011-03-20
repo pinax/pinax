@@ -1,0 +1,21 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+
+{% block extra_head %}
+    <link rel="alternate" type="application/atom+xml" title="Notices Feed" href="{% url notification_feed_for_user %}" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}pinax/css/notification.css" />
+{% endblock %}
+
+{% block body_class %}notices{% endblock %}
+
+{% block subnav %}
+    {% if user.is_authenticated %}
+        <ul>
+            <li><a href="{% url notification_notices %}">{% trans "Notices" %}</a></li>
+            <li><a href="{% url notification_notice_settings %}">{% trans "Settings" %}</a></li>
+        </ul>
+    {% else %}
+        &nbsp;
+    {% endif %}
+{% endblock %}
