@@ -51,7 +51,7 @@ class ChangePasswordTest(TestCase):
         """
         bob = User.objects.get(email="bob@example.com")
         data = {
-            "oldpassword": "abc123", 
+            "oldpassword": "abc123",
             "password1": "def456",
             "password2": "def456",
         }
@@ -72,7 +72,7 @@ class ChangePasswordTest(TestCase):
         password_changed.connect(receiver)
         
         data = {
-            "oldpassword": "def456", 
+            "oldpassword": "def456",
             "password1": "ghi789",
             "password2": "ghi789",
         }
