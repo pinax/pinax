@@ -23,7 +23,7 @@ class InviteUserForm(GroupForm):
     
     def create_signup_code(self, commit=True):
         email = self.cleaned_data["email"]
-        signup_code = SignupCode.create(email, 1, group=self.group)
+        signup_code = SignupCode.create(email, 24, group=self.group)
         if commit:
             signup_code.save()
         return signup_code
