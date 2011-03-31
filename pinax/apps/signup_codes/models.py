@@ -72,7 +72,7 @@ class SignupCodeResult(models.Model):
     """
     signup_code = models.ForeignKey(SignupCode)
     user = models.ForeignKey(User)
-    timestamp = models.DateTimeField(default=datetime.now)
+    timestamp = models.DateTimeField(default=datetime.datetime.now)
 
 
 def signup_code_result_save(sender, instance=None, created=False, **kwargs):
@@ -94,7 +94,7 @@ def check_signup_code(code):
             if signup_code.max_uses and signup_code.max_uses < signup_code.use_count + 1:
                 return False
             else:
-                if signup_code.expiry and datetime.now() > signup_code.expiry:
+                if signup_code.expiry and datetime.datetime.now() > signup_code.expiry:
                     return False
                 else:
                     return signup_code
