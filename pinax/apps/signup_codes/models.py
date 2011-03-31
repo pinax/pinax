@@ -1,10 +1,14 @@
-from datetime import datetime
+import datetime
 
+from django.conf import settings
+from django.core.mail import send_mail
 from django.db import models
 from django.db.models.signals import post_save
+from django.template.loader import render_to_string
+from django.utils.hashcompat import sha_constructor
 
 from django.contrib.auth.models import User
-
+from django.contrib.sites.models import Site
 
 
 class SignupCode(models.Model):
@@ -16,13 +20,26 @@ class SignupCode(models.Model):
     inviter = models.ForeignKey(User, null=True, blank=True)
     email = models.EmailField(blank=True)
     notes = models.TextField(blank=True)
-    created = models.DateTimeField(default=datetime.now, editable=False)
+    created = models.DateTimeField(default=datetime.datetime.now, editable=False)
     
     # calculated
     use_count = models.PositiveIntegerField(editable=False, default=0)
     
     def __unicode__(self):
         return self.code
+    
+    @classmethod
+    def create(cls, email, expiry, group=None):
+        expiry = datetime.datetime.now() + datetime.timedelta(hours=expiry)
+        bits = [
+            settings.SECRET_KEY,
+            email,
+            str(expiry),
+        ]
+        if group is not None:
+            bits.append("%s%s" % (group._meta, group.pk))
+        code = sha_constructor("".join(bits)).hexdigest()
+        return cls(code=code, email=email, max_uses=1, expiry=expiry)
     
     def calculate_use_count(self):
         self.use_count = self.signupcoderesult_set.count()
@@ -36,6 +53,18 @@ class SignupCode(models.Model):
         result.signup_code = self
         result.user = user
         result.save()
+    
+    def send(self, group=None):
+        current_site = Site.objects.get_current()
+        domain = unicode(current_site.domain)
+        ctx = {
+            "group": group,
+            "signup_code": self,
+            "domain": domain,
+        }
+        subject = render_to_string("signup_codes/invite_user_subject.txt", ctx)
+        message = render_to_string("signup_codes/invite_user.txt", ctx)
+        send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [self.email])
 
 
 class SignupCodeResult(models.Model):
