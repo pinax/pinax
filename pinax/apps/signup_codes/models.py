@@ -26,7 +26,7 @@ class SignupCode(models.Model):
     use_count = models.PositiveIntegerField(editable=False, default=0)
     
     def __unicode__(self):
-        return self.code
+        return "%s [%s]" % (self.email, self.code)
     
     @classmethod
     def create(cls, email, expiry, group=None):
