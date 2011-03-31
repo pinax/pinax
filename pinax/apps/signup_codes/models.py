@@ -20,6 +20,7 @@ class SignupCode(models.Model):
     inviter = models.ForeignKey(User, null=True, blank=True)
     email = models.EmailField(blank=True)
     notes = models.TextField(blank=True)
+    sent = models.DateTimeField(null=True, blank=True)
     created = models.DateTimeField(default=datetime.datetime.now, editable=False)
     
     # calculated
@@ -65,6 +66,8 @@ class SignupCode(models.Model):
         subject = render_to_string("signup_codes/invite_user_subject.txt", ctx)
         message = render_to_string("signup_codes/invite_user.txt", ctx)
         send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [self.email])
+        self.sent = datetime.datetime.now()
+        self.save()
 
 
 class SignupCodeResult(models.Model):
