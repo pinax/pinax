@@ -20,7 +20,7 @@ class PasswordResetTest(TestCase):
     
     def setUp(self):
         self.old_installed_apps = settings.INSTALLED_APPS
-        # remove django-mailer to properly test for outbound e-mail
+        # remove django-mailer to properly test for outbound email
         if "mailer" in settings.INSTALLED_APPS:
             settings.INSTALLED_APPS.remove("mailer")
     
@@ -43,7 +43,7 @@ class PasswordResetTest(TestCase):
     
     def test_email_not_found(self):
         """
-        Error is raised if the provided e-mail address isn't verified to an
+        Error is raised if the provided email address isn't verified to an
         existing user account
         """
         data = {
@@ -59,7 +59,7 @@ class PasswordResetTest(TestCase):
     
     def test_email_not_verified(self):
         """
-        Error is raised if the provided e-mail address isn't verified to an
+        Error is raised if the provided email address isn't verified to an
         existing user account
         """
         bob = User.objects.create_user("bob", "bob@example.com", "abc123")
@@ -82,7 +82,7 @@ class PasswordResetTest(TestCase):
     
     def test_email_found(self):
         """
-        E-mail is sent if a valid e-mail address is provided for password reset
+        Email is sent if a valid email address is provided for password reset
         """
         bob = User.objects.create_user("bob", "bob@example.com", "abc123")
         EmailAddress.objects.create(
@@ -101,7 +101,7 @@ class PasswordResetTest(TestCase):
     
     def _read_reset_email(self,  email):
         match = re.search(r"https?://[^/]*(/.*reset_key/\S*)", email.body)
-        self.assert_(match is not None, "No URL found in sent e-mail")
+        self.assert_(match is not None, "No URL found in sent email")
         return match.group(), match.groups()[0]
     
     def _test_confirm_start(self):

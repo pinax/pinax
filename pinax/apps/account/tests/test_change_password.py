@@ -10,7 +10,7 @@ class ChangePasswordTest(TestCase):
     
     def setUp(self):
         self.old_installed_apps = settings.INSTALLED_APPS
-        # remove django-mailer to properly test for outbound e-mail
+        # remove django-mailer to properly test for outbound email
         if "mailer" in settings.INSTALLED_APPS:
             settings.INSTALLED_APPS.remove("mailer")
         

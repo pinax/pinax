@@ -122,7 +122,7 @@ def admin_invite_user(request, **kwargs):
             email = form.cleaned_data["email"]
             form.send_signup_code()
             messages.add_message(request, messages.INFO,
-                ugettext("An e-mail has been sent to %(email)s.") % {
+                ugettext("An email has been sent to %(email)s.") % {
                     "email": email
                 }
             )

@@ -21,7 +21,7 @@ class InviteUserTest(TestCase):
     
     def setUp(self):
         self.old_installed_apps = settings.INSTALLED_APPS
-        # remove django-mailer to properly test for outbound e-mail
+        # remove django-mailer to properly test for outbound email
         if "mailer" in settings.INSTALLED_APPS:
             settings.INSTALLED_APPS.remove("mailer")
         
@@ -75,7 +75,7 @@ class InviteUserTest(TestCase):
         data = {"email":"bob@example.com"}
         response = self.client.post(reverse("admin_invite_user"), data)
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "An e-mail has been sent to " + data["email"])
+        self.assertContains(response, "An email has been sent to " + data["email"])
     
     def test_accept_invite(self):
         """

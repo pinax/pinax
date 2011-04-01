@@ -28,7 +28,7 @@ oidutil.log = dummy_log
 
 class PinaxConsumer(RegistrationConsumer):
     
-    # Pinax does its own e-mail confirmation handling, but django-openid
+    # Pinax does its own email confirmation handling, but django-openid
     # wants to do its own handling of this so we turn it off in all cases
     confirm_email_addresses = False
     
