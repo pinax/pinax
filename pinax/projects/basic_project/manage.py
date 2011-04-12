@@ -5,8 +5,7 @@ try:
     import pinax
 except ImportError:
     sys.stderr.write("Error: Can't import Pinax. Make sure you are in a "
-        "virtual environment that has\nPinax installed or create one with "
-        "pinax-boot.py.\n")
+        "virtual environment that has\nPinax installed.\n")
     sys.exit(1)
 else:
     import pinax.env
