@@ -209,7 +209,6 @@ class ProjectInstaller(object):
         pip.call_subprocess([
             pip_cmd,
             "install",
-            "--no-deps",
             "--requirement", requirements_file,
         ], show_stdout=True, extra_environ=environ)
 
