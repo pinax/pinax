@@ -1,6 +1,7 @@
 {% extends "site_base.html" %}
 
 {% load i18n %}
+{% load ifsetting_tag %}
 
 {% block extra_head %}
     <link rel="stylesheet" href="{{ STATIC_URL }}pinax/css/account.css" />
@@ -21,7 +22,9 @@
             {% if user.password and request.openids %}
             <li><a href="{% url acct_passwd_delete %}">{% trans "Delete Password" %}</a></li>
             {% endif %}
-            <li><a href="{% url acct_language_change %}">{% trans "Language" %}</a></li>
+            {% ifsetting USE_I18N %}
+                <li><a href="{% url acct_language_change %}">{% trans "Language" %}</a></li>
+            {% endifsetting %}
             <li><a href="{% url acct_timezone_change %}">{% trans "Timezone" %}</a></li>
         </ul>
     {% else %}
