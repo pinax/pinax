@@ -12,8 +12,7 @@
         <aside class="sidebar">
             <div class="blog-sections">
                 {% blog_sections as sections %}
-                <h4>Categories</h4>
-                <hr />
+                <h2>Categories</h2>
                 <ul>
                 {% for section in sections %}
                     {% ifequal section.0 "all" %}
@@ -26,8 +25,7 @@
             </div>
             <div class="blog-sections">
                 {% latest_blog_posts as recent_posts %}
-                <h4>Recent Posts</h4>
-                <hr />
+                <h2>Recent Posts</h2>
                 <ul>
                 {% for post in recent_posts %}
                     <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>

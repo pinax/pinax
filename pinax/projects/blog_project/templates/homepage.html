@@ -1,5 +1,6 @@
 {% extends "site_base.html" %}
 
+{% load biblion_tags %}
 {% load i18n %}
 {% load ifsetting_tag %}
 
@@ -32,24 +33,22 @@
     
     <p>
         {% blocktrans %}
-        This project lays the foundation for all other Pinax starter projects. It
-        provides the project directory layout and some key infrastructure apps on
-        which the other starter projects are based.
+        This project provides a simple out of the box blog.
         {% endblocktrans %}
     </p>
     
-    <hr />
-    {% if user.is_authenticated %}
-        {% url what_next as what_next_url %}
-        <p class="what_next">{% blocktrans %}Wondering <a href="{{ what_next_url }}">What Next</a>?{% endblocktrans %}</p>
+    <h2>{% trans "Latest Blog Posts" %}</h2>
+    {% latest_blog_posts as posts %}
+    {% if posts %}
+        {% for post in posts %}
+            <div class="blog-post">
+                {% include "biblion/_minipost.html" %}
+                <div><a href="{{ post.get_absolute_url }}" class="more">read more &rarr;</a></div>
+            </div>
+        {% endfor %}
     {% else %}
-        {% url acct_login as login_url %}
-        {% ifsetting ACCOUNT_OPEN_SIGNUP %}
-            {% url acct_signup as signup_url %}
-            <p>{% blocktrans %}You can <a href="{{ signup_url }}">Sign up</a> and <a href="{{ login_url }}">Log in</a> to try out the site.{% endblocktrans %}</p>
-        {% else %}
-            <p>{% blocktrans %}You can <a href="{{ login_url }}">Log in</a> to try out the site.{% endblocktrans %}</p>
-        {% endifsetting %}
+        <p>No blog posts have been published.</p>
     {% endif %}
+    
     
 {% endblock %}
