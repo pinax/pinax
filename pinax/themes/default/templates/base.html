@@ -39,7 +39,7 @@
         <div id="footer">{% block footer %}{% endblock %}</div>
         
         {% compress js %}
-            <script src="{% block jquery_src %}{{ STATIC_URL }}pinax/js/jquery-1.5.min.js{% endblock %}" type="text/javascript"></script>
+            <script src="{% block jquery_src %}{{ STATIC_URL }}pinax/js/jquery-1.5.2.js{% endblock %}" type="text/javascript"></script>
             <script src="{{ STATIC_URL }}pinax/js/base.js" type="text/javascript"></script>
             {% block extra_body_base %}
                 {% block extra_body %}{% endblock %}
