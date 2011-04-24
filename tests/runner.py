@@ -16,7 +16,7 @@ import pinax.env
 # their tests.
 #
 
-
+PINAX_THEME = "default"
 PINAX_ROOT = os.path.abspath(os.path.dirname(pinax.__file__))
 PINAX_PROJECTS = [
     "account_project",
@@ -89,8 +89,9 @@ def setup_test_environment():
         "TEMPLATE_DIRS": [
             os.path.join(os.path.dirname(__file__), "templates"),
             os.path.join(os.path.dirname(pinax.__file__), "templates", "default"),
+            os.path.join(PINAX_ROOT, "themes", PINAX_THEME, "templates")
         ],
-        
+        "STATIC_ROOT": os.path.join("site_media", "static"),
         # these settings are currently required to support Pinax default
         # templates.
         "TEMPLATE_CONTEXT_PROCESSORS": [
