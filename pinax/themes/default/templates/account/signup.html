@@ -13,7 +13,7 @@
     {% else %}
         <p>{% trans "Already have an account?" %} <a href="{% url acct_login %}">{% trans "Log In" %}</a>!</p>
         
-        <form class="signup uniForm" id="signup_form" method="post" action="{% url acct_signup %}">
+        <form class="signup uniForm" id="signup_form" method="post" action="{% url acct_signup %}" autocapitalize="off">
             {% csrf_token %}
             <fieldset class="inlineLabels">
                 {{ form|as_uni_form }}

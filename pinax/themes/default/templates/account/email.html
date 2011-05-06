@@ -62,7 +62,7 @@
     
     <h3>{% trans "Add Email Address" %}</h3>
     
-    <form method="post" action="" class="uniForm">
+    <form method="post" action="" class="uniForm" autocapitalize="off">
         {% csrf_token %}
         <fieldset class="inlineLabels">
             {{ add_email_form|as_uni_form }}

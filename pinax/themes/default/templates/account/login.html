@@ -25,7 +25,7 @@
         {% endifsetting %}
     {% endif %}
     
-    <form class="login uniForm" method="POST" action="{% url acct_login %}">
+    <form class="login uniForm" method="POST" action="{% url acct_login %}" autocapitalize="off">
         {% csrf_token %}
         <fieldset class="inlineLabels">
             <div class="form_block">
@@ -43,7 +43,7 @@
     
     <p>{% trans "Or sign in with your OpenID" %}:</p>
     {# @@@ why isn't this just does as a form object ? #}
-    <form class="login uniForm" action="/openid/register/" method="POST">
+    <form class="login uniForm" action="/openid/register/" method="POST" autocapitalize="off">
         {% csrf_token %}
         <fieldset class="inlineLabels">
             {% if url_required %}
