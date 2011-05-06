@@ -44,7 +44,7 @@ def silk(parser, token):
     Template tag to render silk icons
     Usage::
     
-        {{ silk "image_name" arg1="value1" arg2="value2" ... }}
+        {% silk "image_name" arg1="value1" arg2="value2" ... %}
     
     """
     bits = token.split_contents()
