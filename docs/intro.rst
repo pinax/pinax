@@ -6,10 +6,22 @@ Introduction
 Pinax is an MIT-licensed, open-source platform built on the Django Web
 Framework.
 
+By integrating numerous reusable Django apps and providing starter projects
+and infrastructure tools, Pinax takes care of the things that many sites
+have in common so you can focus on what makes your site different.
+
+Pinax has been used for everything from social networks to corporate websites
+and from intranets to online games. We are also working on number of editions
+tailored to event management, learning management, software project management
+and more.
+
+
+.. _philosphy:
+
 Philosphy
 ---------
 
-todo
+todo (not sure if this deserves its own section)
 
 
 .. _license:
