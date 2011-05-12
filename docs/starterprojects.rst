@@ -31,13 +31,13 @@ they don't need to be, beyond things like restyling. Examples of out-of-the-box
 projects are ``company`` and ``code``.
 
 
-Bundled Project Bases
-=====================
+Bundled Projects
+================
 
-Pinax comes with bundled project bases to be used as your starter project.
-These project bases can be used when you run ``setup_project``::
+Pinax comes with bundled starter projects which can be used to bootstrap your
+project. These starter projects can be used when you run ``setup_project``::
 
-    pinax-admin setup_project -b <base> mysite_project
+    pinax-admin setup_project -b <project> mysite_project
 
 zero
 ----
@@ -45,9 +45,9 @@ zero
 * **Inherits**: Django project layout
 * **Type**: foundational
 
-The ``zero`` project base is what we call Layer Zero. This is not much more
-than what you get from ``django-admin startproject``, but follows our
-conventional project layout. Here's the directory structure you should see::
+This starter project is what we call Layer Zero. This is not much more than
+what you get from ``django-admin startproject``, but follows our conventional
+project layout. Here's the directory structure you should see::
 
     <project-root>
         apps/
@@ -101,9 +101,9 @@ account
  * **Inherits**: zero
  * **Type**: foundational
 
-The account project base builds on zero integrating ``pinax.apps.account``
-for managing user accounts. Users can login, signup, reset password, change
-email addresses, change password and change timezone.
+This starter project builds on zero integrating ``pinax.apps.account`` for
+managing user accounts. Users can login, signup, reset password, change email
+addresses, change password and change timezone.
 
 Apps included (excluding parent project):
 
@@ -120,7 +120,7 @@ basic
  * **Inherits**: account
  * **Type**: foundational
 
-The basic project base adds user profiles and notifications. User profiles
+This starter project adds user profiles and notifications. User profiles
 is handled by idios and notifications by django-notification.
 
 Apps included (excluding parent project):
@@ -136,9 +136,8 @@ blog
  * **Inherits**: account
  * **Type**: demo
 
-The blog project is a demo project integrating components required to build
-a blog site. biblion is used to handle blog posts and dialogos handles
-comments.
+This starter project demos integration of components required to build a blog
+site. biblion is used to handle blog posts and dialogos handles comments.
 
 Apps included (excluding parent project):
 
