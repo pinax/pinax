@@ -1,5 +1,6 @@
 .. _deployment:
 
+==========
 Deployment
 ==========
 
@@ -7,19 +8,18 @@ In short:
 
  * Create a ``local_settings.py`` alongside ``settings.py`` for your
    host-specific settings (like database connection, email, etc).
- * Configure your WSGI server.
- * Set up ``cron`` job for mailer and asynchronous notifications.
+ * Configure your WSGI or FastCGI server.
+
+All projects come with the deployment files to properly run your Pinax project
+in a production environment. These are located in the ``deploy/`` directory
+of your project.
 
 Using mod_wsgi
---------------
+==============
 
-If you are using mod_wsgi, which we recommend, you will need to provide a WSGI
-script. All projects include a ``deploy/`` directory which contain this
-script named ``wsgi.py``. You may modify this file to best suit your needs.
+Here is a basic configuration for Apache (assuming you are using Python 2.7)::
 
-Here is a basic configuration for Apache (assuming you are using Python 2.5)::
-
-    WSGIDaemonProcess mysite python-path=/path/to/virtualenvs/pinax-env/lib/python2.5/site-packages
+    WSGIDaemonProcess mysite python-path=/path/to/mysite-env/lib/python2.7/site-packages
     WSGIProcessGroup mysite
     
     WSGIScriptAlias / /path/to/project/deploy/wsgi.py
@@ -33,66 +33,70 @@ specifically make sure the ``python-path`` option points to the right Python
 version. We encourage you to read about `WSGIDaemonProcess`_ to learn more
 about what you can configure.
 
-.. _sending-mail-and-notices:
+.. _WSGIDaemonProcess: http://code.google.com/p/modwsgi/wiki/ConfigurationDirectives#WSGIDaemonProcess
 
-Sending mail and notices
-------------------------
+Using gunicorn
+==============
 
-Both mail messages and (some) notifications are queued for asynchronous
-delivery. To actually deliver them you need to run::
+Install gunicorn_ in your environment (best to add it to your requirements
+file) and run ``gunicorn``::
 
-    python manage.py send_mail
+    (mysite-env)$ pip install gunicorn
+    (mysite-env)$ gunicorn --workers=2 --bind=127.0.0.1:8000 deploy.wsgi:application
 
-and::
+This assumes your current working directory is your project root (
+``deploy.wsgi`` must be importable from where you are). Running the example
+shown above as-is will not be sufficient for a production website. You will
+need to daemonize the gunicorn processes and supervise them. Please refer to
+`gunicorn documentation`_ for more information.
 
-    python manage.py emit_notices
+.. _gunicorn: http://gunicorn.org/
+.. _gunicorn documentation: http://gunicorn.org/deploy.html
 
-on a frequent, regular basis.
+Using FastCGI
+=============
 
-Because failed mail will be deferred, you need an additional, less
-frequent, run of::
-
-    python manage.py retry_deferred
-
-We recommend setting up some scripts to run these commands within your
-virtual environment. You can use the following shell script as the basis for
-each management command::
-
-    #!/bin/sh
-
-    WORKON_HOME=/home/user/virtualenvs
-    PROJECT_ROOT=/path/to/project
-
-    # activate virtual environment
-    . $WORKON_HOME/pinax-env/bin/activate
-
-    cd $PROJECT_ROOT
-    python manage.py send_mail >> $PROJECT_ROOT/logs/cron_mail.log 2>&1
-
-Let's assume the scripts you create from above are stored in
-``$PROJECT_ROOT/cron``. You can now setup the cron job similar to::
-
-    * * * * * /path/to/project/cron/send_mail.sh
-    * * * * * /path/to/project/cron/emit_notices.sh
-
-    0,20,40 * * * * /path/to/project/cron/retry_deferred.sh
-
-This runs ``send_mail`` and ``emit_notices`` every minute and
-``retry_deferred`` every 20 minutes.
+TODO
 
 Media files
------------
+===========
 
-Pinax makes it very easy to combine all your applications' media files into
-one single location (see :ref:`ref-media` for details). Serving them more or
-less comes down again to how you do it with Django itself.
+During development media files were handled for you. Running a production
+Pinax project it is **strongly** recommeneded you do not rely on
+``SERVE_MEDIA = True``. By default, ``SERVE_MEDIA`` is set to ``DEBUG`` which
+likely means moving to production will turn off ``SERVE_MEDIA``.
 
-There is an example on how to serve those files with the development server in
-:ref:`ref-media-devel`.
+Pinax, by default, sets ``STATIC_ROOT`` and ``MEDIA_ROOT`` to directories
+within the same directory (``site_media``). This is very beneficial to running
+a production Pinax site as you can configure your web server to serve files
+from a single directory.
 
-In a production environment you, too, have to merge those files before you can
-serve them. Regarding actually serving those files then, see `Django's
-deployment documentation`_ for details.
+To collect all your static files into ``STATIC_ROOT`` for your web server to
+serve run::
 
-.. _`WSGIDaemonProcess`: http://code.google.com/p/modwsgi/wiki/ConfigurationDirectives#WSGIDaemonProcess
-.. _django's deployment documentation: http://docs.djangoproject.com/en/dev/howto/deployment/
+    (mysite-env)$ python manage.py collectstatic
+
+nginx
+-----
+
+::
+
+    server {
+        ...
+        
+        location /site_media {
+            alias /path/to/site_media;
+        }
+    }
+
+Apache
+------
+
+::
+
+    <VirtualHost *:80>
+        ...
+        
+        Alias /site_media/ /path/to/site_media/
+        
+    </VirtualHost>
