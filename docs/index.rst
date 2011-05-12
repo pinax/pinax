@@ -37,6 +37,10 @@ User Guide
    
    gettingstarted
 
+.. toctree::
+   :maxdepth: 2
+   
+   starterprojects
 
 .. toctree::
    :maxdepth: 2
