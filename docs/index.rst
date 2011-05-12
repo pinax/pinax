@@ -45,4 +45,9 @@ User Guide
 .. toctree::
    :maxdepth: 2
    
+   deployment
+
+.. toctree::
+   :maxdepth: 2
+   
    development

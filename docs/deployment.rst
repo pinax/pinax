@@ -1,0 +1,98 @@
+.. _deployment:
+
+Deployment
+==========
+
+In short:
+
+ * Create a ``local_settings.py`` alongside ``settings.py`` for your
+   host-specific settings (like database connection, email, etc).
+ * Configure your WSGI server.
+ * Set up ``cron`` job for mailer and asynchronous notifications.
+
+Using mod_wsgi
+--------------
+
+If you are using mod_wsgi, which we recommend, you will need to provide a WSGI
+script. All projects include a ``deploy/`` directory which contain this
+script named ``wsgi.py``. You may modify this file to best suit your needs.
+
+Here is a basic configuration for Apache (assuming you are using Python 2.5)::
+
+    WSGIDaemonProcess mysite python-path=/path/to/virtualenvs/pinax-env/lib/python2.5/site-packages
+    WSGIProcessGroup mysite
+    
+    WSGIScriptAlias / /path/to/project/deploy/wsgi.py
+    <Directory /path/to/project/deploy>
+        Order deny,allow
+        Allow from all
+    </Directory>
+
+The above configuration will likely need to be modified before use. Most
+specifically make sure the ``python-path`` option points to the right Python
+version. We encourage you to read about `WSGIDaemonProcess`_ to learn more
+about what you can configure.
+
+.. _sending-mail-and-notices:
+
+Sending Mail and Notices
+------------------------
+
+Both mail messages and (some) notifications are queued for asynchronous
+delivery. To actually deliver them you need to run::
+
+    python manage.py send_mail
+
+and::
+
+    python manage.py emit_notices
+
+on a frequent, regular basis.
+
+Because failed mail will be deferred, you need an additional, less
+frequent, run of::
+
+    python manage.py retry_deferred
+
+We recommend setting up some scripts to run these commands within your
+virtual environment. You can use the following shell script as the basis for
+each management command::
+
+    #!/bin/sh
+
+    WORKON_HOME=/home/user/virtualenvs
+    PROJECT_ROOT=/path/to/project
+
+    # activate virtual environment
+    . $WORKON_HOME/pinax-env/bin/activate
+
+    cd $PROJECT_ROOT
+    python manage.py send_mail >> $PROJECT_ROOT/logs/cron_mail.log 2>&1
+
+Let's assume the scripts you create from above are stored in
+``$PROJECT_ROOT/cron``. You can now setup the cron job similar to::
+
+    * * * * * /path/to/project/cron/send_mail.sh
+    * * * * * /path/to/project/cron/emit_notices.sh
+
+    0,20,40 * * * * /path/to/project/cron/retry_deferred.sh
+
+This runs ``send_mail`` and ``emit_notices`` every minute and
+``retry_deferred`` every 20 minutes.
+
+Media files
+-----------
+
+Pinax makes it very easy to combine all your applications' media files into
+one single location (see :ref:`ref-media` for details). Serving them more or
+less comes down again to how you do it with Django itself.
+
+There is an example on how to serve those files with the development server in
+:ref:`ref-media-devel`.
+
+In a production environment you, too, have to merge those files before you can
+serve them. Regarding actually serving those files then, see `Django's
+deployment documentation`_ for details.
+
+.. _`WSGIDaemonProcess`: http://code.google.com/p/modwsgi/wiki/ConfigurationDirectives#WSGIDaemonProcess
+.. _django's deployment documentation: http://docs.djangoproject.com/en/dev/howto/deployment/
