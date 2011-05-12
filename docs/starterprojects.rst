@@ -151,7 +151,9 @@ static
  * **Inherits**: zero
  * **Type**: demo
 
-The static project provides a very simple infrastructure for quickly creating
-pages from templates. It uses ``pinax.views.static_view`` mounted at ``/``.
-For example if you access ``/test.html`` it will render ``templates/test.html``.
-Directory paths, i.e., ``/a/``, will render ``/templates/a/index.html``.
+This project just serves static media and templates with no models or views.
+It is a great starting point for doing HTML mockups while taking advantage of
+the Django templating language. It uses ``pinax.views.static_view`` mounted
+at ``/``. For example if you access ``/test.html`` it will render
+``templates/test.html``. Directory paths, i.e., ``/a/``, will render
+``/templates/a/index.html``.
