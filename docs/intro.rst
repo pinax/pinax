@@ -55,11 +55,25 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 .. _pythonsupport:
 
-Python Version Support
-----------------------
+Python Versions
+---------------
 
 At this time, the following Python platforms are officially supported:
 
-* cPython 2.5
-* cPython 2.6
-* cPython 2.7
+ * cPython 2.4
+ * cPython 2.5
+ * cPython 2.6
+ * cPython 2.7
+
+
+.. _djangosupport:
+
+Django Versions
+---------------
+
+At this time, the following Django versions are officially supported:
+
+ * Django 1.2.X
+ * Django 1.3.X
+
+Pinax bundled starter projects install **Django 1.2**.
