@@ -35,7 +35,7 @@ about what you can configure.
 
 .. _sending-mail-and-notices:
 
-Sending Mail and Notices
+Sending mail and notices
 ------------------------
 
 Both mail messages and (some) notifications are queued for asynchronous
