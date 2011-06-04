@@ -14,7 +14,7 @@ def setup_environ(dunder_file=None, project_path=None, relative_project_path=Non
             "fcgi.py", "fcgi.pyc",
             "wsgi.py", "wsgi.pyc",
         ]
-        if os.path.basename(dunder_file) in deploy_files:
+        if os.path.basename(dunder_file) in deploy_files and relative_project_path is None:
             relative_project_path = [os.pardir]
         if relative_project_path is not None:
             project_path = os.path.abspath(os.path.join(file_path, *relative_project_path))
