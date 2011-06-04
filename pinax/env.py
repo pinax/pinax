@@ -4,7 +4,7 @@ import sys
 from django.utils.importlib import import_module
 
 
-def setup_environ(dunder_file=None, project_path=None):
+def setup_environ(dunder_file=None, project_path=None, relative_project_path=None, settings_path=None):
     assert not (dunder_file and project_path), ("You must not specify both "
         "__file__ and project_path")
     
@@ -15,16 +15,21 @@ def setup_environ(dunder_file=None, project_path=None):
             "wsgi.py", "wsgi.pyc",
         ]
         if os.path.basename(dunder_file) in deploy_files:
-            project_path = os.path.abspath(os.path.join(file_path, os.pardir))
+            relative_project_path = [os.pardir]
+        if relative_project_path is not None:
+            project_path = os.path.abspath(os.path.join(file_path, *relative_project_path))
         else:
             project_path = file_path
-            
+    
     # the basename must be the project name and importable.
     project_name = os.path.basename(project_path)
     
     # setup Django correctly (the hard-coding of settings is only temporary.
     # carljm's proposal will remove that)
-    os.environ["DJANGO_SETTINGS_MODULE"] = "%s.settings" % project_name
+    if settings_path is None:
+        os.environ["DJANGO_SETTINGS_MODULE"] = "%s.settings" % project_name
+    else:
+        os.environ["DJANGO_SETTINGS_MODULE"] = settings_path
     
     # ensure the importablity of project
     sys.path.append(os.path.join(project_path, os.pardir))
