@@ -13,7 +13,9 @@
     {% if user.is_authenticated %}
         <ul>
             <li><a href="{% url acct_email %}">{% trans "Email Addresses" %}</a></li>
-            <li><a href="/openid/associations/">{% trans "OpenID Associations" %}</a></li>
+            {% ifsetting ACCOUNT_USE_OPENID %}
+                <li><a href="/openid/associations/">{% trans "OpenID Associations" %}</a></li>
+            {% endifsetting %}
             {% if user.password %}
             <li><a href="{% url acct_passwd %}">{% trans "Change Password" %}</a></li>
             {% else %}
