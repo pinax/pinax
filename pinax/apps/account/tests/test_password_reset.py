@@ -12,11 +12,14 @@ import pinax
 
 from emailconfirmation.models import EmailAddress, EmailConfirmation
 
+test_urls = getattr(settings, "ROOT_URLCONF")
+if not test_urls:
+    test_urls = "pinax.apps.account.tests.account_urls"
 
 class PasswordResetTest(TestCase):
     # tests based on django.contrib.auth tests
     
-    urls = "pinax.apps.account.tests.account_urls"
+    urls = test_urls
     
     def setUp(self):
         self.old_installed_apps = settings.INSTALLED_APPS
