@@ -10,6 +10,8 @@ from django.utils.hashcompat import sha_constructor
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 
+from pinax.apps.signup_codes.signals import signup_code_used
+
 
 class SignupCode(models.Model):
     """
@@ -54,6 +56,7 @@ class SignupCode(models.Model):
         result.signup_code = self
         result.user = user
         result.save()
+        signup_code_used.send(sender=result.__class__, signup_code_result=result)
     
     def send(self, group=None):
         current_site = Site.objects.get_current()
