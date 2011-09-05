@@ -69,7 +69,8 @@ def signup(request, **kwargs):
             user = form.save(request=request)
             
             signup_code = form.cleaned_data["signup_code"]
-            signup_code.use(user)
+            if signup_code:
+                signup_code.use(user)
             
             form.login(request, user)
             messages.add_message(request, messages.SUCCESS,
