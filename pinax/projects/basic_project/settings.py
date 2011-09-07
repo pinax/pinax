@@ -3,13 +3,8 @@
 
 import os.path
 import posixpath
-import pinax
 
-PINAX_ROOT = os.path.abspath(os.path.dirname(pinax.__file__))
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
-
-# tells Pinax to use the default theme
-PINAX_THEME = "default"
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -79,7 +74,6 @@ STATIC_URL = "/site_media/static/"
 # Additional directories which hold static files
 STATICFILES_DIRS = [
     os.path.join(PROJECT_ROOT, "static"),
-    os.path.join(PINAX_ROOT, "themes", PINAX_THEME, "static"),
 ]
 
 STATICFILES_FINDERS = [
@@ -123,7 +117,6 @@ ROOT_URLCONF = "basic_project.urls"
 
 TEMPLATE_DIRS = [
     os.path.join(PROJECT_ROOT, "templates"),
-    os.path.join(PINAX_ROOT, "themes", PINAX_THEME, "templates"),
 ]
 
 TEMPLATE_CONTEXT_PROCESSORS = [
@@ -162,13 +155,15 @@ INSTALLED_APPS = [
     "compressor",
     "debug_toolbar",
     "mailer",
-    "uni_form",
     "django_openid",
     "timezones",
     "emailconfirmation",
     "announcements",
     "pagination",
     "idios",
+    
+    # theme
+    "pinax_theme_bootstrap",
     
     # Pinax
     "pinax.apps.account",
