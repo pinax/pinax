@@ -3,7 +3,6 @@ import optparse
 import pinax
 
 
-
 class CommandError(Exception):
     pass
 

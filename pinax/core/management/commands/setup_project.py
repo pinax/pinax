@@ -20,9 +20,7 @@ import pinax
 from pinax.core.management.base import BaseCommand, CommandError
 
 
-
 PROJECTS_DIR = os.path.join(os.path.dirname(pinax.__file__), "projects")
-
 
 
 class Command(BaseCommand):
