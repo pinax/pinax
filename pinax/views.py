@@ -4,7 +4,6 @@ from django.shortcuts import render_to_response
 from django.template import loader, Context, RequestContext
 
 
-
 def noop(request):
     """
     provides a callable that can be used to stub out a URL that might be
