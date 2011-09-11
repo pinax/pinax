@@ -1,6 +1,5 @@
+import datetime
 import os
-
-from datetime import datetime, timedelta
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -11,8 +10,6 @@ from django.utils.hashcompat import sha_constructor
 import signup_codes
 
 from signup_codes.models import SignupCode
-
-
 
 
 class InviteUserTest(TestCase):
@@ -85,7 +82,7 @@ class InviteUserTest(TestCase):
         #print help(self)
         # Create an invitation
         email = "joe@example.com"
-        expiry = datetime.now() + timedelta(hours=1)
+        expiry = datetime.datetime.now() + datetime.timedelta(hours=1)
         code = sha_constructor("%s%s%s%s" % (
             settings.SECRET_KEY,
             email,
