@@ -2,16 +2,13 @@ from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.db import models
-from django.db.models import Q
 from django.http import HttpResponseRedirect, HttpResponseForbidden, Http404
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.utils.http import base36_to_int
-from django.utils.translation import ugettext, ugettext_lazy as _
+from django.utils.translation import ugettext
 
 from django.contrib import messages
-from django.contrib.auth import authenticate
-from django.contrib.auth import login as auth_login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth.tokens import default_token_generator
@@ -23,11 +20,9 @@ if association_model is not None:
     from django_openid.models import UserOpenidAssociation
 
 from pinax.apps.account.utils import get_default_redirect, user_display
-from pinax.apps.account.models import OtherServiceInfo
 from pinax.apps.account.forms import AddEmailForm, ChangeLanguageForm, ChangePasswordForm
 from pinax.apps.account.forms import ChangeTimezoneForm, LoginForm, ResetPasswordKeyForm
 from pinax.apps.account.forms import ResetPasswordForm, SetPasswordForm, SignupForm
-from pinax.apps.account.forms import TwitterForm
 
 
 
@@ -324,8 +319,7 @@ def password_reset(request, **kwargs):
     if request.method == "POST":
         password_reset_form = form_class(request.POST)
         if password_reset_form.is_valid():
-            email = password_reset_form.save()
-            
+            password_reset_form.save()
             if group:
                 redirect_to = bridge.reverse("acct_passwd_reset_done", group)
             else:
@@ -442,65 +436,3 @@ def language_change(request, **kwargs):
     })
     
     return render_to_response(template_name, RequestContext(request, ctx))
-
-
-@login_required
-def other_services(request, **kwargs):
-    
-    from microblogging.utils import twitter_verify_credentials
-    
-    template_name = kwargs.pop("template_name", "account/other_services.html")
-    
-    group, bridge = group_and_bridge(kwargs)
-    
-    twitter_form = TwitterForm(request.user)
-    twitter_authorized = False
-    if request.method == "POST":
-        twitter_form = TwitterForm(request.user, request.POST)
-        
-        if request.POST["actionType"] == "saveTwitter":
-            if twitter_form.is_valid():
-                from microblogging.utils import twitter_account_raw
-                twitter_account = twitter_account_raw(
-                    request.POST["username"], request.POST["password"])
-                twitter_authorized = twitter_verify_credentials(
-                    twitter_account)
-                if not twitter_authorized:
-                    messages.add_message(request, messages.ERROR,
-                        ugettext("Twitter authentication failed")
-                    )
-                else:
-                    twitter_form.save()
-                    messages.add_message(request, messages.SUCCESS,
-                        ugettext(u"Successfully authenticated.")
-                    )
-    else:
-        from microblogging.utils import twitter_account_for_user
-        twitter_account = twitter_account_for_user(request.user)
-        twitter_authorized = twitter_verify_credentials(twitter_account)
-        twitter_form = TwitterForm(request.user)
-    
-    ctx = group_context(group, bridge)
-    ctx.update({
-        "twitter_form": twitter_form,
-        "twitter_authorized": twitter_authorized,
-    })
-    
-    return render_to_response(template_name, RequestContext(request, ctx))
-
-
-@login_required
-def other_services_remove(request):
-    
-    group, bridge = group_and_bridge(kwargs)
-    
-    # @@@ this is a bit coupled
-    OtherServiceInfo.objects.filter(user=request.user).filter(
-        Q(key="twitter_user") | Q(key="twitter_password")
-    ).delete()
-    
-    messages.add_message(request, messages.SUCCESS,
-        ugettext("Removed twitter account information successfully.")
-    )
-    
-    return HttpResponseRedirect(reverse("acct_other_services"))
