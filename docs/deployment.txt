@@ -22,8 +22,8 @@ Here is a basic configuration for Apache (assuming you are using Python 2.7)::
     WSGIDaemonProcess mysite python-path=/path/to/mysite-env/lib/python2.7/site-packages
     WSGIProcessGroup mysite
     
-    WSGIScriptAlias / /path/to/project/deploy/wsgi.py
-    <Directory /path/to/project/deploy>
+    WSGIScriptAlias / /path/to/project/wsgi.py
+    <Directory /path/to/project>
         Order deny,allow
         Allow from all
     </Directory>
@@ -42,12 +42,12 @@ Install gunicorn_ in your environment (best to add it to your requirements
 file) and run ``gunicorn``::
 
     (mysite-env)$ pip install gunicorn
-    (mysite-env)$ gunicorn --workers=2 --bind=127.0.0.1:8000 deploy.wsgi:application
+    (mysite-env)$ gunicorn --workers=2 --bind=127.0.0.1:8000 wsgi:application
 
-This assumes your current working directory is your project root (
-``deploy.wsgi`` must be importable from where you are). Running the example
-shown above as-is will not be sufficient for a production website. You will
-need to daemonize the gunicorn processes and supervise them. Please refer to
+This assumes your current working directory is your project root (``wsgi``
+must be importable from where you are). Running the example shown above as-is
+will not be sufficient for a production website. You will need to daemonize
+the gunicorn processes and supervise them. Please refer to
 `gunicorn documentation`_ for more information.
 
 .. _gunicorn: http://gunicorn.org/
