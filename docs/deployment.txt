@@ -56,7 +56,21 @@ the gunicorn processes and supervise them. Please refer to
 Using FastCGI
 =============
 
-TODO
+To use FastCGI (including SCGI or AJP) you must install `flup`_. This can be
+done by using ``pip``::
+
+    pip install flup
+
+Once installed, you can use Django's built-in ``runfcgi`` management command
+to run a server. For example::
+
+    python manage.py method=threaded host=127.0.0.1 port=3033
+
+You can learn much more about ``runfcgi`` from the Django documentation on
+`FastCGI deployment`_.
+
+.. _flup: http://trac.saddi.com/flup
+.. _FastCGI deployment: https://docs.djangoproject.com/en/1.3/howto/deployment/fastcgi/
 
 Media files
 ===========
