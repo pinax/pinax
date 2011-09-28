@@ -1,5 +1,3 @@
-import os
-
 from django import template
 from django.core.exceptions import ImproperlyConfigured
 
@@ -10,6 +8,7 @@ register = template.Library()
 
 
 class IfOpenidNode(template.Node):
+    
     def __init__(self, nodelist_true, nodelist_false):
         self.nodelist_true = nodelist_true
         self.nodelist_false = nodelist_false
@@ -31,7 +30,6 @@ class IfOpenidNode(template.Node):
 
 @register.tag
 def ifopenid(parser, token):
-    bits = token.split_contents()
     nodelist_true = parser.parse(("else", "endifopenid"))
     token = parser.next_token()
     if token.contents == "else":

@@ -1,5 +1,4 @@
 from django import template
-from django.conf import settings
 from django.utils.html import conditional_escape
 
 from pinax.apps.account.utils import user_display
@@ -9,6 +8,7 @@ register = template.Library()
 
 
 class UserDisplayNode(template.Node):
+    
     def __init__(self, user, as_var=None):
         self.user_var = template.Variable(user)
         self.as_var = as_var

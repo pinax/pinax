@@ -11,7 +11,6 @@ from django.contrib.auth import REDIRECT_FIELD_NAME
 from pinax.apps.account.models import Account
 
 
-
 class LocaleMiddleware(object):
     """
     This is a very simple middleware that parses a request

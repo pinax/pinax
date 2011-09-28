@@ -6,7 +6,6 @@ from django.shortcuts import render_to_response
 from pinax.apps.waitinglist.forms import WaitingListEntryForm
 
 
-
 def list_signup(request, post_save_redirect=None):
     if request.method == "POST":
         form = WaitingListEntryForm(request.POST)

@@ -3,9 +3,7 @@ from django import template
 from pinax.apps.waitinglist.forms import WaitingListEntryForm
 
 
-
 register = template.Library()
-
 
 
 class WaitingListEntryFormNode(template.Node):

@@ -1,4 +1,3 @@
-import os
 import re
 
 from django.conf import settings
@@ -8,13 +7,13 @@ from django.test import TestCase
 
 from django.contrib.auth.models import User
 
-import pinax
+from emailconfirmation.models import EmailAddress
 
-from emailconfirmation.models import EmailAddress, EmailConfirmation
 
 test_urls = getattr(settings, "ROOT_URLCONF")
 if not test_urls:
     test_urls = "pinax.apps.account.tests.account_urls"
+
 
 class PasswordResetTest(TestCase):
     # tests based on django.contrib.auth tests

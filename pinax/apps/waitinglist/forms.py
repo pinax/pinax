@@ -3,7 +3,6 @@ from django import forms
 from pinax.apps.waitinglist.models import WaitingListEntry
 
 
-
 class WaitingListEntryForm(forms.ModelForm):
     
     class Meta:
@@ -16,7 +15,9 @@ class WaitingListEntryForm(forms.ModelForm):
         except WaitingListEntry.DoesNotExist:
             return value
         else:
-            raise forms.ValidationError("The email address %(email)s already registered on %(date)s." %{
-                "email": value,
-                "date": entry.created.strftime("%m/%d/%y"),
-            })
+            raise forms.ValidationError("The email address %(email)s already "
+                "registered on %(date)s." % {
+                    "email": value,
+                    "date": entry.created.strftime("%m/%d/%y"),
+                }
+            )

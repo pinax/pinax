@@ -18,12 +18,10 @@ from pinax.apps.account.utils import get_default_redirect, user_display
 from pinax.apps.account.views import login as account_login
 
 
-
 # install our own logger that does nothing
 def dummy_log(*args, **kwargs):
     return
 oidutil.log = dummy_log
-
 
 
 class PinaxConsumer(RegistrationConsumer):

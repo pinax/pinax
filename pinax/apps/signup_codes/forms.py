@@ -2,7 +2,7 @@ from django import forms
 from django.conf import settings
 
 from pinax.apps.account.forms import GroupForm, SignupForm as BaseSignupForm
-from pinax.apps.signup_codes.models import SignupCode, check_signup_code
+from pinax.apps.signup_codes.models import SignupCode
 
 
 class SignupForm(BaseSignupForm):
@@ -11,7 +11,7 @@ class SignupForm(BaseSignupForm):
     
     def clean_signup_code(self):
         code = self.cleaned_data.get("signup_code")
-        signup_code = check_signup_code(code)
+        signup_code = SignupCode.check(code)
         if signup_code:
             return signup_code
         else:
