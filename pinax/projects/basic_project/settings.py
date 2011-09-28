@@ -149,6 +149,9 @@ INSTALLED_APPS = [
     
     "pinax.templatetags",
     
+    # theme
+    "pinax_theme_bootstrap",
+    
     # external
     "notification", # must be first
     "staticfiles",
@@ -161,9 +164,6 @@ INSTALLED_APPS = [
     "announcements",
     "pagination",
     "idios",
-    
-    # theme
-    "pinax_theme_bootstrap",
     
     # Pinax
     "pinax.apps.account",

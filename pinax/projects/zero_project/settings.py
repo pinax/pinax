@@ -141,13 +141,13 @@ INSTALLED_APPS = [
     
     "pinax.templatetags",
     
+    # theme
+    "pinax_theme_bootstrap",
+    
     # external
     "staticfiles",
     "compressor",
     "debug_toolbar",
-    
-    # theme
-    "pinax_theme_bootstrap",
     
     # Pinax
     
