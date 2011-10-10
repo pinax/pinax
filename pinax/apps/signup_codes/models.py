@@ -39,7 +39,7 @@ class SignupCode(models.Model):
             email,
             str(expiry),
         ]
-        if group is not None:
+        if group:
             bits.append("%s%s" % (group._meta, group.pk))
         code = sha_constructor("".join(bits)).hexdigest()
         return cls(code=code, email=email, max_uses=1, expiry=expiry)
