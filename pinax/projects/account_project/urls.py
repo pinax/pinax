@@ -19,8 +19,13 @@ urlpatterns = patterns("",
     url(r"^admin/", include(admin.site.urls)),
     url(r"^about/", include("about.urls")),
     url(r"^account/", include("pinax.apps.account.urls")),
-    url(r"^openid/", include(PinaxConsumer().urls)),
 )
+
+
+if getattr(settings, "ACCOUNT_USE_OPENID", False):
+    urlpatterns += patterns("",
+        url(r"^openid/", include(PinaxConsumer().urls)),
+    )
 
 
 if settings.SERVE_MEDIA:
