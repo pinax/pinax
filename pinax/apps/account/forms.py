@@ -266,6 +266,11 @@ class OpenIDSignupForm(SignupForm):
         del self.fields["password2"]
 
 
+class OpenIDAuthForm(forms.Form):
+    
+    openid_url = forms.CharField()
+
+
 class UserForm(forms.Form):
     
     def __init__(self, user=None, *args, **kwargs):

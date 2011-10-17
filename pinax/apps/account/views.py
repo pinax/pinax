@@ -23,6 +23,7 @@ from pinax.apps.account.utils import get_default_redirect, user_display
 from pinax.apps.account.forms import AddEmailForm, ChangeLanguageForm, ChangePasswordForm
 from pinax.apps.account.forms import ChangeTimezoneForm, LoginForm, ResetPasswordKeyForm
 from pinax.apps.account.forms import ResetPasswordForm, SetPasswordForm, SignupForm
+from pinax.apps.account.forms import OpenIDAuthForm
 
 
 
@@ -108,12 +109,14 @@ def login(request, **kwargs):
 def signup(request, **kwargs):
     
     form_class = kwargs.pop("form_class", SignupForm)
+    openid_form_class = kwargs.pop("openid_form_class", OpenIDAuthForm)
     template_name = kwargs.pop("template_name", "account/signup.html")
     redirect_field_name = kwargs.pop("redirect_field_name", "next")
     success_url = kwargs.pop("success_url", None)
     
     group, bridge = group_and_bridge(kwargs)
     ctx = group_context(group, bridge)
+    openid_form = None
     
     if success_url is None:
         if hasattr(settings, "SIGNUP_REDIRECT_URLNAME"):
@@ -146,9 +149,11 @@ def signup(request, **kwargs):
                 return HttpResponseRedirect(success_url)
     else:
         form = form_class(group=group)
+        openid_form = openid_form_class()
     
     ctx.update({
         "form": form,
+        "openid_form": openid_form,
         "redirect_field_name": redirect_field_name,
         "redirect_field_value": request.REQUEST.get(redirect_field_name),
     })
