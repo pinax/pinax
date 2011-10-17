@@ -268,7 +268,7 @@ class OpenIDSignupForm(SignupForm):
 
 class OpenIDAuthForm(forms.Form):
     
-    openid_url = forms.CharField()
+    openid_url = forms.CharField(required=True)
 
 
 class UserForm(forms.Form):
