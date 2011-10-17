@@ -145,17 +145,17 @@ INSTALLED_APPS = [
     
     "pinax.templatetags",
     
+    # theme
+    "pinax_theme_bootstrap",
+    
     # external
     "staticfiles",
     "compressor",
     "debug_toolbar",
     "mailer",
-    "django_openid",
     "timezones",
     "emailconfirmation",
-    
-    # theme
-    "pinax_theme_bootstrap",
+    "django_openid",
     
     # Pinax
     "pinax.apps.account",

@@ -67,8 +67,8 @@ class PinaxConsumer(RegistrationConsumer):
         openids = request.session.get("openids")
         
         if not openid_url and not openids:
-            return account_login(request, url_required=True, extra_context={
-                "openid_login": True,
+            return self.render(request, "django_openid/login.html", {
+                "form": OpenIDAuthForm(),
             })
         
         # perform OpenID login if openid_url is defined. we do this before the
