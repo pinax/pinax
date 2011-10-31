@@ -12,6 +12,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth.tokens import default_token_generator
+from django.contrib.auth.views import logout as django_logout
 
 from emailconfirmation.models import EmailAddress, EmailConfirmation
 
@@ -103,6 +104,16 @@ def login(request, **kwargs):
     ctx.update(extra_context)
     
     return render_to_response(template_name, RequestContext(request, ctx))
+
+
+def logout(request, next_page=None, **kwargs):
+    # Simple Wrapper around django.contrib.auth.views.logout to default
+    #    next_page based off the setting LOGOUT_REDIRECT_URLNAME.
+
+    if next_page is None and hasattr(settings, "LOGOUT_REDIRECT_URLNAME"):
+        next_page = reverse(settings.LOGOUT_REDIRECT_URLNAME)
+
+    return django_logout(request, next_page, **kwargs)
 
 
 def signup(request, **kwargs):
