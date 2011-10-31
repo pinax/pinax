@@ -110,11 +110,8 @@ def logout(request, next_page=None, **kwargs):
     # Simple Wrapper around django.contrib.auth.views.logout to default
     #    next_page based off the setting LOGOUT_REDIRECT_URLNAME.
 
-    if next_page is None:
-        if hasattr(settings, "LOGOUT_REDIRECT_URLNAME"):
-            next_page = reverse(settings.LOGOUT_REDIRECT_URLNAME)
-        elif hasattr(settings, "LOGOUT_REDIRECT_URL"):
-            next_page = settings.LOGOUT_REDIRECT_URL
+    if next_page is None and hasattr(settings, "LOGOUT_REDIRECT_URLNAME"):
+        next_page = reverse(settings.LOGOUT_REDIRECT_URLNAME)
 
     return django_logout(request, next_page, **kwargs)
 
