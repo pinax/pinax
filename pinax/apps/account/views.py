@@ -26,7 +26,6 @@ from pinax.apps.account.forms import ChangeTimezoneForm, LoginForm, ResetPasswor
 from pinax.apps.account.forms import ResetPasswordForm, SetPasswordForm, SignupForm
 
 
-
 def group_and_bridge(kwargs):
     """
     Given kwargs from the view (with view specific keys popped) pull out the

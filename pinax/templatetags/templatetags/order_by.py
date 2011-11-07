@@ -1,12 +1,11 @@
 from django import template
 
 
-
 register = template.Library()
 
 
-
 class OrderByNode(template.Node):
+    
     def __init__(self, queryset_var, order_field):
         self.queryset_var = template.Variable(queryset_var)
         self.order_field = order_field

@@ -6,9 +6,7 @@ from django.utils.tzinfo import LocalTimezone
 from django.utils.translation import ungettext, ugettext
 
 
-
 register = Library()
-
 
 
 def calculate_shorttimesince(d, now=None):

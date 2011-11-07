@@ -4,11 +4,9 @@ import sys
 import pinax
 
 
-
 PINAX_COMMAND_DIR = os.path.join(
     os.path.dirname(pinax.__file__), "core", "management", "commands"
 )
-
 
 
 class CommandNotFound(Exception):

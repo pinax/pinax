@@ -1,9 +1,7 @@
 from django import template
 
 
-
 register = template.Library()
-
 
 
 class VarNode(template.Node):
@@ -11,11 +9,13 @@ class VarNode(template.Node):
     def __init__(self, var_name, var_to_resolve):
         self.var_name = var_name
         self.var_to_resolve = var_to_resolve
+    
     def get_context(self, top_context):
         for context in top_context.dicts:
             if self.var_name in context:
                 return context
         return top_context
+    
     def render(self, context):
         try:
             resolved_var = template.resolve_variable(
