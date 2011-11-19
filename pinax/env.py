@@ -21,7 +21,8 @@ def setup_environ(dunder_file=None, project_path=None, relative_project_path=Non
     # setup Django correctly (the hard-coding of settings is only temporary.
     # carljm's proposal will remove that)
     if settings_path is None:
-        os.environ["DJANGO_SETTINGS_MODULE"] = "%s.settings" % project_name
+        if "DJANGO_SETTINGS_MODULE" not in os.environ:
+            os.environ["DJANGO_SETTINGS_MODULE"] = "%s.settings" % project_name
     else:
         os.environ["DJANGO_SETTINGS_MODULE"] = settings_path
     
