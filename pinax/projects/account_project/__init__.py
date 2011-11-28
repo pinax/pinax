@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
 __about__ = """
-This project lays the foundation for all other Pinax starter projects. It
-provides the project directory layout and some key infrastructure apps on
-which the other starter projects are based.
+This project takes the zero_project and adds basic account management
+functionality such as sign up, log in, password change/reset and email
+confirmation. It is a foundation suitable for most sites that have user
+accounts.
 """
