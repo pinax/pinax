@@ -164,11 +164,11 @@ INSTALLED_APPS = [
     "announcements",
     "pagination",
     "idios",
+    "metron",
     
     # Pinax
     "pinax.apps.account",
     "pinax.apps.signup_codes",
-    "pinax.apps.analytics",
     
     # project
     "about",
