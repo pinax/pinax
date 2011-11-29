@@ -1,4 +1,4 @@
-{% extends "hero_base.html" %}
+{% extends "banner_base.html" %}
 
 {% load i18n %}
 
@@ -6,7 +6,7 @@
 
 {% block body_class %}home{% endblock %}
 
-{% block herocolumn %}
+{% block banner %}
     <h1>{% trans "Welcome to Pinax" %}</h1>
     <p>
         {% blocktrans %}
@@ -17,12 +17,6 @@
         makes your site different.
         {% endblocktrans %}
     </p>
-    
-    <p><a href="http://pinaxproject.com/" class="btn primary large">{% trans "Learn more &raquo;" %}</a></p>
-{% endblock %}
-
-{% block leftcolumn %}
-    <h2>{% trans "About this project" %}</h2>
     <p>
         {% blocktrans %}
         This project lays the foundation for all other Pinax starter projects. It
@@ -30,4 +24,6 @@
         which the other starter projects are based.
         {% endblocktrans %}
     </p>
+    
+    <p><a href="http://pinaxproject.com/" class="btn primary large">{% trans "Learn more &raquo;" %}</a></p>
 {% endblock %}
