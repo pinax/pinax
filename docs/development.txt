@@ -54,9 +54,11 @@ is from within the clone (the ``pinax`` directory)::
     source ../pinax-dev/bin/activate
     pip install -e .
 
-Finally, you need to install the dependencies for the development version::
+Finally, you need to install the dependencies for the project you want to work
+against::
 
-    pip install --no-deps --requirement requirements/development.txt
+    cd pinax/projects/<project>
+    pip install --requirement requirements/project.txt
 
 In order to run the test suite, you'll also need PIL installed::
 
@@ -86,7 +88,8 @@ branch. This can be simplified::
 To keep your virtual environment in-sync you will need to use pip (make sure
 you are **inside** your virtual environment)::
 
-    pip install --no-deps --requirement requirements/development.txt
+    cd pinax/projects/<project>
+    pip install --no-deps --requirement requirements/project.txt
 
 Running the tests
 -----------------
