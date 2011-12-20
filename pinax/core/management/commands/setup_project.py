@@ -92,7 +92,7 @@ class Command(BaseCommand):
         
         user_project_name = os.path.basename(destination)
 
-        if not re.search(r'^\w+$', user_project_name):
+        if not re.search(r"^\w+$", user_project_name):
             sys.stderr.write("Error: %r is not a valid app name. Please use only numbers, letters and underscores.\n" % (user_project_name))
             sys.exit(1)
 
