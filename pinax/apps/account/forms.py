@@ -17,6 +17,7 @@ from emailconfirmation.models import EmailAddress
 from timezones.forms import TimeZoneField
 
 from pinax.apps.account.models import Account, PasswordReset
+from pinax.apps.account.signals import user_login_attempt, user_signed_up, user_sign_up_attempt
 from pinax.apps.account.utils import perform_login, change_password
 
 
@@ -97,6 +98,11 @@ class LoginForm(GroupForm):
                 error = _("The username and/or password you specified are not correct.")
             raise forms.ValidationError(error)
         return self.cleaned_data
+    
+    def is_valid(self, *args, **kwargs):
+        result = super(LoginForm, self).is_valid(*args, **kwargs)
+        user_login_attempt.send(sender=LoginForm, username=self.data["username"], result=result)
+        return result
     
     def login(self, request):
         perform_login(request, self.user)
@@ -241,11 +247,21 @@ class SignupForm(GroupForm):
         
         return new_user
     
+    def is_valid(self, *args, **kwargs):
+        result = super(SignupForm, self).is_valid(*args, **kwargs)
+        user_sign_up_attempt.send(
+            sender=SignupForm,
+            username=self.data["username"],
+            email=self.data["email"],
+            result=result
+        )
+        return result
+    
     def after_signup(self, user, **kwargs):
         """
         An extension point for subclasses.
         """
-        pass
+        user_signed_up.send(sender=SignupForm, user=user)
 
 
 class OpenIDSignupForm(SignupForm):
