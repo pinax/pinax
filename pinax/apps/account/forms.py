@@ -101,7 +101,11 @@ class LoginForm(GroupForm):
     
     def is_valid(self, *args, **kwargs):
         result = super(LoginForm, self).is_valid(*args, **kwargs)
-        user_login_attempt.send(sender=LoginForm, username=self.data["username"], result=result)
+        if EMAIL_AUTHENTICATION:
+            username = self.data["email"]
+        else:
+            username = self.data["username"]
+        user_login_attempt.send(sender=LoginForm, username=username, result=result)
         return result
     
     def login(self, request):
