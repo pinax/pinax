@@ -136,7 +136,7 @@ def signup(request, **kwargs):
         success_url = get_default_redirect(request, fallback_url, redirect_field_name)
     
     if request.method == "POST":
-        form = form_class(request.POST, group=group)
+        form = form_class(request.POST, request.FILES, group=group)
         if form.is_valid():
             user = form.save(request=request)
             if settings.ACCOUNT_EMAIL_VERIFICATION:
