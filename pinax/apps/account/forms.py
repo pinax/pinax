@@ -255,8 +255,8 @@ class SignupForm(GroupForm):
         result = super(SignupForm, self).is_valid(*args, **kwargs)
         user_sign_up_attempt.send(
             sender=SignupForm,
-            username=self.data["username"],
-            email=self.data["email"],
+            username=self.data.get("username"),
+            email=self.data.get("email"),
             result=result
         )
         return result
