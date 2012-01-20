@@ -62,7 +62,7 @@ def signup(request, **kwargs):
     code = request.GET.get("code")
     
     if request.method == "POST":
-        form = form_class(request.POST, group=group)
+        form = form_class(request.POST, request.FILES, group=group)
         if form.is_valid():
             user = form.save(request=request)
             
