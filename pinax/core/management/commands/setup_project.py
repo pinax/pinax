@@ -91,7 +91,11 @@ class Command(BaseCommand):
     def setup_project(self, destination, base, options):
         
         user_project_name = os.path.basename(destination)
-        
+
+        if not re.search(r"^\w+$", user_project_name):
+            sys.stderr.write("Error: %r is not a valid app name. Please use only numbers, letters and underscores.\n" % (user_project_name))
+            sys.exit(1)
+
         if os.path.exists(destination):
             raise CommandError("Destination path already exists [%s]" % destination)
         
