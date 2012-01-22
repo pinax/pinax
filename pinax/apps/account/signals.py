@@ -7,3 +7,5 @@ password_changed = django.dispatch.Signal(providing_args=["user",])
 user_login_attempt = django.dispatch.Signal(providing_args=["username", "result"])
 user_sign_up_attempt = django.dispatch.Signal(providing_args=["username",  "email", "result"])
 user_signed_up = django.dispatch.Signal(providing_args=["user"])
+
+timezone_changed = django.dispatch.Signal(providing_args=["request", "from_timezone", "to_timezone"])

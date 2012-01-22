@@ -24,6 +24,7 @@ from pinax.apps.account.utils import get_default_redirect, user_display
 from pinax.apps.account.forms import AddEmailForm, ChangeLanguageForm, ChangePasswordForm
 from pinax.apps.account.forms import ChangeTimezoneForm, LoginForm, ResetPasswordKeyForm
 from pinax.apps.account.forms import ResetPasswordForm, SetPasswordForm, SignupForm
+from pinax.apps.account.signals import timezone_changed
 
 
 def group_and_bridge(kwargs):
@@ -405,7 +406,16 @@ def timezone_change(request, **kwargs):
     if request.method == "POST":
         form = form_class(request.user, request.POST)
         if form.is_valid():
+            from_timezone = form.account.timezone
             form.save()
+            to_timezone = form.account.timezone
+            timezone_changed.send(
+                sender=User,
+                request=request,
+                from_timezone=from_timezone,
+                to_timezone=to_timezone
+            )
+            # @@@ consider removing this to be handled in the signal (or add default signal)
             messages.add_message(request, messages.SUCCESS,
                 ugettext(u"Timezone successfully updated.")
             )
