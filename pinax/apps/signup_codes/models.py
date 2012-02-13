@@ -11,7 +11,7 @@ from django.utils.hashcompat import sha_constructor
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 
-from pinax.apps.signup_codes.signals import signup_code_used
+from pinax.apps.signup_codes.signals import signup_code_sent, signup_code_used
 
 
 class SignupCode(models.Model):
@@ -90,6 +90,10 @@ class SignupCode(models.Model):
         send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [self.email])
         self.sent = datetime.datetime.now()
         self.save()
+        signup_code_sent.send(
+            sender=SignupCode,
+            signup_code=self
+        )
 
 
 class SignupCodeResult(models.Model):
