@@ -37,7 +37,7 @@ class Command(BaseCommand):
         optparse.make_option("-b", "--base",
             dest = "base",
             default = "zero",
-            help = "the starter project to use as a base (excluding _project, e.g., basic or social. see --list-projects)"
+            help = "the starter project to use as a base (excluding _project, e.g., basic or social. see --list-bases)"
         ),
         optparse.make_option("--no-reqs",
             dest = "no_reqs",
