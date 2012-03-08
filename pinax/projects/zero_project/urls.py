@@ -6,6 +6,8 @@ from django.conf.urls.static import static
 from django.contrib import admin
 admin.autodiscover()
 
+from staticfiles.urls import staticfiles_urlpatterns
+
 
 handler500 = "pinax.views.server_error"
 
@@ -17,8 +19,5 @@ urlpatterns = patterns("",
     url(r"^admin/", include(admin.site.urls)),
 )
 
-
-if settings.SERVE_MEDIA:
-    urlpatterns += patterns("",
-        url(r"", include("staticfiles.urls")),
-    ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += staticfiles_urlpatterns()
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

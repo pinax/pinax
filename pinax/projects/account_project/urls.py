@@ -6,6 +6,8 @@ from django.conf.urls.static import static
 from django.contrib import admin
 admin.autodiscover()
 
+from staticfiles.urls import staticfiles_urlpatterns
+
 from pinax.apps.account.openid_consumer import PinaxConsumer
 
 
@@ -23,8 +25,5 @@ urlpatterns = patterns("",
     url(r"^openid/", include(PinaxConsumer().urls)),
 )
 
-
-if settings.SERVE_MEDIA:
-    urlpatterns += patterns("",
-        url(r"", include("staticfiles.urls")),
-    ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += staticfiles_urlpatterns()
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

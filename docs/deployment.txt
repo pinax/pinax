@@ -75,10 +75,9 @@ You can learn much more about ``runfcgi`` from the Django documentation on
 Media files
 ===========
 
-During development media files were handled for you. Running a production
-Pinax project it is **strongly** recommeneded you do not rely on
-``SERVE_MEDIA = True``. By default, ``SERVE_MEDIA`` is set to ``DEBUG`` which
-likely means moving to production will turn off ``SERVE_MEDIA``.
+During development media files are handled for you by staticfiles. Serving of
+media is controlled by ``DEBUG`` (previous versions of Pinax used an additional
+setting ``SERVE_MEDIA`` that controlled this behavior, but it is now unused).
 
 Pinax, by default, sets ``STATIC_ROOT`` and ``MEDIA_ROOT`` to directories
 within the same directory (``site_media``). This is very beneficial to running
