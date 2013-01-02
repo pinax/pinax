@@ -14,7 +14,7 @@ To give you an example of how one would use Pinax now to start a new
 site based on the [Account Starter Project](https://github.com/pinax/pinax-project-account) follow these steps in your shell:
 
     $ mkvirtualenv mysite
-    $ pip install Django==1.4.1
+    $ pip install Django==1.4.3
     $ django-admin.py startproject --template=https://github.com/pinax/pinax-project-account/zipball/master mysite
     $ cd mysite
     $ pip install -r requirements.txt
