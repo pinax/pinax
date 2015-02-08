@@ -71,7 +71,6 @@ Django's coding style:
 * Use double quotes not single quotes. Single quotes are allowed in cases
   where a double quote is needed in the string. This makes the code read
   cleaner in those cases.
-* Blank lines are indented to the appropriate level for the block they are in.
 * Docstrings always use three double quotes on a line of their own, so, for
   example, a single line docstring should take up three lines not one.
 * Imports are grouped specifically and ordered alphabetically. This is shown
@@ -107,27 +106,27 @@ Here is an example of these rules applied:
         """
         A model for storing a task.
         """
-        
+    
         creator = models.ForeignKey(User)
         created = models.DateTimeField(default=timezone.now)
         modified = models.DateTimeField(default=timezone.now)
-        
+    
         objects = models.Manager()
-        
+    
         class Meta:
             verbose_name = _("task")
             verbose_name_plural = _("tasks")
-        
+    
         def __unicode__(self):
             return self.summary
-        
+    
         def save(self, **kwargs):
             self.modified = datetime.now()
             super(Task, self).save(**kwargs)
-        
+    
         def get_absolute_url(self):
             return reverse("task_detail", kwargs={"task_id": self.pk})
-        
+    
         # custom methods
     
     
