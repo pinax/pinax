@@ -1,5 +1,7 @@
 # pinax
 
+[![Join the chat at https://gitter.im/pinax/pinax](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/pinax/pinax?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Pinax is an ecosystem of reusable Django apps, themes, and starter project
 templates.
 
