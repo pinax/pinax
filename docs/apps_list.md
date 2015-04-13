@@ -1,3 +1,11 @@
+Each of these will eventually link to a separate page for each app with:
+
+* description
+* maturity rating
+* what starter projects use it
+* what starter projects particularly showcase it
+* how to add it to a project
+
 # List of Apps
 
 Apps that need to be assessed and triaged:

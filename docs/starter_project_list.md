@@ -1,3 +1,9 @@
+Each of these will eventually link to a separate page for each starter project with:
+
+* description
+* what starter project it’s built on
+* what apps it uses (and perhaps particularly showcases)
+
 # List of Starter Projects
 
 Base of all starter projects:
