@@ -1,7 +1,5 @@
 # Pinax Documentation
 
-Pinax is an ecosystem of reusable Django apps, themes, and starter project templates.
-
 @@@ We're just starting to provide overarching documentation for the whole of Pinax to better explain what it is and how to get going with it.
 
 ## Table of Contents
