@@ -13,6 +13,7 @@
   * [Apps](apps_list.md)
   * Development
     * [How to Contribute](how_to_contribute.md)
+    * [Code of Conduct](code_of_conduct.md)
     * [Code Conventions](code_conventions.md)
     * [Release Process](release_process.md)
   * [Tutorials](tutorials.md)
