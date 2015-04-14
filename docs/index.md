@@ -1,6 +1,7 @@
 # Pinax Documentation
 
-@@@ We're just starting to provide overarching documentation for the whole of Pinax to better explain what it is and how to get going with it.
+@@@ We're just starting to provide overarching documentation for the whole of Pinax to better explain what it is and how to get going with it. While a lot of individual apps have good docs, there's nothing that provides the big picture or help in how the pieces fit together. This documentation is intended to (eventually) serve that purpose.
+
 
 ## Table of Contents
 
