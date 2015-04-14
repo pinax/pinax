@@ -20,6 +20,7 @@ Now install the requirements, initialize your database, load the default sites f
 ```
 cd mysite
 pip install -r requirements.txt
+chmod +x manage.py
 ./manage.py migrate
 ./manage.py loaddata sites
 ./manage.py runserver
