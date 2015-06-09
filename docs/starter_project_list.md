@@ -19,7 +19,6 @@ Starter projects that need to be assessed and triaged:
 * pinax-project-blog
 * pinax-project-symposion
 * pinax-project-lms
-* pinax-project-socialauth
 * pinax-project-forums
 * pinax-project-social
 * pinax-project-teams
