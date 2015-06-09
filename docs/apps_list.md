@@ -17,7 +17,6 @@ Apps that need to be assessed and triaged:
 * pinax-referrals
 * pinax-ratings
 * pinax-testimonials
-* pinax-projects
 * pinax-blog
 * pinax-teams
 * django-stripe-payments
@@ -29,15 +28,13 @@ Apps that need to be assessed and triaged:
 * django-email-confirmation (deprecated)
 * symposion
 * metron
-* phileo
-* django-forms-bootstrap
+* phileo (soon to be pinax-likes)
+* django-forms-bootstrap (deprecated?)
 * pinax-phone-confirmation
 * django-bookmarks
 * django-friends
-* django-site-access
 * django-flag
 * pinax-wiki
-* django-observer
 
 Apps often follow the following template:
 
