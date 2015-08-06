@@ -14,7 +14,7 @@ site based on the [Account Starter Project](https://github.com/pinax/pinax-proje
 pip install virtualenv
 virtualenv mysiteenv
 source mysiteenv/bin/activate
-pip install Django==1.7.4
+pip install Django==1.8.3
 django-admin.py startproject --template=https://github.com/pinax/pinax-project-account/zipball/master mysite
 cd mysite
 pip install -r requirements.txt
