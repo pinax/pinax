@@ -6,10 +6,10 @@ It takes care of the things that many sites have in common so you can focus on w
 
 Pinax provides:
 
-  * **standard project layout** for consistency and easy deployment
-  * **starter projects** that can be used as the basis for any Django website as well as some tailored to community sites, company sites, intranets and sites in closed beta
-  * **reusable apps** providing both back-end functionality and user-facing components
-  * **default templates** to enable quick prototyping
+  * **Standard project layout** for consistency and easy deployment
+  * **Starter projects** that can be used as the basis for any Django website as well as some tailored to community sites, company sites, intranets and sites in closed beta
+  * **Reusable apps** providing both back-end functionality and user-facing components
+  * **Default templates** to enable quick prototyping
 
 Pinax has been used for everything from social networks to conference websites, and from intranets to online games.
 

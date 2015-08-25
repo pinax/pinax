@@ -1,10 +1,10 @@
 Each of these will eventually link to a separate page for each app with:
 
-* description
-* maturity rating
-* what starter projects use it
-* what starter projects particularly showcase it
-* how to add it to a project
+* Description
+* Maturity rating
+* What starter projects use it
+* What starter projects particularly showcase it
+* How to add it to a project
 
 # List of Apps
 

@@ -26,7 +26,7 @@ chmod +x manage.py
 ./manage.py runserver
 ```
 
-You now have a running Django site complete with account management and Bootstrap-based templates.
+You now have a running Django site complete with account management and bootstrap-based templates.
 
 
-@@@ then add one more app
+@@@ Then add one more app

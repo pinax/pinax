@@ -1,3 +1,3 @@
 # Code Conventions
 
-@@@ for now see [CONTRIBUTING.md](https://github.com/pinax/pinax/blob/master/CONTRIBUTING.md)
+@@@ For now see [CONTRIBUTING.md](https://github.com/pinax/pinax/blob/master/CONTRIBUTING.md)

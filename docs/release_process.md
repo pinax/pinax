@@ -1,3 +1,3 @@
 # Release Process
 
-@@@ how packages are released, etc
+@@@ How packages are released, etc

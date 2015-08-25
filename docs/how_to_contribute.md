@@ -1,9 +1,9 @@
 # How To Contribute
 
-@@@ changes to projects or apps
+@@@ Changes to projects or apps
 
-@@@ new starter projects
+@@@ New starter projects
 
-@@@ new apps
+@@@ New apps
 
-@@@ suggested things to contribute
+@@@ Suggested things to contribute

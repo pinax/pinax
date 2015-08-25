@@ -46,10 +46,10 @@ a message that will link the commit message to the issue and auto-close it
 if appropriate.
 
     Add ability to travel back in time
-    
+
     You need to be driving 88 miles per hour to generate 1.21 gigawatts of
     power to properly use this feature.
-    
+
     Fixes #88
 
 
@@ -85,51 +85,51 @@ Here is an example of these rules applied:
     # first set of imports are stdlib imports
     # non-from imports go first then from style import in their own group
     import csv
-    
+
     # second set of imports are Django imports with contrib in their own
     # group.
     from django.core.urlresolvers import reverse
     from django.db import models
     from django.utils import timezone
     from django.utils.translation import ugettext_lazy as _
-    
+
     from django.contrib.auth.models import User
-    
+
     # third set of imports are external apps (if applicable)
     from tagging.fields import TagField
-    
+
     # fourth set of imports are local apps
     from .fields import MarkupField
-    
-    
+
+
     class Task(models.Model):
         """
         A model for storing a task.
         """
-    
+
         creator = models.ForeignKey(User)
         created = models.DateTimeField(default=timezone.now)
         modified = models.DateTimeField(default=timezone.now)
-    
+
         objects = models.Manager()
-    
+
         class Meta:
             verbose_name = _("task")
             verbose_name_plural = _("tasks")
-    
+
         def __unicode__(self):
             return self.summary
-    
+
         def save(self, **kwargs):
             self.modified = datetime.now()
             super(Task, self).save(**kwargs)
-    
+
         def get_absolute_url(self):
             return reverse("task_detail", kwargs={"task_id": self.pk})
-    
+
         # custom methods
-    
-    
+
+
     class TaskComment(models.Model):
         # ... you get the point ...
         pass
@@ -138,7 +138,7 @@ Here is an example of these rules applied:
 ## Pull Requests
 
 Please keep your pull requests focused on one specific thing only. If you
-have a number of contributions to make, then please send seperate pull
+have a number of contributions to make, then please send separate pull
 requests. It is much easier on maintainers to receive small, well defined,
 pull requests, than it is to have a single large one that batches up a
 lot of unrelated commits.
