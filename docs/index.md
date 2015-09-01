@@ -10,10 +10,12 @@ We're just starting to provide overarching documentation for the whole of Pinax 
     * [Quick Start](quick_start.md)
     * [History](history.md)
     * [FAQs](faq.md)
-  * [Starter Projects](pinax_starter_projects.md)
-  * [Starter Projects](starter_project_list.md)
-  * [Starter Projects](moving_to_webpack.md)
-  * [Apps](apps_list.md)
+  * Starter Projects
+    * [Pinax Starter Projects](pinax_starter_projects.md)
+    * [List of Starter Projects](starter_project_list.md)
+    * [Pinax Theme Bootstrap](pinax_theme_bootstrap.md)
+  * Apps
+    * [List of Apps](apps_list.md)
   * Development
     * [How to Contribute](how_to_contribute.md)
     * [Code of Conduct](code_of_conduct.md)
