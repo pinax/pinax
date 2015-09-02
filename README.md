@@ -41,4 +41,12 @@ Pinax Project Blog and Twitter
 
 For updates and news regarding the Pinax Project, please follow us on Twitter at [@pinaxproject](https://twitter.com/pinaxproject) and check out our blog http://blog.pinaxproject.com.
 
+Updating Docs
+-------------
 
+The docs live online at http://pinaxproject.com/pinax/. You can update them by
+running:
+
+```
+mkdocs gh-deploy
+```
