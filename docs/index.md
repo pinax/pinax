@@ -22,6 +22,7 @@ We're just starting to provide overarching documentation for the whole of Pinax 
     * [Code Conventions](code_conventions.md)
     * [Release Process](release_process.md)
   * [Tutorials](tutorials.md)
+  * [Pinax in the Wild](in_the_wild.md)
 
 
 ## Colophon
