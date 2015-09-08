@@ -19,7 +19,7 @@ We're just starting to provide overarching documentation for the whole of Pinax 
   * Development
     * [Ways to Contribute](ways_to_contribute.md)
     * [Code of Conduct](code_of_conduct.md)
-    * [Code Conventions](code_conventions.md)
+    * [How to Contribute](how_to_contribute.md)
     * [Release Process](release_process.md)
   * [Tutorials](tutorials.md)
   * [Pinax in the Wild](in_the_wild.md)
