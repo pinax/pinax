@@ -1,4 +1,4 @@
-# How To Contribute
+# Ways To Contribute
 
 @@@ Changes to projects or apps
 
