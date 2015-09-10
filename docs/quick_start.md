@@ -1,6 +1,6 @@
 # Quick Start
 
-We strongly recommend running Pinax (or indeed, any Django) projects in a virtualenv:
+We strongly recommend running Pinax (or indeed, any Django) projects in a virtual environment:
 
 ```
 pip install virtualenv
@@ -8,11 +8,11 @@ virtualenv mysiteenv
 source mysiteenv/bin/activate
 ```
 
-Once your virtualenv has been activated, install Django and use `django-admin.py` to create a new project based on the Account Pinax starter project:
+Once your virtual environment has been activated, install Django and use `django-admin` to create a new project based on the Account Pinax starter project:
 
 ```
 pip install Django==1.8.4
-django-admin.py startproject --template=https://github.com/pinax/pinax-starter-projects/zipball/account mysite -n webpack.config.js
+django-admin startproject --template=https://github.com/pinax/pinax-starter-projects/zipball/account mysite -n webpack.config.js
 ```
 
 Now install the requirements, initialize your database, load the default sites fixtures and run the dev server:
