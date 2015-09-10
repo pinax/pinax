@@ -11,30 +11,55 @@ Each of these will eventually link to a separate page for each app with:
 Apps that need to be assessed and triaged:
 
 ## [django-user-accounts](https://github.com/pinax/django-user-accounts)
+
 ## [django-mailer](https://github.com/pinax/django-mailer)
+
 ## [django-waitinglist](https://github.com/pinax/django-waitinglist)
+
 ## [pinax-points](https://github.com/pinax/pinax-points)
+
 ## [pinax-referrals](https://github.com/pinax/pinax-referrals)
+
 ## [pinax-ratings](https://github.com/pinax/pinax-ratings)
+
 ## [pinax-testimonials](https://github.com/pinax/pinax-testimonials)
+
 ## [pinax-blog](https://github.com/pinax/pinax-blog)
+
 ## [pinax-teams](https://github.com/pinax/pinax-teams)
+
 ## [django-stripe-payments](https://github.com/pinax/django-stripe-payments)
+
 ## [django-announcements](https://github.com/pinax/django-announcements)
+
 ## [pinax-notifications](https://github.com/pinax/pinax-notifications)
+
 ## [pinax-lms-activities](https://github.com/pinax/pinax-lms-activities)
+
 ## [pinax-forums](https://github.com/pinax/pinax-forums)
+
 ## [pinax-types](https://github.com/pinax/pinax-types)
+
 ## [django-email-confirmation (deprecated)](https://github.com/pinax/django-email-confirmation)
+
 ## [symposion](https://github.com/pinax/symposion)
+
 ## [metron](https://github.com/pinax/metron)
+
 ## [phileo (soon to be pinax-likes)](https://github.com/pinax/phileo)
+
 ## [django-forms-bootstrap (deprecated?)](https://github.com/pinax/django-forms-bootstrap)
+
 ## [pinax-phone-confirmation](https://github.com/pinax/pinax-phone-confirmation)
+
 ## [django-bookmarks](https://github.com/pinax/django-bookmarks)
+
 ## [django-friends](https://github.com/pinax/django-friends)
+
 ## [django-flag](https://github.com/pinax/django-flag)
+
 ## [pinax-wiki](https://github.com/pinax/pinax-wiki)
+
 
 Apps often follow the following template:
 
