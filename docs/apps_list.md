@@ -27,14 +27,27 @@ pinax-referrals provides a Django site with referrals functionality.
 ## [pinax-ratings](https://github.com/pinax/pinax-ratings)
 pinax-ratings is a ratings app for Django.
 ## [pinax-testimonials](https://github.com/pinax/pinax-testimonials)
-
+pinax-testimonials is a testimonials app for Django.
 ## [pinax-blog](https://github.com/pinax/pinax-blog)
-
+pinax-blog is a blog app for Django.
 ## [pinax-teams](https://github.com/pinax/pinax-teams)
-
+https://github.com/pinax/pinax-teams
 ## [django-stripe-payments](https://github.com/pinax/django-stripe-payments)
+django-stripe-payments is a payments Django app for Stripe.
 
+This app allows you to process one off charges as well as signup users for recurring subscriptions managed by Stripe.
 ## [django-announcements](https://github.com/pinax/django-announcements)
+django-announcements is a site-wide announcement reusable app for Django.
+
+Some sites need the ability to broadcast an announcement to all of their users. django-announcements was created precisely for this reason. How you present the announcement is up to you as the site-developer. When working with announcements that are presented on the website one feature is that they are only viewed once. A session variable will hold which announcements an user has viewed and exclude that from their display. announcements supports two different types of filtering of announcements:
+
+    site-wide (this can be presented to anonymous users)
+
+    non site-wide (these can be used a strictly a mailing if so desired)
+
+    members only (announcements are filtered based on the value of
+
+        request.user)
 
 ## [pinax-notifications](https://github.com/pinax/pinax-notifications)
 
