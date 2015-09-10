@@ -50,7 +50,7 @@ Some sites need the ability to broadcast an announcement to all of their users. 
         request.user)
 
 ## [pinax-notifications](https://github.com/pinax/pinax-notifications)
-https://github.com/pinax/pinax-notifications
+pinax-notifications is a user notification management app for the Django web framework. Many sites need to notify users when certain events have occurred and to allow configurable options as to how those notifications are to be received.
 ## [pinax-lms-activities](https://github.com/pinax/pinax-lms-activities)
 pinax-lms-activities provides a framework and base learning activities for Pinax LMS.
 ## [pinax-forums](https://github.com/pinax/pinax-forums)
@@ -66,22 +66,31 @@ NOTE: this project has been superceded by https://github.com/pinax/django-user-a
 ## [symposion](https://github.com/pinax/symposion)
 symposion is a conference management solution from Eldarion. It was built with the generous support of the Python Software Foundation. See http://eldarion.com/symposion/ for commercial support, customization and hosting.
 ## [metron](https://github.com/pinax/metron)
+metron provides analytics and metrics integration for Django.
+
+Current analytics services supported:
+
+    Google Analytics
+    Mixpanel
+    gaug.es
+    Google AdWords Conversion Tracking
 
 ## [phileo (soon to be pinax-likes)](https://github.com/pinax/phileo)
-
+phileo is a liking app for Django.
 ## [django-forms-bootstrap (deprecated?)](https://github.com/pinax/django-forms-bootstrap)
-
+django-forms-bootstrap is a simple bootstrap filter for Django forms. Extracted from the bootstrap theme for Pinax.
 ## [pinax-phone-confirmation](https://github.com/pinax/pinax-phone-confirmation)
-
+pinax-phone-confirmation is an app to provide phone confirmation via Twilio.
 ## [django-bookmarks](https://github.com/pinax/django-bookmarks)
-
+django-bookmarks provides bookmark management for the Django web framework.
 ## [django-friends](https://github.com/pinax/django-friends)
-
+django-friends provides friendship, contact, and invitation management for the Django web framework.
 ## [django-flag](https://github.com/pinax/django-flag)
-
+django-flag provides flagging of inapproprite spam/content.
 ## [pinax-wiki](https://github.com/pinax/pinax-wiki)
-
+pinax-wiki lets you easily add a wiki to your Django site.
 
 Apps often follow the following template:
 
 ## [pinax-starter-app](https://github.com/pinax/pinax-starter-app)
+pinax-starter-app is a starter app template for Pinax apps.
