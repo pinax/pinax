@@ -12,13 +12,13 @@ On Memorial Day weekend 2008, James decided to spend the weekend hacking on this
 
 By July, Pinax added wikis, threaded discussions, bookmarks with voting, contact import, blogs with tagging and localization into Brazilian Portuguese and Hebrew.
 
-@@@ THE BREAK OUT OF CLOUD27
+TODO: THE BREAK OUT OF CLOUD27
 
-@@@ DJANGOCON 2008
+TODO: DJANGOCON 2008
 
-@@@ THE 0.7.X ERA
+TODO: THE 0.7.X ERA
 
-@@@ THE 0.9.X ERA
+TODO: THE 0.9.X ERA
 
 
 

@@ -31,4 +31,4 @@ chmod +x manage.py
 You now have a running Django site complete with account management and bootstrap-based templates.
 
 
-@@@ Then add one more app
+TODO: Then add one more app
