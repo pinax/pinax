@@ -16,6 +16,8 @@ We're just starting to provide overarching documentation for the whole of Pinax 
     * [Pinax Theme Bootstrap](pinax_theme_bootstrap.md)
   * Apps
     * [List of Apps](apps_list.md)
+  * How-tos
+    * [LDAP](how-tos/ldap.md)
   * Development
     * [Ways to Contribute](ways_to_contribute.md)
     * [Code of Conduct](code_of_conduct.md)
