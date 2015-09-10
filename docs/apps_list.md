@@ -86,7 +86,7 @@ django-bookmarks provides bookmark management for the Django web framework.
 ## [django-friends](https://github.com/pinax/django-friends)
 django-friends provides friendship, contact, and invitation management for the Django web framework.
 ## [django-flag](https://github.com/pinax/django-flag)
-django-flag provides flagging of inapproprite spam/content.
+django-flag provides flagging of inappropriate spam/content.
 ## [pinax-wiki](https://github.com/pinax/pinax-wiki)
 pinax-wiki lets you easily add a wiki to your Django site.
 
