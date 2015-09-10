@@ -1,5 +1,7 @@
 # Quick Start
 
+Make sure you've read [What is Pinax?](what_is_pinax.md) to get a conceptual overview of Pinax.
+
 We strongly recommend running Pinax (or indeed, any Django) projects in a virtual environment:
 
 ```
