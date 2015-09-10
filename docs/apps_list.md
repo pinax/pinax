@@ -31,7 +31,7 @@ pinax-testimonials is a testimonials app for Django.
 ## [pinax-blog](https://github.com/pinax/pinax-blog)
 pinax-blog is a blog app for Django.
 ## [pinax-teams](https://github.com/pinax/pinax-teams)
-https://github.com/pinax/pinax-teams
+pinax-teams is an app for Django sites that supports open, by invitation, and by application teams.
 ## [django-stripe-payments](https://github.com/pinax/django-stripe-payments)
 django-stripe-payments is a payments Django app for Stripe.
 
@@ -50,17 +50,21 @@ Some sites need the ability to broadcast an announcement to all of their users. 
         request.user)
 
 ## [pinax-notifications](https://github.com/pinax/pinax-notifications)
-
+https://github.com/pinax/pinax-notifications
 ## [pinax-lms-activities](https://github.com/pinax/pinax-lms-activities)
-
+pinax-lms-activities provides a framework and base learning activities for Pinax LMS.
 ## [pinax-forums](https://github.com/pinax/pinax-forums)
+pinax-forums is an extensible forums app for Django and Pinax. It is focused on core forum functionality and hence is expected to be combined with other Pinax apps for broader features.
 
+See pinax-project-forums for a full Django project incorporating numerous apps with the goal of providing an out of the box forums solution.
 ## [pinax-types](https://github.com/pinax/pinax-types)
 
 ## [django-email-confirmation (deprecated)](https://github.com/pinax/django-email-confirmation)
+simple email confirmation for the Django web framework 
 
+NOTE: this project has been superceded by https://github.com/pinax/django-user-accounts/ and is not longer active.
 ## [symposion](https://github.com/pinax/symposion)
-
+symposion is a conference management solution from Eldarion. It was built with the generous support of the Python Software Foundation. See http://eldarion.com/symposion/ for commercial support, customization and hosting.
 ## [metron](https://github.com/pinax/metron)
 
 ## [phileo (soon to be pinax-likes)](https://github.com/pinax/phileo)
