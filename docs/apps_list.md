@@ -11,17 +11,21 @@ Each of these will eventually link to a separate page for each app with:
 Apps that need to be assessed and triaged:
 
 ## [django-user-accounts](https://github.com/pinax/django-user-accounts)
-
+django-user-accounts provides a Django project with a very extensible infrastructure for dealing with user accounts.
 ## [django-mailer](https://github.com/pinax/django-mailer)
-
+django-mailer is a reusable Django app for queuing the sending of email.
 ## [django-waitinglist](https://github.com/pinax/django-waitinglist)
-
+django-waitinglist is a Django waiting list app for running a private beta with cohorts support.
 ## [pinax-points](https://github.com/pinax/pinax-points)
+pinax-points is a points, positions and levels app for Django.
 
+pinax-points, formerly agon, provides the ability to track points on arbitrary objects in your system. The common case being User instances. It can additionally keep track of positions for these objects to produce leaderboards.
+
+This code has mostly been pulled out of typewar and made slightly more generic to work well.
 ## [pinax-referrals](https://github.com/pinax/pinax-referrals)
-
+pinax-referrals provides a Django site with referrals functionality.
 ## [pinax-ratings](https://github.com/pinax/pinax-ratings)
-
+pinax-ratings is a ratings app for Django.
 ## [pinax-testimonials](https://github.com/pinax/pinax-testimonials)
 
 ## [pinax-blog](https://github.com/pinax/pinax-blog)
