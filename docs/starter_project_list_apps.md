@@ -1,6 +1,6 @@
 
 apps | zero | account | blog  | documents | wiki | team-wiki
------|---|--- |--- |--- |--- | --- 
+-----|---|--- |--- |--- |--- | ---
 django | 1.8.4| 1.8.4 | 1.8.4 | 1.8.4 | 1.8.4 | 1.8.4
 django-announcements  | | | | | |
 django-bookmarks | | | | | |
@@ -27,14 +27,14 @@ pinax-testimonials | | | | | |
 pinax-types | | | | | |
 pinax-wiki | | | | | 0.1.3 | 0.1.3
 symposion | | | | | |
-django-bootstrap-form | | | 3.2  | | | 
+django-bootstrap-form | | | 3.2  | | |
 django-jsonfield | | 0.9.15 | | 0.9.15 | 0.9.15 | 0.9.15
 django-reversion | | | | | | 1.9.3
 easy-thumbnails | | | | | | 2.2
-Markdown | | | 2.6.2 | | | 
+Markdown | | | 2.6.2 | | |
 Pillow | | | 2.9.0 | | | 2.9.0
-pinax-documents | | | | 0.2.0 | | 
+pinax-documents | | | | 0.2.0 | |
 pinax-event-log | | 1.0.0| | 1.0.0 | 1.0.0 | 1.0.0
 pinax-theme-bootstrap | 7.0.0 | 7.0.0 | 7.0.0 | 7.0.0 | 7.0.0 | 7.0.0
-pytz | | | 2015.4 | | | 
+pytz | | | 2015.4 | | |
 __apps__ | __zero__ | __account__ | __blog__  | __documents__ | __wiki__ | __team-wiki__
