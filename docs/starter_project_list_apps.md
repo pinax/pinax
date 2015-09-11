@@ -10,11 +10,11 @@ django-forms-bootstrap (deprecated?) | | | | | |
 django-friends | | | | | |
 django-mailer | | | | | |
 django-stripe-payments | | | | |
-django-user-accounts | | 1.2 | | 1.2 | 1.2 | 1.2
+django-user-accounts | | [x] | | [x] | [x] | [x]
 django-waitinglist | | | | | |
-metron | | 1.3.5 | | 1.3.5 | 1.3.5 | 1.3.5
+metron | | [x] | | [x] | [x] | [x]
 phileo (soon to be pinax-likes) | | | | | |
-pinax-blog | | | 4.2.1 | | |
+pinax-blog | | | [x] | | |
 pinax-forums | | | | | |
 pinax-lms-activities | | | | | |
 pinax-notifications | | | | | |
@@ -25,16 +25,16 @@ pinax-referrals | | | | | |
 pinax-teams | | | | | |
 pinax-testimonials | | | | | |
 pinax-types | | | | | |
-pinax-wiki | | | | | 0.1.3 | 0.1.3
+pinax-wiki | | | | | [x] | [x]
 symposion | | | | | |
-django-bootstrap-form | | | 3.2  | | |
-django-jsonfield | | 0.9.15 | | 0.9.15 | 0.9.15 | 0.9.15
-django-reversion | | | | | | 1.9.3
-easy-thumbnails | | | | | | 2.2
-Markdown | | | 2.6.2 | | |
-Pillow | | | 2.9.0 | | | 2.9.0
-pinax-documents | | | | 0.2.0 | |
-pinax-event-log | | 1.0.0| | 1.0.0 | 1.0.0 | 1.0.0
-pinax-theme-bootstrap | 7.0.0 | 7.0.0 | 7.0.0 | 7.0.0 | 7.0.0 | 7.0.0
-pytz | | | 2015.4 | | |
+django-bootstrap-form | | | [x] | | |
+django-jsonfield | | [x] | | [x] | [x] | [x]
+django-reversion | | | | | | [x]
+easy-thumbnails | | | | | | [x]
+Markdown | | | [x] | | |
+Pillow | | | [x] | | | [x]
+pinax-documents | | | | [x] | |
+pinax-event-log | | [x] | | [x] | [x] | [x]
+pinax-theme-bootstrap | [x] | [x] | [x] | [x] | [x] | [x]
+pytz | | | [x] | | |
 __apps__ | __zero__ | __account__ | __blog__  | __documents__ | __wiki__ | __team-wiki__
