@@ -19,6 +19,7 @@ We're just starting to provide overarching documentation for the whole of Pinax 
   * How-tos
     * [LDAP](how-tos/ldap.md)
     * [Deploying to Heroku](how-tos/deploy-to-heroku.md)
+    * [Release a Starter Project](how-tos/release-starter-project.md)
   * Development
     * [Ways to Contribute](ways_to_contribute.md)
     * [Code of Conduct](code_of_conduct.md)
