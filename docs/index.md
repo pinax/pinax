@@ -31,4 +31,4 @@ We're just starting to provide overarching documentation for the whole of Pinax 
 
 ## Colophon
 
-These docs live in the <https://github.com/pinax/pinax> repo and are generated with MkDocs. Please create issues or pull-requests on that repo if you have any suggestions, corrections or contributions.
+These docs live in the <https://github.com/pinax/pinax> repo and are generated with MkDocs. Please create issues or pull-requests in that repo if you have any suggestions, corrections, or contributions.

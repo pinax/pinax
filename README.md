@@ -33,7 +33,7 @@ The Pinax documentation is available at http://pinaxproject.com/pinax/.
 Code of Conduct
 -----------------
 
-In order to foster a kind, inclusive, and harassment-free community, the Pinax Project has a code of conduct, which can be found here  http://pinaxproject.com/pinax/code_of_conduct/.
+In order to foster a kind, inclusive, and harassment-free community, the Pinax Project has a Code of Conduct, which can be found here  http://pinaxproject.com/pinax/code_of_conduct/.
 
 
 Pinax Project Blog and Twitter

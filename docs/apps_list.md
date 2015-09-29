@@ -17,9 +17,9 @@ django-mailer is a reusable Django app for queuing the sending of email.
 ## [django-waitinglist](https://github.com/pinax/django-waitinglist)
 django-waitinglist is a Django waiting list app for running a private beta with cohorts support.
 ## [pinax-points](https://github.com/pinax/pinax-points)
-pinax-points is a points, positions and levels app for Django.
+pinax-points is a points, positions, and levels app for Django.
 
-pinax-points, formerly agon, provides the ability to track points on arbitrary objects in your system. The common case being User instances. It can additionally keep track of positions for these objects to produce leaderboards.
+pinax-points, formerly agon, provides the ability to track points on arbitrary objects in your system. The common case being user instances. It can additionally keep track of positions for these objects to produce leaderboards.
 
 This code has mostly been pulled out of typewar and made slightly more generic to work well.
 ## [pinax-referrals](https://github.com/pinax/pinax-referrals)
@@ -39,7 +39,7 @@ This app allows you to process one off charges as well as signup users for recur
 ## [django-announcements](https://github.com/pinax/django-announcements)
 django-announcements is a site-wide announcement reusable app for Django.
 
-Some sites need the ability to broadcast an announcement to all of their users. django-announcements was created precisely for this reason. How you present the announcement is up to you as the site-developer. When working with announcements that are presented on the website one feature is that they are only viewed once. A session variable will hold which announcements an user has viewed and exclude that from their display. announcements supports two different types of filtering of announcements:
+Some sites need the ability to broadcast an announcement to all of their users. django-announcements was created precisely for this reason. How you present the announcement is up to you as the site developer. When working with announcements that are presented on the website one feature is that they are only viewed once. A session variable will hold which announcements a user has viewed and exclude that from their display. Announcements supports two different types of filtering of announcements:
 
     site-wide (this can be presented to anonymous users)
 
@@ -60,9 +60,9 @@ See pinax-project-forums for a full Django project incorporating numerous apps w
 ## [pinax-types](https://github.com/pinax/pinax-types)
 
 ## [django-email-confirmation (deprecated)](https://github.com/pinax/django-email-confirmation)
-simple email confirmation for the Django web framework 
+simple email confirmation for the Django web framework
 
-NOTE: this project has been superceded by https://github.com/pinax/django-user-accounts/ and is not longer active.
+NOTE: this project has been superceded by https://github.com/pinax/django-user-accounts/ and is no longer active.
 ## [symposion](https://github.com/pinax/symposion)
 symposion is a conference management solution from Eldarion. It was built with the generous support of the Python Software Foundation. See http://eldarion.com/symposion/ for commercial support, customization and hosting.
 ## [metron](https://github.com/pinax/metron)

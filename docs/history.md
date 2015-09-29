@@ -8,7 +8,7 @@ James became interested in developing a set of reusable Django apps and developi
 
 In early May 2008, James suggested to the `django-hotclub` mailing list the need for a project that could be "an out-of-the-box Django-based website with everything but the domain-specific functionality". James also suggested it could be a useful scaffolding for writing and trying out reusable apps. He started what he initially called "Tabula Rasa", shortly after renamed to "Pinax", a suggestion by Orestis Markou.
 
-On Memorial Day weekend 2008, James decided to spend the weekend hacking on this new Pinax project and was joined by other "hotclub" members Brian Rosner, Jannis Leidel and Eric Florenzano. By the end of the weekend, with help from others, Pinax had user profile pages, gravatars, user-to-user messages, announcements, OpenID support, join invitations, a basic Twitter clone with OEmbed support, groups and localizations into German, Spanish and Swedish.
+On Memorial Day weekend 2008, James decided to spend the weekend hacking on this new Pinax project and was joined by other "hotclub" members Brian Rosner, Jannis Leidel, and Eric Florenzano. By the end of the weekend, with help from others, Pinax had user profile pages, gravatars, user-to-user messages, announcements, OpenID support, join invitations, a basic Twitter clone with OEmbed support, groups and localizations into German, Spanish, and Swedish.
 
 By July, Pinax added wikis, threaded discussions, bookmarks with voting, contact import, blogs with tagging and localization into Brazilian Portuguese and Hebrew.
 

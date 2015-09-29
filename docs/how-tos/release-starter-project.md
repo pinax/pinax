@@ -2,7 +2,7 @@
 
 In an effort to communicate completeness and bring some stability to our starter
 projects, we tag releases. Semantic versioning applies less to starter projects
-than it does apps as things like backwards-incompatibility are a non-issue.
+than it does to apps as things like backwards-incompatibility are a non-issue.
 However, for the sake of consistency we should adhere to keeping close to it.
 
 ### Versioning Rules
@@ -13,7 +13,7 @@ However, for the sake of consistency we should adhere to keeping close to it.
 * once a starter project is used to create a site that is running in production
   it gets bumped to `1.0.0`
 * increment patch numbers if any change is fixing a bug
-* increment minor numbers for any feature changes or version bumps of dependendecies
+* increment minor numbers for any feature changes or version bumps of dependencies
   that are relatively minor
 * increment major numbers for any **major** work done
 

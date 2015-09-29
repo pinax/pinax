@@ -17,7 +17,7 @@ pip install Django==1.8.4
 django-admin startproject --template=https://github.com/pinax/pinax-starter-projects/zipball/account mysite -n webpack.config.js
 ```
 
-Now install the requirements, initialize your database, load the default sites fixtures and run the dev server:
+Now install the requirements, initialize your database, load the default sites fixtures, and run the dev server:
 
 ```
 cd mysite

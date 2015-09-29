@@ -11,12 +11,12 @@ among many others).
 
 We leverage `git` and branching to manage the hierarchy.
 
-Each project template will get a new branch and will branch from it's natural
+Each project template will get a new branch and will branch from its natural
 parent.
 
 
 All starter projects share a common method for getting started. It involves
-created a virtualenv, installing Django, and running the `startproject` command
+creating a virtualenv, installing Django, and running the `startproject` command
 with a url to the template, followed by a few commands within your new project.
 
 ### Create a virtualenv
@@ -39,7 +39,7 @@ pip install Django==1.8.4
 django-admin.py startproject --template=https://github.com/pinax/pinax-starter-projects/zipball/<PROJECT_BRANCH> mysite -n webpack.config.js -n PROJECT_README.md
 ```
 
-#### Using the `pinax` client
+#### Using the `pinax` Client
 
 ```
 pip install pinax
@@ -47,7 +47,7 @@ pinax projects --start=<KIND> mysite
 ```
 
 
-#### Get going with your new project
+#### Get Going With Your New Project
 
 ```
 cd mysite

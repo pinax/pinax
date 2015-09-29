@@ -7,7 +7,7 @@ It takes care of the things that many sites have in common so you can focus on w
 Pinax provides:
 
   * **Standard project layout** for consistency and easy deployment
-  * **Starter projects** that can be used as the basis for any Django website as well as some tailored to community sites, company sites, intranets and sites in closed beta
+  * **Starter projects** that can be used as the basis for any Django website as well as some tailored-to-community sites, company sites, intranets and sites in closed beta
   * **Reusable apps** providing both back-end functionality and user-facing components
   * **Default templates** to enable quick prototyping
 
@@ -23,7 +23,7 @@ Hundreds of sites have been built on `pinax-project-account` even if they otherw
 
 Some starter projects are more designed to be demos of how to use a particular reusable app or set of apps.
 
-Yet other starter projects are designed to be out-of-the-box, fully-functional sites ready to deploy (although we don't have many of these yet).
+Yet other starter projects are designed to be out-of-the-box, fully-functional sites, ready to deploy (although we don't have many of these yet).
 
 After you've started your Django project with a Pinax starter project, it is quite common to add other apps from the Pinax ecosystem. But the apps in Pinax are just regular Django apps. Django apps don't have to be "Pinax" apps to be added to a Pinax starter project.
 

@@ -3,8 +3,8 @@
 Pinax is used to build all sorts of things. This is just a small sampling of
 some of the things that can be built with Pinax. If you have built something
 please either [create an issue](https://github.com/pinax/pinax/issues/new)
-and tell us about it or [fork this repo](https://github.com/pinax/pinax/issues#fork-destination-box)
-and update this document and send a pull request.
+and tell us about it or [fork this repo](https://github.com/pinax/pinax/issues#fork-destination-box),
+update this document, and send a pull request.
 
 
 ## Pinax Blog

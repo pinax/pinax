@@ -32,7 +32,7 @@ django-admin.py startproject --template=https://github.com/pinax/pinax-starter-p
 
 ## Pinax-Project-Static
 
-This purpose of this starter project is to provide a robust mocking and design tool.
+The purpose of this starter project is to provide a robust mocking and design tool.
 
 ```
 django-admin.py startproject --template=https://github.com/pinax/pinax-starter-projects/zipball/static mysite -n webpack.config.js
@@ -62,7 +62,7 @@ This project is a starter project that has account management with profiles and 
 django-admin.py startproject --template=https://github.com/pinax/pinax-starter-projects/zipball/team-wiki mysite -n webpack.config.js
 ```
 
-Additional atarter projects:
+Additional starter projects:
 
 * pinax-project-social
 * pinax-project-socialauth
