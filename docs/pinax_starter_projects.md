@@ -42,7 +42,7 @@ django-admin.py startproject --template=https://github.com/pinax/pinax-starter-p
 #### Using the `pinax` Client
 
 ```
-pip install pinax
+pip install pinax-cli
 pinax projects --start=<KIND> mysite
 ```
 
