@@ -27,7 +27,7 @@ pip install -r requirements.txt
 Documentation
 --------------
 
-The Pinax documentation is available at http://pinaxproject.com/pinax/.
+The Pinax documentation is available at http://pinaxproject.com/pinax/. If you would like to help us improve our documentation or write more documentation, please join our Slack channel and let us know!
 
 
 Code of Conduct
