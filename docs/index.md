@@ -27,6 +27,7 @@ We're just starting to provide overarching documentation for the whole of Pinax 
     * [Release Process](release_process.md)
   * [Tutorials](tutorials.md)
   * [Pinax in the Wild](in_the_wild.md)
+  * [Companies Working with Pinax](companies_working_with_pinax.md)
 
 
 ## Colophon
