@@ -13,3 +13,9 @@ You can now start adding your own apps or existing Django apps (whether from Pin
 ## I already have an existing Django project. Can I still use Pinax?
 
 A large component of Pinax is just re-usable Django apps. Most make very few assumptions about what else is in your project (although some assume you're using django-user-accounts for user account management). In most cases you can just use an app in the Pinax ecosystem like you would any other Django app.
+
+## How do we upgrade a site to a newer Pinax release?
+
+Individual apps generally follow [semantic versioning](http://semver.org/) and often have an upgrade path.  So they should be upgradable.
+
+If you want to use a starter project, or other collection of Pinax apps, and be able to follow a documented upgrade path, something like [Proposal for Pinax Distribution Versioning - pinax issue #84](https://github.com/pinax/pinax/issues/84) is needed.  It would provide coordinated releases, and make Pinax even more like a Linux distribution, in the way that e.g. Ubuntu creates a coordinated release of an infrastructure along with a variety of applications.
