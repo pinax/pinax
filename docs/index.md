@@ -21,10 +21,11 @@ We're just starting to provide overarching documentation for the whole of Pinax 
     * [Deploying to Heroku](how-tos/deploy-to-heroku.md)
     * [Release a Starter Project](how-tos/release-starter-project.md)
   * Development
-    * [Ways to Contribute](ways_to_contribute.md)
-    * [Code of Conduct](code_of_conduct.md)
     * [How to Contribute](how_to_contribute.md)
+    * [Ways to Contribute](ways_to_contribute.md)
     * [Release Process](release_process.md)
+    * [Code of Conduct](code_of_conduct.md)
+        
   * [Tutorials](tutorials.md)
   * [Pinax in the Wild](in_the_wild.md)
   * [Companies Working with Pinax](companies_working_with_pinax.md)
