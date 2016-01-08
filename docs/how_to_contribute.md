@@ -6,6 +6,26 @@ documentation, reporting bugs, as well as reading and providing feedback on
 issues and pull requests, all are valid and necessary ways to
 help.
 
+
+## Watch the Videos
+
+Each month we do a Pinax Hangout, where we talk about a Pinax app or starter project, and demo how it works. Watching the videos of our [previous Pinax Hangouts](https://www.youtube.com/channel/UCAPpNG85GLzUBwzYCjd4raQ) might be helpful to you and might make contributing to Pinax easier. Click on the Youtube description of each video and you will find an agenda of what was discussed during a particular Hangout.
+
+
+## Questions/Help
+
+When you have questions or need help it’s best to join our [Pinax project Slack channel](http://slack.pinaxproject.com) and ping us there. It is also valid to create an issue and add the `question` label to it but it will usually take us longer to answer a question that has been filed as an issue than to help you in Slack.
+
+If you provide us with an example of a bug you ran into, something that isn’t working, something you don’t understand, we will be able to help you much faster. It is totally sufficient to take a screenshot and post it in Slack or add it to your GitHub issue.
+
+
+## Reporting Bugs/ Requesting Features/ Making Pull Requests
+
+If you’re not sure how to create an issue or make a pull request on GitHub, please read [this blog post](http://blog.pinaxproject.com/2015/11/10/guide-how-contribute-pinax/) for help. If things are still unclear or you run into any problems, please don’t hesitate to ping us in Slack.
+
+When you create an issue, please make sure to assign the correct labels to it. See [this blog post]() for help.
+
+
 ## Committing Code
 
 The great thing about using a distributed versioning control system like git
@@ -137,6 +157,8 @@ Here is an example of these rules applied:
 
 ## Pull Requests
 
+If you would like to add functionality or add a new feature, please submit an issue first to make sure it’s a direction we want to take.
+
 Please keep your pull requests focused on one specific thing only. If you
 have a number of contributions to make, then please send separate pull
 requests. It is much easier on maintainers to receive small, well defined,
@@ -159,3 +181,40 @@ one entirely.) Save and exit will complete the rebase. Use a forced push to
 your fork.
 
     git push -f
+
+When you create a pull requests which fixes an issue, please link the original issue in your pull request.
+
+
+## Other Ways to Contribute/What We Need Help With
+
+### Help Others!
+
+If you would like to help others who are just starting to contribute to Pinax, you can do the following:
+
+* Hang out in [Slack](http://slack.pinaxproject.com) and help answer questions!
+* Watch the [Pinax repositories](https://github.com/pinax) for issues or pull request you could help with!
+* When you encounter a bug/have an idea for a feature/encounter missing documentation that could easily be fixed, create `first-timers-only` issues like [this one](https://github.com/pinax/pinax/issues/102) for people wanting to make their first OSS contribution! If you need help creating this sort of issue, please ping @ossanna16 on GitHub or @anna in Slack.
+
+
+### Contribute To The Community!
+
+* Write blog posts [like these](http://blog.pinaxproject.com/section/how-tos/)!
+* Host a [Pinax Hangout](https://www.youtube.com/channel/UCAPpNG85GLzUBwzYCjd4raQ)!
+* Help us contribute to our existing documentation and write new documentation! You can find links to each app’s/starter project’s documentation in the README of the app/starter project.
+* Write tutorials! If there’s an app or starter project you know well, write a tutorial and show others how to use it, what features it has, etc.
+
+
+### Contribute Code!
+
+* Write tests!
+* If you have time to fix any of our GitHub issues (especially those labelled `up-for-grabs`) we would greatly appreciate your help!
+* Create a new starter project which showcases how to use any of our Pinax apps (or a combination of them). This doesn’t have to be anything new or original. You could for example pick an existing website like Facebook and try to rebuild it with Pinax components.
+* Write new Pinax apps! If while building your starter project you notice that an app is missing we would love for you to let us know about your idea or build the app yourself.
+
+
+
+
+
+
+
+
