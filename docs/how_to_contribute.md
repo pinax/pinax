@@ -182,7 +182,7 @@ your fork.
 
     git push -f
 
-When you create a pull requests which fixes an issue, please link the original issue in your pull request.
+When you create a pull requests, which fixes an issue, please link the original issue in your pull request.
 
 
 ## Other Ways to Contribute/What We Need Help With
