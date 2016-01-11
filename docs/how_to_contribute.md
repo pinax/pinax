@@ -23,7 +23,7 @@ If you provide us with an example of a bug you ran into, something that isn’t 
 
 If you’re not sure how to create an issue or make a pull request on GitHub, please read [this blog post](http://blog.pinaxproject.com/2015/11/10/guide-how-contribute-pinax/) for help. If things are still unclear or you run into any problems, please don’t hesitate to ping us in Slack.
 
-When you create an issue, please make sure to assign the correct labels to it. See [this blog post]() for help.
+When you create an issue, please make sure to assign the correct labels to it. See [this blog post](http://blog.pinaxproject.com/2016/01/11/first-timers-only-and-new-labels/) for help.
 
 
 ## Committing Code
