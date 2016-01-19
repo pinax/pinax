@@ -11,7 +11,7 @@ Each of these will eventually link to a separate page for each starter project w
 This project lays the foundation for all other Pinax starter projects. It provides the project directory layout and Bootstrap-based theme.
 
 ```
-django-admin.py startproject --template=https://github.com/pinax/pinax-starter-projects/zipball/zero mysite -n webpack.config.js
+pinax start zero mysite
 ```
 
 ## Pinax-Project-Account
@@ -19,7 +19,16 @@ django-admin.py startproject --template=https://github.com/pinax/pinax-starter-p
 In addition to what is provided by the "zero" project, this project provides thorough integration with django-user-accounts, adding comprehensive account management functionality. It is a foundation suitable for most sites that have user accounts.
 
 ```
-django-admin.py startproject --template=https://github.com/pinax/pinax-starter-projects/zipball/account mysite -n webpack.config.js
+pinax start account mysite
+```
+
+## Pinax-Project-Social-Auth
+
+In addition to what is provided by the "account" project, this project provides
+integrates `python-social-auth` all ready for Twitter authentication.
+
+```
+pinax start --dev social-auth mysite
 ```
 
 ## Pinax-Project-Blog
@@ -27,7 +36,7 @@ django-admin.py startproject --template=https://github.com/pinax/pinax-starter-p
 This project gets you off and running with a blog.
 
 ```
-django-admin.py startproject --template=https://github.com/pinax/pinax-starter-projects/zipball/blog mysite -n webpack.config.js
+pinax start blog mysite
 ```
 
 ## Pinax-Project-Static
@@ -35,7 +44,7 @@ django-admin.py startproject --template=https://github.com/pinax/pinax-starter-p
 The purpose of this starter project is to provide a robust mocking and design tool.
 
 ```
-django-admin.py startproject --template=https://github.com/pinax/pinax-starter-projects/zipball/static mysite -n webpack.config.js
+pinax start static mysite
 ```
 
 ## Pinax-Project-Documents
@@ -43,7 +52,7 @@ django-admin.py startproject --template=https://github.com/pinax/pinax-starter-p
 Builds on the Accounts starter project to get you off and running with a document library built around [pinax-documents](https://github.com/pinax/pinax-documents).
 
 ```
-django-admin.py startproject --template=https://github.com/pinax/pinax-starter-projects/zipball/documents mysite -n webpack.config.js
+pinax start documents mysite
 ```
 
 ## Pinax-Project-Wiki
@@ -51,7 +60,7 @@ django-admin.py startproject --template=https://github.com/pinax/pinax-starter-p
 This project is a demo starter project that provides a wiki for authenticated users.
 
 ```
-django-admin.py startproject --template=https://github.com/pinax/pinax-starter-projects/zipball/wiki mysite -n webpack.config.js
+pinax start wiki mysite
 ```
 
 ## Pinax-Project-Team-Wiki
@@ -59,7 +68,7 @@ django-admin.py startproject --template=https://github.com/pinax/pinax-starter-p
 This project is a starter project that has account management with profiles and teams and basic collaborative content.
 
 ```
-django-admin.py startproject --template=https://github.com/pinax/pinax-starter-projects/zipball/team-wiki mysite -n webpack.config.js
+pinax start team-wiki mysite
 ```
 
 Additional starter projects:

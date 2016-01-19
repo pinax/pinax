@@ -1,25 +1,15 @@
 # Getting Started
 
-The pinax/pinax-starter projects repo is available [here](https://github.com/pinax/pinax-starter-projects/).
+The `pinax/pinax-starter-projects` repo is available [here](https://github.com/pinax/pinax-starter-projects/).
 
-All starter projects share a common method for getting started. It involves creating a virtual environment, installing Django, and running the `startproject` command with a URL to the template, followed by a few commands within your new project.
+Many of the starter projects are derivatives of each other `zero` is the parent of `account` among many
+others). We leverage `git` and branching to manage the hierarchy. Each project template lives in it's
+own branch and will branch from its natural parent.
 
-Many of the starter projects are derivatives of each
-other ([pinax-starter-projects-zero](http://github.com/pinax/pinax-starter-projects-zero) is a
-parent of [pinax-starter-projects-project](http://github.com/pinax/pinax-starter-projects-project)
-among many others).
+All starter projects share a common method for getting started. It involves creating a virtual environment, installing Django, and running the `startproject` command with a URL to the template, followed by a few commands within your new project. Or even easier, you can use the `pinax`
+command line utility.
 
-We leverage `git` and branching to manage the hierarchy.
-
-Each project template will get a new branch and will branch from its natural
-parent.
-
-
-All starter projects share a common method for getting started. It involves
-creating a virtualenv, installing Django, and running the `startproject` command
-with a url to the template, followed by a few commands within your new project.
-
-### Create a virtualenv
+## Getting Started
 
 You might use `pyenv` instead.
 
@@ -29,25 +19,32 @@ virtualenv mysiteenv
 source mysiteenv/bin/activate
 ```
 
-
-### Install Django and Start Project
-
-#### Manually
-
-```
-pip install Django==1.8.4
-django-admin.py startproject --template=https://github.com/pinax/pinax-starter-projects/zipball/<PROJECT_BRANCH> mysite -n webpack.config.js -n PROJECT_README.md
-```
-
-#### Using the `pinax` Client
+### Using the `pinax` command line utility
 
 ```
 pip install pinax-cli
-pinax projects --start=<KIND> mysite
+pinax projects  # list available project releases
+pinax start <kind> <project_name>
+```
+
+If you are feeling adventurous you can install off latest development by passing
+the `--dev` flag:
+
+```
+pinax start --dev <kind> <project_name>
 ```
 
 
-#### Get Going With Your New Project
+### Manually
+
+```
+pip install Django
+django-admin.py startproject --template=https://github.com/pinax/pinax-starter-projects/zipball/<PROJECT_BRANCH> mysite -n webpack.config.js -n PROJECT_README.md
+```
+
+
+
+### Get Going With Your New Project
 
 ```
 cd mysite
@@ -68,13 +65,13 @@ Projects
 * [zero](starter_project_list.md#pinax-project-zero)
   * [account](starter_project_list.md#pinax-project-account)
     * [documents](starter_project_list.md#pinax-project-documents)
+    * [social-auth](starter_project_list.md#pinax-project-social-auth)
     * [wiki](starter_project_list.md#pinax-project-wiki)
       * [team-wiki](starter_project_list.md#pinax-project-team-wiki)
   * [blog](starter_project_list.md#pinax-project-blog)
   * [static](starter_project_list.md#pinax-project-static)
   * [waiting-list](starter_project_list.md#pinax-project-waiting-list)
 * `social`
-* `social-auth`
 * `lms`
 * `forums`
 * `private-beta`
