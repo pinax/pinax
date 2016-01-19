@@ -9,14 +9,14 @@ Getting Started
 ------------
 
 To give you an example of how one would use Pinax now to start a new
-site based on the [Account Starter Project](https://github.com/pinax/pinax-project-account) follow these steps in your shell:
+site based on the Account Starter Project follow these steps in your shell:
 
 ```
 pip install virtualenv
 virtualenv mysiteenv
 source mysiteenv/bin/activate
-pip install Django==1.8.3
-django-admin.py startproject --template=https://github.com/pinax/pinax-project-account/zipball/master mysite
+pip install pinax-cli
+pinax start account mysite
 cd mysite
 pip install -r requirements.txt
 ./manage.py migrate
