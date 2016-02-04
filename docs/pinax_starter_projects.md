@@ -2,7 +2,7 @@
 
 The `pinax/pinax-starter-projects` repo is available [here](https://github.com/pinax/pinax-starter-projects/).
 
-Many of the starter projects are derivatives of each other `zero` is the parent of `account` among many
+Many of the starter projects are derivatives of each other (`zero` is the parent of `account` among many
 others). We leverage `git` and branching to manage the hierarchy. Each project template lives in it's
 own branch and will branch from its natural parent.
 
@@ -11,13 +11,13 @@ command line utility.
 
 ## Getting Started
 
-You might use `pyenv` instead.
-
 ```
 pip install virtualenv
 virtualenv mysiteenv
 source mysiteenv/bin/activate
 ```
+
+You might use `pyenv-virtualenv` instead. See the [pyenv-virtualenv repository](https://github.com/yyuu/pyenv-virtualenv) for usage.
 
 ### Using the `pinax` command line utility
 
