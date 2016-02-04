@@ -22,10 +22,11 @@ In addition to what is provided by the "zero" project, this project provides tho
 pinax start account mysite
 ```
 
-## Pinax-Project-Social-Auth
+## Pinax-Project-SocialAuth
 
-In addition to what is provided by the "account" project, this project provides
-integrates `python-social-auth` all ready for Twitter authentication.
+In addition to what is provided by the "account" project, this project
+integrates with `python-social-auth` for Twitter, Facebook, and Google
+authentication.
 
 ```
 pinax start --dev social-auth mysite
@@ -74,9 +75,7 @@ pinax start team-wiki mysite
 Additional starter projects:
 
 * pinax-project-social
-* pinax-project-socialauth
 * pinax-project-waitinglist
-* pinax-project-privatebeta
 * pinax-project-symposion
 * pinax-project-lms
 * pinax-project-forums
