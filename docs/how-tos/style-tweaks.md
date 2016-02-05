@@ -4,7 +4,7 @@
 ## How to edit LESS and rebuild CSS
 
 To edit LESS you will need to go to the less file you wish to change. The LESS
-files are located in `static/src/.less/`. In this example, we will use
+files are located in `static/src/less/`. In this example, we will use
 `custom.less`.
 
 In `custom.less` add the CSS changes you want to make to your site:
@@ -23,13 +23,28 @@ following command:
 npm install
 ```
 
-To rebuild the site, you will run the following command:
-```
-npm run build && ./manage.py runserver
-```
-The build command will rebuild the CSS and the runserver command allow you to
-view your changes locally.
+To rebuild the CSS, be sure to open two command windows for the following commands:
 
+In one window, you will run:
+```
+npm run build
+```
+This will rebuild your CSS changes.
+
+In the second window, you will run:
+```
+npm run watch.
+```
+This will ensure that the changes will be rebuilt on save.
+
+You can refresh your browser at this point to review your changes.
+
+To make a production build, you will run:
+```
+npm run build
+```
+before committing.
+ 
 ## How to edit the footer
 
 If you want to make changes to the footer, you will first locate `_footer.html`
