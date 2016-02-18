@@ -17,7 +17,7 @@ virtualenv mysiteenv
 source mysiteenv/bin/activate
 ```
 
-You might use `pyenv-virtualenv` instead. See the [pyenv-virtualenv repository](https://github.com/yyuu/pyenv-virtualenv) for usage.
+You might use `pyenv` to manage the version of Python used in your virtualenv. See the [pyenv repository](https://github.com/yyuu/pyenv) for usage.
 
 ### Using the `pinax` command line utility
 
