@@ -99,6 +99,8 @@ Django's coding style:
 * Tuples should be reserved for positional data structures and not used
   where a list is more appropriate.
 * URL patterns should use the `url()` function rather than a tuple.
+* When callable arguments require multiple lines, place each argument
+  on a new line, indented four spaces as usual.
 
 Here is an example of these rules applied:
 
@@ -145,7 +147,10 @@ Here is an example of these rules applied:
             super(Task, self).save(**kwargs)
 
         def get_absolute_url(self):
-            return reverse("task_detail", kwargs={"task_id": self.pk})
+            return reverse(
+                "task_detail_with_a_super_long_url_name",
+                kwargs={"task_id": self.pk}
+            )
 
         # custom methods
 
