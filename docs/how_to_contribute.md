@@ -272,6 +272,12 @@ Each test combination produces it's own output, so review errors carefully to un
 whether the problem lies with a general coding mistake or compatibility with a specific
 version of Python and/or Django.
 
+We encourage developers to test updated code before submitting a pull request.
+Every pull request triggers our Travis continuous integration (CI) system,
+which automatically tests the same Python/Django configurations using `tox.ini`.
+A pull request which passes all tests in all configurations is a sign of quality
+and attention to detail.
+
 
 ## Pull Requests
 
