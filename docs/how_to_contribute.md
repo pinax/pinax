@@ -163,7 +163,7 @@ Here is an example of these rules applied:
 ## Testing your code
 
 Pinax apps typically support several different versions of Python and several
-different version of Django. The supported combination are specified in `tox.ini`
+different versions of Django. The supported combinations are specified in `tox.ini`
 at the root of every Pinax app. Here is a sample `tox.ini` file:
 
     [flake8]
@@ -218,7 +218,7 @@ Next install `detox`:
 ### Installing Python versions
 
 Using the Pinax app `tox.ini` file, determine what versions of Python are required for testing.
-In our example above we support Python 2.7.x, 3.3.x, 3.4.x, and 3.5.x. Install the latest versions
+In our example above we support Python 2.7.x, 3.3.x, 3.4.x, and 3.5.x. Install the latest version
 of each required Python <major>.<minor> release using `pyenv`:
 
     $ pyenv install 2.7.10
