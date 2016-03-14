@@ -19,3 +19,7 @@ A large component of Pinax is just re-usable Django apps. Most make very few ass
 Individual apps generally follow [semantic versioning](http://semver.org/) and often have an upgrade path.  So they should be upgradable.
 
 If you want to use a starter project, or other collection of Pinax apps, and be able to follow a documented upgrade path, something like [Proposal for Pinax Distribution Versioning - pinax issue #84](https://github.com/pinax/pinax/issues/84) is needed.  It would provide coordinated releases, and make Pinax even more like a Linux distribution, in the way that e.g. Ubuntu creates a coordinated release of an infrastructure along with a variety of applications.
+
+## What editor/IDE/etc. do Pinax developers like to use?
+
+Some use [Sublime Text](https://www.sublimetext.com), some [Atom](https://atom.io), some [Emacs](https://www.gnu.org/software/emacs/), some [WingIDE](https://wingware.com). There is nothing Pinax-specific about these editor choices and we recommend that you use the text editor or IDE you are most comfortable using and you enjoy the most.
