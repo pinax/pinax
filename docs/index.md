@@ -8,6 +8,7 @@ We're just starting to provide overarching documentation for the whole of Pinax 
   * Introduction
     * [What is Pinax?](what_is_pinax.md)
     * [Quick Start](quick_start.md)
+    * [Quick Start Manual](quick_start_manual.md)
     * [History](history.md)
     * [FAQs](faq.md)
   * Starter Projects
