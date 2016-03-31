@@ -160,6 +160,125 @@ Here is an example of these rules applied:
         pass
 
 
+## Testing your code
+
+Pinax apps typically support several different versions of Python and several
+different versions of Django. The supported combinations are specified in `tox.ini`
+at the root of every Pinax app. Here is a sample `tox.ini` file:
+
+    [flake8]
+    ignore = E265,E501
+    max-line-length = 100
+    max-complexity = 10
+    exclude = migrations/*,docs/*
+
+    [tox]
+    envlist =
+        py27-{1.8,1.9,master},
+        py33-{1.8},
+        py34-{1.8,1.9,master},
+        py35-{1.8,1.9,master}
+
+    [testenv]
+    deps =
+        coverage == 4.0.2
+        flake8 == 2.5.0
+        1.8: Django>=1.8,<1.9
+        1.9: Django>=1.9,<1.10
+        master: https://github.com/django/django/tarball/master
+    usedevelop = True
+    setenv =
+       LANG=en_US.UTF-8
+       LANGUAGE=en_US:en
+       LC_ALL=en_US.UTF-8
+    commands =
+        flake8 pinax
+        coverage run setup.py test
+
+The supported Python - Django combinations are specified in the `[tox] envlist=` section.
+
+In order to test all supported Python/Django combinations we use `pyenv` and `detox`.
+
+### Installing `pyenv` and `detox`
+
+First install `pyenv` according to the directions at https://github.com/yyuu/pyenv.
+(Note you may need to install to a different shell profile configuration file, as
+outlined in the installation directions.)
+
+    $ brew install pyenv
+    $ echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile
+    $ echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bash_profile
+    $ echo 'if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi' >> ~/.bash_profile
+    $ exec $SHELL
+
+Next install `detox`:
+
+    $ pip install detox
+
+### Installing Python versions
+
+Using the Pinax app `tox.ini` file, determine what versions of Python are required for testing.
+In our example above we support Python 2.7.x, 3.3.x, 3.4.x, and 3.5.x. Install the latest version
+of each required Python <major>.<minor> release using `pyenv`:
+
+    $ pyenv install 2.7.10
+    $ pyenv install 3.3.6
+    $ pyenv install 3.4.4
+    $ pyenv install 3.5.1
+
+Ensure these versions appear in the list of installed Python versions:
+
+    $ pyenv versions
+      system
+      2.7.10
+      3.3.6
+      3.4.4
+      3.5.1
+
+Now activate the versions required for your testing:
+
+    $ pyenv local 2.7.10 3.3.6 3.4.4 3.5.1
+
+and verify those versions are active (indicated by an asterisk next to the version number):
+
+    $ pyenv versions
+      system
+    * 2.7.10
+    * 3.3.6
+    * 3.4.4
+    * 3.5.1
+
+### Running tests
+
+Finally, invoke `detox` in the same directory as `tox.ini`.
+
+    $ detox
+
+If your installation and setup worked, you should see something like this:
+
+    py27-1.8 create: /Users/pinax/venv/pinax-ann/src/pinax-announcements/.tox/py27-1.8
+    py27-1.9 create: /Users/pinax/venv/pinax-ann/src/pinax-announcements/.tox/py27-1.9
+    py27-master create: /Users/pinax/venv/pinax-ann/src/pinax-announcements/.tox/py27-master
+    py33-1.8 create: /Users/pinax/venv/pinax-ann/src/pinax-announcements/.tox/py33-1.8
+    py34-1.8 create: /Users/pinax/venv/pinax-ann/src/pinax-announcements/.tox/py34-1.8
+    py34-1.9 create: /Users/pinax/venv/pinax-ann/src/pinax-announcements/.tox/py34-1.9
+    py34-master create: /Users/pinax/venv/pinax-ann/src/pinax-announcements/.tox/py34-master
+    py35-1.8 create: /Users/pinax/venv/pinax-ann/src/pinax-announcements/.tox/py35-1.8
+    py35-1.9 create: /Users/pinax/venv/pinax-ann/src/pinax-announcements/.tox/py35-1.9
+    py35-master create: /Users/pinax/venv/pinax-ann/src/pinax-announcements/.tox/py35-master
+    ...
+
+Each test combination produces it's own output, so review errors carefully to understand
+whether the problem lies with a general coding mistake or compatibility with a specific
+version of Python and/or Django.
+
+We encourage developers to test updated code before submitting a pull request.
+Every pull request triggers our Travis continuous integration (CI) system,
+which automatically tests the same Python/Django configurations using `tox.ini`.
+A pull request which passes all tests in all configurations is a sign of quality
+and attention to detail.
+
+
 ## Pull Requests
 
 If you would like to add functionality or add a new feature, please submit an issue first to make sure it’s a direction we want to take.
