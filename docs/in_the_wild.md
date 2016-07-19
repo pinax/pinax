@@ -14,3 +14,4 @@ http://blog.pinaxproject.com/
 * [Blog starter project](https://github.com/pinax/pinax-starter-projects#pinax-project-blog)
     * [pinax-blog](https://github.com/pinax/pinax-blog) for the blog application
 * [pinax-pages](https://github.com/pinax/pinax-pages) to add some basic CMS functionality
+* [django-cms-light](http://django-cms-light.com) KISS multi-site CMS project optimized for hackers based on git and markdown like django and pelican had a baby with the purpose of hacking on local economy growth for the greater good.
