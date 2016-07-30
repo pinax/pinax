@@ -94,14 +94,17 @@ for repo in pinax.repositories():
             for commit in list(repo.commits(sha="master", since=tagged_commit.commit.author["date"]))  # noqa
             if commit.sha != tagged_sha
         ]
-        since_count = len(since)
+        milestones = (latest, "post-{}".format(latest))
+        triaged = sum([m.open_issues for m in repo.milestones() if m.title in milestones])  # noqa
         repos.append([
             u"\u2713" if repo.name in distro_repos else "",
             repo.name,
             version,
-            since_count or ""
+            len(since) or "",
+            triaged,
+            repo.open_issues_count - triaged
         ])
 
 repos = sorted(repos, key=lambda x: (x[0], x[1]))
-headers = [latest, "repo", "latest", "commits"]
+headers = [latest, "repo", "latest", "commits", "triaged", "to triage"]
 print(tabulate(repos, headers))
