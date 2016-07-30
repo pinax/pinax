@@ -63,6 +63,7 @@ distributions = json.loads(open("distributions.json").read())
 versions = list(distributions.keys())
 versions.sort()
 latest = versions[-1]
+latest_post = "post-{}".format(latest)
 
 distro_repos = list(distributions[latest]["apps"].keys())
 
@@ -94,17 +95,18 @@ for repo in pinax.repositories():
             for commit in list(repo.commits(sha="master", since=tagged_commit.commit.author["date"]))  # noqa
             if commit.sha != tagged_sha
         ]
-        milestones = (latest, "post-{}".format(latest))
-        triaged = sum([m.open_issues for m in repo.milestones() if m.title in milestones])  # noqa
+        triaged_latest = sum([m.open_issues for m in repo.milestones() if m.title == latest])  # noqa
+        triaged_post = sum([m.open_issues for m in repo.milestones() if m.title == latest_post])  # noqa
         repos.append([
             u"\u2713" if repo.name in distro_repos else "",
             repo.name,
             version,
             len(since) or "",
-            triaged,
-            repo.open_issues_count - triaged
+            triaged_latest or "",
+            triaged_post or "",
+            (repo.open_issues_count - triaged_latest - triaged_post) or ""
         ])
 
 repos = sorted(repos, key=lambda x: (x[0], x[1]))
-headers = [latest, "repo", "latest", "commits", "triaged", "to triage"]
+headers = ["ship", "repo", "latest", "commits", latest, latest_post, "to triage"]  # noqa
 print(tabulate(repos, headers))
