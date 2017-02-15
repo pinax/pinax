@@ -13,4 +13,9 @@ Script https://github.com/pinax/pinax/blob/master/check.py can help identify whi
 * do `git clean -fdx`
 * publish to pypi with `python setup.py sdist bdist_wheel upload`
 
+    Note: if this command fails with `error: invalid command 'bdist_wheel'`
+    you need to install "wheel" in your virtualenv:
+    
+        `$ pip install wheel`
+
 see also https://github.com/pinax/pinax/issues/113
