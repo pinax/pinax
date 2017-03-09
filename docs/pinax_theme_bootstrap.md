@@ -54,7 +54,7 @@ npm install
 npm run build
 ```
 
-If you want to have your assets automatically rebuild whenver you save changes, you can run:
+If you want to have your assets automatically rebuild whenever you save changes, you can run:
 
 ```
 npm run watch
