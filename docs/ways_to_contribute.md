@@ -6,7 +6,7 @@ If you would like to help others who are just starting to contribute to Pinax, y
 
 * Hang out in [Slack](http://slack.pinaxproject.com) and help answer questions!
 * Watch the [Pinax repositories](https://github.com/pinax) for issues or pull request you could help with!
-* When you encounter a bug/have an idea for a feature/encounter missing documentation that could easily be fixed, create `first-timers-only` issues like [this one](https://github.com/pinax/pinax/issues/102) for people wanting to make their first OSS contribution! If you need help creating this sort of issue, please ping @ossanna16 on GitHub or @anna in Slack.
+* When you encounter a bug/have an idea for a feature/encounter missing documentation that could easily be fixed, create `first-timers-only` issues like [this one](https://github.com/pinax/pinax/issues/102) for people wanting to make their first OSS contribution! If you need help creating this sort of issue, please ping @KatherineMichel on GitHub or @katherinemichel in Slack.
 
 
 ## Contribute To The Community!
