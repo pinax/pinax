@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>How to Contribute - Pinax Documentation</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "How to Contribute";
+    var mkdocs_page_input_path = "how_to_contribute.md";
+    var mkdocs_page_url = "/how_to_contribute/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Pinax Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Introduction</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../what_is_pinax/">What is Pinax?</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../quick_start/">Quick Start</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../quick_start_manual/">Quick Start Manual</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../history/">History</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../faq/">FAQs</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Starter Projects</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../pinax_starter_projects/">Pinax Starter Projects</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../starter_project_list/">List of Starter Projects</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../pinax_theme_bootstrap/">Pinax Theme Bootstrap</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Apps</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../apps_list/">List of Apps</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">How Tos</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../how-tos/ldap/">LDAP Integration</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../how-tos/deploy-to-heroku/">Deploying to Heroku</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../how-tos/release-starter-project/">Releasing a Starter Project</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Development</span>
+    <ul class="subnav">
+                <li class=" current">
+                    
+    <a class="current" href="./">How to Contribute</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#how-to-contribute">How to Contribute</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#watch-the-videos">Watch the Videos</a></li>
+        
+            <li><a class="toctree-l4" href="#questionshelp">Questions/Help</a></li>
+        
+            <li><a class="toctree-l4" href="#reporting-bugs-requesting-features-making-pull-requests">Reporting Bugs/ Requesting Features/ Making Pull Requests</a></li>
+        
+            <li><a class="toctree-l4" href="#committing-code">Committing Code</a></li>
+        
+            <li><a class="toctree-l4" href="#coding-style">Coding style</a></li>
+        
+            <li><a class="toctree-l4" href="#testing-your-code">Testing your code</a></li>
+        
+            <li><a class="toctree-l4" href="#pull-requests">Pull Requests</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../ways_to_contribute/">Ways to Contribute</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../release_process/">Release Process</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../code_of_conduct/">Code of Conduct</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Tutorials</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../tutorials/">Tutorials</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">In the Wild</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../in_the_wild/">In the Wild</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Companies Working with Pinax</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../companies_working_with_pinax/">Companies Working with Pinax</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Pinax Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Development &raquo;</li>
+        
+      
+    
+    <li>How to Contribute</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="how-to-contribute">How to Contribute</h1>
+<p>There are many ways you can help contribute to Pinax and the various apps,
+themes, and starter projects that it is made up of. Contributing code, writing
+documentation, reporting bugs, as well as reading and providing feedback on
+issues and pull requests, all are valid and necessary ways to
+help.</p>
+<h2 id="watch-the-videos">Watch the Videos</h2>
+<p>Each month we do a Pinax Hangout, where we talk about a Pinax app or starter project, and demo how it works. Watching the videos of our <a href="https://www.youtube.com/channel/UCAPpNG85GLzUBwzYCjd4raQ">previous Pinax Hangouts</a> might be helpful to you and might make contributing to Pinax easier. Click on the Youtube description of each video and you will find an agenda of what was discussed during a particular Hangout.</p>
+<h2 id="questionshelp">Questions/Help</h2>
+<p>When you have questions or need help it’s best to join our <a href="http://slack.pinaxproject.com">Pinax project Slack channel</a> and ping us there. It is also valid to create an issue and add the <code>question</code> label to it but it will usually take us longer to answer a question that has been filed as an issue than to help you in Slack.</p>
+<p>If you provide us with an example of a bug you ran into, something that isn’t working, something you don’t understand, we will be able to help you much faster. It is totally sufficient to take a screenshot and post it in Slack or add it to your GitHub issue.</p>
+<h2 id="reporting-bugs-requesting-features-making-pull-requests">Reporting Bugs/ Requesting Features/ Making Pull Requests</h2>
+<p>If you’re not sure how to create an issue or make a pull request on GitHub, please read <a href="http://blog.pinaxproject.com/2015/11/10/guide-how-contribute-pinax/">this blog post</a> for help. If things are still unclear or you run into any problems, please don’t hesitate to ping us in Slack.</p>
+<p>When you create an issue, please make sure to assign the correct labels to it. See <a href="http://blog.pinaxproject.com/2016/01/11/first-timers-only-and-new-labels/">this blog post</a> for help.</p>
+<h2 id="committing-code">Committing Code</h2>
+<p>The great thing about using a distributed versioning control system like git
+is that everyone becomes a committer. When other people write good patches
+it makes it very easy to include their fixes/features and give them proper
+credit for the work.</p>
+<p>We recommend that you do all your work in a separate branch. When you
+are ready to work on a bug or a new feature create yourself a new branch. The
+reason why this is important is you can commit as often you like. When you are
+ready you can merge in the change. Let's take a look at a common workflow:</p>
+<pre><code>git checkout -b task-566
+... fix and git commit often ...
+git push origin task-566
+</code></pre>
+<p>The reason we have created two new branches is to stay off of <code>master</code>.
+Keeping master clean of only upstream changes makes yours and ours lives
+easier. You can then send us a pull request for the fix/feature. Then we can
+easily review it and merge it when ready.</p>
+<h3 id="writing-commit-messages">Writing Commit Messages</h3>
+<p>Writing a good commit message makes it simple for us to identify what your
+commit does from a high-level. There are some basic guidelines we'd like to
+ask you to follow.</p>
+<p>A critical part is that you keep the <strong>first</strong> line as short and sweet
+as possible. This line is important because when git shows commits and it has
+limited space or a different formatting option is used the first line becomes
+all someone might see. If your change isn't something non-trivial or there
+reasoning behind the change is not obvious, then please write up an extended
+message explaining the fix, your rationale, and anything else relevant for
+someone else that might be reviewing the change. Lastly, if there is a
+corresponding issue in Github issues for it, use the final line to provide
+a message that will link the commit message to the issue and auto-close it
+if appropriate.</p>
+<pre><code>Add ability to travel back in time
+
+You need to be driving 88 miles per hour to generate 1.21 gigawatts of
+power to properly use this feature.
+
+Fixes #88
+</code></pre>
+<h2 id="coding-style">Coding style</h2>
+<p>When writing code to be included in Pinax keep our style in mind:</p>
+<ul>
+<li>Follow <a href="http://www.python.org/dev/peps/pep-0008/">PEP8</a> there are some
+  cases where we do not follow PEP8. It is an excellent starting point.</li>
+<li>Follow <a href="http://docs.djangoproject.com/en/dev/internals/contributing/#coding-style">Django's coding style</a>
+  we're pretty much in agreement on Django style outlined there.</li>
+</ul>
+<p>We would like to enforce a few more strict guides not outlined by PEP8 or
+Django's coding style:</p>
+<ul>
+<li>PEP8 tries to keep line length at 80 characters. We follow it when we can,
+  but not when it makes a line harder to read. It is okay to go a little bit
+  over 80 characters if not breaking the line improves readability.</li>
+<li>Use double quotes not single quotes. Single quotes are allowed in cases
+  where a double quote is needed in the string. This makes the code read
+  cleaner in those cases.</li>
+<li>Docstrings always use three double quotes on a line of their own, so, for
+  example, a single line docstring should take up three lines not one.</li>
+<li>Imports are grouped specifically and ordered alphabetically. This is shown
+  in the example below.</li>
+<li>Always use <code>reverse</code> and never <code>@models.permalink</code>.</li>
+<li>Tuples should be reserved for positional data structures and not used
+  where a list is more appropriate.</li>
+<li>URL patterns should use the <code>url()</code> function rather than a tuple.</li>
+<li>When callable arguments require multiple lines, place each argument
+  on a new line, indented four spaces as usual.</li>
+</ul>
+<p>Here is an example of these rules applied:</p>
+<pre><code># first set of imports are stdlib imports
+# non-from imports go first then from style import in their own group
+import csv
+
+# second set of imports are Django imports with contrib in their own
+# group.
+from django.core.urlresolvers import reverse
+from django.db import models
+from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
+
+from django.contrib.auth.models import User
+
+# third set of imports are external apps (if applicable)
+from tagging.fields import TagField
+
+# fourth set of imports are local apps
+from .fields import MarkupField
+
+
+class Task(models.Model):
+    """
+    A model for storing a task.
+    """
+
+    creator = models.ForeignKey(User)
+    created = models.DateTimeField(default=timezone.now)
+    modified = models.DateTimeField(default=timezone.now)
+
+    objects = models.Manager()
+
+    class Meta:
+        verbose_name = _("task")
+        verbose_name_plural = _("tasks")
+
+    def __unicode__(self):
+        return self.summary
+
+    def save(self, **kwargs):
+        self.modified = datetime.now()
+        super(Task, self).save(**kwargs)
+
+    def get_absolute_url(self):
+        return reverse(
+            "task_detail_with_a_super_long_url_name",
+            kwargs={"task_id": self.pk}
+        )
+
+    # custom methods
+
+
+class TaskComment(models.Model):
+    # ... you get the point ...
+    pass
+</code></pre>
+<h2 id="testing-your-code">Testing your code</h2>
+<p>Pinax apps typically support several different versions of Python and several
+different versions of Django. The supported combinations are specified in <code>tox.ini</code>
+at the root of every Pinax app. Here is a sample <code>tox.ini</code> file:</p>
+<pre><code>[flake8]
+ignore = E265,E501
+max-line-length = 100
+max-complexity = 10
+exclude = migrations/*,docs/*
+
+[tox]
+envlist =
+    py27-{1.8,1.9,master},
+    py33-{1.8},
+    py34-{1.8,1.9,master},
+    py35-{1.8,1.9,master}
+
+[testenv]
+deps =
+    coverage == 4.0.2
+    flake8 == 2.5.0
+    1.8: Django&gt;=1.8,&lt;1.9
+    1.9: Django&gt;=1.9,&lt;1.10
+    master: https://github.com/django/django/tarball/master
+usedevelop = True
+setenv =
+   LANG=en_US.UTF-8
+   LANGUAGE=en_US:en
+   LC_ALL=en_US.UTF-8
+commands =
+    flake8 pinax
+    coverage run setup.py test
+</code></pre>
+<p>The supported Python - Django combinations are specified in the <code>[tox] envlist=</code> section.</p>
+<p>In order to test all supported Python/Django combinations we use <code>pyenv</code> and <code>detox</code>.</p>
+<h3 id="installing-pyenv-and-detox">Installing <code>pyenv</code> and <code>detox</code></h3>
+<p>First install <code>pyenv</code> according to the directions at https://github.com/yyuu/pyenv.
+(Note you may need to install to a different shell profile configuration file, as
+outlined in the installation directions.)</p>
+<pre><code>$ brew install pyenv
+$ echo 'export PYENV_ROOT="$HOME/.pyenv"' &gt;&gt; ~/.bash_profile
+$ echo 'export PATH="$PYENV_ROOT/bin:$PATH"' &gt;&gt; ~/.bash_profile
+$ echo 'if which pyenv &gt; /dev/null; then eval "$(pyenv init -)"; fi' &gt;&gt; ~/.bash_profile
+$ exec $SHELL
+</code></pre>
+<p>Next install <code>detox</code>:</p>
+<pre><code>$ pip install detox
+</code></pre>
+<h3 id="installing-python-versions">Installing Python versions</h3>
+<p>Using the Pinax app <code>tox.ini</code> file, determine what versions of Python are required for testing.
+In our example above we support Python 2.7.x, 3.3.x, 3.4.x, and 3.5.x. Install the latest version
+of each required Python <major>.<minor> release using <code>pyenv</code>:</p>
+<pre><code>$ pyenv install 2.7.10
+$ pyenv install 3.3.6
+$ pyenv install 3.4.4
+$ pyenv install 3.5.1
+</code></pre>
+<p>Ensure these versions appear in the list of installed Python versions:</p>
+<pre><code>$ pyenv versions
+  system
+  2.7.10
+  3.3.6
+  3.4.4
+  3.5.1
+</code></pre>
+<p>Now activate the versions required for your testing:</p>
+<pre><code>$ pyenv local 2.7.10 3.3.6 3.4.4 3.5.1
+</code></pre>
+<p>and verify those versions are active (indicated by an asterisk next to the version number):</p>
+<pre><code>$ pyenv versions
+  system
+* 2.7.10
+* 3.3.6
+* 3.4.4
+* 3.5.1
+</code></pre>
+<h3 id="running-tests">Running tests</h3>
+<p>Finally, invoke <code>detox</code> in the same directory as <code>tox.ini</code>.</p>
+<pre><code>$ detox
+</code></pre>
+<p>If your installation and setup worked, you should see something like this:</p>
+<pre><code>py27-1.8 create: /Users/pinax/venv/pinax-ann/src/pinax-announcements/.tox/py27-1.8
+py27-1.9 create: /Users/pinax/venv/pinax-ann/src/pinax-announcements/.tox/py27-1.9
+py27-master create: /Users/pinax/venv/pinax-ann/src/pinax-announcements/.tox/py27-master
+py33-1.8 create: /Users/pinax/venv/pinax-ann/src/pinax-announcements/.tox/py33-1.8
+py34-1.8 create: /Users/pinax/venv/pinax-ann/src/pinax-announcements/.tox/py34-1.8
+py34-1.9 create: /Users/pinax/venv/pinax-ann/src/pinax-announcements/.tox/py34-1.9
+py34-master create: /Users/pinax/venv/pinax-ann/src/pinax-announcements/.tox/py34-master
+py35-1.8 create: /Users/pinax/venv/pinax-ann/src/pinax-announcements/.tox/py35-1.8
+py35-1.9 create: /Users/pinax/venv/pinax-ann/src/pinax-announcements/.tox/py35-1.9
+py35-master create: /Users/pinax/venv/pinax-ann/src/pinax-announcements/.tox/py35-master
+...
+</code></pre>
+<p>Each test combination produces it's own output, so review errors carefully to understand
+whether the problem lies with a general coding mistake or compatibility with a specific
+version of Python and/or Django.</p>
+<p>We encourage developers to test updated code before submitting a pull request.
+Every pull request triggers our Travis continuous integration (CI) system,
+which automatically tests the same Python/Django configurations using <code>tox.ini</code>.
+A pull request which passes all tests in all configurations is a sign of quality
+and attention to detail.</p>
+<h2 id="pull-requests">Pull Requests</h2>
+<p>If you would like to add functionality or add a new feature, please submit an issue first to make sure it’s a direction we want to take.</p>
+<p>Please keep your pull requests focused on one specific thing only. If you
+have a number of contributions to make, then please send separate pull
+requests. It is much easier on maintainers to receive small, well defined,
+pull requests, than it is to have a single large one that batches up a
+lot of unrelated commits.</p>
+<p>If you ended up making multiple commits for one logical change, please
+rebase into a single commit.</p>
+<pre><code>git rebase -i HEAD~10  # where 10 is the number of commits back you need
+</code></pre>
+<p>This will pop up an editor with your commits and some instructions you want
+to squash commits down by replacing 'pick' with 's' to have it combined with
+the commit before it. You can squash multiple ones at the same time.</p>
+<p>When you save and exit the text editor where you were squashing commits, git
+will squash them down and then present you with another editor with commit
+messages. Choose the one to apply to the squashed commit (or write a new
+one entirely.) Save and exit will complete the rebase. Use a forced push to
+your fork.</p>
+<pre><code>git push -f
+</code></pre>
+<p>When you create a pull requests, which fixes an issue, please link the original issue in your pull request.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../ways_to_contribute/" class="btn btn-neutral float-right" title="Ways to Contribute">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../how-tos/release-starter-project/" class="btn btn-neutral" title="Releasing a Starter Project"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../how-tos/release-starter-project/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../ways_to_contribute/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../js/theme.js"></script>
+
+</body>
+</html>
