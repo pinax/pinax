@@ -43,13 +43,25 @@ We also highly recommend reading our [Open Source and Self-Care blog post](http:
 Updating Docs
 -------------
 
-The docs live online at http://pinaxproject.com/pinax/. You can update them by
-running:
+The docs live online at http://pinaxproject.com/pinax/. 
+
+After a pull request is merged, checkout your local master branch: 
+
+```
+git checkout master
+```
+
+Pull the update into your local master branch:
+
+```
+git pull master
+```
+
+Push the update live to gh-pages:
 
 ```
 mkdocs gh-deploy
 ```
-
 
 
 Code of Conduct
