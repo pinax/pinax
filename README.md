@@ -54,7 +54,7 @@ git checkout master
 Pull the update into your local master branch:
 
 ```
-git pull master
+git pull origin master
 ```
 
 Push the update live to gh-pages:
