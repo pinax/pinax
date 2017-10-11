@@ -1,4 +1,16 @@
 /*
+ * Tweak the overal size to better match RTD.
+ */
+html {
+    font-size: 90%;
+}
+
+h3, h4, h5, h6 {
+    color: #2980b9;
+    font-weight: 300
+}
+
+/*
  * Sphinx doesn't have support for section dividers like we do in
  * MkDocs, this styles the section titles in the nav
  *
@@ -22,25 +34,10 @@
  * area doesn't scroll.
  *
  * https://github.com/mkdocs/mkdocs/pull/202
- *
- * Builds upon pull 202 https://github.com/mkdocs/mkdocs/pull/202
- * to make toc scrollbar end before navigations buttons to not be overlapping.
  */
 .wy-nav-side {
-    height: calc(100% - 45px);
+    height: 100%;
     overflow-y: auto;
-    min-height: 0;
-}
-
-.rst-versions{
-    border-top: 0;
-    height: 45px;
-}
-
-@media screen and (max-width: 768px) {
-    .wy-nav-side {
-        height: 100%;
-    }
 }
 
 /*
@@ -54,48 +51,22 @@
 }
 
 /*
+ * Fix wrapping in the code highlighting
+ *
+ * https://github.com/mkdocs/mkdocs/issues/233
+ */
+code {
+    white-space: pre;
+}
+
+/*
  * Wrap inline code samples otherwise they shoot of the side and
  * can't be read at all.
  *
  * https://github.com/mkdocs/mkdocs/issues/313
- * https://github.com/mkdocs/mkdocs/issues/233
- * https://github.com/mkdocs/mkdocs/issues/834
  */
-code {
-    white-space: pre-wrap;
+p code {
     word-wrap: break-word;
-    padding: 2px 5px;
-}
-
-/**
- * Make code blocks display as blocks and give them the appropriate
- * font size and padding.
- *
- * https://github.com/mkdocs/mkdocs/issues/855
- * https://github.com/mkdocs/mkdocs/issues/834
- * https://github.com/mkdocs/mkdocs/issues/233
- */
-pre code {
-  white-space: pre;
-  word-wrap: normal;
-  display: block;
-  padding: 12px;
-  font-size: 12px;
-}
-
-/*
- * Fix link colors when the link text is inline code.
- *
- * https://github.com/mkdocs/mkdocs/issues/718
- */
-a code {
-    color: #2980B9;
-}
-a:hover code {
-    color: #3091d1;
-}
-a:visited code {
-    color: #9B59B6;
 }
 
 /*
@@ -105,7 +76,7 @@ a:visited code {
  *
  * https://github.com/mkdocs/mkdocs/issues/411
  */
-pre .cs, pre .c {
+code.cs, code.c {
     font-weight: inherit;
     font-style: inherit;
 }
@@ -128,20 +99,21 @@ pre .cs, pre .c {
  * Additions specific to the search functionality provided by MkDocs
  */
 
-.search-results article {
+#mkdocs-search-results article h3
+{
     margin-top: 23px;
     border-top: 1px solid #E1E4E5;
     padding-top: 24px;
 }
 
-.search-results article:first-child {
+#mkdocs-search-results article:first-child h3 {
     border-top: none;
 }
 
-form .search-query {
+#mkdocs-search-query{
     width: 100%;
     border-radius: 50px;
-    padding: 6px 12px;  /* csslint allow: box-model */
+    padding: 6px 12px;
     border-color: #D1D4D5;
 }
 
@@ -153,41 +125,14 @@ form .search-query {
     padding-left: 1em;
 }
 
-.wy-menu-vertical .subnav li.current > a {
-    padding-left: 2.42em;
-}
-.wy-menu-vertical .subnav li.current > ul li a {
-    padding-left: 3.23em;
-}
 
 /*
  * Improve inline code blocks within admonitions.
  *
  * https://github.com/mkdocs/mkdocs/issues/656
  */
- .admonition code {
+ div.admonition code {
   color: #404040;
-  border: 1px solid #c7c9cb;
   border: 1px solid rgba(0, 0, 0, 0.2);
-  background: #f8fbfd;
   background: rgba(255, 255, 255, 0.7);
-}
-
-/*
- * Account for wide tables which go off the side.
- * Override borders to avoid wierdness on narrow tables.
- * 
- * https://github.com/mkdocs/mkdocs/issues/834
- * https://github.com/mkdocs/mkdocs/pull/1034
- */
-.rst-content .section .docutils {
-    width: 100%;
-    overflow: auto;
-    display: block;
-    border: none;
-}
-
-td, th {
-   border: 1px solid #e1e4e5 !important; /* csslint allow: important */
-   border-collapse: collapse;
 }
