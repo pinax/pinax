@@ -75,8 +75,12 @@ Current analytics services supported:
     gaug.es
     Google AdWords Conversion Tracking
 
-## [phileo (soon to be pinax-likes)](https://github.com/pinax/phileo)
-phileo is a liking app for Django.
+## [pinax-likes (used to be phileo )](https://github.com/pinax/pinax-likes)
+pinax-likes is a liking app for Django.
+What pinax-likes is:
+pinax-likes is an app that you can use to allow liking of any model.
+What pinax-likes isn't:
+pinax-likes isn't a karma system. It doesn't have downvoting.
 ## [django-forms-bootstrap (deprecated?)](https://github.com/pinax/django-forms-bootstrap)
 django-forms-bootstrap is a simple bootstrap filter for Django forms. Extracted from the bootstrap theme for Pinax.
 ## [pinax-phone-confirmation](https://github.com/pinax/pinax-phone-confirmation)
