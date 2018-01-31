@@ -54,8 +54,8 @@ app_repos = set([
     "pinax-teams",
     "pinax-testimonials",
     "pinax-types",
-    "pinax-webanalytics",
     "pinax-waitinglist",
+    "pinax-webanalytics",
     "pinax-wiki"
 ])
 

@@ -8,7 +8,6 @@ We're just starting to provide overarching documentation for the whole of Pinax 
   * Introduction
     * [What is Pinax?](what_is_pinax.md)
     * [Quick Start](quick_start.md)
-    * [Quick Start Manual](quick_start_manual.md)
     * [History](history.md)
     * [FAQs](faq.md)
   * Starter Projects
@@ -16,7 +15,7 @@ We're just starting to provide overarching documentation for the whole of Pinax 
     * [List of Starter Projects](starter_project_list.md)
     * [Pinax Theme Bootstrap](pinax_theme_bootstrap.md)
   * Apps
-    * [List of Apps](apps_list.md)
+    * [List of Pinax Apps](apps_list.md)
   * How-tos
     * [LDAP](how-tos/ldap.md)
     * [Deploying to Heroku](how-tos/deploy-to-heroku.md)
