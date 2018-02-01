@@ -2,8 +2,8 @@
     "docs": [
         {
             "location": "/",
-            "text": "Pinax Documentation\n\n\nWe're just starting to provide overarching documentation for the whole of Pinax to better explain what it is and how to get going with it. While a lot of individual apps have good docs, there's nothing that provides the big picture or help in how the pieces fit together. This documentation is intended to (eventually) serve that purpose.\n\n\nTable of Contents\n\n\n\n\nIntroduction\n\n\nWhat is Pinax?\n\n\nQuick Start\n\n\nQuick Start Manual\n\n\nHistory\n\n\nFAQs\n\n\n\n\n\n\nStarter Projects\n\n\nPinax Starter Projects\n\n\nList of Starter Projects\n\n\nPinax Theme Bootstrap\n\n\n\n\n\n\nApps\n\n\nList of Apps\n\n\n\n\n\n\nHow-tos\n\n\nLDAP\n\n\nDeploying to Heroku\n\n\nRelease a Starter Project\n\n\n\n\n\n\n\n\nDevelopment\n\n\n\n\nHow to Contribute\n\n\nWays to Contribute\n\n\nRelease Process\n\n\nCode of Conduct\n\n\n\n\n\n\n\n\nTutorials\n\n\n\n\nPinax in the Wild\n\n\nCompanies Working with Pinax\n\n\n\n\nColophon\n\n\nThese docs live in the \nhttps://github.com/pinax/pinax\n repo and are generated with MkDocs. Please create issues or pull-requests in that repo if you have any suggestions, corrections, or contributions.",
-            "title": "Home"
+            "text": "Pinax Documentation\n\n\nWe're just starting to provide overarching documentation for the whole of Pinax to better explain what it is and how to get going with it. While a lot of individual apps have good docs, there's nothing that provides the big picture or help in how the pieces fit together. This documentation is intended to (eventually) serve that purpose.\n\n\nTable of Contents\n\n\n\n\nIntroduction\n\n\nWhat is Pinax?\n\n\nQuick Start\n\n\nHistory\n\n\nFAQs\n\n\n\n\n\n\nStarter Projects and Apps\n\n\nPinax Starter Projects\n\n\nPinax Apps\n\n\n\n\n\n\nHow-tos\n\n\nLDAP\n\n\nDeploying to Heroku\n\n\nRelease a Starter Project\n\n\n\n\n\n\n\n\nDevelopment\n\n\n\n\nHow to Contribute\n\n\nWays to Contribute\n\n\nRelease Process\n\n\nCode of Conduct\n\n\n\n\n\n\n\n\nPinax in the Wild\n\n\n\n\n\n\nColophon\n\n\nThese docs live in the \nhttps://github.com/pinax/pinax\n repo and are generated with MkDocs. Please create issues or pull-requests in that repo if you have any suggestions, corrections, or contributions.",
+            "title": "Pinax Documentation"
         },
         {
             "location": "/#pinax-documentation",
@@ -12,7 +12,7 @@
         },
         {
             "location": "/#table-of-contents",
-            "text": "Introduction  What is Pinax?  Quick Start  Quick Start Manual  History  FAQs    Starter Projects  Pinax Starter Projects  List of Starter Projects  Pinax Theme Bootstrap    Apps  List of Apps    How-tos  LDAP  Deploying to Heroku  Release a Starter Project     Development   How to Contribute  Ways to Contribute  Release Process  Code of Conduct     Tutorials   Pinax in the Wild  Companies Working with Pinax",
+            "text": "Introduction  What is Pinax?  Quick Start  History  FAQs    Starter Projects and Apps  Pinax Starter Projects  Pinax Apps    How-tos  LDAP  Deploying to Heroku  Release a Starter Project     Development   How to Contribute  Ways to Contribute  Release Process  Code of Conduct     Pinax in the Wild",
             "title": "Table of Contents"
         },
         {
@@ -32,23 +32,18 @@
         },
         {
             "location": "/quick_start/",
-            "text": "Quick Start\n\n\nMake sure you've read \nWhat is Pinax?\n to get a conceptual overview of Pinax.\n\n\nWe strongly recommend running Pinax (or indeed, any Django) projects in a virtual environment:\n\n\npip install virtualenv\nvirtualenv mysiteenv\nsource mysiteenv/bin/activate\n\n\n\n\nOnce your virtual environment has been activated, install Django and use \ndjango-admin\n to create a new project based on the Account Pinax starter project:\n\n\npip install pinax-cli\npinax start account mysite\n\n\n\n\nNOTE\n: \nThe CLI method for starting a Pinax project has been added for convenience.\nThe more manual method, using Django\u2019s command-line utility, is also still supported.\nPlease refer to the \nQuick Start Manual\n page for details.\n\n\nNow install the requirements, initialize your database, load the default sites fixtures, and run the dev server:\n\n\ncd mysite\npip install -r requirements.txt\nchmod +x manage.py\n./manage.py migrate\n./manage.py loaddata sites\n./manage.py runserver\n\n\n\n\nYou now have a running Django site complete with account management and bootstrap-based templates.\n\n\nTo add one more app you will first have to modify the \nrequirements.txt\n file by adding the new app:\n\n\nmyapp\n\n\n\nMake sure to install the requirements once again.\n\n\npip install -r requirements.txt\n\n\n\n\nNext, you will modify the \nsettings.py\n, by adding your app to the \nINSTALLED_APPS\n:\n\n\nINSTALLED_APPS = [\n    ...\n    \"myapp\"\n]\n\n\n\n\nThis will also be a good time to make any additional changes to \nsettings.py\n if needed for the new app.\n\n\nBe sure to migrate the new app:\n\n\n./manage.py migrate\n\n\n\n\nNext, you will modify the \nurls.py\n to contain a new url for the new app:\n\n\nurl(r\"^myapp/\", include(\"myapp.url\")),\n\n\n\n\nThis will be a good time to make any adjustments to any templates if needed for the new app.",
+            "text": "Quick Start\n\n\nMake sure you've read \nWhat is Pinax?\n to get a conceptual overview of Pinax.\n\n\nWe strongly recommend running Pinax (or indeed, any Django) projects in a virtual environment:\n\n\npip install virtualenv\nvirtualenv mysiteenv\nsource mysiteenv/bin/activate\npip install pinax-cli\npinax start account mysite\n\n\n\n\nIf you are using \npipenv\n try this instead:\n\n\nmkdir mysite\ncd mysite\npipenv --three\npipenv shell\npip install pinax-cli\npinax start account mysite --location .\n\n\n\n\nNOTE\n: \nIf you are wondering what \npinax start\n actually does, it is equivalent to:\n\n\npip install Django==2.0\ndjango-admin startproject --template=https://github.com/pinax/pinax-starter-projects/zipball/account mysite\n\n\n\n\nNow install the requirements, initialize your database, load the default sites fixtures, and run the dev server:\n\n\ncd mysite\npip install -r requirements.txt\nchmod +x manage.py\n./manage.py migrate\n./manage.py loaddata sites\n./manage.py runserver\n\n\n\n\nYou now have a running Django site complete with account management and bootstrap-based templates.\n\n\nAdding Another Pinax App\n\n\nAdd the new app name to \nrequirements.txt\n:\n\n\n    # other apps\n    pinax-amazing==2.0.1,\n\n\n\n\nand install requirements once again.\n\n\npip install -r requirements.txt\n\n\n\n\nIf you are using \npipenv\n, you know to use this instead:\n\n\npipenv install pinax-amazing==2.0.1\n\n\n\n\nNext, modify \nsettings.py\n by adding your app to \nINSTALLED_APPS\n:\n\n\nINSTALLED_APPS = [\n    # other apps\n    \"pinax-amazing\",\n]\n\n\n\n\nThis is a good time to make any additional changes to \nsettings.py\n if needed for the new app.\n\n\nBe sure to establish database tables for the new app:\n\n\n./manage.py migrate\n\n\n\n\nFinally, modify your project \nurls.py\n with urls for the new app:\n\n\n    urlpatterns = [\n        # other urls\n        url(r\"^amazing/\", include(\"pinax.amazing.urls\", namespace=\"pinax_amazing\")),\n    ]\n\n\n\n\nThis is a good time to adjustment templates for the new app, if needed.",
             "title": "Quick Start"
         },
         {
             "location": "/quick_start/#quick-start",
-            "text": "Make sure you've read  What is Pinax?  to get a conceptual overview of Pinax.  We strongly recommend running Pinax (or indeed, any Django) projects in a virtual environment:  pip install virtualenv\nvirtualenv mysiteenv\nsource mysiteenv/bin/activate  Once your virtual environment has been activated, install Django and use  django-admin  to create a new project based on the Account Pinax starter project:  pip install pinax-cli\npinax start account mysite  NOTE :  The CLI method for starting a Pinax project has been added for convenience.\nThe more manual method, using Django\u2019s command-line utility, is also still supported.\nPlease refer to the  Quick Start Manual  page for details.  Now install the requirements, initialize your database, load the default sites fixtures, and run the dev server:  cd mysite\npip install -r requirements.txt\nchmod +x manage.py\n./manage.py migrate\n./manage.py loaddata sites\n./manage.py runserver  You now have a running Django site complete with account management and bootstrap-based templates.  To add one more app you will first have to modify the  requirements.txt  file by adding the new app:  myapp  Make sure to install the requirements once again.  pip install -r requirements.txt  Next, you will modify the  settings.py , by adding your app to the  INSTALLED_APPS :  INSTALLED_APPS = [\n    ...\n    \"myapp\"\n]  This will also be a good time to make any additional changes to  settings.py  if needed for the new app.  Be sure to migrate the new app:  ./manage.py migrate  Next, you will modify the  urls.py  to contain a new url for the new app:  url(r\"^myapp/\", include(\"myapp.url\")),  This will be a good time to make any adjustments to any templates if needed for the new app.",
+            "text": "Make sure you've read  What is Pinax?  to get a conceptual overview of Pinax.  We strongly recommend running Pinax (or indeed, any Django) projects in a virtual environment:  pip install virtualenv\nvirtualenv mysiteenv\nsource mysiteenv/bin/activate\npip install pinax-cli\npinax start account mysite  If you are using  pipenv  try this instead:  mkdir mysite\ncd mysite\npipenv --three\npipenv shell\npip install pinax-cli\npinax start account mysite --location .  NOTE :  If you are wondering what  pinax start  actually does, it is equivalent to:  pip install Django==2.0\ndjango-admin startproject --template=https://github.com/pinax/pinax-starter-projects/zipball/account mysite  Now install the requirements, initialize your database, load the default sites fixtures, and run the dev server:  cd mysite\npip install -r requirements.txt\nchmod +x manage.py\n./manage.py migrate\n./manage.py loaddata sites\n./manage.py runserver  You now have a running Django site complete with account management and bootstrap-based templates.",
             "title": "Quick Start"
         },
         {
-            "location": "/quick_start_manual/",
-            "text": "Quick Start Manual\n\n\nMake sure you've read \nWhat is Pinax?\n to get a conceptual overview of Pinax.\n\n\nWe strongly recommend running Pinax (or indeed, any Django) projects in a virtual environment:\n\n\npip install virtualenv\nvirtualenv mysiteenv\nsource mysiteenv/bin/activate\n\n\n\n\nOnce your virtual environment has been activated, install Django and use \ndjango-admin\n to create a new project based on the Account Pinax starter project:\n\n\npip install Django==1.8.4\ndjango-admin startproject --template=https://github.com/pinax/pinax-starter-projects/zipball/account mysite -n webpack.config.js\n\n\n\n\nNow install the requirements, initialize your database, load the default sites fixtures, and run the dev server:\n\n\ncd mysite\npip install -r requirements.txt\nchmod +x manage.py\n./manage.py migrate\n./manage.py loaddata sites\n./manage.py runserver\n\n\n\n\nYou now have a running Django site complete with account management and bootstrap-based templates.\n\n\nTo add one more app you will first have to modify the \nrequirements.txt\n file by adding the new app:\n\n\nmyapp\n\n\n\nMake sure to install the requirements once again.\n\n\npip install -r requirements.txt\n\n\n\n\nNext, you will modify the \nsettings.py\n, by adding your app to the \nINSTALLED_APPS\n:\n\n\nINSTALLED_APPS = [\n    ...\n    \"myapp\"\n]\n\n\n\n\nThis will also be a good time to make any additional changes to \nsettings.py\n if needed for the new app.\n\n\nBe sure to migrate the new app:\n\n\n./manage.py migrate\n\n\n\n\nNext, you will modify the \nurls.py\n to contain a new url for the new app:\n\n\nurl(r\"^myapp/\", include(\"myapp.url\")),\n\n\n\n\nThis will be a good time to make any adjustments to any templates if needed for the new app.",
-            "title": "Quick Start Manual"
-        },
-        {
-            "location": "/quick_start_manual/#quick-start-manual",
-            "text": "Make sure you've read  What is Pinax?  to get a conceptual overview of Pinax.  We strongly recommend running Pinax (or indeed, any Django) projects in a virtual environment:  pip install virtualenv\nvirtualenv mysiteenv\nsource mysiteenv/bin/activate  Once your virtual environment has been activated, install Django and use  django-admin  to create a new project based on the Account Pinax starter project:  pip install Django==1.8.4\ndjango-admin startproject --template=https://github.com/pinax/pinax-starter-projects/zipball/account mysite -n webpack.config.js  Now install the requirements, initialize your database, load the default sites fixtures, and run the dev server:  cd mysite\npip install -r requirements.txt\nchmod +x manage.py\n./manage.py migrate\n./manage.py loaddata sites\n./manage.py runserver  You now have a running Django site complete with account management and bootstrap-based templates.  To add one more app you will first have to modify the  requirements.txt  file by adding the new app:  myapp  Make sure to install the requirements once again.  pip install -r requirements.txt  Next, you will modify the  settings.py , by adding your app to the  INSTALLED_APPS :  INSTALLED_APPS = [\n    ...\n    \"myapp\"\n]  This will also be a good time to make any additional changes to  settings.py  if needed for the new app.  Be sure to migrate the new app:  ./manage.py migrate  Next, you will modify the  urls.py  to contain a new url for the new app:  url(r\"^myapp/\", include(\"myapp.url\")),  This will be a good time to make any adjustments to any templates if needed for the new app.",
-            "title": "Quick Start Manual"
+            "location": "/quick_start/#adding-another-pinax-app",
+            "text": "Add the new app name to  requirements.txt :      # other apps\n    pinax-amazing==2.0.1,  and install requirements once again.  pip install -r requirements.txt  If you are using  pipenv , you know to use this instead:  pipenv install pinax-amazing==2.0.1  Next, modify  settings.py  by adding your app to  INSTALLED_APPS :  INSTALLED_APPS = [\n    # other apps\n    \"pinax-amazing\",\n]  This is a good time to make any additional changes to  settings.py  if needed for the new app.  Be sure to establish database tables for the new app:  ./manage.py migrate  Finally, modify your project  urls.py  with urls for the new app:      urlpatterns = [\n        # other urls\n        url(r\"^amazing/\", include(\"pinax.amazing.urls\", namespace=\"pinax_amazing\")),\n    ]  This is a good time to adjustment templates for the new app, if needed.",
+            "title": "Adding Another Pinax App"
         },
         {
             "location": "/history/",
@@ -72,7 +67,7 @@
         },
         {
             "location": "/faq/",
-            "text": "Frequently Asked Questions\n\n\nIf you have any questions, please join our \nPinax Slack channel\n. Everyone is welcome!\n\n\nWhich starter project should I start with?\n\n\nIf you're wanting to build a new site with a combination of project-specific functionality and a few Pinax apps then you probably want to start with either the \nZero\n starter project (if you don't have users logging in to your site) or the \nAccount\n starter project (if you \ndo\n have users logging in to your site).\n\n\nI've done the Quick Start and set up a project based on the Account starter project. Now what?\n\n\nYou can now start adding your own apps or existing Django apps (whether from Pinax or anywhere else).\n\n\nI already have an existing Django project. Can I still use Pinax?\n\n\nA large component of Pinax is just re-usable Django apps. Most make very few assumptions about what else is in your project (although some assume you're using django-user-accounts for user account management). In most cases you can just use an app in the Pinax ecosystem like you would any other Django app.\n\n\nHow do we upgrade a site to a newer Pinax release?\n\n\nIndividual apps generally follow \nsemantic versioning\n and often have an upgrade path.  So they should be upgradable.\n\n\nIf you want to use a starter project, or other collection of Pinax apps, and be able to follow a documented upgrade path, something like \nProposal for Pinax Distribution Versioning - pinax issue #84\n is needed.  It would provide coordinated releases, and make Pinax even more like a Linux distribution, in the way that e.g. Ubuntu creates a coordinated release of an infrastructure along with a variety of applications.\n\n\nWhat editor/IDE/etc. do Pinax developers like to use?\n\n\nSome use \nSublime Text\n, some \nAtom\n, some \nEmacs\n, some \nWingIDE\n. There is nothing Pinax-specific about these editor choices and we recommend that you use the text editor or IDE you are most comfortable using and you enjoy the most.",
+            "text": "Frequently Asked Questions\n\n\nIf you have any questions, please join our \nPinax Slack channel\n. Everyone is welcome!\n\n\nWhich starter project should I start with?\n\n\nIf you want to build a new site with a combination of project-specific functionality and a few Pinax apps\nthen you probably want to start with either the \nZero\n starter project (if you don't have users logging in to your site)\nor the \nAccount\n starter project (if you \ndo\n have users logging in to your site).\n\n\nI've done the Quick Start and set up a project based on the Account starter project. Now what?\n\n\nYou can now start adding your own apps or existing Django apps (whether from Pinax or anywhere else).\n\n\nI already have an existing Django project. Can I still use Pinax?\n\n\nYes! A large component of Pinax is re-usable Django apps. Most apps make very few assumptions about what else\nis in your project (although some assume you're using django-user-accounts for user account management).\nIn most cases you can just use an app in the Pinax ecosystem like you would any other Django app.\n\n\nHow do we upgrade a site to a newer Pinax release?\n\n\nIndividual apps generally follow \nsemantic versioning\n and often have an upgrade path.  So they should be upgradable.\n\n\nIf you want to use a starter project, or other collection of Pinax apps, and be able to follow a documented upgrade path, our\n\nProposal for Pinax Distribution Versioning - pinax issue #84\n is required.\nIt provides coordinated releases and makes Pinax even more like a Linux distribution, in the way that e.g. Ubuntu\ncreates a coordinated release of an infrastructure along with a variety of applications.\n\n\nWhat editor/IDE/etc. do Pinax developers like to use?\n\n\nOne key to efficient coding is becoming comfortable and proficient with whatever system you use.\nOur favorites these days include:\n\n\n\n\nVisual Studio Code\n\n\nPyCharm\n\n\nSublime Text\n\n\n\n\nThere is nothing Pinax-specific about these editor choices and we recommend that you use the text editor or IDE\nyou are most comfortable using and enjoy the most.",
             "title": "FAQs"
         },
         {
@@ -82,7 +77,7 @@
         },
         {
             "location": "/faq/#which-starter-project-should-i-start-with",
-            "text": "If you're wanting to build a new site with a combination of project-specific functionality and a few Pinax apps then you probably want to start with either the  Zero  starter project (if you don't have users logging in to your site) or the  Account  starter project (if you  do  have users logging in to your site).",
+            "text": "If you want to build a new site with a combination of project-specific functionality and a few Pinax apps\nthen you probably want to start with either the  Zero  starter project (if you don't have users logging in to your site)\nor the  Account  starter project (if you  do  have users logging in to your site).",
             "title": "Which starter project should I start with?"
         },
         {
@@ -92,283 +87,338 @@
         },
         {
             "location": "/faq/#i-already-have-an-existing-django-project-can-i-still-use-pinax",
-            "text": "A large component of Pinax is just re-usable Django apps. Most make very few assumptions about what else is in your project (although some assume you're using django-user-accounts for user account management). In most cases you can just use an app in the Pinax ecosystem like you would any other Django app.",
+            "text": "Yes! A large component of Pinax is re-usable Django apps. Most apps make very few assumptions about what else\nis in your project (although some assume you're using django-user-accounts for user account management).\nIn most cases you can just use an app in the Pinax ecosystem like you would any other Django app.",
             "title": "I already have an existing Django project. Can I still use Pinax?"
         },
         {
             "location": "/faq/#how-do-we-upgrade-a-site-to-a-newer-pinax-release",
-            "text": "Individual apps generally follow  semantic versioning  and often have an upgrade path.  So they should be upgradable.  If you want to use a starter project, or other collection of Pinax apps, and be able to follow a documented upgrade path, something like  Proposal for Pinax Distribution Versioning - pinax issue #84  is needed.  It would provide coordinated releases, and make Pinax even more like a Linux distribution, in the way that e.g. Ubuntu creates a coordinated release of an infrastructure along with a variety of applications.",
+            "text": "Individual apps generally follow  semantic versioning  and often have an upgrade path.  So they should be upgradable.  If you want to use a starter project, or other collection of Pinax apps, and be able to follow a documented upgrade path, our Proposal for Pinax Distribution Versioning - pinax issue #84  is required.\nIt provides coordinated releases and makes Pinax even more like a Linux distribution, in the way that e.g. Ubuntu\ncreates a coordinated release of an infrastructure along with a variety of applications.",
             "title": "How do we upgrade a site to a newer Pinax release?"
         },
         {
             "location": "/faq/#what-editorideetc-do-pinax-developers-like-to-use",
-            "text": "Some use  Sublime Text , some  Atom , some  Emacs , some  WingIDE . There is nothing Pinax-specific about these editor choices and we recommend that you use the text editor or IDE you are most comfortable using and you enjoy the most.",
+            "text": "One key to efficient coding is becoming comfortable and proficient with whatever system you use.\nOur favorites these days include:   Visual Studio Code  PyCharm  Sublime Text   There is nothing Pinax-specific about these editor choices and we recommend that you use the text editor or IDE\nyou are most comfortable using and enjoy the most.",
             "title": "What editor/IDE/etc. do Pinax developers like to use?"
         },
         {
             "location": "/pinax_starter_projects/",
-            "text": "Getting Started\n\n\nThe \npinax/pinax-starter-projects\n repo is available \nhere\n.\n\n\nMany of the starter projects are derivatives of each other (\nzero\n is the parent of \naccount\n among many\nothers). We leverage \ngit\n and branching to manage the hierarchy. Each project template lives in it's\nown branch and will branch from its natural parent.\n\n\nAll starter projects share a common method for getting started. It involves creating a virtual environment, installing Django, and running the \nstartproject\n command with a URL to the template, followed by a few commands within your new project. Or even easier, you can use the \npinax\n\ncommand line utility.\n\n\nGetting Started\n\n\npip install virtualenv\nvirtualenv mysiteenv\nsource mysiteenv/bin/activate\n\n\n\n\nYou might use \npyenv\n to manage the version of Python used in your virtualenv. See the \npyenv repository\n for usage.\n\n\nUsing the \npinax\n command line utility\n\n\npip install pinax-cli\npinax projects  # list available project releases\npinax start <kind> <project_name>\n\n\n\n\nIf you are feeling adventurous you can install off latest development by passing\nthe \n--dev\n flag:\n\n\npinax start --dev <kind> <project_name>\n\n\n\n\nManually\n\n\npip install Django\ndjango-admin.py startproject --template=https://github.com/pinax/pinax-starter-projects/zipball/<PROJECT_BRANCH> mysite -n webpack.config.js -n PROJECT_README.md\n\n\n\n\nGet Going With Your New Project\n\n\ncd mysite\nchmod +x manage.py\npip install -r requirements.txt\n./manage.py migrate\n./manage.py loaddata sites\n./manage.py runserver\n\n\n\n\nSee each section below for the startproject url as well as any deviation from\nthese common notes.\n\n\nProjects\n\n\n\n\nzero\n\n\naccount\n\n\ndocuments\n\n\nsocial-auth\n\n\nwiki\n\n\nteam-wiki\n\n\n\n\n\n\nblog\n\n\nstatic\n\n\nwaiting-list\n\n\nsocial\n\n\nlms\n\n\nforums\n\n\nprivate-beta\n\n\nsymposion\n\n\n\n\nDevelopment\n\n\nIf you want to develop your own starter projects here is the workflow you should\nfollow:\n\n\n\n\nStart with the branch you want to base your new project on.\n\n\ngit co -b <name>\n\n\nDo the work on your project template\n\n\nTest your project template by running \ndjango-admin.py startproject --template=pinax-starter-projects test1 -n webpack.config.js -n PROJECT_README.md\n\n\nOnce you are satisified with your testing, commit.\n\n\ngit co master\n and then update this \nREADME.md\n file with details about your new project\n\n\nUpdate all descendent branches:\n\n\n\n\n./update.sh\ngit push",
+            "text": "Pinax Starter Projects\n\n\nThe \npinax/pinax-starter-projects\n repo is available \nhere\n.\n\n\nMany starter projects are derivatives of other projects (\nzero\n is the parent of \naccount\n among many\nothers). We leverage \ngit\n and branching to manage the hierarchy. Each project template lives in it's\nown branch and branches from its natural parent.\n\n\nAll starter projects share a common method for getting started. It involves creating a virtual environment, installing Django, and running the \nstartproject\n command with a URL to the template, followed by a few commands within your new project. Or even easier, you can use the \npinax\n\ncommand line utility.\n\n\nGetting Started\n\n\nRefer to the Pinax Starter Project \nQuick Start\n guide for simple steps to get started.\n\n\nUsing the \npinax\n command line utility\n\n\nSince you've already installed \npinax-cli\n as described in the \nQuick Start\n guide,\nyou can experiment with the \npinax\n command:\n\n\npinax projects  # list available project releases\npinax start <kind> <project_name>\n\n\n\n\nIf you are feeling adventurous you can install from the latest development branch by passing\nthe \n--dev\n flag:\n\n\npinax start --dev <kind> <project_name>\n\n\n\n\nFor the Pinax \ndocuments\n, \nwiki\n, \nteam-wiki\n, and \nsocial-auth\n starter projects,\nusing the \n--dev\n option is the only way to create a project because\nthese do not yet have official releases. This is indicated by a lack of version number\nnext to the project:\n\n\n$ pinax projects\nRelease Project\n------- ---------------\n  4.0.2 account\n  4.0.2 blog\n  2.0.2 company\n        documents\n        social-auth\n  4.0.2 static\n  4.0.2 stripe\n        team-wiki\n  3.0.2 waitinglist\n        wiki\n  4.0.2 zero\n\n\n\n\nStarter Project Inheritance\n\n\n\n\nzero\n\n\naccount\n\n\ndocuments\n\n\nsocial-auth\n\n\nwiki\n\n\nteam-wiki\n\n\n\n\n\n\nblog\n\n\nstatic\n\n\nwaiting-list\n\n\nsocial\n\n\nlms\n\n\nforums\n\n\nprivate-beta\n\n\nsymposion\n\n\n\n\nStarter Project List\n\n\nPinax-Project-Zero\n\n\nThis project lays the foundation for all other Pinax starter projects. It provides the project directory layout and Bootstrap-based theme.\n\n\npinax start zero mysite\n\n\n\n\nPinax-Project-Account\n\n\nIn addition to what is provided by the \"zero\" project, this project provides thorough integration with django-user-accounts, adding comprehensive account management functionality. It is a foundation suitable for most sites that have user accounts.\n\n\npinax start account mysite\n\n\n\n\nPinax-Project-SocialAuth\n\n\nIn addition to what is provided by the \"account\" project, this project\nintegrates with \npython-social-auth\n for Twitter, Facebook, and Google\nauthentication.\n\n\npinax start --dev social-auth mysite\n\n\n\n\nPinax-Project-Blog\n\n\nThis project gets you off and running with a blog.\n\n\npinax start blog mysite\n\n\n\n\nPinax-Project-Static\n\n\nThe purpose of this starter project is to provide a robust mocking and design tool.\n\n\npinax start static mysite\n\n\n\n\nPinax-Project-Documents\n\n\nBuilds on the Accounts starter project to get you off and running with a document library built around \npinax-documents\n.\n\n\npinax start documents mysite\n\n\n\n\nPinax-Project-Wiki\n\n\nThis project is a demo starter project that provides a wiki for authenticated users.\n\n\npinax start wiki mysite\n\n\n\n\nPinax-Project-Team-Wiki\n\n\nThis project is a starter project that has account management with profiles and teams and basic collaborative content.\n\n\npinax start team-wiki mysite\n\n\n\n\nAdditional starter projects:\n\n\n\n\npinax-project-social\n\n\npinax-project-waitinglist\n\n\npinax-project-symposion\n\n\npinax-project-lms\n\n\npinax-project-forums\n\n\npinax-project-teams\n\n\n\n\nStarter Project Development\n\n\nIf you want to develop your own starter projects here is the workflow you should\nfollow:\n\n\n\n\nStart with the branch you want to base your new project on.\n\n\ngit co -b <name>\n\n\nDo the work on your project template\n\n\nTest your project template by running \ndjango-admin.py startproject --template=pinax-starter-projects test1 -n webpack.config.js -n PROJECT_README.md\n\n\nOnce you are satisified with your testing, commit.\n\n\ngit co master\n and then update this \nREADME.md\n file with details about your new project\n\n\nUpdate all descendent branches:\n\n\n\n\n./update.sh\ngit push",
+            "title": "Pinax Starter Projects"
+        },
+        {
+            "location": "/pinax_starter_projects/#pinax-starter-projects",
+            "text": "The  pinax/pinax-starter-projects  repo is available  here .  Many starter projects are derivatives of other projects ( zero  is the parent of  account  among many\nothers). We leverage  git  and branching to manage the hierarchy. Each project template lives in it's\nown branch and branches from its natural parent.  All starter projects share a common method for getting started. It involves creating a virtual environment, installing Django, and running the  startproject  command with a URL to the template, followed by a few commands within your new project. Or even easier, you can use the  pinax \ncommand line utility.",
             "title": "Pinax Starter Projects"
         },
         {
             "location": "/pinax_starter_projects/#getting-started",
-            "text": "The  pinax/pinax-starter-projects  repo is available  here .  Many of the starter projects are derivatives of each other ( zero  is the parent of  account  among many\nothers). We leverage  git  and branching to manage the hierarchy. Each project template lives in it's\nown branch and will branch from its natural parent.  All starter projects share a common method for getting started. It involves creating a virtual environment, installing Django, and running the  startproject  command with a URL to the template, followed by a few commands within your new project. Or even easier, you can use the  pinax \ncommand line utility.",
-            "title": "Getting Started"
-        },
-        {
-            "location": "/pinax_starter_projects/#getting-started_1",
-            "text": "pip install virtualenv\nvirtualenv mysiteenv\nsource mysiteenv/bin/activate  You might use  pyenv  to manage the version of Python used in your virtualenv. See the  pyenv repository  for usage.",
+            "text": "Refer to the Pinax Starter Project  Quick Start  guide for simple steps to get started.",
             "title": "Getting Started"
         },
         {
             "location": "/pinax_starter_projects/#using-the-pinax-command-line-utility",
-            "text": "pip install pinax-cli\npinax projects  # list available project releases\npinax start <kind> <project_name>  If you are feeling adventurous you can install off latest development by passing\nthe  --dev  flag:  pinax start --dev <kind> <project_name>",
+            "text": "Since you've already installed  pinax-cli  as described in the  Quick Start  guide,\nyou can experiment with the  pinax  command:  pinax projects  # list available project releases\npinax start <kind> <project_name>  If you are feeling adventurous you can install from the latest development branch by passing\nthe  --dev  flag:  pinax start --dev <kind> <project_name>  For the Pinax  documents ,  wiki ,  team-wiki , and  social-auth  starter projects,\nusing the  --dev  option is the only way to create a project because\nthese do not yet have official releases. This is indicated by a lack of version number\nnext to the project:  $ pinax projects\nRelease Project\n------- ---------------\n  4.0.2 account\n  4.0.2 blog\n  2.0.2 company\n        documents\n        social-auth\n  4.0.2 static\n  4.0.2 stripe\n        team-wiki\n  3.0.2 waitinglist\n        wiki\n  4.0.2 zero",
             "title": "Using the pinax command line utility"
         },
         {
-            "location": "/pinax_starter_projects/#manually",
-            "text": "pip install Django\ndjango-admin.py startproject --template=https://github.com/pinax/pinax-starter-projects/zipball/<PROJECT_BRANCH> mysite -n webpack.config.js -n PROJECT_README.md",
-            "title": "Manually"
-        },
-        {
-            "location": "/pinax_starter_projects/#get-going-with-your-new-project",
-            "text": "cd mysite\nchmod +x manage.py\npip install -r requirements.txt\n./manage.py migrate\n./manage.py loaddata sites\n./manage.py runserver  See each section below for the startproject url as well as any deviation from\nthese common notes.",
-            "title": "Get Going With Your New Project"
-        },
-        {
-            "location": "/pinax_starter_projects/#projects",
+            "location": "/pinax_starter_projects/#starter-project-inheritance",
             "text": "zero  account  documents  social-auth  wiki  team-wiki    blog  static  waiting-list  social  lms  forums  private-beta  symposion",
-            "title": "Projects"
+            "title": "Starter Project Inheritance"
         },
         {
-            "location": "/pinax_starter_projects/#development",
-            "text": "If you want to develop your own starter projects here is the workflow you should\nfollow:   Start with the branch you want to base your new project on.  git co -b <name>  Do the work on your project template  Test your project template by running  django-admin.py startproject --template=pinax-starter-projects test1 -n webpack.config.js -n PROJECT_README.md  Once you are satisified with your testing, commit.  git co master  and then update this  README.md  file with details about your new project  Update all descendent branches:   ./update.sh\ngit push",
-            "title": "Development"
-        },
-        {
-            "location": "/starter_project_list/",
-            "text": "Each of these will eventually link to a separate page for each starter project with:\n\n\n\n\nDescription\n\n\nWhat starter project it\u2019s built on\n\n\nWhat apps it uses (and perhaps particularly showcases)\n\n\n\n\nList of Starter Projects\n\n\nPinax-Project-Zero\n\n\nThis project lays the foundation for all other Pinax starter projects. It provides the project directory layout and Bootstrap-based theme.\n\n\npinax start zero mysite\n\n\n\n\nPinax-Project-Account\n\n\nIn addition to what is provided by the \"zero\" project, this project provides thorough integration with django-user-accounts, adding comprehensive account management functionality. It is a foundation suitable for most sites that have user accounts.\n\n\npinax start account mysite\n\n\n\n\nPinax-Project-SocialAuth\n\n\nIn addition to what is provided by the \"account\" project, this project\nintegrates with \npython-social-auth\n for Twitter, Facebook, and Google\nauthentication.\n\n\npinax start --dev social-auth mysite\n\n\n\n\nPinax-Project-Blog\n\n\nThis project gets you off and running with a blog.\n\n\npinax start blog mysite\n\n\n\n\nPinax-Project-Static\n\n\nThe purpose of this starter project is to provide a robust mocking and design tool.\n\n\npinax start static mysite\n\n\n\n\nPinax-Project-Documents\n\n\nBuilds on the Accounts starter project to get you off and running with a document library built around \npinax-documents\n.\n\n\npinax start documents mysite\n\n\n\n\nPinax-Project-Wiki\n\n\nThis project is a demo starter project that provides a wiki for authenticated users.\n\n\npinax start wiki mysite\n\n\n\n\nPinax-Project-Team-Wiki\n\n\nThis project is a starter project that has account management with profiles and teams and basic collaborative content.\n\n\npinax start team-wiki mysite\n\n\n\n\nAdditional starter projects:\n\n\n\n\npinax-project-social\n\n\npinax-project-waitinglist\n\n\npinax-project-symposion\n\n\npinax-project-lms\n\n\npinax-project-forums\n\n\npinax-project-teams\n\n\n\n\nSome starter projects just demo an app or collection of apps. Some provide scaffolding during the development and testing of an app. Some are full-featured, out-of-the-box sites. Some lay the foundation for almost any custom Django site.",
-            "title": "List of Starter Projects"
-        },
-        {
-            "location": "/starter_project_list/#list-of-starter-projects",
+            "location": "/pinax_starter_projects/#starter-project-list",
             "text": "",
-            "title": "List of Starter Projects"
+            "title": "Starter Project List"
         },
         {
-            "location": "/starter_project_list/#pinax-project-zero",
+            "location": "/pinax_starter_projects/#pinax-project-zero",
             "text": "This project lays the foundation for all other Pinax starter projects. It provides the project directory layout and Bootstrap-based theme.  pinax start zero mysite",
             "title": "Pinax-Project-Zero"
         },
         {
-            "location": "/starter_project_list/#pinax-project-account",
+            "location": "/pinax_starter_projects/#pinax-project-account",
             "text": "In addition to what is provided by the \"zero\" project, this project provides thorough integration with django-user-accounts, adding comprehensive account management functionality. It is a foundation suitable for most sites that have user accounts.  pinax start account mysite",
             "title": "Pinax-Project-Account"
         },
         {
-            "location": "/starter_project_list/#pinax-project-socialauth",
+            "location": "/pinax_starter_projects/#pinax-project-socialauth",
             "text": "In addition to what is provided by the \"account\" project, this project\nintegrates with  python-social-auth  for Twitter, Facebook, and Google\nauthentication.  pinax start --dev social-auth mysite",
             "title": "Pinax-Project-SocialAuth"
         },
         {
-            "location": "/starter_project_list/#pinax-project-blog",
+            "location": "/pinax_starter_projects/#pinax-project-blog",
             "text": "This project gets you off and running with a blog.  pinax start blog mysite",
             "title": "Pinax-Project-Blog"
         },
         {
-            "location": "/starter_project_list/#pinax-project-static",
+            "location": "/pinax_starter_projects/#pinax-project-static",
             "text": "The purpose of this starter project is to provide a robust mocking and design tool.  pinax start static mysite",
             "title": "Pinax-Project-Static"
         },
         {
-            "location": "/starter_project_list/#pinax-project-documents",
+            "location": "/pinax_starter_projects/#pinax-project-documents",
             "text": "Builds on the Accounts starter project to get you off and running with a document library built around  pinax-documents .  pinax start documents mysite",
             "title": "Pinax-Project-Documents"
         },
         {
-            "location": "/starter_project_list/#pinax-project-wiki",
+            "location": "/pinax_starter_projects/#pinax-project-wiki",
             "text": "This project is a demo starter project that provides a wiki for authenticated users.  pinax start wiki mysite",
             "title": "Pinax-Project-Wiki"
         },
         {
-            "location": "/starter_project_list/#pinax-project-team-wiki",
-            "text": "This project is a starter project that has account management with profiles and teams and basic collaborative content.  pinax start team-wiki mysite  Additional starter projects:   pinax-project-social  pinax-project-waitinglist  pinax-project-symposion  pinax-project-lms  pinax-project-forums  pinax-project-teams   Some starter projects just demo an app or collection of apps. Some provide scaffolding during the development and testing of an app. Some are full-featured, out-of-the-box sites. Some lay the foundation for almost any custom Django site.",
+            "location": "/pinax_starter_projects/#pinax-project-team-wiki",
+            "text": "This project is a starter project that has account management with profiles and teams and basic collaborative content.  pinax start team-wiki mysite",
             "title": "Pinax-Project-Team-Wiki"
         },
         {
-            "location": "/pinax_theme_bootstrap/",
-            "text": "Pinax Theme Bootstrap\n\n\nIn all our projects we\u2019ve been maintaining a theme based on \nBootstrap\n, \nFont Awesome\n, and \njQuery\n. We previously vendored these packages and had an undocumented build process pre-configured in our starter projects that use this theme. We are now using proper packaging in the starter projects.\n\n\nStarting with \nversion 6.0.0\n, \npinax-theme-bootstrap\n ships with templates and it\u2019s own small javascript file.\n\n\nDependencies\n\n\nThe templates in this project are currently tested with the following versions:\n\n\n\n\nBootstrap 3.3.5\n\n\nFont Awesome 4.4.0\n\n\njQuery 2.1.4\n\n\n\n\nUpgrade Notes\n\n\nUpgrading to 6.0, you should be aware of a few changes:\n\n\n\n\nstyle_base\n and \nextra_style\n blocks have been merged into styles\n\n\nscript_base\n and \nextra_script\n blocks have been merged into \nscripts\n and the \ntheme.js\n script is now loaded within a \ntheme_script\n block after the \nscripts block\n. It now expects that you'll load the necessary \njQuery\n library at the project level in the \nscripts\n block.\n\n\nNo vendored assets ship with the theme anymore. You are responsible for setting up your own static assets at the project level. We have made it easy by just using one of our starter projects.\n\n\n\n\nIf you are not using one of our starter projects, you will need to go about setting up a build environment to use these libraries. We recommend using \nwebpack\n and installing these libraries with \nnpm\n.\n\n\nReference Implementation\n\n\nWe have provided a reference implementation of using \nnpm\n and \nwebpack\n  in our most popular starter project, the \npinax-project-account\n \nproject\n. To build the \npackage.json\n (\nnpm\n\u2018s version of \nrequirements.txt\n) simply follow these steps:\n\n\nnpm init  # taking all defaults\nnpm install bootstrap font-awesome jquery --save  # the core libraries we need\nnpm install webpack  --save # the builder\nnpm install extract-text-webpack-plugin --save  # plugin to break apart files\nnpm install css-loader style-loader file-loader less-loader babel-loader --save\n\n\n\n\nSubsequent developers (or if you are using this starter project), can simply issue:\n\n\nnpm install\n\n\n\n\nto install everything in the \npackage.json\n to a local \nnode_modules/\n directory that \nwebpack\n can then use to build static files.\n\n\nWe also provided a working \nwebpack.config.js\n in the starter project, which provides not only a build script but also the ability to run a watcher so static assets are built as you edit them.\n\n\nAsset Changes\n\n\nThe starter project comes with assets prebuilt and ready to go. If you make changes to any assets you simply need to run:\n\n\nnpm install\nnpm run build\n\n\n\n\nIf you want to have your assets automatically rebuild whenever you save changes, you can run:\n\n\nnpm run watch\n\n\n\n\nAdding Libraries\n\n\nIf you need to add some other library, a datepicker for instance, you simply need to run the \nnpm install <package> --save\n command, hook it up in your \nstatic/src/js/main.js\n (or elsewhere in your modules), and run \nnpm run build\n if you were not already running \nnpm run watch\n.\n\n\nFor more on our move to \nwebpack\nand away from vendoring, please read \nthis blog post\n.",
-            "title": "Pinax Theme Bootstrap"
+            "location": "/pinax_starter_projects/#additional-starter-projects",
+            "text": "pinax-project-social  pinax-project-waitinglist  pinax-project-symposion  pinax-project-lms  pinax-project-forums  pinax-project-teams",
+            "title": "Additional starter projects:"
         },
         {
-            "location": "/pinax_theme_bootstrap/#pinax-theme-bootstrap",
-            "text": "In all our projects we\u2019ve been maintaining a theme based on  Bootstrap ,  Font Awesome , and  jQuery . We previously vendored these packages and had an undocumented build process pre-configured in our starter projects that use this theme. We are now using proper packaging in the starter projects.  Starting with  version 6.0.0 ,  pinax-theme-bootstrap  ships with templates and it\u2019s own small javascript file.",
-            "title": "Pinax Theme Bootstrap"
+            "location": "/pinax_starter_projects/#starter-project-development",
+            "text": "If you want to develop your own starter projects here is the workflow you should\nfollow:   Start with the branch you want to base your new project on.  git co -b <name>  Do the work on your project template  Test your project template by running  django-admin.py startproject --template=pinax-starter-projects test1 -n webpack.config.js -n PROJECT_README.md  Once you are satisified with your testing, commit.  git co master  and then update this  README.md  file with details about your new project  Update all descendent branches:   ./update.sh\ngit push",
+            "title": "Starter Project Development"
         },
         {
-            "location": "/pinax_theme_bootstrap/#dependencies",
-            "text": "The templates in this project are currently tested with the following versions:   Bootstrap 3.3.5  Font Awesome 4.4.0  jQuery 2.1.4",
-            "title": "Dependencies"
+            "location": "/pinax_apps/",
+            "text": "Pinax Apps\n\n\nEvery Pinax app has documentation in it's README.md file. We recommend you follow\ninstructions found there for installing and adding a Pinax app to your project.\n\n\nCurrent Distribution (18.01) Pinax Apps\n\n\ndjango-user-accounts\n\n\ndjango-user-accounts provides a Django project with a very extensible infrastructure for dealing with user accounts.\n\n\npinax-announcements\n\n\npinax-announcements is a site-wide announcement reusable app for Django.\n\n\npinax-blog\n\n\npinax-blog is a blog app for Django.\n\n\npinax-calendars\n\n\npinax-calendars provides utilities for publishing events as a calendar.\n\n\npinax-eventlog\n\n\npinax-eventlog is a simple app that provides an easy and clean interface for logging diagnostic\nas well as business intelligence data about activity that occurs in your site.\n\n\npinax-events\n\n\npinax-events is a simple app for publishing events on your site.\n\n\npinax-images\n\n\npinax-images is an app for managing collections of images associated with any content object.\n\n\npinax-invitations\n\n\npinax-invitations is a site invitation app for Django.\n\n\npinax-likes\n\n\npinax-likes is a liking app for Django.\n\n\npinax-messages\n\n\npinax-messages is an app for providing private user-to-user threaded messaging.\n\n\npinax-news\n\n\npinax-news is a simple app for publishing links to news articles on your site.\n\n\npinax-notifications\n\n\npinax-notifications is a user notification management app for the Django web framework.\n\n\npinax-patches\n\n\npinax-stripe\n\n\npinax-stripe is a payments Django app for Stripe.\nIt allows you to process one off charges as well as signup users for recurring subscriptions managed by Stripe.\n\n\npinax-testimonials\n\n\npinax-testimonials provides support for any site wanting to display testimonials.\n\n\npinax-waitinglist\n\n\ndjango-waitinglist is a Django waiting list app for running a private beta with cohorts support.\n\n\npinax-webanalytics\n\n\npinax-webanalytics provides analytics and metrics integration for Django.\n\n\nUpdated Pinax Apps\n\n\nThese apps are not part of the latest official distribution, but have been updated\nto support the latest Django/Python compatibility matrix, including Django 2.0.\n\n\nTheir omission may be because the app is not demonstrated with a starter or demo project,\ninsufficient documentation, or lack of thorough tests.\n\n\nHowever, just because an app is not included in the Pinax distribution does not mean\nit is bad or useless. Many of these additional apps are useful as-is, and are sourced\nfor various real-world projects.\n\n\nIf you'd like to help improve the Pinax distribution list, we appreciate Pinax app\npull requests to improve documentation, fix issues, and add tests.\n\n\npinax-badges\n\n\npinax-badges allows awarding badges to users in Django.\n\n\npinax-cohorts\n\n\npinax-cohorts allows creating cohorts for inviting people off your pinax-waitinglist\nwaiting list to your private beta site.\n\n\npinax-comments\n\n\npinax-comments is a comments app for Django.\n\n\npinax-documents\n\n\npinax-documents is a document management app for collecting and sharing documents in folders.\n\n\npinax-forums\n\n\npinax-forums is an extensible forums app for Django and Pinax.\n\n\npinax-points\n\n\npinax-points is a points, positions, and levels app for Django.\n\n\npinax-ratings\n\n\npinax-ratings is a ratings app for Django.\n\n\npinax-referrals\n\n\npinax-referrals provides a Django site with referrals functionality.\n\n\npinax-submissions\n\n\npinax-submissions is an app for proposing and reviewing submissions.\n\n\npinax-teams\n\n\npinax-teams is an app for Django sites that supports open, by invitation, and by application teams.\n\n\npinax-wiki\n\n\npinax-wiki lets you easily add a wiki to your Django site.\n\n\nOther Pinax Apps\n\n\ndjango-bookmarks\n\n\ndjango-bookmarks provides bookmark management for the Django web framework.\n\n\ndjango-mailer\n\n\ndjango-mailer is a reusable Django app for queuing the sending of email.\n\n\ndjango-flag\n\n\ndjango-flag provides flagging of inappropriate spam/content.\n\n\ndjango-friends\n\n\ndjango-friends provides friendship, contact, and invitation management for the Django web framework.\n\n\npinax-lms-activities\n\n\npinax-lms-activities provides a framework and base learning activities for Pinax LMS.\n\n\npinax-phone-confirmation\n\n\npinax-phone-confirmation is an app to provide phone confirmation via Twilio.\n\n\npinax-types\n\n\nsymposion\n\n\nsymposion is a conference management solution from Eldarion. It was built with the generous support of the Python Software Foundation. See http://eldarion.com/symposion/ for commercial support, customization and hosting.\n\n\nSupport and Demonstration Apps\n\n\ncloudspotting2\n\n\nDemonstration project showing the use of many Pinax apps. Clone and run this project locally to see\nthe Pinax apps in action.\n\n\npinax-calendars-demo\n\n\nClone and run this project to see pinax-calendars app in action.\n\n\npinax-design\n\n\nSource for Pinax app patches, demonstrated at http://pinaxproject.com/pinax-design/.\n\n\npinax-starter-app\n\n\npinax-starter-app contains starter app templates used to create base projects from which you build your site.\n\n\npinax-templates\n\n\nProvides default template for many Pinax apps.\n\n\npinax_theme_tester\n\n\npinax_theme_tester provides the magic driving the template demonstration site http://templates.pinaxproject.com.",
+            "title": "Pinax Apps"
         },
         {
-            "location": "/pinax_theme_bootstrap/#upgrade-notes",
-            "text": "Upgrading to 6.0, you should be aware of a few changes:   style_base  and  extra_style  blocks have been merged into styles  script_base  and  extra_script  blocks have been merged into  scripts  and the  theme.js  script is now loaded within a  theme_script  block after the  scripts block . It now expects that you'll load the necessary  jQuery  library at the project level in the  scripts  block.  No vendored assets ship with the theme anymore. You are responsible for setting up your own static assets at the project level. We have made it easy by just using one of our starter projects.   If you are not using one of our starter projects, you will need to go about setting up a build environment to use these libraries. We recommend using  webpack  and installing these libraries with  npm .",
-            "title": "Upgrade Notes"
+            "location": "/pinax_apps/#pinax-apps",
+            "text": "Every Pinax app has documentation in it's README.md file. We recommend you follow\ninstructions found there for installing and adding a Pinax app to your project.",
+            "title": "Pinax Apps"
         },
         {
-            "location": "/pinax_theme_bootstrap/#reference-implementation",
-            "text": "We have provided a reference implementation of using  npm  and  webpack   in our most popular starter project, the  pinax-project-account   project . To build the  package.json  ( npm \u2018s version of  requirements.txt ) simply follow these steps:  npm init  # taking all defaults\nnpm install bootstrap font-awesome jquery --save  # the core libraries we need\nnpm install webpack  --save # the builder\nnpm install extract-text-webpack-plugin --save  # plugin to break apart files\nnpm install css-loader style-loader file-loader less-loader babel-loader --save  Subsequent developers (or if you are using this starter project), can simply issue:  npm install  to install everything in the  package.json  to a local  node_modules/  directory that  webpack  can then use to build static files.  We also provided a working  webpack.config.js  in the starter project, which provides not only a build script but also the ability to run a watcher so static assets are built as you edit them.",
-            "title": "Reference Implementation"
+            "location": "/pinax_apps/#current-distribution-1801-pinax-apps",
+            "text": "",
+            "title": "Current Distribution (18.01) Pinax Apps"
         },
         {
-            "location": "/pinax_theme_bootstrap/#asset-changes",
-            "text": "The starter project comes with assets prebuilt and ready to go. If you make changes to any assets you simply need to run:  npm install\nnpm run build  If you want to have your assets automatically rebuild whenever you save changes, you can run:  npm run watch",
-            "title": "Asset Changes"
-        },
-        {
-            "location": "/pinax_theme_bootstrap/#adding-libraries",
-            "text": "If you need to add some other library, a datepicker for instance, you simply need to run the  npm install <package> --save  command, hook it up in your  static/src/js/main.js  (or elsewhere in your modules), and run  npm run build  if you were not already running  npm run watch .  For more on our move to  webpack and away from vendoring, please read  this blog post .",
-            "title": "Adding Libraries"
-        },
-        {
-            "location": "/apps_list/",
-            "text": "Each of these will eventually link to a separate page for each app with:\n\n\n\n\nDescription\n\n\nMaturity rating\n\n\nWhat starter projects use it\n\n\nWhat starter projects particularly showcase it\n\n\nHow to add it to a project\n\n\n\n\nList of Apps\n\n\nApps that need to be assessed and triaged:\n\n\ndjango-user-accounts\n\n\ndjango-user-accounts provides a Django project with a very extensible infrastructure for dealing with user accounts.\n\n\ndjango-mailer\n\n\ndjango-mailer is a reusable Django app for queuing the sending of email.\n\n\ndjango-waitinglist\n\n\ndjango-waitinglist is a Django waiting list app for running a private beta with cohorts support.\n\n\npinax-points\n\n\npinax-points is a points, positions, and levels app for Django.\n\n\npinax-points, formerly agon, provides the ability to track points on arbitrary objects in your system. The common case being user instances. It can additionally keep track of positions for these objects to produce leaderboards.\n\n\nThis code has mostly been pulled out of typewar and made slightly more generic to work well.\n\n\npinax-referrals\n\n\npinax-referrals provides a Django site with referrals functionality.\n\n\npinax-ratings\n\n\npinax-ratings is a ratings app for Django.\n\n\npinax-testimonials\n\n\npinax-testimonials is a testimonials app for Django.\n\n\npinax-blog\n\n\npinax-blog is a blog app for Django.\n\n\npinax-teams\n\n\npinax-teams is an app for Django sites that supports open, by invitation, and by application teams.\n\n\ndjango-stripe-payments\n\n\ndjango-stripe-payments is a payments Django app for Stripe.\n\n\nThis app allows you to process one off charges as well as signup users for recurring subscriptions managed by Stripe.\n\n\ndjango-announcements\n\n\ndjango-announcements is a site-wide announcement reusable app for Django.\n\n\nSome sites need the ability to broadcast an announcement to all of their users. django-announcements was created precisely for this reason. How you present the announcement is up to you as the site developer. When working with announcements that are presented on the website one feature is that they are only viewed once. A session variable will hold which announcements a user has viewed and exclude that from their display. Announcements supports two different types of filtering of announcements:\n\n\nsite-wide (this can be presented to anonymous users)\n\nnon site-wide (these can be used a strictly a mailing if so desired)\n\nmembers only (announcements are filtered based on the value of\n\n    request.user)\n\n\n\npinax-notifications\n\n\npinax-notifications is a user notification management app for the Django web framework. Many sites need to notify users when certain events have occurred and to allow configurable options as to how those notifications are to be received.\n\n\npinax-lms-activities\n\n\npinax-lms-activities provides a framework and base learning activities for Pinax LMS.\n\n\npinax-forums\n\n\npinax-forums is an extensible forums app for Django and Pinax. It is focused on core forum functionality and hence is expected to be combined with other Pinax apps for broader features.\n\n\nSee pinax-project-forums for a full Django project incorporating numerous apps with the goal of providing an out of the box forums solution.\n\n\npinax-types\n\n\ndjango-email-confirmation (deprecated)\n\n\nsimple email confirmation for the Django web framework\n\n\nNOTE: this project has been superceded by https://github.com/pinax/django-user-accounts/ and is no longer active.\n\n\nsymposion\n\n\nsymposion is a conference management solution from Eldarion. It was built with the generous support of the Python Software Foundation. See http://eldarion.com/symposion/ for commercial support, customization and hosting.\n\n\nmetron\n\n\nmetron provides analytics and metrics integration for Django.\n\n\nCurrent analytics services supported:\n\n\nGoogle Analytics\nMixpanel\ngaug.es\nGoogle AdWords Conversion Tracking\n\n\n\nphileo (soon to be pinax-likes)\n\n\nphileo is a liking app for Django.\n\n\ndjango-forms-bootstrap (deprecated?)\n\n\ndjango-forms-bootstrap is a simple bootstrap filter for Django forms. Extracted from the bootstrap theme for Pinax.\n\n\npinax-phone-confirmation\n\n\npinax-phone-confirmation is an app to provide phone confirmation via Twilio.\n\n\ndjango-bookmarks\n\n\ndjango-bookmarks provides bookmark management for the Django web framework.\n\n\ndjango-friends\n\n\ndjango-friends provides friendship, contact, and invitation management for the Django web framework.\n\n\ndjango-flag\n\n\ndjango-flag provides flagging of inappropriate spam/content.\n\n\npinax-wiki\n\n\npinax-wiki lets you easily add a wiki to your Django site.\n\n\nApps often follow the following template:\n\n\npinax-starter-app\n\n\npinax-starter-app is a starter app template for Pinax apps.",
-            "title": "List of Apps"
-        },
-        {
-            "location": "/apps_list/#list-of-apps",
-            "text": "Apps that need to be assessed and triaged:",
-            "title": "List of Apps"
-        },
-        {
-            "location": "/apps_list/#django-user-accounts",
+            "location": "/pinax_apps/#django-user-accounts",
             "text": "django-user-accounts provides a Django project with a very extensible infrastructure for dealing with user accounts.",
             "title": "django-user-accounts"
         },
         {
-            "location": "/apps_list/#django-mailer",
-            "text": "django-mailer is a reusable Django app for queuing the sending of email.",
-            "title": "django-mailer"
+            "location": "/pinax_apps/#pinax-announcements",
+            "text": "pinax-announcements is a site-wide announcement reusable app for Django.",
+            "title": "pinax-announcements"
         },
         {
-            "location": "/apps_list/#django-waitinglist",
-            "text": "django-waitinglist is a Django waiting list app for running a private beta with cohorts support.",
-            "title": "django-waitinglist"
-        },
-        {
-            "location": "/apps_list/#pinax-points",
-            "text": "pinax-points is a points, positions, and levels app for Django.  pinax-points, formerly agon, provides the ability to track points on arbitrary objects in your system. The common case being user instances. It can additionally keep track of positions for these objects to produce leaderboards.  This code has mostly been pulled out of typewar and made slightly more generic to work well.",
-            "title": "pinax-points"
-        },
-        {
-            "location": "/apps_list/#pinax-referrals",
-            "text": "pinax-referrals provides a Django site with referrals functionality.",
-            "title": "pinax-referrals"
-        },
-        {
-            "location": "/apps_list/#pinax-ratings",
-            "text": "pinax-ratings is a ratings app for Django.",
-            "title": "pinax-ratings"
-        },
-        {
-            "location": "/apps_list/#pinax-testimonials",
-            "text": "pinax-testimonials is a testimonials app for Django.",
-            "title": "pinax-testimonials"
-        },
-        {
-            "location": "/apps_list/#pinax-blog",
+            "location": "/pinax_apps/#pinax-blog",
             "text": "pinax-blog is a blog app for Django.",
             "title": "pinax-blog"
         },
         {
-            "location": "/apps_list/#pinax-teams",
+            "location": "/pinax_apps/#pinax-calendars",
+            "text": "pinax-calendars provides utilities for publishing events as a calendar.",
+            "title": "pinax-calendars"
+        },
+        {
+            "location": "/pinax_apps/#pinax-eventlog",
+            "text": "pinax-eventlog is a simple app that provides an easy and clean interface for logging diagnostic\nas well as business intelligence data about activity that occurs in your site.",
+            "title": "pinax-eventlog"
+        },
+        {
+            "location": "/pinax_apps/#pinax-events",
+            "text": "pinax-events is a simple app for publishing events on your site.",
+            "title": "pinax-events"
+        },
+        {
+            "location": "/pinax_apps/#pinax-images",
+            "text": "pinax-images is an app for managing collections of images associated with any content object.",
+            "title": "pinax-images"
+        },
+        {
+            "location": "/pinax_apps/#pinax-invitations",
+            "text": "pinax-invitations is a site invitation app for Django.",
+            "title": "pinax-invitations"
+        },
+        {
+            "location": "/pinax_apps/#pinax-likes",
+            "text": "pinax-likes is a liking app for Django.",
+            "title": "pinax-likes"
+        },
+        {
+            "location": "/pinax_apps/#pinax-messages",
+            "text": "pinax-messages is an app for providing private user-to-user threaded messaging.",
+            "title": "pinax-messages"
+        },
+        {
+            "location": "/pinax_apps/#pinax-news",
+            "text": "pinax-news is a simple app for publishing links to news articles on your site.",
+            "title": "pinax-news"
+        },
+        {
+            "location": "/pinax_apps/#pinax-notifications",
+            "text": "pinax-notifications is a user notification management app for the Django web framework.",
+            "title": "pinax-notifications"
+        },
+        {
+            "location": "/pinax_apps/#pinax-patches",
+            "text": "",
+            "title": "pinax-patches"
+        },
+        {
+            "location": "/pinax_apps/#pinax-stripe",
+            "text": "pinax-stripe is a payments Django app for Stripe.\nIt allows you to process one off charges as well as signup users for recurring subscriptions managed by Stripe.",
+            "title": "pinax-stripe"
+        },
+        {
+            "location": "/pinax_apps/#pinax-testimonials",
+            "text": "pinax-testimonials provides support for any site wanting to display testimonials.",
+            "title": "pinax-testimonials"
+        },
+        {
+            "location": "/pinax_apps/#pinax-waitinglist",
+            "text": "django-waitinglist is a Django waiting list app for running a private beta with cohorts support.",
+            "title": "pinax-waitinglist"
+        },
+        {
+            "location": "/pinax_apps/#pinax-webanalytics",
+            "text": "pinax-webanalytics provides analytics and metrics integration for Django.",
+            "title": "pinax-webanalytics"
+        },
+        {
+            "location": "/pinax_apps/#updated-pinax-apps",
+            "text": "These apps are not part of the latest official distribution, but have been updated\nto support the latest Django/Python compatibility matrix, including Django 2.0.  Their omission may be because the app is not demonstrated with a starter or demo project,\ninsufficient documentation, or lack of thorough tests.  However, just because an app is not included in the Pinax distribution does not mean\nit is bad or useless. Many of these additional apps are useful as-is, and are sourced\nfor various real-world projects.  If you'd like to help improve the Pinax distribution list, we appreciate Pinax app\npull requests to improve documentation, fix issues, and add tests.",
+            "title": "Updated Pinax Apps"
+        },
+        {
+            "location": "/pinax_apps/#pinax-badges",
+            "text": "pinax-badges allows awarding badges to users in Django.",
+            "title": "pinax-badges"
+        },
+        {
+            "location": "/pinax_apps/#pinax-cohorts",
+            "text": "pinax-cohorts allows creating cohorts for inviting people off your pinax-waitinglist\nwaiting list to your private beta site.",
+            "title": "pinax-cohorts"
+        },
+        {
+            "location": "/pinax_apps/#pinax-comments",
+            "text": "pinax-comments is a comments app for Django.",
+            "title": "pinax-comments"
+        },
+        {
+            "location": "/pinax_apps/#pinax-documents",
+            "text": "pinax-documents is a document management app for collecting and sharing documents in folders.",
+            "title": "pinax-documents"
+        },
+        {
+            "location": "/pinax_apps/#pinax-forums",
+            "text": "pinax-forums is an extensible forums app for Django and Pinax.",
+            "title": "pinax-forums"
+        },
+        {
+            "location": "/pinax_apps/#pinax-points",
+            "text": "pinax-points is a points, positions, and levels app for Django.",
+            "title": "pinax-points"
+        },
+        {
+            "location": "/pinax_apps/#pinax-ratings",
+            "text": "pinax-ratings is a ratings app for Django.",
+            "title": "pinax-ratings"
+        },
+        {
+            "location": "/pinax_apps/#pinax-referrals",
+            "text": "pinax-referrals provides a Django site with referrals functionality.",
+            "title": "pinax-referrals"
+        },
+        {
+            "location": "/pinax_apps/#pinax-submissions",
+            "text": "pinax-submissions is an app for proposing and reviewing submissions.",
+            "title": "pinax-submissions"
+        },
+        {
+            "location": "/pinax_apps/#pinax-teams",
             "text": "pinax-teams is an app for Django sites that supports open, by invitation, and by application teams.",
             "title": "pinax-teams"
         },
         {
-            "location": "/apps_list/#django-stripe-payments",
-            "text": "django-stripe-payments is a payments Django app for Stripe.  This app allows you to process one off charges as well as signup users for recurring subscriptions managed by Stripe.",
-            "title": "django-stripe-payments"
+            "location": "/pinax_apps/#pinax-wiki",
+            "text": "pinax-wiki lets you easily add a wiki to your Django site.",
+            "title": "pinax-wiki"
         },
         {
-            "location": "/apps_list/#django-announcements",
-            "text": "django-announcements is a site-wide announcement reusable app for Django.  Some sites need the ability to broadcast an announcement to all of their users. django-announcements was created precisely for this reason. How you present the announcement is up to you as the site developer. When working with announcements that are presented on the website one feature is that they are only viewed once. A session variable will hold which announcements a user has viewed and exclude that from their display. Announcements supports two different types of filtering of announcements:  site-wide (this can be presented to anonymous users)\n\nnon site-wide (these can be used a strictly a mailing if so desired)\n\nmembers only (announcements are filtered based on the value of\n\n    request.user)",
-            "title": "django-announcements"
-        },
-        {
-            "location": "/apps_list/#pinax-notifications",
-            "text": "pinax-notifications is a user notification management app for the Django web framework. Many sites need to notify users when certain events have occurred and to allow configurable options as to how those notifications are to be received.",
-            "title": "pinax-notifications"
-        },
-        {
-            "location": "/apps_list/#pinax-lms-activities",
-            "text": "pinax-lms-activities provides a framework and base learning activities for Pinax LMS.",
-            "title": "pinax-lms-activities"
-        },
-        {
-            "location": "/apps_list/#pinax-forums",
-            "text": "pinax-forums is an extensible forums app for Django and Pinax. It is focused on core forum functionality and hence is expected to be combined with other Pinax apps for broader features.  See pinax-project-forums for a full Django project incorporating numerous apps with the goal of providing an out of the box forums solution.",
-            "title": "pinax-forums"
-        },
-        {
-            "location": "/apps_list/#pinax-types",
+            "location": "/pinax_apps/#other-pinax-apps",
             "text": "",
-            "title": "pinax-types"
+            "title": "Other Pinax Apps"
         },
         {
-            "location": "/apps_list/#django-email-confirmation-deprecated",
-            "text": "simple email confirmation for the Django web framework  NOTE: this project has been superceded by https://github.com/pinax/django-user-accounts/ and is no longer active.",
-            "title": "django-email-confirmation (deprecated)"
-        },
-        {
-            "location": "/apps_list/#symposion",
-            "text": "symposion is a conference management solution from Eldarion. It was built with the generous support of the Python Software Foundation. See http://eldarion.com/symposion/ for commercial support, customization and hosting.",
-            "title": "symposion"
-        },
-        {
-            "location": "/apps_list/#metron",
-            "text": "metron provides analytics and metrics integration for Django.  Current analytics services supported:  Google Analytics\nMixpanel\ngaug.es\nGoogle AdWords Conversion Tracking",
-            "title": "metron"
-        },
-        {
-            "location": "/apps_list/#phileo-soon-to-be-pinax-likes",
-            "text": "phileo is a liking app for Django.",
-            "title": "phileo (soon to be pinax-likes)"
-        },
-        {
-            "location": "/apps_list/#django-forms-bootstrap-deprecated",
-            "text": "django-forms-bootstrap is a simple bootstrap filter for Django forms. Extracted from the bootstrap theme for Pinax.",
-            "title": "django-forms-bootstrap (deprecated?)"
-        },
-        {
-            "location": "/apps_list/#pinax-phone-confirmation",
-            "text": "pinax-phone-confirmation is an app to provide phone confirmation via Twilio.",
-            "title": "pinax-phone-confirmation"
-        },
-        {
-            "location": "/apps_list/#django-bookmarks",
+            "location": "/pinax_apps/#django-bookmarks",
             "text": "django-bookmarks provides bookmark management for the Django web framework.",
             "title": "django-bookmarks"
         },
         {
-            "location": "/apps_list/#django-friends",
-            "text": "django-friends provides friendship, contact, and invitation management for the Django web framework.",
-            "title": "django-friends"
+            "location": "/pinax_apps/#django-mailer",
+            "text": "django-mailer is a reusable Django app for queuing the sending of email.",
+            "title": "django-mailer"
         },
         {
-            "location": "/apps_list/#django-flag",
+            "location": "/pinax_apps/#django-flag",
             "text": "django-flag provides flagging of inappropriate spam/content.",
             "title": "django-flag"
         },
         {
-            "location": "/apps_list/#pinax-wiki",
-            "text": "pinax-wiki lets you easily add a wiki to your Django site.  Apps often follow the following template:",
-            "title": "pinax-wiki"
+            "location": "/pinax_apps/#django-friends",
+            "text": "django-friends provides friendship, contact, and invitation management for the Django web framework.",
+            "title": "django-friends"
         },
         {
-            "location": "/apps_list/#pinax-starter-app",
-            "text": "pinax-starter-app is a starter app template for Pinax apps.",
+            "location": "/pinax_apps/#pinax-lms-activities",
+            "text": "pinax-lms-activities provides a framework and base learning activities for Pinax LMS.",
+            "title": "pinax-lms-activities"
+        },
+        {
+            "location": "/pinax_apps/#pinax-phone-confirmation",
+            "text": "pinax-phone-confirmation is an app to provide phone confirmation via Twilio.",
+            "title": "pinax-phone-confirmation"
+        },
+        {
+            "location": "/pinax_apps/#pinax-types",
+            "text": "",
+            "title": "pinax-types"
+        },
+        {
+            "location": "/pinax_apps/#symposion",
+            "text": "symposion is a conference management solution from Eldarion. It was built with the generous support of the Python Software Foundation. See http://eldarion.com/symposion/ for commercial support, customization and hosting.",
+            "title": "symposion"
+        },
+        {
+            "location": "/pinax_apps/#support-and-demonstration-apps",
+            "text": "",
+            "title": "Support and Demonstration Apps"
+        },
+        {
+            "location": "/pinax_apps/#cloudspotting2",
+            "text": "Demonstration project showing the use of many Pinax apps. Clone and run this project locally to see\nthe Pinax apps in action.",
+            "title": "cloudspotting2"
+        },
+        {
+            "location": "/pinax_apps/#pinax-calendars-demo",
+            "text": "Clone and run this project to see pinax-calendars app in action.",
+            "title": "pinax-calendars-demo"
+        },
+        {
+            "location": "/pinax_apps/#pinax-design",
+            "text": "Source for Pinax app patches, demonstrated at http://pinaxproject.com/pinax-design/.",
+            "title": "pinax-design"
+        },
+        {
+            "location": "/pinax_apps/#pinax-starter-app",
+            "text": "pinax-starter-app contains starter app templates used to create base projects from which you build your site.",
             "title": "pinax-starter-app"
+        },
+        {
+            "location": "/pinax_apps/#pinax-templates",
+            "text": "Provides default template for many Pinax apps.",
+            "title": "pinax-templates"
+        },
+        {
+            "location": "/pinax_apps/#pinax_theme_tester",
+            "text": "pinax_theme_tester provides the magic driving the template demonstration site http://templates.pinaxproject.com.",
+            "title": "pinax_theme_tester"
         },
         {
             "location": "/how-tos/ldap/",
@@ -541,16 +591,6 @@
             "title": "Contributor Code of Conduct"
         },
         {
-            "location": "/tutorials/",
-            "text": "Tutorials\n\n\nTODO: Site projects: a series of apps put together to build a site",
-            "title": "Tutorials"
-        },
-        {
-            "location": "/tutorials/#tutorials",
-            "text": "TODO: Site projects: a series of apps put together to build a site",
-            "title": "Tutorials"
-        },
-        {
             "location": "/in_the_wild/",
             "text": "Pinax in the Wild\n\n\nPinax is used to build all sorts of things. This is just a small sampling of\nsome of the things that can be built with Pinax. If you have built something\nplease either \ncreate an issue\n\nand tell us about it or \nfork this repo\n,\nupdate this document, and send a pull request.\n\n\nPinax Blog\n\n\nhttp://blog.pinaxproject.com/\n\n\n\n\nBlog starter project\n\n\npinax-blog\n for the blog application\n\n\n\n\n\n\npinax-pages\n to add some basic CMS functionality\n\n\n\n\nDjango CMS Light\n\n\nhttp://django-cms-light.com\n\n\nKISS multi-site CMS project optimized for hackers based on git and markdown like django and pelican had a baby with the purpose of hacking on local economy growth for the greater good.\n\n\n\n\nBased on social auth starter project (https://github.com/pinax/pinax-starter-projects/tree/social-auth)\n\n\nUses \nPinax Theme Bootstrap\n\n\nUses \nPinax Web Analytics\n\n\nUses \nPinax Eventlog",
             "title": "In the Wild"
@@ -569,26 +609,6 @@
             "location": "/in_the_wild/#django-cms-light",
             "text": "http://django-cms-light.com  KISS multi-site CMS project optimized for hackers based on git and markdown like django and pelican had a baby with the purpose of hacking on local economy growth for the greater good.   Based on social auth starter project (https://github.com/pinax/pinax-starter-projects/tree/social-auth)  Uses  Pinax Theme Bootstrap  Uses  Pinax Web Analytics  Uses  Pinax Eventlog",
             "title": "Django CMS Light"
-        },
-        {
-            "location": "/companies_working_with_pinax/",
-            "text": "Companies Working with and Contributing to Pinax\n\n\nThere are quite a few companies which work with and/or contribute to Pinax. If your\ncompany does so and would like to be added to this list, please either\n\ncreate an issue\n and tell us about it or\n\nfork this repo\n,\nupdate this document, and send a pull request.\n\n\nCompanies Working with Pinax\n\n\n\n\nEldarion\n\n\n\n\nCompanies Contributing to Pinax\n\n\n\n\nEldarion",
-            "title": "Companies Working with Pinax"
-        },
-        {
-            "location": "/companies_working_with_pinax/#companies-working-with-and-contributing-to-pinax",
-            "text": "There are quite a few companies which work with and/or contribute to Pinax. If your\ncompany does so and would like to be added to this list, please either create an issue  and tell us about it or fork this repo ,\nupdate this document, and send a pull request.",
-            "title": "Companies Working with and Contributing to Pinax"
-        },
-        {
-            "location": "/companies_working_with_pinax/#companies-working-with-pinax",
-            "text": "Eldarion",
-            "title": "Companies Working with Pinax"
-        },
-        {
-            "location": "/companies_working_with_pinax/#companies-contributing-to-pinax",
-            "text": "Eldarion",
-            "title": "Companies Contributing to Pinax"
         }
     ]
 }
