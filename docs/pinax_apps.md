@@ -17,9 +17,6 @@ pinax-blog is a blog app for Django.
 ### [pinax-calendars](https://github.com/pinax/pinax-calendars)
 pinax-calendars provides utilities for publishing events as a calendar.
 
-### [pinax-documents](https://github.com/pinax/pinax-documents)
-pinax-documents is a document management app for collecting and sharing documents in folders.
-
 ### [pinax-eventlog](https://github.com/pinax/pinax-eventlog)
 pinax-eventlog is a simple app that provides an easy and clean interface for logging diagnostic
 as well as business intelligence data about activity that occurs in your site.
@@ -85,6 +82,9 @@ waiting list to your private beta site.
 
 ### [pinax-comments](https://github.com/pinax/pinax-comments)
 pinax-comments is a comments app for Django.
+
+### [pinax-documents](https://github.com/pinax/pinax-documents)
+pinax-documents is a document management app for collecting and sharing documents in folders.
 
 ### [pinax-forums](https://github.com/pinax/pinax-forums)
 pinax-forums is an extensible forums app for Django and Pinax.
