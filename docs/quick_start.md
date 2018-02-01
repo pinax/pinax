@@ -4,26 +4,35 @@ Make sure you've read [What is Pinax?](what_is_pinax.md) to get a conceptual ove
 
 We strongly recommend running Pinax (or indeed, any Django) projects in a virtual environment:
 
-```
+```shell
 pip install virtualenv
 virtualenv mysiteenv
 source mysiteenv/bin/activate
-```
-
-Once your virtual environment has been activated, install Django and use `django-admin` to create a new project based on the Account Pinax starter project:
-
-```
 pip install pinax-cli
 pinax start account mysite
 ```
 
-**NOTE**: _The CLI method for starting a Pinax project has been added for convenience.
-The more manual method, using Django’s command-line utility, is also still supported.
-Please refer to the [Quick Start Manual](quick_start_manual.md) page for details._
+If you are using `pipenv` try this instead:
+
+```shell
+mkdir mysite
+cd mysite
+pipenv --three
+pipenv shell
+pip install pinax-cli
+pinax start account mysite --location .
+```
+
+**NOTE**: _If you are wondering what `pinax start` actually does, it is equivalent to:_
+
+```shell
+pip install Django==2.0
+django-admin startproject --template=https://github.com/pinax/pinax-starter-projects/zipball/account mysite
+```
 
 Now install the requirements, initialize your database, load the default sites fixtures, and run the dev server:
 
-```
+```shell
 cd mysite
 pip install -r requirements.txt
 chmod +x manage.py
@@ -35,33 +44,51 @@ chmod +x manage.py
 You now have a running Django site complete with account management and bootstrap-based templates.
 
 
-To add one more app you will first have to modify the `requirements.txt` file by adding the new app:
+## Adding Another Pinax App
 
-    myapp
+Add the new app name to `requirements.txt`:
 
-Make sure to install the requirements once again.
+```python
+    # other apps
+    pinax-amazing==2.0.1,
 ```
+
+and install requirements once again.
+
+```shell
 pip install -r requirements.txt
 ```
 
-Next, you will modify the `settings.py`, by adding your app to the `INSTALLED_APPS`:
+If you are using `pipenv`, you know to use this instead:
+
+```python
+pipenv install pinax-amazing==2.0.1
 ```
+
+Next, modify `settings.py` by adding your app to `INSTALLED_APPS`:
+
+```python
 INSTALLED_APPS = [
-    ...
-    "myapp"
+    # other apps
+    "pinax-amazing",
 ]
 ```
 
-This will also be a good time to make any additional changes to `settings.py` if needed for the new app.
+This is a good time to make any additional changes to `settings.py` if needed for the new app.
 
-Be sure to migrate the new app:
-```
+Be sure to establish database tables for the new app:
+
+```shell
 ./manage.py migrate
 ```
 
-Next, you will modify the `urls.py` to contain a new url for the new app:
+Finally, modify your project `urls.py` with urls for the new app:
+
 ```
-url(r"^myapp/", include("myapp.url")),
+    urlpatterns = [
+        # other urls
+        url(r"^amazing/", include("pinax.amazing.urls", namespace="pinax_amazing")),
+    ]
 ```
 
-This will be a good time to make any adjustments to any templates if needed for the new app.
+This is a good time to adjustment templates for the new app, if needed.
