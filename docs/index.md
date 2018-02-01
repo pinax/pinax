@@ -10,8 +10,9 @@ We're just starting to provide overarching documentation for the whole of Pinax 
     * [Quick Start](quick_start.md)
     * [History](history.md)
     * [FAQs](faq.md)
-  * [Pinax Starter Projects](pinax_starter_projects.md)
-  * [Pinax Apps](pinax_apps.md)
+  * Starter Projects and Apps
+    * [Pinax Starter Projects](pinax_starter_projects.md)
+    * [Pinax Apps](pinax_apps.md)
   * How-tos
     * [LDAP](how-tos/ldap.md)
     * [Deploying to Heroku](how-tos/deploy-to-heroku.md)
