@@ -10,12 +10,8 @@ We're just starting to provide overarching documentation for the whole of Pinax 
     * [Quick Start](quick_start.md)
     * [History](history.md)
     * [FAQs](faq.md)
-  * Starter Projects
-    * [Pinax Starter Projects](pinax_starter_projects.md)
-    * [List of Starter Projects](starter_project_list.md)
-    * [Pinax Theme Bootstrap](pinax_theme_bootstrap.md)
-  * Apps
-    * [List of Pinax Apps](apps_list.md)
+  * [Pinax Starter Projects](pinax_starter_projects.md)
+  * [Pinax Apps](pinax_apps.md)
   * How-tos
     * [LDAP](how-tos/ldap.md)
     * [Deploying to Heroku](how-tos/deploy-to-heroku.md)
@@ -26,9 +22,7 @@ We're just starting to provide overarching documentation for the whole of Pinax 
     * [Release Process](release_process.md)
     * [Code of Conduct](code_of_conduct.md)
         
-  * [Tutorials](tutorials.md)
   * [Pinax in the Wild](in_the_wild.md)
-  * [Companies Working with Pinax](companies_working_with_pinax.md)
 
 
 ## Colophon

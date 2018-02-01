@@ -1,4 +1,7 @@
-# List of Apps
+# Pinax Apps
+
+Every Pinax app has documentation in it's README.md file. We recommend you follow
+instructions found there for installing and adding a Pinax app to your project.
 
 ## Current Distribution (18.01) Pinax Apps
 
@@ -135,7 +138,7 @@ symposion is a conference management solution from Eldarion. It was built with t
 
 ### [cloudspotting2](https://github.com/pinax/cloudspotting2)
 Demonstration project showing the use of many Pinax apps. Clone and run this project locally to see
-these apps in action.
+the Pinax apps in action.
 
 ### [pinax-calendars-demo](https://github.com/pinax/pinax-calendars-demo)
 Clone and run this project to see pinax-calendars app in action.
