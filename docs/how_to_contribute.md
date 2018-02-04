@@ -3,8 +3,7 @@
 There are many ways you can help contribute to Pinax and the various apps,
 themes, and starter projects that it is made up of. Contributing code, writing
 documentation, reporting bugs, as well as reading and providing feedback on
-issues and pull requests, all are valid and necessary ways to
-help.
+issues and pull requests, all are valid and necessary ways to help.
 
 
 ## Watch the Videos
@@ -28,24 +27,49 @@ When you create an issue, please make sure to assign the correct labels to it. S
 
 ## Committing Code
 
-The great thing about using a distributed versioning control system like git
-is that everyone becomes a committer. When other people write good patches
-it makes it very easy to include their fixes/features and give them proper
-credit for the work.
+We love thoughtful contributions from the Pinax community.
+Developers like you improve Pinax apps all the time by filing issues
+for bugs and feature requests, and even better by submitting pull requests.
 
-We recommend that you do all your work in a separate branch. When you
-are ready to work on a bug or a new feature create yourself a new branch. The
-reason why this is important is you can commit as often you like. When you are
-ready you can merge in the change. Let's take a look at a common workflow:
+One great thing about using a distributed versioning control system like git
+is that anyone can become a contributor. You can clone a repository and work
+on a new feature without fear of breaking the official release.
 
-    git checkout -b task-566
-    ... fix and git commit often ...
-    git push origin task-566
+We recommend that you work on bug fixes or features in a new branch from "master".
+First get the repository and create your own branch. If you are working
+on pinax-ratings you'd type something like this:
+ 
+```shell
+mkdir pinax-ratings
+git clone https://github.com/pinax/pinax-ratings.git pinax-ratings
+cd pinax-ratings
+git checkout master
+git checkout -b my-new-branch
+```
 
-The reason we have created two new branches is to stay off of `master`.
-Keeping master clean of only upstream changes makes yours and ours lives
-easier. You can then send us a pull request for the fix/feature. Then we can
-easily review it and merge it when ready.
+When your branch is ready for review, push it to GitHub and
+open a pull request from your branch to master.
+
+Here is a sample workflow of working on issue #27 with a cloned repository:
+
+```shell
+git checkout master
+git checkout -b 27-frobnozz
+
+# write code
+git commit -a -m "Change the frobnozz"
+
+# write code
+git commit -a -m "Add tests"
+
+git push origin 27-frobnozz
+```
+
+You are encouraged to add your name to the AUTHORS.md file in your pull
+requests and receive credit for helping out.
+Now go to Github to create a pull request for the fix/feature!
+Once your pull request is created, Pinax maintainers are notified and
+review your contributions.
 
 
 ### Writing Commit Messages
@@ -60,37 +84,39 @@ limited space or a different formatting option is used the first line becomes
 all someone might see. If your change isn't something non-trivial or there
 reasoning behind the change is not obvious, then please write up an extended
 message explaining the fix, your rationale, and anything else relevant for
-someone else that might be reviewing the change. Lastly, if there is a
-corresponding issue in Github issues for it, use the final line to provide
+someone reviewing the change. Lastly, if there is a
+corresponding Github issue use the final line to provide
 a message that will link the commit message to the issue and auto-close it
-if appropriate.
+if appropriate. For instance, use `#27` to link to issue number 27:
 
-    Add ability to travel back in time
+```text
+    Restore ability to travel back in time
 
     You need to be driving 88 miles per hour to generate 1.21 gigawatts of
     power to properly use this feature.
 
-    Fixes #88
+    Fixes #27
+```
 
 
 ## Coding style
 
-When writing code to be included in Pinax keep our style in mind:
+When writing code for Pinax apps, please keep our style in mind:
 
-* Follow [PEP8](http://www.python.org/dev/peps/pep-0008/) there are some
-  cases where we do not follow PEP8. It is an excellent starting point.
+* Follow [PEP8](http://www.python.org/dev/peps/pep-0008/). There are some
+  cases where we do not follow PEP8, but PEP8 is an excellent starting point.
 * Follow [Django's coding style](http://docs.djangoproject.com/en/dev/internals/contributing/#coding-style)
   we're pretty much in agreement on Django style outlined there.
 
-We would like to enforce a few more strict guides not outlined by PEP8 or
-Django's coding style:
+We enforce a few more strict guides not outlined by PEP8 or Django's coding style:
 
 * PEP8 tries to keep line length at 80 characters. We follow it when we can,
   but not when it makes a line harder to read. It is okay to go a little bit
   over 80 characters if not breaking the line improves readability.
-* Use double quotes not single quotes. Single quotes are allowed in cases
-  where a double quote is needed in the string. This makes the code read
-  cleaner in those cases.
+* Use double quotes ("double quotes") not single quotes ('single quotes').
+  Single quotes are allowed in cases where a double quote is needed in the string.
+  For example `title = 'Dwayne "The Rock" Johnson'`. We feel code reads cleaner
+  in these situations.
 * Docstrings always use three double quotes on a line of their own, so, for
   example, a single line docstring should take up three lines not one.
 * Imports are grouped specifically and ordered alphabetically. This is shown
@@ -98,106 +124,152 @@ Django's coding style:
 * Always use `reverse` and never `@models.permalink`.
 * Tuples should be reserved for positional data structures and not used
   where a list is more appropriate.
-* URL patterns should use the `url()` function rather than a tuple.
+* URL patterns must use the `path()` and/or `url()` functions.
 * When callable arguments require multiple lines, place each argument
-  on a new line, indented four spaces as usual.
+  on a new line, indented four spaces from start of the function/method name.
 
 Here is an example of these rules applied:
 
-    # first set of imports are stdlib imports
-    # non-from imports go first then from style import in their own group
-    import csv
+```python
+# models.py
 
-    # second set of imports are Django imports with contrib in their own
-    # group.
-    from django.core.urlresolvers import reverse
-    from django.db import models
-    from django.utils import timezone
-    from django.utils.translation import ugettext_lazy as _
+# first set of imports are stdlib imports
+# non-from imports go first then from style import in their own group
+import csv
 
-    from django.contrib.auth.models import User
+# second set of imports are Django
+from django.conf import settings
+from django.db import models
+from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
+from django.urls import reverse
 
-    # third set of imports are external apps (if applicable)
-    from tagging.fields import TagField
+# third set of imports are external apps (if applicable)
+from pinax. import TagField
 
-    # fourth set of imports are local apps
-    from .fields import MarkupField
+# fourth set of imports are local apps
+from .fields import MarkupField
+from .utils import frobnozz
 
 
-    class Task(models.Model):
+class Task(models.Model):
+    """
+    A model for storing a task.
+    """
+    title = models.CharField(max_length=50)
+    description = models.TextField()
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL)
+    created = models.DateTimeField(default=timezone.now)
+    modified = models.DateTimeField(default=timezone.now)
+
+    objects = models.Manager()
+
+    class Meta:
+        verbose_name = _("task")
+        verbose_name_plural = _("tasks")
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse("my_app:task_detail", args=[self.pk])
+
+    def frobnozz_with_deconstrictulator(
+            self,
+            first_argument,
+            second_argument,
+            third_argument,
+            fourth_argument):
         """
-        A model for storing a task.
+        Simulate frobnozzes after deconstriculation
         """
+        # do some magic
+```
 
-        creator = models.ForeignKey(User)
-        created = models.DateTimeField(default=timezone.now)
-        modified = models.DateTimeField(default=timezone.now)
+This example shows use of `path()` and an acceptable line longer than 80 characters.
 
-        objects = models.Manager()
+```
+# urls.py
 
-        class Meta:
-            verbose_name = _("task")
-            verbose_name_plural = _("tasks")
+from django.urls import include, path
 
-        def __unicode__(self):
-            return self.summary
-
-        def save(self, **kwargs):
-            self.modified = datetime.now()
-            super(Task, self).save(**kwargs)
-
-        def get_absolute_url(self):
-            return reverse(
-                "task_detail_with_a_super_long_url_name",
-                kwargs={"task_id": self.pk}
-            )
-
-        # custom methods
+urlpatterns = [
+    path("account/", include("account.urls")),
+    path("tasks/<int:pk>/", TaskDetail.as_view(), name="task_view")
+    path("tasks/<int:pk>/frobnozz/<int:pk>/wilco", TaskFrobnozz.as_view(), name="task_frobnozz")
+    # more urls
+]
+```
 
 
-    class TaskComment(models.Model):
-        # ... you get the point ...
-        pass
-
-
-## Testing your code
+## Testing
 
 Pinax apps typically support several different versions of Python and several
 different versions of Django. The supported combinations are specified in `tox.ini`
-at the root of every Pinax app. Here is a sample `tox.ini` file:
+at the root of every Pinax app. Here is a sample `tox.ini` file from the Pinax 18.01 distribution:
 
-    [flake8]
-    ignore = E265,E501
-    max-line-length = 100
-    max-complexity = 10
-    exclude = migrations/*,docs/*
+```ini
+[flake8]
+ignore = E265,E501
+max-line-length = 100
+max-complexity = 10
+exclude = **/*/migrations/*
+inline-quotes = double
 
-    [tox]
-    envlist =
-        py27-{1.8,1.9,master},
-        py33-{1.8},
-        py34-{1.8,1.9,master},
-        py35-{1.8,1.9,master}
+[isort]
+multi_line_output=3
+known_django=django
+known_third_party=appconf,pinax
+sections=FUTURE,STDLIB,DJANGO,THIRDPARTY,FIRSTPARTY,LOCALFOLDER
+skip_glob=**/*/migrations/*
 
-    [testenv]
-    deps =
-        coverage == 4.0.2
-        flake8 == 2.5.0
-        1.8: Django>=1.8,<1.9
-        1.9: Django>=1.9,<1.10
-        master: https://github.com/django/django/tarball/master
-    usedevelop = True
-    setenv =
-       LANG=en_US.UTF-8
-       LANGUAGE=en_US:en
-       LC_ALL=en_US.UTF-8
-    commands =
-        flake8 pinax
-        coverage run setup.py test
+[coverage:run]
+source = pinax
+omit = **/*/conf.py,**/*/tests/*,**/*/migrations/*
+branch = true
+data_file = .coverage
 
+[coverage:report]
+omit = **/*/conf.py,**/*/tests/*,**/*/migrations/*
+exclude_lines =
+    coverage: omit
+show_missing = True
+
+[tox]
+envlist =
+    checkqa,
+    py27-dj{111}
+    py34-dj{111,20}
+    py35-dj{111,20}
+    py36-dj{111,20}
+
+[testenv]
+passenv = CI CIRCLECI CIRCLE_*
+deps =
+    coverage
+    codecov
+    dj111: Django>=1.11,<1.12
+    dj20: Django<2.1
+    master: https://github.com/django/django/tarball/master
+
+usedevelop = True
+commands =
+    coverage run setup.py test
+    coverage report -m --skip-covered
+
+[testenv:checkqa]
+commands =
+    flake8 pinax
+    isort --recursive --check-only --diff pinax -sp tox.ini
+deps =
+    flake8 == 3.4.1
+    flake8-quotes == 0.11.0
+    isort == 4.2.15
+```
+    
 The supported Python - Django combinations are specified in the `[tox] envlist=` section.
 
-In order to test all supported Python/Django combinations we use `pyenv` and `detox`.
+In order to test all supported Python/Django combinations we use `pyenv` and `detox` (`tox`).
 
 ### Installing `pyenv` and `detox`
 
@@ -221,32 +293,30 @@ Using the Pinax app `tox.ini` file, determine what versions of Python are requir
 In our example above we support Python 2.7.x, 3.3.x, 3.4.x, and 3.5.x. Install the latest version
 of each required Python <major>.<minor> release using `pyenv`:
 
-    $ pyenv install 2.7.10
-    $ pyenv install 3.3.6
-    $ pyenv install 3.4.4
-    $ pyenv install 3.5.1
+    $ pyenv install 2.7.14
+    $ pyenv install 3.4.7
+    $ pyenv install 3.5.4
+    $ pyenv install 3.6.4
 
 Ensure these versions appear in the list of installed Python versions:
 
     $ pyenv versions
-      system
-      2.7.10
-      3.3.6
-      3.4.4
-      3.5.1
+      3.6.4
+      3.5.4
+      3.4.7
+      2.7.14
 
 Now activate the versions required for your testing:
 
-    $ pyenv local 2.7.10 3.3.6 3.4.4 3.5.1
+    $ pyenv local 3.6.4 3.5.4 3.4.7 2.7.14
 
 and verify those versions are active (indicated by an asterisk next to the version number):
 
     $ pyenv versions
-      system
-    * 2.7.10
-    * 3.3.6
-    * 3.4.4
-    * 3.5.1
+    * 3.6.4
+    * 3.5.4
+    * 3.4.7
+    * 2.7.14
 
 ### Running tests
 
@@ -256,17 +326,17 @@ Finally, invoke `detox` in the same directory as `tox.ini`.
 
 If your installation and setup worked, you should see something like this:
 
-    py27-1.8 create: /Users/pinax/venv/pinax-ann/src/pinax-announcements/.tox/py27-1.8
-    py27-1.9 create: /Users/pinax/venv/pinax-ann/src/pinax-announcements/.tox/py27-1.9
-    py27-master create: /Users/pinax/venv/pinax-ann/src/pinax-announcements/.tox/py27-master
-    py33-1.8 create: /Users/pinax/venv/pinax-ann/src/pinax-announcements/.tox/py33-1.8
-    py34-1.8 create: /Users/pinax/venv/pinax-ann/src/pinax-announcements/.tox/py34-1.8
-    py34-1.9 create: /Users/pinax/venv/pinax-ann/src/pinax-announcements/.tox/py34-1.9
-    py34-master create: /Users/pinax/venv/pinax-ann/src/pinax-announcements/.tox/py34-master
-    py35-1.8 create: /Users/pinax/venv/pinax-ann/src/pinax-announcements/.tox/py35-1.8
-    py35-1.9 create: /Users/pinax/venv/pinax-ann/src/pinax-announcements/.tox/py35-1.9
-    py35-master create: /Users/pinax/venv/pinax-ann/src/pinax-announcements/.tox/py35-master
-    ...
+```shell
+checkqa create: /Users/pinax/code/pinax-ratings/.tox/checkqa
+py27-dj111 create: /Users/pinax/code/pinax-ratings/.tox/py27-dj111
+py34-dj111 create: /Users/pinax/code/pinax-ratings/.tox/py34-dj111
+py34-dj20 create: /Users/pinax/code/pinax-ratings/.tox/py34-dj20
+py35-dj111 create: /Users/pinax/code/pinax-ratings/.tox/py35-dj111
+py35-dj20 create: /Users/pinax/code/pinax-ratings/.tox/py35-dj20
+py36-dj111 create: /Users/pinax/code/pinax-ratings/.tox/py36-dj111
+py36-dj20 create: /Users/pinax/code/pinax-ratings/.tox/py36-dj20
+...
+```
 
 Each test combination produces it's own output, so review errors carefully to understand
 whether the problem lies with a general coding mistake or compatibility with a specific
