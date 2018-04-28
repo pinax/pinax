@@ -30,7 +30,20 @@ pip install Django==2.0
 django-admin startproject --template=https://github.com/pinax/pinax-starter-projects/zipball/account mysite
 ```
 
-Now install the requirements, initialize your database, load the default sites fixtures, and run the dev server:
+If you are using pinax-templates, install the npm dependencies, install the requirements, initialize your database, load the default sites fixtures, and run the dev server:
+
+```shell
+cd mysite
+npm install
+pip install -r requirements.txt
+./manage.py migrate
+./manage.py loaddata sites
+npm run dev
+```
+
+Browse to http://localhost:3000/
+
+If you are using pinax-theme-bootstrap, install the requirements, initialize your database, load the default sites fixtures, and run the dev server:
 
 ```shell
 cd mysite
@@ -41,7 +54,9 @@ chmod +x manage.py
 ./manage.py runserver
 ```
 
-You now have a running Django site complete with account management and bootstrap-based templates.
+Browse to http://127.0.0.1:8000/
+
+You now have a running Django site complete with account management and pinax-templates or pinax-theme-bootstrap.
 
 
 ## Adding Another Pinax App
