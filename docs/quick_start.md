@@ -30,7 +30,9 @@ pip install Django==2.0
 django-admin startproject --template=https://github.com/pinax/pinax-starter-projects/zipball/account mysite
 ```
 
-If you are using pinax-templates, install the npm dependencies, install the requirements, initialize your database, load the default sites fixtures, and run the dev server:
+### Modern Deployment
+
+If you are using pinax-templates, you will use an npm command to run a script in the package.json file. This script will automatically run the local server and prepare the static files. Install the npm dependencies, install the requirements, initialize your database, load the default sites fixtures, and run the dev server:
 
 ```shell
 cd mysite
@@ -43,7 +45,9 @@ npm run dev
 
 Browse to http://localhost:3000/
 
-If you are using pinax-theme-bootstrap, install the requirements, initialize your database, load the default sites fixtures, and run the dev server:
+### Old Deployment
+
+If you are using pinax-theme-bootstrap, you will run the local server by using the Django runserver command. Install the requirements, initialize your database, load the default sites fixtures, and run the dev server:
 
 ```shell
 cd mysite
