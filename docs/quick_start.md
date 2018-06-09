@@ -45,6 +45,14 @@ npm run dev
 
 Browse to http://localhost:3000/
 
+#### Collect Static Files
+
+To collect the static files run:
+
+```shell
+./manage.py collectstatic
+```
+
 ### Old Deployment
 
 If you are using pinax-theme-bootstrap, you will run the local server by using the Django runserver command. Install the requirements, initialize your database, load the default sites fixtures, and run the dev server:
