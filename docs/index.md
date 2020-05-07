@@ -6,10 +6,11 @@
     * [What is Pinax?](what_is_pinax.md)
     * [Quick Start](quick_start.md)
     * [History](history.md)
-    * [FAQs](faq.md)
   * Starter Projects and Apps
     * [Pinax Starter Projects](pinax_starter_projects.md)
     * [Pinax Apps](pinax_apps.md)
+    * [Tutorial](tutorial.md) 
+    * [FAQs](faq.md)
   * Community
     * [Contributing](contributing.md)    
     * [Release](release.md)
